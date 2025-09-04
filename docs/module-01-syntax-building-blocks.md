@@ -28,7 +28,13 @@ The sequence is presented in **increasing order of complexity**, with general de
 
 ## 3. **Identifier**
 - **Definition:** A symbolic name that associates a value (or a structure) with a readable label.  
-- **In Java:** `int x = 42;` → `x` is an identifier.  
+- **In Java:**  
+  - **User-defined identifiers:** chosen by the programmer to name variables, methods, classes, etc.  
+    Examples: `x`, `counter`, `MyClass`, `calculateSum`.  
+  - **Keywords (reserved identifiers):** predefined names reserved by the Java language and cannot be redefined.  
+    Examples: `class`, `public`, `static`, `if`, `return`.  
+
+  > **Note:** Identifiers must follow Java naming rules: [See Java Naming Rules](module-01-naming-rules.md) 
 - **Theory:** Binding function: connects a name to a value or resource.
 
 ---
@@ -46,7 +52,9 @@ The sequence is presented in **increasing order of complexity**, with general de
   - **Primitive (simple) types:** directly represent basic values.  
     Examples: `int`, `double`, `boolean`, `char`, `byte`, `short`, `long`, `float`.  
   - **Reference (complex) types:** represent references (pointers) to objects in memory.  
-    Examples: `String`, arrays (e.g., `int[]`), classes, interfaces, and user-defined types.  
+    Examples: `String`, arrays (e.g., `int[]`), classes, interfaces, and user-defined types.
+
+  > **Note:** Java DataTypes [See Java DataTypes](module-01-data-types.md) 	
 - **Theory:** A type system = rules that associate sets of values and admissible operations.
 
 ---
