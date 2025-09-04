@@ -51,7 +51,7 @@ The sequence is presented in **increasing order of complexity**, with general de
 - **In Java:**  
   - **Primitive (simple) types:** directly represent basic values.  
     Examples: `int`, `double`, `boolean`, `char`, `byte`, `short`, `long`, `float`.  
-  - **Reference (complex) types:** represent references (pointers) to objects in memory.  
+  - **Reference types:** represent references (pointers) to objects in memory.  
     Examples: `String`, arrays (e.g., `int[]`), classes, interfaces, and user-defined types.
 
   > **Note:** Java DataTypes [See Java DataTypes](module-01-data-types.md) 	
