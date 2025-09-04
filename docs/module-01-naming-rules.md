@@ -11,28 +11,26 @@ As long as you follow the naming rules described below, you are free to choose m
 ### 1. Reserved Words
 
 - Identifiers **cannot** be the same as Java’s **keywords** or **literals**.  
-- Keywords are predefined words in the Java language.  
+- Keywords are predefined words in the Java language (see [Java Keywords](#java-reserved-keywords)).  
 - Literals such as `true`, `false`, and `null` are also reserved and cannot be used as identifiers.  
-- Example ❌:  
+- Example:  
   ```java
   int class = 5;        // invalid: 'class' is a keyword
   boolean true = false; // invalid: 'true' is a literal
   ```
 
-#### Java Keywords (50 total)
+#### Java Reserved Keywords
 
-| | | | | |
-|---|---|---|---|---|
 | abstract | continue | for | new | switch |
-| assert | default | goto* | package | synchronized |
-| boolean | do | if | private | this |
-| break | double | implements | protected | throw |
-| byte | else | import | public | throws |
-| case | enum | instanceof | return | transient |
-| catch | extends | int | short | try |
-| char | final | interface | static | void |
-| class | finally | long | strictfp | volatile |
-| const* | float | native | super | while |
+| assert   | default  | goto* | package | synchronized |
+| boolean  | do       | if | private | this |
+| break    | double   | implements | protected | throw |
+| byte     | else     | import | public | throws |
+| case     | enum     | instanceof | return | transient |
+| catch    | extends  | int | short | try |
+| char     | final    | interface | static | void |
+| class    | finally  | long | strictfp | volatile |
+| const*   | float    | native | super | while |
 
 > \* `goto` and `const` are reserved but not used.  
 
@@ -48,7 +46,7 @@ As long as you follow the naming rules described below, you are free to choose m
 
 - Identifiers in Java are **case sensitive**.  
 - This means `myVar`, `MyVar`, and `MYVAR` are all different identifiers.  
-- Example ✅:  
+- Example:  
   ```java
   int myVar = 1;
   int MyVar = 2;
@@ -58,5 +56,3 @@ As long as you follow the naming rules described below, you are free to choose m
 - While legal, such naming is discouraged because it reduces readability.
 
 ---
-
- 
