@@ -10,8 +10,8 @@ As long as you follow the naming rules described below, you are free to choose m
 
 ### 1. Reserved Words
 
-- Identifiers **cannot** be the same as Java’s **keywords** or **literals**.  
-- Keywords are predefined words in the Java language (see [Java Keywords](#java-reserved-keywords)).  
+- Identifiers **cannot** be the same as Java’s **keywords** or **reserved literals**.  
+- Keywords are predefined, special words in the Java language which you are not allowed to use (see [Java Keywords](#java-reserved-keywords)).  
 - Literals such as `true`, `false`, and `null` are also reserved and cannot be used as identifiers.  
 - Example:  
   ```java
@@ -51,8 +51,39 @@ As long as you follow the naming rules described below, you are free to choose m
   int myVar = 1;
   int MyVar = 2;
   int MYVAR = 3;
-  System.out.println(myVar + MyVar + MYVAR); // prints 6
+  int CLASS = 6; // legal but, please, don't do it!!
   ```
-- While legal, such naming is discouraged because it reduces readability.
+> \* **WARNING!** : Because of case sensitivity, you could use versions of keywords which differ in case. While legal, such naming is discouraged because it reduces readability and it is considered a very bad practice.
 
+---
+
+### 3. Beginning of Identifiers
+
+- Identifiers in Java must begin with a letter, a currency symbol ( $, €, £, ₹...) or a _ symbol.   
+- Example:  
+  ```java
+  int myVarA;
+  int $myVarB;
+  int _myVarC;
+  ```
+---
+
+### 4. Numbers in Identifiers
+
+- Identifiers in Java can include numbers but they cannot start with them.   
+- Example:  
+  ```java
+  int my33VarA;
+  int $myVar44;
+  int 3myVarC; // // invalid: literal starting with a number
+  ```
+---
+
+### 5. Single _ token
+
+- A single _ (underscore) token is not allowed   
+- Example:  
+  ```java
+  int _; // // invalid: single underscore token;
+  ```
 ---
