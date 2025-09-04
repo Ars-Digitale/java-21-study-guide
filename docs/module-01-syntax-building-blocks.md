@@ -12,55 +12,63 @@ The sequence is presented in **increasing order of complexity**, with general de
 ---
 
 ## 1. **Value**
-- **Definition:** An elementary representation of information (number, character, boolean, etc.). It is what the program manipulates.  
-- **In Java:** `42`, `'a'`, `true`, `"Hello"`.  
-- **Theory:** A value is an element of a well-defined domain (set), such as ℕ for natural numbers, Σ* for strings.
+- **Definition:** An abstract entity representing information (number, character, boolean, string, etc.).  
+- **Theory:** A value belongs to a mathematical domain (set), such as ℕ for natural numbers or Σ* for strings.  
+- **Example (abstract):** the number forty-two, the truth value *true*, the character "a".
 
 ---
 
-## 2. **Identifier**
+## 2. **Literal**
+- **Definition:** A **literal** is the concrete notation in source code that directly denotes a fixed value.  
+- **In Java:** `42`, `'a'`, `true`, `"Hello"`.  
+- **Theory:** A literal is syntax, while a value is its semantics.  
+- **Note:** Literals are the most common way to introduce values into programs.
+
+---
+
+## 3. **Identifier**
 - **Definition:** A symbolic name that associates a value (or a structure) with a readable label.  
 - **In Java:** `int x = 42;` → `x` is an identifier.  
 - **Theory:** Binding function: connects a name to a value or resource.
 
 ---
 
-## 3. **Variable**
+## 4. **Variable**
 - **Definition:** A “memory cell” labeled by an identifier, which can hold and change value.  
 - **In Java:** `int counter = 0; counter = counter + 1;`.  
 - **Theory:** A mutable state that can vary over time during execution.
 
 ---
 
-## 4. **Type**
+## 5. **Type**
 - **Definition:** A classification of values and variables, defining what is valid and which operations are allowed.  
 - **In Java:** `int`, `double`, `boolean`, `String`, or user-defined types.  
 - **Theory:** A type system = rules that associate sets of values and admissible operations.
 
 ---
 
-## 5. **Expression**
-- **Definition:** A combination of values, variables, operators, and functions that produces a new value.  
-- **In Java:** `x + 3`, `Math.sqrt(25)`.  
+## 6. **Expression**
+- **Definition:** A combination of values, literals, variables, operators, and functions that produces a new value.  
+- **In Java:** `x + 3`, `Math.sqrt(25)`, `"Hello" + " world"`.  
 - **Theory:** A syntax tree that evaluates to a result.
 
 ---
 
-## 6. **Statement**
+## 7. **Statement**
 - **Definition:** A unit of execution that modifies state or controls flow.  
 - **In Java:** `x = x + 1;`, `if (x > 0) { ... }`.  
 - **Theory:** A sequence of actions that does not return a value, but changes the configuration of the abstract machine.
 
 ---
 
-## 7. **Code Block**
+## 8. **Code Block**
 - **Definition:** A set of statements enclosed between delimiters forming an executable unit.  
 - **In Java:** `{ int y = 5; x = x + y; }`.  
 - **Theory:** A sequential composition of statements, with rules of *scope* (visibility).
 
 ---
 
-## 8. **Function / Method**
+## 9. **Function / Method**
 - **Definition:** A sequence of encapsulated statements, identified by a name, which can receive inputs (parameters) and return an output (value).  
 - **In Java:**
   ~~~java
@@ -70,7 +78,7 @@ The sequence is presented in **increasing order of complexity**, with general de
 
 ---
 
-## 9. **Class / Object**
+## 10. **Class / Object**
 - **Definition:**  
   - **Class:** abstract description of a set of objects (state + behavior).  
   - **Object:** a concrete instance of the class.  
@@ -83,21 +91,21 @@ The sequence is presented in **increasing order of complexity**, with general de
 
 ---
 
-## 10. **Module / Package**
+## 11. **Module / Package**
 - **Definition:** Logical grouping of classes, functions, and resources with a common purpose.  
 - **In Java:** `package java.util;` → collects utilities.  
 - **Theory:** Mechanism of organization and reuse, reducing complexity.
 
 ---
 
-## 11. **Program**
+## 12. **Program**
 - **Definition:** A coherent set of modules, classes, and functions that, when executed on a machine, realizes a global behavior.  
 - **In Java:** The `main` and everything it invokes.  
 - **Theory:** A specification of transformations from input to output on an abstract machine.
 
 ---
 
-## 12. **System**
+## 13. **System**
 - **Definition:** A set of cooperating programs that interact with external resources (user, network, devices).  
 - **Example:** An enterprise Java platform with database, REST services, UI.  
 - **Theory:** Complex architecture of software and hardware components.
@@ -106,13 +114,13 @@ The sequence is presented in **increasing order of complexity**, with general de
 
 ## 📌 Summary as a Growing Scale
 
-`Value → Identifier → Variable → Type → Expression → Statement → Code Block → Function/Method → Class/Object → Module/Package → Program → System`
+`Value → Literal → Identifier → Variable → Type → Expression → Statement → Code Block → Function/Method → Class/Object → Module/Package → Program → System`
 
 ---
 
 ## 📊 Hierarchy Diagram (ASCII)
 
-**Description:** This ASCII diagram shows the hierarchical relation between building blocks, from the most complex (System) down to the simplest (Value). Use it when a plain-text, dependency-free visualization is needed.
+**Description:** This ASCII diagram shows the hierarchical relation between building blocks, from the most complex (System) down to the simplest (Value and its concrete form, the Literal).
 
 ~~~text
 System
@@ -126,14 +134,15 @@ System
                             └── Type
                                 └── Variable
                                     └── Identifier
-                                        └── Value
+                                        └── Literal
+                                            └── Value
 ~~~
 
 ---
 
 ## 📊 Hierarchy Diagram (Mermaid)
 
-**Description:** The Mermaid diagram renders a top-down graph of the same hierarchy. It is useful on GitHub/GitHub Pages (with Mermaid enabled) for a more visual overview.
+**Description:** The Mermaid diagram renders the same hierarchy in a top-down tree. It highlights that a Literal is the syntactic form of a Value.
 
 ~~~mermaid
 graph TD
@@ -148,5 +157,6 @@ graph TD
     H --> I[Type]
     I --> J[Variable]
     J --> K[Identifier]
-    K --> L[Value]
+    K --> L[Literal]
+    L --> M[Value]
 ~~~
