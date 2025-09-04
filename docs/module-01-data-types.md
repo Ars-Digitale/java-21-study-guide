@@ -47,18 +47,34 @@ Reference (4 or 8 bytes)
 
 ## Primitive Types Table
 
-| Keyword  | Type      | Size      | Min Value             | Max Value            | Default Value | Example |
-|----------|-----------|-----------|-----------------------|----------------------|---------------|---------|
-| `byte`   | 8-bit int | 1 byte    | –128                  | 127                  | 0             | `byte b = 100;` |
-| `short`  | 16-bit int| 2 bytes   | –32,768               | 32,767               | 0             | `short s = 2000;` |
-| `int`    | 32-bit int| 4 bytes   | –2,147,483,648        | 2,147,483,647        | 0             | `int i = 123456;` |
-| `long`   | 64-bit int| 8 bytes   | –9,223,372,036,854,775,808 | 9,223,372,036,854,775,807 | 0L | `long l = 123456789L;` |
-| `float`  | 32-bit FP | 4 bytes   | ~1.4E–45              | ~3.4E+38             | 0.0f          | `float f = 3.14f;` |
-| `double` | 64-bit FP | 8 bytes   | ~4.9E–324             | ~1.8E+308            | 0.0d          | `double d = 2.718;` |
-| `char`   | UTF-16    | 2 bytes   | `'\u0000'` (0)        | `'\uffff'` (65,535)  | `'\u0000'`    | `char c = 'A';` |
+| Keyword  | Type      | Size      | Min Value                  | Max Value                  | Default Value | Example |
+|----------|-----------|-----------|----------------------------|----------------------------|---------------|---------|
+| `byte`   | 8-bit int | 1 byte    | –128                       | 127                        | 0             | `byte b = 100;` |
+| `short`  | 16-bit int| 2 bytes   | –32,768                    | 32,767                     | 0             | `short s = 2000;` |
+| `int`    | 32-bit int| 4 bytes   | –2,147,483,648 (`–2^31`)   | 2,147,483,647 (`2^31–1`)   | 0             | `int i = 123456;` |
+| `long`   | 64-bit int| 8 bytes   | –2^63                      | 2^63–1                     | 0L            | `long l = 123456789L;` |
+| `float`  | 32-bit FP | 4 bytes   | see note                   | see note                   | 0.0f          | `float f = 3.14f;` |
+| `double` | 64-bit FP | 8 bytes   | see note                   | see note                   | 0.0          | `double d = 2.718;` |
+| `char`   | UTF-16    | 2 bytes   | `'\u0000'` (0)             | `'\uffff'` (65,535)        | `'\u0000'`    | `char c = 'A';` |
 | `boolean`| true/false| JVM-dep. (often 1 byte) | `false` | `true` | false | `boolean b = true;` |
 
-Notes:
+---
+
+### Notes
+
+`float` and `double` do not have fixed integer bounds like integral types.  
+Instead, they follow the IEEE 754 standard:
+
+- **Smallest positive nonzero values**:  
+  - `Float.MIN_VALUE ≈ 1.4E–45`  
+  - `Double.MIN_VALUE ≈ 4.9E–324`  
+
+- **Largest finite values**:  
+  - `Float.MAX_VALUE ≈ 3.4028235E+38`  
+  - `Double.MAX_VALUE ≈ 1.7976931348623157E+308`  
+
+They also support special values: **`+Infinity`**, **`-Infinity`**, and **`NaN`** (Not a Number).
+
 - **FP** = floating point.  
 - `boolean` size is JVM-dependent but behaves logically as `true`/`false`.  
 - Default values apply to **fields** (class variables). Local variables must be explicitly initialized before use.
