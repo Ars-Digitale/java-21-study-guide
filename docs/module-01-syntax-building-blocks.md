@@ -1,7 +1,13 @@
 # Syntax Building Blocks
 
+Every software system or computer program is composed of a set of data and a set of operations that are applied to this data in order to produce a result.
+
+More formally:
+
+A computer program consists of a collection of data structures that represent the state of the system, together with algorithms that specify the operations to be performed on this state in order to produce outputs.
+
 This document describes a **hierarchy of abstractions**: the *elementary building blocks* which, combined into increasingly complex structures, form software.  
-The sequence is presented in **increasing order of complexity**, with general definitions (computer science) and Java references when useful.
+The sequence is presented in **increasing order of complexity**, with general definitions (computer science) and Java references.
 
 ---
 
