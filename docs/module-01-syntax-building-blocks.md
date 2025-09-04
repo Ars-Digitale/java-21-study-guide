@@ -42,7 +42,11 @@ The sequence is presented in **increasing order of complexity**, with general de
 
 ## 5. **Type**
 - **Definition:** A classification of values and variables, defining what is valid and which operations are allowed.  
-- **In Java:** `int`, `double`, `boolean`, `String`, or user-defined types.  
+- **In Java:**  
+  - **Primitive (simple) types:** directly represent basic values.  
+    Examples: `int`, `double`, `boolean`, `char`, `byte`, `short`, `long`, `float`.  
+  - **Reference (complex) types:** represent references (pointers) to objects in memory.  
+    Examples: `String`, arrays (e.g., `int[]`), classes, interfaces, and user-defined types.  
 - **Theory:** A type system = rules that associate sets of values and admissible operations.
 
 ---
