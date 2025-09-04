@@ -1,40 +1,38 @@
-# Java / Build
-*.class
-*.log
-hs_err_pid*
-replay_pid*
+# ---- Build outputs ----
+/target/
+/out/
+/*.iml
 
+# ---- Eclipse ----
+/.classpath
+/.project
+/.settings/
 
-# Archives
-*.zip
-*.tar
-*.tar.gz
+# ---- IntelliJ IDEA ----
+/.idea/
+/*.ipr
+/*.iws
 
-
-# Eclipse
-.classpath
-.project
-.settings/
-.metadata/
-bin/
-recommenders/
-.factorypath
-
-
-# IntelliJ / VS Code (in case students use them)
-.idea/
-*.iml
-out/
+# ---- VS Code ----
 .vscode/
 
-
-# Maven / Gradle (if added later)
-.target/
-target/
-.gradle/
-build/
-
-
-# OS artifacts
+# ---- OS junk ----
 .DS_Store
 Thumbs.db
+
+# ---- Logs & temp ----
+*.log
+*.tmp
+*.swp
+
+# ---- Java/Maven specifics ----
+.mvn/wrapper/maven-wrapper.jar
+
+# ---- Optional: ignore local env dirs if any ----
+/env/
+/local/
+/tools/
+
+# ---- If you keep 'bin' or a custom classes dir ----
+/bin/
+/examples-bin/

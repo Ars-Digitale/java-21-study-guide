@@ -1,0 +1,68 @@
+<!-- pom.xml (Option B: use repo/code as sources) -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.arsdigitale</groupId>
+  <artifactId>cert_examples</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>cert_examples</name>
+  <description>Code examples</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>21</maven.compiler.release>
+    <!-- JUnit 5 (GA) as of Jul 2025 -->
+    <junit.jupiter.version>5.13.4</junit.jupiter.version>
+    <!-- Plugin versions current & Java 21–friendly -->
+    <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
+    <maven.surefire.plugin.version>3.5.3</maven.surefire.plugin.version>
+    <exec.maven.plugin.version>3.5.1</exec.maven.plugin.version>
+  </properties>
+
+  <!-- Use your repo's code/ folder as main sources -->
+  <build>
+    <sourceDirectory>${project.basedir}/code</sourceDirectory>
+    <!-- If you want a custom test folder, uncomment next line and create it
+    <testSourceDirectory>${project.basedir}/code-test</testSourceDirectory>
+    -->
+
+    <plugins>
+      <!-- Compile with Java 21 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.plugin.version}</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+        </configuration>
+      </plugin>
+
+      <!-- Run unit tests (JUnit Platform auto-detected) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven.surefire.plugin.version}</version>
+      </plugin>
+
+      <!-- (Optional) Run a main class: mvn -q -Dexec.mainClass=com.example.Main exec:java -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>${exec.maven.plugin.version}</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <!-- JUnit 5 (Jupiter) -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

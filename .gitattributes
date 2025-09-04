@@ -1,1 +1,59 @@
-* text=auto
+# ------------------------------------------------------
+# Line endings
+# ------------------------------------------------------
+# Use LF for all text files (recommended for Java projects)
+* text=auto eol=lf
+
+# ------------------------------------------------------
+# Java source
+# ------------------------------------------------------
+*.java   text diff=java
+
+# ------------------------------------------------------
+# Configuration / Build files
+# ------------------------------------------------------
+pom.xml   text
+*.xml     text
+*.properties text
+*.gradle  text
+*.sh      text eol=lf
+*.bat     text eol=crlf
+*.cmd     text eol=crlf
+
+# ------------------------------------------------------
+# Documentation
+# ------------------------------------------------------
+*.md      text
+*.txt     text
+*.adoc    text
+
+# ------------------------------------------------------
+# Scripts
+# ------------------------------------------------------
+*.py      text
+*.rb      text
+*.pl      text
+
+# ------------------------------------------------------
+# OS / IDE generated (no attributes needed but enforce text)
+*.gitignore text
+*.gitattributes text
+
+# ------------------------------------------------------
+# Binary files (no diff, keep as-is)
+# ------------------------------------------------------
+*.jar     binary
+*.war     binary
+*.class   binary
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.ico     binary
+*.pdf     binary
+*.zip     binary
+*.gz      binary
+*.tar     binary
+*.tgz     binary
+*.mp4     binary
+*.mov     binary
