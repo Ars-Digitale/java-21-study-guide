@@ -7,37 +7,37 @@
 # ------------------------------------------------------
 # Java source
 # ------------------------------------------------------
-*.java   text diff=java
+*.java   text diff=java working-tree-encoding=UTF-8
 
 # ------------------------------------------------------
 # Configuration / Build files
 # ------------------------------------------------------
-pom.xml   text
-*.xml     text
-*.properties text
-*.gradle  text
-*.sh      text eol=lf
-*.bat     text eol=crlf
-*.cmd     text eol=crlf
+pom.xml           text working-tree-encoding=UTF-8
+*.xml             text working-tree-encoding=UTF-8
+*.properties      text working-tree-encoding=UTF-8
+*.gradle          text working-tree-encoding=UTF-8
+*.sh              text eol=lf working-tree-encoding=UTF-8
+*.bat             text eol=crlf
+*.cmd             text eol=crlf
 
 # ------------------------------------------------------
 # Documentation
 # ------------------------------------------------------
-*.md      text
-*.txt     text
-*.adoc    text
+*.md              text working-tree-encoding=UTF-8
+*.txt             text working-tree-encoding=UTF-8
+*.adoc            text working-tree-encoding=UTF-8
 
 # ------------------------------------------------------
 # Scripts
 # ------------------------------------------------------
-*.py      text
-*.rb      text
-*.pl      text
+*.py              text working-tree-encoding=UTF-8
+*.rb              text working-tree-encoding=UTF-8
+*.pl              text working-tree-encoding=UTF-8
 
 # ------------------------------------------------------
-# OS / IDE generated (no attributes needed but enforce text)
-*.gitignore text
-*.gitattributes text
+# OS / IDE generated (just treat as text for ignore diffs)
+.gitignore        text
+.gitattributes    text
 
 # ------------------------------------------------------
 # Binary files (no diff, keep as-is)
