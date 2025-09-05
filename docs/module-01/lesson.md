@@ -1,13 +1,4 @@
-<style>
-  .kw { color:#005cc5; font-weight:600; }     /* keyword */
-  .type { color:#6f42c1; font-weight:600; }   /* type name */
-  .id { color:#1a7f37; }                      /* identifier (name) */
-  .mand { color:#0b75d1; font-weight:700; }   /* mandatory */
-  .opt { color:#b31d28; font-weight:700; }    /* optional */
-</style>
-
 # Lesson 1: Java Building Block 
-
 ## Class definition
 
 
@@ -47,12 +38,12 @@ public class Person {
 
 | Token / Identifier | Category | Meaning | Optional? |
 |---|---|---|---|
-| <span class="kw">class</span> | Keyword | Declares a class type. | <span class="mand">Mandatory</span> |
-| <span class="id">Person</span> | Class name (identifier) | The name of the class. | <span class="mand">Mandatory</span> |
-| <span class="id">name</span> | Field (identifier) | Stores the name of the person. | <span class="opt">Optional</span> |
-| <span class="type">String</span> | Type | Type of the field `name`. | <span class="mand">Mandatory</span> |
-| <span class="id">sayHello</span> | Method (identifier) | Defines a behavior of the class. | <span class="opt">Optional</span> |
-| <span class="kw">void</span> | Return type | Indicates the method does not return a value. | <span class="mand">Mandatory</span> |
+| <span>class</span> | Keyword | Declares a class type. | <span>Mandatory</span> |
+| <span>Person</span> | Class name (identifier) | The name of the class. | <span>Mandatory</span> |
+| <span>name</span> | Field (identifier) | Stores the name of the person. | <span>Optional</span> |
+| <span>String</span> | Type | Type of the field `name`. | <span>Mandatory</span> |
+| <span>sayHello</span> | Method (identifier) | Defines a behavior of the class. | <span>Optional</span> |
+| <span>void</span> | Return type | Indicates the method does not return a value. | <span>Mandatory</span> |
 
 
 **Notes**

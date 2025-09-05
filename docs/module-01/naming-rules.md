@@ -20,7 +20,7 @@ As long as you follow the naming rules described below, you are free to choose m
   ```
 
 #### a. Java Reserved Keywords
-
+|---|---|---|---|---|
 | abstract | continue | for | new | switch |
 | assert   | default  | goto* | package | synchronized |
 | boolean  | do       | if | private | this |
