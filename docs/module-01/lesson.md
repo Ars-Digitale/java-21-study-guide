@@ -20,7 +20,7 @@ A Java class is composed of two main elements, known as its **members**:
 public class Person {
 
     // Field → defines data/state
-    String name;
+    String personName;
 
     // Method → defines behavior
     void sayHello() {
@@ -40,7 +40,7 @@ public class Person {
 |---|---|---|---|
 | <span>class</span> | Keyword | Declares a class type. | <span>Mandatory</span> |
 | <span>Person</span> | Class name (identifier) | The name of the class. | <span>Mandatory</span> |
-| <span>name</span> | Field name (identifier) | Stores the name of the person. | <span>Optional</span> |
+| <span>personName</span> | Field name (identifier) | Stores the name of the person. | <span>Optional</span> |
 | <span>String</span> | Type / Keyword | Type of the field `name`. | <span>Mandatory</span> |
 | <span>sayHello</span> | Method name (identifier) | Defines a behavior of the class. | <span>Optional</span> |
 | <span>void</span> | Return Type / Keyword | Indicates the method does not return a value. | <span>Mandatory</span> |
