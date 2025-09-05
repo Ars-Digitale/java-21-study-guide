@@ -3,7 +3,7 @@
 
 
 A **Java class** is the fundamental building block of a Java program.
-It represents a user-defined **type** which, as defined in programming language theory (see: [Syntax Building Blocks](syntax-building-bloks)), specifies the kind of data and the operations (methods) that this new type supports.<br>
+It represents a user-defined **type** which, as defined in programming language theory (see: [Syntax Building Blocks](syntax-building-blocks.md)), specifies the kind of data and the operations (methods) that this new type supports.<br>
 A class serves as the blueprint — the definition of the new type — while objects are concrete instances of this type, created in memory at runtime.
 
 
@@ -19,12 +19,16 @@ A Java class is composed of two main elements, known as its **members**:
 ```java
 public class Person {
 
+	// This is a comment: explains the code but is ignored by the compiler
+
     // Field → defines data/state
     String personName;
 
     // Method → defines behavior
     void sayHello() {
-        System.out.println("Hello, my name is " + name);
+	
+		// We will explain this "statement" later 
+        System.out.println("Hello, my name is " + personName);
     }
 }
 ```
