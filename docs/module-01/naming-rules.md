@@ -19,7 +19,7 @@ As long as you follow the naming rules described below, you are free to choose m
   boolean true = false; // invalid: 'true' is a literal
   ```
 
-	- a. Java Reserved Keywords
+#### a. Java Reserved Keywords
 
 | abstract | continue | for | new | switch |
 | assert   | default  | goto* | package | synchronized |
@@ -34,7 +34,7 @@ As long as you follow the naming rules described below, you are free to choose m
 
 > \* `goto` and `const` are reserved but not used.  
 
-	- b. Reserved Literals
+#### b. Reserved Literals
 
 - `true`  
 - `false`  
