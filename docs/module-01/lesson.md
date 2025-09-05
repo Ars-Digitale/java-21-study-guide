@@ -24,11 +24,12 @@ public class Person {
     // Field → defines data/state
     String personName;
 
-    // Method → defines behavior
+    // Method → defines behavior (this one take a parameter, newName, in input but does not return a value)
     void setPersonName(String newName) {
 		personName = newName;
     }
 	
+	// Method → defines behavior  (this one does not take parameters in input but does return a String)
 	String getPersonName(){
 		return personName;
 	}
