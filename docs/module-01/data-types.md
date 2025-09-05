@@ -1,6 +1,6 @@
 # Java Data Types
 
-As we saw before in the [Module 1: Syntax Building Blocks](module-01-syntax-building-blocks.md), Java has two categories of data types:
+As we saw before in the [Module 1: Syntax Building Blocks](syntax-building-blocks.md), Java has two categories of data types:
 
 - **Primitive types**  
 - **Reference types**

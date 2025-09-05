@@ -34,7 +34,7 @@ The sequence is presented in **increasing order of complexity**, with general de
   - **Keywords (reserved identifiers):** predefined names reserved by the Java language and cannot be redefined.  
     Examples: `class`, `public`, `static`, `if`, `return`.  
 
-  > **Note:** Identifiers must follow Java naming rules: [See Java Naming Rules](module-01-naming-rules.md) 
+  > **Note:** Identifiers must follow Java naming rules: [See Java Naming Rules](naming-rules.md) 
 - **Theory:** Binding function: connects a name to a value or resource.
 
 ---
@@ -54,7 +54,7 @@ The sequence is presented in **increasing order of complexity**, with general de
   - **Reference types:** represent references (pointers) to objects in memory.  
     Examples: `String`, arrays (e.g., `int[]`), classes, interfaces, and user-defined types.
 
-  > **Note:** Java DataTypes [See Java DataTypes](module-01-data-types.md) 	
+  > **Note:** Java DataTypes [See Java DataTypes](data-types.md) 	
 - **Theory:** A type system = rules that associate sets of values and admissible operations.
 
 ---
