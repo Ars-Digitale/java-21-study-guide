@@ -18,9 +18,9 @@ A class serves as the blueprint — the definition of the new type — while obj
 
 A Java class is composed of two main elements, known as its **members**:
 
-**Fields** (or variables) — they represent the data that define the state of this newly created type.
+- **Fields** (or variables) — they represent the data that define the state of this newly created type.
 
-**Methods** (or functions) — they represent the operations that can be performed on this data.
+- **Methods** (or functions) — they represent the operations that can be performed on this data.
 
 
 ## 1) `Person` class example
