@@ -25,11 +25,13 @@ public class Person {
     String personName;
 
     // Method → defines behavior
-    void sayHello() {
-	
-		// We will explain this "statement" later 
-        System.out.println("Hello, my name is " + personName);
+    void setPersonName(String newName) {
+		personName = newName;
     }
+	
+	String getPersonName(){
+		return personName;
+	}
 }
 ```
 
@@ -37,17 +39,19 @@ public class Person {
 
 ## Identifiers explained
 
-> **Legend:** <span class="mand">Mandatory</span> = required by Java syntax,  
-> <span class="opt">Optional</span> = not required by syntax; depends on design.  
+> **Legend:** Mandatory = required by Java syntax,  
+> Optional = not required by syntax; depends on design.  
 
 | Token / Identifier | Category | Meaning | Optional? |
 |---|---|---|---|
-| <span>class</span> | Keyword | Declares a class type. | <span>Mandatory</span> |
-| <span>Person</span> | Class name (identifier) | The name of the class. | <span>Mandatory</span> |
-| <span>personName</span> | Field name (identifier) | Stores the name of the person. | <span>Optional</span> |
-| <span>String</span> | Type / Keyword | Type of the field `name`. | <span>Mandatory</span> |
-| <span>sayHello</span> | Method name (identifier) | Defines a behavior of the class. | <span>Optional</span> |
-| <span>void</span> | Return Type / Keyword | Indicates the method does not return a value. | <span>Mandatory</span> |
+| class | Keyword | Declares a class type. | Mandatory |
+| Person | Class name (identifier) | The name of the class. | Mandatory |
+| personName | Field name (identifier) | Stores the name of the person. | Optional |
+| String | Type / Keyword | Type of the field `name`. | Mandatory |
+| setPersonName, getPersonName | Method names (identifier) | Name a behavior of the class. | Optional |
+| newName | Parameter name (identifier) | nput passed to the method setPersonName. | Mandatory (if the method needs a parameter) |
+| return | Keyword | Exits a method and gives back a value. | Mandatory (in methods with a non-void return type) |
+| void | Return Type / Keyword | Indicates the method does not return a value. | Mandatory (if the method does not return a value) |
 
 
 **Notes**
