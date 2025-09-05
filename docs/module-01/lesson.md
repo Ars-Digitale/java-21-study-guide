@@ -40,7 +40,8 @@ public class Person {
 
 ## Identifiers explained
 
-> **Legend:** Mandatory = required by Java syntax,  
+> **Legend:** 
+> Mandatory = required by Java syntax,  
 > Optional = not required by syntax; depends on design.  
 
 | Token / Identifier | Category | Meaning | Optional? |
