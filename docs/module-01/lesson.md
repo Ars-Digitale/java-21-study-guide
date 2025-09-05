@@ -47,11 +47,11 @@ public class Person {
 | Token / Identifier | Category | Meaning | Optional? |
 |---|---|---|---|
 | class | Keyword | Declares a class type. | Mandatory |
-| Person | Class name (identifier) | The name of the class. | Mandatory |
-| personName | Field name (identifier) | Stores the name of the person. | Optional |
+| `Person` | Class name (identifier) | The name of the class. | Mandatory |
+| `personName` | Field name (identifier) | Stores the name of the person. | Optional |
 | String | Type / Keyword | Type of the field `name`. | Mandatory |
-| setPersonName, getPersonName | Method names (identifier) | Name a behavior of the class. | Optional |
-| newName | Parameter name (identifier) | nput passed to the method setPersonName. | Mandatory (if the method needs a parameter) |
+| `setPersonName`, `getPersonName` | Method names (identifier) | name a behavior of the class. | Optional |
+| `newName` | Parameter name (identifier) | input passed to the method `setPersonName`. | Mandatory (if the method needs a parameter) |
 | return | Keyword | Exits a method and gives back a value. | Mandatory (in methods with a non-void return type) |
 | void | Return Type / Keyword | Indicates the method does not return a value. | Mandatory (if the method does not return a value) |
 
