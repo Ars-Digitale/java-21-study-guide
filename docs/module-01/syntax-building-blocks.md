@@ -47,7 +47,7 @@ The sequence is presented in **increasing order of complexity**, with general de
 ---
 
 ## 5. **Type**
-- **Definition:** A classification of values and variables, defining what is valid and which operations are allowed.  
+- **Definition:** A type is a set of values and a set of operations permitted on those values..  
 - **In Java:**  
   - **Primitive (simple) types:** directly represent basic values.  
     Examples: `int`, `double`, `boolean`, `char`, `byte`, `short`, `long`, `float`.  
