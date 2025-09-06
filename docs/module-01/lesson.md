@@ -6,6 +6,7 @@
 
 A **Java class** is the fundamental building block of a Java program.
 It represents a user-defined **type** which, as defined in programming language theory (see: [Syntax Building Blocks](syntax-building-blocks.md)), specifies the kind of data and the operations (methods) that this new type supports.<br>
+
 A class serves as the blueprint — the definition of the new type — while objects are concrete instances of this type, created in memory at runtime.
 
 
@@ -54,7 +55,7 @@ public class Person {
 
 | Token / Identifier | Category | Meaning | Optional? |
 |---|---|---|---|
-| public | Keyword / access modifier | determines which other classes can use or see that element | Mandatory (when absent is, by default, package-private |
+| public | Keyword / access modifier | determines which other classes can use or see that element | Mandatory (when absent is, by default, package-private) |
 | class | Keyword | Declares a class type. | Mandatory |
 | Person | Class name (identifier) | The name of the class. | Mandatory |
 | personName | Field name (identifier) | Stores the name of the person. | Optional |
@@ -110,7 +111,7 @@ public class MyApp{
 }
 ```
 
-This declaration means the class must be located in the directory: **com/example/myapp/utils/**
+> This declaration means the class must be located in the directory: **com/example/myapp/utils/**
 
 ### c. Belonging to the Same Package
 
@@ -144,7 +145,7 @@ import java.util.*;          // imports all classes in java.util
 
 > **Notes**
 
-* imports all types in the package but not its subpackages.
+> \* imports all types in the package but not its subpackages.
 
 You can always use the fully qualified name instead of importing:
 
