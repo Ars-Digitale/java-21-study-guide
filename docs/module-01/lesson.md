@@ -148,7 +148,7 @@ import java.util.*;          // imports all classes in java.util
 
 > **Notes**
 
-> **\*** imports all types in the package but not its subpackages.
+> The wildcard character **\*** imports all types in the package but not its subpackages.
 
 You can always use the fully qualified name instead of importing:
 
