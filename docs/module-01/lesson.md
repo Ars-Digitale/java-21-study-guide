@@ -123,7 +123,7 @@ Two classes belong to the same package if and only if:
 - They are declared with the same package statement at the top of their source file.
 - They are placed in the same directory of the source hierarchy.
 
-Example:
+- Example:
 
 A class in package A.B.C; belongs to A.B.C only, not to A.B.
 
