@@ -94,6 +94,7 @@ In Java, an **access modifier** is a keyword that specifies the visibility (or a
 **Java packages** are logical groupings of classes, interfaces, and sub-packages. They help organize large codebases, avoid name conflicts, and provide controlled access between different parts of an application.
 
 ### a. Organization and Purpose
+- Naming of packages follow the same rules of variable names: see: [Java Naming Rules](naming-rules.md)
 - Packages are like **folders** for your Java source code.  
 - They let you group related classes together (e.g., all utility classes in `java.util`, all networking classes in `java.net`).  
 - By using packages, you can prevent **naming conflicts**: for example, you may have two classes named `Date`, but one is `java.util.Date` and another is `java.sql.Date`.
