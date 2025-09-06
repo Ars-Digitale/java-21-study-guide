@@ -27,6 +27,7 @@ A single file, however, may contain more than one class definition. In this case
 Nested class, which are classes declared inside another class, can declare any access modifier: public, protected, private, default (package-private).
 
 
+
 ### a. `Person` class example
 
 ```java
@@ -49,9 +50,11 @@ public class Person {
 }
 ```
 
+
 > **Identifiers explained:** 
 > Mandatory = required by Java syntax,  
 > Optional = not required by syntax; depends on design.  
+
 
 | Token / Identifier | Category | Meaning | Optional? |
 |---|---|---|---|
@@ -145,7 +148,7 @@ import java.util.*;          // imports all classes in java.util
 
 > **Notes**
 
-> \* imports all types in the package but not its subpackages.
+> **\*** imports all types in the package but not its subpackages.
 
 You can always use the fully qualified name instead of importing:
 
