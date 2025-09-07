@@ -52,11 +52,8 @@ public class Person {
 }
 ```
 
-
 > [!NOTE]
-> Mandatory = required by Java syntax,  
-> Optional = not required by syntax; depends on design.  
-
+> In its simplest form, we could theoretically have a class with no methods and no fields. Although such a class would compile, it would hardly make much sense.
 
 | Token / Identifier | Category | Meaning | Optional? |
 |---|---|---|---|
@@ -70,9 +67,9 @@ public class Person {
 | return | Keyword | Exits a method and gives back a value. | Mandatory (in methods with a non-void return type) |
 | void | Return Type / Keyword | Indicates the method does not return a value. | Mandatory (if the method does not return a value) |
 
-
 > [!NOTE]
-> In its simplest form, we could theoretically have a class with no methods and no fields. Although such a class would compile, it would hardly make much sense.
+> Mandatory = required by Java syntax,  
+> Optional = not required by syntax; depends on design. 
 
 ---
 
