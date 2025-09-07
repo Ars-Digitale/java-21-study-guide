@@ -5,9 +5,11 @@
 
 
 A **Java class** is the fundamental building block of a Java program.
-It represents a user-defined **type** which, as defined in programming language theory (see: [Syntax Building Blocks](syntax-building-blocks.md)), specifies the kind of data and the operations (methods) that this new type supports.<br>
+A class represents a type in Java. 
+This type can be user-defined (created by the programmer) or predefined (coming from the Java standard library or external libraries). 
+As described in programming language theory [see: Syntax Building Blocks](syntax-building-blocks.md), a type specifies the kind of data and the operations (methods) that it supports.
 
-A class serves as the blueprint — the definition of the new type — while objects are concrete instances of this type, created in memory at runtime.
+A class serves as the blueprint — the definition of the new type — while objects are concrete instances (implementations) of this type, created in memory at runtime.
 
 
 A Java class is composed of two main elements, known as its **members**:
@@ -28,7 +30,7 @@ Nested class, which are classes declared inside another class, can declare any a
 
 
 
-### a. `Person` class example
+- Example:
 
 ```java
 public class Person {
@@ -94,7 +96,7 @@ In Java, an **access modifier** is a keyword that specifies the visibility (or a
 **Java packages** are logical groupings of classes, interfaces, and sub-packages. They help organize large codebases, avoid name conflicts, and provide controlled access between different parts of an application.
 
 ### a. Organization and Purpose
-- Naming of packages follow the same rules of variable names: see: [Java Naming Rules](naming-rules.md)
+- Naming of packages follow the same rules of variable names. see: [Java Naming Rules](naming-rules.md)
 - Packages are like **folders** for your Java source code.  
 - They let you group related classes together (e.g., all utility classes in `java.util`, all networking classes in `java.net`).  
 - By using packages, you can prevent **naming conflicts**: for example, you may have two classes named `Date`, but one is `java.util.Date` and another is `java.sql.Date`.
