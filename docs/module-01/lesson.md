@@ -53,7 +53,7 @@ public class Person {
 ```
 
 
-> **Identifiers explained:** 
+> [!NOTE]
 > Mandatory = required by Java syntax,  
 > Optional = not required by syntax; depends on design.  
 
@@ -71,8 +71,8 @@ public class Person {
 | void | Return Type / Keyword | Indicates the method does not return a value. | Mandatory (if the method does not return a value) |
 
 
-> **Notes**
-- In its simplest form, we could theoretically have a class with no methods and no fields. Although such a class would compile, it would hardly make much sense.
+> [!NOTE]
+> In its simplest form, we could theoretically have a class with no methods and no fields. Although such a class would compile, it would hardly make much sense.
 
 ---
 
@@ -117,7 +117,7 @@ public class MyApp{
 }
 ```
 
-> This declaration means the class must be located in the directory: **com/example/myapp/utils/**
+> [!IMPORTANT] This declaration means the class must be located in the directory: **com/example/myapp/utils/**
 
 ### c. Belonging to the Same Package
 
