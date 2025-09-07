@@ -117,7 +117,8 @@ public class MyApp{
 }
 ```
 
-> [!IMPORTANT] This declaration means the class must be located in the directory: **com/example/myapp/utils/**
+[!IMPORTANT] 
+> This declaration means the class must be located in the directory: **com/example/myapp/utils/MyApp.java**
 
 ### c. Belonging to the Same Package
 
@@ -141,7 +142,6 @@ Classes in the same package:
 
 To use classes from another package, you need to import them:
 
-	
 - Example:
 
 ```java
@@ -149,8 +149,7 @@ import java.util.List;       // imports a specific class
 import java.util.*;          // imports all classes in java.util
 ```
 
-> **Notes**
-
+> [!NOTE]
 > The wildcard character  **\***  imports all types in the package but not its subpackages.
 
 You can always use the fully qualified name instead of importing:
