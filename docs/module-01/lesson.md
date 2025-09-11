@@ -141,11 +141,11 @@ is fine, but
 
 ```java
 
-/* */ /*
+/* */ */
 
 ```
 
-will cause a compilation error, because the second /* starts a new block comment that is never terminated.
+will cause a compilation error because, while the first two symbols are part of the comment, the last symbol don't. The extra symbol */ is not valid syntax then and the compiler will complain. 
 
 ---
 
