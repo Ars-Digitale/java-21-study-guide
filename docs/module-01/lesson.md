@@ -109,7 +109,7 @@ A **multiline comment** includes anything between the symbols /* and */.
 
 ```
 
-A **Javadoc comment** is similar to a **multiline comment**, except it starts with /\*\*: All the text between its opening and closing symbols is processed by the Javadoc tool to generate API documentation.
+A **Javadoc comment** is similar to a **multiline comment**, except it starts with /\*\*: all the text between its opening and closing symbols is processed by the Javadoc tool to generate API documentation.
 
 ```java
 
@@ -125,6 +125,27 @@ A **Javadoc comment** is similar to a **multiline comment**, except it starts wi
  */
 
 ```
+
+[!WARNING] 
+> In Java, every block comment must be properly closed with */.
+
+- Example:
+
+```java
+
+/* valid block comment */
+
+```
+
+is fine, but
+
+```java
+
+/* */ /*
+
+```
+
+will cause a compilation error, because the second /* starts a new block comment that is never terminated.
 
 ---
 
