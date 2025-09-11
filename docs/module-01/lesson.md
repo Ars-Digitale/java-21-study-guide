@@ -73,7 +73,29 @@ public class Person {
 
 ---
 
-## 2. Access modifiers
+## 2. Comments
+
+Comments are not executable code: they explains the code but are ignored by the compiler.
+
+In Java there are 3 types of comments:
+
+- **Single-line** comment;
+- **Multiline** comment;
+- **Javadoc** comment;
+
+A **single-line comment** starts with 2 slashes: all the text after that on the same line, is ignored by the compiler.
+
+- Exapmle:
+
+```java
+
+// This is a single-line comment
+
+```
+
+A **multiline comment** includes anything between the symbols /* and */.
+
+## 3. Access modifiers
 
 In Java, an **access modifier** is a keyword that specifies the visibility (or accessibility) of a class, method, or field. It determines which other classes can use or see that element.
 
@@ -88,7 +110,7 @@ In Java, an **access modifier** is a keyword that specifies the visibility (or a
 
 ---
 
-## 3. Packages
+## 4. Packages
 
 **Java packages** are logical groupings of classes, interfaces, and sub-packages. They help organize large codebases, avoid name conflicts, and provide controlled access between different parts of an application.
 
@@ -127,7 +149,6 @@ Two classes belong to the same package if and only if:
 - Example:
 
 A class in package A.B.C; belongs to A.B.C only, not to A.B.
-
 Classes in A.B cannot directly access **package-private** members of classes in A.B.C, because they are different packages.
 
 Classes in the same package:
