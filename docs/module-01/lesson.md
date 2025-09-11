@@ -26,7 +26,7 @@ Such a class can only be declared as public or package-private (i.e., with no ac
 
 A single file, however, may contain more than one class definition. In this case, only one class can be declared public, and the file name must match that class. 
 
-Nested class, which are classes declared inside another class, can declare any access modifier: public, protected, private, default (package-private).
+**Nested class**, which are classes declared inside another class, can declare any access modifier: public, protected, private, default (package-private).
 
 
 
@@ -83,17 +83,50 @@ In Java there are 3 types of comments:
 - **Multiline** comment;
 - **Javadoc** comment;
 
-A **single-line comment** starts with 2 slashes: all the text after that on the same line, is ignored by the compiler.
+A **single-line comment** starts with 2 slashes: all the text after that, on the same line, is ignored by the compiler.
 
 - Exapmle:
 
 ```java
 
-// This is a single-line comment
+// This is a single-line comment. It starts with 2 slashes and ends at the end of the line. 
+
 
 ```
 
 A **multiline comment** includes anything between the symbols /* and */.
+
+- Exapmle:
+
+```java
+
+/* 	
+* This is a multi-line comment.
+* It can span multiple lines.
+* All the text between its opening and closing symbols is ignored by the compiler.
+*
+*/
+
+```
+
+A **Javadoc comment** is similar to a **multiline comment**, except it starts with /\*\*: All the text between its opening and closing symbols is processed by the Javadoc tool to generate API documentation.
+
+```java
+
+/**
+ * This is a Javadoc comment
+ *
+ * This class represents a Person.
+ * It stores a name and provides methods
+ * to set and retrieve it.
+ *
+ * <p>Javadoc comments can include HTML tags,
+ * and special annotations like @param and @return.</p>
+ */
+
+```
+
+---
 
 ## 3. Access modifiers
 
