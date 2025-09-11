@@ -126,7 +126,7 @@ A **Javadoc comment** is similar to a **multiline comment**, except it starts wi
 
 ```
 
-[!WARNING] 
+> [!WARNING] 
 > In Java, every block comment must be properly closed with */.
 
 - Example:
