@@ -236,4 +236,38 @@ java.util.List myList = new java.util.ArrayList<>();
 
 **User-defined packages**: created by developers to organize application code.
 
+---
+
+## 5. The `main` Method
+
+In Java, the `main` method serves as the **entry point** of a standalone application. Its correct declaration is critical for the JVM to recognize it:
+
+### a. `main` method signature
+
+Let's review the `main` method signature inside the simplest possible class:
+
+```java
+public class MainExample {
+
+	public static void main(String[] args){
+	
+		System.out.print("Hello World!!");
+	
+	}
+
+}
+```
+
+| Token / Identifier | Category | Meaning | Optional? |
+|---|---|---|---|
+| public | Keyword / Access Modifier | Makes the method accessible from anywhere. Required so the JVM can call it from outside the class. | Mandatory |
+| static | Keyword | Means the method belongs to the class itself and can be called without creating an object. Required because the JVM has no object instance when starting the program. | Mandatory |
+| main | Method name (predefined) | The exact name that the JVM looks for as the entry point of the program. Must be spelled exactly as `main` (lowercase). | Mandatory |
+| void | Return Type / Keyword | Declares that the method does not return any value to the JVM. | Mandatory |
+| String[] args | Parameter list | An array of `String` values that holds the command-line arguments passed to the program. May also be written as `String args[]` or `String... args`. The parameter name (`args`) is arbitrary. | Mandatory (the parameter type is required, but the name can vary) |
+
+
+
+
+
 
