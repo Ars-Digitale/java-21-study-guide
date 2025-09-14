@@ -153,6 +153,7 @@ will cause a compilation error because, while the first two symbols are part of 
 
 In Java, an **access modifier** is a keyword that specifies the visibility (or accessibility) of a class, method, or field. It determines which other classes can use or see that element.
 
+> [!NOTE]
 > **Table of the access modifiers available in Java**
 
 | Token / Identifier | Category | Meaning | Optional? |
@@ -190,7 +191,7 @@ public class MyApp{
 }
 ```
 
-[!IMPORTANT] 
+> [!IMPORTANT] 
 > This declaration means the class must be located in the directory: **com/example/myapp/utils/MyApp.java**
 
 ### c. Belonging to the Same Package
@@ -273,6 +274,9 @@ public class MainSecondExample {
 
 }
 ```
+
+> [!IMPORTANT]
+> **Table of the access modifiers for the main method**
 
 | Token / Identifier | Category | Meaning | Optional? |
 |---|---|---|---|
