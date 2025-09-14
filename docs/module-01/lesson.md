@@ -244,12 +244,28 @@ In Java, the `main` method serves as the **entry point** of a standalone applica
 
 ### a. `main` method signature
 
-Let's review the `main` method signature inside the simplest possible class:
+Let's review the `main` method signature inside two of the simplest possible classes:
+
+- Example: without optional modifiers
 
 ```java
-public class MainExample {
+public class MainFirstExample {
 
 	public static void main(String[] args){
+	
+		System.out.print("Hello World!!");
+	
+	}
+
+}
+```
+
+- Example: with both optional `final` modifiers
+
+```java
+public class MainSecondExample {
+
+	public final static void main(final String options[]){
 	
 		System.out.print("Hello World!!");
 	
@@ -262,10 +278,15 @@ public class MainExample {
 |---|---|---|---|
 | public | Keyword / Access Modifier | Makes the method accessible from anywhere. Required so the JVM can call it from outside the class. | Mandatory |
 | static | Keyword | Means the method belongs to the class itself and can be called without creating an object. Required because the JVM has no object instance when starting the program. | Mandatory |
+| final (before return type) | Modifier | Prevents the method from being overridden. It can legally appear before the return type, but it has no effect on `main` and is not required. | Optional |
 | main | Method name (predefined) | The exact name that the JVM looks for as the entry point of the program. Must be spelled exactly as `main` (lowercase). | Mandatory |
 | void | Return Type / Keyword | Declares that the method does not return any value to the JVM. | Mandatory |
 | String[] args | Parameter list | An array of `String` values that holds the command-line arguments passed to the program. May also be written as `String args[]` or `String... args`. The parameter name (`args`) is arbitrary. | Mandatory (the parameter type is required, but the name can vary) |
+| final (in parameter) | Modifier | Marks the parameter as unchangeable inside the method body (you cannot reassign `args` to another array). | Optional |
 
+
+> [!NOTE]
+> Modifiers `public`, `static` (mandatory) and `final` (if present) can be swapped in order;  `public` and `static` can't be omitted.
 
 
 
