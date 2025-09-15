@@ -308,12 +308,12 @@ This chapter shows **correct, working** `javac` and `java` command lines for com
 
 ```bash
 javac -version   # should print: javac 21.x
-java  -version   # should print: java version "21.0.7" ... (the output could be different depending on your jvm implementation
+java  -version   # should print: java version "21.0.7" ... (the output could be different depending on the implementation of the jvm you installed)
 ```
 
 ---
 
-### 1) Compiling one file, default package (single directory)
+### a. Compiling one file, default package (single directory)
 
 **Files**
 ```
@@ -350,7 +350,7 @@ java Hello
 
 ---
 
-### 2) Multiple files, default package (single directory)
+### b. Multiple files, default package (single directory)
 
 **Files**
 ```
@@ -393,14 +393,14 @@ java B
 > [!IMPORTANT]
 > The path to your classes is, in Java, the **classpath**
 
-#### You can specify the classpath with one of the following iptions
+> You can specify the **classpath** with one of the following options
 
 - -cp <classpath>
 - -classpath  <classpath>
 - --class-path <classpath>
 
 
-### 3) Code inside packages (standard src → out layout)
+### c. Code inside packages (standard src → out layout)
 
 **Files**
 ```
