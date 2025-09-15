@@ -389,14 +389,12 @@ java B
 ```
 
 
-> [!IMPORTANT]
-> The path to your classes is, in Java, the **classpath**
+> [!NOTE]
+> The path to your classes is, in Java, the **classpath**: You can specify the **classpath** with one of the following options
 
-> You can specify the **classpath** with one of the following options
-
-- -cp <classpath>
-- -classpath  <classpath>
-- --class-path <classpath>
+- -cp `<classpath>`
+- -classpath `<classpath>`
+- --class-path `<classpath>`
 
 
 ### c. Code inside packages (standard src → out layout)
