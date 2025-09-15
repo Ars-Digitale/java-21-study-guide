@@ -220,6 +220,8 @@ To use classes from another package, you need to import them:
 ```java
 import java.util.List;       // imports a specific class
 import java.util.*;          // imports all classes in java.util
+
+import java.nio.file.*.*     // ERROR! ony one wildcard is allowed ant it must be at the end!
 ```
 
 > [!NOTE]
@@ -230,6 +232,10 @@ You can always use the fully qualified name instead of importing:
 ```java
 java.util.List myList = new java.util.ArrayList<>();
 ```
+
+> [!NOTE]
+> If you explicitely import a class name, it takes precedence over any wildcard import
+> if you want two use two class with the same name (ex. `Date` from java.util and from java.sql), it is better to use a fully qualified name import.
 
 ### e. Standard vs. User-Defined Packages
 
@@ -275,7 +281,7 @@ public class MainSecondExample {
 }
 ```
 
-> [!IMPORTANT]
+> [!NOTE]
 > **Table of the access modifiers for the main method**
 
 | Token / Identifier | Category | Meaning | Optional? |
@@ -289,7 +295,7 @@ public class MainSecondExample {
 | final (in parameter) | Modifier | Marks the parameter as unchangeable inside the method body (you cannot reassign `args` to another array). | Optional |
 
 
-> [!NOTE]
+> [!IMPORTANT]
 > Modifiers `public`, `static` (mandatory) and `final` (if present) can be swapped in order;  `public` and `static` can't be omitted.
 
 
