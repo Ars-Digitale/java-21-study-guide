@@ -234,7 +234,7 @@ java.util.List myList = new java.util.ArrayList<>();
 ```
 
 > [!NOTE]
-> If you explicitely import a class name, it takes precedence over any wildcard import
+> If you explicitely import a class name, it takes precedence over any wildcard import;
 > if you want two use two class with the same name (ex. `Date` from java.util and from java.sql), it is better to use a fully qualified name import.
 
 ### e. Standard vs. User-Defined Packages
@@ -297,6 +297,158 @@ public class MainSecondExample {
 
 > [!IMPORTANT]
 > Modifiers `public`, `static` (mandatory) and `final` (if present) can be swapped in order;  `public` and `static` can't be omitted.
+
+---
+
+## 5. Compiling and running your code
+
+This chapter shows **correct, working** `javac` and `java` command lines for common situations in Java 21: single files, multiple files, packages, separate output directories, and classpath/module-path usage. Follow the directory layouts exactly.
+
+> check your tools
+
+```bash
+javac -version   # should print: javac 21.x
+java  -version   # should print: java version "21.0.7" ... (the output could be different depending on your jvm implementation
+```
+
+---
+
+### 1) Compiling one file, default package (single directory)
+
+**Files**
+```
+.
+└── Hello.java
+```
+
+**Hello.java**
+```java
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java 21!");
+    }
+}
+```
+
+**Compile (in the same directory)**
+```bash
+javac Hello.java
+```
+
+This command will create, in the same directory, a file with the same name of your ".java" file but with ".class" filename extension ; this is the bytecode file which will be interpreted and compiled by the jvm.
+
+Once you have the .class file, in this case Hello.class, you ca run the program with:
+
+**Run**
+```bash
+java Hello
+```
+
+> [!IMPORTANT]
+> You don't have to specify the ".class" extension when executing the program
+
+
+---
+
+### 2) Multiple files, default package (single directory)
+
+**Files**
+```
+.
+├── A.java
+└── B.java
+```
+
+**Compile everything**
+```bash
+javac *.java
+```
+
+Or, if the classes belong to a specific package:
+
+```bash
+javac packagex/*.java
+```
+
+Or, specifying each of them
+
+```bash
+javac A.java B.java
+```
+and
+
+```bash
+javac packagex/A.java packagey/B.java
+```
+
+**Run the entry point**: The class which has a `main` method
+```bash
+java A    # if A has main(...)
+# or
+java B
+```
+
+---
+
+> [!IMPORTANT]
+> The path to your classes is, in Java, the **classpath**
+
+#### You can specify the classpath with one of the following iptions
+
+- -cp <classpath>
+- -classpath  <classpath>
+- --class-path <classpath>
+
+
+### 3) Code inside packages (standard src → out layout)
+
+**Files**
+```
+.
+├── src/
+│   └── com/
+│       └── example/
+│           └── app/
+│               └── Main.java
+└── out/
+```
+
+> [!NOTE]
+> The `src` directory it is not part of our package, being only the directory containing all our source files;
+
+**Main.java**
+```java
+package com.example.app;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Packages done right.");
+    }
+}
+```
+
+**Compile to the same directory**
+```bash
+# Creates package folders under out/
+javac src/com/example/app/Main.java
+```
+
+**Compile to another directory (`out/`)**: the `-d` option is used to specify the output directory.
+```bash
+# Creates package folders under out/
+javac -d out src/com/example/app/Main.java
+```
+
+**Run (use the classpath to point at out/)**
+```bash
+# Unix/macOS
+java -cp out com.example.app.Main
+
+# Windows
+java -cp out com.example.app.Main
+```
+
+---
 
 
 
