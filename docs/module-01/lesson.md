@@ -221,13 +221,13 @@ To use classes from another package, you need to import them:
 import java.util.List;       // imports a specific class
 import java.util.*;          // imports all classes in java.util
 
-import java.nio.file.*.*     // ERROR! ony one wildcard is allowed ant it must be at the end!
+import java.nio.file.*.*     // ERROR! only one wildcard is allowed and it must be at the end!
 ```
 
 > [!NOTE]
 > The wildcard character  **\***  imports all types in the package but not its subpackages.
 
-You can always use the fully qualified name instead of importing:
+You can always use the fully qualified name instead of importing all the classes in that package:
 
 ```java
 java.util.List myList = new java.util.ArrayList<>();
@@ -267,7 +267,7 @@ public class MainFirstExample {
 }
 ```
 
-- Example: with both optional `final` modifiers
+- Example: with both, optional, `final` modifiers
 
 ```java
 public class MainSecondExample {
@@ -302,7 +302,9 @@ public class MainSecondExample {
 
 ## 5. Compiling and running your code
 
+
 This chapter shows **correct, working** `javac` and `java` command lines for common situations in Java 21: single files, multiple files, packages, separate output directories, and classpath/module-path usage. Follow the directory layouts exactly.
+
 
 > check your tools
 
@@ -311,7 +313,6 @@ javac -version   # should print: javac 21.x
 java  -version   # should print: java version "21.0.7" ... (the output could be different depending on the implementation of the jvm you installed)
 ```
 
----
 
 ### a. Compiling one file, default package (single directory)
 
@@ -348,7 +349,6 @@ java Hello
 > You don't have to specify the ".class" extension when executing the program
 
 
----
 
 ### b. Multiple files, default package (single directory)
 
@@ -388,7 +388,6 @@ java A    # if A has main(...)
 java B
 ```
 
----
 
 > [!IMPORTANT]
 > The path to your classes is, in Java, the **classpath**
@@ -448,7 +447,7 @@ java -cp out com.example.app.Main
 java -cp out com.example.app.Main
 ```
 
----
+
 
 
 
