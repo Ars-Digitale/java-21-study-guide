@@ -472,7 +472,7 @@ javac -d out -sourcepath src   src/com/example/app/Main.java
 ```
 
 > [!IMPORTANT]
-> `-sourcepath <sourcepath>` tells `javac` where to look for other `.java` files that a given source depends on.
+> **-sourcepath** `<sourcepath>` tells `javac` where to look for other `.java` files that a given source depends on.
 
 ### f. Single-file source execution (quick runs without `javac`)
 
@@ -490,6 +490,40 @@ java Main.java Helper.java
 ```
 
 > If you use **packages**, prefer compiling to `out/` and running with `-cp`.
+
+### g. Passing Parameters to a Java program
+
+You can send data to your Java program through the parameters of the `main` entry point.
+
+As we learned before, the `main` method can receive an array of strings in the form: String[] args. See [the section on main](#a-main-method-signature).
+
+**Main.java printing out two parameters received in input by the "main" method**: 
+```java
+package com.example.app;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(args[0]);
+        System.out.println(args[1]);
+    }
+}
+```
+
+To pass parameter, just type (for example):
+
+```bash
+java Main.java Hello World  #space are used to separate the two arguments
+```
+
+If you want to pass an argument containing spaces, just use quotes:
+
+```bash
+java Main.java Hello "World Mario" #space are used to separate the two arguments
+```
+
+> If you declare to print the first two element of the parameter array (as in our previous example) but you pass less arguments, the jvm will notify you of a problem through a `java.lang.ArrayIndexOutOfBoundsException`.
+
+> If, on the other hand, you pass more arguments than the method expects, it will print out just the two (in this case) expected. 
 
 
 
