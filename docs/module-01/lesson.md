@@ -389,12 +389,12 @@ java B
 ```
 
 
-> [!NOTE]
-> The path to your classes is, in Java, the **classpath**: you can specify the **classpath** with one of the following options
+> [!IMPORTANT]
+> The path to your classes is, in Java, the **classpath**. You can specify the **classpath** with one of the following options:
 
-- -cp `<classpath>`
-- -classpath `<classpath>`
-- --class-path `<classpath>`
+- **-cp** `<classpath>`
+- **-classpath** `<classpath>`
+- **--class-path** `<classpath>`
 
 
 ### c. Code inside packages (standard src → out layout)
@@ -426,14 +426,16 @@ public class Main {
 
 **Compile to the same directory**
 ```bash
-# Creates package folders under out/
+# Creates .class file just beside the source file
 javac src/com/example/app/Main.java
 ```
 
-**Compile to another directory (`out/`)**: the `-d` option is used to specify the output directory.
+### d. Compiling to another directory (`-d`)
+
+`-d out` places compiled `.class` files into the `out/` directory, creating package subfolders that mirror your `package` names:
+
 ```bash
-# Creates package folders under out/
-javac -d out src/com/example/app/Main.java
+javac -d out -sourcepath src src/com/example/app/Main.java
 ```
 
 **Run (use the classpath to point at out/)**
@@ -445,7 +447,7 @@ java -cp out com.example.app.Main
 java -cp out com.example.app.Main
 ```
 
-### d. Multiple files across packages (compile whole source tree)
+### e. Multiple files across packages (compile whole source tree)
 
 **Files**
 ```
@@ -471,6 +473,23 @@ javac -d out -sourcepath src   src/com/example/app/Main.java
 
 > [!IMPORTANT]
 > `-sourcepath <sourcepath>` tells `javac` where to look for other `.java` files that a given source depends on.
+
+### f. Single-file source execution (quick runs without `javac`)
+
+Java 21 (since Java 11) lets you run small programs directly from source:
+
+```bash
+# Default package only
+java Hello.java
+```
+
+Multiple source files are allowed if they’re in the **default package** and in the **same directory**:
+
+```bash
+java Main.java Helper.java
+```
+
+> If you use **packages**, prefer compiling to `out/` and running with `-cp`.
 
 
 
