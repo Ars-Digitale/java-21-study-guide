@@ -411,7 +411,7 @@ java B
 ```
 
 > [!NOTE]
-> The `src` directory it is not part of our package, being only the directory containing all our source files;
+> The `src` and `out` folders are not part of our packages, being only the directory containing all our source files and the compiled .class files;
 
 **Main.java**
 ```java
