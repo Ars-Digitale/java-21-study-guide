@@ -495,7 +495,7 @@ java Main.java Helper.java
 
 You can send data to your Java program through the parameters of the `main` entry point.
 
-As we learned before, the `main` method can receive an array of strings in the form: String[] args. See [the section on main](#a-main-method-signature).
+As we learned before, the `main` method can receive an array of strings in the form: **String[] args**. See [the section on main](#a-main-method-signature).
 
 **Main.java printing out two parameters received in input by the "main" method**: 
 ```java
@@ -521,7 +521,7 @@ If you want to pass an argument containing spaces, just use quotes:
 java Main.java Hello "World Mario" #space are used to separate the two arguments
 ```
 
-> If you declare to print the first two element of the parameter array (as in our previous example) but you pass less arguments, the jvm will notify you of a problem through a `java.lang.ArrayIndexOutOfBoundsException`.
+> If you declare to use (in this case print) the first two element of the parameter's array (as in our previous example) but, in fact, you pass less arguments, the jvm will notify you of a problem through a `java.lang.ArrayIndexOutOfBoundsException`.
 
 > If, on the other hand, you pass more arguments than the method expects, it will print out just the two (in this case) expected. 
 
