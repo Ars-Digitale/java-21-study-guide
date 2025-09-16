@@ -390,7 +390,7 @@ java B
 
 
 > [!NOTE]
-> The path to your classes is, in Java, the **classpath**: You can specify the **classpath** with one of the following options
+> The path to your classes is, in Java, the **classpath**: you can specify the **classpath** with one of the following options
 
 - -cp `<classpath>`
 - -classpath `<classpath>`
@@ -444,6 +444,33 @@ java -cp out com.example.app.Main
 # Windows
 java -cp out com.example.app.Main
 ```
+
+### d. Multiple files across packages (compile whole source tree)
+
+**Files**
+```
+.
+├── src/
+│   └── com/
+│       └── example/
+│           ├── util/
+│           │   └── Utils.java
+│           └── app/
+│               └── Main.java
+└── out/
+```
+
+**Compile entire source tree to `out/`**
+```bash
+# Option A: point javac at the top package(s)
+javac -d out   src/com/example/util/Utils.java   src/com/example/app/Main.java
+
+# Option B: use -sourcepath to let javac find dependencies
+javac -d out -sourcepath src   src/com/example/app/Main.java
+```
+
+> [!IMPORTANT]
+> `-sourcepath <sourcepath>` tells `javac` where to look for other `.java` files that a given source depends on.
 
 
 
