@@ -1,6 +1,7 @@
 # Module 1: Instantiating types
 
-In Java, a **type** can be either a **primitive type** (such as `int`, `double`, `boolean`, etc.) or a **reference type** (classes, interfaces, arrays, enums, records, etc.).  
+In Java, a **type** can be either a **primitive type** (such as `int`, `double`, `boolean`, etc.) or a **reference type** (classes, interfaces, arrays, enums, records, etc.). See: [Module 1: Java Data Types](docs/module-01/data-types.md)
+
 The way instances are created depends on the category of the type:
 
 - **Primitive types**  
