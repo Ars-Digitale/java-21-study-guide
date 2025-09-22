@@ -29,3 +29,38 @@ It is also common to rely on literals or factory methods for object creation:
 	String name = new String("Alice"); // creates a new String object explicitly
 	Person p = new Person();           // creates a new Person object using its constructor
   ``` 
+  
+## Handling a Primitive Type
+
+### 1. Declaring a Primitive
+
+**Declaring** a primitive type (as with reference types) means reserving space in memory for a variable of a given type, without necessarily giving it a value.  
+Unlike primitives, whose size depends on their specific type (e.g., `int` vs `long`), reference types always occupy the same fixed size in memory — what varies is the size of the object they point to.
+
+- Syntax examples for declaration only:
+
+  ```java
+  int number;
+  boolean active;
+  char letter;
+  ```
+### 2. Assigning a Primitive
+
+**Assigning** a primitive type (as with reference types) means storing a value into a declared variable of the given type.
+
+- Syntax examples:
+
+  ```java
+  int number;  			// Declaring an int type: a variable called "number"
+  
+  number = 10;  		// Assigning the value 10 to this variable
+  
+  char letter = 'A';    // Declaring and Assigning in a single statement: declaration and assignment can be combined  
+  ```
+  
+  
+  
+  
+  
+> [!IMPORTANT]
+> 
