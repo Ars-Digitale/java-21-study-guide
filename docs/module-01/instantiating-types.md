@@ -41,26 +41,48 @@ Unlike primitives, whose size depends on their specific type (e.g., `int` vs `lo
 
   ```java
   int number;
+  
   boolean active;
+  
   char letter;
+  
+  int x, y, z;          // Multiple declarations in one statement: Java allows declaring multiple variables of the same type
   ```
 ### 2. Assigning a Primitive
 
-**Assigning** a primitive type (as with reference types) means storing a value into a declared variable of the given type.
+**Assigning** a primitive type (as with reference types) means storing a value into a declared variable of that given type.
 
 - Syntax examples:
 
   ```java
-  int number;  			// Declaring an int type: a variable called "number"
+  int number;  					// Declaring an int type: a variable called "number"
   
-  number = 10;  		// Assigning the value 10 to this variable
+  number = 10;  				// Assigning the value 10 to this variable
   
-  char letter = 'A';    // Declaring and Assigning in a single statement: declaration and assignment can be combined  
+  char letter = 'A';    		// Declaring and Assigning in a single statement: declaration and assignment can be combined  
+  
+  int a = 1, b = 2, c = 3;  	// Multiple declarations & assignements
+  
   ```
   
-  
-  
-  
-  
 > [!IMPORTANT]
-> 
+> When you write a number directly in the code (a numeric literal), Java assumes by default that it is of type **int**.  
+> If the value does not fit into an `int`, the code will not compile unless you explicitly mark it with the correct suffix.
+
+- Syntax example for a numeric literal:
+
+  ```java
+  long exNumLit = 5729685479; // ❌ Does not compile.
+                              // Even though the value would fit in a long,
+                              // a plain numeric literal is assumed to be an int,
+                              // and this number is too large for int.
+  
+  Changing the declaration adding the correct suffix (L or l) will solve:
+  
+  long exNumLit = 5729685479L;
+  
+  or
+  
+  long exNumLit = 5729685479l;
+							 
+  ```
