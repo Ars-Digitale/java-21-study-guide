@@ -89,3 +89,71 @@ For primitives, the variable holds the value itself, while for reference types t
   long exNumLit = 5729685479l;
 							 
   ```
+  
+**Declaring** a reference type means reserving space in memory for a variable that will contain a reference (pointer) to an object of the specified type.  
+At this stage, no object is created yet — the variable only has the potential to point to one.
+
+> [!WARNING]  
+> Unlike primitives, whose size depends on their specific type (e.g., `int` vs `long`), reference variables always occupy the same fixed size in memory (enough to store a reference).  
+> What varies is the size of the object they point to, which is allocated separately on the heap.
+
+- Syntax examples for declaration only:
+
+  ```java
+  String name;
+  Person person;
+  List<Integer> numbers;
+  
+  Person p1, p2, p3;   // Multiple declarations in one statement
+  ```
+
+### 2. Creating and Assigning a Reference
+
+**Assigning** a reference type means storing into the variable the memory address of an object.
+This is normally done after the creation of the object with the new keyword and a Constructor, or by using a literal or a factory method.
+
+- Syntax examples:
+
+  ```java
+  Person person = new Person(); // Example with 'new' and a constructor:
+                                // 'new Person()' creates a new Person object on the heap
+                                // and returns its reference, which is stored in the variable 'person'.
+  
+  String greeting = "Hello";	 // Example with literal (for String).
+  
+  List<Integer> numbers = List.of(1, 2, 3);   // Example with a factory method.
+  
+  ```
+  
+### 3. Constructors
+
+In the example, **`Person()`** is a constructor — a special kind of method used to initialize new objects.  
+Whenever you call `new Person()`, the constructor runs and sets up the newly created instance.
+
+**Constructors have three main characteristics:**
+
+- The constructor name **must match the class name** exactly (case-sensitive).  
+- Constructors **do not declare a return type** (not even `void`).  
+- If you do not define any constructor in your class, the compiler will automatically provide a **default no-argument constructor** that does nothing.
+
+> [!WARNING]  
+> If you see a method that has the same name as the class **but also declares a return type**, it is **not** a constructor.  
+> It is simply a regular method (though starting method names with a capital letter is against Java naming conventions).
+
+- Syntax example for a numeric literal:
+
+  ```java
+  long exNumLit = 5729685479; // ❌ Does not compile.
+                              // Even though the value would fit in a long,
+                              // a plain numeric literal is assumed to be an int,
+                              // and this number is too large for int.
+  
+  Changing the declaration adding the correct suffix (L or l) will solve:
+  
+  long exNumLit = 5729685479L;
+  
+  or
+  
+  long exNumLit = 5729685479l;
+							 
+  ```
