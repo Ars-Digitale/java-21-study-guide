@@ -216,7 +216,7 @@ These are blocks of code inside a class, enclosed in `{ }`, that run **every tim
 - Run **before the constructor body**, but after field initializers.  
 - Useful when multiple constructors need to share common initialization code.
 
-- Example: Using an Instance Initializer Block
+Example: Using an Instance Initializer Block
 
 ```java
 public class Person {
