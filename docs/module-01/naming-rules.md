@@ -89,3 +89,21 @@ As long as you follow the naming rules described below, you are free to choose m
   int _; // // invalid: single underscore token;
   ```
 ---
+
+### 6. Numeric literals & Underscore character
+
+- You can have one or more _ (underscore) character in number literals in order to make them easier to read.
+- You can have underscores anywhere except at the beginning, at the end or right around (before/after) a decimal point.
+   
+- Example:  
+  ```java
+  int firstNum = 1_000_000;
+  int secondNum = 1 _____________ 2;
+  
+  double firstDouble = _1000.00   // DOES NOT COMPILE
+  double secondDouble = 1000_.00  // DOES NOT COMPILE
+  double thirdDouble = 1000._00   // DOES NOT COMPILE
+  double fourthDouble = 1000.00_  // DOES NOT COMPILE
+  
+  ```
+---

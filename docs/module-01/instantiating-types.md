@@ -18,17 +18,17 @@ The way instances are created depends on the category of the type:
 	Instances of class types are created using the new keyword (except for a few special cases such as string literals, records with canonical constructors, or factory methods).
 	The new keyword allocates memory on the heap and invokes a constructor of the class.
   
-  ```java
+	```java
 	String name = new String("Alice"); // creates a new String object explicitly
 	Person p = new Person();           // creates a new Person object using its constructor
-  ```
+	```
   
 It is also common to rely on literals or factory methods for object creation:
   
-  ```java
+	```java
 	String name = new String("Alice"); // creates a new String object explicitly
 	Person p = new Person();           // creates a new Person object using its constructor
-  ``` 
+	``` 
   
 ## Handling a Primitive Type
 
@@ -50,7 +50,8 @@ Unlike primitives, whose size depends on their specific type (e.g., `int` vs `lo
   ```
 ### 2. Assigning a Primitive
 
-**Assigning** a primitive type (as with reference types) means storing a value into a declared variable of that given type.
+**Assigning** a primitive type (as with reference types) means storing a value into a declared variable of that given type.  
+For primitives, the variable holds the value itself, while for reference types the variable holds the memory address (a reference) of the object being pointed to.
 
 - Syntax examples:
 
