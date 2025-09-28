@@ -110,7 +110,7 @@ At this stage, no object is created yet — the variable only has the potential 
 ### 2. Creating and Assigning a Reference
 
 **Assigning** a reference type means storing into the variable the memory address of an object.
-This is normally done after the creation of the object with the new keyword and a Constructor, or by using a literal or a factory method.
+This is normally done after the creation of the object with the **new** keyword and a Constructor, or by using a literal or a factory method.
 
 - Syntax examples:
 
