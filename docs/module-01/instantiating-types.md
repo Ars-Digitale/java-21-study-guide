@@ -35,7 +35,9 @@ It is also common to rely on literals or factory methods for object creation:
 ### 1. Declaring a Primitive
 
 **Declaring** a primitive type (as with reference types) means reserving space in memory for a variable of a given type, without necessarily giving it a value.  
-Unlike primitives, whose size depends on their specific type (e.g., `int` vs `long`), reference types always occupy the same fixed size in memory — what varies is the size of the object they point to.
+
+> [!WARNING]
+> Unlike primitives, whose size depends on their specific type (e.g., `int` vs `long`), reference types always occupy the same fixed size in memory — what varies is the size of the object they point to.
 
 - Syntax examples for declaration only:
 
