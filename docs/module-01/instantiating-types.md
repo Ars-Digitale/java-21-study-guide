@@ -107,6 +107,8 @@ At this stage, no object is created yet — the variable only has the potential 
   Person p1, p2, p3;   // Multiple declarations in one statement
   ```
 
+## Handling a Reference Type
+
 ### 2. Creating and Assigning a Reference
 
 **Assigning** a reference type means storing into the variable the memory address of an object.
