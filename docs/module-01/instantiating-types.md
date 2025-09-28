@@ -204,3 +204,73 @@ Person p2 = new Person("Bob", 25);   // name = "Bob", age = 25
 > [!IMPORTANT]
 > - Constructors are not inherited: if a superclass defines constructors, they are not automatically available in the subclass — you must declare them explicitly.
 > - If you declare any constructor in a class, the compiler does not generate the default no-argument constructor: if you still need a no-argument constructor, you must declare it manually.
+
+### 4. Instance Initializer Blocks
+
+In addition to constructors, Java provides a mechanism called **initializer blocks** to help initialize objects.  
+These are blocks of code inside a class, enclosed in `{ }`, that run **every time an instance is created**, just before the constructor body is executed.
+
+#### Characteristics
+- Also called **instance initializer blocks**.  
+- Executed in the order in which they appear in the class definition.  
+- Run **before the constructor body**, but after field initializers.  
+- Useful when multiple constructors need to share common initialization code.
+
+- Example: Using an Instance Initializer Block
+
+```java
+public class Person {
+    String name;
+    int age;
+
+    // Instance initializer block
+    {
+        System.out.println("Instance initializer block executed");
+        age = 18; // default age for every Person
+    }
+
+    // Default constructor
+    public Person() {
+        name = "Unknown";
+    }
+
+    // Constructor with parameters
+    public Person(String newName) {
+        name = newName;
+    }
+}
+
+Person p1 = new Person();          // prints "Instance initializer block executed"
+Person p2 = new Person("Alice");   // prints "Instance initializer block executed"
+```
+> [!NOTE]
+> In this example, the initializer block runs before either constructor body.
+> Both p1 and p2 will start with age = 18, regardless of which constructor is used.
+
+**Multiple Initializer Blocks**: if a class contains multiple initializer blocks, they are executed in the order they appear in the source file:
+
+- Example: 
+
+```java
+public class Example {
+    {
+        System.out.println("First block");
+    }
+
+    {
+        System.out.println("Second block");
+    }
+}
+
+Example ex = new Example();
+// Output:
+// First block
+// Second block
+```
+
+> [!NOTE]
+> Instance initializer blocks are less common in practice, because similar logic can often be placed directly in constructors.
+> However, for the certification exam it is important to know that:
+> - They always run before the constructor body.
+> - They are executed in the order of declaration in the class.
+> - They can be combined with constructors to avoid code duplication.
