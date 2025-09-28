@@ -142,20 +142,65 @@ Whenever you call `new Person()`, the constructor runs and sets up the newly cre
 > If you see a method that has the same name as the class **but also declares a return type**, it is **not** a constructor.  
 > It is simply a regular method (though starting method names with a capital letter is against Java naming conventions).
 
-- Syntax example for a numeric literal:
+The **purpose of a constructor** is to initialize the state of a newly created object — typically by assigning values to its fields, either with default values or using parameters passed to the constructor.
 
-  ```java
-  long exNumLit = 5729685479; // ❌ Does not compile.
-                              // Even though the value would fit in a long,
-                              // a plain numeric literal is assumed to be an int,
-                              // and this number is too large for int.
-  
-  Changing the declaration adding the correct suffix (L or l) will solve:
-  
-  long exNumLit = 5729685479L;
-  
-  or
-  
-  long exNumLit = 5729685479l;
+- Example 1: Default constructor (no parameters)
 							 
-  ```
+```java
+public class Person {
+    String name;
+    int age;
+
+    // Default constructor
+    public Person() {
+        name = "Unknown";
+        age = 0;
+    }
+}
+
+Person p1 = new Person(); // name = "Unknown", age = 0
+```
+
+- Example 2: Constructor with parameters
+
+```java
+public class Person {
+    String name;
+    int age;
+
+    // Constructor with parameters
+    public Person(String newName, int newAge) {
+        name = newName;
+        age = newAge;
+    }
+}
+
+Person p2 = new Person("Alice", 30); // name = "Alice", age = 30
+```
+
+- Example 3: Multiple constructors (constructor overloading)
+
+```java
+public class Person {
+    String name;
+    int age;
+
+    // Default constructor
+    public Person() {
+        this("Unknown", 0); // calls the other constructor
+    }
+
+    // Constructor with parameters
+    public Person(String newName, int newAge) {
+        name = newName;
+        age = newAge;
+    }
+}
+
+Person p1 = new Person();            // name = "Unknown", age = 0
+Person p2 = new Person("Bob", 25);   // name = "Bob", age = 25
+```
+
+> [!IMPORTANT]
+> - Constructors are not inherited: if a superclass defines constructors, they are not automatically available in the subclass — you must declare them explicitly.
+> - If you declare any constructor in a class, the compiler does not generate the default no-argument constructor: if you still need a no-argument constructor, you must declare it manually.
