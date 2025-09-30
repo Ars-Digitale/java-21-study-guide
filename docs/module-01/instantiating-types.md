@@ -113,6 +113,8 @@ At this stage, no object is created yet — the variable only has the potential 
 
 **Assigning** a reference type means storing into the variable the memory address of an object.
 This is normally done after the creation of the object with the **new** keyword and a Constructor, or by using a literal or a factory method.
+A reference can also be assigned to another object of the same or compatible type.
+Reference types can also be assigned **null**, which means that they do not refer to an object.
 
 - Syntax examples:
 
@@ -212,8 +214,7 @@ These are blocks of code inside a class, enclosed in `{ }`, that run **every tim
 
 #### Characteristics
 - Also called **instance initializer blocks**.  
-- Executed in the order in which they appear in the class definition.  
-- Run **before the constructor body**, but after field initializers.  
+- Executed, along with fields initializers, in the order in which they appear in the class definition but always before Constructors.    
 - Useful when multiple constructors need to share common initialization code.
 
 Example: Using an Instance Initializer Block
