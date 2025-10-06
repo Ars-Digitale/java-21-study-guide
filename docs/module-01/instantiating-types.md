@@ -275,3 +275,72 @@ Example ex = new Example();
 > - They always run before the constructor body.
 > - They are executed in the order of declaration in the class.
 > - They can be combined with constructors to avoid code duplication.
+
+## Wrapper Types
+
+In Java, **wrapper types** are object representations of the eight primitive types.  
+Each primitive has a corresponding wrapper class in the `java.lang` package:
+
+| Primitive | Wrapper Class |
+|-----------|---------------|
+| `byte`    | `Byte`        |
+| `short`   | `Short`       |
+| `int`     | `Integer`     |
+| `long`    | `Long`        |
+| `float`   | `Float`       |
+| `double`  | `Double`      |
+| `char`    | `Character`   |
+| `boolean` | `Boolean`     |
+
+Wrapper objects are immutable — once created, their value cannot change.
+
+### Purpose of Wrapper Types
+- Allow primitives to be used in contexts that require objects (e.g., collections, generics).  
+- Provide utility methods for parsing, converting, and working with values.  
+- Support constants such as `Integer.MAX_VALUE` or `Double.MIN_VALUE`.  
+
+### Autoboxing and Unboxing
+Since Java 5, the compiler automatically converts between primitives and their wrappers:
+- **Autoboxing**: primitive → wrapper  
+- **Unboxing**: wrapper → primitive  
+
+```java
+Integer i = 10;       // autoboxing: int → Integer
+int n = i;            // unboxing: Integer → int
+```
+
+### Parsing and Conversion
+
+Wrappers provide static methods to convert strings or other types into primitives:
+
+```java
+int x = Integer.parseInt("123");    // returns primitive int
+Integer y = Integer.valueOf("456"); // returns Integer object
+double d = Double.parseDouble("3.14");
+```
+
+> [!NOTE]
+> methods **parseXxx()** return a primitive while **valueOf()** returns a wrapper object.
+
+### Null Values
+
+Unlike primitives, wrapper types can hold **null**. 
+Attempting to unbox null causes a NullPointerException:
+
+```java
+Integer val = null;
+int z = val; // ❌ NullPointerException at runtime
+```
+
+### Equality
+
+Comparing wrappers with == checks for reference equality, not value equality. 
+Use .equals() for value comparison.
+
+```java
+Integer a = 1000;
+Integer b = 1000;
+System.out.println(a == b);        // false, different objects
+System.out.println(a.equals(b));   // true, same value
+```
+
