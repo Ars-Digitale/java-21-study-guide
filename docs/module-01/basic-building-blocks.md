@@ -1,5 +1,15 @@
 # Module 1: Java building Blocks
 
+# Table of Contents
+
+- [1. Class definition](#1-class-definition)
+- [2. Comments](#2-comments)
+- [3. Access modifiers](#3-access-modifiers)
+- [4. Packages](#4-packages)
+- [5. The main Method](#5-the-main-method)
+- [6. Compiling and running your code](#6-compiling-and-running-your-code)
+
+---
  
 ## 1. Class definition
 
@@ -300,7 +310,7 @@ public class MainSecondExample {
 
 ---
 
-## 5. Compiling and running your code
+## 6. Compiling and running your code
 
 
 This chapter shows **correct, working** `javac` and `java` command lines for common situations in Java 21: single files, multiple files, packages, separate output directories, and classpath/module-path usage. Follow the directory layouts exactly.
