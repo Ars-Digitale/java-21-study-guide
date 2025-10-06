@@ -333,6 +333,15 @@ Boolean.valueOf("false");	// false
 Boolean.valueOf("FALSE");	// false
 Boolean.valueOf("xyz");		// false
 Boolean.valueOf(null);		// false
+
+// The numeric integral classes Byte, Short, Integer and Long include an overloaded **valueOf(String str, int base)** method which takes a base value
+// Example with base 16 (hexadecimal) which includes character 0 -> 9 and A -> F (ignore case)
+
+Integer.valueOf("6", 16);	// 6
+Integer.valueOf("a", 16);	// 10
+Integer.valueOf("A", 16);	// 10
+Integer.valueOf("F", 16);	// 15
+Integer.valueOf("G", 16);	// NumberFormatException
 ```
 
 > [!NOTE]
