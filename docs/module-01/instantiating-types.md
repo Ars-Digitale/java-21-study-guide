@@ -5,7 +5,7 @@
 - [Handling a Primitive Type](#handling-a-primitive-type)
 	- [1. Declaring a Primitive](#1-declaring-a-primitive)
 	- [2. Assigning a Primitive](#2-assigning-a-primitive)
-- [Handling a Reference Type](#handling-a-primitive-type)
+- [Handling a Reference Type](#handling-a-reference-type)
 	- [1. Creating and Assigning a Reference](#1-creating-and-assigning-a-reference)
 	- [2. Constructors](#2-constructors)
 	- [3. Instance Initializer Blocks](#3-instance-initializer-blocks)
