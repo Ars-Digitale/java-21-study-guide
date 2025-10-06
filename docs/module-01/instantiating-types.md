@@ -109,7 +109,7 @@ At this stage, no object is created yet — the variable only has the potential 
 
 ## Handling a Reference Type
 
-### 2. Creating and Assigning a Reference
+### 1. Creating and Assigning a Reference
 
 **Assigning** a reference type means storing into the variable the memory address of an object.
 This is normally done after the creation of the object with the **new** keyword and a Constructor, or by using a literal or a factory method.
@@ -129,7 +129,7 @@ Reference types can also be assigned **null**, which means that they do not refe
   
   ```
   
-### 3. Constructors
+### 2. Constructors
 
 In the example, **`Person()`** is a constructor — a special kind of method used to initialize new objects.  
 Whenever you call `new Person()`, the constructor runs and sets up the newly created instance.
@@ -207,7 +207,7 @@ Person p2 = new Person("Bob", 25);   // name = "Bob", age = 25
 > - Constructors are not inherited: if a superclass defines constructors, they are not automatically available in the subclass — you must declare them explicitly.
 > - If you declare any constructor in a class, the compiler does not generate the default no-argument constructor: if you still need a no-argument constructor, you must declare it manually.
 
-### 4. Instance Initializer Blocks
+### 3. Instance Initializer Blocks
 
 In addition to constructors, Java provides a mechanism called **initializer blocks** to help initialize objects.  
 These are blocks of code inside a class, enclosed in `{ }`, that run **every time an instance is created**, just before the constructor body is executed.
@@ -317,6 +317,22 @@ Wrappers provide static methods to convert strings or other types into primitive
 int x = Integer.parseInt("123");    // returns primitive int
 Integer y = Integer.valueOf("456"); // returns Integer object
 double d = Double.parseDouble("3.14");
+
+// On the numeric wrapper class valueOf() throws a NumberFormatException on invalid input.
+// Example:
+
+Integer w = Integer.valueOf("two"); // NumberFormatException
+
+// On Boolean, the method returns Boolean.TRUE for any value that matches "true" ignoring case, otherwise Boolean.false
+// Example:
+
+Boolean.valueOf("true"); 	// true
+Boolean.valueOf("TrUe"); 	// true
+Boolean.valueOf("TRUE"); 	// true
+Boolean.valueOf("false");	// false
+Boolean.valueOf("FALSE");	// false
+Boolean.valueOf("xyz");		// false
+Boolean.valueOf(null);		// false
 ```
 
 > [!NOTE]
