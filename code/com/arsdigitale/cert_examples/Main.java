@@ -3,12 +3,19 @@ package com.arsdigitale.cert_examples;
 public class Main {
 
 	static public void main(String[] args) {
-		synchronized (args) {
-			// TODO Auto-generated method stub
-			System.out.println("Float.MIN_VALUE: " + Float.MIN_VALUE);
-			int pippo = 2;
-		}
+		
+		Double baseDouble = Double.valueOf("300.56");
 
+		Double wrapDouble = baseDouble.doubleValue();
+		System.out.println("baseDouble.doubleValue(): " + wrapDouble);
+		
+		Byte wrapByte = baseDouble.byteValue();
+		System.out.println("baseDouble.byteValue(): " + wrapByte);
+		
+		Integer wrapInt = baseDouble.intValue();
+		System.out.println("baseDouble.intValue(): " + wrapInt);
+		
+		
 	}
 
 }

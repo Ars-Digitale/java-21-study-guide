@@ -294,12 +294,12 @@ Each primitive has a corresponding wrapper class in the `java.lang` package:
 
 Wrapper objects are immutable — once created, their value cannot change.
 
-### Purpose of Wrapper Types
+### 1. Purpose of Wrapper Types
 - Allow primitives to be used in contexts that require objects (e.g., collections, generics).  
 - Provide utility methods for parsing, converting, and working with values.  
 - Support constants such as `Integer.MAX_VALUE` or `Double.MIN_VALUE`.  
 
-### Autoboxing and Unboxing
+### 2. Autoboxing and Unboxing
 Since Java 5, the compiler automatically converts between primitives and their wrappers:
 - **Autoboxing**: primitive → wrapper  
 - **Unboxing**: wrapper → primitive  
@@ -309,7 +309,7 @@ Integer i = 10;       // autoboxing: int → Integer
 int n = i;            // unboxing: Integer → int
 ```
 
-### Parsing and Conversion
+### 3. Parsing and Conversion
 
 Wrappers provide static methods to convert strings or other types into primitives:
 
@@ -347,7 +347,30 @@ Integer.valueOf("G", 16);	// NumberFormatException
 > [!NOTE]
 > methods **parseXxx()** return a primitive while **valueOf()** returns a wrapper object.
 
-### Null Values
+### 4. Helper methods
+
+All the numeric wrapper classes extend the Number class and, for that, they inherit some helper methods such as: byteValue(), shortValue(), intValue(), longValue(), floatValue(), DoubleValue().
+The Boolean and Character wrapper classes include: booleanValue() and charValue().
+
+- Example:
+
+```java
+
+		// In trying to convert those helper methods can result in a loss of precision.
+
+		Double baseDouble = Double.valueOf("300.56");
+
+		Double wrapDouble = baseDouble.doubleValue();
+		System.out.println("baseDouble.doubleValue(): " + wrapDouble);  // 300.56
+		
+		Byte wrapByte = baseDouble.byteValue();
+		System.out.println("baseDouble.byteValue(): " + wrapByte);		// 44  -> There is no 300 in byte
+		
+		Integer wrapInt = baseDouble.intValue();
+		System.out.println("baseDouble.intValue(): " + wrapInt);		// 300 -> The value is truncated
+```
+
+### 5. Null Values
 
 Unlike primitives, wrapper types can hold **null**. 
 Attempting to unbox null causes a NullPointerException:
@@ -357,7 +380,7 @@ Integer val = null;
 int z = val; // ❌ NullPointerException at runtime
 ```
 
-### Equality
+### 6. Equality
 
 Comparing wrappers with == checks for reference equality, not value equality. 
 Use .equals() for value comparison.
