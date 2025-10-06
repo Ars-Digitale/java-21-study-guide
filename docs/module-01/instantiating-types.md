@@ -1,5 +1,26 @@
 # Module 1: Instantiating types
 
+### Table of Contents
+
+- [Handling a Primitive Type](#handling-a-primitive-type)
+	- [1. Declaring a Primitive](#1-declaring-a-primitive)
+	- [2. Assigning a Primitive](#2-assigning-a-primitive)
+- [Handling a Reference Type](#handling-a-primitive-type)
+	- [1. Creating and Assigning a Reference](#1-creating-and-assigning-a-reference)
+	- [2. Constructors](#2-constructors)
+	- [3. Instance Initializer Blocks](#3-instance-initializer-blocks)
+- [Wrapper Types](#wrapper-types)
+	- [1. Purpose of Wrapper Types](#1-purpose-of-wrapper-types)
+	- [2. Autoboxing and Unboxing](#2-autoboxing-and-unboxing)
+	- [3. Parsing and Conversion](#3-parsing-and-conversion)
+	- [4. Helper methods](#4-helper-methods)
+	- [5. Null Values](#5-null-values)
+	- [6. Equality](#6-equality)
+	
+---
+ 
+
+
 In Java, a **type** can be either a **primitive type** (such as `int`, `double`, `boolean`, etc.) or a **reference type** (classes, interfaces, arrays, enums, records, etc.). See: [Module 1: Java Data Types](data-types.md)
 
 The way instances are created depends on the category of the type:

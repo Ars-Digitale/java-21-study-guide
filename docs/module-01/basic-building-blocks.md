@@ -1,6 +1,6 @@
 # Module 1: Java building Blocks
 
-# Table of Contents
+### Table of Contents
 
 - [1. Class definition](#1-class-definition)
 - [2. Comments](#2-comments)
