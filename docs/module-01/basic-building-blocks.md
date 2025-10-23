@@ -562,16 +562,73 @@ An escape sequence starts with a backslash \.
 > [!NOTE]
 > **Table of principal special characters and symbol**
 
-| Escape | Meaning | Example |
-|---|---|---|
-| \" | double quote | "She said \"Hello\"" → She said "Hello" |
-| \\ | backslash | "C:\\Users\\Alex" → C:\Users\Alex |
-| \n | newline | "Hello\nWorld" |
-| \t | tab | "Name\tAge" |
-| \r | carriage return | "Hello\rWorld" |
-| \' | single quote | '\'A\'' |
-| \b | backspace | "AB\bC" → AC |
-| \uXXXX | Unicode character | "\u00A9" → © |
+## 2) Special Characters & Escape Sequences in Strings (Markdown-safe)
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Escape</th>
+      <th>Meaning</th>
+      <th>Java Example</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>&#92;&quot;</code></td>
+      <td>double quote</td>
+      <td><code>"She said &#92;&quot;Hi&#92;&quot;"</code></td>
+      <td><code>She said "Hi"</code></td>
+    </tr>
+    <tr>
+      <td><code>&#92;&#92;</code></td>
+      <td>backslash</td>
+      <td><code>"C:&#92;&#92;Users&#92;&#92;Alex"</code></td>
+      <td><code>C:\Users\Alex</code></td>
+    </tr>
+    <tr>
+      <td><code>&#92;n</code></td>
+      <td>newline (LF)</td>
+      <td><code>"Hello&#92;nWorld"</code></td>
+      <td>
+        <code>Hello</code><br/>
+        <code>World</code>
+      </td>
+    </tr>
+    <tr>
+      <td><code>&#92;r</code></td>
+      <td>carriage return (CR)</td>
+      <td><code>"A&#92;rB"</code></td>
+      <td><code>CR before B</code></td>
+    </tr>
+    <tr>
+      <td><code>&#92;t</code></td>
+      <td>tab</td>
+      <td><code>"Name&#92;tAge"</code></td>
+      <td><code>Name&nbsp;&nbsp;&nbsp;&nbsp;Age</code></td>
+    </tr>
+    <tr>
+      <td><code>&#92;&#39;</code></td>
+      <td>single quote</td>
+      <td><code>"It&#92;&#39;s ok"</code></td>
+      <td><code>It's ok</code></td>
+    </tr>
+    <tr>
+      <td><code>&#92;b</code></td>
+      <td>backspace</td>
+      <td><code>"AB&#92;bC"</code></td>
+      <td><code>AC</code> (the <code>B</code> is removed visually)</td>
+    </tr>
+    <tr>
+      <td><code>&#92;uXXXX</code></td>
+      <td>Unicode code unit</td>
+      <td><code>"&#92;u00A9"</code></td>
+      <td><code>©</code></td>
+    </tr>
+  </tbody>
+</table>
+
 
 ### 3. Text Blocks (since Java 15)
 
