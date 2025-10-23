@@ -663,7 +663,7 @@ String text = """
 ```
 
 > [!IMPORTANT]
-> - The closing """ are the leftmost characters of the resulting string: all the spaces on the left of the 3 Lines are **Incidental whitespaces**;
+> - **Leftmost character (baseline)**: The position of the first non-space character across all lines or the closing """ are the leftmost characters of the resulting string: all the spaces on the left of the 3 Lines are **Incidental whitespaces**;
 > - The line immediately following the opening """ is not included in the output if it’s empty (typical formatting).
 > - The newline before the closing """ is included in the content. This means the text block in the example ends with a newline after “Line 3” counting then, in total, 4 lines in the output.
 
