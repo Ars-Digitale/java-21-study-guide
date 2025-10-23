@@ -8,6 +8,7 @@
 - [4. Packages](#4-packages)
 - [5. The main Method](#5-the-main-method)
 - [6. Compiling and running your code](#6-compiling-and-running-your-code)
+- [7. Strings and Text blocks](#7-strings--text-blocks)
 
 ---
  
@@ -560,10 +561,7 @@ Strings can contain escape characters, which allow you to include special symbol
 An escape sequence starts with a backslash \.
 
 > [!NOTE]
-> **Table of principal special characters and symbol**
-
-## 2) Special Characters & Escape Sequences in Strings (Markdown-safe)
-
+> **Table of Special Characters & Escape Sequences in Strings**
 
 <table>
   <thead>
