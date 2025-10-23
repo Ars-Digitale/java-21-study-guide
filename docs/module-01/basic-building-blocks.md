@@ -551,8 +551,8 @@ String s2 = new String("Hello");        // using constructor (not recommended)
 String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
 ```
 > [!NOTE]
-> String literals are stored in the String pool, a special memory area used to avoid creating duplicate string objects.
-> Using the **new** keyword always creates a new object outside the pool.
+> - String literals are stored in the String pool, a special memory area used to avoid creating duplicate string objects.
+> - Using the **new** keyword always creates a new object outside the pool.
 
 ### 2. Special Characters and Escape Sequences
 
@@ -647,9 +647,9 @@ String html = """
 ```
 
 > [!NOTE]
-> Text blocks automatically include line breaks and indentation for readability (Newlines are automatically normalized to \n).
-> Double quotes inside the block don’t need escaping.
-> The compiler interprets the content between the opening and closing triple quotes as the string’s value.
+> - Text blocks automatically include line breaks and indentation for readability (Newlines are automatically normalized to \n).
+> - Double quotes inside the block don’t need escaping.
+> - The compiler interprets the content between the opening and closing triple quotes as the string’s value.
 
 ### 4. Formatting: Essential vs Incidental Whitespace
 
@@ -665,9 +665,9 @@ String text = """
 ```
 
 > [!IMPORTANT]
-> The closing """ are the leftmost characters of the resulting string: all the spaces on the left of the 3 Lines are **Incidental whitespaces**;
-> The line immediately following the opening """ is not included in the output if it’s empty (typical formatting).
-> The newline before the closing """ is included in the content. This means the text block in the example ends with a newline after “Line 3” counting then, in total, 4 lines in the output.
+> - The closing """ are the leftmost characters of the resulting string: all the spaces on the left of the 3 Lines are **Incidental whitespaces**;
+> - The line immediately following the opening """ is not included in the output if it’s empty (typical formatting).
+> - The newline before the closing """ is included in the content. This means the text block in the example ends with a newline after “Line 3” counting then, in total, 4 lines in the output.
 
 - Output with line numbers (showing the trailing blank line):
 
