@@ -678,8 +678,8 @@ String text = """
 
 To suppress the trailing newline:
 
-a) Use a line continuation backslash at the end of the last content line;
-b) Put the ending three double quotes on the same line.
+- a) Use a line continuation backslash at the end of the last content line;
+- b) Put the ending three double quotes on the same line.
 
 ```java
 String textNoTrail_1 = """
@@ -696,8 +696,93 @@ String textNoTrail_2 = """
         Line 3""";
 ```
 
+### 5. Line Count, Blank Lines, and Line Breaks
 
+- Every visible line break inside the block becomes \n.
+- Blank lines inside the block are preserved:
 
+```java
+String textNoTrail_0 = """
+		Line 1  
+		Line 2 \n
+		Line 3 
+		
+		Line 4 
+		""";
+```
+
+output:
+
+```makefile
+1: Line 1
+2: Line 2
+3:
+4: Line 3
+5:
+6: Line 4
+7:
+```
+
+### 6. Text Blocks & Escape Characters
+
+Escapes still work inside text blocks when needed (e.g., backslashes, explicit escapes):
+
+```java
+String json = """
+    {
+      "name": "Alice",
+      "path": "C:\\\\Users\\\\Alice"
+    }\
+    """;
+```
+
+You can also format a text block with placeholders:
+
+```java
+String card = """
+    Name: %s
+    Age:  %d
+    """.formatted("Alice", 30);
+```
+
+### 7. Common Errors (with fixes)
+
+```java
+// ❌ Mismatched delimiters / missing closing triple quote
+String bad = """
+  Hello
+World";      // ERROR — not a closing text block
+
+// ✅ Fix
+String ok = """
+  Hello
+  World
+  """;
+```
+
+```java
+// ❌ Text block require a line break after the opening """
+String invalid = """Hello""";  // ERROR
+
+// ✅ Fix
+String valid = """
+    Hello
+    """;
+```
+
+```java
+// ❌ Unescaped trailing backslash at end of a line inside the block
+String wrong = """
+    C:\Users\Alex\     // ERROR — backslash escapes the newline
+    Documents
+    """;
+
+// ✅ Fix: escape backslashes, or avoid backslash at end of line
+String correct = """
+    C:\\Users\\Alex\\
+    Documents\
+    """;
+```
 
 
 
