@@ -34,7 +34,7 @@ Any class that is independently defined in its own source file is called a **top
 
 Such a class can only be declared as public or package-private (i.e., with no access modifier).
 
-A single file, however, may contain more than one class definition. In this case, only one class can be declared public, and the file name must match that class. 
+A single file, however, may contain more than one class definition. **In this case, only one class can be declared public, and the file name must match that class**. 
 
 **Nested class**, which are classes declared inside another class, can declare any access modifier: public, protected, private, default (package-private).
 
@@ -534,6 +534,114 @@ java Main.java Hello "World Mario" #space are used to separate the two arguments
 > If you declare to use (in this case print) the first two element of the parameter's array (as in our previous example) but, in fact, you pass less arguments, the jvm will notify you of a problem through a `java.lang.ArrayIndexOutOfBoundsException`.
 
 > If, on the other hand, you pass more arguments than the method expects, it will print out just the two (in this case) expected. 
+
+
+## 7. Strings & Text Blocks
+
+### 1. Initializing Strings
+
+In Java, a **String** is an object of the `java.lang.String` class, used to represent a sequence of characters.  
+Strings are **immutable**, meaning that once created, their content cannot be changed. Any operation that seems to modify a string actually creates a new one.
+
+You can create and initialize strings in several ways:
+
+```java
+String s1 = "Hello";                    // string literal
+String s2 = new String("Hello");        // using constructor (not recommended)
+String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
+```
+> [!NOTE]
+> String literals are stored in the String pool, a special memory area used to avoid creating duplicate string objects.
+> Using the **new** keyword always creates a new object outside the pool.
+
+### 2. Special Characters and Escape Sequences
+
+Strings can contain escape characters, which allow you to include special symbols or control characters (characters with a special meaning in Java).
+An escape sequence starts with a backslash \.
+
+> [!NOTE]
+> **Table of principal special characters and symbol**
+
+| Escape | Meaning | Example |
+|---|---|---|
+| \" | double quote | "She said \"Hello\"" → She said "Hello" |
+| \\ | backslash | "C:\\Users\\Alex" → C:\Users\Alex |
+| \n | newline | "Hello\nWorld" |
+| \t | tab | "Name\tAge" |
+| \r | carriage return | "Hello\rWorld" |
+| \' | single quote | '\'A\'' |
+| \b | backspace | "AB\bC" → AC |
+| \uXXXX | Unicode character | "\u00A9" → © |
+
+### 3. Text Blocks (since Java 15)
+
+A text block is a multi-line string literal introduced to simplify writing large strings (such as HTML, JSON, or code) without the need to escaped.
+A text block starts and ends with three double quotes (""").
+You can use text blocks everywhere you would use Strings.
+
+```java
+String html = """
+    <html>
+        <body>
+            <p>Hello, world!</p>
+        </body>
+    </html>
+    """;
+```
+
+> [!NOTE]
+> Text blocks automatically include line breaks and indentation for readability (Newlines are automatically normalized to \n).
+> Double quotes inside the block don’t need escaping.
+> The compiler interprets the content between the opening and closing triple quotes as the string’s value.
+
+### 4. Formatting: Essential vs Incidental Whitespace
+
+- **Essential whitespace**: the spaces and newlines that are part of the intended string content.
+- **Incidental whitespace** is just indentation in your source.
+
+```java
+String text = """
+        Line 1
+        Line 2
+        Line 3
+        """;
+```
+
+> [!IMPORTANT]
+> The closing """ are the leftmost characters of the resulting string: all the spaces on the left of the 3 Lines are **Incidental whitespaces**;
+> The line immediately following the opening """ is not included in the output if it’s empty (typical formatting).
+> The newline before the closing """ is included in the content. This means the text block in the example ends with a newline after “Line 3” counting then, in total, 4 lines in the output.
+
+- Output with line numbers (showing the trailing blank line):
+
+```makefile
+1: Line 1
+2: Line 2
+3: Line 3
+4:
+```
+
+To suppress the trailing newline:
+
+a) Use a line continuation backslash at the end of the last content line;
+b) Put the ending three double quotes on the same line.
+
+```java
+String textNoTrail_1 = """
+        Line 1
+        Line 2
+        Line 3\
+        """;
+		
+// OR
+
+String textNoTrail_2 = """
+        Line 1
+        Line 2
+        Line 3""";
+```
+
+
 
 
 

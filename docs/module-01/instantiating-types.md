@@ -140,7 +140,7 @@ Reference types can also be assigned **null**, which means that they do not refe
 - Syntax examples:
 
   ```java
-  Person person = new Person(); // Example with 'new' and a constructor:
+  Person person = new Person(); // Example with 'new' and a constructor 'Person()':
                                 // 'new Person()' creates a new Person object on the heap
                                 // and returns its reference, which is stored in the variable 'person'.
   
