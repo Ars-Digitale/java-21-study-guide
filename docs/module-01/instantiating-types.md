@@ -46,7 +46,7 @@ The way instances are created depends on the category of the type:
 	Person p = new Person();           // creates a new Person object using its constructor
 	```
   
-It is also common to rely on literals or factory methods for object creation:
+It is also common to rely on literals or factory methods for object creation.
   
 	```java
 	String name = new String("Alice"); // creates a new String object explicitly
