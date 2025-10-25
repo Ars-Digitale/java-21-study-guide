@@ -19,8 +19,6 @@
 	
 ---
  
-
-
 In Java, a **type** can be either a **primitive type** (such as `int`, `double`, `boolean`, etc.) or a **reference type** (classes, interfaces, arrays, enums, records, etc.). See: [Module 1: Java Data Types](data-types.md)
 
 The way instances are created depends on the category of the type:
@@ -83,10 +81,17 @@ For primitives, the variable holds the value itself, while for reference types t
   
   number = 10;  				// Assigning the value 10 to this variable
   
-  char letter = 'A';    		// Declaring and Assigning in a single statement: declaration and assignment can be combined  
+  char letter = 'A';    		// Declaring and Assigning in a single statement: declaration and assignment can be combined 
+
+  int a1, a2;                   // Multiple declarations  
   
   int a = 1, b = 2, c = 3;  	// Multiple declarations & assignements
   
+  char b1, b2, b3 = 'C'			// Mixed declarations (2) with one assignement
+  
+  double d1, double d2;         // ERROR - NOT LEGAL
+  
+  int v1; v2; 					// ERROR - NOT LEGAL
   ```
   
 > [!IMPORTANT]
@@ -126,7 +131,17 @@ At this stage, no object is created yet — the variable only has the potential 
   List<Integer> numbers;
   
   Person p1, p2, p3;   // Multiple declarations in one statement
+   
+  String a = "abc", b = "def", c = "ghi";  	// Multiple declarations & assignements
+  
+  String b1, b2, b3 = "abc"					// Mixed declarations (2) with one assignement
+  
+  String d1, String d2;         			// ERROR - NOT LEGAL
+  
+  String v1; v2; 							// ERROR - NOT LEGAL
   ```
+
+---
 
 ## Handling a Reference Type
 
@@ -296,6 +311,78 @@ Example ex = new Example();
 > - They always run before the constructor body.
 > - They are executed in the order of declaration in the class.
 > - They can be combined with constructors to avoid code duplication.
+
+---
+
+## Default initializations for variables
+
+### 1. Instance & Class variables
+
+- An **instance variable (a field)** is a value defined within an instance of an object;
+- A **class variable** (defined with the keyword **static**) is defined at class level and it is shared among all the objects (instances of the class)
+
+Instance and class variables are given a default value, by the compiler, if not initialized.
+
+- Table of default values for instance & class variables;
+
+| Type | Default Value |
+|----|----|
+| Object | null |
+| Numeric | 0 |
+| boolean | false |
+| char | '\u0000' (NUL) |
+
+### 2. Local variables
+
+**Local variables** are variables defined within a constructor, method or inizializer block;
+
+Local variables do not have default values and they must be initialized before they can be used. If you try to use a not initialized local variable the compiler will report an ERROR.
+
+- Example 
+
+```java
+public int localMethod {
+   
+	int firstVar = 25;
+	int secondVar;
+	secondVar = 35;
+	int firstSum = firstVar + secondVar;    // OK variables are both initialized before use
+	
+	int thirdVar;
+	int secondSum = firstSum + thirdVar;    // ERROR: variable thirdVar has not been initialized before use; if you do not try to use thirdVar the compiler will not complain
+}
+```
+
+### 3. Inferring Types with var
+
+Under certain conditions you can use the keyword **var** in place of the appropriate type when declaring **local** variables;
+
+> [!WARNING]
+> - **var** IS NOT a reserved word in java;
+> - **var** can be used only for local variables: it CAN'T be used for **constructor parameters**, **instance variables** or **method parameters**;
+> - The compiler infere the type by looking ONLY at the code **on the line of the declaration**; once the right type has been inferred you can't reassign to another type.
+
+- example
+
+```java
+public int localMethod {
+   
+	var inferredInt = 10; 	// The compiler infer int by the context;
+	inferredInt = 25; 		// OK
+	
+	inferredInt = "abcd";   // ERROR: the compiler has already inferred the type of the variable as int
+	
+	var notInferred;
+	notInferred = 30;		// ERROR: in order to infer the type, the compiler looks ONLY at the line with declaration
+	
+	var first, second = 15; // ERROR: var cannot be used to define two variables on the same statement;
+	
+	var x = null;           // ERROR: var cannot be initialized with null but it can be reassigned to null provided that the underlying type is a reference type.
+}
+```
+
+
+---
 
 ## Wrapper Types
 
