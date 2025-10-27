@@ -64,14 +64,14 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 
 ---
 
-## 5. Summary Table of Java Operators
+## 5. Summary Table of Java Operators (
 
 | Precedence (High → Low) | Type | Operators | Example | Evaluation Order | Applicable To |
 |--------------------------|------|------------|----------|------------------|---------------|
 | 1 | **Postfix Unary** | `expr++`, `expr--` | `x++` | Left → Right | Numeric types |
 | 2 | **Prefix Unary** | `++expr`, `--expr` | `--x` | Left → Right | Numeric, boolean |
 | 3 | **Other Unary** | `(type)`, `+`, `-`, `~`, `!` | `-x`, `!flag` | Right → Left | Numeric, boolean |
-| 4 | **Cast** | `(Type)reference` | `(short) 22` | Right → Left | Numeric, boolean |
+| 4 | **Cast Unary** | `(Type)reference` | `(short) 22` | Right → Left | Numeric, boolean |
 | 5 | **Multiplication/division/modulus** | `*`, `/`, `%` | `a * b` | Left → Right | Numeric types |
 | 6 | **Additive** | `+`, `-` | `a + b` | Left → Right | Numeric, String (concatenation) |
 | 7 | **Shift** | `<<`, `>>`, `>>>` | `a << 2` | Left → Right | Integral types |
@@ -80,10 +80,11 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 | 10 | **Logical AND** | <code>&amp;</code> | `a & b` | Left → Right | Integral, boolean |
 | 11 | **Logical exclusive OR** | `^` | `a ^ b` | Left → Right | Integral, boolean |
 | 12 | **Logical inclusive OR** | <code>&#124;</code> | `a `<code>&#124;</code>` b` | Left → Right | Integral, boolean |
-| 11 | **Logical AND** | `&&` | `a && b` | Left → Right | Boolean |
-| 12 | **Logical OR** | `||` | `a || b` | Left → Right | Boolean |
-| 13 | **Ternary (Conditional)** | `? :` | `a > b ? x : y` | Right → Left | All types |
-| 14 | **Assignment** | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 5` | Right → Left | All assignable types |
+| 13 | **Conditional AND** | <code>&amp;&amp;</code> | `a`<code>&amp;&amp;</code>`b` | Left → Right | Boolean |
+| 14 | **Conditional OR** | <code>&#124;&#124;</code> | `a`<code>&#124;&#124;</code>`b` | Left → Right | Boolean |
+| 15 | **Ternary (Conditional)** | `? :` | `a > b ? x : y` | Right → Left | All types |
+| 16 | **Assignment** | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 5` | Right → Left | All assignable types |
+| 17 | **Arrow operator** | `->` | `different contexts` | Right → Left | All assignable types |
 
 ---
 
