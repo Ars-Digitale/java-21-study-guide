@@ -35,7 +35,7 @@ Operators can also be gouped, by their purpose, in categories:
 | **Assignment** | Assign values to variables | `=`, `+=`, `-=`, `*=`, `/=`, `%=` |
 | **Relational** | Compare values | `==`, `!=`, `<`, `>`, `<=`, `>=` |
 | **Logical** | Combine or invert boolean expressions | <code>&#124;&#124;</code>, <code>&amp;&amp;</code>, <code>!</code> |
-| **Bitwise** | Manipulate bits | `&`, `|`, `^`, `~`, `<<`, `>>`, `>>>` |
+| **Bitwise** | Manipulate bits | <code>&amp;</code>, <code>&#124;</code>, `^`, `~`, `<<`, `>>`, `>>>` |
 | **Instanceof** | Test object type | `obj instanceof ClassName` |
 | **Lambda** | Used in lambda expressions | `(x, y) -> x + y` |
 
