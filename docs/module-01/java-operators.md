@@ -71,15 +71,15 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 | 1 | **Postfix Unary** | `expr++`, `expr--` | `x++` | Left → Right | Numeric types |
 | 2 | **Prefix Unary** | `++expr`, `--expr` | `--x` | Left → Right | Numeric, boolean |
 | 3 | **Other Unary** | `(type)`, `+`, `-`, `~`, `!` | `-x`, `!flag` | Right → Left | Numeric, boolean |
-| 4 | **Cast** | `++expr`, `--expr`, `+`, `-`, `~`, `!` | `--x`, `!flag` | Right → Left | Numeric, boolean |
-| 3 | **Multiplication/division/modulus** | `*`, `/`, `%` | `a * b` | Left → Right | Numeric types |
-| 4 | **Additive** | `+`, `-` | `a + b` | Left → Right | Numeric, String (concatenation) |
-| 5 | **Shift** | `<<`, `>>`, `>>>` | `a << 2` | Left → Right | Integral types |
-| 6 | **Relational** | `<`, `>`, `<=`, `>=`, `instanceof` | `a < b`, `obj instanceof Person` | Left → Right | Numeric, reference |
-| 7 | **Equality** | `==`, `!=` | `a == b` | Left → Right | All types (except boolean for `<`, `>`) |
-| 8 | **Bitwise AND** | `&` | `a & b` | Left → Right | Integral, boolean |
-| 9 | **Bitwise XOR** | `^` | `a ^ b` | Left → Right | Integral, boolean |
-| 10 | **Bitwise OR** | `|` | `a | b` | Left → Right | Integral, boolean |
+| 4 | **Cast** | `(Type)reference` | `(short) 22` | Right → Left | Numeric, boolean |
+| 5 | **Multiplication/division/modulus** | `*`, `/`, `%` | `a * b` | Left → Right | Numeric types |
+| 6 | **Additive** | `+`, `-` | `a + b` | Left → Right | Numeric, String (concatenation) |
+| 7 | **Shift** | `<<`, `>>`, `>>>` | `a << 2` | Left → Right | Integral types |
+| 8 | **Relational** | `<`, `>`, `<=`, `>=`, `instanceof` | `a < b`, `obj instanceof Person` | Left → Right | Numeric, reference |
+| 9 | **Equality** | `==`, `!=` | `a == b` | Left → Right | All types (except boolean for `<`, `>`) |
+| 10 | **Logical AND** | <code>&amp;</code> | `a & b` | Left → Right | Integral, boolean |
+| 11 | **Logical exclusive OR** | `^` | `a ^ b` | Left → Right | Integral, boolean |
+| 12 | **Logical inclusive OR** | <code>&#124;</code> | `a `<code>&#124;</code>` b` | Left → Right | Integral, boolean |
 | 11 | **Logical AND** | `&&` | `a && b` | Left → Right | Boolean |
 | 12 | **Logical OR** | `||` | `a || b` | Left → Right | Boolean |
 | 13 | **Ternary (Conditional)** | `? :` | `a > b ? x : y` | Right → Left | All types |
