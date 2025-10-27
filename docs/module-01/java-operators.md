@@ -16,23 +16,32 @@ Here, `+` and `*` are operators, and `a`, `b`, and `c` are operands.
 
 ## 2. Types of Operators
 
-Java defines several categories of operators, grouped by their purpose and the number of operands they use:
+Java defines three types of operators, grouped by the number of operands they use:
 
-| Category | Description | Examples |
+| Type | Description | Examples |
 |-----------|--------------|-----------|
 | **Unary** | Operate on a single operand | `+x`, `-x`, `++x`, `--x`, `!flag`, `~num` |
 | **Binary** | Operate on two operands | `a + b`, `a - b`, `x * y`, `x / y`, `x % y` |
 | **Ternary** | Operate on three operands (only one in Java) | `condition ? valueIfTrue : valueIfFalse` |
+
+---
+
+## 3. Categories of Operators
+
+Operators can also be gouped, by their purpose, in categories:
+
+| Category | Description | Examples |
+|-----------|--------------|-----------|
 | **Assignment** | Assign values to variables | `=`, `+=`, `-=`, `*=`, `/=`, `%=` |
 | **Relational** | Compare values | `==`, `!=`, `<`, `>`, `<=`, `>=` |
-| **Logical** | Combine or invert boolean expressions | `&&`, `||`, `!` |
+| **Logical** | Combine or invert boolean expressions | <code>&#124;&#124;</code>, <code>&amp;&amp;</code>, <code>!</code> |
 | **Bitwise** | Manipulate bits | `&`, `|`, `^`, `~`, `<<`, `>>`, `>>>` |
 | **Instanceof** | Test object type | `obj instanceof ClassName` |
 | **Lambda** | Used in lambda expressions | `(x, y) -> x + y` |
 
 ---
 
-## 3. Operator Precedence and Order of Evaluation
+## 4. Operator Precedence and Order of Evaluation
 
 **Operator precedence** determines how operators are grouped in an expression — that is, which operations are performed first.  
 **Associativity** (or **order of evaluation**) determines whether the expression is evaluated from **left to right** or **right to left** when operators have the same precedence.
@@ -49,20 +58,21 @@ Parentheses `()` can be used to **override precedence**:
 int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 ```
 
-> [!NOTE]
-> - Java evaluates operands **from left to right**.  
+> [!NOTE] 
 > - Operator **precedence** is about *grouping*, not evaluation order.  
 > - Use parentheses for clarity in complex expressions.
 
 ---
 
-## 4. Summary Table of Java Operators
+## 5. Summary Table of Java Operators
 
 | Precedence (High → Low) | Type | Operators | Example | Evaluation Order | Applicable To |
 |--------------------------|------|------------|----------|------------------|---------------|
 | 1 | **Postfix Unary** | `expr++`, `expr--` | `x++` | Left → Right | Numeric types |
-| 2 | **Prefix Unary** | `++expr`, `--expr`, `+`, `-`, `~`, `!` | `--x`, `!flag` | Right → Left | Numeric, boolean |
-| 3 | **Multiplicative** | `*`, `/`, `%` | `a * b` | Left → Right | Numeric types |
+| 2 | **Prefix Unary** | `++expr`, `--expr` | `--x` | Left → Right | Numeric, boolean |
+| 3 | **Other Unary** | `(type)`, `+`, `-`, `~`, `!` | `-x`, `!flag` | Right → Left | Numeric, boolean |
+| 4 | **Cast** | `++expr`, `--expr`, `+`, `-`, `~`, `!` | `--x`, `!flag` | Right → Left | Numeric, boolean |
+| 3 | **Multiplication/division/modulus** | `*`, `/`, `%` | `a * b` | Left → Right | Numeric types |
 | 4 | **Additive** | `+`, `-` | `a + b` | Left → Right | Numeric, String (concatenation) |
 | 5 | **Shift** | `<<`, `>>`, `>>>` | `a << 2` | Left → Right | Integral types |
 | 6 | **Relational** | `<`, `>`, `<=`, `>=`, `instanceof` | `a < b`, `obj instanceof Person` | Left → Right | Numeric, reference |
