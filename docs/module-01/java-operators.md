@@ -61,7 +61,7 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 
 > [!NOTE] 
 > - Operator **precedence** is about *grouping*, not evaluation order.  
-> - Use parentheses for clarity in complex expressions.
+> - Use parentheses for precedence and clarity in complex expressions.
 
 ---
 
