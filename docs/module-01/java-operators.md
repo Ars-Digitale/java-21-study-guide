@@ -1,4 +1,4 @@
-# Chapter 8: Java Operators
+# Java Operators
 
 ## 1. Definition
 
@@ -84,7 +84,7 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 | 14 | **Conditional OR** | <code>&#124;&#124;</code> | `a`<code>&#124;&#124;</code>`b` | Left → Right | Boolean |
 | 15 | **Ternary (Conditional)** | `? :` | `a > b ? x : y` | Right → Left | All types |
 | 16 | **Assignment** | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 5` | Right → Left | All assignable types |
-| 17 | **Arrow operator** | `->` | `different contexts` | Right → Left | All assignable types |
+| 17 | **Arrow operator** | `->` | `multiple contexts` | Right → Left | Multiple contextx |
 
 ---
 
@@ -98,6 +98,143 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 
 ---
 
-**Summary:**  
-Java operators define how expressions are computed.  
-Understanding **precedence**, **associativity**, and **type applicability** is essential for writing correct and predictable code, and it’s a common topic in Java certification exams.
+## 6. Unary Operators
+
+Unary operators operate on **a single operand** to produce a new value.  
+They are used for operations like incrementing/decrementing, negating a value, inverting a boolean, or performing bitwise complement.
+
+### 6.1 Categories of Unary Operators
+
+| Operator | Name | Description | Example | Result |
+|-----------|------|-------------|----------|---------|
+| `+` | Unary plus | Indicates a positive value (usually redundant). | `+x` | Same as `x` |
+| `-` | Unary minus | Indicates a literal number is negative or negates an expression. | `-5` | `-5` |
+| `++` | Increment | Increases a variable by 1. Can be prefix or postfix. | `++x`, `x++` | `x+1` |
+| `--` | Decrement | Decreases a variable by 1. Can be prefix or postfix. | `--x`, `x--` | `x-1` |
+| `!` | Logical complement | Inverts a boolean value. | `!true` | `false` |
+| `~` | Bitwise complement | Inverts each bit of an integer. | `~5` | `-6` |
+| `(type)` | Cast | Converts value to another type. | `(int) 3.9` | `3` |
+
+### 6.2 Examples
+
+```java
+int x = 5;
+System.out.println(++x);  // 6  (prefix: increment (or decrement) first the value by one and then returns the NEW value)
+System.out.println(x++);  // 6  (postfix: increment the value by one and then returns the ORIGINAL value)
+System.out.println(x);    // 7
+
+boolean flag = false;
+System.out.println(!flag);  // true
+
+int a = 5;                  // binary: 0000 0101
+System.out.println(~a);     // -6 → binary: 1111 1010
+```
+
+> [!NOTE]
+> - Prefix (`++x`) increments *before* evaluation.  
+> - Postfix (`x++`) increments *after* evaluation.  
+> - The `!` and `~` operators can only be applied to `boolean` and integer types respectively.
+
+---
+
+## 7. Binary Operators
+
+Binary operators require **two operands**.  
+They perform arithmetic, relational, logical, bitwise, and assignment operations.
+
+### 7.1 Categories of Binary Operators
+
+| Category | Operators | Example | Description |
+|-----------|------------|----------|--------------|
+| **Arithmetic** | `+`, `-`, `*`, `/`, `%` | `a + b` | Basic math operations. |
+| **Relational** | `<`, `>`, `<=`, `>=`, `==`, `!=` | `a < b` | Compare values. |
+| **Logical (Boolean)** | `&`, `|`, `^` | `a & b` | See note below |
+| **Conditional** |  `&&`, `||` | `a && b` |  See note below  |
+| **Bitwise (Integral)** | `&`, `|`, `^`, `<<`, `>>`, `>>>` | `a << 2` | Operate on bits. |
+| **Assignment** | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 3` | Modify and assign. |
+| **String Concatenation** | `+` | `"Hello " + name` | Joins strings together. |
+
+> [!NOTE]
+> - **Logical operators**: **AND** ( x & b ) true if both operands are true; **INCLUSIVE OR** ( x | y ) only false if both operands are false; **EXCLUSIVE OR** ( x ^ y ) true if the operands are different.  
+> - Postfix (`x++`) increments *after* evaluation.  
+> - The `!` and `~` operators can only be applied to `boolean` and integer types respectively.
+
+### 7.2 Examples
+
+#### Arithmetic Example
+```java
+int a = 10, b = 4;
+System.out.println(a + b);  // 14
+System.out.println(a - b);  // 6
+System.out.println(a * b);  // 40
+System.out.println(a / b);  // 2
+System.out.println(a % b);  // 2
+```
+
+#### Relational Example
+```java
+int a = 5, b = 8;
+System.out.println(a < b);   // true
+System.out.println(a >= b);  // false
+System.out.println(a == b);  // false
+System.out.println(a != b);  // true
+```
+
+#### Logical Example
+```java
+boolean x = true, y = false;
+System.out.println(x && y);  // false
+System.out.println(x || y);  // true
+System.out.println(!x);      // false
+```
+
+#### Bitwise Example
+```java
+int a = 5;   // 0101
+int b = 3;   // 0011
+System.out.println(a & b);  // 1  (0001)
+System.out.println(a | b);  // 7  (0111)
+System.out.println(a ^ b);  // 6  (0110)
+System.out.println(a << 1); // 10 (1010)
+System.out.println(a >> 1); // 2  (0010)
+```
+
+> [!IMPORTANT]
+> - **Short-circuit evaluation:** `&&` and `||` skip evaluation of the right operand when the result is already known.  
+> - **Bitwise vs Logical:** `&` and `|` always evaluate both operands; `&&` and `||` may not.
+
+---
+
+## 8. Ternary Operator
+
+The **ternary operator** (`? :`) is the only operator in Java that takes **three operands**.  
+It acts as a concise form of an `if-else` statement.
+
+### 8.1 Syntax
+```java
+condition ? expressionIfTrue : expressionIfFalse;
+```
+
+### 8.2 Example
+
+```java
+int age = 20;
+String access = (age >= 18) ? "Allowed" : "Denied";
+System.out.println(access);  // "Allowed"
+```
+
+### 8.3 Nested Ternary Example
+
+```java
+int score = 85;
+String grade = (score >= 90) ? "A" :
+               (score >= 75) ? "B" :
+               (score >= 60) ? "C" : "F";
+System.out.println(grade);  // "B"
+```
+
+### 8.4 Notes
+
+> [!WARNING]
+> - Nested ternary expressions can reduce readability. Use parentheses for clarity.  
+> - The ternary operator returns a **value**, unlike `if-else`, which is a statement.
