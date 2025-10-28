@@ -34,7 +34,8 @@ Operators can also be gouped, by their purpose, in categories:
 |-----------|--------------|-----------|
 | **Assignment** | Assign values to variables | `=`, `+=`, `-=`, `*=`, `/=`, `%=` |
 | **Relational** | Compare values | `==`, `!=`, `<`, `>`, `<=`, `>=` |
-| **Logical** | Combine or invert boolean expressions | <code>&#124;&#124;</code>, <code>&amp;&amp;</code>, <code>!</code> |
+| **Logical** | Combine or invert boolean expressions | <code>&#124;</code>, <code>&amp;</code>, <code>^</code> |
+| **Conditional** | Combine or invert boolean expressions | <code>&#124;&#124;</code>, <code>&amp;&amp;</code> |
 | **Bitwise** | Manipulate bits | <code>&amp;</code>, <code>&#124;</code>, `^`, `~`, `<<`, `>>`, `>>>` |
 | **Instanceof** | Test object type | `obj instanceof ClassName` |
 | **Lambda** | Used in lambda expressions | `(x, y) -> x + y` |
@@ -148,16 +149,18 @@ They perform arithmetic, relational, logical, bitwise, and assignment operations
 |-----------|------------|----------|--------------|
 | **Arithmetic** | `+`, `-`, `*`, `/`, `%` | `a + b` | Basic math operations. |
 | **Relational** | `<`, `>`, `<=`, `>=`, `==`, `!=` | `a < b` | Compare values. |
-| **Logical (Boolean)** | `&`, `|`, `^` | `a & b` | See note below |
-| **Conditional** |  `&&`, `||` | `a && b` |  See note below  |
-| **Bitwise (Integral)** | `&`, `|`, `^`, `<<`, `>>`, `>>>` | `a << 2` | Operate on bits. |
+| **Logical (Boolean)** | <code>&amp;</code>, <code>&#124;</code>, `^` | `a `<code>&amp;</code>` b` | See note below |
+| **Conditional** |  <code>&amp;&amp;</code>, <code>&#124;&#124;</code> | `a `<code>&amp;&amp;</code>` b` |  See note below  |
+| **Bitwise (Integral)** | <code>&amp;</code>, <code>&#124;</code>, `^`, `<<`, `>>`, `>>>` | `a << 2` | Operate on bits. |
 | **Assignment** | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 3` | Modify and assign. |
 | **String Concatenation** | `+` | `"Hello " + name` | Joins strings together. |
 
 > [!NOTE]
-> - **Logical operators**: **AND** ( x & b ) true if both operands are true; **INCLUSIVE OR** ( x | y ) only false if both operands are false; **EXCLUSIVE OR** ( x ^ y ) true if the operands are different.  
-> - Postfix (`x++`) increments *after* evaluation.  
-> - The `!` and `~` operators can only be applied to `boolean` and integer types respectively.
+> - **Logical operators**: 
+> -- **AND** ( x & b ) true if both operands are true; 
+> -- **INCLUSIVE OR** ( x | y ) only false if both operands are false; 
+> -- **EXCLUSIVE OR** ( x ^ y ) true if the operands are different.  
+
 
 ### 7.2 Examples
 
