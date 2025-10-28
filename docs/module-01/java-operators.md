@@ -65,7 +65,7 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 
 ---
 
-## 5. Summary Table of Java Operators (
+## 5. Summary Table of Java Operators 
 
 | Precedence (High → Low) | Type | Operators | Example | Evaluation Order | Applicable To |
 |--------------------------|------|------------|----------|------------------|---------------|
@@ -131,7 +131,7 @@ System.out.println(~a);     // -6 → binary: 1111 1010
 > [!NOTE]
 > - Prefix (`++x`) prefix: increment (or decrement) first the value by one and then returns the NEW value.  
 > - Postfix (`x++`) postfix: increment the value by one and then returns the ORIGINAL value.  
-> - The `!` and `~` operators can only be applied to `boolean` and integer types respectively.
+> - The `!` and `~` operators can only be applied to `boolean` and `numeric` types respectively.
 
 ---
 
@@ -146,9 +146,9 @@ They perform arithmetic, relational, logical, bitwise, and assignment operations
 |-----------|------------|----------|--------------|
 | **Arithmetic** | `+`, `-`, `*`, `/`, `%` | `a + b` | Basic math operations. |
 | **Relational** | `<`, `>`, `<=`, `>=`, `==`, `!=` | `a < b` | Compare values. |
-| **Logical (Boolean)** | <code>&amp;</code>, <code>&#124;</code>, `^` | `a `<code>&amp;</code>` b` | See note below |
+| **Logical (boolean)** | <code>&amp;</code>, <code>&#124;</code>, `^` | `a `<code>&amp;</code>` b` | See note below |
 | **Conditional** |  <code>&amp;&amp;</code>, <code>&#124;&#124;</code> | `a `<code>&amp;&amp;</code>` b` |  See note below  |
-| **Bitwise (Integral)** | <code>&amp;</code>, <code>&#124;</code>, `^`, `<<`, `>>`, `>>>` | `a << 2` | Operate on bits. |
+| **Bitwise (integral)** | <code>&amp;</code>, <code>&#124;</code>, `^`, `<<`, `>>`, `>>>` | `a << 2` | Operate on bits. |
 | **Assignment** | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 3` | Modify and assign. |
 | **String Concatenation** | `+` | `"Hello " + name` | Joins strings together. |
 
@@ -157,7 +157,9 @@ They perform arithmetic, relational, logical, bitwise, and assignment operations
 > - **AND** ( x & b ) true if both operands are true; 
 > - **INCLUSIVE OR** ( x | y ) only false if both operands are false; 
 > - **EXCLUSIVE OR** ( x ^ y ) true if the operands are different.  
->
+
+
+> [!NOTE]
 > - **Conditional (short-circuit) operators** applies to `&&` and `||`:  
 > - `a && b` → `b` is evaluated *only if* `a` is `true`.  
 > - `a || b` → `b` is evaluated *only if* `a` is `false`.
