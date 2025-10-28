@@ -72,7 +72,7 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 | 1 | **Postfix Unary** | `expr++`, `expr--` | `x++` | Left → Right | Numeric types |
 | 2 | **Prefix Unary** | `++expr`, `--expr` | `--x` | Left → Right | Numeric |
 | 3 | **Other Unary** | `(type)`, `+`, `-`, `~`, `!` | `-x`, `!flag` | Right → Left | Numeric, boolean |
-| 4 | **Cast Unary** | `(Type) reference` | `(short) 22` | Right → Left | Numeric, boolean |
+| 4 | **Cast Unary** | `(Type) reference` | `(short) 22` | Right → Left | reference, primitive |
 | 5 | **Multiplication/division/modulus** | `*`, `/`, `%` | `a * b` | Left → Right | Numeric types |
 | 6 | **Additive** | `+`, `-` | `a + b` | Left → Right | Numeric, String (concatenation) |
 | 7 | **Shift** | `<<`, `>>`, `>>>` | `a << 2` | Left → Right | Integral types |
@@ -85,14 +85,14 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 | 14 | **Conditional OR** | <code>&#124;&#124;</code> | `a`<code>&#124;&#124;</code>`b` | Left → Right | boolean |
 | 15 | **Ternary (Conditional)** | `? :` | `a > b ? x : y` | Right → Left | All types |
 | 16 | **Assignment** | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 5` | Right → Left | All assignable types |
-| 17 | **Arrow operator** | `->` | `multiple contexts` | Right → Left | Multiple contextx |
+| 17 | **Arrow operator** | `->` | `multiple contexts` | Right → Left | Multiple contexts |
 
 ---
 
 ### ⚙️ Additional Notes
 
 - **String concatenation (`+`)** has lower precedence than arithmetic `+` with numbers.
-- Use parentheses `()` for readability — they don’t change semantics but make intent explicit.
+- Use parentheses `()` for precedence and readability — they don’t change semantics but make intent explicit.
 
 ---
 
@@ -129,8 +129,8 @@ System.out.println(~a);     // -6 → binary: 1111 1010
 ```
 
 > [!NOTE]
-> - Prefix (`++x`) increments *before* evaluation.  
-> - Postfix (`x++`) increments *after* evaluation.  
+> - Prefix (`++x`) prefix: increment (or decrement) first the value by one and then returns the NEW value.  
+> - Postfix (`x++`) postfix: increment the value by one and then returns the ORIGINAL value.  
 > - The `!` and `~` operators can only be applied to `boolean` and integer types respectively.
 
 ---
