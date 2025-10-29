@@ -183,7 +183,7 @@ the **result** of the expression has that **same promoted type**.
 ### 🧠 Key Takeaways
 
 - Always consider **type promotion** when mixing data types in arithmetic.  
-- For smaller types (`byte`, `short`, `char`), promotion to `int` is automatic and unavoidable.  
+- For smaller types (`byte`, `short`, `char`), promotion to `int` is automatic when operands of an arithmetic operation containing variables.  
 - Use **explicit casting** only when you are sure the result fits the target type.  
 - Remember: **integer division truncates**, **floating-point division keeps decimals**.  
 - Understanding promotion rules is crucial for avoiding **unexpected precision loss** or **compile-time errors** during the Java certification exam.
