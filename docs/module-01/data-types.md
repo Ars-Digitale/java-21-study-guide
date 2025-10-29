@@ -1,4 +1,4 @@
-# Java Data Types
+# Java Data Types and Casting
 
 As we saw before in the [Module 1: Syntax Building Blocks](syntax-building-blocks.md), Java has two categories of data types:
 
@@ -81,7 +81,7 @@ They also support special values: **`+Infinity`**, **`-Infinity`**, and **`NaN`*
 
 ---
 
-## Recap
+### Recap
 
 - **Primitive** = actual value, stored directly in memory.  
 - **Reference** = pointer to an object; the object itself may contain primitives and other references.  
@@ -188,4 +188,166 @@ the **result** of the expression has that **same promoted type**.
 - Remember: **integer division truncates**, **floating-point division keeps decimals**.  
 - Understanding promotion rules is crucial for avoiding **unexpected precision loss** or **compile-time errors** during the Java certification exam.
 
+---
 
+## 5. Casting in Java
+
+**Casting** in Java is the process of **explicitly converting a value from one data type to another**.  
+It allows a variable of one type to be **interpreted as another compatible type** either among **primitive types** or **reference types** within an inheritance hierarchy.
+
+---
+
+### 🔹 1. Primitive Casting
+
+Primitive casting changes the data type of a **numeric value**.  
+There are two kinds of primitive casting: **widening** and **narrowing**.
+
+| Type | Description | Example | Explicit? | Risk |
+|------|--------------|----------|------------|------|
+| **Widening** | Converts a smaller type to a larger type | `int → double` | ❌ No | Safe |
+| **Narrowing** | Converts a larger type to a smaller type | `double → int` | ✅ Yes | Possible data loss |
+
+#### **a) Widening (Implicit) Casting**
+
+Automatic conversion from a smaller to a larger compatible type.  
+Handled by the compiler; no explicit syntax is required.
+
+```java
+int i = 100;
+double d = i;   // implicit cast: int → double
+System.out.println(d); // 100.0
+```
+
+✅ **Safe** – no data loss or overflow.
+
+#### **b) Narrowing (Explicit) Casting**
+
+Manual conversion from a larger type to a smaller type.  
+Requires explicit syntax because data may be lost.
+
+```java
+double d = 9.78;
+int i = (int) d;   // explicit cast: double → int
+System.out.println(i); // 9
+```
+
+### 1.1 Casting Values versus Variable
+
+Even though Java interprets integer numeric literals as `int` by default, the compiler does NOT require casting when working with literals values that fit into the data type;
+
+> [!NOTE]  
+> (Floating-point numeric literals are interpreted by default as `double`
+
+- Example:
+
+```java
+byte first = 10;		// OK
+short second = 9 * 10;	// OK
+
+long a = 5729685479;   // ❌ error: int literal out of range
+long b = 5729685479L;  // ✅ long literal
+
+float c = 3.14;        // ❌ error: double → float requires suffix or cast
+float d = 3.14F;       // ✅ float literal
+
+int e = 0x7FFF_FFFF;   // ✅ fits in int
+int f = 0x8000_0000;   // ❌ error: out of int range (needs L)
+
+double g = 1e3;        // ✅ double (1000.0)
+float  h = 1e3F;       // ✅ float  (1000.0f)
+```
+
+Conversely, for the third rule we saw before [Promotion of variables to int with arithmetic operators](#rule-3--byte-short-and-char-are-promoted-to-int-during-arithmetic), when dealing with arithmetic operations with variables,
+both operands are automatically promoted to `int`;
+
+- Example:
+
+```java
+byte first = 10;		
+short second = 9 + first;				// ❌ error: both operand are automatically promoted to int because the second operand in a variable
+
+short second = (short) ( 9 + first ); 	// NOW OK 
+```
+> [!WARNING]  
+> Casting is a unary operation: without the parentheses enclosing (9 + first) it would only be applied to 9  
+
+
+---
+
+### 🔹 2. Reference Casting (Objects)
+
+Casting also applies to **object references** within inheritance hierarchies.  
+It doesn’t change the actual object in memory, only how it is interpreted by the program.
+
+#### **2.1 Upcasting (Widening Reference Cast)**
+
+Conversion from a subclass reference to a superclass type.  
+This is **implicit and always safe** because every subclass is an instance of its superclass.
+
+```java
+class Animal { }
+class Dog extends Animal { }
+
+Dog dog = new Dog();
+Animal a = dog;  // implicit upcast
+```
+
+✅ Safe: `Dog` *is an* `Animal`.
+
+#### **2.2 Downcasting (Narrowing Reference Cast)**
+
+Conversion from a superclass reference back to a subclass type.  
+This is **explicit** and may fail at runtime if the object is not actually an instance of the subclass.
+
+```java
+Animal a = new Dog();
+Dog d = (Dog) a;   // explicit downcast → OK
+
+Animal x = new Animal();
+Dog d2 = (Dog) x;  // ⚠️ Runtime error: ClassCastException
+```
+
+Use the `instanceof` operator to check before casting:
+
+```java
+if (x instanceof Dog) {
+    Dog safeDog = (Dog) x;
+}
+```
+
+---
+
+### 🧠 **Key Points Summary**
+
+| Casting Type | Applies To | Direction | Syntax | Safe? | Performed By |
+|---------------|-------------|------------|---------|--------|---------------|
+| Widening Primitive | Primitives | small → large | Implicit | ✅ Yes | Compiler |
+| Narrowing Primitive | Primitives | large → small | Explicit | ⚠️ No | Programmer |
+| Upcasting | Objects | subclass → superclass | Implicit | ✅ Yes | Compiler |
+| Downcasting | Objects | superclass → subclass | Explicit | ⚠️ Runtime check | Programmer |
+
+---
+
+### ✅ **Examples Overview**
+
+```java
+// Primitive casting
+short s = 50;
+int i = s;          // widening
+byte b = (byte) i;  // narrowing
+
+// Object casting
+Object obj = "Hello";
+String str = (String) obj; // OK, obj actually refers to a String
+Object n = Integer.valueOf(10);
+// String fail = (String) n;  // Runtime error: ClassCastException
+```
+
+---
+
+**In summary:**  
+- Casting is the mechanism to convert one type to another.  
+- **Primitive casting** changes numeric types.  
+- **Reference casting** changes the view of an object in a class hierarchy.  
+- **Upcasting** is safe and implicit; **downcasting** must be checked and explicit.  
+- Use `instanceof` to avoid runtime exceptions during downcasting.
