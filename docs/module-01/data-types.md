@@ -231,7 +231,35 @@ int i = (int) d;   // explicit cast: double → int
 System.out.println(i); // 9
 ```
 
-### 1.1 Casting Values versus Variable
+### 1.1 Data Loss, Overflow, and Underflow
+
+In Java, **data loss** can occur when a value exceeds the storage capacity or precision of its data type.  
+When performing arithmetic operations or explicit type casts, values may **overflow**, **underflow**, or **truncate**.
+
+- **Overflow** happens when a result is **greater than the maximum** value of the type: 
+
+```java
+int x = Integer.MAX_VALUE + 1; // wraps to -2147483648
+
+// When the number is too large to fit within the data type java "wraps around" to the lowest negative value of that type and start up counting from there 
+```
+
+- **Underflow** happens when a result is less than the minimum value of the type:
+
+```java
+int y = Integer.MIN_VALUE - 1; // wraps to 2147483647
+```
+
+- **Data truncation** occurs in narrowing conversions, where precision is lost:
+
+```java
+double d = 9.99;
+int i = (int) d; // 9 (fraction dropped)
+```
+> [!NOTE]  
+> Floating-point types (float, double) don’t wrap around; overflow results in Infinity, and underflow in 0.0.
+
+### 1.2 Casting Values versus Variable
 
 Even though Java interprets integer numeric literals as `int` by default, the compiler does NOT require casting when working with literals values that fit into the data type;
 
@@ -267,10 +295,13 @@ byte first = 10;
 short second = 9 + first;				// ❌ error: both operand are automatically promoted to int because the second operand in a variable
 
 short second = (short) ( 9 + first ); 	// NOW OK 
+
+short b = 10;	
+short a = 5 + (short) b; 				// ❌ error: both operand are automatically promoted to int because the second operand in a variable
+
 ```
 > [!WARNING]  
 > Casting is a unary operation: without the parentheses enclosing (9 + first) it would only be applied to 9  
-
 
 ---
 
