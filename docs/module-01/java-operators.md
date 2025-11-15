@@ -286,7 +286,7 @@ To compare the **contents** of objects, use the **.equals()** method instead.
 System.out.println(s1.equals(s2)); // true → same string content
 ```
 
-**Special Case: null and String Literals
+**Special Case: null and String Literals**
 
 - Any reference can be compared with null using == or !=.
 
