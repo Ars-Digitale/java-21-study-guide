@@ -204,7 +204,34 @@ System.out.println(a << 1); // 10 (1010)
 System.out.println(a >> 1); // 2  (0010)
 ```
 
-### 7.2 The Return Value of an Assignment Operator
+### 7.2 Division and Modulus Operators
+
+The modulus operator is the remainder when two numbers are divided.
+If two numbers divide evenly, the reminder is 0: for example **10 % 5** is 0.
+On the other hand, **13 % 4** gives the reminder of 1.
+
+We can use modulus with negative numbers according to the following rules:
+
+- if the **divisor** is negative (Ex: 7 % -5), then the sign is ignored and the result is **2**;
+- if the **dividend** is negative (Ex: -7 % 5), then the sign is preserved and the result is **-2**;
+
+```java
+System.out.println(8 % 5);      // GIVES 3
+System.out.println(10 % 5); 	// GIVES 0
+System.out.println(10 % 3); 	// GIVES 1    
+System.out.println(-10 % 3); 	// GIVES -1    
+System.out.println(10 % -3); 	// GIVES 1   
+System.out.println(-10 % -3); 	// GIVES -1 
+
+System.out.println(8 % 9);      // GIVES 8
+System.out.println(3 % 4);      // GIVES 3    
+System.out.println(2 % 4);      // GIVES 2
+System.out.println(-8 % 9);     // GIVES -8
+
+
+```
+
+### 7.3 The Return Value of an Assignment Operator
 
 In Java, the **assignment operator (`=`)** not only stores a value in a variable —  
 it also **returns the assigned value** as the result of the entire expression.
@@ -242,7 +269,7 @@ if (flag == true) {
 }
 ```
 
-### 7.3 Compound Assignment Operators
+### 7.4 Compound Assignment Operators
 
 **Compound assignment operators** in Java combine an arithmetic or bitwise operation with assignment in a single step.  
 Instead of writing `x = x + 5`, you can use the shorthand `x += 5`.  
@@ -279,12 +306,12 @@ byte b = 10;
 b += 1;         // ✅ works: implicit cast back to byte
 ```
 
-### 7.4 Equality Operators (`==` and `!=`)
+### 7.5 Equality Operators (`==` and `!=`)
 
 The **equality operators** in Java `==` (equal to) and `!=` (not equal to) are used to compare two operands for equality.  
 However, their behavior differs **depending on whether they are applied to primitive types or reference types (objects)**.
 
-#### 7.4.1 Equality with Primitive Types
+#### 7.5.1 Equality with Primitive Types
 
 When comparing **primitive values**, `==` and `!=` compare the **actual stored values**.
 
@@ -307,7 +334,7 @@ double d = 0.1 + 0.2;
 System.out.println(d == 0.3); // false → floating-point rounding issue
 ```
 
-#### 7.4.2 Equality with Reference Types (Objects)
+#### 7.5.2 Equality with Reference Types (Objects)
 
 For objects, == and != compare references, not object content.
 They return true only if both references point to the exact same object in memory.
@@ -354,7 +381,7 @@ int j = 100;
 System.out.println(i == j);   // true → unboxed before comparison
 ```
 
-### 7.5 The `instanceof` Operator
+### 7.6 The `instanceof` Operator
  
 `instanceof` is a **relational operator** that tests whether a reference value is an **instance of** a given **reference type** at runtime.  
 It returns a `boolean`.
@@ -373,7 +400,7 @@ Object n = null;
 System.out.println(n instanceof Object);  // false
 ```
 
-#### 7.5.1 Compile-Time Check vs Runtime Check
+#### 7.6.1 Compile-Time Check vs Runtime Check
 
 - At compile time, the compiler rejects inconvertible types (types that cannot possibly relate at runtime).
 - At runtime, if the compile-time check passed, the JVM evaluates the actual object type.
@@ -390,7 +417,7 @@ System.out.println(num instanceof Integer); // true at runtime
 System.out.println(num instanceof Double);  // false at runtime
 ```
 
-#### 7.5.2 Pattern Matching for instanceof (Standard in Java 21)
+#### 7.6.2 Pattern Matching for instanceof (Standard in Java 21)
 
 Java supports type patterns with instanceof, which both test and bind the variable when the test succeeds.
 
@@ -411,7 +438,7 @@ Key properties
 - The name must not clash with an existing variable in the same scope.
 
 
-#### 7.5.3 Flow Scoping & Short-Circuit Logic
+#### 7.6.3 Flow Scoping & Short-Circuit Logic
 
 Pattern variables become available based on flow analysis:
 
@@ -441,7 +468,7 @@ if ((obj instanceof String s) && s.contains("a")) { // ✅ s in scope after grou
 }
 ```
 
-#### 7.5.4 Arrays and Reifiable Types
+#### 7.6.4 Arrays and Reifiable Types
 
 instanceof works with arrays (which are reifiable) and with erased or wildcard generic forms.
 **Reifiable types** are those whose runtime representation fully preserves their type (e.g., raw types, arrays, non-generic classes, wildcard ?). 
