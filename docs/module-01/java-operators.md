@@ -153,19 +153,58 @@ They perform arithmetic, relational, logical, bitwise, and assignment operations
 | **String Concatenation** | `+` | `"Hello " + name` | Joins strings together. |
 
 > [!NOTE]
-> - **Logical operators**: 
-> - **AND** ( x & b ) true if both operands are true; 
-> - **INCLUSIVE OR** ( x | y ) only false if both operands are false; 
-> - **EXCLUSIVE OR** ( x ^ y ) true if the operands are different.  
+> **Logical operators**: 
+> - **AND** ( x **&** b ) true if both operands are true; 
+> - **INCLUSIVE OR** ( x **|** y ) only false if both operands are false; 
+> - **EXCLUSIVE OR** ( x **^** y ) true if the operands are different.  
 
 
 > [!NOTE]
-> - **Conditional (short-circuit) operators** applies to `&&` and `||`:  
+> **Conditional (short-circuit) operators** applies to `&&` and `||`:  
 > - `a && b` → `b` is evaluated *only if* `a` is `true`.  
 > - `a || b` → `b` is evaluated *only if* `a` is `false`.
 
+### 7.2 The Return Value of an Assignment Operator
 
-### 7.2 Examples
+In Java, the **assignment operator (`=`)** not only stores a value in a variable —  
+it also **returns the assigned value** as the result of the entire expression.
+
+This means that the assignment operation itself can be **used as part of another expression**,  
+such as inside an `if` statement, a loop condition, or even another assignment.
+
+```java
+int x;
+int y = (x = 10);   // the assignment (x = 10) returns 10
+System.out.println(y);  // 10
+
+// x = 10 assigns 10 to x.
+// The expression (x = 10) evaluates to 10.
+// That value is then assigned to y.
+// So both x and y end up with the same value (10).
+```
+
+Because assignment returns a value, it can also appear inside an **if** statement.
+However, this often leads to logical errors if used unintentionally.
+
+```java
+boolean flag = false;
+
+if (flag = true) {
+    System.out.println("This will always execute!");
+}
+
+// Here the condition (flag = true) assigns true to flag, and then evaluates to true, so the if block always runs.
+
+// Correct usage (comparison instead of assignment):
+
+if (flag == true) {
+    System.out.println("Condition checked, not assigned");
+}
+```
+
+
+
+### 7.3 Examples
 
 #### Arithmetic Example
 ```java
