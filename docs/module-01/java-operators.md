@@ -164,6 +164,46 @@ They perform arithmetic, relational, logical, bitwise, and assignment operations
 > - `a && b` → `b` is evaluated *only if* `a` is `true`.  
 > - `a || b` → `b` is evaluated *only if* `a` is `false`.
 
+**Some Examples**
+
+#### Arithmetic Example
+```java
+int a = 10, b = 4;
+System.out.println(a + b);  // 14
+System.out.println(a - b);  // 6
+System.out.println(a * b);  // 40
+System.out.println(a / b);  // 2
+System.out.println(a % b);  // 2
+```
+
+#### Relational Example
+```java
+int a = 5, b = 8;
+System.out.println(a < b);   // true
+System.out.println(a >= b);  // false
+System.out.println(a == b);  // false
+System.out.println(a != b);  // true
+```
+
+#### Logical Example
+```java
+boolean x = true, y = false;
+System.out.println(x && y);  // false
+System.out.println(x || y);  // true
+System.out.println(!x);      // false
+```
+
+#### Bitwise Example
+```java
+int a = 5;   // 0101
+int b = 3;   // 0011
+System.out.println(a & b);  // 1  (0001)
+System.out.println(a | b);  // 7  (0111)
+System.out.println(a ^ b);  // 6  (0110)
+System.out.println(a << 1); // 10 (1010)
+System.out.println(a >> 1); // 2  (0010)
+```
+
 ### 7.2 The Return Value of an Assignment Operator
 
 In Java, the **assignment operator (`=`)** not only stores a value in a variable —  
@@ -241,7 +281,7 @@ b += 1;         // ✅ works: implicit cast back to byte
 
 ### 7.4 Equality Operators (`==` and `!=`)
 
-The **equality operators** in Java — `==` (equal to) and `!=` (not equal to) — are used to compare two operands for equality.  
+The **equality operators** in Java `==` (equal to) and `!=` (not equal to) are used to compare two operands for equality.  
 However, their behavior differs **depending on whether they are applied to primitive types or reference types (objects)**.
 
 #### 7.4.1 Equality with Primitive Types
@@ -308,50 +348,112 @@ System.out.println(a == b);       // true → same interned literal
 When using == between operands of different categories (e.g., primitive vs. object),
 the compiler tries to perform unboxing if one of them is a **wrapper class**.
 
- ```java
+```java
 Integer i = 100;
 int j = 100;
 System.out.println(i == j);   // true → unboxed before comparison
 ```
 
-### 7.5 Examples
+### 7.5 The `instanceof` Operator
+ 
+`instanceof` is a **relational operator** that tests whether a reference value is an **instance of** a given **reference type** at runtime.  
+It returns a `boolean`.
 
-#### Arithmetic Example
 ```java
-int a = 10, b = 4;
-System.out.println(a + b);  // 14
-System.out.println(a - b);  // 6
-System.out.println(a * b);  // 40
-System.out.println(a / b);  // 2
-System.out.println(a % b);  // 2
+Object o = "Java";
+boolean b1 = (o instanceof String);   // true
+boolean b2 = (o instanceof Number);   // false
 ```
 
-#### Relational Example
+**null** behavior:
+If expr is null, **expr instanceof Type** is always **false**.
+
 ```java
-int a = 5, b = 8;
-System.out.println(a < b);   // true
-System.out.println(a >= b);  // false
-System.out.println(a == b);  // false
-System.out.println(a != b);  // true
+Object n = null;
+System.out.println(n instanceof Object);  // false
 ```
 
-#### Logical Example
+#### 7.5.1 Compile-Time Check vs Runtime Check
+
+- At compile time, the compiler rejects inconvertible types (types that cannot possibly relate at runtime).
+- At runtime, if the compile-time check passed, the JVM evaluates the actual object type.
+
 ```java
-boolean x = true, y = false;
-System.out.println(x && y);  // false
-System.out.println(x || y);  // true
-System.out.println(!x);      // false
+// ❌ Compile-time error: inconvertible types (String is unrelated to Integer)
+
+boolean bad = ("abc" instanceof Integer);
+
+// ✅ Compiles, but runtime result depends on actual object:
+
+Number num = Integer.valueOf(10);
+System.out.println(num instanceof Integer); // true at runtime
+System.out.println(num instanceof Double);  // false at runtime
 ```
 
-#### Bitwise Example
+#### 7.5.2 Pattern Matching for instanceof (Standard in Java 21)
+
+Java supports type patterns with instanceof, which both test and bind the variable when the test succeeds.
+
+Syntax (pattern form):
+
 ```java
-int a = 5;   // 0101
-int b = 3;   // 0011
-System.out.println(a & b);  // 1  (0001)
-System.out.println(a | b);  // 7  (0111)
-System.out.println(a ^ b);  // 6  (0110)
-System.out.println(a << 1); // 10 (1010)
-System.out.println(a >> 1); // 2  (0010)
+Object obj = "Hello";
+
+if (obj instanceof String s) {
+    System.out.println(s.toUpperCase()); // identifier is in scope here, of type Type: (safe: s is a String here). 
+}
+```
+
+Key properties
+
+- If the test succeeds, the pattern variable (e.g., s) is definitely assigned and in scope in the true branch.
+- Pattern variables are implicitly final (cannot be reassigned).
+- The name must not clash with an existing variable in the same scope.
+
+
+#### 7.5.3 Flow Scoping & Short-Circuit Logic
+
+Pattern variables become available based on flow analysis:
+
+```java
+Object obj = "data";
+
+// Negated test, variable available in the else branch
+if (!(obj instanceof String s)) {
+    // s not in scope here
+} else {
+    System.out.println(s.length()); // s is in scope here
+}
+
+// With &&, pattern variable can be used on the right side if the left side established it
+if (obj instanceof String s && s.length() > 3) {
+    System.out.println(s.substring(0, 3)); // s in scope
+}
+
+// With ||, the pattern variable is NOT safe on the right side (short-circuit may fail to establish it)
+if (obj instanceof String s || s.length() > 3) {  // ❌ s not in scope here
+    // ...
+}
+
+// Parentheses can help group logic
+if ((obj instanceof String s) && s.contains("a")) { // ✅ s in scope after grouped test
+    System.out.println(s);
+}
+```
+
+#### 7.5.4 Arrays and Reifiable Types
+
+instanceof works with arrays (which are reifiable) and with erased or wildcard generic forms.
+**Reifiable types** are those whose runtime representation fully preserves their type (e.g., raw types, arrays, non-generic classes, wildcard ?). 
+Due to type erasure, List<String> cannot be tested directly at runtime.
+
+```java
+Object arr = new int[]{1,2,3};
+System.out.println(arr instanceof int[]); // true
+
+Object list = java.util.List.of(1,2,3);
+// System.out.println(list instanceof List<Integer>); // ❌ Compile-time error: parameterized type not reifiable
+System.out.println(list instanceof java.util.List<?>); // ✅ true
 ```
 
 ---
