@@ -202,9 +202,119 @@ if (flag == true) {
 }
 ```
 
+### 7.3 Compound Assignment Operators
+
+**Compound assignment operators** in Java combine an arithmetic or bitwise operation with assignment in a single step.  
+Instead of writing `x = x + 5`, you can use the shorthand `x += 5`.  
+They automatically perform **type casting** to the left-hand variable type when necessary.
+
+Common compound operators include:  
+`+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`, and `>>>=`.
+
+```java
+int x = 10;
+
+// Arithmetic compound assignments
+x += 5;   // same as x = x + 5 → x = 15
+x -= 3;   // same as x = x - 3 → x = 12
+x *= 2;   // same as x = x * 2 → x = 24
+x /= 4;   // same as x = x / 4 → x = 6
+x %= 5;   // same as x = x % 5 → x = 1
+
+// Bitwise compound assignments
+int y = 6;   // 0110 (binary)
+y &= 3;      // y = y & 3 → 0110 & 0011 = 0010 → y = 2
+y |= 4;      // y = y | 4 → 0010 | 0100 = 0110 → y = 6
+y ^= 5;      // y = y ^ 5 → 0110 ^ 0101 = 0011 → y = 3
+
+// Shift compound assignments
+int z = 8;   // 0000 1000
+z <<= 2;     // z = z << 2 → 0010 0000 → z = 32
+z >>= 1;     // z = z >> 1 → 0001 0000 → z = 16
+z >>>= 2;    // z = z >>> 2 → 0000 0100 → z = 4
+
+// Type casting example
+byte b = 10;
+// b = b + 1;   // ❌ compile-time error: int result cannot be assigned to byte
+b += 1;         // ✅ works: implicit cast back to byte
+```
+
+### 7.4 Equality Operators (`==` and `!=`)
+
+The **equality operators** in Java — `==` (equal to) and `!=` (not equal to) — are used to compare two operands for equality.  
+However, their behavior differs **depending on whether they are applied to primitive types or reference types (objects)**.
+
+#### 7.4.1 Equality with Primitive Types
+
+When comparing **primitive values**, `==` and `!=` compare the **actual stored values**.
+
+```java
+int a = 5, b = 5;
+System.out.println(a == b);  // true  → both have the same value
+System.out.println(a != b);  // false → values are equal
+```
+> [!IMPORTANT]
+> - If the operands are of different numeric types, Java automatically promotes them to a common type before comparison.
+> - However, comparing float and double can produce unexpected results due to precision errors (check example below)
+
+```java
+int x = 10;
+double y = 10.0;
+System.out.println(x == y);  // true → x promoted to double (10.0)
 
 
-### 7.3 Examples
+double d = 0.1 + 0.2;
+System.out.println(d == 0.3); // false → floating-point rounding issue
+```
+
+#### 7.4.2 Equality with Reference Types (Objects)
+
+For objects, == and != compare references, not object content.
+They return true only if both references point to the exact same object in memory.
+
+```java
+String s1 = new String("Java");
+String s2 = new String("Java");
+System.out.println(s1 == s2);      // false → different objects in memory
+System.out.println(s1 != s2);      // true  → not the same reference
+```
+
+Even if two objects have identical content, == compares their **addresses**, not values.
+To compare the **contents** of objects, use the **.equals()** method instead.
+
+```java
+System.out.println(s1.equals(s2)); // true → same string content
+```
+
+**Special Case: null and String Literals
+
+- Any reference can be compared with null using == or !=.
+
+```java
+String text = null;
+System.out.println(text == null);  // true
+```
+
+- String literals are interned by the Java Virtual Machine (JVM):
+This means identical literal strings may point to the same reference in memory:
+
+ ```java
+String a = "Java";
+String b = "Java";
+System.out.println(a == b);       // true → same interned literal
+```
+
+- Equality with Mixed Types:
+When using == between operands of different categories (e.g., primitive vs. object),
+the compiler tries to perform unboxing if one of them is a **wrapper class**.
+
+ ```java
+Integer i = 100;
+int j = 100;
+System.out.println(i == j);   // true → unboxed before comparison
+```
+
+### 7.5 Examples
 
 #### Arithmetic Example
 ```java
