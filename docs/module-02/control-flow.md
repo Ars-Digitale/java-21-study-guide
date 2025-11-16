@@ -97,8 +97,8 @@ switch (mode) {                     // switch statement
 
 **Key points**:
 
-- Each `case` clause includes one or a set of matching values split by commas `(,)`. <br>After that a `separator` follows which can be both a colon `(:)` or, less usual for `statement`, the **arrow operator** `(->)`.
-<br>Finally, an expression or a code block with braces `({})`, for the code to execute, when a match occurs; <br>(Note that if you use the arrow operator for one clause, you must use it for all clauses)
+- Each `case` clause includes one or a set of matching values split by commas `(,)`. <br>After that a `separator` follows which can be both a **colon** `(:)` or, less usual for `statement`, the **arrow operator** `(->)`.
+<br>Finally, an expression follows or a code block with braces `({})`, for the code to execute, when a match occurs; <br>(Note that if you use the arrow operator for one clause, you must use it for all clauses)
 - Fall-through is possible unless a branch uses `break`, `return`, or `throw`: while `break` are optional, when present they terminate the switch after the execution of the matching clause they belong to: without the `break` 
 statement, the code continues to execute, `IN ORDER`, the following branches;
 - A `default` clause is optional and it can appear anywhere within the switch statement: a `default` statement runs if there is no match; 
