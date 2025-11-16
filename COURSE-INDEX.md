@@ -4,7 +4,7 @@
 
 - [Module 0: Prerequisites](docs/module-00/)
 	- [Prerequisite material](docs/module-00/prerequisites.md)
-- [Module 1: Basics](docs/module-01/)
+- [Module 1: Basics]
 	- [Basic Building Blocks](docs/module-01/basic-building-blocks.md)
 		- [Syntax Bulding blocks](docs/module-01/syntax-building-blocks.md)
 		- [Java Naming Rules](docs/module-01/naming-rules.md)
