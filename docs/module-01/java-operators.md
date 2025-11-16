@@ -417,17 +417,20 @@ System.out.println(num instanceof Integer); // true at runtime
 System.out.println(num instanceof Double);  // false at runtime
 ```
 
-#### 7.6.2 Pattern Matching for instanceof (Standard in Java 21)
+#### 7.6.2 Pattern Matching for instanceof
 
 Java supports type patterns with instanceof, which both test and bind the variable when the test succeeds.
+Adding a variable after the type instructs the compiler to treat it as Pattern Matching
 
 Syntax (pattern form):
 
 ```java
 Object obj = "Hello";
 
-if (obj instanceof String s) {
-    System.out.println(s.toUpperCase()); // identifier is in scope here, of type Type: (safe: s is a String here). 
+if (obj instanceof String str) {
+	// Adding the variable str after the type instructs the compiler to treat it as Pattern Matching
+	
+    System.out.println(str.toUpperCase()); // identifier is in scope here, of type Type: (safe: str is a String here). 
 }
 ```
 
@@ -440,7 +443,7 @@ Key properties
 
 #### 7.6.3 Flow Scoping & Short-Circuit Logic
 
-Pattern variables become available based on flow analysis:
+- Pattern variables become available based on flow analysis:
 
 ```java
 Object obj = "data";
@@ -466,6 +469,36 @@ if (obj instanceof String s || s.length() > 3) {  // ❌ s not in scope here
 if ((obj instanceof String s) && s.contains("a")) { // ✅ s in scope after grouped test
     System.out.println(s);
 }
+```
+
+- Pattern matching with `null` evaluates, like always for `instanceof`, to `false`
+
+```java
+String str = null;
+
+// Regular instanceof
+if (str instanceof String) {  
+	System.out.print("NOT EXECUTED"); // instanceof evaluates to false
+}
+
+// Pattern matching
+if (str instanceof String s) {  
+	System.out.print("NOT EXECUTED"); // instanceof still evaluates to false
+}
+```
+
+- Supported Types
+
+The type of the pattern variable must be a subtype, a supertype or of the same type of the reference variable.
+
+```java
+Number num = Short.valueOf(10);
+
+if (num instanceof String s) {}  // ❌ Compile-time error
+if (num instanceof Short s) {}   // ✅ Ok
+if (num instanceof Object s) {}  // ✅ Ok
+if (num instanceof Number s) {}  // ✅ Ok
+
 ```
 
 #### 7.6.4 Arrays and Reifiable Types
