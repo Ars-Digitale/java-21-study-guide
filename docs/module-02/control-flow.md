@@ -103,3 +103,38 @@ Finally, an expression or a code block with braces `({})`, for the code to execu
 statement, the code continues to execute, `IN ORDER`, the following branches;
 - A `default` clause is optional and it can appear anywhere within the switch statement: a `default` statement runs if there is no match; 
 - There is no value that the switch as a `statement` yields. You cannot assign the statement itself to a variable.
+
+### 3.2 Control Flow in `Switch Statements`: break and Order
+
+#### 3.2.1 Fall-Through Behavior
+
+- Execution jumps to the matching case.
+- If there is no break, it continues into the next case until a break, return or throw.
+
+```java
+int n = 2;
+switch (n) {
+    case 1:
+        System.out.println("1");
+    case 2:
+        System.out.println("2");    // printed
+    case 3:
+        System.out.println("3");    // printed (fall-through)
+        break;
+    default:
+        System.out.println("message default");
+}
+```
+
+Output:
+
+```bash
+2
+3
+```
+
+> [!NOTE]
+> If in the previous example we remove the `break` on `case 3`, also the `message default` will be printed;
+
+
+
