@@ -51,7 +51,7 @@ if (grade >= 90) {
 ```
 
 > [!NOTE]
-> - The if condition must evaluate to a boolean; numeric or object expressions are not allowed.
+> - The if condition must evaluate to a **boolean**; numeric or object expressions are not allowed.
 > - Curly braces {} are optional for single statements but recommended to prevent logic errors.
 > - The if-else chain is evaluated top to bottom, executing only the first true branch.
 
@@ -77,7 +77,7 @@ Java 21 supports:
 
 Both forms of `switch` share the same rules concerning the switch `Variable` and acceptable `Case Values`:
 
-- The **switch target variable** can be:
+### 2.1 The **switch `target variable`** can be:
 
 | Control Variable type     |
 |---------------------------|
@@ -97,7 +97,7 @@ Both forms of `switch` share the same rules concerning the switch `Variable` and
 > - float
 > - double
 
-- Concerning acceptable `Case Values`:
+### 2.2 Concerning acceptable `Case Values`:
 
 For a non-pattern switch, each case must be a compile-time constant compatible with the selector type:
 
@@ -106,6 +106,16 @@ Allowed as case labels:
 - **Literals**: 0, 'A', "ON".
 - **enum constants**: Color.RED.
 - **final constant `variables`**.
+
+A **final constant `variable`** must be marked of course as **final** and initialized, in the same expression, with a `literal` value.
+
+### 2.3 Type Compatibility Between Selector and Case
+
+The selector type and each case label must be compatible:
+
+- Numeric case constants must be within the range of the selector type.
+- For an enum selector, case labels must be constants of that enum.
+- For a String selector, case labels must be string constants.
 
 
 ## 3. Two Forms of switch: `switch` Statement vs `switch` Expression
