@@ -97,7 +97,7 @@ Both forms of `switch` share the same rules concerning the switch `Variable` and
 > - float
 > - double
 
-### 2.2 Concerning acceptable `Case Values`:
+### 2.2 Acceptable `Case Values`:
 
 For a non-pattern switch, each case must be a compile-time constant compatible with the selector type:
 
@@ -116,6 +116,120 @@ The selector type and each case label must be compatible:
 - Numeric case constants must be within the range of the selector type.
 - For an enum selector, case labels must be constants of that enum.
 - For a String selector, case labels must be string constants.
+
+### 2.4 Pattern Matching in Switch
+
+Switch in Java 21 supports pattern matching, including:
+
+- **Type patterns**: case String s
+- **Guarded patterns**: case String s when s.length() > 3
+- **Null pattern**: case null
+
+Example:
+
+```java
+String describe(Object o) {
+    return switch (o) {
+        case null                -> "null";
+        case Integer i           -> "int " + i;
+        case String s when s.isEmpty() -> "empty string";
+        case String s            -> "string (" + s.length() + ")";
+        default                  -> "other";
+    };
+}
+```
+
+**Key points**:
+
+- Each pattern introduces a pattern variable (i, s).
+- Pattern variables are in scope only in their arm (or in paths where the pattern is known to match).
+- Order matters due to **dominance**: more specific patterns must precede more general ones.
+
+#### 2.4.1 Variable Names and Scope Across Branches
+
+With `Pattern Matching` the pattern matching variable exist only in the scope of the arm for which it has been defined: we can then reuse the same name for different case branches.
+
+Example:
+
+```java
+switch (o) {
+    case String str           -> System.out.println(str.length());
+    case CharSequence str     -> System.out.println(str.charAt(0));
+    default                 -> { }
+}
+```
+
+> [!NOTE]
+> Note that this last examples, not returning a value, is in fact a statement switch.
+
+#### 2.4.2 Ordering, Dominance and Exhaustiveness in Pattern Switches
+
+When dealing with `patterns matching` the ordering of branches is always important because of **dominance** and possible **unreachable code**.
+
+A more general pattern must NOT appear before a more specific one, or the specific one becomes unreachable.
+
+Example:
+
+```java
+return switch (o) {
+    case Object obj      -> "object";
+    case String s -> "string"; // ❌ DOES NOT COMPILE -> unreachable: String is already matched by Object
+}
+```
+
+or
+
+```java
+return switch (o) {
+    case Integer a      -> "First";
+    case Integer a  when  a > 0   -> "Second"; // ❌ DOES NOT COMPILE -> unreachable: Firs will always be selected
+	...
+}
+```
+
+When using `patterns matching`, switches must be **`exhaustive`**; i.e., they must handle all possible selector values:
+
+This can be achieved by:
+
+- Providing a default case in order to address all values that don't match a `case clause`;
+- Providing a `last case clause` with a pattern variable type that is the same as the `selector` reference type.
+
+Example:
+
+```java
+Number number = Short.valueOf(10);
+switch (number) {
+    case Short short      -> System.out.println("A"); // ❌ DOES NOT COMPILE -> Not exhaustive: selector reference variable of type Number
+}
+```
+
+In order to solve you can:
+
+- 1) Change the reference type of `number` to be `Short` (Exhaustiveness achieved);
+- 2) Add a `default` clause that covers everything;
+- 3) Add a case clause, at the end, covering the type of the selector variable (see example below);
+
+```java
+Number number = Short.valueOf(10);
+switch (number) {
+    case Short short      -> System.out.println("A");
+	case Number b         -> System.out.println("B");
+}
+``` 
+
+> [!WARNING]
+> The following example, applying both a `default` clause and a `last` clause of the same type of the `selector` variable DOES NOT COMPILE:
+> the compiler consider one of the two cases always dominating the other.
+
+```java
+Number number = Short.valueOf(10);
+switch (number) {
+    case Short short      -> System.out.println("A");
+	case Number b         -> System.out.println("B"); // ❌ DOES NOT COMPILE -> the compiler consider one of the two cases always dominating the other
+	default -> System.out.println("C");
+}
+``` 
+
 
 
 ## 3. Two Forms of switch: `switch` Statement vs `switch` Expression
@@ -179,3 +293,62 @@ Output:
 
 
 ### 3.2 The Switch Expression
+
+A switch expression always produces a single value as its result.
+
+Example:
+
+```java
+int len = switch (s) {              // switch expression
+    case null      -> 0;
+    case ""        -> 0;
+    default        -> s.length();
+};
+```
+
+**Key points**:
+
+- Each `case` clause includes one or a set of matching values split by commas `(,)`. <br>After that, the  **arrow operator** `(->) `separator` follows.
+<br>Finally, an expression follows (or a code block with braces `({})`), for the code to execute when a match occurs; 
+- No fall-through between arrow arms.
+- Must be **exhaustive**: all possible selector values must be covered (via cases and/or default).
+- The result type must be consistent across all branches. (Ex: if a `switch expression` returns an int, the other branches can't return an unrelated type)
+
+#### 3.2.1 `yield` in Switch Expression Blocks
+
+When an arm of a switch expression uses a block instead of a single expression, you must use yield to provide the result:
+
+```java
+int len = switch (s) {
+    case null -> 0;
+    default -> {
+        int l = s.trim().length();
+        System.out.println("Length: " + l);
+        yield l;    // result of this arm
+    }
+};
+```
+
+> [!NOTE]
+> `yield` is only for switch expressions.
+> break value; is not allowed as a way to return a value from a switch expression.
+
+#### 3.2.2 Exhaustiveness for Switch Expressions
+
+Because a `switch expression` must return a value, it must be also **`exhaustive`**; i.e., it must handle all possible selector values:
+
+You can ensure this by:
+
+- Providing a default case, or
+- For enum selector: covering all enum constants, or
+- For sealed types/pattern switches: covering all permitted subtypes or providing default.
+
+Example, exhaustive through default:
+
+```java
+int val = switch (s) {
+    case "one" -> 1;
+    case "two" -> 2;
+    default    -> 0;
+};
+```
