@@ -59,7 +59,7 @@ if (grade >= 90) {
 
 ## 2. The `switch` Statement & Expression 
 
-The **`switch`** construct is a control-flow structure that selects **one branch among multiple alternatives** based on the value of an expression (the *selector*).
+The **`switch`** construct is a control-flow structure that selects **one branch among multiple alternatives** based on the value of an expression (the **selector**).
 
 Compared to long chains of `if-else-if`, a `switch`:
 
@@ -76,6 +76,21 @@ Java 21 supports:
 
 
 ## 3. Two Forms of switch: `switch` Statement vs `switch` Expression
+
+Both forms of `switch` share the same rules concerning the switch `Variable` and acceptable `Case Values`:
+
+The switch target variable can be:
+
+| Control Variable type     |
+|-----------|---------------|
+| `byte`    | `Byte`        |
+| `short`   | `Short`       |
+| `char`    | `Character`   |
+| `int`     | `Integer`     |
+| `String`                  |
+| `enum values`             |
+| `all obj. types` (with pattern matching) |
+| `var` (if resolves to types above    |
 
 ### 3.1 Switch Statement
 
