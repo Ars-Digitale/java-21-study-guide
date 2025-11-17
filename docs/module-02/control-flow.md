@@ -75,11 +75,9 @@ Java 21 supports:
 - **Pattern matching** inside `switch`, including type patterns and guards.
 
 
-## 3. Two Forms of switch: `switch` Statement vs `switch` Expression
-
 Both forms of `switch` share the same rules concerning the switch `Variable` and acceptable `Case Values`:
 
-The switch target variable can be:
+- The **switch target variable** can be:
 
 | Control Variable type     |
 |---------------------------|
@@ -91,6 +89,28 @@ The switch target variable can be:
 | `enum values`             |
 | `all obj. types` (with pattern matching) |
 | `var` (if resolves to types above)    |
+
+> [!WARNING]
+> **Not allowed as selector types**:
+> - boolean
+> - long
+> - float
+> - double
+
+- Concerning acceptable `Case Values`:
+
+For a non-pattern switch, each case must be a compile-time constant compatible with the selector type:
+
+Allowed as case labels:
+
+- **Literals**: 0, 'A', "ON".
+- **enum constants**: Color.RED.
+- **final constant `variables`**.
+
+
+## 3. Two Forms of switch: `switch` Statement vs `switch` Expression
+
+
 
 ### 3.1 Switch Statement
 
