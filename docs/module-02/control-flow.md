@@ -122,7 +122,7 @@ The selector type and each case label must be compatible:
 Switch in Java 21 supports pattern matching, including:
 
 - **Type patterns**: case String s
-- **Guarded patterns**: case String s when s.length() > 3
+- **Guarded patterns**: case String s **when** s.length() > 3
 - **Null pattern**: case null
 
 Example:
@@ -230,8 +230,6 @@ switch (number) {
 }
 ``` 
 
-
-
 ## 3. Two Forms of switch: `switch` Statement vs `switch` Expression
 
 ### 3.1 The Switch Statement
@@ -308,8 +306,9 @@ int len = switch (s) {              // switch expression
 
 **Key points**:
 
-- Each `case` clause includes one or a set of matching values split by commas `(,)`. <br>After that, the  **arrow operator** `(->) `separator` follows.
+- Each `case` clause includes one or a set of matching values split by commas `(,)`. <br>After that, the  **arrow operator** `(->) follows.
 <br>Finally, an expression follows (or a code block with braces `({})`), for the code to execute when a match occurs; 
+- A `switch expression` requires a semicolon `(;)` after it when it is used with the `assignemet operator` or a `return` statement;
 - No fall-through between arrow arms.
 - Must be **exhaustive**: all possible selector values must be covered (via cases and/or default).
 - The result type must be consistent across all branches. (Ex: if a `switch expression` returns an int, the other branches can't return an unrelated type)
@@ -352,3 +351,41 @@ int val = switch (s) {
     default    -> 0;
 };
 ```
+
+## 4. Null Handling
+
+Classic Switch (without patterns)
+
+If the selector expression evaluates to `null`, a `NullPointerException` is thrown at runtime.
+
+To avoid this, check `null` before switching:
+
+```java
+if (s == null) {
+    // handle null
+} else {
+    switch (s) {
+        case "A" -> ...
+        default  -> ...
+    }
+}
+```
+
+Pattern Switch (with case null)
+
+With pattern matching, you can handle `null` directly:
+
+```java
+int len = switch (s) {
+    case null -> 0;
+    default   -> s.length();
+};
+```
+
+> [!NOTE]
+> For switch expressions:
+> If you do not handle `null` and the selector is `null`, you get `NullPointerException`.
+> Using case `null` makes the switch explicitly null-safe.
+
+> [!WARNING]
+> Anytime `case null` is used in a switch, it is considerede to use `pattern matching` and all the related rules apply.
