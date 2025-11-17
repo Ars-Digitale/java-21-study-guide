@@ -182,7 +182,7 @@ or
 ```java
 return switch (o) {
     case Integer a      -> "First";
-    case Integer a  when  a > 0   -> "Second"; // ❌ DOES NOT COMPILE -> unreachable: Firs will always be selected
+    case Integer a  when  a > 0   -> "Second"; // ❌ DOES NOT COMPILE -> unreachable: First will always be selected
 	...
 }
 ```
@@ -205,9 +205,9 @@ switch (number) {
 
 In order to solve you can:
 
-- 1) Change the reference type of `number` to be `Short` (Exhaustiveness achieved);
-- 2) Add a `default` clause that covers everything;
-- 3) Add a case clause, at the end, covering the type of the selector variable (see example below);
+1) Change the reference type of `number` to be `Short` (Exhaustiveness achieved);
+2) Add a `default` clause that covers everything;
+3) Add a case clause, at the end, covering the type of the selector variable (see example below);
 
 ```java
 Number number = Short.valueOf(10);
