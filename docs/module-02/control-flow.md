@@ -82,15 +82,15 @@ Both forms of `switch` share the same rules concerning the switch `Variable` and
 The switch target variable can be:
 
 | Control Variable type     |
-|-----------|---------------|
-| `byte`    | `Byte`        |
-| `short`   | `Short`       |
-| `char`    | `Character`   |
-| `int`     | `Integer`     |
+|---------------------------|
+| `byte`   -  `Byte`        |
+| `short`  -  `Short`       |
+| `char`   -  `Character`   |
+| `int`    -  `Integer`     |
 | `String`                  |
 | `enum values`             |
 | `all obj. types` (with pattern matching) |
-| `var` (if resolves to types above    |
+| `var` (if resolves to types above)    |
 
 ### 3.1 Switch Statement
 
