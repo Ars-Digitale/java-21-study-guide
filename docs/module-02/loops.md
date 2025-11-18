@@ -170,8 +170,14 @@ while (true) { ... }
 for (;;) { ... }   // infinite for loop
 ```
 > [!TIP]
-> Infinite loops must contain `break`, `retur`n, or external control to terminate.
+> Infinite loops must contain `break`, `return`, or external control to terminate.
 
+
+## 8. `break` and `continue`
+
+**`break`**
+
+Exits the innermost loop immediately.
 
 
 
