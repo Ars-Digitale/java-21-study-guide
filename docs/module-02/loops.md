@@ -81,6 +81,8 @@ for (initialization; condition; update) {
 - **Initialization runs once** before the loop starts.
 - **Condition** is evaluated before each iteration.
 - **Update** runs after each iteration.
+- Initialization and Update sections may contain multiple statements separate by commas.
+- The variables in the **initialization** block must all be of the same type.
 - Any of the three components may be omitted, but the semicolons must remain.
 
 Example:
@@ -97,6 +99,15 @@ Omitting parts:
 int j = 0;
 for (; j < 3;) {  // valid
     j++;
+}
+```
+
+Multiple statements:
+
+```java
+int x = 0;
+for (long i = 0, c = 3; x < 3 && i < 12; x++, i++) {
+    System.out.println(i);
 }
 ```
 
@@ -175,9 +186,110 @@ for (;;) { ... }   // infinite for loop
 
 ## 8. `break` and `continue`
 
+
+
 **`break`**
 
 Exits the innermost loop immediately.
 
+```java
+for (int i = 0; i < 5; i++) {
+    if (i == 2) break;
+    System.out.println(i);
+}
+```
+
+**`continue`**
+
+Skips the rest of the loop body and proceeds with the next iteration.
+
+```java
+for (int i = 0; i < 5; i++) {
+    if (i % 2 == 0) continue;
+    System.out.println(i);   // prints only odd numbers
+}
+```
+
+`break` and `continue` are applied, without labels, to the nearest inner loop under execution.
+
+
+## 9. Labeled Loops
+
+A label, which is a single identifier followed by a colon `(:)` may be applied to a loop to allow break or continue to affect outer loops.
+
+**Syntax**
+```java
+labelName:
+for (...) {
+    for (...) {
+        break labelName;   // jumps out of outer loop
+    }
+}
+```
+
+Example
+
+```java
+outer:
+for (int i = 1; i <= 3; i++) {
+    for (int j = 1; j <= 3; j++) {
+        if (j == 2) break outer;
+        System.out.println(i + "," + j);
+    }
+}
+```
+
+## 10. Loop Variable Scope
+
+- Variables declared inside a loop header (like for (int i = ...)) are scoped to the loop only.
+- Variables declared inside the body exist only inside the block.
+
+```java
+for (int i = 0; i < 3; i++) {
+    int x = i * 2;
+}
+// i and x are not accessible here
+```
+
+## 11. Unreachable code after `break`, `continue`, and `return`
+
+In Java, any statement placed **after** `break`, `continue`, or `return` within the **same block** is considered **unreachable code**, and the compiler will refuse to compile it.  
+This is because these keywords **guarantee** that program control leaves the current block immediately, making any following statements impossible to reach during execution.
+
+###  Unreachable Code After `break`
+```java
+for (int i = 0; i < 3; i++) {
+    break;
+    System.out.println("Unreachable"); // ❌ Compile-time error
+}
+```
+
+###  Unreachable Code After continue
+```java
+for (int i = 0; i < 3; i++) {
+    continue;
+    System.out.println("Unreachable"); // ❌ Compile-time error
+}
+```
+
+Explanation:
+
+continue skips to the next iteration.
+
+The statement following it will never run.
+
+###  Unreachable Code After return
+```java
+int test() {
+    return 5;
+    System.out.println("Unreachable"); // ❌ Compile-time error
+}
+```
+
+Explanation:
+
+return exits the method immediately.
+
+No code can appear after it in the same block.
 
 
