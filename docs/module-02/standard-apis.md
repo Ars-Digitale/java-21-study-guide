@@ -237,8 +237,62 @@ These methods follow the same slicing behavior:
 
 | Method | Description | Example |
 |--------|-------------|---------|
-| `indent(int numSpaces)` | add (positive numSpaces) or removes (negative numSpaces) the provided amount of blank spaces from the beginning of each line; A line break is also added, to the end of the string if not already present | `"abc".toCharArray()` |
-| `getBytes()` | byte[] from encoding | `"á".getBytes()` |
+| `indent(int numSpaces)` | `add` (positive numSpaces) or `removes` (negative numSpaces) the provided amount of blank spaces from the beginning of each line; A line break is also added, to the end of the string, if not already present | `str.indent(-20)` |
+| `stripIndent()` | removes all incidental WHITESPACES. Does not add a line break at the end | `str.stripIndent()` |
+
+Example:
+```java
+		var txtBlock = """
+				
+				    a
+				      b
+				     c""";
+		
+		var conc = " a\n" + " b\n" + " c";
+		
+		System.out.println("length: " + txtBlock.length());
+		System.out.println(txtBlock);
+		System.out.println("");
+		String stripped1 = txtBlock.stripIndent();
+		System.out.println(stripped1);
+		System.out.println("length: " + stripped1.length());
+
+		System.out.println("*********************");
+		
+		System.out.println("length: " + conc.length());
+		System.out.println(conc);
+		System.out.println("");
+		String stripped2 = conc.stripIndent();
+		System.out.println(stripped2);
+		System.out.println("length: " + stripped2.length());
+```
+
+output:
+
+```bash
+length: 9
+
+a
+  b
+ c
+
+
+a
+  b
+ c
+length: 9
+*********************
+length: 8
+ a
+ b
+ c
+
+a
+b
+c
+length: 5
+```
+
 
 #### 1.2.13 Additional Examples
 
