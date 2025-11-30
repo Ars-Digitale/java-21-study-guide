@@ -130,6 +130,11 @@ Meaning:
 
 substring(start, end) includes characters from index start up to BUT NOT including index end.
 
+- **Start index must be ≥ 0 and ≤ length() - 1**
+- **End index may be equal to `length()`** (the “invisible end-of-string position” when "End index exclusive" apply)
+- **End index must not exceed `length()`**
+- **Start index must never be greater than end index**
+
 
 Example:
 ```java
@@ -230,23 +235,27 @@ These methods follow the same slicing behavior:
 
 #### 1.2.13 Additional Examples
 
-### Example 1 — Extract `[start, end)`
+Example 1 — Extract `[start, end)`
 ```java
 String s = "012345";
 System.out.println(s.substring(2, 5));
 // includes 2,3,4 → prints "234"
 ```
 
-### Example 2 — Searching from a start index
+Example 2 — Searching from a start index
 ```java
 String s = "hellohello";
 int idx = s.indexOf("lo", 5); // search begins at index 5
 ```
 
-### Example 3 — Certification Pitfall: start == end
+Example 3 — Common Pitfall
 ```java
 String s = "abcd";
 System.out.println(s.substring(1,1)); // "" empty string
-System.out.println(s.substring(1,2)); // "b"
+System.out.println(s.substring(3, 2)); // ❌ Exception: start index (3) > end index (2)
+
+System.out.println("abcd".substring(2, 4)); // "cd" — includes indexes 2 and 3; 4 is excluded but legal here
+
+System.out.println("abcd".substring(2, 5)); // ❌ StringIndexOutOfBoundsException (end index 5 is invalid)
 ```
 
