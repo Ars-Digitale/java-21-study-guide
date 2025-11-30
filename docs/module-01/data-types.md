@@ -1,6 +1,6 @@
 # Java Data Types and Casting
 
-As we saw before in the [Module 1: Syntax Building Blocks](syntax-building-blocks.md), Java has two categories of data types:
+As we saw before in the [Syntax Building Blocks](syntax-building-blocks.md), Java has two categories of data types:
 
 - **Primitive types**  
 - **Reference types**
