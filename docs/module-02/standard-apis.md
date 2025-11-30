@@ -233,6 +233,13 @@ These methods follow the same slicing behavior:
 | `getBytes()` | byte[] from encoding | `"á".getBytes()` |
 
 
+#### 1.2.13 Indentation
+
+| Method | Description | Example |
+|--------|-------------|---------|
+| `indent(int numSpaces)` | add (positive numSpaces) or removes (negative numSpaces) the provided amount of blank spaces from the beginning of each line; A line break is also added, to the end of the string if not already present | `"abc".toCharArray()` |
+| `getBytes()` | byte[] from encoding | `"á".getBytes()` |
+
 #### 1.2.13 Additional Examples
 
 Example 1 — Extract `[start, end)`
