@@ -14,3 +14,4 @@
 - [Module 2: Control Flow]
 	- [Control Flow](docs/module-02/control-flow.md)
     - [Loops](docs/module-02/loops.md)
+	- [Standard APIs](docs/module-02/standard-apis.md)
