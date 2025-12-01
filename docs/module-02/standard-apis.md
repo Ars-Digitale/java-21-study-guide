@@ -63,6 +63,17 @@
 		- [2.12.6 Using `binarySearch` on Unsorted Arrays](#2126-using-binarysearch-on-unsorted-arrays)
 		- [2.12.7 ArrayStoreException Due to Covariance](#2127-arraystoreexception-due-to-covariance)
 	  - [2.13 Summary](#213-summary)
+	- [3. Math APIs](#3-math-apis)
+	  - [3.1 Maximum and Minimum between two values](#31-maximum-and-minimum-between-two-values)
+	  - [3.2 Math.round()](#32-mathround)
+	  - [3.3 Math.ceil() (Ceiling)](#33-mathceil-ceiling)
+	  - [3.4 Math.floor() (Floor)](#34-mathfloor-floor)
+	  - [3.5 Math.pow()](#35-mathpow)
+	  - [3.6 Math.random()](#36-mathrandom)
+	  - [3.7 Math.abs()](#37-mathabs)
+	  - [3.8 Math.sqrt()](#371-mathsqrt)
+	  - [3.9 Summary Table](#38-summary-table)
+
 
 
 ---
@@ -1005,6 +1016,147 @@ Arrays in Java are:
 - always initialized with default values
 - type-safe but subject to covariance rules
 
+
+---
+
+## 3. Math APIs
+
+The `java.lang.Math` class provides a set of static methods useful for numerical operations. 
+These methods work with primitive numeric types. 
+Below is a summary of the most frequently used ones, together with their overloaded forms.
+
+
+### 3.1 `Maximum` and `Minimum` between two values
+
+Math.max() and Math.min() compare the two provided values and return the `Max` or `Min` between them;
+There are 4 overloaded versions for each method:
+
+```java
+public static int min(int x, int y);
+public static float min(float x, float y);
+public static long min(long x, long y);
+public static double min(double x, double y);
+
+public static int max(int x, int y);
+public static float max(float x, float y);
+public static long max(long x, long y);
+public static double max(double x, double y);
+```
+
+Example:
+```java
+System.out.println(Math.max(10.50, 7.5));   // 10.5
+System.out.println(Math.min(10, -20));		// -20
+```
+
+### 3.2 `Math.round()`
+
+`round()` returns the **nearest integer** to its argument, following standard rounding rules  
+(0.5 and above → up, below 0.5 → down).
+
+Overloads:
+- `long round(double value)`
+- `int round(float value)`
+
+
+Examples:
+```java
+Math.round(3.2);    // 3   (returns long)
+Math.round(3.6);    // 4
+Math.round(-3.5f);  // -3  (float version returns int)
+```
+
+Note:  
+- The **float** version returns an `int`  
+- The **double** version returns a `long`
+
+(e.g., `round(float)` returns an `int`, while `round(double)` returns a `long`)
+
+### 3.3 `Math.ceil()` (Ceiling)
+
+Returns the **smallest double** value that is **≥ argument**.
+
+Overloads:
+- `double ceil(double value)`
+
+Examples:
+```java
+Math.ceil(3.1);   // 4.0
+Math.ceil(-3.1);  // -3.0
+```
+
+### 3.4 `Math.floor()` (Floor)
+
+Returns the **largest double** value that is **≤ argument**.
+
+Overloads:
+- `double floor(double value)`
+
+Examples:
+```java
+Math.floor(3.9);   // 3.0
+Math.floor(-3.1);  // -4.0
+```
+
+### 3.5 `Math.pow()`
+
+Raises a value to a power.
+
+Overloads:
+- `double pow(double base, double exponent)`
+
+Examples:
+```java
+Math.pow(2, 3);      // 8.0
+Math.pow(9, 0.5);    // 3.0  (square root)
+Math.pow(10, -1);    // 0.1
+```
+
+
+### 3.6 `Math.random()`
+
+Returns a **double in the range [0.0, 1.0)**.
+
+Overloads:
+- `double random()`
+
+Examples:
+```java
+double r = Math.random();   // 0.0 <= r < 1.0
+
+// Example: random int 0–9
+int x = (int)(Math.random() * 10);
+```
+
+### 3.7 `Math.abs()`
+Absolute value.
+
+Overloads:
+- `int abs(int)`
+- `long abs(long)`
+- `float abs(float)`
+- `double abs(double)`
+
+### 3.8 `Math.sqrt()`
+Square root, returns a `double`.
+
+```java
+Math.sqrt(9);    // 3.0
+Math.sqrt(-1);   // NaN
+```
+
+### 3.9 Summary Table
+
+| Method | Returns | Overloads | Notes |
+|--------|---------|-----------|--------|
+| `round()` | `int` or `long` | float, double | Nearest integer |
+| `ceil()`  | double | double | Smallest ≥ value |
+| `floor()` | double | double | Largest ≤ value |
+| `pow()`   | double | double,double | Exponentiation |
+| `random()` | double | none | 0.0 ≤ r < 1.0 |
+| `min()`/`max()` | same type | int, long, float, double | Compare two values |
+| `abs()` | same type | int, long, float, double | Absolute value |
+| `sqrt()` | double | double | Square root |
 
 ---
 
