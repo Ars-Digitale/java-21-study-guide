@@ -6,24 +6,20 @@
   - [1.1 Handling Primitive Types](#11-handling-primitive-types)
     - [1.1.1 Declaring a Primitive](#111-declaring-a-primitive)
     - [1.1.2 Assigning a Primitive](#112-assigning-a-primitive)
-
   - [1.2 Handling Reference Types](#12-handling-reference-types)
     - [1.2.1 Creating and Assigning a Reference](#121-creating-and-assigning-a-reference)
     - [1.2.2 Constructors](#122-constructors)
     - [1.2.3 Instance Initializer Blocks](#123-instance-initializer-blocks)
-
   - [1.3 Default Variable Initialization](#13-default-variable-initialization)
     - [1.3.1 Instance and Class Variables](#131-instance-and-class-variables)
     - [1.3.2 Local Variables](#132-local-variables)
     - [1.3.3 Inferring Types with `var`](#133-inferring-types-with-var)
-
   - [1.4 Wrapper Types](#14-wrapper-types)
     - [1.4.1 Purpose of Wrapper Types](#141-purpose-of-wrapper-types)
     - [1.4.2 Autoboxing and Unboxing](#142-autoboxing-and-unboxing)
     - [1.4.3 Parsing and Conversion](#143-parsing-and-conversion)
     - [1.4.4 Helper Methods](#144-helper-methods)
     - [1.4.5 Null Values](#145-null-values)
-
   - [1.5 Equality in Java](#15-equality-in-java)
     - [1.5.1 Equality with Primitives](#151-equality-with-primitives)
     - [1.5.2 Equality with Reference Types](#152-equality-with-reference-types)
@@ -327,7 +323,7 @@ Example ex = new Example();
 
 > [!NOTE]
 > Instance initializer blocks are less common in practice, because similar logic can often be placed directly in constructors.
-> However, for the certification exam it is important to know that:
+> It is important to know that:
 > - They always run before the constructor body.
 > - They are executed in the order of declaration in the class.
 > - They can be combined with constructors to avoid code duplication.
@@ -515,7 +511,7 @@ Java provides two different mechanisms for checking equality:
 - `==` (equality operator)
 - `.equals()` (method defined in `Object` and overridden in many classes)
 
-Understanding the difference is essential for the certification exam.
+Understanding the difference is essential.
 
 
 #### 1.5.1 Equality with Primitive Types
@@ -593,8 +589,6 @@ String y = "Java";
 System.out.println(x == y);       // false → x is not pooled
 System.out.println(x.equals(y));  // true
 ```
-
-This is a **classic exam trick**.
 
 
 #### 1.5.4 Equality with Wrapper Types
