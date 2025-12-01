@@ -331,7 +331,7 @@ Example ex = new Example();
 
 ### 1.3 Default Variable Initialization
 
-#### 1.3.1 Instance & Class variables
+#### 1.3.1 Instance and Class variables
 
 - An **instance variable (a field)** is a value defined within an instance of an object;
 - A **class variable** (defined with the keyword **static**) is defined at class level and it is shared among all the objects (instances of the class)
