@@ -7,11 +7,8 @@
 	- [2. Arrays in Java](#2-arrays-in-java)
 	  - [2.1 Declaring Arrays](#21-declaring-arrays)
 	  - [2.2 Creating Arrays (Instantiation)](#22-creating-arrays-instantiation)
-		- [2.2.1 Key Rules](#221-key-rules)
-		- [2.2.2 Illegal Array Creation Examples](#222-illegal-array-creation-examples)
 	  - [2.3 Default Values in Arrays](#23-default-values-in-arrays)
 	  - [2.4 Accessing Elements](#24-accessing-elements)
-		- [2.4.1 Common Exceptions](#241-common-exceptions)
 	  - [2.5 Array Initialization Shorthands](#25-array-initialization-shorthands)
 		- [2.5.1 Anonymous Array Creation](#251-anonymous-array-creation)
 		- [2.5.2 Short Syntax (Only at Declaration)](#252-short-syntax-only-at-declaration)
@@ -89,7 +86,7 @@ int[] numbers = new int[5];
 String[] words = new String[3];
 ```
 
-### Key rules
+Key rules
 - The length **must be non-negative** and specified at creation time.
 - Length **cannot be changed later**.
 - Array length can be any `int` expression:
@@ -99,7 +96,7 @@ int size = 4;
 double[] values = new double[size];
 ```
 
-### Illegal array creation examples
+Illegal array creation examples
 ```java
 // int length = -1;          // Runtime exception: NegativeArraySizeException
 // int[] arr = new int[-1]; 
@@ -141,7 +138,7 @@ a[1] = 20;
 System.out.println(a[1]); // 20
 ```
 
-### Common Exceptions
+Common Exceptions
 - `ArrayIndexOutOfBoundsException` (runtime)
 
 ```java
@@ -172,18 +169,18 @@ int[] b = {1,2,3};
 
 Java implements multi-dimensional arrays as **arrays of arrays**.
 
-### Declaration
+Declaration
 ```java
 int[][] matrix;
 String[][][] cube;
 ```
 
-### Creating a rectangular array
+#### 2.6.1 Creating a rectangular array
 ```java
 int[][] rect = new int[3][4]; // 3 rows, 4 columns each
 ```
 
-### Creating a jagged (irregular) array
+#### 2.6.2 Creating a jagged (irregular) array
 You can create rows with different lengths:
 
 ```java
@@ -192,7 +189,6 @@ jagged[0] = new int[2];
 jagged[1] = new int[5];
 jagged[2] = new int[1];
 ```
-
 
 ### 2.7 Array Length vs String Length
 
@@ -209,7 +205,7 @@ jagged[2] = new int[1];
 
 ### 2.8 Array Reference Assignments
 
-### Assigning compatible references
+#### 2.8.1 Assigning compatible references
 ```java
 int[] a = {1,2,3};
 int[] b = a; // both now point to the same array
@@ -222,7 +218,7 @@ b[0] = 99;
 System.out.println(a[0]); // 99
 ```
 
-### Incompatible assignments (compile-time errors)
+#### 2.8.2 Incompatible assignments (compile-time errors)
 ```java
 // int[] x = new int[3];
 // long[] y = x;     // ❌ incompatible types
@@ -235,7 +231,7 @@ String[] s = new String[3];
 Object[] o = s;      // OK: arrays are covariant
 ```
 
-### Covariance runtime danger: ArrayStoreException
+#### 2.8.3 Covariance runtime danger: ArrayStoreException
 ```java
 Object[] objs = new String[3];
 // objs[0] = Integer.valueOf(5); // ❌ ArrayStoreException
