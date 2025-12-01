@@ -796,7 +796,7 @@ jagged[2] = new int[1];
 - Arrays use **`.length`** (public final field)
 - Strings use **`.length()`** (method)
 
-**Exam trap**:
+**Common Pitfall**:
 
 ```java
 // int x = arr.length;   // OK
@@ -871,7 +871,7 @@ System.out.println(Arrays.toString(new int[]{1,2,3}));
 
 ### • `Arrays.deepToString()` (for nested arrays)
 ```java
-System.out.println(Arrays.deepToString(new int[][] {{1,2},{3,4}}));
+System.out.println(Arrays.deepToString(new int[][] {{1,2},{3,4}}));	// [1, 2, 3]
 ```
 
 ### • `Arrays.sort()`
@@ -880,8 +880,21 @@ int[] a = {4,1,3};
 Arrays.sort(a); // [1,3,4]
 ```
 
+> [!TIPS]
+> Strings sorts in alphabetical order
+> Numbers sort before letters and uppercase letters sort before lowercase letters: (numbers < uppercase < lowercase)
+> `null` is smaller of any other value
+
+```java
+String[] arr = {"AB", "ac", "Ba", "bA", "10", "99"};
+
+Arrays.sort(arr);
+
+System.out.println(Arrays.toString(arr));  // [10, 99, AB, Ba, ac, bA]
+```
+
 ### • `Arrays.binarySearch()`
-Requirements: array **must be sorted**, otherwise result is unpredictable.
+Requirements: array **must be sorted**, otherwise result is `unpredictable`.
 
 ```java
 int[] a = {1,3,5,7};
@@ -896,7 +909,48 @@ int pos = Arrays.binarySearch(a, 4); // returns -3
 
 Explanation: insertion at index 2 → return `-(2) - 1 = -3`.
 
-This is a *classic exam trap*.
+
+### • `Arrays.compare()`
+
+While the class `Arrays` contain an overloaded version of the method `equals()` which checks if two arrays contain the same elements (and of course are of the same size)
+
+```java
+System.out.println(Arrays.equals(new int[] {200}, new int[] {100}));	// false
+System.out.println(Arrays.equals(new int[] {200}, new int[] {200}));	// true
+System.out.println(Arrays.equals(new int[] {200}, new int[] {100, 200}));	// false
+```
+
+it offers also a `compare()` method with the following utilization rules:
+
+- If the method gives a result `n < 0` --> first array is smaller than the second;
+- If the method gives a result `n > 0` --> first array is bigger than the second;
+- If the method gives a result `n == 0` --> arrays are equal;
+
+Additional rules in the following example:
+
+```java
+
+
+int[] arr1 = new int[] {200, 300};
+int[] arr2 = new int[] {200, 300, 400};
+System.out.println(Arrays.compare(arr1, arr2));  // -1
+
+int[] arr3 = new int[] {200, 300, 400};
+int[] arr4 = new int[] {200, 300};
+System.out.println(Arrays.compare(arr3, arr4));  // 1
+
+String[] arr5 = new String[] {"200", "300", "aBB"};
+String[] arr6 = new String[] {"200", "300", "ABB"};
+System.out.println(Arrays.compare(arr5, arr6));     // Positive number: uppercase is smaller than lowercase
+
+String[] arr7 = new String[] {"200", "300", "ABB"};
+String[] arr8 = new String[] {"200", "300", "aBB"};
+System.out.println(Arrays.compare(arr7, arr8));     // Negative number: uppercase is smaller than lowercase
+
+String[] arr9 = null;
+String[] arr10 = new String[] {"200", "300", "ABB"};
+System.out.println(Arrays.compare(arr9, arr10));   // -1
+```
 
 
 ### 2.11 Enhanced for-loop with Arrays
