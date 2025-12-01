@@ -31,27 +31,27 @@ The way instances are created depends on the category of the type:
   Instances of primitive types are created simply by declaring a variable.  
   The JVM automatically allocates memory to hold the value, and no explicit keyword is needed. 
   
-  ```java
+```java
   int age = 30;         // creates a primitive int with value 30
   boolean flag = true;  // creates a primitive boolean with value true
   double pi = 3.14159;  // creates a primitive double with value 3.14159
-  ```
+```
   
  - **Reference types (objects)**  
 	Instances of class types are created using the new keyword (except for a few special cases such as string literals, records with canonical constructors, or factory methods).
 	The new keyword allocates memory on the heap and invokes a constructor of the class.
   
-	```java
+```java
 	String name = new String("Alice"); // creates a new String object explicitly
 	Person p = new Person();           // creates a new Person object using its constructor
-	```
+```
   
 It is also common to rely on literals or factory methods for object creation.
   
-	```java
+```java
 	String name = new String("Alice"); // creates a new String object explicitly
 	Person p = new Person();           // creates a new Person object using its constructor
-	``` 
+``` 
   
 ## Handling a Primitive Type
 
@@ -80,7 +80,7 @@ For primitives, the variable holds the value itself, while for reference types t
 
 - Syntax examples:
 
-  ```java
+```java
   int number;  					// Declaring an int type: a variable called "number"
   
   number = 10;  				// Assigning the value 10 to this variable
@@ -96,7 +96,7 @@ For primitives, the variable holds the value itself, while for reference types t
   double d1, double d2;         // ERROR - NOT LEGAL
   
   int v1; v2; 					// ERROR - NOT LEGAL
-  ```
+```
   
 > [!IMPORTANT]
 > When you write a number directly in the code (a numeric literal), Java assumes by default that it is of type **int**.  
@@ -104,7 +104,7 @@ For primitives, the variable holds the value itself, while for reference types t
 
 - Syntax example for a numeric literal:
 
-  ```java
+```java
   long exNumLit = 5729685479; // ❌ Does not compile.
                               // Even though the value would fit in a long,
                               // a plain numeric literal is assumed to be an int,
@@ -118,7 +118,7 @@ For primitives, the variable holds the value itself, while for reference types t
   
   long exNumLit = 5729685479l;
 							 
-  ```
+```
   
 **Declaring** a reference type means reserving space in memory for a variable that will contain a reference (pointer) to an object of the specified type.  
 At this stage, no object is created yet — the variable only has the potential to point to one.
@@ -129,7 +129,7 @@ At this stage, no object is created yet — the variable only has the potential 
 
 - Syntax examples for declaration only:
 
-  ```java
+```java
   String name;
   Person person;
   List<Integer> numbers;
@@ -143,7 +143,7 @@ At this stage, no object is created yet — the variable only has the potential 
   String d1, String d2;         			// ERROR - NOT LEGAL
   
   String v1; v2; 							// ERROR - NOT LEGAL
-  ```
+```
 
 ---
 
@@ -158,7 +158,7 @@ Reference types can also be assigned **null**, which means that they do not refe
 
 - Syntax examples:
 
-  ```java
+```java
   Person person = new Person(); // Example with 'new' and a constructor 'Person()':
                                 // 'new Person()' creates a new Person object on the heap
                                 // and returns its reference, which is stored in the variable 'person'.
@@ -167,7 +167,7 @@ Reference types can also be assigned **null**, which means that they do not refe
   
   List<Integer> numbers = List.of(1, 2, 3);   // Example with a factory method.
   
-  ```
+```
   
 ### 2. Constructors
 

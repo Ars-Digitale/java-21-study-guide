@@ -80,12 +80,12 @@ System.out.println("AB" + null);
 // ABnull
 ```
 
-### 1.2 Relevant String methods
+### 1.2 Core String methods
 
 #### Strings — Indexing, Length, and Core Methods
 
 Java’s `String` class represents **immutable** sequences of Unicode characters.  
-Let's understanding indexing rules and how Java handles substring boundaries.
+Let's understand indexing rules and how Java handles substring boundaries.
 
 
 #### 1.2.1 String Indexing
