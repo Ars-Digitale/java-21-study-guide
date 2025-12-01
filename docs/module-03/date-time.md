@@ -6,10 +6,6 @@
 	- [4. Dates and Time](#4-dates-and-time)
 	  - [Getting the Current Date/Time](#getting-the-current-datetime)
 	  - [4.1 Creating Specific Dates and Times](#41-creating-specific-dates-and-times)
-		- [LocalDate — overloaded of() forms](#localdate--overloaded-of-forms)
-		- [LocalTime — overloaded of() forms](#localtime--overloaded-of-forms)
-		- [LocalDateTime — overloaded of() forms](#localdatetime--overloaded-of-forms)
-		- [ZonedDateTime — overloaded of() forms](#zoneddatetime--overloaded-of-forms)
 		- [4.1.1 Date and Time Arithmetic: plus and minus Methods](#411-date-and-time-arithmetic-plus-and-minus-methods)
 		- [4.1.2 Common Patterns](#412-common-patterns)
 		- [4.1.3 LocalDate Arithmetic](#413-localdate-arithmetic)
@@ -55,7 +51,7 @@ Depending on the level of detail required, Java offers four main classes:
 > - A **zone offset** is a fixed shift from UTC/GMT (e.g., `+01:00`, `-07:00`).  
 > - To compare two instants from different time zones, convert them to UTC (GMT) by applying the offset.
 
-## Getting the Current Date/Time
+**Getting the Current Date/Time**
 
 You can retrieve the current system values using the `static now()` method:
 
@@ -90,22 +86,22 @@ Both represent **the same instant in time**, simply expressed in different time 
 You can build precise date/time objects using the `of()` factory methods.  
 All classes include multiple overloaded versions of `of()` (not listed in examples, but included below).
 
-### **LocalDate — overloaded `of()` forms**
+**LocalDate — overloaded `of()` forms**
 - `of(int year, int month, int dayOfMonth)`
 - `of(int year, Month month, int dayOfMonth)`
 
-### **LocalTime — overloaded `of()` forms**
+**LocalTime — overloaded `of()` forms**
 - `of(int hour, int minute)`
 - `of(int hour, int minute, int second)`
 - `of(int hour, int minute, int second, int nanoOfSecond)`
 
-### **LocalDateTime — overloaded `of()` forms**
+**LocalDateTime — overloaded `of()` forms**
 - `of(int year, int month, int day, int hour, int minute)`
 - `of(int year, int month, int day, int hour, int minute, int second)`
 - `of(int year, int month, int day, int hour, int minute, int second, int nano)`
 - `of(LocalDate date, LocalTime time)`
 
-### **ZonedDateTime — overloaded `of()` forms**
+**ZonedDateTime — overloaded `of()` forms**
 - `of(LocalDate date, LocalTime time, ZoneId zone)`
 - `of(int y, int m, int d, int h, int min, int s, int nano, ZoneId zone)`
 
@@ -166,7 +162,7 @@ These allow flexible and readable date/time arithmetic.
 
 `LocalDate` represents a **date only** (no time, no zone).
 
-### Main `plus` / `minus` methods (overloads)
+**Main `plus` / `minus` methods (overloads)**
 
 | Method | Description |
 |--------|-------------|
@@ -206,7 +202,7 @@ LocalDate d6 = date.plus(p);
 
 `LocalTime` represents **time only** (no date, no zone).
 
-### Main `plus` / `minus` methods (overloads)
+**Main `plus` / `minus` methods (overloads)**
 
 | Method | Description |
 |--------|-------------|
@@ -251,7 +247,7 @@ LocalTime t5 = time.plus(d);                // 15:00
 
 It supports both the date-related and time-related shortcut methods.
 
-### Main `plus` / `minus` methods (overloads)
+** Main `plus` / `minus` methods (overloads)**
 
 | Method | Description |
 |--------|-------------|
@@ -286,15 +282,13 @@ LocalDateTime l5 = ldt.plus(p);    // 2025-03-20T13:30
 LocalDateTime l6 = ldt.plus(d);    // 2025-03-10T18:30
 ```
 
----
-
 #### 4.1.6 `ZonedDateTime` Arithmetic
 
 `ZonedDateTime` represents **date + time + time zone + offset**.  
 
 It supports the same plus/minus methods as `LocalDateTime`, but with extra attention to **time zones** and **Daylight Saving Time (DST)**.
 
-### Main `plus` / `minus` methods (overloads)
+** Main `plus` / `minus` methods (overloads)**
 
 | Method | Description |
 |--------|-------------|
@@ -408,7 +402,7 @@ These are foundational for date/time arithmetic and are frequently tested in the
 A `Period` represents a **date-based amount of time**, such as “3 years, 2 months, and 5 days”.  
 It is used with **LocalDate** and **LocalDateTime** (because they contain date parts).
 
-#### ✔ Creation Methods
+**✔ Creation Methods**
 
 | Method | Description |
 |--------|-------------|
@@ -419,7 +413,7 @@ It is used with **LocalDate** and **LocalDateTime** (because they contain date p
 | `Period.of(int years, int months, int days)` | Full period |
 | `Period.parse(CharSequence text)` | ISO-8601 format: `"P1Y2M3D"` |
 
-#### ✔ Key properties
+✔ Key properties
 
 - **Does NOT support hours, minutes, seconds, nanoseconds**  
 - **Can be negative**  
@@ -436,7 +430,7 @@ LocalDate base = LocalDate.of(2025, 1, 10);
 LocalDate result = base.plus(p2);          // 2026-03-13
 ```
 
-#### ✔ Common Pitfall
+✔ Common Pitfall
 `Period.ofWeeks(1)` is **not** 7 calendar days in all contexts when combined with DST-sensitive classes.  
 (But DST issues mainly affect `ZonedDateTime + Duration`.)
 
@@ -446,7 +440,7 @@ LocalDate result = base.plus(p2);          // 2026-03-13
 A `Duration` represents a **time-based amount** in seconds and nanoseconds.  
 It is used with **LocalTime**, **LocalDateTime**, and **ZonedDateTime**.
 
-#### ✔ Creation Methods
+**✔ Creation Methods**
 
 | Method | Description |
 |--------|-------------|
@@ -460,7 +454,7 @@ It is used with **LocalTime**, **LocalDateTime**, and **ZonedDateTime**.
 | `Duration.between(Temporal start, Temporal end)` | Compute duration between two instants |
 | `Duration.parse(CharSequence text)` | ISO: `"PT20H"` `"PT15M"` `"PT10S"` |
 
-#### ✔ Key characteristics
+✔ Key characteristics
 
 - Supports **hours → nanoseconds**, but **NOT years/months/weeks**  
 - Ideal for machine-level time computations  
@@ -484,7 +478,7 @@ ZonedDateTime z2 = z1.plusHours(2);          // DST-aware
 ZonedDateTime z3 = z1.plus(d2);              // Duration-based
 ```
 
-#### ✔ Common pitfall
+✔ Common pitfall
 `Duration.ofDays(1)` is **not necessarily 24h of local time** in zones with DST changes.
 
 
@@ -497,7 +491,7 @@ It contains:
 - seconds since epoch (1970-01-01T00:00Z)
 - nanoseconds adjustment
 
-#### ✔ Creation Methods
+**✔ Creation Methods**
 
 | Method | Description |
 |--------|-------------|
@@ -507,7 +501,7 @@ It contains:
 | `Instant.ofEpochMilli(long millis)` | Epoch milliseconds |
 | `Instant.parse(CharSequence text)` | ISO: `"2024-01-01T10:15:30Z"` |
 
-#### ✔ Conversions
+**✔ Conversions**
 
 | Action | Method |
 |--------|--------|
@@ -515,8 +509,7 @@ It contains:
 | Convert `ZonedDateTime` → Instant | `zdt.toInstant()` |
 | Convert `LocalDateTime` → Instant | **Not allowed** (needs a zone) |
 
-#### ✔ Example
-
+Example
 ```java
 Instant i = Instant.now();
 
@@ -544,7 +537,7 @@ Duration between = Duration.between(start, end); // PT2H30M
 | **Instant** | Exact point on UTC timeline | Timestamp representation | Convertable to/from `ZonedDateTime` | Cannot combine with Period |
 
 
-### Common Traps
+Common Traps
 
 - `Period.of(1, 0, 0)` ≠ `Duration.ofDays(365)` (leap years!)
 - `Duration.ofDays(1)` may not equal a full day in a DST zone  
@@ -568,7 +561,7 @@ Both are essential for understanding how the plus/minus and with methods work, a
 `TemporalUnit` represents a **single unit** of date/time measurement.  
 The main implementation used in Java is:
 
-### ✔ `ChronoUnit` (enum)
+#### 4.3.2 `ChronoUnit` (enum)
 
 This enum provides the standard units used in the ISO-8601 chronology:
 
@@ -593,7 +586,7 @@ LocalTime time = LocalTime.of(10, 0);
 LocalTime t1 = time.plus(90, ChronoUnit.MINUTES);  // 11:30
 ```
 
-### ✔ Common Pitfall
+✔ Common Pitfall
 You **cannot** use time-based units with `LocalDate`, nor date-based units with `LocalTime`.
 
 Examples:
@@ -607,7 +600,7 @@ LocalTime t = LocalTime.now().plus(1, ChronoUnit.DAYS);
 ```
 
 
-#### 4.3.2 `TemporalAmount`
+#### 4.3.3 `TemporalAmount`
 
 `TemporalAmount` represents a **multiple-unit amount** of time (e.g. “2 years, 3 months”, or “90 minutes”).  
 It is implemented by:
@@ -618,7 +611,7 @@ It is implemented by:
 Both can be passed to date/time objects to adjust them using `plus()` and `minus()`.
 
 
-#### 4.3.3 `Period` as a `TemporalAmount`
+#### 4.3.4 `Period` as a `TemporalAmount`
 
 `Period` represents a human-based amount: **years, months, days**.
 
@@ -631,12 +624,12 @@ LocalDate base = LocalDate.of(2025, 3, 10);
 LocalDate result = base.plus(p); // 2026-05-13
 ```
 
-### Notes
+Notes
 - A `Period` **cannot** be used with `LocalTime` (no date).  
 - `Period.ofWeeks(n)` is converted internally to *days*.
 
 
-#### 4.3.4 `Duration` as a `TemporalAmount`
+#### 4.3.5 `Duration` as a `TemporalAmount`
 
 `Duration` represents machine-based time: **seconds + nanoseconds**.
 
@@ -649,21 +642,21 @@ LocalDateTime ldt = LocalDateTime.of(2025, 3, 10, 10, 0);
 LocalDateTime result = ldt.plus(d); // 2025-03-10T15:30
 ```
 
-### Notes
+Notes
 - A `Duration` **can** be used with classes that have time components (`LocalTime`, `LocalDateTime`, `ZonedDateTime`, `Instant`).  
 - A `Duration` **cannot** be applied to `LocalDate`: it will throw `UnsupportedTemporalTypeException`.  
 - `Duration` interacts with zones and DST transitions if applied to `ZonedDateTime`.
 
 
-#### 4.3.5 Using `TemporalAmount` vs `TemporalUnit`
+#### 4.3.6 Using `TemporalAmount` vs `TemporalUnit`
 
-### ✔ Using a TemporalUnit
+✔ Using a TemporalUnit
 
 ```java
 LocalDate d1 = LocalDate.now().plus(5, ChronoUnit.DAYS);
 ```
 
-### ✔ Using a TemporalAmount
+✔ Using a TemporalAmount
 
 ```java
 Period p = Period.ofDays(5);
@@ -672,7 +665,7 @@ LocalDate d2 = LocalDate.now().plus(p);
 
 Both produce the same result when supported.
 
-### Differences
+**Differences**
 
 | Aspect | `TemporalUnit` | `TemporalAmount` |
 |--------|----------------|------------------|
@@ -682,11 +675,11 @@ Both produce the same result when supported.
 | Good for | Simple increments | Complex increments |
 | Common with | all date/time classes | restricted by type |
 
-#### 4.3.6 `between(...)` Methods
+#### 4.3.7 `between(...)` Methods
 
 Many classes provide a `between` method from `ChronoUnit`, `Duration`, or `Period`.
 
-### ✔ Using `Duration.between` (for time-based classes)
+✔ Using `Duration.between` (for time-based classes)
 
 ```java
 Duration d = Duration.between(
@@ -696,7 +689,7 @@ Duration d = Duration.between(
 // PT3H30M
 ```
 
-### ✔ Using `Period.between` (ONLY for dates)
+✔ Using `Period.between` (ONLY for dates)
 
 ```java
 Period p = Period.between(
@@ -706,7 +699,7 @@ Period p = Period.between(
 // P2M9D
 ```
 
-### ✔ Using ChronoUnit BETWEEN
+✔ Using ChronoUnit BETWEEN
 
 ```java
 long days = ChronoUnit.DAYS.between(
@@ -722,7 +715,7 @@ long days = ChronoUnit.DAYS.between(
 > and `Duration.between` returns a `Duration`.
 
 
-#### 4.3.7 Common Pitfalls
+#### 4.3.8 Common Pitfalls
 
 1. **Applying the wrong TemporalAmount**  
    - `LocalTime.plus(Period.ofDays(1))` → ❌ compile-time error  
@@ -742,7 +735,7 @@ long days = ChronoUnit.DAYS.between(
    - Needs a time zone: `ldt.atZone(zone).toInstant()`.
 
 
-#### 4.3.8 Summary
+#### 4.3.9 Summary
 
 | Feature | TemporalUnit | TemporalAmount | ChronoUnit | Period | Duration |
 |---------|--------------|----------------|------------|--------|----------|
