@@ -644,21 +644,35 @@ System.out.println("abcd".substring(2, 5)); // ❌ StringIndexOutOfBoundsExcepti
 
 Arrays in Java are **fixed-size**, **indexed**, **ordered** collections of elements of the *same* type.  
 They are considered **objects**, even when the elements are primitives.  
-Arrays are a key exam topic, with many subtle rules commonly tested in certification questions.
 
 
 ### 2.1 Declaring Arrays
 
 You can declare an array in two ways:
 
-<CODE-JAVA>
+```java
 int[] a;      // preferred modern syntax
 int b[];      // legal, older style
 String[] names;
 Person[] people;
-</CODE-JAVA>
 
-> Both forms are equivalent, but the first is preferred: it groups the brackets with the type.
+// [] can be before or after the name: all the following declarations are equivalent.
+
+int[] x;
+int [] x1;
+int []x2;
+int x3[];
+int x5 [];
+
+// MULTIPLE ARRAYs DECLARATION
+
+int[] arr1, arr2;   // Declares two arrays of int
+
+WARNING!
+
+int arr1[], arr2;   // This time (just moving the brackets) we obtain one variable of type array of int and the second one, arr2, of type int
+
+```
 
 **Declaring does NOT create the array** — it only creates a variable capable of referencing one.
 
@@ -667,28 +681,28 @@ Person[] people;
 
 An array is created using `new` followed by the element type and the array length:
 
-<CODE-JAVA>
+```java
 int[] numbers = new int[5];
 String[] words = new String[3];
-</CODE-JAVA>
+```
 
 ### Key rules
 - The length **must be non-negative** and specified at creation time.
 - Length **cannot be changed later**.
 - Array length can be any `int` expression:
 
-<CODE-JAVA>
+```java
 int size = 4;
 double[] values = new double[size];
-</CODE-JAVA>
+```
 
 ### Illegal array creation examples
-<CODE-JAVA>
+```java
 // int length = -1;          // Runtime exception: NegativeArraySizeException
 // int[] arr = new int[-1]; 
 
 // int[] arr = new int[2.5];  // Compile error: size must be int
-</CODE-JAVA>
+```
 
 
 ### 2.3 Default Values in Arrays
@@ -704,80 +718,77 @@ Arrays (because they are objects) always receive **default initialization**:
 
 Example:
 
-<CODE-JAVA>
+```java
 int[] nums = new int[3]; 
 System.out.println(nums[0]); // 0
 
 String[] s = new String[3];
 System.out.println(s[0]);    // null
-</CODE-JAVA>
-
-This is a common exam topic.
+```
 
 
 ### 2.4 Accessing Elements
 
 Elements are accessed using zero-based indexing:
 
-<CODE-JAVA>
+```java
 int[] a = new int[3];
 a[0] = 10;
 a[1] = 20;
 System.out.println(a[1]); // 20
-</CODE-JAVA>
+```
 
 ### Common Exceptions
 - `ArrayIndexOutOfBoundsException` (runtime)
 
-<CODE-JAVA>
+```java
 // int[] x = new int[2];
 // System.out.println(x[2]); // ❌ index 2 out of bounds
-</CODE-JAVA>
+```
 
 ### 2.5 Array Initialization Shorthands
 
 #### 2.5.1 Anonymous array creation
-<CODE-JAVA>
+```java
 int[] a = new int[] {1,2,3};
-</CODE-JAVA>
+```
 
 #### 2.5.2 Short syntax (only at declaration!)
-<CODE-JAVA>
+```java
 int[] b = {1,2,3};
-</CODE-JAVA>
+```
 
 > The short syntax *cannot* be used in assignment:
 
-<CODE-JAVA>
+```java
 // int[] c;
 // c = {1,2,3};  // ❌ does not compile
-</CODE-JAVA>
-
+```
 
 ### 2.6 Multidimensional Arrays (Arrays of Arrays)
 
 Java implements multi-dimensional arrays as **arrays of arrays**.
 
 ### Declaration
-<CODE-JAVA>
+```java
 int[][] matrix;
 String[][][] cube;
-</CODE-JAVA>
+```
 
 ### Creating a rectangular array
-<CODE-JAVA>
+```java
 int[][] rect = new int[3][4]; // 3 rows, 4 columns each
-</CODE-JAVA>
+```
 
 ### Creating a jagged (irregular) array
 You can create rows with different lengths:
 
-<CODE-JAVA>
+```java
 int[][] jagged = new int[3][];
 jagged[0] = new int[2];
 jagged[1] = new int[5];
 jagged[2] = new int[1];
-</CODE-JAVA>
+```
 
 
 ### 2.7 Array Length vs String Length
@@ -787,102 +798,101 @@ jagged[2] = new int[1];
 
 **Exam trap**:
 
-<CODE-JAVA>
+```java
 // int x = arr.length;   // OK
 // int y = s.length;     // ❌ does not compile: missing ()
-</CODE-JAVA>
+```
 
 
 ### 2.8 Array Reference Assignments
 
 ### Assigning compatible references
-<CODE-JAVA>
+```java
 int[] a = {1,2,3};
 int[] b = a; // both now point to the same array
-</CODE-JAVA>
+```
 
 Modifying one affects the other:
 
-<CODE-JAVA>
+```java
 b[0] = 99;
 System.out.println(a[0]); // 99
-</CODE-JAVA>
+```
 
 ### Incompatible assignments (compile-time errors)
-<CODE-JAVA>
+```java
 // int[] x = new int[3];
 // long[] y = x;     // ❌ incompatible types
-</CODE-JAVA>
+```
 
 But array references follow normal inheritance rules:
 
-<CODE-JAVA>
+```java
 String[] s = new String[3];
 Object[] o = s;      // OK: arrays are covariant
-</CODE-JAVA>
+```
 
 ### Covariance runtime danger: ArrayStoreException
-<CODE-JAVA>
+```java
 Object[] objs = new String[3];
 // objs[0] = Integer.valueOf(5); // ❌ ArrayStoreException
-</CODE-JAVA>
+```
 
 
 ### 2.9 Comparing Arrays
 
 `==` compares references (identity):  
-<CODE-JAVA>
+```java
 int[] a = {1,2};
 int[] b = {1,2};
 System.out.println(a == b); // false
-</CODE-JAVA>
+```
 
 `.equals()` in arrays **does not compare contents** (it behaves like `==`):  
-<CODE-JAVA>
+```java
 System.out.println(a.equals(b)); // false
-</CODE-JAVA>
+```
 
 To compare contents, use methods from `java.util.Arrays`:
 
-<CODE-JAVA>
+```java
 Arrays.equals(a, b);         // shallow comparison
 Arrays.deepEquals(o1, o2);   // deep comparison for nested arrays
-</CODE-JAVA>
+```
 
 
 ### 2.10 Arrays Utility Methods
 
-The certification exam expects familiarity with:
 
 ### • `Arrays.toString()`
-<CODE-JAVA>
+```java
 System.out.println(Arrays.toString(new int[]{1,2,3}));
-</CODE-JAVA>
+```
 
 ### • `Arrays.deepToString()` (for nested arrays)
-<CODE-JAVA>
+```java
 System.out.println(Arrays.deepToString(new int[][] {{1,2},{3,4}}));
-</CODE-JAVA>
+```
 
 ### • `Arrays.sort()`
-<CODE-JAVA>
+```java
 int[] a = {4,1,3};
 Arrays.sort(a); // [1,3,4]
-</CODE-JAVA>
+```
 
 ### • `Arrays.binarySearch()`
 Requirements: array **must be sorted**, otherwise result is unpredictable.
 
-<CODE-JAVA>
+```java
 int[] a = {1,3,5,7};
 int idx = Arrays.binarySearch(a, 5); // returns 2
-</CODE-JAVA>
+```
 
 When value not found → returns **-(insertionPoint) - 1**:
 
-<CODE-JAVA>
+```java
 int pos = Arrays.binarySearch(a, 4); // returns -3
-</CODE-JAVA>
+```
 
 Explanation: insertion at index 2 → return `-(2) - 1 = -3`.
 
@@ -891,41 +901,41 @@ This is a *classic exam trap*.
 
 ### 2.11 Enhanced for-loop with Arrays
 
-<CODE-JAVA>
+```java
 for (int value : new int[]{1,2,3}) {
     System.out.println(value);
 }
-</CODE-JAVA>
+```
 
 Rules:
 - The right side must be an array or iterable.
 - The loop variable must be compatible with element type.
 
 Common error:
-<CODE-JAVA>
+```java
 // for (long v : new int[]{1,2}) {} // ❌ not allowed: int cannot widen to long in enhanced loop
-</CODE-JAVA>
+```
 
 
-### 2.12 Common Certification Pitfalls
+### 2.12 Common Pitfalls
 
 #### 2.12.1 Accessing out of bounds  
 Throws `ArrayIndexOutOfBoundsException`.
 
 #### 2.12.2 Using short array initializer incorrectly  
-<CODE-JAVA>
+```java
 // int[] x;
 // x = {1,2}; // ❌ does not compile
-</CODE-JAVA>
+```
 
 #### 2.12.3 Confusing `.length` and `.length()`
 
 #### 2.12.4 Forgetting arrays are objects
 
 #### 2.12.5 Mixing primitive arrays and wrapper arrays  
-<CODE-JAVA>
+```java
 // int[] p = new Integer[3]; // ❌ incompatible
-</CODE-JAVA>
+```
 
 #### 2.12.6 Using binarySearch on unsorted arrays → unpredictable results
 
@@ -940,9 +950,7 @@ Arrays in Java are:
 - fixed-size, indexed collections
 - always initialized with default values
 - type-safe but subject to covariance rules
-- often involved in exam traps (initializers, binarySearch, covariance)
 
-A strong understanding of array creation, usage, assignment, and pitfalls is essential for certification success.
 
 ---
 
