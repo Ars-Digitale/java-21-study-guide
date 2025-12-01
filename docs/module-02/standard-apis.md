@@ -2,7 +2,7 @@
 
 ### Table of Contents
 
-- [Standard APIs]()
+- [Standard APIs]
 	- [1 Strings & Text Blocks](#1-strings--text-blocks)
 		- [1.1 Initializing Strings](#11-initializing-strings)
 		- [1.2 Special Characters and Escape Sequences](#12-special-characters-and-escape-sequences)
@@ -1158,6 +1158,90 @@ Math.sqrt(-1);   // NaN
 | `abs()` | same type | int, long, float, double | Absolute value |
 | `sqrt()` | double | double | Square root |
 
+
+### 3.10 BigInteger and BigDecimal
+
+The classes `BigInteger` and `BigDecimal` (in java.math) provide arbitrary-precision number types.
+They are used when:
+
+- primitive types (int, long, double, etc.) don’t have enough range, or
+- floating-point rounding errors of float/double are not acceptable (e.g. money, financial calculations).
+
+Both are `immutable`: every operation returns a new instance.
+
+#### 3.10.1 Why double and float are not enough
+
+Floating-point types (float, double) use a binary representation. Many decimal fractions can’t be represented exactly (like 0.1 or 0.2), so you get rounding errors:
+
+```java
+System.out.println(0.1 + 0.2); // 0.30000000000000004 
+```
+
+For tasks like financial calculations, this is unacceptable.
+`BigDecimal` solves this by representing numbers using a decimal model with a configurable scale (number of digits after the decimal point).
+
+#### 3.10.2 BigInteger — Arbitrary-Precision Integers
+
+BigInteger represents integer values of any size, limited only by memory.
+
+#### 3.10.3 Creating BigInteger
+
+Common ways:
+
+- From a long:
+ - static BigInteger valueOf(long val)
+- From a String:
+ - BigInteger(String val) – decimal by default
+ - BigInteger(String val, int radix) – with base (2, 8, 16, etc.)
+- Random big value:
+ - BigInteger(int numBits, Random rnd)
+
+Examples:
+```java
+import java.math.BigInteger;
+import java.util.Random;
+
+BigInteger a = BigInteger.valueOf(10L);
+BigInteger b = new BigInteger("12345678901234567890"); // decimal string
+BigInteger c = new BigInteger("FF", 16); // 255 in base 16
+BigInteger r = new BigInteger(128, new Random()); // random 128-bit number
+```
+
+#### 3.10.4 Operations (no operators!)
+
+You cannot use `+`, `-`, `*`, `/`, `%` with BigInteger.
+Instead, use methods (all return new instances):
+
+- add(BigInteger val)
+- subtract(BigInteger val)
+- multiply(BigInteger val)
+- divide(BigInteger val) – integer division
+- remainder(BigInteger val)
+- pow(int exponent)
+- negate()
+- abs()
+- gcd(BigInteger val)
+- compareTo(BigInteger val) – ordering
+
+Example:
+```java
+BigInteger x = new BigInteger("100000000000000000000");
+BigInteger y = new BigInteger("3");
+
+BigInteger sum = x.add(y); // x + y
+BigInteger prod = x.multiply(y); // x * y
+BigInteger div = x.divide(y); // integer division
+BigInteger rem = x.remainder(y); // modulus
+
+if (x.compareTo(y) > 0) {
+System.out.println("x is larger");
+}
+```
+
 ---
+
+
+
+
 
 
