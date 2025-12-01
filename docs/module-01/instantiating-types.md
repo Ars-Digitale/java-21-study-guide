@@ -138,7 +138,7 @@ At this stage, no object is created yet — the variable only has the potential 
    
   String a = "abc", b = "def", c = "ghi";  	// Multiple declarations & assignements
   
-  String b1, b2, b3 = "abc"					// Mixed declarations (2) with one assignement
+  String b1, b2, b3 = "abc"					// Mixed declarations (b1, b2) with one assignement (b3)
   
   String d1, String d2;         			// ERROR - NOT LEGAL
   
