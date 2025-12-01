@@ -73,6 +73,11 @@
 	  - [3.7 Math.abs()](#37-mathabs)
 	  - [3.8 Math.sqrt()](#371-mathsqrt)
 	  - [3.9 Summary Table](#38-summary-table)
+	  - [3.10 BigInteger and BigDecimal](#310-biginteger-and-bigdecimal)
+		- [3.10.1 Why double and float are not enough](#3101-why-double-and-float-are-not-enough)
+		- [3.10.2 BigInteger — Arbitrary-Precision Integers](#3102-biginteger--arbitrary-precision-integers)
+		- [3.10.3 Creating BigInteger](#3103-creating-biginteger)
+		- [3.10.4 Operations (no operators!)](#3104-operations-no-operators)
 
 
 
@@ -1208,6 +1213,13 @@ import java.math.BigInteger;
 import java.util.Random;
 
 BigInteger a = BigInteger.valueOf(10L);
+
+// You can pass a long to either types, but double only to BigDecimal 
+
+BigInteger g = BigInteger.valueOf(3000L);
+BigDecimal p = BigDecimal.valueOf(3000L);
+BigDecimal q = BigDecimal.valueOf(3000.00);
+
 BigInteger b = new BigInteger("12345678901234567890"); // decimal string
 BigInteger c = new BigInteger("FF", 16); // 255 in base 16
 BigInteger r = new BigInteger(128, new Random()); // random 128-bit number
