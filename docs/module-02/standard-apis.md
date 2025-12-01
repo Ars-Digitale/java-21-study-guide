@@ -53,15 +53,7 @@ String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
 Because String are `immutable` and they are widely used in Java, they could easily occupy a huge amount of memory in a Java program;
 In order to face this problem Java will reuse all the Strings which are declared as literals (see example above), storing them in a dedicated location of the JVM which is known as the `String Pool` or the `Intern Pool`.
 
-Examples:
-
-```java
-String s1 = "Hello";                    // string literal
-String s2 = new String("Hello");        // using constructor 
-String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
-
-
-```
+Please Check [1.5.3 String Pool and Equality](../module-01/instantiating-types.md#153-string-pool-and-equality)
 
 ### 1.1.2 Special Characters and Escape Sequences
 
