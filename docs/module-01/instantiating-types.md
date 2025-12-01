@@ -23,8 +23,8 @@
   - [1.5 Equality in Java](#15-equality-in-java)
     - [1.5.1 Equality with Primitives](#151-equality-with-primitives)
     - [1.5.2 Equality with Reference Types](#152-equality-with-reference-types)
-      - [1.5.2.1 `==` (Identity Comparison)](#1521--identity-comparison)
-      - [1.5.2.2 `.equals()` (Logical Comparison)](#1522-equals-logical-comparison)
+      - [1.5.2.1 `==` (Identity Comparison)](#1521-identity-comparison)
+      - [1.5.2.2 `.equals()` (Logical Comparison)](#1522-equals-logical-comparison
     - [1.5.3 String Pool and Equality](#153-string-pool-and-equality)
       - [1.5.3.1 The intern method](#1531-the-intern-method)
     - [1.5.4 Equality with Wrapper Types](#154-equality-with-wrapper-types)
