@@ -65,7 +65,7 @@ It is also common to rely on literals or factory methods for object creation.
 	Person p = new Person();           // creates a new Person object using its constructor
 ``` 
   
-### 1.1 Handling a Primitive Type
+### 1.1 Handling Primitive Types
 
 #### 1.1.1 Declaring a Primitive
 
@@ -159,7 +159,7 @@ At this stage, no object is created yet — the variable only has the potential 
 
 ---
 
-### 1.2 Handling a Reference Type
+### 1.2 Handling Reference Types
 
 #### 1.2.1 Creating and Assigning a Reference
 
