@@ -4,7 +4,6 @@
 
 - [Dates and Time in Java]
 	- [4. Dates and Time](#4-dates-and-time)
-	  - [Getting the Current Date/Time](#getting-the-current-datetime)
 	  - [4.1 Creating Specific Dates and Times](#41-creating-specific-dates-and-times)
 		- [4.1.1 Date and Time Arithmetic: plus and minus Methods](#411-date-and-time-arithmetic-plus-and-minus-methods)
 		- [4.1.2 Common Patterns](#412-common-patterns)
@@ -20,16 +19,16 @@
 		- [4.2.2 Duration — Machine Time Amounts](#422-duration--machine-time-amounts)
 		- [4.2.3 Instant — Point on the UTC Timeline](#423-instant--point-on-the-utc-timeline)
 		- [4.2.4 Summary Table (Period vs Duration vs Instant)](#424-summary-table-period-vs-duration-vs-instant)
-		- [Common Traps](#common-traps)
 	  - [4.3 TemporalUnit and TemporalAmount](#43-temporalunit-and-temporalamount)
 		- [4.3.1 TemporalUnit](#431-temporalunit)
-		- [4.3.2 TemporalAmount](#432-temporalamount)
-		- [4.3.3 Period as a TemporalAmount](#433-period-as-a-temporalamount)
-		- [4.3.4 Duration as a TemporalAmount](#434-duration-as-a-temporalamount)
-		- [4.3.5 Using TemporalAmount vs TemporalUnit](#435-using-temporalamount-vs-temporalunit)
-		- [4.3.6 between(...) Methods](#436-between-methods)
-		- [4.3.7 Common Pitfalls](#437-common-pitfalls)
-		- [4.3.8 Summary](#438-summary)
+		- [4.3.2 ChronoUnit](#432-chronounit-enum)
+		- [4.3.3 TemporalAmount](#433-temporalamount)
+		- [4.3.4 Period as a TemporalAmount](#434-period-as-a-temporalamount)
+		- [4.3.5 Duration as a TemporalAmount](#435-duration-as-a-temporalamount)
+		- [4.3.6 Using TemporalAmount vs TemporalUnit](#436-using-temporalamount-vs-temporalunit)
+		- [4.3.7 between(...) Methods](#437-between-methods)
+		- [4.3.8 Common Pitfalls](#438-common-pitfalls)
+		- [4.3.9 Summary](#439-summary)
 
 
 ---
