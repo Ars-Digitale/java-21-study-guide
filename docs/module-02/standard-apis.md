@@ -861,17 +861,17 @@ Arrays.deepEquals(o1, o2);   // deep comparison for nested arrays
 ```
 
 
-### 2.10 Arrays Utility Methods
+### 2.10 `Arrays` Utility Methods
 
 
 ### • `Arrays.toString()`
 ```java
-System.out.println(Arrays.toString(new int[]{1,2,3}));
+System.out.println(Arrays.toString(new int[]{1,2,3})); // [1, 2, 3]
 ```
 
 ### • `Arrays.deepToString()` (for nested arrays)
 ```java
-System.out.println(Arrays.deepToString(new int[][] {{1,2},{3,4}}));	// [1, 2, 3]
+System.out.println(Arrays.deepToString(new int[][] {{1,2},{3,4}}));	// [[1, 2], [3, 4]]
 ```
 
 ### • `Arrays.sort()`
@@ -880,7 +880,7 @@ int[] a = {4,1,3};
 Arrays.sort(a); // [1,3,4]
 ```
 
-> [!TIPS]
+> [!TIP]
 > Strings sorts in alphabetical order
 > Numbers sort before letters and uppercase letters sort before lowercase letters: (numbers < uppercase < lowercase)
 > `null` is smaller of any other value
