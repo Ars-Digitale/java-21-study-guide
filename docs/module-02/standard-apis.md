@@ -2,37 +2,37 @@
 
 ### Table of Contents
 
-- [1. Standard APIs](#1-standard-apis)
-  - [1.1 Strings & Text Blocks](#11-strings--text-blocks)
-    - [1.1.1 Initializing Strings](#111-initializing-strings)
-    - [1.1.2 Special Characters and Escape Sequences](#112-special-characters-and-escape-sequences)
-    - [1.1.3 Text Blocks](#113-text-blocks)
-    - [1.1.4 Essential vs Incidental Whitespace](#114-essential-vs-incidental-whitespace)
-    - [1.1.5 Line Count, Blank Lines, and Line Breaks](#115-line-count-blank-lines-and-line-breaks)
-    - [1.1.6 Text Blocks & Escape Characters](#116-text-blocks--escape-characters)
-    - [1.1.7 Common Text Block Errors](#117-common-text-block-errors)
-    - [1.1.8 Rules for String Concatenation](#118-rules-for-string-concatenation)
-    - [1.1.9 Core String Methods](#119-core-string-methods)
-      - [1.1.9.1 String Indexing](#1191-string-indexing)
-      - [1.1.9.2 `length()` Method](#1192-length-method)
-      - [1.1.9.3 Boundary Rules: Start vs End Index](#1193-boundary-rules-start-vs-end-index)
-      - [1.1.9.4 Classification of Methods](#1194-classification-of-methods)
-      - [1.1.9.5 Methods Using Only Start Index (Inclusive)](#1195-methods-using-only-start-index-inclusive)
-      - [1.1.9.6 Methods with Start Inclusive / End Exclusive](#1196-methods-with-start-inclusive--end-exclusive)
-      - [1.1.9.7 Methods Operating on Entire String](#1197-methods-operating-on-entire-string)
-      - [1.1.9.8 Character Access](#1198-character-access)
-      - [1.1.9.9 Searching Methods](#1199-searching-methods)
-      - [1.1.9.10 Replacement Methods](#11910-replacement-methods)
-      - [1.1.9.11 Splitting and Joining](#11911-splitting-and-joining)
-      - [1.1.9.12 Methods Returning Arrays](#11912-methods-returning-arrays)
-      - [1.1.9.13 Indentation Methods](#11913-indentation-methods)
-      - [1.1.9.14 Additional Examples](#11914-additional-examples)
+- [Standard APIs]()
+  - [1 Strings & Text Blocks](#1-strings--text-blocks)
+    - [1.1 Initializing Strings](#11-initializing-strings)
+    - [1.2 Special Characters and Escape Sequences](#12-special-characters-and-escape-sequences)
+    - [1.3 Text Blocks](#13-text-blocks)
+    - [1.4 Essential vs Incidental Whitespace](#14-essential-vs-incidental-whitespace)
+    - [1.5 Line Count, Blank Lines, and Line Breaks](#15-line-count-blank-lines-and-line-breaks)
+    - [1.6 Text Blocks & Escape Characters](#16-text-blocks--escape-characters)
+    - [1.7 Common Text Block Errors](#17-common-text-block-errors)
+    - [1.8 Rules for String Concatenation](#18-rules-for-string-concatenation)
+    - [1.9 Core String Methods](#19-core-string-methods)
+      - [1.9.1 String Indexing](#191-string-indexing)
+      - [1.9.2 `length()` Method](#192-length-method)
+      - [1.9.3 Boundary Rules: Start vs End Index](#193-boundary-rules-start-vs-end-index)
+      - [1.9.4 Classification of Methods](#194-classification-of-methods)
+      - [1.9.5 Methods Using Only Start Index (Inclusive)](#195-methods-using-only-start-index-inclusive)
+      - [1.9.6 Methods with Start Inclusive / End Exclusive](#196-methods-with-start-inclusive--end-exclusive)
+      - [1.9.7 Methods Operating on Entire String](#197-methods-operating-on-entire-string)
+      - [1.9.8 Character Access](#198-character-access)
+      - [1.9.9 Searching Methods](#199-searching-methods)
+      - [1.9.10 Replacement Methods](#1910-replacement-methods)
+      - [1.9.11 Splitting and Joining](#1911-splitting-and-joining)
+      - [1.9.12 Methods Returning Arrays](#1912-methods-returning-arrays)
+      - [1.9.13 Indentation Methods](#1913-indentation-methods)
+      - [1.9.14 Additional Examples](#1914-additional-examples)
 
 ---
 
-## 1.1 Strings & Text Blocks
+## 1 Strings & Text Blocks
  
-### 1.1.1 Initializing Strings
+### 1.1 Initializing Strings
 
 In Java, a **String** is an object of the `java.lang.String` class, used to represent a sequence of characters.  
 Strings are **immutable**, meaning that once created, their content cannot be changed. Any operation that seems to modify a string actually creates a new one.
@@ -55,7 +55,7 @@ In order to face this problem Java will reuse all the Strings which are declared
 
 Please Check [1.5.3 String Pool and Equality](../module-01/instantiating-types.md#153-string-pool-and-equality)
 
-### 1.1.2 Special Characters and Escape Sequences
+### 1.2 Special Characters and Escape Sequences
 
 Strings can contain escape characters, which allow you to include special symbols or control characters (characters with a special meaning in Java).
 An escape sequence starts with a backslash \.
@@ -128,7 +128,7 @@ An escape sequence starts with a backslash \.
 </table>
 
 
-### 1.1.3 Text Blocks (since Java 15)
+### 1.3 Text Blocks (since Java 15)
 
 A text block is a multi-line string literal introduced to simplify writing large strings (such as HTML, JSON, or code) without the need to escape.
 A text block starts and ends with three double quotes (""").
@@ -149,7 +149,7 @@ String html = """
 > - Double quotes inside the block don’t need escaping.
 > - The compiler interprets the content between the opening and closing triple quotes as the string’s value.
 
-### 1.1.4 Formatting: Essential vs Incidental Whitespace
+### 1.4 Formatting: Essential vs Incidental Whitespace
 
 - **Essential whitespace**: the spaces and newlines that are part of the intended string content.
 - **Incidental whitespace** is just indentation in your source.
@@ -196,7 +196,7 @@ String textNoTrail_2 = """
         Line 3""";
 ```
 
-### 1.1.5 Line Count, Blank Lines, and Line Breaks
+### 1.5 Line Count, Blank Lines, and Line Breaks
 
 - Every visible line break inside the block becomes \n.
 - Blank lines inside the block are preserved:
@@ -223,7 +223,7 @@ output:
 7:
 ```
 
-### 1.1.6 Text Blocks & Escape Characters
+### 1.6 Text Blocks & Escape Characters
 
 Escapes still work inside text blocks when needed (e.g., backslashes, explicit escapes):
 
@@ -245,7 +245,7 @@ String card = """
     """.formatted("Alice", 30);
 ```
 
-### 1.1.7 Common Errors (with fixes)
+### 1.7 Common Errors (with fixes)
 
 ```java
 // ❌ Mismatched delimiters / missing closing triple quote
@@ -284,7 +284,7 @@ String correct = """
     """;
 ```
 
-### 1.1.8 Rules for String Concatenation
+### 1.8 Rules for String Concatenation
 
 As introduced in the chapter on  
 [Java Operators](../module-01/java-operators.md), the symbol `+` normally represents **arithmetic addition** when used with numeric operands.  
@@ -362,14 +362,14 @@ System.out.println("AB" + null);
 // ABnull
 ```
 
-### 1.1.9 Core String methods
+### 1.9 Core String methods
 
 #### Strings — Indexing, Length, and Core Methods
  
 Let's understand indexing rules and how Java handles substring boundaries.
 
 
-#### 1.1.9.1 String Indexing
+#### 1.9.1 String Indexing
 
 Strings in Java use **zero-based indexing**, meaning:
 
@@ -388,7 +388,7 @@ char c = s.charAt(2); // 'v'
 ```
 
 
-#### 1.1.9.2 `length()` Method
+#### 1.9.2 `length()` Method
 
 `length()` returns the **number of characters** in the string.
 
@@ -400,7 +400,7 @@ System.out.println(s.length());  // 5
 - The last valid index is `length() - 1`.
 
 
-#### 1.1.9.3 Boundary Rules: Start Index vs End Index
+#### 1.9.3 Boundary Rules: Start Index vs End Index
 
 Many String methods use **two indices**:
 
@@ -426,12 +426,12 @@ s.substring(1, 4); // "bcd" (indexes 1,2,3)
 This rule applies to most substring-based methods.
 
 
-#### 1.1.9.4 String Methods 
+#### 1.9.4 String Methods 
 
 A structured and complete classification.
 
 
-#### 1.1.9.5 Methods Using Only Start Index (Inclusive)
+#### 1.9.5 Methods Using Only Start Index (Inclusive)
 
 | Method | Description | Parameters | Index Rule | Example |
 |--------|-------------|------------|------------|---------|
@@ -442,7 +442,7 @@ A structured and complete classification.
 | `lastIndexOf(String, fromIndex)` | Search backward from index | fromIndex | fromIndex = inclusive | `"banana".lastIndexOf("a", 3)` → 3 |
 
 
-#### 1.1.9.6 Methods with Start Inclusive / End Exclusive
+#### 1.9.6 Methods with Start Inclusive / End Exclusive
 
 These methods follow the same slicing behavior:
 
@@ -456,7 +456,7 @@ These methods follow the same slicing behavior:
 | `copyValueOf(char[] data, int offset, int count)` | Creates a new string | offset inclusive; offset+count exclusive | same rule as substring |
 
 
-#### 1.1.9.7 Methods That Operate on Entire String
+#### 1.9.7 Methods That Operate on Entire String
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -470,7 +470,7 @@ These methods follow the same slicing behavior:
 | `isEmpty()` | Length == 0 | `"".isEmpty()` → `true` |
 
 
-#### 1.1.9.8 Character Access
+#### 1.9.8 Character Access
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -478,7 +478,7 @@ These methods follow the same slicing behavior:
 | `codePointAt(int index)` | Unicode code point | useful for emojis |
 
 
-#### 1.1.9.9 Searching
+#### 1.9.9 Searching
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -488,7 +488,7 @@ These methods follow the same slicing behavior:
 | `endsWith(String)` | Suffix | `"abcdef".endsWith("def")` → `true` |
 
 
-#### 1.1.9.10 Replacement Methods
+#### 1.9.10 Replacement Methods
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -498,7 +498,7 @@ These methods follow the same slicing behavior:
 | `replaceFirst` | First regex match only | `"a1a2".replaceFirst("\\d","")` → `"aa2"` |
 
 
-#### 1.1.9.11 Splitting and Joining
+#### 1.9.11 Splitting and Joining
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -506,7 +506,7 @@ These methods follow the same slicing behavior:
 | `split(String regex, limit)` | Controlled split | limit < 0 keeps all |
 
 
-#### 1.1.9.12 Methods Returning Arrays
+#### 1.9.12 Methods Returning Arrays
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -514,7 +514,7 @@ These methods follow the same slicing behavior:
 | `getBytes()` | byte[] from encoding | `"á".getBytes()` |
 
 
-#### 1.1.9.13 Indentation
+#### 1.9.13 Indentation
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -575,7 +575,7 @@ length: 5
 ```
 
 
-#### 1.1.9.14 Additional Examples
+#### 1.9.14 Additional Examples
 
 Example 1 — Extract `[start, end)`
 ```java
