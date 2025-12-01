@@ -83,7 +83,7 @@
 
 ---
 
-## 1 Strings & Text Blocks
+## 1. Strings & Text Blocks
  
 ### 1.1 Initializing Strings
 
@@ -1257,6 +1257,369 @@ System.out.println("x is larger");
 ```
 
 ---
+
+## 4. Dates and Time
+
+Java provides a modern, consistent, immutable date/time API in the package **`java.time.*`**.  
+This API replaces the old `java.util.Date` and `java.util.Calendar` classes and is widely tested in certification exams.
+
+Depending on the level of detail required, Java offers four main classes:
+
+- **`LocalDate`** → represents a *date* only (year-month-day)
+- **`LocalTime`** → represents a *time* only (hour-minute-second-nanosecond)
+- **`LocalDateTime`** → combines *date + time*, but **no time zone**
+- **`ZonedDateTime`** → full *date + time + offset + time zone*
+
+> [!NOTE]
+> - A **time zone** defines rules such as daylight saving changes (e.g., `Europe/Paris`).  
+> - A **zone offset** is a fixed shift from UTC/GMT (e.g., `+01:00`, `-07:00`).  
+> - To compare two instants from different time zones, convert them to UTC (GMT) by applying the offset.
+
+## Getting the Current Date/Time
+
+You can retrieve the current system values using the `static now()` method:
+
+```java
+System.out.println(LocalDate.now());
+System.out.println(LocalTime.now());
+System.out.println(LocalDateTime.now());
+System.out.println(ZonedDateTime.now());
+```
+
+Example output (your system may differ):
+
+```bash
+2025-12-01
+19:11:53.213856300
+2025-12-01T19:11:53.213856300
+2025-12-01T19:11:53.214856900+01:00[Europe/Paris]
+```
+
+Example: Converting ZonedDateTime to GMT (UTC)
+
+```java
+2024-07-01T12:00+09:00[Asia/Tokyo]        ---> 12:00 minus 9 hours ---> 03:00 UTC
+2024-07-01T20:00-07:00[America/Los_Angeles] ---> 20:00 plus 7 hours ---> 03:00 UTC
+```
+
+Both represent **the same instant in time**, simply expressed in different time zones.
+
+
+### 4.1 Creating Specific Dates and Times
+
+You can build precise date/time objects using the `of()` factory methods.  
+All classes include multiple overloaded versions of `of()` (not listed in examples, but included below).
+
+### **LocalDate — overloaded `of()` forms**
+- `of(int year, int month, int dayOfMonth)`
+- `of(int year, Month month, int dayOfMonth)`
+
+### **LocalTime — overloaded `of()` forms**
+- `of(int hour, int minute)`
+- `of(int hour, int minute, int second)`
+- `of(int hour, int minute, int second, int nanoOfSecond)`
+
+### **LocalDateTime — overloaded `of()` forms**
+- `of(int year, int month, int day, int hour, int minute)`
+- `of(int year, int month, int day, int hour, int minute, int second)`
+- `of(int year, int month, int day, int hour, int minute, int second, int nano)`
+- `of(LocalDate date, LocalTime time)`
+
+### **ZonedDateTime — overloaded `of()` forms**
+- `of(LocalDate date, LocalTime time, ZoneId zone)`
+- `of(int y, int m, int d, int h, int min, int s, int nano, ZoneId zone)`
+
+Examples
+
+```java
+// Creating specific dates
+
+var localDate1 = LocalDate.of(2025, 7, 31);
+var localDate2 = LocalDate.of(2025, Month.JULY, 31);
+
+// Creating specific times
+
+var localTime1 = LocalTime.of(13, 21);
+System.out.println(localTime1);                     // 13:21
+System.out.println(LocalTime.of(13, 21, 52));       // 13:21:52
+System.out.println(LocalTime.of(13, 21, 52, 200));  // 13:21:52.000000200
+
+// Creating LocalDateTime
+
+var localDateTime1 = LocalDateTime.of(2025, 7, 31, 13, 55, 22);
+var localDateTime2 = LocalDateTime.of(localDate1, localTime1);
+
+// Creating a ZonedDateTime
+
+var zoned = ZonedDateTime.of(2025, 7, 31, 13, 55, 22, 0, ZoneId.of("Europe/Paris"));
+```
+
+### 4.2 Date and Time Arithmetic: `plus` and `minus` Methods
+
+All classes in the `java.time` package (`LocalDate`, `LocalTime`, `LocalDateTime`, `ZonedDateTime`, etc.) are **immutable**.  
+This means that methods like `plusXxx()` and `minusXxx()` **never modify** the original object — instead, they return a **new instance** with the adjusted value.
+
+These methods are heavily used and frequently tested in certification exams.
+
+
+### 4.3 Common Patterns
+
+Most date/time classes support three kinds of arithmetic methods:
+
+1. **Type-specific shortcuts**  
+   - `plusDays(long daysToAdd)`  
+   - `plusHours(long hoursToAdd)`  
+   - etc.
+
+2. **Generic amount-based methods**  
+   - `plus(TemporalAmount amount)` → e.g. `Period`, `Duration`  
+   - `minus(TemporalAmount amount)`
+
+3. **Generic unit-based methods**  
+   - `plus(long amountToAdd, TemporalUnit unit)`  
+   - `minus(long amountToSubtract, TemporalUnit unit)`  
+
+These allow flexible and readable date/time arithmetic.
+
+
+### 4.4 `LocalDate` Arithmetic
+
+`LocalDate` represents a **date only** (no time, no zone).
+
+### Main `plus` / `minus` methods (overloads)
+
+| Method | Description |
+|--------|-------------|
+| `plusDays(long days)` | Add days |
+| `plusWeeks(long weeks)` | Add weeks |
+| `plusMonths(long months)` | Add months |
+| `plusYears(long years)` | Add years |
+| `minusDays(long days)` | Subtract days |
+| `minusWeeks(long weeks)` | Subtract weeks |
+| `minusMonths(long months)` | Subtract months |
+| `minusYears(long years)` | Subtract years |
+| `plus(TemporalAmount amount)` | Add a `Period` |
+| `minus(TemporalAmount amount)` | Subtract a `Period` |
+| `plus(long amountToAdd, TemporalUnit unit)` | Add using `ChronoUnit` (e.g., DAYS, MONTHS) |
+| `minus(long amountToSubtract, TemporalUnit unit)` | Subtract using `ChronoUnit` |
+
+Examples:
+
+```java
+LocalDate date = LocalDate.of(2025, 3, 10);
+
+LocalDate d1 = date.plusDays(5);            // 2025-03-15
+LocalDate d2 = date.minusWeeks(2);          // 2025-02-24
+LocalDate d3 = date.plusMonths(1);          // 2025-04-10
+LocalDate d4 = date.plusYears(2);           // 2027-03-10
+
+// Using ChronoUnit
+LocalDate d5 = date.plus(10, ChronoUnit.DAYS);   // 2025-03-20
+
+// Using Period
+Period p = Period.of(1, 2, 3);  // 1 year, 2 months, 3 days
+LocalDate d6 = date.plus(p);
+```
+
+
+### 4.5 `LocalTime` Arithmetic
+
+`LocalTime` represents **time only** (no date, no zone).
+
+### Main `plus` / `minus` methods (overloads)
+
+| Method | Description |
+|--------|-------------|
+| `plusNanos(long nanos)` | Add nanoseconds |
+| `plusSeconds(long seconds)` | Add seconds |
+| `plusMinutes(long minutes)` | Add minutes |
+| `plusHours(long hours)` | Add hours |
+| `minusNanos(long nanos)` | Subtract nanoseconds |
+| `minusSeconds(long seconds)` | Subtract seconds |
+| `minusMinutes(long minutes)` | Subtract minutes |
+| `minusHours(long hours)` | Subtract hours |
+| `plus(TemporalAmount amount)` | Add a `Duration` |
+| `minus(TemporalAmount amount)` | Subtract a `Duration` |
+| `plus(long amountToAdd, TemporalUnit unit)` | Add using `ChronoUnit` |
+| `minus(long amountToSubtract, TemporalUnit unit)` | Subtract using `ChronoUnit` |
+
+Examples
+
+```java
+LocalTime time = LocalTime.of(13, 30);       // 13:30
+
+LocalTime t1 = time.plusHours(2);            // 15:30
+LocalTime t2 = time.minusMinutes(45);        // 12:45
+LocalTime t3 = time.plusSeconds(90);         // 13:31:30
+
+// Using ChronoUnit
+LocalTime t4 = time.plus(3, ChronoUnit.HOURS);    // 16:30
+
+// Using Duration
+Duration d = Duration.ofMinutes(90);
+LocalTime t5 = time.plus(d);                // 15:00
+```
+
+> [!NOTE]  
+> When time arithmetic crosses midnight, the date is **ignored** with `LocalTime`.  
+> For example, 23:30 + 2 hours = 01:30 (with no date involved).
+
+
+### 4.6 `LocalDateTime` Arithmetic
+
+`LocalDateTime` combines **date + time**, but still **no time zone**.
+
+It supports both the date-related and time-related shortcut methods.
+
+### Main `plus` / `minus` methods (overloads)
+
+| Method | Description |
+|--------|-------------|
+| `plusYears(long years)` / `minusYears(long years)` | Adjust years |
+| `plusMonths(long months)` / `minusMonths(long months)` | Adjust months |
+| `plusWeeks(long weeks)` / `minusWeeks(long weeks)` | Adjust weeks |
+| `plusDays(long days)` / `minusDays(long days)` | Adjust days |
+| `plusHours(long hours)` / `minusHours(long hours)` | Adjust hours |
+| `plusMinutes(long minutes)` / `minusMinutes(long minutes)` | Adjust minutes |
+| `plusSeconds(long seconds)` / `minusSeconds(long seconds)` | Adjust seconds |
+| `plusNanos(long nanos)` / `minusNanos(long nanos)` | Adjust nanoseconds |
+| `plus(TemporalAmount amount)` / `minus(TemporalAmount amount)` | Add/subtract `Period` or `Duration` |
+| `plus(long amountToAdd, TemporalUnit unit)` / `minus(long amountToSubtract, TemporalUnit unit)` | Using `ChronoUnit` |
+
+Examples
+
+```java
+LocalDateTime ldt = LocalDateTime.of(2025, 3, 10, 13, 30); // 2025-03-10T13:30
+
+LocalDateTime l1 = ldt.plusDays(1);          // 2025-03-11T13:30
+LocalDateTime l2 = ldt.minusHours(3);        // 2025-03-10T10:30
+LocalDateTime l3 = ldt.plusMinutes(90);      // 2025-03-10T15:00
+
+// Using ChronoUnit
+LocalDateTime l4 = ldt.plus(2, ChronoUnit.WEEKS); // 2025-03-24T13:30
+
+// Using Period and Duration
+Period p = Period.ofDays(10);
+Duration d = Duration.ofHours(5);
+
+LocalDateTime l5 = ldt.plus(p);    // 2025-03-20T13:30
+LocalDateTime l6 = ldt.plus(d);    // 2025-03-10T18:30
+```
+
+---
+
+### 4.7 `ZonedDateTime` Arithmetic
+
+`ZonedDateTime` represents **date + time + time zone + offset**.  
+
+It supports the same plus/minus methods as `LocalDateTime`, but with extra attention to **time zones** and **Daylight Saving Time (DST)**.
+
+### Main `plus` / `minus` methods (overloads)
+
+| Method | Description |
+|--------|-------------|
+| `plusYears(long years)` / `minusYears(long years)` | Adjust years |
+| `plusMonths(long months)` / `minusMonths(long months)` | Adjust months |
+| `plusWeeks(long weeks)` / `minusWeeks(long weeks)` | Adjust weeks |
+| `plusDays(long days)` / `minusDays(long days)` | Adjust days |
+| `plusHours(long hours)` / `minusHours(long hours)` | Adjust hours |
+| `plusMinutes(long minutes)` / `minusMinutes(long minutes)` | Adjust minutes |
+| `plusSeconds(long seconds)` / `minusSeconds(long seconds)` | Adjust seconds |
+| `plusNanos(long nanos)` / `minusNanos(long nanos)` | Adjust nanoseconds |
+| `plus(TemporalAmount amount)` / `minus(TemporalAmount amount)` | `Period` / `Duration` |
+| `plus(long amountToAdd, TemporalUnit unit)` / `minus(long amountToSubtract, TemporalUnit unit)` | Using `ChronoUnit` |
+
+Examples (with time zones and DST)
+
+```java
+ZonedDateTime zdt = ZonedDateTime.of(
+    2025, 3, 30, 1, 30, 0, 0,
+    ZoneId.of("Europe/Paris")
+);
+
+// Add 2 hours across a possible DST change
+ZonedDateTime z1 = zdt.plusHours(2);
+System.out.println(zdt);
+System.out.println(z1);
+```
+
+Depending on Daylight Saving rules for that date:
+
+- The local time might jump from 02:00 to 03:00 or similar.
+- `ZonedDateTime` adjusts the **offset and local time** according to the zone rules, but still represents the correct instant on the timeline.
+
+> [!IMPORTANT]  
+> For `ZonedDateTime`, arithmetic is defined in terms of the **local timeline** and **time zone rules**, which can cause hour shifts during DST transitions. 
+
+
+
+### 4.8 Summary Table
+
+| Class           | Shortcut `plus`/`minus` methods                                | Generic methods                                |
+|----------------|------------------------------------------------------------------|-----------------------------------------------|
+| `LocalDate`    | `plusDays`, `plusWeeks`, `plusMonths`, `plusYears` (and `minus`) | `plus/minus(TemporalAmount)`, `plus/minus(long, TemporalUnit)` |
+| `LocalTime`    | `plusNanos`, `plusSeconds`, `plusMinutes`, `plusHours` (and `minus`) | `plus/minus(TemporalAmount)`, `plus/minus(long, TemporalUnit)` |
+| `LocalDateTime`| All `LocalDate` + `LocalTime` shortcuts                         | `plus/minus(TemporalAmount)`, `plus/minus(long, TemporalUnit)` |
+| `ZonedDateTime`| Same as `LocalDateTime`, but zone-aware                         | `plus/minus(TemporalAmount)`, `plus/minus(long, TemporalUnit)` |
+
+
+### 4.9 `withXxx(...)` Methods
+
+The `with...` methods return a **copy** of the object with one field changed.  
+They never mutate the original instance.
+
+| Class           | Common `with...` methods (not exhaustive)                                 | Description                                      |
+|----------------|----------------------------------------------------------------------------|--------------------------------------------------|
+| `LocalDate`    | `withYear(int year)`                                                      | Same date, but with a different year             |
+|                | `withMonth(int month)`                                                    | Same date, different month (1–12)                |
+|                | `withDayOfMonth(int dayOfMonth)`                                          | Same date, different day of month                |
+|                | `with(TemporalField field, long newValue)`                                | Generic field-based adjustment                   |
+|                | `with(TemporalAdjuster adjuster)`                                         | Uses an adjuster (e.g. `firstDayOfMonth()`)      |
+| `LocalTime`    | `withHour(int hour)`                                                      | Same time, different hour                        |
+|                | `withMinute(int minute)`                                                  | Same time, different minute                      |
+|                | `withSecond(int second)`                                                  | Same time, different second                      |
+|                | `withNano(int nanoOfSecond)`                                              | Same time, different nanosecond                  |
+|                | `with(TemporalField field, long newValue)`                                | Generic field-based adjustment                   |
+|                | `with(TemporalAdjuster adjuster)`                                         | Adjust using a temporal adjuster                 |
+| `LocalDateTime`| `withYear(int year)`, `withMonth(int month)`, `withDayOfMonth(int day)`   | Change date part only                            |
+|                | `withHour(int hour)`, `withMinute(int minute)`, `withSecond(int second)`  | Change time part only                            |
+|                | `withNano(int nanoOfSecond)`                                              | Change nanosecond                                |
+|                | `with(TemporalField field, long newValue)`                                | Generic field-based adjustment                   |
+|                | `with(TemporalAdjuster adjuster)`                                         | Adjust using a temporal adjuster                 |
+| `ZonedDateTime`| All the `withXxx(...)` of `LocalDateTime`                                 | Change local date/time components                |
+|                | `withZoneSameInstant(ZoneId zone)`                                        | Same instant, different zone (changes local time)|
+|                | `withZoneSameLocal(ZoneId zone)`                                          | Same local date/time, different zone (changes instant) |
+
+
+
+### 4.10 Conversion & `at...` Methods (Linking Date, Time, and Zone)
+
+These methods are used to **combine** or **convert** between `LocalDate`, `LocalTime`, `LocalDateTime`, and `ZonedDateTime`.
+
+| From              | Method                                     | Result           | Description                                        |
+|-------------------|--------------------------------------------|------------------|----------------------------------------------------|
+| `LocalDate`       | `atTime(LocalTime time)`                   | `LocalDateTime`  | Combines this date with a given time               |
+|                   | `atTime(int hour, int minute)`             | `LocalDateTime`  | Convenience overloads with numeric time components |
+|                   | `atTime(int hour, int minute, int second)` | `LocalDateTime`  |                                                    |
+|                   | `atTime(int hour, int minute, int second, int nano)` | `LocalDateTime` |                                                    |
+|                   | `atStartOfDay()`                           | `LocalDateTime`  | This date at time `00:00`                          |
+|                   | `atStartOfDay(ZoneId zone)`                | `ZonedDateTime`  | This date at start of day in a specific zone       |
+| `LocalTime`       | `atDate(LocalDate date)`                   | `LocalDateTime`  | Combines this time with a given date               |
+| `LocalDateTime`   | `atZone(ZoneId zone)`                      | `ZonedDateTime`  | Adds a time zone to a local date-time              |
+|                   | `toLocalDate()`                            | `LocalDate`      | Extracts the date component                        |
+|                   | `toLocalTime()`                            | `LocalTime`      | Extracts the time component                        |
+| `ZonedDateTime`   | `toLocalDate()`                            | `LocalDate`      | Drops zone/offset, keeps local date                |
+|                   | `toLocalTime()`                            | `LocalTime`      | Drops zone/offset, keeps local time                |
+|                   | `toLocalDateTime()`                        | `LocalDateTime`  | Drops zone/offset, keeps local date-time           |
+
+
+
+---
+
+
+
+
+
 
 
 
