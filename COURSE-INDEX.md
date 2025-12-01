@@ -14,4 +14,8 @@
 - [Module 2: Control Flow]
 	- [Control Flow](docs/module-02/control-flow.md)
     - [Loops](docs/module-02/loops.md)
-	- [Standard APIs](docs/module-02/standard-apis.md)
+- [Module 3: Standard APIs]
+	- [Strings in Java](docs/module-03/strings.md)
+	- [Arrays in Java](docs/module-03/arrays.md)
+	- [Math in Java](docs/module-03/math.md)
+	- [Dates and Time](docs/module-03/date-time.md)
