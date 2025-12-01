@@ -5,8 +5,8 @@
 - [Module 0: Prerequisites]
 	- [Prerequisite material](docs/module-00/prerequisites.md)
 - [Module 1: Basics]
-	- [Basic Building Blocks](docs/module-01/basic-building-blocks.md)
-		- [Syntax Bulding blocks](docs/module-01/syntax-building-blocks.md)
+	- [Syntax Bulding blocks](docs/module-01/syntax-building-blocks.md)
+	- [Basic Language Building Blocks](docs/module-01/basic-building-blocks.md)
 		- [Java Naming Rules](docs/module-01/naming-rules.md)
 		- [Java Data Types and Casting](docs/module-01/data-types.md)
 		- [Java Operators](docs/module-01/java-operators.md)
