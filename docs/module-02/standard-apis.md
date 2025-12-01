@@ -355,7 +355,7 @@ Since the operator `+` may appear in expressions where both **numbers** and **st
 3. **Evaluation is strictly left-to-right**, because `+` is **left-associative**.  
    This means that once a `String` appears on the left side of the expression, all subsequent `+` operations become concatenations.
 
-> [!TIPS]
+> [!TIP]
 > Because evaluation is left-to-right, the position of the first String operand determines the rest of the expression.
 
 Examples
