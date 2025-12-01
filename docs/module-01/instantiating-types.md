@@ -26,6 +26,7 @@
       - [1.5.2.1 `==` (Identity Comparison)](#1521--identity-comparison)
       - [1.5.2.2 `.equals()` (Logical Comparison)](#1522-equals-logical-comparison)
     - [1.5.3 String Pool and Equality](#153-string-pool-and-equality)
+      - [1.5.3.1 The intern method)](#1531-the-intern-method)
     - [1.5.4 Equality with Wrapper Types](#154-equality-with-wrapper-types)
     - [1.5.5 Equality and `null`](#155-equality-and-null)
     - [1.5.6 Summary Table](#156-summary-table)
@@ -565,7 +566,7 @@ System.out.println(s1.equals(s2)); // true → same content
   to provide meaningful value comparison.
 
 
-#### 1.5.3 Special Case: The String Pool
+#### 1.5.3 String Pool and Equality
 
 String literals are stored in the **String pool**, so identical literals  
 refer to the **same object**.
@@ -586,6 +587,22 @@ System.out.println(x == y);       // false → x is not pooled
 System.out.println(x.equals(y));  // true
 ```
 
+Common Pitfalls
+
+```java
+String x = "Java string literal";
+String y = " Java string literal".trim();
+
+System.out.println(x == y);       // false → x and y are not the same at compile time
+
+String a = "Java string literal";
+String b = "Java ";
+b += "string literal";
+
+System.out.println(a == b);  // false
+```
+
+##### 1.5.3.1 The intern method
 
 #### 1.5.4 Equality with Wrapper Types
 
@@ -631,10 +648,7 @@ System.out.println(s == null);   // true
 | `==`      | compares **value** | compares **reference** | identity (affected by String pool) |
 | `.equals()` | N/A | compares **content** if overridden | **content** comparison |
 
----
 
-If you want, I can now produce the matching chapter on **hashCode()**,  
-or integrate this directly into the reorganized structure of your manual.
 
 
 
