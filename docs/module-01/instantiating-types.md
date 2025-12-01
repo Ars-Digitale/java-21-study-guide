@@ -21,7 +21,7 @@
     - [1.4.4 Helper Methods](#144-helper-methods)
     - [1.4.5 Null Values](#145-null-values)
   - [1.5 Equality in Java](#15-equality-in-java)
-    - [1.5.1 Equality with Primitives](#151-equality-with-primitives)
+    - [1.5.1 Equality with Primitives](#151-equality-with-primitive-types)
     - [1.5.2 Equality with Reference Types](#152-equality-with-reference-types)
       - [1.5.2.1 `==` (Identity Comparison)](#1521-identity-comparison)
       - [1.5.2.2 `.equals()` (Logical Comparison)](#1522-equals-logical-comparison)
