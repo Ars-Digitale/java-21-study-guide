@@ -1188,13 +1188,19 @@ BigInteger represents integer values of any size, limited only by memory.
 
 Common ways:
 
-- From a long:
--- static BigInteger valueOf(long val)
-- From a String:
--- BigInteger(String val) – decimal by default
--- BigInteger(String val, int radix) – with base (2, 8, 16, etc.)
-- Random big value:
--- BigInteger(int numBits, Random rnd)
+From a long:
+
+    static BigInteger valueOf(long val)
+
+From a String:
+
+    BigInteger(String val)        // decimal by default
+    BigInteger(String val, int radix)
+
+Random big value:
+
+    BigInteger(int numBits, Random rnd)
+
 
 Examples:
 ```java
