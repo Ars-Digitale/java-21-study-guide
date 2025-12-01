@@ -538,7 +538,7 @@ System.out.println(c1 == c2);   // true
 
 With objects (reference types), the meaning of `==` changes.
 
-##### 1.5.2.1 `==` → reference (identity) comparison  
+##### 1.5.2.1 `==`(Identity Comparison)  
 `==` checks whether **two references point to the same object in memory**.
 
 ```java
@@ -552,7 +552,7 @@ Even if contents are identical, `==` is false unless both variables refer to
 **the exact same object**.
 
 
-##### 1.5.2.2 `.equals()` → logical (content) comparison  
+##### 1.5.2.2 `.equals()` (Logical Comparison)  
 Many classes override `.equals()` to compare **values**, not memory addresses.
 
 ```java
