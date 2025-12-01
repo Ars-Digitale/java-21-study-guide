@@ -881,9 +881,9 @@ Arrays.sort(a); // [1,3,4]
 ```
 
 > [!TIP]
-> Strings sorts in alphabetical order
-> Numbers sort before letters and uppercase letters sort before lowercase letters: (numbers < uppercase < lowercase)
-> `null` is smaller of any other value
+> - Strings are sorted in alphabetical order
+> - Numbers sort before letters and uppercase letters sort before lowercase letters: (numbers < uppercase < lowercase)
+> - `null` is smaller of any other value
 
 ```java
 String[] arr = {"AB", "ac", "Ba", "bA", "10", "99"};
