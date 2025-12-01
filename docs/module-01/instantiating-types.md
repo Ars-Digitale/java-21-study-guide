@@ -328,9 +328,8 @@ Example ex = new Example();
 > - They are executed in the order of declaration in the class.
 > - They can be combined with constructors to avoid code duplication.
 
----
 
-### 1.3 Default initializations for variables
+### 1.3 Default Variable Initialization
 
 #### 1.3.1 Instance & Class variables
 
@@ -396,9 +395,6 @@ public int localMethod {
 	var x = null;           // ERROR: var cannot be initialized with null but it can be reassigned to null provided that the underlying type is a reference type.
 }
 ```
-
-
----
 
 ### 1.4 Wrapper Types
 
