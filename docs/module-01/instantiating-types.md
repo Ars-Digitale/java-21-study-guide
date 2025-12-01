@@ -26,7 +26,7 @@
       - [1.5.2.1 `==` (Identity Comparison)](#1521--identity-comparison)
       - [1.5.2.2 `.equals()` (Logical Comparison)](#1522-equals-logical-comparison)
     - [1.5.3 String Pool and Equality](#153-string-pool-and-equality)
-      - [1.5.3.1 The intern method)](#1531-the-intern-method)
+      - [1.5.3.1 The intern method](#1531-the-intern-method)
     - [1.5.4 Equality with Wrapper Types](#154-equality-with-wrapper-types)
     - [1.5.5 Equality and `null`](#155-equality-and-null)
     - [1.5.6 Summary Table](#156-summary-table)
@@ -603,6 +603,16 @@ System.out.println(a == b);  // false
 ```
 
 ##### 1.5.3.1 The intern method
+
+You can also tell Java to use a String from the String Pool (in case it already exist) through the `intern()` method:
+
+```java
+String x = "Java";
+String y = new String("Java").intern();
+
+
+System.out.println(x == y);       // true
+```
 
 #### 1.5.4 Equality with Wrapper Types
 
