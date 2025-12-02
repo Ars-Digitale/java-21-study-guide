@@ -246,7 +246,7 @@ LocalTime t5 = time.plus(d);                // 15:00
 
 It supports both the date-related and time-related shortcut methods.
 
-** Main `plus` / `minus` methods (overloads)**
+**Main `plus` / `minus` methods (overloads)**
 
 | Method | Description |
 |--------|-------------|
@@ -287,7 +287,7 @@ LocalDateTime l6 = ldt.plus(d);    // 2025-03-10T18:30
 
 It supports the same plus/minus methods as `LocalDateTime`, but with extra attention to **time zones** and **Daylight Saving Time (DST)**.
 
-** Main `plus` / `minus` methods (overloads)**
+**Main `plus` / `minus` methods (overloads)**
 
 | Method | Description |
 |--------|-------------|
