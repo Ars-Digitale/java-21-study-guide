@@ -443,8 +443,8 @@ Double[] arr2 = {11, 22};     // WARNING: Does not compile!!
 ```
 
 > [!WARNING]
-> **AUTOBOXING** and **Implicit cast** are not allowed in the same statement: you can't do both at the same time. (see example above)
-> This rule apply also in method calls.
+> - **AUTOBOXING** and **Implicit cast** are not allowed in the same statement: you can't do both at the same time. (see example above)
+> - This rule apply also in method calls.
 
 #### 1.4.3 Parsing and Conversion
 
