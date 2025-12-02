@@ -36,7 +36,7 @@
 
 ## 1. Instantiating Types
  
-In Java, a **type** can be either a **primitive type** (such as `int`, `double`, `boolean`, etc.) or a **reference type** (classes, interfaces, arrays, enums, records, etc.). See: [Module 1: Java Data Types](data-types.md)
+In Java, a **type** can be either a **primitive type** (such as `int`, `double`, `boolean`, etc.) or a **reference type** (classes, interfaces, arrays, enums, records, etc.). See: [Java Data Types and Casting](data-types.md)
 
 The way instances are created depends on the category of the type:
 
@@ -665,8 +665,6 @@ System.out.println(s == null);   // true
 // s.equals("Hi");               // ❌ NullPointerException
 ```
 
----
-
 #### 1.5.6 Summary Table
 
 | Comparison | Primitives | Objects / Wrappers | Strings |
@@ -675,6 +673,6 @@ System.out.println(s == null);   // true
 | `.equals()` | N/A | compares **content** if overridden | **content** comparison |
 
 
-
+---
 
 
