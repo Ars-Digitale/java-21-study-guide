@@ -428,7 +428,23 @@ Since Java 5, the compiler automatically converts between primitives and their w
 ```java
 Integer i = 10;       // autoboxing: int → Integer
 int n = i;            // unboxing: Integer → int
+
+Integer int1 = Integer.valueOf(11);
+long long1 = int1;  // Unboxing --> implicit cast OK
+
+Long long2 = 11     // WARNING: Does not compile!!
+
+
+Character char1 = null;
+char char2 = char1;  // WARNING: NullPointerException
+
+Integer	 arr1 = {11.5, 13.6}  // WARNING: Does not compile!!
+Double[] arr2 = {11, 22};     // WARNING: Does not compile!!
 ```
+
+> [!WARNING]
+> **AUTOBOXING** and **Implicit cast** are not allowed in the same statement: you can't do both at the same time. (see example above)
+> This rule apply also in method calls.
 
 #### 1.4.3 Parsing and Conversion
 
