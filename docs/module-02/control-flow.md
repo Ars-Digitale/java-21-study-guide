@@ -1,4 +1,4 @@
-# Module 2: Control Flow
+# Control Flow
 
 **Control flow** in Java refers to the **order in which individual statements, instructions, or function calls are executed** during program runtime.  
 By default, statements run **sequentially** from top to bottom, but **control flow statements** allow the program to **make decisions**, **repeat actions**, or **branch execution paths** based on conditions.
