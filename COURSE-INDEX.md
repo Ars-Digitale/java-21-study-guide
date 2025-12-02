@@ -19,3 +19,5 @@
 	- [Arrays in Java](docs/module-03/arrays.md)
 	- [Math in Java](docs/module-03/math.md)
 	- [Dates and Time](docs/module-03/date-time.md)
+- [Module 4: Object-Oriented Fundamentals]
+	- [Object-Oriented Programming Concepts](docs/module-04/oo-concepts.md)
