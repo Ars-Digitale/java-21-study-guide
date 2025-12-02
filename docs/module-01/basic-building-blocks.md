@@ -3,7 +3,7 @@
 
 ### Table of Contents
 
--[Basic Language Java Building Blocks]
+- [Basic Language Java Building Blocks]
 	- [1. Class definition](#1-class-definition)
 	- [2. Comments](#2-comments)
 	- [3. Access modifiers](#3-access-modifiers)
