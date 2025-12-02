@@ -1,5 +1,51 @@
 # Object-Oriented Programming Concepts
 
+### Table of Contents
+
+- [Object-Oriented Programming Concepts]
+- [1. Methods](#1-methods)
+  - [1.1 Mandatory Components of a Method](#11-mandatory-components-of-a-method)
+    - [1.1.1 Access Modifiers](#111-access-modifiers)
+    - [1.1.2 Return Type](#112-return-type)
+    - [1.1.3 Method Name](#113-method-name)
+    - [1.1.4 Method Signature](#114-method-signature)
+    - [1.1.5 Method Body](#115-method-body)
+  - [1.2 Optional Modifiers](#12-optional-modifiers)
+  - [1.3 Declaring Methods](#13-declaring-methods)
+- [2. Java Is a “Pass-by-Value” Language](#2-java-is-a-pass-by-value-language)
+- [3. Overloading Methods](#3-overloading-methods)
+  - [3.1 Calling overloaded methods](#31-calling-overloaded-methods)
+    - [3.1.1 — Exact match wins](#311--exact-match-wins)
+    - [3.1.2 — If no exact match exists, Java picks the most specific compatible type](#312--if-no-exact-match-exists-java-picks-the-most-specific-compatible-type)
+    - [3.1.3 — Primitive widening beats boxing](#313--primitive-widening-beats-boxing)
+    - [3.1.4 — Boxing beats varargs](#314--boxing-beats-varargs)
+    - [3.1.5 — For references, Java picks the most specific reference type](#315--for-references-java-picks-the-most-specific-reference-type)
+    - [3.1.6 — When there is no unambiguous “most specific”, the call is a compile error](#316--when-there-is-no-unambiguous-most-specific-the-call-is-a-compile-error)
+    - [3.1.7 — Mixed primitive + wrapper overloads](#317--mixed-primitive--wrapper-overloads)
+    - [3.1.8 — When primitives mix with reference types](#318--when-primitives-mix-with-reference-types)
+    - [3.1.9 Summary Table (Overload Resolution)](#319-summary-table-overload-resolution)
+- [4. Local and Instance Variables](#4-local-and-instance-variables)
+  - [4.1 Instance Variables](#41-instance-variables)
+  - [4.2 Local Variables](#42-local-variables)
+    - [4.2.1 Effectively Final Local Variables](#421-effectively-final-local-variables)
+    - [4.2.2 Parameters as Effectively Final](#422-parameters-as-effectively-final)
+- [5. Varargs (Variable-Length Argument Lists](#5-varargs-variable-length-argument-lists)
+- [6. Static Methods, Static Variables, and Static Initializers](#6-static-methods-static-variables-and-static-initializers)
+  - [6.1 Static Variables (Class Variables)](#61-static-variables-class-variables)
+  - [6.2 Static Methods](#62-static-methods)
+  - [6.3 Static Initializer Blocks](#63-static-initializer-blocks)
+  - [6.4 Initialization Order (Static vs Instance)](#64-initialization-order-static-vs-instance)
+    - [6.4.1 Class loading order](#641-class-loading-order)
+    - [6.4.2 Instance creation order](#642-instance-creation-order)
+  - [6.5 Accessing Static Members](#65-accessing-static-members)
+    - [6.5.1 Recommended: use class name](#651-recommended-use-class-name)
+    - [6.5.2 Also legal: via instance reference](#652-also-legal-via-instance-reference)
+  - [6.6 Static and Inheritance](#66-static-and-inheritance)
+  - [6.7 Common Pitfalls](#67-common-pitfalls)
+
+
+---
+
 This chapter introduces fundamental Object-Oriented Programming (OOP) concepts in Java, starting with **methods**, **parameter passing**, **overloading**, **local vs. instance variables**, and **varargs**.  
 
 
@@ -129,6 +175,21 @@ void modify(int a, StringBuilder b) {
 }
 ```
 
+```java
+public static void main(String[] args) {
+    
+	int num1 = 11;
+	methodTryModif(num1);
+	System.out.println(num1);
+	
+}
+
+public static void methodTryModif(int num1){	
+	num1 = 10;  // this new assignement affects only the method parameter which, accidentally, has the same name as the external variable.
+}
+
+```
+
 
 ## 3. Overloading Methods
 
@@ -161,6 +222,157 @@ Illegal overloaded method:
 int compute(int x)
 double compute(int x)
 ```
+
+### 3.1 Calling overloaded methods
+
+
+When multiple overloaded methods are available, Java applies **overload resolution** to decide which method to call.  
+The compiler selects the method whose parameter types are the **most specific** and **compatible** with the provided arguments.
+
+Overload resolution happens **at compile time** (unlike overriding, which is run-time based).
+
+Java follows these rules:
+
+
+#### 3.1.1 — Exact match wins
+
+If an argument matches a method parameter exactly, that method is chosen.
+
+<CODE-JAVA>
+void call(int x)    { System.out.println("int"); }
+void call(long x)   { System.out.println("long"); }
+
+call(5); // prints: int (exact match for int)
+</CODE-JAVA>
+
+
+#### 3.1.2 — If no exact match exists, Java picks the *most specific* compatible type
+
+Java prefers:
+
+1. **widening** over autoboxing  
+2. **autoboxing** over varargs  
+3. **wider reference** only if more specific type is not available  
+
+Example with numeric primitives:
+
+<CODE-JAVA>
+void test(long x)   { System.out.println("long"); }
+void test(float x)  { System.out.println("float"); }
+
+test(5);  // int literal: can widen to long or float
+          // but long is more specific than float for integer types
+          // Output: long
+</CODE-JAVA>
+
+
+#### 3.1.3 — Primitive widening beats boxing
+
+If a primitive argument can either widen or autobox, Java chooses widening.
+
+<CODE-JAVA>
+void m(int x)       { System.out.println("int"); }
+void m(Integer x)   { System.out.println("Integer"); }
+
+byte b = 10;
+m(b);               // byte → int (widening) wins
+                    // Output: int
+</CODE-JAVA>
+
+
+#### 3.1.4 — Boxing beats varargs
+
+<CODE-JAVA>
+void show(Integer x)    { System.out.println("Integer"); }
+void show(int... x)     { System.out.println("varargs"); }
+
+show(5);                // int → Integer (boxing) preferred
+                        // Output: Integer
+</CODE-JAVA>
+
+
+#### 3.1.5 — For references, Java picks the most specific reference type
+
+<CODE-JAVA>
+void ref(Object o)      { System.out.println("Object"); }
+void ref(String s)      { System.out.println("String"); }
+
+ref("abc");             // "abc" is a String → more specific than Object
+                        // Output: String
+</CODE-JAVA>
+
+More specific means *lower in the inheritance hierarchy*.
+
+
+#### 3.1.6 — When there is no unambiguous “most specific”, the call is a compile error
+
+Example with sibling classes:
+
+<CODE-JAVA>
+void check(Number n)      { System.out.println("Number"); }
+void check(String s)      { System.out.println("String"); }
+
+check(null);    // Both String and Number can accept null
+                // String is more specific because it is a concrete class
+                // Output: String
+</CODE-JAVA>
+
+But if two unrelated classes compete:
+
+<CODE-JAVA>
+void run(String s)   { }
+void run(Integer i)  { }
+
+run(null);  // ❌ Compile-time error: ambiguous method call
+</CODE-JAVA>
+
+
+#### 3.1.7 — Mixed primitive + wrapper overloads
+
+Java evaluates widening, boxing, and varargs in this order:
+
+**widening → boxing → varargs**
+
+Example:
+
+<CODE-JAVA>
+void mix(long x)        { System.out.println("long"); }
+void mix(Integer x)     { System.out.println("Integer"); }
+void mix(int... x)      { System.out.println("varargs"); }
+
+short s = 5;
+mix(s);   // short → int → long  (widening)
+          // Boxing and varargs ignored
+          // Output: long
+</CODE-JAVA>
+
+
+#### 3.1.8 — When primitives mix with reference types
+
+<CODE-JAVA>
+void fun(Object o)     { System.out.println("Object"); }
+void fun(int x)        { System.out.println("int"); }
+
+fun(10);                // exact primitive match wins
+                        // Output: int
+
+Integer i = 10;
+fun(i);                 // reference accepted → Object
+                        // Output: Object
+</CODE-JAVA>
+
+
+#### 3.1.9 Summary Table (Overload Resolution)
+
+| Situation | Rule |
+|----------|------|
+| Exact match | Always chosen |
+| Primitive widening vs boxing | Widening wins |
+| Boxing vs varargs | Boxing wins |
+| Most specific reference type | Wins |
+| Unrelated reference types | Ambiguous → compile error |
+| Mixed primitive + wrapper | Widening → boxing → varargs |
+
 
 ## 4. Local and Instance Variables
 
