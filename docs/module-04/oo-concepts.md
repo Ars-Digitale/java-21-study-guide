@@ -238,12 +238,12 @@ Java follows these rules:
 
 If an argument matches a method parameter exactly, that method is chosen.
 
-<CODE-JAVA>
+```java
 void call(int x)    { System.out.println("int"); }
 void call(long x)   { System.out.println("long"); }
 
 call(5); // prints: int (exact match for int)
-</CODE-JAVA>
+```
 
 
 #### 3.1.2 — If no exact match exists, Java picks the *most specific* compatible type
@@ -256,50 +256,50 @@ Java prefers:
 
 Example with numeric primitives:
 
-<CODE-JAVA>
+```java
 void test(long x)   { System.out.println("long"); }
 void test(float x)  { System.out.println("float"); }
 
 test(5);  // int literal: can widen to long or float
           // but long is more specific than float for integer types
           // Output: long
-</CODE-JAVA>
+```
 
 
 #### 3.1.3 — Primitive widening beats boxing
 
 If a primitive argument can either widen or autobox, Java chooses widening.
 
-<CODE-JAVA>
+```java
 void m(int x)       { System.out.println("int"); }
 void m(Integer x)   { System.out.println("Integer"); }
 
 byte b = 10;
 m(b);               // byte → int (widening) wins
                     // Output: int
-</CODE-JAVA>
+```
 
 
 #### 3.1.4 — Boxing beats varargs
 
-<CODE-JAVA>
+```java
 void show(Integer x)    { System.out.println("Integer"); }
 void show(int... x)     { System.out.println("varargs"); }
 
 show(5);                // int → Integer (boxing) preferred
                         // Output: Integer
-</CODE-JAVA>
+```
 
 
 #### 3.1.5 — For references, Java picks the most specific reference type
 
-<CODE-JAVA>
+```java
 void ref(Object o)      { System.out.println("Object"); }
 void ref(String s)      { System.out.println("String"); }
 
 ref("abc");             // "abc" is a String → more specific than Object
                         // Output: String
-</CODE-JAVA>
+```
 
 More specific means *lower in the inheritance hierarchy*.
 
@@ -308,23 +308,23 @@ More specific means *lower in the inheritance hierarchy*.
 
 Example with sibling classes:
 
-<CODE-JAVA>
+```java
 void check(Number n)      { System.out.println("Number"); }
 void check(String s)      { System.out.println("String"); }
 
 check(null);    // Both String and Number can accept null
                 // String is more specific because it is a concrete class
                 // Output: String
-</CODE-JAVA>
+```
 
 But if two unrelated classes compete:
 
-<CODE-JAVA>
+```java
 void run(String s)   { }
 void run(Integer i)  { }
 
 run(null);  // ❌ Compile-time error: ambiguous method call
-</CODE-JAVA>
+```
 
 
 #### 3.1.7 — Mixed primitive + wrapper overloads
@@ -335,7 +335,7 @@ Java evaluates widening, boxing, and varargs in this order:
 
 Example:
 
-<CODE-JAVA>
+```java
 void mix(long x)        { System.out.println("long"); }
 void mix(Integer x)     { System.out.println("Integer"); }
 void mix(int... x)      { System.out.println("varargs"); }
@@ -344,12 +344,12 @@ short s = 5;
 mix(s);   // short → int → long  (widening)
           // Boxing and varargs ignored
           // Output: long
-</CODE-JAVA>
+```
 
 
 #### 3.1.8 — When primitives mix with reference types
 
-<CODE-JAVA>
+```java
 void fun(Object o)     { System.out.println("Object"); }
 void fun(int x)        { System.out.println("int"); }
 
@@ -359,7 +359,7 @@ fun(10);                // exact primitive match wins
 Integer i = 10;
 fun(i);                 // reference accepted → Object
                         // Output: Object
-</CODE-JAVA>
+```
 
 
 #### 3.1.9 Summary Table (Overload Resolution)
