@@ -1,13 +1,31 @@
 # Basic Language Java building Blocks
 
+
 ### Table of Contents
 
-- [1. Class definition](#1-class-definition)
-- [2. Comments](#2-comments)
-- [3. Access modifiers](#3-access-modifiers)
-- [4. Packages](#4-packages)
-- [5. The main Method](#5-the-main-method)
-- [6. Compiling and running your code](#6-compiling-and-running-your-code)
+-[Basic Language Java Building Blocks]
+	- [1. Class definition](#1-class-definition)
+	- [2. Comments](#2-comments)
+	- [3. Access modifiers](#3-access-modifiers)
+	- [4. Packages](#4-packages)
+	  - [4.1 Organization and Purpose](#41-organization-and-purpose)
+	  - [4.2 Mapping with the File System and declaration of a package](#42-mapping-with-the-file-system-and-declaration-of-a-package)
+	  - [4.3 Belonging to the Same Package](#43-belonging-to-the-same-package)
+	  - [4.4 Importing from a Package](#44-importing-from-a-package)
+	  - [4.5 Static imports](#45-static-imports)
+		- [4.5.1 Precedence Rules](#451-precedence-rules)
+	  - [4.6 Standard vs. User-Defined Packages](#46-standard-vs-user-defined-packages)
+	- [5. The main Method](#5-the-main-method)
+	  - [5.1 main method signature](#51-main-method-signature)
+	- [6. Compiling and running your code](#6-compiling-and-running-your-code)
+	  - [6.1 Compiling one file, default package (single directory)](#61-compiling-one-file-default-package-single-directory)
+	  - [6.2 Multiple files, default package (single directory)](#62-multiple-files-default-package-single-directory)
+	  - [6.3 Code inside packages (standard src → out layout)](#63-code-inside-packages-standard-src--out-layout)
+	  - [6.4 Compiling to another directory (-d)](#64-compiling-to-another-directory--d)
+	  - [6.5 Multiple files across packages (compile whole source tree)](#65-multiple-files-across-packages-compile-whole-source-tree)
+	  - [6.6 Single-file source execution (quick runs without javac)](#66-single-file-source-execution-quick-runs-without-javac)
+	  - [6.7 Passing Parameters to a Java program](#67-passing-parameters-to-a-java-program)
+
 
 ---
  
@@ -179,13 +197,13 @@ In Java, an **access modifier** is a keyword that specifies the visibility (or a
 
 **Java packages** are logical groupings of classes, interfaces, and sub-packages. They help organize large codebases, avoid name conflicts, and provide controlled access between different parts of an application.
 
-### a. Organization and Purpose
+### 4.1 Organization and Purpose
 - Naming of packages follow the same rules of variable names. see: [Java Naming Rules](naming-rules.md)
 - Packages are like **folders** for your Java source code.  
 - They let you group related classes together (e.g., all utility classes in `java.util`, all networking classes in `java.net`).  
 - By using packages, you can prevent **naming conflicts**: for example, you may have two classes named `Date`, but one is `java.util.Date` and another is `java.sql.Date`.
 
-### b. Mapping with the File System and declaration of a package
+### 4.2 Mapping with the File System and declaration of a package
 - Packages map directly to the **directory hierarchy** on your file system.
 - You declare the package at the top of the source file (**before any imports**).
 - If you do not declare a package, the class belongs to the default package.
@@ -204,7 +222,7 @@ public class MyApp{
 > [!IMPORTANT] 
 > This declaration means the class must be located in the directory: **com/example/myapp/utils/MyApp.java**
 
-### c. Belonging to the Same Package
+### 4.3 Belonging to the Same Package
 
 Two classes belong to the same package if and only if:
 
@@ -221,7 +239,7 @@ Classes in the same package:
 - Can access each other’s package-private members (i.e., members without an access modifier).
 - Share the same namespace, so you don’t need to import them to use them.  
 
-### d. Importing a Package
+### 4.4 Importing from a Package
 
 To use classes from another package, you need to import them:
 
@@ -247,7 +265,121 @@ java.util.List myList = new java.util.ArrayList<>();
 > If you explicitely import a class name, it takes precedence over any wildcard import;
 > if you want two use two class with the same name (ex. `Date` from java.util and from java.sql), it is better to use a fully qualified name import.
 
-### e. Standard vs. User-Defined Packages
+### 4.5 Static imports
+
+
+In addition to importing classes from a package, Java allows another kind of import: the **static import**.  
+A *static import* lets you import **static members** of a class — such as static methods and static variables — so you can use them **without referencing the class name**.
+
+You may import either **specific** static members or use a **wildcard** to import all static members of a class.
+
+
+Example — Specific Static Import
+
+```java
+import static java.util.Arrays.asList;   // Imports Arrays.asList()
+
+public class Example {
+
+    List<String> arr = asList("first", "second");
+    // We can call asList() directly, without using Arrays.asList()
+}
+```
+
+
+Example — Static Import of a Constant
+
+```java
+import static java.lang.Math.PI;
+import static java.lang.Math.sqrt;
+
+public class Circle {
+    double radius = 3;
+
+    double area = PI * radius * radius;
+    double diagonal = sqrt(2); 
+}
+```
+
+
+Example — Wildcard Static Import
+
+```java
+import static java.lang.Math.*;
+
+public class Calculator {
+    double x = sqrt(49);   // 7.0
+    double y = max(10, 20); 
+    double z = random();   // calls Math.random()
+}
+```
+
+Wildcard static imports behave exactly like normal wildcard imports:  
+they bring **all static members** of the class into scope.
+
+
+#### 4.5.1 Precedence Rules
+
+If the current class already declares a method or variable with the same name as the statically imported one:
+
+- The **local member takes precedence**.
+- The imported static member is **shadowed**.
+
+Example:
+
+```java
+import static java.lang.Math.max;
+
+public class Test {
+
+    static int max(int a, int b) {   // local version
+        return a > b ? a : b;
+    }
+
+    void run() {
+        System.out.println(max(2, 5));  
+        // Calls the LOCAL max(), not Math.max()
+    }
+}
+```
+
+
+> [!WARNING]
+> - A static import **must** follow the exact syntax: `import static`.
+> - The compiler forbids importing **two static members with the same simple name** if it creates ambiguity — even if they come from different classes or packages.
+
+Example — **Not allowed**:
+
+```java
+import static java.util.Collections.emptyList;
+import static java.util.List.of;
+
+// ❌ ERROR: both methods have the same name `of()`
+import static java.util.Set.of;
+```
+
+The compiler does not know which `of()` you intend to call → compilation fails.
+
+---
+
+
+>[!TIP]
+> - Static imports are fine but **should not create confusion** — the exam may test ambiguous cases.
+> - If two static imports introduce the same name, **any attempt to use that name causes a compile error**.
+> - Static imports do **not** import classes, only static members.
+> - You can still call the static member using the class name even if statically imported.
+
+Example:
+
+```java
+import static java.lang.Math.sqrt;
+
+double a = sqrt(16);        // imported
+double b = Math.sqrt(25);   // fully qualified — always allowed
+```
+
+
+### 4.6 Standard vs. User-Defined Packages
 
 **Standard packages**: shipped with the JDK (e.g., java.lang, java.util, java.io).
 
@@ -259,7 +391,7 @@ java.util.List myList = new java.util.ArrayList<>();
 
 In Java, the `main` method serves as the **entry point** of a standalone application. Its correct declaration is critical for the JVM to recognize it:
 
-### a. `main` method signature
+### 5.1 `main` method signature
 
 Let's review the `main` method signature inside two of the simplest possible classes:
 
@@ -324,7 +456,7 @@ java  -version   # should print: java version "21.0.7" ... (the output could be 
 ```
 
 
-### a. Compiling one file, default package (single directory)
+### 6.1 Compiling one file, default package (single directory)
 
 **Files**
 ```
@@ -360,7 +492,7 @@ java Hello
 
 
 
-### b. Multiple files, default package (single directory)
+### 6.2 Multiple files, default package (single directory)
 
 **Files**
 ```
@@ -407,7 +539,7 @@ java B
 - **--class-path** `<classpath>`
 
 
-### c. Code inside packages (standard src → out layout)
+### 6.3 Code inside packages (standard src → out layout)
 
 **Files**
 ```
@@ -440,7 +572,7 @@ public class Main {
 javac src/com/example/app/Main.java
 ```
 
-### d. Compiling to another directory (`-d`)
+### 6.4 Compiling to another directory (`-d`)
 
 `-d out` places compiled `.class` files into the `out/` directory, creating package subfolders that mirror your `package` names:
 
@@ -457,7 +589,7 @@ java -cp out com.example.app.Main
 java -cp out com.example.app.Main
 ```
 
-### e. Multiple files across packages (compile whole source tree)
+### 6.5 Multiple files across packages (compile whole source tree)
 
 **Files**
 ```
@@ -484,7 +616,7 @@ javac -d out -sourcepath src   src/com/example/app/Main.java
 > [!IMPORTANT]
 > **-sourcepath** `<sourcepath>` tells `javac` where to look for other `.java` files that a given source depends on.
 
-### f. Single-file source execution (quick runs without `javac`)
+### 6.6 Single-file source execution (quick runs without `javac`)
 
 Java 21 (since Java 11) lets you run small programs directly from source:
 
@@ -501,7 +633,7 @@ java Main.java Helper.java
 
 > If you use **packages**, prefer compiling to `out/` and running with `-cp`.
 
-### g. Passing Parameters to a Java program
+### 6.7 Passing Parameters to a Java program
 
 You can send data to your Java program through the parameters of the `main` entry point.
 
