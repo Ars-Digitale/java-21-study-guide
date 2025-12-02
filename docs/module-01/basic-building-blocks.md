@@ -161,7 +161,7 @@ will cause a compilation error because, while the first two symbols are part of 
 
 ## 3. Access modifiers
 
-In Java, an **access modifier** is a keyword that specifies the visibility (or accessibility) of a class, method, or field. It determines which other classes can use or see that element.
+In Java, an **access modifier** is a keyword that specifies the visibility (or accessibility) of a **class**, **method**, or **field**. It determines which other classes can use or see that element.
 
 > [!NOTE]
 > **Table of the access modifiers available in Java**
