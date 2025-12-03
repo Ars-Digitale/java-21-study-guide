@@ -20,4 +20,4 @@
 	- [Math in Java](docs/module-03/math.md)
 	- [Dates and Time](docs/module-03/date-time.md)
 - [Module 4: Object-Oriented Fundamentals]
-	- [Object-Oriented Programming Concepts](docs/module-04/methods-attributes.md)
+	- [Methods, Attributes and Variables](docs/module-04/methods-attributes.md)
