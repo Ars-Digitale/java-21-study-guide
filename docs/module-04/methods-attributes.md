@@ -1,8 +1,8 @@
-# Object-Oriented Programming Concepts
+# Methods, Attributes and Variables
 
 ### Table of Contents
 
-- [Object-Oriented Programming Concepts]
+- [Methods, Attributes and Variables]
 	- [1. Methods](#1-methods)
 	  - [1.1 Mandatory Components of a Method](#11-mandatory-components-of-a-method)
 		- [1.1.1 Access Modifiers](#111-access-modifiers)
