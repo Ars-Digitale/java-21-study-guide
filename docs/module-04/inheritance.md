@@ -92,7 +92,7 @@ public class Person {
     String name;
 
 	public Person(String n) {
-		name = n; // fine: there is no ambiguity, no shadowing
+		name = n; // fine, the names of the variables differ: there is no ambiguity, no shadowing
 	}
 }
 ```
