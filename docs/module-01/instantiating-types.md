@@ -362,7 +362,7 @@ This applies to both:
 Java enforces this rule because a `final` variable represents a value that must be *known and fixed* before use.
 
 
-**Final Instance Variables**
+**`Final Instance Variables`**
 
 A **final instance variable** must be assigned **exactly once**, and the assignment must occur in *one* of the following:
 
