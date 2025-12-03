@@ -163,7 +163,7 @@ C instance block
 C constructor
 ```
 
-## 5. Visualization Diagram (Safe ASCII)
+## 5. Visualization Diagram
 
 ```text
             CLASS LOADING (top to bottom)
@@ -194,7 +194,7 @@ C constructor
     +--> run C constructor
 ```
 
-## 6. Key Rules to Remember
+## 6. Key Rules
 
 - Static initialization happens **once** per class.
 - Static initializers run in parent → child order.

@@ -597,9 +597,7 @@ public class Config {
 ### 6.4 Initialization Order (Static vs. Instance)
 
 
-(Please refer to: [Access Modifiers](../module-01/basic-building-blocks.md#3-access-modifiers)) 
-
-
+(Please refer to: [Class Loading, Initialization, and Object Construction](class-loading.md)) 
 
 
 ### 6.5 Accessing Static Members
