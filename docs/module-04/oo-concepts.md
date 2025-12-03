@@ -23,7 +23,7 @@
 		- [3.1.6 — When there is no unambiguous “most specific”, the call is a compile error](#316--when-there-is-no-unambiguous-most-specific-the-call-is-a-compile-error)
 		- [3.1.7 — Mixed primitive + wrapper overloads](#317--mixed-primitive--wrapper-overloads)
 		- [3.1.8 — When primitives mix with reference types](#318--when-primitives-mix-with-reference-types)
-		- [3.1.9 — When Object wins](#319--when-objects-wins)
+		- [3.1.9 — When Object wins](#319--when-object-wins)
 		- [3.1.10 Summary Table (Overload Resolution)](#3110-summary-table-overload-resolution)
 	- [4. Local and Instance Variables](#4-local-and-instance-variables)
 	  - [4.1 Instance Variables](#41-instance-variables)
