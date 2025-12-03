@@ -12,8 +12,9 @@
     - [1.2.3 Instance Initializer Blocks](#123-instance-initializer-blocks)
   - [1.3 Default Variable Initialization](#13-default-variable-initialization)
     - [1.3.1 Instance and Class Variables](#131-instance-and-class-variables)
-    - [1.3.2 Local Variables](#132-local-variables)
-    - [1.3.3 Inferring Types with `var`](#133-inferring-types-with-var)
+    - [1.3.2 Final Instance Variables](#132-final-instance-variables)
+    - [1.3.3 Local Variables](#133-local-variables)
+    - [1.3.4 Inferring Types with `var`](#134-inferring-types-with-var)
   - [1.4 Wrapper Types](#14-wrapper-types)
     - [1.4.1 Purpose of Wrapper Types](#141-purpose-of-wrapper-types)
     - [1.4.2 Autoboxing and Unboxing](#142-autoboxing-and-unboxing)
@@ -348,7 +349,108 @@ Instance and class variables are given a default value, by the compiler, if not 
 | boolean | false |
 | char | '\u0000' (NUL) |
 
-#### 1.3.2 Local variables
+
+#### 1.3.2 Final Instance Variables
+
+Unlike regular instance and class variables, **`final` variables are *not* default-initialized by the compiler**.  
+A `final` variable **must be explicitly assigned exactly once**, otherwise the code does not compile.
+
+This applies to both:
+- **final instance variables**
+- **static final class variables**
+
+Java enforces this rule because a `final` variable represents a value that must be *known and fixed* before use.
+
+
+**Final Instance Variables**
+
+A **final instance variable** must be assigned **exactly once**, and the assignment must occur in *one* of the following:
+
+1. **At the point of declaration**
+2. **In an instance initializer block**
+3. **Inside every constructor**
+
+If the class has *multiple constructors*, the variable must be assigned in **all** of them.
+
+Example:
+```java
+public class Person {
+    final int id;   // must be assigned before constructor ends
+    String name;
+
+    // Constructor 1
+    public Person(int id, String name) {
+        this.id = id;        // ok
+        this.name = name;
+    }
+
+    // Constructor 2
+    public Person() {
+        this.id = 0;         // also required here
+        this.name = "Unknown";
+    }
+}
+```
+
+Trying to compile without assigning `id` inside **every** constructor produces a compile-time error:
+> variable id might not have been initialized
+
+**`static final` Class Variables (Constants)**
+
+A **static final variable** belongs to the class rather than to any instance.  
+It must also be assigned exactly once, but assignment can occur in one of the following places:
+
+1. **At the point of declaration**
+2. **Inside a static initializer block**
+
+Example:
+```java
+public class AppConfig {
+
+    static final int TIMEOUT = 5000;    // assigned at declaration
+
+    static final String VERSION;        // assigned in static initializer
+
+    static {
+        VERSION = "1.0.0";              // ok
+    }
+}
+```
+
+Attempting to assign a `static final` in a constructor is illegal.
+
+
+**Key Rules for `final` Fields**
+
+| Scenario | Allowed? | Notes |
+|---------|----------|-------|
+| Assign at declaration | ✔ | Most common pattern |
+| Assign in constructor | ✔ | All constructors must assign it |
+| Assign in instance initializer | ✔ | Before constructor body runs |
+| Assign in static initializer (`static final` only) | ✔ | For class-level constants |
+| Assign multiple times | ❌ | Compilation error |
+| Default initialization | ❌ | Must be explicitly assigned |
+
+Example of an **illegal** situation:
+```java
+public class Example {
+    final int x;        // not initialized
+}
+
+Example e = new Example(); // ❌ compile-time error
+```
+
+**Why `final` Variables Are Not Default-Initialized?**
+
+Because:
+- Their value must be **known and immutable**, and
+- Java must guarantee that the value is set **before use**,
+- Default initialization would create a situation where `0`, `null`, or `false` might unintentionally become the permanent value.
+
+Thus, Java forces developers to explicitly initialize `final` fields.
+
+
+#### 1.3.3 Local variables
 
 **Local variables** are variables defined within a constructor, method or inizializer block;
 
@@ -369,7 +471,7 @@ public int localMethod {
 }
 ```
 
-#### 1.3.3 Inferring Types with var
+#### 1.3.4 Inferring Types with var
 
 Under certain conditions you can use the keyword **var** in place of the appropriate type when declaring **local** variables;
 
