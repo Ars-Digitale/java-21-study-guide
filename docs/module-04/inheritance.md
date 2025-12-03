@@ -88,8 +88,12 @@ public class Person {
 If names differ, `this` is optional:
 
 ```java
-public Person(String n) {
-    name = n; // fine, no shadowing
+public class Person {
+    String name;
+
+	public Person(String n) {
+		name = n; // fine: there is no ambiguity, no shadowing
+	}
 }
 ```
 
