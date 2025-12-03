@@ -1,217 +1,166 @@
 # Inheritance in Java
 
-Inheritance is one of the core pillars of Object-Oriented Programming.  
-It allows a class (the *subclass*) to acquire the state and behavior of another class (the *superclass*), creating hierarchical relationships that promote code reuse, specialization, and polymorphism.
+Inheritance is one of the core principles of object-oriented programming. It allows a class (the *child* or *subclass*) to acquire the fields and methods of another class (the *parent* or *superclass*).
 
-## 1. General Definition of Inheritance
+## 1. What Is Inheritance?
+Inheritance defines an “@@ITALIC@@is-a@@ITALIC_END@@” relationship between classes: a subclass represents a specialized version of its parent class. This allows code reuse, model specialization, and hierarchical structures.
 
-Inheritance enables a class to extend another class, automatically gaining its accessible fields and methods.  
-The extending class may add new features or override existing behaviors, creating more specialized versions of its parent.
-
-> **Note:** Inheritance expresses an *“is-a”* relationship: a Dog **is a** Animal.
-
-## 2. Single Inheritance and java.lang.Object
-
-Java supports **single inheritance**, meaning every class may extend **only one** direct superclass.  
-All classes ultimately inherit from `java.lang.Object`, which sits at the top of the hierarchy.  
-This ensures all Java objects share a minimal common behavior (e.g., `toString()`, `equals()`, `hashCode()`).
-
-```java
-class Animal { }
-class Dog extends Animal { }
-
-// All classes implicitly extend Object
-System.out.println(new Dog() instanceof Object); // true
-```
+## 2. Single Inheritance in Java
+Java supports **single inheritance** for classes: each class may extend only **one** direct parent.  
+All classes ultimately inherit from `java.lang.Object`, which sits at the top of the hierarchy.
 
 ## 3. Transitive Inheritance
+Inheritance is transitive:  
+- If `C extends B`  
+- And `B extends A`  
+Then `C` inherits all accessible members of `A` and `B`.
 
-Inheritance is **transitive**.  
-If class C extends B and B extends A, then C effectively inherits accessible members from both B *and* A.
+## 4. What Gets Inherited (Short Version)
+This chapter contains only a quick reminder:  
+- **public** and **protected** members are inherited.  
+- **default** (package-private) members are inherited only if subclass is in the same package.  
+- **private members are @@UNDERLINE@@not inherited@@UNDERLINE_END@@
 
-```java
-class A { }
-class B extends A { }
-class C extends B { } // C inherits from both A and B
-```
-
-## 4. What Gets Inherited? (Short Reminder)
-
-A subclass inherits all **accessible** members of the superclass.  
-However, this depends on access modifiers.
-
-- **public** → always inherited
-- **protected** → inherited if accessible through package or subclass rules
-- **default (package-private)** → inherited only within the same package
-- **private** → **NOT** inherited
-
-> **Note:** A full detailed chapter on access modifiers will be linked here.
-
----
+> **Note:** Full details are in the dedicated Access Modifiers chapter.
 
 ## 5. Class Modifiers Affecting Inheritance
 
-Some class-level modifiers affect whether a class may be extended.
-
-```text
-| Modifier      | Meaning | Effect on Inheritance |
-|---------------|---------|-----------------------|
-| final         | Class cannot be extended | Inheritance STOP |
-| abstract      | Class cannot be instantiated | Must be extended |
-| sealed        | Only allows a fixed list of subclasses | Restricts inheritance |
-| non-sealed    | Subclass of sealed class that reopens inheritance | Inheritance allowed |
-| static        | Applies only to nested classes | Behaves like a top-level class inside its enclosing class |
-```
-
-> **Note:** A `static` class in Java can exist only as a **static nested class**.
-
----
+@@TABLE@@
+Modifier | Meaning | Effect on inheritance
+--- | --- | ---
+`final` | Class cannot be modified | **Cannot be extended**
+`abstract` | Class may contain unfinished features | Must be subclassed to be instantiated
+`static` | Applies only to nested classes | Behaves like a top-level class regarding instances
+`sealed` | Restricts who may extend the class | Only permitted subclasses may inherit
+`non-sealed` | Overrides sealing | Allows further extension down the hierarchy
+@@TABLE_END@@
 
 ## 6. `this` and `super` References
 
-Java provides two special references inside instance methods and constructors:
-
-- **this** → refers to the current object instance
-- **super** → refers to the direct superclass instance
-
-### 6.1 When You Can Use Them
-
-- Inside instance methods
-- Inside constructors
-
-### 6.2 When You Cannot Use Them
-
-- Inside static methods
-- Inside static initializer blocks
+### 6.1 The `this` Reference
+`this` refers to the current object instance.  
+Java uses a **granular scope** rule:  
+- If a method/local variable has the same name as an instance field, the local one “shadows” the field.  
+- `this.fieldName` is required to access the instance attribute.
 
 ```java
-class Animal {
-    int age = 5;
-}
+public class Person {
+    String name;
 
-class Dog extends Animal {
-    int age = 3;
-
-    void printAges() {
-        System.out.println(age);      // Dog's age
-        System.out.println(this.age); // Dog's age
-        System.out.println(super.age); // Animal's age
+    public Person(String name) {
+        // Without "this", we would reassign the parameter to itself
+        this.name = name;
     }
 }
 ```
 
----
+If names differ, `this` is optional:
+
+```java
+public Person(String n) {
+    name = n; // fine, no shadowing
+}
+```
+
+> **Note:** `this` cannot be used inside static methods because no instance exists.
+
+### 6.2 The `super` Reference
+`super` gives access to members of the direct parent class.  
+Useful when:  
+- The parent and child define a field/method with the same name  
+- You need to call the parent’s constructor  
+- You want to explicitly refer to the inherited implementation
+
+```java
+class Parent { int value = 10; }
+class Child extends Parent {
+    int value = 20;
+
+    void printBoth() {
+        System.out.println(value);      // child value
+        System.out.println(super.value); // parent value
+    }
+}
+```
+
+> **Note:** `super` cannot be used inside static contexts.
 
 ## 7. Declaring Constructors in an Inheritance Chain
+Constructors are **not inherited**.  
+Each class must declare its own constructors.
 
-A constructor initializes a newly created object.  
-Constructors are **never inherited**, but each subclass constructor must ensure that the superclass is initialized.
+## 8. Default Constructor Behavior
+If you do not define any constructor for a class, Java provides a  
+**default no-argument constructor** that calls:  
+`super()`
 
----
+> **Note:** Only provided if **no constructor is declared** in the class.
 
-## 8. Default Constructor
-
-If a class does not declare any constructor, Java automatically inserts a **default no-argument constructor**.  
-This constructor calls `super()` implicitly.
-
-```java
-class Parent { }
-
-class Child extends Parent {
-    // Compiler inserts:
-    // Child() { super(); }
-}
-```
-
----
-
-## 9. Using `this()` and Constructor Overloading
-
-**this()** calls another constructor in the same class.  
+## 9. Using `this()` (Constructor Chaining)
+`this()` calls another constructor of the same class.  
 Rules:
 
-- Must be the **first** statement in the constructor
-- Cannot be combined with `super()`
-- Used to centralize initialization
+- Must be the **first** statement in the constructor.
+- Cannot be used together with `super()` in the same constructor.
 
 ```java
-class Car {
-    int year;
-    String model;
+class Book {
+    String title;
+    int pages;
 
-    Car() {
-        this(2020, "Unknown");
+    Book(String title) {
+        this(title, 0); // calls the other constructor
     }
 
-    Car(int year, String model) {
-        this.year = year;
-        this.model = model;
+    Book(String title, int pages) {
+        this.title = title;
+        this.pages = pages;
     }
 }
 ```
 
----
+## 10. Calling the Parent Constructor with `super()`
 
-## 10. Calling the Parent Constructor Using `super()`
-
-Every constructor must call a superclass constructor, either explicitly or implicitly.  
-`super()` must appear as the **first** line in the constructor (unless replaced by `this()`).
+`super()` must be the **first** line of a constructor (unless `this()` is used).  
+Used to initialize the parent portion of the subclass object.
 
 ```java
 class Parent {
-    Parent() { System.out.println("Parent constructor"); }
+    Parent(int x) { System.out.println("Parent: " + x); }
 }
 
 class Child extends Parent {
     Child() {
-        super(); // optional, compiler would insert it
-        System.out.println("Child constructor");
+        super(5); // must be first
+        System.out.println("Child");
     }
 }
 ```
 
----
+## 11. Default Constructor Traps
 
-## 11. Default Constructor — Tips and Traps
+### 11.1 Subclass Declares No Constructor
+Java inserts:  
+`Child() { super(); }`  
+Works only if parent has a no-arg constructor.
 
-- **If the superclass has no no-arg constructor, the subclass MUST call `super(args)` explicitly.**
-- If the subclass defines any constructor, Java does NOT create a default constructor automatically.
-- If you forget to call an existing parent constructor explicitly, the compiler inserts `super()` — which may not exist.
+### 11.2 Subclass Defines a Constructor but Does Not Call `super()`
+Java inserts `super()` automatically — but only in constructors that the programmer did not write the call explicitly.
 
-```java
-class Parent {
-    Parent(int x) { }
-}
+> **Note:** If parent has @@UNDERLINE@@no no-arg constructor@@UNDERLINE_END@@ → compile error.
 
-class Child extends Parent {
-    // ERROR → compiler inserts super(), but Parent() does not exist
-    Child() { }
-}
-```
-
----
-
-## 12. `super()` Always Refers to the **Most Direct Parent**
-
-Even in long inheritance chains, `super()` always calls the constructor of the **immediate** superclass, not any higher ancestor.
+## 12. `super()` Always Refers to the **Direct Parent**
+Even in deep inheritance chains, `super()` always calls the constructor of the immediate superclass, not ancestors further up.
 
 ```java
 class A { A() { System.out.println("A"); } }
-class B extends A { B() { System.out.println("B"); } }
-class C extends B {
-    C() {
-        super(); // Calls B(), not A()
-        System.out.println("C");
-    }
-}
+class B extends A { B() { super(); System.out.println("B"); } }
+class C extends B { C() { super(); System.out.println("C"); } }
+
+new C();
+// Output:
+// A
+// B
+// C
 ```
-
-Output:
-
-```bash
-A
-B
-C
-```
-
 

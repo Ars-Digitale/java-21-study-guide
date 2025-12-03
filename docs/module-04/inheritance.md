@@ -47,7 +47,6 @@ However, this depends on access modifiers.
 
 > **Note:** (Please refer to: [Access Modifiers](../module-01/basic-building-blocks.md#3-access-modifiers)) 
 
----
 
 ## 5. Class Modifiers Affecting Inheritance
 
@@ -65,49 +64,63 @@ Some class-level modifiers affect whether a class may be extended.
 
 > **Note:** A `static` class in Java can exist only as a **static nested class**.
 
----
 
 ## 6. `this` and `super` References
 
-Java provides two special references inside instance methods and constructors:
-
-- **this** → refers to the current object instance
-- **super** → refers to the direct superclass instance
-
-### 6.1 When You Can Use Them
-
-- Inside instance methods
-- Inside constructors
-
-### 6.2 When You Cannot Use Them
-
-- Inside static methods
-- Inside static initializer blocks
+### 6.1 The `this` Reference
+`this` refers to the current object instance.  
+Java uses a **granular scope** rule:  
+- If a method/local variable has the same name as an instance field, the local one “shadows” the field.  
+- `this.fieldName` is required to access the instance attribute.
 
 ```java
-class Animal {
-    int age = 5;
-}
+public class Person {
+    String name;
 
-class Dog extends Animal {
-    int age = 3;
-
-    void printAges() {
-        System.out.println(age);      // Dog's age
-        System.out.println(this.age); // Dog's age
-        System.out.println(super.age); // Animal's age
+    public Person(String name) {
+        // Without "this", we would reassign the parameter to itself
+        this.name = name;
     }
 }
 ```
 
----
+If names differ, `this` is optional:
+
+```java
+public Person(String n) {
+    name = n; // fine, no shadowing
+}
+```
+
+> **Note:** `this` cannot be used inside static methods because no instance exists.
+
+### 6.2 The `super` Reference
+`super` gives access to members of the direct parent class.  
+Useful when:  
+- The parent and child define a field/method with the same name  
+- You need to call the parent’s constructor  
+- You want to explicitly refer to the inherited implementation
+
+```java
+class Parent { int value = 10; }
+class Child extends Parent {
+    int value = 20;
+
+    void printBoth() {
+        System.out.println(value);      // child value
+        System.out.println(super.value); // parent value
+    }
+}
+```
+
+> **Note:** `super` cannot be used inside static contexts.
+
 
 ## 7. Declaring Constructors in an Inheritance Chain
 
 A constructor initializes a newly created object.  
 Constructors are **never inherited**, but each subclass constructor must ensure that the superclass is initialized.
 
----
 
 ## 8. Default Constructor
 
@@ -123,7 +136,6 @@ class Child extends Parent {
 }
 ```
 
----
 
 ## 9. Using `this()` and Constructor Overloading
 
@@ -150,7 +162,6 @@ class Car {
 }
 ```
 
----
 
 ## 10. Calling the Parent Constructor Using `super()`
 
@@ -170,7 +181,6 @@ class Child extends Parent {
 }
 ```
 
----
 
 ## 11. Default Constructor — Tips and Traps
 
@@ -189,7 +199,6 @@ class Child extends Parent {
 }
 ```
 
----
 
 ## 12. `super()` Always Refers to the **Most Direct Parent**
 
