@@ -101,13 +101,13 @@ class A {
 }
 
 class B extends A {
-    static int sb = init("B static var");
+    static int sb = init("B static var");	// call to the inherited static method init(String)
 
     static {
         System.out.println("B static block");
     }
 
-    int ib = init("B instance var");
+    int ib = init("B instance var");	// call to the inherited static method init(String)
 
     {
         System.out.println("B instance block");
@@ -119,13 +119,13 @@ class B extends A {
 }
 
 class C extends B {
-    static int sc = init("C static var");
+    static int sc = init("C static var");	// call to the inherited static method init(String)
 
     static {
         System.out.println("C static block");
     }
 
-    int ic = init("C instance var");
+    int ic = init("C instance var");	// call to the inherited static method init(String)
 
     {
         System.out.println("C instance block");
