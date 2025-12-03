@@ -45,7 +45,7 @@ However, this depends on access modifiers.
 - **default (package-private)** → inherited only within the same package
 - **private** → **NOT** inherited
 
-> **Note:** A full detailed chapter on access modifiers will be linked here.
+> **Note:** (Please refer to: [Access Modifiers](../module-01/basic-building-blocks.md#3-access-modifiers)) 
 
 ---
 

@@ -5,7 +5,7 @@
 - [Methods, Attributes and Variables]
 	- [1. Methods](#1-methods)
 	  - [1.1 Mandatory Components of a Method](#11-mandatory-components-of-a-method)
-		- [1.1.1 Access Modifiers](#111-access-modifiers)
+		- [1.1.1 Access Modifiers](#111--access-modifiers)
 		- [1.1.2 Return Type](#112-return-type)
 		- [1.1.3 Method Name](#113-method-name)
 		- [1.1.4 Method Signature](#114-method-signature)
