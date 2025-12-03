@@ -359,6 +359,9 @@ This applies to both:
 - **final instance variables**
 - **static final class variables**
 
+> [!NOTE]
+> We can assign a `null` value to a `final` instance or class instance variables as long they are explicitely set.
+
 Java enforces this rule because a `final` variable represents a value that must be *known and fixed* before use.
 
 

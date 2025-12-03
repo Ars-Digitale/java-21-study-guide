@@ -21,3 +21,4 @@
 	- [Dates and Time](docs/module-03/date-time.md)
 - [Module 4: Object-Oriented Fundamentals]
 	- [Methods, Attributes and Variables](docs/module-04/methods-attributes.md)
+	- [Class Loading, Initialization, and Object Construction](docs/module-04/class-loading.md)

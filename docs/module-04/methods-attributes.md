@@ -523,7 +523,7 @@ A **static method** belongs to the class, not to any object instance.
 Rules:
 
 - They can be called using the class name: `ClassName.method()`.
-- They **cannot** access instance variables or instance methods directly, but only through an istance of the class.
+- They **cannot** access instance variables or instance methods directly, but only through an instance of the class.
 - They **cannot** use `this` or `super`.
 - They are commonly used for:
   - utility methods (e.g., `Math.sqrt()`)
@@ -596,62 +596,10 @@ public class Config {
 
 ### 6.4 Initialization Order (Static vs. Instance)
 
-This is extremely important for the exam.
 
-#### 6.4.1 Class loading order
-When a class is loaded:
+(Please refer to: [Access Modifiers](../module-01/basic-building-blocks.md#3-access-modifiers)) 
 
-1. **Static variables** are initialized (default values first).
-2. **Static initializer blocks** run, in declared order.
-3. The class becomes ready for use.
 
-#### 6.4.2 Instance creation order
-When `new` is invoked:
-
-1. Instance variables → default values  
-2. Instance variables → explicit initializations  
-3. Instance initializer blocks  
-4. Constructor runs  
-
-Example showing full initialization order:
-
-```java
-public class InitOrder {
-
-    static int a = 10;
-
-    static {
-        System.out.println("Static block 1, a=" + a);
-    }
-
-    static {
-        System.out.println("Static block 2");
-    }
-
-    int x = 5;
-
-    {
-        System.out.println("Instance initializer, x=" + x);
-    }
-
-    public InitOrder() {
-        System.out.println("Constructor");
-    }
-
-    public static void main(String[] args) {
-        new InitOrder();
-    }
-}
-```
-
-Output:
-
-```bash
-Static block 1, a=10
-Static block 2
-Instance initializer, x=5
-Constructor
-```
 
 
 ### 6.5 Accessing Static Members
