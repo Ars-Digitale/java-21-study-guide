@@ -1,6 +1,6 @@
 # Class Loading, Initialization, and Object Construction
 
-In Java, understanding **how classes are loaded**, **how static and instance members are initialized**, and **how constructors run — especially with inheritance** — is essential for mastering the language and succeeding in certification exams.
+In Java, understanding **how classes are loaded**, **how static and instance members are initialized**, and **how constructors run — especially with inheritance** — is essential for mastering the language.
 
 This chapter provides a unified, clear explanation of:
 
@@ -18,8 +18,8 @@ Before understanding initialization order, it is useful to recall the three main
 - **Heap** — stores all objects and instance fields.
 - **Stack** — stores method calls, local variables, and references.
 
-> **Note:** Static members belong to the **class** and are created once in the Method Area.  
-Instance members belong to **each object** and live in the Heap.
+> **Note:** Static members belong to the **class** and are created **once** in the Method Area.  
+Instance members belong to **each object** and live in the **Heap**.
 
 ## 2. Class Loading (with Inheritance)
 
@@ -141,11 +141,11 @@ public class Test {
         new C();
     }
 }
-
+```
 
 Output
 
-```java
+```bash
 A static var
 A static block
 B static var
