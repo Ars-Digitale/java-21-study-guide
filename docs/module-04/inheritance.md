@@ -104,8 +104,10 @@ public class Person {
 The `super` reference gives access to members of the direct parent class.  
 
 Useful when:  
-- The parent and child define a field/method with the same name (the child instance holds two separated values for a variable with the same name)  
-- You want to explicitly refer to the inherited implementation
+- The parent and child define a field/method with the same name: (See below: [Inheriting Members](#13-inheriting-members))
+- When a child class defines a `field` with the same name of an `inherited variable` defined in a parent class, we have **`variable hiding`**;  
+- When a child class defines a `method` with the same `signature` as a method defined in a parent class, we have **`method overridding`**; 
+- You want to explicitly refer to the inherited implementations
 
 ```java
 class Parent { int value = 10; }
@@ -129,9 +131,9 @@ Constructors are **never inherited**, but each subclass constructor must ensure 
 
 Constructors are special methods with a name that matches the name of the class and that does not declare any return type.
 
-A class may implement `constructor overloading` having multiple constructors, each of them with a unique `signature`.
+A class may implement `constructor overloading` declaring multiple constructors, each with a unique `signature`.
 
-You can explicitely declare a no-arg or a specific constructor or, if you don't, Java will  implicitely create a default no-arg constructor.
+You can explicitely declare a no-arg or a specific constructor or, if you don't, Java will  implicitely create a `default no-arg constructor`.
 
 If you explicitely declare a constructor, the Java compiler will not include any `default no-arg constructor`.
 
@@ -242,5 +244,7 @@ A
 B
 C
 ```
+
+## 13. Inheriting Members
 
 
