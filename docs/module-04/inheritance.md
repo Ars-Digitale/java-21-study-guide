@@ -1,5 +1,37 @@
 # Inheritance in Java
 
+### Table of Contents
+
+- [Inheritance in Java]
+	- [1. General Definition of Inheritance](#1-general-definition-of-inheritance)
+	- [2. Single Inheritance and java.lang.Object](#2-single-inheritance-and-javalangobject)
+	- [3. Transitive Inheritance](#3-transitive-inheritance)
+	- [4. What Gets Inherited? (Short Reminder)](#4-what-gets-inherited-short-reminder)
+	- [5. Class Modifiers Affecting Inheritance](#5-class-modifiers-affecting-inheritance)
+	- [6. this and super References](#6-this-and-super-references)
+	  - [6.1 The this Reference](#61-the-this-reference)
+	  - [6.2 The super Reference](#62-the-super-reference)
+	- [7. Declaring Constructors in an Inheritance Chain](#7-declaring-constructors-in-an-inheritance-chain)
+	- [8. Default no-arg Constructor](#8-default-no-arg-constructor)
+	- [9. Using this() and Constructor Overloading](#9-using-this-and-constructor-overloading)
+	- [10. Calling the Parent Constructor Using super()](#10-calling-the-parent-constructor-using-super)
+	- [11. Default Constructor — Tips and Traps](#11-default-constructor--tips-and-traps)
+	- [12. super() Always Refers to the Most Direct Parent](#12-super-always-refers-to-the-most-direct-parent)
+	- [13. Inheriting Members](#13-inheriting-members)
+	  - [13.1 Method Overriding](#131-method-overriding)
+		- [13.1.1 Definition and Role in Inheritance](#1311-definition-and-role-in-inheritance)
+		- [13.1.2 Using super to Call the Parent Implementation](#1312-using-super-to-call-the-parent-implementation)
+		- [13.1.3 Overriding Rules (Instance Methods)](#1313-overriding-rules-instance-methods)
+		- [13.1.4 Hiding Static Methods](#1314-hiding-static-methods)
+	  - [13.2 Abstract Classes](#132-abstract-classes)
+		- [13.2.1 Definition and Purpose](#1321-definition-and-purpose)
+		- [13.2.2 Rules for Abstract Classes](#1322-rules-for-abstract-classes)
+	  - [13.3 Creating Immutable Objects](#133-creating-immutable-objects)
+		- [13.3.1 What Is an Immutable Object?](#1331-what-is-an-immutable-object)
+		- [13.3.2 Guidelines for Designing Immutable Classes](#1332-guidelines-for-designing-immutable-classes)
+
+---
+
 Inheritance is one of the core pillars of Object-Oriented Programming.  
 It allows a class (the *subclass*) to acquire the state and behavior of another class (the *superclass*), creating hierarchical relationships that promote code reuse, specialization, and polymorphism.
 
@@ -395,19 +427,18 @@ public class TestStatic {
 }
 ```
 
-**final** static methods cannot be hidden, and instance methods declared **final** cannot be overridden. 
+> [!IMPORTANT] 
+> - **final** static methods cannot be hidden, and instance methods declared **final** cannot be overridden. 
+> - If you try to redefine them in a subclass, the code will not compile.
 
-If you try to redefine them in a subclass, the code will not compile.
-
-**final** static methods cannot be hidden, and instance methods declared **final** cannot be overridden. 
-
-If you try to redefine them in a subclass, the code will not compile.
 
 ### 13.2 Abstract Classes
 
 #### 13.2.1 Definition and Purpose
 
-An **abstract class** is a class that cannot be instantiated directly and is intended to be extended. It may contain:
+An **abstract class** is a class that cannot be instantiated directly and is intended to be extended. 
+
+It may contain:
 
 - abstract methods (declared without a body);
 - concrete methods (with implementation);
@@ -420,14 +451,13 @@ Abstract classes are used when you want to define a common **base behavior** and
 - A class with at least one abstract method **must** be declared abstract.
 - An abstract class **cannot** be instantiated directly.
 - Abstract methods have no body and end with a semicolon.
-- Abstract methods cannot be `final`, `static`, or `private`, because they must be overridable.
+- **Abstract methods cannot be `final`, `static`, or `private`**, because they must be overridable.
 - The first concrete (non abstract) subclass in the hierarchy must implement all inherited abstract methods, otherwise it must itself be declared abstract.
 
 ```java
 abstract class Shape {
 
 	abstract double area(); // must be implemented by concrete subclasses
-
 
 	void describe() {
 		System.out.println("I am a shape.");
@@ -452,9 +482,10 @@ class Circle extends Shape {
 }
 ```
 
-Although an abstract class cannot be instantiated, its constructors are still called when creating instances of concrete subclasses. 
 
-The chain always starts from the top of the hierarchy and moves down.
+> [!NOTE]
+> - Although an abstract class cannot be instantiated, its constructors are still called when creating instances of concrete subclasses. 
+> - The chain always starts from the top of the hierarchy and moves down.
 
 ### 13.3 Creating Immutable Objects
 
