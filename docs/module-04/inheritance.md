@@ -249,8 +249,10 @@ C
 
 ### 13.1 Method Overriding
 
-Method overriding is a core concept of inheritance: it allows a subclass to provide a **new implementation** for a method that is already defined in its superclass. 
-At runtime, the version of the method that is executed depends on the **actual object type**, not on the reference type. 
+Method overriding is a core concept of inheritance: it allows a subclass to provide a **new implementation** for a method that is already defined in its superclass.
+ 
+At runtime, the version of the method that is executed depends on the **actual object type**, not on the reference type.
+ 
 This is called **dynamic dispatch** and it is what enables polymorphism in Java.
 
 #### 13.1.1 Definition and Role in Inheritance
