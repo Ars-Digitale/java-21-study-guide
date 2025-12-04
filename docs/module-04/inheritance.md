@@ -316,49 +316,88 @@ If both parent and child declare a member (field or method) with the same name, 
 
 ```java
 class Base {
-int value = 10;
+	int value = 10;
 
-void show() {
-    System.out.println("Base value = " + value);
-}
-
-
-}
-
-class Derived extends Base {
-int value = 20; // hides Base.value
-
-void show() {
-    System.out.println("Base value = " + value);
-}
-
+	void show() {
+		System.out.println("Base value = " + value);
+	}
 }
 
 class Derived extends Base {
-int value = 20; // hides Base.value
+	int value = 20; // hides Base.value
 
-@Override
-void show() {
-    System.out.println("Derived value = " + value);          // 20
-    System.out.println("Base value via super = " + super.value); // 10
-}
-
-class Derived extends Base {
-int value = 20; // hides Base.value
-
-@Override
-void show() {
-    System.out.println("Derived value = " + value);          // 20
-    System.out.println("Base value via super = " + super.value); // 10
-}
-
-.show(); // A.show()  (reference type A)
-    b.show(); // B.show()  (reference type B)
-}
+	@Override
+	void show() {
+		System.out.println("Derived value = " + value);          // 20
+		System.out.println("Base value via super = " + super.value); // 10
+	}
 }
 ```
 
-**final** static methods cannot be hidden, and instance methods declared **final** cannot be overridden. If you try to redefine them in a subclass, the code will not compile.
+#### 13.1.3 Overriding Rules (Instance Methods)
+
+- **Same signature**: same method name, same parameter types and order.
+- **Covariant return type**: the overriding method can return the same type as the parent, or a **subtype** of the parent return type.
+- **Accessibility**: the overriding method cannot be less accessible than the overridden one (for example, cannot change from public to protected or private). It can keep the same visibility or increase it.
+- **Checked exceptions**: the overriding method cannot declare new or broader checked exceptions than the parent method; it may declare fewer or more specific checked exceptions, or remove them entirely.
+- **Unchecked exceptions**: can be added or removed without restriction.
+- **final methods**: cannot be overridden.
+
+```java
+class Parent {
+	Number getValue() throws Exception {
+		return 42;
+	}
+}
+
+class Child extends Parent {
+@Override
+	// Covariant return type: Integer is a subclass of Number
+	Integer getValue() throws RuntimeException {
+		return 100;
+	}
+}
+```
+
+#### 13.1.4 Hiding Static Methods
+
+Static methods are **not overridden**; they are **hidden**. 
+
+If a subclass defines a static method with the same signature as a static method in the parent, the subclass method **hides** the parent method. 
+
+Method selection for static methods happens at **compile time**, based on the reference type, not the object type.
+
+```java
+class A {
+	static void show() {
+		System.out.println("A.show()");
+	}
+}
+
+class B extends A {
+	static void show() {
+		System.out.println("B.show()");
+	}
+}
+
+public class TestStatic {
+	public static void main(String[] args) {
+		A a = new B();
+		B b = new B();
+
+			a.show(); // A.show()  (reference type A)
+			b.show(); // B.show()  (reference type B)
+	}
+}
+```
+
+**final** static methods cannot be hidden, and instance methods declared **final** cannot be overridden. 
+
+If you try to redefine them in a subclass, the code will not compile.
+
+**final** static methods cannot be hidden, and instance methods declared **final** cannot be overridden. 
+
+If you try to redefine them in a subclass, the code will not compile.
 
 ### 13.2 Abstract Classes
 
@@ -382,42 +421,46 @@ Abstract classes are used when you want to define a common **base behavior** and
 
 ```java
 abstract class Shape {
-abstract double area(); // must be implemented by concrete subclasses
 
-csharp
-Copier le code
-void describe() {
-    System.out.println("I am a shape.");
-}
+	abstract double area(); // must be implemented by concrete subclasses
 
-Shape() {
-    System.out.println("Shape constructor");
-}
+
+	void describe() {
+		System.out.println("I am a shape.");
+	}
+
+	Shape() {
+		System.out.println("Shape constructor");
+	}
 }
 
 class Circle extends Shape {
-private final double radius;
+	private final double radius;
 
-csharp
-Copier le code
-Circle(double radius) {
-    this.radius = radius;
-}
+	Circle(double radius) {
+		this.radius = radius;
+	}
 
-@Override
-double area() {
-    return Math.PI * radius * radius;
-}
+	@Override
+	double area() {
+		return Math.PI * radius * radius;
+	}
 }
 ```
 
-Although an abstract class cannot be instantiated, its constructors are still called when creating instances of concrete subclasses. The chain always starts from the top of the hierarchy and moves down.
+Although an abstract class cannot be instantiated, its constructors are still called when creating instances of concrete subclasses. 
+
+The chain always starts from the top of the hierarchy and moves down.
 
 ### 13.3 Creating Immutable Objects
 
 #### 13.3.1 What Is an Immutable Object?
 
-An object is **immutable** if, after it has been created, its state **cannot change**. All fields that represent the state remain constant for the lifetime of that object. Immutable objects are simpler to reason about, inherently thread safe (if properly designed), and widely used in the Java Standard Library (for example, `String`, wrapper classes like `Integer`, and many classes in `java.time`).
+An object is **immutable** if, after it has been created, its state **cannot change**. 
+
+All fields that represent the state remain constant for the lifetime of that object. 
+
+Immutable objects are simpler to reason about, inherently thread safe (if properly designed), and widely used in the Java Standard Library (for example, `String`, wrapper classes like `Integer`, and many classes in `java.time`).
 
 #### 13.3.2 Guidelines for Designing Immutable Classes
 
@@ -433,31 +476,29 @@ import java.util.Collections;
 import java.util.List;
 
 public final class Person {
-private final String name; // String is immutable
-private final int age;
-private final List<String> hobbies; // List is mutable, we must protect it
+	private final String name; // String is immutable
+	private final int age;
+	private final List<String> hobbies; // List is mutable, we must protect it
 
-arduino
-Copier le code
-public Person(String name, int age, List<String> hobbies) {
-    this.name = name;
-    this.age = age;
-    // Defensive copy on input
-    this.hobbies = new ArrayList<>(hobbies);
-}
+	public Person(String name, int age, List<String> hobbies) {
+		this.name = name;
+		this.age = age;
+		// Defensive copy on input
+		this.hobbies = new ArrayList<>(hobbies);
+	}
 
-public String getName() {
-    return name; // safe (String is immutable)
-}
+	public String getName() {
+		return name; // safe (String is immutable)
+	}
 
-public int getAge() {
-    return age;
-}
+	public int getAge() {
+		return age;
+	}
 
-public List<String> getHobbies() {
-    // Defensive copy or unmodifiable view on output
-    return Collections.unmodifiableList(hobbies);
-}
+	public List<String> getHobbies() {
+		// Defensive copy or unmodifiable view on output
+		return Collections.unmodifiableList(hobbies);
+	}
 }
 ```
 
@@ -468,7 +509,7 @@ In this example:
 - The list of hobbies is defensively copied on construction and wrapped as unmodifiable in the getter, so external code cannot modify the internal state.
 
 Designing immutable objects is especially important in multi thread contexts and when passing objects across layers of an application. 
-The certification exam often tests whether a supposedly immutable design actually prevents state changes through exposed mutable fields or collections.
+
 
 
 
