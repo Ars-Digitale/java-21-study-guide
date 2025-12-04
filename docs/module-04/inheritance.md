@@ -105,7 +105,7 @@ The `super` reference gives access to members of the direct parent class.
 
 Useful when:  
 - The parent and child define a field/method with the same name: (See below: [Inheriting Members](#13-inheriting-members))
-- When a child class defines a `field` with the same name of an `inherited variable` defined in a parent class, we have **`variable hiding`**;  
+- When a child class defines a `field` with the same name of an `inherited variable` defined in a parent class, we have **`variable hiding`** and the two variables exist indipendently of each other;  
 - When a child class defines a `method` with the same `signature` as a method defined in a parent class, we have **`method overridding`**; 
 - You want to explicitly refer to the inherited implementations
 
@@ -246,5 +246,228 @@ C
 ```
 
 ## 13. Inheriting Members
+
+### 13.1 Method Overriding
+
+Method overriding is a core concept of inheritance: it allows a subclass to provide a **new implementation** for a method that is already defined in its superclass. 
+At runtime, the version of the method that is executed depends on the **actual object type**, not on the reference type. 
+This is called **dynamic dispatch** and it is what enables polymorphism in Java.
+
+#### 13.1.1 Definition and Role in Inheritance
+
+A method in a subclass **overrides** a method in its superclass if:
+
+- the superclass method is `instance` (non static);
+- the subclass method has the same name, the same parameter list and a return type which is the same type or a subtype of the return type in the inherited method;
+- both methods are accessible (not private) and the subclass method is NOT less visible than the superclass one.
+- The overridding method cannot declare NEW or BROADER checked exceptions than those declared in the inherited method. 
+
+Overriding is used to specialize behavior: a subclass can adapt or refine what the parent class does while still being used through a reference of the parent type.
+
+```java
+class Animal {
+	void speak() {
+		System.out.println("Some generic animal sound");
+	}
+}
+
+class Dog extends Animal {
+
+	@Override
+	void speak() {
+		System.out.println("Woof!");
+	}
+}
+
+public class TestOverride {
+	public static void main(String[] args) {
+		Animal a = new Dog(); // reference type = Animal, object type = Dog
+		a.speak(); // prints "Woof!" (Dog implementation)
+	}
+}
+```
+
+#### 13.1.2 Using `super` to Call the Parent Implementation
+
+When a subclass overrides a method, it can still access the superclass implementation via the `super` reference. This is useful if you want to reuse or extend the behavior defined in the parent class.
+
+```java
+class Person {
+	void introduce() {
+		System.out.println("I am a person.");
+	}
+}
+
+class Student extends Person {
+	@Override
+	void introduce() {
+		super.introduce(); // calls Person.introduce()
+		System.out.println("I am also a student.");
+	}
+}
+```
+
+If both parent and child declare a member (field or method) with the same name, the child instance effectively has access to **two versions**:
+
+- the one defined in the child class (default when called directly);
+- the parent version, accessible using `super`.
+
+```java
+class Base {
+int value = 10;
+
+void show() {
+    System.out.println("Base value = " + value);
+}
+
+
+}
+
+class Derived extends Base {
+int value = 20; // hides Base.value
+
+void show() {
+    System.out.println("Base value = " + value);
+}
+
+}
+
+class Derived extends Base {
+int value = 20; // hides Base.value
+
+@Override
+void show() {
+    System.out.println("Derived value = " + value);          // 20
+    System.out.println("Base value via super = " + super.value); // 10
+}
+
+class Derived extends Base {
+int value = 20; // hides Base.value
+
+@Override
+void show() {
+    System.out.println("Derived value = " + value);          // 20
+    System.out.println("Base value via super = " + super.value); // 10
+}
+
+.show(); // A.show()  (reference type A)
+    b.show(); // B.show()  (reference type B)
+}
+}
+```
+
+**final** static methods cannot be hidden, and instance methods declared **final** cannot be overridden. If you try to redefine them in a subclass, the code will not compile.
+
+### 13.2 Abstract Classes
+
+#### 13.2.1 Definition and Purpose
+
+An **abstract class** is a class that cannot be instantiated directly and is intended to be extended. It may contain:
+
+- abstract methods (declared without a body);
+- concrete methods (with implementation);
+- fields, constructors, static members, and even static initializers.
+
+Abstract classes are used when you want to define a common **base behavior** and contract, but leave some details to be implemented by concrete subclasses.
+
+#### 13.2.2 Rules for Abstract Classes
+
+- A class with at least one abstract method **must** be declared abstract.
+- An abstract class **cannot** be instantiated directly.
+- Abstract methods have no body and end with a semicolon.
+- Abstract methods cannot be `final`, `static`, or `private`, because they must be overridable.
+- The first concrete (non abstract) subclass in the hierarchy must implement all inherited abstract methods, otherwise it must itself be declared abstract.
+
+```java
+abstract class Shape {
+abstract double area(); // must be implemented by concrete subclasses
+
+csharp
+Copier le code
+void describe() {
+    System.out.println("I am a shape.");
+}
+
+Shape() {
+    System.out.println("Shape constructor");
+}
+}
+
+class Circle extends Shape {
+private final double radius;
+
+csharp
+Copier le code
+Circle(double radius) {
+    this.radius = radius;
+}
+
+@Override
+double area() {
+    return Math.PI * radius * radius;
+}
+}
+```
+
+Although an abstract class cannot be instantiated, its constructors are still called when creating instances of concrete subclasses. The chain always starts from the top of the hierarchy and moves down.
+
+### 13.3 Creating Immutable Objects
+
+#### 13.3.1 What Is an Immutable Object?
+
+An object is **immutable** if, after it has been created, its state **cannot change**. All fields that represent the state remain constant for the lifetime of that object. Immutable objects are simpler to reason about, inherently thread safe (if properly designed), and widely used in the Java Standard Library (for example, `String`, wrapper classes like `Integer`, and many classes in `java.time`).
+
+#### 13.3.2 Guidelines for Designing Immutable Classes
+
+- Declare the class **final** so it cannot be subclassed (or make all constructors private and provide controlled factory methods).
+- Make all fields that represent state **private** and **final**.
+- Do not provide any mutator (setter) methods.
+- Initialize all fields in constructors (or factory methods) and never expose them in a mutable way.
+- If a field refers to a mutable object, make **defensive copies** on construction and when returning it via getters.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public final class Person {
+private final String name; // String is immutable
+private final int age;
+private final List<String> hobbies; // List is mutable, we must protect it
+
+arduino
+Copier le code
+public Person(String name, int age, List<String> hobbies) {
+    this.name = name;
+    this.age = age;
+    // Defensive copy on input
+    this.hobbies = new ArrayList<>(hobbies);
+}
+
+public String getName() {
+    return name; // safe (String is immutable)
+}
+
+public int getAge() {
+    return age;
+}
+
+public List<String> getHobbies() {
+    // Defensive copy or unmodifiable view on output
+    return Collections.unmodifiableList(hobbies);
+}
+}
+```
+
+In this example:
+
+- `Person` is final: it cannot be subclassed and its behavior cannot be altered through inheritance.
+- All fields are `private` and `final`, set only once in the constructor.
+- The list of hobbies is defensively copied on construction and wrapped as unmodifiable in the getter, so external code cannot modify the internal state.
+
+Designing immutable objects is especially important in multi thread contexts and when passing objects across layers of an application. 
+The certification exam often tests whether a supposedly immutable design actually prevents state changes through exposed mutable fields or collections.
+
+
 
 
