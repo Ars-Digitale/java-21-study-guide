@@ -291,7 +291,9 @@ public class TestOverride {
 
 #### 13.1.2 Using `super` to Call the Parent Implementation
 
-When a subclass overrides a method, it can still access the superclass implementation via the `super` reference. This is useful if you want to reuse or extend the behavior defined in the parent class.
+When a subclass overrides a method, it can still access the superclass implementation via the `super` reference. 
+
+This is useful if you want to reuse or extend the behavior defined in the parent class.
 
 ```java
 class Person {
@@ -365,6 +367,8 @@ Static methods are **not overridden**; they are **hidden**.
 
 If a subclass defines a static method with the same signature as a static method in the parent, the subclass method **hides** the parent method. 
 
+If one of the method is marked as `static` and the other is not, the code will NOT compile.
+
 Method selection for static methods happens at **compile time**, based on the reference type, not the object type.
 
 ```java
@@ -385,8 +389,8 @@ public class TestStatic {
 		A a = new B();
 		B b = new B();
 
-			a.show(); // A.show()  (reference type A)
-			b.show(); // B.show()  (reference type B)
+		a.show(); // A.show()  (reference type A)
+		b.show(); // B.show()  (reference type B)
 	}
 }
 ```
