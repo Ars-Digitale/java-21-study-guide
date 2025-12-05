@@ -95,21 +95,21 @@ A `default` method (declared with the `default` keyword) is a method that define
 
 - A default method include code and is implicitly `public`;
 - A default method cannot be `abstract`, `static` or `final`;
-- As we saw just above, if two interfaces provide default methods with the same signature, the implementing class must override the method.
-- An implementig class may of course rely on the provided implementation of the `default` method without overriding it.
-- The `default` method can be invoked on an instance of the implementing class and NOT as a `static` method of the containing interface.
+- As we saw just above, if two interfaces provide default methods with the same signature, the implementing class must override the method;
+- An implementig class may of course rely on the provided implementation of the `default` method without overriding it;
+- The `default` method can be invoked on an instance of the implementing class and NOT as a `static` method of the containing interface;
 
 ### 1.6 Static methods
 
 - An interface can provide `static methods` (through the keyword `static`) which are implicitly `public`;
-- Static methods must include a method body and are accessed through the reference of the interface name.
+- Static methods must include a method body and are accessed through the reference of the interface name;
 - Static methods cannot be `abstract` or `final`;
 
 ### 1.7 Private interface methods
 
 Among all the concrete methods that an interface can implement we have also:
 
-- **`private` methods**: visible only inside the declaring interface and which can only be invoked from a `non-static` context (`default` methods or other `non-static private methods`) 
+- **`private` methods**: visible only inside the declaring interface and which can only be invoked from a `non-static` context (`default` methods or other `non-static private methods`).
 - **`private static` methods**: visible only inside the declaring interface and which can be invoked by any method of the enclosing interface.
 
 ## 2. Sealed and non-sealed Types
@@ -181,7 +181,7 @@ public static void main(String[] args) {
 
 ## 4. Records (Java 16+)
 
-A **record** is a special class designed to model immutable data: they are, in fact, implicitly **final**; 
+A **record** is a special class designed to model immutable data: they are, in fact, implicitly **final**. 
 
 You can't extend or inherit a record but it is allowed to implement a regular or sealed interface.
 
@@ -202,7 +202,7 @@ System.out.println(element.x);
 System.out.println(element.y);
 ```
 
-In case you need additional validation or tranformation over the provided fields, you can declare: `Long Constructors` or `Compact Constructors`
+In case you need additional validation or tranformation over the provided fields, you can declare: `Long Constructors` or `Compact Constructors`.
 
 ### 4.1 Long Constructor
 
@@ -259,8 +259,8 @@ public record Person(String name, int age) {
 
 When you use pattern matching with `instanceof` or with `switch`, a record pattern must specify:
 
-- The record type
-- A pattern for each field of the record (matching the correct number of components, and compatible types)
+- The record type;
+- A pattern for each field of the record (matching the correct number of components, and compatible types);
 
 Example record:
 
@@ -469,7 +469,7 @@ class Test {
 }
 ```
 
-#### 5.2.2 COmmon Pitfalls
+#### 5.2.2 Common Pitfalls
 
 - Inner classes **cannot declare static members** except **static final constants**.
 
