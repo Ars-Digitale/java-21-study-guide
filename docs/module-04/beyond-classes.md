@@ -6,7 +6,7 @@ This chapter presents several advanced type mechanisms beyond the Java Class des
 
 An **interface** in Java is a reference type that defines a contract of methods that a class agrees to implement. 
 
-A java class may implement any number of interface through the `implements` keyword.
+A Java class may implement any number of interface through the `implements` keyword.
 
 An `interface` may in turn extend multiple interfaces using the `extends` keyword.
 
@@ -16,9 +16,10 @@ Interfaces enable abstraction, loose coupling, and multiple inheritance of type.
 
 - **Abstract** an interface is implicitly abstract and cannot be marked as `final`
 - **Abstract methods** (implicitly `public` and `abstract`)
-- **Default methods** (include code)
-- **Static methods**
-- **Private methods** (Java 9+) for internal reuse
+- **Concrete methods**
+	- **Default methods** (include code and is implicitly `public`)
+	- **Static methods** (declared as `static`, include code and is implicitly `public`)
+	- **Private methods** (Java 9+) for internal reuse
 - **Constants** → implicitly `public static final` and initialized at declaration
 
 ```java
@@ -42,7 +43,8 @@ class BasicCalc implements Calculator {
 }
 ```
 
-> **Note:** **Every** abstract method must be implemented unless the class is abstract.
+> [!NOTE]
+> - **Every** abstract method must be implemented unless the class is abstract.
 
 
 ### 1.3 Multiple Inheritance of Type
@@ -72,6 +74,38 @@ class Z implements X, Y {
     public void run() { } // mandatory
 }
 ```
+
+In case you would still access a particular implementation of the `inherited default` method, you can do it through the following syntax:
+
+```java
+interface X { default int run() { } }
+interface Y { default int run() { } }
+
+class Z implements X, Y {
+    public int useARun(){
+		return Y.super.run();
+	}
+}
+```
+ 
+### 1.5 Default methods
+
+A `default` method (declared with the `default` keyword) is a method that define an implementation and can be `overridden` by a class implementing the interface. 
+
+- A default method include code and is implicitly `public`;
+- A default method cannot be `abstract`, `static` or `final`;
+- As we saw just above, if two interfaces provide default methods with the same signature, the implementing class must override the method.
+- An implementig class may of course rely on the provided implementation of the `default` method without overriding it.
+- The `default` method can be invoked on an instance of the implementing class and NOT as a `static` method of the containing interface.
+
+### 1.6 Static methods
+
+- An interface can provide `static methods` (through the keyword `static`) which are implicitly `public`;
+- Static methods must include a method body and are accessed through the reference of the interface name.
+- Static methods cannot be `abstract` or `final`;
+
+### 1.7 Private interface methods
+
 
 
 ## 2. Enums
