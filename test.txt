@@ -1,201 +1,223 @@
-# Interfaces, Enums, Sealed Classes, Records, and Nested Classes
+# Nested Classes in Java
 
-This chapter presents several advanced type mechanisms introduced by Java over the years: **interfaces**, **enums**, **sealed / non-sealed classes**, **records**, and **nested classes**. All of them appear frequently on certification exams.
+Java supports several kinds of **nested classes** — classes declared inside another class.  
+They are a fundamental tool for encapsulation, code organization, event-handling patterns, and representing logical hierarchies.  
+A nested class always belongs to an **enclosing class** and has special accessibility and instantiation rules depending on its category.
 
+Java defines four kinds of nested classes:
 
-## 1. Interfaces
+- **Static Nested Classes** – declared with `static` inside another class.
+- **Inner Classes** (non-static nested classes).
+- **Local Classes** – declared inside a block (method, constructor, or initializer).
+- **Anonymous Classes** – unnamed classes created inline, usually to override a method or implement an interface.
 
-An **interface** in Java is a reference type that defines a contract of methods that a class agrees to implement. Interfaces enable abstraction, loose coupling, and multiple inheritance of type.
+---
 
-### 1.1 What Interfaces Can Contain
+## 1. Static Nested Classes
 
-- **Abstract methods** (implicitly public and abstract)
-- **Default methods** (include code)
-- **Static methods**
-- **Private methods** (Java 9+) for internal reuse
-- **Constants** → implicitly public static final
+A **static nested class** behaves like a top-level class that is namespaced inside its enclosing class.  
+It **cannot** access instance members of the outer class but **can** access static members.  
+It does **not** hold a reference to an instance of the enclosing class.
 
-```java
-interface Calculator {
-    int add(int a, int b);                 // abstract
-    default int mult(int a, int b) {       // default method
-        return a * b;
-    }
-    static double pi() { return 3.14; }    // static method
-}
-```
+### 1.1 Syntax and Access Rules
 
-
-### 1.2 Implementing an Interface
-
-```java
-class BasicCalc implements Calculator {
-    public int add(int a, int b) { return a + b; }
-}
-```
-
-> **Note:** **Every** abstract method must be implemented unless the class is abstract.
-
-
-### 1.3 Multiple Inheritance of Type
-
-A class may implement multiple interfaces.
-
-```java
-interface A { void a(); }
-interface B { void b(); }
-
-class C implements A, B {
-    public void a() {}
-    public void b() {}
-}
-```
-
-
-### 1.4 Interface Inheritance and Conflicts
-
-If two interfaces provide default methods with the same signature, the implementing class must override the method.
-
-```java
-interface X { default void run() { } }
-interface Y { default void run() { } }
-
-class Z implements X, Y {
-    public void run() { } // mandatory
-}
-```
-
-
-
-## 2. Enums
-
-**Enums** define a fixed set of constant values. They are full-fledged classes with fields, constructors, and methods.
-
-### 2.1 Basic Enum Definition
-
-```java
-enum Day { MON, TUE, WED, THU, FRI, SAT, SUN }
-```
-
-
-### 2.2 Enums with State and Behavior
-
-```java
-enum Level {
-    LOW(1), MEDIUM(5), HIGH(10);
-    private int code; 
-    Level(int code) { this.code = code; }
-    public int getCode() { return code; }
-}
-```
-
-
-### 2.3 Enum Methods
-
-- `values()` – returns all constants
-- `valueOf(String)` – returns constant by name
-- `ordinal()` – index of the constant
-
-
-
-## 3. Sealed and non-sealed Classes
-
-Sealed classes (Java 17+) restrict which other classes can extend or implement them.
-
-```java
-public sealed class Shape permits Circle, Rectangle { }
-final class Circle extends Shape { }
-non-sealed class Rectangle extends Shape { }
-```
-
-### 3.1 Rules
-
-- A sealed class must declare all permitted subclasses.
-- A permitted subclass must be **final**, **sealed**, or **non-sealed**.
-- Enforced at compile time and runtime.
-
-
-
-## 4. Records (Java 16+)
-
-A **record** is a special class designed to model immutable data. It automatically provides:
-
-- **private final fields** for each component
-- **constructor**
-- **getters** (named like fields)
-- **`equals()`, `hashCode()`, `toString()`**
-
-```java
-public record Point(int x, int y) { }
-```
-
-### 4.1 Compact Constructor
-
-```java
-public record Person(String name, int age) {
-    public Person {
-        if (age < 0) throw new IllegalArgumentException();
-    }
-}
-```
-
-
-
-## 5. Nested Classes
-
-Nested classes help organize code and control access. They exist in four forms:
-
-- **Static nested class**
-- **Inner class**
-- **Local class**
-- **Anonymous class**
-
-
-### 5.1 Static Nested Class
-
-Behaves like a top-level class but scoped inside another class. Cannot access instance members directly.
+- Declared using `static class` inside another class.
+- Can access only **static** members of the outer class.
+- Does not have an implicit reference to the enclosing instance.
+- Can be instantiated without an outer instance.
 
 ```java
 class Outer {
-    static class Nested { }
+    static int version = 1;
+
+    static class Nested {
+        void print() {
+            System.out.println("Version: " + version); // OK: accessing static member
+        }
+    }
 }
-```
 
-
-### 5.2 Inner Class
-
-Has an implicit reference to the outer instance.
-
-```java
-class A {
-    class B {
-        void hello() { System.out.println("inner"); }
+class Test {
+    public static void main(String[] args) {
+        Outer.Nested n = new Outer.Nested(); // No Outer instance required
+        n.print();
     }
 }
 ```
 
+### 1.2 Certification Pitfalls
 
-### 5.3 Local Classes
+- Static nested classes **cannot access instance variables**:
 
-Defined inside a block, used for localized behavior.
+```java
+class Outer {
+    int x = 10;
+    static class Nested {
+        void test() {
+            // System.out.println(x); // ❌ Compile error
+        }
+    }
+}
+```
 
+---
 
-### 5.4 Anonymous Classes
+## 2. Inner Classes (Non-Static Nested Classes)
 
-Used for quick one-time implementations
+An **inner class** is associated with an instance of the outer class and can access **all members** of the outer class, including **private** ones.
+
+### 2.1 Syntax and Access Rules
+
+- Declared without `static`.
+- Has an implicit reference to the enclosing instance.
+- Can access both static and instance members of the outer class.
+- Requires an enclosing instance for instantiation.
+
+```java
+class Outer {
+    private int value = 100;
+
+    class Inner {
+        void print() {
+            System.out.println("Value = " + value); // OK: accessing private
+        }
+    }
+
+    void make() {
+        Inner i = new Inner(); // OK inside the outer class
+        i.print();
+    }
+}
+
+class Test {
+    public static void main(String[] args) {
+        Outer o = new Outer();
+        Outer.Inner i = o.new Inner(); // MUST be created from an instance
+        i.print();
+    }
+}
+```
+
+### 2.2 Certification Pitfalls
+
+- Inner classes **cannot declare static members** except **static final constants**.
+
+```java
+class Outer {
+    class Inner {
+        // static int x = 10;     // ❌ Compile error
+        static final int OK = 10; // ✔ Allowed (constant)
+    }
+}
+```
+
+- Instantiating an inner class WITHOUT an outer instance is illegal.
+
+---
+
+## 3. Local Classes
+
+A **local class** is a nested class defined inside a block — most commonly a method.  
+It has no access modifier and is visible only within the block where it is declared.
+
+### 3.1 Characteristics
+
+- Declared inside a method, constructor, or initializer.
+- Can access members of the outer class.
+- Can access local variables if they are **effectively final**.
+- Cannot declare static members (except static final constants).
+
+```java
+class Outer {
+    void compute() {
+        int base = 5; // must be effectively final
+
+        class Local {
+            void show() {
+                System.out.println(base); // OK
+            }
+        }
+
+        new Local().show();
+    }
+}
+```
+
+### 3.2 Certification Pitfalls
+
+- `base` must be effectively final; changing it breaks compilation.
+
+```java
+void compute() {
+    int base = 5;
+    base++; // ❌ Now base is NOT effectively final
+    class Local {}
+}
+```
+
+---
+
+## 4. Anonymous Classes
+
+An **anonymous class** is a one-off class created inline, usually to implement an interface or override a method without naming a new class.
+
+### 4.1 Syntax and Usage
+
+- Created using `new` + type + body.
+- Cannot have constructors (no name).
+- Often used for event handling, callbacks, comparators.
 
 ```java
 Runnable r = new Runnable() {
-    public void run() { }
+    @Override
+    public void run() {
+        System.out.println("Anonymous running");
+    }
 };
 ```
 
+### 4.2 Anonymous Class Extending a Class
 
+```java
+Button b = new Button("Click");
+b.onClick(new ClickHandler() {
+    @Override
+    public void handle() {
+        System.out.println("Handled!");
+    }
+});
+```
 
-## 6. Certification Pitfalls
+---
 
-- Abstract methods in interfaces are implicitly public.
-- Enums cannot extend classes but can implement interfaces.
-- Sealed classes require explicit permission lists.
-- Records are immutable unless you cheat via mutable fields.
-- Inner classes cannot contain static declarations except constants.
+## 5. Comparison of Nested Class Types
+
+A quick table summarizing all kinds of nested classes.
+
+```text
+Type                | Has Outer Instance? | Can Access Outer Instance Members? | Can Have Static Members? | Typical Use
+------------------- | ------------------- | ---------------------------------- | ------------------------- | ---------------------------
+Static Nested       | No                  | No                                 | Yes                      | Namespacing, helpers
+Inner Class         | Yes                 | Yes                                | No (except constants)     | Object-bound behavior
+Local Class         | Yes                 | Yes                                | No                        | Temporary scoped classes
+Anonymous Class     | Yes                 | Yes                                | No                        | Inline customization
+```
+
+---
+
+## 6. Certification Pitfalls Summary
+
+- Inner classes cannot have static members (except constants).
+- Static nested classes cannot access instance members of the outer class.
+- Local and anonymous classes require effectively final variables.
+- Anonymous classes cannot define constructors.
+- To instantiate an inner class, you MUST have an instance of the outer class.
+- Accessing shadowed members requires `Outer.this.member` inside inner classes.
+
+---
+
+If you want, I can now generate:  
+- A full chapter comparing nested classes with records, interfaces, and sealed hierarchies  
+- Exam-style questions specifically about nested classes  
+- A flow diagram showing how each nested class captures context  
+Just let me know!

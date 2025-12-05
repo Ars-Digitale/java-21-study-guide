@@ -143,6 +143,7 @@ Useful when:
 
 ```java
 class Parent { int value = 10; }
+
 class Child extends Parent {
     int value = 20;
 
