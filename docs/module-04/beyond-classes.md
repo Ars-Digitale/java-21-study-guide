@@ -1,5 +1,49 @@
 # Beyond Classes
 
+### Table of Contents
+
+- [Beyond Classes]
+	- [1. Interfaces](#1-interfaces)
+	  - [1.1 What Interfaces Can Contain](#11-what-interfaces-can-contain)
+	  - [1.2 Implementing an Interface](#12-implementing-an-interface)
+	  - [1.3 Multiple Inheritance](#13-multiple-inheritance)
+	  - [1.4 Interface Inheritance and Conflicts](#14-interface-inheritance-and-conflicts)
+	  - [1.5 Default methods](#15-default-methods)
+	  - [1.6 Static methods](#16-static-methods)
+	  - [1.7 Private interface methods](#17-private-interface-methods)
+	- [2. Sealed and non-sealed Types](#2-sealed-and-non-sealed-types)
+	  - [2.1 Rules](#21-rules)
+	- [3. Enums](#3-enums)
+	  - [3.1 Simple Enum Definition](#31-simple-enum-definition)
+	  - [3.2 Complex Enums with State and Behavior](#32-complex-enums-with-state-and-behavior)
+	  - [3.3 Enum Methods](#33-enum-methods)
+	  - [3.4 Rules](#34-rules)
+	- [4. Records (Java 16+)](#4-records-java-16)
+	  - [4.1 Long Constructor](#41-long-constructor)
+	  - [4.2 Compact Constructor](#42-compact-constructor)
+	  - [4.3 Pattern Matching for Records](#43-pattern-matching-for-records)
+	  - [4.4 Nested Record Patterns and Matching Records with var and Generics](#44-nested-record-patterns-and-matching-records-with-var-and-generics)
+		- [4.4.1 Basic Nested Record Pattern](#441-basic-nested-record-pattern)
+		- [4.4.2 Nested Record Patterns with var](#442-nested-record-patterns-with-var)
+		- [4.4.3 Nested Record Patterns and Generics](#443-nested-record-patterns-and-generics)
+		- [4.4.4 Common Errors with Nested Record Patterns](#444-common-errors-with-nested-record-patterns)
+	- [5. Nested Classes in Java](#5-nested-classes-in-java)
+	  - [5.1 Static Nested Classes](#51-static-nested-classes)
+		- [5.1.1 Syntax and Access Rules](#511-syntax-and-access-rules)
+		- [5.1.2 Common Pitfalls](#512-common-pitfalls)
+	  - [5.2 Inner Classes (Non-Static Nested Classes)](#52-inner-classes-non-static-nested-classes)
+		- [5.2.1 Syntax and Access Rules](#521-syntax-and-access-rules)
+		- [5.2.2 Common Pitfalls](#522-common-pitfalls)
+	  - [5.3 Local Classes](#53-local-classes)
+		- [5.3.1 Characteristics](#531-characteristics)
+		- [5.3.2 Common Pitfalls](#532-common-pitfalls)
+	  - [5.4 Anonymous Classes](#54-anonymous-classes)
+		- [5.4.1 Syntax and Usage](#541-syntax-and-usage)
+		- [5.4.2 Anonymous Class Extending a Class](#542-anonymous-class-extending-a-class)
+	  - [5.5 Comparison of Nested Class Types](#55-comparison-of-nested-class-types)
+
+---
+
 This chapter presents several advanced type mechanisms beyond the Java Class design: **interfaces**, **enums**, **sealed / non-sealed classes**, **records**, and **nested classes**. 
 
 ## 1. Interfaces
@@ -280,7 +324,7 @@ Nested record patterns allow you to destructure records that contain other recor
 
 They combine the power of `record` deconstruction with pattern matching, giving you a concise and expressive way to navigate hierarchical data structures.
 
-#### 4.3.1 Basic Nested Record Pattern
+#### 4.4.1 Basic Nested Record Pattern
 
 If a record contains another record, you can destructure both at once:
 
@@ -300,7 +344,7 @@ void printInfo(Object obj) {
 Here above the `Person` pattern includes a nested `Address` pattern. 
 Both are matched structurally.
 
-#### 4.3.2 Nested Record Patterns with `var`
+#### 4.4.2 Nested Record Patterns with `var`
 
 Instead of specifying exact types for each field, you can use `var` inside the pattern to let the compiler infer the type. 
 
@@ -316,7 +360,7 @@ Instead of specifying exact types for each field, you can use `var` inside the p
 > - You still need the enclosing record type (Person, Address); 
 > - only the field types can be replaced with `var`.
 
-#### 4.3.3 Nested Record Patterns and Generics
+#### 4.4.3 Nested Record Patterns and Generics
 
 Record patterns also work with generic records.
 
@@ -337,7 +381,7 @@ In this example:
 - The pattern requires exactly `Box<String>`, not `Box<Integer>`.
 - Inside the pattern, `var v` captures the unboxed generic value.
 
-#### 4.3.4 Common Errors with Nested Record Patterns
+#### 4.4.4 Common Errors with Nested Record Patterns
 
 Mismatched record structure
 
@@ -420,7 +464,7 @@ class Test {
 }
 ```
 
-#### 5.1.1 Common Pitfalls
+#### 5.1.2 Common Pitfalls
 
 - Static nested classes **cannot access instance variables**:
 
@@ -435,7 +479,6 @@ class Outer {
 }
 ```
 
-
 ### 5.2 Inner Classes (Non-Static Nested Classes)
 
 An **inner class** is associated with an instance of the outer class and can access **all members** of the outer class, including **private** ones.
@@ -445,7 +488,7 @@ An **inner class** is associated with an instance of the outer class and can acc
 - Declared without `static`.
 - Has an implicit reference to the enclosing instance.
 - Can access both static and instance members of the outer class.
-- Requires an enclosing instance for instantiation.
+- Since it is not static, it has to be called through an instance of the enclosing class.
 
 ```java
 class Outer {
@@ -485,7 +528,8 @@ class Outer {
 }
 ```
 
-- Instantiating an inner class WITHOUT an outer instance is illegal.
+> [!WARNING]
+> - Instantiating an inner class WITHOUT an outer instance is illegal.
 
 
 ### 5.3 Local Classes
