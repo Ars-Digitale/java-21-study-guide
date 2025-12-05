@@ -310,6 +310,11 @@ short a = 5 + (short) b; 				// ❌ error: both operand are automatically promot
 Casting also applies to **object references** within inheritance hierarchies.  
 It doesn’t change the actual object in memory, only how it is interpreted by the program.
 
+When dealing with "Object & References" you sou should keep in mind that:
+
+- The object's actual type determines which properties the object contains in memory.
+- The type of the reference used to access the object determines which methods and fields the Java program is allowed to access. 
+
 #### **2.1 Upcasting (Widening Reference Cast)**
 
 Conversion from a subclass reference to a superclass type.  

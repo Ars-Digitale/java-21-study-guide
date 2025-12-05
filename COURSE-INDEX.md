@@ -23,3 +23,4 @@
 	- [Methods, Attributes and Variables](docs/module-04/methods-attributes.md)
 	- [Class Loading, Initialization, and Object Construction](docs/module-04/class-loading.md)
 	- [Inheritance](docs/module-04/inheritance.md)
+	- [Beyond Classes](docs/module-04/beyond-classes.md)

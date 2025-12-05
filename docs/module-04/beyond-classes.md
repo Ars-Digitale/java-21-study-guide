@@ -1,19 +1,25 @@
-# Interfaces, Enums, Sealed Classes, Records, and Nested Classes
+# Beyond Classes
 
-This chapter presents several advanced type mechanisms introduced by Java over the years: **interfaces**, **enums**, **sealed / non-sealed classes**, **records**, and **nested classes**. All of them appear frequently on certification exams.
-
+This chapter presents several advanced type mechanisms beyond the Java Class design: **interfaces**, **enums**, **sealed / non-sealed classes**, **records**, and **nested classes**. 
 
 ## 1. Interfaces
 
-An **interface** in Java is a reference type that defines a contract of methods that a class agrees to implement. Interfaces enable abstraction, loose coupling, and multiple inheritance of type.
+An **interface** in Java is a reference type that defines a contract of methods that a class agrees to implement. 
+
+A java class may implement any number of interface through the `implements` keyword.
+
+An `interface` may in turn extend multiple interfaces using the `extends` keyword.
+
+Interfaces enable abstraction, loose coupling, and multiple inheritance of type.
 
 ### 1.1 What Interfaces Can Contain
 
-- **Abstract methods** (implicitly public and abstract)
+- **Abstract** an interface is implicitly abstract and cannot be marked as `final`
+- **Abstract methods** (implicitly `public` and `abstract`)
 - **Default methods** (include code)
 - **Static methods**
 - **Private methods** (Java 9+) for internal reuse
-- **Constants** → implicitly public static final
+- **Constants** → implicitly `public static final` and initialized at declaration
 
 ```java
 interface Calculator {
@@ -25,6 +31,8 @@ interface Calculator {
 }
 ```
 
+> [!WARNING]
+> - Because interface abstract methods are implicitly `public`, you CAN'T reduce the access level on an implementing method
 
 ### 1.2 Implementing an Interface
 
@@ -64,7 +72,6 @@ class Z implements X, Y {
     public void run() { } // mandatory
 }
 ```
-
 
 
 ## 2. Enums
