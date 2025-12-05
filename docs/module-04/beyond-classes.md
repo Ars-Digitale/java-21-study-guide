@@ -48,7 +48,7 @@ class BasicCalc implements Calculator {
 > - **Every** abstract method must be implemented unless the class is abstract.
 
 
-### 1.3 Multiple Inheritance of Type
+### 1.3 Multiple Inheritance
 
 A class may implement multiple interfaces.
 
@@ -132,6 +132,7 @@ non-sealed class Rectangle extends Shape { }
 - A permitted sub-type must be **final**, **sealed**, or **non-sealed**; because interfaces cannot be final, they can only be marked `sealed` or `non-sealed` when extending a sealed interface.
 - Sealed Types must be declared in the same package (or named module) as their direct sub-types.
 
+---
 
 ## 3. Enums
 
@@ -178,6 +179,7 @@ public static void main(String[] args) {
 - Enum can contain `static` and `instance` methods;
 - Enums can implement `interfaces`;
 
+---
 
 ## 4. Records (Java 16+)
 
@@ -370,6 +372,7 @@ case var(Person(var n, var a)) -> ...
 > [!NOTE]
 > - `var` cannot stand in for the whole pattern, only for individual components.
 
+---
 
 ## 5. Nested Classes in Java
 
