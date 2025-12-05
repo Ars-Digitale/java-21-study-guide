@@ -6,6 +6,8 @@ This chapter presents several advanced type mechanisms beyond the Java Class des
 
 An **interface** in Java is a reference type that defines a contract of methods that a class agrees to implement. 
 
+An interface is implicitly `abstract` and cannot be marked as `final`: as with top-level classes, an interface can declare visibility of type `public` or `default (package private)`.
+
 A Java class may implement any number of interface through the `implements` keyword.
 
 An `interface` may in turn extend multiple interfaces using the `extends` keyword.
@@ -14,7 +16,6 @@ Interfaces enable abstraction, loose coupling, and multiple inheritance of type.
 
 ### 1.1 What Interfaces Can Contain
 
-- **Abstract** an interface is implicitly abstract and cannot be marked as `final`
 - **Abstract methods** (implicitly `public` and `abstract`)
 - **Concrete methods**
 	- **Default methods** (include code and is implicitly `public`)
@@ -106,20 +107,43 @@ A `default` method (declared with the `default` keyword) is a method that define
 
 ### 1.7 Private interface methods
 
+Among all the concrete methods that an interface can implement we have also:
 
+- **`private` methods**: visible only inside the declaring interface and which can only be invoked from a `non-static` context (`default` methods or other `non-static private methods`) 
+- **`private static`** methods: visible only inside the declaring interface and which can be invoked by any method of the enclosing interface.
 
-## 2. Enums
+## 2. Sealed and non-sealed Types
+
+Sealed classes and interfaces (Java 17+) restrict which other classes (or interfaces) can extend or implement them.
+
+```java
+public sealed class Shape permits Circle, Rectangle { }
+final class Circle extends Shape { }
+non-sealed class Rectangle extends Shape { }
+```
+
+A sealed type is declared by placing the `sealed` modifier right before the class (or interface) keyword, and adding, after the Type name, the `permits` keyword followed by the list of types that can extend (or implement) it.
+
+ 
+### 2.1 Rules
+
+- A sealed Type must declare all permitted Sub-Types.
+- A permitted sub-type must be **final**, **sealed**, or **non-sealed**: because interfaces cannot be final, when extending a sealed interface they can only be marked `sealed` or `non-sealed`.
+- Sealed Types must be declared in the same package (or named module) as their direct sub-types.
+- 
+
+## 3. Enums
 
 **Enums** define a fixed set of constant values. They are full-fledged classes with fields, constructors, and methods.
 
-### 2.1 Basic Enum Definition
+### 3.1 Basic Enum Definition
 
 ```java
 enum Day { MON, TUE, WED, THU, FRI, SAT, SUN }
 ```
 
 
-### 2.2 Enums with State and Behavior
+### 3.2 Enums with State and Behavior
 
 ```java
 enum Level {
@@ -131,29 +155,11 @@ enum Level {
 ```
 
 
-### 2.3 Enum Methods
+### 3.3 Enum Methods
 
 - `values()` – returns all constants
 - `valueOf(String)` – returns constant by name
 - `ordinal()` – index of the constant
-
-
-
-## 3. Sealed and non-sealed Classes
-
-Sealed classes (Java 17+) restrict which other classes can extend or implement them.
-
-```java
-public sealed class Shape permits Circle, Rectangle { }
-final class Circle extends Shape { }
-non-sealed class Rectangle extends Shape { }
-```
-
-### 3.1 Rules
-
-- A sealed class must declare all permitted subclasses.
-- A permitted subclass must be **final**, **sealed**, or **non-sealed**.
-- Enforced at compile time and runtime.
 
 
 
