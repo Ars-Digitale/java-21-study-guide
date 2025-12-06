@@ -1,13 +1,14 @@
 # Functional Programming in Java
 
 Functional programming is a programming paradigm that focuses on describing what should be done rather than how it should be done.
-Starting from Java 8, the language added several features that enable functional-style programming: lambda expressions, functional interfaces, and method references.
+Starting from Java 8, the language added several features that enable functional-style programming: `lambda expressions`, `functional interfaces`, and `method references`.
 
 These features allow developers to write more expressive, concise, and reusable code, especially when working with collections, concurrency APIs, and event-driven systems.
 
 ## 1. Functional Interfaces
 
 In Java, a **functional interface** is an interface that contains **exactly one** abstract method.
+
 Functional interfaces enable **Lambda Expressions** and **Method References**, forming the core of Java’s functional programming model.
 
 > **Note:** Java automatically treats any interface with a single abstract method as a functional interface, `` annotation is optional but recommended.
