@@ -5,171 +5,369 @@ Starting from Java 8, the language added several features that enable functional
 
 These features allow developers to write more expressive, concise, and reusable code, especially when working with collections, concurrency APIs, and event-driven systems.
 
-# 1. Functional Interfaces
+## 1. Functional Interfaces
 
-A functional interface is an interface that declares exactly one abstract method. This method represents a single behavior and is the target for lambda expressions and method references.
+In Java, a **functional interface** is an interface that contains **exactly one** abstract method.
+Functional interfaces enable **Lambda Expressions** and **Method References**, forming the core of Java’s functional programming model.
 
-## 1.1 Rules for Functional Interfaces
+> **Note:** Java automatically treats any interface with a single abstract method as a functional interface, `` annotation is optional but recommended.
 
-- A functional interface must have exactly one abstract method.
-- It may include default, static, and private methods.
-- @FunctionalInterface annotation is optional but recommended.
+### 1.1 Rules for Functional Interfaces
+
+- **Exactly one abstract method** (SAM = Single Abstract Method).
+- Interfaces may declare any number of **default** or **static** methods.
+- They may override `Object` methods (e.g., `toString()`) without affecting SAM count.
+- The functional method may come from a **superinterface**.
+
+Example:
 
 ```java
 @FunctionalInterface
-interface Printer {
-void print(String msg); // Single abstract method
+interface Adder {
+    int add(int a, int b);   // single abstract method
+    static void info() {}
+    default void log() {}
 }
 ```
 
-## 1.2 Common Functional Interfaces (java.util.function)
+### 1.2 Common Functional Interfaces (java.util.function)
 
-Below is a table of the most common standard functional interfaces.
-
-```text
-Type Parameters → Returns Example use
-
-Supplier<T> () → T get a value
-Consumer<T> (T) → void print, log
-Function<T,R> (T) → R transform value
-Predicate<T> (T) → boolean filtering
-BiFunction<A,B,R> (A,B) → R combining inputs
-UnaryOperator<T> (T) → T numeric ops
-BinaryOperator<T> (T,T) → T reduce/combine
-```
-
-## 1.3 Examples for each Functional Interface
-
-```java
-Supplier<String> s = () -> "Hello!";
-Consumer<String> c = msg -> System.out.println(msg);
-Function<String, Integer> f = str -> str.length();
-Predicate<Integer> p = n -> n > 10;
-
-System.out.println(s.get());
-c.accept("Test");
-System.out.println(f.apply("abc"));
-System.out.println(p.test(12));
-```
-
-## 1.4 Convenience Methods on Functional Interfaces
-
-Many functional interfaces provide helper methods to chain or combine behaviors.
+Below is a certification-grade summary of the most important functional interfaces.
 
 ```text
-Interface Methods
-
-Function andThen(), compose()
-Predicate and(), or(), negate()
-Consumer andThen()
-BinaryOperator minBy(), maxBy()
+Functional Interface | Returns | Method | Parameters
+-------------------------------------------------------------
+Supplier<T>          | T       | get()         | 0
+Consumer<T>          | void    | accept(T)     | 1
+BiConsumer<T,U>      | void    | accept(T,U)   | 2
+Function<T,R>        | R       | apply(T)      | 1
+BiFunction<T,U,R>    | R       | apply(T,U)    | 2
+UnaryOperator<T>     | T       | apply(T)      | 1 (same types)
+BinaryOperator<T>    | T       | apply(T,T)    | 2 (same types)
+Predicate<T>         | boolean | test(T)       | 1
+BiPredicate<T,U>     | boolean | test(T,U)     | 2
 ```
+
+Examples
 
 ```java
-Predicate<Integer> isEven = x -> x % 2 == 0;
-Predicate<Integer> isPositive = x -> x > 0;
-
-Predicate<Integer> evenAndPositive = isEven.and(isPositive);
-System.out.println(evenAndPositive.test(4)); // true
+Supplier<String> sup = () -> "Hello!";
+Consumer<String> printer = s -> System.out.println(s);
+Function<String, Integer> length = s -> s.length();
+UnaryOperator<Integer> square = x -> x * x;
+Predicate<Integer> positive = x -> x > 0;
 ```
 
-## 1.5 Primitive Functional Interfaces
+### 1.3 Convenience Methods on Functional Interfaces
+
+Many FI come with helper methods that allow chaining and composition. These are heavily tested in certification exams.
 
 ```text
-IntPredicate, LongPredicate, DoublePredicate
-IntFunction<R>, LongFunction<R>, DoubleFunction<R>
-IntSupplier, LongSupplier, DoubleSupplier
-IntUnaryOperator, IntBinaryOperator, etc.
+Interface        | Method         | Description
+--------------------------------------------------------------
+Function         | andThen()      | applies this, then another
+Function         | compose()      | applies another, then this
+Function         | identity()     | returns a function x -> x
+Predicate        | and()          | logical AND
+Predicate        | or()           | logical OR
+Predicate        | negate()       | logical NOT
+Consumer         | andThen()      | chains consumers
+BinaryOperator   | minBy()        | comparator-based minimum
+BinaryOperator   | maxBy()        | comparator-based maximum
 ```
+
+Examples
 
 ```java
-IntPredicate ip = x -> x > 5;
-System.out.println(ip.test(7));
+Function<Integer, Integer> times2 = x -> x * 2;
+Function<Integer, Integer> plus3  = x -> x + 3;
+
+var result1 = times2.andThen(plus3).apply(5);   // (5*2)+3 = 13
+var result2 = times2.compose(plus3).apply(5);   // (5+3)*2 = 16
+
+Predicate<String> longString = s -> s.length() > 5;
+Predicate<String> startsWithA = s -> s.startsWith("A");
+
+boolean ok = longString.and(startsWithA).test("Amazing");  // true
 ```
 
-# 2. Lambda Expressions
+### 1.4 Primitive Functional Interfaces
 
-A lambda expression is a compact way of writing a function. It represents an implementation of a functional interface.
-
-## 2.1 Syntax
+Java provides specialized versions of functional interfaces for primitives to avoid boxing/unboxing overhead.
 
 ```text
-(parameters) -> expression
-(parameters) -> { statements }
+Category     | Interfaces
+------------------------------------------------------------
+Int-based    | IntSupplier, IntConsumer, IntPredicate,
+             | IntFunction<R>, IntUnaryOperator,
+             | IntBinaryOperator
+Long-based   | LongSupplier, LongConsumer, LongPredicate, ...
+Double-based | DoubleSupplier, DoubleConsumer, DoublePredicate, ...
+To-Primitive | ToIntFunction<T>, ToLongFunction<T>, ToDoubleFunction<T>
+From-Primitive | IntToLongFunction, IntToDoubleFunction, ...
+Bi-Primitive  | ObjIntConsumer<T>, ObjLongConsumer<T>, ...
 ```
 
-## 2.2 Rules for Lambdas
-
-- Parameter types can be omitted if inference is possible.
-- If there is one parameter, parentheses are optional.
-- If the body is a single expression, braces and return are omitted.
-- Lambdas cannot declare checked exceptions unless allowed by the target functional interface.
+Example
 
 ```java
-// full
-Function<String, Integer> f1 = (String s) -> { return s.length(); };
-
-// simplified
-Function<String, Integer> f2 = s -> s.length();
+IntSupplier dice = () -> (int)(Math.random() * 6) + 1;
+IntPredicate even = x -> x % 2 == 0;
+IntUnaryOperator doubleIt = x -> x * 2;
 ```
 
-# 3. Method References
 
-A method reference is a shorthand syntax to reference an existing method instead of writing a lambda.
-It is still a functional interface implementation.
+### 1.5 Summary
 
-## 3.1 Types of Method References
+- Functional Interfaces contain exactly one abstract method (SAM).
+- They power Lambdas and Method References.
+- Java offers many built-in FIs in java.util.function.
+- Primitive variants improve performance by removing boxing.
 
-### 3.1.1 Reference to a Static Method
+---
+
+## 2. Lambda Expressions
+
+A lambda expression is a compact way of writing a function. 
+Lambda expressions provide a concise way to define implementations of functional interfaces.
+A lambda is essentially a short block of code that takes parameters and returns a value, without requiring a full method declaration.
+
+They represent behavior as data and are a key element of Java’s functional programming model.
+
+### 2.1 Syntax of Lambda Expressions
+
+The general syntax is:
+
+`(parameters) -> expression`
+or
+`(parameters) -> { statements }`
+
+### 2.2 Examples of Lambda Syntax
+
+**Zero parameters**
+```java
+Runnable r = () -> System.out.println("Hello");
+```
+
+**One parameter (parentheses optional)**
+```java
+Consumer<String> c = s -> System.out.println(s);
+```
+
+**Multiple parameters**
+```java
+BinaryOperator<Integer> add = (a, b) -> a + b;
+```
+
+**With a block body**
+```java
+Function<Integer, String> f = (x) -> {
+    int doubled = x * 2;
+    return "Value: " + doubled;
+};
+```
+
+### 2.3 Rules for Lambda Expressions
+
+- Parameter types may be omitted (type inference).
+- If a parameter has a type, all parameters must specify the type.
+- A single parameter does not require parentheses.
+- Multiple parameters require parentheses.
+- If the body is a single expression, `return` is not allowed.
+- If the body is in `{ }` brackets, `return` must appear if a value is returned.
+- Lambda expressions can only be assigned to functional interfaces (SAM types).
+
+### 2.4 Type Inference
+
+The compiler infers the lambda's type from the target functional interface context.
 
 ```java
-Function<Integer, String> f = String::valueOf;
+Predicate<String> p = s -> s.isEmpty();  // s inferred as String
 ```
 
-Equivalent lambda:
-
-`x -> String.valueOf(x)`
-
-### 3.1.2 Reference to an Instance Method of a Particular Object
+If the compiler cannot infer the type, you must specify it explicitly.
 
 ```java
-String prefix = "Hello ";
-Function<String, String> f = prefix::concat;
+BiFunction<Integer, Integer, Integer> f = (Integer a, Integer b) -> a * b;
 ```
 
-Equivalent lambda:
+### 2.5 Restrictions in Lambda Bodies
 
-`s -> prefix.concat(s)`
-
-### 3.1.3 Reference to an Instance Method of an Arbitrary Object
+**Lambdas cannot reassign non-final (effectively final) local variables.**
 
 ```java
-Function<String, Integer> f = String::length;
+int x = 10;
+Runnable r = () -> {
+    // x++;   // ❌ compile error — x must be effectively final
+    System.out.println(x);
+};
 ```
 
-Equivalent lambda:
-
-`s -> s.length()`
-
-### 3.1.4 Reference to a Constructor
+**They CAN modify object state (only references must be effectively final).**
 
 ```java
-Supplier<ArrayList<String>> s = ArrayList::new;
+var list = new ArrayList<>();
+Runnable r2 = () -> list.add("OK");  // allowed
 ```
 
-Equivalent lambda:
+### 2.6 Return Type Rules
 
-`() -> new ArrayList<>()`
+If the body is an expression: the expression is the return value.
 
-## 3.2 Summary Table of Method References
+```java
+Function<Integer, Integer> f = x -> x * 2;
+```
+
+If the body is a block: you must include `return`.
+
+```java
+Function<Integer, Integer> g = x -> {
+    return x * 2;
+};
+```
+
+### 2.7 Lambdas vs Anonymous Classes
+
+- Lambdas do NOT create a new scope — they share the enclosing scope.
+- `this` inside a lambda refers to the enclosing object, not the lambda.
+
+```java
+class Test {
+    void run() {
+        Runnable r = () -> System.out.println(this.toString());
+    }
+}
+```
+
+In anonymous classes, `this` refers to the anonymous class instance.
+
+### 2.8 Common Lambda Errors (Certification Traps)
+
+**Inconsistent return types**
+```java
+x -> { if (x > 0) return 1; }  // ❌ missing return for negative case
+```
+
+**Mixing typed and untyped parameters**
+```java
+(a, int b) -> a + b   // ❌ illegal
+```
+
+**Returning a value from a void-target lambda**
+```java
+Runnable r = () -> 5;  // ❌ Runnable.run() returns void
+```
+
+**Ambiguous overload resolution**
+
+```java
+void m(IntFunction<Integer> f) {}
+void m(Function<Integer, Integer> f) {}
+
+m(x -> x + 1);  // ❌ ambiguous
+```
+
+---
+
+## 3. Method References
+
+Method references provide a shorthand syntax for using an existing method as a functional interface implementation.  
+They are equivalent to lambda expressions, but more concise, readable, and often preferred when the target method already exists.
+
+There are four categories of method references in Java:
+
+- 1. Reference to a static method (`ClassName::staticMethod`)
+- 2. Reference to an instance method of a particular object (`instance::method`)
+- 3. Reference to an instance method of an arbitrary object of a given type (`ClassName::instanceMethod`)
+- 4. Reference to a constructor (`ClassName::new`)
+
+
+### 3.1 Reference to a Static Method
+
+A static method reference replaces a lambda that calls a static method.
+
+```java
+class Utils {
+    static int square(int x) { return x * x; }
+}
+
+Function<Integer, Integer> f1 = x -> Utils.square(x);
+Function<Integer, Integer> f2 = Utils::square;  // method reference
+```
+
+Both `f1` and `f2` behave identically.
+
+
+### 3.2 Reference to an Instance Method of a Particular Object
+
+Used when you already have an object instance, and want to refer to one of its methods.
+
+```java
+String prefix = "Hello, ";
+
+UnaryOperator<String> op1 = s -> prefix.concat(s);
+UnaryOperator<String> op2 = prefix::concat;   // method reference
+
+System.out.println(op2.apply("World"));
+```
+
+The reference `prefix::concat` binds `concat` to **that specific object**.
+
+
+### 3.3 Reference to an Instance Method of an Arbitrary Object of a Given Type
+
+This is the trickiest form.  
+The functional interface’s first parameter becomes the method’s receiver (`this`).
+
+```java
+BiPredicate<String, String> p1 = (s1, s2) -> s1.equals(s2);
+BiPredicate<String, String> p2 = String::equals;   // method reference
+
+System.out.println(p2.test("abc", "abc"));  // true
+```
+
+> **Note:** This form applies the method to the *first argument* of the lambda.
+
+
+### 3.4 Reference to a Constructor
+
+Constructor references replace lambdas that call `new`.
+
+```java
+Supplier<ArrayList<String>> sup1 = () -> new ArrayList<>();
+Supplier<ArrayList<String>> sup2 = ArrayList::new; // method reference
+
+Function<Integer, ArrayList<String>> sup3 = ArrayList::new;
+// calls the constructor ArrayList(int capacity)
+```
+
+### 3.5 Summary Table of Method Reference Types
+
+The table below summarizes all method reference categories.
 
 ```text
-Pattern Example Meaning
-
-Class::staticMethod Integer::parseInt calls static method
-instance::method obj::toString calls method on given object
-Class::instanceMethod String::toLowerCase method of unknown object
-Class::new ArrayList::new constructor reference
+Type                                | Syntax Example          | Equivalent Lambda
+----------------------------------- | ------------------------ | ----------------------------------------
+Static method                       | Class::staticMethod     | x -> Class.staticMethod(x)
+Instance method of specific object  | instance::method        | x -> instance.method(x)
+Instance method of arbitrary object | Class::method           | (obj, x) -> obj.method(x)
+Constructor                         | Class::new              | () -> new Class()
 ```
 
-# End of Chapter
+### 3.6 Common Pitfalls
+
+- A method reference must match *exactly* the functional interface signature.
+- Method overloads can make method references ambiguous.
+- Instance-method reference (`Class::method`) shifts the receiver to parameter 1.
+- Constructor reference fails if there is no matching constructor.
+
+```java
+// ❌ Ambiguous: which println()? (println(int), println(String)...)
+Consumer<String> c = System.out::println; // OK only because FI parameter is String
+
+// ❌ No matching constructor
+Function<String, Integer> f = Integer::new; 
+// ERROR: Integer(String) exists, but return type Integer must match
+```
+
+When in doubt, rewrite the method reference as a lambda — if the lambda works but the method reference does not, the problem is usually signature matching.
