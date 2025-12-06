@@ -24,3 +24,5 @@
 	- [Class Loading, Initialization, and Object Construction](docs/module-04/class-loading.md)
 	- [Inheritance](docs/module-04/inheritance.md)
 	- [Beyond Classes](docs/module-04/beyond-classes.md)
+- [Module 5: Functional Programming]
+	- [Basics of functional programming in Java](docs/module-05/functional.md)
