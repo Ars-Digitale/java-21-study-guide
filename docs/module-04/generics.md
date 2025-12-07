@@ -1,7 +1,7 @@
-# Generics in Java (Certification Grade)
+# Generics in Java
 
 Java Generics provide **compile-time type safety** by allowing `classes`, `interfaces`, and `methods` to work with **types as parameters**.  
-They prevent ClassCastException at runtime by moving type checks to compile time, and they increase code reusability by enabling type-agnostic algorithms.  
+They prevent ClassCastException at runtime by moving type checks to **compile time**, and they increase code reusability by enabling type-agnostic algorithms.  
 
 Generics apply to:  
 - Classes
@@ -67,122 +67,19 @@ String t = Util.pick("A", "B");         // inference works
 ```
 
 
-## 4. Bounds on Type Parameters (extends / super)
-
-### 4.1 Upper Bounds: extends
-
-`<T extends Number>` means **T must be Number or a subclass**.
-
-```java
-class Stats<T extends Number> {
-    T num;
-    Stats(T num) { this.num = num; }
-}
-```
-
-### 4.2 Multiple Bounds
-
-Syntax: `T extends Class & Interface1 & Interface2 ...`  
-The class must come first.
-
-```java
-class C<T extends Number & Comparable<T>> { }
-```
-
-## 5. Wildcards: `?`, `? extends`, `? super`
-
-### 5.1 Unbounded Wildcard `?`
-
-Use when you want to accept a list of unknown type:
-
-```java
-void printAll(List<?> list) { ... }
-```
-
-### 5.2 Upper-Bounded Wildcard `? extends`
-
-```java
-List<? extends Number> nums = List.of(1,2,3);
-Number n = nums.get(0);   // OK
-// nums.add(5);           // ❌ cannot add: type safety
-```
-
-Rule: **You cannot add elements (except null) to ? extends**  
-because you don’t know the exact subtype.
-
-### 5.3 Lower-Bounded Wildcard `? super`
-
-```java
-List<? super Integer> list = new ArrayList<Number>();
-list.add(10);    // OK
-Object o = list.get(0); // returns Object (lowest common supertype)
-```
-
-Rule: “Super accepts insertion, extends accepts extraction.”
-
-
-## 6. Generics and Inheritance
-
-Important rule: **Generics do NOT participate in inheritance**.
-
-```java
-List<String> ls = new ArrayList<>();
-List<Object> lo = ls;      // ❌ compile error
-```
-
-Instead:
-
-```java
-List<? extends Object> ok = ls;   // works
-```
-
-
-## 7. Type Inference (Diamond Operator)
-
-```java
-Map<String, List<Integer>> map = new HashMap<>();
-```
-
-The compiler infers generic arguments from the assignment.
-
-
-## 8. Raw Types (Legacy Compatibility)
-
-A **raw type** disables generics, re-introducing unsafe behavior.
-
-```java
-List raw = new ArrayList();
-raw.add("x");
-raw.add(10);   // allowed, but unsafe
-```
-
-> **Note:** Raw types should be avoided.
-
-
-## 9. Generic Arrays (Not Allowed)
-
-You cannot create arrays of parameterized types:
-
-```java
-List<String>[] arr = new List<String>[10];   // ❌ compile error
-```
-
-Because arrays enforce runtime type safety while generics rely on compile time only.
-
-
-## 10. Type Erasure
+## 4. Type Erasure
 
 Type erasure is the process by which the Java compiler removes all generic type information before generating bytecode. This ensures backward compatibility with pre-Java-5 JVMs.
 
 At compile time, generics are fully checked: type bounds, variance, method overloading with generics, etc. However, at runtime, all generic information disappears.
 
-### 10.1 How Type Erasure Works
+### 4.1 How Type Erasure Works
 
 - Replace all type variables (like `T`) with their erasure.
 - Insert casts where needed.
 - Remove all generic type arguments (e.g., `List<String>` → `List`).
 
-### 10.2 Erasure of Unbounded Type Parameters
+### 4.2 Erasure of Unbounded Type Parameters
 
 If a type variable has no bound:
 
@@ -202,7 +99,7 @@ class Box {
 }
 ```
 
-### 10.3 Erasure of Bounded Type Parameters
+### 4.3 Erasure of Bounded Type Parameters
 
 If the type parameter has bounds:
 
@@ -220,7 +117,7 @@ class TaskRunner {
 }
 ```
 
-### 10.4 Multiple Bounds: The First Bound Determines Erasure
+### 4.4 Multiple Bounds: The First Bound Determines Erasure
 
 Java allows multiple bounds:
 
@@ -262,7 +159,7 @@ What happens to the other bounds (Serializable, Cloneable)?
 - They do NOT appear in bytecode.
 - No additional interfaces are attached to the erased type.
 
-### 10.5 Why Only the First Bound Becomes the Runtime Type?
+### 4.5 Why Only the First Bound Becomes the Runtime Type?
 
 Because the JVM must operate using a single, concrete reference type for each variable or parameter.
 
@@ -272,7 +169,7 @@ Thus:
 
 > **Note:** Java selects the **first bound** as the runtime type, and uses the remaining bounds for **compile-time validation only**.
 
-### 10.6 A More Complex Example
+### 4.6 A More Complex Example
 
 ```java
 interface A { void a(); }
@@ -304,7 +201,7 @@ class Demo {
 
 > **Note:** The compiler inserts additional type checks or bridge methods as needed, but erasure always uses **only the first bound** (A in this case).
 
-### 10.7 Summary of Erasure Rules
+### 4.7 Summary of Erasure Rules
 
 - Unbounded T → erased to Object.
 - T extends X → erased to X.
@@ -312,6 +209,109 @@ class Demo {
 - All generic parameters are erased in method signatures.
 - Casts are inserted to preserve compile-time typing.
 - Bridge methods may be generated to preserve polymorphism.
+
+
+## 5. Bounds on Type Parameters (extends / super)
+
+### 5.1 Upper Bounds: extends
+
+`<T extends Number>` means **T must be Number or a subclass**.
+
+```java
+class Stats<T extends Number> {
+    T num;
+    Stats(T num) { this.num = num; }
+}
+```
+
+### 5.2 Multiple Bounds
+
+Syntax: `T extends Class & Interface1 & Interface2 ...`  
+The class must come first.
+
+```java
+class C<T extends Number & Comparable<T>> { }
+```
+
+## 6. Wildcards: `?`, `? extends`, `? super`
+
+### 6.1 Unbounded Wildcard `?`
+
+Use when you want to accept a list of unknown type:
+
+```java
+void printAll(List<?> list) { ... }
+```
+
+### 6.2 Upper-Bounded Wildcard `? extends`
+
+```java
+List<? extends Number> nums = List.of(1,2,3);
+Number n = nums.get(0);   // OK
+// nums.add(5);           // ❌ cannot add: type safety
+```
+
+Rule: **You cannot add elements (except null) to ? extends**  
+because you don’t know the exact subtype.
+
+### 6.3 Lower-Bounded Wildcard `? super`
+
+```java
+List<? super Integer> list = new ArrayList<Number>();
+list.add(10);    // OK
+Object o = list.get(0); // returns Object (lowest common supertype)
+```
+
+Rule: “Super accepts insertion, extends accepts extraction.”
+
+
+## 7. Generics and Inheritance
+
+Important rule: **Generics do NOT participate in inheritance**.
+
+```java
+List<String> ls = new ArrayList<>();
+List<Object> lo = ls;      // ❌ compile error
+```
+
+Instead:
+
+```java
+List<? extends Object> ok = ls;   // works
+```
+
+
+## 8. Type Inference (Diamond Operator)
+
+```java
+Map<String, List<Integer>> map = new HashMap<>();
+```
+
+The compiler infers generic arguments from the assignment.
+
+
+## 9. Raw Types (Legacy Compatibility)
+
+A **raw type** disables generics, re-introducing unsafe behavior.
+
+```java
+List raw = new ArrayList();
+raw.add("x");
+raw.add(10);   // allowed, but unsafe
+```
+
+> **Note:** Raw types should be avoided.
+
+
+## 10. Generic Arrays (Not Allowed)
+
+You cannot create arrays of parameterized types:
+
+```java
+List<String>[] arr = new List<String>[10];   // ❌ compile error
+```
+
+Because arrays enforce runtime type safety while generics rely on compile time only.
 
 
 ## 11. Bounded Type Inference
