@@ -222,7 +222,9 @@ public class Demo {
 
 Explanation
 
+```bash
 List<Object> and List<String> are both erased to List.
+```
 
 At runtime both methods would appear as:
 
