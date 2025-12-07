@@ -201,7 +201,140 @@ class Demo {
 
 > **Note:** The compiler inserts additional type checks or bridge methods as needed, but erasure always uses **only the first bound** (A in this case).
 
-### 4.7 Summary of Erasure Rules
+
+### 4.7 Overloading a Generic Method — Why Some Overloads Are Impossible
+
+When Java compiles generic code, it applies type erasure:
+generic type parameters such as T, String, or Integer are removed, and the compiler substitutes them with their erased type (usually Object or the first bound).
+
+Because of this, two methods that look different at the source level may become identical after erasure.
+If the erased signatures are the same, Java cannot distinguish between them, therefore the code does not compile.
+
+Example: Two Methods That Collapse to the Same Signature
+
+```java
+public class Demo {
+    public void testInput(List<Object> inputParam) {}
+
+    // public void testInput(List<String> inputParam) {}   // ❌ Compile error: after erasure, both become testInput(List)
+}
+```
+
+Explanation
+
+List<Object> and List<String> are both erased to List.
+
+At runtime both methods would appear as:
+
+```java
+void testInput(List inputParam)
+```
+
+Java does not allow two methods with identical signatures in the same class, so the overload is rejected at compile time.
+
+### 4.8 Overloading a Generic Method Inherited from a Parent Class
+
+The same rule applies when a subclass tries to introduce a method that erases to the same signature as one in its superclass.
+
+```java
+public class SubDemo extends Demo {
+    public void testInput(List<Integer> inputParam) {} 
+    // ❌ Compile error: erases to testInput(List), same as parent
+}
+```
+
+Again, the compiler rejects the overload because the erased signatures collide.
+
+When Overloading Does Work
+
+**Erasure only removes type parameters, not the actual class used in the method parameter**.
+
+Therefore, if two method parameters differ in their raw (non-generic) type, the overload is legal, even if one is a generic parameterized type.
+
+```java
+public class Demo {
+    public void testInput(List<Object> inputParam) {}
+    public void testInput(ArrayList<String> inputParam) {}  // ✔ Compiles
+}
+```
+
+Why this works
+Even though ArrayList<String> erases to ArrayList, and List<Object> erases to List, these are different classes (ArrayList vs. List), so the signatures remain distinct:
+
+```java
+void testInput(List inputParam)
+void testInput(ArrayList inputParam)
+```
+
+No collision → legal overloading.
+
+### 4.9 Returning Generic Types — Rules and Restrictions
+
+When returning a value from a method, Java follows a strict rule:
+
+The return type of an overriding method must be a subtype of the parent's return type, but the generic arguments must still respect type erasure rules.
+
+This often confuses developers, because generics on return types cause similar erasure-based conflicts as parameter types.
+
+Key Points:
+- Return type covariance applies only to the raw type, not the generic arguments.
+- Generic arguments must remain compatible after erasure.
+- Two methods cannot differ only by generic parameter on the return type.
+
+Example: Illegal Return Type Change Due to Generic Mismatch
+
+```java
+class A {
+    List<String> getData() { return null; }
+}
+
+class B extends A {
+    // List<Integer> is not a covariant return type of List<String>
+    // ❌ Compile error
+    List<Integer> getData() { return null; }
+}
+```
+
+Explanation
+
+Even though generics are erased, Java still enforces source-level type safety:
+
+`List<Integer>` is not a subtype of `List<String>`.
+
+Both erase to `List`, but Java rejects overriding that breaks type compatibility.
+
+Example: Legal Covariant Return Type
+
+```java
+class A {
+    Collection<String> getData() { return null; }
+}
+
+class B extends A {
+    List<String> getData() { return null; }  // ✔ List is a subtype of Collection
+}
+```
+
+This is allowed because:
+- The raw types are covariant (List extends Collection).
+- The generic arguments match (String vs. String).
+
+Example: Illegal Overload on Return Type Alone
+
+Two methods differing only by the generic argument in the return type cannot coexist:
+
+```java
+class Demo {
+    List<String> getList() { return null; }
+
+    // List<Integer> getList() { return null; }  
+    // ❌ Compile error: return type alone does not distinguish methods
+}
+```
+
+Java does not use the return type when distinguishing overloaded methods.
+
+### 4.10 Summary of Erasure Rules
 
 - Unbounded T → erased to Object.
 - T extends X → erased to X.
@@ -209,6 +342,7 @@ class Demo {
 - All generic parameters are erased in method signatures.
 - Casts are inserted to preserve compile-time typing.
 - Bridge methods may be generated to preserve polymorphism.
+
 
 
 ## 5. Bounds on Type Parameters (extends / super)
