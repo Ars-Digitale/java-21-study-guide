@@ -11,13 +11,13 @@ In Java, a **functional interface** is an interface that contains **exactly one*
 
 Functional interfaces enable **Lambda Expressions** and **Method References**, forming the core of Java’s functional programming model.
 
-> **Note:** Java automatically treats any interface with a single abstract method as a functional interface, `` annotation is optional but recommended.
+> **Note:** Java automatically treats any interface with a single abstract method as a functional interface, `@FunctionalInterface` annotation is optional but recommended.
 
 ### 1.1 Rules for Functional Interfaces
 
 - **Exactly one abstract method** (SAM = Single Abstract Method).
-- Interfaces may declare any number of **default** or **static** methods.
-- They may override `Object` methods (e.g., `toString()`) without affecting SAM count.
+- Interfaces may declare any number of **default**, **static** or **private** methods.
+- They may override `Object` methods (`toString()`, `equals(Object)`, `hashCode()`) without affecting SAM count.
 - The functional method may come from a **superinterface**.
 
 Example:
@@ -53,15 +53,19 @@ Examples
 
 ```java
 Supplier<String> sup = () -> "Hello!";
+
 Consumer<String> printer = s -> System.out.println(s);
+
 Function<String, Integer> length = s -> s.length();
+
 UnaryOperator<Integer> square = x -> x * x;
+
 Predicate<Integer> positive = x -> x > 0;
 ```
 
 ### 1.3 Convenience Methods on Functional Interfaces
 
-Many FI come with helper methods that allow chaining and composition. These are heavily tested in certification exams.
+Many Functional interfaces come with helper methods that allow chaining and composition.
 
 ```text
 Interface        | Method         | Description
@@ -97,23 +101,61 @@ boolean ok = longString.and(startsWithA).test("Amazing");  // true
 Java provides specialized versions of functional interfaces for primitives to avoid boxing/unboxing overhead.
 
 ```text
-Category     | Interfaces
-------------------------------------------------------------
-Int-based    | IntSupplier, IntConsumer, IntPredicate,
-             | IntFunction<R>, IntUnaryOperator,
-             | IntBinaryOperator
-Long-based   | LongSupplier, LongConsumer, LongPredicate, ...
-Double-based | DoubleSupplier, DoubleConsumer, DoublePredicate, ...
-To-Primitive | ToIntFunction<T>, ToLongFunction<T>, ToDoubleFunction<T>
-From-Primitive | IntToLongFunction, IntToDoubleFunction, ...
-Bi-Primitive  | ObjIntConsumer<T>, ObjLongConsumer<T>, ...
+| Functional Interface          | Return Type  | Single Abstract Method | # Parameters |
+|------------------------------|--------------|-------------------------|--------------|
+| IntSupplier                  | int          | getAsInt()              | 0            |
+| LongSupplier                 | long         | getAsLong()             | 0            |
+| DoubleSupplier               | double       | getAsDouble()           | 0            |
+| BooleanSupplier              | boolean      | getAsBoolean()          | 0            |
+|                              |              |                         |              |
+| IntConsumer                  | void         | accept(int)             | 1 (int)      |
+| LongConsumer                 | void         | accept(long)            | 1 (long)     |
+| DoubleConsumer               | void         | accept(double)          | 1 (double)   |
+|                              |              |                         |              |
+| IntPredicate                 | boolean      | test(int)               | 1 (int)      |
+| LongPredicate                | boolean      | test(long)              | 1 (long)     |
+| DoublePredicate              | boolean      | test(double)            | 1 (double)   |
+|                              |              |                         |              |
+| IntUnaryOperator             | int          | applyAsInt(int)         | 1 (int)      |
+| LongUnaryOperator            | long         | applyAsLong(long)       | 1 (long)     |
+| DoubleUnaryOperator          | double       | applyAsDouble(double)   | 1 (double)   |
+|                              |              |                         |              |
+| IntBinaryOperator            | int          | applyAsInt(int, int)    | 2 (int,int)  |
+| LongBinaryOperator           | long         | applyAsLong(long, long) | 2 (long,long)|
+| DoubleBinaryOperator         | double       | applyAsDouble(double,double)| 2         |
+|                              |              |                         |              |
+| IntFunction<R>               | R            | apply(int)              | 1 (int)      |
+| LongFunction<R>              | R            | apply(long)             | 1 (long)     |
+| DoubleFunction<R>            | R            | apply(double)           | 1 (double)   |
+|                              |              |                         |              |
+| ToIntFunction<T>             | int          | applyAsInt(T)           | 1 (T)        |
+| ToLongFunction<T>            | long         | applyAsLong(T)          | 1 (T)        |
+| ToDoubleFunction<T>          | double       | applyAsDouble(T)        | 1 (T)        |
+|                              |              |                         |              |
+| ToIntBiFunction<T,U>         | int          | applyAsInt(T,U)         | 2 (T,U)      |
+| ToLongBiFunction<T,U>        | long         | applyAsLong(T,U)        | 2 (T,U)      |
+| ToDoubleBiFunction<T,U>      | double       | applyAsDouble(T,U)      | 2 (T,U)      |
+|                              |              |                         |              |
+| ObjIntConsumer<T>            | void         | accept(T,int)           | 2 (T,int)    |
+| ObjLongConsumer<T>           | void         | accept(T,long)          | 2 (T,long)   |
+| ObjDoubleConsumer<T>         | void         | accept(T,double)        | 2 (T,double) |
+|                              |              |                         |              |
+| DoubleToIntFunction          | int          | applyAsInt(double val.) | 1            |
+| DoubleToLongFunction         | long         | applyAsLong(double val.)| 1            |
+| IntToDoubleFunction          | double       | applyAsDouble(int val.) | 1            |
+| IntToLongFunction            | long         | applyAsLong(int value)  | 1            |
+| LongToDoubleFunction         | double       | applyAsDouble(long val.)| 1            |
+| LongToIntFunction            | int          | applyAsInt(long value)  | 1            |
+
 ```
 
 Example
 
 ```java
 IntSupplier dice = () -> (int)(Math.random() * 6) + 1;
+
 IntPredicate even = x -> x % 2 == 0;
+
 IntUnaryOperator doubleIt = x -> x * 2;
 ```
 
@@ -129,8 +171,10 @@ IntUnaryOperator doubleIt = x -> x * 2;
 
 ## 2. Lambda Expressions
 
-A lambda expression is a compact way of writing a function. 
+A lambda expression is a compact way of writing a function.
+ 
 Lambda expressions provide a concise way to define implementations of functional interfaces.
+
 A lambda is essentially a short block of code that takes parameters and returns a value, without requiring a full method declaration.
 
 They represent behavior as data and are a key element of Java’s functional programming model.
