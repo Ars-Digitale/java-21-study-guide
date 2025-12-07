@@ -1,6 +1,6 @@
 # Generics in Java (Certification Grade)
 
-Java Generics provide **compile-time type safety** by allowing classes, interfaces, and methods to work with **types as parameters**.  
+Java Generics provide **compile-time type safety** by allowing `classes`, `interfaces`, and `methods` to work with **types as parameters**.  
 They prevent ClassCastException at runtime by moving type checks to compile time, and they increase code reusability by enabling type-agnostic algorithms.  
 
 Generics apply to:  
@@ -35,6 +35,7 @@ class Pair<K, V> {
 }
 ```
 
+
 ## 2. Why Generics Exist: Before/After
 
 ```java
@@ -51,6 +52,7 @@ list.add("hi");
 String x = list.get(0);               // type-safe, no cast
 ```
 
+
 ## 3. Generic Methods
 
 A **generic method** introduces its own type parameter(s), independent of the class.
@@ -63,6 +65,7 @@ class Util {
 String s = Util.<String>pick("A", "B"); // explicit
 String t = Util.pick("A", "B");         // inference works
 ```
+
 
 ## 4. Bounds on Type Parameters (extends / super)
 
@@ -86,9 +89,9 @@ The class must come first.
 class C<T extends Number & Comparable<T>> { }
 ```
 
-## 5. Wildcards: ?, ? extends, ? super
+## 5. Wildcards: `?`, `? extends`, `? super`
 
-### 5.1 Unbounded Wildcard ?
+### 5.1 Unbounded Wildcard `?`
 
 Use when you want to accept a list of unknown type:
 
@@ -96,7 +99,7 @@ Use when you want to accept a list of unknown type:
 void printAll(List<?> list) { ... }
 ```
 
-### 5.2 Upper-Bounded Wildcard ? extends
+### 5.2 Upper-Bounded Wildcard `? extends`
 
 ```java
 List<? extends Number> nums = List.of(1,2,3);
@@ -107,8 +110,7 @@ Number n = nums.get(0);   // OK
 Rule: **You cannot add elements (except null) to ? extends**  
 because you don’t know the exact subtype.
 
-
-### 5.3 Lower-Bounded Wildcard ? super
+### 5.3 Lower-Bounded Wildcard `? super`
 
 ```java
 List<? super Integer> list = new ArrayList<Number>();
@@ -133,6 +135,7 @@ Instead:
 ```java
 List<? extends Object> ok = ls;   // works
 ```
+
 
 ## 7. Type Inference (Diamond Operator)
 
@@ -309,6 +312,7 @@ class Demo {
 - Casts are inserted to preserve compile-time typing.
 - Bridge methods may be generated to preserve polymorphism.
 
+
 ## 11. Bounded Type Inference
 
 ```java
@@ -317,6 +321,7 @@ class Demo {
 int v = identity(10);   // OK
 // String s = identity("x"); // ❌ not a Number
 ```
+
 
 ## 12. Wildcards vs. Type Parameters
 
