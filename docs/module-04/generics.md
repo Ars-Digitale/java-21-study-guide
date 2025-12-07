@@ -170,7 +170,7 @@ List<String>[] arr = new List<String>[10];   // ❌ compile error
 Because arrays enforce runtime type safety while generics rely on compile time only.
 
 
-## 10. Type Erasure (Certification Critical)
+## 10. Type Erasure
 
 Type erasure is the process by which the Java compiler removes all generic type information before generating bytecode. This ensures backward compatibility with pre-Java-5 JVMs.
 
@@ -230,9 +230,10 @@ Java allows multiple bounds:
 
 The critical rule:
 
+
 > **Note:** The erasure of `T` is always the **first bound**, which must be a class or interface.
 
-This is where your question applies. Because `Runnable` is the first bound, the compiler erases `T` to `Runnable`.
+Because `Runnable` is the first bound, the compiler erases `T` to `Runnable`.
 
 Example with Multiple Bounds (Fully Expanded)
 
