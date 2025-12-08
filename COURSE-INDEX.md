@@ -29,3 +29,4 @@
 	- [Functional programming in Java](docs/module-05/functional.md)
 - [Module 6: Collections APIs]
 	- [Introduction to the Collections Framework](docs/module-06/collections.md)
+	- [Shared Collection Operations & Equality](docs/module-06/shared-operations.md)
