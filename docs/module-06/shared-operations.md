@@ -13,7 +13,8 @@ The following methods come from the `Collection<E>` interface and are inherited 
 - `boolean add(E e)` — Adds an element (allowed to add duplicates in lists).
 - `boolean remove(Object o)` — Removes the first matching element.
 - `void clear()` — Removes all elements.
-- `boolean addAll(Collection<? extends E> c)` — Bulk insertion. - `boolean removeAll(Collection<?> c)` — Removes all elements contained in the given collection.
+- `boolean addAll(Collection<? extends E> c)` — Bulk insertion. 
+- `boolean removeAll(Collection<?> c)` — Removes all elements contained in the given collection.
 - `boolean retainAll(Collection<?> c)` — Keeps only matching elements.
 
 ### 2.1.2 Query Operations
@@ -21,12 +22,12 @@ The following methods come from the `Collection<E>` interface and are inherited 
 - `int size()` — Number of elements.
 - `boolean isEmpty()` — Whether collection contains zero elements.
 - `boolean contains(Object o)` — Relies on element equality rules.
-- ``Iterator<E> iterator()` — Returns an iterator (fail-fast).
-- ``Object[] toArray()` and `<T> T[] toArray(T[] a)` — Copy into an array.
+- `Iterator<E> iterator()` — Returns an iterator (fail-fast).
+- `Object[] toArray()` and `<T> T[] toArray(T[] a)` — Copy into an array.
 
 ## 2.2 Equality Rules — How Collections Decide If Two Elements Are “The Same”
 
-For certification, it is **critical** to understand **how Java determines whether an element is considered equal** inside a collection.
+It is now **critical** to understand **how Java determines whether an element is considered equal** inside a collection.
 
 ### 2.2.1 Equality for Objects
 
