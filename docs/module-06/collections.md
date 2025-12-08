@@ -99,7 +99,7 @@ Before Java 1.2, data structures were ad-hoc, inconsistent, and untyped. The Col
 
 ## 5. The Two Sides of the Framework: Collections vs. Maps
 
-A common certification question: “Does Map extend Collection?”
+“Does Map extend Collection?”
 **No.**
 A Map stores **pairs**, while a Collection stores **single elements**.
 
@@ -108,14 +108,14 @@ A Map stores **pairs**, while a Collection stores **single elements**.
 
 ## 6. Generic Types in the Collections Framework
 
-Collections are almost always used with generics. Using raw types is discouraged and often tested on the exam.
+Collections are almost always used with generics. Using raw types is discouraged.
 
 ```java
 List<String> names = new ArrayList<>();
 Map<Integer, String> map = new HashMap<>();
 ```
 
-> **Note:** Generics in collections work through type erasure — explained deeply in the Generics chapter.
+> **Note:** Generics in collections work through type erasure: see [Type Erasuere](../module-04/generics.md#4-type-erasure).
 
 ## 7. Mutability vs. Immutability
 
