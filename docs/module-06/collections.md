@@ -23,7 +23,7 @@ At the heart of the Java Collections Framework is a small set of **root interfac
 
 - **List**: an `ordered` collection of elements that allows `duplicates`;
 - **Set**: a collection that does not allow `duplicates`;
-- **Queue**: a structure that maps keys to values, in which we cannot have duplicate keys; each key can map to at most one value.
+- **Queue**: a structure that maps keys to values, in which duplicate keys are not allowed; each key can map to at most one value.
 
 ### 2.1 Main Collection Interfaces
 
@@ -133,8 +133,29 @@ immutable.add("c"); // ❌ UnsupportedOperationException
 Java provides several ways to create immutable collections:
 
 - List.of(), Set.of(), Map.of()
-- Collections.unmodifiableList(...) wrappers
+- List.copyOf(collection)
+- Collections.**unmodifiableList(...)** wrappers
 - Records used as immutable value containers
+
+> [!NOTE]
+> The method `Arrays.asList(varargs)`, which is backed by an array, behaves differently: see examples below.
+
+```java
+
+String[] vargs = new String[] {"u", "v", "z"};
+List<String> fromAsList = Arrays.asList(vargs);
+
+List<String> immutable1 = List.of(vargs);
+immutable1.add("c"); // ❌ UnsupportedOperationException
+
+List<String> immutable2 = List.copyOf(fromAsList);
+immutable2.set(0, "k"); ❌ UnsupportedOperationException
+
+
+// We can't ADD or REMOVE elements to "fromAsList" but we can replace them, both by modifying the underline array "vargs" or by doing the opposite:
+
+fromAsList.set(0, "k");  // the update will be reflected on the backing array as well.
+```
 
 ## 8. Big-O Performance Expectations
 
