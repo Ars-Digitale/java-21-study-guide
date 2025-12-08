@@ -115,7 +115,7 @@ List<String> names = new ArrayList<>();
 Map<Integer, String> map = new HashMap<>();
 ```
 
-> **Note:** Generics in collections work through type erasure: see [Type Erasuere](../module-04/generics.md#4-type-erasure).
+> **Note:** Generics in collections work through type erasure: see [Type Erasure](../module-04/generics.md#4-type-erasure).
 
 ## 7. Mutability vs. Immutability
 
@@ -134,7 +134,7 @@ Java provides several ways to create immutable collections:
 
 ## 8. Big-O Performance Expectations
 
-Understanding complexity is essential for the exam. Here are common examples:
+Understanding complexity is essential. Here are common examples:
 
 ```text
 ArrayList: get() O(1), add() amortized O(1), remove() O(n)
@@ -148,14 +148,8 @@ Deque: add/remove first/last O(1)
 
 > **Note:** These values are averages; worst-case may be different (especially for hash-based structures).
 
-## 9. Common Exceptions in Collection Operations
 
-- UnsupportedOperationException — modifying an unmodifiable collection
-- ClassCastException — incompatible element or key types
-- NullPointerException — certain implementations forbid null (e.g., TreeMap keys)
-- ConcurrentModificationException — structural modification during iteration
-
-## 10. Summary of Chapter 1
+## 9. Summary of Chapter 1
 
 - The Collection Framework is built on a small set of core interfaces.
 - Java 21 adds Sequenced Collections to unify ordering behavior.

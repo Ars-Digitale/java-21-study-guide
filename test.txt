@@ -1,51 +1,111 @@
-### FORMAT A — Vertical Hierarchy Tree (Collections & Sequenced Types)
+@@H1@@Chapter 2 — Shared Collection Operations & Equality@@H1_END@@
 
-```text
-java.util
-├─ Collection<E>
-│ ├─ SequencedCollection<E> (Java 21+)
-│ │ ├─ List<E>
-│ │ │ ├─ ArrayList<E>
-│ │ │ └─ LinkedList<E> (also implements Deque<E>)
-│ │ └─ Deque<E> (also extends Queue<E>)
-│ │ ├─ ArrayDeque<E>
-│ │ └─ LinkedList<E>
-│ ├─ Set<E>
-│ │ ├─ SequencedSet<E> (Java 21+)
-│ │ │ └─ LinkedHashSet<E>
-│ │ ├─ SortedSet<E>
-│ │ │ └─ NavigableSet<E>
-│ │ │ └─ TreeSet<E>
-│ │ ├─ HashSet<E>
-│ │ └─ (other Set implementations)
-│ ├─ Queue<E>
-│ │ ├─ Deque<E> (already under SequencedCollection<E>)
-│ │ ├─ PriorityQueue<E>
-│ │ └─ (other Queue implementations)
-│ └─ (other Collection implementations)
-└─ Map<K,V> (not a Collection)
-├─ SequencedMap<K,V> (Java 21+)
-│ └─ LinkedHashMap<K,V>
-├─ SortedMap<K,V>
-│ └─ NavigableMap<K,V>
-│ └─ TreeMap<K,V>
-├─ HashMap<K,V>
-├─ Hashtable<K,V>
-└─ (other Map/ConcurrentMap implementations)
-```
+@@P@@This chapter covers the fundamental operations shared across the Java Collections API, including how equality is determined inside collections. These concepts apply to all main collection families (@@CODE@@List@@CODE_END@@, @@CODE@@Set@@CODE_END@@, @@CODE@@Queue@@CODE_END@@, @@CODE@@Deque@@CODE_END@@, @@CODE@@Map@@CODE_END@@ and their Sequenced variants).@@P_END@@
 
-### FORMAT A — Clean Tree (Maps & Sequenced Maps)
+@@P@@Mastering these operations is essential for the Java 21 Certification, as they explain how collections behave when adding, searching, removing, comparing, iterating, and sorting elements.@@P_END@@
 
-```text
-java.util
-└─ Map<K,V>
-├─ SequencedMap<K,V> (Java 21+)
-│ └─ LinkedHashMap<K,V>
-├─ SortedMap<K,V>
-│ └─ NavigableMap<K,V>
-│ └─ TreeMap<K,V>
-├─ HashMap<K,V>
-├─ Hashtable<K,V>
-└─ ConcurrentMap<K,V> (java.util.concurrent)
-└─ ConcurrentHashMap<K,V>
-```
+@@H2@@2.1 Core Collection Methods (Available to Most Collections)@@H2_END@@
+
+@@P@@The following methods come from the @@CODE@@Collection<E>@@CODE_END@@ interface and are inherited by @@BOLD@@all@@BOLD_END@@ major collections except @@CODE@@Map@@CODE_END@@ (which has its own family of operations).@@P_END@@
+
+@@H3@@2.1.1 Mutating Operations@@H3_END@@
+
+@@LIST_ITEM@@@@CODE@@boolean add(E e)@@CODE_END@@ — Adds an element (allowed to add duplicates in lists).@@LIST_ITEM_END@@
+@@LIST_ITEM@@@@CODE@@boolean remove(Object o)@@CODE_END@@ — Removes the first matching element.@@LIST_ITEM_END@@
+@@LIST_ITEM@@@@CODE@@void clear()@@CODE_END@@ — Removes all elements.@@LIST_ITEM_END@@
+@@LIST_ITEM@@@@CODE@@boolean addAll(Collection<? extends E> c)@@CODE_END@@ — Bulk insertion.@@LIST_ITEM_END@@ @@LIST_ITEM@@@@CODE@@boolean removeAll(Collection<?> c)@@CODE_END@@ — Removes all elements contained in the given collection.@@LIST_ITEM_END@@
+@@LIST_ITEM@@@@CODE@@boolean retainAll(Collection<?> c)@@CODE_END@@ — Keeps only matching elements.@@LIST_ITEM_END@@
+
+@@H3@@2.1.2 Query Operations@@H3_END@@
+
+@@LIST_ITEM@@@@CODE@@int size()@@CODE_END@@ — Number of elements.@@LIST_ITEM_END@@
+@@LIST_ITEM@@@@CODE@@boolean isEmpty()@@CODE_END@@ — Whether collection contains zero elements.@@LIST_ITEM_END@@
+@@LIST_ITEM@@@@CODE@@boolean contains(Object o)@@CODE_END@@ — Relies on element equality rules.@@LIST_ITEM_END@@
+@@LIST_ITEM@@@@CODE@@@@CODE@@Iterator<E> iterator()@@CODE_END@@ — Returns an iterator (fail-fast).@@LIST_ITEM_END@@
+@@LIST_ITEM@@@@CODE@@@@CODE@@Object[] toArray()@@CODE_END@@ and @@CODE@@<T> T[] toArray(T[] a)@@CODE_END@@ — Copy into an array.@@LIST_ITEM_END@@
+
+@@H2@@2.2 Equality Rules — How Collections Decide If Two Elements Are “The Same”@@H2_END@@
+
+@@P@@For certification, it is @@BOLD@@critical@@BOLD_END@@ to understand @@BOLD@@how Java determines whether an element is considered equal@@BOLD_END@@ inside a collection.@@P_END@@
+
+@@H3@@2.2.1 Equality for Objects@@H3_END@@
+
+@@P@@Collections rely on the @@CODE@@equals()@@CODE_END@@ method to determine equality:@@P_END@@
+
+@@CODEBLOCK_JAVA@@
+String a = "hello";
+String b = "hello";
+
+System.out.println(a.equals(b)); // true
+System.out.println(a == b); // may be true (string pool), but not guaranteed
+@@CODEBLOCK_END@@
+
+@@NOTE@@Collections always use @@CODE@@equals()@@CODE_END@@, not @@CODE@@==@@CODE_END@@, except for special cases like @@CODE@@IdentityHashMap@@CODE_END@@.@@NOTE_END@@
+
+@@H3@@2.2.2 Equality for Hash-Based Collections@@H3_END@@
+
+@@P@@Hash-based structures (HashSet, HashMap, LinkedHashSet, LinkedHashMap) use:@@P_END@@
+
+@@LIST_ITEM@@@@CODE@@hashCode()@@CODE_END@@ to locate a bucket@@LIST_ITEM_END@@
+@@LIST_ITEM@@@@CODE@@equals()@@CODE_END@@ to compare elements inside the same bucket@@LIST_ITEM_END@@
+
+@@P@@Important rule:@@P_END@@
+
+@@NOTE@@When @@CODE@@equals()@@CODE_END@@ is overridden, @@CODE@@hashCode()@@CODE_END@@ must also be overridden so the contract remains valid.@@NOTE_END@@
+
+@@H3@@2.2.3 Equality and Ordering Collections@@H3_END@@
+
+@@P@@Tree-based structures (TreeSet, TreeMap) use ordering, not equality.@@P_END@@
+
+@@LIST_ITEM@@Ordering obtained via @@CODE@@Comparable@@CODE_END@@ (natural order).@@LIST_ITEM_END@@
+@@LIST_ITEM@@Or via a provided @@CODE@@Comparator@@CODE_END@@.@@LIST_ITEM_END@@
+
+@@NOTE@@In ordered sets and maps, two elements are considered “equal” if their comparison returns @@CODE@@0@@CODE_END@@.@@NOTE_END@@
+
+@@H2@@2.3 Fail-Fast Behavior@@H2_END@@
+
+@@P@@Most collection iterators (except concurrent collections) are fail-fast: modifying a collection structurally while iterating triggers a @@CODE@@ConcurrentModificationException@@CODE_END@@.@@P_END@@
+
+@@CODEBLOCK_JAVA@@
+List<Integer> list = new ArrayList<>(List.of(1,2,3));
+for (Integer i : list) {
+list.add(99); // ❌ ConcurrentModificationException
+}
+@@CODEBLOCK_END@@
+
+@@NOTE@@Use @@CODE@@Iterator.remove()@@CODE_END@@ when you must remove elements during iteration.@@NOTE_END@@
+
+@@H2@@2.4 Bulk Operations (Java 21)@@H2_END@@
+
+@@LIST_ITEM@@@@CODE@@removeIf(Predicate<? super E> filter)@@CODE_END@@ — Removes all matching items.@@LIST_ITEM_END@@
+@@LIST_ITEM@@@@CODE@@replaceAll(UnaryOperator<E> op)@@CODE_END@@ — Replaces every element.@@LIST_ITEM_END@@
+@@LIST_ITEM@@@@CODE@@forEach(Consumer<? super E> action)@@CODE_END@@ — Applies action to each element.@@LIST_ITEM_END@@
+@@LIST_ITEM@@@@CODE@@stream()@@CODE_END@@ — Returns a stream for pipeline operations.@@LIST_ITEM_END@@
+
+@@H2@@2.5 Common Return Types and Exceptions (Certification Must-Know)@@H2_END@@
+
+@@LIST_ITEM@@@@CODE@@add(E)@@CODE_END@@ returns @@BOLD@@boolean@@BOLD_END@@ — always @@CODE@@true@@CODE_END@@ for @@CODE@@ArrayList@@CODE_END@@, may be @@CODE@@false@@CODE_END@@ for @@CODE@@Set@@CODE_END@@ if no change occurs.@@LIST_ITEM_END@@
+
+@@LIST_ITEM@@@@CODE@@remove(Object)@@CODE_END@@ returns boolean (not the removed element!).@@LIST_ITEM_END@@
+
+@@LIST_ITEM@@@@CODE@@get(int)@@CODE_END@@ throws @@CODE@@IndexOutOfBoundsException.@@LIST_ITEM_END@@
+
+@@LIST_ITEM@@@@CODE@@iterator().remove()@@CODE_END@@ throws @@CODE@@IllegalStateException@@CODE_END@@ if called twice without next().@@LIST_ITEM_END@@
+
+@@LIST_ITEM@@@@CODE@@toArray()@@CODE_END@@ always returns a @@CODE@@Object[]@@CODE_END@@ — not @@CODE@@T[]@@CODE_END@@.@@LIST_ITEM_END@@
+
+@@H2@@2.6 Summary Table — Shared Operations@@H2_END@@
+
+@@CODEBLOCK_TEXT@@
+Operation Applies To Notes
+add(e) All collections except Map Lists allow duplicates
+remove(o) All collections except Map Removes first occurrence
+contains(o) All collections except Map Uses equals()
+size(), isEmpty() All collections Constant-time for most
+iterator() All collections Fail-fast
+clear() All collections Removes all elements
+stream() All collections Returns sequential stream
+removeIf(), replaceAll() Lists, Sets, etc. Bulk operations
+toArray() All collections Returns Object[]
+
+@@CODEBLOCK_END@@
