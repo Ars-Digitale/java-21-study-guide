@@ -1,9 +1,10 @@
-# Chapter 1 — Introduction to the Collections Framework
+# Introduction to the Collections Framework
 
 The Java Collections Framework (JCF) is a set of **interfaces, classes, and algorithms** designed to store, manipulate, and process groups of data efficiently.
+
 It provides a unified architecture for handling collections, allowing developers to write reusable, interoperable code with predictable behaviors and performance characteristics.
 
-This chapter introduces the foundational concepts needed before studying Lists, Sets, Queues, Maps, and Sequenced Collections in detail in later chapters.
+This chapter introduces the foundational concepts needed before studying Lists, Sets, Queues, Maps, and Sequenced Collections, explored in detail in subsequent chapters.
 
 ## 1. What Is the Collections Framework?
 
@@ -25,15 +26,37 @@ At the heart of the Java Collections Framework is a small set of **root interfac
 Below is the conceptual hierarchy.
 
 ```text
-Iterable
-│
-Collection
-┌────────┼────────┬─────────┐
-│ │ │ │
-List Set Queue SequencedCollection (Java 21)
-│ │ │
-ArrayList HashSet Deque
-LinkedList TreeSet LinkedList (Deque)
+java.util
+├─ Collection<E>
+│ ├─ SequencedCollection<E> (Java 21+)
+│ │ ├─ List<E>
+│ │ │ 	├─ ArrayList<E>
+│ │ │ 	└─ LinkedList<E> (also implements Deque<E>)
+│ │ └─ Deque<E> (also extends Queue<E>)
+│ │ 	├─ ArrayDeque<E>
+│ │ 	└─ LinkedList<E>
+│ ├─ Set<E>
+│ │ 	├─ SequencedSet<E> (Java 21+)
+│ │ 	│ 		└─ LinkedHashSet<E>
+│ │ 	├─ SortedSet<E>
+│ │ 	│ 		└─ NavigableSet<E>
+│ │ 	│ 		└─ TreeSet<E>
+│ │ 	├─ HashSet<E>
+│ │ 	└─ (other Set implementations)
+│ ├─ Queue<E>
+│ │ 	├─ Deque<E> (already under SequencedCollection<E>)
+│ │ 	├─ PriorityQueue<E>
+│ │ 	└─ (other Queue implementations)
+│ └─ (other Collection implementations)
+└─ Map<K,V> (not a Collection)
+	├─ SequencedMap<K,V> (Java 21+)
+	│ └─ LinkedHashMap<K,V>
+	├─ SortedMap<K,V>
+	│ └─ NavigableMap<K,V>
+	│ └─ TreeMap<K,V>
+	├─ HashMap<K,V>
+	├─ Hashtable<K,V>
+	└─ (other Map/ConcurrentMap implementations)
 ```
 
 The **Map** interface does not extend Collection because a map stores key/value pairs rather than single values.
@@ -41,14 +64,17 @@ The **Map** interface does not extend Collection because a map stores key/value 
 ### 2.2 Map Hierarchy
 
 ```text
-Map
-┌─────────┼───────────────┐
-│ │
-HashMap SortedMap
-│
-NavigableMap
-│
-TreeMap
+java.util
+└─ Map<K,V>
+	├─ SequencedMap<K,V> (Java 21+)
+	│ 	└─ LinkedHashMap<K,V>
+	├─ SortedMap<K,V>
+	│ 	└─ NavigableMap<K,V>
+	│ 	└─ TreeMap<K,V>
+	├─ HashMap<K,V>
+	├─ Hashtable<K,V>
+		└─ ConcurrentMap<K,V> (java.util.concurrent)
+		└─ ConcurrentHashMap<K,V>
 ```
 
 ## 3. Sequenced Collections (Java 21+)
