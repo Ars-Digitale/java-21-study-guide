@@ -25,7 +25,7 @@ The following methods come from the `Collection<E>` interface and are inherited 
 - `Iterator<E> iterator()` — Returns an iterator (fail-fast).
 - `Object[] toArray()` and `<T> T[] toArray(T[] a)` — Copy into an array.
 
-## 2.2 Equality Rules — How Collections Decide If Two Elements Are “The Same”
+## 2.2 Equality
 
 A custom implementation of the method `equals()` allows us to compare the type and content of two collections.
 
@@ -95,14 +95,14 @@ list.add(99); // ❌ ConcurrentModificationException
 
 ```text
 Operation Applies To Notes
-add(e) All collections except Map Lists allow duplicates
-remove(o) All collections except Map Removes first occurrence
-contains(o) All collections except Map Uses equals()
-size(), isEmpty() All collections Constant-time for most
-iterator() All collections Fail-fast
-clear() All collections Removes all elements
-stream() All collections Returns sequential stream
-removeIf(), replaceAll() Lists, Sets, etc. Bulk operations
-toArray() All collections Returns Object[]
 
+`add(e)` All collections except Map Lists allow duplicates
+`remove(o)` All collections except Map Removes first occurrence
+`contains(o)` All collections except Map Uses equals()
+`size(), isEmpty()` All collections Constant-time for most
+`iterator()` All collections Fail-fast
+`clear()` All collections Removes all elements
+`stream()` All collections Returns sequential stream
+`removeIf(), replaceAll()` Lists, Sets, etc. Bulk operations
+`toArray()` All collections Returns Object[]
 ```
