@@ -48,12 +48,13 @@ java.util
 │ │ 	├─ PriorityQueue<E>
 │ │ 	└─ (other Queue implementations)
 │ └─ (other Collection implementations)
+│
 └─ Map<K,V> (not a Collection)
 	├─ SequencedMap<K,V> (Java 21+)
-	│ └─ LinkedHashMap<K,V>
+	│ 	└─ LinkedHashMap<K,V>
 	├─ SortedMap<K,V>
-	│ └─ NavigableMap<K,V>
-	│ └─ TreeMap<K,V>
+	│ 	└─ NavigableMap<K,V>
+	│ 	└─ TreeMap<K,V>
 	├─ HashMap<K,V>
 	├─ Hashtable<K,V>
 	└─ (other Map/ConcurrentMap implementations)
@@ -73,7 +74,7 @@ java.util
 	│ 	└─ TreeMap<K,V>
 	├─ HashMap<K,V>
 	├─ Hashtable<K,V>
-		└─ ConcurrentMap<K,V> (java.util.concurrent)
+	└─ ConcurrentMap<K,V> (java.util.concurrent)
 		└─ ConcurrentHashMap<K,V>
 ```
 
