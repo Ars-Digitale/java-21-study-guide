@@ -280,7 +280,7 @@ This often confuses developers, because generics on return types cause similar e
 
 Key Points:
 - Return type covariance applies only to the raw type, not the generic arguments.
-- Generic arguments must remain compatible after erasure.
+- Generic arguments must remain compatible after erasure (they must match).
 - Two methods cannot differ only by generic parameter on the return type.
 
 Example: Illegal Return Type Change Due to Generic Mismatch

@@ -27,3 +27,5 @@
 	- [Generics in Java](docs/module-04/generics.md)
 - [Module 5: Functional Programming]
 	- [Functional programming in Java](docs/module-05/functional.md)
+- [Module 6: Collections APIs]
+	- [Introduction to the Collections Framework](docs/module-06/collections.md)
