@@ -27,41 +27,37 @@ The following methods come from the `Collection<E>` interface and are inherited 
 
 ## 2.2 Equality Rules — How Collections Decide If Two Elements Are “The Same”
 
-It is now **critical** to understand **how Java determines whether an element is considered equal** inside a collection.
+A custom implementation of the method `equals()` allows us to compare the type and content of two collections.
 
-### 2.2.1 Equality for Objects
+The implementation will differ depending if we are dealing with Lists or Sets.
 
-Collections rely on the `equals()` method to determine equality:
+Example
 
 ```java
-String a = "hello";
-String b = "hello";
+List<Integer> firstList = List.of(10, 11, 22);
+List<Integer> secondList = List.of(10, 11, 22);
+List<Integer> thirdList = List.of(22, 11, 10);
 
-System.out.println(a.equals(b)); // true
-System.out.println(a == b); // may be true (string pool), but not guaranteed
+System.out.println("firstList.equals(secondList): " + firstList.equals(secondList));
+System.out.println("secondList.equals(thirdList): " + secondList.equals(thirdList));
+
+Set<Integer> firstSet = Set.of(10, 11, 22);
+Set<Integer> secondSet = Set.of(10, 11, 22);
+Set<Integer> thirdSet = Set.of(22, 11, 10);
+
+System.out.println("firstSet.equals(secondSet): " + firstSet.equals(secondSet));
+System.out.println("secondSet.equals(thirdSet): " + secondSet.equals(thirdSet));
+}
 ```
 
-> **Note:** Collections always use `equals()`, not `==`, except for special cases like `IdentityHashMap`.
+Output
 
-### 2.2.2 Equality for Hash-Based Collections
-
-Hash-based structures (HashSet, HashMap, LinkedHashSet, LinkedHashMap) use:
-
-- `hashCode()` to locate a bucket
-- `equals()` to compare elements inside the same bucket
-
-Important rule:
-
-> **Note:** When `equals()` is overridden, `hashCode()` must also be overridden so the contract remains valid.
-
-### 2.2.3 Equality and Ordering Collections
-
-Tree-based structures (TreeSet, TreeMap) use ordering, not equality.
-
-- Ordering obtained via `Comparable` (natural order).
-- Or via a provided `Comparator`.
-
-> **Note:** In ordered sets and maps, two elements are considered “equal” if their comparison returns `0`.
+```bash
+firstList.equals(secondList): true
+secondList.equals(thirdList): false
+firstSet.equals(secondSet): true
+secondSet.equals(thirdSet): true
+```
 
 ## 2.3 Fail-Fast Behavior
 
@@ -83,7 +79,7 @@ list.add(99); // ❌ ConcurrentModificationException
 - `forEach(Consumer<? super E> action)` — Applies action to each element.
 - `stream()` — Returns a stream for pipeline operations.
 
-## 2.5 Common Return Types and Exceptions (Certification Must-Know)
+## 2.5 Common Return Types and Exceptions
 
 - `add(E)` returns **boolean** — always `true` for `ArrayList`, may be `false` for `Set` if no change occurs.
 
