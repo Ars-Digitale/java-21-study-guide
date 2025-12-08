@@ -2,7 +2,7 @@
 
 This chapter covers the fundamental operations shared across the Java Collections API, including how equality is determined inside collections. These concepts apply to all main collection families (`List`, `Set`, `Queue`, `Deque`, `Map` and their Sequenced variants).
 
-Mastering these operations is essential for the Java 21 Certification, as they explain how collections behave when adding, searching, removing, comparing, iterating, and sorting elements.
+Mastering these operations is essential, as they explain how collections behave when adding, searching, removing, comparing, iterating, and sorting elements.
 
 ## 2.1 Core Collection Methods (Available to Most Collections)
 

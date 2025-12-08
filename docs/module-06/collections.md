@@ -17,9 +17,13 @@ The Collections Framework provides:
 
 All major collection structures share a consistent design so that code working with one implementation can often be reused with another.
 
-## 2. The Core Interfaces (Hierarchy Overview)
+## 2. The Core Interfaces
 
 At the heart of the Java Collections Framework is a small set of **root interfaces** that define generic data-handling behaviors.
+
+- **List**: an `ordered` collection of elements that allows `duplicates`;
+- **Set**: a collection that does not allow `duplicates`;
+- **Queue**: a structure that maps keys to values, in which we cannot have duplicate keys; each key can map to at most one value.
 
 ### 2.1 Main Collection Interfaces
 
@@ -149,7 +153,7 @@ Deque: add/remove first/last O(1)
 > **Note:** These values are averages; worst-case may be different (especially for hash-based structures).
 
 
-## 9. Summary of Chapter 1
+## 9. Summary
 
 - The Collection Framework is built on a small set of core interfaces.
 - Java 21 adds Sequenced Collections to unify ordering behavior.
