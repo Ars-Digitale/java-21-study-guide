@@ -158,7 +158,6 @@ System.out.println(a.equals(b)); // true
 
 ## 3.8 Summary Table of Important Operations
 
-```text
 
 | 	Operation		| 		ArrayList		| 		LinkedList 		| 		Immutable Lists 	|
 |-------------------|-----------------------|-----------------------|---------------------------|
@@ -171,4 +170,4 @@ System.out.println(a.equals(b)); // true
 | iterator()		|	fast				|	fast				|	fast					|
 | listIterator()	|	fast				|	fast				|	fast					|
 | contains(Object)	|	O(n)				|	O(n)				|	O(n)					|
-```		
+		

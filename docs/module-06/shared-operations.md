@@ -93,7 +93,7 @@ list.add(99); // ❌ ConcurrentModificationException
 
 ## 2.6 Summary Table — Shared Operations
 
-```text
+
 |	Operation 					|	Applies						|	 To Notes					|
 |-------------------------------|-------------------------------|-------------------------------|
 |	`add(e)`					|	All collections except Map 	|	Lists allow duplicates		|
@@ -105,4 +105,3 @@ list.add(99); // ❌ ConcurrentModificationException
 |	`stream()` 					|	All collections 			|	Returns sequential stream	|
 |	`removeIf(), replaceAll()`	| 	Lists, Sets, etc. 			|	Bulk operations				|
 |	`toArray()` 				|	All collections 			|	Returns Object[]			|
-```
