@@ -135,7 +135,7 @@ System.out.println(pq.poll()); // 50
 ```
 
 
-## 5.6 Blocking Queues (Certification Basics)
+## 5.6 Blocking Queues (Basics)
 
 In concurrent environments, the `java.util.concurrent` package provides blocking queue types.
 
@@ -147,7 +147,7 @@ In concurrent environments, the `java.util.concurrent` package provides blocking
 > **Note:** BlockingQueue never allows `null`.
 
 
-## 5.7 Certification Pitfalls
+## 5.7 Common Pitfalls
 
 - `Queue` and `Deque` methods come in “exception” and “special-value” variants — memorize which is which.
 - `ArrayDeque` cannot store `null` — `null` is used internally.

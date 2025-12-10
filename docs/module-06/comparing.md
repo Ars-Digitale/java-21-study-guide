@@ -95,9 +95,32 @@ int compare(T a, T b);
 
 Additional helper methods:
 
-- `reversed()`
-- `thenComparing(...)` for multi-level comparison
-- Static factory methods: `Comparator.comparing(...)`
+|Comparator Helper Methods — Exhaustive Table
+
+|Method	| Static / Instance | Return Type |	Parameters	| Description |
+|-------|-------------------|---------------|------------|-------------|
+|Comparator.comparing(keyExtractor)	| static	|Comparator<T>	| Function<? super T, ? extends U>	| Builds a comparator comparing extracted keys using natural ordering. |
+|Comparator.comparing(keyExtractor, keyComparator)	| static	| Comparator<T>	| Function<T,U>, Comparator<U>	| Builds comparator comparing extracted keys using a custom comparator.|
+|Comparator.comparingInt(keyExtractor)	| static	| Comparator<T>		| ToIntFunction<T>	| Optimized comparator for int keys (avoids boxing).|
+|Comparator.comparingLong(keyExtractor)	| static	| Comparator<T>		| ToLongFunction<T>	| Optimized comparator for long keys.|
+|Comparator.comparingDouble(keyExtractor)	| static	| Comparator<T>		| ToDoubleFunction<T>	| Optimized comparator for double keys.|
+|Comparator.naturalOrder()	| static	| Comparator<T>	| none	| Comparator using natural ordering (Comparable).|
+|Comparator.reverseOrder()	| static	| Comparator<T>	| none	| Reverse natural ordering.|
+|Comparator.nullsFirst(comparator)	| static	| Comparator<T>	| Comparator<T>	| Wraps comparator so nulls compare before non-nulls.|
+|Comparator.nullsLast(comparator)	| static	| Comparator<T>	| Comparator<T>	| Wraps comparator so nulls compare after non-nulls.|
+
+
+Instance Methods on Comparator
+
+|Method	| Static / Instance |	Return Type	| Parameters | Description |
+|-------|-------------------|---------------|------------|-------------|
+|thenComparing(otherComparator)	| instance	| Comparator<T>	| Comparator<T>	| Adds a secondary comparator when the primary compares equal.|
+|thenComparing(keyExtractor)	| instance	| Comparator<T>	| Function<T,U>	| Secondary comparison using natural ordering of extracted key.|
+|thenComparing(keyExtractor, keyComparator)	| instance	| Comparator<T>	| Function<T,U>, Comparator<U>	| Secondary comparison with custom comparator.|
+|thenComparingInt(keyExtractor)	| instance	| Comparator<T>	| ToIntFunction<T>	| Secondary numeric comparison (optimized).|
+|thenComparingLong(keyExtractor)	| instance	| Comparator<T>	| ToLongFunction<T>	| Secondary numeric comparison.|
+|thenComparingDouble(keyExtractor)	| instance	| Comparator<T>	| ToDoubleFunction<T>	| Secondary numeric comparison.|
+|reversed()	| instance	| Comparator<T>	| none	| Returns a reversed comparator for the same comparison logic.|
 
 ### 2.2 Comparator Example
 
