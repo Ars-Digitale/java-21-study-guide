@@ -10,17 +10,16 @@ A **Deque** (“double-ended queue”) allows insertion and removal from both en
 
 The `Queue` interface extends `Collection` and is commonly used in asynchronous programming, work distribution, algorithms, and buffering.
 
-Two families of methods exist: ones that throw exceptions and ones that return special values (usually `null`).
+Two families of methods exist: ones that **throw exceptions** and ones that **return special values** (usually `null`).
 
 ### 5.1.1 Queue Core Methods
 
-```text
 | Operation | Throws Exception | Returns Special Value | Description |
 |----------|------------------|------------------------|-------------|
 | Insert   | add(e)          | offer(e)              | Adds an element; offer preferred for bounded queues |
 | Remove   | remove()        | poll()                | Removes and returns head |
 | Examine  | element()       | peek()                | Returns head without removing |
-```
+
 
 
 ### 5.1.2 Queue Implementations
@@ -46,13 +45,13 @@ It is more versatile than a Queue:
 
 ### 5.2.1 Deque Core Methods
 
-```text
+
 | Operation | Front | End |
 |----------|-------|-----|
 | Insert   | addFirst(e), offerFirst(e) | addLast(e), offerLast(e) |
 | Remove   | removeFirst(), pollFirst() | removeLast(), pollLast() |
 | Examine  | getFirst(), peekFirst()    | getLast(), peekLast() |
-```
+
 
 
 ### 5.2.2 Deque Implementations
@@ -159,7 +158,7 @@ In concurrent environments, the `java.util.concurrent` package provides blocking
 
 ## 5.8 Summary Table
 
-```text
+
 | Interface | Typical Behavior | Null Allowed? | Common Implementations | Notes |
 |-----------|------------------|----------------|-------------------------|-------|
 | Queue     | FIFO             | Depends        | LinkedList, ArrayDeque, PriorityQueue | PriorityQueue not FIFO |
@@ -167,5 +166,5 @@ In concurrent environments, the `java.util.concurrent` package provides blocking
 | PriorityQueue | Ordered by priority | No | PriorityQueue | Removes smallest element first |
 | BlockingQueue | Thread-safe FIFO | No | ArrayBlockingQueue, LinkedBlockingQueue | add/offer vs put differences |
 | ConcurrentLinkedQueue | Lock-free FIFO | No | ConcurrentLinkedQueue | Very fast for multi-threading |
-```
+
 
