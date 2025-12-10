@@ -95,7 +95,7 @@ int compare(T a, T b);
 
 Additional helper methods:
 
-Comparator Helper **Static** Methods
+#### 2.1.1 Comparator Helper **Static** Methods
 
 |Method	| Static / Instance | Return Type |	Parameters	| Description |
 |-------|-------------------|---------------|------------|-------------|
@@ -110,7 +110,7 @@ Comparator Helper **Static** Methods
 |Comparator.nullsLast(comparator)	| static	| Comparator<T>	| Comparator<T>	| Wraps comparator so nulls compare after non-nulls.|
 
 
-**Instance** Methods on Comparator
+#### 2.1.2 **Instance** Methods on Comparator
 
 |Method	| Static / Instance |	Return Type	| Parameters | Description |
 |-------|-------------------|---------------|------------|-------------|
