@@ -129,13 +129,14 @@ list.clear();
 
 ### 3.5 Important Behaviors and Characteristics
 
-Operation	Behavior	Exception(s)
-add(E)	always appends	—
-add(int,E)	shifts elements right	IndexOutOfBoundsException
-get(int)	constant-time for ArrayList, linear for LinkedList	IndexOutOfBoundsException
-set(int,E)	replaces element	IndexOutOfBoundsException
-remove(int)	shifts elements left	IndexOutOfBoundsException
-remove(Object)	removes first equal element	—
+|		Operation		|		Behavior			|		Exception(s)			|
+|-----------------------|---------------------------|-------------------------------|
+|		add(E)			|	always appends			|		—						|
+|		add(int,E)		|	shifts elements right	|	IndexOutOfBoundsException	|
+|		get(int)		|	constant-time for ArrayList, linear for LinkedList |	IndexOutOfBoundsException	|
+|		set(int,E)		|	replaces element		|	IndexOutOfBoundsException	|
+|		remove(int)		|	shifts elements left	|	IndexOutOfBoundsException	|
+|		remove(Object)	|	removes first equal element	|	—	|
 
 ## 3.6 contains(), equals(), and hashCode()
 
