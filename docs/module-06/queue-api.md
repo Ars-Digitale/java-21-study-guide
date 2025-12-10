@@ -1,4 +1,4 @@
-# Chapter 5 — Queue & Deque API
+# Queue & Deque API
 
 Java’s `Queue` and `Deque` interfaces model ordered collections designed for processing elements in a particular sequence.
 

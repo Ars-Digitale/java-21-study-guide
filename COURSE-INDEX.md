@@ -33,3 +33,4 @@
 	- [Sorting and Comparing](docs/module-06/comparing.md)
 	- [List APIs](docs/module-06/list-api.md)
 	- [Set APIs](docs/module-06/set-api.md)
+	- [Queue & Deque API](docs/module-06/queue-api.md)
