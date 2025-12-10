@@ -94,15 +94,15 @@ list.add(99); // ❌ ConcurrentModificationException
 ## 2.6 Summary Table — Shared Operations
 
 ```text
-Operation Applies To Notes
-
-`add(e)` All collections except Map Lists allow duplicates
-`remove(o)` All collections except Map Removes first occurrence
-`contains(o)` All collections except Map Uses equals()
-`size(), isEmpty()` All collections Constant-time for most
-`iterator()` All collections Fail-fast
-`clear()` All collections Removes all elements
-`stream()` All collections Returns sequential stream
-`removeIf(), replaceAll()` Lists, Sets, etc. Bulk operations
-`toArray()` All collections Returns Object[]
+|	Operation 					|	Applies						|	 To Notes					|
+|-------------------------------|-------------------------------|-------------------------------|
+|	`add(e)`					|	All collections except Map 	|	Lists allow duplicates		|
+|	`remove(o)`					|	All collections except Map 	|	Removes first occurrence	|
+|	`contains(o)`				|	All collections except Map 	|	Uses equals()				|
+|	`size(), isEmpty()`			|	All collections 			|	Constant-time for most		|
+|	`iterator()` 				|	All collections 			|	Fail-fast					|
+|	`clear()` 					|	All collections 			|	Removes all elements		|
+|	`stream()` 					|	All collections 			|	Returns sequential stream	|
+|	`removeIf(), replaceAll()`	| 	Lists, Sets, etc. 			|	Bulk operations				|
+|	`toArray()` 				|	All collections 			|	Returns Object[]			|
 ```

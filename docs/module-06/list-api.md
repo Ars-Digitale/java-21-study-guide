@@ -1,7 +1,7 @@
 # The List API
 
 In the Collections Framework, a **List** represents an ordered, index-based, duplicate-allowing collection.
-It is one of the most heavily tested APIs in Java certifications because of its subtle behaviors around indexing, mutability, equality, and iteration.
+
 
 The List interface extends `Collection` and is implemented by:
 
@@ -49,11 +49,9 @@ list1.set(0, "Z"); // ❌ UnsupportedOperationException
 
 > **Note:** All `List.of()` lists:
 
-reject nulls
-
-are immutable
-
-throw `UOE` on structural modification
+- reject nulls
+- are immutable
+- throw `UOE` on structural modification
 
 ### 3.3.2 `List.copyOf()` (immutable copy)
 
@@ -111,7 +109,7 @@ list.clear();
 
 ```java
 for (int i = 0; i < list.size(); i++) {
-System.out.println(list.get(i));
+	System.out.println(list.get(i));
 }
 ```
 
@@ -119,7 +117,7 @@ System.out.println(list.get(i));
 
 ```java
 for (String s : list) {
-System.out.println(s);
+	System.out.println(s);
 }
 ```
 
@@ -131,7 +129,7 @@ while (it.hasNext()) { System.out.println(it.next()); }
 
 ListIterator<String> lit = list.listIterator();
 while (lit.hasNext()) {
-if (lit.next().equals("A")) lit.set("Z");
+	if (lit.next().equals("A")) lit.set("Z");
 }
 ```
 
@@ -162,14 +160,15 @@ System.out.println(a.equals(b)); // true
 
 ```text
 
-Operation	ArrayList	LinkedList	Immutable Lists
-add(E)	fast	fast	❌ unsupported
-add(index,E)	slow (shift)	fast	❌
-get(index)	fast	slow	fast
-remove(index)	slow (shift)	fast	❌
-remove(Object)	slower	slower	❌
-set(index,E)	fast	slow	❌
-iterator()	fast	fast	fast
-listIterator()	fast	fast	fast
-contains(Object)	O(n)	O(n)	O(n)
+| 	Operation		| 		ArrayList		| 		LinkedList 		| 		Immutable Lists 	|
+|-------------------|-----------------------|-----------------------|---------------------------|
+| add(E)			|	fast				|	fast				|	❌ unsupported			|
+| add(index,E)		|	slow (shift)		|	fast				|	❌						|
+| get(index)		|	fast				|	slow				|	fast					|
+| remove(index)		|	slow (shift)		|	fast				|	❌						|
+| remove(Object)	|	slower				|	slower				|	❌						|
+| set(index,E)		|	fast				|	slow				|	❌						|
+| iterator()		|	fast				|	fast				|	fast					|
+| listIterator()	|	fast				|	fast				|	fast					|
+| contains(Object)	|	O(n)				|	O(n)				|	O(n)					|
 ```		
