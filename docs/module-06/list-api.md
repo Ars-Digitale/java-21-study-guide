@@ -1,4 +1,4 @@
-# Chapter 3 — The List API
+# The List API
 
 In the Collections Framework, a **List** represents an ordered, index-based, duplicate-allowing collection.
 It is one of the most heavily tested APIs in Java certifications because of its subtle behaviors around indexing, mutability, equality, and iteration.
