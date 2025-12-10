@@ -3,8 +3,8 @@
 Java provides two main strategies for sorting and comparing: `Comparable` (natural ordering) and `Comparator` (custom ordering).
 Understanding their rules, constraints, and interactions with generics is essential.
 
-- For numeric types, sorting follows natural numerical order, meaning smaller values come before larger ones.
-- For strings, sorting follows Unicode (lexicographical) order: `digits` come first, then `uppercase letters`, and finally `lowercase letters`.
+- For **numeric types**, sorting follows natural numerical order, meaning smaller values come before larger ones.
+- For **strings**, sorting follows Unicode (lexicographical) order: `digits` come first, then `uppercase letters`, and finally `lowercase letters`.
 
 This ordering is based on each character’s Unicode code point, not alphabetical intuition.
 
@@ -15,8 +15,6 @@ List<String> sorted = new ArrayList<>(items);
 Collections.sort(sorted);
 
 System.out.println(sorted);
-
-}
 ```
 
 Output:
