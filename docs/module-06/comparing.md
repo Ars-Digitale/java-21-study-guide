@@ -1,8 +1,30 @@
 # Comparable, Comparator & Sorting in Java
 
-Sorting collections and arrays is a fundamental certification topic.
-Java provides two main strategies: `Comparable` (natural ordering) and `Comparator` (custom ordering).
-Understanding their rules, constraints, and interactions with generics is mandatory for the exam.
+Java provides two main strategies for sorting and comparing: `Comparable` (natural ordering) and `Comparator` (custom ordering).
+Understanding their rules, constraints, and interactions with generics is essential.
+
+- For numeric types, sorting follows natural numerical order, meaning smaller values come before larger ones.
+- For strings, sorting follows Unicode (lexicographical) order: `digits` come first, then `uppercase letters`, and finally `lowercase letters`.
+
+This ordering is based on each character’s Unicode code point, not alphabetical intuition.
+
+```java
+List<String> items = List.of("10", "2", "A", "Z", "a", "b");
+
+List<String> sorted = new ArrayList<>(items);
+Collections.sort(sorted);
+
+System.out.println(sorted);
+
+}
+```
+
+Output:
+
+```bash
+[10, 2, A, Z, a, b]
+```
+
 
 ## 1. Comparable — Natural Ordering
 
@@ -13,22 +35,25 @@ A class implements it when it wants to define its default sorting rule.
 
 ```java
 public interface Comparable<T> {
-int compareTo(T other);
+	int compareTo(T other);
 }
 ```
 
 Rules and expectations:
 
-- Return negative → this < other
-- Return zero → this == other
-- Return positive → this > other
+- Return negative → `this` < `other`
+- Return zero → `this` == `other`
+- Return positive → `this` > `other`
 
-> **Note:** Natural ordering must be consistent with equals(), unless explicitly documented otherwise.
+> [!IMPORTANT]
+> - Natural ordering must be consistent with equals(), unless explicitly documented otherwise:
+> - `compareTo()` is consistent with `equals()` if, and only if, `a.compareTo(b) == 0` and `a.equals(b) is true`.
 
 ### 1.2 Example: Class Implementing Comparable
 
 ```java
 public class Person implements Comparable<Person> {
+
 private String name;
 private int age;
 
@@ -45,22 +70,19 @@ public int compareTo(Person other) {
 
 }
 
-var list = List.of(
-new Person("Bob", 40),
-new Person("Alice", 30)
-);
+var list = List.of(new Person("Bob", 40), new Person("Alice", 30));
 
 list.stream().sorted().forEach(p -> System.out.println(p.age));
 ```
 
-The list sorts by age, because that is the natural order.
+The list sorts by age, because that is the natural numbering order.
 
 ### 1.3 Common Comparable Pitfalls
 
 - Compare all relevant fields → inconsistent results if not
 - Violating transitivity → leads to undefined behavior
 - Throwing exceptions inside compareTo() breaks sorting
-- Failing to implement the same logic as equals() → certification trap
+- Failing to implement the same logic as equals() → common trap
 
 ## 2. Comparator — Custom Ordering
 
@@ -73,40 +95,36 @@ without modifying the class itself.
 int compare(T a, T b);
 ```
 
-Additional helper methods (highly used in certification):
+Additional helper methods:
 
 - `reversed()`
-- `thenComparing(...)` for multi-level comparison@@
-- Static factory methods: `Comparator.comparing(...)`@@
+- `thenComparing(...)` for multi-level comparison
+- Static factory methods: `Comparator.comparing(...)`
 
 ### 2.2 Comparator Example
 
 ```java
-Comparator<Person> byName =
-Comparator.comparing(Person::getName);
+Comparator<Person> byName = Comparator.comparing(Person::getName);
 
-Comparator<Person> byAgeDesc =
-Comparator.comparingInt(Person::getAge).reversed();
+Comparator<Person> byAgeDesc = Comparator.comparingInt(Person::getAge).reversed();
 
-var sorted = people.stream()
-.sorted(byName.thenComparing(byAgeDesc))
-.toList();
+var sorted = people.stream().sorted(byName.thenComparing(byAgeDesc)).toList();
 ```
 
-## 3. Comparable vs Comparator (Certification Table)
+## 3. Comparable vs Comparator 
 
-```text
 
-Feature	Comparable	Comparator
-Package	java.lang	java.util
-Method	compareTo(T)	compare(T,T)
-Sorting Type	Natural (default)	Custom (multiple strategies)
-Modifies Source Class	YES	NO
-Useful For	Default ordering	External or alternate ordering
-Allows Multiple Orders	NO	YES
-Used By Collections.sort	YES	YES
-Used By Arrays.sort	YES	YES
-```		
+|Feature  |	Comparable	| Comparator |
+|---------|-------------|------------|
+|Package  |	java.lang	| java.util	|
+|Method	|	compareTo(T) |	compare(T,T)	|
+|Sorting Type |	Natural (default) |	Custom (multiple strategies) |
+|Modifies Source Class	| YES |	NO |
+|Useful For	|	Default ordering |	External or alternate ordering |
+|Allows Multiple Orders	| NO |	YES |
+|Used By Collections.sort	| YES |	YES |
+|Used By Arrays.sort	| YES	| YES |
+	
 
 ## 4. Sorting Arrays and Collections
 
@@ -147,7 +165,7 @@ Comparator.comparingDouble(...)
 
 > **Note:** These avoid boxing and are preferred in performance-sensitive code.
 
-## 7. Certification Traps
+## 7. Common Traps
 
 - Sorting a list of Objects without Comparable → runtime ClassCastException
 - compareTo inconsistent with equals → unpredictable behavior
@@ -156,7 +174,7 @@ Comparator.comparingDouble(...)
 - Comparator comparing fields of mixed types → ClassCastException
 - Using subtraction to compare ints can overflow → always use `Integer.compare()`
 
-## 8. Full Certification Example
+## 8. Full Example
 
 ```java
 record Book(String title, double price, int year) {}
