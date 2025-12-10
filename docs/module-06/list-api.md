@@ -196,7 +196,7 @@ while (lit.hasNext()) {
 ## 3.8 The subList() Method
 
 `subList()` creates a view of a portion of the list, not a copy.
-This part is heavily tested because modifying either list can modify the other.
+Modifying either list can modify the other.
 
 ### 3.8.1 Syntax
 

@@ -31,3 +31,4 @@
 	- [Introduction to the Collections Framework](docs/module-06/collections.md)
 	- [Shared Collection Operations & Equality](docs/module-06/shared-operations.md)
 	- [List APIs](docs/module-06/list-api.md)
+	- [Set APIs](docs/module-06/set-api.md)
