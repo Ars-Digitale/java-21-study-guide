@@ -73,7 +73,6 @@ System.out.println(tree); // [1, 5, 10]
 > **Note:** TreeSet requires all elements to be mutually comparable —  
 mixing non-comparable types produces `ClassCastException`.
 
----
 
 ## 4.3 Equality Rules in Sets
 
@@ -105,10 +104,6 @@ set.add("Yo"); // same length → treated as duplicate
 
 System.out.println(set);  // ["Hi"]
 ```
-
-> **Note:** This distinction often appears on exams.
-
----
 
 ## 4.4 Creating Set Instances
 
@@ -142,7 +137,6 @@ Set<String> empty = Set.of();             // empty immutable set
 > **Note:** Factory-created sets are **immutable** —  
 adding or removing elements throws `UnsupportedOperationException`.
 
----
 
 ## 4.5 Main Operations on Sets
 
@@ -174,7 +168,6 @@ set.removeAll(otherSet);
 set.retainAll(otherSet); // intersection
 ```
 
----
 
 ## 4.6 Common Pitfalls
 
@@ -184,15 +177,14 @@ set.retainAll(otherSet); // intersection
 - HashSet does not guarantee iteration order
 - TreeSet treats objects with compare()==0 as duplicates even if not equal
 
----
 
 ## 4.7 Summary Table
 
-```text
+
 | Implementation   | Keeps Order?          | Allows Null? | Sorted?        | Underlying Logic        |
 |------------------|-----------------------|--------------|----------------|--------------------------|
 | HashSet          | No                    | Yes (1 null) | No             | hashCode + equals        |
 | LinkedHashSet    | Yes (insertion order) | Yes (1 null) | No             | hash table + linked list |
 | TreeSet          | Yes (sorted)          | No           | Yes (natural/comparator) | compareTo / Comparator |
-```
+
 
