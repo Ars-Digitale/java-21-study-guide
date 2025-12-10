@@ -5,9 +5,13 @@ In the Collections Framework, a **List** represents an ordered, index-based, dup
 
 The List interface extends `Collection` and is implemented by:
 
-- `ArrayList` — resizable array, fast random access, not thread-safe.
-- `LinkedList` — doubly-linked list, fast insertions/removals, slower random access.
-- `CopyOnWriteArrayList` — thread-safe, designed for heavy reads and rare writes.
+```text
+List
+├── ArrayList (Resizable array — fast random access, slower inserts/removals in the middle)
+├── LinkedList (Doubly-linked list — fast inserts/removals, slower random access)
+└── Vector (Legacy synchronized list — rarely used today)
+```
+
 
 ## 3.1 Characteristics of Lists
 
@@ -94,18 +98,71 @@ list.set(1, "NewValue");
 
 > **Note:** `get()` throws `IndexOutOfBoundsException` for invalid indices.
 
+If you try to `update` an element in an empty List, event at index 0, you get an `IndexOutOfBoundsException`
+
+```java
+List<Integer> list = new ArrayList<Integer>();
+list.add(3);
+list.add(5);
+System.out.println(list.toString());
+list.clear();
+list.set(0, 2);
+```
+
+Output
+
+```bash
+[3, 5]
+Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+```
+
+> **Note:** `get()` throws `IndexOutOfBoundsException` for invalid indices.
+
 ### 3.4.3 Removing Elements
 
 ```java
-list.remove(0); // removes by index
+list.remove(0); // removes by a "primitive" index. Overloaded version over the one implemented in Collection which removes an object match.
 list.remove("A"); // removes first occurrence
 list.removeIf(s -> s.startsWith("X"));
 list.clear();
 ```
 
-## 3.5 Iterating Through a List
+### 3.5 Important Behaviors and Characteristics
 
-### 3.5.1 Classic For Loop
+Operation	Behavior	Exception(s)
+add(E)	always appends	—
+add(int,E)	shifts elements right	IndexOutOfBoundsException
+get(int)	constant-time for ArrayList, linear for LinkedList	IndexOutOfBoundsException
+set(int,E)	replaces element	IndexOutOfBoundsException
+remove(int)	shifts elements left	IndexOutOfBoundsException
+remove(Object)	removes first equal element	—
+
+## 3.6 contains(), equals(), and hashCode()
+
+### 3.6.1 contains()
+
+Uses .equals() on elements.
+
+### 3.6.2 Equality of Lists
+
+`List.equals()` performs element-wise comparison in order.
+
+```java
+List<String> a = List.of("A", "B");
+List<String> b = List.of("A", "B");
+
+System.out.println(a.equals(b)); // true
+```
+
+> **Note:** Order matters. Type of list does NOT matter.
+
+### 3.6.3 hashCode()
+
+Computed based on the contents.
+
+## 3.7 Iterating Through a List
+
+### 3.7.1 Classic For Loop
 
 ```java
 for (int i = 0; i < list.size(); i++) {
@@ -113,7 +170,7 @@ for (int i = 0; i < list.size(); i++) {
 }
 ```
 
-### 3.5.2 Enhanced For Loop
+### 3.7.2 Enhanced For Loop
 
 ```java
 for (String s : list) {
@@ -121,7 +178,7 @@ for (String s : list) {
 }
 ```
 
-### 3.5.3 Iterator & ListIterator
+### 3.7.3 Iterator & ListIterator
 
 ```java
 Iterator<String> it = list.iterator();
@@ -135,28 +192,71 @@ while (lit.hasNext()) {
 
 > **Note:** Only `ListIterator` supports bidirectional traversal and modification.
 
-## 3.6 Equality of Lists
+## 3.8 The subList() Method
 
-`List.equals()` performs element-wise comparison in order.
+`subList()` creates a view of a portion of the list, not a copy.
+This part is heavily tested because modifying either list can modify the other.
+
+### 3.8.1 Syntax
 
 ```java
-List<String> a = List.of("A", "B");
-List<String> b = List.of("A", "B");
-
-System.out.println(a.equals(b)); // true
+List<E> subList(int fromIndex, int toIndex);
 ```
 
-> **Note:** Order matters. Duplicates matter. Type of list does NOT matter.
+### 3.8.2 Rules
 
-## 3.7 Common Certification Pitfalls
+|			Rule						|				Explanation				|
+|---------------------------------------|---------------------------------------|
+|	fromIndex inclusive					|	element at fromIndex is included	|
+|	toIndex exclusive					|	element at toIndex is NOT included  |
+|	The view is backed by original list	|	modifying one modifies the other  	|
+|	Structural modification of parent invalidates the subList	|	→ ConcurrentModificationException	|
 
-- `List.of()` rejects nulls.
-- Arrays.asList() creates a fixed-size list.
-- Removing by index vs. object: `remove(1)` vs `remove(Integer.valueOf(1))`.
-- LinkedList random access is slow (O(n)).
-- SubList is a view — modifying it affects the parent.
+### 3.8.3 Examples
 
-## 3.8 Summary Table of Important Operations
+```java
+List<String> list = new ArrayList<>(List.of("A", "B", "C", "D"));
+List<String> view = list.subList(1, 3);
+// view = ["B", "C"]
+
+view.set(0, "X");
+// list = ["A", "X", "C", "D"]
+// view = ["X", "C"]
+```
+
+### 3.8.4 Modifying the parent list invalidates the view
+
+```java
+List<String> list = new ArrayList<>(List.of("A","B","C","D"));
+List<String> view = list.subList(1, 3);
+
+list.add("E"); // structural change to parent list
+
+view.get(0); // ❌ ConcurrentModificationException
+```
+
+### 3.8.5 Modifying the subList modifies the parent
+
+```java
+view.remove(1);
+// removes "C" from both view and parent list
+```
+
+### 3.8.6 Clearing the subList clears part of the parent list
+
+```java
+view.clear();
+// removes indices 1 and 2 from the parent
+```
+
+### 3.8.7 Common Pitfalls
+
+- Assuming subList is independent	It is a view, not a copy
+- Assuming subList allows resizing	It allows add/remove only inside the subrange
+- Forgetting that parent modifications invalidate	Results in ConcurrentModificationException
+- Incorrect index expectations	End index is exclusive
+
+## 3.9 Summary Table of Important Operations
 
 
 | 	Operation		| 		ArrayList		| 		LinkedList 		| 		Immutable Lists 	|

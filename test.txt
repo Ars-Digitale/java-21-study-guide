@@ -1,175 +1,89 @@
-# Chapter 3 — The List API
+### 3.3.1 Important Behaviors and Characteristics
 
-In the Collections Framework, a **List** represents an ordered, index-based, duplicate-allowing collection.
-It is one of the most heavily tested APIs in Java certifications because of its subtle behaviors around indexing, mutability, equality, and iteration.
+Operation	Behavior	Exception(s)
+add(E)	always appends	—
+add(int,E)	shifts elements right	IndexOutOfBoundsException
+get(int)	constant-time for ArrayList, linear for LinkedList	IndexOutOfBoundsException
+set(int,E)	replaces element	IndexOutOfBoundsException
+remove(int)	shifts elements left	IndexOutOfBoundsException
+remove(Object)	removes first equal element	—
 
-The List interface extends `Collection` and is implemented by:
+## 3.4 contains(), equals(), and hashCode()
 
-- `ArrayList` — resizable array, fast random access, not thread-safe.
-- `LinkedList` — doubly-linked list, fast insertions/removals, slower random access.
-- `CopyOnWriteArrayList` — thread-safe, designed for heavy reads and rare writes.
+3.4.1 contains()
 
-## 3.1 Characteristics of Lists
+Uses .equals() on elements.
 
-- Ordered — elements preserve insertion order.
-- Indexed — accessible via `get(int)` and `set(int,E)`.
-- Allow duplicates — `List` does not enforce uniqueness.
-- Can contain null — unless using special implementations.
+3.4.2 equals()
 
-## 3.2 Creating Lists (Constructors)
+Two lists are equal if:
 
-### 3.2.1 ArrayList Constructors
+- They have the same size
+- All elements are equal pairwise using .equals()
 
-```java
-List<String> a1 = new ArrayList<>();
-List<String> a2 = new ArrayList<>(50); // initial capacity
-List<String> a3 = new ArrayList<>(List.of("A", "B"));
-```
+3.4.3 hashCode()
 
-> **Note:** Initial capacity is not a size. It just decides how many elements the internal array can hold before resizing.
+Computed based on the contents.
 
-### 3.2.2 LinkedList Constructors
+⭐ 3.5 The subList() Method — Certification-Critical Topic
 
-```java
-List<String> l1 = new LinkedList<>();
-List<String> l2 = new LinkedList<>(List.of("A", "B"));
-```
+subList() creates a view of a portion of the list, not a copy.
+This part is heavily tested because modifying either list can modify the other.
 
-> **Note:** LinkedList also implements `Deque`.
-
-## 3.3 Factory Methods
-
-### 3.3.1 `List.of()` (immutable)
+3.5.1 Syntax
 
 ```java
-List<String> list1 = List.of("A", "B", "C");
-list1.add("X"); // ❌ UnsupportedOperationException
-list1.set(0, "Z"); // ❌ UnsupportedOperationException
+List<E> subList(int fromIndex, int toIndex);
 ```
 
-> **Note:** All `List.of()` lists:
+3.5.2 Rules
+Rule	Explanation
+fromIndex inclusive	element at fromIndex is included
+toIndex exclusive	element at toIndex is NOT included
+The view is backed by original list	modifying one modifies the other
+Structural modification of parent invalidates the subList	→ ConcurrentModificationException
 
-reject nulls
-
-are immutable
-
-throw `UOE` on structural modification
-
-### 3.3.2 `List.copyOf()` (immutable copy)
+### 3.5.3 Examples
 
 ```java
-List<String> src = new ArrayList<>();
-src.add("Hello");
+List<String> list = new ArrayList<>(List.of("A", "B", "C", "D"));
+List<String> view = list.subList(1, 3);
+// view = ["B", "C"]
 
-List<String> copy = List.copyOf(src); // immutable snapshot
+view.set(0, "X");
+// list = ["A", "X", "C", "D"]
+// view = ["X", "C"]
 ```
 
-### 3.3.3 Arrays.asList() (fixed-size list)
+3.5.4 Modifying the parent list invalidates the view
 
 ```java
-String[] arr = {"A", "B"};
-List<String> list = Arrays.asList(arr);
+List<String> list = new ArrayList<>(List.of("A","B","C","D"));
+List<String> view = list.subList(1, 3);
 
-list.set(0, "Z"); // OK
-list.add("X"); // ❌ UOE — size is fixed
+list.add("E"); // structural change to parent list
+
+view.get(0); // ❌ ConcurrentModificationException
 ```
 
-> **Note:** The list is backed by the array: modifying one affects the other.
-
-## 3.4 Core List Operations
-
-### 3.4.1 Adding Elements
+3.5.5 Modifying the subList modifies the parent
 
 ```java
-list.add("A");
-list.add(1, "B"); // insert at index
-list.addAll(otherList);
-list.addAll(2, otherList);
+view.remove(1);
+// removes "C" from both view and parent list
 ```
 
-### 3.4.2 Accessing Elements
+3.5.6 Clearing the subList clears part of the parent list
 
 ```java
-String x = list.get(0);
-list.set(1, "NewValue");
+view.clear();
+// removes indices 1 and 2 from the parent
 ```
 
-> **Note:** `get()` throws `IndexOutOfBoundsException` for invalid indices.
+### 3.5.7 Certification Pitfalls
 
-### 3.4.3 Removing Elements
-
-```java
-list.remove(0); // removes by index
-list.remove("A"); // removes first occurrence
-list.removeIf(s -> s.startsWith("X"));
-list.clear();
-```
-
-## 3.5 Iterating Through a List
-
-### 3.5.1 Classic For Loop
-
-```java
-for (int i = 0; i < list.size(); i++) {
-System.out.println(list.get(i));
-}
-```
-
-### 3.5.2 Enhanced For Loop
-
-```java
-for (String s : list) {
-System.out.println(s);
-}
-```
-
-### 3.5.3 Iterator & ListIterator
-
-```java
-Iterator<String> it = list.iterator();
-while (it.hasNext()) { System.out.println(it.next()); }
-
-ListIterator<String> lit = list.listIterator();
-while (lit.hasNext()) {
-if (lit.next().equals("A")) lit.set("Z");
-}
-```
-
-> **Note:** Only `ListIterator` supports bidirectional traversal and modification.
-
-## 3.6 Equality of Lists
-
-`List.equals()` performs element-wise comparison in order.
-
-```java
-List<String> a = List.of("A", "B");
-List<String> b = List.of("A", "B");
-
-System.out.println(a.equals(b)); // true
-```
-
-> **Note:** Order matters. Duplicates matter. Type of list does NOT matter.
-
-## 3.7 Common Certification Pitfalls
-
-- `List.of()` rejects nulls.
-- Arrays.asList() creates a fixed-size list.
-- Removing by index vs. object: `remove(1)` vs `remove(Integer.valueOf(1))`.
-- LinkedList random access is slow (O(n)).
-- SubList is a view — modifying it affects the parent.
-
-## 3.8 Summary Table of Important Operations
-
-```text
-
-Operation	ArrayList	LinkedList	Immutable Lists
-add(E)	fast	fast	❌ unsupported
-add(index,E)	slow (shift)	fast	❌
-get(index)	fast	slow	fast
-remove(index)	slow (shift)	fast	❌
-remove(Object)	slower	slower	❌
-set(index,E)	fast	slow	❌
-iterator()	fast	fast	fast
-listIterator()	fast	fast	fast
-contains(Object)	O(n)	O(n)	O(n)
-```		
+Pitfall	Explanation
+Assuming subList is independent	It is a view, not a copy
+Assuming subList allows resizing	It allows add/remove only inside the subrange
+Forgetting that parent modifications invalidate	Results in ConcurrentModificationException
+Incorrect index expectations	End index is exclusive
