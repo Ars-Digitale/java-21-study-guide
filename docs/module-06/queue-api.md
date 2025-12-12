@@ -17,8 +17,8 @@ Two families of methods exist: ones that **throw exceptions** and ones that **re
 | Operation | Throws Exception | Returns Special Value | Description |
 |----------|------------------|------------------------|-------------|
 | Insert   | add(e)          | offer(e)              | Adds an element; offer preferred for bounded queues |
-| Remove   | remove()        | poll()                | Removes and returns head |
-| Examine  | element()       | peek()                | Returns head without removing |
+| Remove   | E remove()        | E poll()                | Removes and returns head. remove throw NoSuchElementException if queue is empty, poll retutn null |
+| Read	   | E element()       | E peek()                | Returns head without removing. element throw NoSuchElementException if queue is empty, peek retutn null |
 
 
 

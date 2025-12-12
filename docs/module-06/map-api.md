@@ -6,7 +6,7 @@ Unlike other collection types, `Map` does **not** extend `Collection` and theref
 
 ## 6.1 Core Map Characteristics
 
-- Each key is unique; duplicate keys overwrite the previous value
+- Each key is unique; **duplicate keys overwrite the previous value**
 - Values may be duplicated
 - Maps do not support positional (index-based) access
 - Iteration is performed over `keySet()`, `values()`, or `entrySet()`
@@ -47,16 +47,18 @@ Map<String, Integer> map5 = Map.ofEntries(
 
 ## 6.4 Basic Map Operations
 
-| Method | Description |
-|------|-------------|
-| put(k, v) | Adds or replaces a mapping |
-| get(k) | Returns value or null |
-| remove(k) | Removes mapping |
-| containsKey(k) | Checks key presence |
-| containsValue(v) | Checks value presence |
-| size() | Number of entries |
-| isEmpty() | Empty check |
-| clear() | Removes all entries |
+| Method | Description | Return
+|------|-------------|---------------|
+| put(k, v) | Adds or replaces a mapping | Return prev. value or null
+| get(k) | Returns value or null | Return specific value or null
+| getOrDefault(k, default) | Returns value or default | Return specific value or default
+| remove(k) | Removes mapping | Remove and return specific value or null
+| containsKey(k) | Checks key presence | boolean
+| containsValue(v) | Checks value presence | boolean
+| size() | Number of entries | int
+| isEmpty() | Empty check | boolean
+| clear() | Removes all entries | void
+| V merge(k, v, BiFunction(V, V, V)) | merge value with func. | Set value if not set; run func. if set for new value; Remove if v is null
 
 ```java
 Map<String, String> map = new HashMap<>();
