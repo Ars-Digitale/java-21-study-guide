@@ -31,7 +31,7 @@ Common classes implementing `Queue`:
 - `PriorityQueue` — orders elements by natural order or comparator; not FIFO.
 - `ConcurrentLinkedQueue` — thread-safe, lock-free.
 
-> **Note:** For certification, remember: `PriorityQueue` does not guarantee traversal order matching priority sorting.
+> **Note:** `PriorityQueue` does not guarantee traversal order matching priority sorting.
 
 
 ## 5.2 Deque — Overview
