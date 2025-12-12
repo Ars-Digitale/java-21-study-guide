@@ -99,7 +99,7 @@ They sit above them in the hierarchy and unify common behaviors.
 
 All existing ordered collections automatically benefit from these APIs without breaking backward compatibility.
 
-## 5. Certification Pitfalls
+## 5. Common Pitfalls
 
 Sequenced interfaces define views, not copies
 
