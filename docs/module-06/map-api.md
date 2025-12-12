@@ -3,14 +3,6 @@
 The `Map` interface represents a collection of **key–value pairs**, where each key maps to at most one value.
 Unlike other collection types, `Map` does **not** extend `Collection` and therefore has its own hierarchy and rules.
 
-Maps are heavily tested in Java certification exams, especially regarding:
-- key uniqueness
-- equality rules
-- null handling
-- ordering guarantees
-- default and convenience methods
-
----
 
 ## 6.1 Core Map Characteristics
 
@@ -20,8 +12,6 @@ Maps are heavily tested in Java certification exams, especially regarding:
 - Iteration is performed over `keySet()`, `values()`, or `entrySet()`
 
 > **Note:** A `Map` is not a `Collection`, but its views (keySet, values, entrySet) are collections.
-
----
 
 ## 6.2 Main Map Implementations
 
@@ -35,7 +25,6 @@ Maps are heavily tested in Java certification exams, especially regarding:
 
 > **Note:** TreeMap ordering is determined either by `Comparable` or by a `Comparator` provided at construction.
 
----
 
 ## 6.3 Creating Maps
 
@@ -55,7 +44,6 @@ Map<String, Integer> map5 = Map.ofEntries(
 
 > **Note:** Maps created with `Map.of(...)` and `Map.ofEntries(...)` are **immutable**. Any modification attempt throws `UnsupportedOperationException`.
 
----
 
 ## 6.4 Basic Map Operations
 
@@ -79,8 +67,6 @@ map.put("A", "Avocado"); // overwrites value
 
 String v = map.get("B"); // Banana
 ```
-
----
 
 ## 6.5 Iterating Over a Map
 
@@ -106,7 +92,6 @@ for (Map.Entry<String, String> e : map.entrySet()) {
 
 > **Note:** Modifying the map while iterating over these views may throw `ConcurrentModificationException` (except for concurrent maps).
 
----
 
 ## 6.6 Determining Equality in Maps
 
@@ -125,7 +110,6 @@ System.out.println(m1.equals(m2)); // true
 
 > **Note:** Iteration order does not affect map equality.
 
----
 
 ## 6.7 Special Behavior of TreeMap
 
@@ -140,9 +124,10 @@ tm.put(2, "B");
 System.out.println(tm); // {1=A, 2=B, 3=C}
 ```
 
-@@WARNING@@All keys in a TreeMap must be mutually comparable. Mixing incompatible types causes `ClassCastException` at runtime.@@WARNING_END@@
+> [!WARNING]
+> All keys in a TreeMap must be mutually comparable. 
+> Mixing incompatible types causes `ClassCastException` at runtime.@@WARNING_END@@
 
----
 
 ## 6.8 Null Handling
 
@@ -154,11 +139,9 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 | Hashtable | No | No |
 | ConcurrentHashMap | No | No |
 
-> **Note:** Null handling differences are a common certification trap.
 
----
 
-## 6.9 Common Certification Pitfalls
+## 6.9 Common  Pitfalls
 
 - Assuming Map is a Collection
 - Forgetting that duplicate keys overwrite values
@@ -166,7 +149,6 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 - Confusing iteration order with equality
 - Trying to modify immutable maps created via Map.of
 
----
 
 ## 6.10 Summary
 
