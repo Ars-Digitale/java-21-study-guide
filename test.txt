@@ -32,9 +32,9 @@ Streams are conceptually similar to database queries: they describe what to comp
 
 Every stream pipeline consists of three distinct phases:
 
-- Source
-- Zero or more intermediate operations
-- Exactly one terminal operation
+- **Source**
+- Zero or more **Intermediate Operations**
+- Exactly one **Terminal Operation**
 
 
 ### 2.1 Stream Sources
@@ -97,13 +97,13 @@ Terminal operations:
 
 | Method | Return value | behaviour for infinite streams |
 |--------|--------------|--------------------------------|
-| `forEach` | void | does not terminate |
+| `forEach` | **void** | does not terminate |
 | `collect` | varies | does not terminate |
 | `reduce` | varies | does not terminate |
-| `findFirst` / `findAny` |  Optional<T> |  terminates |
-| `anyMatch` / `allMatch` / `noneMatch` | boolean | sometimes terminate |
-| `min` / `max` | Optional<T> | does not terminate |  
-|  `count` | long | does not terminate |
+| `findFirst` / `findAny` |  **`Optional<T>`** |  terminates |
+| `anyMatch` / `allMatch` / `noneMatch` | **boolean** | sometimes terminate |
+| `min` / `max` | **`Optional<T>`** | does not terminate |  
+|  `count` | **long** | does not terminate |
 
 
 ## 3. Lazy Evaluation and Short-Circuiting
