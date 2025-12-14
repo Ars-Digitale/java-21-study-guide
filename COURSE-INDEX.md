@@ -27,6 +27,7 @@
 	- [Generics in Java](docs/module-04/generics.md)
 - [Module 5: Functional Programming]
 	- [Functional programming in Java](docs/module-05/functional.md)
+	- [Java Streams](docs/module-05/streams.md)
 - [Module 6: Collections APIs]
 	- [Introduction to the Collections Framework](docs/module-06/collections.md)
 	- [Shared Collection Operations & Equality](docs/module-06/shared-operations.md)
