@@ -1,9 +1,10 @@
-# Java Streams — Certification-Grade Deep Dive (Java 21)
+# Java Streams (Java 21)
 
 
 
 This chapter provides an in deep treatment of the Java Streams API as defined in Java 21. 
-It focuses on conceptual correctness, execution model, edge cases, performance implications, and common traps frequently tested in professional Java certifications.
+
+It focuses on conceptual correctness, execution model, edge cases, performance implications, and common traps.
 
 
 ##  1. What Is a Stream (And What It Is Not)
@@ -65,14 +66,20 @@ Intermediate operations:
 
 
 
-Common intermediate operations include:
+#### 2.2.1 Table of Common intermediate operations:
 
-- `filter`
-- `map`
-- `flatMap`
-- `sorted`
-- `distinct`
+| Method | Common Input Params | Return value | Desctiption |
+|--------|--------------|--------------|--------------|
+|`filter` | Predicate | `Stream<T>` | filter the stream according to a predicate match |
+| `map` | Function | `Stream<T>` | transform a stream through a one to one mapping input/output |
+| `flatMap` | Function | `Stream<T>` | flatten all the contained elements to be top level in a sigle stream, removing empty elements |
+| `sorted` | void or Comparator | `Stream<T>` | sort according to natural order or provided Comparator |
+| `distinct` | void | `Stream<T>` | remove duplicate elements |
+| `limit` / `skip` |  long | `Stream<T>` | limit size or skip elements |
+| `peek` |  Consumer | `Stream<T>` | perform stream operations without changing the stream (Debug)  |
 
+
+Example:
 
 ```java
 Stream<String> s2 = names.stream().filter(n -> n.length() > 3).map(String::toUpperCase);
@@ -92,7 +99,7 @@ Terminal operations:
 - Produce a result or side effect
 
 
-### 2.4 Table of terminal operations:
+#### 2.3.1 Table of terminal operations:
 
 
 | Method | Return value | behaviour for infinite streams |
