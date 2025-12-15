@@ -325,7 +325,7 @@ And a common version used is:
 
 where Collectors.* provides prebuilt collectors (grouping, mapping, joining, counting, etc.).
 
-Meaning:
+**Meaning**:
 
 - **supplier**: creates a new empty result container (e.g. new ArrayList<>())
 - **accumulator**: adds one element into that container (e.g. list::add)
@@ -399,7 +399,8 @@ Java provides three specialized stream types to avoid boxing overhead and to ena
 
 Primitive streams are still streams (lazy pipelines, intermediate + terminal operations, single-use), but they are **not generic** and they use primitive-specialized functional interfaces (e.g., `IntPredicate`, `LongUnaryOperator`, `DoubleConsumer`).
 
-> **Note:** Use primitive streams when the data is naturally numeric or when performance matters: they avoid boxing/unboxing overhead and provide additional numeric terminal operations.
+> [!NOTE]
+> Use primitive streams when the data is naturally numeric or when performance matters: they avoid boxing/unboxing overhead and provide additional numeric terminal operations.
 
 ### 9.1 Why primitive streams matter
 
@@ -505,7 +506,6 @@ Primitive streams have several terminal operations that are either unique or hav
 > [!WARNING]
 > - Even for `IntStream` and `LongStream`, **`average()`** returns `OptionalDouble` (not `OptionalInt` or `OptionalLong`).
 
-Examples (end-to-end conversions)
 
 Example 1: `Stream<String>` → `IntStream` → primitive terminal operations.
 ```java
