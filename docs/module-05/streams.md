@@ -353,13 +353,36 @@ Meaning:
 		- Using reduce() to build a collection often creates extra objects or forces unsafe mutation.
 
 
+Example: “collect into a List” the right way
+
 ```java
-Map<Integer, List<String>> byLength =
-names.stream()
-.collect(Collectors.groupingBy(String::length));
+List<String> longNames =
+    names.stream()
+         .filter(s -> s.length() > 3)
+         .collect(Collectors.toList());
 ```
 
-## 8. Common Pitfall
+Example: groupingBy (your snippet) with explanation
+
+```java
+Map<Integer, List<String>> byLength =
+    names.stream()
+         .collect(Collectors.groupingBy(String::length));
+```
+
+What happens conceptually:
+
+- The collector creates an empty Map<Integer, List<String>>
+- For each name:
+	- compute the key (String::length)
+	- put it in the correct bucket list
+- In parallel:
+	- each thread builds its own partial maps
+	- the combiner merges maps by merging lists per key
+
+
+
+## 8. Common Streams Pitfall
 
 - Reusing a consumed stream → `IllegalStateException`
 - Modifying external variables inside lambdas
@@ -379,11 +402,13 @@ Primitive streams are still streams (lazy pipelines, intermediate + terminal ope
 > **Note:** Use primitive streams when the data is naturally numeric or when performance matters: they avoid boxing/unboxing overhead and provide additional numeric terminal operations.
 
 ### 9.1 Why primitive streams matter
+
 - Performance: avoid allocating wrapper objects and repeated boxing/unboxing in large pipelines
 - Convenience: built-in numeric reductions such as `sum()`, `average()`, `summaryStatistics()`
-- Exam traps: understanding when results are primitives vs `OptionalInt`/`OptionalLong`/`OptionalDouble`
+- Common traps: understanding when results are primitives vs `OptionalInt`/`OptionalLong`/`OptionalDouble`
 
 ### 9.2 Common creation methods
+
 The following are the most frequently used ways to create primitive streams. Many certification questions start by identifying the stream type created by a factory method.
 
 | Sources |
@@ -405,8 +430,9 @@ The following are the most frequently used ways to create primitive streams. Man
 | DoubleStream.iterate(double seed, DoublePredicate hasNext, DoubleUnaryOperator f) |
 | DoubleStream.generate(DoubleSupplier s) |
 
-
-> **Note:** Only `IntStream` and `LongStream` provide `range()` and `rangeClosed()`. There is no `DoubleStream.range` because counting with doubles has rounding issues.
+> [!IMPORTANT]
+> - Only `IntStream` and `LongStream` provide `range()` and `rangeClosed()`. 
+> - There is no `DoubleStream.range` because counting with doubles has rounding issues.
 
 ### 9.3 Primitive-specialized mapping methods (within the same primitive family)
 
@@ -415,9 +441,11 @@ Primitive streams provide **primitive-only** mapping operations that avoid boxin
 - `IntStream.map(IntUnaryOperator)` → `IntStream`
 - `IntStream.mapToLong(IntToLongFunction)` → `LongStream`
 - `IntStream.mapToDouble(IntToDoubleFunction)` → `DoubleStream`
+
 - `LongStream.map(LongUnaryOperator)` → `LongStream`
 - `LongStream.mapToInt(LongToIntFunction)` → `IntStream`
 - `LongStream.mapToDouble(LongToDoubleFunction)` → `DoubleStream`
+
 - `DoubleStream.map(DoubleUnaryOperator)` → `DoubleStream`
 - `DoubleStream.mapToInt(DoubleToIntFunction)` → `IntStream`
 - `DoubleStream.mapToLong(DoubleToLongFunction)` → `LongStream`
@@ -425,50 +453,57 @@ Primitive streams provide **primitive-only** mapping operations that avoid boxin
 
 ### 9.4 Mapping table among Stream<T> and primitive streams
 
-This table summarizes the main conversions among object streams and primitive streams. The “From” column tells you which methods are available and the resulting target stream type.
+This table summarizes the main conversions among object streams and primitive streams. 
+
+The “From” column tells you which methods are available and the resulting target stream type.
 
 
 | From (source)	| To (target) |	Primary method(s) |
 |---------------|-------------|-------------------|
 | Stream<T> | Stream<R> | map(Function<? super T, ? extends R>) |
 | Stream<T> | Stream<R> (flatten) | flatMap(Function<? super T, ? extends Stream<? extends R>>) |
+||||
 | Stream<T> | IntStream | mapToInt(ToIntFunction<? super T>) |
 | Stream<T> | LongStream | mapToLong(ToLongFunction<? super T>) |
 | Stream<T> | DoubleStream | mapToDouble(ToDoubleFunction<? super T>) |
 | Stream<T> | IntStream (flatten) | flatMapToInt(Function<? super T, ? extends IntStream>) |
 | Stream<T> | LongStream (flatten) | flatMapToLong(Function<? super T, ? extends LongStream>) |
 | Stream<T> | DoubleStream (flatten) | flatMapToDouble(Function<? super T, ? extends DoubleStream>) |
+||||
 | IntStream | Stream<Integer> | boxed() |
 | LongStream | Stream<Long> | boxed() |
 | DoubleStream | Stream<Double> | boxed() |
+||||
 | IntStream | Stream<U> | mapToObj(IntFunction<? extends U>) |
 | LongStream | Stream<U> | mapToObj(LongFunction<? extends U>) |
 | DoubleStream | Stream<U> | mapToObj(DoubleFunction<? extends U>) |
+||||
 | IntStream | LongStream | asLongStream() |
 | IntStream | DoubleStream | asDoubleStream() |
 | LongStream | DoubleStream | asDoubleStream() |
 		
-
-> **Note:** There is no `unboxed()` operation. To go from wrappers to primitives you must start from `Stream<T>` and use `mapToInt` / `mapToLong` / `mapToDouble`.
+> [!IMPORTANT]
+> - There is no **`unboxed()`** operation. 
+> - To go from wrappers to primitives you must start from `Stream<T>` and use `mapToInt` / `mapToLong` / `mapToDouble`.
 
 ### 9.5 Terminal operations and their result types
 
 Primitive streams have several terminal operations that are either unique or have primitive-specific return types. Many exam questions test the return type precisely.
 
-```text
 
-Terminal operation	IntStream returns	LongStream returns	DoubleStream returns
-count()	long	long	long
-sum()	int	long	double
-min() / max()	OptionalInt	OptionalLong	OptionalDouble
-average()	OptionalDouble	OptionalDouble	OptionalDouble
-findFirst() / findAny()	OptionalInt	OptionalLong	OptionalDouble
-reduce(op)	OptionalInt	OptionalLong	OptionalDouble
-reduce(identity, op)	int	long	double
-summaryStatistics()	IntSummaryStatistics	LongSummaryStatistics	DoubleSummaryStatistics
-```			
-
-> **Note:** Even for `IntStream` and `LongStream`, `average()` returns `OptionalDouble` (not `OptionalInt` or `OptionalLong`). This is a classic certification trap.
+| Terminal operation | IntStream returns | LongStream returns | DoubleStream returns |
+|--------------------|-------------------|--------------------|----------------------|
+| count() | long | long | long |
+| sum() | int | long | double |
+| min() / max() | OptionalInt | OptionalLong | OptionalDouble |
+| average() | OptionalDouble | OptionalDouble | OptionalDouble |
+| findFirst() / findAny() | OptionalInt | OptionalLong | OptionalDouble |
+| reduce(op) | OptionalInt | OptionalLong | OptionalDouble |
+| reduce(identity, op) | int | long | double |
+| summaryStatistics() | IntSummaryStatistics | LongSummaryStatistics | DoubleSummaryStatistics |
+			
+> [!WARNING]
+> - Even for `IntStream` and `LongStream`, **`average()`** returns `OptionalDouble` (not `OptionalInt` or `OptionalLong`).
 
 Examples (end-to-end conversions)
 
@@ -500,7 +535,7 @@ IntStream.range(1, 4) // 1,2,3
 
 ### 9.6 Common pitfalls and gotchas
 - Do not confuse `Stream<Integer>` with `IntStream`: their mapping methods and functional interfaces differ
-- `IntStream.sum()` returns `int` but `IntStream.count()` returns `long` — result types are frequently tested
+- `IntStream.sum()` returns `int` but `IntStream.count()` returns `long`
 - `average()` always returns `OptionalDouble` for all primitive stream types
 - Using `boxed()` reintroduces boxing; only do it if the downstream API requires objects (e.g., collecting to `List<Integer>`)
 - Be careful with narrowing conversions: `LongStream.mapToInt` and `DoubleStream.mapToInt` may truncate values
