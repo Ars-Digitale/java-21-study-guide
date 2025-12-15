@@ -51,7 +51,7 @@ Common stream sources include:
 
 ```java
 List<String> names = List.of("Ana", "Bob", "Carla");
-Stream<String> s = names.stream();
+Stream<String> s = names.stream();  
 ```
 
 ### 2.2 Intermediate Operations
@@ -114,6 +114,15 @@ Terminal operations:
 
 
 ## 3. Lazy Evaluation and Short-Circuiting
+
+```java
+var newNames = new ArrayList<String>();
+newNames.add("Bob");
+newNames.add("Dan");
+var stream = newNames.stream(); // Stream are lazily evaluated: This line does not create the stream, but un object which knows where to look for the data when needed.
+newNames.add("Erin");
+stream.count(); // 3
+```
 
 
 Streams process elements one at a time, flowing through the pipeline vertically, not stage-by-stage.
