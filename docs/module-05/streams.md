@@ -129,7 +129,6 @@ Stream.of("a", "bb", "ccc").filter(s -> {
 }).findFirst();
 ```
 
-
 Execution order:
 
 > **Note:** 
@@ -161,7 +160,6 @@ Stateful operations can severely impact parallel stream performance.
 ## 5. Stream Ordering and Determinism
 
 
-
 Streams may be:
 
 - Ordered (e.g., `List.stream()`)
@@ -174,58 +172,10 @@ Some operations respect encounter order:
 - `findFirst`
 
 
-> **Note:** 
-In parallel streams, `forEach` does not guarantee order.
+> **Note:** In parallel streams, `forEach` does not guarantee order.
 
 
-## 6. Reduction Operations
-
-
-### 6.1 reduce()
-
-
-```java
-int sum =
-Stream.of(1, 2, 3)
-.reduce(0, Integer::sum);
-```
-
-
-Reduction requires:
-
-
-- 
-Identity
-
-- 
-Accumulator
-
-- 
-(Optional) Combiner
-
-
-> **Note:** 
-The accumulator must be associative and stateless.
-
-
-### 
-6.2 collect()
-
-
-
-`collect` is a mutable reduction optimized for grouping and aggregation.
-
-
-```java
-Map<Integer, List<String>> byLength =
-names.stream()
-.collect(Collectors.groupingBy(String::length));
-```
-
-## 
-7. Parallel Streams
-
-
+## 6. Parallel Streams
 
 Parallel streams divide work across threads using the ForkJoinPool.commonPool().
 
@@ -241,117 +191,285 @@ IntStream.range(1, 1_000_000)
 Rules for safe parallel streams:
 
 
-- 
-No side effects
+- No side effects
+- No mutable shared state
+- Associative operations only
 
-- 
-No mutable shared state
 
-- 
-Associative operations only
+> **Note:** Parallel streams can be slower for small workloads.
+
+## 7. Reduction Operations
+
+
+### 7.1 `reduce()`: combining a steam in to a single object
+
+There are three method signatures for this operation:
+
+- public Optional<T> **reduce**(BinaryOperator<T> accumulator);
+- public T **reduce**(T identity, BinaryOperator<T> accumulator);
+- public <U> U **reduce**(U identity, BiFunction<U, ? super T, U> accumulator, BinaryOperator<U> combiner)
+
+
+```java
+int sum =
+Stream.of(1, 2, 3)
+.reduce(0, Integer::sum);
+```
+
+Reduction requires:
+
+- **Identity**: Initial value for each partial reduction; must be a neutral element; Example: 0 for sum, 1 for multiplication, empty collection for collecting;
+- **Accumulator**: Incorporates one stream element into a partial result;
+- (Optional) **Combiner**: Merges two partial results; Used only when the stream is parallel; Ignored for sequential streams
 
 
 > **Note:** 
-Parallel streams can be slower for small workloads.
+The accumulator must be associative and stateless.
 
+#### 7.1.1 Correct mental model
 
-## 
-8. Common Certification Pitfalls
+- Accumulator: result + element
+- Combiner: result + result
 
-
-- 
-Reusing a consumed stream → `IllegalStateException`
-
-- 
-Modifying external variables inside lambdas
-
-- 
-Assuming execution order in parallel streams
-
-- 
-Using `peek` for logic instead of debugging
-
-
-## 
-9. Certification Exercises
-
-
-### 
-Exercise 1 — Lazy Evaluation
-
-
-
-How many times is `filter` executed?
-
+**Example 1**: Correct use (sum of lengths)
 
 ```java
-Stream.of("x", "yy", "zzz")
-.filter(s -> s.length() > 1)
-.findFirst();
+int totalLength =
+    Stream.of("a", "bb", "ccc")
+          .parallel()
+          .reduce(
+              0,                       // identity
+              (sum, s) -> sum + s.length(), // accumulator
+              (left, right) -> left + right // combiner
+          );
 ```
 
-### 
-Exercise 2 — Stream Reuse
+What happens in parallel
 
+Suppose the stream is split:
 
+- Thread 1: "a", "bb" → 0 + 1 + 2 = 3
+- Thread 2: "ccc" → 0 + 3 = 3
 
-What happens at runtime?
+Output, Combines merges:
 
-
-```java
-Stream<Integer> s = Stream.of(1, 2, 3);
-s.count();
-s.forEach(System.out::println);
+```bash
+3 + 3 = 6
 ```
 
-### 
-Exercise 3 — Parallel Semantics
-
-
-
-Is the output deterministic?
-
-
-```java
-IntStream.range(1, 10)
-.parallel()
-.forEach(System.out::print);
-```
-
-### 
-Exercise 4 — Reduction Correctness
-
-
-
-Why is this reduction incorrect for parallel streams?
-
+**Example 2**: Combiner ignored in sequential streams
 
 ```java
 int result =
-IntStream.range(1, 100)
-.parallel()
-.reduce(0, (a, b) -> a - b);
+    Stream.of("a", "bb", "ccc")
+          .reduce(
+              0,
+              (sum, s) -> sum + s.length(),
+              (x, y) -> {
+                  throw new RuntimeException("Never called");
+              }
+          );
 ```
 
-## 
-10. Exam Summary
+**Example 3**: Incorrect combiner
+
+```java
+int result =
+    Stream.of(1, 2, 3, 4)
+          .parallel()
+          .reduce(
+              0,
+              (a, b) -> a - b,   // accumulator
+              (x, y) -> x - y    // combiner
+          );
+```
+
+Why this is wrong
+
+**Subtraction is not associative**.
+
+Possible execution:
+
+- Thread 1: 0 - 1 - 2 = -3
+- Thread 2: 0 - 3 - 4 = -7
+
+Combiner:
+
+```bash
+-3 - (-7) = 4
+```
+
+Sequential result would be:
+
+```bash
+(((0 - 1) - 2) - 3) - 4 = -10
+```
+
+> [!WARNING]
+> ❌ Parallel and sequential results differ → illegal reduction
+
+### 7.2 collect()
 
 
-- 
-Streams are lazy and single-use
-
-- 
-Intermediate ≠ execution
-
-- 
-Terminal triggers processing
-
-- 
-Parallel streams require mathematical discipline
-
-- 
-Most exam traps involve ordering, laziness, and side effects
+`collect` is a mutable reduction optimized for grouping and aggregation.
 
 
-> **Note:** 
-Mastery of streams means understanding how execution flows, not memorizing methods.
+```java
+Map<Integer, List<String>> byLength =
+names.stream()
+.collect(Collectors.groupingBy(String::length));
+```
+
+## 8. Common Pitfall
+
+- Reusing a consumed stream → `IllegalStateException`
+- Modifying external variables inside lambdas
+- Assuming execution order in parallel streams
+- Using `peek` for logic instead of debugging
+
+## 9. Primitive Streams
+
+Java provides three specialized stream types to avoid boxing overhead and to enable numeric-focused operations:
+
+- `IntStream` for `int`
+- `LongStream` for `long`
+- `DoubleStream` for `double`
+
+Primitive streams are still streams (lazy pipelines, intermediate + terminal operations, single-use), but they are **not generic** and they use primitive-specialized functional interfaces (e.g., `IntPredicate`, `LongUnaryOperator`, `DoubleConsumer`).
+
+> **Note:** Use primitive streams when the data is naturally numeric or when performance matters: they avoid boxing/unboxing overhead and provide additional numeric terminal operations.
+
+### 9.1 Why primitive streams matter
+- Performance: avoid allocating wrapper objects and repeated boxing/unboxing in large pipelines
+- Convenience: built-in numeric reductions such as `sum()`, `average()`, `summaryStatistics()`
+- Exam traps: understanding when results are primitives vs `OptionalInt`/`OptionalLong`/`OptionalDouble`
+
+### 9.2 Common creation methods
+The following are the most frequently used ways to create primitive streams. Many certification questions start by identifying the stream type created by a factory method.
+
+| Sources |
+|---------|
+| IntStream.of(int...) |
+| IntStream.range(int startInclusive, int endExclusive) |
+| IntStream.rangeClosed(int startInclusive, int endInclusive) |
+| IntStream.iterate(int seed, IntUnaryOperator f) // infinite unless limited |
+| IntStream.iterate(int seed, IntPredicate hasNext, IntUnaryOperator f)  |
+| IntStream.generate(IntSupplier s) // infinite unless limited  |
+| LongStream.of(long...) |
+| LongStream.range(long startInclusive, long endExclusive) |
+| LongStream.rangeClosed(long startInclusive, long endInclusive) |
+| LongStream.iterate(long seed, LongUnaryOperator f) |
+| LongStream.iterate(long seed, LongPredicate hasNext, LongUnaryOperator f) |
+| LongStream.generate(LongSupplier s) |
+| DoubleStream.of(double...) |
+| DoubleStream.iterate(double seed, DoubleUnaryOperator f) |
+| DoubleStream.iterate(double seed, DoublePredicate hasNext, DoubleUnaryOperator f) |
+| DoubleStream.generate(DoubleSupplier s) |
+
+
+> **Note:** Only `IntStream` and `LongStream` provide `range()` and `rangeClosed()`. There is no `DoubleStream.range` because counting with doubles has rounding issues.
+
+### 9.3 Primitive-specialized mapping methods (within the same primitive family)
+
+Primitive streams provide **primitive-only** mapping operations that avoid boxing:
+
+- `IntStream.map(IntUnaryOperator)` → `IntStream`
+- `IntStream.mapToLong(IntToLongFunction)` → `LongStream`
+- `IntStream.mapToDouble(IntToDoubleFunction)` → `DoubleStream`
+- `LongStream.map(LongUnaryOperator)` → `LongStream`
+- `LongStream.mapToInt(LongToIntFunction)` → `IntStream`
+- `LongStream.mapToDouble(LongToDoubleFunction)` → `DoubleStream`
+- `DoubleStream.map(DoubleUnaryOperator)` → `DoubleStream`
+- `DoubleStream.mapToInt(DoubleToIntFunction)` → `IntStream`
+- `DoubleStream.mapToLong(DoubleToLongFunction)` → `LongStream`
+
+
+### 9.4 Mapping table among Stream<T> and primitive streams
+
+This table summarizes the main conversions among object streams and primitive streams. The “From” column tells you which methods are available and the resulting target stream type.
+
+
+| From (source)	| To (target) |	Primary method(s) |
+|---------------|-------------|-------------------|
+| Stream<T> | Stream<R> | map(Function<? super T, ? extends R>) |
+| Stream<T> | Stream<R> (flatten) | flatMap(Function<? super T, ? extends Stream<? extends R>>) |
+| Stream<T> | IntStream | mapToInt(ToIntFunction<? super T>) |
+| Stream<T> | LongStream | mapToLong(ToLongFunction<? super T>) |
+| Stream<T> | DoubleStream | mapToDouble(ToDoubleFunction<? super T>) |
+| Stream<T> | IntStream (flatten) | flatMapToInt(Function<? super T, ? extends IntStream>) |
+| Stream<T> | LongStream (flatten) | flatMapToLong(Function<? super T, ? extends LongStream>) |
+| Stream<T> | DoubleStream (flatten) | flatMapToDouble(Function<? super T, ? extends DoubleStream>) |
+| IntStream | Stream<Integer> | boxed() |
+| LongStream | Stream<Long> | boxed() |
+| DoubleStream | Stream<Double> | boxed() |
+| IntStream | Stream<U> | mapToObj(IntFunction<? extends U>) |
+| LongStream | Stream<U> | mapToObj(LongFunction<? extends U>) |
+| DoubleStream | Stream<U> | mapToObj(DoubleFunction<? extends U>) |
+| IntStream | LongStream | asLongStream() |
+| IntStream | DoubleStream | asDoubleStream() |
+| LongStream | DoubleStream | asDoubleStream() |
+		
+
+> **Note:** There is no `unboxed()` operation. To go from wrappers to primitives you must start from `Stream<T>` and use `mapToInt` / `mapToLong` / `mapToDouble`.
+
+### 9.5 Terminal operations and their result types
+
+Primitive streams have several terminal operations that are either unique or have primitive-specific return types. Many exam questions test the return type precisely.
+
+```text
+
+Terminal operation	IntStream returns	LongStream returns	DoubleStream returns
+count()	long	long	long
+sum()	int	long	double
+min() / max()	OptionalInt	OptionalLong	OptionalDouble
+average()	OptionalDouble	OptionalDouble	OptionalDouble
+findFirst() / findAny()	OptionalInt	OptionalLong	OptionalDouble
+reduce(op)	OptionalInt	OptionalLong	OptionalDouble
+reduce(identity, op)	int	long	double
+summaryStatistics()	IntSummaryStatistics	LongSummaryStatistics	DoubleSummaryStatistics
+```			
+
+> **Note:** Even for `IntStream` and `LongStream`, `average()` returns `OptionalDouble` (not `OptionalInt` or `OptionalLong`). This is a classic certification trap.
+
+Examples (end-to-end conversions)
+
+Example 1: `Stream<String>` → `IntStream` → primitive terminal operations.
+```java
+List<String> words = List.of("a", "bb", "ccc");
+
+int totalLength =
+words.stream()
+.mapToInt(String::length) // IntStream
+.sum(); // int
+
+// totalLength = 1 + 2 + 3 = 6
+```
+
+Example 2: `IntStream` → boxed `Stream<Integer>` (boxing introduced).
+```java
+Stream<Integer> boxed =
+IntStream.rangeClosed(1, 3) // 1,2,3
+.boxed(); // Stream<Integer>
+```
+
+Example 3: primitive stream → object stream via `mapToObj`.
+```java
+Stream<String> labels =
+IntStream.range(1, 4) // 1,2,3
+.mapToObj(i -> "N=" + i); // Stream<String>
+```
+
+### 9.6 Common pitfalls and gotchas
+- Do not confuse `Stream<Integer>` with `IntStream`: their mapping methods and functional interfaces differ
+- `IntStream.sum()` returns `int` but `IntStream.count()` returns `long` — result types are frequently tested
+- `average()` always returns `OptionalDouble` for all primitive stream types
+- Using `boxed()` reintroduces boxing; only do it if the downstream API requires objects (e.g., collecting to `List<Integer>`)
+- Be careful with narrowing conversions: `LongStream.mapToInt` and `DoubleStream.mapToInt` may truncate values
+
+
+
+
+
+
+
+
