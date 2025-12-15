@@ -201,7 +201,7 @@ Rules for safe parallel streams:
 ## 7. Reduction Operations
 
 
-### 7.1 `reduce()`: combining a steam in to a single object
+### 7.1 `reduce()`: combining a stream in to a single object
 
 There are three method signatures for this operation:
 
@@ -310,8 +310,47 @@ Sequential result would be:
 
 ### 7.2 collect()
 
+`collect` is a mutable reduction optimized for grouping and aggregation. 
 
-`collect` is a mutable reduction optimized for grouping and aggregation.
+It is the Stream API’s standard tool for “mutable reduction”: you accumulate elements into a mutable container (like a List, Set, Map, StringBuilder, custom result object), 
+and then optionally merge partial containers when running in parallel.
+
+The general form is:
+
+- public <R> R **collect**(Supplier<R> supplier, BiConsumer<R, ? super T> accumulator, BiConsumer<R, R> combiner);
+
+And a common version used is:
+
+- public <R, A> R **collect**(Collector<? super T, A, R> collector)
+
+where Collectors.* provides prebuilt collectors (grouping, mapping, joining, counting, etc.).
+
+Meaning:
+
+- **supplier**: creates a new empty result container (e.g. new ArrayList<>())
+- **accumulator**: adds one element into that container (e.g. list::add)
+- **combiner**: merges two containers (e.g. list1.addAll(list2))
+
+### 7.3 Why collect() is different from reduce()
+
+- 1. Intent: mutation vs immutability
+	- reduce() is designed for immutable-style reduction: combine values into a new value (e.g. sum, min, max).
+	- collect() is designed for mutable containers: build up a List, Map, StringBuilder, etc.
+- 2. Correctness in parallel
+	- reduce() requires the operation to be:
+		- associative
+		- stateless
+		- compatible with identity/combiner rules
+	- collect() is built to support parallelism safely by:
+		- creating one container per thread (supplier)
+		- accumulating locally (accumulator)
+		- merging at the end (combiner)
+- 3. Performance
+	- collect() can be optimized because the stream runtime knows you are building containers:
+		- it can avoid unnecessary copying
+		- it can pre-size or use specialized implementations (depending on collector)
+		- it’s the idiomatic and expected approach
+		- Using reduce() to build a collection often creates extra objects or forces unsafe mutation.
 
 
 ```java
