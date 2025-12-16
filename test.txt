@@ -1,177 +1,111 @@
-## Primitive Streams (IntStream, LongStream, DoubleStream)
+## Collectors (collect(), Collector, and the Collectors Factory Methods)
+A `Collector` describes how to accumulate stream elements into a final result. The `collect(...)` terminal operation executes this recipe. The `Collectors` utility class provides ready-made collectors for common aggregation tasks.
+> **Note:** On certifications, **collectors** are heavily tested because they involve generics, nested collectors, maps, grouping, partitioning, and parallel semantics (supplier/accumulator/combiner).
 
-Java provides three specialized stream types to avoid boxing overhead and to enable numeric-focused operations:
-- `IntStream` for `int`
-- `LongStream` for `long`
-- `DoubleStream` for `double`
+### collect() vs Collector
+There are two main ways to collect:
+- `collect(Collector)` → the common form using `Collectors.*`
+- `collect(supplier, accumulator, combiner)` → explicit mutable reduction (lower-level)
 
-Primitive streams are still streams (lazy pipelines, intermediate + terminal operations, single-use), but they are **not generic** and they use primitive-specialized functional interfaces (e.g., `IntPredicate`, `LongUnaryOperator`, `DoubleConsumer`).
-
-> **Note:** Use primitive streams when the data is naturally numeric or when performance matters: they avoid boxing/unboxing overhead and provide additional numeric terminal operations.
-
-### Why primitive streams matter
-- Performance: avoid allocating wrapper objects and repeated boxing/unboxing in large pipelines
-- Convenience: built-in numeric reductions such as `sum()`, `average()`, `summaryStatistics()`
-- Exam traps: understanding when results are primitives vs `OptionalInt`/`OptionalLong`/`OptionalDouble`
-
-### Common creation methods
-The following are the most frequently used ways to create primitive streams. Many certification questions start by identifying the stream type created by a factory method.
-
-```text
-IntStream sources
-
-IntStream.of(int...)
-
-IntStream.range(int startInclusive, int endExclusive)
-
-IntStream.rangeClosed(int startInclusive, int endInclusive)
-
-IntStream.iterate(int seed, IntUnaryOperator f) // infinite unless limited
-
-IntStream.iterate(int seed, IntPredicate hasNext, IntUnaryOperator f) // Java 9+
-
-IntStream.generate(IntSupplier s) // infinite unless limited
-
-LongStream sources
-
-LongStream.of(long...)
-
-LongStream.range(long startInclusive, long endExclusive)
-
-LongStream.rangeClosed(long startInclusive, long endInclusive)
-
-LongStream.iterate(long seed, LongUnaryOperator f)
-
-LongStream.iterate(long seed, LongPredicate hasNext, LongUnaryOperator f)
-
-LongStream.generate(LongSupplier s)
-
-DoubleStream sources
-
-DoubleStream.of(double...)
-
-DoubleStream.iterate(double seed, DoubleUnaryOperator f)
-
-DoubleStream.iterate(double seed, DoublePredicate hasNext, DoubleUnaryOperator f)
-
-DoubleStream.generate(DoubleSupplier s)
-```
-
-> **Note:** Only `IntStream` and `LongStream` provide `range()` and `rangeClosed()`. There is no `DoubleStream.range` because counting with doubles has rounding issues.
-
-### Primitive-specialized mapping methods (within the same primitive family)
-Primitive streams provide **primitive-only** mapping operations that avoid boxing:
-- `IntStream.map(IntUnaryOperator)` → `IntStream`
-- `IntStream.mapToLong(IntToLongFunction)` → `LongStream`
-- `IntStream.mapToDouble(IntToDoubleFunction)` → `DoubleStream`
-- `LongStream.map(LongUnaryOperator)` → `LongStream`
-- `LongStream.mapToInt(LongToIntFunction)` → `IntStream`
-- `LongStream.mapToDouble(LongToDoubleFunction)` → `DoubleStream`
-- `DoubleStream.map(DoubleUnaryOperator)` → `DoubleStream`
-- `DoubleStream.mapToInt(DoubleToIntFunction)` → `IntStream`
-- `DoubleStream.mapToLong(DoubleToLongFunction)` → `LongStream`
-
-> **Note:** The presence of `mapToInt` / `mapToLong` / `mapToDouble` often indicates a deliberate “boxing vs primitive” exam focus. Identify the stream type after each mapping step.
-
-### Mapping table among Stream<T> and primitive streams
-This table summarizes the main conversions among object streams and primitive streams. The “From” column tells you which methods are available and the resulting target stream type.
-
-```text
-
-From (source)	To (target)	Primary method(s)
-Stream<T>	Stream<R>	map(Function<? super T, ? extends R>)
-Stream<T>	Stream<R> (flatten)	flatMap(Function<? super T, ? extends Stream<? extends R>>)
-Stream<T>	IntStream	mapToInt(ToIntFunction<? super T>)
-Stream<T>	LongStream	mapToLong(ToLongFunction<? super T>)
-Stream<T>	DoubleStream	mapToDouble(ToDoubleFunction<? super T>)
-Stream<T>	IntStream (flatten)	flatMapToInt(Function<? super T, ? extends IntStream>)
-Stream<T>	LongStream (flatten)	flatMapToLong(Function<? super T, ? extends LongStream>)
-Stream<T>	DoubleStream (flatten)	flatMapToDouble(Function<? super T, ? extends DoubleStream>)
-IntStream	Stream<Integer>	boxed()
-LongStream	Stream<Long>	boxed()
-DoubleStream	Stream<Double>	boxed()
-IntStream	Stream<U>	mapToObj(IntFunction<? extends U>)
-LongStream	Stream<U>	mapToObj(LongFunction<? extends U>)
-DoubleStream	Stream<U>	mapToObj(DoubleFunction<? extends U>)
-IntStream	LongStream	asLongStream()
-IntStream	DoubleStream	asDoubleStream()
-LongStream	DoubleStream	asDoubleStream()
-```		
-
-> **Note:** There is no `unboxed()` operation. To go from wrappers to primitives you must start from `Stream<T>` and use `mapToInt` / `mapToLong` / `mapToDouble`.
-
-### Terminal operations and their result types
-Primitive streams have several terminal operations that are either unique or have primitive-specific return types. Many exam questions test the return type precisely.
-
-```text
-
-Terminal operation	IntStream returns	LongStream returns	DoubleStream returns
-count()	long	long	long
-sum()	int	long	double
-min() / max()	OptionalInt	OptionalLong	OptionalDouble
-average()	OptionalDouble	OptionalDouble	OptionalDouble
-findFirst() / findAny()	OptionalInt	OptionalLong	OptionalDouble
-reduce(op)	OptionalInt	OptionalLong	OptionalDouble
-reduce(identity, op)	int	long	double
-summaryStatistics()	IntSummaryStatistics	LongSummaryStatistics	DoubleSummaryStatistics
-```			
-
-> **Note:** Even for `IntStream` and `LongStream`, `average()` returns `OptionalDouble` (not `OptionalInt` or `OptionalLong`). This is a classic certification trap.
-
-### Examples (end-to-end conversions)
-
-Example 1: `Stream<String>` → `IntStream` → primitive terminal operations.
 ```java
-List<String> words = List.of("a", "bb", "ccc");
+List<String> list =
+Stream.of("a", "b")
+.collect(Collectors.toList());
 
-int totalLength =
-words.stream()
-.mapToInt(String::length) // IntStream
-.sum(); // int
-
-// totalLength = 1 + 2 + 3 = 6
+StringBuilder sb =
+Stream.of("a", "b")
+.collect(StringBuilder::new, StringBuilder::append, StringBuilder::append);
 ```
 
-Example 2: `IntStream` → boxed `Stream<Integer>` (boxing introduced).
+> **Note:** Use `collect(supplier, accumulator, combiner)` when you need a custom mutable container and do not want to implement a full `Collector`.
+
+### Core collectors (quick reference)
+These are the most frequently used collectors and the ones most likely to appear in exam questions.
+- `toList()` → `List<T>` (no guarantees about mutability/implementation)
+- `toSet()` → `Set<T>`
+- `toCollection(supplier)` → specific collection type (e.g., `TreeSet`)
+- `joining(delim, prefix, suffix)` → `String` from `CharSequence` elements
+- `counting()` → `Long` count
+- `summingInt` / `summingLong` / `summingDouble` → numeric sums
+- `averagingInt` / `averagingLong` / `averagingDouble` → numeric averages
+- `minBy(comparator)` / `maxBy(comparator)` → `Optional<T>`
+- `mapping(mapper, downstream)` → transform then collect with downstream
+- `filtering(predicate, downstream)` → filter inside collector (Java 9+)
+
+### Grouping collectors
+`groupingBy` classifies elements into buckets keyed by a classifier function. It produces a `Map<K, V>` where `V` depends on the downstream collector.
+
 ```java
-Stream<Integer> boxed =
-IntStream.rangeClosed(1, 3) // 1,2,3
-.boxed(); // Stream<Integer>
+Map<Integer, List<String>> byLen =
+Stream.of("a", "bb", "ccc", "dd")
+.collect(Collectors.groupingBy(String::length));
 ```
 
-Example 3: primitive stream → object stream via `mapToObj`.
+With a downstream collector you control what each bucket contains:
+
 ```java
-Stream<String> labels =
-IntStream.range(1, 4) // 1,2,3
-.mapToObj(i -> "N=" + i); // Stream<String>
+Map<Integer, Long> countByLen =
+Stream.of("a", "bb", "ccc", "dd")
+.collect(Collectors.groupingBy(String::length, Collectors.counting()));
+
+Map<Integer, Set<String>> setByLen =
+Stream.of("a", "bb", "ccc", "dd")
+.collect(Collectors.groupingBy(String::length, Collectors.toSet()));
 ```
 
-### Certification pitfalls and gotchas
-- Do not confuse `Stream<Integer>` with `IntStream`: their mapping methods and functional interfaces differ
-- `IntStream.sum()` returns `int` but `IntStream.count()` returns `long` — result types are frequently tested
-- `average()` always returns `OptionalDouble` for all primitive stream types
-- Using `boxed()` reintroduces boxing; only do it if the downstream API requires objects (e.g., collecting to `List<Integer>`)
-- Be careful with narrowing conversions: `LongStream.mapToInt` and `DoubleStream.mapToInt` may truncate values
+> **Note:** Common exam requirement: know the resulting map value type. Example: `groupingBy(..., counting())` yields `Map<K, Long>` (not `int`).
 
-### Mini-exercises (exam style)
+### partitioningBy
+`partitioningBy` splits the stream into exactly two groups using a boolean predicate. It always returns a map with keys `true` and `false`.
 
-1) State the compile-time type of each expression.
-- `Stream.of("a","bb").mapToInt(String::length)`
-- `IntStream.of(1,2,3).mapToObj(String::valueOf)`
-- `IntStream.range(0, 5).boxed()`
-- `LongStream.of(1L, 2L).asDoubleStream()`
-
-2) What does each line return (type + “empty or not” possibility)?
-- `IntStream.empty().min()`
-- `IntStream.empty().sum()`
-- `IntStream.empty().average()`
-
-3) Spot the first failing line (compile-time vs runtime).
 ```java
-Stream<Integer> s = Stream.of(1, 2, 3);
-IntStream p = s.mapToInt(x -> x);
-Stream<Integer> b = p.boxed();
-s.count(); // which kind of failure (if any)?
-System.out.println(p.sum()); // which kind of failure (if any)?
-b.forEach(System.out::println);
+Map<Boolean, List<String>> parts =
+Stream.of("a", "bb", "ccc")
+.collect(Collectors.partitioningBy(s -> s.length() > 1));
 ```
+
+> **Note:** `partitioningBy` always creates two buckets, while `groupingBy` can create many. Both support downstream collectors.
+
+### toMap and merge rules
+`toMap` is a frequent exam topic because it throws an exception on duplicate keys unless you provide a merge function.
+
+```java
+Map<Integer, String> m1 =
+Stream.of("aa", "bb")
+.collect(Collectors.toMap(String::length, s -> s)); // OK: keys are unique (2)
+
+Map<Integer, String> m2 =
+Stream.of("aa", "bb", "cc")
+.collect(Collectors.toMap(
+String::length,
+s -> s,
+(oldV, newV) -> oldV + "," + newV
+)); // key=2 merges values
+```
+
+> **Note:** Without a merge function, duplicate keys cause `IllegalStateException` at runtime. This is a common certification trap.
+
+### collectingAndThen
+`collectingAndThen(downstream, finisher)` lets you apply a final transformation after collecting (e.g., make the list unmodifiable).
+
+```java
+List<String> unmodifiable =
+Stream.of("a", "b", "c")
+.collect(Collectors.collectingAndThen(
+Collectors.toList(),
+List::copyOf
+));
+```
+
+### How collectors relate to parallel streams
+Collectors are designed to work with parallel streams by using supplier/accumulator/combiner internally. In parallel, each worker builds a partial result container and then merges containers.
+- The accumulator mutates a per-thread container (no shared mutable state)
+- The combiner merges containers (required for parallel execution)
+- Some collectors are “concurrent” or have characteristics that affect performance and ordering
+
+> **Note:** Certification emphasis: prefer `collect(Collectors.toList())` over using `reduce` to build collections. `reduce` is for immutable-style reductions; `collect` is for mutable containers.
+
+### Mini-exercises
+- What is the result type? `stream.collect(Collectors.groupingBy(String::length, Collectors.counting()))`
+- What happens at runtime? `Collectors.toMap(kFn, vFn)` with duplicate keys
+- Difference: `groupingBy` vs `partitioningBy` (number of buckets and key types)

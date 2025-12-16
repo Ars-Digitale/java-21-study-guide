@@ -1,20 +1,118 @@
-# Java Streams (Java 21)
+# Java Optionals and Streams (Java 21)
+
+## 1. Optionals (Optional, OptionalInt, OptionalLong, OptionalDouble)
+
+`Optional<T>` is a container object that may or may not hold a non-null value. 
+
+It is designed to make “absence of a value” explicit and to reduce `NullPointerException` risk by forcing callers to handle the empty case.
+
+> [!NOTE]
+> - `Optional` is intended primarily for **return types**. 
+> - It is generally discouraged for fields, method parameters, and serialization boundaries (unless a specific API contract requires it).
+
+### 1.1 Creating Optionals
+
+There are three core factory methods. 
+
+- `Optional.of(value)` → value must be non-null; otherwise `NullPointerException` is thrown
+- `Optional.ofNullable(value)` → returns empty if value is null
+- `Optional.empty()` → an explicitly empty Optional
+
+```java
+Optional<String> a = Optional.of("x");
+Optional<String> b = Optional.ofNullable(null); // Optional.empty
+Optional<String> c = Optional.empty();
+```
+
+### 1.2 Reading values safely
+
+Optionals provide multiple ways to access the wrapped value.
+
+- `isPresent()` / `isEmpty()` → test presence
+- `get()` → returns the value or throws `NoSuchElementException` if empty (discouraged)
+- `orElse(defaultValue)` → returns value or default (default evaluated immediately)
+- `orElseGet(supplier)` → returns value or supplier result (supplier evaluated lazily)
+- `orElseThrow()` → returns value or throws `NoSuchElementException`
+- `orElseThrow(exceptionSupplier)` → returns value or throws custom exception
+
+```java
+Optional<String> opt = Optional.of("java");
+
+String v1 = opt.orElse("default");
+String v2 = opt.orElseGet(() -> "computed");
+String v3 = opt.orElseThrow(); // ok because opt is present
+```
+
+> [!NOTE]
+> - A common trap: `orElse(...)` evaluates its argument even if the Optional is present. 
+> - Use `orElseGet(...)` when the default is expensive to compute.
+
+### 1.3 Transforming Optionals
+
+Optionals support functional transformations similar to streams, but with “0 or 1 element” semantics.
+
+- `map(fn)` → transforms the value if present
+- `flatMap(fn)` → transforms to an Optional without nesting
+- `filter(predicate)` → keeps value only if predicate is true
+
+```java
+Optional<String> name = Optional.of("Alice");
+
+Optional<Integer> len =
+name.map(String::length); // Optional[5]
+
+Optional<String> filtered =
+name.filter(n -> n.startsWith("A")); // Optional[Alice]
+```
+
+> [!NOTE]
+> - `map` wraps the result in an Optional. 
+> - If your mapping function already returns an Optional, use `flatMap` to avoid `Optional<Optional<T>>` nesting.
+
+### 1.4 Optionals and Streams
+
+A very common pipeline pattern is to map to an Optional and then remove empties. 
+
+Since Java 9, `Optional` provides `stream()` to convert “present → one element” and “empty → zero elements”.
+
+```java
+Stream<String> words = Stream.of("a", "bb", "ccc");
+
+Stream<Integer> lengthsOverOne =
+words.map(w -> w.length() > 1 ? Optional.of(w.length()) : Optional.<Integer>empty())
+.flatMap(Optional::stream); // removes empties
+```
+
+> **Note:** Before Java 9, this pattern required `filter(Optional::isPresent)` plus `map(Optional::get)`. 
+
+### 1.5 Primitive Optionals
+
+Primitive streams use primitive optionals to avoid boxing: `OptionalInt`, `OptionalLong`, `OptionalDouble`. 
+
+They mirror the main Optional API with primitive getters such as `getAsInt()`.
+
+- `OptionalInt.getAsInt()` / `OptionalLong.getAsLong()` / `OptionalDouble.getAsDouble()`
+- `orElse(...)` / `orElseGet(...)` / `orElseThrow(...)`
+
+```java
+OptionalInt m = IntStream.of(3, 1, 2).min(); // OptionalInt[1]
+int value = m.orElse(0); // 1
+```
+
+### 1.6 Common pitfalls
+
+- Do not call `get()` without checking presence; prefer `orElseThrow` or transformations
+- Avoid returning `null` instead of `Optional.empty()`; an Optional reference itself should not be null
+- Remember: `average()` on primitive streams returns `OptionalDouble` (even for `IntStream` and `LongStream`)
+- Use `orElseGet` when computing the default is expensive
 
 
-
-This chapter provides an in deep treatment of the Java Streams API as defined in Java 21. 
-
-It focuses on conceptual correctness, execution model, edge cases, performance implications, and common traps.
-
-
-##  1. What Is a Stream (And What It Is Not)
+##  2. What Is a Stream (And What It Is Not)
 
 
 A Java Stream represents a sequence of elements supporting functional-style operations. 
 
 Streams are designed for data processing, not data storage.
-
-
 
 **Key characteristics**:
 
@@ -29,7 +127,7 @@ Streams are designed for data processing, not data storage.
 Streams are conceptually similar to database queries: they describe what to compute, not how to iterate.
 
 
-## 2. Stream Pipeline Architecture
+## 3. Stream Pipeline Architecture
 
 Every stream pipeline consists of three distinct phases:
 
@@ -38,7 +136,7 @@ Every stream pipeline consists of three distinct phases:
 - Exactly one **Terminal Operation**
 
 
-### 2.1 Stream Sources
+### 3.1 Stream Sources
 
 
 Common stream sources include:
@@ -54,7 +152,7 @@ List<String> names = List.of("Ana", "Bob", "Carla");
 Stream<String> s = names.stream();  
 ```
 
-### 2.2 Intermediate Operations
+### 3.2 Intermediate Operations
 
 
 Intermediate operations:
@@ -66,7 +164,7 @@ Intermediate operations:
 
 
 
-#### 2.2.1 Table of Common intermediate operations:
+#### 3.2.1 Table of Common intermediate operations:
 
 | Method | Common Input Params | Return value | Desctiption |
 |--------|--------------|--------------|--------------|
@@ -89,7 +187,7 @@ Stream<String> s2 = names.stream().filter(n -> n.length() > 3).map(String::toUpp
 Intermediate operations only describe the computation. No element is processed yet.
 
 
-### 2.3 Terminal Operations
+### 3.3 Terminal Operations
 
 Terminal operations:
 
@@ -99,7 +197,7 @@ Terminal operations:
 - Produce a result or side effect
 
 
-#### 2.3.1 Table of terminal operations:
+#### 3.3.1 Table of terminal operations:
 
 
 | Method | Return value | behaviour for infinite streams |
@@ -113,7 +211,7 @@ Terminal operations:
 |  `count` | **long** | does not terminate |
 
 
-## 3. Lazy Evaluation and Short-Circuiting
+## 4. Lazy Evaluation and Short-Circuiting
 
 ```java
 var newNames = new ArrayList<String>();
@@ -149,15 +247,15 @@ Only the minimum number of elements required by the terminal operation are proce
 ----> map bb
 ```
 
-## 4. Stateless vs Stateful Operations
+## 5. Stateless vs Stateful Operations
 
 
-### 4.1 Stateless Operations
+### 5.1 Stateless Operations
 
 Operations like `map` and `filter` process each element independently.
 
 
-### 4.2 Stateful Operations
+### 5.2 Stateful Operations
 
 Operations like `distinct`, `sorted`, and `limit` require maintaining internal state.
 
@@ -166,7 +264,7 @@ Operations like `distinct`, `sorted`, and `limit` require maintaining internal s
 Stateful operations can severely impact parallel stream performance.
 
 
-## 5. Stream Ordering and Determinism
+## 6. Stream Ordering and Determinism
 
 
 Streams may be:
@@ -184,7 +282,7 @@ Some operations respect encounter order:
 > **Note:** In parallel streams, `forEach` does not guarantee order.
 
 
-## 6. Parallel Streams
+## 7. Parallel Streams
 
 Parallel streams divide work across threads using the ForkJoinPool.commonPool().
 
@@ -207,10 +305,10 @@ Rules for safe parallel streams:
 
 > **Note:** Parallel streams can be slower for small workloads.
 
-## 7. Reduction Operations
+## 8. Reduction Operations
 
 
-### 7.1 `reduce()`: combining a stream in to a single object
+### 8.1 `reduce()`: combining a stream in to a single object
 
 There are three method signatures for this operation:
 
@@ -235,7 +333,7 @@ Reduction requires:
 > **Note:** 
 The accumulator must be associative and stateless.
 
-#### 7.1.1 Correct mental model
+#### 8.1.1 Correct mental model
 
 - Accumulator: result + element
 - Combiner: result + result
@@ -317,7 +415,7 @@ Sequential result would be:
 > [!WARNING]
 > ❌ Parallel and sequential results differ → illegal reduction
 
-### 7.2 collect()
+### 8.2 collect()
 
 `collect` is a mutable reduction optimized for grouping and aggregation. 
 
@@ -340,7 +438,7 @@ where Collectors.* provides prebuilt collectors (grouping, mapping, joining, cou
 - **accumulator**: adds one element into that container (e.g. list::add)
 - **combiner**: merges two containers (e.g. list1.addAll(list2))
 
-### 7.3 Why collect() is different from reduce()
+### 8.3 Why collect() is different from reduce()
 
 - 1. Intent: mutation vs immutability
 	- reduce() is designed for immutable-style reduction: combine values into a new value (e.g. sum, min, max).
@@ -391,14 +489,14 @@ What happens conceptually:
 
 
 
-## 8. Common Streams Pitfall
+## 9. Common Streams Pitfall
 
 - Reusing a consumed stream → `IllegalStateException`
 - Modifying external variables inside lambdas
 - Assuming execution order in parallel streams
 - Using `peek` for logic instead of debugging
 
-## 9. Primitive Streams
+## 10. Primitive Streams
 
 Java provides three specialized stream types to avoid boxing overhead and to enable numeric-focused operations:
 
@@ -411,13 +509,13 @@ Primitive streams are still streams (lazy pipelines, intermediate + terminal ope
 > [!NOTE]
 > Use primitive streams when the data is naturally numeric or when performance matters: they avoid boxing/unboxing overhead and provide additional numeric terminal operations.
 
-### 9.1 Why primitive streams matter
+### 10.1 Why primitive streams matter
 
 - Performance: avoid allocating wrapper objects and repeated boxing/unboxing in large pipelines
 - Convenience: built-in numeric reductions such as `sum()`, `average()`, `summaryStatistics()`
 - Common traps: understanding when results are primitives vs `OptionalInt`/`OptionalLong`/`OptionalDouble`
 
-### 9.2 Common creation methods
+### 10.2 Common creation methods
 
 The following are the most frequently used ways to create primitive streams. Many certification questions start by identifying the stream type created by a factory method.
 
@@ -444,7 +542,7 @@ The following are the most frequently used ways to create primitive streams. Man
 > - Only `IntStream` and `LongStream` provide `range()` and `rangeClosed()`. 
 > - There is no `DoubleStream.range` because counting with doubles has rounding issues.
 
-### 9.3 Primitive-specialized mapping methods (within the same primitive family)
+### 10.3 Primitive-specialized mapping methods (within the same primitive family)
 
 Primitive streams provide **primitive-only** mapping operations that avoid boxing:
 
@@ -461,7 +559,7 @@ Primitive streams provide **primitive-only** mapping operations that avoid boxin
 - `DoubleStream.mapToLong(DoubleToLongFunction)` → `LongStream`
 
 
-### 9.4 Mapping table among Stream<T> and primitive streams
+### 10.4 Mapping table among Stream<T> and primitive streams
 
 This table summarizes the main conversions among object streams and primitive streams. 
 
@@ -496,7 +594,7 @@ The “From” column tells you which methods are available and the resulting ta
 > - There is no **`unboxed()`** operation. 
 > - To go from wrappers to primitives you must start from `Stream<T>` and use `mapToInt` / `mapToLong` / `mapToDouble`.
 
-### 9.5 Terminal operations and their result types
+### 10.5 Terminal operations and their result types
 
 Primitive streams have several terminal operations that are either unique or have primitive-specific return types. Many exam questions test the return type precisely.
 
@@ -542,12 +640,166 @@ IntStream.range(1, 4) // 1,2,3
 .mapToObj(i -> "N=" + i); // Stream<String>
 ```
 
-### 9.6 Common pitfalls and gotchas
+### 10.6 Common pitfalls and gotchas
+
 - Do not confuse `Stream<Integer>` with `IntStream`: their mapping methods and functional interfaces differ
 - `IntStream.sum()` returns `int` but `IntStream.count()` returns `long`
 - `average()` always returns `OptionalDouble` for all primitive stream types
 - Using `boxed()` reintroduces boxing; only do it if the downstream API requires objects (e.g., collecting to `List<Integer>`)
 - Be careful with narrowing conversions: `LongStream.mapToInt` and `DoubleStream.mapToInt` may truncate values
+
+
+## 11. Collectors (collect(), Collector, and the Collectors Factory Methods)
+
+A `Collector` describes how to accumulate stream elements into a final result. 
+
+The `collect(...)` terminal operation executes this recipe. 
+
+The `Collectors` utility class provides ready-made collectors for common aggregation tasks.
+
+
+### 11.1 collect() vs Collector
+
+There are two main ways to collect:
+
+- `collect(Collector)` → the common form using `Collectors.*`
+- `collect(supplier, accumulator, combiner)` → explicit mutable reduction (lower-level)
+
+```java
+List<String> list =
+Stream.of("a", "b")
+	.collect(Collectors.toList());
+
+StringBuilder sb =
+Stream.of("a", "b")
+	.collect(StringBuilder::new, StringBuilder::append, StringBuilder::append);
+```
+
+> [!NOTE]
+> Use `collect(supplier, accumulator, combiner)` when you need a custom mutable container and do not want to implement a full `Collector`.
+
+### 11.2 Core collectors (quick reference)
+
+These are the most frequently used collectors and the ones most likely to appear in exam questions.
+
+- `toList()` → `List<T>` (no guarantees about mutability/implementation)
+- `toSet()` → `Set<T>`
+- `toCollection(supplier)` → specific collection type (e.g., `TreeSet`)
+- `joining(delim, prefix, suffix)` → `String` from `CharSequence` elements
+- `counting()` → `Long` count
+- `summingInt` / `summingLong` / `summingDouble` → numeric sums
+- `averagingInt` / `averagingLong` / `averagingDouble` → numeric averages
+- `minBy(comparator)` / `maxBy(comparator)` → `Optional<T>`
+- `mapping(mapper, downstream)` → transform then collect with downstream
+- `filtering(predicate, downstream)` → filter inside collector (Java 9+)
+
+### 11.3 Grouping collectors
+
+`groupingBy` classifies elements into buckets keyed by a classifier function. 
+
+It produces a `Map<K, V>` where `V` depends on the downstream collector.
+
+```java
+Map<Integer, List<String>> byLen =
+Stream.of("a", "bb", "ccc", "dd")
+	.collect(Collectors.groupingBy(String::length));
+System.out.println("byLen: " + byLen.toString());
+```
+
+Output:
+
+```bash
+byLen: {1=[a], 2=[bb, dd], 3=[ccc]}
+```
+
+
+With a downstream collector you control what each bucket contains:
+
+```java
+Map<Integer, Long> countByLen =
+Stream.of("a", "bb", "ccc", "dd")
+	.collect(Collectors.groupingBy(String::length, Collectors.counting()));
+System.out.println("countByLen: " + countByLen.toString());
+
+Map<Integer, Set<String>> setByLen =
+Stream.of("a", "bb", "ccc", "dd")
+	.collect(Collectors.groupingBy(String::length, Collectors.toSet()));
+System.out.println("setByLen: " + setByLen.toString());
+```
+
+Output:
+
+```bash
+countByLen: {1=1, 2=2, 3=1}
+setByLen: {1=[a], 2=[bb, dd], 3=[ccc]}
+```
+
+
+> [!WARNING]
+> Pay attention to the resulting map value type. Example: `groupingBy(..., counting())` yields `Map<K, Long>` (not `int`).
+
+### 11.4 partitioningBy
+
+`partitioningBy` splits the stream into exactly two groups using a boolean predicate. It always returns a map with keys `true` and `false`.
+
+```java
+Map<Boolean, List<String>> parts =
+Stream.of("a", "bb", "ccc")
+.collect(Collectors.partitioningBy(s -> s.length() > 1));
+System.out.println("parts: " + parts.toString());
+```
+
+Output:
+
+```bash
+parts: {false=[a], true=[bb, ccc]}
+```
+
+> [!NOTE]
+> `partitioningBy` always creates two buckets, while `groupingBy` can create many. Both support downstream collectors.
+
+### 11.5 toMap and merge rules
+
+`toMap` throws an exception on duplicate keys unless you provide a merge function.
+
+```java
+Map<Integer, String> m1 =
+Stream.of("aa", "bb")
+	.collect(Collectors.toMap(String::length, s -> s)); // ❌ Exception in thread "main" java.lang.IllegalStateException: Duplicate key 2 (attempted merging values aa and bb)
+
+Map<Integer, String> m2 =
+Stream.of("aa", "bb", "cc")
+	.collect(Collectors.toMap(String::length, s -> s, (oldV, newV) -> oldV + "," + newV)); // key=2 merges values
+```
+
+Output:
+
+```bash
+m2: {2=aa,bb,cc}
+```
+
+### 11.6 collectingAndThen
+
+`collectingAndThen(downstream, finisher)` lets you apply a final transformation after collecting (e.g., make the list unmodifiable).
+
+```java
+List<String> unmodifiable =
+Stream.of("a", "b", "c")
+	.collect(Collectors.collectingAndThen(Collectors.toList(), List::copyOf));
+```
+
+### 11.7 How collectors relate to parallel streams
+
+Collectors are designed to work with parallel streams by using supplier/accumulator/combiner internally. In parallel, each worker builds a partial result container and then merges containers.
+
+- The accumulator mutates a per-thread container (no shared mutable state)
+- The combiner merges containers (required for parallel execution)
+- Some collectors are “concurrent” or have characteristics that affect performance and ordering
+
+> [!NOTE]
+> prefer `collect(Collectors.toList())` over using `reduce` to build collections. `reduce` is for immutable-style reductions; `collect` is for mutable containers.
+
+
 
 
 
