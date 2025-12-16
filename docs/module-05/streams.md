@@ -1,4 +1,4 @@
-# Java Optionals and Streams (Java 21)
+# Java Optionals and Streams
 
 ## 1. Optionals (Optional, OptionalInt, OptionalLong, OptionalDouble)
 
@@ -106,6 +106,7 @@ int value = m.orElse(0); // 1
 - Remember: `average()` on primitive streams returns `OptionalDouble` (even for `IntStream` and `LongStream`)
 - Use `orElseGet` when computing the default is expensive
 
+---
 
 ##  2. What Is a Stream (And What It Is Not)
 
