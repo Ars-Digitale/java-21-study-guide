@@ -218,7 +218,7 @@ Terminal operations:
 var newNames = new ArrayList<String>();
 newNames.add("Bob");
 newNames.add("Dan");
-var stream = newNames.stream(); // Stream are lazily evaluated: This line does not create the stream, but un object which knows where to look for the data when needed.
+var stream = newNames.stream(); // Stream are lazily evaluated: This line does not create the stream, but an object which "knows" where to look for the data when needed.
 newNames.add("Erin");
 stream.count(); // 3
 ```

@@ -25,6 +25,7 @@
 	- [Inheritance](docs/module-04/inheritance.md)
 	- [Beyond Classes](docs/module-04/beyond-classes.md)
 	- [Generics in Java](docs/module-04/generics.md)
+	- [Exceptions and Error Handling](docs/module-04/exceptions.md)
 - [Module 5: Functional Programming]
 	- [Functional programming in Java](docs/module-05/functional.md)
 	- [Java Streams](docs/module-05/streams.md)
