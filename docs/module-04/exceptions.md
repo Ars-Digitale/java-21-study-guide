@@ -92,9 +92,9 @@ class Parent {
 }
 
 class Child extends Parent {
-@Override
-void work() throws FileNotFoundException {} // OK (subclass)
-}
+	@Override
+	void work() throws FileNotFoundException {} // OK (subclass)
+	}
 ```
 
 > [!NOTE]
@@ -197,23 +197,19 @@ OutputStream out = Files.newOutputStream(q)
 
 - Resources are in scope only inside the `try` block
 - They are implicitly `final`
+- You can declare resources ahead of time, outside the `try-with-resources`, provided they are declared as `final` or are effectively final.
+
+```java
+final var firstWriter = Files.newBufferedWriter(filePath);
+
+try (firstWriter; var secondWriter = Files.newBufferedWriter(filePath)) {
+	// CODE
+}
+```
 
 > [!NOTE]
 > Attempting to reassign a resource variable causes a compilation error.
 
-## 6. Effectively final variables
-
-A variable is **effectively final** if it is assigned once and never modified. Java treats it as final even without the `final` keyword.
-
-```java
-int x = 10;
-try (Scanner sc = new Scanner(System.in)) {
-System.out.println(x);
-}
-```
-
-- Required for variables captured by lambdas
-- Required for resources declared outside try-with-resources
 
 ## 7. Suppressed exceptions
 
@@ -221,7 +217,7 @@ When both the `try` block and the resource’s `close()` method throw exceptions
 
 ```java
 try (BadResource r = new BadResource()) {
-throw new RuntimeException("main");
+	throw new RuntimeException("main");
 }
 ```
 
@@ -229,18 +225,18 @@ If `close()` also throws an exception, it becomes **suppressed**.
 
 ```java
 catch (Exception e) {
-for (Throwable t : e.getSuppressed()) {
-System.out.println(t);
-}
+	for (Throwable t : e.getSuppressed()) {
+		System.out.println(t);
+	}
 }
 ```
 
 - Primary exception is thrown
 - Secondary exceptions are accessible via `getSuppressed()`
 
-> **Note:** Suppressed exceptions are a **very common certification question**, especially combined with try-with-resources.
 
-## 8. Certification summary
+## 8. Exceptions summary
+
 - Checked exceptions must be caught or declared
 - Override methods may not widen checked exceptions
 - Use multi-catch for shared handling logic
@@ -248,4 +244,3 @@ System.out.println(t);
 - Resources close in reverse order
 - Suppressed exceptions preserve full failure context
 
-> **Note:** Exception mastery is about **control flow and contracts**, not memorizing class names.
