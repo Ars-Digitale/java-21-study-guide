@@ -1,227 +1,158 @@
-# Formatting in Java 21 — Comprehensive Certification Chapter
+# DecimalFormat and NumberFormat — Certification-Grade Explanation
 
-This chapter delivers a **deep, exam-oriented, and practical** treatment of formatting in Java 21. Every topic is expanded with explanations, rules, examples, and certification pitfalls. It is designed both for **Java 21 certification** and for real-world mastery.
+`DecimalFormat` is a concrete subclass of `NumberFormat` that provides fine-grained control over numeric formatting using patterns. It is frequently tested in Java certification exams, especially the meaning of the `0` and `#` symbols.
 
-## 1. String Formatting
+## Relationship Between NumberFormat and DecimalFormat
 
-### String.format()
-
-The `String.format()` method creates formatted strings using printf-style placeholders. It is locale-sensitive and returns a new immutable `String`.
+`NumberFormat` defines locale-aware formatting via factory methods, while `DecimalFormat` allows explicit pattern-based control.
 
 ```java
-String result = String.format("User: %s | Score: %d", "Bob", 42);
-System.out.println(result);
+NumberFormat nf = NumberFormat.getInstance(Locale.US);
+DecimalFormat df = (DecimalFormat) nf;
 ```
 
-Key characteristics:
-
-- Uses format specifiers like %s, %d, %f
-- Does not modify existing strings
-- Throws IllegalFormatException if arguments mismatch
-- Locale-sensitive when Locale is provided
+Or directly:
 
 ```java
-String price = String.format(Locale.GERMANY, "%.2f", 1234.5);
-// Output: 1234,50
+DecimalFormat df = new DecimalFormat("#,##0.00");
 ```
 
-> **Note:** 
-In certification questions, pay attention to missing arguments or wrong format types — these cause runtime exceptions.
+- DecimalFormat is mutable
+- DecimalFormat is NOT thread-safe
+- Formatting is locale-sensitive via DecimalFormatSymbols
 
+## DecimalFormat Pattern Structure
 
-### Custom Text Values and Escaping
+A pattern may contain a positive and an optional negative subpattern, separated by `;`.
 
-Certain characters have special meaning in format strings and must be escaped.
-
-- %% → literal percent sign
-- \n, \t → standard Java escapes
-
-```java
-String msg = String.format("Completion: %d%%\nStatus: OK", 100);
-System.out.println(msg);
+```text
+#,##0.00;(#,##0.00)
 ```
 
-> **Note:** 
-A single % without a valid specifier causes an exception.
+- First part → positive numbers
+- Second part → negative numbers
+- If omitted, negative numbers use '-' automatically
 
+## The 0 Symbol (Mandatory Digit)
 
-## 2. Number Formatting
-
-### NumberFormat
-
-`NumberFormat` is an abstract class used to format and parse numbers in a locale-aware manner.
+The `0` symbol forces a digit to appear, padding with zeros if necessary.
 
 ```java
-NumberFormat nf = NumberFormat.getInstance(Locale.FRANCE);
-System.out.println(nf.format(1234567.89));
+DecimalFormat df = new DecimalFormat("0000.00");
+System.out.println(df.format(12.3));
 ```
 
-Important rules:
-
-- Factory methods determine formatting style
-- Formatting depends on Locale
-- Not thread-safe
-
-### Localizing Numbers
-
-Number localization affects decimal separators, grouping separators, and currency symbols.
-
-```java
-NumberFormat nfUS = NumberFormat.getInstance(Locale.US);
-NumberFormat nfIT = NumberFormat.getInstance(Locale.ITALY);
-
-System.out.println(nfUS.format(1234.56)); // 1,234.56
-System.out.println(nfIT.format(1234.56)); // 1.234,56
+```bash
+0012.30
 ```
 
-### Parsing Numbers
+- Controls minimum number of digits
+- Pads with zeros
+- Used for fixed-width or aligned output
 
-Parsing converts localized text into numeric values. Parsing is lenient by default.
+## The # Symbol (Optional Digit)
+
+The `#` symbol displays a digit only if it exists.
 
 ```java
-NumberFormat nf = NumberFormat.getInstance(Locale.FRANCE);
-Number n = nf.parse("12 345,67abc"); // parses 12345.67
+DecimalFormat df = new DecimalFormat("####.##");
+System.out.println(df.format(12.3));
+```
+
+```bash
+12.3
+```
+
+- Suppresses leading zeros
+- Suppresses trailing zeros
+- Used for human-readable formatting
+
+## Combining 0 and #
+
+Patterns often combine both symbols for flexibility.
+
+```java
+DecimalFormat df = new DecimalFormat("#,##0.##");
+System.out.println(df.format(12));
+System.out.println(df.format(12.5));
+System.out.println(df.format(12345.678));
+```
+
+```bash
+12
+12.5
+12,345.68
+```
+
+- At least one integer digit is guaranteed
+- Fractional digits are optional
+- Grouping is enabled
+
+## Decimal and Grouping Separators
+
+In patterns:
+
+- . → decimal separator
+- , → grouping separator
+
+Actual symbols depend on Locale.
+
+## DecimalFormatSymbols
+
+`DecimalFormatSymbols` defines locale-specific formatting symbols.
+
+```java
+DecimalFormatSymbols symbols =
+DecimalFormatSymbols.getInstance(Locale.FRANCE);
+
+DecimalFormat df =
+new DecimalFormat("#,##0.00", symbols);
+
+System.out.println(df.format(1234.5));
+```
+
+```bash
+1 234,50
+```
+
+- Controls decimal and grouping separators
+- Controls minus sign and currency symbol
+- Controls NaN and Infinity strings
+
+## Parsing with DecimalFormat
+
+`DecimalFormat` can also parse numbers. Parsing is lenient by default.
+
+```java
+DecimalFormat df = new DecimalFormat("#,##0.##");
+Number n = df.parse("1,234.56abc");
 ```
 
 - Parsing stops at first invalid character
-- Trailing text is ignored unless explicitly checked
+- Trailing text is ignored
 
-> **Note:** 
-Certification questions often test silent parsing failures.
-
-
-### CompactNumberFormat
-
-Compact formatting shortens large numbers for human readability.
+To enforce strict parsing:
 
 ```java
-NumberFormat cnf =
-NumberFormat.getCompactNumberInstance(
-Locale.US, NumberFormat.Style.SHORT);
-
-System.out.println(cnf.format(1_200)); // 1.2K
-System.out.println(cnf.format(5_000_000)); // 5M
+df.setParseStrict(true);
 ```
 
-- SHORT vs LONG styles
-- Locale-dependent abbreviations
-
-## 3. Date and Time Formatting
-
-### DateTimeFormatter
-
-Java 21 relies on `java.time` and `DateTimeFormatter` for modern date/time formatting.
-
-```java
-DateTimeFormatter f =
-DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-System.out.println(LocalDateTime.now().format(f));
-```
-
-Core properties:
-
-- Immutable
-- Thread-safe
-- Locale-aware
-
-### Standard Date/Time Symbols
+## Special DecimalFormat Patterns
 
 ```text
-y year
-M month number
-d day of month
-E day name
-H hour (0–23)
-h hour (1–12)
-m minute
-s second
-a AM/PM
-z time zone
+0.###E0 scientific notation
+###% percent
+¤#,##0.00 currency
 ```
+
+## Certification Rules and Pitfalls
+
+- DecimalFormat is a NumberFormat subclass
+- 0 forces digits, # does not
+- Patterns control formatting, not rounding mode
+- Grouping only works if ',' is present
+- Parsing may succeed partially without error
+- DecimalFormat is NOT thread-safe
 
 > **Note:** 
-Uppercase and lowercase symbols are different and exam-critical.
-
-
-### datetime.format() vs formatter.format()
-
-Both methods are functionally identical.
-
-```java
-date.format(formatter);
-formatter.format(date);
-```
-
-- datetime.format(formatter) → preferred for clarity
-- formatter.format(datetime) → useful in functional code
-
-### Localizing Dates
-
-Localized styles adapt date output to cultural norms.
-
-```java
-DateTimeFormatter f =
-DateTimeFormatter
-.ofLocalizedDate(FormatStyle.FULL)
-.withLocale(Locale.ITALY);
-
-System.out.println(LocalDate.now().format(f));
-```
-
-## 4. Internationalization (i18n) and Localization (l10n)
-
-### Locales
-
-A `Locale` defines language, country, and optional variant.
-
-```java
-Locale l1 = Locale.US;
-Locale l2 = Locale.of("fr", "FR");
-```
-
-### Locale Categories
-
-Locale categories separate formatting from UI language.
-
-- FORMAT → dates, numbers, currency
-- DISPLAY → UI text
-
-```java
-Locale.setDefault(Locale.Category.FORMAT, Locale.FRANCE);
-```
-
-### Properties and Resource Bundles
-
-Resource bundles externalize text and allow localization without code changes.
-
-```java
-ResourceBundle rb =
-ResourceBundle.getBundle("messages", Locale.GERMAN);
-
-String msg = rb.getString("welcome");
-```
-
-### Resource Bundle Resolution Rules
-
-Java searches bundles in a strict fallback order.
-
-- messages_de_DE.properties
-- messages_de.properties
-- messages.properties
-
-- If none found → MissingResourceException
-
-> **Note:** 
-Properties files must be ISO-8859-1 unless Unicode escapes are used.
-
-
-## 5. Certification Rules and Common Pitfalls
-
-- DateTimeFormatter is immutable and thread-safe
-- NumberFormat is mutable and NOT thread-safe
-- Locale changes formatting, not stored values
-- Parsing may succeed partially without errors
-- java.time replaces Date/Calendar completely
-
-> **Note:** 
-In Java certification exams, formatting questions often hide the trap in Locale selection or parsing behavior — always inspect Locale usage first.
+In certification exams, questions often hinge on subtle differences between 0 and # or on locale-dependent symbols — always evaluate the pattern carefully.
