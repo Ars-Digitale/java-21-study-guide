@@ -304,7 +304,7 @@ System.out.println(df.format(12.3));
 - Suppresses trailing zeros
 - Used for human-readable formatting
 
-### 2.6 Combining 0 and #
+### 2.6 Combining `0` and `#`
 
 Patterns often combine both symbols for flexibility.
 
