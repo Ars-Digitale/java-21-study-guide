@@ -19,6 +19,7 @@
 	- [Arrays in Java](docs/module-03/arrays.md)
 	- [Math in Java](docs/module-03/math.md)
 	- [Dates and Time](docs/module-03/date-time.md)
+	- [Formatting and Localizing](docs/module-03/formatting.md)
 - [Module 4: Object-Oriented Fundamentals]
 	- [Methods, Attributes and Variables](docs/module-04/methods-attributes.md)
 	- [Class Loading, Initialization, and Object Construction](docs/module-04/class-loading.md)
