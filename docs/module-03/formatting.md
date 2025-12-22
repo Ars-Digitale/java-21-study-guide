@@ -1,4 +1,4 @@
-# Formatting in Java
+# Formatting and Localizing in Java
 
 This chapter delivers a **deep and practical** treatment of formatting in Java 21. 
 
@@ -207,6 +207,7 @@ Status: OK
 > [!NOTE] 
 > A single % without a valid specifier causes an exception.
 
+---
 
 ## 2. Number Formatting
 
@@ -383,6 +384,7 @@ System.out.println(df.format(1234.5));
 - Parsing may succeed partially without error
 - DecimalFormat is NOT thread-safe
 
+---
 
 ## 3. Parsing Numbers
 
@@ -442,6 +444,8 @@ System.out.println(cnf1.format(315_000_000));  	// 315M
 System.out.println(cnf2.format(315_000_000));	// 315 million
 
 ```
+
+---
 
 ## 4. Date and Time Formatting
 
@@ -515,6 +519,7 @@ mercoledì 17 dicembre 2025
 17 dic 2025
 ```
 
+---
 
 ## 4. Internationalization (i18n) and Localization (l10n)
 
@@ -570,8 +575,9 @@ Sample Output:
 | Month names   | `décembre`   |
 | Country names | `Allemagne`  |
 
+---
 
-### Properties and Resource Bundles
+## 5. Properties and Resource Bundles
 
 Resource bundles externalize text and allow localization without code changes.
 
@@ -582,7 +588,7 @@ ResourceBundle.getBundle("messages", Locale.GERMAN);
 String msg = rb.getString("welcome");
 ```
 
-### Resource Bundle Resolution Rules
+### 5.1 Resource Bundle Resolution Rules
 
 Java searches bundles in a strict fallback order.
 
@@ -596,7 +602,7 @@ Java searches bundles in a strict fallback order.
 Properties files must be ISO-8859-1 unless Unicode escapes are used.
 
 
-## 5. Common Rules and Pitfalls
+## 6. Common Rules and Pitfalls
 
 - DateTimeFormatter is immutable and thread-safe
 - NumberFormat is mutable and NOT thread-safe
@@ -604,5 +610,4 @@ Properties files must be ISO-8859-1 unless Unicode escapes are used.
 - Parsing may succeed partially without errors
 - java.time replaces Date/Calendar completely
 
-> **Note:** 
-In Java certification exams, formatting questions often hide the trap in Locale selection or parsing behavior — always inspect Locale usage first.
+

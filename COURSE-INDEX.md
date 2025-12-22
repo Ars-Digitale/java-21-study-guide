@@ -39,3 +39,5 @@
 	- [Queue & Deque API](docs/module-06/queue-api.md)
 	- [Map API](docs/module-06/map-api.md)
 	- [Sequenced Collections](docs/module-06/sequenced.md)
+- [Module 7: Threads]
+	- [Threads Fundamentals](docs/module-07/threads.md)
