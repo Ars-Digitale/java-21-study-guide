@@ -62,7 +62,6 @@ Java 21 defines multiple kinds of threads, differing in lifecycle, scheduling, a
 - **User Thread**: Any non-daemon thread. The JVM waits for all user threads to complete before exiting.
 - **System Thread**: Threads created internally by the JVM for garbage collection, JIT compilation, and other runtime services.
 
-From a certification perspective, understanding the behavioral differences between platform threads and virtual threads is essential.
 
 ## 7. Creating Threads in Java
 
@@ -74,6 +73,10 @@ Threads can be created in multiple ways, all conceptually centered around provid
 
 ```java
 Runnable runnable = ...
+
+  // Create a platform thread through constructor
+  Thread thread = new Thread(runnable);
+  thread.start();
 
   // Start a daemon thread to run a task
   Thread thread = Thread.ofPlatform().daemon().start(runnable);
