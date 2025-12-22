@@ -46,10 +46,10 @@ Java supports concurrency independently of hardware parallelism. Even on a singl
 
 In Java, a **thread** represents an independent path of execution within a single JVM process. All Java threads run within the same heap and class loader context unless explicitly isolated by advanced mechanisms.
 
-- Java Thread: An object of type `java.lang.Thread` that maps to an underlying execution unit.
-- Runnable: A functional interface representing a task whose `run()` method contains executable logic.
+- **Java Thread**: An object of type `java.lang.Thread` that maps to an underlying execution unit.
+- **Runnable**: A functional interface representing a task whose `run()` method contains executable logic.
 
-A thread executes code by invoking its `run()` method, either directly or indirectly through the JVM thread scheduler.
+A thread executes code by invoking its `run()` method, either directly or indirectly through the JVM thread scheduler: please check [Starting vs Running a Thread](#9-starting-vs-running-a-thread-synchronous-or-asynchronous)
 
 ## 6. Thread Categories in Java 21
 
@@ -119,7 +119,7 @@ Therefore, code such as `new Thread(r).run();` does NOT create concurrency. The 
 
 Asynchronous execution means the caller continues immediately while the new thread progresses independently, subject to scheduling. Synchronous execution means the caller waits for the operation to complete.
 
-## 10. hread Priority and Scheduling
+## 10. Thread Priority and Scheduling
 
 Java threads have an associated priority hint that influences scheduling.
 
