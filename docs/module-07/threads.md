@@ -49,7 +49,7 @@ In Java, a **thread** represents an independent path of execution within a singl
 - **Java Thread**: An object of type `java.lang.Thread` that maps to an underlying execution unit.
 - **Runnable**: A functional interface representing a task whose `run()` method contains executable logic.
 
-A thread executes code by invoking its `run()` method, either directly or indirectly through the JVM thread scheduler: please check [Starting vs Running a Thread](#9-starting-vs-running-a-thread-synchronous-or-asynchronous)
+A thread executes code by invoking its `run()` method, either directly or indirectly through the JVM thread scheduler: please check [Starting vs Running a Thread: Synchronous or Asynchronous](#9-starting-vs-running-a-thread-synchronous-or-asynchronous)
 
 ## 6. Thread Categories in Java 21
 
