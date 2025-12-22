@@ -4,7 +4,7 @@ This chapter introduces **threads** from first principles and explains how they 
 
 It builds the conceptual foundation required for understanding concurrency, synchronization, and the Java Concurrency API covered in the next chapter.
 
-## Threads, Processes, and the Operating System
+## 1. Threads, Processes, and the Operating System
 
 To understand threads, we must start from the operating system execution model. Modern operating systems execute programs using **processes** and **threads**.
 
@@ -15,7 +15,7 @@ To understand threads, we must start from the operating system execution model. 
 
 A single process can contain many threads, all operating within the same shared environment. This shared environment is both the source of concurrency power and concurrency risk.
 
-## Memory Model: Stack and Heap
+## 2. Memory Model: Stack and Heap
 
 Threads interact with memory in two fundamentally different ways.
 
@@ -24,7 +24,7 @@ Threads interact with memory in two fundamentally different ways.
 
 Because stacks are isolated and the heap is shared, concurrency problems arise when multiple threads access the same heap objects without proper coordination.
 
-## Context and Context Switching
+## 3. Context and Context Switching
 
 The operating system schedules threads onto CPU cores. Since the number of runnable threads often exceeds the number of available cores, the OS performs **context switching**.
 
@@ -33,7 +33,7 @@ The operating system schedules threads onto CPU cores. Since the number of runna
 
 Context switching enables concurrency but has a cost: CPU cycles are consumed without executing application logic. Java developers must design systems that balance concurrency and efficiency.
 
-## Concurrency vs Parallelism
+## 4. Concurrency vs Parallelism
 
 These two terms are often confused but describe different concepts.
 
@@ -42,7 +42,7 @@ These two terms are often confused but describe different concepts.
 
 Java supports concurrency independently of hardware parallelism. Even on a single-core system, Java threads can be concurrent through time slicing.
 
-## Threads in Java: Conceptual Model
+## 5. Threads in Java: Conceptual Model
 
 In Java, a **thread** represents an independent path of execution within a single JVM process. All Java threads run within the same heap and class loader context unless explicitly isolated by advanced mechanisms.
 
@@ -51,7 +51,7 @@ In Java, a **thread** represents an independent path of execution within a singl
 
 A thread executes code by invoking its `run()` method, either directly or indirectly through the JVM thread scheduler.
 
-## Thread Categories in Java 21
+## 6. Thread Categories in Java 21
 
 Java 21 defines multiple kinds of threads, differing in lifecycle, scheduling, and intended use.
 
@@ -64,7 +64,7 @@ Java 21 defines multiple kinds of threads, differing in lifecycle, scheduling, a
 
 From a certification perspective, understanding the behavioral differences between platform threads and virtual threads is essential.
 
-## Creating Threads in Java
+## 7. Creating Threads in Java
 
 Threads can be created in multiple ways, all conceptually centered around providing executable logic.
 
@@ -94,7 +94,7 @@ Runnable runnable = ...
 
 Thread creation alone does not start execution. Execution begins only when the JVM scheduler is engaged.
 
-## Thread Lifecycle and Execution
+## 8. Thread Lifecycle and Execution
 
 A Java thread progresses through well-defined states during its lifetime.
 
@@ -108,7 +108,7 @@ The JVM and operating system cooperate to move threads between these states.
 
 Threads in `BLOCKED`, `WAITING` or `TIMED_WAITING` state are **not using any CPU resources**
 
-## Starting vs Running a Thread: Synchronous or Asynchronous
+## 9. Starting vs Running a Thread: Synchronous or Asynchronous
 
 A critical conceptual distinction exists between invoking `run()` and invoking `start()`.
 
@@ -119,7 +119,7 @@ Therefore, code such as `new Thread(r).run();` does NOT create concurrency. The 
 
 Asynchronous execution means the caller continues immediately while the new thread progresses independently, subject to scheduling. Synchronous execution means the caller waits for the operation to complete.
 
-## Thread Priority and Scheduling
+## 10. hread Priority and Scheduling
 
 Java threads have an associated priority hint that influences scheduling.
 
@@ -130,7 +130,7 @@ Thread priority affects scheduling probability but never guarantees execution or
 
 You can set **priority** on `platform threads`; for `virtual threads` the **priority** is always set to **5** (Thread.NORM_PRIORITY) and trying to change it has no effect.
 
-## Thread Deferring and Yielding
+## 11. Thread Deferring and Yielding
 
 Threads can voluntarily influence scheduling behavior.
 
@@ -139,7 +139,77 @@ Threads can voluntarily influence scheduling behavior.
 
 These mechanisms do not guarantee immediate execution of other threads; they merely provide scheduling hints.
 
-## Threads and the Main Thread
+## 12. Thread Interruption and Cooperative Cancellation
+
+Java threads cannot be stopped forcibly from the outside. Instead, Java provides a cooperative mechanism called **thread interruption**, which allows one thread to request that another thread stop what it is doing. 
+
+The target thread decides how and when to respond.
+
+### 12.1 What Interrupting a Thread Means
+
+Interrupting a thread does **not** terminate it. Calling `interrupt()` sets an internal **interruption flag** on the target thread. It is the responsibility of the running thread to observe this flag and react appropriately.
+
+- Interrupt Request: A signal sent to a thread indicating that it should stop or change its current activity.
+- Interruption Flag: A boolean status associated with each thread, set when `interrupt()` is invoked.
+- Cooperative Cancellation: A design pattern where threads periodically check for interruption and terminate themselves cleanly.
+
+### 12.2 Interrupting Blocking Operations
+
+Some blocking methods in Java respond immediately to interruption by throwing `InterruptedException` and clearing the interruption flag. These methods include `sleep()`, `wait()`, and `join()`.
+
+When a thread is blocked in one of these methods and another thread interrupts it, the blocked thread is awakened and an exception is thrown. This provides a safe escape point from blocking operations.
+
+### 12.3 Checking the Interruption Status
+
+Threads that are not blocked must explicitly check whether they have been interrupted. Java provides two ways to do this.
+
+- `Thread.currentThread().isInterrupted()`: Returns the interruption status without clearing it.
+- `Thread.interrupted()`: Returns the interruption status and clears it.
+
+Failing to check the interruption status may cause threads to ignore cancellation requests and run indefinitely.
+
+### 12.4 Example: Interrupting a Sleeping Thread
+
+The following example demonstrates cooperative cancellation using interruption. A worker thread repeatedly sleeps while performing work. The main thread interrupts it, causing a clean shutdown.
+
+```java
+class InterruptExample {
+
+	static class Worker implements Runnable {
+		public void run() {
+			try {
+				while (true) {
+					System.out.println("Working...");
+					Thread.sleep(1000);
+				}
+			} catch (InterruptedException e) {
+				System.out.println("Worker interrupted, shutting down");
+			}
+		}
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+		Thread worker = new Thread(new Worker());
+		worker.start();
+
+		Thread.sleep(3000);
+		worker.interrupt();
+	}
+}
+```
+
+### 12.5 Key Observations
+
+- Calling `interrupt()` does not stop the thread directly.
+- The interruption is detected because `sleep()` throws `InterruptedException`.
+- The worker thread terminates itself in a controlled manner.
+- Proper interruption handling allows threads to release resources and maintain program correctness.
+
+> **Note:** 
+Swallowing `InterruptedException` without terminating or restoring the interruption status is considered bad practice and may lead to unresponsive threads.
+
+
+## 13. Threads and the Main Thread
 
 Every Java application starts with a **main thread**. This thread executes the `main(String[])` method.
 
@@ -149,7 +219,7 @@ Every Java application starts with a **main thread**. This thread executes the `
 
 Understanding the role of the main thread is essential for reasoning about program termination and background processing.
 
-## Thread Concurrency and Shared State
+## 14. Thread Concurrency and Shared State
 
 Concurrency arises when multiple threads access shared mutable state.
 
@@ -159,6 +229,6 @@ Concurrency arises when multiple threads access shared mutable state.
 
 Java provides synchronization, volatile variables, and higher-level concurrency utilities to address these problems, which will be studied in subsequent sections.
 
-## Summary
+## 15. Summary
 
-Threads are the fundamental building block of concurrent execution in Java. They exist within processes, share memory, and are scheduled by the JVM in cooperation with the operating system. A precise understanding of thread creation, execution, and synchronization is mandatory for both the Java 21 certification and real-world system design.
+Threads are the fundamental building block of concurrent execution in Java. They exist within processes, share memory, and are scheduled by the JVM in cooperation with the operating system.

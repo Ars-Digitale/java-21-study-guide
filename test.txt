@@ -1,35 +1,35 @@
-@@H2@@Thread Interruption and Cooperative Cancellation@@H2_END@@
+## Thread Interruption and Cooperative Cancellation
 
-@@P@@Java threads cannot be stopped forcibly from the outside. Instead, Java provides a cooperative mechanism called @@BOLD@@thread interruption@@BOLD_END@@, which allows one thread to request that another thread stop what it is doing. The target thread decides how and when to respond.@@P_END@@
+Java threads cannot be stopped forcibly from the outside. Instead, Java provides a cooperative mechanism called **thread interruption**, which allows one thread to request that another thread stop what it is doing. The target thread decides how and when to respond.
 
-@@H3@@What Interrupting a Thread Means@@H3_END@@
+### What Interrupting a Thread Means
 
-@@P@@Interrupting a thread does @@BOLD@@not@@BOLD_END@@ terminate it. Calling @@CODE@@interrupt()@@CODE_END@@ sets an internal @@BOLD@@interruption flag@@BOLD_END@@ on the target thread. It is the responsibility of the running thread to observe this flag and react appropriately.@@P_END@@
+Interrupting a thread does **not** terminate it. Calling `interrupt()` sets an internal **interruption flag** on the target thread. It is the responsibility of the running thread to observe this flag and react appropriately.
 
-@@LIST_ITEM@@Interrupt Request: A signal sent to a thread indicating that it should stop or change its current activity.@@LIST_ITEM_END@@
-@@LIST_ITEM@@Interruption Flag: A boolean status associated with each thread, set when @@CODE@@interrupt()@@CODE_END@@ is invoked.@@LIST_ITEM_END@@
-@@LIST_ITEM@@Cooperative Cancellation: A design pattern where threads periodically check for interruption and terminate themselves cleanly.@@LIST_ITEM_END@@
+- Interrupt Request: A signal sent to a thread indicating that it should stop or change its current activity.
+- Interruption Flag: A boolean status associated with each thread, set when `interrupt()` is invoked.
+- Cooperative Cancellation: A design pattern where threads periodically check for interruption and terminate themselves cleanly.
 
-@@H3@@Interrupting Blocking Operations@@H3_END@@
+### Interrupting Blocking Operations
 
-@@P@@Some blocking methods in Java respond immediately to interruption by throwing @@CODE@@InterruptedException@@CODE_END@@ and clearing the interruption flag. These methods include @@CODE@@sleep()@@CODE_END@@, @@CODE@@wait()@@CODE_END@@, and @@CODE@@join()@@CODE_END@@.@@P_END@@
+Some blocking methods in Java respond immediately to interruption by throwing `InterruptedException` and clearing the interruption flag. These methods include `sleep()`, `wait()`, and `join()`.
 
-@@P@@When a thread is blocked in one of these methods and another thread interrupts it, the blocked thread is awakened and an exception is thrown. This provides a safe escape point from blocking operations.@@P_END@@
+When a thread is blocked in one of these methods and another thread interrupts it, the blocked thread is awakened and an exception is thrown. This provides a safe escape point from blocking operations.
 
-@@H3@@Checking the Interruption Status@@H3_END@@
+### Checking the Interruption Status
 
-@@P@@Threads that are not blocked must explicitly check whether they have been interrupted. Java provides two ways to do this.@@P_END@@
+Threads that are not blocked must explicitly check whether they have been interrupted. Java provides two ways to do this.
 
-@@LIST_ITEM@@@@CODE@@Thread.currentThread().isInterrupted()@@CODE_END@@: Returns the interruption status without clearing it.@@LIST_ITEM_END@@
-@@LIST_ITEM@@@@CODE@@Thread.interrupted()@@CODE_END@@: Returns the interruption status and clears it.@@LIST_ITEM_END@@
+- `Thread.currentThread().isInterrupted()`: Returns the interruption status without clearing it.
+- `Thread.interrupted()`: Returns the interruption status and clears it.
 
-@@P@@Failing to check the interruption status may cause threads to ignore cancellation requests and run indefinitely.@@P_END@@
+Failing to check the interruption status may cause threads to ignore cancellation requests and run indefinitely.
 
-@@H3@@Example: Interrupting a Sleeping Thread@@H3_END@@
+### Example: Interrupting a Sleeping Thread
 
-@@P@@The following example demonstrates cooperative cancellation using interruption. A worker thread repeatedly sleeps while performing work. The main thread interrupts it, causing a clean shutdown.@@P_END@@
+The following example demonstrates cooperative cancellation using interruption. A worker thread repeatedly sleeps while performing work. The main thread interrupts it, causing a clean shutdown.
 
-@@CODEBLOCK_JAVA@@
+```java
 class InterruptExample {
 
 static class Worker implements Runnable {
@@ -53,15 +53,14 @@ Thread.sleep(3000);
 worker.interrupt();
 }
 }
-@@CODEBLOCK_END@@
+```
 
-@@H3@@Key Observations@@H3_END@@
+### Key Observations
 
-@@LIST_ITEM@@Calling @@CODE@@interrupt()@@CODE_END@@ does not stop the thread directly.@@LIST_ITEM_END@@
-@@LIST_ITEM@@The interruption is detected because @@CODE@@sleep()@@CODE_END@@ throws @@CODE@@InterruptedException@@CODE_END@@.@@LIST_ITEM_END@@
-@@LIST_ITEM@@The worker thread terminates itself in a controlled manner.@@LIST_ITEM_END@@
-@@LIST_ITEM@@Proper interruption handling allows threads to release resources and maintain program correctness.@@LIST_ITEM_END@@
+- Calling `interrupt()` does not stop the thread directly.
+- The interruption is detected because `sleep()` throws `InterruptedException`.
+- The worker thread terminates itself in a controlled manner.
+- Proper interruption handling allows threads to release resources and maintain program correctness.
 
-@@NOTE@@
-Swallowing @@CODE@@InterruptedException@@CODE_END@@ without terminating or restoring the interruption status is considered bad practice and may lead to unresponsive threads.
-@@NOTE_END@@
+> **Note:** 
+Swallowing `InterruptedException` without terminating or restoring the interruption status is considered bad practice and may lead to unresponsive threads.
