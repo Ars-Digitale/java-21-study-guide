@@ -176,7 +176,7 @@ Failing to check the interruption status may cause threads to ignore cancellatio
 The following example demonstrates cooperative cancellation using interruption. A worker thread repeatedly sleeps while performing work. The main thread interrupts it, causing a clean shutdown.
 
 ```java
-class InterruptExample {
+class Main {
 
 	static class Task implements Runnable {
 		public void run() {
@@ -194,11 +194,25 @@ class InterruptExample {
 	public static void main(String[] args) throws InterruptedException {
 		Thread worker = new Thread(new Task());
 		worker.start();
-
+		System.out.println("main before sleep...");
 		Thread.sleep(3000);
+		System.out.println("main after sleep...");
 		worker.interrupt();
+		System.out.println("main reached END");
 	}
 }
+```
+
+Output:
+
+```bash
+main before sleep...
+Working...
+Working...
+Working...
+main after sleep...
+main reached END
+Task interrupted, shutting down
 ```
 
 ### 12.5 Key Observations
