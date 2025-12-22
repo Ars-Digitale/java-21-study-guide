@@ -178,7 +178,7 @@ The following example demonstrates cooperative cancellation using interruption. 
 ```java
 class InterruptExample {
 
-	static class Worker implements Runnable {
+	static class Task implements Runnable {
 		public void run() {
 			try {
 				while (true) {
@@ -186,13 +186,13 @@ class InterruptExample {
 					Thread.sleep(1000);
 				}
 			} catch (InterruptedException e) {
-				System.out.println("Worker interrupted, shutting down");
+				System.out.println("Task interrupted, shutting down");
 			}
 		}
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		Thread worker = new Thread(new Worker());
+		Thread worker = new Thread(new Task());
 		worker.start();
 
 		Thread.sleep(3000);
