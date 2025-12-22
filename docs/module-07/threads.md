@@ -2,7 +2,7 @@
 
 This chapter introduces **threads** from first principles and explains how they are modeled and used in Java 21. 
 
-It builds the conceptual foundation required for understanding concurrency, synchronization, and the Java Concurrency API covered in next chapter.
+It builds the conceptual foundation required for understanding concurrency, synchronization, and the Java Concurrency API covered in the next chapter.
 
 ## Threads, Processes, and the Operating System
 
@@ -19,8 +19,8 @@ A single process can contain many threads, all operating within the same shared 
 
 Threads interact with memory in two fundamentally different ways.
 
-- Thread Stack: Private memory area for each thread. It stores method call frames, local variables, and execution state. Each thread has exactly one stack.
-- Heap: Shared memory area used for objects and class instances. All threads within the same process can access the heap.
+- **Thread Stack**: Private memory area for each thread. It stores method call frames, local variables, and execution state. Each thread has exactly one stack.
+- **Heap**: Shared memory area used for objects and class instances. All threads within the same process can access the heap.
 
 Because stacks are isolated and the heap is shared, concurrency problems arise when multiple threads access the same heap objects without proper coordination.
 
@@ -28,8 +28,8 @@ Because stacks are isolated and the heap is shared, concurrency problems arise w
 
 The operating system schedules threads onto CPU cores. Since the number of runnable threads often exceeds the number of available cores, the OS performs **context switching**.
 
-- Context: The complete execution state of a thread, including registers, program counter, and stack pointer.
-- Context Switch: The act of suspending one thread and resuming another by saving and restoring their contexts.
+- **Context**: The complete execution state of a thread, including registers, program counter, and stack pointer.
+- **Context Switch**: The act of suspending one thread and resuming another by saving and restoring their contexts.
 
 Context switching enables concurrency but has a cost: CPU cycles are consumed without executing application logic. Java developers must design systems that balance concurrency and efficiency.
 
@@ -37,8 +37,8 @@ Context switching enables concurrency but has a cost: CPU cycles are consumed wi
 
 These two terms are often confused but describe different concepts.
 
-- Concurrency: Multiple threads are in progress during the same time interval, possibly interleaved on a single CPU core.
-- Parallelism: Multiple threads execute simultaneously on different CPU cores.
+- **Concurrency**: Multiple threads are in progress during the same time interval, possibly interleaved on a single CPU core.
+- **Parallelism**: Multiple threads execute simultaneously on different CPU cores.
 
 Java supports concurrency independently of hardware parallelism. Even on a single-core system, Java threads can be concurrent through time slicing.
 
@@ -55,12 +55,12 @@ A thread executes code by invoking its `run()` method, either directly or indire
 
 Java 21 defines multiple kinds of threads, differing in lifecycle, scheduling, and intended use.
 
-- Platform Thread: A traditional Java thread mapped one-to-one to an operating system thread.
-- Virtual Thread: A lightweight thread managed by the JVM and scheduled onto carrier threads. Introduced to enable massive concurrency with minimal overhead.
-- Carrier Thread: A platform thread used internally by the JVM to execute virtual threads.
-- Daemon Thread: A background thread that does not prevent JVM termination. When only daemon threads remain, the JVM exits.
-- User Thread: Any non-daemon thread. The JVM waits for all user threads to complete before exiting.
-- System Thread: Threads created internally by the JVM for garbage collection, JIT compilation, and other runtime services.
+- **Platform Thread**: A traditional Java thread mapped one-to-one to an operating system thread.
+- **Virtual Thread**: A lightweight thread managed by the JVM and scheduled onto carrier threads. Introduced to enable massive concurrency with minimal overhead.
+- **Carrier Thread**: A platform thread used internally by the JVM to execute virtual threads.
+- **Daemon Thread**: A background thread that does not prevent JVM termination. When only daemon threads remain, the JVM exits.
+- **User Thread**: Any non-daemon thread. The JVM waits for all user threads to complete before exiting.
+- **System Thread**: Threads created internally by the JVM for garbage collection, JIT compilation, and other runtime services.
 
 From a certification perspective, understanding the behavioral differences between platform threads and virtual threads is essential.
 
@@ -72,19 +72,41 @@ Threads can be created in multiple ways, all conceptually centered around provid
 - Passing a `Runnable` to a `Thread` constructor.
 - Using thread factories and executors (covered in the Concurrency API section).
 
+```java
+Runnable runnable = ...
+
+  // Start a daemon thread to run a task
+  Thread thread = Thread.ofPlatform().daemon().start(runnable);
+
+  // Create an unstarted thread with name "duke", its start() method
+  // must be invoked to schedule it to execute.
+  Thread thread = Thread.ofPlatform().name("duke").unstarted(runnable);
+
+  // A ThreadFactory that creates daemon threads named "worker-0", "worker-1", ...
+  ThreadFactory factory = Thread.ofPlatform().daemon().name("worker-", 0).factory();
+
+  // Start a virtual thread to run a task
+  Thread thread = Thread.ofVirtual().start(runnable);
+
+  // A ThreadFactory that creates virtual threads
+  ThreadFactory factory = Thread.ofVirtual().factory();
+```
+
 Thread creation alone does not start execution. Execution begins only when the JVM scheduler is engaged.
 
 ## Thread Lifecycle and Execution
 
 A Java thread progresses through well-defined states during its lifetime.
 
-- New: Thread object created but not yet started.
-- Runnable: Eligible for execution by the scheduler.
-- Running: Actively executing on a CPU core.
-- Blocked / Waiting: Temporarily unable to proceed due to synchronization or coordination.
-- Terminated: Execution completed or aborted.
+- **New**: Thread object created but not yet started.
+- **Runnable**: Eligible for execution by the scheduler.
+- **Running**: Actively executing on a CPU core.
+- **Blocked / Waiting**: Temporarily unable to proceed due to synchronization or coordination.
+- **Terminated**: Execution completed or aborted.
 
 The JVM and operating system cooperate to move threads between these states.
+
+Threads in `BLOCKED`, `WAITING` or `TIMED_WAITING` state are **not using any CPU resources**
 
 ## Starting vs Running a Thread: Synchronous or Asynchronous
 
@@ -106,6 +128,8 @@ Java threads have an associated priority hint that influences scheduling.
 
 Thread priority affects scheduling probability but never guarantees execution order. Portable Java code must never rely on priorities for correctness.
 
+You can set **priority** on `platform threads`; for `virtual threads` the **priority** is always set to **5** (Thread.NORM_PRIORITY) and trying to change it has no effect.
+
 ## Thread Deferring and Yielding
 
 Threads can voluntarily influence scheduling behavior.
@@ -121,7 +145,7 @@ Every Java application starts with a **main thread**. This thread executes the `
 
 - The main thread is a user thread.
 - The JVM remains alive as long as at least one user thread is running.
-- If the main thread terminates but other user threads exist, the JVM continues execution.
+- If the main thread terminates but other user threads exist, the JVM continues execution waiting for the user threads to be done.
 
 Understanding the role of the main thread is essential for reasoning about program termination and background processing.
 
