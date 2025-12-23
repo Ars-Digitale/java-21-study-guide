@@ -89,7 +89,9 @@ Both threads may repeatedly retry, preventing forward progress.
 
 ## From Threads to Tasks
 
-The Concurrency API shifts the programming model from managing **threads** directly to submitting **tasks**. A task represents a logical unit of work independent of the thread that executes it.
+The Concurrency API shifts the programming model from managing **threads** directly to submitting **tasks**. 
+
+A **task** represents a logical unit of work independent of the thread that executes it.
 
 - Runnable: Represents a task that does not return a result.
 - Callable: Represents a task that returns a result and may throw checked exceptions.
@@ -265,4 +267,6 @@ This allows blocking code to scale efficiently without redesigning APIs.
 
 ## Summary
 
-The Java Concurrency API provides a robust, scalable, and safer alternative to manual thread management. By abstracting execution, coordinating tasks, and offering thread-safe utilities, it enables developers to build concurrent systems that are both performant and maintainable. Mastery of these concepts is essential for Java 21 certification and modern Java development.
+The Java Concurrency API provides a robust, scalable, and safer alternative to manual thread management. 
+
+By abstracting execution, coordinating tasks, and offering thread-safe utilities, it enables developers to build concurrent systems that are both performant and maintainable. Mastery of these concepts is essential for Java 21 certification and modern Java development.
