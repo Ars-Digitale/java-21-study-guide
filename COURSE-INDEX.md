@@ -41,3 +41,4 @@
 	- [Sequenced Collections](docs/module-06/sequenced.md)
 - [Module 7: Threads]
 	- [Threads Fundamentals](docs/module-07/threads.md)
+	- [Concurrency APIs](docs/module-07/concurrency.md)
