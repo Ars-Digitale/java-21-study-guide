@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 # Java Concurrency APIs
 
 This chapter introduces the **Java Concurrency API**, which provides high-level abstractions for managing concurrent execution safely, efficiently, and scalably.<br>
+=======
+# Java Concurrency API
+
+This chapter introduces the **Java Concurrency API**, which provides high-level abstractions for managing concurrent execution safely, efficiently, and scalably. 
+
+>>>>>>> 1d6513f7c052618b7d5a746ac53b22cc2cd7d242
 Unlike low-level thread manipulation, the Concurrency API focuses on **tasks**, **executors**, and **coordination mechanisms**, allowing developers to reason about what should be done rather than how threads are scheduled.
 
 ## 1. Goals and Scope of the Concurrency API
@@ -39,7 +46,11 @@ A **race condition** occurs when multiple threads access shared mutable state an
 class Counter {
     int count = 0;
     void increment() {
+<<<<<<< HEAD
 	   count++;
+=======
+        count++;
+>>>>>>> 1d6513f7c052618b7d5a746ac53b22cc2cd7d242
     }
 }
 ```
@@ -93,6 +104,11 @@ Both threads may repeatedly retry, preventing forward progress.
 ## 3. From Threads to Tasks
 
 The Concurrency API shifts the programming model from managing **threads** directly to submitting **tasks**. 
+<<<<<<< HEAD
+=======
+
+A **task** represents a logical unit of work independent of the thread that executes it.
+>>>>>>> 1d6513f7c052618b7d5a746ac53b22cc2cd7d242
 
 A **task** represents a logical unit of work independent of the thread that executes it.
 
@@ -179,11 +195,20 @@ Executors manage **thread pools**, which reuse a fixed or dynamic number of thre
 - **Scheduled executor**: Supports delayed and periodic tasks.
 
 ```java
+<<<<<<< HEAD
 ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
 scheduler.schedule(
 	() -> System.out.println("Delayed"),
 	2, TimeUnit.SECONDS);
+=======
+ScheduledExecutorService scheduler =
+    Executors.newScheduledThreadPool(1);
+
+scheduler.schedule(
+    () -> System.out.println("Delayed"),
+    2, TimeUnit.SECONDS);
+>>>>>>> 1d6513f7c052618b7d5a746ac53b22cc2cd7d242
 ```
 
 ## 6. Executor Lifecycle and Termination
@@ -294,9 +319,15 @@ The java.util.concurrent.locks package provides explicit locking mechanisms that
 ReentrantLock lock = new ReentrantLock();
 lock.lock();
 try {
+<<<<<<< HEAD
     // critical section
 } finally {
     lock.unlock();
+=======
+
+} finally {
+   lock.unlock();
+>>>>>>> 1d6513f7c052618b7d5a746ac53b22cc2cd7d242
 }
 ```
 
@@ -471,4 +502,9 @@ This allows blocking code to scale efficiently without redesigning APIs.
 ## Summary
 
 The Java Concurrency API provides a robust, scalable, and safer alternative to manual thread management. 
+<<<<<<< HEAD
 By abstracting execution, coordinating tasks, and offering thread-safe utilities, it enables developers to build concurrent systems that are both performant and maintainable.
+=======
+
+By abstracting execution, coordinating tasks, and offering thread-safe utilities, it enables developers to build concurrent systems that are both performant and maintainable. Mastery of these concepts is essential for Java 21 certification and modern Java development.
+>>>>>>> 1d6513f7c052618b7d5a746ac53b22cc2cd7d242
