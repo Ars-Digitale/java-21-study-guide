@@ -1,6 +1,8 @@
-# Java Concurrency API – High-Level Concurrency in Java 21
+# Java Concurrency API
 
-This chapter introduces the **Java Concurrency API**, which provides high-level abstractions for managing concurrent execution safely, efficiently, and scalably. Unlike low-level thread manipulation, the Concurrency API focuses on **tasks**, **executors**, and **coordination mechanisms**, allowing developers to reason about what should be done rather than how threads are scheduled.
+This chapter introduces the **Java Concurrency API**, which provides high-level abstractions for managing concurrent execution safely, efficiently, and scalably. 
+
+Unlike low-level thread manipulation, the Concurrency API focuses on **tasks**, **executors**, and **coordination mechanisms**, allowing developers to reason about what should be done rather than how threads are scheduled.
 
 ## Goals and Scope of the Concurrency API
 
@@ -32,10 +34,10 @@ A **race condition** occurs when multiple threads access shared mutable state an
 
 ```java
 class Counter {
-int count = 0;
-void increment() {
-count++;
-}
+    int count = 0;
+    void increment() {
+        count++;
+    }
 }
 ```
 
@@ -50,8 +52,8 @@ A **deadlock** occurs when two or more threads are permanently blocked, each wai
 
 ```java
 synchronized (lockA) {
-synchronized (lockB) {
-}
+    synchronized (lockB) {
+    }
 }
 ```
 
@@ -79,7 +81,7 @@ In a **livelock**, threads are not blocked but continuously react to each other 
 
 ```java
 while (!tryLock()) {
-Thread.sleep(10);
+    Thread.sleep(10);
 }
 ```
 
@@ -152,11 +154,11 @@ Executors manage **thread pools**, which reuse a fixed or dynamic number of thre
 
 ```java
 ScheduledExecutorService scheduler =
-Executors.newScheduledThreadPool(1);
+    Executors.newScheduledThreadPool(1);
 
 scheduler.schedule(
-() -> System.out.println("Delayed"),
-2, TimeUnit.SECONDS);
+    () -> System.out.println("Delayed"),
+    2, TimeUnit.SECONDS);
 ```
 
 ## Executor Lifecycle and Termination
@@ -182,7 +184,7 @@ Synchronization enforces mutual exclusion and memory visibility using intrinsic 
 
 ```java
 synchronized void increment() {
-count++;
+    count++;
 }
 ```
 
@@ -203,8 +205,9 @@ The `java.util.concurrent.locks` package provides advanced locking constructs wi
 ReentrantLock lock = new ReentrantLock();
 lock.lock();
 try {
+
 } finally {
-lock.unlock();
+   lock.unlock();
 }
 ```
 
@@ -242,8 +245,8 @@ Parallel streams provide declarative data parallelism by splitting stream operat
 
 ```java
 list.parallelStream()
-.map(x -> x * x)
-.forEach(System.out::println);
+    .map(x -> x * x)
+    .forEach(System.out::println);
 ```
 
 ## Relation to Virtual Threads
