@@ -138,21 +138,21 @@ Integer result = future.get();
 
 | Method                                      | Description |
 |---------------------------------------------|-------------|
-| void execute(Runnable task)                  | Executes a task asynchronously with no return value and no `Future`. |
-| Future<?> submit(Runnable task)              | Executes a task asynchronously; no result is produced (`Future.get()` returns `null`). |
-| <T> Future<T> submit(Callable<T> task)       | Executes a task asynchronously and returns a result of type `T`. |
-| <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks) | Executes all tasks and returns a `Future` for each, after all complete. |
-| <T> T invokeAny(Collection<? extends Callable<T>> tasks) | Executes tasks and returns the result of one that completes successfully; others are cancelled. |
+| void **execute(Runnable task)**                  | Executes a task asynchronously with no return value and no `Future`. |
+| Future<?> **submit(Runnable task)**              | Executes a task asynchronously; no result is produced (`Future.get()` returns `null`). |
+| <T> Future<T> **submit(Callable<T> task)**       | Executes a task asynchronously and returns a result of type `T`. |
+| <T> List<Future<T>> **invokeAll(Collection<? extends Callable<T>> tasks)** | Executes all tasks and returns a `Future` for each, after all complete. |
+| <T> T **invokeAny(Collection<? extends Callable<T>> tasks)** | Executes tasks and returns the result of one that completes successfully; others are cancelled. |
 
 
 
 | Method                                   | Description |
 |------------------------------------------|-------------|
-| boolean isDone()                          | Returns `true` if the task has completed (normally, exceptionally, or via cancellation). |
-| boolean isCancelled()                    | Returns `true` if the task was cancelled before normal completion. |
-| boolean cancel(boolean mayInterruptIfRunning) | Attempts to cancel execution. If `true`, interrupts the running thread if possible. |
-| T get()                                  | Blocks until completion and returns the result, or throws an exception if failed or cancelled. |
-| T get(long timeout, TimeUnit unit)        | Blocks up to the given timeout and returns the result, or throws `TimeoutException` if not completed. |
+| boolean **isDone()**                          | Returns `true` if the task has completed (normally, exceptionally, or via cancellation). |
+| boolean **isCancelled()**                    | Returns `true` if the task was cancelled before normal completion. |
+| boolean **cancel(boolean mayInterruptIfRunning)** | Attempts to cancel execution. If `true`, interrupts the running thread if possible. |
+| T **get()**                                  | Blocks until completion and returns the result, or throws an exception if failed or cancelled. |
+| T **get(long timeout, TimeUnit unit)**        | Blocks up to the given timeout and returns the result, or throws `TimeoutException` if not completed. |
 
 
 ### 4.2 Callable vs Runnable
@@ -244,31 +244,31 @@ count.incrementAndGet();
 
 | Atomic Class            | Description |
 |-------------------------|-------------|
-| AtomicBoolean           | Atomically updates and reads a `boolean` value. |
-| AtomicInteger           | Atomically updates and reads an `int` value. |
-| AtomicLong              | Atomically updates and reads a `long` value. |
-| AtomicReference<T>      | Atomically updates and reads an object reference. |
-| AtomicIntegerArray      | Provides atomic operations on elements of an `int` array. |
-| AtomicLongArray         | Provides atomic operations on elements of a `long` array. |
-| AtomicReferenceArray<T>| Provides atomic operations on elements of a reference array. |
-| AtomicStampedReference<T> | Atomically updates a reference with an integer stamp to avoid ABA problems. |
-| AtomicMarkableReference<T> | Atomically updates a reference with a boolean mark. |
+| **AtomicBoolean**           | Atomically updates and reads a `boolean` value. |
+| **AtomicInteger**           | Atomically updates and reads an `int` value. |
+| **AtomicLong**              | Atomically updates and reads a `long` value. |
+| **AtomicReference<T>**      | Atomically updates and reads an object reference. |
+| **AtomicIntegerArray**      | Provides atomic operations on elements of an `int` array. |
+| **AtomicLongArray**         | Provides atomic operations on elements of a `long` array. |
+| **AtomicReferenceArray<T>** | Provides atomic operations on elements of a reference array. |
+| **AtomicStampedReference<T>** | Atomically updates a reference with an integer stamp to avoid ABA problems. |
+| **AtomicMarkableReference<T>** | Atomically updates a reference with a boolean mark. |
 
 #### 7.2.2 Atomic methods
 
 | Method | Description |
 |--------|-------------|
-| get() | Returns the current value with volatile-read semantics. |
-| set(value) | Sets the value with volatile-write semantics. |
-| lazySet(value) | Eventually sets the value with weaker ordering guarantees. |
-| compareAndSet(expect, update) | Atomically sets the value if the current value equals the expected value. |
-| getAndSet(value) | Atomically sets the value and returns the previous value. |
-| incrementAndGet() | Atomically increments the value and returns the updated result. |
-| getAndIncrement() | Atomically increments the value and returns the previous result. |
-| decrementAndGet() | Atomically decrements the value and returns the updated result. |
-| getAndDecrement() | Atomically decrements the value and returns the previous result. |
-| addAndGet(delta) | Atomically adds the given delta and returns the updated result. |
-| getAndAdd(delta) | Atomically adds the given delta and returns the previous result. |
+| **get()** | Returns the current value with volatile-read semantics. |
+| **set(value)** | Sets the value with volatile-write semantics. |
+| **lazySet(value)** | Eventually sets the value with weaker ordering guarantees. |
+| **compareAndSet(expect, update)** | Atomically sets the value if the current value equals the expected value. |
+| **getAndSet(value)** | Atomically sets the value and returns the previous value. |
+| **incrementAndGet()** | Atomically increments the value and returns the updated result. |
+| **getAndIncrement()** | Atomically increments the value and returns the previous result. |
+| **decrementAndGet()** | Atomically decrements the value and returns the updated result. |
+| **getAndDecrement()** | Atomically decrements the value and returns the previous result. |
+| **addAndGet(delta)** | Atomically adds the given delta and returns the updated result. |
+| **getAndAdd(delta)** | Atomically adds the given delta and returns the previous result. |
 
 
 Atomic variables:
@@ -311,23 +311,23 @@ Key characteristics of the Lock framework:
 
 | Lock Implementation | Description |
 |---------------------|-------------|
-| Lock                | Core interface defining explicit lock operations. |
-| ReentrantLock       | Reentrant mutual exclusion lock with optional fairness policy. |
-| ReadWriteLock       | Interface defining separate read and write locks. |
-| ReentrantReadWriteLock | Provides separate reentrant read and write locks to improve read scalability. |
-| StampedLock         | Lock supporting optimistic, read, and write locking modes (non-reentrant). |
+| **Lock**                | Core interface defining explicit lock operations. |
+| **ReentrantLock**       | Reentrant mutual exclusion lock with optional fairness policy. |
+| **ReadWriteLock**       | Interface defining separate read and write locks. |
+| **ReentrantReadWriteLock** | Provides separate reentrant read and write locks to improve read scalability. |
+| **StampedLock**         | Lock supporting optimistic, read, and write locking modes (non-reentrant). |
 
 
 #### 7.3.2 Common Lock methods
 
 | Method | Description |
 |--------|-------------|
-| lock() | Acquires the lock, blocking indefinitely until available. |
-| unlock() | Releases the lock; must be called by the owning thread. |
-| tryLock() | Attempts to acquire the lock immediately without blocking: returns boolean indicating if lock has been succesfully acquired |
-| tryLock(long, TimeUnit) | Attempts to acquire the lock within the given timeout. |
-| lockInterruptibly() | Acquires the lock unless the thread is interrupted. |
-| newCondition() | Creates a `Condition` instance for fine-grained thread coordination. |
+| **lock()** | Acquires the lock, blocking indefinitely until available. |
+| **unlock()** | Releases the lock; must be called by the owning thread. |
+| **tryLock()** | Attempts to acquire the lock immediately without blocking: returns boolean indicating if lock has been succesfully acquired |
+| **tryLock(long, TimeUnit)** | Attempts to acquire the lock within the given timeout. |
+| **lockInterruptibly()** | Acquires the lock unless the thread is interrupted. |
+| **newCondition()** | Creates a `Condition` instance for fine-grained thread coordination. |
 
 
 Unlike synchronized, locks do not release automatically, making proper try/finally usage essential to avoid deadlocks.
