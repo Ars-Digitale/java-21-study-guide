@@ -37,10 +37,10 @@ A **race condition** occurs when multiple threads access shared mutable state an
 
 ```java
 class Counter {
-	int count = 0;
-	void increment() {
-		count++;
-	}
+   int count = 0;
+   void increment() {
+	  count++;
+   }
 }
 ```
 
@@ -55,8 +55,8 @@ A **deadlock** occurs when two or more threads are permanently blocked, each wai
 
 ```java
 synchronized (lockA) {
-	synchronized (lockB) {
-	}
+   synchronized (lockB) {
+   }
 }
 ```
 
@@ -84,7 +84,7 @@ In a **livelock**, threads are not blocked but continuously react to each other 
 
 ```java
 while (!tryLock()) {
-	Thread.sleep(10);
+   Thread.sleep(10);
 }
 ```
 
