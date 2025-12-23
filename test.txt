@@ -1,8 +1,6 @@
-# Java Concurrency API – High-Level Concurrency in Java 21
+# Java Concurrency APIs
 
-This chapter introduces the **Java Concurrency API**, which provides high-level abstractions for managing concurrent execution safely, efficiently, and scalably. 
-
-
+This chapter introduces the **Java Concurrency API**, which provides high-level abstractions for managing concurrent execution safely, efficiently, and scalably.<br>
 Unlike low-level thread manipulation, the Concurrency API focuses on **tasks**, **executors**, and **coordination mechanisms**, allowing developers to reason about what should be done rather than how threads are scheduled.
 
 ## 1. Goals and Scope of the Concurrency API
