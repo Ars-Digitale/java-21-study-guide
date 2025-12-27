@@ -1,6 +1,8 @@
 # Java I/O Streams
 
-This chapter provides a detailed explanation of Java I/O Streams. It covers classic **java.io** streams, contrasts them with **java.nio / java.nio.file**, and explains design principles, APIs, edge cases, and exam-relevant distinctions.
+This chapter provides a detailed explanation of Java I/O Streams. 
+
+It covers classic **java.io** streams, contrasts them with **java.nio / java.nio.file**, and explains design principles, APIs, edge cases, and exam-relevant distinctions.
 
 ## 1. What Is an I/O Stream in Java?
 
@@ -39,11 +41,11 @@ Java distinguishes streams based on the unit of data they process.
 
 |	Aspect	|	Byte Streams	|	Character Streams	|
 |-----------|-------------------|-----------------------|
-|	Unit of data	|	byte (8 bits)	|	char (16 bits)	|
-|	Encoding handling	|	None	|	Yes (Charset aware)	|
-|	Base classes	|	InputStream / OutputStream	|	Reader / Writer	|
-|	Typical usage	|	Binary files	|	Text files	|
-| 	Focus	|	Low-level I/O	|	Text processing	|
+|	`Unit of data`	|	byte (8 bits)	|	char (16 bits)	|
+|	`Encoding handling`	|	None	|	Yes (Charset aware)	|
+|	`Base classes`	|	InputStream / OutputStream	|	Reader / Writer	|
+|	`Typical usage`	|	Binary files	|	Text files	|
+| 	`Focus`	|	Low-level I/O	|	Text processing	|
 	
 
 ## 3. Low-Level vs High-Level Streams
