@@ -198,9 +198,17 @@ Closing the outermost stream automatically closes all wrapped streams.
 - Using default charset unintentionally
 
 
+
+
+
+
+
+
+
+
+
 ## 4. Core java.io Base Classes and Key Methods
 
-Understanding method behavior and return values is critical for exams.
 
 ### 4.1 InputStream
 

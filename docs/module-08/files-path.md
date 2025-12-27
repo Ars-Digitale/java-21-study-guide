@@ -1,9 +1,9 @@
-## Files and Path in Java I/O – Conceptual Foundations and Critical Details
+# Files and Path in Java I/O – Conceptual Foundations and Critical Details
 
 This section focuses on `Path`, `Files`, and related classes, explaining why they exist, what problems they solve, and how they differ fundamentally 
 from legacy java.io APIs, with special attention to filesystem semantics, path resolution, and common misconceptions.
 
-### 1. Why Path and Files Exist (I/O Context)
+## 1. Why Path and Files Exist (I/O Context)
 
 Classic `java.io` mixed three different concerns into poorly separated APIs:
 
@@ -20,7 +20,7 @@ The NIO.2 design (Java 7+) deliberately separates these concerns:
 > [!NOTE] 
 > A `Path` never opens a file and never touches the disk by itself.
 
-### 2. Path Is a Description, Not a Resource
+## 2. Path Is a Description, Not a Resource
 
 A `Path` is a pure abstraction representing a sequence of name elements in a filesystem.
 
@@ -30,18 +30,19 @@ A `Path` is a pure abstraction representing a sequence of name elements in a fil
 
 This is fundamentally different from streams or channels.
 
-```text
 
-Concept	Path	Stream / Channel
-Opens resource	No	Yes
-Touches disk	No	Yes
-Holds OS handle	No	Yes
-Immutable	Yes	No
-```		
+|	Concept	|	Path	|	Stream / Channel	|
+|-----------|-----------|-----------------------|
+|	`Opens resource`	|	No	|	Yes	|
+|	`Touches disk`	|	No	|	Yes	|
+|	`Holds OS handle`	|	No	|	Yes	|
+|	`Immutable`	|	Yes	|	No	|
+	
 
-> **Note:** [!NOTE] Creating a Path cannot throw `IOException` because no I/O happens.
+> [!NOTE]  
+> Creating a Path cannot throw `IOException` because no I/O happens.
 
-### 3. Absolute vs Relative Paths
+## 3. Absolute vs Relative Paths
 
 Understanding path resolution is essential and frequently tested.
 
@@ -52,61 +53,65 @@ An absolute path fully identifies a location from the filesystem root.
 - Platform-dependent root
 - Independent of JVM working directory
 
-```text
 
-Platform	Example Absolute Path
-Unix	/home/user/file.txt
-Windows	C:\Users\User\file.txt
-```	
+|	Platform	|	Example Absolute Path	|
+|---------------|---------------------------|
+|	Unix	|	`/home/user/file.txt`	|
+|	Windows	|	`C:\Users\User\file.txt`	|
+	
 
-@@H4@@3.2 Relative Paths@@H4_END@@
+### 3.1 Relative Paths
 
 A relative path is resolved against the JVM current working directory.
 
 - Depends on where JVM was launched
 - Common source of bugs
 
-> **Note:** [!NOTE] The working directory is typically available via `System.getProperty("user.dir")`.
+> [!NOTE]
+>  The working directory is typically available via `System.getProperty("user.dir")`.
 
-### 4. Filesystem Awareness and Separators
+## 4. Filesystem Awareness and Separators
 
 NIO introduces filesystem abstraction, which was mostly absent in java.io.
 
-@@H4@@4.1 FileSystem@@H4_END@@
+### 4.1 FileSystem
 
 A `FileSystem` represents a concrete filesystem implementation.
 
 - Default filesystem corresponds to OS filesystem
 - Other filesystems possible (ZIP, memory, network)
 
-> **Note:** [!NOTE] Paths are always associated with exactly ONE FileSystem.
+> [!NOTE] 
+> Paths are always associated with exactly ONE FileSystem.
 
-@@H4@@4.2 Path Separators@@H4_END@@
+### 4.2 Path Separators
 
 Separators differ across platforms, but `Path` abstracts them.
 
-```text
 
-Aspect	java.io.File	java.nio.file.Path
-Separator	String-based	Filesystem-aware
-Portability	Manual handling	Automatic
-Comparison	Error-prone	Safer
-```		
 
-> **Note:** [!NOTE] Hardcoding "/" or "" is discouraged; Path handles this automatically.
+|	Aspect	|	java.io.File	|	java.nio.file.Path	|
+|-----------|-------------------|-----------------------|
+|	Separator	|	String-based	|	Filesystem-aware	|
+|	Portability	|	Manual handling	|	Automatic	|
+|	Comparison	|	Error-prone	|	Safer	|
+	
+> [!NOTE] 
+> Hardcoding "/" or "" is discouraged; Path handles this automatically.
 
-### 5. Normalization, Resolution, Relativization
+### 4.3 Normalization, Resolution, Relativization
 
 These operations manipulate path structure only, not the filesystem.
 
-@@H4@@5.1 normalize()@@H4_END@@
+### 4.4 `normalize()`
 
 Removes redundant name elements like `.` and `..`.
 
 - Purely syntactic
 - Does not check if path exists
 
-> **Note:** [!NOTE] normalize() can produce invalid paths if misused.
+> [!NOTE]
+> normalize() can produce invalid paths if misused.
 
 @@H4@@5.2 resolve()@@H4_END@@
 
@@ -117,50 +122,50 @@ Combines paths in a filesystem-aware way.
 
 > **Note:** [!NOTE] If the parameter is absolute, the original path is discarded.
 
-@@H4@@5.3 relativize()@@H4_END@@
+### 4.5 `relativize()`
 
 Computes a relative path between two paths.
 
 - Both paths must be of same type (both absolute or both relative)
 - Otherwise throws `IllegalArgumentException` 
 
-> **Note:** [!NOTE] This method does NOT access the filesystem.
+> [!NOTE]
+> This method does NOT access the filesystem.
 
-### 6. What Files Actually Do (and What They Don’t)
+## 5. What Files Actually Do (and What They Don’t)
 
 The `Files` class performs real I/O operations.
 
-@@H4@@6.1 Files DO@@H4_END@@
+### 5.1 Files DO
 
 - Open files
 - Create and delete filesystem entries
 - Throw checked exceptions on failure
 - Respect filesystem permissions
 
-@@H4@@6.2 Files DO NOT@@H4_END@@
+### 5.2 Files DO NOT
 
 - Maintain open resources after method returns (except streams)
 - Store file contents internally
 - Guarantee atomicity unless specified
 
-> **Note:** [!NOTE] Methods returning streams (e.g. `Files.lines()`) DO keep the file open until the stream is closed.
+> [!NOTE]
+> Methods returning streams (e.g. `Files.lines()`) DO keep the file open until the stream is closed.
 
-### 7. Error Handling Philosophy: Old vs NIO
+## 6. Error Handling Philosophy: Old vs NIO
 
 A major conceptual difference lies in error reporting.
 
-```text
 
-Aspect	java.io.File	java.nio.file.Files
-Error signaling	boolean / null	IOException
-Diagnostics	Poor	Rich
-Race awareness	Weak	Improved
-Exam preference	Discouraged	Preferred
-```		
+|	Aspect	|	java.io.File	|	java.nio.file.Files	|
+|-----------|-------------------|-----------------------|
+|	Error signaling	|	boolean / null	|	IOException	|
+|	Diagnostics	|	Poor	|	Rich	|
+|	Race awareness	|	Weak	|	Improved	|
+|	preference	|	Discouraged	|	Preferred	|
+		
 
-> **Note:** [!NOTE] Certification questions often expect you to favor NIO because of explicit failure handling.
-
-### 8. Common Misconceptions (Very Exam-Relevant)
+## 7. Common Misconceptions
 
 - “Path represents a file” → false
 - “normalize checks existence” → false
@@ -168,6 +173,3 @@ Exam preference	Discouraged	Preferred
 - “Relative paths are portable” → false
 - “Creating a Path may fail due to permissions” → false
 
-> **Note:** [!NOTE] Always ask: Is this operation purely structural, or does it touch the filesystem?
-
-If you want, the next logical continuation would be a method-by-method deep dive of Files (with memory, performance, and exception semantics), or a comparison with Channels and Asynchronous I/O at the filesystem level.
