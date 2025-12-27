@@ -61,23 +61,23 @@ Low-level streams connect directly to a data source or sink.
 
 ### Common Low-Level Streams
 
-```text
 
-Stream Class	Purpose
-FileInputStream	Read bytes from file
-FileOutputStream	Write bytes to file
-FileReader	Read characters from file
-FileWriter	Write characters to file
-```	
+|	Stream Class	|	Purpose	|
+|-------------------|-----------|
+|	FileInputStream		|	Read bytes from file	|
+|	FileOutputStream	|	Write bytes to file	|
+|	FileReader	|	Read characters from file	|
+|	FileWriter	|	Write characters to file	|
+
 
 ### Example: Low-Level Byte Stream
 
 ```java
 try (InputStream in = new FileInputStream("data.bin")) {
-int b;
-while ((b = in.read()) != -1) {
-System.out.println(b);
-}
+	int b;
+	while ((b = in.read()) != -1) {
+		System.out.println(b);
+	}
 }
 ```
 
