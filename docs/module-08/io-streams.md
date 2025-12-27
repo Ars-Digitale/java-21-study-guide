@@ -81,7 +81,8 @@ try (InputStream in = new FileInputStream("data.bin")) {
 }
 ```
 
-> **Note:** Low-level streams are rarely used alone in real applications due to poor performance and limited features.
+> [!NOTE]
+> Low-level streams are rarely used alone in real applications due to poor performance and limited features.
 
 ### 3.3 High-Level Streams (Filter / Processing Streams)
 
@@ -121,7 +122,9 @@ try (BufferedReader reader =
 
 ### 3.5 Stream Chaining Rules and Common Errors
 
-The previous example illustrates stream chaining, a core concept in `java.io` based on the decorator pattern. Each stream wraps another stream, adding functionality while preserving a strict type hierarchy.
+The previous example illustrates stream chaining, a core concept in `java.io` based on the decorator pattern. 
+
+Each stream wraps another stream, adding functionality while preserving a strict type hierarchy.
 
 #### 3.5.1 Fundamental Chaining Rule
 
@@ -131,7 +134,8 @@ A stream can only wrap another stream of a compatible abstraction level.
 - Character streams can only wrap character streams
 - High-level streams require an underlying low-level stream
 
-> **Note:** You cannot arbitrarily mix `InputStream` with `Reader` or `OutputStream` with `Writer`.
+> [!NOTE]
+> You cannot arbitrarily mix `InputStream` with `Reader` or `OutputStream` with `Writer`.
 
 #### 3.5.2 Byte vs Character Stream Incompatibility
 
@@ -144,7 +148,8 @@ BufferedReader reader =
 	new BufferedReader(new FileInputStream("text.txt"));
 ```
 
-> **Note:** This fails because `BufferedReader` expects a `Reader`, not an `InputStream`.
+> [!NOTE]
+> This fails because `BufferedReader` expects a `Reader`, not an `InputStream`.
 
 #### 3.5.4 Bridging Byte Streams to Character Streams
 
@@ -161,7 +166,8 @@ BufferedReader reader =
 		new InputStreamReader(new FileInputStream("text.txt")));
 ```
 
-> **Note:** The bridge handles character decoding using a charset (default or explicit).
+> [!NOTE]
+> The bridge handles character decoding using a charset (default or explicit).
 
 #### 3.5.6 Ordering Rules in Stream Chains
 
@@ -181,7 +187,8 @@ FileInputStream → InputStreamReader → BufferedReader
 
 Closing the outermost stream automatically closes all wrapped streams.
 
-> **Note:** This is why try-with-resources should reference only the highest-level stream.
+> [!NOTE]
+> This is why try-with-resources should reference only the highest-level stream.
 
 #### 3.5.9 Common Pitfalls
 
@@ -210,7 +217,8 @@ int available()	Bytes readable without blocking
 void close()	Releases resource
 ```	
 
-> **Note:** The `read()` method blocks until data is available or EOF.
+> [!NOTE]
+> The `read()` method blocks until data is available or EOF.
 
 ### 4.2 OutputStream
 
@@ -319,4 +327,5 @@ Legacy APIs	java.io
 - InputStreamReader bridges byte → char with charset
 - Files methods throw IOException (checked)
 
-> **Note:** Expect questions mixing java.io and java.nio to test conceptual understanding, not syntax memorization.
+> [!NOTE]
+> Expect questions mixing java.io and java.nio to test conceptual understanding, not syntax memorization.
