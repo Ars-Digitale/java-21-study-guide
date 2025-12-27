@@ -59,18 +59,18 @@ Low-level streams connect directly to a data source or sink.
 - They know how to read/write bytes or characters
 - They do NOT provide buffering, formatting, or object handling
 
-### Common Low-Level Streams
+### 3.2 Common Low-Level Streams
 
 
 |	Stream Class	|	Purpose	|
 |-------------------|-----------|
-|	FileInputStream		|	Read bytes from file	|
-|	FileOutputStream	|	Write bytes to file	|
-|	FileReader	|	Read characters from file	|
-|	FileWriter	|	Write characters to file	|
+|	`FileInputStream`		|	Read bytes from file	|
+|	`FileOutputStream`	|	Write bytes to file	|
+|	`FileReader`	|	Read characters from file	|
+|	`FileWriter`	|	Write characters to file	|
 
 
-### Example: Low-Level Byte Stream
+Example: Low-Level Byte Stream
 
 ```java
 try (InputStream in = new FileInputStream("data.bin")) {
@@ -83,7 +83,7 @@ try (InputStream in = new FileInputStream("data.bin")) {
 
 > **Note:** Low-level streams are rarely used alone in real applications due to poor performance and limited features.
 
-### 3.2 High-Level Streams (Filter / Processing Streams)
+### 3.3 High-Level Streams (Filter / Processing Streams)
 
 High-level streams wrap other streams to add functionality.
 
@@ -92,34 +92,104 @@ High-level streams wrap other streams to add functionality.
 - Object serialization
 - Primitive reading/writing
 
-### Common High-Level Streams
+### 3.4 Common High-Level Streams
 
-```text
 
-Stream Class	Adds Functionality
-BufferedInputStream	Buffering
-BufferedReader	Line-based reading
-DataInputStream	Primitive types
-ObjectInputStream	Object serialization
-PrintWriter	Formatted text output
-```	
+|	Stream Class	|	Adds Functionality	|
+|-------------------|-----------------------|
+|	`BufferedInputStream`	|	Buffering	|
+|	`BufferedReader`	|	Line-based reading	|
+|	`DataInputStream`	|	Primitive types	|
+|	`ObjectInputStream`	|	Object serialization	|
+|	`PrintWriter`	|	Formatted text output	|
 
-### Example: Stream Chaining
+
+Example: Stream Chaining
 
 ```java
 try (BufferedReader reader =
-new BufferedReader(
-new InputStreamReader(
-new FileInputStream("text.txt")))) {
+	new BufferedReader(
+		new InputStreamReader(
+			new FileInputStream("text.txt")))) {
 
-String line;
-while ((line = reader.readLine()) != null) {
-System.out.println(line);
-}
+	String line;
+	while ((line = reader.readLine()) != null) {
+		System.out.println(line);
+	}
 }
 ```
 
-> **Note:** This chaining pattern is essential knowledge for Java certification exams.
+### 3.5 Stream Chaining Rules and Common Errors
+
+The previous example illustrates stream chaining, a core concept in `java.io` based on the decorator pattern. Each stream wraps another stream, adding functionality while preserving a strict type hierarchy.
+
+#### 3.5.1 Fundamental Chaining Rule
+
+A stream can only wrap another stream of a compatible abstraction level.
+
+- Byte streams can only wrap byte streams
+- Character streams can only wrap character streams
+- High-level streams require an underlying low-level stream
+
+> **Note:** You cannot arbitrarily mix `InputStream` with `Reader` or `OutputStream` with `Writer`.
+
+#### 3.5.2 Byte vs Character Stream Incompatibility
+
+A very common error is attempting to wrap a byte stream directly with a character-based class (or vice versa).
+
+#### 3.5.3 Invalid Chaining (Compile-Time Error)
+
+```java
+BufferedReader reader =
+	new BufferedReader(new FileInputStream("text.txt"));
+```
+
+> **Note:** This fails because `BufferedReader` expects a `Reader`, not an `InputStream`.
+
+#### 3.5.4 Bridging Byte Streams to Character Streams
+
+To convert between byte-based and character-based streams, Java provides bridge classes.
+
+- `InputStreamReader` converts bytes → characters
+- `OutputStreamWriter` converts characters → bytes
+
+#### 3.5.5 Correct Conversion Pattern
+
+```java
+BufferedReader reader =
+	new BufferedReader(
+		new InputStreamReader(new FileInputStream("text.txt")));
+```
+
+> **Note:** The bridge handles character decoding using a charset (default or explicit).
+
+#### 3.5.6 Ordering Rules in Stream Chains
+
+The order of wrapping is not arbitrary and is often tested in certification exams.
+
+- Low-level stream must be innermost
+- Bridges (if needed) come next
+- Buffered or processing streams come last
+
+#### 3.5.7 Correct Logical Order
+
+```text
+FileInputStream → InputStreamReader → BufferedReader
+```
+
+#### 3.5.8 Resource Management Rule
+
+Closing the outermost stream automatically closes all wrapped streams.
+
+> **Note:** This is why try-with-resources should reference only the highest-level stream.
+
+#### 3.5.9 Common Pitfalls
+
+- Trying to buffer a stream of the wrong type
+- Forgetting the bridge between byte and char streams
+- Assuming `Reader` works with binary data
+- Using default charset unintentionally
+
 
 ## 4. Core java.io Base Classes and Key Methods
 
