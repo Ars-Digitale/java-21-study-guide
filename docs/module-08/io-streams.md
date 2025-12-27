@@ -1,10 +1,12 @@
-# Java I/O Streams (Java 21) – Certification-Level Deep Dive
+# Java I/O Streams
 
-This chapter provides a very detailed, certification-oriented explanation of Java I/O Streams, aligned with Java 21 and suitable for Oracle Java SE certification preparation. It covers classic **java.io** streams, contrasts them with **java.nio / java.nio.file**, and explains design principles, APIs, edge cases, and exam-relevant distinctions.
+This chapter provides a detailed explanation of Java I/O Streams. It covers classic **java.io** streams, contrasts them with **java.nio / java.nio.file**, and explains design principles, APIs, edge cases, and exam-relevant distinctions.
 
 ## 1. What Is an I/O Stream in Java?
 
-An I/O Stream represents a flow of data between a Java program and an external source or destination. The data flows sequentially, like water in a pipe.
+An I/O Stream represents a flow of data between a Java program and an external source or destination. 
+
+The data flows sequentially, like water in a pipe.
 
 - A stream is not a data structure; it does not store data permanently
 - Streams are unidirectional (input OR output)
@@ -34,15 +36,15 @@ Java distinguishes streams based on the unit of data they process.
 
 ### Summary Table
 
-```text
 
-Aspect	Byte Streams	Character Streams
-Unit of data	byte (8 bits)	char (16 bits)
-Encoding handling	None	Yes (Charset aware)
-Base classes	InputStream / OutputStream	Reader / Writer
-Typical usage	Binary files	Text files
-Exam focus	Low-level I/O	Text processing
-```		
+|	Aspect	|	Byte Streams	|	Character Streams	|
+|-----------|-------------------|-----------------------|
+|	Unit of data	|	byte (8 bits)	|	char (16 bits)	|
+|	Encoding handling	|	None	|	Yes (Charset aware)	|
+|	Base classes	|	InputStream / OutputStream	|	Reader / Writer	|
+|	Typical usage	|	Binary files	|	Text files	|
+| 	Focus	|	Low-level I/O	|	Text processing	|
+	
 
 ## 3. Low-Level vs High-Level Streams
 
