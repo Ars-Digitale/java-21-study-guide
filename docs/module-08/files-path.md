@@ -150,8 +150,8 @@ Some filesystem entries are not data containers but interaction endpoints.
 
 Java I/O APIs operate at different abstraction layers:
 
-- Path/File (legacy API) → describes a filesystem entry
-- File (legacy API)/Files → queries or modifies filesystem state
+- Path / File (legacy API) → describes a filesystem entry
+- File (legacy API) / Files → queries or modifies filesystem state
 - Streams / Channels → move bytes or characters
 
 | Java API | Role |
