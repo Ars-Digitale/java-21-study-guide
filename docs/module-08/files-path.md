@@ -391,38 +391,6 @@ Separators differ across platforms, but `Path` abstracts them.
 > [!NOTE] 
 > Hardcoding "/" or "" is discouraged; Path handles this automatically.
 
-### 14.3 Normalization, Resolution, Relativization
-
-These operations manipulate path structure only, not the filesystem.
-
-### 14.4 `normalize()`
-
-Removes **redundant** name elements like `.` and `..`.
-
-- Purely syntactic
-- Does not check if path exists
-
-> [!NOTE]
-> normalize() can produce invalid paths if misused.
-
-### 14.5 `resolve()`
-
-Combines paths in a filesystem-aware way.
-
-- Relative paths are appended
-- Absolute argument replaces base path
-
-> **Note:** [!NOTE] If the parameter is absolute, the original path is discarded.
-
-### 14.6 `relativize()`
-
-Computes a relative path between two paths.
-
-- Both paths must be of same type (both absolute or both relative)
-- Otherwise throws `IllegalArgumentException` 
-
-> [!NOTE]
-> This method does NOT access the filesystem.
 
 ## 15. What Files Actually Do (and What They Don’t)
 

@@ -1,12 +1,14 @@
 # Files and Paths APIs
 
-## Legacy `File` and NIO `Path`: Creation and Conversion
+This first section focuses on how to create filesystem locators using the legacy `java.io.File` API and the modern `java.nio.file.Path` API: how to convert between them and understanding overloads, defaults, and common pitfalls.
 
-This first section focuses on how to create filesystem locators using the legacy `java.io.File` API and the modern `java.nio.file.Path` API, and how to convert between them. The goal is to be certification-ready: know the overloads, defaults, and common pitfalls.
+## Legacy `File` and NIO `Path`: Creation and Conversion
 
 ### 1. Creating a `File` (Legacy)
 
-A `File` instance represents a filesystem pathname (absolute or relative). Creating one does **not** access the filesystem and does not throw `IOException`.
+A `File` instance represents a filesystem pathname (absolute or relative). 
+
+Creating one does **not** access the filesystem and does not throw `IOException`.
 
 Core constructors (most common):
 
@@ -27,11 +29,14 @@ File f4 = new File(URI.create("file:///tmp/data.txt"));
 ```
 
 > [!NOTE]
-> `new File(...)` never opens the file. Existence/permissions are checked only when you call methods like `exists()`, `length()`, or when you open a stream/channel.
+> - `new File(...)` never opens the file. 
+> - Existence/permissions are checked only when you call methods like `exists()`, `length()`, or when you open a stream/channel.
 
-### 2. Creating a `Path` (NIO.2)
+### 2. Creating a `Path` (NIO v.2)
 
-A `Path` is also just a locator. Like `File`, creating a `Path` does not access the filesystem.
+A `Path` is also just a locator. 
+
+Like `File`, creating a `Path` does not access the filesystem.
 
 Core factories:
 
@@ -52,11 +57,14 @@ Path p4 = Path.of(URI.create("file:///tmp/data.txt"));
 ```
 
 > [!NOTE]
-> `Path.of(...)` and `Paths.get(...)` are equivalent for the default filesystem. Prefer `Path.of` in modern code.
+> - `Path.of(...)` and `Paths.get(...)` are equivalent for the default filesystem. 
+> - Prefer `Path.of` in modern code.
 
 ### 3. Absolute vs Relative: What “Relative” Means
 
-Both `File` and `Path` can be created as relative paths. Relative paths are resolved against the process working directory (typically `System.getProperty("user.dir")`).
+Both `File` and `Path` can be created as relative paths. 
+
+Relative paths are resolved against the process working directory (typically `System.getProperty("user.dir")`).
 
 ```java
 import java.io.File;
@@ -77,7 +85,8 @@ System.out.println(rp.toAbsolutePath());
 
 ### 4. Joining / Building Paths
 
-Legacy `File` uses constructors (parent + child). NIO uses `resolve` and related methods.
+- Legacy `File` uses constructors (parent + child). 
+- NIO uses `resolve` and related methods.
 
 | Task | Legacy (File) | NIO (Path) |
 |------|---------------|------------|
@@ -96,8 +105,128 @@ Path p = base.resolve("a.txt"); // /tmp/a.txt
 Path p2 = base.resolve("dir").resolve("a.txt"); // /tmp/dir/a.txt
 ```
 
+#### 4.1 `resolve()`
+
+Combines paths in a filesystem-aware way.
+
+- Relative paths are appended
+- Absolute argument replaces base path
+
 > [!NOTE]
-> `Path.resolve(...)` has a rule: if the argument is absolute, it returns the argument and discards the base.
+> `Path.resolve(...)` has a rule: if the argument is absolute, it returns the argument and discards the base (you cannot combine two absolute path using `resolve`)
+
+#### 4.2 `relativize()`
+
+`Path.relativize` computes a **relative path** from one path to another. The resulting path, when `resolve`d against the source path, yields the target path.
+
+In other words:
+
+- It answers the question: “How do I go from path A to path B?”
+- The result is always a **relative** path
+- No filesystem access occurs
+
+Fundamental Rules (EXAM-CRITICAL)
+
+`relativize` has strict preconditions. Violating them throws an exception.
+
+| Rule | Explanation |
+|------|-------------|
+| Both paths must be absolute | or both relative |
+| Both paths must belong to the same filesystem | same provider |
+| Root components must match | same root (on Windows, same drive) |
+| Result is never absolute | always relative |
+
+> [!NOTE]
+> If one path is absolute and the other relative, `IllegalArgumentException` is thrown.
+
+Simple Relative Example:
+
+Both paths are relative, so relativization is allowed.
+
+```java
+Path p1 = Path.of("docs/manual");
+Path p2 = Path.of("docs/images/logo.png");
+
+Path relative = p1.relativize(p2);
+System.out.println(relative);
+```
+
+```bash
+../images/logo.png
+```
+
+Interpretation: from `docs/manual`, go up one level, then into `images/logo.png`.
+
+Absolute Paths Example:
+
+Absolute paths work exactly the same way.
+
+```java
+Path base = Path.of("/home/user/projects");
+Path target = Path.of("/home/user/docs/readme.txt");
+
+Path relative = base.relativize(target);
+System.out.println(relative);
+```
+
+```bash
+../../docs/readme.txt
+```
+
+> [!NOTE]
+> The common prefix (here `/home/user`) is removed before computing the `..` segments.
+
+**Using `resolve` to Verify the Result**
+
+A key property of `relativize` is this identity:
+
+```text
+base.resolve(base.relativize(target)).equals(target)
+```
+
+```java
+Path base = Path.of("/a/b/c");
+Path target = Path.of("/a/d/e");
+
+Path r = base.relativize(target);
+System.out.println(r); // ../../d/e
+System.out.println(base.resolve(r)); // /a/d/e
+```
+
+> [!NOTE]
+> This identity is frequently tested in certification questions.
+
+Example: Mixing Absolute and Relative Paths (ERROR CASE)
+
+This is one of the most common mistakes.
+
+```java
+Path abs = Path.of("/a/b");
+Path rel = Path.of("c/d");
+
+abs.relativize(rel); // throws exception
+```
+
+```bash
+Exception in thread "main" java.lang.IllegalArgumentException
+```
+
+> [!NOTE]
+> `relativize` does NOT attempt to convert paths to absolute automatically.
+
+Example: Different Roots (Windows-Specific Trap)
+
+On Windows, paths with different drive letters cannot be relativized.
+
+```java
+Path p1 = Path.of("C:\data\a");
+Path p2 = Path.of("D:\data\b");
+
+p1.relativize(p2); // IllegalArgumentException
+```
+
+> [!NOTE]
+> On Unix-like systems, the root is always `/`, so this issue does not occur.
 
 ### 5. Converting Between `File` and `Path`
 
@@ -188,6 +317,17 @@ System.out.println(p.toRealPath()); // resolves symlinks, requires existence
 System.out.println("RealPath failed: " + e.getMessage());
 }
 ```
+
+#### 7.1 `normalize()`
+
+Removes **redundant** name elements like `.` and `..`.
+
+- Purely syntactic
+- Does not check if path exists
+
+> [!NOTE]
+> normalize() can produce invalid paths if misused.
+
 
 ### 8. Quick Comparison Table (Creation + Conversion)
 
