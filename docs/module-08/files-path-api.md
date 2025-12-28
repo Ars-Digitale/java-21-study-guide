@@ -2,9 +2,9 @@
 
 This first section focuses on how to create filesystem locators using the legacy `java.io.File` API and the modern `java.nio.file.Path` API: how to convert between them and understanding overloads, defaults, and common pitfalls.
 
-## Legacy `File` and NIO `Path`: Creation and Conversion
+## 1. Legacy `File` and NIO `Path`: Creation and Conversion
 
-### 1. Creating a `File` (Legacy)
+### 1.1 Creating a `File` (Legacy)
 
 A `File` instance represents a filesystem pathname (absolute or relative). 
 
@@ -32,7 +32,7 @@ File f4 = new File(URI.create("file:///tmp/data.txt"));
 > - `new File(...)` never opens the file. 
 > - Existence/permissions are checked only when you call methods like `exists()`, `length()`, or when you open a stream/channel.
 
-### 2. Creating a `Path` (NIO v.2)
+### 1.2 Creating a `Path` (NIO v.2)
 
 A `Path` is also just a locator. 
 
@@ -60,7 +60,7 @@ Path p4 = Path.of(URI.create("file:///tmp/data.txt"));
 > - `Path.of(...)` and `Paths.get(...)` are equivalent for the default filesystem. 
 > - Prefer `Path.of` in modern code.
 
-### 3. Absolute vs Relative: What “Relative” Means
+### 1.3 Absolute vs Relative: What “Relative” Means
 
 Both `File` and `Path` can be created as relative paths. 
 
@@ -83,7 +83,7 @@ System.out.println(rp.toAbsolutePath());
 > [!NOTE]
 > Relative paths are a common source of “works on my machine” bugs because `user.dir` depends on how/where the JVM was launched.
 
-### 4. Joining / Building Paths
+### 1.4 Joining / Building Paths
 
 - Legacy `File` uses constructors (parent + child). 
 - NIO uses `resolve` and related methods.
@@ -105,7 +105,7 @@ Path p = base.resolve("a.txt"); // /tmp/a.txt
 Path p2 = base.resolve("dir").resolve("a.txt"); // /tmp/dir/a.txt
 ```
 
-#### 4.1 `resolve()`
+#### 1.4.1 `resolve()`
 
 Combines paths in a filesystem-aware way.
 
@@ -115,7 +115,7 @@ Combines paths in a filesystem-aware way.
 > [!NOTE]
 > `Path.resolve(...)` has a rule: if the argument is absolute, it returns the argument and discards the base (you cannot combine two absolute path using `resolve`)
 
-#### 4.2 `relativize()`
+#### 1.4.2 `relativize()`
 
 `Path.relativize` computes a **relative path** from one path to another. The resulting path, when `resolved` against the source path, yields the target path.
 
@@ -170,11 +170,8 @@ System.out.println(relative);
 ```
 
 ```bash
-../../docs/readme.txt
+../docs/readme.txt
 ```
-
-> [!NOTE]
-> The common prefix (here `/home/user`) is removed before computing the `..` segments.
 
 **Using `resolve` to Verify the Result**
 
@@ -193,8 +190,7 @@ System.out.println(r); // ../../d/e
 System.out.println(base.resolve(r)); // /a/d/e
 ```
 
-> [!NOTE]
-> This identity is frequently tested in certification questions.
+
 
 **Example**: Mixing Absolute and Relative Paths (ERROR CASE)
 
@@ -228,7 +224,7 @@ p1.relativize(p2); // IllegalArgumentException
 > [!NOTE]
 > On Unix-like systems, the root is always `/`, so this issue does not occur.
 
-### 5. Converting Between `File` and `Path`
+### 1.5 Converting Between `File` and `Path`
 
 Conversion is straightforward and lossless for normal local filesystem paths.
 
@@ -251,9 +247,11 @@ File back = p.toFile();
 > [!NOTE]
 > Conversion does not validate existence. It only converts representations.
 
-### 6. URI Conversion (When Needed)
+### 1.6 URI Conversion (When Needed)
 
-URIs are useful when paths must be represented in a standard, absolute form (e.g., interoperating with networked resources or configuration). Both APIs support URI conversion.
+URIs are useful when paths must be represented in a standard, absolute form (e.g., interoperating with networked resources or configuration). 
+
+Both APIs support URI conversion.
 
 | Direction | Legacy (File) | NIO (Path) |
 |-----------|----------------|------------|
@@ -279,9 +277,9 @@ File fFromUri = new File(u1);
 > [!NOTE]
 > `new File(URI)` requires a `file:` URI and throws `IllegalArgumentException` if the URI is not hierarchical or not a file URI.
 
-### 7. Canonical vs Absolute vs Normalized (Core Differences)
+### 1.7 Canonical vs Absolute vs Normalized (Core Differences)
 
-These terms are often mixed up in exams. They are not the same.
+These terms are often mixed up. They are not the same.
 
 | Concept | Legacy (File) | NIO (Path) | Touches filesystem |
 |--------|----------------|------------|--------------------|
@@ -302,9 +300,9 @@ File f = new File("a/../data.txt");
 System.out.println(f.getAbsolutePath()); // absolute, may still contain ".."
 
 try {
-System.out.println(f.getCanonicalPath()); // resolves "..", may touch filesystem
+	System.out.println(f.getCanonicalPath()); // resolves "..", may touch filesystem
 } catch (IOException e) {
-System.out.println("Canonical failed: " + e.getMessage());
+	System.out.println("Canonical failed: " + e.getMessage());
 }
 
 Path p = Path.of("a/../data.txt");
@@ -312,13 +310,13 @@ System.out.println(p.toAbsolutePath()); // absolute, may still contain ".."
 System.out.println(p.normalize()); // purely syntactic
 
 try {
-System.out.println(p.toRealPath()); // resolves symlinks, requires existence
+	System.out.println(p.toRealPath()); // resolves symlinks, requires existence
 } catch (IOException e) {
-System.out.println("RealPath failed: " + e.getMessage());
+	System.out.println("RealPath failed: " + e.getMessage());
 }
 ```
 
-#### 7.1 `normalize()`
+#### 1.7.1 `normalize()`
 
 Removes **redundant** name elements like `.` and `..`.
 
@@ -329,7 +327,7 @@ Removes **redundant** name elements like `.` and `..`.
 > normalize() can produce invalid paths if misused.
 
 
-### 8. Quick Comparison Table (Creation + Conversion)
+### 1.8 Quick Comparison Table (Creation + Conversion)
 
 | Need | Legacy (File) | NIO (Path) | Preferred today |
 |------|----------------|------------|-----------------|
@@ -338,4 +336,310 @@ Removes **redundant** name elements like `.` and `..`.
 | Convert between APIs | `toPath()` | `toFile()` | Path-centric |
 | Normalize | Canonical | `normalize()` | Path |
 | Resolve symlinks | Canonical | `toRealPath()` | Path |
+
+
+## 2. Managing Files and Directories: Create, Copy, Move, Replace, Compare, Delete (Legacy vs NIO)
+
+This section covers the operations you perform on filesystem entries (files/directories): creating, copying, moving/renaming, replacing, comparing, and deleting. 
+
+It contrasts legacy `java.io.File` (and related legacy helpers) with modern `java.nio.file` (NIO.2).
+
+### 2.1 Mental Model: “Path/Locator” vs “Operations”
+
+Both APIs use objects that represent a path, but operations differ:
+
+- Legacy: `File` is both a path wrapper and an operations API (mixed responsibility)
+- NIO: `Path` is the path; `Files` performs operations (separation of concerns)
+
+| Responsibility | Legacy | NIO |
+|----------------|--------|-----|
+| Path representation | `File` | `Path` |
+| Filesystem operations | `File` | `Files` |
+| Rich error reporting | Weak (booleans) | Strong (exceptions) |
+
+> [!NOTE]
+> legacy methods often return `boolean` (silent failure), while NIO throws `IOException` with cause.
+
+### 2.2 Creating Files and Directories
+
+Creating is where the old API is most awkward and the NIO API is most expressive.
+
+| Task | Legacy approach | NIO approach | Notes |
+|----------------|--------|-----|--------|
+| Create empty file | open+close stream | `Files.createFile` | NIO fails if exists |
+| Create one directory | `mkdir` | `Files.createDirectory` | Parent must exist |
+| Create directories recursively | `mkdirs` | `Files.createDirectories` | Creates parents |
+
+### 2.1 Create a File
+
+Legacy has no “create empty file” method, so you typically create a file by opening an output stream (side effect).
+
+```java
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+File f = new File("created-legacy.txt");
+try (FileOutputStream out = new FileOutputStream(f)) {
+	// file is created (or truncated) as a side effect
+}
+```
+
+NIO provides an explicit creation method.
+
+```java
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.io.IOException;
+
+Path p = Path.of("created-nio.txt");
+Files.createFile(p);
+```
+
+> [!NOTE]
+> `Files.createFile` throws `FileAlreadyExistsException` if the entry exists.
+
+### 2.2 Create Directories
+
+```java
+import java.io.File;
+
+File dir1 = new File("a/b");
+boolean ok1 = dir1.mkdir(); // fails if parent "a" does not exist
+boolean ok2 = dir1.mkdirs(); // creates parents
+```
+
+```java
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.io.IOException;
+
+Path d = Path.of("a/b");
+Files.createDirectory(d); // parent must exist
+Files.createDirectories(d); // creates parents, ok if already exists
+```
+
+> [!NOTE]
+> Legacy `mkdir()/mkdirs()` return `false` on failure without telling why. NIO throws `IOException`.
+
+### 2.3 Copying Files and Directories
+
+Legacy copy is usually manual stream-copy (or external libs). NIO has a single, explicit operation.
+
+|	Capability | Legacy | NIO |
+|--------------|--------|-----|
+|	Copy file contents | Manual streams | `Files.copy` |
+|	Copy into existing target | Manual | `REPLACE_EXISTING` option |
+|	Copy directory tree | Manual recursion | Manual recursion (but better tools: `Files.walk` + `Files.copy`) |
+
+#### 2.3.1 Copy a File (NIO)
+
+```java
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.io.IOException;
+
+Path src = Path.of("src.txt");
+Path dst = Path.of("dst.txt");
+
+Files.copy(src, dst); // fails if dst exists
+Files.copy(src, dst, StandardCopyOption.REPLACE_EXISTING);
+```
+
+> [!NOTE]
+> `Files.copy` throws `FileAlreadyExistsException` if the target exists and you did not use `REPLACE_EXISTING`.
+
+#### 2.3.2 Manual Copy (Legacy, Stream-Based)
+
+```java
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+try (FileInputStream in = new FileInputStream("src.bin");
+FileOutputStream out = new FileOutputStream("dst.bin")) {
+
+	byte[] buf = new byte[8192];
+	int n;
+	while ((n = in.read(buf)) != -1) {
+		out.write(buf, 0, n);
+	}
+}
+```
+
+> [!NOTE]
+> remember `read(byte[])` returns the number of bytes read; you must write only that count, not the full buffer.
+
+### 2.4 Moving / Renaming and Replacing
+
+In both APIs, rename/move is “metadata-level” when possible, but can behave like copy+delete across filesystems. NIO makes this explicit via options.
+
+| Operation | Legacy | NIO |
+|-----------|--------|-----|
+| Rename/move | `File.renameTo` | `Files.move` |
+| Replace existing | Unreliable | `REPLACE_EXISTING` |
+| Atomic move | Not supported | `ATOMIC_MOVE` (if supported) |
+
+#### 2.4.1 Legacy Rename (Common Pitfall)
+
+```java
+import java.io.File;
+
+File from = new File("old.txt");
+File to = new File("new.txt");
+
+boolean ok = from.renameTo(to); // may fail silently
+System.out.println(ok);
+```
+
+> [!NOTE]
+> - `renameTo` is notoriously platform-dependent and returns only `boolean`. 
+> - It may fail because target exists, file is open, permissions, or cross-filesystem move.
+
+#### 2.4.2 NIO Move (Preferred)
+
+```java
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.io.IOException;
+
+Path from = Path.of("old.txt");
+Path to = Path.of("new.txt");
+
+Files.move(from, to); // fails if target exists
+Files.move(from, to, StandardCopyOption.REPLACE_EXISTING);
+```
+
+> [!NOTE]
+> `Files.move` throws `FileAlreadyExistsException` when the target exists and `REPLACE_EXISTING` is not specified.
+
+### 2.5 Comparing Paths and Files
+
+Comparing locators can mean: string/path equality, normalized/canonical equality, or “same file on disk”. 
+
+The APIs differ here significantly.
+
+| Comparison goal | Legacy | NIO |
+|-----------------|--------|-----|
+| Same path text | `File.equals` | `Path.equals` |
+| Normalize path | `getCanonicalFile` | `normalize` |
+| Same file/resource on disk | weak (canonical heuristic) | `Files.isSameFile` |
+
+#### 2.5.1 Equality vs Same File
+
+Two different path strings can refer to the same file.
+
+```java
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.io.IOException;
+
+Path p1 = Path.of("a/../data.txt");
+Path p2 = Path.of("data.txt");
+
+System.out.println(p1.equals(p2)); // false (different path text)
+System.out.println(p1.normalize().equals(p2.normalize())); // might still be false if relative
+
+try {
+	System.out.println(Files.isSameFile(p1, p2)); // may be true, may throw if not accessible
+} catch (IOException e) {
+	System.out.println("isSameFile failed: " + e.getMessage());
+}
+```
+
+> [!NOTE]
+> `Files.isSameFile` may access the filesystem and can throw `IOException` (permission issues, missing files, etc.).
+
+### 2.6 Deleting Files and Directories
+
+Deletion is simple in concept but has important edge cases: non-empty directories, missing targets, and error reporting differences.
+
+| Task | Legacy | NIO | Behavior if missing |
+|------|--------|-----|---------------------|
+| Delete file/dir | `File.delete` | `Files.delete` | Legacy false, NIO exception |
+| Delete if exists | No direct (check+delete) | `Files.deleteIfExists` | returns boolean |
+| Delete non-empty dir | Manual recursion | Manual recursion (walk) | Both require recursion |
+
+#### 2.6.1 Legacy Delete
+
+```java
+import java.io.File;
+
+File f = new File("x.txt");
+boolean ok = f.delete(); // false if not deleted
+System.out.println(ok);
+```
+
+> [!NOTE]
+> Legacy `delete()` fails (returns false) for a non-empty directory and often provides no reason.
+
+#### 2.6.2 NIO Delete and DeleteIfExists
+
+```java
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.DirectoryNotEmptyException;
+import java.io.IOException;
+
+Path p = Path.of("x.txt");
+
+try {
+	Files.delete(p);
+} catch (NoSuchFileException e) {
+	System.out.println("Missing: " + e.getFile());
+} catch (DirectoryNotEmptyException e) {
+	System.out.println("Directory not empty: " + e.getFile());
+} catch (IOException e) {
+	System.out.println("Delete failed: " + e.getMessage());
+}
+
+boolean deleted = Files.deleteIfExists(p);
+System.out.println(deleted);
+```
+
+> [!NOTE]
+> Certification tip: `Files.delete` throws `NoSuchFileException` if missing, while `deleteIfExists` returns `false`.
+
+### 2.7 Recursively Copying / Deleting Directory Trees (NIO Pattern)
+
+NIO doesn’t provide a single “copyTree/deleteTree” method, but the standard approach uses `Files.walk` or `Files.walkFileTree`. 
+
+```java
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+
+Path root = Path.of("dirToDelete");
+
+Files.walkFileTree(root, new SimpleFileVisitor<>() {
+
+@Override
+public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+	Files.delete(file);
+	return FileVisitResult.CONTINUE;
+}
+
+@Override
+public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+	if (exc != null) throw exc;
+	Files.delete(dir);
+	return FileVisitResult.CONTINUE;
+}
+});
+```
+
+> [!NOTE]
+> Deleting a directory tree requires deleting files first, then directories (post-order). This is a common reasoning question.
+
+### 2.8 Summary Checklist
+
+- Prefer `Files.createFile/createDirectory/createDirectories` over legacy workarounds
+- `File.renameTo` is unreliable; prefer `Files.move` with options
+- `Files.copy/move` throw `FileAlreadyExistsException` unless `REPLACE_EXISTING` is used
+- `Files.delete` throws; `Files.deleteIfExists` returns boolean
+- `Files.isSameFile` can throw `IOException` and may touch the filesystem
+- Non-empty directory deletion requires recursion (both APIs)
 

@@ -1,146 +1,292 @@
-## Using `Path.relativize`: Concepts, Rules, and Examples
+## Managing Files and Directories: Create, Copy, Move, Replace, Compare, Delete (Legacy vs NIO)
 
-The `relativize` method is often misunderstood but is very important both in real code and in certification exams. This section explains what it does, the strict rules it follows, and provides concrete examples.
+This section covers the operations you perform on filesystem entries (files/directories): creating, copying, moving/renaming, replacing, comparing, and deleting. It contrasts legacy `java.io.File` (and related legacy helpers) with modern `java.nio.file` (NIO.2), emphasizing correctness, exceptions, and certification traps.
 
-### 1. What `relativize` Does
+### 1. Mental Model: “Path/Locator” vs “Operations”
 
-`Path.relativize` computes a **relative path** from one path to another. The resulting path, when `resolve`d against the source path, yields the target path.
+Both APIs use objects that represent a path, but operations differ:
 
-In other words:
+- Legacy: `File` is both a path wrapper and an operations API (mixed responsibility)
+- NIO: `Path` is the path; `Files` performs operations (separation of concerns)
 
-- It answers the question: “How do I go from path A to path B?”
-- The result is always a **relative** path
-- No filesystem access occurs
-
-> [!NOTE]
-> `relativize` is purely syntactic. It does not check whether paths exist.
-
-### 2. Fundamental Rules (EXAM-CRITICAL)
-
-`relativize` has strict preconditions. Violating them throws an exception.
-
-| Rule | Explanation |
-|------|-------------|
-| Both paths must be absolute | or both relative |
-| Both paths must belong to the same filesystem | same provider |
-| Root components must match | same root (on Windows, same drive) |
-| Result is never absolute | always relative |
+Responsibility	Legacy	NIO
+Path representation	`File`	`Path`
+Filesystem operations	`File`	`Files`
+Rich error reporting	Weak (booleans)	Strong (exceptions)
 
 > [!NOTE]
-> If one path is absolute and the other relative, `IllegalArgumentException` is thrown.
+> For certification: memorize that legacy methods often return `boolean` (silent failure), while NIO throws `IOException` with cause.
 
-### 3. Simple Relative Example
+### 2. Creating Files and Directories
 
-Both paths are relative, so relativization is allowed.
+Creating is where the old API is most awkward and the NIO API is most expressive.
+
+Task	Legacy approach	NIO approach	Notes
+Create empty file	open+close stream	`Files.createFile`	NIO fails if exists
+Create one directory	`mkdir`	`Files.createDirectory`	Parent must exist
+Create directories recursively	`mkdirs`	`Files.createDirectories`	Creates parents
+
+### 2.1 Create a File
+
+Legacy has no “create empty file” method, so you typically create a file by opening an output stream (side effect).
 
 ```java
-Path p1 = Path.of("docs/manual");
-Path p2 = Path.of("docs/images/logo.png");
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
-Path relative = p1.relativize(p2);
-System.out.println(relative);
+File f = new File("created-legacy.txt");
+try (FileOutputStream out = new FileOutputStream(f)) {
+// file is created (or truncated) as a side effect
+}
 ```
 
-```bash
-../images/logo.png
-```
-
-Interpretation: from `docs/manual`, go up one level, then into `images/logo.png`.
-
-### 4. Absolute Paths Example
-
-Absolute paths work exactly the same way.
+NIO provides an explicit creation method.
 
 ```java
-Path base = Path.of("/home/user/projects");
-Path target = Path.of("/home/user/docs/readme.txt");
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.io.IOException;
 
-Path relative = base.relativize(target);
-System.out.println(relative);
-```
-
-```bash
-../../docs/readme.txt
+Path p = Path.of("created-nio.txt");
+Files.createFile(p);
 ```
 
 > [!NOTE]
-> The common prefix (here `/home/user`) is removed before computing the `..` segments.
+> `Files.createFile` throws `FileAlreadyExistsException` if the entry exists. This is a common exam point.
 
-### 5. Using `resolve` to Verify the Result
+### 2.2 Create Directories
 
-A key property of `relativize` is this identity:
+```java
+import java.io.File;
 
-```text
-base.resolve(base.relativize(target)).equals(target)
+File dir1 = new File("a/b");
+boolean ok1 = dir1.mkdir(); // fails if parent "a" does not exist
+boolean ok2 = dir1.mkdirs(); // creates parents
 ```
 
 ```java
-Path base = Path.of("/a/b/c");
-Path target = Path.of("/a/d/e");
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.io.IOException;
 
-Path r = base.relativize(target);
-System.out.println(r); // ../../d/e
-System.out.println(base.resolve(r)); // /a/d/e
+Path d = Path.of("a/b");
+Files.createDirectory(d); // parent must exist
+Files.createDirectories(d); // creates parents, ok if already exists
 ```
 
 > [!NOTE]
-> This identity is frequently tested in certification questions.
+> Legacy `mkdir()/mkdirs()` return `false` on failure without telling why. NIO throws `IOException`.
 
-### 6. Mixing Absolute and Relative Paths (ERROR CASE)
+### 3. Copying Files and Directories
 
-This is one of the most common mistakes.
+Legacy copy is usually manual stream-copy (or external libs). NIO has a single, explicit operation.
+
+Capability	Legacy	NIO
+Copy file contents	Manual streams	`Files.copy`
+Copy into existing target	Manual	`REPLACE_EXISTING` option
+Copy directory tree	Manual recursion	Manual recursion (but better tools: `Files.walk` + `Files.copy`)
+
+### 3.1 Copy a File (NIO)
 
 ```java
-Path abs = Path.of("/a/b");
-Path rel = Path.of("c/d");
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.io.IOException;
 
-abs.relativize(rel); // throws exception
-```
+Path src = Path.of("src.txt");
+Path dst = Path.of("dst.txt");
 
-```bash
-Exception in thread "main" java.lang.IllegalArgumentException
+Files.copy(src, dst); // fails if dst exists
+Files.copy(src, dst, StandardCopyOption.REPLACE_EXISTING);
 ```
 
 > [!NOTE]
-> `relativize` does NOT attempt to convert paths to absolute automatically.
+> `Files.copy` throws `FileAlreadyExistsException` if the target exists and you did not use `REPLACE_EXISTING`.
 
-### 7. Different Roots (Windows-Specific Trap)
-
-On Windows, paths with different drive letters cannot be relativized.
+### 3.2 Manual Copy (Legacy, Stream-Based)
 
 ```java
-Path p1 = Path.of("C:\data\a");
-Path p2 = Path.of("D:\data\b");
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
-p1.relativize(p2); // IllegalArgumentException
+try (FileInputStream in = new FileInputStream("src.bin");
+FileOutputStream out = new FileOutputStream("dst.bin")) {
+
+byte[] buf = new byte[8192];
+int n;
+while ((n = in.read(buf)) != -1) {
+out.write(buf, 0, n);
+}
+}
 ```
 
 > [!NOTE]
-> On Unix-like systems, the root is always `/`, so this issue does not occur.
+> Certification trap: remember `read(byte[])` returns the number of bytes read; you must write only that count, not the full buffer.
 
-### 8. Relativize vs Normalize
+### 4. Moving / Renaming and Replacing
 
-These two methods are often confused but serve different purposes.
+In both APIs, rename/move is “metadata-level” when possible, but can behave like copy+delete across filesystems. NIO makes this explicit via options.
 
-Method	Purpose
-`relativize`	Compute a path between two paths
-`normalize`	Remove `.` and `..` segments
+Operation	Legacy	NIO
+Rename/move	`File.renameTo`	`Files.move`
+Replace existing	Unreliable	`REPLACE_EXISTING`
+Atomic move	Not supported	`ATOMIC_MOVE` (if supported)
+
+### 4.1 Legacy Rename (Common Pitfall)
 
 ```java
-Path p = Path.of("a/b/../c");
-System.out.println(p.normalize()); // a/c
+import java.io.File;
+
+File from = new File("old.txt");
+File to = new File("new.txt");
+
+boolean ok = from.renameTo(to); // may fail silently
+System.out.println(ok);
 ```
 
 > [!NOTE]
-> `normalize` works on a single path; `relativize` always involves two paths.
+> `renameTo` is notoriously platform-dependent and returns only `boolean`. It may fail because target exists, file is open, permissions, or cross-filesystem move.
 
-### 9. Exam-Oriented Summary
+### 4.2 NIO Move (Preferred)
 
-- `relativize` returns a relative path from one path to another
-- Both paths must be either absolute or relative
-- Paths must share the same root/filesystem
-- No filesystem access occurs
-- Result can be safely `resolve`d back
+```java
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.io.IOException;
+
+Path from = Path.of("old.txt");
+Path to = Path.of("new.txt");
+
+Files.move(from, to); // fails if target exists
+Files.move(from, to, StandardCopyOption.REPLACE_EXISTING);
+```
 
 > [!NOTE]
-> If you see `IllegalArgumentException` in a question, check for mixed absolute/relative paths or different roots.
+> `Files.move` throws `FileAlreadyExistsException` when the target exists and `REPLACE_EXISTING` is not specified.
+
+### 5. Comparing Paths and Files
+
+Comparing locators can mean: string/path equality, normalized/canonical equality, or “same file on disk”. The APIs differ here significantly.
+
+Comparison goal	Legacy	NIO
+Same path text	`File.equals`	`Path.equals`
+Normalize path	`getCanonicalFile`	`normalize`
+Same file/resource on disk	weak (canonical heuristic)	`Files.isSameFile`
+
+### 5.1 Equality vs Same File
+
+Two different path strings can refer to the same file.
+
+```java
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.io.IOException;
+
+Path p1 = Path.of("a/../data.txt");
+Path p2 = Path.of("data.txt");
+
+System.out.println(p1.equals(p2)); // false (different path text)
+System.out.println(p1.normalize().equals(p2.normalize())); // might still be false if relative
+
+try {
+System.out.println(Files.isSameFile(p1, p2)); // may be true, may throw if not accessible
+} catch (IOException e) {
+System.out.println("isSameFile failed: " + e.getMessage());
+}
+```
+
+> [!NOTE]
+> `Files.isSameFile` may access the filesystem and can throw `IOException` (permission issues, missing files, etc.).
+
+### 6. Deleting Files and Directories
+
+Deletion is simple in concept but has important edge cases: non-empty directories, missing targets, and error reporting differences.
+
+Task	Legacy	NIO	Behavior if missing
+Delete file/dir	`File.delete`	`Files.delete`	Legacy false, NIO exception
+Delete if exists	No direct (check+delete)	`Files.deleteIfExists`	returns boolean
+Delete non-empty dir	Manual recursion	Manual recursion (walk)	Both require recursion
+
+### 6.1 Legacy Delete
+
+```java
+import java.io.File;
+
+File f = new File("x.txt");
+boolean ok = f.delete(); // false if not deleted
+System.out.println(ok);
+```
+
+> [!NOTE]
+> Legacy `delete()` fails (returns false) for a non-empty directory and often provides no reason.
+
+### 6.2 NIO Delete and DeleteIfExists
+
+```java
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.DirectoryNotEmptyException;
+import java.io.IOException;
+
+Path p = Path.of("x.txt");
+
+try {
+Files.delete(p);
+} catch (NoSuchFileException e) {
+System.out.println("Missing: " + e.getFile());
+} catch (DirectoryNotEmptyException e) {
+System.out.println("Directory not empty: " + e.getFile());
+} catch (IOException e) {
+System.out.println("Delete failed: " + e.getMessage());
+}
+
+boolean deleted = Files.deleteIfExists(p);
+System.out.println(deleted);
+```
+
+> [!NOTE]
+> Certification tip: `Files.delete` throws `NoSuchFileException` if missing, while `deleteIfExists` returns `false`.
+
+### 7. Recursively Copying / Deleting Directory Trees (NIO Pattern)
+
+NIO doesn’t provide a single “copyTree/deleteTree” method, but the standard approach uses `Files.walk` or `Files.walkFileTree`. For certification, knowing the pattern is valuable.
+
+```java
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+
+Path root = Path.of("dirToDelete");
+
+Files.walkFileTree(root, new SimpleFileVisitor<>() {
+@Override
+public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+Files.delete(file);
+return FileVisitResult.CONTINUE;
+}
+
+@Override
+public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+if (exc != null) throw exc;
+Files.delete(dir);
+return FileVisitResult.CONTINUE;
+}
+});
+```
+
+> [!NOTE]
+> Deleting a directory tree requires deleting files first, then directories (post-order). This is a common reasoning question.
+
+### 8. Exam-Oriented Checklist
+
+- Prefer `Files.createFile/createDirectory/createDirectories` over legacy workarounds
+- `File.renameTo` is unreliable; prefer `Files.move` with options
+- `Files.copy/move` throw `FileAlreadyExistsException` unless `REPLACE_EXISTING` is used
+- `Files.delete` throws; `Files.deleteIfExists` returns boolean
+- `Files.isSameFile` can throw `IOException` and may touch the filesystem
+- Non-empty directory deletion requires recursion (both APIs)

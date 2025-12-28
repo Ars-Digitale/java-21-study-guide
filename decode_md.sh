@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
-# OURCODE decoder (v4) - robust NOTES + TABLE blocks
-# Usage:
-#   chmod +x decode_md.sh
-#   ./decode_md.sh input_safe.txt output.md
-# Notes:
-# - If output.md is omitted, edits input file in-place.
-# - Uses awk + sed (still deterministic). GNU sed syntax (-i). macOS: sed -i '' ...
-
+# OURCODE decoder (v4) - NOTES as blockquotes, TABLE blocks to pipe tables
 set -euo pipefail
 
 input="${1:-}"
@@ -22,28 +15,25 @@ if [[ ! -f "$input" ]]; then
 fi
 
 tmp="$input"
-if [[ -n "$output" ]]; then
+if [[ -n "${output:-}" ]]; then
   cp -- "$input" "$output"
   tmp="$output"
 fi
 
-# Step 1: Handle NOTE and TABLE blocks while tags are still present.
-# - NOTE: turn into blockquote lines (no injected "Note:")
-# - TABLE: convert tab-separated rows into Markdown pipe table
+# Pre-pass: NOTE -> blockquote lines, TABLE -> pipe table
 awk '
 function trim(s){ sub(/^[ \t\r\n]+/,"",s); sub(/[ \t\r\n]+$/,"",s); return s }
-function emit_row(arr, n,    i, out) {
+
+function emit_row(line,   n,i,out,cell) {
+  n = split(line, cell, "\t")
   out="|"
-  for(i=1;i<=n;i++){
-    out = out " " trim(arr[i]) " |"
-  }
+  for(i=1;i<=n;i++) out = out " " trim(cell[i]) " |"
   print out
+  return n
 }
-function emit_sep(n,    i, out) {
+function emit_sep(n,   i,out) {
   out="|"
-  for(i=1;i<=n;i++){
-    out = out " --- |"
-  }
+  for(i=1;i<=n;i++) out = out " --- |"
   print out
 }
 
@@ -55,44 +45,29 @@ BEGIN { in_note=0; in_table=0; table_rows=0 }
 
   if ($0 ~ /^@@TABLE@@/) { in_table=1; table_rows=0; next }
   if ($0 ~ /^@@TABLE_END@@/) {
-    # Emit table if at least header exists
     if (table_rows >= 1) {
-      # header
-      n = split(table[1], h, "\t")
-      emit_row(h, n)
+      n = emit_row(table[1])
       emit_sep(n)
-      # body
-      for (r=2; r<=table_rows; r++) {
-        split(table[r], c, "\t")
-        emit_row(c, n)
-      }
+      for (r=2; r<=table_rows; r++) emit_row(table[r])
     }
-    # cleanup
     delete table
     in_table=0
     next
   }
 
-  if (in_note) {
-    # Prefix every note line as a proper blockquote
-    print "> " $0
-    next
-  }
+  if (in_note) { print "> " $0; next }
 
   if (in_table) {
-    # Collect raw tab-separated lines (leave empty lines out)
-    if ($0 !~ /^[ \t]*$/) {
-      table[++table_rows] = $0
-    }
+    if ($0 !~ /^[ \t]*$/) table[++table_rows] = $0
     next
   }
 
   print $0
 }
-' "$tmp" > "${tmp}.awk"
-mv -- "${tmp}.awk" "$tmp"
+' "$tmp" > "${tmp}.pp"
+mv -- "${tmp}.pp" "$tmp"
 
-# Step 2: Regular tag decoding with sed (backward-compatible with your v3 script)
+# Your original sed decoding (unchanged)
 sed -i 's/@@H1@@/# /g'  "$tmp"
 sed -i 's/@@H1_END@@//g' "$tmp"
 sed -i 's/@@H2@@/## /g' "$tmp"
