@@ -150,14 +150,14 @@ Some filesystem entries are not data containers but interaction endpoints.
 
 Java I/O APIs operate at different abstraction layers:
 
-- Path → describes a filesystem entry
-- File/Files → queries or modifies filesystem state
+- Path/File (legacy API) → describes a filesystem entry
+- File (legacy API)/Files → queries or modifies filesystem state
 - Streams / Channels → move bytes or characters
 
 | Java API | Role |
 | --- | --- |
 | `Path` | Addressing |
-| `File (Old APIs)` | Addressing / Filesystem operations |
+| `File (legacy APIs)` | Addressing / Filesystem operations |
 | `Files` | Filesystem operations |
 | `InputStream / Reader` | Reading data |
 | `OutputStream / Writer` | Writing data |
@@ -166,7 +166,7 @@ Java I/O APIs operate at different abstraction layers:
 > [!NOTE]
 > No Java API “is” a file; APIs mediate access to filesystem-managed resources.
 
-## 9. Core Conceptual Pitfalls (Exam-Relevant)
+## 9. Core Conceptual Pitfalls
 
 - Confusing paths with files
 - Assuming paths imply existence
@@ -194,7 +194,7 @@ The NIO.2 design (Java 7+) deliberately separates these concerns:
 > [!NOTE] 
 > A `Path` never opens a file and never touches the disk by itself.
 
-## 11. Is `java.io.File` (Old APIs) both a `path` and a `file-operations` API?
+## 11. Is `java.io.File` (legacy APIs) both a `path` and a `file-operations` API?
 
 Yes — in the old I/O API, `java.io.File` confusingly plays two roles at the same time, and this design is exactly one of the reasons `java.nio.file` was introduced.
 
