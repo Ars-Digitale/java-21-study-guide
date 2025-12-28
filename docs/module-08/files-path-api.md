@@ -117,7 +117,7 @@ Combines paths in a filesystem-aware way.
 
 #### 4.2 `relativize()`
 
-`Path.relativize` computes a **relative path** from one path to another. The resulting path, when `resolve`d against the source path, yields the target path.
+`Path.relativize` computes a **relative path** from one path to another. The resulting path, when `resolved` against the source path, yields the target path.
 
 In other words:
 
@@ -125,7 +125,7 @@ In other words:
 - The result is always a **relative** path
 - No filesystem access occurs
 
-Fundamental Rules (EXAM-CRITICAL)
+**Fundamental Rules**
 
 `relativize` has strict preconditions. Violating them throws an exception.
 
@@ -139,7 +139,7 @@ Fundamental Rules (EXAM-CRITICAL)
 > [!NOTE]
 > If one path is absolute and the other relative, `IllegalArgumentException` is thrown.
 
-Simple Relative Example:
+**Simple Relative Example**:
 
 Both paths are relative, so relativization is allowed.
 
@@ -157,7 +157,7 @@ System.out.println(relative);
 
 Interpretation: from `docs/manual`, go up one level, then into `images/logo.png`.
 
-Absolute Paths Example:
+**Absolute Paths Example**:
 
 Absolute paths work exactly the same way.
 
@@ -196,7 +196,7 @@ System.out.println(base.resolve(r)); // /a/d/e
 > [!NOTE]
 > This identity is frequently tested in certification questions.
 
-Example: Mixing Absolute and Relative Paths (ERROR CASE)
+**Example**: Mixing Absolute and Relative Paths (ERROR CASE)
 
 This is one of the most common mistakes.
 
@@ -214,7 +214,7 @@ Exception in thread "main" java.lang.IllegalArgumentException
 > [!NOTE]
 > `relativize` does NOT attempt to convert paths to absolute automatically.
 
-Example: Different Roots (Windows-Specific Trap)
+**Example**: Different Roots (Windows-Specific Trap)
 
 On Windows, paths with different drive letters cannot be relativized.
 
