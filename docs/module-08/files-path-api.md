@@ -1,3 +1,5 @@
+# Files and Paths APIs
+
 ## Legacy `File` and NIO `Path`: Creation and Conversion
 
 This first section focuses on how to create filesystem locators using the legacy `java.io.File` API and the modern `java.nio.file.Path` API, and how to convert between them. The goal is to be certification-ready: know the overloads, defaults, and common pitfalls.
@@ -197,6 +199,3 @@ System.out.println("RealPath failed: " + e.getMessage());
 | Normalize | Canonical | `normalize()` | Path |
 | Resolve symlinks | Canonical | `toRealPath()` | Path |
 
-
-> [!NOTE]
-> For certification: remember that `File` mixes path + ops; `Path` is path-only and `Files` performs operations.

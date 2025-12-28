@@ -1,4 +1,4 @@
-# Files and Path in Java I/O – Conceptual Foundations and Critical Details
+# Files and Paths Fundamentals
 
 This section focuses on `Path`, `File`, `Files`, and related classes, explaining why they exist, what problems they solve, and which are the differences between 
 legacy java.io APIs and NIO v.2 (new I/O APIs), with special attention to filesystem semantics, path resolution, and common misconceptions.
@@ -271,9 +271,6 @@ The dual role of `File` caused several issues:
 - Weak support for links and multiple filesystems
 - Platform-dependent behavior
 
-> [!NOTE]
-> Many certification questions rely on knowing that `File` does too much, but still does not open files.
-
 ### 11.6 How NIO Fixed This
 
 NIO.2 explicitly separates responsibilities:
@@ -318,7 +315,7 @@ This is fundamentally different from streams or channels.
 
 ## 13. Absolute vs Relative Paths
 
-Understanding path resolution is essential and frequently tested.
+Understanding path resolution is essential.
 
 ### 13.1 Absolute Paths
 
@@ -332,8 +329,24 @@ An absolute path fully identifies a location from the filesystem root.
 |---------------|---------------------------|
 |	Unix	|	`/home/user/file.txt`	|
 |	Windows	|	`C:\Users\User\file.txt`	|
-	
 
+
+> [!IMPORTANT]  
+> - a path starting with a forward slash `(/)` or with a drive letter `(C:)` is an absolute path.
+> The symbol `(.)` is a reference to the current directory while the symbol `(..)` is a reference to its parent directory.
+
+Example:
+
+```bash
+/dirA/dirB/../dirC/./content.txt
+
+is equivalent to:
+
+/dirA/dirC/content.txt
+
+// in this example the symbols were redundant and unnecessary
+```
+	
 ### 13.2 Relative Paths
 
 A relative path is resolved against the JVM current working directory.
@@ -343,6 +356,13 @@ A relative path is resolved against the JVM current working directory.
 
 > [!NOTE]
 >  The working directory is typically available via `System.getProperty("user.dir")`.
+
+Example:
+
+```bash
+dirB/dirC/content.txt
+```
+
 
 ## 14. Filesystem Awareness and Separators
 
@@ -377,7 +397,7 @@ These operations manipulate path structure only, not the filesystem.
 
 ### 14.4 `normalize()`
 
-Removes redundant name elements like `.` and `..`.
+Removes **redundant** name elements like `.` and `..`.
 
 - Purely syntactic
 - Does not check if path exists

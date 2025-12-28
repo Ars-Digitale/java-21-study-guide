@@ -42,6 +42,7 @@
 - [Module 7: Threads]
 	- [Threads Fundamentals](docs/module-07/threads.md)
 	- [Concurrency APIs](docs/module-07/concurrency.md)
-- [Module 8: I/O Streams]
-	- [Files and Paths](docs/module-08/files-path.md)	
-	- [Java I/O Fundamentals](docs/module-08/io-streams.md)
+- [Module 8: Java I/O]
+	- [Files and Paths Fundamentals](docs/module-08/files-path.md)
+	- [Files and Paths APIs](docs/module-08/files-path-api.md)		
+	- [Java I/O Streams](docs/module-08/io-streams.md)
