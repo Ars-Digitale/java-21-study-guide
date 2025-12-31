@@ -246,11 +246,11 @@ It represents a destination where raw bytes can be written.
 
 | Method | Description |
 |--------|-------------|
-| void write(int b) | Writes the low 8 bits of the integer |
-| void write(byte[]) | Writes an entire byte array |
-| void write(byte[], int, int) | Writes a slice of a byte array |
-| void flush() | Forces buffered data to be written |
-| void close() | Flushes and releases the resource |
+| void write(int b)	|	Writes the low 8 bits of the integer |
+| void write(byte[])	|	Writes an entire byte array |
+| void write(byte[], int, int)	|	Writes a slice of a byte array |
+| void flush()	|	Forces buffered data to be written |
+| void close()	|	Flushes and releases the resource |
 
 > [!NOTE]
 > Calling close() implicitly calls flush().
