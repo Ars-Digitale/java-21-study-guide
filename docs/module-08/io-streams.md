@@ -200,7 +200,7 @@ Closing the outermost stream automatically closes all wrapped streams.
 
 ## 4. Core java.io Base Classes and Key Methods
 
-The java.io package is built around a small set of abstract base classes.
+The `java.io` package is built around a small set of **abstract base classes**.
 Understanding these classes and their contracts is essential, because all concrete I/O classes build on them.
 
 ### 4.1 InputStream
@@ -210,16 +210,17 @@ All input streams read raw bytes (8-bit values) from a source such as a file, ne
 
 #### 4.1.1 Key Methods
 
-| Method Description |
-| --- |
-| int read() Reads one byte (0–255); returns -1 at end of stream |
-| int read(byte[]) Reads bytes into buffer; returns number of bytes read or -1 |
-| int read(byte[], int, int) Reads up to length bytes into a buffer slice |
-| int available() Bytes readable without blocking (hint, not guarantee) |
-| void close() Releases the underlying resource |
+| Method | Description |
+|--------|-------------|
+| int `read()`	|	Reads one byte (0–255); returns -1 at end of stream |
+| int `read(byte[])`	|	Reads bytes into buffer; returns number of bytes read or -1 |
+| int `read(byte[], int, int)`	|	Reads up to length bytes into a buffer slice |
+| int `available()`	|	Bytes readable without blocking (hint, not guarantee) |
+| void `close()`	|	Releases the underlying resource |
 
 > [!NOTE]
-> The read() methods are blocking by default.
+> The `read()` methods are blocking by default.
+>
 > They suspend the calling thread until data is available, end-of-stream is reached, or an I/O error occurs.
 
 The single-byte read() method is primarily a low-level primitive.
