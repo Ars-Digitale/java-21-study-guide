@@ -24,13 +24,15 @@ fi
 awk '
 function trim(s){ sub(/^[ \t\r\n]+/,"",s); sub(/[ \t\r\n]+$/,"",s); return s }
 
-# Split a row using tabs if present, otherwise spaces.
-# If expected > 0 and we get too many tokens, merge extras into the last cell.
+# Split on TAB; fallback to 2+ spaces ONLY.
+# Never split on single spaces (avoids table corruption).
 function split_row(line, arr, expected,   n,i,tmp) {
   n = split(line, arr, "\t")
   if (n == 1) {
-    n = split(trim(line), arr, /[ ]+/)
+    n = split(trim(line), arr, /  +/)
   }
+
+  # Merge overflow tokens into the last cell if we know expected column count
   if (expected > 0 && n > expected) {
     tmp = arr[expected]
     for (i = expected + 1; i <= n; i++) tmp = tmp " " arr[i]
@@ -38,6 +40,13 @@ function split_row(line, arr, expected,   n,i,tmp) {
     arr[expected] = tmp
     n = expected
   }
+
+  # Pad missing columns with empty strings
+  if (expected > 0 && n < expected) {
+    for (i = n + 1; i <= expected; i++) arr[i] = ""
+    n = expected
+  }
+
   return n
 }
 
@@ -63,7 +72,6 @@ BEGIN { in_note=0; in_table=0; table_rows=0; expected_cols=0 }
   if ($0 ~ /^@@TABLE@@/) { in_table=1; table_rows=0; expected_cols=0; next }
   if ($0 ~ /^@@TABLE_END@@/) {
     if (table_rows >= 1) {
-      # header decides expected column count
       expected_cols = emit_row(table[1], 0)
       emit_sep(expected_cols)
       for (r=2; r<=table_rows; r++) emit_row(table[r], expected_cols)

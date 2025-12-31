@@ -1,431 +1,215 @@
-## 9.3 java.nio.file (NIO.2) — File and Directory Operations (Legacy vs Modern)
+### 4.8 Custom Serialization Hooks: writeObject and readObject
+Custom serialization hooks exist to handle cases where default Java serialization is not enough (transient state, derived fields, encryption, validation, compatibility).
+They are advanced but extremely important for correct deserialization behavior.
 
-This section focuses on practical operations on files and directories.
-We compare the legacy approaches (java.io.File + java.io streams) with modern NIO.2 approaches (Path + Files).
+### 4.8.1 Why Custom Serialization Exists
+By default, Java serialization automatically writes and reads all non-static, non-transient instance fields of a Serializable object.
+This is convenient, but it cannot express certain common needs.
+Typical reasons to customize serialization:
+- A field should not be stored directly (sensitive data)
+- A field is derived/cached and should be recomputed after restore
+- You need validation when reading (reject invalid state)
+- You need backward/forward compatibility logic (support older streams)
+- A referenced object is not Serializable and must be handled specially
 
-The goal is not only to know the method names, but to understand:
-- what each method really does
-- what it returns and how it reports errors
-- what pitfalls exist (race conditions, links, permissions, portability)
-- when a Files method is a safe enhancement over the old approach
+### 4.8.2 What writeObject and readObject Really Are
+writeObject and readObject are private methods with special meaning.
+They are NOT overrides and you never call them directly in normal code.
+Instead, ObjectOutputStream and ObjectInputStream look for these methods (by reflection).
+If they exist with the exact required signature, the stream calls them automatically.
 
-### 9.3.1 Existence and Accessibility Checks
+> [!NOTE]
+> If the signature is wrong (wrong visibility, parameter type, return type), the method is ignored and default serialization happens.
+> This can be very confusing during debugging.
 
-A very common operation is to check whether a file exists and whether it can be accessed.
-Legacy and NIO.2 differ mainly in error handling and link behavior.
-
-### Legacy API (File)
+### 4.8.3 Exact Required Signatures
 
 ```java
-File f = new File("data.txt");
+private void writeObject(ObjectOutputStream out) throws IOException
 
-boolean exists = f.exists();
-boolean canRead = f.canRead();
-boolean canWrite = f.canWrite();
-boolean canExec = f.canExecute();
+private void readObject(ObjectInputStream in)
+throws IOException, ClassNotFoundException
 ```
 
-These methods return boolean and do not explain why an operation failed.
-For example, exists() returns false for a missing file and also for some permission problems.
+Key constraints:
+- must be private
+- must return void
+- parameter types must match exactly
+- exceptions must be compatible with the required throws list
 
-### Modern API (Files)
-
+### 4.8.4 What Happens During Serialization: Step by Step
+When you serialize an object, you typically call:
 ```java
-Path p = Path.of("data.txt");
-
-boolean exists = Files.exists(p);
-boolean readable = Files.isReadable(p);
-boolean writable = Files.isWritable(p);
-boolean executable = Files.isExecutable(p);
+out.writeObject(obj);
 ```
 
-Files also provides negations that can be useful in exams and defensive code.
+Then the serialization mechanism does roughly this:
+- Checks if the object’s class implements Serializable
+- Checks whether the class declares a private writeObject(ObjectOutputStream)
+- If not present: default serialization runs automatically
+- If present: your writeObject is called instead
+
+A crucial point: inside writeObject, Java does not automatically write the normal fields unless you ask for it.
+This is why this call exists:
+```java
+out.defaultWriteObject();
+```
+
+defaultWriteObject() means: “serialize the object’s normal serializable fields using the default mechanism.”
+After that, you may write extra data in any format you want.
+
+### 4.8.5 Typical Pattern and the Write/Read Order Rule
+The typical pattern is to keep default serialization and then extend it.
+The order of reads MUST match the order of writes.
 
 ```java
-boolean notExists = Files.notExists(p);
+private void writeObject(ObjectOutputStream out) throws IOException {
+out.defaultWriteObject(); // writes normal fields
+out.writeInt(42); // writes extra custom data
+}
+
+private void readObject(ObjectInputStream in)
+throws IOException, ClassNotFoundException {
+
+in.defaultReadObject();         // reads normal fields
+int x = in.readInt();           // reads extra custom data in same order
+
+
+}
 ```
 
 > [!NOTE]
-> exists() and notExists() can both be false if the status cannot be determined (for example due to permissions).
-> This is a common exam trap.
+> If you write extra values (ints/strings/etc.), you must read them back in the same sequence.
+> Otherwise deserialization will fail or restore corrupted state.
 
-Files.exists can also be configured to not follow symbolic links.
-
-```java
-Files.exists(p, LinkOption.NOFOLLOW_LINKS);
-```
-
-| Goal | Legacy | (File) | Modern | (Files) | Key | detail |
-| --- | --- | --- | --- | --- | --- | --- |
-| Check | existence | exists() | exists() | / | notExists() | notExists may be false when unknown |
-| Check | read/write | canRead/canWrite | isReadable/isWritable | Files | can | specify NOFOLLOW_LINKS |
-| Error | details | Not | available | Exceptions | available | in other ops Checks still return boolean |
-
-### 9.3.2 Creating Files and Directories
-
-Creation is a major weakness of legacy File.
-Legacy often uses createNewFile() and mkdir/mkdirs(), which return boolean and provide little diagnostic information.
-
-### Legacy API (File)
+### 4.8.6 Example Use Case: Restoring a transient Derived Field
+A classic use case is recomputing a transient cached value after deserialization.
 
 ```java
-File f = new File("a.txt");
-boolean created = f.createNewFile(); // may throw IOException
+class User implements Serializable {
+private static final long serialVersionUID = 1L;
 
-File dir = new File("dir");
-boolean ok1 = dir.mkdir();
-boolean ok2 = new File("a/b/c").mkdirs();
+private String firstName;
+private String lastName;
+
+private transient String fullName;
+
+User(String firstName, String lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.fullName = firstName + " " + lastName;
+}
+
+private void readObject(ObjectInputStream in)
+        throws IOException, ClassNotFoundException {
+
+    in.defaultReadObject(); // restore firstName and lastName
+    fullName = firstName + " " + lastName; // recompute transient field
+}
+
+
+}
 ```
 
-mkdir() creates only one directory level, mkdirs() creates parents too.
-Both return false on failure but do not tell you why.
+### 4.9 Constructors and Serialization (Including Inheritance)
+Constructor behavior during serialization and deserialization is a frequent source of confusion.
+Java serialization restores object state primarily from the byte stream, not by running constructors.
 
-### Modern API (Files)
-
-```java
-Path file = Path.of("a.txt");
-Files.createFile(file);
-
-Path dir1 = Path.of("dir");
-Files.createDirectory(dir1);
-
-Path dirDeep = Path.of("a/b/c");
-Files.createDirectories(dirDeep);
-```
+### 4.9.1 Rule: Constructors of Serializable Classes Are Not Called
+During deserialization of a Serializable class, the constructors of that class are NOT executed.
+The instance is created without calling those constructors, and field values are injected from the stream.
 
 > [!NOTE]
-> Files.createFile throws FileAlreadyExistsException if the file exists.
-> This is often preferred over boolean checks because it is race-safe.
+> This is why constructors of Serializable classes must not contain essential initialization logic.
+> That initialization would not run during deserialization.
 
-| Goal | Legacy | (File) | Modern | (Files) | Key | detail |
-| --- | --- | --- | --- | --- | --- | --- |
-| Create | file | createNewFile() | createFile() | NIO | throws | FileAlreadyExistsException |
-| Create | directory | mkdir() | createDirectory() | NIO | throws | detailed exceptions |
-| Create | parents | mkdirs() | createDirectories() | Atomicity | is | not guaranteed for deep creation |
+### 4.9.2 Inheritance Rule: The First Non-Serializable Superclass Constructor Is Called
+When a Serializable class has a non-Serializable superclass, deserialization must still initialize that superclass part.
+Therefore, Java calls the no-argument constructor of the first non-Serializable superclass.
 
-### 9.3.3 Deleting Files and Directories
+Important implications:
+- the non-Serializable superclass must have an accessible no-arg constructor
+- serializable subclasses skip constructors, but non-serializable superclasses do not
 
-Deletion semantics differ strongly between legacy and NIO.2.
-Legacy delete() returns boolean; NIO.2 offers methods that throw meaningful exceptions.
+### 4.9.3 Summary Table: Which Constructors Run
 
-### Legacy API (File)
+| Class type Constructor called during deserialization |
+| --- |
+| Serializable class No |
+| Serializable subclass No |
+| First non-Serializable superclass Yes (no-arg constructor) |
+| Externalizable class Yes (public no-arg constructor required) |
 
-```java
-File f = new File("a.txt");
-boolean deleted = f.delete();
-```
-
-If deletion fails (permission denied, file does not exist, directory not empty), delete() usually returns false without explanation.
-
-### Modern API (Files)
+### 4.10 Worked Example: Which Constructors Are Called
+This example prints which constructors run during normal construction and during deserialization.
 
 ```java
-Files.delete(Path.of("a.txt"));
-```
+import java.io.*;
 
-If you want "delete if present" semantics, use deleteIfExists().
+class A {
+A() {
+System.out.println("A constructor");
+}
+}
 
-```java
-Files.deleteIfExists(Path.of("a.txt"));
-```
+class B extends A implements Serializable {
+private static final long serialVersionUID = 1L;
 
-| Goal | Legacy | (File) | Modern | (Files) | Key | detail |
-| --- | --- | --- | --- | --- | --- | --- |
-| Delete | delete() | delete() | Files | throws | exception | with reason |
-| Delete | if | present | Manual | exists() | check | deleteIfExists() Avoids TOCTOU check-then-act pattern |
+B() {
+    System.out.println("B constructor");
+}
 
-### 9.3.4 Copying Files and Directories
 
-Legacy copying typically requires manually reading and writing bytes via streams.
-NIO.2 provides high-level copy operations with options.
+}
 
-### Legacy technique (manual streams)
+class C extends B {
+private static final long serialVersionUID = 1L;
 
-```java
-try (InputStream in = new FileInputStream("src.bin");
-OutputStream out = new FileOutputStream("dst.bin")) {
+C() {
+    System.out.println("C constructor");
+}
 
-byte[] buf = new byte[8192];
-int n;
-while ((n = in.read(buf)) != -1) {
-    out.write(buf, 0, n);
+
+}
+
+public class Demo {
+public static void main(String[] args) throws Exception {
+C obj = new C();
+
+    try (ObjectOutputStream out =
+             new ObjectOutputStream(new FileOutputStream("c.bin"))) {
+        out.writeObject(obj);
+    }
+
+    try (ObjectInputStream in =
+             new ObjectInputStream(new FileInputStream("c.bin"))) {
+        Object restored = in.readObject();
+    }
 }
 
 
 }
 ```
 
-This is verbose and easy to get wrong (missing buffering, missing close, etc.).
-
-### Modern API (Files.copy)
-
-```java
-Files.copy(Path.of("src.bin"), Path.of("dst.bin"));
+### 4.10.1 Expected Output and Explanation
+During normal construction (new C()):
+```text
+A constructor
+B constructor
+C constructor
 ```
 
-Copy behavior can be controlled with options.
-
-```java
-Files.copy(
-Path.of("src.bin"),
-Path.of("dst.bin"),
-StandardCopyOption.REPLACE_EXISTING,
-StandardCopyOption.COPY_ATTRIBUTES
-);
+During deserialization (readObject):
+```text
+A constructor
 ```
+
+Explanation:
+- C is Serializable, so C() is not called during deserialization
+- B is Serializable, so B() is not called during deserialization
+- A is not Serializable, so A() is called (no-arg constructor)
+- Fields of B and C are restored from the stream instead of constructors running
 
 > [!NOTE]
-> Files.copy throws FileAlreadyExistsException by default.
-> Use REPLACE_EXISTING when overwriting is intended.
-
-| Goal | Legacy | approach | Modern | (Files) | Key | detail |
-| --- | --- | --- | --- | --- | --- | --- |
-| Copy | file | Manual | streams | Files.copy | Options: | REPLACE_EXISTING, COPY_ATTRIBUTES |
-| Copy | stream | Streams | Files.copy(InputStream, | Path, | ...) | Useful for uploads/downloads |
-| Copy | directory | Manual | recursion | Walk | tree | + copy No single one-liner for full tree copy |
-
-### 9.3.5 Moving and Renaming
-
-Renaming in legacy code typically uses File.renameTo(), which is notoriously unreliable and platform-dependent.
-NIO.2 provides Files.move() with explicit semantics and options.
-
-### Legacy API
-
-```java
-boolean ok = new File("a.txt").renameTo(new File("b.txt"));
-```
-
-renameTo() returns false on failure and does not explain why.
-It may also fail unexpectedly across filesystems.
-
-### Modern API
-
-```java
-Files.move(Path.of("a.txt"), Path.of("b.txt"));
-```
-
-Move options provide precise behavior.
-
-```java
-Files.move(
-Path.of("a.txt"),
-Path.of("b.txt"),
-StandardCopyOption.REPLACE_EXISTING,
-StandardCopyOption.ATOMIC_MOVE
-);
-```
-
-> [!NOTE]
-> ATOMIC_MOVE is only guaranteed when the move occurs within the same filesystem.
-> Otherwise an exception is thrown.
-
-| Goal | Legacy | (File) | Modern | (Files) | Key | detail |
-| --- | --- | --- | --- | --- | --- | --- |
-| Rename/move | renameTo() | move() | Files | gives | exceptions | + options |
-| Atomic | move | No | move(..., | ATOMIC_MOVE) | Only | within same filesystem |
-| Replace | existing | Not | explicit | REPLACE_EXISTING | Makes | intent explicit |
-
-### 9.3.6 Reading and Writing Text and Bytes (Files Enhancements)
-
-A major enhancement of NIO.2 is the Files utility class, which provides high-level methods for common reading and writing tasks.
-These methods reduce boilerplate and improve correctness.
-
-### Legacy text reading/writing
-
-```java
-try (BufferedReader r = new BufferedReader(new FileReader("file.txt"))) {
-String line = r.readLine();
-}
-```
-
-```java
-try (BufferedWriter w = new BufferedWriter(new FileWriter("file.txt"))) {
-w.write("hello");
-}
-```
-
-These legacy classes typically use the platform default charset unless you explicitly bridge with InputStreamReader/OutputStreamWriter.
-
-### Modern text reading/writing
-
-```java
-List<String> lines = Files.readAllLines(Path.of("file.txt"), StandardCharsets.UTF_8);
-Files.write(Path.of("file.txt"), lines, StandardCharsets.UTF_8);
-```
-
-### Modern binary reading/writing
-
-```java
-byte[] data = Files.readAllBytes(Path.of("data.bin"));
-Files.write(Path.of("out.bin"), data);
-```
-
-> [!NOTE]
-> readAllBytes and readAllLines load the entire file into memory.
-> For large files, prefer streaming APIs such as newBufferedReader or newInputStream.
-
-| Task | Legacy | method | NIO.2 | Files | method | Key | detail |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Read | all | bytes | Manual | stream | loop | readAllBytes() | Loads whole file into memory |
-| Read | all | lines | BufferedReader | loop | readAllLines() | Loads | whole file into memory |
-| Write | bytes | OutputStream | write(Path, | byte[]) | Simple | and | concise |
-| Write | lines | BufferedWriter | loop | write(Path, | Iterable, | ...) | Charset can be specified |
-| Append | text | FileWriter(true) | write(..., | APPEND) | Options | make | intent explicit |
-
-### 9.3.7 newInputStream/newOutputStream and newBufferedReader/newBufferedWriter
-
-These factory methods create stream/reader instances from a Path.
-They are the recommended bridge between classic streaming and NIO.2 path handling.
-
-```java
-try (InputStream in = Files.newInputStream(Path.of("a.bin"))) { }
-try (OutputStream out = Files.newOutputStream(Path.of("b.bin"))) { }
-```
-
-```java
-try (BufferedReader r = Files.newBufferedReader(Path.of("t.txt"), StandardCharsets.UTF_8)) { }
-try (BufferedWriter w = Files.newBufferedWriter(Path.of("t.txt"), StandardCharsets.UTF_8)) { }
-```
-
-### 9.3.8 Listing Directories and Traversing Trees
-
-Legacy directory listing is based on File.list() and File.listFiles().
-These methods return arrays and provide limited error reporting.
-
-### Legacy listing
-
-```java
-File dir = new File(".");
-File[] children = dir.listFiles();
-```
-
-NIO.2 provides multiple approaches depending on needs.
-
-### Modern listing (DirectoryStream)
-
-```java
-try (DirectoryStream<Path> ds = Files.newDirectoryStream(Path.of("."))) {
-for (Path p : ds) {
-System.out.println(p);
-}
-}
-```
-
-### Modern walking (Files.walk)
-
-```java
-Files.walk(Path.of("."))
-.filter(Files::isRegularFile)
-.forEach(System.out::println);
-```
-
-> [!NOTE]
-> Files.walk returns a Stream that must be closed.
-> Prefer try-with-resources when using it.
-
-```java
-try (Stream<Path> s = Files.walk(Path.of("."))) {
-s.forEach(System.out::println);
-}
-```
-
-### Modern traversal with FileVisitor
-
-For full control (skip subtrees, handle errors, follow links), use walkFileTree + FileVisitor.
-
-```java
-Files.walkFileTree(Path.of("."), new SimpleFileVisitor<>() {
-@Override
-public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-System.out.println(file);
-return FileVisitResult.CONTINUE;
-}
-});
-```
-
-| Goal | Legacy | Modern | Key | detail |
-| --- | --- | --- | --- | --- |
-| List | directory | list/listFiles | newDirectoryStream | Lazy, must be closed |
-| Walk | tree | (simple) | Manual | recursion walk() Stream must be closed |
-| Walk | tree | (control) | Manual | recursion walkFileTree() Error handling + pruning |
-
-### 9.3.9 Searching and Filtering
-
-Searching is typically implemented by traversing and filtering.
-NIO.2 provides convenient building blocks: glob patterns, streams, and visitors.
-
-```java
-try (DirectoryStream<Path> ds =
-Files.newDirectoryStream(Path.of("."), "*.txt")) {
-for (Path p : ds) {
-System.out.println(p);
-}
-}
-```
-
-```java
-try (Stream<Path> s = Files.find(Path.of("."), 10,
-(p, a) -> a.isRegularFile() && p.toString().endsWith(".log"))) {
-s.forEach(System.out::println);
-}
-```
-
-### 9.3.10 Attributes: Reading, Writing, and Views
-
-Legacy File exposes only a few attributes (size, lastModified).
-NIO.2 supports rich metadata via attribute views.
-
-### Legacy attributes
-
-```java
-long size = new File("a.txt").length();
-long lm = new File("a.txt").lastModified();
-```
-
-### Modern attributes
-
-```java
-BasicFileAttributes a =
-Files.readAttributes(Path.of("a.txt"), BasicFileAttributes.class);
-
-long size = a.size();
-FileTime modified = a.lastModifiedTime();
-```
-
-You can also access attributes using string-based names.
-
-```java
-Object v = Files.getAttribute(Path.of("a.txt"), "basic:size");
-Files.setAttribute(Path.of("a.txt"), "basic:lastModifiedTime", FileTime.fromMillis(0));
-```
-
-> [!NOTE]
-> Attribute views are filesystem-dependent.
-> Unsupported attributes cause exceptions.
-
-### 9.3.11 Symbolic Links and Link Following
-
-NIO.2 can explicitly detect and read symbolic links.
-This is critical for correct filesystem traversal and security.
-
-```java
-Path link = Path.of("mylink");
-boolean isLink = Files.isSymbolicLink(link);
-
-if (isLink) {
-Path target = Files.readSymbolicLink(link);
-}
-```
-
-Many methods follow links by default.
-To prevent this, pass LinkOption.NOFOLLOW_LINKS when supported.
-
-### 9.3.12 Summary: Why Files Is an Enhancement
-
-The Files utility class improves filesystem programming by:
-- reducing boilerplate (copy/move/read/write)
-- providing explicit options (overwrite, atomic move, follow links)
-- offering richer metadata (attributes/views)
-- supporting scalable traversal and searching
-
-Legacy APIs remain mostly for backward compatibility or when required by old libraries.
+> If the first non-Serializable superclass has no accessible no-arg constructor, deserialization fails.
+> This is a classic certification trap.
