@@ -223,7 +223,8 @@ All input streams read raw bytes (8-bit values) from a source such as a file, ne
 >
 > They suspend the calling thread until data is available, end-of-stream is reached, or an I/O error occurs.
 
-The single-byte read() method is primarily a low-level primitive.
+The `single-byte read()` method is primarily a low-level primitive.
+
 In practice, reading one byte at a time is inefficient and should almost always be avoided in favor of buffered reads.
 
 #### 4.1.2 Typical Usage Example
@@ -241,20 +242,22 @@ try (InputStream in = new FileInputStream("data.bin")) {
 ### 4.2 OutputStream
 
 Abstract base class for byte-oriented output.
+
 It represents a destination where raw bytes can be written.
 
 #### 4.2.1 Key Methods
 
 | Method | Description |
 |--------|-------------|
-| void write(int b)	|	Writes the low 8 bits of the integer |
-| void write(byte[])	|	Writes an entire byte array |
-| void write(byte[], int, int)	|	Writes a slice of a byte array |
-| void flush()	|	Forces buffered data to be written |
-| void close()	|	Flushes and releases the resource |
+| void `write(int b)`	|	Writes the low 8 bits of the integer |
+| void `write(byte[])`	|	Writes an entire byte array |
+| void `write(byte[], int, int)`	|	Writes a slice of a byte array |
+| void `flush()`	|	Forces buffered data to be written |
+| void `close()`	|	Flushes and releases the resource |
 
 > [!NOTE]
-> Calling close() implicitly calls flush().
+> Calling `close()` implicitly calls `flush()`.
+>
 > Failing to flush or close an OutputStream may result in data loss.
 
 #### 4.2.2 Typical Usage Example
@@ -268,15 +271,17 @@ try (OutputStream out = new FileOutputStream("out.bin")) {
 
 ### 4.3 Reader and Writer
 
-Reader and Writer are the character-oriented counterparts of InputStream and OutputStream.
+`Reader` and `Writer` are the `character-oriented` counterparts of InputStream and OutputStream.
+
 They operate on 16-bit Unicode characters instead of raw bytes.
 
 | Class | Direction | Character-based | Encoding aware |
 |-------|-----------|-----------------|----------------|
-| Reader | Input | Yes | Yes |
-| Writer | Output | Yes | Yes |
+| `Reader` | Input | Yes | Yes |
+| `Writer` | Output | Yes | Yes |
 
-Readers and Writers always involve a charset, either explicitly or implicitly.
+Readers and Writers always involve a `charset`, either explicitly or implicitly.
+
 This makes them the correct abstraction for text processing.
 
 #### 4.3.1 Charset Handling
@@ -289,35 +294,38 @@ Reader reader = new InputStreamReader(
 ```
 
 > [!NOTE]
-> InputStreamReader and OutputStreamWriter are bridge classes.
-> They convert between byte streams and character streams using a charset.
+> `InputStreamReader` and `OutputStreamWriter` are bridge classes.
+> 
+> They convert between `byte streams` and `character streams` using a `charset`.
 
 ## 4.4 Buffered Streams and Performance
 
-Buffered streams wrap another stream and add an in-memory buffer.
+`Buffered streams` wrap another stream and add an in-memory buffer.
+
 Instead of interacting with the operating system on every read or write, data is accumulated in memory and transferred in larger chunks.
 
 - BufferedInputStream / BufferedOutputStream for byte streams
 - BufferedReader / BufferedWriter for character streams
 
 > [!NOTE]
-> Buffered streams are decorators: they do not replace the underlying stream,
-> they enhance it by adding buffering behavior.
+> Buffered streams are `decorators`: they do not replace the underlying stream, they enhance it by adding buffering behavior.
 
 ### 4.4.1 Why Buffering Matters
 
 | Aspect | Unbuffered | Buffered |
 |--------|------------|----------|
-| System calls | Frequent | Reduced |
-| Performance | Poor | High |
-| Memory usage | Minimal | Slightly higher |
+| `System calls` | Frequent | Reduced |
+| `Performance` | Poor | High |
+| `Memory usage` | Minimal | Slightly higher |
 
 System calls are expensive operations.
+
 Buffering minimizes them by grouping multiple logical reads or writes into fewer physical I/O operations.
 
 ### 4.4.2 How Unbuffered Reading Works
 
 In an unbuffered stream, each call to read() may result in a native system call.
+
 This is especially inefficient when reading small amounts of data.
 
 ```java
@@ -335,7 +343,8 @@ try (InputStream in = new FileInputStream("data.bin")) {
 ### 4.4.3 How BufferedInputStream Works
 
 BufferedInputStream internally reads a large block of bytes into a buffer.
-Subsequent read() calls are served directly from memory until the buffer is empty.
+
+Subsequent `read()` calls are served directly from memory until the buffer is empty.
 
 ```java
 try (InputStream in =
@@ -348,13 +357,13 @@ try (InputStream in =
 ```
 
 > [!NOTE]
-> The program still calls read() repeatedly,
-> but the operating system is accessed only when the internal buffer needs refilling.
+> The program still calls `read()` repeatedly, but the operating system is accessed only when the internal buffer needs refilling.
 
 ### 4.4.4 Buffered Output Example
 
 Buffered output accumulates data in memory and writes it in larger chunks.
-The flush() operation forces the buffer to be written immediately.
+
+The `flush()` operation forces the buffer to be written immediately.
 
 ```java
 try (OutputStream out =
@@ -367,12 +376,14 @@ try (OutputStream out =
 ```
 
 > [!NOTE]
-> close() automatically calls flush().
-> Calling flush() explicitly is useful when data must be visible immediately.
+> `close()` automatically calls flush().
+>
+> Calling `flush()` explicitly is useful when data must be visible immediately.
 
 ### 4.4.5 BufferedReader vs Reader
 
-BufferedReader adds efficient line-based reading on top of a Reader.
+`BufferedReader` adds efficient `**line-based reading**` on top of a Reader.
+
 Without buffering, each character read may involve a system call.
 
 ```java
@@ -387,8 +398,7 @@ try (BufferedReader reader =
 ```
 
 > [!NOTE]
-> The readLine() method is only available on BufferedReader,
-> because it relies on buffering to efficiently detect line boundaries.
+> The `readLine()` method is only available on BufferedReader, because it relies on buffering to efficiently detect line boundaries.
 
 ### 4.4.6 BufferedWriter Example
 
@@ -402,7 +412,7 @@ try (BufferedWriter writer =
 }
 ```
 
-BufferedWriter minimizes disk access and provides convenience methods such as newLine().
+`BufferedWriter` minimizes disk access and provides convenience methods such as newLine().
 
 > [!NOTE]
 > Always wrap file streams with buffering unless there is a strong reason not to
@@ -415,64 +425,63 @@ BufferedWriter minimizes disk access and provides convenience methods such as ne
 
 Modern Java applications increasingly favor NIO and NIO.2 APIs, but java.io remains fundamental and widely used.
 
-## 6.1 Conceptual Differences
+### 5.1 Conceptual Differences
 
-| Aspect java.io java.nio / nio.2 |
-| --- |
-| Programming model Stream-based Buffer / Channel-based |
-| Blocking I/O blocking by default Non-blocking capable |
-| File API File Path + Files |
-| Scalability Limited High |
-| Introduced Java 1.0 Java 4 / Java 7 |
+| Aspect | java.io | java.nio / nio.2 |
+|--------|---------|------------------|
+| `Programming model` | Stream-based | Buffer / Channel-based |
+| `Blocking I/O` | blocking by default | Non-blocking capable |
+| `File API` | File | Path + Files |
+| `Scalability` | Limited | High |
+| `Introduced` | Java 1.0 | Java 4 / Java 7 |
 
 > [!NOTE]
-> java.nio does not replace java.io.
+> `java.nio` does not replace `java.io`.
+>
 > Many NIO classes internally rely on streams or coexist with them.
 
-## 6.2 java.nio.file (Modern File I/O)
+### 5.2 java.nio.file (Modern File I/O)
 
 The java.nio.file package (NIO.2) provides a high-level, expressive, and safer file API.
 It is the preferred approach for file operations in Java 11+.
 
-### Example: Reading a File (NIO)
+Example: Reading a File (NIO)
 
 ```java
 Path path = Path.of("file.txt");
 List<String> lines = Files.readAllLines(path);
 ```
 
-### Equivalent java.io Code
+Equivalent java.io Code
 
 ```java
 try (BufferedReader reader = new BufferedReader(new FileReader("file.txt"))) {
-String line;
-while ((line = reader.readLine()) != null) {
-System.out.println(line);
-}
+	String line;
+	while ((line = reader.readLine()) != null) {
+		System.out.println(line);
+	}
 }
 ```
 
-# 7. When to Use Which API (Exam Perspective)
+## 6. When to Use Which API
 
-| Scenario Recommended API |
-| --- |
-| Simple file read/write java.nio.file.Files |
-| Binary streaming InputStream / OutputStream |
-| Character text processing Reader / Writer |
-| High-performance servers java.nio.channels |
-| Legacy APIs java.io |
+| Scenario | Recommended API |
+|----------|-----------------|
+| `Simple file read/write` | java.nio.file.Files |
+| `Binary streaming` | InputStream / OutputStream |
+| `Character text processing` | Reader / Writer |
+| `High-performance servers` | java.nio.channels |
+| `Legacy APIs` | java.io |
 
-For certification exams, always favor clarity and intent:
-Files for files, streams for streaming, readers/writers for text.
 
 # 8. Common Traps and Tips
 
 - End-of-file is indicated by -1, not by an exception
 - Closing a wrapper stream closes the wrapped stream automatically
-- BufferedReader.readLine() strips line separators
-- InputStreamReader always involves a charset
+- `BufferedReader.readLine()` strips line separators
+- `InputStreamReader` always involves a charset
 - Files utility methods throw checked IOException
-- available() must not be used to detect EOF
+- `available()` must not be used to detect EOF
 
 > [!NOTE]
 > Most I/O bugs come from incorrect assumptions about blocking, buffering, or character encoding.
