@@ -418,7 +418,7 @@ boolean notExists = Files.notExists(p);
 
 This does not make the check more accurate — it merely makes the uncertainty explicit.
 
-**Symbolic Link Awareness** (Real Improvement)
+##### 3.1.2.1 Symbolic Link Awareness (Real Improvement)
 
 One genuine enhancement of NIO.2 is control over symbolic link handling:
 
@@ -434,7 +434,7 @@ Legacy File cannot reliably distinguish:
 
 NIO.2 allows link-aware checks and explicit link inspection.
 
-**Correct Usage Pattern** (Critical)
+##### 3.1.2.2 Correct Usage Pattern (Critical)
 
 Neither API provides reliable diagnostics through boolean checks alone.
 
