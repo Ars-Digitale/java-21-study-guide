@@ -1,6 +1,6 @@
 # Java I/O APIs (Legacy and NIO)
 
-## 1. Legacy java.io — Design, Behavior, and Subtleties
+## 1. Legacy `java.io` — Design, Behavior, and Subtleties
 
 The legacy `java.io` API is the original I/O abstraction introduced in Java 1.0.
 
