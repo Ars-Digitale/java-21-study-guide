@@ -1,128 +1,177 @@
-## 4.4 Buffered Streams and Performance
+## 9.2 java.nio — Buffers, Channels, and Non-Blocking I/O
 
-Buffered streams wrap another stream and add an in-memory buffer.
-Instead of interacting with the operating system on every read or write, data is accumulated in memory and transferred in larger chunks.
+The java.nio API (New I/O) was introduced to address limitations of legacy java.io.
+It provides a lower-level, more explicit model of I/O that maps closely to modern operating systems.
 
-- BufferedInputStream / BufferedOutputStream for byte streams
-- BufferedReader / BufferedWriter for character streams
+At its core, java.nio is built around three concepts:
+- Buffers — explicit memory containers
+- Channels — bidirectional data connections
+- Selectors — multiplexing non-blocking I/O
 
-> [!NOTE]
-> Buffered streams are decorators: they do not replace the underlying stream,
-> they enhance it by adding buffering behavior.
+### 9.2.1 From Streams to Buffers: A Conceptual Shift
 
-### 4.4.1 Why Buffering Matters
+Legacy streams hide memory management from the programmer.
+In contrast, NIO makes memory explicit through buffers.
 
-| Aspect Unbuffered Buffered |
-| --- |
-| System calls Frequent Reduced |
-| Performance Poor High |
-| Memory usage Minimal Slightly higher |
+| Aspect | java.io | java.nio |
+| --- | --- | --- |
+| Data | flow | Push-based Pull-based |
+| Memory | Hidden | Explicit |
+| Control | Simple | More granular |
 
-System calls are expensive operations.
-Buffering minimizes them by grouping multiple logical reads or writes into fewer physical I/O operations.
+With NIO, the application controls when data is read into memory and how it is consumed.
 
-### 4.4.2 How Unbuffered Reading Works
+### 9.2.2 Buffers: Purpose and Structure
 
-In an unbuffered stream, each call to read() may result in a native system call.
-This is especially inefficient when reading small amounts of data.
+A buffer is a fixed-size, typed container for data.
+All NIO I/O operations read from or write to buffers.
+
+The most common buffer is ByteBuffer.
 
 ```java
-try (InputStream in = new FileInputStream("data.bin")) {
-int b;
-while ((b = in.read()) != -1) {
-// each read() may trigger a system call
+ByteBuffer buffer = ByteBuffer.allocate(1024);
+```
+
+| Property | Meaning |
+| --- | --- |
+| capacity | Total size of the buffer |
+| position | Current read/write index |
+| limit | Boundary of readable or writable data |
+
+### 9.2.3 Buffer Lifecycle: Write → Flip → Read
+
+Buffers have a strict usage lifecycle.
+Misunderstanding it is a common source of bugs.
+
+Typical sequence:
+- Write data into the buffer
+- flip() to switch to read mode
+- Read data from the buffer
+- clear() or compact() to reuse
+
+```java
+ByteBuffer buffer = ByteBuffer.allocate(16);
+
+buffer.put((byte) 1);
+buffer.put((byte) 2);
+
+buffer.flip(); // switch to read mode
+
+while (buffer.hasRemaining()) {
+byte b = buffer.get();
 }
-}
+
+buffer.clear(); // ready for writing again
 ```
 
 > [!NOTE]
-> Reading byte-by-byte without buffering is almost always a performance anti-pattern.
+> flip() does not erase data.
+> It adjusts position and limit.
 
-### 4.4.3 How BufferedInputStream Works
+### 9.2.4 clear() vs compact()
 
-BufferedInputStream internally reads a large block of bytes into a buffer.
-Subsequent read() calls are served directly from memory until the buffer is empty.
+After reading, a buffer can be reused in two ways.
 
-```java
-try (InputStream in =
-new BufferedInputStream(new FileInputStream("data.bin"))) {
+| Method | Behavior |
+| --- | --- |
+| clear() | Discards unread data |
+| compact() | Preserves unread data |
 
-int b;
-while ((b = in.read()) != -1) {
-    // most reads are served from memory, not the OS
-}
+compact() is useful in streaming protocols where partial messages may remain in the buffer.
 
+### 9.2.5 Heap Buffers vs Direct Buffers
 
-}
-```
-
-The program still calls read() repeatedly,
-but the operating system is accessed only when the internal buffer needs refilling.
-
-### 4.4.4 Buffered Output Example
-
-Buffered output accumulates data in memory and writes it in larger chunks.
-The flush() operation forces the buffer to be written immediately.
+Buffers can be allocated in two different memory regions.
 
 ```java
-try (OutputStream out =
-new BufferedOutputStream(new FileOutputStream("out.bin"))) {
-
-for (int i = 0; i < 1_000; i++) {
-    out.write(i);
-}
-out.flush(); // forces buffered data to disk
-
-
-}
+ByteBuffer heap = ByteBuffer.allocate(1024);
+ByteBuffer direct = ByteBuffer.allocateDirect(1024);
 ```
+
+| Type | Memory | location | Characteristics |
+| --- | --- | --- | --- |
+| Heap | buffer | JVM | heap Garbage collected |
+| Direct | buffer | Native | memory Faster I/O, costly allocation |
 
 > [!NOTE]
-> close() automatically calls flush().
-> Calling flush() explicitly is useful when data must be visible immediately.
+> Direct buffers reduce copying between JVM and OS
+> but must be used carefully to avoid memory pressure.
 
-### 4.4.5 BufferedReader vs Reader
+### 9.2.6 Channels: What They Are
 
-BufferedReader adds efficient line-based reading on top of a Reader.
-Without buffering, each character read may involve a system call.
+A channel represents a connection to an I/O entity
+such as a file, socket, or device.
+
+Unlike streams, channels are bidirectional.
+
+| Channel | type | Purpose |
+| --- | --- | --- |
+| FileChannel | File | I/O |
+| SocketChannel | TCP | sockets |
+| DatagramChannel | UDP |
 
 ```java
-try (BufferedReader reader =
-new BufferedReader(new FileReader("file.txt"))) {
+try (FileChannel channel =
+FileChannel.open(Path.of("file.txt"))) {
 
-String line;
-while ((line = reader.readLine()) != null) {
-    System.out.println(line);
-}
+ByteBuffer buffer = ByteBuffer.allocate(128);
+channel.read(buffer);
 
 
 }
 ```
 
-The readLine() method is only available on BufferedReader,
-because it relies on buffering to efficiently detect line boundaries.
+### 9.2.7 Blocking vs Non-Blocking Channels
 
-### 4.4.6 BufferedWriter Example
+Channels can operate in blocking or non-blocking mode.
 
 ```java
-try (BufferedWriter writer =
-new BufferedWriter(new FileWriter("file.txt"))) {
-
-writer.write("Hello");
-writer.newLine();
-writer.write("World");
-
-
-}
+SocketChannel channel = SocketChannel.open();
+channel.configureBlocking(false);
 ```
 
-BufferedWriter minimizes disk access and provides convenience methods such as newLine().
+In non-blocking mode:
+- read() may return immediately with 0 bytes
+- write() may write only part of the data
 
 > [!NOTE]
-> For exams and real applications:
-> 
-> Always wrap file streams with buffering unless there is a strong reason not to
-> 
-> Prefer BufferedReader / BufferedWriter for text
-> 
-> Prefer BufferedInputStream / BufferedOutputStream for binary data
+> Non-blocking I/O shifts complexity from the OS to the application.
+
+### 9.2.8 Scatter/Gather I/O
+
+NIO supports reading into or writing from multiple buffers in a single operation.
+
+```java
+ByteBuffer header = ByteBuffer.allocate(128);
+ByteBuffer body = ByteBuffer.allocate(1024);
+
+ByteBuffer[] buffers = { header, body };
+channel.read(buffers);
+```
+
+This is useful for structured protocols (headers + payload).
+
+### 9.2.9 Selectors: Multiplexing Non-Blocking I/O
+
+Selectors allow a single thread to monitor multiple channels.
+
+They are the foundation of scalable servers.
+
+| Component | Role |
+| --- | --- |
+| Selector | Monitors channels |
+| SelectionKey | Represents channel state |
+| Interest | set Operations of interest |
+
+> [!NOTE]
+> Selectors are advanced and rarely required in exams,
+> but understanding their purpose is important.
+
+### 9.2.10 When to Use java.nio
+
+NIO is appropriate when:
+- High concurrency is required
+- You need fine-grained memory control
+- You are implementing protocols or servers
+
+For simple file operations, java.nio.file.Files is usually sufficient.

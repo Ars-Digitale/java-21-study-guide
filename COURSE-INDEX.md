@@ -46,3 +46,4 @@
 	- [Files and Paths Fundamentals](docs/module-08/files-path.md)
 	- [Files and Paths APIs](docs/module-08/files-path-api.md)		
 	- [Java I/O Streams](docs/module-08/io-streams.md)
+	- [I/O Streams APIs](docs/module-08/io-streams-api.md)

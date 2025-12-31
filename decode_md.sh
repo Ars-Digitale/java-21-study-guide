@@ -24,8 +24,25 @@ fi
 awk '
 function trim(s){ sub(/^[ \t\r\n]+/,"",s); sub(/[ \t\r\n]+$/,"",s); return s }
 
-function emit_row(line,   n,i,out,cell) {
-  n = split(line, cell, "\t")
+# Split a row using tabs if present, otherwise spaces.
+# If expected > 0 and we get too many tokens, merge extras into the last cell.
+function split_row(line, arr, expected,   n,i,tmp) {
+  n = split(line, arr, "\t")
+  if (n == 1) {
+    n = split(trim(line), arr, /[ ]+/)
+  }
+  if (expected > 0 && n > expected) {
+    tmp = arr[expected]
+    for (i = expected + 1; i <= n; i++) tmp = tmp " " arr[i]
+    for (i = expected + 1; i <= n; i++) delete arr[i]
+    arr[expected] = tmp
+    n = expected
+  }
+  return n
+}
+
+function emit_row(line, expected,   n,i,out,cell) {
+  n = split_row(line, cell, expected)
   out="|"
   for(i=1;i<=n;i++) out = out " " trim(cell[i]) " |"
   print out
@@ -37,18 +54,19 @@ function emit_sep(n,   i,out) {
   print out
 }
 
-BEGIN { in_note=0; in_table=0; table_rows=0 }
+BEGIN { in_note=0; in_table=0; table_rows=0; expected_cols=0 }
 
 {
   if ($0 ~ /^@@NOTE@@/) { in_note=1; next }
   if ($0 ~ /^@@NOTE_END@@/) { in_note=0; next }
 
-  if ($0 ~ /^@@TABLE@@/) { in_table=1; table_rows=0; next }
+  if ($0 ~ /^@@TABLE@@/) { in_table=1; table_rows=0; expected_cols=0; next }
   if ($0 ~ /^@@TABLE_END@@/) {
     if (table_rows >= 1) {
-      n = emit_row(table[1])
-      emit_sep(n)
-      for (r=2; r<=table_rows; r++) emit_row(table[r])
+      # header decides expected column count
+      expected_cols = emit_row(table[1], 0)
+      emit_sep(expected_cols)
+      for (r=2; r<=table_rows; r++) emit_row(table[r], expected_cols)
     }
     delete table
     in_table=0
