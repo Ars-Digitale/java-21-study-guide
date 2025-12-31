@@ -1,292 +1,128 @@
-## Managing Files and Directories: Create, Copy, Move, Replace, Compare, Delete (Legacy vs NIO)
+## 4.4 Buffered Streams and Performance
 
-This section covers the operations you perform on filesystem entries (files/directories): creating, copying, moving/renaming, replacing, comparing, and deleting. It contrasts legacy `java.io.File` (and related legacy helpers) with modern `java.nio.file` (NIO.2), emphasizing correctness, exceptions, and certification traps.
+Buffered streams wrap another stream and add an in-memory buffer.
+Instead of interacting with the operating system on every read or write, data is accumulated in memory and transferred in larger chunks.
 
-### 1. Mental Model: “Path/Locator” vs “Operations”
-
-Both APIs use objects that represent a path, but operations differ:
-
-- Legacy: `File` is both a path wrapper and an operations API (mixed responsibility)
-- NIO: `Path` is the path; `Files` performs operations (separation of concerns)
-
-Responsibility	Legacy	NIO
-Path representation	`File`	`Path`
-Filesystem operations	`File`	`Files`
-Rich error reporting	Weak (booleans)	Strong (exceptions)
+- BufferedInputStream / BufferedOutputStream for byte streams
+- BufferedReader / BufferedWriter for character streams
 
 > [!NOTE]
-> For certification: memorize that legacy methods often return `boolean` (silent failure), while NIO throws `IOException` with cause.
+> Buffered streams are decorators: they do not replace the underlying stream,
+> they enhance it by adding buffering behavior.
 
-### 2. Creating Files and Directories
+### 4.4.1 Why Buffering Matters
 
-Creating is where the old API is most awkward and the NIO API is most expressive.
+| Aspect Unbuffered Buffered |
+| --- |
+| System calls Frequent Reduced |
+| Performance Poor High |
+| Memory usage Minimal Slightly higher |
 
-Task	Legacy approach	NIO approach	Notes
-Create empty file	open+close stream	`Files.createFile`	NIO fails if exists
-Create one directory	`mkdir`	`Files.createDirectory`	Parent must exist
-Create directories recursively	`mkdirs`	`Files.createDirectories`	Creates parents
+System calls are expensive operations.
+Buffering minimizes them by grouping multiple logical reads or writes into fewer physical I/O operations.
 
-### 2.1 Create a File
+### 4.4.2 How Unbuffered Reading Works
 
-Legacy has no “create empty file” method, so you typically create a file by opening an output stream (side effect).
-
-```java
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-File f = new File("created-legacy.txt");
-try (FileOutputStream out = new FileOutputStream(f)) {
-// file is created (or truncated) as a side effect
-}
-```
-
-NIO provides an explicit creation method.
+In an unbuffered stream, each call to read() may result in a native system call.
+This is especially inefficient when reading small amounts of data.
 
 ```java
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.io.IOException;
-
-Path p = Path.of("created-nio.txt");
-Files.createFile(p);
-```
-
-> [!NOTE]
-> `Files.createFile` throws `FileAlreadyExistsException` if the entry exists. This is a common exam point.
-
-### 2.2 Create Directories
-
-```java
-import java.io.File;
-
-File dir1 = new File("a/b");
-boolean ok1 = dir1.mkdir(); // fails if parent "a" does not exist
-boolean ok2 = dir1.mkdirs(); // creates parents
-```
-
-```java
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.io.IOException;
-
-Path d = Path.of("a/b");
-Files.createDirectory(d); // parent must exist
-Files.createDirectories(d); // creates parents, ok if already exists
-```
-
-> [!NOTE]
-> Legacy `mkdir()/mkdirs()` return `false` on failure without telling why. NIO throws `IOException`.
-
-### 3. Copying Files and Directories
-
-Legacy copy is usually manual stream-copy (or external libs). NIO has a single, explicit operation.
-
-Capability	Legacy	NIO
-Copy file contents	Manual streams	`Files.copy`
-Copy into existing target	Manual	`REPLACE_EXISTING` option
-Copy directory tree	Manual recursion	Manual recursion (but better tools: `Files.walk` + `Files.copy`)
-
-### 3.1 Copy a File (NIO)
-
-```java
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.io.IOException;
-
-Path src = Path.of("src.txt");
-Path dst = Path.of("dst.txt");
-
-Files.copy(src, dst); // fails if dst exists
-Files.copy(src, dst, StandardCopyOption.REPLACE_EXISTING);
-```
-
-> [!NOTE]
-> `Files.copy` throws `FileAlreadyExistsException` if the target exists and you did not use `REPLACE_EXISTING`.
-
-### 3.2 Manual Copy (Legacy, Stream-Based)
-
-```java
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-try (FileInputStream in = new FileInputStream("src.bin");
-FileOutputStream out = new FileOutputStream("dst.bin")) {
-
-byte[] buf = new byte[8192];
-int n;
-while ((n = in.read(buf)) != -1) {
-out.write(buf, 0, n);
+try (InputStream in = new FileInputStream("data.bin")) {
+int b;
+while ((b = in.read()) != -1) {
+// each read() may trigger a system call
 }
 }
 ```
 
 > [!NOTE]
-> Certification trap: remember `read(byte[])` returns the number of bytes read; you must write only that count, not the full buffer.
+> Reading byte-by-byte without buffering is almost always a performance anti-pattern.
 
-### 4. Moving / Renaming and Replacing
+### 4.4.3 How BufferedInputStream Works
 
-In both APIs, rename/move is “metadata-level” when possible, but can behave like copy+delete across filesystems. NIO makes this explicit via options.
-
-Operation	Legacy	NIO
-Rename/move	`File.renameTo`	`Files.move`
-Replace existing	Unreliable	`REPLACE_EXISTING`
-Atomic move	Not supported	`ATOMIC_MOVE` (if supported)
-
-### 4.1 Legacy Rename (Common Pitfall)
+BufferedInputStream internally reads a large block of bytes into a buffer.
+Subsequent read() calls are served directly from memory until the buffer is empty.
 
 ```java
-import java.io.File;
+try (InputStream in =
+new BufferedInputStream(new FileInputStream("data.bin"))) {
 
-File from = new File("old.txt");
-File to = new File("new.txt");
+int b;
+while ((b = in.read()) != -1) {
+    // most reads are served from memory, not the OS
+}
 
-boolean ok = from.renameTo(to); // may fail silently
-System.out.println(ok);
+
+}
 ```
 
-> [!NOTE]
-> `renameTo` is notoriously platform-dependent and returns only `boolean`. It may fail because target exists, file is open, permissions, or cross-filesystem move.
+The program still calls read() repeatedly,
+but the operating system is accessed only when the internal buffer needs refilling.
 
-### 4.2 NIO Move (Preferred)
+### 4.4.4 Buffered Output Example
 
-```java
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.io.IOException;
-
-Path from = Path.of("old.txt");
-Path to = Path.of("new.txt");
-
-Files.move(from, to); // fails if target exists
-Files.move(from, to, StandardCopyOption.REPLACE_EXISTING);
-```
-
-> [!NOTE]
-> `Files.move` throws `FileAlreadyExistsException` when the target exists and `REPLACE_EXISTING` is not specified.
-
-### 5. Comparing Paths and Files
-
-Comparing locators can mean: string/path equality, normalized/canonical equality, or “same file on disk”. The APIs differ here significantly.
-
-Comparison goal	Legacy	NIO
-Same path text	`File.equals`	`Path.equals`
-Normalize path	`getCanonicalFile`	`normalize`
-Same file/resource on disk	weak (canonical heuristic)	`Files.isSameFile`
-
-### 5.1 Equality vs Same File
-
-Two different path strings can refer to the same file.
+Buffered output accumulates data in memory and writes it in larger chunks.
+The flush() operation forces the buffer to be written immediately.
 
 ```java
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.io.IOException;
+try (OutputStream out =
+new BufferedOutputStream(new FileOutputStream("out.bin"))) {
 
-Path p1 = Path.of("a/../data.txt");
-Path p2 = Path.of("data.txt");
+for (int i = 0; i < 1_000; i++) {
+    out.write(i);
+}
+out.flush(); // forces buffered data to disk
 
-System.out.println(p1.equals(p2)); // false (different path text)
-System.out.println(p1.normalize().equals(p2.normalize())); // might still be false if relative
 
-try {
-System.out.println(Files.isSameFile(p1, p2)); // may be true, may throw if not accessible
-} catch (IOException e) {
-System.out.println("isSameFile failed: " + e.getMessage());
 }
 ```
 
 > [!NOTE]
-> `Files.isSameFile` may access the filesystem and can throw `IOException` (permission issues, missing files, etc.).
+> close() automatically calls flush().
+> Calling flush() explicitly is useful when data must be visible immediately.
 
-### 6. Deleting Files and Directories
+### 4.4.5 BufferedReader vs Reader
 
-Deletion is simple in concept but has important edge cases: non-empty directories, missing targets, and error reporting differences.
-
-Task	Legacy	NIO	Behavior if missing
-Delete file/dir	`File.delete`	`Files.delete`	Legacy false, NIO exception
-Delete if exists	No direct (check+delete)	`Files.deleteIfExists`	returns boolean
-Delete non-empty dir	Manual recursion	Manual recursion (walk)	Both require recursion
-
-### 6.1 Legacy Delete
+BufferedReader adds efficient line-based reading on top of a Reader.
+Without buffering, each character read may involve a system call.
 
 ```java
-import java.io.File;
+try (BufferedReader reader =
+new BufferedReader(new FileReader("file.txt"))) {
 
-File f = new File("x.txt");
-boolean ok = f.delete(); // false if not deleted
-System.out.println(ok);
+String line;
+while ((line = reader.readLine()) != null) {
+    System.out.println(line);
+}
+
+
+}
 ```
 
-> [!NOTE]
-> Legacy `delete()` fails (returns false) for a non-empty directory and often provides no reason.
+The readLine() method is only available on BufferedReader,
+because it relies on buffering to efficiently detect line boundaries.
 
-### 6.2 NIO Delete and DeleteIfExists
+### 4.4.6 BufferedWriter Example
 
 ```java
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.DirectoryNotEmptyException;
-import java.io.IOException;
+try (BufferedWriter writer =
+new BufferedWriter(new FileWriter("file.txt"))) {
 
-Path p = Path.of("x.txt");
+writer.write("Hello");
+writer.newLine();
+writer.write("World");
 
-try {
-Files.delete(p);
-} catch (NoSuchFileException e) {
-System.out.println("Missing: " + e.getFile());
-} catch (DirectoryNotEmptyException e) {
-System.out.println("Directory not empty: " + e.getFile());
-} catch (IOException e) {
-System.out.println("Delete failed: " + e.getMessage());
+
 }
-
-boolean deleted = Files.deleteIfExists(p);
-System.out.println(deleted);
 ```
 
-> [!NOTE]
-> Certification tip: `Files.delete` throws `NoSuchFileException` if missing, while `deleteIfExists` returns `false`.
-
-### 7. Recursively Copying / Deleting Directory Trees (NIO Pattern)
-
-NIO doesn’t provide a single “copyTree/deleteTree” method, but the standard approach uses `Files.walk` or `Files.walkFileTree`. For certification, knowing the pattern is valuable.
-
-```java
-import java.io.IOException;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
-
-Path root = Path.of("dirToDelete");
-
-Files.walkFileTree(root, new SimpleFileVisitor<>() {
-@Override
-public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-Files.delete(file);
-return FileVisitResult.CONTINUE;
-}
-
-@Override
-public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-if (exc != null) throw exc;
-Files.delete(dir);
-return FileVisitResult.CONTINUE;
-}
-});
-```
+BufferedWriter minimizes disk access and provides convenience methods such as newLine().
 
 > [!NOTE]
-> Deleting a directory tree requires deleting files first, then directories (post-order). This is a common reasoning question.
-
-### 8. Exam-Oriented Checklist
-
-- Prefer `Files.createFile/createDirectory/createDirectories` over legacy workarounds
-- `File.renameTo` is unreliable; prefer `Files.move` with options
-- `Files.copy/move` throw `FileAlreadyExistsException` unless `REPLACE_EXISTING` is used
-- `Files.delete` throws; `Files.deleteIfExists` returns boolean
-- `Files.isSameFile` can throw `IOException` and may touch the filesystem
-- Non-empty directory deletion requires recursion (both APIs)
+> For exams and real applications:
+> 
+> Always wrap file streams with buffering unless there is a strong reason not to
+> 
+> Prefer BufferedReader / BufferedWriter for text
+> 
+> Prefer BufferedInputStream / BufferedOutputStream for binary data
