@@ -1,266 +1,187 @@
-# 10. Java Platform Module System (JPMS)
+## 10.8 Compiling, Packaging, and Running Modules
 
-The Java Platform Module System (JPMS) was introduced in Java 9.
-It is a language-level and runtime-level mechanism for structuring Java applications into strongly encapsulated units called modules.
+Once a module is defined with a module-info.java file, it must be compiled, packaged, and executed using module-aware tools.
+This section explains how the Java toolchain changes when modules are involved.
 
-JPMS affects how code is:
-- organized
-- compiled
-- linked
-- packaged
-- loaded at runtime
+### 10.8.1 The Module Path vs the Classpath
 
-Understanding JPMS is essential for modern Java, especially for large applications, libraries, runtime images, and deployment tooling.
+JPMS introduces a new concept: the module path.
+It exists alongside the traditional classpath, but the two behave very differently.
 
-## 10.1 Why Modules Were Introduced
-
-Before Java 9, Java applications were built using only:
-- packages
-- JAR files
-- the classpath
-
-This model had serious limitations as applications grew.
-
-### 10.1.1 Problems with the Classpath
-
-The classpath is a flat list of JARs where:
-- all public classes are accessible to everyone
-- there is no reliable dependency declaration
-- conflicting versions are common
-- encapsulation is weak or nonexistent
-
-This led to well-known issues such as:
-- “JAR hell”
-- classpath ordering bugs
-- accidental use of internal APIs
-- runtime failures that were not detected at compile time
-
-### 10.1.2 Example of a Classpath Problem
-
-Suppose two libraries depend on different versions of the same third-party JAR.
-Only one version can be placed on the classpath.
-Which one is chosen depends on classpath order, not correctness.
+| Aspect Classpath Module path |
+| --- |
+| Structure Flat list of JARs Modules with identities |
+| Encapsulation None Strong |
+| Dependency checking None Strict |
+| Split packages Allowed Forbidden (named modules) |
+| Resolution order Order-dependent Deterministic |
 
 > [!NOTE]
-> This problem cannot be reliably solved with the classpath alone.
+> A JAR placed on the classpath is treated as part of the unnamed module.
+> A JAR placed on the module path becomes a named (or automatic) module.
 
-## 10.2 What Is a Module?
+### 10.8.2 Compiling a Single Module
 
-A module is a named, self-describing unit of code.
-It explicitly declares:
-- what it depends on
-- what it exposes to other modules
-- what it keeps hidden
+To compile a module, you must specify the module source path and the destination directory.
 
-A module is stronger than a package and more structured than a JAR.
-
-### 10.2.1 Core Properties of Modules
-
-| Property Description |
-| --- |
-| Strong encapsulation Packages are hidden by default |
-| Explicit dependencies Dependencies must be declared |
-| Reliable configuration Missing dependencies cause errors early |
-| Named identity Each module has a unique name |
-
-### 10.2.2 Module vs Package vs JAR
-
-| Concept Purpose Encapsulation |
-| --- |
-| Package Namespace only Weak |
-| JAR Deployment unit None |
-| Module Strong abstraction unit Strong |
-
-## 10.3 The module-info.java Descriptor
-
-Every named module is defined by a module descriptor file named:
-
-```text
-module-info.java
+```bash
+javac -d out
+src/com.example.hello/module-info.java
+src/com.example.hello/com/example/hello/Main.java
 ```
 
-This file describes the module to the compiler and the runtime.
+A more scalable approach uses --module-source-path.
 
-### 10.3.1 Minimal Module Descriptor
+```bash
+javac -d out
+--module-source-path src
+$(find src -name "*.java")
+```
 
-A minimal module descriptor declares only the module name.
+> [!NOTE]
+> --module-source-path tells javac where to find multiple modules at once.
+
+### 10.8.3 Compiling Multiple Interdependent Modules
+
+When modules depend on each other, their dependencies must be resolvable at compile time.
+
+```bash
+javac -d out
+--module-source-path src
+--module-path mods
+$(find src -name "*.java")
+```
+
+Here:
+- --module-source-path locates module source trees
+- --module-path provides already-compiled modules
+
+### 10.8.4 Packaging a Module into a Modular JAR
+
+After compilation, modules are typically packaged as JAR files.
+A modular JAR contains a module-info.class at its root.
+
+```bash
+jar --create
+--file mods/com.example.hello.jar
+--main-class com.example.hello.Main
+-C out/com.example.hello .
+```
+
+> [!NOTE]
+> A JAR with module-info.class is a named module, not an automatic module.
+
+### 10.8.5 Running a Modular Application
+
+To run a modular application, you use the module path and specify the module name.
+
+```bash
+java --module-path mods
+--module com.example.hello/com.example.hello.Main
+```
+
+You can shorten this using the -m option.
+
+```bash
+java -p mods -m com.example.hello/com.example.hello.Main
+```
+
+## 10.9 Module Directives Explained
+
+The module-info.java file contains directives that describe dependencies, visibility, and services.
+Each directive has a precise meaning.
+
+### 10.9.1 requires
+
+The requires directive declares a dependency on another module.
+Without it, types from the dependency module cannot be used.
 
 ```java
-module com.example.hello {
+module com.example.app {
+requires com.example.lib;
+}
+```
+
+Effects of requires:
+- Dependency must be present at compile and runtime
+- Exported packages of the required module become accessible
+
+### 10.9.2 requires transitive
+
+requires transitive exposes a dependency to downstream modules.
+It propagates readability.
+
+```java
+module com.example.lib {
+requires transitive com.example.util;
+exports com.example.lib.api;
+}
+```
+
+Meaning:
+- Any module requiring com.example.lib automatically reads com.example.util
+- Callers do not need to declare requires com.example.util explicitly
+
+> [!NOTE]
+> This is similar to “public dependencies” in other module systems.
+
+### 10.9.3 exports
+
+exports makes a package accessible to other modules.
+Only exported packages are visible outside the module.
+
+```java
+module com.example.lib {
+exports com.example.lib.api;
+}
+```
+
+Non-exported packages remain strongly encapsulated.
+
+### 10.9.4 exports ... to (Qualified Exports)
+
+A qualified export restricts access to specific modules.
+
+```java
+module com.example.lib {
+exports com.example.internal to com.example.friend;
+}
+```
+
+Only the listed modules can access the exported package.
+
+### 10.9.5 opens
+
+opens allows deep reflective access to a package.
+This is primarily for frameworks using reflection.
+
+```java
+module com.example.app {
+opens com.example.app.model;
 }
 ```
 
 > [!NOTE]
-> A module with no directives exports nothing and depends on nothing.
+> opens does NOT make a package accessible at compile time.
+> It only affects runtime reflection.
 
-## 10.4 Module Directory Structure
+### 10.9.6 opens ... to (Qualified Opens)
 
-A modular project follows a standard directory layout.
-The module descriptor sits at the root of the module’s source tree.
-
-```text
-src/
-└─ com.example.hello/
-├─ module-info.java
-└─ com/
-└─ example/
-└─ hello/
-└─ Main.java
-```
-
-Key points:
-- The directory name matches the module name
-- module-info.java is at the top of the module source root
-- packages follow standard Java naming rules
-
-## 10.5 A First Modular Program
-
-Let’s create a minimal modular application.
-
-### 10.5.1 Main Class
+You can restrict reflective access to specific modules.
 
 ```java
-package com.example.hello;
-
-public class Main {
-public static void main(String[] args) {
-System.out.println("Hello, modular world!");
-}
+module com.example.app {
+opens com.example.app.model to com.fasterxml.jackson.databind;
 }
 ```
 
-### 10.5.2 Module Descriptor
+### 10.9.7 Summary of Core Directives
 
-```java
-module com.example.hello {
-exports com.example.hello;
-}
-```
-
-The exports directive makes the package accessible to other modules.
-Without it, the package is encapsulated and inaccessible.
-
-## 10.6 Strong Encapsulation Explained
-
-In JPMS, packages are NOT accessible by default.
-Even public classes are hidden unless explicitly exported.
-
-| Situation Accessible? |
+| Directive Purpose |
 | --- |
-| Public class in non-exported package No |
-| Public class in exported package Yes |
-| Non-public class Never |
-
-> [!NOTE]
-> This is a fundamental difference from the classpath model.
-
-## 10.7 Summary of Key Ideas (So Far)
-
-- JPMS introduces modules as strong units of encapsulation
-- Dependencies are explicit and checked
-- module-info.java is the central descriptor
-- Packages are hidden unless exported
-- Classpath-based visibility no longer applies in modules
-
-### 4.9 Constructors and Serialization (Including Inheritance)
-Constructor behavior during serialization and deserialization is a frequent source of confusion.
-Java serialization restores object state primarily from the byte stream, not by running constructors.
-
-### 4.9.1 Rule: Constructors of Serializable Classes Are Not Called
-During deserialization of a Serializable class, the constructors of that class are NOT executed.
-The instance is created without calling those constructors, and field values are injected from the stream.
-
-> [!NOTE]
-> This is why constructors of Serializable classes must not contain essential initialization logic.
-> That initialization would not run during deserialization.
-
-### 4.9.2 Inheritance Rule: The First Non-Serializable Superclass Constructor Is Called
-When a Serializable class has a non-Serializable superclass, deserialization must still initialize that superclass part.
-Therefore, Java calls the no-argument constructor of the first non-Serializable superclass.
-
-Important implications:
-- the non-Serializable superclass must have an accessible no-arg constructor
-- serializable subclasses skip constructors, but non-serializable superclasses do not
-
-### 4.9.3 Summary Table: Which Constructors Run
-
-| Class type Constructor called during deserialization |
-| --- |
-| Serializable class No |
-| Serializable subclass No |
-| First non-Serializable superclass Yes (no-arg constructor) |
-| Externalizable class Yes (public no-arg constructor required) |
-
-### 4.10 Worked Example: Which Constructors Are Called
-This example prints which constructors run during normal construction and during deserialization.
-
-```java
-import java.io.*;
-
-class A {
-A() {
-System.out.println("A constructor");
-}
-}
-
-class B extends A implements Serializable {
-private static final long serialVersionUID = 1L;
-
-B() {
-    System.out.println("B constructor");
-}
-
-
-}
-
-class C extends B {
-private static final long serialVersionUID = 1L;
-
-C() {
-    System.out.println("C constructor");
-}
-
-
-}
-
-public class Demo {
-public static void main(String[] args) throws Exception {
-C obj = new C();
-
-    try (ObjectOutputStream out =
-             new ObjectOutputStream(new FileOutputStream("c.bin"))) {
-        out.writeObject(obj);
-    }
-
-    try (ObjectInputStream in =
-             new ObjectInputStream(new FileInputStream("c.bin"))) {
-        Object restored = in.readObject();
-    }
-}
-
-
-}
-```
-
-### 4.10.1 Expected Output and Explanation
-During normal construction (new C()):
-```text
-A constructor
-B constructor
-C constructor
-```
-
-During deserialization (readObject):
-```text
-A constructor
-```
-
-Explanation:
-- C is Serializable, so C() is not called during deserialization
-- B is Serializable, so B() is not called during deserialization
-- A is not Serializable, so A() is called (no-arg constructor)
-- Fields of B and C are restored from the stream instead of constructors running
-
-> [!NOTE]
-> If the first non-Serializable superclass has no accessible no-arg constructor, deserialization fails.
-> This is a classic certification trap.
+| requires Declare a dependency |
+| requires transitive Propagate dependency |
+| exports Expose a package |
+| exports ... to Expose to specific modules |
+| opens Allow runtime reflection |
+| opens ... to Restrict reflective access |

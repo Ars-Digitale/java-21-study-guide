@@ -48,4 +48,5 @@
 	- [Java I/O Streams](docs/module-08/io-streams.md)
 	- [I/O Streams APIs](docs/module-08/io-streams-api.md)
 - [Java Platform Module System ]
-	- [JPMS](docs/module-09/jpms.md)
+	- [JPMS Fundamentals](docs/module-09/jpms.md)
+	- [Compiling, Packaging, and Running Modules](docs/module-09/jpms-compiling.md)
