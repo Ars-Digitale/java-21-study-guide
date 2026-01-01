@@ -1,6 +1,6 @@
 # Java Platform Module System (JPMS)
 
-The Java Platform Module System (JPMS) was introduced in Java 9.
+The `Java Platform Module System` (**JPMS**) was introduced in Java 9.
 
 It is a language-level and runtime-level mechanism for structuring Java applications into strongly encapsulated units called modules.
 
