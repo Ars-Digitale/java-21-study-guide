@@ -49,7 +49,7 @@ Which one is chosen depends on classpath order, not correctness.
 
 ## 2. What Is a Module?
 
-A module is a named, self-describing unit of code.
+A `module` is a named, self-describing unit of code.
 
 It explicitly declares:
 - what it depends on
@@ -71,11 +71,11 @@ A module is stronger than a package and more structured than a JAR.
 
 | Concept | Purpose | Encapsulation |
 | --- | --- | --- |
-| Package | Namespace | only Weak |
-| JAR | Deployment unit | None |
-| Module | Strong abstraction unit | Strong |
+| `Package` | Namespace | only Weak |
+| `JAR` | Deployment unit | None |
+| `Module` | Strong abstraction unit | Strong |
 
-## 3. The module-info.java Descriptor
+## 3. The `module-info.java` Descriptor
 
 Every named module is defined by a module descriptor file named:
 
@@ -151,11 +151,14 @@ In `JPMS`, packages are NOT accessible by default.
 
 Even public classes are hidden unless explicitly exported.
 
-| Situation | Accessible? |
-| --- | --- |
-| Public class in non-exported package | No |
+| Situation | Accessible from another module? |
+|-----------|---------------------------------|
+| Public class in non-exported package  | No |
 | Public class in exported package | Yes |
-| Non-public class | Never |
+| Protected member in exported package  | Yes (subject to Java inheritance rules) |
+| Package-private class/member (any package) | No |
+| Private member | No |
+
 
 > [!NOTE]
 > This is a fundamental difference from the classpath model.
