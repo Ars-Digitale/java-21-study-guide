@@ -1,13 +1,14 @@
 # Services in JPMS (The ServiceLoader Model)
 
-JPMS includes a built-in service mechanism that allows modules to discover and use implementations at runtime
+`JPMS` includes a built-in service mechanism that allows modules to discover and use implementations at runtime
 without hardcoding dependencies between providers and consumers.
 
-This mechanism is based on the existing ServiceLoader API, but modules make it reliable, explicit, and safe.
+This mechanism is based on the existing `ServiceLoader API`, but modules make it reliable, explicit, and safe.
 
 ## 1. The Problem Services Solve
 
 Sometimes a module needs to use a capability, but should not depend on a specific implementation.
+
 Typical examples include:
 - logging frameworks
 - database drivers
@@ -15,35 +16,37 @@ Typical examples include:
 - service providers selected at runtime
 
 Without services, the consumer would need to depend directly on a concrete implementation.
+
 This creates tight coupling and reduces flexibility.
 
 ### 1.1 Roles in the Service Model
 
-The JPMS service model involves four distinct roles.
+The `JPMS service model` involves four distinct roles.
 
 | Role | Description |
 | --- | --- |
-| Service interface | Defines the contract |
-| Service provider | Implements the service |
-| Service consumer | Uses the service |
-| Service loader | Discovers implementations at runtime |
+| `Service interface` | Defines the contract |
+| `Service provider` | Implements the service |
+| `Service consumer` | Uses the service |
+| `Service loader` | Discovers implementations at runtime |
 
 ### 1.2 Service Interface Module
 
-The service interface defines the API that consumers depend on.
+The `service interface` defines the API that consumers depend on.
+
 It must be exported so other modules can see it.
 
 ```java
 package com.example.service;
 
 public interface GreetingService {
-String greet(String name);
+	String greet(String name);
 }
 ```
 
 ```java
 module com.example.service {
-exports com.example.service;
+	exports com.example.service;
 }
 ```
 
@@ -52,7 +55,7 @@ exports com.example.service;
 
 ### 1.3 Service Provider Module
 
-A provider module implements the service interface and declares that it provides the service.
+A `provider module` implements the service interface and declares that it provides the service.
 
 ```java
 package com.example.service.impl;
@@ -60,17 +63,16 @@ package com.example.service.impl;
 import com.example.service.GreetingService;
 
 public class EnglishGreeting implements GreetingService {
-public String greet(String name) {
-return "Hello " + name;
-}
+	public String greet(String name) {
+		return "Hello " + name;
+	}
 }
 ```
 
 ```java
 module com.example.provider.english {
-requires com.example.service;
-provides com.example.service.GreetingService
-with com.example.service.impl.EnglishGreeting;
+	requires com.example.service;
+	provides com.example.service.GreetingService with com.example.service.impl.EnglishGreeting;
 }
 ```
 
@@ -81,33 +83,35 @@ Key points:
 
 ### 1.4 Service Consumer Module
 
-The consumer module declares that it uses a service, but does not name any implementation.
+The `consumer module` declares that it uses a service, but does not name any implementation.
 
 ```java
 module com.example.consumer {
-requires com.example.service;
-uses com.example.service.GreetingService;
+	requires com.example.service;
+	uses com.example.service.GreetingService;
 }
 ```
 
 > [!NOTE]
-> uses declares intent to discover implementations at runtime.
+> `uses` declares intent to discover implementations at runtime.
 
 ### 1.5 Loading Services at Runtime
 
-The ServiceLoader API performs service discovery.
+The `ServiceLoader API` performs service discovery.
+
 It finds all providers visible to the module graph.
 
 ```java
 ServiceLoader<GreetingService> loader =
-ServiceLoader.load(GreetingService.class);
+	ServiceLoader.load(GreetingService.class);
 
 for (GreetingService service : loader) {
-System.out.println(service.greet("World"));
+	System.out.println(service.greet("World"));
 }
 ```
 
 JPMS guarantees that only declared providers are discovered.
+
 Classpath-based “accidental” discovery is prevented.
 
 ### 1.6 Service Resolution Rules
@@ -116,8 +120,8 @@ Classpath-based “accidental” discovery is prevented.
 | --- | --- |
 | Provider module must be readable | Resolved by requires graph |
 | Service interface must be exported | Consumers must see it |
-| Consumer must declare uses | Otherwise ServiceLoader fails |
-| Provider must declare provides | Implicit discovery is forbidden |
+| Consumer must declare `uses` | Otherwise ServiceLoader fails |
+| Provider must declare `provides` | Implicit discovery is forbidden |
 
 ## 2. Named, Automatic, and Unnamed Modules
 
@@ -125,7 +129,7 @@ JPMS supports different kinds of modules to allow gradual migration from the cla
 
 ### 2.1 Named Modules
 
-A named module has a module-info.class and a stable identity.
+A `named module` has a module-info.class and a stable identity.
 
 - Strong encapsulation
 - Explicit dependencies
@@ -133,7 +137,7 @@ A named module has a module-info.class and a stable identity.
 
 ### 2.2 Automatic Modules
 
-A JAR without module-info placed on the module path becomes an automatic module.
+A JAR without module-info placed on the module path becomes an `automatic module`.
 
 Its name is derived from the JAR file name.
 
@@ -147,14 +151,14 @@ Its name is derived from the JAR file name.
 
 ### 2.3 Unnamed Module
 
-Code on the classpath belongs to the unnamed module.
+Code on the classpath belongs to the `unnamed module`.
 
 - Reads all named modules
 - All packages are open
 - Cannot be required by named modules
 
 > [!NOTE]
-> The unnamed module preserves legacy classpath behavior.
+> The `unnamed module` preserves legacy classpath behavior.
 
 ### 2.4 Comparison Summary
 
@@ -180,9 +184,9 @@ This shows exports, requires, and services of a module.
 jar --describe-module --file mylib.jar
 ```
 
-### 3.3 Analyzing Dependencies with jdeps
+### 3.3 Analyzing Dependencies with `jdeps`
 
-jdeps analyzes class and module dependencies statically.
+`jdeps` analyzes class and module dependencies statically.
 
 ```bash
 jdeps myapp.jar
@@ -198,9 +202,9 @@ To detect use of JDK internal APIs:
 jdeps --jdk-internals myapp.jar
 ```
 
-## 4. Creating Custom Runtime Images with jlink
+## 4. Creating Custom Runtime Images with `jlink`
 
-jlink builds a minimal Java runtime containing only the modules required by an application.
+`jlink` builds a minimal Java runtime containing only the modules required by an application.
 
 ```bash
 jlink
@@ -214,9 +218,9 @@ Benefits:
 - faster startup
 - no unused JDK modules
 
-## 5. Creating Self-Contained Applications with jpackage
+## 5. Creating Self-Contained Applications with `jpackage`
 
-jpackage builds platform-specific installers or application images.
+`jpackage` builds platform-specific installers or application images.
 
 ```bash
 jpackage
@@ -225,7 +229,7 @@ jpackage
 --main-module com.example.app/com.example.Main
 ```
 
-jpackage can produce:
+`jpackage` can produce:
 - .exe / .msi (Windows)
 - .pkg / .dmg (macOS)
 - .deb / .rpm (Linux)
