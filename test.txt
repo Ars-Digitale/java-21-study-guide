@@ -1,115 +1,166 @@
-### 4.8 Custom Serialization Hooks: writeObject and readObject
-Custom serialization hooks exist to handle cases where default Java serialization is not enough (transient state, derived fields, encryption, validation, compatibility).
-They are advanced but extremely important for correct deserialization behavior.
+# 10. Java Platform Module System (JPMS)
 
-### 4.8.1 Why Custom Serialization Exists
-By default, Java serialization automatically writes and reads all non-static, non-transient instance fields of a Serializable object.
-This is convenient, but it cannot express certain common needs.
-Typical reasons to customize serialization:
-- A field should not be stored directly (sensitive data)
-- A field is derived/cached and should be recomputed after restore
-- You need validation when reading (reject invalid state)
-- You need backward/forward compatibility logic (support older streams)
-- A referenced object is not Serializable and must be handled specially
+The Java Platform Module System (JPMS) was introduced in Java 9.
+It is a language-level and runtime-level mechanism for structuring Java applications into strongly encapsulated units called modules.
 
-### 4.8.2 What writeObject and readObject Really Are
-writeObject and readObject are private methods with special meaning.
-They are NOT overrides and you never call them directly in normal code.
-Instead, ObjectOutputStream and ObjectInputStream look for these methods (by reflection).
-If they exist with the exact required signature, the stream calls them automatically.
+JPMS affects how code is:
+- organized
+- compiled
+- linked
+- packaged
+- loaded at runtime
 
-> [!NOTE]
-> If the signature is wrong (wrong visibility, parameter type, return type), the method is ignored and default serialization happens.
-> This can be very confusing during debugging.
+Understanding JPMS is essential for modern Java, especially for large applications, libraries, runtime images, and deployment tooling.
 
-### 4.8.3 Exact Required Signatures
+## 10.1 Why Modules Were Introduced
 
-```java
-private void writeObject(ObjectOutputStream out) throws IOException
+Before Java 9, Java applications were built using only:
+- packages
+- JAR files
+- the classpath
 
-private void readObject(ObjectInputStream in)
-throws IOException, ClassNotFoundException
-```
+This model had serious limitations as applications grew.
 
-Key constraints:
-- must be private
-- must return void
-- parameter types must match exactly
-- exceptions must be compatible with the required throws list
+### 10.1.1 Problems with the Classpath
 
-### 4.8.4 What Happens During Serialization: Step by Step
-When you serialize an object, you typically call:
-```java
-out.writeObject(obj);
-```
+The classpath is a flat list of JARs where:
+- all public classes are accessible to everyone
+- there is no reliable dependency declaration
+- conflicting versions are common
+- encapsulation is weak or nonexistent
 
-Then the serialization mechanism does roughly this:
-- Checks if the object’s class implements Serializable
-- Checks whether the class declares a private writeObject(ObjectOutputStream)
-- If not present: default serialization runs automatically
-- If present: your writeObject is called instead
+This led to well-known issues such as:
+- “JAR hell”
+- classpath ordering bugs
+- accidental use of internal APIs
+- runtime failures that were not detected at compile time
 
-A crucial point: inside writeObject, Java does not automatically write the normal fields unless you ask for it.
-This is why this call exists:
-```java
-out.defaultWriteObject();
-```
+### 10.1.2 Example of a Classpath Problem
 
-defaultWriteObject() means: “serialize the object’s normal serializable fields using the default mechanism.”
-After that, you may write extra data in any format you want.
-
-### 4.8.5 Typical Pattern and the Write/Read Order Rule
-The typical pattern is to keep default serialization and then extend it.
-The order of reads MUST match the order of writes.
-
-```java
-private void writeObject(ObjectOutputStream out) throws IOException {
-out.defaultWriteObject(); // writes normal fields
-out.writeInt(42); // writes extra custom data
-}
-
-private void readObject(ObjectInputStream in)
-throws IOException, ClassNotFoundException {
-
-in.defaultReadObject();         // reads normal fields
-int x = in.readInt();           // reads extra custom data in same order
-
-
-}
-```
+Suppose two libraries depend on different versions of the same third-party JAR.
+Only one version can be placed on the classpath.
+Which one is chosen depends on classpath order, not correctness.
 
 > [!NOTE]
-> If you write extra values (ints/strings/etc.), you must read them back in the same sequence.
-> Otherwise deserialization will fail or restore corrupted state.
+> This problem cannot be reliably solved with the classpath alone.
 
-### 4.8.6 Example Use Case: Restoring a transient Derived Field
-A classic use case is recomputing a transient cached value after deserialization.
+## 10.2 What Is a Module?
+
+A module is a named, self-describing unit of code.
+It explicitly declares:
+- what it depends on
+- what it exposes to other modules
+- what it keeps hidden
+
+A module is stronger than a package and more structured than a JAR.
+
+### 10.2.1 Core Properties of Modules
+
+| Property Description |
+| --- |
+| Strong encapsulation Packages are hidden by default |
+| Explicit dependencies Dependencies must be declared |
+| Reliable configuration Missing dependencies cause errors early |
+| Named identity Each module has a unique name |
+
+### 10.2.2 Module vs Package vs JAR
+
+| Concept Purpose Encapsulation |
+| --- |
+| Package Namespace only Weak |
+| JAR Deployment unit None |
+| Module Strong abstraction unit Strong |
+
+## 10.3 The module-info.java Descriptor
+
+Every named module is defined by a module descriptor file named:
+
+```text
+module-info.java
+```
+
+This file describes the module to the compiler and the runtime.
+
+### 10.3.1 Minimal Module Descriptor
+
+A minimal module descriptor declares only the module name.
 
 ```java
-class User implements Serializable {
-private static final long serialVersionUID = 1L;
-
-private String firstName;
-private String lastName;
-
-private transient String fullName;
-
-User(String firstName, String lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.fullName = firstName + " " + lastName;
-}
-
-private void readObject(ObjectInputStream in)
-        throws IOException, ClassNotFoundException {
-
-    in.defaultReadObject(); // restore firstName and lastName
-    fullName = firstName + " " + lastName; // recompute transient field
-}
-
-
+module com.example.hello {
 }
 ```
+
+> [!NOTE]
+> A module with no directives exports nothing and depends on nothing.
+
+## 10.4 Module Directory Structure
+
+A modular project follows a standard directory layout.
+The module descriptor sits at the root of the module’s source tree.
+
+```text
+src/
+└─ com.example.hello/
+├─ module-info.java
+└─ com/
+└─ example/
+└─ hello/
+└─ Main.java
+```
+
+Key points:
+- The directory name matches the module name
+- module-info.java is at the top of the module source root
+- packages follow standard Java naming rules
+
+## 10.5 A First Modular Program
+
+Let’s create a minimal modular application.
+
+### 10.5.1 Main Class
+
+```java
+package com.example.hello;
+
+public class Main {
+public static void main(String[] args) {
+System.out.println("Hello, modular world!");
+}
+}
+```
+
+### 10.5.2 Module Descriptor
+
+```java
+module com.example.hello {
+exports com.example.hello;
+}
+```
+
+The exports directive makes the package accessible to other modules.
+Without it, the package is encapsulated and inaccessible.
+
+## 10.6 Strong Encapsulation Explained
+
+In JPMS, packages are NOT accessible by default.
+Even public classes are hidden unless explicitly exported.
+
+| Situation Accessible? |
+| --- |
+| Public class in non-exported package No |
+| Public class in exported package Yes |
+| Non-public class Never |
+
+> [!NOTE]
+> This is a fundamental difference from the classpath model.
+
+## 10.7 Summary of Key Ideas (So Far)
+
+- JPMS introduces modules as strong units of encapsulation
+- Dependencies are explicit and checked
+- module-info.java is the central descriptor
+- Packages are hidden unless exported
+- Classpath-based visibility no longer applies in modules
 
 ### 4.9 Constructors and Serialization (Including Inheritance)
 Constructor behavior during serialization and deserialization is a frequent source of confusion.

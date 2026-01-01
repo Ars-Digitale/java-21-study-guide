@@ -858,7 +858,6 @@ The Files utility class improves filesystem programming by:
 
 Legacy APIs remain mostly for backward compatibility or when required by old libraries.
 
-
 ---
 
 ## 4. Serialization — Object Streams, Compatibility, and Traps
@@ -962,7 +961,7 @@ Object[] restored = (Object[]) in.readObject();
 > [!NOTE]
 > This behavior prevents infinite recursion on cyclic graphs.
 
-### 4.5 serialVersionUID: The Versioning Key
+### 4.5 `serialVersionUID`: The Versioning Key
 
 `serialVersionUID` is a long identifier used to verify compatibility between a serialized stream and a class definition.
 
@@ -993,7 +992,7 @@ class Person implements Serializable {
 > [!NOTE]
 > Declaring a stable serialVersionUID is the standard way to control serialization compatibility.
 
-### 4.6 transient and static Fields
+### 4.6 `transient` and `static` Fields
 
 `transient` fields are excluded from serialization.
 
@@ -1167,7 +1166,7 @@ Typical reasons to customize serialization:
 - You need backward/forward compatibility logic (support older streams)
 - A referenced object is not Serializable and must be handled specially
 
-#### 4.9.2 What writeObject and readObject Really Are
+#### 4.9.2 What `writeObject` and `readObject` Really Are
 
 To customize serialization and deserialization, a class may define two special private methods named `writeObject` and `readObject`.
 
