@@ -1,6 +1,40 @@
-# Java Operators
+# 5. Java Operators
 
-## 1. Definition
+### Table of Contents
+
+- [5. Java Operators](#5-java-operators)
+  - [5.1 Definition](#51-definition)
+  - [5.2 Types of Operators](#52-types-of-operators)
+  - [5.3 Categories of Operators](#53-categories-of-operators)
+  - [5.4 Operator Precedence and Order of Evaluation](#54-operator-precedence-and-order-of-evaluation)
+  - [5.5 Summary Table of Java Operators](#55-summary-table-of-java-operators)
+    - [5.5.1 Additional Notes](#551-additional-notes)
+  - [5.6 Unary Operators](#56-unary-operators)
+    - [5.6.1 Categories of Unary Operators](#561-categories-of-unary-operators)
+    - [5.6.2 Examples](#562-examples)
+  - [5.7 Binary Operators](#57-binary-operators)
+    - [5.7.1 Categories of Binary Operators](#571-categories-of-binary-operators)
+    - [5.7.2 Division and Modulus Operators](#572-division-and-modulus-operators)
+    - [5.7.3 The Return Value of an Assignment Operator](#573-the-return-value-of-an-assignment-operator)
+    - [5.7.4 Compound Assignment Operators](#574-compound-assignment-operators)
+    - [5.7.5 Equality Operators == and !=](#575-equality-operators--and-)
+      - [5.7.5.1 Equality with Primitive Types](#5751-equality-with-primitive-types)
+      - [5.7.5.2 Equality with Reference Types Objects](#5752-equality-with-reference-types-objects)
+    - [5.7.6 The instanceof Operator](#576-the-instanceof-operator)
+      - [5.7.6.1 Compile-Time Check vs Runtime Check](#5761-compile-time-check-vs-runtime-check)
+      - [5.7.6.2 Pattern Matching for instanceof](#5762-pattern-matching-for-instanceof)
+      - [5.7.6.3 Flow Scoping & Short-Circuit Logic](#5763-flow-scoping--short-circuit-logic)
+      - [5.7.6.4 Arrays and Reifiable Types](#5764-arrays-and-reifiable-types)
+  - [5.8 Ternary Operator](#58-ternary-operator)
+    - [5.8.1 Syntax](#581-syntax)
+    - [5.8.2 Example](#582-example)
+    - [5.8.3 Nested Ternary Example](#583-nested-ternary-example)
+    - [5.8.4 Notes](#584-notes)
+
+
+---
+
+## 5.1 Definition
 
 In Java, **operators** are special symbols that perform operations on variables and values.  
 They are the building blocks of expressions and allow developers to manipulate data, compare values, perform arithmetic, and control logic flow.
@@ -14,7 +48,7 @@ Here, `+` and `*` are operators, and `a`, `b`, and `c` are operands.
 
 ---
 
-## 2. Types of Operators
+## 5.2 Types of Operators
 
 Java defines three types of operators, grouped by the number of operands they use:
 
@@ -26,7 +60,7 @@ Java defines three types of operators, grouped by the number of operands they us
 
 ---
 
-## 3. Categories of Operators
+## 5.3 Categories of Operators
 
 Operators can also be gouped, by their purpose, in categories:
 
@@ -42,7 +76,7 @@ Operators can also be gouped, by their purpose, in categories:
 
 ---
 
-## 4. Operator Precedence and Order of Evaluation
+## 5.4 Operator Precedence and Order of Evaluation
 
 **Operator precedence** determines how operators are grouped in an expression — that is, which operations are performed first.  
 **Associativity** (or **order of evaluation**) determines whether the expression is evaluated from **left to right** or **right to left** when operators have the same precedence.
@@ -65,7 +99,7 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 
 ---
 
-## 5. Summary Table of Java Operators 
+## 5.5 Summary Table of Java Operators 
 
 | Precedence (High → Low) | Type | Operators | Example | Evaluation Order | Applicable To |
 |--------------------------|------|------------|----------|------------------|---------------|
@@ -89,19 +123,19 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 
 ---
 
-### ⚙️ Additional Notes
+### 5.5.1 ⚙️ Additional Notes
 
 - **String concatenation (`+`)** has lower precedence than arithmetic `+` with numbers.
 - Use parentheses `()` for precedence and readability — they don’t change semantics but make intent explicit.
 
 ---
 
-## 6. Unary Operators
+## 5.6 Unary Operators
 
 Unary operators operate on **a single operand** to produce a new value.  
 They are used for operations like incrementing/decrementing, negating a value, inverting a boolean, or performing bitwise complement.
 
-### 6.1 Categories of Unary Operators
+### 5.6.1 Categories of Unary Operators
 
 | Operator | Name | Description | Example | Result |
 |-----------|------|-------------|----------|---------|
@@ -113,7 +147,7 @@ They are used for operations like incrementing/decrementing, negating a value, i
 | `~` | Bitwise complement | Inverts each bit of an integer. | `~5` | `-6` |
 | `(type)` | Cast | Converts value to another type. | `(int) 3.9` | `3` |
 
-### 6.2 Examples
+### 5.6.2 Examples
 
 ```java
 int x = 5;
@@ -135,12 +169,12 @@ System.out.println(~a);     // -6 → binary: 1111 1010
 
 ---
 
-## 7. Binary Operators
+## 5.7 Binary Operators
 
 Binary operators require **two operands**.  
 They perform arithmetic, relational, logical, bitwise, and assignment operations.
 
-### 7.1 Categories of Binary Operators
+### 5.7.1 Categories of Binary Operators
 
 | Category | Operators | Example | Description |
 |-----------|------------|----------|--------------|
@@ -166,7 +200,7 @@ They perform arithmetic, relational, logical, bitwise, and assignment operations
 
 **Some Examples**
 
-#### Arithmetic Example
+Arithmetic Example:
 ```java
 int a = 10, b = 4;
 System.out.println(a + b);  // 14
@@ -176,7 +210,7 @@ System.out.println(a / b);  // 2
 System.out.println(a % b);  // 2
 ```
 
-#### Relational Example
+Relational Example:
 ```java
 int a = 5, b = 8;
 System.out.println(a < b);   // true
@@ -185,7 +219,7 @@ System.out.println(a == b);  // false
 System.out.println(a != b);  // true
 ```
 
-#### Logical Example
+Logical Example:
 ```java
 boolean x = true, y = false;
 System.out.println(x && y);  // false
@@ -193,7 +227,7 @@ System.out.println(x || y);  // true
 System.out.println(!x);      // false
 ```
 
-#### Bitwise Example
+Bitwise Example:
 ```java
 int a = 5;   // 0101
 int b = 3;   // 0011
@@ -204,7 +238,7 @@ System.out.println(a << 1); // 10 (1010)
 System.out.println(a >> 1); // 2  (0010)
 ```
 
-### 7.2 Division and Modulus Operators
+### 5.7.2 Division and Modulus Operators
 
 The modulus operator is the remainder when two numbers are divided.
 If two numbers divide evenly, the reminder is 0: for example **10 % 5** is 0.
@@ -231,7 +265,7 @@ System.out.println(-8 % 9);     // GIVES -8
 
 ```
 
-### 7.3 The Return Value of an Assignment Operator
+### 5.7.3 The Return Value of an Assignment Operator
 
 In Java, the **assignment operator (`=`)** not only stores a value in a variable —  
 it also **returns the assigned value** as the result of the entire expression.
@@ -269,7 +303,7 @@ if (flag == true) {
 }
 ```
 
-### 7.4 Compound Assignment Operators
+### 5.7.4 Compound Assignment Operators
 
 **Compound assignment operators** in Java combine an arithmetic or bitwise operation with assignment in a single step.  
 Instead of writing `x = x + 5`, you can use the shorthand `x += 5`.  
@@ -306,12 +340,12 @@ byte b = 10;
 b += 1;         // ✅ works: implicit cast back to byte
 ```
 
-### 7.5 Equality Operators (`==` and `!=`)
+### 5.7.5 Equality Operators (`==` and `!=`)
 
 The **equality operators** in Java `==` (equal to) and `!=` (not equal to) are used to compare two operands for equality.  
 However, their behavior differs **depending on whether they are applied to primitive types or reference types (objects)**.
 
-#### 7.5.1 Equality with Primitive Types
+#### 5.7.5.1 Equality with Primitive Types
 
 When comparing **primitive values**, `==` and `!=` compare the **actual stored values**.
 
@@ -334,7 +368,7 @@ double d = 0.1 + 0.2;
 System.out.println(d == 0.3); // false → floating-point rounding issue
 ```
 
-#### 7.5.2 Equality with Reference Types (Objects)
+#### 5.7.5.2 Equality with Reference Types (Objects)
 
 For objects, == and != compare references, not object content.
 They return true only if both references point to the exact same object in memory.
@@ -381,7 +415,7 @@ int j = 100;
 System.out.println(i == j);   // true → unboxed before comparison
 ```
 
-### 7.6 The `instanceof` Operator
+### 5.7.6 The `instanceof` Operator
  
 `instanceof` is a **relational operator** that tests whether a reference value is an **instance of** a given **reference type** at runtime.  
 It returns a `boolean`.
@@ -400,7 +434,7 @@ Object n = null;
 System.out.println(n instanceof Object);  // false
 ```
 
-#### 7.6.1 Compile-Time Check vs Runtime Check
+#### 5.7.6.1 Compile-Time Check vs Runtime Check
 
 - At compile time, the compiler rejects inconvertible types (types that cannot possibly relate at runtime).
 - At runtime, if the compile-time check passed, the JVM evaluates the actual object type.
@@ -417,7 +451,7 @@ System.out.println(num instanceof Integer); // true at runtime
 System.out.println(num instanceof Double);  // false at runtime
 ```
 
-#### 7.6.2 Pattern Matching for instanceof
+#### 5.7.6.2 Pattern Matching for instanceof
 
 Java supports type patterns with instanceof, which both test and bind the variable when the test succeeds.
 Adding a variable after the type instructs the compiler to treat it as Pattern Matching
@@ -441,7 +475,7 @@ Key properties
 - The name must not clash with an existing variable in the same scope.
 
 
-#### 7.6.3 Flow Scoping & Short-Circuit Logic
+#### 5.7.6.3 Flow Scoping & Short-Circuit Logic
 
 - Pattern variables become available based on flow analysis:
 
@@ -501,7 +535,7 @@ if (num instanceof Number s) {}  // ✅ Ok
 
 ```
 
-#### 7.6.4 Arrays and Reifiable Types
+#### 5.7.6.4 Arrays and Reifiable Types
 
 instanceof works with arrays (which are reifiable) and with erased or wildcard generic forms.
 **Reifiable types** are those whose runtime representation fully preserves their type (e.g., raw types, arrays, non-generic classes, wildcard ?). 
@@ -518,17 +552,17 @@ System.out.println(list instanceof java.util.List<?>); // ✅ true
 
 ---
 
-## 8. Ternary Operator
+## 5.8 Ternary Operator
 
 The **ternary operator** (`? :`) is the only operator in Java that takes **three operands**.  
 It acts as a concise form of an `if-else` statement.
 
-### 8.1 Syntax
+### 5.8.1 Syntax
 ```java
 condition ? expressionIfTrue : expressionIfFalse;
 ```
 
-### 8.2 Example
+### 5.8.2 Example
 
 ```java
 int age = 20;
@@ -536,7 +570,7 @@ String access = (age >= 18) ? "Allowed" : "Denied";
 System.out.println(access);  // "Allowed"
 ```
 
-### 8.3 Nested Ternary Example
+### 5.8.3 Nested Ternary Example
 
 ```java
 int score = 85;
@@ -546,7 +580,7 @@ String grade = (score >= 90) ? "A" :
 System.out.println(grade);  // "B"
 ```
 
-### 8.4 Notes
+### 5.8.4 Notes
 
 > [!WARNING]
 > - Nested ternary expressions can reduce readability. Use parentheses for clarity.  
