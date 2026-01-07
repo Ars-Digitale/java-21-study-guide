@@ -1,4 +1,34 @@
-# Java Data Types and Casting
+# 4. Java Data Types and Casting
+
+### Table of Contents
+
+- [4. Java Data Types and Casting](#4-java-data-types-and-casting)
+  - [4.1 Primitive Types](#41-primitive-types)
+  - [4.2 Reference Types](#42-reference-types)
+  - [4.3 Primitive Types Table](#43-primitive-types-table)
+  - [4.4 Notes](#44-notes)
+  - [4.5 Recap](#45-recap)
+  - [4.6 Arithmetic and Primitive Numeric Promotion](#46-arithmetic-and-primitive-numeric-promotion)
+    - [4.6.1 Numeric Promotion Rules in Java](#461-numeric-promotion-rules-in-java)
+      - [4.6.1.1 Rule 1 – Mixed Data Types → Smaller type promoted to larger type](#4611-rule-1--mixed-data-types--smaller-type-promoted-to-larger-type)
+      - [4.6.1.2 Rule 2 – Integral + Floating-point → Integral promoted to floating-point](#4612-rule-2--integral--floating-point--integral-promoted-to-floating-point)
+      - [4.6.1.3 Rule 3 – byte short and char are promoted to int during arithmetic](#4613-rule-3--byte-short-and-char-are-promoted-to-int-during-arithmetic)
+      - [4.6.1.4 Rule 4 – Result type matches the promoted operand type](#4614-rule-4--result-type-matches-the-promoted-operand-type)
+    - [4.6.2 Summary of Numeric Promotion Behavior](#462-summary-of-numeric-promotion-behavior)
+      - [4.6.2.1 Key Takeaways](#4621-key-takeaways)
+  - [4.7 Casting in Java](#47-casting-in-java)
+    - [4.7.1 Primitive Casting](#471-primitive-casting)
+      - [4.7.1.1 Widening Implicit Casting](#4711-widening-implicit-casting)
+      - [4.7.1.2 Narrowing Explicit Casting](#4712-narrowing-explicit-casting)
+    - [4.7.2 Data Loss Overflow and Underflow](#472-data-loss-overflow-and-underflow)
+    - [4.7.3 Casting Values versus Variable](#473-casting-values-versus-variable)
+    - [4.7.4 Reference Casting Objects](#474-reference-casting-objects)
+      - [4.7.4.1 Upcasting Widening Reference Cast](#4741-upcasting-widening-reference-cast)
+      - [4.7.4.2 Downcasting Narrowing Reference Cast](#4742-downcasting-narrowing-reference-cast)
+    - [4.7.5 Key Points Summary](#475-key-points-summary)
+    - [4.7.6 Examples](#476-examples)
+
+---
 
 As we saw before in the [Syntax Building Blocks](syntax-building-blocks.md), Java has two categories of data types:
 
@@ -7,9 +37,8 @@ As we saw before in the [Syntax Building Blocks](syntax-building-blocks.md), Jav
 
 👉 For a complete overview of primitive types with their sizes, ranges, defaults, and examples, see the [Primitive Types Table](#primitive-types-table).
 
----
 
-## 1. Primitive Types
+## 4.1 Primitive Types
 
 Primitives represent **single raw values** stored directly in memory.  
 Each primitive type has a fixed size that determines how many bytes it occupies.
@@ -24,7 +53,7 @@ Conceptually, a primitive is just a **cell in memory** holding a value:
 
 ---
 
-## 2. Reference Types
+## 4.2 Reference Types
 
 A reference type does not hold the object itself, but a **reference (pointer)** to it.  
 The reference has a fixed size (JVM-dependent, often 4 or 8 bytes), which points to a memory location where the actual object is stored.
@@ -45,7 +74,7 @@ Reference (4 or 8 bytes)
 
 ---
 
-## 3. Primitive Types Table
+## 4.3 Primitive Types Table
 
 | Keyword  | Type      | Size      | Min Value                  | Max Value                  | Default Value | Example |
 |----------|-----------|-----------|----------------------------|----------------------------|---------------|---------|
@@ -60,7 +89,7 @@ Reference (4 or 8 bytes)
 
 ---
 
-### Notes
+## 4.4 Notes
 
 `float` and `double` do not have fixed integer bounds like integral types.  
 Instead, they follow the IEEE 754 standard:
@@ -81,7 +110,7 @@ They also support special values: **`+Infinity`**, **`-Infinity`**, and **`NaN`*
 
 ---
 
-### Recap
+## 4.5 Recap
 
 - **Primitive** = actual value, stored directly in memory.  
 - **Reference** = pointer to an object; the object itself may contain primitives and other references.  
@@ -89,7 +118,7 @@ They also support special values: **`+Infinity`**, **`-Infinity`**, and **`NaN`*
 
 ---
 
-## 4. Arithmetic and Primitive Numeric Promotion
+## 4.6 Arithmetic and Primitive Numeric Promotion
 
 When applying arithmetic or comparison operators to **primitive data types**, Java automatically converts (or *promotes*) values to compatible types according to well-defined **numeric promotion rules**.
 
@@ -97,9 +126,9 @@ These rules ensure consistent calculations and prevent data loss when mixing dif
 
 ---
 
-### 🔹 Numeric Promotion Rules in Java
+### 4.6.1 🔹 Numeric Promotion Rules in Java
 
-#### **Rule 1 – Mixed Data Types → Smaller type promoted to larger type**
+#### 4.6.1.1 **Rule 1 – Mixed Data Types → Smaller type promoted to larger type**
 
 If two operands belong to **different numeric data types**, Java automatically promotes the **smaller** type to the **larger** type before performing the operation.
 
@@ -112,7 +141,7 @@ If two operands belong to **different numeric data types**, Java automatically p
 
 ---
 
-#### **Rule 2 – Integral + Floating-point → Integral promoted to floating-point**
+#### 4.6.1.2 **Rule 2 – Integral + Floating-point → Integral promoted to floating-point**
 
 If one operand is an **integral type** (`byte`, `short`, `char`, `int`, `long`) and the other is a **floating-point type** (`float`, `double`),  
 the **integral value is promoted** to the **floating-point** type before the operation.
@@ -124,7 +153,7 @@ the **integral value is promoted** to the **floating-point** type before the ope
 
 ---
 
-#### **Rule 3 – `byte`, `short`, and `char` are promoted to `int` during arithmetic**
+#### 4.6.1.3 **Rule 3 – `byte`, `short`, and `char` are promoted to `int` during arithmetic**
 
 When performing arithmetic **with variables** (not literal constants) of type `byte`, `short`, or `char`,  
 Java automatically promotes them to **`int`**, even if **both operands are smaller than `int`**.
@@ -148,7 +177,7 @@ byte d = b + c;     // ❌ Error: b + c is evaluated at runtime → int
 
 ---
 
-#### **Rule 4 – Result type matches the promoted operand type**
+#### 4.6.1.4 **Rule 4 – Result type matches the promoted operand type**
 
 After promotions are applied, and both operands are of the same type,  
 the **result** of the expression has that **same promoted type**.
@@ -169,7 +198,7 @@ the **result** of the expression has that **same promoted type**.
 
 ---
 
-### ✅ Summary of Numeric Promotion Behavior
+### 4.6.2 ✅ Summary of Numeric Promotion Behavior
 
 | Situation | Promotion Result | Example |
 |------------|------------------|----------|
@@ -180,7 +209,7 @@ the **result** of the expression has that **same promoted type**.
 
 ---
 
-### 🧠 Key Takeaways
+#### 4.6.2.1 🧠 Key Takeaways
 
 - Always consider **type promotion** when mixing data types in arithmetic.  
 - For smaller types (`byte`, `short`, `char`), promotion to `int` is automatic when operands of an arithmetic operation containing variables.  
@@ -190,14 +219,14 @@ the **result** of the expression has that **same promoted type**.
 
 ---
 
-## 5. Casting in Java
+## 4.7 Casting in Java
 
 **Casting** in Java is the process of **explicitly converting a value from one data type to another**.  
 It allows a variable of one type to be **interpreted as another compatible type** either among **primitive types** or **reference types** within an inheritance hierarchy.
 
 ---
 
-### 🔹 1. Primitive Casting
+### 4.7.1 🔹 Primitive Casting
 
 Primitive casting changes the data type of a **numeric value**.  
 There are two kinds of primitive casting: **widening** and **narrowing**.
@@ -207,7 +236,7 @@ There are two kinds of primitive casting: **widening** and **narrowing**.
 | **Widening** | Converts a smaller type to a larger type | `int → double` | ❌ No | Safe |
 | **Narrowing** | Converts a larger type to a smaller type | `double → int` | ✅ Yes | Possible data loss |
 
-#### **a) Widening (Implicit) Casting**
+#### 4.7.1.1 Widening (Implicit) Casting**
 
 Automatic conversion from a smaller to a larger compatible type.  
 Handled by the compiler; no explicit syntax is required.
@@ -220,7 +249,7 @@ System.out.println(d); // 100.0
 
 ✅ **Safe** – no data loss or overflow.
 
-#### **b) Narrowing (Explicit) Casting**
+#### 4.7.1.2 Narrowing (Explicit) Casting**
 
 Manual conversion from a larger type to a smaller type.  
 Requires explicit syntax because data may be lost.
@@ -231,7 +260,7 @@ int i = (int) d;   // explicit cast: double → int
 System.out.println(i); // 9
 ```
 
-### 1.1 Data Loss, Overflow, and Underflow
+### 4.7.2 Data Loss, Overflow, and Underflow
 
 In Java, **data loss** can occur when a value exceeds the storage capacity or precision of its data type.  
 When performing arithmetic operations or explicit type casts, values may **overflow**, **underflow**, or **truncate**.
@@ -259,7 +288,7 @@ int i = (int) d; // 9 (fraction dropped)
 > [!NOTE]  
 > Floating-point types (float, double) don’t wrap around; overflow results in Infinity, and underflow in 0.0.
 
-### 1.2 Casting Values versus Variable
+### 4.7.3  Casting Values versus Variable
 
 Even though Java interprets integer numeric literals as `int` by default, the compiler does NOT require casting when working with literals values that fit into the data type;
 
@@ -305,7 +334,7 @@ short a = 5 + (short) b; 				// ❌ error: both operand are automatically promot
 
 ---
 
-### 🔹 2. Reference Casting (Objects)
+### 4.7.4 🔹 Reference Casting (Objects)
 
 Casting also applies to **object references** within inheritance hierarchies.  
 It doesn’t change the actual object in memory, only how it is interpreted by the program.
@@ -315,7 +344,7 @@ When dealing with "Object & References" you sou should keep in mind that:
 - The object's actual type determines which properties the object contains in memory.
 - The type of the reference used to access the object determines which methods and fields the Java program is allowed to access. 
 
-#### **2.1 Upcasting (Widening Reference Cast)**
+#### 4.7.4.1 Upcasting (Widening Reference Cast)**
 
 Conversion from a subclass reference to a superclass type.  
 This is **implicit and always safe** because every subclass is an instance of its superclass.
@@ -330,7 +359,7 @@ Animal a = dog;  // implicit upcast
 
 ✅ Safe: `Dog` *is an* `Animal`.
 
-#### **2.2 Downcasting (Narrowing Reference Cast)**
+#### 4.7.4.2 Downcasting (Narrowing Reference Cast)**
 
 Conversion from a superclass reference back to a subclass type.  
 This is **explicit** and may fail at runtime if the object is not actually an instance of the subclass.
@@ -353,7 +382,7 @@ if (x instanceof Dog) {
 
 ---
 
-### 🧠 **Key Points Summary**
+### 4.7.5 🧠 **Key Points Summary**
 
 | Casting Type | Applies To | Direction | Syntax | Safe? | Performed By |
 |---------------|-------------|------------|---------|--------|---------------|
@@ -364,7 +393,7 @@ if (x instanceof Dog) {
 
 ---
 
-### ✅ **Examples Overview**
+### 4.7.6 ✅ **Examples**
 
 ```java
 // Primitive casting
