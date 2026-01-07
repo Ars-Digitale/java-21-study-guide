@@ -1,4 +1,26 @@
-# Control Flow
+# 7. Control Flow
+
+### Table of Contents
+
+- [7. Control Flow](#7-control-flow)
+  - [7.1 The if Statement](#71-the-if-statement)
+  - [7.2 The switch Statement & Expression](#72-the-switch-statement--expression)
+    - [7.2.1 The switch target variable can be](#721-the-switch-target-variable-can-be)
+    - [7.2.2 Acceptable Case Values](#722-acceptable-case-values)
+    - [7.2.3 Type Compatibility Between Selector and Case](#723-type-compatibility-between-selector-and-case)
+    - [7.2.4 Pattern Matching in Switch](#724-pattern-matching-in-switch)
+      - [7.2.4.1 Variable Names and Scope Across Branches](#7241-variable-names-and-scope-across-branches)
+      - [7.2.4.2 Ordering Dominance and Exhaustiveness in Pattern Switches](#7242-ordering-dominance-and-exhaustiveness-in-pattern-switches)
+  - [7.3 Two Forms of switch Statement vs switch Expression](#73-two-forms-of-switch-statement-vs-switch-expression)
+    - [7.3.1 The Switch Statement](#731-the-switch-statement)
+      - [7.3.1.1 Fall-Through Behavior](#7311-fall-through-behavior)
+    - [7.3.2 The Switch Expression](#732-the-switch-expression)
+      - [7.3.2.1 yield in Switch Expression Blocks](#7321-yield-in-switch-expression-blocks)
+      - [7.3.2.2 Exhaustiveness for Switch Expressions](#7322-exhaustiveness-for-switch-expressions)
+  - [7.4 Null Handling](#74-null-handling)
+
+
+---
 
 **Control flow** in Java refers to the **order in which individual statements, instructions, or function calls are executed** during program runtime.  
 By default, statements run **sequentially** from top to bottom, but **control flow statements** allow the program to **make decisions**, **repeat actions**, or **branch execution paths** based on conditions.
@@ -14,7 +36,7 @@ Java provides three main categories of control flow constructs:
 > Understanding control flow is essential for determining how data moves through your program and how logic decisions are executed step by step.
 
 
-## 1. The `if` Statement
+## 7.1 The `if` Statement
 
 The **`if` statement** is a **conditional control flow structure** that executes a block of code **only if** a specified **boolean expression** evaluates to `true`.  
 It allows the program to make **decisions** during runtime.
@@ -57,7 +79,7 @@ if (grade >= 90) {
 
 ---
 
-## 2. The `switch` Statement & Expression 
+## 7.2 The `switch` Statement & Expression 
 
 The **`switch`** construct is a control-flow structure that selects **one branch among multiple alternatives** based on the value of an expression (the **selector**).
 
@@ -77,7 +99,7 @@ Java 21 supports:
 
 Both forms of `switch` share the same rules concerning the switch `Variable` and acceptable `Case Values`:
 
-### 2.1 The **switch `target variable`** can be:
+### 7.2.1 The **switch `target variable`** can be:
 
 | Control Variable type     |
 |---------------------------|
@@ -97,7 +119,7 @@ Both forms of `switch` share the same rules concerning the switch `Variable` and
 > - float
 > - double
 
-### 2.2 Acceptable `Case Values`:
+### 7.2.2 Acceptable `Case Values`:
 
 For a non-pattern switch, each case must be a compile-time constant compatible with the selector type:
 
@@ -109,7 +131,7 @@ Allowed as case labels:
 
 A **final constant `variable`** must be marked of course as **final** and initialized, in the same expression, with a `literal` value.
 
-### 2.3 Type Compatibility Between Selector and Case
+### 7.2.3 Type Compatibility Between Selector and Case
 
 The selector type and each case label must be compatible:
 
@@ -117,7 +139,7 @@ The selector type and each case label must be compatible:
 - For an enum selector, case labels must be constants of that enum.
 - For a String selector, case labels must be string constants.
 
-### 2.4 Pattern Matching in Switch
+### 7.2.4 Pattern Matching in Switch
 
 Switch in Java 21 supports pattern matching, including:
 
@@ -145,7 +167,7 @@ String describe(Object o) {
 - Pattern variables are in scope only in their arm (or in paths where the pattern is known to match).
 - Order matters due to **dominance**: more specific patterns must precede more general ones.
 
-#### 2.4.1 Variable Names and Scope Across Branches
+#### 7.2.4.1 Variable Names and Scope Across Branches
 
 With `Pattern Matching` the pattern matching variable exist only in the scope of the arm for which it has been defined: we can then reuse the same name for different case branches.
 
@@ -162,7 +184,7 @@ switch (o) {
 > [!NOTE]
 > Note that this last examples, not returning a value, is in fact a statement switch.
 
-#### 2.4.2 Ordering, Dominance and Exhaustiveness in Pattern Switches
+#### 7.2.4.2 Ordering, Dominance and Exhaustiveness in Pattern Switches
 
 When dealing with `patterns matching` the ordering of branches is always important because of **dominance** and possible **unreachable code**.
 
@@ -230,9 +252,9 @@ switch (number) {
 }
 ``` 
 
-## 3. Two Forms of switch: `switch` Statement vs `switch` Expression
+## 7.3 Two Forms of switch: `switch` Statement vs `switch` Expression
 
-### 3.1 The Switch Statement
+### 7.3.1 The Switch Statement
 
 A **switch statement** is used as a control-flow construct.
 It **does not itself evaluate to a value**, but its branches may contain `return` statements that return from the **enclosing method**.
@@ -259,7 +281,7 @@ statement, the code continues to execute, `IN ORDER`, the following branches;
 - A `default` clause is optional and it can appear anywhere within the switch statement: a `default` statement runs if there is no match; 
 - There is no value that the switch as a `statement` yields. You cannot assign the statement itself to a variable.
 
-#### 3.1.1 Fall-Through Behavior
+#### 7.3.1.1 Fall-Through Behavior
 
 - Execution jumps to the matching case.
 - If there is no break, it continues into the next case until a break, return or throw are met.
@@ -290,7 +312,7 @@ Output:
 > If in the previous example we remove the `break` on `case 3`, also the `message default` will be printed;
 
 
-### 3.2 The Switch Expression
+### 7.3.2 The Switch Expression
 
 A switch expression always produces a single value as its result.
 
@@ -313,7 +335,7 @@ int len = switch (s) {              // switch expression
 - Must be **exhaustive**: all possible selector values must be covered (via cases and/or default).
 - The result type must be consistent across all branches. (Ex: if a `switch expression` returns an int, the other branches can't return an unrelated type)
 
-#### 3.2.1 `yield` in Switch Expression Blocks
+#### 7.3.2.1 `yield` in Switch Expression Blocks
 
 When an arm of a switch expression uses a block instead of a single expression, you must use yield to provide the result:
 
@@ -332,7 +354,7 @@ int len = switch (s) {
 > `yield` is only for switch expressions.
 > break value; is not allowed as a way to return a value from a switch expression.
 
-#### 3.2.2 Exhaustiveness for Switch Expressions
+#### 7.3.2.2 Exhaustiveness for Switch Expressions
 
 Because a `switch expression` must return a value, it must be also **`exhaustive`**; i.e., it must handle all possible selector values:
 
@@ -352,7 +374,7 @@ int val = switch (s) {
 };
 ```
 
-## 4. Null Handling
+## 7.4 Null Handling
 
 Classic Switch (without patterns)
 
