@@ -1,9 +1,29 @@
-# Looping Constructs in Java 
+# 8. Looping Constructs in Java
+
+### Table of Contents
+
+- [8. Looping Constructs in Java](#8-looping-constructs-in-java)
+  - [8.1 The while Loop](#81-the-while-loop)
+  - [8.2 The do-while Loop](#82-the-do-while-loop)
+  - [8.3 The for Loop](#83-the-for-loop)
+  - [8.4 The Enhanced for-each Loop](#84-the-enhanced-foreach-loop)
+  - [8.5 Nested Loops](#85-nested-loops)
+  - [8.6 Infinite Loops](#86-infinite-loops)
+  - [8.7 break and continue](#87-break-and-continue)
+  - [8.8 Labeled Loops](#88-labeled-loops)
+  - [8.9 Loop Variable Scope](#89-loop-variable-scope)
+  - [8.10 Unreachable Code After break continue and return](#810-unreachable-code-after-break-continue-and-return)
+    - [8.10.1 Unreachable Code After break](#8101-unreachable-code-after-break)
+    - [8.10.2 Unreachable Code After continue](#8102-unreachable-code-after-continue)
+    - [8.10.3 Unreachable Code After return](#8103-unreachable-code-after-return)
+	
+---
+
 
 Java provides several **looping constructs** that allow repeated execution of a block of code as long as a condition holds. 
 Loops are essential for iteration, traversal of data structures, repeated computations, and implementing algorithms. 
 
-## 1. The `while` Loop
+## 8.1 The `while` Loop
 
 The `while` loop evaluates its **boolean condition before each iteration**.  
 If the condition is `false` from the beginning, the body is **never executed**.
@@ -37,7 +57,7 @@ Output:
 2
 ```
 
-## 2. The `do-while` Loop
+## 8.2 The `do-while` Loop
 
 The do-while loop evaluates its condition after executing the body,
 ensuring that the loop body runs at least once, even if the condition is false.
@@ -67,7 +87,7 @@ Output:
 5
 ```
 
-## 3. The `for` Loop
+## 8.3 The `for` Loop
 
 The traditional for `loop` is best suited for loops with a counter variable.
 It consists of three parts: **initialization**, **condition**, and **update**.
@@ -111,7 +131,7 @@ for (long i = 0, c = 3; x < 3 && i < 12; x++, i++) {
 }
 ```
 
-## 4. The Enhanced `for-each` Loop
+## 8.4 The Enhanced `for-each` Loop
 
 The enhanced for loop simplifies iteration over arrays and collections.
 
@@ -142,7 +162,7 @@ B
 C
 ```
 
-## 6. Nested Loops
+## 8.5 Nested Loops
 
 Loops may be nested within each other.
 Each loop maintains its own variables and conditions.
@@ -168,7 +188,7 @@ Output:
 2,3
 ```
 
-## 7. Infinite Loops
+## 8.6 Infinite Loops
 
 A loop is infinite when its condition always evaluates to true or is omitted.
 
@@ -184,7 +204,7 @@ for (;;) { ... }   // infinite for loop
 > Infinite loops must contain `break`, `return`, or external control to terminate.
 
 
-## 8. `break` and `continue`
+## 8.7 `break` and `continue`
 
 
 
@@ -213,7 +233,7 @@ for (int i = 0; i < 5; i++) {
 `break` and `continue` are applied, without labels, to the nearest inner loop under execution.
 
 
-## 9. Labeled Loops
+## 8.8 Labeled Loops
 
 A label, which is a single identifier followed by a colon `(:)` may be applied to a loop to allow break or continue to affect outer loops.
 
@@ -239,7 +259,7 @@ for (int i = 1; i <= 3; i++) {
 }
 ```
 
-## 10. Loop Variable Scope
+## 8.9 Loop Variable Scope
 
 - Variables declared inside a loop header (like for (int i = ...)) are scoped to the loop only.
 - Variables declared inside the body exist only inside the block.
@@ -251,12 +271,12 @@ for (int i = 0; i < 3; i++) {
 // i and x are not accessible here
 ```
 
-## 11. Unreachable code after `break`, `continue`, and `return`
+## 8.10 Unreachable code after `break`, `continue`, and `return`
 
 In Java, any statement placed **after** `break`, `continue`, or `return` within the **same block** is considered **unreachable code**, and the compiler will refuse to compile it.  
 This is because these keywords **guarantee** that program control leaves the current block immediately, making any following statements impossible to reach during execution.
 
-###  Unreachable Code After `break`
+###  8.10.1 Unreachable Code After `break`
 ```java
 for (int i = 0; i < 3; i++) {
     break;
@@ -264,7 +284,7 @@ for (int i = 0; i < 3; i++) {
 }
 ```
 
-###  Unreachable Code After continue
+###  8.10.2 Unreachable Code After continue
 ```java
 for (int i = 0; i < 3; i++) {
     continue;
@@ -278,7 +298,7 @@ continue skips to the next iteration.
 
 The statement following it will never run.
 
-###  Unreachable Code After return
+###  8.10.3 Unreachable Code After return
 ```java
 int test() {
     return 5;
