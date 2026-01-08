@@ -1,12 +1,29 @@
-# Introduction to the Collections Framework
+# 22. Introduction to the Collections Framework
 
-The Java Collections Framework (JCF) is a set of **interfaces, classes, and algorithms** designed to store, manipulate, and process groups of data efficiently.
+### Table of Contents
+
+- [22. Introduction to the Collections Framework](#22-introduction-to-the-collections-framework)
+  - [22.1 What Is the Collections Framework](#221-what-is-the-collections-framework)
+  - [22.2 The Core Interfaces](#222-the-core-interfaces)
+    - [22.2.1 Main Collection Interfaces](#2221-main-collection-interfaces)
+    - [22.2.2 Map Hierarchy](#2222-map-hierarchy)
+  - [22.3 Sequenced Collections Java-21](#223-sequenced-collections-java-21)
+  - [22.4 Why the Collections Framework Exists](#224-why-the-collections-framework-exists)
+  - [22.5 The Two Sides of the Framework Collections-vs-Maps](#225-the-two-sides-of-the-framework-collections-vs-maps)
+  - [22.6 Generic Types in the Collections Framework](#226-generic-types-in-the-collections-framework)
+  - [22.7 Mutability vs Immutability](#227-mutability-vs-immutability)
+  - [22.8 Big-O Performance Expectations](#228-big-o-performance-expectations)
+  - [22.9 Summary](#229-summary)
+
+---
+
+The `Java Collections Framework (JCF)` is a set of **interfaces, classes, and algorithms** designed to store, manipulate, and process groups of data efficiently.
 
 It provides a unified architecture for handling collections, allowing developers to write reusable, interoperable code with predictable behaviors and performance characteristics.
 
 This chapter introduces the foundational concepts needed before studying Lists, Sets, Queues, Maps, and Sequenced Collections, explored in detail in subsequent chapters.
 
-## 1. What Is the Collections Framework?
+## 22.1 What Is the Collections Framework?
 
 The Collections Framework provides:
 
@@ -17,7 +34,7 @@ The Collections Framework provides:
 
 All major collection structures share a consistent design so that code working with one implementation can often be reused with another.
 
-## 2. The Core Interfaces
+## 22.2 The Core Interfaces
 
 At the heart of the Java Collections Framework is a small set of **root interfaces** that define generic data-handling behaviors.
 
@@ -25,7 +42,7 @@ At the heart of the Java Collections Framework is a small set of **root interfac
 - **Set**: a collection that does not allow `duplicates`;
 - **Queue**: a structure that maps keys to values, in which duplicate keys are not allowed; each key can map to at most one value.
 
-### 2.1 Main Collection Interfaces
+### 22.2.1 Main Collection Interfaces
 
 Below is the conceptual hierarchy.
 
@@ -66,7 +83,7 @@ java.util
 
 The **Map** interface does not extend Collection because a map stores key/value pairs rather than single values.
 
-### 2.2 Map Hierarchy
+### 22.2.2 Map Hierarchy
 
 ```text
 java.util
@@ -82,7 +99,7 @@ java.util
 		└─ ConcurrentHashMap<K,V>
 ```
 
-## 3. Sequenced Collections (Java 21+)
+## 22.3 Sequenced Collections (Java 21+)
 
 Java 21 introduces the new interface `SequencedCollection`, which formalizes the idea that a collection maintains a **defined encounter order**.
 This was already true for List, LinkedHashSet, LinkedHashMap, Deque, etc., but now the behavior is standardized.
@@ -92,7 +109,7 @@ This was already true for List, LinkedHashSet, LinkedHashMap, Deque, etc., but n
 
 This drastically simplifies the specification of ordering behaviors and will be used throughout the following chapters.
 
-## 4. Why the Collections Framework Exists
+## 22.4 Why the Collections Framework Exists
 
 - Avoid reinventing data structures
 - Provide well-tested, high-performance algorithms
@@ -101,7 +118,7 @@ This drastically simplifies the specification of ordering behaviors and will be 
 
 Before Java 1.2, data structures were ad-hoc, inconsistent, and untyped. The Collections Framework unified all of this into a consistent API.
 
-## 5. The Two Sides of the Framework: Collections vs. Maps
+## 22.5 The Two Sides of the Framework: Collections vs. Maps
 
 “Does Map extend Collection?”
 **No.**
@@ -110,7 +127,7 @@ A Map stores **pairs**, while a Collection stores **single elements**.
 - Collection = List, Set, Queue, Deque, SequencedCollection
 - Map = Dictionary-like key/value store
 
-## 6. Generic Types in the Collections Framework
+## 22.6 Generic Types in the Collections Framework
 
 Collections are almost always used with generics. Using raw types is discouraged.
 
@@ -121,7 +138,7 @@ Map<Integer, String> map = new HashMap<>();
 
 > **Note:** Generics in collections work through type erasure: see [Type Erasure](../module-04/generics.md#4-type-erasure).
 
-## 7. Mutability vs. Immutability
+## 22.7 Mutability vs. Immutability
 
 Many methods in the Collections API return **unmodifiable** collections:
 
@@ -157,7 +174,7 @@ immutable2.set(0, "k"); ❌ UnsupportedOperationException
 fromAsList.set(0, "k");  // the update will be reflected on the backing array as well.
 ```
 
-## 8. Big-O Performance Expectations
+## 22.8 Big-O Performance Expectations
 
 Understanding complexity is essential. Here are common examples:
 
@@ -174,7 +191,7 @@ Deque: add/remove first/last O(1)
 > **Note:** These values are averages; worst-case may be different (especially for hash-based structures).
 
 
-## 9. Summary
+## 22.9 Summary
 
 - The Collection Framework is built on a small set of core interfaces.
 - Java 21 adds Sequenced Collections to unify ordering behavior.
