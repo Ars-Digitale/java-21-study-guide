@@ -1,48 +1,50 @@
-# Inheritance in Java
+# 16. Inheritance in Java
 
 ### Table of Contents
 
-- [Inheritance in Java]
-	- [1. General Definition of Inheritance](#1-general-definition-of-inheritance)
-	- [2. Single Inheritance and java.lang.Object](#2-single-inheritance-and-javalangobject)
-	- [3. Transitive Inheritance](#3-transitive-inheritance)
-	- [4. What Gets Inherited? (Short Reminder)](#4-what-gets-inherited-short-reminder)
-	- [5. Class Modifiers Affecting Inheritance](#5-class-modifiers-affecting-inheritance)
-	- [6. this and super References](#6-this-and-super-references)
-	  - [6.1 The this Reference](#61-the-this-reference)
-	  - [6.2 The super Reference](#62-the-super-reference)
-	- [7. Declaring Constructors in an Inheritance Chain](#7-declaring-constructors-in-an-inheritance-chain)
-	- [8. Default no-arg Constructor](#8-default-no-arg-constructor)
-	- [9. Using this() and Constructor Overloading](#9-using-this-and-constructor-overloading)
-	- [10. Calling the Parent Constructor Using super()](#10-calling-the-parent-constructor-using-super)
-	- [11. Default Constructor — Tips and Traps](#11-default-constructor--tips-and-traps)
-	- [12. super() Always Refers to the Most Direct Parent](#12-super-always-refers-to-the-most-direct-parent)
-	- [13. Inheriting Members](#13-inheriting-members)
-	  - [13.1 Method Overriding](#131-method-overriding)
-		- [13.1.1 Definition and Role in Inheritance](#1311-definition-and-role-in-inheritance)
-		- [13.1.2 Using super to Call the Parent Implementation](#1312-using-super-to-call-the-parent-implementation)
-		- [13.1.3 Overriding Rules (Instance Methods)](#1313-overriding-rules-instance-methods)
-		- [13.1.4 Hiding Static Methods](#1314-hiding-static-methods)
-	  - [13.2 Abstract Classes](#132-abstract-classes)
-		- [13.2.1 Definition and Purpose](#1321-definition-and-purpose)
-		- [13.2.2 Rules for Abstract Classes](#1322-rules-for-abstract-classes)
-	  - [13.3 Creating Immutable Objects](#133-creating-immutable-objects)
-		- [13.3.1 What Is an Immutable Object?](#1331-what-is-an-immutable-object)
-		- [13.3.2 Guidelines for Designing Immutable Classes](#1332-guidelines-for-designing-immutable-classes)
+- [16. Inheritance in Java](#16-inheritance-in-java)
+  - [16.1 General Definition of Inheritance](#161-general-definition-of-inheritance)
+  - [16.2 Single Inheritance and java.lang.Object](#162-single-inheritance-and-javalangobject)
+  - [16.3 Transitive Inheritance](#163-transitive-inheritance)
+  - [16.4 What Gets Inherited Short Reminder](#164-what-gets-inherited-short-reminder)
+  - [16.5 Class Modifiers Affecting Inheritance](#165-class-modifiers-affecting-inheritance)
+  - [16.6 this and super References](#166-this-and-super-references)
+    - [16.6.1 The this Reference](#1661-the-this-reference)
+    - [16.6.2 The super Reference](#1662-the-super-reference)
+  - [16.7 Declaring Constructors in an Inheritance Chain](#167-declaring-constructors-in-an-inheritance-chain)
+  - [16.8 Default no-arg Constructor](#168-default-no-arg-constructor)
+  - [16.9 Using this and Constructor Overloading](#169-using-this-and-constructor-overloading)
+  - [16.10 Calling the Parent Constructor Using super](#1610-calling-the-parent-constructor-using-super)
+  - [16.11 Default Constructor Tips and Traps](#1611-default-constructor-tips-and-traps)
+  - [16.12 super Always Refers to the Most Direct Parent](#1612-super-always-refers-to-the-most-direct-parent)
+  - [16.13 Inheriting Members](#1613-inheriting-members)
+    - [16.13.1 Method Overriding](#16131-method-overriding)
+      - [16.13.1.1 Definition and Role in Inheritance](#161311-definition-and-role-in-inheritance)
+      - [16.13.1.2 Using super to Call the Parent Implementation](#161312-using-super-to-call-the-parent-implementation)
+      - [16.13.1.3 Overriding Rules Instance Methods](#161313-overriding-rules-instance-methods)
+      - [16.13.1.4 Hiding Static Methods Method Hiding](#161314-hiding-static-methods-method-hiding)
+    - [16.13.2 Abstract Classes](#16132-abstract-classes)
+      - [16.13.2.1 Definition and Purpose](#161321-definition-and-purpose)
+      - [16.13.2.2 Rules for Abstract Classes](#161322-rules-for-abstract-classes)
+    - [16.13.3 Creating Immutable Objects](#16133-creating-immutable-objects)
+      - [16.13.3.1 What Is an Immutable Object](#161331-what-is-an-immutable-object)
+      - [16.13.3.2 Guidelines for Designing Immutable Classes](#161332-guidelines-for-designing-immutable-classes)
+
 
 ---
+
 
 Inheritance is one of the core pillars of Object-Oriented Programming.  
 It allows a class (the *subclass*) to acquire the state and behavior of another class (the *superclass*), creating hierarchical relationships that promote code reuse, specialization, and polymorphism.
 
-## 1. General Definition of Inheritance
+## 16.1 General Definition of Inheritance
 
 Inheritance enables a class to extend another class, automatically gaining its accessible fields and methods.  
 The extending class may add new features or override existing behaviors, creating more specialized versions of its parent.
 
 > **Note:** Inheritance expresses an *“is-a”* relationship: a Dog **is a** Animal.
 
-## 2. Single Inheritance and java.lang.Object
+## 16.2 Single Inheritance and java.lang.Object
 
 Java supports **single inheritance**, meaning every class may extend **only one** direct superclass.  
 All classes ultimately inherit from `java.lang.Object`, which sits at the top of the hierarchy.  
@@ -56,7 +58,7 @@ class Dog extends Animal { }
 System.out.println(new Dog() instanceof Object); // true
 ```
 
-## 3. Transitive Inheritance
+## 16.3 Transitive Inheritance
 
 Inheritance is **transitive**.  
 If class C extends B and B extends A, then C effectively inherits accessible members from both B *and* A.
@@ -67,7 +69,7 @@ class B extends A { }
 class C extends B { } // C inherits from both A and B
 ```
 
-## 4. What Gets Inherited? (Short Reminder)
+## 16.4 What Gets Inherited? (Short Reminder)
 
 A subclass inherits all **accessible** members of the superclass.  
 However, this depends on access modifiers.
@@ -80,7 +82,7 @@ However, this depends on access modifiers.
 > **Note:** (Please refer to: [Access Modifiers](../module-01/basic-building-blocks.md#3-access-modifiers)) 
 
 
-## 5. Class Modifiers Affecting Inheritance
+## 16.5 Class Modifiers Affecting Inheritance
 
 Some class-level modifiers affect whether a class may be extended.
 
@@ -97,9 +99,9 @@ Some class-level modifiers affect whether a class may be extended.
 > **Note:** A `static` class in Java can exist only as a **static nested class**.
 
 
-## 6. `this` and `super` References
+## 16.6 `this` and `super` References
 
-### 6.1 The `this` Reference
+### 16.6.1 The `this` Reference
 The `this` reference refers to the current object instance and helps in disambiguing access to current and inherited members. 
  
 Java uses a **granular scope** rule:  
@@ -132,7 +134,7 @@ public class Person {
 > [!WARNING]
 > `this` cannot be used inside static methods because no instance exists.
 
-### 6.2 The `super` Reference
+### 16.6.2 The `super` Reference
 The `super` reference gives access to members of the direct parent class.  
 
 Useful when:  
@@ -157,7 +159,7 @@ class Child extends Parent {
 > **Note:** `super` cannot be used inside static contexts.
 
 
-## 7. Declaring Constructors in an Inheritance Chain
+## 16.7 Declaring Constructors in an Inheritance Chain
 
 A constructor initializes a newly created object.  
 Constructors are **never inherited**, but each subclass constructor must ensure that the superclass is initialized.
@@ -170,7 +172,7 @@ You can explicitely declare a no-arg or a specific constructor or, if you don't,
 
 If you explicitely declare a constructor, the Java compiler will not include any `default no-arg constructor`.
 
-## 8. Default `no-arg` Constructor
+## 16.8 Default `no-arg` Constructor
 
 If a class does not declare any constructor, Java automatically inserts a **default no-argument constructor**.  
 This constructor calls `super()` implicitly: the Java compiler implicitely insert a call to the no-arg constructor super(). 
@@ -185,7 +187,7 @@ class Child extends Parent {
 ```
 
 
-## 9. Using `this()` and Constructor Overloading
+## 16.9 Using `this()` and Constructor Overloading
 
 **this()** calls another constructor in the same class. 
  
@@ -213,7 +215,7 @@ class Car {
 ```
 
 
-## 10. Calling the Parent Constructor Using `super()`
+## 16.10 Calling the Parent Constructor Using `super()`
 
 Every constructor must call a superclass constructor, either explicitly or implicitly.  
 `super()` must appear as the **first** line in the constructor (unless replaced by `this()`).
@@ -233,7 +235,7 @@ class Child extends Parent {
 ```
 
 
-## 11. Default Constructor — Tips and Traps
+## 16.11 Default Constructor — Tips and Traps
 
 - **If the superclass does not have a no-arg constructor, the subclass MUST call `super(args)` explicitly.**
 - If the subclass defines any constructor, Java does NOT create a default constructor automatically for the parent class.
@@ -251,7 +253,7 @@ class Child extends Parent {
 ```
 
 
-## 12. `super()` Always Refers to the **Most Direct Parent**
+## 16.12 `super()` Always Refers to the **Most Direct Parent**
 
 Even in long inheritance chains, `super()` always calls the constructor of the **immediate** superclass, not any higher ancestor.
 
@@ -278,9 +280,9 @@ B
 C
 ```
 
-## 13. Inheriting Members
+## 16.13 Inheriting Members
 
-### 13.1 Method Overriding
+### 16.13.1 Method Overriding
 
 Method overriding is a core concept of inheritance: it allows a subclass to provide a **new implementation** for a method that is already defined in its superclass.
  
@@ -288,7 +290,7 @@ At runtime, the version of the method that is executed depends on the **actual o
  
 This is called **dynamic dispatch** and it is what enables polymorphism in Java.
 
-#### 13.1.1 Definition and Role in Inheritance
+#### 16.13.1.1 Definition and Role in Inheritance
 
 A method in a subclass **overrides** a method in its superclass if:
 
@@ -322,7 +324,7 @@ public class TestOverride {
 }
 ```
 
-#### 13.1.2 Using `super` to Call the Parent Implementation
+#### 16.13.1.2 Using `super` to Call the Parent Implementation
 
 When a subclass overrides a method, it can still access the superclass implementation via the `super` reference. 
 
@@ -369,7 +371,7 @@ class Derived extends Base {
 }
 ```
 
-#### 13.1.3 Overriding Rules (Instance Methods)
+#### 16.13.1.3 Overriding Rules (Instance Methods)
 
 - **Same signature**: same method name, same parameter types and order.
 - **Covariant return type**: the overriding method can return the same type as the parent, or a **subtype** of the parent return type.
@@ -394,7 +396,7 @@ class Child extends Parent {
 }
 ```
 
-#### 13.1.4 Hiding Static Methods
+#### 16.13.1.4 Hiding Static Methods (Method Hiding)
 
 Static methods are **not overridden**; they are **hidden**. 
 
@@ -433,9 +435,9 @@ public class TestStatic {
 > - If you try to redefine them in a subclass, the code will not compile.
 
 
-### 13.2 Abstract Classes
+### 16.13.2 Abstract Classes
 
-#### 13.2.1 Definition and Purpose
+#### 16.13.2.1 Definition and Purpose
 
 An **abstract class** is a class that cannot be instantiated directly and is intended to be extended. 
 
@@ -447,7 +449,7 @@ It may contain:
 
 Abstract classes are used when you want to define a common **base behavior** and contract, but leave some details to be implemented by concrete subclasses.
 
-#### 13.2.2 Rules for Abstract Classes
+#### 16.13.2.2 Rules for Abstract Classes
 
 - A class with at least one abstract method **must** be declared abstract.
 - An abstract class **cannot** be instantiated directly.
@@ -488,9 +490,9 @@ class Circle extends Shape {
 > - Although an abstract class cannot be instantiated, its constructors are still called when creating instances of concrete subclasses. 
 > - The chain always starts from the top of the hierarchy and moves down.
 
-### 13.3 Creating Immutable Objects
+### 16.13.3 Creating Immutable Objects
 
-#### 13.3.1 What Is an Immutable Object?
+#### 16.13.3.1 What Is an Immutable Object?
 
 An object is **immutable** if, after it has been created, its state **cannot change**. 
 
@@ -498,7 +500,7 @@ All fields that represent the state remain constant for the lifetime of that obj
 
 Immutable objects are simpler to reason about, inherently thread safe (if properly designed), and widely used in the Java Standard Library (for example, `String`, wrapper classes like `Integer`, and many classes in `java.time`).
 
-#### 13.3.2 Guidelines for Designing Immutable Classes
+#### 16.13.3.2 Guidelines for Designing Immutable Classes
 
 - Declare the class **final** so it cannot be subclassed (or make all constructors private and provide controlled factory methods).
 - Make all fields that represent state **private** and **final**.
