@@ -1,35 +1,35 @@
-# Math in Java
-
+# 11. Math in Java
 
 ### Table of Contents
 
-- [Math in Java]
-	- [3. Math APIs](#3-math-apis)
-	  - [3.1 Maximum and Minimum between two values](#31-maximum-and-minimum-between-two-values)
-	  - [3.2 Math.round()](#32-mathround)
-	  - [3.3 Math.ceil() (Ceiling)](#33-mathceil-ceiling)
-	  - [3.4 Math.floor() (Floor)](#34-mathfloor-floor)
-	  - [3.5 Math.pow()](#35-mathpow)
-	  - [3.6 Math.random()](#36-mathrandom)
-	  - [3.7 Math.abs()](#37-mathabs)
-	  - [3.8 Math.sqrt()](#371-mathsqrt)
-	  - [3.9 Summary Table](#38-summary-table)
-	  - [3.10 BigInteger and BigDecimal](#310-biginteger-and-bigdecimal)
-		- [3.10.1 Why double and float are not enough](#3101-why-double-and-float-are-not-enough)
-		- [3.10.2 BigInteger — Arbitrary-Precision Integers](#3102-biginteger--arbitrary-precision-integers)
-		- [3.10.3 Creating BigInteger](#3103-creating-biginteger)
-		- [3.10.4 Operations (no operators!)](#3104-operations-no-operators)
-		
+- [11. Math in Java](#11-math-in-java)
+  - [11.1 Math APIs](#111-math-apis)
+    - [11.1.1 Maximum and Minimum Between Two Values](#1111-maximum-and-minimum-between-two-values)
+    - [11.1.2 Math.round](#1112-mathround)
+    - [11.1.3 Math.ceil Ceiling](#1113-mathceil-ceiling)
+    - [11.1.4 Math.floor Floor](#1114-mathfloor-floor)
+    - [11.1.5 Math.pow](#1115-mathpow)
+    - [11.1.6 Math.random](#1116-mathrandom)
+    - [11.1.7 Math.abs](#1117-mathabs)
+    - [11.1.8 Math.sqrt](#1118-mathsqrt)
+    - [11.1.9 Summary Table](#1119-summary-table)
+  - [11.2 BigInteger and BigDecimal](#112-biginteger-and-bigdecimal)
+    - [11.2.1 Why double and float Are Not Enough](#1121-why-double-and-float-are-not-enough)
+    - [11.2.2 BigInteger — Arbitrary-Precision Integers](#1122-biginteger--arbitrary-precision-integers)
+    - [11.2.3 Creating BigInteger](#1123-creating-biginteger)
+    - [11.2.4 Operations No Operators](#1124-operations-no-operators)
+
+
 ---
 
-## 3. Math APIs
+## 11.1 Math APIs
 
 The `java.lang.Math` class provides a set of static methods useful for numerical operations. 
 These methods work with primitive numeric types. 
 Below is a summary of the most frequently used ones, together with their overloaded forms.
 
 
-### 3.1 `Maximum` and `Minimum` between two values
+### 11.1.1 `Maximum` and `Minimum` between two values
 
 Math.max() and Math.min() compare the two provided values and return the `Max` or `Min` between them;
 There are 4 overloaded versions for each method:
@@ -52,7 +52,7 @@ System.out.println(Math.max(10.50, 7.5));   // 10.5
 System.out.println(Math.min(10, -20));		// -20
 ```
 
-### 3.2 `Math.round()`
+### 11.1.2 `Math.round()`
 
 `round()` returns the **nearest integer** to its argument, following standard rounding rules  
 (0.5 and above → up, below 0.5 → down).
@@ -75,7 +75,7 @@ Note:
 
 (e.g., `round(float)` returns an `int`, while `round(double)` returns a `long`)
 
-### 3.3 `Math.ceil()` (Ceiling)
+### 11.1.3 `Math.ceil()` (Ceiling)
 
 Returns the **smallest double** value that is **≥ argument**.
 
@@ -88,7 +88,7 @@ Math.ceil(3.1);   // 4.0
 Math.ceil(-3.1);  // -3.0
 ```
 
-### 3.4 `Math.floor()` (Floor)
+### 11.1.4 `Math.floor()` (Floor)
 
 Returns the **largest double** value that is **≤ argument**.
 
@@ -101,7 +101,7 @@ Math.floor(3.9);   // 3.0
 Math.floor(-3.1);  // -4.0
 ```
 
-### 3.5 `Math.pow()`
+### 11.1.5 `Math.pow()`
 
 Raises a value to a power.
 
@@ -116,7 +116,7 @@ Math.pow(10, -1);    // 0.1
 ```
 
 
-### 3.6 `Math.random()`
+### 11.1.6 `Math.random()`
 
 Returns a **double in the range [0.0, 1.0)**.
 
@@ -131,7 +131,7 @@ double r = Math.random();   // 0.0 <= r < 1.0
 int x = (int)(Math.random() * 10);
 ```
 
-### 3.7 `Math.abs()`
+### 11.1.7 `Math.abs()`
 Absolute value.
 
 Overloads:
@@ -140,7 +140,7 @@ Overloads:
 - `float abs(float)`
 - `double abs(double)`
 
-### 3.8 `Math.sqrt()`
+### 11.1.8 `Math.sqrt()`
 Square root, returns a `double`.
 
 ```java
@@ -148,7 +148,7 @@ Math.sqrt(9);    // 3.0
 Math.sqrt(-1);   // NaN
 ```
 
-### 3.9 Summary Table
+### 11.1.9 Summary Table
 
 | Method | Returns | Overloads | Notes |
 |--------|---------|-----------|--------|
@@ -162,7 +162,7 @@ Math.sqrt(-1);   // NaN
 | `sqrt()` | double | double | Square root |
 
 
-### 3.10 BigInteger and BigDecimal
+## 11.2 BigInteger and BigDecimal
 
 The classes `BigInteger` and `BigDecimal` (in java.math) provide arbitrary-precision number types.
 They are used when:
@@ -172,7 +172,7 @@ They are used when:
 
 Both are `immutable`: every operation returns a new instance.
 
-#### 3.10.1 Why double and float are not enough
+### 11.2.1 Why double and float are not enough
 
 Floating-point types (float, double) use a binary representation. Many decimal fractions can’t be represented exactly (like 0.1 or 0.2), so you get rounding errors:
 
@@ -183,11 +183,11 @@ System.out.println(0.1 + 0.2); // 0.30000000000000004
 For tasks like financial calculations, this is unacceptable.
 `BigDecimal` solves this by representing numbers using a decimal model with a configurable scale (number of digits after the decimal point).
 
-#### 3.10.2 BigInteger — Arbitrary-Precision Integers
+### 11.2.2 BigInteger — Arbitrary-Precision Integers
 
 BigInteger represents integer values of any size, limited only by memory.
 
-#### 3.10.3 Creating BigInteger
+### 11.2.3 Creating BigInteger
 
 Common ways:
 
@@ -223,7 +223,7 @@ BigInteger c = new BigInteger("FF", 16); // 255 in base 16
 BigInteger r = new BigInteger(128, new Random()); // random 128-bit number
 ```
 
-#### 3.10.4 Operations (no operators!)
+### 11.2.4 Operations (no operators!)
 
 You cannot use `+`, `-`, `*`, `/`, `%` with BigInteger.
 Instead, use methods (all return new instances):
@@ -253,5 +253,3 @@ if (x.compareTo(y) > 0) {
 System.out.println("x is larger");
 }
 ```
-
----
