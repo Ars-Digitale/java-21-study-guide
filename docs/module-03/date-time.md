@@ -33,7 +33,7 @@
 
 ---
 
-## 12.1 Dates and Time
+## 12.1 Date and Time
 
 Java provides a modern, consistent, immutable date/time API in the package **`java.time.*`**.  
 This API replaces the old `java.util.Date` and `java.util.Calendar` classes and is widely tested in certification exams.
