@@ -1,10 +1,26 @@
-# Chapter 6 — Map API
+# 28. Map API
+
+### Table of Contents
+
+- [28. Map API](#28-map-api)
+  - [28.1 Core Map Characteristics](#281-core-map-characteristics)
+  - [28.2 Main Map Implementations](#282-main-map-implementations)
+  - [28.3 Creating Maps](#283-creating-maps)
+  - [28.4 Basic Map Operations](#284-basic-map-operations)
+  - [28.5 Iterating Over a Map](#285-iterating-over-a-map)
+  - [28.6 Determining Equality in Maps](#286-determining-equality-in-maps)
+  - [28.7 Special Behavior of TreeMap](#287-special-behavior-of-treemap)
+  - [28.8 Null Handling](#288-null-handling)
+  - [28.9 Common Pitfalls](#289-common-pitfalls)
+  - [28.10 Summary](#2810-summary)
+
+---
 
 The `Map` interface represents a collection of **key–value pairs**, where each key maps to at most one value.
 Unlike other collection types, `Map` does **not** extend `Collection` and therefore has its own hierarchy and rules.
 
 
-## 6.1 Core Map Characteristics
+## 28.1 Core Map Characteristics
 
 - Each key is unique; **duplicate keys overwrite the previous value**
 - Values may be duplicated
@@ -13,7 +29,7 @@ Unlike other collection types, `Map` does **not** extend `Collection` and theref
 
 > **Note:** A `Map` is not a `Collection`, but its views (keySet, values, entrySet) are collections.
 
-## 6.2 Main Map Implementations
+## 28.2 Main Map Implementations
 
 | Implementation | Ordering | Null Keys | Null Values | Thread-Safe | Notes |
 |----------------|---------|-----------|-------------|-------------|------|
@@ -26,7 +42,7 @@ Unlike other collection types, `Map` does **not** extend `Collection` and theref
 > **Note:** TreeMap ordering is determined either by `Comparable` or by a `Comparator` provided at construction.
 
 
-## 6.3 Creating Maps
+## 28.3 Creating Maps
 
 Maps can be created using constructors or factory methods.
 
@@ -45,20 +61,20 @@ Map<String, Integer> map5 = Map.ofEntries(
 > **Note:** Maps created with `Map.of(...)` and `Map.ofEntries(...)` are **immutable**. Any modification attempt throws `UnsupportedOperationException`.
 
 
-## 6.4 Basic Map Operations
+## 28.4 Basic Map Operations
 
 | Method | Description | Return
 |------|-------------|---------------|
-| put(k, v) | Adds or replaces a mapping | Return prev. value or null
-| get(k) | Returns value or null | Return specific value or null
-| getOrDefault(k, default) | Returns value or default | Return specific value or default
-| remove(k) | Removes mapping | Remove and return specific value or null
-| containsKey(k) | Checks key presence | boolean
-| containsValue(v) | Checks value presence | boolean
-| size() | Number of entries | int
-| isEmpty() | Empty check | boolean
-| clear() | Removes all entries | void
-| V merge(k, v, BiFunction(V, V, V)) | merge value with func. | Set value if not set; run func. if set for new value; Remove if v is null
+| put(k, v) | Adds or replaces a mapping | Return prev. value or null |
+| get(k) | Returns value or null | Return specific value or null |
+| getOrDefault(k, default) | Returns value or default | Return specific value or default |
+| remove(k) | Removes mapping | Remove and return specific value or null |
+| containsKey(k) | Checks key presence | boolean |
+| containsValue(v) | Checks value presence | boolean |
+| size() | Number of entries | int |
+| isEmpty() | Empty check | boolean |
+| clear() | Removes all entries | void |
+| V merge(k, v, BiFunction(V, V, V)) | merge value with func. | Set value if not set; run func. if set for new value; Remove if v is null |
 
 ```java
 Map<String, String> map = new HashMap<>();
@@ -70,7 +86,7 @@ map.put("A", "Avocado"); // overwrites value
 String v = map.get("B"); // Banana
 ```
 
-## 6.5 Iterating Over a Map
+## 28.5 Iterating Over a Map
 
 Maps are iterated via views:
 
@@ -95,7 +111,7 @@ for (Map.Entry<String, String> e : map.entrySet()) {
 > **Note:** Modifying the map while iterating over these views may throw `ConcurrentModificationException` (except for concurrent maps).
 
 
-## 6.6 Determining Equality in Maps
+## 28.6 Determining Equality in Maps
 
 Map equality is defined as follows:
 
@@ -113,7 +129,7 @@ System.out.println(m1.equals(m2)); // true
 > **Note:** Iteration order does not affect map equality.
 
 
-## 6.7 Special Behavior of TreeMap
+## 28.7 Special Behavior of TreeMap
 
 TreeMap maintains entries in sorted order based on keys.
 
@@ -131,7 +147,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 > Mixing incompatible types causes `ClassCastException` at runtime.@@WARNING_END@@
 
 
-## 6.8 Null Handling
+## 28.8 Null Handling
 
 | Implementation | Null Key | Null Value |
 |----------------|----------|------------|
@@ -143,7 +159,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 
 
 
-## 6.9 Common  Pitfalls
+## 28.9 Common  Pitfalls
 
 - Assuming Map is a Collection
 - Forgetting that duplicate keys overwrite values
@@ -152,7 +168,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 - Trying to modify immutable maps created via Map.of
 
 
-## 6.10 Summary
+## 28.10 Summary
 
 - Maps store unique keys mapped to values
 - Ordering depends on implementation
