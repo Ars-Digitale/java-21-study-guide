@@ -3,7 +3,7 @@
 ### Table of Contents
 
 - [35. Java I/O APIs (Legacy and NIO)](#35-java-io-apis-legacy-and-nio)
-  - [35.1 Legacy java.io — Design, Behavior, and Subtleties](#351-legacy-javaio-design-behavior-and-subtleties)
+  - [35.1 Legacy java.io — Design, Behavior, and Subtleties](#351-legacy-javaio--design-behavior-and-subtleties)
     - [35.1.1 The Stream Abstraction](#3511-the-stream-abstraction)
     - [35.1.2 Stream Chaining and the Decorator Pattern](#3512-stream-chaining-and-the-decorator-pattern)
     - [35.1.3 Blocking I/O: What It Means](#3513-blocking-io-what-it-means)
