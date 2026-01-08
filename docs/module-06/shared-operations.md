@@ -1,14 +1,28 @@
-# Shared Collection Operations & Equality
+# 23. Shared Collection Operations & Equality
+
+### Table of Contents
+
+- [23. Shared Collection Operations & Equality](#23-shared-collection-operations--equality)
+  - [23.1 Core Collection Methods Available to Most Collections](#231-core-collection-methods-available-to-most-collections)
+    - [23.1.1 Mutating Operations](#2311-mutating-operations)
+    - [23.1.2 Query Operations](#2312-query-operations)
+  - [23.2 Equality](#232-equality)
+  - [23.3 Fail-Fast Behavior](#233-fail-fast-behavior)
+  - [23.4 Bulk Operations Java-21](#234-bulk-operations-java-21)
+  - [23.5 Common Return Types and Exceptions](#235-common-return-types-and-exceptions)
+  - [23.6 Summary Table — Shared Operations](#236-summary-table--shared-operations)
+
+---
 
 This chapter covers the fundamental operations shared across the Java Collections API, including how equality is determined inside collections. These concepts apply to all main collection families (`List`, `Set`, `Queue`, `Deque`, `Map` and their Sequenced variants).
 
 Mastering these operations is essential, as they explain how collections behave when adding, searching, removing, comparing, iterating, and sorting elements.
 
-## 2.1 Core Collection Methods (Available to Most Collections)
+## 23.1 Core Collection Methods (Available to Most Collections)
 
 The following methods come from the `Collection<E>` interface and are inherited by **all** major collections except `Map` (which has its own family of operations).
 
-### 2.1.1 Mutating Operations
+### 23.1.1 Mutating Operations
 
 - `boolean add(E e)` — Adds an element (allowed to add duplicates in lists).
 - `boolean remove(Object o)` — Removes the first matching element.
@@ -17,7 +31,7 @@ The following methods come from the `Collection<E>` interface and are inherited 
 - `boolean removeAll(Collection<?> c)` — Removes all elements contained in the given collection.
 - `boolean retainAll(Collection<?> c)` — Keeps only matching elements.
 
-### 2.1.2 Query Operations
+### 23.1.2 Query Operations
 
 - `int size()` — Number of elements.
 - `boolean isEmpty()` — Whether collection contains zero elements.
@@ -25,7 +39,7 @@ The following methods come from the `Collection<E>` interface and are inherited 
 - `Iterator<E> iterator()` — Returns an iterator (fail-fast).
 - `Object[] toArray()` and `<T> T[] toArray(T[] a)` — Copy into an array.
 
-## 2.2 Equality
+## 23.2 Equality
 
 A custom implementation of the method `equals()` allows us to compare the type and content of two collections.
 
@@ -59,7 +73,7 @@ firstSet.equals(secondSet): true
 secondSet.equals(thirdSet): true
 ```
 
-## 2.3 Fail-Fast Behavior
+## 23.3 Fail-Fast Behavior
 
 Most collection iterators (except concurrent collections) are fail-fast: modifying a collection structurally while iterating triggers a `ConcurrentModificationException`.
 
@@ -72,14 +86,14 @@ list.add(99); // ❌ ConcurrentModificationException
 
 > **Note:** Use `Iterator.remove()` when you must remove elements during iteration.
 
-## 2.4 Bulk Operations (Java 21)
+## 23.4 Bulk Operations (Java 21)
 
 - `removeIf(Predicate<? super E> filter)` — Removes all matching items.
 - `replaceAll(UnaryOperator<E> op)` — Replaces every element.
 - `forEach(Consumer<? super E> action)` — Applies action to each element.
 - `stream()` — Returns a stream for pipeline operations.
 
-## 2.5 Common Return Types and Exceptions
+## 23.5 Common Return Types and Exceptions
 
 - `add(E)` returns **boolean** — always `true` for `ArrayList`, may be `false` for `Set` if no change occurs.
 
@@ -91,7 +105,7 @@ list.add(99); // ❌ ConcurrentModificationException
 
 - `toArray()` always returns a `Object[]` — not `T[]`.
 
-## 2.6 Summary Table — Shared Operations
+## 23.6 Summary Table — Shared Operations
 
 
 |	Operation 					|	Applies						|	 To Notes					|
