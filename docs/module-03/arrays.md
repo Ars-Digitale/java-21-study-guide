@@ -1,40 +1,44 @@
-# Arrays in Java
-
+# 10. Arrays in Java
 
 ### Table of Contents
 
-- [Arrays in Java]
-	- [2. Arrays in Java](#2-arrays-in-java)
-	  - [2.1 Declaring Arrays](#21-declaring-arrays)
-	  - [2.2 Creating Arrays (Instantiation)](#22-creating-arrays-instantiation)
-	  - [2.3 Default Values in Arrays](#23-default-values-in-arrays)
-	  - [2.4 Accessing Elements](#24-accessing-elements)
-	  - [2.5 Array Initialization Shorthands](#25-array-initialization-shorthands)
-		- [2.5.1 Anonymous Array Creation](#251-anonymous-array-creation)
-		- [2.5.2 Short Syntax (Only at Declaration)](#252-short-syntax-only-at-declaration)
-	  - [2.6 Multidimensional Arrays (Arrays of Arrays)](#26-multidimensional-arrays-arrays-of-arrays)
-		- [2.6.1 Creating a Rectangular Array](#261-creating-a-rectangular-array)
-		- [2.6.2 Creating a Jagged (Irregular) Array](#262-creating-a-jagged-irregular-array)
-	  - [2.7 Array Length vs String Length](#27-array-length-vs-string-length)
-	  - [2.8 Array Reference Assignments](#28-array-reference-assignments)
-		- [2.8.1 Assigning Compatible References](#281-assigning-compatible-references)
-		- [2.8.2 Incompatible Assignments (Compile-Time Errors)](#282-incompatible-assignments-compile-time-errors)
-		- [2.8.3 Covariance Runtime Danger: ArrayStoreException](#283-covariance-runtime-danger-arraystoreexception)
-	  - [2.9 Comparing Arrays](#29-comparing-arrays)
-	  - [2.10 Arrays Utility Methods](#210-arrays-utility-methods)
-	  - [2.11 Enhanced for-loop with Arrays](#211-enhanced-for-loop-with-arrays)
-	  - [2.12 Common Pitfalls](#212-common-pitfalls)
-	  - [2.13 Summary](#213-summary)
-	  
+- [10. Arrays in Java](#10-arrays-in-java)
+  - [10.1 What an Array Is](#101-what-an-array-is)
+    - [10.1.1 Declaring Arrays](#1011-declaring-arrays)
+    - [10.1.2 Creating Arrays Instantiation](#1012-creating-arrays-instantiation)
+    - [10.1.3 Default Values in Arrays](#1013-default-values-in-arrays)
+    - [10.1.4 Accessing Elements](#1014-accessing-elements)
+    - [10.1.5 Array Initialization Shorthands](#1015-array-initialization-shorthands)
+      - [10.1.5.1 Anonymous Array Creation](#10151-anonymous-array-creation)
+      - [10.1.5.2 Short Syntax Only at Declaration](#10152-short-syntax-only-at-declaration)
+  - [10.2 Multidimensional Arrays Arrays of Arrays](#102-multidimensional-arrays-arrays-of-arrays)
+    - [10.2.1 Creating a Rectangular Array](#1021-creating-a-rectangular-array)
+    - [10.2.2 Creating a Jagged Irregular Array](#1022-creating-a-jagged-irregular-array)
+  - [10.3 Array Length vs String Length](#103-array-length-vs-string-length)
+  - [10.4 Array Reference Assignments](#104-array-reference-assignments)
+    - [10.4.1 Assigning Compatible References](#1041-assigning-compatible-references)
+    - [10.4.2 Incompatible Assignments Compile-Time Errors](#1042-incompatible-assignments-compile-time-errors)
+    - [10.4.3 Covariance Runtime Danger ArrayStoreException](#1043-covariance-runtime-danger-arraystoreexception)
+  - [10.5 Comparing Arrays](#105-comparing-arrays)
+  - [10.6 Arrays Utility Methods](#106-arrays-utility-methods)
+    - [10.6.1 Arrays.toString](#1061-arraystostring)
+    - [10.6.2 Arrays.deepToString for Nested Arrays](#1062-arraysdeeptostring-for-nested-arrays)
+    - [10.6.3 Arrays.sort](#1063-arrayssort)
+    - [10.6.4 Arrays.binarySearch](#1064-arraysbinarysearch)
+    - [10.6.5 Arrays.compare](#1065-arrayscompare)
+  - [10.7 Enhanced for-loop with Arrays](#107-enhanced-for-loop-with-arrays)
+  - [10.8 Common Pitfalls](#108-common-pitfalls)
+  - [10.9 Summary](#109-summary)
+
 ---
 
-## 2. Arrays in Java
+## 10.1 What an Array is
 
 Arrays in Java are **fixed-size**, **indexed**, **ordered** collections of elements of the *same* type.  
 They are considered **objects**, even when the elements are primitives.  
 
 
-### 2.1 Declaring Arrays
+### 10.1.1 Declaring Arrays
 
 You can declare an array in two ways:
 
@@ -65,7 +69,7 @@ int arr1[], arr2;   // This time (just moving the brackets) we obtain one variab
 **Declaring does NOT create the array** — it only creates a variable capable of referencing one.
 
 
-### 2.2 Creating Arrays (Instantiation)
+### 10.1.2 Creating Arrays (Instantiation)
 
 An array is created using `new` followed by the element type and the array length:
 
@@ -93,7 +97,7 @@ Illegal array creation examples
 ```
 
 
-### 2.3 Default Values in Arrays
+### 10.1.3 Default Values in Arrays
 
 Arrays (because they are objects) always receive **default initialization**:
 
@@ -115,7 +119,7 @@ System.out.println(s[0]);    // null
 ```
 
 
-### 2.4 Accessing Elements
+### 10.1.4 Accessing Elements
 
 Elements are accessed using zero-based indexing:
 
@@ -134,14 +138,14 @@ Common Exceptions
 // System.out.println(x[2]); // ❌ index 2 out of bounds
 ```
 
-### 2.5 Array Initialization Shorthands
+### 10.1.5 Array Initialization Shorthands
 
-#### 2.5.1 Anonymous array creation
+#### 10.1.5.1 Anonymous array creation
 ```java
 int[] a = new int[] {1,2,3};
 ```
 
-#### 2.5.2 Short syntax (only at declaration!)
+#### 10.1.5.2 Short syntax (only at declaration!)
 ```java
 int[] b = {1,2,3};
 ```
@@ -153,7 +157,7 @@ int[] b = {1,2,3};
 // c = {1,2,3};  // ❌ does not compile
 ```
 
-### 2.6 Multidimensional Arrays (Arrays of Arrays)
+## 10.2 Multidimensional Arrays (Arrays of Arrays)
 
 Java implements multi-dimensional arrays as **arrays of arrays**.
 
@@ -163,12 +167,12 @@ int[][] matrix;
 String[][][] cube;
 ```
 
-#### 2.6.1 Creating a rectangular array
+### 10.2.1 Creating a rectangular array
 ```java
 int[][] rect = new int[3][4]; // 3 rows, 4 columns each
 ```
 
-#### 2.6.2 Creating a jagged (irregular) array
+### 10.2.2 Creating a jagged (irregular) array
 You can create rows with different lengths:
 
 ```java
@@ -178,7 +182,7 @@ jagged[1] = new int[5];
 jagged[2] = new int[1];
 ```
 
-### 2.7 Array Length vs String Length
+## 10.3 Array Length vs String Length
 
 - Arrays use **`.length`** (public final field)
 - Strings use **`.length()`** (method)
@@ -191,9 +195,9 @@ jagged[2] = new int[1];
 ```
 
 
-### 2.8 Array Reference Assignments
+## 10.4 Array Reference Assignments
 
-#### 2.8.1 Assigning compatible references
+### 10.4.1 Assigning compatible references
 ```java
 int[] a = {1,2,3};
 int[] b = a; // both now point to the same array
@@ -206,7 +210,7 @@ b[0] = 99;
 System.out.println(a[0]); // 99
 ```
 
-#### 2.8.2 Incompatible assignments (compile-time errors)
+### 10.4.2 Incompatible assignments (compile-time errors)
 ```java
 // int[] x = new int[3];
 // long[] y = x;     // ❌ incompatible types
@@ -219,14 +223,14 @@ String[] s = new String[3];
 Object[] o = s;      // OK: arrays are covariant
 ```
 
-#### 2.8.3 Covariance runtime danger: ArrayStoreException
+### 10.4.3 Covariance runtime danger: ArrayStoreException
 ```java
 Object[] objs = new String[3];
 // objs[0] = Integer.valueOf(5); // ❌ ArrayStoreException
 ```
 
 
-### 2.9 Comparing Arrays
+## 10.5 Comparing Arrays
 
 `==` compares references (identity):  
 ```java
@@ -248,20 +252,20 @@ Arrays.deepEquals(o1, o2);   // deep comparison for nested arrays
 ```
 
 
-### 2.10 `Arrays` Utility Methods
+## 10.6 `Arrays` Utility Methods
 
 
-### • `Arrays.toString()`
+### 10.6.1 `Arrays.toString()`
 ```java
 System.out.println(Arrays.toString(new int[]{1,2,3})); // [1, 2, 3]
 ```
 
-### • `Arrays.deepToString()` (for nested arrays)
+### 10.6.2 `Arrays.deepToString()` (for nested arrays)
 ```java
 System.out.println(Arrays.deepToString(new int[][] {{1,2},{3,4}}));	// [[1, 2], [3, 4]]
 ```
 
-### • `Arrays.sort()`
+### 10.6.3 `Arrays.sort()`
 ```java
 int[] a = {4,1,3};
 Arrays.sort(a); // [1,3,4]
@@ -280,7 +284,7 @@ Arrays.sort(arr);
 System.out.println(Arrays.toString(arr));  // [10, 99, AB, Ba, ac, bA]
 ```
 
-### • `Arrays.binarySearch()`
+### 10.6.4 `Arrays.binarySearch()`
 Requirements: array **must be sorted**, otherwise result is `unpredictable`.
 
 ```java
@@ -297,7 +301,7 @@ int pos = Arrays.binarySearch(a, 4); // returns -3
 Explanation: insertion at index 2 → return `-(2) - 1 = -3`.
 
 
-### • `Arrays.compare()`
+### 10.6.5 `Arrays.compare()`
 
 While the class `Arrays` contain an overloaded version of the method `equals()` which checks if two arrays contain the same elements (and of course are of the same size)
 
@@ -340,7 +344,7 @@ System.out.println(Arrays.compare(arr9, arr10));   // -1
 ```
 
 
-### 2.11 Enhanced for-loop with Arrays
+## 10.7 Enhanced for-loop with Arrays
 
 ```java
 for (int value : new int[]{1,2,3}) {
@@ -358,39 +362,36 @@ Common error:
 ```
 
 
-### 2.12 Common Pitfalls
+## 10.8 Common Pitfalls
 
-#### 2.12.1 Accessing out of bounds  
+**Accessing out of bounds**  
 Throws `ArrayIndexOutOfBoundsException`.
 
-#### 2.12.2 Using short array initializer incorrectly  
+**Using short array initializer incorrectly **
 ```java
 // int[] x;
 // x = {1,2}; // ❌ does not compile
 ```
 
-#### 2.12.3 Confusing `.length` and `.length()`
+**Confusing `.length` and `.length()`**
 
-#### 2.12.4 Forgetting arrays are objects
+**Forgetting arrays are objects**
 
-#### 2.12.5 Mixing primitive arrays and wrapper arrays  
+**Mixing primitive arrays and wrapper arrays ** 
 ```java
 // int[] p = new Integer[3]; // ❌ incompatible
 ```
 
-#### 2.12.6 Using binarySearch on unsorted arrays → unpredictable results
+**Using binarySearch on unsorted arrays → unpredictable results**
 
-#### 2.12.7 Covariant array runtime exceptions (ArrayStoreException)
+**Covariant array runtime exceptions (ArrayStoreException)**
 
 ---
 
-#### 2.13 Summary
+## 10.9 Summary
 
 Arrays in Java are:
 - objects (even if holding primitives)
 - fixed-size, indexed collections
 - always initialized with default values
 - type-safe but subject to covariance rules
-
-
----

@@ -447,7 +447,7 @@ This rule applies to most substring-based methods.
 
 These methods follow the same slicing behavior:
 
-**start included**, **end excluded**
+`start included`, `end excluded`
 
 | Method | Description | Signature | Example |
 |--------|-------------|-----------|---------|
