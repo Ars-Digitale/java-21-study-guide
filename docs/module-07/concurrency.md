@@ -1,11 +1,42 @@
-# Java Concurrency APIs
+# 31. Java Concurrency APIs
+
+### Table of Contents
+
+- [31. Java Concurrency APIs](#31-java-concurrency-apis)
+  - [31.1 Goals and Scope of the Concurrency API](#311-goals-and-scope-of-the-concurrency-api)
+  - [31.2 Fundamental Threading Problems](#312-fundamental-threading-problems)
+    - [31.2.1 Race Conditions](#3121-race-conditions)
+    - [31.2.2 Deadlock](#3122-deadlock)
+    - [31.2.3 Starvation](#3123-starvation)
+    - [31.2.4 Livelock](#3124-livelock)
+  - [31.3 From Threads to Tasks](#313-from-threads-to-tasks)
+  - [31.4 Executor Framework](#314-executor-framework)
+    - [31.4.1 Submitting Tasks and Futures](#3141-submitting-tasks-and-futures)
+    - [31.4.2 Callable vs Runnable](#3142-callable-vs-runnable)
+  - [31.5 Thread Pools and Scheduling](#315-thread-pools-and-scheduling)
+  - [31.6 Executor Lifecycle and Termination](#316-executor-lifecycle-and-termination)
+  - [31.7 Thread Safety Strategies](#317-thread-safety-strategies)
+    - [31.7.1 Synchronization](#3171-synchronization)
+    - [31.7.2 Atomic Variables](#3172-atomic-variables)
+      - [31.7.2.1 Atomic classes](#31721-atomic-classes)
+      - [31.7.2.2 Atomic methods](#31722-atomic-methods)
+    - [31.7.3 Lock Framework](#3173-lock-framework)
+      - [31.7.3.1 Lock implementations](#31731-lock-implementations)
+      - [31.7.3.2 Common Lock methods](#31732-common-lock-methods)
+    - [31.7.4 Coordination Utilities](#3174-coordination-utilities)
+  - [31.8 Concurrent Collections](#318-concurrent-collections)
+  - [31.9 Parallel Streams](#319-parallel-streams)
+  - [31.10 Relation to Virtual Threads](#3110-relation-to-virtual-threads)
+  - [31.11 Summary](#3111-summary)
+
+---
 
 This chapter introduces the **Java Concurrency API**, which provides high-level abstractions for managing concurrent execution safely, efficiently, and scalably.<br>
 Unlike low-level thread manipulation, the Concurrency API focuses on **tasks**, **executors**, and **coordination mechanisms**, allowing developers to reason about what should be done rather than how threads are scheduled.
 
-## 1. Goals and Scope of the Concurrency API
+## 31.1 Goals and Scope of the Concurrency API
 
-The Java Concurrency API, primarily located in the `java.util.concurrent` package, was introduced to address fundamental problems inherent in manual thread management.
+The `Java Concurrency API`, primarily located in the `java.util.concurrent` package, was introduced to address fundamental problems inherent in manual thread management.
 
 - Decouple task submission from thread management.
 - Reduce error-prone low-level synchronization.
@@ -22,13 +53,13 @@ executor.execute(() -> System.out.println("Task executed"));
 executor.shutdown();
 ```
 
-## 2. Fundamental Threading Problems
+## 31.2 Fundamental Threading Problems
 
 Before understanding the Concurrency API, it is essential to understand the concurrency problems it is designed to mitigate. 
 
 These problems arise from shared mutable state, scheduling unpredictability, and improper coordination.
 
-### 2.1 Race Conditions
+### 31.2.1 Race Conditions
 
 A **race condition** occurs when multiple threads access shared mutable state and the program’s correctness depends on the timing or interleaving of their execution.
 
@@ -46,7 +77,7 @@ class Counter {
 
 If multiple threads invoke `increment()` concurrently, increments may be lost because the operation is not atomic.
 
-### 2.2 Deadlock
+### 31.2.2 Deadlock
 
 A **deadlock** occurs when two or more threads are permanently blocked, each waiting for a resource held by another thread.
 
@@ -62,7 +93,7 @@ synchronized (lockA) {
 
 If another thread acquires `lockB` first and then waits for `lockA`, a deadlock may occur.
 
-### 2.3 Starvation
+### 31.2.3 Starvation
 
 **Starvation** happens when a thread is indefinitely denied access to resources, even though those resources are available.
 
@@ -75,7 +106,7 @@ ReentrantLock lock = new ReentrantLock(false); // unfair lock
 
 Threads may repeatedly acquire the lock while others wait indefinitely.
 
-### 2.4 Livelock
+### 31.2.4 Livelock
 
 In a **livelock**, threads are not blocked but continuously react to each other in a way that prevents progress.
 
@@ -90,7 +121,7 @@ while (!tryLock()) {
 
 Both threads may repeatedly retry, preventing forward progress.
 
-## 3. From Threads to Tasks
+## 31.3 From Threads to Tasks
 
 The Concurrency API shifts the programming model from managing **threads** directly to submitting **tasks**. 
 
@@ -106,7 +137,7 @@ Callable<Integer> callable = () -> 42;
 
 This abstraction allows tasks to be reused, scheduled flexibly, and executed by different execution strategies.
 
-## 4. Executor Framework
+## 31.4 Executor Framework
 
 The **Executor Framework** is the core of the Concurrency API. 
 
@@ -123,7 +154,7 @@ executor.execute(() -> System.out.println("Task 2"));
 executor.shutdown();
 ```
 
-### 4.1 Submitting Tasks and Futures
+### 31.4.1 Submitting Tasks and Futures
 
 Tasks submitted using `execute()` return `void: it is a "fire-and-forget" method which does not give back any information about the result of the task.
 
@@ -155,7 +186,7 @@ Integer result = future.get();
 | T **get(long timeout, TimeUnit unit)**        | Blocks up to the given timeout and returns the result, or throws `TimeoutException` if not completed. |
 
 
-### 4.2 Callable vs Runnable
+### 31.4.2 Callable vs Runnable
 
 Both interfaces represent tasks, but with different capabilities.
 
@@ -169,7 +200,7 @@ Runnable r = () -> System.out.println("done");
 
 For result-oriented asynchronous computation, `Callable` is generally preferred.
 
-## 5. Thread Pools and Scheduling
+## 31.5 Thread Pools and Scheduling
 
 Executors manage **thread pools**, which reuse a fixed or dynamic number of threads to execute tasks efficiently.
 
@@ -186,7 +217,7 @@ scheduler.schedule(
 	2, TimeUnit.SECONDS);
 ```
 
-## 6. Executor Lifecycle and Termination
+## 31.6 Executor Lifecycle and Termination
 
 Executors must be shut down explicitly to release resources and allow JVM termination.
 
@@ -200,11 +231,11 @@ executor.shutdown();
 executor.awaitTermination(5, TimeUnit.SECONDS);
 ```
 
-## 7. Thread Safety Strategies
+## 31.7 Thread Safety Strategies
 
 The Concurrency API provides multiple complementary strategies for achieving thread safety.
 
-### 7.1 Synchronization
+### 31.7.1 Synchronization
 
 Synchronization enforces mutual exclusion and memory visibility by using an intrinsic lock (monitor) associated with an object or a class.
 
@@ -231,7 +262,7 @@ The synchronized keyword can be applied to:
 - **Static methods** (lock on the `Class` object)
 - **Blocks** (lock on a specific object, allowing finer-grained control)
 
-### 7.2 Atomic Variables
+### 31.7.2 Atomic Variables
 
 Atomic classes provide lock-free, thread-safe operations implemented using low-level CPU primitives such as Compare-And-Swap (CAS).
 
@@ -240,7 +271,7 @@ AtomicInteger count = new AtomicInteger();
 count.incrementAndGet();
 ```
 
-#### 7.2.1 Atomic classes
+#### 31.7.2.1 Atomic classes
 
 | Atomic Class            | Description |
 |-------------------------|-------------|
@@ -254,7 +285,7 @@ count.incrementAndGet();
 | **AtomicStampedReference<T>** | Atomically updates a reference with an integer stamp to avoid ABA problems. |
 | **AtomicMarkableReference<T>** | Atomically updates a reference with a boolean mark. |
 
-#### 7.2.2 Atomic methods
+#### 31.7.2.2 Atomic methods
 
 | Method | Description |
 |--------|-------------|
@@ -286,7 +317,7 @@ Atomic variables are typically used for:
 - Flags and state indicators
 - High-throughput, low-latency updates
 
-### 7.3 Lock Framework
+### 31.7.3 Lock Framework
 
 The java.util.concurrent.locks package provides explicit locking mechanisms that offer greater flexibility and control than synchronized.
 
@@ -307,7 +338,7 @@ Key characteristics of the Lock framework:
 - Locks may be configured with fairness policies (parameter) when ordering is required (when you need to control the order in which threads run)
 - Multiple Condition objects can be associated with a single lock
 
-#### 7.3.1 Lock implementations
+#### 31.7.3.1 Lock implementations
 
 | Lock Implementation | Description |
 |---------------------|-------------|
@@ -318,7 +349,7 @@ Key characteristics of the Lock framework:
 | **StampedLock**         | Lock supporting optimistic, read, and write locking modes (non-reentrant). |
 
 
-#### 7.3.2 Common Lock methods
+#### 31.7.3.2 Common Lock methods
 
 | Method | Description |
 |--------|-------------|
@@ -332,7 +363,7 @@ Key characteristics of the Lock framework:
 
 Unlike synchronized, locks do not release automatically, making proper try/finally usage essential to avoid deadlocks.
 
-### 7.4 Coordination Utilities
+### 31.7.4 Coordination Utilities
 
 Coordination utilities allow threads to coordinate execution phases without protecting shared data via mutual exclusion.
 
@@ -399,7 +430,7 @@ A CyclicBarrier:
 These utilities focus on execution ordering and synchronization, not data protection.
 
 
-## 8. Concurrent Collections
+## 31.8 Concurrent Collections
 
 Concurrent collections are **thread-safe data structures** designed to support **high levels of concurrency** without requiring external synchronization.
 
@@ -428,7 +459,7 @@ queue.take();        // blocks if the queue is empty
 Blocking queues handle synchronization internally, simplifying coordination between producer and consumer threads.
 
 
-## 9. Parallel Streams
+## 31.9 Parallel Streams
 
 Parallel streams provide **declarative data parallelism**, allowing stream operations to be executed concurrently across multiple threads with minimal code changes.
 
@@ -454,7 +485,7 @@ Because execution order is not guaranteed, parallel streams should avoid:
 - Order-dependent side effects
 
 
-## 10. Relation to Virtual Threads
+## 31.10 Relation to Virtual Threads
 
 In Java 21, the Executor framework integrates seamlessly with **virtual threads**, enabling massive concurrency with minimal resource usage.
 
@@ -468,7 +499,7 @@ executor.close();
 
 This allows blocking code to scale efficiently without redesigning APIs.
 
-## Summary
+## 31.11 Summary
 
 The Java Concurrency API provides a robust, scalable, and safer alternative to manual thread management. 
 By abstracting execution, coordinating tasks, and offering thread-safe utilities, it enables developers to build concurrent systems that are both performant and maintainable.
