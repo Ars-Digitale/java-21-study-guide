@@ -1,4 +1,20 @@
-# Class Loading, Initialization, and Object Construction
+# 15. Class Loading, Initialization, and Object Construction
+
+### Table of Contents
+
+- [15. Class Loading, Initialization, and Object Construction](#15-class-loading-initialization-and-object-construction)
+  - [15.1 Memory Areas Relevant to Class and Object Initialization](#151-memory-areas-relevant-to-class-and-object-initialization)
+  - [15.2 Class Loading with Inheritance](#152-class-loading-with-inheritance)
+    - [15.2.1 Class Loading Order](#1521-class-loading-order)
+    - [15.2.2 What Happens During Class Loading](#1522-what-happens-during-class-loading)
+  - [15.3 Object Creation with Inheritance](#153-object-creation-with-inheritance)
+    - [15.3.1 Full Instance Creation Order](#1531-full-instance-creation-order)
+  - [15.4 A Complete Example Static + Instance Initialization Across Inheritance](#154-a-complete-example-static--instance-initialization-across-inheritance)
+  - [15.5 Visualization Diagram](#155-visualization-diagram)
+  - [15.6 Key Rules](#156-key-rules)
+  - [15.7 Summary Table](#157-summary-table)
+
+---
 
 In Java, understanding **how classes are loaded**, **how static and instance members are initialized**, and **how constructors run — especially with inheritance** — is essential for mastering the language.
 
@@ -10,7 +26,7 @@ This chapter provides a unified, clear explanation of:
 - How constructors run in an inheritance chain
 - How different memory areas (Heap, Stack, Method Area) participate
 
-## 1. Memory Areas Relevant to Class and Object Initialization
+## 15.1 Memory Areas Relevant to Class and Object Initialization
 
 Before understanding initialization order, it is useful to recall the three main memory areas involved:
 
@@ -21,12 +37,12 @@ Before understanding initialization order, it is useful to recall the three main
 > **Note:** Static members belong to the **class** and are created **once** in the Method Area.  
 Instance members belong to **each object** and live in the **Heap**.
 
-## 2. Class Loading (with Inheritance)
+## 15.2 Class Loading (with Inheritance)
 
 When a Java program starts, the JVM loads classes *on demand*.  
 When a class is referenced for the first time (e.g., by calling `new` or accessing a static member), **its entire inheritance chain must be loaded first**.
 
-### 2.1 Class Loading Order
+### 15.2.1 Class Loading Order
 
 Given a class hierarchy:
 
@@ -52,7 +68,7 @@ Then class loading proceeds in this strict order:
 - Load class B and repeat the same logic
 - Load class C and repeat the same logic
 
-### 2.2 What Happens During Class Loading
+### 15.2.2 What Happens During Class Loading
 
 - **Step 1: Static variables are allocated** (default values first).
 - **Step 2: Explicit static initializations run**.
@@ -60,11 +76,11 @@ Then class loading proceeds in this strict order:
 
 > **Note:** After these steps, the class is fully prepared and may now be used (instantiated or referenced).
 
-## 3. Object Creation (with Inheritance)
+## 15.3 Object Creation (with Inheritance)
 
 When the `new` keyword is used, **instance creation follows a strict and predictable sequence** involving all parent classes.
 
-### 3.1 Full Instance Creation Order
+### 15.3.1 Full Instance Creation Order
 
 - **1. Memory is allocated on the Heap for the new object** (fields get default values).
 - **2. Parent constructors must run first** — top of hierarchy → subclass.
@@ -72,7 +88,7 @@ When the `new` keyword is used, **instance creation follows a strict and predict
 - **4. Instance initializer blocks execute**.
 - **5. The constructor body runs**.
 
-## 4. A Complete Example: Static + Instance Initialization Across Inheritance
+## 15.4 A Complete Example: Static + Instance Initialization Across Inheritance
 
 Consider the following three-level hierarchy:
 
@@ -163,7 +179,7 @@ C instance block
 C constructor
 ```
 
-## 5. Visualization Diagram
+## 15.5 Visualization Diagram
 
 ```text
             CLASS LOADING (top to bottom)
@@ -194,7 +210,7 @@ C constructor
     +--> run C constructor
 ```
 
-## 6. Key Rules
+## 15.6 Key Rules
 
 - Static initialization happens **once** per class.
 - Static initializers run in parent → child order.
@@ -203,7 +219,7 @@ C constructor
 but field initialization always runs **parent first**, then child.
 - Constructors always call the parent constructor (explicitly or implicitly).
 
-## 7. Summary Table
+## 15.7 Summary Table
 
 ```text
 STATIC (Class Level)                   | INSTANCE (Object Level)
