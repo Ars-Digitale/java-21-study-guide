@@ -367,7 +367,7 @@ Common error:
 **Accessing out of bounds**  
 Throws `ArrayIndexOutOfBoundsException`.
 
-**Using short array initializer incorrectly **
+**Using short array initializer incorrectly**
 ```java
 // int[] x;
 // x = {1,2}; // ❌ does not compile
@@ -377,7 +377,7 @@ Throws `ArrayIndexOutOfBoundsException`.
 
 **Forgetting arrays are objects**
 
-**Mixing primitive arrays and wrapper arrays ** 
+**Mixing primitive arrays and wrapper arrays** 
 ```java
 // int[] p = new Integer[3]; // ❌ incompatible
 ```
