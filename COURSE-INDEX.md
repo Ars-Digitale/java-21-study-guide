@@ -51,3 +51,4 @@
 - [Module 9: Java Platform Module System (JPMS)]
 	- [JPMS Fundamentals](docs/module-09/jpms.md)
 	- [Compiling, Packaging, and Running Modules](docs/module-09/jpms-compiling.md)
+	- [Services in JPMS](docs/module-09/jpms-services.md)
