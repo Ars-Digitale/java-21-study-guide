@@ -1,4 +1,29 @@
-# Comparable, Comparator & Sorting in Java
+# 24. Comparable, Comparator & Sorting in Java
+
+### Table of Contents
+
+- [24. Comparable, Comparator & Sorting in Java](#24-comparable-comparator--sorting-in-java)
+  - [24.1 Comparable — Natural Ordering](#241-comparable--natural-ordering)
+    - [24.1.1 Comparable Method Contract](#2411-comparable-method-contract)
+    - [24.1.2 Example Class Implementing Comparable](#2412-example-class-implementing-comparable)
+    - [24.1.3 Common Comparable Pitfalls](#2413-common-comparable-pitfalls)
+  - [24.2 Comparator — Custom Ordering](#242-comparator--custom-ordering)
+    - [24.2.1 Comparator Core Methods](#2421-comparator-core-methods)
+      - [24.2.1.1 Comparator Helper Static Methods](#24211-comparator-helper-static-methods)
+      - [24.2.1.2 Instance Methods on Comparator](#24212-instance-methods-on-comparator)
+    - [24.2.2 Comparator Example](#2422-comparator-example)
+  - [24.3 Comparable vs Comparator](#243-comparable-vs-comparator)
+  - [24.4 Sorting Arrays and Collections](#244-sorting-arrays-and-collections)
+    - [24.4.1 Arrayssort](#2441-arrayssort)
+    - [24.4.2 Collectionssort](#2442-collectionssort)
+  - [24.5 Multi-Level Sorting thenComparing](#245-multi-level-sorting-thencomparing)
+  - [24.6 Comparing Primitives Efficiently](#246-comparing-primitives-efficiently)
+  - [24.7 Common Traps](#247-common-traps)
+  - [24.8 Full Example](#248-full-example)
+  - [24.9 Summary](#249-summary)
+
+---
+
 
 Java provides two main strategies for sorting and comparing: `Comparable` (natural ordering) and `Comparator` (custom ordering).
 Understanding their rules, constraints, and interactions with generics is essential.
@@ -24,12 +49,12 @@ Output:
 ```
 
 
-## 1. Comparable — Natural Ordering
+## 24.1 Comparable — Natural Ordering
 
 The interface `Comparable<T>` defines the natural order of a type.
 A class implements it when it wants to define its default sorting rule.
 
-### 1.1 Comparable Method Contract
+### 24.1.1 Comparable Method Contract
 
 ```java
 public interface Comparable<T> {
@@ -47,7 +72,7 @@ Rules and expectations:
 > - Natural ordering must be consistent with equals(), unless explicitly documented otherwise:
 > - `compareTo()` is consistent with `equals()` if, and only if, `a.compareTo(b) == 0` and `a.equals(b) is true`.
 
-### 1.2 Example: Class Implementing Comparable
+### 24.1.2 Example: Class Implementing Comparable
 
 ```java
 public class Person implements Comparable<Person> {
@@ -75,19 +100,19 @@ list.stream().sorted().forEach(p -> System.out.println(p.age));
 
 The list sorts by age, because that is the natural numbering order.
 
-### 1.3 Common Comparable Pitfalls
+### 24.1.3 Common Comparable Pitfalls
 
 - Compare all relevant fields → inconsistent results if not
 - Violating transitivity → leads to undefined behavior
 - Throwing exceptions inside compareTo() breaks sorting
 - Failing to implement the same logic as equals() → common trap
 
-## 2. Comparator — Custom Ordering
+## 24.2 Comparator — Custom Ordering
 
 The interface `Comparator<T>` allows defining multiple sorting strategies
 without modifying the class itself.
 
-### 2.1 Comparator Core Methods
+### 24.2.1 Comparator Core Methods
 
 ```java
 int compare(T a, T b);
@@ -95,7 +120,7 @@ int compare(T a, T b);
 
 Additional helper methods:
 
-#### 2.1.1 Comparator Helper **Static** Methods
+#### 24.2.1.1 Comparator Helper **Static** Methods
 
 |Method	| Static / Instance | Return Type |	Parameters	| Description |
 |-------|-------------------|---------------|------------|-------------|
@@ -110,7 +135,7 @@ Additional helper methods:
 |Comparator.nullsLast(comparator)	| static	| Comparator<T>	| Comparator<T>	| Wraps comparator so nulls compare after non-nulls.|
 
 
-#### 2.1.2 **Instance** Methods on Comparator
+#### 24.2.1.2 **Instance** Methods on Comparator
 
 |Method	| Static / Instance |	Return Type	| Parameters | Description |
 |-------|-------------------|---------------|------------|-------------|
@@ -122,7 +147,7 @@ Additional helper methods:
 |thenComparingDouble(keyExtractor)	| instance	| Comparator<T>	| ToDoubleFunction<T>	| Secondary numeric comparison.|
 |reversed()	| instance	| Comparator<T>	| none	| Returns a reversed comparator for the same comparison logic.|
 
-### 2.2 Comparator Example
+### 24.2.2 Comparator Example
 
 ```java
 Comparator<Person> byName = Comparator.comparing(Person::getName);
@@ -132,7 +157,7 @@ Comparator<Person> byAgeDesc = Comparator.comparingInt(Person::getAge).reversed(
 var sorted = people.stream().sorted(byName.thenComparing(byAgeDesc)).toList();
 ```
 
-## 3. Comparable vs Comparator 
+## 24.3 Comparable vs Comparator 
 
 
 |Feature  |	Comparable	| Comparator |
@@ -147,9 +172,9 @@ var sorted = people.stream().sorted(byName.thenComparing(byAgeDesc)).toList();
 |Used By Arrays.sort	| YES	| YES |
 	
 
-## 4. Sorting Arrays and Collections
+## 24.4 Sorting Arrays and Collections
 
-### 4.1 Arrays.sort()
+### 24.4.1 Arrays.sort()
 
 ```java
 int[] nums = {3,1,2};
@@ -160,14 +185,14 @@ Arrays.sort(arr); // Person must implement Comparable
 Arrays.sort(arr, byName); // using Comparator
 ```
 
-### 4.2 Collections.sort()
+### 24.4.2 Collections.sort()
 
 ```java
 Collections.sort(list); // natural order
 Collections.sort(list, byName); // comparator
 ```
 
-## 5. Multi-Level Sorting (thenComparing)
+## 24.5 Multi-Level Sorting (thenComparing)
 
 ```java
 var cmp = Comparator
@@ -176,7 +201,7 @@ var cmp = Comparator
 .thenComparingInt(Person::getAge);
 ```
 
-## 6. Comparing Primitives Efficiently
+## 24.6 Comparing Primitives Efficiently
 
 ```java
 Comparator.comparingInt(Person::getAge)
@@ -186,7 +211,7 @@ Comparator.comparingDouble(...)
 
 > **Note:** These avoid boxing and are preferred in performance-sensitive code.
 
-## 7. Common Traps
+## 24.7 Common Traps
 
 - Sorting a list of Objects without Comparable → runtime ClassCastException
 - compareTo inconsistent with equals → unpredictable behavior
@@ -195,7 +220,7 @@ Comparator.comparingDouble(...)
 - Comparator comparing fields of mixed types → ClassCastException
 - Using subtraction to compare ints can overflow → always use `Integer.compare()`
 
-## 8. Full Example
+## 24.8 Full Example
 
 ```java
 record Book(String title, double price, int year) {}
@@ -216,7 +241,7 @@ books.stream().sorted(cmp)
 .forEach(System.out::println);
 ```
 
-# Summary
+## 24.9 Summary
 
 - Use `Comparable` for natural ordering (1 default order).
 - Use `Comparator` for flexible or multiple sorting strategies.

@@ -61,7 +61,6 @@ Set<Integer> thirdSet = Set.of(22, 11, 10);
 
 System.out.println("firstSet.equals(secondSet): " + firstSet.equals(secondSet));
 System.out.println("secondSet.equals(thirdSet): " + secondSet.equals(thirdSet));
-}
 ```
 
 Output
