@@ -1,52 +1,53 @@
-# Beyond Classes
+# 17. Beyond Classes
 
 ### Table of Contents
 
-- [Beyond Classes]
-	- [1. Interfaces](#1-interfaces)
-	  - [1.1 What Interfaces Can Contain](#11-what-interfaces-can-contain)
-	  - [1.2 Implementing an Interface](#12-implementing-an-interface)
-	  - [1.3 Multiple Inheritance](#13-multiple-inheritance)
-	  - [1.4 Interface Inheritance and Conflicts](#14-interface-inheritance-and-conflicts)
-	  - [1.5 Default methods](#15-default-methods)
-	  - [1.6 Static methods](#16-static-methods)
-	  - [1.7 Private interface methods](#17-private-interface-methods)
-	- [2. Sealed and non-sealed Types](#2-sealed-and-non-sealed-types)
-	  - [2.1 Rules](#21-rules)
-	- [3. Enums](#3-enums)
-	  - [3.1 Simple Enum Definition](#31-simple-enum-definition)
-	  - [3.2 Complex Enums with State and Behavior](#32-complex-enums-with-state-and-behavior)
-	  - [3.3 Enum Methods](#33-enum-methods)
-	  - [3.4 Rules](#34-rules)
-	- [4. Records (Java 16+)](#4-records-java-16)
-	  - [4.1 Long Constructor](#41-long-constructor)
-	  - [4.2 Compact Constructor](#42-compact-constructor)
-	  - [4.3 Pattern Matching for Records](#43-pattern-matching-for-records)
-	  - [4.4 Nested Record Patterns and Matching Records with var and Generics](#44-nested-record-patterns-and-matching-records-with-var-and-generics)
-		- [4.4.1 Basic Nested Record Pattern](#441-basic-nested-record-pattern)
-		- [4.4.2 Nested Record Patterns with var](#442-nested-record-patterns-with-var)
-		- [4.4.3 Nested Record Patterns and Generics](#443-nested-record-patterns-and-generics)
-		- [4.4.4 Common Errors with Nested Record Patterns](#444-common-errors-with-nested-record-patterns)
-	- [5. Nested Classes in Java](#5-nested-classes-in-java)
-	  - [5.1 Static Nested Classes](#51-static-nested-classes)
-		- [5.1.1 Syntax and Access Rules](#511-syntax-and-access-rules)
-		- [5.1.2 Common Pitfalls](#512-common-pitfalls)
-	  - [5.2 Inner Classes (Non-Static Nested Classes)](#52-inner-classes-non-static-nested-classes)
-		- [5.2.1 Syntax and Access Rules](#521-syntax-and-access-rules)
-		- [5.2.2 Common Pitfalls](#522-common-pitfalls)
-	  - [5.3 Local Classes](#53-local-classes)
-		- [5.3.1 Characteristics](#531-characteristics)
-		- [5.3.2 Common Pitfalls](#532-common-pitfalls)
-	  - [5.4 Anonymous Classes](#54-anonymous-classes)
-		- [5.4.1 Syntax and Usage](#541-syntax-and-usage)
-		- [5.4.2 Anonymous Class Extending a Class](#542-anonymous-class-extending-a-class)
-	  - [5.5 Comparison of Nested Class Types](#55-comparison-of-nested-class-types)
+- [17. Beyond Classes](#17-beyond-classes)
+  - [17.1 Interfaces](#171-interfaces)
+    - [17.1.1 What Interfaces Can Contain](#1711-what-interfaces-can-contain)
+    - [17.1.2 Implementing an Interface](#1712-implementing-an-interface)
+    - [17.1.3 Multiple Inheritance](#1713-multiple-inheritance)
+    - [17.1.4 Interface Inheritance and Conflicts](#1714-interface-inheritance-and-conflicts)
+    - [17.1.5 Default methods](#1715-default-methods)
+    - [17.1.6 Static methods](#1716-static-methods)
+    - [17.1.7 Private interface methods](#1717-private-interface-methods)
+  - [17.2 Sealed, non-sealed, and final Types](#172-sealed-non-sealed-and-final-types)
+    - [17.2.1 Rules](#1721-rules)
+  - [17.3 Enums](#173-enums)
+    - [17.3.1 Simple Enum Definition](#1731-simple-enum-definition)
+    - [17.3.2 Complex Enums with State and Behavior](#1732-complex-enums-with-state-and-behavior)
+    - [17.3.3 Enum Methods](#1733-enum-methods)
+    - [17.3.4 Rules](#1734-rules)
+  - [17.4 Records Java 16+](#174-records-java-16)
+    - [17.4.1 Long Constructor](#1741-long-constructor)
+    - [17.4.2 Compact Constructor](#1742-compact-constructor)
+    - [17.4.3 Pattern Matching for Records](#1743-pattern-matching-for-records)
+    - [17.4.4 Nested Record Patterns and Matching Records with var and Generics](#1744-nested-record-patterns-and-matching-records-with-var-and-generics)
+      - [17.4.4.1 Basic Nested Record Pattern](#17441-basic-nested-record-pattern)
+      - [17.4.4.2 Nested Record Patterns with var](#17442-nested-record-patterns-with-var)
+      - [17.4.4.3 Nested Record Patterns and Generics](#17443-nested-record-patterns-and-generics)
+      - [17.4.4.4 Common Errors with Nested Record Patterns](#17444-common-errors-with-nested-record-patterns)
+  - [17.5 Nested Classes in Java](#175-nested-classes-in-java)
+    - [17.5.1 Static Nested Classes](#1751-static-nested-classes)
+      - [17.5.1.1 Syntax and Access Rules](#17511-syntax-and-access-rules)
+      - [17.5.1.2 Common Pitfalls](#17512-common-pitfalls)
+    - [17.5.2 Inner Classes Non-Static Nested Classes](#1752-inner-classes-non-static-nested-classes)
+      - [17.5.2.1 Syntax and Access Rules](#17521-syntax-and-access-rules)
+      - [17.5.2.2 Common Pitfalls](#17522-common-pitfalls)
+    - [17.5.3 Local Classes](#1753-local-classes)
+      - [17.5.3.1 Characteristics](#17531-characteristics)
+      - [17.5.3.2 Common Pitfalls](#17532-common-pitfalls)
+    - [17.5.4 Anonymous Classes](#1754-anonymous-classes)
+      - [17.5.4.1 Syntax and Usage](#17541-syntax-and-usage)
+      - [17.5.4.2 Anonymous Class Extending a Class](#17542-anonymous-class-extending-a-class)
+    - [17.5.5 Comparison of Nested Class Types](#1755-comparison-of-nested-class-types)
+
 
 ---
 
 This chapter presents several advanced type mechanisms beyond the Java Class design: **interfaces**, **enums**, **sealed / non-sealed classes**, **records**, and **nested classes**. 
 
-## 1. Interfaces
+## 17.1 Interfaces
 
 An **interface** in Java is a reference type that defines a contract of methods that a class agrees to implement. 
 
@@ -58,7 +59,7 @@ An `interface` may in turn extend multiple interfaces using the `extends` keywor
 
 Interfaces enable abstraction, loose coupling, and multiple inheritance of type.
 
-### 1.1 What Interfaces Can Contain
+### 17.1.1 What Interfaces Can Contain
 
 - **Abstract methods** (implicitly `public` and `abstract`)
 - **Concrete methods**
@@ -80,7 +81,7 @@ interface Calculator {
 > [!WARNING]
 > - Because interface abstract methods are implicitly `public`, you CAN'T reduce the access level on an implementing method
 
-### 1.2 Implementing an Interface
+### 17.1.2 Implementing an Interface
 
 ```java
 class BasicCalc implements Calculator {
@@ -92,7 +93,7 @@ class BasicCalc implements Calculator {
 > - **Every** abstract method must be implemented unless the class is abstract.
 
 
-### 1.3 Multiple Inheritance
+### 17.1.3 Multiple Inheritance
 
 A class may implement multiple interfaces.
 
@@ -107,7 +108,7 @@ class C implements A, B {
 ```
 
 
-### 1.4 Interface Inheritance and Conflicts
+### 17.1.4 Interface Inheritance and Conflicts
 
 If two interfaces provide default methods with the same signature, the implementing class must override the method.
 
@@ -133,7 +134,7 @@ class Z implements X, Y {
 }
 ```
  
-### 1.5 Default methods
+### 17.1.5 Default methods
 
 A `default` method (declared with the `default` keyword) is a method that define an implementation and can be `overridden` by a class implementing the interface. 
 
@@ -143,20 +144,20 @@ A `default` method (declared with the `default` keyword) is a method that define
 - An implementig class may of course rely on the provided implementation of the `default` method without overriding it;
 - The `default` method can be invoked on an instance of the implementing class and NOT as a `static` method of the containing interface;
 
-### 1.6 Static methods
+### 17.1.6 Static methods
 
 - An interface can provide `static methods` (through the keyword `static`) which are implicitly `public`;
 - Static methods must include a method body and are accessed through the reference of the interface name;
 - Static methods cannot be `abstract` or `final`;
 
-### 1.7 Private interface methods
+### 17.1.7 Private interface methods
 
 Among all the concrete methods that an interface can implement we have also:
 
 - **`private` methods**: visible only inside the declaring interface and which can only be invoked from a `non-static` context (`default` methods or other `non-static private methods`).
 - **`private static` methods**: visible only inside the declaring interface and which can be invoked by any method of the enclosing interface.
 
-## 2. Sealed and non-sealed Types
+## 17.2 Sealed, non-sealed, and final Types
 
 Sealed classes and interfaces (Java 17+) restrict which other classes (or interfaces) can extend or implement them.
 
@@ -170,7 +171,7 @@ final class Circle extends Shape { }
 non-sealed class Rectangle extends Shape { }
 ```
 
-### 2.1 Rules
+### 17.2.1 Rules
 
 - A sealed Type must declare all permitted Sub-Types.
 - A permitted sub-type must be **final**, **sealed**, or **non-sealed**; because interfaces cannot be final, they can only be marked `sealed` or `non-sealed` when extending a sealed interface.
@@ -178,7 +179,7 @@ non-sealed class Rectangle extends Shape { }
 
 ---
 
-## 3. Enums
+## 17.3 Enums
 
 **Enums** define a fixed set of constant values. 
 
@@ -186,14 +187,14 @@ Enums can declare fields, constructors, and methods as regular classes do but th
 
 The list of enum values must end with a semicolon `(;)` in case of `Complex Enums`, but this is not mandatory for `Simple Enums`.
 
-### 3.1 `Simple` Enum Definition
+### 17.3.1 `Simple` Enum Definition
 
 ```java
 enum Day { MON, TUE, WED, THU, FRI, SAT, SUN }
 ```
 
 
-### 3.2 `Complex` Enums with State and Behavior
+### 17.3.2 `Complex` Enums with State and Behavior
 
 ```java
 enum Level {
@@ -211,13 +212,13 @@ public static void main(String[] args) {
 }
 ```
 
-### 3.3 Enum Methods
+### 17.3.3 Enum Methods
 
 - `values()` – returns an array of all the constants values that can be used, for example, in a `for-each` loop
 - `valueOf(String)` – returns constant by name
 - `ordinal()` – index (int) of the constant
 
-### 3.4 Rules
+### 17.3.4 Rules
 
 - Enum Constructors are implicitly `private`;
 - Enum can contain `static` and `instance` methods;
@@ -225,7 +226,7 @@ public static void main(String[] args) {
 
 ---
 
-## 4. Records (Java 16+)
+## 17.4 Records (Java 16+)
 
 A **record** is a special class designed to model immutable data: they are, in fact, implicitly **final**. 
 
@@ -250,7 +251,7 @@ System.out.println(element.y);
 
 In case you need additional validation or tranformation over the provided fields, you can declare: `Long Constructors` or `Compact Constructors`.
 
-### 4.1 Long Constructor
+### 17.4.1 Long Constructor
 
 ```java
 public record Person(String name, int age) {
@@ -279,7 +280,7 @@ public record Point(int x, int y) {
 > - The compiler will not insert a constructor if you manually provide one with the same list of parameters in the defined order;
 > - In this case, you must explicitly set every field manually;
 
-### 4.2 Compact Constructor
+### 17.4.2 Compact Constructor
 
 You can define a Compact constructor which implicitly set all fields, while letting you perform validations and transformations on some target fields.
 Java will execute the full constructor, setting all fields, after the Compact COnstructor has completed.
@@ -301,7 +302,7 @@ public record Person(String name, int age) {
 > - If you try to modify a Record field inside a Compact Constructor, your code will not compile
 
 
-### 4.3 Pattern Matching for Records
+### 17.4.3 Pattern Matching for Records
 
 When you use pattern matching with `instanceof` or with `switch`, a record pattern must specify:
 
@@ -318,13 +319,13 @@ if (obj instanceof Point(int a, int b)) {
 }
 ```
 
-### 4.4 Nested Record Patterns and Matching Records with `var` and Generics
+### 17.4.4 Nested Record Patterns and Matching Records with `var` and Generics
 
 Nested record patterns allow you to destructure records that contain other records or complex types, extracting values recursively directly within the pattern itself.
 
 They combine the power of `record` deconstruction with pattern matching, giving you a concise and expressive way to navigate hierarchical data structures.
 
-#### 4.4.1 Basic Nested Record Pattern
+#### 17.4.4.1 Basic Nested Record Pattern
 
 If a record contains another record, you can destructure both at once:
 
@@ -344,7 +345,7 @@ void printInfo(Object obj) {
 Here above the `Person` pattern includes a nested `Address` pattern. 
 Both are matched structurally.
 
-#### 4.4.2 Nested Record Patterns with `var`
+#### 17.4.4.2 Nested Record Patterns with `var`
 
 Instead of specifying exact types for each field, you can use `var` inside the pattern to let the compiler infer the type. 
 
@@ -360,7 +361,7 @@ Instead of specifying exact types for each field, you can use `var` inside the p
 > - You still need the enclosing record type (Person, Address); 
 > - only the field types can be replaced with `var`.
 
-#### 4.4.3 Nested Record Patterns and Generics
+#### 17.4.4.3 Nested Record Patterns and Generics
 
 Record patterns also work with generic records.
 
@@ -381,7 +382,7 @@ In this example:
 - The pattern requires exactly `Box<String>`, not `Box<Integer>`.
 - Inside the pattern, `var v` captures the unboxed generic value.
 
-#### 4.4.4 Common Errors with Nested Record Patterns
+#### 17.4.4.4 Common Errors with Nested Record Patterns
 
 Mismatched record structure
 
@@ -418,7 +419,7 @@ case var(Person(var n, var a)) -> ...
 
 ---
 
-## 5. Nested Classes in Java
+## 17.5 Nested Classes in Java
 
 Java supports several kinds of **nested classes** — classes declared inside another class.  
 They are a fundamental tool for encapsulation, code organization, event-handling patterns, and representing logical hierarchies.  
@@ -432,13 +433,13 @@ Java defines four kinds of nested classes:
 - **Anonymous Classes** – unnamed classes created inline, usually to override a method or implement an interface.
 
 
-### 5.1 Static Nested Classes
+### 17.5.1 Static Nested Classes
 
 A **static nested class** behaves like a top-level class that is namespaced inside its enclosing class.  
 It **cannot** access instance members of the outer class but **can** access static members.  
 It does **not** hold a reference to an instance of the enclosing class.
 
-#### 5.1.1 Syntax and Access Rules
+#### 17.5.1.1 Syntax and Access Rules
 
 - Declared using `static class` inside another class.
 - Can access only **static** members of the outer class.
@@ -464,7 +465,7 @@ class Test {
 }
 ```
 
-#### 5.1.2 Common Pitfalls
+#### 17.5.1.2 Common Pitfalls
 
 - Static nested classes **cannot access instance variables**:
 
@@ -479,11 +480,11 @@ class Outer {
 }
 ```
 
-### 5.2 Inner Classes (Non-Static Nested Classes)
+### 17.5.2 Inner Classes (Non-Static Nested Classes)
 
 An **inner class** is associated with an instance of the outer class and can access **all members** of the outer class, including **private** ones.
 
-#### 5.2.1 Syntax and Access Rules
+#### 17.5.2.1 Syntax and Access Rules
 
 - Declared without `static`.
 - Has an implicit reference to the enclosing instance.
@@ -515,7 +516,7 @@ class Test {
 }
 ```
 
-#### 5.2.2 Common Pitfalls
+#### 17.5.2.2 Common Pitfalls
 
 - Inner classes **cannot declare static members** except **static final constants**.
 
@@ -532,12 +533,12 @@ class Outer {
 > - Instantiating an inner class WITHOUT an outer instance is illegal.
 
 
-### 5.3 Local Classes
+### 17.5.3 Local Classes
 
 A **local class** is a nested class defined inside a block — most commonly a method.  
 It has no access modifier and is visible only within the block where it is declared.
 
-#### 5.3.1 Characteristics
+#### 17.5.3.1 Characteristics
 
 - Declared inside a method, constructor, or initializer.
 - Can access members of the outer class.
@@ -560,7 +561,7 @@ class Outer {
 }
 ```
 
-#### 5.3.2 Common Pitfalls
+#### 17.5.3.2 Common Pitfalls
 
 - `base` must be effectively final; changing it breaks compilation.
 
@@ -572,11 +573,11 @@ void compute() {
 }
 ```
 
-## 5.4 Anonymous Classes
+### 17.5.4 Anonymous Classes
 
 An **anonymous class** is a one-off class created inline, usually to implement an interface or override a method without naming a new class.
 
-#### 5.4.1 Syntax and Usage
+#### 17.5.4.1 Syntax and Usage
 
 - Created using `new` + type + body.
 - Cannot have constructors (no name).
@@ -591,7 +592,7 @@ Runnable r = new Runnable() {
 };
 ```
 
-#### 5.4.2 Anonymous Class Extending a Class
+#### 17.5.4.2 Anonymous Class Extending a Class
 
 ```java
 Button b = new Button("Click");
@@ -604,7 +605,7 @@ b.onClick(new ClickHandler() {
 ```
 
 
-### 5.5 Comparison of Nested Class Types
+### 17.5.5 Comparison of Nested Class Types
 
 A quick table summarizing all kinds of nested classes.
 
@@ -617,5 +618,4 @@ Local Class         | Yes                 | Yes                                |
 Anonymous Class     | Yes                 | Yes                                | No                        | Inline customization
 ```
 
----
 

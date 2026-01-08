@@ -34,7 +34,8 @@
 ---
 
 
-Inheritance is one of the core pillars of Object-Oriented Programming.  
+`Inheritance` is one of the core pillars of Object-Oriented Programming. 
+ 
 It allows a class (the *subclass*) to acquire the state and behavior of another class (the *superclass*), creating hierarchical relationships that promote code reuse, specialization, and polymorphism.
 
 ## 16.1 General Definition of Inheritance
