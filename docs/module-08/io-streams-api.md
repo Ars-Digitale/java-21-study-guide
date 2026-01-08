@@ -1,6 +1,93 @@
-# Java I/O APIs (Legacy and NIO)
+# 35. Java I/O APIs (Legacy and NIO)
 
-## 1. Legacy `java.io` — Design, Behavior, and Subtleties
+### Table of Contents
+
+- [35. Java I/O APIs Legacy-and-NIO](#35-java-io-apis-legacy-and-nio)
+  - [35.1 Legacy javaio — Design Behavior-and-Subtleties](#351-legacy-javaio--design-behavior-and-subtleties)
+    - [35.1.1 The Stream Abstraction](#3511-the-stream-abstraction)
+    - [35.1.2 Stream Chaining and the Decorator Pattern](#3512-stream-chaining-and-the-decorator-pattern)
+    - [35.1.3 Blocking IO What-It-Means](#3513-blocking-io-what-it-means)
+    - [35.1.4 Resource Management close-flush-and-why-they-exist](#3514-resource-management-close-flush-and-why-they-exist)
+    - [35.1.5 finalize Why-It-Exists-and-Why-It-Fails](#3515-finalize-why-it-exists-and-why-it-fails)
+    - [35.1.6 available Purpose-and-Misuse](#3516-available-purpose-and-misuse)
+    - [35.1.7 mark--reset Controlled-Backtracking](#3517-mark--reset-controlled-backtracking)
+    - [35.1.8 Readers Writers-and-Character-Encoding](#3518-readers-writers-and-character-encoding)
+    - [35.1.9 File-vs-FileDescriptor](#3519-file-vs-filedescriptor)
+  - [35.2 javanio — Buffers Channels-and-Non-Blocking-IO](#352-javanio--buffers-channels-and-non-blocking-io)
+    - [35.2.1 From Streams to Buffers Conceptual-Shift](#3521-from-streams-to-buffers-conceptual-shift)
+    - [35.2.2 Buffers Purpose-and-Structure](#3522-buffers-purpose-and-structure)
+    - [35.2.3 Buffer Lifecycle Write--Flip--Read](#3523-buffer-lifecycle-write--flip--read)
+    - [35.2.4 clear-vs-compact](#3524-clear-vs-compact)
+    - [35.2.5 Heap-Buffers-vs-Direct-Buffers](#3525-heap-buffers-vs-direct-buffers)
+    - [35.2.6 Channels What-They-Are](#3526-channels-what-they-are)
+    - [35.2.7 Blocking-vs-Non-Blocking-Channels](#3527-blocking-vs-non-blocking-channels)
+    - [35.2.8 Scatter--Gather-IO](#3528-scatter--gather-io)
+    - [35.2.9 Selectors Multiplexing-Non-Blocking-IO](#3529-selectors-multiplexing-non-blocking-io)
+    - [35.2.10 When-to-Use-javanio](#35210-when-to-use-javanio)
+  - [35.3 javaniofile NIO2 — File-and-Directory-Operations Legacy-vs-Modern](#353-javaniofile-nio2--file-and-directory-operations-legacy-vs-modern)
+    - [35.3.1 Existence and Accessibility Checks](#3531-existence-and-accessibility-checks)
+      - [35.3.1.1 Legacy-API File](#35311-legacy-api-file)
+      - [35.3.1.2 Modern-API Files](#35312-modern-api-files)
+        - [35.3.1.2.1 Symbolic-Link-Awareness](#353121-symbolic-link-awareness)
+        - [35.3.1.2.2 Correct-Usage-Pattern](#353122-correct-usage-pattern)
+        - [35.3.1.2.3 Summary-Table](#353123-summary-table)
+    - [35.3.2 Creating Files and Directories](#3532-creating-files-and-directories)
+      - [35.3.2.1 Legacy-API File](#35321-legacy-api-file)
+      - [35.3.2.2 Modern-API Files](#35322-modern-api-files)
+    - [35.3.3 Deleting Files and Directories](#3533-deleting-files-and-directories)
+      - [35.3.3.1 Legacy-API File](#35331-legacy-api-file)
+      - [35.3.3.2 Modern-API Files](#35332-modern-api-files)
+    - [35.3.4 Copying Files and Directories](#3534-copying-files-and-directories)
+      - [35.3.4.1 Legacy-technique](#35341-legacy-technique)
+      - [35.3.4.2 Modern-API Filescopy](#35342-modern-api-filescopy)
+    - [35.3.5 Moving and Renaming](#3535-moving-and-renaming)
+      - [35.3.5.1 Legacy-API](#35351-legacy-api)
+      - [35.3.5.2 Modern-API](#35352-modern-api)
+    - [35.3.6 Reading and Writing Text and Bytes Files-Enhancements](#3536-reading-and-writing-text-and-bytes-files-enhancements)
+      - [35.3.6.1 Legacy-text-readingwriting](#35361-legacy-text-readingwriting)
+      - [35.3.6.2 Modern-text-readingwriting](#35362-modern-text-readingwriting)
+      - [35.3.6.3 Modern-binary-readingwriting](#35363-modern-binary-readingwriting)
+    - [35.3.7 newInputStream-newOutputStream-and-newBufferedReader-newBufferedWriter](#3537-newinputstream-newoutputstream-and-newbufferedreader-newbufferedwriter)
+    - [35.3.8 Listing Directories and Traversing Trees](#3538-listing-directories-and-traversing-trees)
+      - [35.3.8.1 Legacy-listing](#35381-legacy-listing)
+      - [35.3.8.2 Modern-listing-Directorystream](#35382-modern-listing-directorystream)
+      - [35.3.8.3 Modern-walking-Fileswalk](#35383-modern-walking-fileswalk)
+      - [35.3.8.4 Modern-traversal-with-FileVisitor](#35384-modern-traversal-with-filevisitor)
+    - [35.3.9 Searching and Filtering](#3539-searching-and-filtering)
+    - [35.3.10 Attributes Reading-Writing-and-Views](#35310-attributes-reading-writing-and-views)
+      - [35.3.10.1 Legacy-attributes](#353101-legacy-attributes)
+      - [35.3.10.2 Modern-attributes](#353102-modern-attributes)
+    - [35.3.11 Symbolic Links and Link Following](#35311-symbolic-links-and-link-following)
+    - [35.3.12 Summary Why-Files-Is-an-Enhancement](#35312-summary-why-files-is-an-enhancement)
+  - [35.4 Serialization Object-Streams Compatibility-and-Traps](#354-serialization-object-streams-compatibility-and-traps)
+    - [35.4.1 What Serialization Does](#3541-what-serialization-does)
+    - [35.4.2 The Two Marker Interfaces](#3542-the-two-marker-interfaces)
+    - [35.4.3 Basic Example Writing-and-Reading-an-Object](#3543-basic-example-writing-and-reading-an-object)
+    - [35.4.4 Object Graphs References-and-Identity](#3544-object-graphs-references-and-identity)
+    - [35.4.5 serialVersionUID The-Versioning-Key](#3545-serialversionuid-the-versioning-key)
+    - [35.4.6 transient-and-static-Fields](#3546-transient-and-static-fields)
+    - [35.4.7 Non-Serializable Fields NotSerializableException](#3547-non-serializable-fields-notserializableexception)
+    - [35.4.8 Constructors and Serialization](#3548-constructors-and-serialization)
+      - [35.4.8.1 Rule Constructors-Not-Called](#35481-rule-constructors-not-called)
+      - [35.4.8.2 Inheritance-Rule](#35482-inheritance-rule)
+      - [35.4.8.3 Summary-Table Which-Constructors-Run](#35483-summary-table-which-constructors-run)
+      - [35.4.8.4 Worked-Example Constructor-Calls](#35484-worked-example-constructor-calls)
+    - [35.4.9 Custom Serialization Hooks](#3549-custom-serialization-hooks)
+      - [35.4.9.1 Why-Custom-Serialization-Exists](#35491-why-custom-serialization-exists)
+      - [35.4.9.2 What-writeObject-and-readObject-Really-Are](#35492-what-writeobject-and-readobject-really-are)
+      - [35.4.9.3 Exact-Required-Signatures](#35493-exact-required-signatures)
+      - [35.4.9.4 What-Happens-Step-by-Step](#35494-what-happens-step-by-step)
+      - [35.4.9.5 Typical-Pattern-and-Ordering-Rule](#35495-typical-pattern-and-ordering-rule)
+    - [35.4.10 Example Use-Case Transient-Derived-Field](#35410-example-use-case-transient-derived-field)
+    - [35.4.11 Externalizable Full-Control](#35411-externalizable-full-control)
+    - [35.4.12 readObject Security-Considerations](#35412-readobject-security-considerations)
+    - [35.4.13 Common Traps-and-Practical-Tips](#35413-common-traps-and-practical-tips)
+    - [35.4.14 When-to-Use-or-Avoid-Java-Serialization](#35414-when-to-use-or-avoid-java-serialization)
+
+
+---
+
+## 35.1 Legacy `java.io` — Design, Behavior, and Subtleties
 
 The legacy `java.io` API is the original I/O abstraction introduced in Java 1.0.
 
@@ -8,7 +95,7 @@ It is stream-oriented, blocking, and closely mapped to operating system I/O conc
 
 Although newer APIs exist, `java.io` remains fundamental: many higher-level APIs build on it, and it is still heavily used.
 
-### 1.1 The Stream Abstraction
+### 35.1.1 The Stream Abstraction
 
 A `stream` represents a continuous flow of data between a source and a destination.
 
@@ -23,7 +110,7 @@ In `java.io`, streams are **unidirectional**: they are either **input** or **out
 
 Streams hide the concrete origin of data (file, network, memory) and expose a uniform read/write interface.
 
-### 1.2 Stream Chaining and the Decorator Pattern
+### 35.1.2 Stream Chaining and the Decorator Pattern
 
 Most java.io streams are designed to be combined.
 Each wrapper adds behavior without changing the underlying data source.
@@ -43,7 +130,7 @@ In this example:
 >
 > It allows features to be layered dynamically.
 
-### 1.3 Blocking I/O: What It Means
+### 35.1.3 Blocking I/O: What It Means
 
 All legacy `java.io` streams are **blocking**.
 
@@ -57,7 +144,7 @@ For example, when calling `read()`:
 > [!NOTE]
 > Blocking behavior simplifies programming but limits scalability.
 
-### 1.4 Resource Management: `close()`, `flush()`, and Why They Exist
+### 35.1.4 Resource Management: `close()`, `flush()`, and Why They Exist
 
 Streams often encapsulate native operating system resources
 such as `file descriptors` or `socket handles`.
@@ -78,7 +165,7 @@ try (OutputStream out = new FileOutputStream("file.bin")) {
 > [!NOTE]
 > Failing to close streams may cause data loss or resource exhaustion.
 
-### 1.5 `finalize()`: Why It Exists and Why It Fails
+### 35.1.5 `finalize()`: Why It Exists and Why It Fails
 
 Early Java attempted to automate resource cleanup using finalization.
 
@@ -95,7 +182,7 @@ However, garbage collection timing is unpredictable.
 > [!NOTE]
 > `finalize()` must never be used for I/O cleanup; it is deprecated and unsafe.
 
-### 1.6 `available()`: Purpose and Misuse
+### 35.1.6 `available()`: Purpose and Misuse
 
 The `available()` method estimates how many bytes can be read without blocking.
 
@@ -115,7 +202,7 @@ if (in.available() > 0) {
 > `available()` must not be used to detect end-of-file.
 > Only `read()` returning -1 signals EOF.
 
-### 1.7 `mark()` and `reset()`: Controlled Backtracking
+### 35.1.7 `mark()` and `reset()`: Controlled Backtracking
 
 Some input streams allow marking a position
 and returning to it later.
@@ -134,7 +221,7 @@ in.reset();
 | `ByteArrayInputStream` | Yes |
 
 
-### 1.8 Readers, Writers, and Character Encoding
+### 35.1.8 Readers, Writers, and Character Encoding
 
 `Reader` and `Writer` operate on `characters`, not bytes.
 
@@ -151,7 +238,7 @@ new FileReader("file.txt"); // platform default encoding
 >
 > Always specify a charset explicitly.
 
-### 1.9 File vs FileDescriptor
+### 35.1.9 File vs FileDescriptor
 
 `File` represents a `path` in the filesystem.
 
@@ -171,7 +258,7 @@ FileDescriptor represents a native OS handle to an open file or stream.
 
 ---
 
-## 2. `java.nio` — Buffers, Channels, and Non-Blocking I/O
+## 35.2 `java.nio` — Buffers, Channels, and Non-Blocking I/O
 
 The `java.nio` API (New I/O) was introduced to address limitations of legacy `java.io`.
 
@@ -182,7 +269,7 @@ At its core, `java.nio` is built around three concepts:
 - `Channels` — bidirectional data connections
 - `Selectors` — multiplexing non-blocking I/O
 
-### 2.1 From Streams to Buffers: A Conceptual Shift
+### 35.2.1 From Streams to Buffers: A Conceptual Shift
 
 Legacy streams hide memory management from the programmer.
 
@@ -196,7 +283,7 @@ In contrast, `NIO` makes memory explicit through buffers.
 
 With NIO, the application controls when data is read into memory and how it is consumed.
 
-### 2.2 Buffers: Purpose and Structure
+### 35.2.2 Buffers: Purpose and Structure
 
 A `buffer` is a fixed-size, typed container for data.
 
@@ -214,7 +301,7 @@ ByteBuffer buffer = ByteBuffer.allocate(1024);
 | `position` | Current read/write index |
 | `limit` | Boundary of readable or writable data |
 
-### 2.3 Buffer Lifecycle: Write → Flip → Read
+### 35.2.3 Buffer Lifecycle: Write → Flip → Read
 
 `Buffers` have a strict `usage lifecycle`.
 
@@ -244,7 +331,7 @@ buffer.clear(); // ready for writing again
 > [!NOTE]
 > `flip()` does not erase data: it adjusts position and limit.
 
-### 2.4 `clear()` vs `compact()`
+### 35.2.4 `clear()` vs `compact()`
 
 After reading, a buffer can be reused in two ways.
 
@@ -255,7 +342,7 @@ After reading, a buffer can be reused in two ways.
 
 `compact()` is useful in streaming protocols where partial messages may remain in the buffer.
 
-### 2.5 Heap Buffers vs Direct Buffers
+### 35.2.5 Heap Buffers vs Direct Buffers
 
 Buffers can be allocated in two different memory regions.
 
@@ -272,7 +359,7 @@ ByteBuffer direct = ByteBuffer.allocateDirect(1024);
 > [!NOTE]
 > Direct buffers reduce copying between JVM and OS but must be used carefully to avoid memory pressure.
 
-### 2.6 Channels: What They Are
+### 35.2.6 Channels: What They Are
 
 A `channel` represents a connection to an I/O entity
 such as a file, socket, or device.
@@ -294,7 +381,7 @@ try (FileChannel channel =
 }
 ```
 
-### 2.7 Blocking vs Non-Blocking Channels
+### 35.2.7 Blocking vs Non-Blocking Channels
 
 Channels can operate in blocking or non-blocking mode.
 
@@ -310,7 +397,7 @@ In `**non-blocking mode**`:
 > [!NOTE]
 > Non-blocking I/O shifts complexity from the OS to the application.
 
-### 2.8 Scatter/Gather I/O
+### 35.2.8 Scatter/Gather I/O
 
 NIO supports reading into or writing from multiple buffers in a single operation.
 
@@ -324,7 +411,7 @@ channel.read(buffers);
 
 This is useful for structured protocols (headers + payload).
 
-### 2.9 Selectors: Multiplexing Non-Blocking I/O
+### 35.2.9 Selectors: Multiplexing Non-Blocking I/O
 
 `Selectors` allow a single thread to monitor multiple channels.
 
@@ -337,7 +424,7 @@ They are the foundation of scalable servers.
 | `Interest` | set Operations of interest |
 
 
-### 2.10 When to Use `java.nio`
+### 35.2.10 When to Use `java.nio`
 
 `NIO` is appropriate when:
 - High concurrency is required
@@ -348,7 +435,7 @@ For simple file operations, `java.nio.file.Files` is usually sufficient.
 
 ---
 
-## 3 `java.nio.file` (NIO.2) — File and Directory Operations (Legacy vs Modern)
+## 35.3 `java.nio.file` (NIO.2) — File and Directory Operations (Legacy vs Modern)
 
 This section focuses on practical operations on files and directories.
 
@@ -360,7 +447,7 @@ The goal is not only to know the method names, but to understand:
 - what pitfalls exist (race conditions, links, permissions, portability)
 - when a Files method is a safe enhancement over the old approach
 
-### 3.1 Existence and Accessibility Checks
+### 35.3.1 Existence and Accessibility Checks
 
 A very common operation is to check whether a file exists and whether it can be accessed (read, written, executed).
 
@@ -370,7 +457,7 @@ However, it is important to understand that these checks are intentionally impre
 
 They are best-effort hints, not reliable guarantees.
 
-#### 3.1.1 Legacy API (File)
+#### 35.3.1.1 Legacy API (File)
 
 ```java
 File f = new File("data.txt");
@@ -392,7 +479,7 @@ For example, exists() may return false when:
 
 The API provides no way to distinguish between these cases.
 
-#### 3.1.2 Modern API (Files)
+#### 35.3.1.2 Modern API (Files)
 
 ```java
 Path p = Path.of("data.txt");
@@ -418,7 +505,7 @@ boolean notExists = Files.notExists(p);
 
 This does not make the check more accurate — it merely makes the uncertainty explicit.
 
-##### 3.1.2.1 Symbolic Link Awareness (Real Improvement)
+##### 35.3.1.2.1 Symbolic Link Awareness (Real Improvement)
 
 One genuine enhancement of NIO.2 is control over symbolic link handling:
 
@@ -434,7 +521,7 @@ Legacy File cannot reliably distinguish:
 
 NIO.2 allows link-aware checks and explicit link inspection.
 
-##### 3.1.2.2 Correct Usage Pattern (Critical)
+##### 35.3.1.2.2 Correct Usage Pattern (Critical)
 
 Neither API provides reliable diagnostics through boolean checks alone.
 
@@ -456,7 +543,7 @@ try {
 > [!NOTE]
 > NIO.2’s real advantage is exception-based diagnostics during operations, not more accurate existence or accessibility checks.
 
-##### 3.1.2.3 Summary Table
+##### 35.3.1.2.3 Summary Table
 
 | Goal               | Legacy (File)              | Modern (Files)                     | Key detail                                                                 |
 |--------------------|----------------------------|------------------------------------|----------------------------------------------------------------------------|
@@ -465,13 +552,13 @@ try {
 | Error details      | Not available              | Available via exceptions on actions| Boolean checks themselves still do not explain the reason for failure       |
 
 
-### 3.2 Creating Files and Directories
+### 35.3.2 Creating Files and Directories
 
 Creation is a major weakness of legacy File.
 
 Legacy often uses createNewFile() and mkdir/mkdirs(), which return boolean and provide little diagnostic information.
 
-#### 3.2.1 Legacy API (File)
+#### 35.3.2.1 Legacy API (File)
 
 ```java
 File f = new File("a.txt");
@@ -486,7 +573,7 @@ boolean ok2 = new File("a/b/c").mkdirs();
 
 Both return false on failure but do not tell you why.
 
-#### 3.2.2 Modern API (Files)
+#### 35.3.2.2 Modern API (Files)
 
 ```java
 Path file = Path.of("a.txt");
@@ -511,13 +598,13 @@ Files.createDirectories(dirDeep);
 | Create parents    | `mkdirs()`             | `createDirectories()`      | Atomicity is not guaranteed for deep directory creation         |
 
 
-### 3.3 Deleting Files and Directories
+### 35.3.3 Deleting Files and Directories
 
 Deletion semantics differ strongly between legacy and NIO.2.
 
 Legacy `delete()` returns boolean; NIO.2 offers methods that throw meaningful exceptions.
 
-#### 3.3.1 Legacy API (File)
+#### 35.3.3.1 Legacy API (File)
 
 ```java
 File f = new File("a.txt");
@@ -526,7 +613,7 @@ boolean deleted = f.delete();
 
 If deletion fails (permission denied, file does not exist, directory not empty), `delete()` usually returns false without explanation.
 
-#### 3.3.2 Modern API (Files)
+#### 35.3.3.2 Modern API (Files)
 
 ```java
 Files.delete(Path.of("a.txt"));
@@ -544,13 +631,13 @@ Files.deleteIfExists(Path.of("a.txt"));
 | Delete if present   | `exists() + delete()`      | `deleteIfExists()`         | Avoids TOCTOU (check-then-act) race conditions                      |
 
 
-### 3.4 Copying Files and Directories
+### 35.3.4 Copying Files and Directories
 
 Legacy copying typically requires manually reading and writing bytes via streams.
 
 NIO.2 provides high-level copy operations with options.
 
-#### 3.4.1 Legacy technique (manual streams)
+#### 35.3.4.1 Legacy technique (manual streams)
 
 ```java
 try (InputStream in = new FileInputStream("src.bin"); OutputStream out = new FileOutputStream("dst.bin")) {
@@ -565,7 +652,7 @@ try (InputStream in = new FileInputStream("src.bin"); OutputStream out = new Fil
 
 This is verbose and easy to get wrong (missing buffering, missing close, etc.).
 
-#### 3.4.2 Modern API (Files.copy)
+#### 35.3.4.2 Modern API (Files.copy)
 
 ```java
 Files.copy(Path.of("src.bin"), Path.of("dst.bin"));
@@ -594,13 +681,13 @@ Files.copy(
 | Copy directory  | Manual recursion       | `walkFileTree + Files.copy`              | No single one-liner for full directory tree copy                        |
 
 
-### 3.5 Moving and Renaming
+### 35.3.5 Moving and Renaming
 
 Renaming in legacy code typically uses `File.renameTo()`, which is notoriously unreliable and platform-dependent.
 
 NIO.2 provides Files.move() with explicit semantics and options.
 
-#### 3.5.1 Legacy API
+#### 35.3.5.1 Legacy API
 
 ```java
 boolean ok = new File("a.txt").renameTo(new File("b.txt"));
@@ -610,7 +697,7 @@ boolean ok = new File("a.txt").renameTo(new File("b.txt"));
 
 It may also fail unexpectedly across filesystems.
 
-#### 3.5.2 Modern API
+#### 35.3.5.2 Modern API
 
 ```java
 Files.move(Path.of("a.txt"), Path.of("b.txt"));
@@ -638,13 +725,13 @@ Files.move(
 | Replace existing| Not explicit       | `REPLACE_EXISTING`               | Makes overwrite intent explicit                                  |
 
 
-### 3.6 Reading and Writing Text and Bytes (Files Enhancements)
+### 35.3.6 Reading and Writing Text and Bytes (Files Enhancements)
 
 A major enhancement of NIO.2 is the `Files` utility class, which provides high-level methods for common reading and writing tasks.
 
 These methods reduce boilerplate and improve correctness.
 
-#### 3.6.1 Legacy text reading/writing
+#### 35.3.6.1 Legacy text reading/writing
 
 ```java
 try (BufferedReader r = new BufferedReader(new FileReader("file.txt"))) {
@@ -660,7 +747,7 @@ try (BufferedWriter w = new BufferedWriter(new FileWriter("file.txt"))) {
 
 These legacy classes typically use the platform default charset unless you explicitly bridge with InputStreamReader/OutputStreamWriter.
 
-#### 3.6.2 Modern text reading/writing
+#### 35.3.6.2 Modern text reading/writing
 
 ```java
 List<String> lines = Files.readAllLines(Path.of("file.txt"), StandardCharsets.UTF_8);
@@ -672,7 +759,7 @@ String string = Files.readString(Path.of("file.txt"));
 Files.writeString(Path.of("file.txt"), string);
 ```
 
-#### 3.6.3 Modern binary reading/writing
+#### 35.3.6.3 Modern binary reading/writing
 
 ```java
 byte[] data = Files.readAllBytes(Path.of("data.bin"));
@@ -694,7 +781,7 @@ Files.write(Path.of("out.bin"), data);
 | Append text   | FileWriter(true)                  | `write(…, APPEND)`                   | Options make intent explicit                                   |
 
 
-### 3.7 newInputStream/newOutputStream and newBufferedReader/newBufferedWriter
+### 35.3.7 newInputStream/newOutputStream and newBufferedReader/newBufferedWriter
 
 These factory methods create stream/reader instances from a Path.
 
@@ -710,13 +797,13 @@ try (BufferedReader r = Files.newBufferedReader(Path.of("t.txt"), StandardCharse
 try (BufferedWriter w = Files.newBufferedWriter(Path.of("t.txt"), StandardCharsets.UTF_8)) { }
 ```
 
-### 3.8 Listing Directories and Traversing Trees
+### 35.3.8 Listing Directories and Traversing Trees
 
 Legacy directory listing is based on `File.list()` and `File.listFiles()`.
 
 These methods return arrays and provide limited error reporting.
 
-#### 3.8.1 Legacy listing
+#### 35.3.8.1 Legacy listing
 
 ```java
 File dir = new File(".");
@@ -725,7 +812,7 @@ File[] children = dir.listFiles();
 
 NIO.2 provides multiple approaches depending on needs.
 
-#### 3.8.2 Modern listing (DirectoryStream)
+#### 35.3.8.2 Modern listing (DirectoryStream)
 
 ```java
 try (DirectoryStream<Path> ds = Files.newDirectoryStream(Path.of("."))) {
@@ -735,7 +822,7 @@ try (DirectoryStream<Path> ds = Files.newDirectoryStream(Path.of("."))) {
 }
 ```
 
-#### 3.8.3 Modern walking (Files.walk)
+#### 35.3.8.3 Modern walking (Files.walk)
 
 ```java
 Files.walk(Path.of("."))
@@ -753,7 +840,7 @@ try (Stream<Path> s = Files.walk(Path.of("."))) {
 }
 ```
 
-#### 3.8.4 Modern traversal with FileVisitor
+#### 35.3.8.4 Modern traversal with FileVisitor
 
 For full control (skip subtrees, handle errors, follow links), use `walkFileTree + FileVisitor`.
 
@@ -773,7 +860,7 @@ Files.walkFileTree(Path.of("."), new SimpleFileVisitor<>() {
 | Walk | tree | (simple) | Manual | recursion `walk()` Stream must be closed |
 | Walk | tree | (control) | Manual | recursion `walkFileTree()` Error handling + pruning |
 
-### 3.9 Searching and Filtering
+### 35.3.9 Searching and Filtering
 
 Searching is typically implemented by traversing and filtering.
 
@@ -795,20 +882,20 @@ try (Stream<Path> s = Files.find(Path.of("."), 10,
 }
 ```
 
-### 3.10 Attributes: Reading, Writing, and Views
+### 35.3.10 Attributes: Reading, Writing, and Views
 
 Legacy File exposes only a few attributes (size, lastModified).
 
 NIO.2 supports rich metadata via attribute views.
 
-#### 3.10.1 Legacy attributes
+#### 35.3.10.1 Legacy attributes
 
 ```java
 long size = new File("a.txt").length();
 long lm = new File("a.txt").lastModified();
 ```
 
-#### 3.10.2 Modern attributes
+#### 35.3.10.2 Modern attributes
 
 ```java
 BasicFileAttributes a =
@@ -830,7 +917,7 @@ Files.setAttribute(Path.of("a.txt"), "basic:lastModifiedTime", FileTime.fromMill
 >
 > Unsupported attributes cause exceptions.
 
-### 3.11 Symbolic Links and Link Following
+### 35.3.11 Symbolic Links and Link Following
 
 NIO.2 can explicitly detect and read symbolic links.
 
@@ -848,7 +935,7 @@ if (isLink) {
 Many methods follow links by default.
 To prevent this, pass `LinkOption.NOFOLLOW_LINKS` when supported.
 
-### 3.12 Summary: Why Files Is an Enhancement
+### 35.3.12 Summary: Why Files Is an Enhancement
 
 The Files utility class improves filesystem programming by:
 - reducing boilerplate (copy/move/read/write)
@@ -860,7 +947,7 @@ Legacy APIs remain mostly for backward compatibility or when required by old lib
 
 ---
 
-## 4. Serialization — Object Streams, Compatibility, and Traps
+## 35.4 Serialization — Object Streams, Compatibility, and Traps
 
 Serialization is the process of converting an object graph into a byte stream so it can be stored or transmitted, then reconstructed later.
 
@@ -872,7 +959,7 @@ This topic is critical because it combines:
 - security concerns and safe usage patterns
 - special language rules (`transient`, static, `serialVersionUID`)
 
-### 4.1 What Serialization Does (and What It Does Not)
+### 35.4.1 What Serialization Does (and What It Does Not)
 
 When an object is serialized, Java writes enough information to reconstruct it later:
 - the class name
@@ -885,7 +972,7 @@ Serialization does not automatically include:
 - transient fields (explicitly excluded)
 - non-serializable referenced objects (unless handled specially)
 
-### 4.2 The Two Main Marker Interfaces
+### 35.4.2 The Two Main Marker Interfaces
 
 Java serialization is enabled by implementing one of these interfaces.
 
@@ -899,7 +986,7 @@ Java serialization is enabled by implementing one of these interfaces.
 >
 > `Externalizable` extends Serializable and adds readExternal/writeExternal.
 
-### 4.3 Basic Example: Writing and Reading an Object
+### 35.4.3 Basic Example: Writing and Reading an Object
 
 This is the minimal pattern used in practice.
 
@@ -942,7 +1029,7 @@ public class Demo {
 > `readObject()` returns Object. A cast is required.
 > `readObject()` can throw ClassNotFoundException.
 
-### 4.4 Object Graphs, References, and Identity
+### 35.4.4 Object Graphs, References, and Identity
 
 Serialization preserves object identity within the same stream.
 
@@ -961,7 +1048,7 @@ Object[] restored = (Object[]) in.readObject();
 > [!NOTE]
 > This behavior prevents infinite recursion on cyclic graphs.
 
-### 4.5 `serialVersionUID`: The Versioning Key
+### 35.4.5 `serialVersionUID`: The Versioning Key
 
 `serialVersionUID` is a long identifier used to verify compatibility between a serialized stream and a class definition.
 
@@ -992,7 +1079,7 @@ class Person implements Serializable {
 > [!NOTE]
 > Declaring a stable serialVersionUID is the standard way to control serialization compatibility.
 
-### 4.6 `transient` and `static` Fields
+### 35.4.6 `transient` and `static` Fields
 
 `transient` fields are excluded from serialization.
 
@@ -1016,7 +1103,7 @@ String user;                 // serialized
 > [!NOTE]
 > If a transient field is required after deserialization, you must recompute it or restore it manually.
 
-### 4.7 Non-Serializable Fields and NotSerializableException
+### 35.4.7 Non-Serializable Fields and NotSerializableException
 
 If an object references a field whose type is not serializable, serialization fails with NotSerializableException.
 
@@ -1036,13 +1123,13 @@ Typical solutions:
 - replace it with a serializable representation
 - use custom serialization hooks
 
-### 4.8 Constructors and Serialization
+### 35.4.8 Constructors and Serialization
 
 Constructor behavior during serialization and deserialization is a frequent source of confusion.
 
 Java serialization restores object state primarily from the byte stream, not by running constructors.
 
-#### 4.8.1 Rule: Constructors of Serializable Classes Are Not Called
+#### 35.4.8.1 Rule: Constructors of Serializable Classes Are Not Called
 
 During deserialization of a Serializable class, the constructors of that class are NOT executed.
 
@@ -1053,7 +1140,7 @@ The instance is created without calling those constructors, and field values are
 >
 > That initialization would not run during deserialization.
 
-#### 4.8.2 Inheritance Rule: The First Non-Serializable Superclass Constructor Is Called
+#### 35.4.8.2 Inheritance Rule: The First Non-Serializable Superclass Constructor Is Called
 
 When a Serializable class has a non-Serializable superclass, deserialization must still initialize that superclass part.
 
@@ -1064,7 +1151,7 @@ Important implications:
 - the non-Serializable superclass must have an accessible no-arg constructor
 - serializable subclasses skip constructors, but non-serializable superclasses do not
 
-#### 4.8.3 Summary Table: Which Constructors Run
+#### 35.4.8.3 Summary Table: Which Constructors Run
 
 | Class type Constructor called during deserialization |
 | --- |
@@ -1073,7 +1160,7 @@ Important implications:
 | First non-Serializable superclass Yes (no-arg constructor) |
 | Externalizable class Yes (public no-arg constructor required) |
 
-#### 4.8.4 Worked Example: Which Constructors Are Called
+#### 35.4.8.4 Worked Example: Which Constructors Are Called
 
 This example prints which constructors run during normal construction and during deserialization.
 
@@ -1147,13 +1234,13 @@ Explanation:
 > If the first non-Serializable superclass has no accessible no-arg constructor, deserialization fails.
 
 
-### 4.9 Custom Serialization Hooks: `writeObject` and `readObject`
+### 35.4.9 Custom Serialization Hooks: `writeObject` and `readObject`
 
 Custom serialization hooks exist to handle cases where default Java serialization is not enough (transient state, derived fields, encryption, validation, compatibility).
 
 They are advanced but extremely important for correct deserialization behavior.
 
-#### 4.9.1 Why Custom Serialization Exists
+#### 35.4.9.1 Why Custom Serialization Exists
 
 By default, Java serialization automatically writes and reads all non-static, non-transient instance fields of a Serializable object.
 
@@ -1166,7 +1253,7 @@ Typical reasons to customize serialization:
 - You need backward/forward compatibility logic (support older streams)
 - A referenced object is not Serializable and must be handled specially
 
-#### 4.9.2 What `writeObject` and `readObject` Really Are
+#### 35.4.9.2 What `writeObject` and `readObject` Really Are
 
 To customize serialization and deserialization, a class may define two special private methods named `writeObject` and `readObject`.
 
@@ -1187,7 +1274,7 @@ If they are not found, the framework performs default serialization instead.
 >
 > This behavior often makes errors hard to diagnose.
 
-#### 4.9.3 Exact Required Signatures
+#### 35.4.9.3 Exact Required Signatures
 
 ```java
 private void writeObject(ObjectOutputStream out) throws IOException
@@ -1201,7 +1288,7 @@ Key constraints:
 - parameter types must match exactly
 - exceptions must be compatible with the required throws list
 
-#### 4.9.4 What Happens During Serialization: Step by Step
+#### 35.4.9.4 What Happens During Serialization: Step by Step
 
 When you serialize an object, you typically call:
 
@@ -1226,7 +1313,7 @@ out.defaultWriteObject();
 
 After that, you may write extra data in any format you want.
 
-#### 4.9.5 Typical Pattern and the Write/Read Order Rule
+#### 35.4.9.5 Typical Pattern and the Write/Read Order Rule
 
 The typical pattern is to keep default serialization and then extend it.
 
@@ -1250,7 +1337,7 @@ private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundE
 > If you write extra values (ints/strings/etc.), you must read them back in the same sequence.
 > Otherwise deserialization will fail or restore corrupted state.
 
-### 4.9.6 Example Use Case: Restoring a transient Derived Field
+### 35.4.10 Example Use Case: Restoring a transient Derived Field
 
 A classic use case is recomputing a transient cached value after deserialization.
 
@@ -1279,7 +1366,7 @@ class User implements Serializable {
 }
 ```
 
-### 4.9.7 Externalizable: Full Control (and Full Responsibility)
+### 35.4.11 Externalizable: Full Control (and Full Responsibility)
 
 Externalizable requires you to define how to write and read the object manually.
 
@@ -1316,7 +1403,7 @@ public void readExternal(ObjectInput in) throws IOException {
 > With Externalizable, you control the format.
 > If you change the format later, you must handle backward compatibility yourself.
 
-### 4.9.8 readObject() Security Considerations
+### 35.4.12 `readObject()` Security Considerations
 
 Deserialization of untrusted data is dangerous because it can execute code indirectly via:
 - constructors and initialization logic
@@ -1329,7 +1416,7 @@ Safe practice guidelines:
 - If forced, apply object filters and strict validation
 
 
-### 4.9.9 Common Traps and Practical Tips
+### 35.4.13 Common Traps and Practical Tips
 
 - Serializable is marker-only; no method must be implemented
 - `readObject` returns Object and may throw ClassNotFoundException
@@ -1339,7 +1426,7 @@ Safe practice guidelines:
 - Externalizable requires public no-arg constructor
 - NotSerializableException occurs when a referenced field type is not serializable
 
-### 4.9.10 When to Use (or Avoid) Java Serialization
+### 35.4.14 When to Use (or Avoid) Java Serialization
 
 Use classic Java serialization mainly for:
 - short-lived local persistence under controlled versions
