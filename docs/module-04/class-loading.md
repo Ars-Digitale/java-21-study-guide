@@ -222,10 +222,10 @@ but field initialization always runs **parent first**, then child.
 ## 15.7 Summary Table
 
 
-STATIC (Class Level)                   | INSTANCE (Object Level)
---------------------------------------+-------------------------------------
-One-time-only                         | Happens at every 'new'
-Executed parent → child               | Initialization parent → child
-static vars (default → explicit)      | instance vars (default → explicit)
-static blocks                         | instance blocks
-                                      | constructor
+|STATIC (Class Level)                   | INSTANCE (Object Level) |
+|--------------------------------------|------------------------------------- |
+|One-time-only                         | Happens at every 'new' |
+|Executed parent → child               | Initialization parent → child |
+|static vars (default → explicit)      | instance vars (default → explicit) |
+|static blocks                         | instance blocks |
+|                                      | constructor |
