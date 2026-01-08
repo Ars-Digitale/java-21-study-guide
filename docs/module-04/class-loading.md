@@ -3,7 +3,7 @@
 ### Table of Contents
 
 - [15. Class Loading, Initialization, and Object Construction](#15-class-loading-initialization-and-object-construction)
-  - [15.1 Memory Areas Relevant to Class and Object Initialization](#151-memory-areas-relevant-to-class-and-object-initialization)
+  - [15.1 Java Memory Areas Relevant to Class and Object Initialization](#151-java-memory-areas-relevant-to-class-and-object-initialization)
   - [15.2 Class Loading with Inheritance](#152-class-loading-with-inheritance)
     - [15.2.1 Class Loading Order](#1521-class-loading-order)
     - [15.2.2 What Happens During Class Loading](#1522-what-happens-during-class-loading)
@@ -26,7 +26,7 @@ This chapter provides a unified, clear explanation of:
 - How constructors run in an inheritance chain
 - How different memory areas (Heap, Stack, Method Area) participate
 
-## 15.1 Memory Areas Relevant to Class and Object Initialization
+## 15.1 Java Memory Areas Relevant to Class and Object Initialization
 
 Before understanding initialization order, it is useful to recall the three main memory areas involved:
 
@@ -221,7 +221,7 @@ but field initialization always runs **parent first**, then child.
 
 ## 15.7 Summary Table
 
-```text
+
 STATIC (Class Level)                   | INSTANCE (Object Level)
 --------------------------------------+-------------------------------------
 One-time-only                         | Happens at every 'new'
@@ -229,4 +229,3 @@ Executed parent → child               | Initialization parent → child
 static vars (default → explicit)      | instance vars (default → explicit)
 static blocks                         | instance blocks
                                       | constructor
-```
