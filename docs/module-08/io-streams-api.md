@@ -24,7 +24,7 @@
     - [35.2.8 Scatter/Gather I/O](#3528-scattergather-io)
     - [35.2.9 Selectors: Multiplexing Non-Blocking I/O](#3529-selectors-multiplexing-non-blocking-io)
     - [35.2.10 When to Use java.nio](#35210-when-to-use-javanio)
-  - [35.3 java.nio.file (NIO.2) — File and Directory Operations (Legacy vs Modern)](#353-javaniofile-nio2-file-and-directory-operations-legacy-vs-modern)
+  - [35.3 java.nio.file (NIO.2) — File and Directory Operations (Legacy vs Modern)](#353-javaniofile-nio2--file-and-directory-operations-legacy-vs-modern)
     - [35.3.1 Existence and Accessibility Checks](#3531-existence-and-accessibility-checks)
     - [35.3.2 Creating Files and Directories](#3532-creating-files-and-directories)
     - [35.3.3 Deleting Files and Directories](#3533-deleting-files-and-directories)
