@@ -1,38 +1,47 @@
-# Strings in Java
+# 9. Strings in Java
 
 ### Table of Contents
 
-- [Strings in Java]
-	- [1 Strings & Text Blocks](#1-strings--text-blocks)
-		- [1.1 Initializing Strings](#11-initializing-strings)
-		- [1.2 Special Characters and Escape Sequences](#12-special-characters-and-escape-sequences)
-		- [1.3 Text Blocks](#13-text-blocks-since-java-15)
-		- [1.4 Essential vs Incidental Whitespace](#14-formatting-essential-vs-incidental-whitespace)
-		- [1.5 Line Count, Blank Lines, and Line Breaks](#15-line-count-blank-lines-and-line-breaks)
-		- [1.6 Text Blocks & Escape Characters](#16-text-blocks--escape-characters)
-		- [1.7 Common Text Block Errors](#17-common-errors-with-fixes)
-		- [1.8 Rules for String Concatenation](#18-rules-for-string-concatenation)
-		- [1.9 Core String Methods](#19-core-string-methods)
-		  - [1.9.1 String Indexing](#191-string-indexing)
-		  - [1.9.2 `length()` Method](#192-length-method)
-		  - [1.9.3 Boundary Rules: Start vs End Index](#193-boundary-rules-start-index-vs-end-index)
-		  - [1.9.4 Classification of Methods](#194-string-methods)
-		  - [1.9.5 Methods Using Only Start Index (Inclusive)](#195-methods-using-only-start-index-inclusive)
-		  - [1.9.6 Methods with Start Inclusive / End Exclusive](#196-methods-with-start-inclusive--end-exclusive)
-		  - [1.9.7 Methods Operating on Entire String](#197-methods-that-operate-on-entire-string)
-		  - [1.9.8 Character Access](#198-character-access)
-		  - [1.9.9 Searching Methods](#199-searching)
-		  - [1.9.10 Replacement Methods](#1910-replacement-methods)
-		  - [1.9.11 Splitting and Joining](#1911-splitting-and-joining)
-		  - [1.9.12 Methods Returning Arrays](#1912-methods-returning-arrays)
-		  - [1.9.13 Indentation Methods](#1913-indentation)
-		  - [1.9.14 Additional Examples](#1914-additional-examples)
-		  
+- [9. Strings in Java](#9-strings-in-java)
+  - [9.1 Strings & Text Blocks](#91-strings--text-blocks)
+    - [9.1.1 Strings](#911-strings)
+      - [9.1.1.1 Initializing Strings](#9111-initializing-strings)
+      - [9.1.1.2 The String Pool](#9112-the-string-pool)
+      - [9.1.1.3 Special Characters and Escape Sequences](#9113-special-characters-and-escape-sequences)
+      - [9.1.1.4 Rules for String Concatenation](#9114-rules-for-string-concatenation)
+      - [9.1.1.5 Concatenation Rules](#9115-concatenation-rules)
+    - [9.1.2 Text Blocks since Java 15](#912-text-blocks-since-java-15)
+      - [9.1.2.1 Formatting Essential vs Incidental Whitespace](#9121-formatting-essential-vs-incidental-whitespace)
+      - [9.1.2.2 Line Count Blank Lines and Line Breaks](#9122-line-count-blank-lines-and-line-breaks)
+      - [9.1.2.3 Text Blocks and Escape Characters](#9123-text-blocks-and-escape-characters)
+      - [9.1.2.4 Common Errors with fixes](#9124-common-errors-with-fixes)
+  - [9.2.1 Core String Methods](#921-core-string-methods)
+    - [9.2.1.1 String Indexing](#9211-string-indexing)
+    - [9.2.1.2 length Method](#9212-length-method)
+    - [9.2.1.3 Boundary Rules Start Index vs End Index](#9213-boundary-rules-start-index-vs-end-index)
+    - [9.2.1.4 Methods Using Only Start Index Inclusive](#9214-methods-using-only-start-index-inclusive)
+    - [9.2.1.5 Methods with Start Inclusive End Exclusive](#9215-methods-with-start-inclusive-end-exclusive)
+    - [9.2.1.6 Methods That Operate on Entire String](#9216-methods-that-operate-on-entire-string)
+    - [9.2.1.7 Character Access](#9217-character-access)
+    - [9.2.1.8 Searching](#9218-searching)
+    - [9.2.1.9 Replacement Methods](#9219-replacement-methods)
+    - [9.2.1.10 Splitting and Joining](#92110-splitting-and-joining)
+    - [9.2.1.11 Methods Returning Arrays](#92111-methods-returning-arrays)
+    - [9.2.1.12 Indentation](#92112-indentation)
+    - [9.2.1.13 Additional Examples](#92113-additional-examples)
+
 ---
 
-## 1. Strings & Text Blocks
+
+## 9.1 Strings & Text Blocks
+
+---
+
+### 9.1.1 Strings
+
+---
  
-### 1.1 Initializing Strings
+#### 9.1.1.1 Initializing Strings
 
 In Java, a **String** is an object of the `java.lang.String` class, used to represent a sequence of characters.  
 Strings are **immutable**, meaning that once created, their content cannot be changed. Any operation that seems to modify a string actually creates a new one.
@@ -48,14 +57,14 @@ String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
 > - String literals are stored in the `String pool`, a special memory area used to avoid creating duplicate string objects.
 > - Using the **new** keyword always creates a new object outside the pool.
 
-### **The String Pool**
+#### 9.1.1.2 The String Pool
 
 Because String are `immutable` and they are widely used in Java, they could easily occupy a huge amount of memory in a Java program;
 In order to face this problem Java will reuse all the Strings which are declared as literals (see example above), storing them in a dedicated location of the JVM which is known as the `String Pool` or the `Intern Pool`.
 
 Please Check [1.5.3 String Pool and Equality](../module-01/instantiating-types.md#153-string-pool-and-equality)
 
-### 1.2 Special Characters and Escape Sequences
+#### 9.1.1.3 Special Characters and Escape Sequences
 
 Strings can contain escape characters, which allow you to include special symbols or control characters (characters with a special meaning in Java).
 An escape sequence starts with a backslash \.
@@ -127,164 +136,7 @@ An escape sequence starts with a backslash \.
   </tbody>
 </table>
 
-
-### 1.3 Text Blocks (since Java 15)
-
-A text block is a multi-line string literal introduced to simplify writing large strings (such as HTML, JSON, or code) without the need to escape.
-A text block starts and ends with three double quotes (""").
-You can use text blocks everywhere you would use Strings.
-
-```java
-String html = """
-    <html>
-        <body>
-            <p>Hello, world!</p>
-        </body>
-    </html>
-    """;
-```
-
-> [!NOTE]
-> - Text blocks automatically include line breaks and indentation for readability (Newlines are automatically normalized to \n).
-> - Double quotes inside the block don’t need escaping.
-> - The compiler interprets the content between the opening and closing triple quotes as the string’s value.
-
-### 1.4 Formatting: Essential vs Incidental Whitespace
-
-- **Essential whitespace**: the spaces and newlines that are part of the intended string content.
-- **Incidental whitespace** is just indentation in your source.
-
-```java
-String text = """
-        Line 1
-        Line 2
-        Line 3
-        """;
-```
-
-> [!IMPORTANT]
-> - **Leftmost character (baseline)**: The position of the first non-space character across all lines or the closing """ are the leftmost characters of the resulting string: all the spaces on the left of the 3 Lines are **Incidental whitespaces**;
-> - The line immediately following the opening """ is not included in the output if it’s empty (typical formatting).
-> - The newline before the closing """ is included in the content. This means the text block in the example ends with a newline after “Line 3” counting then, in total, 4 lines in the output.
-
-- Output with line numbers (showing the trailing blank line):
-
-```makefile
-1: Line 1
-2: Line 2
-3: Line 3
-4:
-```
-
-To suppress the trailing newline:
-
-- a) Use a line continuation backslash at the end of the last content line;
-- b) Put the ending three double quotes on the same line.
-
-```java
-String textNoTrail_1 = """
-        Line 1
-        Line 2
-        Line 3\
-        """;
-		
-// OR
-
-String textNoTrail_2 = """
-        Line 1
-        Line 2
-        Line 3""";
-```
-
-### 1.5 Line Count, Blank Lines, and Line Breaks
-
-- Every visible line break inside the block becomes \n.
-- Blank lines inside the block are preserved:
-
-```java
-String textNoTrail_0 = """
-		Line 1  
-		Line 2 \n
-		Line 3 
-		
-		Line 4 
-		""";
-```
-
-output:
-
-```makefile
-1: Line 1
-2: Line 2
-3:
-4: Line 3
-5:
-6: Line 4
-7:
-```
-
-### 1.6 Text Blocks & Escape Characters
-
-Escapes still work inside text blocks when needed (e.g., backslashes, explicit escapes):
-
-```java
-String json = """
-    {
-      "name": "Alice",
-      "path": "C:\\\\Users\\\\Alice"
-    }\
-    """;
-```
-
-You can also format a text block with placeholders:
-
-```java
-String card = """
-    Name: %s
-    Age:  %d
-    """.formatted("Alice", 30);
-```
-
-### 1.7 Common Errors (with fixes)
-
-```java
-// ❌ Mismatched delimiters / missing closing triple quote
-String bad = """
-  Hello
-World";      // ERROR — not a closing text block
-
-// ✅ Fix
-String ok = """
-  Hello
-  World
-  """;
-```
-
-```java
-// ❌ Text block require a line break after the opening """
-String invalid = """Hello""";  // ERROR
-
-// ✅ Fix
-String valid = """
-    Hello
-    """;
-```
-
-```java
-// ❌ Unescaped trailing backslash at end of a line inside the block
-String wrong = """
-    C:\Users\Alex\     // ERROR — backslash escapes the newline
-    Documents
-    """;
-
-// ✅ Fix: escape backslashes, or avoid backslash at end of line
-String correct = """
-    C:\\Users\\Alex\\
-    Documents\
-    """;
-```
-
-### 1.8 Rules for String Concatenation
+#### 9.1.1.4 Rules for String Concatenation
 
 As introduced in the chapter on  
 [Java Operators](../module-01/java-operators.md), the symbol `+` normally represents **arithmetic addition** when used with numeric operands.  
@@ -293,7 +145,7 @@ However, when applied to **Strings**, the same operator performs **string concat
 
 Since the operator `+` may appear in expressions where both **numbers** and **strings** are present, Java applies a specific set of rules to determine whether `+` means *numeric addition* or *string concatenation*.
 
-### **Concatenation Rules**
+#### 9.1.1.5 Concatenation Rules
 
 1. **If both operands are numeric**, `+` performs **numeric addition**.
 
@@ -362,14 +214,169 @@ System.out.println("AB" + null);
 // ABnull
 ```
 
-### 1.9 Core String methods
 
-#### Strings — Indexing, Length, and Core Methods
- 
-Let's understand indexing rules and how Java handles substring boundaries.
+### 9.1.2 Text Blocks (since Java 15)
+
+A text block is a multi-line string literal introduced to simplify writing large strings (such as HTML, JSON, or code) without the need to escape.
+A text block starts and ends with three double quotes (""").
+You can use text blocks everywhere you would use Strings.
+
+```java
+String html = """
+    <html>
+        <body>
+            <p>Hello, world!</p>
+        </body>
+    </html>
+    """;
+```
+
+> [!NOTE]
+> - Text blocks automatically include line breaks and indentation for readability (Newlines are automatically normalized to \n).
+> - Double quotes inside the block don’t need escaping.
+> - The compiler interprets the content between the opening and closing triple quotes as the string’s value.
+
+#### 9.1.2.1 Formatting: Essential vs Incidental Whitespace
+
+- **Essential whitespace**: the spaces and newlines that are part of the intended string content.
+- **Incidental whitespace** is just indentation in your source.
+
+```java
+String text = """
+        Line 1
+        Line 2
+        Line 3
+        """;
+```
+
+> [!IMPORTANT]
+> - **Leftmost character (baseline)**: The position of the first non-space character across all lines or the closing """ are the leftmost characters of the resulting string: all the spaces on the left of the 3 Lines are **Incidental whitespaces**;
+> - The line immediately following the opening """ is not included in the output if it’s empty (typical formatting).
+> - The newline before the closing """ is included in the content. This means the text block in the example ends with a newline after “Line 3” counting then, in total, 4 lines in the output.
+
+- Output with line numbers (showing the trailing blank line):
+
+```makefile
+1: Line 1
+2: Line 2
+3: Line 3
+4:
+```
+
+To suppress the trailing newline:
+
+- a) Use a line continuation backslash at the end of the last content line;
+- b) Put the ending three double quotes on the same line.
+
+```java
+String textNoTrail_1 = """
+        Line 1
+        Line 2
+        Line 3\
+        """;
+		
+// OR
+
+String textNoTrail_2 = """
+        Line 1
+        Line 2
+        Line 3""";
+```
+
+#### 9.1.2.2 Line Count, Blank Lines, and Line Breaks
+
+- Every visible line break inside the block becomes \n.
+- Blank lines inside the block are preserved:
+
+```java
+String textNoTrail_0 = """
+		Line 1  
+		Line 2 \n
+		Line 3 
+		
+		Line 4 
+		""";
+```
+
+output:
+
+```makefile
+1: Line 1
+2: Line 2
+3:
+4: Line 3
+5:
+6: Line 4
+7:
+```
+
+#### 9.1.2.3 Text Blocks & Escape Characters
+
+Escapes still work inside text blocks when needed (e.g., backslashes, explicit escapes):
+
+```java
+String json = """
+    {
+      "name": "Alice",
+      "path": "C:\\\\Users\\\\Alice"
+    }\
+    """;
+```
+
+You can also format a text block with placeholders:
+
+```java
+String card = """
+    Name: %s
+    Age:  %d
+    """.formatted("Alice", 30);
+```
+
+#### 9.1.2.4 Common Errors (with fixes)
+
+```java
+// ❌ Mismatched delimiters / missing closing triple quote
+String bad = """
+  Hello
+World";      // ERROR — not a closing text block
+
+// ✅ Fix
+String ok = """
+  Hello
+  World
+  """;
+```
+
+```java
+// ❌ Text block require a line break after the opening """
+String invalid = """Hello""";  // ERROR
+
+// ✅ Fix
+String valid = """
+    Hello
+    """;
+```
+
+```java
+// ❌ Unescaped trailing backslash at end of a line inside the block
+String wrong = """
+    C:\Users\Alex\     // ERROR — backslash escapes the newline
+    Documents
+    """;
+
+// ✅ Fix: escape backslashes, or avoid backslash at end of line
+String correct = """
+    C:\\Users\\Alex\\
+    Documents\
+    """;
+```
 
 
-#### 1.9.1 String Indexing
+### 9.2.1 Core String methods
+
+--- 
+
+#### 9.2.1.1 String Indexing
 
 Strings in Java use **zero-based indexing**, meaning:
 
@@ -388,7 +395,7 @@ char c = s.charAt(2); // 'v'
 ```
 
 
-#### 1.9.2 `length()` Method
+#### 9.2.1.2 `length()` Method
 
 `length()` returns the **number of characters** in the string.
 
@@ -400,7 +407,7 @@ System.out.println(s.length());  // 5
 - The last valid index is `length() - 1`.
 
 
-#### 1.9.3 Boundary Rules: Start Index vs End Index
+#### 9.2.1.3 Boundary Rules: Start Index vs End Index
 
 Many String methods use **two indices**:
 
@@ -426,12 +433,7 @@ s.substring(1, 4); // "bcd" (indexes 1,2,3)
 This rule applies to most substring-based methods.
 
 
-#### 1.9.4 String Methods 
-
-A structured and complete classification.
-
-
-#### 1.9.5 Methods Using Only Start Index (Inclusive)
+#### 9.2.1.4  Methods Using Only Start Index (Inclusive)
 
 | Method | Description | Parameters | Index Rule | Example |
 |--------|-------------|------------|------------|---------|
@@ -442,7 +444,7 @@ A structured and complete classification.
 | `lastIndexOf(String, fromIndex)` | Search backward from index | fromIndex | fromIndex = inclusive | `"banana".lastIndexOf("a", 3)` → 3 |
 
 
-#### 1.9.6 Methods with Start Inclusive / End Exclusive
+#### 9.2.1.5  Methods with Start Inclusive / End Exclusive
 
 These methods follow the same slicing behavior:
 
@@ -456,7 +458,7 @@ These methods follow the same slicing behavior:
 | `copyValueOf(char[] data, int offset, int count)` | Creates a new string | offset inclusive; offset+count exclusive | same rule as substring |
 
 
-#### 1.9.7 Methods That Operate on Entire String
+#### 9.2.1.6  Methods That Operate on Entire String
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -470,7 +472,7 @@ These methods follow the same slicing behavior:
 | `isEmpty()` | Length == 0 | `"".isEmpty()` → `true` |
 
 
-#### 1.9.8 Character Access
+#### 9.2.1.7  Character Access
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -478,7 +480,7 @@ These methods follow the same slicing behavior:
 | `codePointAt(int index)` | Unicode code point | useful for emojis |
 
 
-#### 1.9.9 Searching
+#### 9.2.1.8 Searching
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -488,7 +490,7 @@ These methods follow the same slicing behavior:
 | `endsWith(String)` | Suffix | `"abcdef".endsWith("def")` → `true` |
 
 
-#### 1.9.10 Replacement Methods
+#### 9.2.1.9 Replacement Methods
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -498,7 +500,7 @@ These methods follow the same slicing behavior:
 | `replaceFirst` | First regex match only | `"a1a2".replaceFirst("\\d","")` → `"aa2"` |
 
 
-#### 1.9.11 Splitting and Joining
+#### 9.2.1.10 Splitting and Joining
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -506,7 +508,7 @@ These methods follow the same slicing behavior:
 | `split(String regex, limit)` | Controlled split | limit < 0 keeps all |
 
 
-#### 1.9.12 Methods Returning Arrays
+#### 9.2.1.11 Methods Returning Arrays
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -514,7 +516,7 @@ These methods follow the same slicing behavior:
 | `getBytes()` | byte[] from encoding | `"á".getBytes()` |
 
 
-#### 1.9.13 Indentation
+#### 9.2.1.12 Indentation
 
 | Method | Description | Example |
 |--------|-------------|---------|
@@ -575,7 +577,7 @@ length: 5
 ```
 
 
-#### 1.9.14 Additional Examples
+#### 9.2.1.13  Additional Examples
 
 Example 1 — Extract `[start, end)`
 ```java
