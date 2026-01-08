@@ -609,13 +609,13 @@ b.onClick(new ClickHandler() {
 
 A quick table summarizing all kinds of nested classes.
 
-```text
-Type                | Has Outer Instance? | Can Access Outer Instance Members? | Can Have Static Members? | Typical Use
-------------------- | ------------------- | ---------------------------------- | ------------------------- | ---------------------------
-Static Nested       | No                  | No                                 | Yes                      | Namespacing, helpers
-Inner Class         | Yes                 | Yes                                | No (except constants)     | Object-bound behavior
-Local Class         | Yes                 | Yes                                | No                        | Temporary scoped classes
-Anonymous Class     | Yes                 | Yes                                | No                        | Inline customization
-```
+
+|Type                | Has Outer Instance? | Can Access Outer Instance Members? | Can Have Static Members? | Typical Use |
+|------------------- | ------------------- | ---------------------------------- | ------------------------- | --------------------------- |
+|Static Nested       | No                  | No                                 | Yes                      | Namespacing, helpers |
+|Inner Class         | Yes                 | Yes                                | No (except constants)     | Object-bound behavior |
+|Local Class         | Yes                 | Yes                                | No                        | Temporary scoped classes |
+|Anonymous Class     | Yes                 | Yes                                | No                        | Inline customization |
+
 
 
