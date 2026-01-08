@@ -1,48 +1,46 @@
-# Methods, Attributes and Variables
+# 14. Methods, Attributes and Variables
 
 ### Table of Contents
 
-- [Methods, Attributes and Variables]
-	- [1. Methods](#1-methods)
-	  - [1.1 Mandatory Components of a Method](#11-mandatory-components-of-a-method)
-		- [1.1.1 Access Modifiers](#111--access-modifiers)
-		- [1.1.2 Return Type](#112-return-type)
-		- [1.1.3 Method Name](#113-method-name)
-		- [1.1.4 Method Signature](#114-method-signature)
-		- [1.1.5 Method Body](#115-method-body)
-	  - [1.2 Optional Modifiers](#12-optional-modifiers)
-	  - [1.3 Declaring Methods](#13-declaring-methods)
-	- [2. Java Is a “Pass-by-Value” Language](#2-java-is-a-pass-by-value-language)
-	- [3. Overloading Methods](#3-overloading-methods)
-	  - [3.1 Calling overloaded methods](#31-calling-overloaded-methods)
-		- [3.1.1 — Exact match wins](#311--exact-match-wins)
-		- [3.1.2 — If no exact match exists, Java picks the most specific compatible type](#312--if-no-exact-match-exists-java-picks-the-most-specific-compatible-type)
-		- [3.1.3 — Primitive widening beats boxing](#313--primitive-widening-beats-boxing)
-		- [3.1.4 — Boxing beats varargs](#314--boxing-beats-varargs)
-		- [3.1.5 — For references, Java picks the most specific reference type](#315--for-references-java-picks-the-most-specific-reference-type)
-		- [3.1.6 — When there is no unambiguous “most specific”, the call is a compile error](#316--when-there-is-no-unambiguous-most-specific-the-call-is-a-compile-error)
-		- [3.1.7 — Mixed primitive + wrapper overloads](#317--mixed-primitive--wrapper-overloads)
-		- [3.1.8 — When primitives mix with reference types](#318--when-primitives-mix-with-reference-types)
-		- [3.1.9 — When Object wins](#319--when-object-wins)
-		- [3.1.10 Summary Table (Overload Resolution)](#3110-summary-table-overload-resolution)
-	- [4. Local and Instance Variables](#4-local-and-instance-variables)
-	  - [4.1 Instance Variables](#41-instance-variables)
-	  - [4.2 Local Variables](#42-local-variables)
-		- [4.2.1 Effectively Final Local Variables](#421-effectively-final-local-variables)
-		- [4.2.2 Parameters as Effectively Final](#422-parameters-as-effectively-final)
-	- [5. Varargs (Variable-Length Argument Lists](#5-varargs-variable-length-argument-lists)
-	- [6. Static Methods, Static Variables, and Static Initializers](#6-static-methods-static-variables-and-static-initializers)
-	  - [6.1 Static Variables (Class Variables)](#61-static-variables-class-variables)
-	  - [6.2 Static Methods](#62-static-methods)
-	  - [6.3 Static Initializer Blocks](#63-static-initializer-blocks)
-	  - [6.4 Initialization Order (Static vs Instance)](#64-initialization-order-static-vs-instance)
-		- [6.4.1 Class loading order](#641-class-loading-order)
-		- [6.4.2 Instance creation order](#642-instance-creation-order)
-	  - [6.5 Accessing Static Members](#65-accessing-static-members)
-		- [6.5.1 Recommended: use class name](#651-recommended-use-class-name)
-		- [6.5.2 Also legal: via instance reference](#652-also-legal-via-instance-reference)
-	  - [6.6 Static and Inheritance](#66-static-and-inheritance)
-	  - [6.7 Common Pitfalls](#67-common-pitfalls)
+- [14. Methods, Attributes and Variables](#14-methods-attributes-and-variables)
+  - [14.1 Methods](#141-methods)
+    - [14.1.1 Mandatory Components of a Method](#1411-mandatory-components-of-a-method)
+      - [14.1.1.1 Access Modifiers](#14111-access-modifiers)
+      - [14.1.1.2 Return Type](#14112-return-type)
+      - [14.1.1.3 Method Name](#14113-method-name)
+      - [14.1.1.4 Method Signature](#14114-method-signature)
+      - [14.1.1.5 Method Body](#14115-method-body)
+    - [14.1.2 Optional Modifiers](#1412-optional-modifiers)
+    - [14.1.3 Declaring Methods](#1413-declaring-methods)
+  - [14.2 Java Is a Pass-by-Value Language](#142-java-is-a-pass-by-value-language)
+  - [14.3 Overloading Methods](#143-overloading-methods)
+    - [14.3.1 Calling overloaded methods](#1431-calling-overloaded-methods)
+      - [14.3.1.1 Exact match wins](#14311-exact-match-wins)
+      - [14.3.1.2 If no exact match exists Java picks the most specific compatible type](#14312-if-no-exact-match-exists-java-picks-the-most-specific-compatible-type)
+      - [14.3.1.3 Primitive widening beats boxing](#14313-primitive-widening-beats-boxing)
+      - [14.3.1.4 Boxing beats varargs](#14314-boxing-beats-varargs)
+      - [14.3.1.5 For references Java picks the most specific reference type](#14315-for-references-java-picks-the-most-specific-reference-type)
+      - [14.3.1.6 When there is no unambiguous most specific the-call-is-a-compile-error](#14316-when-there-is-no-unambiguous-most-specific-the-call-is-a-compile-error)
+      - [14.3.1.7 Mixed primitive + wrapper overloads](#14317-mixed-primitive--wrapper-overloads)
+      - [14.3.1.8 When primitives mix with reference types](#14318-when-primitives-mix-with-reference-types)
+      - [14.3.1.9 When Object wins](#14319-when-object-wins)
+      - [14.3.1.10 Summary Table Overload Resolution](#143110-summary-table-overload-resolution)
+  - [14.4 Local and Instance Variables](#144-local-and-instance-variables)
+    - [14.4.1 Instance Variables](#1441-instance-variables)
+    - [14.4.2 Local Variables](#1442-local-variables)
+      - [14.4.2.1 Effectively Final Local Variables](#14421-effectively-final-local-variables)
+      - [14.4.2.2 Parameters as Effectively Final](#14422-parameters-as-effectively-final)
+  - [14.5 Varargs Variable-Length Argument Lists](#145-varargs-variable-length-argument-lists)
+  - [14.6 Static Methods Static Variables and Static Initializers](#146-static-methods-static-variables-and-static-initializers)
+    - [14.6.1 Static Variables Class Variables](#1461-static-variables-class-variables)
+    - [14.6.2 Static Methods](#1462-static-methods)
+    - [14.6.3 Static Initializer Blocks](#1463-static-initializer-blocks)
+    - [14.6.4 Initialization Order Static vs Instance](#1464-initialization-order-static-vs-instance)
+    - [14.6.5 Accessing Static Members](#1465-accessing-static-members)
+      - [14.6.5.1 Recommended use class name](#14651-recommended-use-class-name)
+      - [14.6.5.2 Also legal via instance reference](#14652-also-legal-via-instance-reference)
+    - [14.6.6 Static and Inheritance](#1466-static-and-inheritance)
+    - [14.6.7 Common Pitfalls](#1467-common-pitfalls)
 
 
 ---
@@ -50,7 +48,7 @@
 This chapter introduces fundamental Object-Oriented Programming (OOP) concepts in Java, starting with **methods**, **parameter passing**, **overloading**, **local vs. instance variables**, and **varargs**.  
 
 
-## 1. Methods
+## 14.1 Methods
 
 Methods represent the **operations/behaviors** that can be performed by a particular data type (a **class**).  
 They describe *what the object can do* and how it interacts with its internal state and the outside world.
@@ -58,14 +56,14 @@ They describe *what the object can do* and how it interacts with its internal st
 A method declaration is composed of **mandatory** and **optional** components.
 
 
-### 1.1 Mandatory Components of a Method
+### 14.1.1 Mandatory Components of a Method
 
-#### 1.1.1  Access Modifiers 
+#### 14.1.1.1  Access Modifiers 
 
 They control *visibility*, not behavior.
 (Please refer to: [Access Modifiers](../module-01/basic-building-blocks.md#3-access-modifiers)) 
 
-#### 1.1.2 Return Type  
+#### 14.1.1.2 Return Type  
 Appears **immediately before** the method name.
 
 - If the method returns a value → the return type specifies the value’s type.
@@ -75,11 +73,11 @@ Appears **immediately before** the method name.
   - omit a return statement
   - include `return;` (with **no** value)
 
-#### 1.1.3 Method Name
+#### 14.1.1.3 Method Name
 
 Follows the same rules as identifiers (Please refer to: [Java Naming Rules](../module-01/naming-rules.md)).
 
-#### 1.1.4 Method Signature  
+#### 14.1.1.4 Method Signature  
 The **method signature** in Java includes:
 
 - the *method name*
@@ -103,12 +101,12 @@ void m(int a)
 void m(int b)
 ```
 
-#### 1.1.5 Method Body  
+#### 14.1.1.5 Method Body  
 A block `{ }` containing **zero or more statements**.  
 If the method is `abstract`, the body must be omitted.
 
 
-### 1.2 Optional Modifiers
+### 14.1.2 Optional Modifiers
 
 Optional method modifiers include:
 
@@ -134,7 +132,7 @@ public static final int compute() {
 ```
 
 
-### 1.3 Declaring Methods 
+### 14.1.3 Declaring Methods 
 
 ```java
 public final synchronized String formatValue(int x, double y) throws IOException {
@@ -156,7 +154,7 @@ Breakdown:
 | method body | implementation |
 
 
-## 2. Java Is a “Pass-by-Value” Language
+## 14.2 Java Is a “Pass-by-Value” Language
 
 Java uses **only pass-by-value**, no exceptions.
 
@@ -192,7 +190,7 @@ public static void methodTryModif(int num1){
 ```
 
 
-## 3. Overloading Methods
+## 14.3 Overloading Methods
 
 Method overloading means **same method name**, **different signature**.
 
@@ -224,7 +222,7 @@ int compute(int x)
 double compute(int x)
 ```
 
-### 3.1 Calling overloaded methods
+### 14.3.1 Calling overloaded methods
 
 
 When multiple overloaded methods are available, Java applies **overload resolution** to decide which method to call.  
@@ -235,7 +233,7 @@ Overload resolution happens **at compile time** (unlike overriding, which is run
 Java follows these rules:
 
 
-#### 3.1.1 — Exact match wins
+#### 14.3.1.1 Exact match wins
 
 If an argument matches a method parameter exactly, that method is chosen.
 
@@ -247,7 +245,7 @@ call(5); // prints: int (exact match for int)
 ```
 
 
-#### 3.1.2 — If no exact match exists, Java picks the *most specific* compatible type
+#### 14.3.1.2 — If no exact match exists, Java picks the *most specific* compatible type
 
 Java prefers:
 
@@ -267,7 +265,7 @@ test(5);  // int literal: can widen to long or float
 ```
 
 
-#### 3.1.3 — Primitive widening beats boxing
+#### 14.3.1.3 — Primitive widening beats boxing
 
 If a primitive argument can either widen or autobox, Java chooses widening.
 
@@ -281,7 +279,7 @@ m(b);               // byte → int (widening) wins
 ```
 
 
-#### 3.1.4 — Boxing beats varargs
+#### 14.3.1.4 — Boxing beats varargs
 
 ```java
 void show(Integer x)    { System.out.println("Integer"); }
@@ -292,7 +290,7 @@ show(5);                // int → Integer (boxing) preferred
 ```
 
 
-#### 3.1.5 — For references, Java picks the most specific reference type
+#### 14.3.1.5 — For references, Java picks the most specific reference type
 
 ```java
 void ref(Object o)      { System.out.println("Object"); }
@@ -305,7 +303,7 @@ ref("abc");             // "abc" is a String → more specific than Object
 More specific means *lower in the inheritance hierarchy*.
 
 
-#### 3.1.6 — When there is no unambiguous “most specific”, the call is a compile error
+#### 14.3.1.6 — When there is no unambiguous “most specific”, the call is a compile error
 
 Example with sibling classes:
 
@@ -328,7 +326,7 @@ run(null);  // ❌ Compile-time error: ambiguous method call
 ```
 
 
-#### 3.1.7 — Mixed primitive + wrapper overloads
+#### 14.3.1.7 — Mixed primitive + wrapper overloads
 
 Java evaluates widening, boxing, and varargs in this order:
 
@@ -348,7 +346,7 @@ mix(s);   // short → int → long  (widening)
 ```
 
 
-#### 3.1.8 — When primitives mix with reference types
+#### 14.3.1.8 — When primitives mix with reference types
 
 ```java
 void fun(Object o)     { System.out.println("Object"); }
@@ -363,7 +361,7 @@ fun(i);                 // reference accepted → Object
 ```
 
 
-#### 3.1.9 — When Object wins
+#### 14.3.1.9 — When Object wins
 
 ```java
 void fun(List<String> o)    { System.out.println("O"); }
@@ -374,7 +372,7 @@ fun(LocalDate.now());       // Output: Y
 
 ```
 
-#### 3.1.10 Summary Table (Overload Resolution)
+#### 14.3.1.10 Summary Table (Overload Resolution)
 
 | Situation | Rule |
 |----------|------|
@@ -386,9 +384,9 @@ fun(LocalDate.now());       // Output: Y
 | Mixed primitive + wrapper | Widening → boxing → varargs |
 
 
-## 4. Local and Instance Variables
+## 14.4 Local and Instance Variables
 
-### 4.1 Instance Variables
+### 14.4.1 Instance Variables
 
 Instance variables are:
 
@@ -413,7 +411,7 @@ public class Person {
 ```
 
 
-### 4.2 Local Variables
+### 14.4.2 Local Variables
 
 Local variables:
 
@@ -434,7 +432,7 @@ void calculate() {
 
 Two special cases:
 
-#### 4.2.1 Effectively Final Local Variables  
+#### 14.4.2.1 Effectively Final Local Variables  
 A local variable is *effectively final* if it is **assigned once**, even without `final`.
 
 Effectively final variables can be used in:
@@ -442,11 +440,11 @@ Effectively final variables can be used in:
 - lambda expressions
 - local/anonymous classes
 
-#### 4.2.2 Parameters as Effectively Final  
+#### 14.4.2.2 Parameters as Effectively Final  
 Method parameters behave as local variables and follow the same rules.
 
 
-## 5. Varargs (Variable-Length Argument Lists)
+## 14.5 Varargs (Variable-Length Argument Lists)
 
 Varargs allow a method to accept **zero or more** parameters of the same type.
 
@@ -478,7 +476,7 @@ show(10, "A", "B", "C");      // length = 3
 > Varargs and arrays participate in method overloading.  
 > Overload resolution may become ambiguous.
 
-## 6. Static Methods, Static Variables, and Static Initializers
+## 14.6 Static Methods, Static Variables, and Static Initializers
 
 In Java, the keyword **`static`** marks elements that **belong to the class itself**, not to individual instances.  
 This means:
@@ -490,7 +488,7 @@ This means:
 Static members are stored in the JVM **method area** (class-level memory), while instance members live in the **heap**.
 
 
-### 6.1 Static Variables (Class Variables)
+### 14.6.1 Static Variables (Class Variables)
 
 A **static variable** is a variable defined at class level and shared by all instances.
 
@@ -516,7 +514,7 @@ public class Counter {
 ```
 
 
-### 6.2 Static Methods
+### 14.6.2 Static Methods
 
 A **static method** belongs to the class, not to any object instance.
 
@@ -558,7 +556,7 @@ void run() { }
 ```
 
 
-### 6.3 Static Initializer Blocks
+### 14.6.3 Static Initializer Blocks
 
 Static initializer blocks allow executing code **once**, when the class is loaded.
 
@@ -594,22 +592,22 @@ public class Config {
 > Static initializer blocks run **once**, in the order they appear, before `main()` and before any static method is called.
 
 
-### 6.4 Initialization Order (Static vs. Instance)
+### 14.6.4 Initialization Order (Static vs. Instance)
 
 
 (Please refer to: [Class Loading, Initialization, and Object Construction](class-loading.md)) 
 
 
-### 6.5 Accessing Static Members
+### 14.6.5 Accessing Static Members
 
-#### 6.5.1 Recommended: use class name
+#### 14.6.5.1 Recommended: use class name
 
 ```java
 Math.sqrt(16);
 MyClass.staticMethod();
 ```
 
-#### 6.5.2 Also legal: via instance reference
+#### 14.6.5.2 Also legal: via instance reference
 
 ```java
 MyClass obj = new MyClass();
@@ -617,7 +615,7 @@ obj.staticMethod();
 ```
 
 
-### 6.6 Static and Inheritance
+### 14.6.6 Static and Inheritance
 
 Static methods:
 
@@ -643,7 +641,7 @@ ref.test();   // prints "A" — static binding!
 > Key rule: static methods use **reference type**, not object type.
 
 
-### 6.7 Common  Pitfalls
+### 14.6.7 Common  Pitfalls
 
 - Attempting to reference an instance variable/method from a static context.
 - Assuming static methods are overridden → they are **hidden**.
@@ -652,7 +650,6 @@ ref.test();   // prints "A" — static binding!
 - Forgetting that static variables are shared across all objects.
 - Not knowing that static initializers run *once*, in declaration order.
 
----
 
 
  
