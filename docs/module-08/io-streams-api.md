@@ -13,7 +13,7 @@
     - [35.1.7 mark() and reset(): Controlled Backtracking](#3517-mark-and-reset-controlled-backtracking)
     - [35.1.8 Readers, Writers, and Character Encoding](#3518-readers-writers-and-character-encoding)
     - [35.1.9 File vs FileDescriptor](#3519-file-vs-filedescriptor)
-  - [35.2 java.nio — Buffers, Channels, and Non-Blocking IO](352-javanio--buffers-channels-and-non-blocking-io)
+  - [35.2 java.nio — Buffers, Channels, and Non-Blocking IO](#352-javanio--buffers-channels-and-non-blocking-io)
     - [35.2.1 From Streams to Buffers: A Conceptual Shift](#3521-from-streams-to-buffers-a-conceptual-shift)
     - [35.2.2 Buffers: Purpose and Structure](#3522-buffers-purpose-and-structure)
     - [35.2.3 Buffer Lifecycle: Write → Flip → Read](#3523-buffer-lifecycle-write-flip-read)
