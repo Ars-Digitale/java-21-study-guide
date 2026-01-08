@@ -1,39 +1,39 @@
-# Dates and Time in Java
+# 12. Date and Time in Java
 
 ### Table of Contents
 
-- [Dates and Time in Java]
-	- [4. Dates and Time](#4-dates-and-time)
-	  - [4.1 Creating Specific Dates and Times](#41-creating-specific-dates-and-times)
-		- [4.1.1 Date and Time Arithmetic: plus and minus Methods](#411-date-and-time-arithmetic-plus-and-minus-methods)
-		- [4.1.2 Common Patterns](#412-common-patterns)
-		- [4.1.3 LocalDate Arithmetic](#413-localdate-arithmetic)
-		- [4.1.4 LocalTime Arithmetic](#414-localtime-arithmetic)
-		- [4.1.5 LocalDateTime Arithmetic](#415-localdatetime-arithmetic)
-		- [4.1.6 ZonedDateTime Arithmetic](#416-zoneddatetime-arithmetic)
-		- [4.1.7 Summary Table](#417-summary-table)
-		- [4.1.8 withXxx(...) Methods](#418-withxxx-methods)
-		- [4.1.9 Conversion & at... Methods](#419-conversion--at-methods)
-	  - [4.2 Period, Duration, and Instant](#42-period-duration-and-instant)
-		- [4.2.1 Period — Human Date Amounts](#421-period--human-date-amounts)
-		- [4.2.2 Duration — Machine Time Amounts](#422-duration--machine-time-amounts)
-		- [4.2.3 Instant — Point on the UTC Timeline](#423-instant--point-on-the-utc-timeline)
-		- [4.2.4 Summary Table (Period vs Duration vs Instant)](#424-summary-table-period-vs-duration-vs-instant)
-	  - [4.3 TemporalUnit and TemporalAmount](#43-temporalunit-and-temporalamount)
-		- [4.3.1 TemporalUnit](#431-temporalunit)
-		- [4.3.2 ChronoUnit](#432-chronounit-enum)
-		- [4.3.3 TemporalAmount](#433-temporalamount)
-		- [4.3.4 Period as a TemporalAmount](#434-period-as-a-temporalamount)
-		- [4.3.5 Duration as a TemporalAmount](#435-duration-as-a-temporalamount)
-		- [4.3.6 Using TemporalAmount vs TemporalUnit](#436-using-temporalamount-vs-temporalunit)
-		- [4.3.7 between(...) Methods](#437-between-methods)
-		- [4.3.8 Common Pitfalls](#438-common-pitfalls)
-		- [4.3.9 Summary](#439-summary)
+- [12. Date and Time in Java](#12-date-and-time-in-java)
+  - [12.1 Date and Time](#121-date-and-time)
+    - [12.1.1 Creating Specific Dates and Times](#1211-creating-specific-dates-and-times)
+    - [12.1.2 Date and Time Arithmetic plus and minus Methods](#1212-date-and-time-arithmetic-plus-and-minus-methods)
+    - [12.1.3 Common Patterns](#1213-common-patterns)
+    - [12.1.4 LocalDate Arithmetic](#1214-localdate-arithmetic)
+    - [12.1.5 LocalTime Arithmetic](#1215-localtime-arithmetic)
+    - [12.1.6 LocalDateTime Arithmetic](#1216-localdatetime-arithmetic)
+    - [12.1.7 ZonedDateTime Arithmetic](#1217-zoneddatetime-arithmetic)
+    - [12.1.8 Summary Table](#1218-summary-table)
+  - [12.2 withXxx Methods](#122-withxxx-methods)
+  - [12.3 Conversion and at Methods Linking Date Time and Zone](#123-conversion-and-at-methods-linking-date-time-and-zone)
+  - [12.4 Period Duration and Instant](#124-period-duration-and-instant)
+  - [12.5 Period — Human Date Amounts](#125-period--human-date-amounts)
+  - [12.6 Duration — Machine Time Amounts](#126-duration--machine-time-amounts)
+  - [12.7 Instant — Point on the UTC Timeline](#127-instant--point-on-the-utc-timeline)
+  - [12.8 Summary Table Period vs Duration vs Instant](#128-summary-table-period-vs-duration-vs-instant)
+  - [12.9 TemporalUnit and TemporalAmount](#129-temporalunit-and-temporalamount)
+    - [12.9.1 TemporalUnit](#1291-temporalunit)
+    - [12.9.2 ChronoUnit enum](#1292-chronounit-enum)
+    - [12.9.3 TemporalAmount](#1293-temporalamount)
+    - [12.9.4 Period as a TemporalAmount](#1294-period-as-a-temporalamount)
+    - [12.9.5 Duration as a TemporalAmount](#1295-duration-as-a-temporalamount)
+    - [12.9.6 Using TemporalAmount vs TemporalUnit](#1296-using-temporalamount-vs-temporalunit)
+    - [12.9.7 between Methods](#1297-between-methods)
+    - [12.9.8 Common Pitfalls](#1298-common-pitfalls)
+    - [12.9.9 Summary](#1299-summary)
 
 
 ---
 
-## 4. Dates and Time
+## 12.1 Dates and Time
 
 Java provides a modern, consistent, immutable date/time API in the package **`java.time.*`**.  
 This API replaces the old `java.util.Date` and `java.util.Calendar` classes and is widely tested in certification exams.
@@ -80,7 +80,7 @@ Example: Converting ZonedDateTime to GMT (UTC)
 Both represent **the same instant in time**, simply expressed in different time zones.
 
 
-### 4.1 Creating Specific Dates and Times
+### 12.1.1 Creating Specific Dates and Times
 
 You can build precise date/time objects using the `of()` factory methods.  
 All classes include multiple overloaded versions of `of()` (not listed in examples, but included below).
@@ -129,7 +129,7 @@ var localDateTime2 = LocalDateTime.of(localDate1, localTime1);
 var zoned = ZonedDateTime.of(2025, 7, 31, 13, 55, 22, 0, ZoneId.of("Europe/Paris"));
 ```
 
-#### 4.1.1 Date and Time Arithmetic: `plus` and `minus` Methods
+### 12.1.2 Date and Time Arithmetic: `plus` and `minus` Methods
 
 All classes in the `java.time` package (`LocalDate`, `LocalTime`, `LocalDateTime`, `ZonedDateTime`, etc.) are **immutable**.  
 This means that methods like `plusXxx()` and `minusXxx()` **never modify** the original object — instead, they return a **new instance** with the adjusted value.
@@ -137,7 +137,7 @@ This means that methods like `plusXxx()` and `minusXxx()` **never modify** the o
 These methods are heavily used and frequently tested in certification exams.
 
 
-#### 4.1.2 Common Patterns
+### 12.1.3 Common Patterns
 
 Most date/time classes support three kinds of arithmetic methods:
 
@@ -157,7 +157,7 @@ Most date/time classes support three kinds of arithmetic methods:
 These allow flexible and readable date/time arithmetic.
 
 
-#### 4.1.3 `LocalDate` Arithmetic
+### 12.1.4 `LocalDate` Arithmetic
 
 `LocalDate` represents a **date only** (no time, no zone).
 
@@ -197,7 +197,7 @@ LocalDate d6 = date.plus(p);
 ```
 
 
-#### 4.1.4 `LocalTime` Arithmetic
+### 12.1.5 `LocalTime` Arithmetic
 
 `LocalTime` represents **time only** (no date, no zone).
 
@@ -240,7 +240,7 @@ LocalTime t5 = time.plus(d);                // 15:00
 > For example, 23:30 + 2 hours = 01:30 (with no date involved).
 
 
-#### 4.1.5 `LocalDateTime` Arithmetic
+### 12.1.6 `LocalDateTime` Arithmetic
 
 `LocalDateTime` combines **date + time**, but still **no time zone**.
 
@@ -281,7 +281,7 @@ LocalDateTime l5 = ldt.plus(p);    // 2025-03-20T13:30
 LocalDateTime l6 = ldt.plus(d);    // 2025-03-10T18:30
 ```
 
-#### 4.1.6 `ZonedDateTime` Arithmetic
+### 12.1.7 `ZonedDateTime` Arithmetic
 
 `ZonedDateTime` represents **date + time + time zone + offset**.  
 
@@ -326,7 +326,7 @@ Depending on Daylight Saving rules for that date:
 
 
 
-#### 4.1.7 Summary Table
+### 12.1.8 Summary Table
 
 | Class           | Shortcut `plus`/`minus` methods                                | Generic methods                                |
 |----------------|------------------------------------------------------------------|-----------------------------------------------|
@@ -336,7 +336,7 @@ Depending on Daylight Saving rules for that date:
 | `ZonedDateTime`| Same as `LocalDateTime`, but zone-aware                         | `plus/minus(TemporalAmount)`, `plus/minus(long, TemporalUnit)` |
 
 
-#### 4.1.8 `withXxx(...)` Methods
+## 12.2 `withXxx(...)` Methods
 
 The `with...` methods return a **copy** of the object with one field changed.  
 They never mutate the original instance.
@@ -365,7 +365,7 @@ They never mutate the original instance.
 
 
 
-#### 4.1.9 Conversion & `at...` Methods (Linking Date, Time, and Zone)
+## 12.3 Conversion & `at...` Methods (Linking Date, Time, and Zone)
 
 These methods are used to **combine** or **convert** between `LocalDate`, `LocalTime`, `LocalDateTime`, and `ZonedDateTime`.
 
@@ -386,7 +386,7 @@ These methods are used to **combine** or **convert** between `LocalDate`, `Local
 |                   | `toLocalDateTime()`                        | `LocalDateTime`  | Drops zone/offset, keeps local date-time           |
 
 
-### 4.2 Period, Duration, and Instant
+## 12.4 Period, Duration, and Instant
 
 The `java.time` package provides three essential temporal classes that represent **amounts of time** or **points on the timeline**, independent of human calendar systems:
 
@@ -396,7 +396,7 @@ The `java.time` package provides three essential temporal classes that represent
 
 These are foundational for date/time arithmetic and are frequently tested in the certification exam.
 
-#### 4.2.1 `Period` — Human Date Amounts
+## 12.5 `Period` — Human Date Amounts
 
 A `Period` represents a **date-based amount of time**, such as “3 years, 2 months, and 5 days”.  
 It is used with **LocalDate** and **LocalDateTime** (because they contain date parts).
@@ -434,7 +434,7 @@ LocalDate result = base.plus(p2);          // 2026-03-13
 (But DST issues mainly affect `ZonedDateTime + Duration`.)
 
 
-#### 4.2.2 `Duration` — Machine Time Amounts
+## 12.6 `Duration` — Machine Time Amounts
 
 A `Duration` represents a **time-based amount** in seconds and nanoseconds.  
 It is used with **LocalTime**, **LocalDateTime**, and **ZonedDateTime**.
@@ -481,7 +481,7 @@ ZonedDateTime z3 = z1.plus(d2);              // Duration-based
 `Duration.ofDays(1)` is **not necessarily 24h of local time** in zones with DST changes.
 
 
-#### 4.2.3 `Instant` — Point on the UTC Timeline
+## 12.7 `Instant` — Point on the UTC Timeline
 
 An `Instant` represents a single moment in time relative to **UTC**, with nanosecond precision.
 
@@ -527,7 +527,7 @@ Duration between = Duration.between(start, end); // PT2H30M
 > It cannot be combined with a `Period`.
 
 
-#### 4.2.4 Summary Table (Period vs Duration vs Instant)
+## 12.8 Summary Table (Period vs Duration vs Instant)
 
 | Concept | Represents | Good For | Works With | Notes |
 |--------|------------|-----------|------------|-------|
@@ -545,7 +545,7 @@ Common Traps
 - `Period.parse("P1W")` is NOT allowed — only `"P7D"` results from creation using weeks
 
 
-### 4.3 TemporalUnit and TemporalAmount
+## 12.9 TemporalUnit and TemporalAmount
 
 The `java.time` API is built on two key interfaces that define how dates, times, and durations are manipulated:
 
@@ -555,12 +555,12 @@ The `java.time` API is built on two key interfaces that define how dates, times,
 Both are essential for understanding how the plus/minus and with methods work, and they frequently appear in certification questions.
 
 
-#### 4.3.1 `TemporalUnit`
+### 12.9.1 `TemporalUnit`
 
 `TemporalUnit` represents a **single unit** of date/time measurement.  
 The main implementation used in Java is:
 
-#### 4.3.2 `ChronoUnit` (enum)
+### 12.9.2 `ChronoUnit` (enum)
 
 This enum provides the standard units used in the ISO-8601 chronology:
 
@@ -599,7 +599,7 @@ LocalTime t = LocalTime.now().plus(1, ChronoUnit.DAYS);
 ```
 
 
-#### 4.3.3 `TemporalAmount`
+### 12.9.3 `TemporalAmount`
 
 `TemporalAmount` represents a **multiple-unit amount** of time (e.g. “2 years, 3 months”, or “90 minutes”).  
 It is implemented by:
@@ -610,7 +610,7 @@ It is implemented by:
 Both can be passed to date/time objects to adjust them using `plus()` and `minus()`.
 
 
-#### 4.3.4 `Period` as a `TemporalAmount`
+### 12.9.4 `Period` as a `TemporalAmount`
 
 `Period` represents a human-based amount: **years, months, days**.
 
@@ -628,7 +628,7 @@ Notes
 - `Period.ofWeeks(n)` is converted internally to *days*.
 
 
-#### 4.3.5 `Duration` as a `TemporalAmount`
+### 12.9.5 `Duration` as a `TemporalAmount`
 
 `Duration` represents machine-based time: **seconds + nanoseconds**.
 
@@ -647,7 +647,7 @@ Notes
 - `Duration` interacts with zones and DST transitions if applied to `ZonedDateTime`.
 
 
-#### 4.3.6 Using `TemporalAmount` vs `TemporalUnit`
+### 12.9.6 Using `TemporalAmount` vs `TemporalUnit`
 
 ✔ Using a TemporalUnit
 
@@ -674,7 +674,7 @@ Both produce the same result when supported.
 | Good for | Simple increments | Complex increments |
 | Common with | all date/time classes | restricted by type |
 
-#### 4.3.7 `between(...)` Methods
+### 12.9.7 `between(...)` Methods
 
 Many classes provide a `between` method from `ChronoUnit`, `Duration`, or `Period`.
 
@@ -714,7 +714,7 @@ long days = ChronoUnit.DAYS.between(
 > and `Duration.between` returns a `Duration`.
 
 
-#### 4.3.8 Common Pitfalls
+### 12.9.8 Common Pitfalls
 
 1. **Applying the wrong TemporalAmount**  
    - `LocalTime.plus(Period.ofDays(1))` → ❌ compile-time error  
@@ -734,7 +734,7 @@ long days = ChronoUnit.DAYS.between(
    - Needs a time zone: `ldt.atZone(zone).toInstant()`.
 
 
-#### 4.3.9 Summary
+### 12.9.9 Summary
 
 | Feature | TemporalUnit | TemporalAmount | ChronoUnit | Period | Duration |
 |---------|--------------|----------------|------------|--------|----------|
@@ -745,4 +745,3 @@ long days = ChronoUnit.DAYS.between(
 | Machine-based | ✔ | ✔ | ✔ | ❌ | ✔ |
 
 
----
