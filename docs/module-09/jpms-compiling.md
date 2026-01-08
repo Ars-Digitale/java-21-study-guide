@@ -1,12 +1,31 @@
-# Compiling, Packaging, and Running Modules
+# 38. Compiling, Packaging, and Running Modules
+
+### Table of Contents
+
+- [38 Compiling Packaging and Running Modules](#38-compiling-packaging-and-running-modules)
+  - [38.1 The Module Path vs the Classpath](#381-the-module-path-vs-the-classpath)
+  - [38.2 Compiling a Single Module](#382-compiling-a-single-module)
+  - [38.3 Compiling Multiple Interdependent Modules](#383-compiling-multiple-interdependent-modules)
+  - [38.4 Packaging a Module into a Modular JAR](#384-packaging-a-module-into-a-modular-jar)
+  - [38.5 Running a Modular Application](#385-running-a-modular-application)
+  - [38.6 Module Directives Explained](#386-module-directives-explained)
+    - [38.6.1 requires](#3861-requires)
+    - [38.6.2 requires transitive](#3862-requires-transitive)
+    - [38.6.3 exports](#3863-exports)
+    - [38.6.4 exports-to-qualified-exports](#3864-exports-to-qualified-exports)
+    - [38.6.5 opens](#3865-opens)
+    - [38.6.6 opens-to-qualified-opens](#3866-opens-to-qualified-opens)
+    - [38.6.7 Summary of Core Directives](#3867-summary-of-core-directives)
+
+---
 
 Once a module is defined with a `module-info.java` file, it must be compiled, packaged, and executed using module-aware tools.
 
 This section explains how the Java toolchain changes when modules are involved.
 
-## 1. The Module Path vs the Classpath
+## 38.1 The Module Path vs the Classpath
 
-JPMS introduces a new concept: the module path.
+`JPMS` introduces a new concept: the module path.
 It exists alongside the traditional classpath, but the two behave very differently.
 
 | Aspect | Classpath | Module path |
@@ -21,7 +40,7 @@ It exists alongside the traditional classpath, but the two behave very different
 > A JAR placed on the classpath is treated as part of the `unnamed module`.
 > A JAR placed on the module path becomes a `named (or automatic) module`.
 
-## 2. Compiling a Single Module
+## 38.2 Compiling a Single Module
 
 To compile a module, you must specify the module source path and the destination directory.
 
@@ -42,7 +61,7 @@ $(find src -name "*.java")
 > [!NOTE]
 > `--module-source-path` tells javac where to find multiple modules at once.
 
-## 3. Compiling Multiple Interdependent Modules
+## 38.3 Compiling Multiple Interdependent Modules
 
 When modules depend on each other, their dependencies must be resolvable at compile time.
 
@@ -57,7 +76,7 @@ Here:
 - `--module-source-path` locates module source trees
 - `--module-path` provides already-compiled modules
 
-## 4. Packaging a Module into a Modular JAR
+## 38.4 Packaging a Module into a Modular JAR
 
 After compilation, modules are typically packaged as JAR files.
 
@@ -73,7 +92,7 @@ jar --create
 > [!NOTE]
 > A JAR with `module-info.class` is a `named module, not an automatic module`.
 
-## 5. Running a Modular Application
+## 38.5 Running a Modular Application
 
 To run a modular application, you use the `module path` and specify the `module name`.
 
@@ -88,13 +107,13 @@ You can shorten this using the `-m` option.
 java -p mods -m com.example.hello/com.example.hello.Main
 ```
 
-## 6. Module Directives Explained
+## 38.6 Module Directives Explained
 
 The module-info.java file contains directives that describe dependencies, visibility, and services.
 
 Each directive has a precise meaning.
 
-### 6.1 `requires`
+### 38.6.1 `requires`
 
 The requires directive declares a dependency on another module.
 
@@ -110,7 +129,7 @@ Effects of requires:
 - Dependency must be present at compile and runtime
 - Exported packages of the required module become accessible
 
-### 6.2 `requires transitive`
+### 38.6.2 `requires transitive`
 
 `requires transitive` exposes a dependency to downstream modules.
 
@@ -130,7 +149,7 @@ Meaning:
 > [!NOTE]
 > This is similar to “public dependencies” in other module systems.
 
-### 6.3 `exports`
+### 38.6.3 `exports`
 
 `exports` makes a package accessible to other modules.
 
@@ -144,7 +163,7 @@ module com.example.lib {
 
 Non-exported packages remain strongly encapsulated.
 
-### 16.4 `exports ... to` (Qualified Exports)
+### 38.6.4 `exports ... to` (Qualified Exports)
 
 A qualified export restricts access to specific modules.
 
@@ -156,7 +175,7 @@ module com.example.lib {
 
 Only the listed modules can access the exported package.
 
-### 6.5 `opens`
+### 38.6.5 `opens`
 
 `opens` allows deep reflective access to a package.
 
@@ -172,7 +191,7 @@ module com.example.app {
 > opens does NOT make a package accessible at compile time.
 > It only affects runtime reflection.
 
-### 6.6 `opens ... to` (Qualified Opens)
+### 38.6.6 `opens ... to` (Qualified Opens)
 
 You can restrict reflective access to specific modules.
 
@@ -182,7 +201,7 @@ module com.example.app {
 }
 ```
 
-### 6.7 Summary of Core Directives
+### 38.6.7 Summary of Core Directives
 
 | Directive | Purpose |
 | --- | --- |
