@@ -1,11 +1,36 @@
-# Chapter 4 — Set API
+# 26. Set API
+
+### Table of Contents
+
+- [26. Set API](#26-set-api)
+  - [26.1 Set Hierarchy Java-Collections-Framework](#261-set-hierarchy-java-collections-framework)
+  - [26.2 Characteristics of Each Set Implementation](#262-characteristics-of-each-set-implementation)
+    - [26.2.1 HashSet](#2621-hashset)
+    - [26.2.2 LinkedHashSet](#2622-linkedhashset)
+    - [26.2.3 TreeSet](#2623-treeset)
+  - [26.3 Equality Rules in Sets](#263-equality-rules-in-sets)
+    - [26.3.1 HashSet--LinkedHashSet](#2631-hashset--linkedhashset)
+    - [26.3.2 TreeSet](#2632-treeset)
+  - [26.4 Creating Set Instances](#264-creating-set-instances)
+    - [26.4.1 Using Constructors](#2641-using-constructors)
+    - [26.4.2 Copy Constructors](#2642-copy-constructors)
+    - [26.4.3 Factory Methods](#2643-factory-methods)
+  - [26.5 Main Operations on Sets](#265-main-operations-on-sets)
+    - [26.5.1 Adding Elements](#2651-adding-elements)
+    - [26.5.2 Checking Membership](#2652-checking-membership)
+    - [26.5.3 Removing Elements](#2653-removing-elements)
+    - [26.5.4 Bulk Operations](#2654-bulk-operations)
+  - [26.6 Common Pitfalls](#266-common-pitfalls)
+  - [26.7 Summary Table](#267-summary-table)
+
+---
 
 A **Set** in Java represents a collection that **contains no duplicate elements**.  
 It models the mathematical concept of a set: unordered (unless using an ordered implementation) and composed of unique values.
 
 All Set implementations rely on **equality semantics** (either `equals()` or comparator logic).
 
-## 4.1 Set Hierarchy (Java Collections Framework)
+## 26.1 Set Hierarchy (Java Collections Framework)
 
 ```text
 Set<E>
@@ -19,9 +44,9 @@ All `Set` implementations require:
 - uniqueness of elements  
 - predictable equality and hashing (depending on implementation)
 
-## 4.2 Characteristics of Each Set Implementation
+## 26.2 Characteristics of Each Set Implementation
 
-### 4.2.1 HashSet
+### 26.2.1 HashSet
 - Fastest general-purpose Set  
 - Unordered (no iteration order guarantee)  
 - Uses `hashCode()` and `equals()`  
@@ -36,7 +61,7 @@ set.add("A");   // duplicate ignored
 System.out.println(set); // order not guaranteed
 ```
 
-### 4.2.2 LinkedHashSet
+### 26.2.2 LinkedHashSet
 - Maintains **insertion order**  
 - Slightly slower than HashSet  
 - Useful when predictable iteration order is required
@@ -49,7 +74,7 @@ set.add("B");
 System.out.println(set);  // [A, C, B]
 ```
 
-### 4.2.3 TreeSet
+### 26.2.3 TreeSet
 
 A **sorted** Set whose order is determined by:  
 1. Natural ordering (`Comparable`)  
@@ -74,11 +99,11 @@ System.out.println(tree); // [1, 5, 10]
 mixing non-comparable types produces `ClassCastException`.
 
 
-## 4.3 Equality Rules in Sets
+## 26.3 Equality Rules in Sets
 
 The rules differ depending on implementation.
 
-### 4.3.1 HashSet & LinkedHashSet
+### 26.3.1 HashSet & LinkedHashSet
 
 Uniqueness is determined by two methods:  
 - `hashCode()`  
@@ -89,7 +114,7 @@ Two objects are considered the same element if:
 2. Their `equals()` method returns `true`  
 
 
-### 4.3.2 TreeSet
+### 26.3.2 TreeSet
 
 Uniqueness is based on `compareTo()` or the provided `Comparator`.  
 
@@ -105,9 +130,9 @@ set.add("Yo"); // same length → treated as duplicate
 System.out.println(set);  // ["Hi"]
 ```
 
-## 4.4 Creating Set Instances
+## 26.4 Creating Set Instances
 
-### 4.4.1 Using Constructors
+### 26.4.1 Using Constructors
 
 ```java
 Set<String> s1 = new HashSet<>();
@@ -115,7 +140,7 @@ Set<String> s2 = new LinkedHashSet<>();
 Set<String> s3 = new TreeSet<>();
 ```
 
-### 4.4.2 Copy Constructors
+### 26.4.2 Copy Constructors
 
 ```java
 List<String> list = List.of("A", "B", "C");
@@ -127,7 +152,7 @@ Set<String> ordered = new LinkedHashSet<>(list); // maintains the order from the
 System.out.println(ordered);
 ```
 
-### 4.4.3 Factory Methods
+### 26.4.3 Factory Methods
 
 ```java
 Set<String> s1 = Set.of("A", "B", "C");   // immutable
@@ -138,29 +163,29 @@ Set<String> empty = Set.of();             // empty immutable set
 adding or removing elements throws `UnsupportedOperationException`.
 
 
-## 4.5 Main Operations on Sets
+## 26.5 Main Operations on Sets
 
-### 4.5.1 Adding Elements
+### 26.5.1 Adding Elements
 
 ```java
 set.add("A");          // returns true if added
 set.add("A");          // returns false if duplicate
 ```
 
-### 4.5.2 Checking Membership
+### 26.5.2 Checking Membership
 
 ```java
 set.contains("A");
 ```
 
-### 4.5.3 Removing Elements
+### 26.5.3 Removing Elements
 
 ```java
 set.remove("A");
 set.clear();
 ```
 
-### 4.5.4 Bulk Operations
+### 26.5.4 Bulk Operations
 
 ```java
 set.addAll(otherSet);
@@ -169,7 +194,7 @@ set.retainAll(otherSet); // intersection
 ```
 
 
-## 4.6 Common Pitfalls
+## 26.6 Common Pitfalls
 
 - Using TreeSet with non-comparable objects → `ClassCastException`
 - Using mutable objects as Set keys → breaks hashing rules
@@ -178,7 +203,7 @@ set.retainAll(otherSet); // intersection
 - TreeSet treats objects with compare()==0 as duplicates even if not equal
 
 
-## 4.7 Summary Table
+## 26.7 Summary Table
 
 
 | Implementation   | Keeps Order?          | Allows Null? | Sorted?        | Underlying Logic        |

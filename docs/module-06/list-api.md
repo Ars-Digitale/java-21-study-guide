@@ -229,7 +229,7 @@ while (lit.hasNext()) {
 
 > **Note:** Only `ListIterator` supports bidirectional traversal and modification.
 
-## 25.7 The subList() Method
+## 25.7 The `subList()` Method
 
 `subList()` creates a view of a portion of the list, not a copy.
 Modifying either list can modify the other.
