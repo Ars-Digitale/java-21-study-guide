@@ -1,4 +1,24 @@
-# Java Platform Module System (JPMS)
+# 37. Java Platform Module System (JPMS)
+
+### Table of Contents
+
+- [37 Java Platform Module System JPMS](#37-java-platform-module-system-jpms)
+  - [37.1 Why Modules Were Introduced](#371-why-modules-were-introduced)
+    - [37.1.1 Problems with the Classpath](#3711-problems-with-the-classpath)
+    - [37.1.2 Example of a Classpath Problem](#3712-example-of-a-classpath-problem)
+  - [37.2 What Is a Module](#372-what-is-a-module)
+    - [37.2.1 Core Properties of Modules](#3721-core-properties-of-modules)
+    - [37.2.2 Module vs Package vs JAR](#3722-module-vs-package-vs-jar)
+  - [37.3 The module-infojava Descriptor](#373-the-module-infojava-descriptor)
+    - [37.3.1 Minimal Module Descriptor](#3731-minimal-module-descriptor)
+  - [37.4 Module Directory Structure](#374-module-directory-structure)
+  - [37.5 A First Modular Program](#375-a-first-modular-program)
+    - [37.5.1 Main Class](#3751-main-class)
+    - [37.5.2 Module Descriptor](#3752-module-descriptor)
+  - [37.6 Strong Encapsulation Explained](#376-strong-encapsulation-explained)
+  - [37.7 Summary of Key Ideas](#377-summary-of-key-ideas)
+
+---
 
 The `Java Platform Module System` (**JPMS**) was introduced in Java 9.
 
@@ -13,7 +33,7 @@ JPMS affects how code is:
 
 Understanding JPMS is essential for modern Java, especially for large applications, libraries, runtime images, and deployment tooling.
 
-## 1. Why Modules Were Introduced
+## 37.1 Why Modules Were Introduced
 
 Before Java 9, Java applications were built using only:
 - packages
@@ -22,7 +42,7 @@ Before Java 9, Java applications were built using only:
 
 This model had serious limitations as applications grew.
 
-### 1.1 Problems with the Classpath
+### 37.1.1 Problems with the Classpath
 
 The classpath is a flat list of JARs where:
 - all public classes are accessible to everyone
@@ -36,7 +56,7 @@ This led to well-known issues such as:
 - accidental use of internal APIs
 - runtime failures that were not detected at compile time
 
-### 1.2 Example of a Classpath Problem
+### 37.1.2 Example of a Classpath Problem
 
 Suppose two libraries depend on different versions of the same third-party JAR.
 
@@ -47,7 +67,7 @@ Which one is chosen depends on classpath order, not correctness.
 > [!NOTE]
 > This problem cannot be reliably solved with the classpath alone.
 
-## 2. What Is a Module?
+## 37.2 What Is a Module?
 
 A `module` is a named, self-describing unit of code.
 
@@ -58,7 +78,7 @@ It explicitly declares:
 
 A module is stronger than a package and more structured than a JAR.
 
-### 2.1 Core Properties of Modules
+### 37.2.1 Core Properties of Modules
 
 | Property | Description |
 | --- | --- |
@@ -67,7 +87,7 @@ A module is stronger than a package and more structured than a JAR.
 | Reliable configuration | Missing dependencies cause errors early |
 | Named identity | Each module has a unique name |
 
-### 2.2 Module vs Package vs JAR
+### 37.2.2 Module vs Package vs JAR
 
 | Concept | Purpose | Encapsulation |
 | --- | --- | --- |
@@ -75,7 +95,7 @@ A module is stronger than a package and more structured than a JAR.
 | `JAR` | Deployment unit | None |
 | `Module` | Strong abstraction unit | Strong |
 
-## 3. The `module-info.java` Descriptor
+## 37.3 The `module-info.java` Descriptor
 
 Every named module is defined by a module descriptor file named:
 
@@ -85,7 +105,7 @@ module-info.java
 
 This file describes the module to the compiler and the runtime.
 
-### 3.1 Minimal Module Descriptor
+### 37.3.1 Minimal Module Descriptor
 
 A minimal module descriptor declares only the module name.
 
@@ -97,7 +117,7 @@ module com.example.hello {
 > [!NOTE]
 > A module with no directives exports nothing and depends on nothing.
 
-## 4. Module Directory Structure
+## 37.4 Module Directory Structure
 
 A modular project follows a standard directory layout.
 The module descriptor sits at the root of the module’s source tree.
@@ -117,11 +137,11 @@ Key points:
 - module-info.java is at the top of the module source root
 - packages follow standard Java naming rules
 
-## 5. A First Modular Program
+## 37.5 A First Modular Program
 
 Let’s create a minimal modular application.
 
-### 5.1 Main Class
+### 37.5.1 Main Class
 
 ```java
 package com.example.hello;
@@ -133,7 +153,7 @@ public class Main {
 }
 ```
 
-### 5.2 Module Descriptor
+### 37.5.2 Module Descriptor
 
 ```java
 module com.example.hello {
@@ -145,7 +165,7 @@ The `exports directive` makes the package accessible to other modules.
 
 Without it, the package is encapsulated and inaccessible.
 
-## 6. Strong Encapsulation Explained
+## 37.6 Strong Encapsulation Explained
 
 In `JPMS`, packages are NOT accessible by default.
 
@@ -163,7 +183,7 @@ Even public classes are hidden unless explicitly exported.
 > [!NOTE]
 > This is a fundamental difference from the classpath model.
 
-## 7. Summary of Key Ideas
+## 37.7 Summary of Key Ideas
 
 - `JPMS` introduces modules as strong units of encapsulation
 - Dependencies are explicit and checked
