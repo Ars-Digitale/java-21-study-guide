@@ -1,4 +1,29 @@
-# Interacting with the User (Standard I/O Streams)
+# 36. Interacting with the User (Standard I/O Streams)
+
+### Table of Contents
+
+- [36. Interacting with the User Standard IO Streams](#36-interacting-with-the-user-standard-io-streams)
+  - [36.1 The Standard IO Streams](#361-the-standard-io-streams)
+  - [36.2 PrintStream What It Is and Why It Exists](#362-printstream-what-it-is-and-why-it-exists)
+    - [36.2.1 Key Characteristics of PrintStream](#3621-key-characteristics-of-printstream)
+    - [36.2.2 Basic Usage of PrintStream](#3622-basic-usage-of-printstream)
+    - [36.2.3 Formatting Output with PrintStream](#3623-formatting-output-with-printstream)
+  - [36.3 Reading Input as an IO Stream](#363-reading-input-as-an-io-stream)
+    - [36.3.1 Low-Level Reading from Systemin](#3631-low-level-reading-from-systemin)
+    - [36.3.2 Using InputStreamReader and BufferedReader](#3632-using-inputstreamreader-and-bufferedreader)
+  - [36.4 The Scanner Class Convenient but Subtle](#364-the-scanner-class-convenient-but-subtle)
+    - [36.4.1 Common Scanner Pitfalls](#3641-common-scanner-pitfalls)
+  - [36.5 Closing System Streams](#365-closing-system-streams)
+  - [36.6 Acquiring Input with Console](#366-acquiring-input-with-console)
+    - [36.6.1 Reading Input from Console](#3661-reading-input-from-console)
+    - [36.6.2 Reading Passwords Securely](#3662-reading-passwords-securely)
+  - [36.7 Formatting Console Output](#367-formatting-console-output)
+  - [36.8 Comparing Console Scanner and BufferedReader](#368-comparing-console-scanner-and-bufferedreader)
+  - [36.9 Redirection and Standard Streams](#369-redirection-and-standard-streams)
+  - [36.10 Common Traps and Best Practices](#3610-common-traps-and-best-practices)
+  - [36.11 Final Summary](#3611-final-summary)
+
+---
 
 Java programs often need to interact with the user: printing information, reading input, and formatting output.
 
@@ -7,7 +32,7 @@ This interaction is implemented using standard I/O streams, which are normal Jav
 This chapter explains how Java interacts with the console and standard input/output,
 starting from the most basic concepts and moving to higher-level APIs.
 
-## 1. The Standard I/O Streams
+## 36.1 The Standard I/O Streams
 
 Every Java program starts with three predefined streams provided by the JVM.
 
@@ -24,7 +49,7 @@ They are connected to the process environment (usually a terminal or console).
 >
 > They exist for the entire lifetime of the process.
 
-## 2. `PrintStream`: What It Is and Why It Exists
+## 36.2 `PrintStream`: What It Is and Why It Exists
 
 `PrintStream` is a byte-oriented output stream designed for human-readable output.
 
@@ -32,7 +57,7 @@ It wraps another OutputStream and adds convenient printing methods.
 
 `System.out` and `System.err` are both instances of `PrintStream`.
 
-### 2.1 Key Characteristics of PrintStream
+### 36.2.1 Key Characteristics of PrintStream
 
 - Provides `print()` and `println()` methods
 - Converts values to text automatically
@@ -44,7 +69,7 @@ It wraps another OutputStream and adds convenient printing methods.
 >
 > Errors must be checked using checkError().
 
-### 2.2 Basic Usage of PrintStream
+### 36.2.2 Basic Usage of PrintStream
 
 ```java
 System.out.println("Hello");
@@ -54,7 +79,7 @@ System.out.println(42);
 
 `println()` appends the platform-specific line separator automatically.
 
-### 2.3 Formatting Output with PrintStream
+### 36.2.3 Formatting Output with PrintStream
 
 PrintStream supports formatted output using `printf()` and `format()`,
 which are based on the same syntax as String.format().
@@ -73,13 +98,13 @@ System.out.printf("Name: %s, Age: %d%n", "Alice", 30);
 > [!NOTE]
 > `printf()` does not automatically add a newline unless you specify `%n`.
 
-## 3. Reading Input as an I/O Stream
+## 36.3 Reading Input as an I/O Stream
 
 Standard input (System.in) is an InputStream connected to user input.
 
 It provides raw bytes and must be adapted for practical use.
 
-### 3.1 Low-Level Reading from System.in
+### 36.3.1 Low-Level Reading from System.in
 
 At the lowest level, you can read raw bytes from System.in.
 
@@ -92,7 +117,7 @@ int b = System.in.read();
 > [!NOTE]
 > `System.in.read()` blocks until input is available.
 
-### 3.2 Using InputStreamReader and BufferedReader
+### 36.3.2 Using InputStreamReader and BufferedReader
 
 To read text input, `System.in` is typically wrapped into a Reader and buffered.
 
@@ -105,7 +130,7 @@ String line = reader.readLine();
 
 This converts `bytes → characters and allows line-based input`.
 
-## 4. The Scanner Class (Convenient but Subtle)
+## 36.4 The Scanner Class (Convenient but Subtle)
 
 `Scanner` is a high-level utility for parsing text input.
 
@@ -122,13 +147,13 @@ String text = sc.nextLine();
 >
 > This makes it convenient but slower and sometimes surprising.
 
-### 4.1 Common Scanner Pitfalls
+### 36.4.1 Common Scanner Pitfalls
 
 - Mixing `nextInt()` and `nextLine()` can skip input
 - Parsing errors throw InputMismatchException
 - Scanner is relatively slow for large input
 
-## 5. Closing System Streams
+## 36.5 Closing System Streams
 
 System streams are special and must be handled carefully.
 
@@ -143,7 +168,7 @@ Closing `System.out` or `System.err` closes the underlying OS stream and affects
 > [!NOTE]
 > In almost all applications, you should NOT close System.out or System.err.
 
-## 6. Acquiring Input with `Console`
+## 36.6 Acquiring Input with `Console`
 
 The `Console` class provides a higher-level, safer way to interact with the user.
 
@@ -157,7 +182,7 @@ Console console = System.console();
 > `System.console()` may return null when no console is available
 > (e.g. IDEs, redirected input).
 
-### 6.1 Reading Input from Console
+### 36.6.1 Reading Input from Console
 
 ```java
 String name = console.readLine("Name: ");
@@ -165,7 +190,7 @@ String name = console.readLine("Name: ");
 
 `readLine()` prints a prompt and reads a full line of input.
 
-### 6.2 Reading Passwords Securely
+### 36.6.2 Reading Passwords Securely
 
 Console allows reading passwords without echoing characters.
 
@@ -176,7 +201,7 @@ char[] password = console.readPassword("Password: ");
 > [!NOTE]
 > Passwords are returned as `char[]` so they can be cleared from memory.
 
-## 7. Formatting Console Output
+## 36.7 Formatting Console Output
 
 Console also supports formatted output, similar to PrintStream.
 
@@ -186,7 +211,7 @@ console.printf("Welcome %s%n", name);
 
 This uses the same format specifiers as `printf()`.
 
-## 8. Comparing Console, Scanner, and BufferedReader
+## 36.8 Comparing Console, Scanner, and BufferedReader
 
 | API | Use case | Strengths | Limitations |
 | --- | --- | --- | --- |
@@ -194,7 +219,7 @@ This uses the same format specifiers as `printf()`.
 | Scanner | Token-based input | Convenient, expressive | Slow, subtle behavior |
 | Console | Interactive apps | Passwords, formatting | May be unavailable |
 
-## 9. Redirection and Standard Streams
+## 36.9 Redirection and Standard Streams
 
 Standard streams can be redirected by the operating system.
 Java code does not need to change.
@@ -205,7 +230,7 @@ java App < input.txt > output.txt
 
 From the program’s perspective, System.in and System.out still behave like normal streams.
 
-## 10. Common Traps and Best Practices
+## 36.10 Common Traps and Best Practices
 
 - PrintStream suppresses IOExceptions
 - `System.console()` can return null
@@ -213,7 +238,7 @@ From the program’s perspective, System.in and System.out still behave like nor
 - Scanner mixes parsing and reading
 - Console is preferred for passwords
 
-## 11. Final Summary
+## 36.11 Final Summary
 
 - `System.out` and `System.err` are PrintStreams for output
 - `System.in` is a byte stream that must be adapted for text
