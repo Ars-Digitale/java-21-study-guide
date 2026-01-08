@@ -35,7 +35,6 @@
 
 ## 9.1 Strings & Text Blocks
 
----
 
 ### 9.1.1 Strings
 
