@@ -15,7 +15,7 @@
     - [33.1.7 Canonical vs Absolute vs Normalized Core-Differences](#3317-canonical-vs-absolute-vs-normalized-core-differences)
       - [33.1.7.1 normalize](#33171-normalize)
     - [33.1.8 Quick Comparison Table Creation--Conversion](#3318-quick-comparison-table-creation--conversion)
-  - [33.2 Managing Files and Directories Create-Copy-Move-Replace-Compare-Delete](#332-managing-files-and-directories-create-copy-move-replace-compare-delete)
+  - [33.2 Managing Files and Directories Create-Copy-Move-Replace-Compare-Delete](#332-managing-files-and-directories-create-copy-move-replace-compare-delete-legacy-vs-nio)
     - [33.2.1 Mental Model Path-Locator-vs-Operations](#3321-mental-model-path-locator-vs-operations)
     - [33.2.2 Creating Files and Directories](#3322-creating-files-and-directories)
       - [33.2.2.1 Create a File](#33221-create-a-file)
