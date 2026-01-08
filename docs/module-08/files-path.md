@@ -1,9 +1,48 @@
-# Files and Paths Fundamentals
+# 32. Files and Paths Fundamentals
+
+### Table of Contents
+
+- [32. Files and Paths Fundamentals](#32-files-and-paths-fundamentals)
+  - [32.1 Conceptual Model Filesystem Files Directories Links-and-IO-Targets](#321-conceptual-model-filesystem-files-directories-links-and-io-targets)
+  - [32.2 Filesystem – The Global Abstraction](#322-filesystem--the-global-abstraction)
+  - [32.3 Path – Locating an Entry in a Filesystem](#323-path--locating-an-entry-in-a-filesystem)
+  - [32.4 Files – Persistent Data Containers](#324-files--persistent-data-containers)
+  - [32.5 Directories – Structural Containers](#325-directories--structural-containers)
+  - [32.6 Links – Indirection Mechanisms](#326-links--indirection-mechanisms)
+    - [32.6.1 Hard Links](#3261-hard-links)
+    - [32.6.2 Symbolic Soft Links](#3262-symbolic-soft-links)
+  - [32.7 Other Filesystem Entry Types](#327-other-filesystem-entry-types)
+  - [32.8 How Java IO Interacts with These Concepts](#328-how-java-io-interacts-with-these-concepts)
+  - [32.9 Core Conceptual Pitfalls](#329-core-conceptual-pitfalls)
+  - [32.10 Why Path and Files Exist IO-Context](#3210-why-path-and-files-exist-io-context)
+  - [32.11 Is javaioFile legacy-apis both-a-path-and-a-file-operations-api](#3211-is-javaiofile-legacy-apis-both-a-path-and-a-file-operations-api)
+    - [32.11.1 What File Really Is](#32111-what-file-really-is)
+    - [32.11.2 Path-like Responsibilities](#32112-path-like-responsibilities)
+    - [32.11.3 Filesystem Operation Responsibilities](#32113-filesystem-operation-responsibilities)
+    - [32.11.4 What File Is NOT](#32114-what-file-is-not)
+    - [32.11.5 Why This Was a Problem](#32115-why-this-was-a-problem)
+    - [32.11.6 How NIO Fixed This](#32116-how-nio-fixed-this)
+    - [32.11.7 Summary](#32117-summary)
+  - [32.12 Path Is a Description Not a Resource](#3212-path-is-a-description-not-a-resource)
+  - [32.13 Absolute vs Relative Paths](#3213-absolute-vs-relative-paths)
+    - [32.13.1 Absolute Paths](#32131-absolute-paths)
+    - [32.13.2 Relative Paths](#32132-relative-paths)
+  - [32.14 Filesystem Awareness and Separators](#3214-filesystem-awareness-and-separators)
+    - [32.14.1 FileSystem](#32141-filesystem)
+    - [32.14.2 Path Separators](#32142-path-separators)
+  - [32.15 What Files Actually Do and What They Don’t](#3215-what-files-actually-do-and-what-they-dont)
+    - [32.15.1 Files DO](#32151-files-do)
+    - [32.15.2 Files DO NOT](#32152-files-do-not)
+  - [32.16 Error Handling Philosophy Old-vs-NIO](#3216-error-handling-philosophy-old-vs-nio)
+  - [32.17 Common Misconceptions](#3217-common-misconceptions)
+
+
+---
 
 This section focuses on `Path`, `File`, `Files`, and related classes, explaining why they exist, what problems they solve, and which are the differences between 
 legacy java.io APIs and NIO v.2 (new I/O APIs), with special attention to filesystem semantics, path resolution, and common misconceptions.
 
-## 1. Conceptual Model: Filesystem, Files, Directories, Links, and I/O Targets
+## 32.1 Conceptual Model: Filesystem, Files, Directories, Links, and I/O Targets
 
 Before understanding Java I/O APIs, it is essential to understand what they interact with. 
 
@@ -11,7 +50,7 @@ Before understanding Java I/O APIs, it is essential to understand what they inte
 
 This section defines those concepts independently of Java, then explains how Java I/O maps onto them and what problems are being solved.
 
-## 2. Filesystem – The Global Abstraction
+## 32.2 Filesystem – The Global Abstraction
 
 A `filesystem` is a structured mechanism provided by an operating system to organize, store, retrieve, and manage data on persistent storage devices.
 
@@ -35,7 +74,7 @@ In Java NIO, a filesystem is represented by the `FileSystem` abstraction.
 > [!NOTE]
 > Java does not implement filesystems; it adapts to filesystem implementations provided by the OS or custom providers.
 
-## 3. Path – Locating an Entry in a Filesystem
+## 32.3 Path – Locating an Entry in a Filesystem
 
 A `path` is a logical locator, not a resource. 
 
@@ -57,7 +96,7 @@ A `path` solves the problem of `addressing`.
 > [!NOTE]
 > In Java, `Path` represents potential filesystem entries, not actual ones.
 
-## 4. Files – Persistent Data Containers
+## 32.4 Files – Persistent Data Containers
 
 A `file` is a filesystem entry whose primary role is to store data. 
 
@@ -85,7 +124,7 @@ From the filesystem perspective, a file has:
 > [!NOTE]
 > Text vs binary is not a filesystem concept; it is an application-level interpretation.
 
-## 5. Directories – Structural Containers
+## 32.5 Directories – Structural Containers
 
 A `directory (or folder)` is a filesystem entry whose purpose is to organize other entries.
 
@@ -105,20 +144,20 @@ Directories solve the problem of scalability and organization.
 > [!NOTE]
 > A directory is not a file with content, even if both share common metadata.
 
-## 6. Links – Indirection Mechanisms
+## 32.6 Links – Indirection Mechanisms
 
 A `link` is a filesystem entry that refers to another entry. 
 
 Links solve the problem of indirection and reuse.
 
-### 6.1 Hard Links
+### 32.6.1 Hard Links
 
 A `hard link` is an additional name for the same underlying data.
 
 - Multiple paths point to the same file data
 - Deletion occurs only when all links are removed
 
-### 6.2 Symbolic (Soft) Links
+### 32.6.2 Symbolic (Soft) Links
 
 A `symbolic link` is a special file containing a path to another entry.
 
@@ -133,7 +172,7 @@ A `symbolic link` is a special file containing a path to another entry.
 > [!NOTE]
 > Java NIO exposes link behavior explicitly via `LinkOption`.
 
-## 7. Other Filesystem Entry Types
+## 32.7 Other Filesystem Entry Types
 
 Some filesystem entries are not data containers but interaction endpoints.
 
@@ -146,7 +185,7 @@ Some filesystem entries are not data containers but interaction endpoints.
 > [!NOTE]
 > Java I/O may interact with these entries, but behavior is platform-dependent.
 
-## 8. How Java I/O Interacts with These Concepts
+## 32.8 How Java I/O Interacts with These Concepts
 
 Java I/O APIs operate at different abstraction layers:
 
@@ -166,7 +205,7 @@ Java I/O APIs operate at different abstraction layers:
 > [!NOTE]
 > No Java API “is” a file; APIs mediate access to filesystem-managed resources.
 
-## 9. Core Conceptual Pitfalls
+## 32.9 Core Conceptual Pitfalls
 
 - Confusing paths with files
 - Assuming paths imply existence
@@ -177,7 +216,7 @@ Java I/O APIs operate at different abstraction layers:
 > Always separate location, structure, and data flow when reasoning about I/O.
 
 
-## 10. Why Path and Files Exist (I/O Context)
+## 32.10 Why Path and Files Exist (I/O Context)
 
 Classic `java.io` mixed three different concerns into poorly separated APIs:
 
@@ -194,7 +233,7 @@ The NIO.2 design (Java 7+) deliberately separates these concerns:
 > [!NOTE] 
 > A `Path` never opens a file and never touches the disk by itself.
 
-## 11. Is `java.io.File` (legacy APIs) both a `path` and a `file-operations` API?
+## 32.11 Is `java.io.File` (legacy APIs) both a `path` and a `file-operations` API?
 
 Yes — in the old I/O API, `java.io.File` confusingly plays two roles at the same time, and this design is exactly one of the reasons `java.nio.file` was introduced.
 
@@ -207,7 +246,7 @@ Yes — in the old I/O API, `java.io.File` confusingly plays two roles at the sa
 > [!NOTE]
 > This mixing of responsibilities is considered a design flaw in hindsight.
 
-### 11.1 What `File` Really Is
+### 32.11.1 What `File` Really Is
 
 Conceptually, `File` is closer to what we now call a `Path`, but with added operational methods.
 
@@ -223,7 +262,7 @@ Conceptually, `File` is closer to what we now call a `Path`, but with added oper
 > [!NOTE]
 > A `File` object can exist even if the file does not.
 
-### 11.2 Path-like Responsibilities
+### 32.11.2 Path-like Responsibilities
 
 `File` behaves like a path abstraction because it:
 
@@ -239,7 +278,7 @@ File abs = f.getAbsoluteFile(); // absolute path
 File canon = f.getCanonicalFile(); // normalized + resolved
 ```
 
-### 11.3 Filesystem Operation Responsibilities
+### 32.11.3 Filesystem Operation Responsibilities
 
 At the same time, `File` exposes methods that touch the filesystem:
 
@@ -253,7 +292,7 @@ At the same time, `File` exposes methods that touch the filesystem:
 > [!NOTE]
 > Most of these methods return `boolean` instead of throwing `IOException`, which hides failure causes.
 
-### 11.4 What `File` Is NOT
+### 32.11.4 What `File` Is NOT
 
 - Not an open file descriptor
 - Not a stream
@@ -262,7 +301,7 @@ At the same time, `File` exposes methods that touch the filesystem:
 
 You must still use streams or readers/writers to access contents.
 
-### 11.5 Why This Was a Problem
+### 32.11.5 Why This Was a Problem
 
 The dual role of `File` caused several issues:
 
@@ -271,7 +310,7 @@ The dual role of `File` caused several issues:
 - Weak support for links and multiple filesystems
 - Platform-dependent behavior
 
-### 11.6 How NIO Fixed This
+### 32.11.6 How NIO Fixed This
 
 NIO.2 explicitly separates responsibilities:
 
@@ -284,14 +323,14 @@ NIO.2 explicitly separates responsibilities:
 > [!NOTE]
 > This separation is one of the most important conceptual improvements in Java I/O.
 
-### 11.7 Summary
+### 32.11.7 Summary
 
 - `File` represents a path AND performs filesystem operations
 - It never reads or writes file contents
 - It never opens a file
 - `Path` + `Files` is the modern replacement
 
-## 12. Path Is a Description, Not a Resource
+## 32.12 Path Is a Description, Not a Resource
 
 A `Path` is a pure abstraction representing a sequence of name elements in a filesystem.
 
@@ -313,11 +352,11 @@ This is fundamentally different from streams or channels.
 > [!NOTE]  
 > Creating a Path cannot throw `IOException` because no I/O happens.
 
-## 13. Absolute vs Relative Paths
+## 32.13 Absolute vs Relative Paths
 
 Understanding path resolution is essential.
 
-### 13.1 Absolute Paths
+### 32.13.1 Absolute Paths
 
 An absolute path fully identifies a location from the filesystem root.
 
@@ -347,7 +386,7 @@ is equivalent to:
 // in this example the symbols were redundant and unnecessary
 ```
 	
-### 13.2 Relative Paths
+### 32.13.2 Relative Paths
 
 A relative path is resolved against the JVM current working directory.
 
@@ -364,11 +403,11 @@ dirB/dirC/content.txt
 ```
 
 
-## 14. Filesystem Awareness and Separators
+## 32.14 Filesystem Awareness and Separators
 
 NIO introduces filesystem abstraction, which was mostly absent in java.io.
 
-### 14.1 FileSystem
+### 32.14.1 FileSystem
 
 A `FileSystem` represents a concrete filesystem implementation.
 
@@ -378,7 +417,7 @@ A `FileSystem` represents a concrete filesystem implementation.
 > [!NOTE] 
 > Paths are always associated with exactly ONE FileSystem.
 
-### 14.2 Path Separators
+### 32.14.2 Path Separators
 
 Separators differ across platforms, but `Path` abstracts them.
 
@@ -392,18 +431,18 @@ Separators differ across platforms, but `Path` abstracts them.
 > Hardcoding "/" or "" is discouraged; Path handles this automatically.
 
 
-## 15. What Files Actually Do (and What They Don’t)
+## 32.15 What Files Actually Do (and What They Don’t)
 
 The `Files` class performs real I/O operations.
 
-### 15.1 Files DO
+### 32.15.1 Files DO
 
 - Open files
 - Create and delete filesystem entries
 - Throw checked exceptions on failure
 - Respect filesystem permissions
 
-### 15.2 Files DO NOT
+### 32.15.2 Files DO NOT
 
 - Maintain open resources after method returns (except streams)
 - Store file contents internally
@@ -412,7 +451,7 @@ The `Files` class performs real I/O operations.
 > [!NOTE]
 > Methods returning streams (e.g. `Files.lines()`) DO keep the file open until the stream is closed.
 
-## 16. Error Handling Philosophy: Old vs NIO
+## 32.16 Error Handling Philosophy: Old vs NIO
 
 A major conceptual difference lies in error reporting.
 
@@ -425,7 +464,7 @@ A major conceptual difference lies in error reporting.
 |	preference	|	Discouraged	|	Preferred	|
 		
 
-## 17. Common Misconceptions
+## 32.17 Common Misconceptions
 
 - “Path represents a file” → false
 - “normalize checks existence” → false

@@ -501,5 +501,5 @@ This allows blocking code to scale efficiently without redesigning APIs.
 
 ## 31.11 Summary
 
-The Java Concurrency API provides a robust, scalable, and safer alternative to manual thread management. 
+The `Java Concurrency API` provides a robust, scalable, and safer alternative to manual thread management. 
 By abstracting execution, coordinating tasks, and offering thread-safe utilities, it enables developers to build concurrent systems that are both performant and maintainable.
