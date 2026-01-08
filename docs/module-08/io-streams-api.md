@@ -37,7 +37,7 @@
     - [35.3.10 Attributes: Reading, Writing, and Views](#35310-attributes-reading-writing-and-views)
     - [35.3.11 Symbolic Links and Link Following](#35311-symbolic-links-and-link-following)
     - [35.3.12 Summary: Why Files Is an Enhancement](#35312-summary-why-files-is-an-enhancement)
-  - [35.4 Serialization — Object Streams, Compatibility, and Traps](#354-serialization-object-streams-compatibility-and-traps)
+  - [35.4 Serialization — Object Streams, Compatibility, and Traps](#354-serialization--object-streams-compatibility-and-traps)
     - [35.4.1 What Serialization Does (and What It Does Not)](#3541-what-serialization-does-and-what-it-does-not)
     - [35.4.2 The Two Main Marker Interfaces](#3542-the-two-main-marker-interfaces)
     - [35.4.3 Basic Example: Writing and Reading an Object](#3543-basic-example-writing-and-reading-an-object)
