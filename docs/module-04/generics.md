@@ -1,6 +1,44 @@
-# Generics in Java
+# 18. Generics in Java
 
-Java Generics provide **compile-time type safety** by allowing `classes`, `interfaces`, and `methods` to work with **types as parameters**.  
+### Table of Contents
+
+- [18. Generics in Java](#18-generics-in-java)
+  - [18.1 Generic Type Basics](#181-generic-type-basics)
+  - [18.2 Why Generics Exist BeforeAfter](#182-why-generics-exist-beforeafter)
+  - [18.3 Generic Methods](#183-generic-methods)
+  - [18.4 Type Erasure](#184-type-erasure)
+    - [18.4.1 How Type Erasure Works](#1841-how-type-erasure-works)
+    - [18.4.2 Erasure of Unbounded Type Parameters](#1842-erasure-of-unbounded-type-parameters)
+    - [18.4.3 Erasure of Bounded Type Parameters](#1843-erasure-of-bounded-type-parameters)
+    - [18.4.4 Multiple Bounds The First Bound Determines Erasure](#1844-multiple-bounds-the-first-bound-determines-erasure)
+    - [18.4.5 Why Only the First Bound Becomes the Runtime Type](#1845-why-only-the-first-bound-becomes-the-runtime-type)
+    - [18.4.6 A More Complex Example](#1846-a-more-complex-example)
+    - [18.4.7 Overloading a Generic Method Why Some Overloads Are Impossible](#1847-overloading-a-generic-method-why-some-overloads-are-impossible)
+    - [18.4.8 Overloading a Generic Method Inherited from a Parent Class](#1848-overloading-a-generic-method-inherited-from-a-parent-class)
+    - [18.4.9 Returning Generic Types Rules and Restrictions](#1849-returning-generic-types-rules-and-restrictions)
+    - [18.4.10 Summary of Erasure Rules](#18410-summary-of-erasure-rules)
+  - [18.5 Bounds on Type Parameters](#185-bounds-on-type-parameters)
+    - [18.5.1 Upper Bounds extends](#1851-upper-bounds-extends)
+    - [18.5.2 Multiple Bounds](#1852-multiple-bounds)
+    - [18.5.3 Wildcards - - extends - super](#1853-wildcards----extends--super)
+      - [18.5.3.1 Unbounded Wildcard](#18531-unbounded-wildcard)
+      - [18.5.3.2 Upper-Bounded Wildcard extends](#18532-upper-bounded-wildcard-extends)
+      - [18.5.3.3 Lower-Bounded Wildcard super](#18533-lower-bounded-wildcard-super)
+  - [18.6 Generics and Inheritance](#186-generics-and-inheritance)
+  - [18.7 Type Inference Diamond Operator](#187-type-inference-diamond-operator)
+  - [18.8 Raw Types Legacy Compatibility](#188-raw-types-legacy-compatibility)
+  - [18.9 Generic Arrays Not Allowed](#189-generic-arrays-not-allowed)
+  - [18.10 Bounded Type Inference](#1810-bounded-type-inference)
+  - [18.11 Wildcards vs Type Parameters](#1811-wildcards-vs-type-parameters)
+  - [18.12 PECS Rule Producer Extends Consumer Super](#1812-pecs-rule-producer-extends-consumer-super)
+  - [18.13 Common Pitfalls](#1813-common-pitfalls)
+  - [18.14 Summary Table of Wildcards](#1814-summary-table-of-wildcards)
+  - [18.15 Summary Table of Concepts](#1815-summary-table-of-concepts)
+  - [18.16 Complete Example](#1816-complete-example)
+
+---
+
+`Java Generics` provide **compile-time type safety** by allowing `classes`, `interfaces`, and `methods` to work with **types as parameters**.  
 They prevent ClassCastException at runtime by moving type checks to **compile time**, and they increase code reusability by enabling type-agnostic algorithms.  
 
 Generics apply to:  
@@ -10,7 +48,7 @@ Generics apply to:
 - Constructors  
 
 
-## 1. Generic Type Basics
+## 18.1 Generic Type Basics
 
 A generic class or interface introduces one or more **type parameters**, enclosed in angle brackets.
 
@@ -36,7 +74,7 @@ class Pair<K, V> {
 ```
 
 
-## 2. Why Generics Exist: Before/After
+## 18.2 Why Generics Exist: Before/After
 
 ```java
 List list = new ArrayList();          // pre-generics
@@ -53,7 +91,7 @@ String x = list.get(0);               // type-safe, no cast
 ```
 
 
-## 3. Generic Methods
+## 18.3 Generic Methods
 
 A **generic method** introduces its own type parameter(s), independent of the class.
 
@@ -67,19 +105,19 @@ String t = Util.pick("A", "B");         // inference works
 ```
 
 
-## 4. Type Erasure
+## 18.4 Type Erasure
 
 Type erasure is the process by which the Java compiler removes all generic type information before generating bytecode. This ensures backward compatibility with pre-Java-5 JVMs.
 
 At compile time, generics are fully checked: type bounds, variance, method overloading with generics, etc. However, at runtime, all generic information disappears.
 
-### 4.1 How Type Erasure Works
+### 18.4.1 How Type Erasure Works
 
 - Replace all type variables (like `T`) with their erasure.
 - Insert casts where needed.
 - Remove all generic type arguments (e.g., `List<String>` → `List`).
 
-### 4.2 Erasure of Unbounded Type Parameters
+### 18.4.2 Erasure of Unbounded Type Parameters
 
 If a type variable has no bound:
 
@@ -99,7 +137,7 @@ class Box {
 }
 ```
 
-### 4.3 Erasure of Bounded Type Parameters
+### 18.4.3 Erasure of Bounded Type Parameters
 
 If the type parameter has bounds:
 
@@ -117,7 +155,7 @@ class TaskRunner {
 }
 ```
 
-### 4.4 Multiple Bounds: The First Bound Determines Erasure
+### 18.4.4 Multiple Bounds: The First Bound Determines Erasure
 
 Java allows multiple bounds:
 
@@ -159,7 +197,7 @@ What happens to the other bounds (Serializable, Cloneable)?
 - They do NOT appear in bytecode.
 - No additional interfaces are attached to the erased type.
 
-### 4.5 Why Only the First Bound Becomes the Runtime Type?
+### 18.4.5 Why Only the First Bound Becomes the Runtime Type?
 
 Because the JVM must operate using a single, concrete reference type for each variable or parameter.
 
@@ -169,7 +207,7 @@ Thus:
 
 > **Note:** Java selects the **first bound** as the runtime type, and uses the remaining bounds for **compile-time validation only**.
 
-### 4.6 A More Complex Example
+### 18.4.6 A More Complex Example
 
 ```java
 interface A { void a(); }
@@ -202,7 +240,7 @@ class Demo {
 > **Note:** The compiler inserts additional type checks or bridge methods as needed, but erasure always uses **only the first bound** (A in this case).
 
 
-### 4.7 Overloading a Generic Method — Why Some Overloads Are Impossible
+### 18.4.7 Overloading a Generic Method — Why Some Overloads Are Impossible
 
 When Java compiles generic code, it applies type erasure:
 generic type parameters such as T, String, or Integer are removed, and the compiler substitutes them with their erased type (usually Object or the first bound).
@@ -234,7 +272,7 @@ void testInput(List inputParam)
 
 Java does not allow two methods with identical signatures in the same class, so the overload is rejected at compile time.
 
-### 4.8 Overloading a Generic Method Inherited from a Parent Class
+### 18.4.8 Overloading a Generic Method Inherited from a Parent Class
 
 The same rule applies when a subclass tries to introduce a method that erases to the same signature as one in its superclass.
 
@@ -270,7 +308,7 @@ void testInput(ArrayList inputParam)
 
 No collision → legal overloading.
 
-### 4.9 Returning Generic Types — Rules and Restrictions
+### 18.4.9 Returning Generic Types — Rules and Restrictions
 
 When returning a value from a method, Java follows a strict rule:
 
@@ -336,7 +374,7 @@ class Demo {
 
 Java does not use the return type when distinguishing overloaded methods.
 
-### 4.10 Summary of Erasure Rules
+### 18.4.10 Summary of Erasure Rules
 
 - Unbounded T → erased to Object.
 - T extends X → erased to X.
@@ -347,9 +385,9 @@ Java does not use the return type when distinguishing overloaded methods.
 
 
 
-## 5. Bounds on Type Parameters (extends / super)
+## 18.5 Bounds on Type Parameters
 
-### 5.1 Upper Bounds: extends
+### 18.5.1 Upper Bounds: extends
 
 `<T extends Number>` means **T must be Number or a subclass**.
 
@@ -360,7 +398,7 @@ class Stats<T extends Number> {
 }
 ```
 
-### 5.2 Multiple Bounds
+### 18.5.2 Multiple Bounds
 
 Syntax: `T extends Class & Interface1 & Interface2 ...`  
 The class must come first.
@@ -369,9 +407,9 @@ The class must come first.
 class C<T extends Number & Comparable<T>> { }
 ```
 
-## 6. Wildcards: `?`, `? extends`, `? super`
+### 18.5.3 Wildcards: `?`, `? extends`, `? super`
 
-### 6.1 Unbounded Wildcard `?`
+#### 18.5.3.1 Unbounded Wildcard `?`
 
 Use when you want to accept a list of unknown type:
 
@@ -379,7 +417,7 @@ Use when you want to accept a list of unknown type:
 void printAll(List<?> list) { ... }
 ```
 
-### 6.2 Upper-Bounded Wildcard `? extends`
+#### 18.5.3.2 Upper-Bounded Wildcard `? extends`
 
 ```java
 List<? extends Number> nums = List.of(1,2,3);
@@ -390,7 +428,7 @@ Number n = nums.get(0);   // OK
 Rule: **You cannot add elements (except null) to ? extends**  
 because you don’t know the exact subtype.
 
-### 6.3 Lower-Bounded Wildcard `? super`
+#### 18.5.3.3 Lower-Bounded Wildcard `? super`
 
 ```java
 List<? super Integer> list = new ArrayList<Number>();
@@ -401,7 +439,7 @@ Object o = list.get(0); // returns Object (lowest common supertype)
 Rule: “Super accepts insertion, extends accepts extraction.”
 
 
-## 7. Generics and Inheritance
+## 18.6 Generics and Inheritance
 
 Important rule: **Generics do NOT participate in inheritance**.
 
@@ -417,7 +455,7 @@ List<? extends Object> ok = ls;   // works
 ```
 
 
-## 8. Type Inference (Diamond Operator)
+## 18.7 Type Inference (Diamond Operator)
 
 ```java
 Map<String, List<Integer>> map = new HashMap<>();
@@ -426,7 +464,7 @@ Map<String, List<Integer>> map = new HashMap<>();
 The compiler infers generic arguments from the assignment.
 
 
-## 9. Raw Types (Legacy Compatibility)
+## 18.8 Raw Types (Legacy Compatibility)
 
 A **raw type** disables generics, re-introducing unsafe behavior.
 
@@ -439,7 +477,7 @@ raw.add(10);   // allowed, but unsafe
 > **Note:** Raw types should be avoided.
 
 
-## 10. Generic Arrays (Not Allowed)
+## 18.9 Generic Arrays (Not Allowed)
 
 You cannot create arrays of parameterized types:
 
@@ -450,7 +488,7 @@ List<String>[] arr = new List<String>[10];   // ❌ compile error
 Because arrays enforce runtime type safety while generics rely on compile time only.
 
 
-## 11. Bounded Type Inference
+## 18.10 Bounded Type Inference
 
 ```java
 <T extends Number> T identity(T x) { return x; }
@@ -460,7 +498,7 @@ int v = identity(10);   // OK
 ```
 
 
-## 12. Wildcards vs. Type Parameters
+## 18.11 Wildcards vs. Type Parameters
 
 Use **wildcards** when you need flexibility in parameters.  
 Use **type parameters** when the method must return or maintain type information.
@@ -482,7 +520,7 @@ Better:
 ```
 
 
-## 13. PECS Rule (Producer Extends, Consumer Super)
+## 18.12 PECS Rule (Producer Extends, Consumer Super)
 
 Use **? extends** when the parameter **produces** values.  
 Use **? super** when the parameter **consumes** values.
@@ -496,7 +534,7 @@ listSuper.add(10);
 ```
 
 
-## 14. Common Pitfalls
+## 18.13 Common Pitfalls
 
 - Sorting lists with wildcards: List<? extends Number> cannot accept insertions.
 - Misunderstanding that List<Object> is NOT a supertype of List<String>.
@@ -505,7 +543,7 @@ listSuper.add(10);
 - Trying to overload methods using only different type parameters.
 
 
-## 15. Summary Table of Wildcards
+## 18.14 Summary Table of Wildcards
 
 ```text
 ?              → unknown type (read-only except Object methods)
@@ -514,7 +552,7 @@ listSuper.add(10);
 ```
 
 
-## 16. Summary Table of Concepts
+## 18.15 Summary Table of Concepts
 
 ```text
 Generics = compile-time type safety
@@ -526,7 +564,7 @@ Bridge Methods = maintain polymorphism
 ```
 
 
-## 17. Complete Example
+## 18.16 Complete Example
 
 ```java
 class Repository<T extends Number> {
