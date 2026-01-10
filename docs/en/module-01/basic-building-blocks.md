@@ -1,6 +1,13 @@
-# 2. Basic Language Java building Blocks
+# 2. Basic Language Java Building Blocks
+
+This chapter introduces the essential structural elements of a Java program:
+classes, methods, comments, access modifiers, packages, the `main` method, and the basic command-line tools (`javac` and `java`).
+
+These are the minimum concepts needed to write, compile, organize, and run Java code in the JDK — without any IDE.
 
 ### Table of Contents
+
+
 
 - [2. Basic Language Java Building Blocks](#2-basic-language-java-building-blocks)
   - [2.1 Class Definition](#21-class-definition)
@@ -33,12 +40,9 @@
 
 
 A **Java class** is the fundamental building block of a Java program.
-A class represents a type in Java. 
-This type can be user-defined (created by the programmer) or predefined (coming from the Java standard library or external libraries). 
-As described in programming language theory [see: Syntax Building Blocks](syntax-building-blocks.md), a type specifies the kind of data and the operations (methods) that it supports.
+A class represents a **type** in Java: it defines structure (fields) and behavior (methods).
 
-A class serves as the blueprint — the definition of the new type — while objects are concrete instances (implementations) of this type, created in memory at runtime.
-
+A class is a **blueprint**, while objects are **concrete instances** created at runtime.
 
 A Java class is composed of two main elements, known as its **members**:
 
@@ -103,17 +107,17 @@ public class Person {
 
 ## 2.2 Comments
 
-Comments are not executable code: they explains the code but are ignored by the compiler.
+Comments are not executable code: they **explain** the code but are ignored by the compiler.
 
 In Java there are 3 types of comments:
+- Single-line (`//`)
+- Multi-line (`/* ... */`)
+- Javadoc (`/** ... */`)
 
-- **Single-line** comment;
-- **Multiline** comment;
-- **Javadoc** comment;
 
 A **single-line comment** starts with 2 slashes: all the text after that, on the same line, is ignored by the compiler.
 
-- Exapmle:
+- Example:
 
 ```java
 
@@ -124,7 +128,7 @@ A **single-line comment** starts with 2 slashes: all the text after that, on the
 
 A **multiline comment** includes anything between the symbols /* and */.
 
-- Exapmle:
+- Example:
 
 ```java
 
@@ -173,7 +177,7 @@ is fine, but
 
 ```
 
-will cause a compilation error because, while the first two symbols are part of the comment, the last symbol don't. The extra symbol */ is not valid syntax then and the compiler will complain. 
+will cause a compilation error because, while the first two symbols are part of the comment, the last symbol don't. The extra symbol `*/` is not valid syntax then and the compiler will complain. 
 
 ---
 
@@ -190,6 +194,10 @@ In Java, an **access modifier** is a keyword that specifies the visibility (or a
 | no modifier (default) | Keyword / access modifier | Visible only within the same package	| Yes |
 | protected |	Keyword / access modifier |	Visible within the same package and by subclasses (even in other packages) | Yes |
 | private	| Keyword / access modifier	| Visible only within the same class | Yes |
+
+> [!TIP]
+> **private > default > protected > public**  
+> Think “visibility grows outward”.
 
 ---
 
@@ -238,6 +246,28 @@ Classes in the same package:
 
 - Can access each other’s package-private members (i.e., members without an access modifier).
 - Share the same namespace, so you don’t need to import them to use them.  
+
+Example: Two files in the same package
+
+```java
+// File: src/com/example/tools/Tool.java
+package com.example.tools;
+
+public class Tool {
+    static void hello() { System.out.println("Hi!"); }
+}
+```
+
+```java
+// File: src/com/example/tools/Runner.java
+package com.example.tools;
+
+public class Runner {
+    public static void main(String[] args) {
+        Tool.hello();    // OK: same package, no import needed
+    }
+}
+```
 
 ### 2.4.4 Importing from a Package
 
@@ -316,6 +346,11 @@ public class Calculator {
 
 Wildcard static imports behave exactly like normal wildcard imports:  
 they bring **all static members** of the class into scope.
+
+> [!REMEMBER]
+> You can **always** call a static member with the class name:
+> `Math.sqrt(16)` always works — even if imported statically.
+
 
 
 #### 2.4.5.1 Precedence Rules
@@ -439,13 +474,19 @@ public class MainSecondExample {
 
 > [!IMPORTANT]
 > Modifiers `public`, `static` (mandatory) and `final` (if present) can be swapped in order;  `public` and `static` can't be omitted.
+>
+> Java treats `String[] args` and `String... args` the same.  
+> Both compile and run correctly as entry points.
+
 
 ---
 
 ## 2.6 Compiling and running your code
 
 
-This chapter shows **correct, working** `javac` and `java` command lines for common situations in Java 21: single files, multiple files, packages, separate output directories, and classpath/module-path usage. Follow the directory layouts exactly.
+This chapter shows **correct, working** `javac` and `java` command lines for common situations in Java 21: single files, multiple files, packages, separate output directories, and classpath/module-path usage. 
+
+Follow the directory layouts exactly.
 
 
 > check your tools
@@ -454,6 +495,13 @@ This chapter shows **correct, working** `javac` and `java` command lines for com
 javac -version   # should print: javac 21.x
 java  -version   # should print: java version "21.0.7" ... (the output could be different depending on the implementation of the jvm you installed)
 ```
+
+> [!WARNING]
+> When running a class inside a package, **java requires the fully qualified name**, NEVER the path:
+>
+> `java com.example.app.Main` ✔
+> 
+> `java src/com/example/app/Main` ❌
 
 
 ### 2.6.1 Compiling one file, default package (single directory)
@@ -480,7 +528,7 @@ javac Hello.java
 
 This command will create, in the same directory, a file with the same name of your ".java" file but with ".class" filename extension ; this is the bytecode file which will be interpreted and compiled by the jvm.
 
-Once you have the .class file, in this case Hello.class, you ca run the program with:
+Once you have the .class file, in this case Hello.class, you can run the program with:
 
 **Run**
 ```bash
@@ -651,10 +699,10 @@ public class Main {
 }
 ```
 
-To pass parameter, just type (for example):
+To pass parameters, just type (for example):
 
 ```bash
-java Main.java Hello World  #space are used to separate the two arguments
+java Main.java Hello World  #spaces are used to separate the two arguments
 ```
 
 If you want to pass an argument containing spaces, just use quotes:
@@ -666,6 +714,9 @@ java Main.java Hello "World Mario" #space are used to separate the two arguments
 > If you declare to use (in this case print) the first two element of the parameter's array (as in our previous example) but, in fact, you pass less arguments, the jvm will notify you of a problem through a `java.lang.ArrayIndexOutOfBoundsException`.
 
 > If, on the other hand, you pass more arguments than the method expects, it will print out just the two (in this case) expected. 
+
+> `args.length` tells you how many arguments were provided.
+
 
 
 
