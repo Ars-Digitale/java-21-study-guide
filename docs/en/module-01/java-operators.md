@@ -39,11 +39,14 @@
 In Java, **operators** are special symbols that perform operations on variables and values.  
 They are the building blocks of expressions and allow developers to manipulate data, compare values, perform arithmetic, and control logic flow.
 
-An **expression** is a combination of operators and operands that produces a result.  
+An **expression** is a combination of operators and operands that produces a result. 
+
+
 For example:
 ```java
 int result = (a + b) * c;
 ```
+
 Here, `+` and `*` are operators, and `a`, `b`, and `c` are operands.
 
 ---
@@ -62,7 +65,8 @@ Java defines three types of operators, grouped by the number of operands they us
 
 ## 5.3 Categories of Operators
 
-Operators can also be gouped, by their purpose, in categories:
+Operators can also be grouped, by their purpose, into categories:
+
 
 | Category | Description | Examples |
 |-----------|--------------|-----------|
@@ -119,7 +123,8 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 | 14 | **Conditional OR** | <code>&#124;&#124;</code> | `a`<code>&#124;&#124;</code>`b` | Left → Right | boolean |
 | 15 | **Ternary (Conditional)** | `? :` | `a > b ? x : y` | Right → Left | All types |
 | 16 | **Assignment** | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 5` | Right → Left | All assignable types |
-| 17 | **Arrow operator** | `->` | `multiple contexts` | Right → Left | Multiple contexts |
+| 17 | **Arrow operator** | `->` | `(x, y) -> x + y` | Right → Left | Lambda expressions, switch rules |
+
 
 ---
 
@@ -149,23 +154,24 @@ They are used for operations like incrementing/decrementing, negating a value, i
 
 ### 5.6.2 Examples
 
+
 ```java
 int x = 5;
-System.out.println(++x);  // 6  (prefix: increment (or decrement) first the value by one and then returns the NEW value)
-System.out.println(x++);  // 6  (postfix: increment the value by one and then returns the ORIGINAL value)
+System.out.println(++x);  // 6  (prefix: increments x to 6, then returns 6)
+System.out.println(x++);  // 6  (postfix: returns 6, then increments x to 7)
 System.out.println(x);    // 7
 
 boolean flag = false;
 System.out.println(!flag);  // true
 
 int a = 5;                  // binary: 0000 0101
-System.out.println(~a);     // -6 → binary: 1111 1010
+System.out.println(~a);     // -6 → binary: 1111 1010 (two's complement)
 ```
 
 > [!NOTE]
-> - Prefix (`++x`) prefix: increment (or decrement) first the value by one and then returns the NEW value.  
-> - Postfix (`x++`) postfix: increment the value by one and then returns the ORIGINAL value.  
-> - The `!` and `~` operators can only be applied to `boolean` and `numeric` types respectively.
+> - Prefix (++x / --x): updates the value first, then returns the new value.
+> - Postfix (x++ / x--): returns the current value first, then updates it.
+> - The ! operator applies to boolean values; ~ applies to integral numeric types.
 
 ---
 
@@ -186,17 +192,13 @@ They perform arithmetic, relational, logical, bitwise, and assignment operations
 | **Assignment** | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 3` | Modify and assign. |
 | **String Concatenation** | `+` | `"Hello " + name` | Joins strings together. |
 
-> [!NOTE]
-> **Logical operators**: 
-> - **AND** ( x **&** b ) true if both operands are true; 
-> - **INCLUSIVE OR** ( x **|** y ) only false if both operands are false; 
-> - **EXCLUSIVE OR** ( x **^** y ) true if the operands are different.  
+> [!IMPORTANT]
+> **Logical operators** (`&`, `|`, `^`) *always evaluate both sides*.
+>  
+> **Conditional operators** (`&&`, `||`) are **short-circuiting**:
+> - `a && b` → `b` evaluated only if `a` is true
+> - `a || b` → `b` evaluated only if `a` is false
 
-
-> [!NOTE]
-> **Conditional (short-circuit) operators** applies to `&&` and `||`:  
-> - `a && b` → `b` is evaluated *only if* `a` is `true`.  
-> - `a || b` → `b` is evaluated *only if* `a` is `false`.
 
 **Some Examples**
 
@@ -303,6 +305,10 @@ if (flag == true) {
 }
 ```
 
+> [!WARNING]
+> If you see `if (x = something)`, stop: it’s **assignment**, not comparison.
+
+
 ### 5.7.4 Compound Assignment Operators
 
 **Compound assignment operators** in Java combine an arithmetic or bitwise operation with assignment in a single step.  
@@ -340,10 +346,21 @@ byte b = 10;
 b += 1;         // ✅ works: implicit cast back to byte
 ```
 
+> [!NOTE]
+> Compound assignments **perform an implicit cast** to the variable type on the left.
+> That’s why `b += 1` compiles even though `b = b + 1` does not.
+
+
 ### 5.7.5 Equality Operators (`==` and `!=`)
 
 The **equality operators** in Java `==` (equal to) and `!=` (not equal to) are used to compare two operands for equality.  
 However, their behavior differs **depending on whether they are applied to primitive types or reference types (objects)**.
+
+> [!SUMMARY]
+> - `==` compares **values** for primitives  
+> - `==` compares **references** for objects  
+> - `.equals()` compares **object content** (if implemented)
+
 
 #### 5.7.5.1 Equality with Primitive Types
 
@@ -433,6 +450,10 @@ If expr is null, **expr instanceof Type** is always **false**.
 Object n = null;
 System.out.println(n instanceof Object);  // false
 ```
+
+> [!REMEMBER]
+> `instanceof` always returns `false` when the left operand is `null`.
+
 
 #### 5.7.6.1 Compile-Time Check vs Runtime Check
 
@@ -556,6 +577,15 @@ System.out.println(list instanceof java.util.List<?>); // ✅ true
 
 The **ternary operator** (`? :`) is the only operator in Java that takes **three operands**.  
 It acts as a concise form of an `if-else` statement.
+
+> [!TIP]
+> The ternary operator **must** produce a value of a *compatible type*.
+> If the two branches produce unrelated types, compilation fails.
+> 
+> ```java
+> String s = true ? "ok" : 5; // ❌ compile error: incompatible types
+> ```
+
 
 ### 5.8.1 Syntax
 ```java

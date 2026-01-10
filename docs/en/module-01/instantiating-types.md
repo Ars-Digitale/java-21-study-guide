@@ -69,6 +69,11 @@ It is also common to rely on literals or factory methods for object creation.
 	String name = new String("Alice"); // creates a new String object explicitly
 	Person p = new Person();           // creates a new Person object using its constructor
 ``` 
+
+> [!IMPORTANT]
+> String literals **do not require `new`** and are stored in the **String pool**.
+> Using `new String("x")` always creates a new object on the heap.
+
   
 ### 6.1.1 Handling Primitive Types
 
@@ -108,7 +113,7 @@ For primitives, the variable holds the value itself, while for reference types t
   
   int a = 1, b = 2, c = 3;  	// Multiple declarations & assignements
   
-  char b1, b2, b3 = 'C'			// Mixed declarations (2) with one assignement
+  char b1, b2, b3 = 'C';		// Mixed declarations (2 declarations + 1 assignment)
   
   double d1, double d2;         // ERROR - NOT LEGAL
   
@@ -333,6 +338,14 @@ Example ex = new Example();
 > - They are executed in the order of declaration in the class.
 > - They can be combined with constructors to avoid code duplication.
 
+> [!REMEMBER]
+> **Order of initialization when creating an object**
+> 1. Static fields
+> 2. Static initializer blocks
+> 3. Instance fields
+> 4. Instance initializer blocks
+> 5. Constructor body
+
 
 ## 6.2 Default Variable Initialization
 
@@ -455,6 +468,15 @@ Because:
 
 Thus, Java forces developers to explicitly initialize `final` fields.
 
+> [!TIP]
+> `final` means **assigned once**, not **immutable object**.
+> A final reference can still point to a mutable object.
+
+```java
+final List<String> list = new ArrayList<>();
+list.add("ok");      // allowed
+list = new ArrayList<>(); // ❌ cannot reassign reference
+```
 
 ### 6.2.3 Local variables
 
@@ -505,6 +527,11 @@ public int localMethod {
 }
 ```
 
+> [!WARNING]
+> Local variables **never** get default values.
+> Instance & static fields **always** do.
+
+
 ## 6.3 Wrapper Types
 
 In Java, **wrapper types** are object representations of the eight primitive types.  
@@ -540,8 +567,8 @@ int n = i;            // unboxing: Integer → int
 Integer int1 = Integer.valueOf(11);
 long long1 = int1;  // Unboxing --> implicit cast OK
 
-Long long2 = 11     // WARNING: Does not compile!!
-
+Long long2 = 11;   // ❌ Does not compile. 
+                   // 11 is an int literal → requires autoboxing + widening → illegal
 
 Character char1 = null;
 char char2 = char1;  // WARNING: NullPointerException
@@ -549,6 +576,10 @@ char char2 = char1;  // WARNING: NullPointerException
 Integer	 arr1 = {11.5, 13.6}  // WARNING: Does not compile!!
 Double[] arr2 = {11, 22};     // WARNING: Does not compile!!
 ```
+
+> [!REMEMBER]
+> Java **never** performs autoboxing + widening/narrowing in one step.
+
 
 > [!WARNING]
 > - **AUTOBOXING** and **Implicit cast** are not allowed in the same statement: you can't do both at the same time. (see example above)
@@ -594,7 +625,8 @@ Integer.valueOf("G", 16);	// NumberFormatException
 
 ### 6.3.4  Helper methods
 
-All the numeric wrapper classes extend the Number class and, for that, they inherit some helper methods such as: byteValue(), shortValue(), intValue(), longValue(), floatValue(), DoubleValue().
+All the numeric wrapper classes extend the Number class and, for that, they inherit some helper methods such as: byteValue(), shortValue(), intValue(), longValue(), floatValue(), doubleValue().
+
 The Boolean and Character wrapper classes include: booleanValue() and charValue().
 
 - Example:
@@ -724,6 +756,24 @@ String b = "Java ";
 b += "string literal";
 
 System.out.println(a == b);  // false
+```
+
+> [!WARNING]
+> Any String created at **runtime** does *not* go into the pool automatically.
+> Use `intern()` if you want pooling.
+
+> [!TRICK]
+> `"Hello" == "Hel" + "lo"` → true (compile-time constant)
+> `"Hello" == getHello()` → false (runtime concatenation)
+
+```java
+String x = "Hello";
+String y = "Hel" + "lo";   // compile-time → same literal
+String z = "Hel";
+z += "lo";                 // runtime → new String
+
+System.out.println(x == y); // true
+System.out.println(x == z); // false
 ```
 
 #### 6.4.3.1 The intern method
