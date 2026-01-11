@@ -1,213 +1,283 @@
-# Interacting with the User (Standard I/O Streams)
+# 8. Looping Constructs in Java
 
-Java programs often need to interact with the user:
-printing information, reading input, and formatting output.
-This interaction is implemented using standard I/O streams, which are normal Java streams connected to the operating system.
+## Table of Contents
 
-This chapter explains how Java interacts with the console and standard input/output,
-starting from the most basic concepts and moving to higher-level APIs.
+- [8. Looping Constructs in Java](#8-looping-constructs-in-java)
+  - [8.1 The while Loop](#81-the-while-loop)
+  - [8.2 The do-while Loop](#82-the-do-while-loop)
+  - [8.3 The for Loop](#83-the-for-loop)
+  - [8.4 The Enhanced for-each Loop](#84-the-enhanced-foreach-loop)
+  - [8.5 Nested Loops](#85-nested-loops)
+  - [8.6 Infinite Loops](#86-infinite-loops)
+  - [8.7 break and continue](#87-break-and-continue)
+  - [8.8 Labeled Loops](#88-labeled-loops)
+  - [8.9 Loop Variable Scope](#89-loop-variable-scope)
+  - [8.10 Unreachable Code After break continue and return](#810-unreachable-code-after-break-continue-and-return)
+    - [8.10.1 Unreachable Code After break](#8101-unreachable-code-after-break)
+    - [8.10.2 Unreachable Code After continue](#8102-unreachable-code-after-continue)
+    - [8.10.3 Unreachable Code After return](#8103-unreachable-code-after-return)
 
-## 1. The Standard I/O Streams
+---
 
-Every Java program starts with three predefined streams provided by the JVM.
-They are connected to the process environment (usually a terminal or console).
+Java provides several **looping constructs** that allow repeated execution of a block of code as long as a condition holds. 
+Loops are essential for iteration, traversal of data structures, repeated computations, and implementing algorithms.
 
-| Stream Field Type Purpose |
-| --- |
-| Standard output System.out PrintStream Normal output |
-| Standard error System.err PrintStream Error output |
-| Standard input System.in InputStream User input |
+## 8.1 The `while` Loop
 
-> [!NOTE]
-> These streams are created by the JVM, not by your program.
-> They exist for the entire lifetime of the process.
+The `while` loop evaluates its **boolean condition before each iteration**.  
+If the condition is `false` from the beginning, the body is never executed.
 
-## 2. PrintStream: What It Is and Why It Exists
+**Syntax**
+```java
+while (condition) {
+    // loop body
+}
+```
 
-PrintStream is a byte-oriented output stream designed for human-readable output.
-It wraps another OutputStream and adds convenient printing methods.
+- The condition must evaluate to a boolean.
+- The loop may execute zero or more times.
+- Common pitfalls include forgetting to update the loop variable, causing an infinite loop.
 
-System.out and System.err are both instances of PrintStream.
+Example:
+```java
+int i = 0;
+while (i < 3) {
+    System.out.println(i);
+    i++;
+}
+```
 
-### 2.1 Key Characteristics of PrintStream
+Output:
+```bash
+0
+1
+2
+```
 
-- Provides print() and println() methods
-- Converts values to text automatically
-- Does not throw IOException on write errors
-- Optionally supports auto-flushing
+## 8.2 The `do-while` Loop
 
-> [!NOTE]
-> Unlike most streams, PrintStream suppresses IOExceptions.
-> Errors must be checked using checkError().
+The `do-while` loop evaluates its condition *after* executing the body,
+ensuring the body runs at least once.
 
-### 2.2 Basic Usage of PrintStream
+**Syntax**
+```java
+do {
+    // loop body
+} while (condition);
+```
+
+> [!TIP]
+> `do-while` requires a semicolon after the closing parenthesis.
+
+Example:
+```java
+int x = 5;
+do {
+    System.out.println(x);
+    x--;
+} while (x > 5); // body runs once even though condition is false
+```
+
+Output:
+```bash
+5
+```
+
+## 8.3 The `for` Loop
+
+The traditional `for` loop is best suited for loops with a counter variable.
+It consists of three parts: initialization, condition, update.
+
+**Syntax**
+```java
+for (initialization; condition; update) {
+    // loop body
+}
+```
+
+- Initialization runs once before the loop starts.
+- Condition is evaluated before each iteration.
+- Update runs after each iteration.
+- Initialization and update may contain multiple statements separated by commas.
+- Variables in initialization must all be of the same type.
+- Any component may be omitted, but semicolons remain.
+
+Example:
+```java
+for (int i = 0; i < 3; i++) {
+    System.out.println(i);
+}
+```
+
+Omitting parts:
+```java
+int j = 0;
+for (; j < 3;) {  // valid
+    j++;
+}
+```
+
+Multiple statements:
+```java
+int x = 0;
+for (long i = 0, c = 3; x < 3 && i < 12; x++, i++) {
+    System.out.println(i);
+}
+```
+
+## 8.4 The Enhanced `for-each` Loop
+
+The enhanced `for` simplifies iteration over arrays and collections.
+
+**Syntax**
+```java
+for (ElementType var : arrayOrCollection) {
+    // loop body
+}
+```
+
+- Loop variable is read-only relative to the underlying collection.
+- Works with any `Iterable` or array.
+- Cannot remove elements without an iterator.
+
+Example:
+```java
+String[] names = {"A", "B", "C"};
+for (String n : names) {
+    System.out.println(n);
+}
+```
+
+Output:
+```bash
+A
+B
+C
+```
+
+## 8.5 Nested Loops
+
+Loops may be nested; each maintains its own variables and conditions.
 
 ```java
-System.out.println("Hello");
-System.out.print("Value: ");
-System.out.println(42);
+for (int i = 1; i <= 2; i++) {
+    for (int j = 1; j <= 3; j++) {
+        System.out.println(i + "," + j);
+    }
+}
 ```
 
-println() appends the platform-specific line separator automatically.
+Output:
+```bash
+1,1
+1,2
+1,3
+2,1
+2,2
+2,3
+```
 
-### 2.3 Formatting Output with PrintStream
+## 8.6 Infinite Loops
 
-PrintStream supports formatted output using printf() and format(),
-which are based on the same syntax as String.format().
+A loop is infinite when its condition always evaluates to `true` or is omitted.
 
 ```java
-System.out.printf("Name: %s, Age: %d%n", "Alice", 30);
+while (true) { ... }
 ```
-
-| Specifier Meaning |
-| --- |
-| %s String |
-| %d Integer |
-| %f Floating-point |
-| %n Platform-independent newline |
-
-> [!NOTE]
-> printf() does not automatically add a newline unless you specify %n.
-
-## 3. Reading Input as an I/O Stream
-
-Standard input (System.in) is an InputStream connected to user input.
-It provides raw bytes and must be adapted for practical use.
-
-### 3.1 Low-Level Reading from System.in
-
-At the lowest level, you can read raw bytes from System.in.
-This is rarely convenient for interactive programs.
 
 ```java
-int b = System.in.read();
+for (;;) { ... }
 ```
 
-> [!NOTE]
-> System.in.read() blocks until input is available.
+> [!TIP]
+> Infinite loops must contain `break`, `return`, or external control.
 
-### 3.2 Using InputStreamReader and BufferedReader
+## 8.7 `break` and `continue`
 
-To read text input, System.in is typically wrapped into a Reader and buffered.
+**break**
+Exits the innermost loop immediately.
+```java
+for (int i = 0; i < 5; i++) {
+    if (i == 2) break;
+    System.out.println(i);
+}
+```
+
+**continue**
+Skips the rest of the loop body and continues to next iteration.
+```java
+for (int i = 0; i < 5; i++) {
+    if (i % 2 == 0) continue;
+    System.out.println(i);
+}
+```
+
+> break and continue apply to the nearest loop unless labels are used.
+
+## 8.8 Labeled Loops
+
+A label (identifier + colon) may be applied to a loop to allow break/continue to affect outer loops.
 
 ```java
-BufferedReader reader =
-new BufferedReader(new InputStreamReader(System.in));
-
-String line = reader.readLine();
+labelName:
+for (...) {
+    for (...) {
+        break labelName;
+    }
+}
 ```
 
-This converts bytes → characters and allows line-based input.
+Example:
+```java
+outer:
+for (int i = 1; i <= 3; i++) {
+    for (int j = 1; j <= 3; j++) {
+        if (j == 2) break outer;
+        System.out.println(i + "," + j);
+    }
+}
+```
 
-## 4. The Scanner Class (Convenient but Subtle)
+## 8.9 Loop Variable Scope
 
-Scanner is a high-level utility for parsing text input.
-It is often used for console interaction, especially in small programs.
+- Variables declared in the loop header are scoped to that loop.
+- Variables declared inside the body exist only inside that block.
 
 ```java
-Scanner sc = new Scanner(System.in);
-int value = sc.nextInt();
-String text = sc.nextLine();
+for (int i = 0; i < 3; i++) {
+    int x = i * 2;
+}
+// i and x are not accessible here
 ```
 
-> [!NOTE]
-> Scanner performs tokenization and parsing, not simple reading.
-> This makes it convenient but slower and sometimes surprising.
+## 8.10 Unreachable code after `break`, `continue`, and `return`
 
-### 4.1 Common Scanner Pitfalls
+Any statement placed **after** `break`, `continue`, or `return` in the same block is considered unreachable and will not compile.
 
-- Mixing nextInt() and nextLine() can skip input
-- Parsing errors throw InputMismatchException
-- Scanner is relatively slow for large input
-
-## 5. Closing System Streams
-
-System streams are special and must be handled carefully.
-
-| Stream Close explicitly? |
-| --- |
-| System.out No |
-| System.err No |
-| System.in Usually no |
-
-Closing System.out or System.err closes the underlying OS stream and affects the entire JVM.
-
-> [!NOTE]
-> In almost all applications, you should NOT close System.out or System.err.
-
-## 6. Acquiring Input with Console
-
-The Console class provides a higher-level, safer way to interact with the user.
-It is designed specifically for interactive console programs.
-
+### 8.10.1 Unreachable Code After `break`
 ```java
-Console console = System.console();
+for (int i = 0; i < 3; i++) {
+    break;
+    System.out.println("Unreachable"); // ❌ Compile-time error
+}
 ```
 
-> [!NOTE]
-> System.console() may return null when no console is available
-> (e.g. IDEs, redirected input).
-
-### 6.1 Reading Input from Console
-
+### 8.10.2 Unreachable Code After `continue`
 ```java
-String name = console.readLine("Name: ");
+for (int i = 0; i < 3; i++) {
+    continue;
+    System.out.println("Unreachable"); // ❌ Compile-time error
+}
 ```
 
-readLine() prints a prompt and reads a full line of input.
+> continue jumps to the next iteration, so following code is never executed.
 
-### 6.2 Reading Passwords Securely
-
-Console allows reading passwords without echoing characters.
-
+### 8.10.3 Unreachable Code After `return`
 ```java
-char[] password = console.readPassword("Password: ");
+int test() {
+    return 5;
+    System.out.println("Unreachable"); // ❌ Compile-time error
+}
 ```
 
-> [!NOTE]
-> Passwords are returned as char[] so they can be cleared from memory.
-
-## 7. Formatting Console Output
-
-Console also supports formatted output, similar to PrintStream.
-
-```java
-console.printf("Welcome %s%n", name);
-```
-
-This uses the same format specifiers as printf().
-
-## 8. Comparing Console, Scanner, and BufferedReader
-
-| API Use case Strengths Limitations |
-| --- |
-| BufferedReader Simple text input Fast, predictable Manual parsing |
-| Scanner Token-based input Convenient, expressive Slow, subtle behavior |
-| Console Interactive apps Passwords, formatting May be unavailable |
-
-## 9. Redirection and Standard Streams
-
-Standard streams can be redirected by the operating system.
-Java code does not need to change.
-
-```text
-java App < input.txt > output.txt
-```
-
-From the program’s perspective, System.in and System.out still behave like normal streams.
-
-## 10. Certification Traps and Best Practices
-
-- PrintStream suppresses IOExceptions
-- System.console() can return null
-- Do not close System.out or System.err
-- Scanner mixes parsing and reading
-- Console is preferred for passwords
-
-## 11. Final Summary
-
-- System.out and System.err are PrintStreams for output
-- System.in is a byte stream that must be adapted for text
-- BufferedReader and Scanner are common input strategies
-- Console provides safe interactive input and output
-- Standard streams integrate naturally with OS redirection
+> return exits the method immediately; no statements can follow.
