@@ -19,20 +19,18 @@
     - [11.2.3 Creating BigInteger](#1123-creating-biginteger)
     - [11.2.4 Operations No Operators](#1124-operations-no-operators)
 
-
 ---
 
 ## 11.1 Math APIs
 
-The `java.lang.Math` class provides a set of static methods useful for numerical operations. 
-These methods work with primitive numeric types. 
+The `java.lang.Math` class provides a set of static methods useful for numerical operations.  
+These methods work with primitive numeric types.  
 Below is a summary of the most frequently used ones, together with their overloaded forms.
 
+### 11.1.1 Maximum and Minimum Between Two Values
 
-### 11.1.1 `Maximum` and `Minimum` between two values
-
-Math.max() and Math.min() compare the two provided values and return the `Max` or `Min` between them;
-There are 4 overloaded versions for each method:
+`Math.max()` and `Math.min()` compare the two provided values and return the maximum or minimum between them.  
+There are four overloaded versions for each method:
 
 ```java
 public static int min(int x, int y);
@@ -47,42 +45,42 @@ public static double max(double x, double y);
 ```
 
 Example:
+
 ```java
 System.out.println(Math.max(10.50, 7.5));   // 10.5
-System.out.println(Math.min(10, -20));		// -20
+System.out.println(Math.min(10, -20));      // -20
 ```
 
 ### 11.1.2 `Math.round()`
 
-`round()` returns the **nearest integer** to its argument, following standard rounding rules  
-(0.5 and above → up, below 0.5 → down).
+`round()` returns the nearest integer to its argument, following standard rounding rules:  
+values with fractional part 0.5 and above are rounded up; below 0.5 are rounded down (toward the nearest integer).
 
-Overloads:
+**Overloads**
 - `long round(double value)`
 - `int round(float value)`
 
-
 Examples:
+
 ```java
 Math.round(3.2);    // 3   (returns long)
 Math.round(3.6);    // 4
 Math.round(-3.5f);  // -3  (float version returns int)
 ```
 
-Note:  
-- The **float** version returns an `int`  
-- The **double** version returns a `long`
-
-(e.g., `round(float)` returns an `int`, while `round(double)` returns a `long`)
+> [!NOTE]
+> - The float version returns an `int`.  
+> - The double version returns a `long`.
 
 ### 11.1.3 `Math.ceil()` (Ceiling)
 
-Returns the **smallest double** value that is **≥ argument**.
+`ceil()` returns the smallest `double` value that is greater than or equal to the argument.
 
-Overloads:
+**Overloads**
 - `double ceil(double value)`
 
 Examples:
+
 ```java
 Math.ceil(3.1);   // 4.0
 Math.ceil(-3.1);  // -3.0
@@ -90,12 +88,13 @@ Math.ceil(-3.1);  // -3.0
 
 ### 11.1.4 `Math.floor()` (Floor)
 
-Returns the **largest double** value that is **≤ argument**.
+`floor()` returns the largest `double` value that is less than or equal to the argument.
 
-Overloads:
+**Overloads**
 - `double floor(double value)`
 
 Examples:
+
 ```java
 Math.floor(3.9);   // 3.0
 Math.floor(-3.1);  // -4.0
@@ -103,27 +102,28 @@ Math.floor(-3.1);  // -4.0
 
 ### 11.1.5 `Math.pow()`
 
-Raises a value to a power.
+`pow()` raises a value to a power.
 
-Overloads:
+**Overloads**
 - `double pow(double base, double exponent)`
 
 Examples:
+
 ```java
 Math.pow(2, 3);      // 8.0
 Math.pow(9, 0.5);    // 3.0  (square root)
 Math.pow(10, -1);    // 0.1
 ```
 
-
 ### 11.1.6 `Math.random()`
 
-Returns a **double in the range [0.0, 1.0)**.
+`random()` returns a `double` in the range `[0.0, 1.0)` (0.0 inclusive, 1.0 exclusive).
 
-Overloads:
+**Overloads**
 - `double random()`
 
 Examples:
+
 ```java
 double r = Math.random();   // 0.0 <= r < 1.0
 
@@ -132,124 +132,133 @@ int x = (int)(Math.random() * 10);
 ```
 
 ### 11.1.7 `Math.abs()`
-Absolute value.
 
-Overloads:
-- `int abs(int)`
-- `long abs(long)`
-- `float abs(float)`
-- `double abs(double)`
+`abs()` returns the absolute value (distance from zero).
+
+**Overloads**
+- `int abs(int value)`
+- `long abs(long value)`
+- `float abs(float value)`
+- `double abs(double value)`
 
 ### 11.1.8 `Math.sqrt()`
-Square root, returns a `double`.
+
+`sqrt()` computes the square root and returns a `double`.
 
 ```java
 Math.sqrt(9);    // 3.0
-Math.sqrt(-1);   // NaN
+Math.sqrt(-1);   // NaN (not a number)
 ```
 
 ### 11.1.9 Summary Table
 
 | Method | Returns | Overloads | Notes |
-|--------|---------|-----------|--------|
-| `round()` | `int` or `long` | float, double | Nearest integer |
-| `ceil()`  | double | double | Smallest ≥ value |
-| `floor()` | double | double | Largest ≤ value |
-| `pow()`   | double | double,double | Exponentiation |
-| `random()` | double | none | 0.0 ≤ r < 1.0 |
-| `min()`/`max()` | same type | int, long, float, double | Compare two values |
-| `abs()` | same type | int, long, float, double | Absolute value |
-| `sqrt()` | double | double | Square root |
-
+| --- | --- | --- | --- |
+| round() | int or long | float, double | Nearest integer |
+| ceil() | double | double | Smallest value >= argument |
+| floor() | double | double | Largest value <= argument |
+| pow() | double | double, double | Exponentiation |
+| random() | double | none | 0.0 <= r < 1.0 |
+| min()/max() | same type | int, long, float, double | Compare two values |
+| abs() | same type | int, long, float, double | Absolute value |
+| sqrt() | double | double | Square root |
 
 ## 11.2 BigInteger and BigDecimal
 
-The classes `BigInteger` and `BigDecimal` (in java.math) provide arbitrary-precision number types.
+The classes `BigInteger` and `BigDecimal` (in `java.math`) provide arbitrary-precision number types.  
 They are used when:
 
-- primitive types (int, long, double, etc.) don’t have enough range, or
-- floating-point rounding errors of float/double are not acceptable (e.g. money, financial calculations).
+- Primitive types (`int`, `long`, `double`, etc.) don’t have enough range.
+- Floating-point rounding errors of `float`/`double` are not acceptable (for example, in financial calculations).
 
-Both are `immutable`: every operation returns a new instance.
+Both are **immutable**: every operation returns a new instance.
 
-### 11.2.1 Why double and float are not enough
+### 11.2.1 Why `double` and `float` Are Not Enough
 
-Floating-point types (float, double) use a binary representation. Many decimal fractions can’t be represented exactly (like 0.1 or 0.2), so you get rounding errors:
+Floating-point types (`float`, `double`) use a binary representation. Many decimal fractions can’t be represented exactly (like 0.1 or 0.2), so you get rounding errors:
 
 ```java
 System.out.println(0.1 + 0.2); // 0.30000000000000004 
 ```
 
-For tasks like financial calculations, this is unacceptable.
+For tasks like financial calculations, this is unacceptable.  
 `BigDecimal` solves this by representing numbers using a decimal model with a configurable scale (number of digits after the decimal point).
 
 ### 11.2.2 BigInteger — Arbitrary-Precision Integers
 
-BigInteger represents integer values of any size, limited only by memory.
+`BigInteger` represents integer values of virtually any size, limited only by available memory.
 
 ### 11.2.3 Creating BigInteger
 
 Common ways:
 
-From a long:
+**From a long**
 
-    static BigInteger valueOf(long val)
+```java
+static BigInteger valueOf(long val);
+```
 
-From a String:
+**From a String**
 
-    BigInteger(String val)        // decimal by default
-    BigInteger(String val, int radix)
+```java
+BigInteger(String val);        // decimal by default
+BigInteger(String val, int radix);
+```
 
-Random big value:
+**Random big value**
 
-    BigInteger(int numBits, Random rnd)
-
+```java
+BigInteger(int numBits, Random rnd);
+```
 
 Examples:
+
 ```java
 import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Random;
 
 BigInteger a = BigInteger.valueOf(10L);
 
-// You can pass a long to either types, but double only to BigDecimal 
+// You can pass a long to both types, but a double only to BigDecimal
 
 BigInteger g = BigInteger.valueOf(3000L);
 BigDecimal p = BigDecimal.valueOf(3000L);
 BigDecimal q = BigDecimal.valueOf(3000.00);
 
 BigInteger b = new BigInteger("12345678901234567890"); // decimal string
-BigInteger c = new BigInteger("FF", 16); // 255 in base 16
-BigInteger r = new BigInteger(128, new Random()); // random 128-bit number
+BigInteger c = new BigInteger("FF", 16);               // 255 in base 16
+BigInteger r = new BigInteger(128, new Random());      // random 128-bit number
 ```
 
-### 11.2.4 Operations (no operators!)
+### 11.2.4 Operations (No Operators!)
 
-You cannot use `+`, `-`, `*`, `/`, `%` with BigInteger.
-Instead, use methods (all return new instances):
+You cannot use the standard arithmetic operators (`+`, `-`, `*`, `/`, `%`) with `BigInteger` or `BigDecimal`.  
+Instead, you must call methods (all of which return new instances). Here are some common ones for `BigInteger`:
 
-- add(BigInteger val)
-- subtract(BigInteger val)
-- multiply(BigInteger val)
-- divide(BigInteger val) – integer division
-- remainder(BigInteger val)
-- pow(int exponent)
-- negate()
-- abs()
-- gcd(BigInteger val)
-- compareTo(BigInteger val) – ordering
+- `add(BigInteger val)`
+- `subtract(BigInteger val)`
+- `multiply(BigInteger val)`
+- `divide(BigInteger val)` – integer division
+- `remainder(BigInteger val)`
+- `pow(int exponent)`
+- `negate()`
+- `abs()`
+- `gcd(BigInteger val)`
+- `compareTo(BigInteger val)` – ordering
 
 Example:
+
 ```java
 BigInteger x = new BigInteger("100000000000000000000");
 BigInteger y = new BigInteger("3");
 
-BigInteger sum = x.add(y); // x + y
-BigInteger prod = x.multiply(y); // x * y
-BigInteger div = x.divide(y); // integer division
-BigInteger rem = x.remainder(y); // modulus
+BigInteger sum = x.add(y);        // x + y
+BigInteger prod = x.multiply(y);  // x * y
+BigInteger div = x.divide(y);     // integer division
+BigInteger rem = x.remainder(y);  // modulus
 
 if (x.compareTo(y) > 0) {
-System.out.println("x is larger");
+    System.out.println("x is larger");
 }
 ```

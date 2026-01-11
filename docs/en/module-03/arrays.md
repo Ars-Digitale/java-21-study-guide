@@ -32,11 +32,11 @@
 
 ---
 
-## 10.1 What an Array is
+## 10.1 What an Array Is
 
-Arrays in Java are **fixed-size**, **indexed**, **ordered** collections of elements of the *same* type.  
-They are considered **objects**, even when the elements are primitives.  
-
+Arrays in Java are **fixed-size**, **indexed**, **ordered** collections of elements of the same type.
+  
+They are **objects**, even when the elements are primitives.
 
 ### 10.1.1 Declaring Arrays
 
@@ -56,18 +56,16 @@ int []x2;
 int x3[];
 int x5 [];
 
-// MULTIPLE ARRAYs DECLARATION
+// MULTIPLE ARRAY DECLARATIONS
 
 int[] arr1, arr2;   // Declares two arrays of int
 
-WARNING!
-
-int arr1[], arr2;   // This time (just moving the brackets) we obtain one variable of type array of int and the second one, arr2, of type int
-
+// WARNING:
+// Here arr1 is an int[] and arr2 is just an int (NOT an array!)
+int arr1[], arr2;
 ```
 
 **Declaring does NOT create the array** — it only creates a variable capable of referencing one.
-
 
 ### 10.1.2 Creating Arrays (Instantiation)
 
@@ -78,35 +76,35 @@ int[] numbers = new int[5];
 String[] words = new String[3];
 ```
 
-Key rules
-- The length **must be non-negative** and specified at creation time.
-- Length **cannot be changed later**.
-- Array length can be any `int` expression:
+**Key rules**
+- The length must be non-negative and specified at creation time.
+- The length cannot be changed later.
+- The array length can be any `int` expression.
 
 ```java
 int size = 4;
 double[] values = new double[size];
 ```
 
-Illegal array creation examples
+Illegal array creation examples:
+
 ```java
-// int length = -1;          // Runtime exception: NegativeArraySizeException
-// int[] arr = new int[-1]; 
+// int length = -1;           
+// int[] arr = new int[-1];   // Runtime: NegativeArraySizeException
 
 // int[] arr = new int[2.5];  // Compile error: size must be int
 ```
-
 
 ### 10.1.3 Default Values in Arrays
 
 Arrays (because they are objects) always receive **default initialization**:
 
-| Element Type | Default Value |
-|--------------|----------------|
-| Numeric      | 0 |
-| boolean      | false |
-| char         | '\u0000' |
-| Reference types | null |
+| Element Type    | Default Value |
+|-----------------|---------------|
+| Numeric         | 0             |
+| boolean         | false         |
+| char            | '\u0000'      |
+| Reference types | null          |
 
 Example:
 
@@ -117,7 +115,6 @@ System.out.println(nums[0]); // 0
 String[] s = new String[3];
 System.out.println(s[0]);    // null
 ```
-
 
 ### 10.1.4 Accessing Elements
 
@@ -130,7 +127,7 @@ a[1] = 20;
 System.out.println(a[1]); // 20
 ```
 
-Common Exceptions
+**Common exception**  
 - `ArrayIndexOutOfBoundsException` (runtime)
 
 ```java
@@ -140,17 +137,19 @@ Common Exceptions
 
 ### 10.1.5 Array Initialization Shorthands
 
-#### 10.1.5.1 Anonymous array creation
+#### 10.1.5.1 Anonymous Array Creation
+
 ```java
 int[] a = new int[] {1,2,3};
 ```
 
-#### 10.1.5.2 Short syntax (only at declaration!)
+#### 10.1.5.2 Short Syntax (Only at Declaration)
+
 ```java
 int[] b = {1,2,3};
 ```
 
-> The short syntax *cannot* be used in assignment:
+> The short syntax `{1,2,3}` can only be used at the point of declaration.
 
 ```java
 // int[] c;
@@ -161,18 +160,21 @@ int[] b = {1,2,3};
 
 Java implements multi-dimensional arrays as **arrays of arrays**.
 
-Declaration
+Declaration:
+
 ```java
 int[][] matrix;
 String[][][] cube;
 ```
 
-### 10.2.1 Creating a rectangular array
+### 10.2.1 Creating a Rectangular Array
+
 ```java
 int[][] rect = new int[3][4]; // 3 rows, 4 columns each
 ```
 
-### 10.2.2 Creating a jagged (irregular) array
+### 10.2.2 Creating a Jagged (Irregular) Array
+
 You can create rows with different lengths:
 
 ```java
@@ -184,62 +186,67 @@ jagged[2] = new int[1];
 
 ## 10.3 Array Length vs String Length
 
-- Arrays use **`.length`** (public final field)
-- Strings use **`.length()`** (method)
+- Arrays use `.length` (public final field).
+- Strings use `.length()` (method).
 
-**Common Pitfall**:
+> [!TIP]
+> This is a classic exam trap: fields vs methods.
 
 ```java
 // int x = arr.length;   // OK
 // int y = s.length;     // ❌ does not compile: missing ()
+int yOk = s.length();
 ```
-
 
 ## 10.4 Array Reference Assignments
 
-### 10.4.1 Assigning compatible references
+### 10.4.1 Assigning Compatible References
+
 ```java
 int[] a = {1,2,3};
 int[] b = a; // both now point to the same array
 ```
 
-Modifying one affects the other:
+Modifying one reference affects the other:
 
 ```java
 b[0] = 99;
 System.out.println(a[0]); // 99
 ```
 
-### 10.4.2 Incompatible assignments (compile-time errors)
+### 10.4.2 Incompatible Assignments (Compile-Time Errors)
+
 ```java
 // int[] x = new int[3];
 // long[] y = x;     // ❌ incompatible types
 ```
 
-But array references follow normal inheritance rules:
+Array references follow normal inheritance rules:
 
 ```java
 String[] s = new String[3];
 Object[] o = s;      // OK: arrays are covariant
 ```
 
-### 10.4.3 Covariance runtime danger: ArrayStoreException
+### 10.4.3 Covariance Runtime Danger: ArrayStoreException
+
 ```java
 Object[] objs = new String[3];
-// objs[0] = Integer.valueOf(5); // ❌ ArrayStoreException
+// objs[0] = Integer.valueOf(5); // ❌ ArrayStoreException at runtime
 ```
-
 
 ## 10.5 Comparing Arrays
 
-`==` compares references (identity):  
+`==` compares references (identity):
+
 ```java
 int[] a = {1,2};
 int[] b = {1,2};
 System.out.println(a == b); // false
 ```
 
-`.equals()` in arrays **does not compare contents** (it behaves like `==`):  
+`equals()` on arrays does not compare contents (it behaves like `==`):
+
 ```java
 System.out.println(a.equals(b)); // false
 ```
@@ -251,30 +258,32 @@ Arrays.equals(a, b);         // shallow comparison
 Arrays.deepEquals(o1, o2);   // deep comparison for nested arrays
 ```
 
-
 ## 10.6 `Arrays` Utility Methods
 
-
 ### 10.6.1 `Arrays.toString()`
+
 ```java
 System.out.println(Arrays.toString(new int[]{1,2,3})); // [1, 2, 3]
 ```
 
 ### 10.6.2 `Arrays.deepToString()` (for nested arrays)
+
 ```java
-System.out.println(Arrays.deepToString(new int[][] {{1,2},{3,4}}));	// [[1, 2], [3, 4]]
+System.out.println(Arrays.deepToString(new int[][] {{1,2},{3,4}}));
+// [[1, 2], [3, 4]]
 ```
 
 ### 10.6.3 `Arrays.sort()`
+
 ```java
 int[] a = {4,1,3};
-Arrays.sort(a); // [1,3,4]
+Arrays.sort(a); // [1, 3, 4]
 ```
 
 > [!TIP]
-> - Strings are sorted in alphabetical order
-> - Numbers sort before letters and uppercase letters sort before lowercase letters: (numbers < uppercase < lowercase)
-> - `null` is smaller of any other value
+> - Strings are sorted in natural (lexicographic) order.
+> - Numbers sort before letters, and uppercase letters sort before lowercase letters (numbers < uppercase < lowercase).
+> - For reference types, `null` is considered smaller than any non-null value.
 
 ```java
 String[] arr = {"AB", "ac", "Ba", "bA", "10", "99"};
@@ -285,43 +294,40 @@ System.out.println(Arrays.toString(arr));  // [10, 99, AB, Ba, ac, bA]
 ```
 
 ### 10.6.4 `Arrays.binarySearch()`
-Requirements: array **must be sorted**, otherwise result is `unpredictable`.
+
+Requirements: the array must be sorted using the same ordering; otherwise the result is unpredictable.
 
 ```java
 int[] a = {1,3,5,7};
 int idx = Arrays.binarySearch(a, 5); // returns 2
 ```
 
-When value not found → returns **-(insertionPoint) - 1**:
+When the value is not found, `binarySearch` returns `-(insertionPoint) - 1`:
 
 ```java
 int pos = Arrays.binarySearch(a, 4); // returns -3
+// Insertion point is index 2 → -(2) - 1 = -3
 ```
-
-Explanation: insertion at index 2 → return `-(2) - 1 = -3`.
-
 
 ### 10.6.5 `Arrays.compare()`
 
-While the class `Arrays` contain an overloaded version of the method `equals()` which checks if two arrays contain the same elements (and of course are of the same size)
+The class `Arrays` offers an overloaded `equals()` that checks if two arrays contain the same elements (and have the same length):
 
 ```java
-System.out.println(Arrays.equals(new int[] {200}, new int[] {100}));	// false
-System.out.println(Arrays.equals(new int[] {200}, new int[] {200}));	// true
-System.out.println(Arrays.equals(new int[] {200}, new int[] {100, 200}));	// false
+System.out.println(Arrays.equals(new int[] {200}, new int[] {100}));        // false
+System.out.println(Arrays.equals(new int[] {200}, new int[] {200}));        // true
+System.out.println(Arrays.equals(new int[] {200}, new int[] {100, 200}));   // false
 ```
 
-it offers also a `compare()` method with the following utilization rules:
+It also provides a `compare()` method with these rules:
 
-- If the method gives a result `n < 0` --> first array is smaller than the second;
-- If the method gives a result `n > 0` --> first array is bigger than the second;
-- If the method gives a result `n == 0` --> arrays are equal;
+- If the result `n < 0` → the first array is considered “smaller” than the second.
+- If the result `n > 0` → the first array is considered “greater” than the second.
+- If the result `n == 0` → the arrays are equal.
 
-Additional rules in the following example:
+Examples:
 
 ```java
-
-
 int[] arr1 = new int[] {200, 300};
 int[] arr2 = new int[] {200, 300, 400};
 System.out.println(Arrays.compare(arr1, arr2));  // -1
@@ -332,17 +338,16 @@ System.out.println(Arrays.compare(arr3, arr4));  // 1
 
 String[] arr5 = new String[] {"200", "300", "aBB"};
 String[] arr6 = new String[] {"200", "300", "ABB"};
-System.out.println(Arrays.compare(arr5, arr6));     // Positive number: uppercase is smaller than lowercase
+System.out.println(Arrays.compare(arr5, arr6));     // Positive: "aBB" > "ABB"
 
 String[] arr7 = new String[] {"200", "300", "ABB"};
 String[] arr8 = new String[] {"200", "300", "aBB"};
-System.out.println(Arrays.compare(arr7, arr8));     // Negative number: uppercase is smaller than lowercase
+System.out.println(Arrays.compare(arr7, arr8));     // Negative: "ABB" < "aBB"
 
 String[] arr9 = null;
 String[] arr10 = new String[] {"200", "300", "ABB"};
-System.out.println(Arrays.compare(arr9, arr10));   // -1
+System.out.println(Arrays.compare(arr9, arr10));    // -1 (null considered smaller)
 ```
-
 
 ## 10.7 Enhanced for-loop with Arrays
 
@@ -352,46 +357,44 @@ for (int value : new int[]{1,2,3}) {
 }
 ```
 
-Rules:
-- The right side must be an array or iterable.
-- The loop variable must be compatible with element type.
+**Rules**
+- The right side must be an array or an `Iterable`.
+- The loop variable type must be compatible with the element type (no primitive widening here).
 
 Common error:
-```java
-// for (long v : new int[]{1,2}) {} // ❌ not allowed: int cannot widen to long in enhanced loop
-```
 
+```java
+// for (long v : new int[]{1,2}) {} // ❌ not allowed: int elements cannot be assigned to long in enhanced for-loop
+```
 
 ## 10.8 Common Pitfalls
 
-**Accessing out of bounds**  
-Throws `ArrayIndexOutOfBoundsException`.
+- **Accessing out of bounds** → throws `ArrayIndexOutOfBoundsException`.
 
-**Using short array initializer incorrectly**
+- **Using short array initializer incorrectly**
+
 ```java
 // int[] x;
 // x = {1,2}; // ❌ does not compile
 ```
 
-**Confusing `.length` and `.length()`**
+- **Confusing `.length` and `.length()`**
+- **Forgetting that arrays are objects** (they live on the heap and are referenced).
 
-**Forgetting arrays are objects**
+- **Mixing primitive arrays and wrapper arrays**
 
-**Mixing primitive arrays and wrapper arrays** 
 ```java
 // int[] p = new Integer[3]; // ❌ incompatible
 ```
 
-**Using binarySearch on unsorted arrays → unpredictable results**
-
-**Covariant array runtime exceptions (ArrayStoreException)**
-
----
+- **Using `binarySearch` on unsorted arrays** → unpredictable results.
+- **Covariant array runtime exceptions** (`ArrayStoreException`).
 
 ## 10.9 Summary
 
 Arrays in Java are:
-- objects (even if holding primitives)
-- fixed-size, indexed collections
-- always initialized with default values
-- type-safe but subject to covariance rules
+
+- Objects (even if they hold primitives).
+- Fixed-size, indexed collections.
+- Always initialized with default values.
+- Type-safe, but subject to covariance rules (which can cause runtime exceptions if misused).

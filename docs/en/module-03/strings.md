@@ -32,18 +32,16 @@
 
 ---
 
-
 ## 9.1 Strings & Text Blocks
-
 
 ### 9.1.1 Strings
 
 ---
- 
+
 #### 9.1.1.1 Initializing Strings
 
 In Java, a **String** is an object of the `java.lang.String` class, used to represent a sequence of characters.  
-Strings are **immutable**, meaning that once created, their content cannot be changed. Any operation that seems to modify a string actually creates a new one.
+Strings are **immutable**: once created, their content cannot be changed. Any operation that seems to modify a string actually creates a new one.
 
 You can create and initialize strings in several ways:
 
@@ -52,21 +50,22 @@ String s1 = "Hello";                    // string literal
 String s2 = new String("Hello");        // using constructor (not recommended)
 String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
 ```
+
 > [!NOTE]
-> - String literals are stored in the `String pool`, a special memory area used to avoid creating duplicate string objects.
-> - Using the **new** keyword always creates a new object outside the pool.
+> - String literals are stored in the `String` pool, a special memory area used to avoid creating duplicate string objects.
+> - Using the `new` keyword always creates a new object outside the pool.
 
 #### 9.1.1.2 The String Pool
 
-Because String are `immutable` and they are widely used in Java, they could easily occupy a huge amount of memory in a Java program;
-In order to face this problem Java will reuse all the Strings which are declared as literals (see example above), storing them in a dedicated location of the JVM which is known as the `String Pool` or the `Intern Pool`.
+Because `String` objects are immutable and widely used, they could easily occupy a large amount of memory in a Java program.  
+To reduce duplication, Java reuses all strings that are declared as literals (see example above), storing them in a dedicated area of the JVM known as the **String Pool** or **Intern Pool**.
 
-Please Check [1.5.3 String Pool and Equality](../module-01/instantiating-types.md#153-string-pool-and-equality)
+Please check `[1.5.3 String Pool and Equality](../module-01/instantiating-types.md#153-string-pool-and-equality)` for a deeper explanation and examples.
 
 #### 9.1.1.3 Special Characters and Escape Sequences
 
-Strings can contain escape characters, which allow you to include special symbols or control characters (characters with a special meaning in Java).
-An escape sequence starts with a backslash \.
+Strings can contain escape characters, which allow you to include special symbols or control characters (characters with a special meaning in Java).  
+An escape sequence starts with a backslash `\`.
 
 > [!NOTE]
 > **Table of Special Characters & Escape Sequences in Strings**
@@ -138,28 +137,27 @@ An escape sequence starts with a backslash \.
 #### 9.1.1.4 Rules for String Concatenation
 
 As introduced in the chapter on  
-[Java Operators](../module-01/java-operators.md), the symbol `+` normally represents **arithmetic addition** when used with numeric operands.  
+`[Java Operators](../module-01/java-operators.md)`, the symbol `+` normally represents **arithmetic addition** when used with numeric operands.
 
-However, when applied to **Strings**, the same operator performs **string concatenation** — that is, it creates a new string by joining operands together.
+However, when applied to **Strings**, the same operator performs **string concatenation** — it creates a new string by joining operands together.
 
-Since the operator `+` may appear in expressions where both **numbers** and **strings** are present, Java applies a specific set of rules to determine whether `+` means *numeric addition* or *string concatenation*.
+Since the operator `+` may appear in expressions where both numbers and strings are present, Java applies a specific set of rules to determine whether `+` means *numeric addition* or *string concatenation*.
 
 #### 9.1.1.5 Concatenation Rules
 
-1. **If both operands are numeric**, `+` performs **numeric addition**.
+- If both operands are numeric, `+` performs **numeric addition**.
 
-2. **If at least one operand is a `String`**, the `+` operator performs **string concatenation**.
+- If at least one operand is a `String`, the `+` operator performs **string concatenation**.
 
-3. **Evaluation is strictly left-to-right**, because `+` is **left-associative**.  
-   This means that once a `String` appears on the left side of the expression, all subsequent `+` operations become concatenations.
+- Evaluation is strictly left-to-right, because `+` is **left-associative**.  
+This means that once a `String` appears on the left side of the expression, all subsequent `+` operations become concatenations.
 
 > [!TIP]
-> Because evaluation is left-to-right, the position of the first String operand determines the rest of the expression.
+> Because evaluation is left-to-right, the position of the first `String` operand determines how the rest of the expression is evaluated.
 
 Examples
 
 ```java
-
 // *** Pure numeric addition
 
 int a = 10 + 20;        // 30
@@ -197,12 +195,12 @@ String result = 10 + 20 + "" + 30 + 40;
 // (10 + 20) = 30
 // 30 + ""  = "30"
 // "30" + 30 = "3030"
-// "3030" + 40 = "303040"
+String out = "3030" + 40; // "303040"
 
 System.out.println(1 + 2 + "3" + 4 + 5);
 // Step 1: 1 + 2 = 3
 // Step 2: 3 + "3" = "33"
-// Step 3: "33" + 4 = "334"
+String r = "33" + 4;  // "334"
 // Step 4: "334" + 5 = "3345"
 
 
@@ -213,12 +211,11 @@ System.out.println("AB" + null);
 // ABnull
 ```
 
-
 ### 9.1.2 Text Blocks (since Java 15)
 
-A text block is a multi-line string literal introduced to simplify writing large strings (such as HTML, JSON, or code) without the need to escape.
-A text block starts and ends with three double quotes (""").
-You can use text blocks everywhere you would use Strings.
+A text block is a multi-line string literal introduced to simplify writing large strings (such as HTML, JSON, or code) without the need for many escape sequences.  
+A text block starts and ends with three double quotes (`"""`).  
+You can use text blocks everywhere you would use strings.
 
 ```java
 String html = """
@@ -231,14 +228,14 @@ String html = """
 ```
 
 > [!NOTE]
-> - Text blocks automatically include line breaks and indentation for readability (Newlines are automatically normalized to \n).
-> - Double quotes inside the block don’t need escaping.
+> - Text blocks automatically include line breaks and indentation for readability. Newlines are normalized to `\n`.
+> - Double quotes inside the block usually don’t need escaping.
 > - The compiler interprets the content between the opening and closing triple quotes as the string’s value.
 
 #### 9.1.2.1 Formatting: Essential vs Incidental Whitespace
 
-- **Essential whitespace**: the spaces and newlines that are part of the intended string content.
-- **Incidental whitespace** is just indentation in your source.
+- **Essential whitespace**: spaces and newlines that are part of the intended string content.
+- **Incidental whitespace**: indentation in your source code that you don’t conceptually consider part of the text.
 
 ```java
 String text = """
@@ -249,13 +246,14 @@ String text = """
 ```
 
 > [!IMPORTANT]
-> - **Leftmost character (baseline)**: The position of the first non-space character across all lines or the closing """ are the leftmost characters of the resulting string: all the spaces on the left of the 3 Lines are **Incidental whitespaces**;
-> - The line immediately following the opening """ is not included in the output if it’s empty (typical formatting).
-> - The newline before the closing """ is included in the content. This means the text block in the example ends with a newline after “Line 3” counting then, in total, 4 lines in the output.
+> - **Leftmost character (baseline)**: the position of the first non-space character across all lines (or the closing `"""`) defines the indentation baseline. Spaces to the left of this baseline are considered incidental and are removed.
+> - The line immediately following the opening `"""` is not included in the output if it’s empty (typical formatting).
+> - The newline before the closing `"""` is included in the content.  
+>   In the example above, the resulting string ends with a newline after `"Line 3"`: there are 4 lines in total.
 
-- Output with line numbers (showing the trailing blank line):
+Output with line numbers (showing the trailing blank line):
 
-```makefile
+```text
 1: Line 1
 2: Line 2
 3: Line 3
@@ -264,8 +262,8 @@ String text = """
 
 To suppress the trailing newline:
 
-- a) Use a line continuation backslash at the end of the last content line;
-- b) Put the ending three double quotes on the same line.
+- Use a line-continuation backslash at the end of the last content line.
+- Put the ending triple quotes on the same line as the last content.
 
 ```java
 String textNoTrail_1 = """
@@ -273,7 +271,7 @@ String textNoTrail_1 = """
         Line 2
         Line 3\
         """;
-		
+
 // OR
 
 String textNoTrail_2 = """
@@ -284,22 +282,22 @@ String textNoTrail_2 = """
 
 #### 9.1.2.2 Line Count, Blank Lines, and Line Breaks
 
-- Every visible line break inside the block becomes \n.
-- Blank lines inside the block are preserved:
+- Every visible line break inside the block becomes `\n`.
+- Blank lines inside the block are preserved.
 
 ```java
 String textNoTrail_0 = """
-		Line 1  
-		Line 2 \n
-		Line 3 
-		
-		Line 4 
-		""";
+        Line 1  
+        Line 2 \n
+        Line 3 
+        
+        Line 4 
+        """;
 ```
 
-output:
+Output:
 
-```makefile
+```text
 1: Line 1
 2: Line 2
 3:
@@ -311,7 +309,7 @@ output:
 
 #### 9.1.2.3 Text Blocks & Escape Characters
 
-Escapes still work inside text blocks when needed (e.g., backslashes, explicit escapes):
+Escape sequences still work inside text blocks when needed (for example, for backslashes or explicit control characters).
 
 ```java
 String json = """
@@ -322,7 +320,7 @@ String json = """
     """;
 ```
 
-You can also format a text block with placeholders:
+You can also format a text block using placeholders and `formatted()`:
 
 ```java
 String card = """
@@ -347,7 +345,7 @@ String ok = """
 ```
 
 ```java
-// ❌ Text block require a line break after the opening """
+// ❌ Text blocks require a line break after the opening """
 String invalid = """Hello""";  // ERROR
 
 // ✅ Fix
@@ -370,21 +368,20 @@ String correct = """
     """;
 ```
 
+### 9.2.1 Core String Methods
 
-### 9.2.1 Core String methods
-
---- 
+---
 
 #### 9.2.1.1 String Indexing
 
 Strings in Java use **zero-based indexing**, meaning:
 
-- The **first** character is at index **0**
-- The **last** character is at index **length() - 1**
-- Accessing any index outside this range causes a  
-  **`StringIndexOutOfBoundsException`**
+- The first character is at index `0`
+- The last character is at index `length() - 1`
+- Accessing any index outside this range causes a `StringIndexOutOfBoundsException`
 
 Example:
+
 ```java
 String s = "Java";
 // Indexes:  0    1    2    3
@@ -393,37 +390,33 @@ String s = "Java";
 char c = s.charAt(2); // 'v'
 ```
 
-
 #### 9.2.1.2 `length()` Method
 
-`length()` returns the **number of characters** in the string.
+`length()` returns the number of characters in the string.
 
 ```java
 String s = "hello";
 System.out.println(s.length());  // 5
 ```
 
-- The last valid index is `length() - 1`.
-
+The last valid index is always `length() - 1`.
 
 #### 9.2.1.3 Boundary Rules: Start Index vs End Index
 
-Many String methods use **two indices**:
+Many String methods use two indices:
 
-- ✔️ Start index — **inclusive**  
-- ✔️ End index — **exclusive**
+- **Start index** — inclusive
+- **End index** — exclusive
 
-Meaning:
+In other words, `substring(start, end)` includes characters from index `start` up to, but not including, index `end`.
 
-substring(start, end) includes characters from index start up to BUT NOT including index end.
-
-- **Start index must be ≥ 0 and ≤ length() - 1**
-- **End index may be equal to `length()`** (the “invisible end-of-string position” when "End index exclusive" apply)
-- **End index must not exceed `length()`**
-- **Start index must never be greater than end index**
-
+- Start index must be `>= 0` and `<= length() - 1`
+- End index may be equal to `length()` (the “virtual” position after the last character).
+- End index must not exceed `length()`.
+- Start index must never be greater than end index.
 
 Example:
+
 ```java
 String s = "abcdef";
 s.substring(1, 4); // "bcd" (indexes 1,2,3)
@@ -431,125 +424,115 @@ s.substring(1, 4); // "bcd" (indexes 1,2,3)
 
 This rule applies to most substring-based methods.
 
-
-#### 9.2.1.4  Methods Using Only Start Index (Inclusive)
+#### 9.2.1.4 Methods Using Only Start Index (Inclusive)
 
 | Method | Description | Parameters | Index Rule | Example |
-|--------|-------------|------------|------------|---------|
-| `substring(int start)` | Returns substring from `start` to end | start | start = inclusive | `"abcdef".substring(2)` → `"cdef"` |
-| `indexOf(String)` | First occurrence | — | — | `"Java".indexOf("a")` → 1 |
-| `indexOf(String, start)` | Start searching at index | start | start = inclusive | `"banana".indexOf("a", 2)` → 3 |
-| `lastIndexOf(String)` | Last occurrence | — | — | `"banana".lastIndexOf("a")` → 5 |
-| `lastIndexOf(String, fromIndex)` | Search backward from index | fromIndex | fromIndex = inclusive | `"banana".lastIndexOf("a", 3)` → 3 |
+| --- | --- | --- | --- | --- |
+| substring(int start) | Returns substring from start to end | start | start inclusive | "abcdef".substring(2) → "cdef" |
+| indexOf(String) | First occurrence | — | — | "Java".indexOf("a") → 1 |
+| indexOf(String, start) | Start searching at index | start | start inclusive | "banana".indexOf("a", 2) → 3 |
+| lastIndexOf(String) | Last occurrence | — | — | "banana".lastIndexOf("a") → 5 |
+| lastIndexOf(String, fromIndex) | Search backward from index | fromIndex | fromIndex inclusive | "banana".lastIndexOf("a", 3) → 3 |
 
+#### 9.2.1.5 Methods with Start Inclusive / End Exclusive
 
-#### 9.2.1.5  Methods with Start Inclusive / End Exclusive
-
-These methods follow the same slicing behavior:
-
-`start included`, `end excluded`
+These methods follow the same slicing behavior: `start` included, `end` excluded.
 
 | Method | Description | Signature | Example |
-|--------|-------------|-----------|---------|
-| `substring(start, end)` | Extracts part of string | `(int start, int end)` | `"abcdef".substring(1,4)` → `"bcd"` |
-| `regionMatches` | Compare substring regions | `(toffset, other, ooffset, len)` | `"Hello".regionMatches(1, "ell", 0, 3)` → `true` |
-| `getBytes(int srcBegin, int srcEnd, byte[] dst, int dstBegin)` | Copies chars to byte array | start inclusive, end exclusive | Copies chars in `[srcBegin, srcEnd)` |
-| `copyValueOf(char[] data, int offset, int count)` | Creates a new string | offset inclusive; offset+count exclusive | same rule as substring |
+| --- | --- | --- | --- |
+| substring(start, end) | Extracts part of string | (int start, int end) | "abcdef".substring(1,4) → "bcd" |
+| regionMatches | Compares substring regions | (toffset, other, ooffset, len) | "Hello".regionMatches(1, "ell", 0, 3) → true |
+| getBytes(int srcBegin, int srcEnd, byte[] dst, int dstBegin) | Copies chars to byte array | start inclusive, end exclusive | Copies chars in [srcBegin, srcEnd) |
+| copyValueOf(char[] data, int offset, int count) | Creates a new string | offset inclusive; offset+count exclusive | Same rule as substring |
 
-
-#### 9.2.1.6  Methods That Operate on Entire String
-
-| Method | Description | Example |
-|--------|-------------|---------|
-| `toUpperCase()` | Uppercase version | `"java".toUpperCase()` → `"JAVA"` |
-| `toLowerCase()` | Lowercase version | `"JAVA".toLowerCase()` → `"java"` |
-| `trim()` | Removes leading/trailing whitespace | `"  hi  ".trim()` → `"hi"` |
-| `strip()` | Unicode-aware trimming | `"  hi\u2003".strip()` → `"hi"` |
-| `stripLeading()` | Removes leading whitespace | `"  hi".stripLeading()` → `"hi"` |
-| `stripTrailing()` | Removes trailing whitespace | `"hi  ".stripTrailing()` → `"hi"` |
-| `isBlank()` | Empty or whitespace only | `"  ".isBlank()` → `true` |
-| `isEmpty()` | Length == 0 | `"".isEmpty()` → `true` |
-
-
-#### 9.2.1.7  Character Access
+#### 9.2.1.6 Methods That Operate on Entire String
 
 | Method | Description | Example |
-|--------|-------------|---------|
-| `charAt(int index)` | Returns char at index | `"Java".charAt(2)` → `'v'` |
-| `codePointAt(int index)` | Unicode code point | useful for emojis |
+| --- | --- | --- |
+| toUpperCase() | Uppercase version | "java".toUpperCase() → "JAVA" |
+| toLowerCase() | Lowercase version | "JAVA".toLowerCase() → "java" |
+| trim() | Removes leading/trailing whitespace | "  hi  ".trim() → "hi" |
+| strip() | Unicode-aware trimming | "  hi\u2003".strip() → "hi" |
+| stripLeading() | Removes leading whitespace | "  hi".stripLeading() → "hi" |
+| stripTrailing() | Removes trailing whitespace | "hi  ".stripTrailing() → "hi" |
+| isBlank() | True if empty or whitespace only | "  ".isBlank() → true |
+| isEmpty() | True if length == 0 | "".isEmpty() → true |
 
+#### 9.2.1.7 Character Access
+
+| Method | Description | Example |
+| --- | --- | --- |
+| charAt(int index) | Returns char at index | "Java".charAt(2) → 'v' |
+| codePointAt(int index) | Returns Unicode code point | Useful for emojis or characters beyond BMP |
 
 #### 9.2.1.8 Searching
 
 | Method | Description | Example |
-|--------|-------------|---------|
-| `contains(CharSequence)` | Substring test | `"hello".contains("ell")` → `true` |
-| `startsWith(String)` | Prefix | `"abcdef".startsWith("abc")` → `true` |
-| `startsWith(String, offset)` | Prefix at given index | `"abc".startsWith("b", 1)` → `true` |
-| `endsWith(String)` | Suffix | `"abcdef".endsWith("def")` → `true` |
-
+| --- | --- | --- |
+| contains(CharSequence) | Substring test | "hello".contains("ell") → true |
+| startsWith(String) | Prefix | "abcdef".startsWith("abc") → true |
+| startsWith(String, offset) | Prefix at index | "abc".startsWith("b", 1) → true |
+| endsWith(String) | Suffix | "abcdef".endsWith("def") → true |
 
 #### 9.2.1.9 Replacement Methods
 
 | Method | Description | Example |
-|--------|-------------|---------|
-| `replace(char old, char new)` | Replace characters | `"banana".replace('a','o')` → `"bonono"` |
-| `replace(CharSequence old, CharSequence new)` | Replace substrings | `"ababa".replace("aba","X")` → `"Xba"` |
-| `replaceAll` | Regex replace all | `"a1a2".replaceAll("\\d","")` → `"aa"` |
-| `replaceFirst` | First regex match only | `"a1a2".replaceFirst("\\d","")` → `"aa2"` |
-
+| --- | --- | --- |
+| replace(char old, char new) | Replace characters | "banana".replace('a','o') → "bonono" |
+| replace(CharSequence old, CharSequence new) | Replace substrings | "ababa".replace("aba","X") → "Xba" |
+| replaceAll(String regex, String replacement) | Regex replace all | "a1a2".replaceAll("\\d","") → "aa" |
+| replaceFirst(String regex, String replacement) | First regex match only | "a1a2".replaceFirst("\\d","") → "aa2" |
 
 #### 9.2.1.10 Splitting and Joining
 
 | Method | Description | Example |
-|--------|-------------|---------|
-| `split(String regex)` | Split by regex | `"a,b,c".split(",")` → `["a","b","c"]` |
-| `split(String regex, limit)` | Controlled split | limit < 0 keeps all |
-
+| --- | --- | --- |
+| split(String regex) | Split by regex | "a,b,c".split(",") → ["a","b","c"] |
+| split(String regex, int limit) | Split with limit | limit < 0 keeps all trailing empty strings |
 
 #### 9.2.1.11 Methods Returning Arrays
 
 | Method | Description | Example |
-|--------|-------------|---------|
-| `toCharArray()` | char[] | `"abc".toCharArray()` |
-| `getBytes()` | byte[] from encoding | `"á".getBytes()` |
-
+| --- | --- | --- |
+| toCharArray() | Returns char[] | "abc".toCharArray() |
+| getBytes() | Returns byte[] using platform/default encoding | "á".getBytes() |
 
 #### 9.2.1.12 Indentation
 
 | Method | Description | Example |
-|--------|-------------|---------|
-| `indent(int numSpaces)` | `add` (positive numSpaces) or `removes` (negative numSpaces) the provided amount of blank spaces from the beginning of each line; A line break is also added, to the end of the string, if not already present | `str.indent(-20)` |
-| `stripIndent()` | removes all incidental WHITESPACES. Does not add a line break at the end | `str.stripIndent()` |
+| --- | --- | --- |
+| indent(int numSpaces) | Adds (positive) or removes (negative) spaces from the beginning of each line; also adds a line break at the end if not already present | str.indent(-20) |
+| stripIndent() | Removes all incidental leading whitespace from each line; does not add a final line break | str.stripIndent() |
 
 Example:
-```java
-		var txtBlock = """
-				
-				    a
-				      b
-				     c""";
-		
-		var conc = " a\n" + " b\n" + " c";
-		
-		System.out.println("length: " + txtBlock.length());
-		System.out.println(txtBlock);
-		System.out.println("");
-		String stripped1 = txtBlock.stripIndent();
-		System.out.println(stripped1);
-		System.out.println("length: " + stripped1.length());
 
-		System.out.println("*********************");
-		
-		System.out.println("length: " + conc.length());
-		System.out.println(conc);
-		System.out.println("");
-		String stripped2 = conc.stripIndent();
-		System.out.println(stripped2);
-		System.out.println("length: " + stripped2.length());
+```java
+var txtBlock = """
+                
+                    a
+                      b
+                     c""";
+        
+var conc = " a\n" + " b\n" + " c";
+
+System.out.println("length: " + txtBlock.length());
+System.out.println(txtBlock);
+System.out.println("");
+String stripped1 = txtBlock.stripIndent();
+System.out.println(stripped1);
+System.out.println("length: " + stripped1.length());
+
+System.out.println("*********************");
+
+System.out.println("length: " + conc.length());
+System.out.println(conc);
+System.out.println("");
+String stripped2 = conc.stripIndent();
+System.out.println(stripped2);
+System.out.println("length: " + stripped2.length());
 ```
 
-output:
+Output:
 
 ```bash
 length: 9
@@ -575,10 +558,10 @@ c
 length: 5
 ```
 
-
-#### 9.2.1.13  Additional Examples
+#### 9.2.1.13 Additional Examples
 
 Example 1 — Extract `[start, end)`
+
 ```java
 String s = "012345";
 System.out.println(s.substring(2, 5));
@@ -586,12 +569,14 @@ System.out.println(s.substring(2, 5));
 ```
 
 Example 2 — Searching from a start index
+
 ```java
 String s = "hellohello";
 int idx = s.indexOf("lo", 5); // search begins at index 5
 ```
 
-Example 3 — Common Pitfall
+Example 3 — Common pitfalls
+
 ```java
 String s = "abcd";
 System.out.println(s.substring(1,1)); // "" empty string
