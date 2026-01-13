@@ -121,7 +121,7 @@ int var2024 = 10; // valid
 int _;  // invalid since Java 9
 ```
 
-> [!REMEMBER]
+> [!WARNING]
 > `_` is legal inside number literals (see next section), but not as a standalone identifier.
 
 
@@ -145,7 +145,7 @@ double pi = 3.14_159_265; // valid
 long mask = 0b1111_0000;  // valid in binary literals
 ```
 
-[!TIP]
+> [!TIP]
 > Underscores improve readability:
 > 1_000_000 is easier than 1000000.
 
