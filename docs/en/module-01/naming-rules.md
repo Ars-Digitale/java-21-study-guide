@@ -26,7 +26,7 @@ As long as you follow the naming rules described below, you are free to choose m
 
 `Identifiers` **cannot** be the same as Java’s **keywords** or **reserved literals**.
   
-`Keywords` are predefined, special words in the Java language which you are not allowed to use (see Table below)).
+`Keywords` are predefined, special words in the Java language which you are not allowed to use (see Table below).
   
 `Literals` such as `true`, `false`, and `null` are also reserved and cannot be used as identifiers.
   
