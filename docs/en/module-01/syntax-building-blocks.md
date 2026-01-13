@@ -73,9 +73,9 @@ String msg = "Hello";     // "Hello" is a String literal
 
 - **Definition:** A symbolic name that associates a value (or a structure) with a readable label.
 - **In Java:**
- - **User-defined identifiers:** chosen by the programmer to name variables, methods, classes, etc.  
+	- **User-defined identifiers:** chosen by the programmer to name variables, methods, classes, etc.  
 Examples: `x`, `counter`, `MyClass`, `calculateSum`.
- - **Keywords (reserved words):** predefined names reserved by the Java language and cannot be redefined.  
+	- **Keywords (reserved words):** predefined names reserved by the Java language and cannot be redefined.  
 Examples: `class`, `public`, `static`, `if`, `return`.
 > **Note:** Identifiers must follow Java naming rules: see [Java Naming Rules](naming-rules.md).
 - **Theory:** Binding function: connects a name to a value or resource.
@@ -109,11 +109,10 @@ counter++;             // another update (post-increment)
 ### 1.5 **Type**
 
 - **Definition:** A type is a set of values and a set of operations permitted on those values.
-
 - **In Java:**
-- - **Primitive (simple) types:** directly represent basic values.  
+	- **Primitive (simple) types:** directly represent basic values.  
   Examples: `int`, `double`, `boolean`, `char`, `byte`, `short`, `long`, `float`.
-- - **Reference types:** represent references (pointers) to objects in memory.  
+	- **Reference types:** represent references (pointers) to objects in memory.  
   Examples: `String`, arrays (e.g., `int[]`), classes, interfaces, and user-defined types.
 
 > [!NOTE]
@@ -136,9 +135,9 @@ String name = "Alice";  // reference type (class String)
 
 - **Definition:** A **symbol or keyword** that performs a computation or action on one or more operands.
 - **Role:** Operators combine values, variables, and expressions to produce new values or to modify program state.
-
 - **In Java:**  
 
+> [!NOTE]
 > See [Java Operators](java-operators.md).
 
 - **Theory:** Operators define allowable computations over types; together with values and variables, they form **expressions**.
@@ -217,7 +216,6 @@ int x = 10;
 ### 1.10  **Function / Method**
 
 - **Definition:** A sequence of encapsulated statements, identified by a name, which can receive inputs (parameters) and return an output (value).
-
 - **In Java:**
 
 ```java
