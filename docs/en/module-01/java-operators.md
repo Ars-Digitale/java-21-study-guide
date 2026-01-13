@@ -126,7 +126,7 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 | 17 | **Arrow operator** | `->` | `(x, y) -> x + y` | Right → Left | Lambda expressions, switch rules |
 
 
-### 5.5.1 ⚙️ Additional Notes
+### 5.5.1 Additional Notes
 
 - **String concatenation (`+`)** has lower precedence than arithmetic `+` with numbers.
 - Use parentheses `()` for precedence and readability — they don’t change semantics but make intent explicit.
@@ -167,9 +167,9 @@ System.out.println(~a);     // -6 → binary: 1111 1010 (two's complement)
 ```
 
 > [!NOTE]
-> - Prefix (++x / --x): updates the value first, then returns the new value.
-> - Postfix (x++ / x--): returns the current value first, then updates it.
-> - The ! operator applies to boolean values; ~ applies to integral numeric types.
+> - Prefix (`++x` / `--x`): updates the value first, then returns the new value.
+> - Postfix (`x++` / `x--`): returns the current value first, then updates it.
+> - The `!` operator applies to boolean values; `~` applies to integral numeric types.
 
 ---
 
