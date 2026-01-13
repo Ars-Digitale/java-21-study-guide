@@ -16,9 +16,9 @@
   - [1.11 Module / Package](#111-module--package)
   - [1.12 Program](#112-program)
   - [1.13 System](#113-system)
-  - [1.14 Summary as a Growing Scale](#114-summary-as-a-growing-scale)
-  - [1.15 Hierarchy Diagram ASCII](#115-hierarchy-diagram-ascii)
-  - [1.16 Hierarchy Diagram Mermaid](#116-hierarchy-diagram-mermaid)
+  - [1.14 Summary as a Growing Scale](#114--summary-as-a-growing-scale)
+  - [1.15 Hierarchy Diagram ASCII](#115--hierarchy-diagram-ascii)
+  - [1.16 Hierarchy Diagram Mermaid](#116--hierarchy-diagram-mermaid)
 
 ---
 
