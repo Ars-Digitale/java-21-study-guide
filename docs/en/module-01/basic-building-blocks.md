@@ -1,9 +1,5 @@
 # 2. Basic Language Java Building Blocks
 
-This chapter introduces the essential structural elements of a Java program:
-classes, methods, comments, access modifiers, packages, the `main` method, and the basic command-line tools (`javac` and `java`).
-
-These are the minimum concepts needed to write, compile, organize, and run Java code in the JDK — without any IDE.
 
 ### Table of Contents
 
@@ -35,6 +31,11 @@ These are the minimum concepts needed to write, compile, organize, and run Java 
 
 
 ---
+
+This chapter introduces the essential structural elements of a Java program:
+classes, methods, comments, access modifiers, packages, the `main` method, and the basic command-line tools (`javac` and `java`).
+
+These are the minimum concepts needed to write, compile, organize, and run Java code in the JDK — without any IDE.
  
 ## 2.1 Class definition
 
@@ -47,7 +48,6 @@ A class is a **blueprint**, while objects are **concrete instances** created at 
 A Java class is composed of two main elements, known as its **members**:
 
 - **Fields** (or variables) — they represent the data that define the state of this newly created type.
-
 - **Methods** (or functions) — they represent the operations that can be performed on this data.
 
 Normally, each class is defined in its own **.java file**; for example, a class named Person will be defined in the corresponding file Person.java.
@@ -395,8 +395,6 @@ import static java.util.Set.of;
 
 The compiler does not know which `of()` you intend to call → compilation fails.
 
----
-
 
 >[!TIP]
 > - Static imports are fine but **should not create confusion** — the exam may test ambiguous cases.
@@ -664,6 +662,7 @@ javac -d out -sourcepath src   src/com/example/app/Main.java
 > [!IMPORTANT]
 > **-sourcepath** `<sourcepath>` tells `javac` where to look for other `.java` files that a given source depends on.
 
+
 ### 2.6.6 Single-file source execution (quick runs without `javac`)
 
 Java 21 (since Java 11) lets you run small programs directly from source:
@@ -680,6 +679,7 @@ java Main.java Helper.java
 ```
 
 > If you use **packages**, prefer compiling to `out/` and running with `-cp`.
+
 
 ### 2.6.7 Passing Parameters to a Java program
 
