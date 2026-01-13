@@ -167,7 +167,6 @@ At this stage, no object is created yet — the variable only has the potential 
   String v1; v2; 							// ERROR - NOT LEGAL
 ```
 
----
 
 ### 6.1.2 Handling Reference Types
 
@@ -338,7 +337,7 @@ Example ex = new Example();
 > - They are executed in the order of declaration in the class.
 > - They can be combined with constructors to avoid code duplication.
 
-> [!REMEMBER]
+> [!WARNING]
 > **Order of initialization when creating an object**
 > 1. Static fields
 > 2. Static initializer blocks
@@ -346,6 +345,7 @@ Example ex = new Example();
 > 4. Instance initializer blocks
 > 5. Constructor body
 
+---
 
 ## 6.2 Default Variable Initialization
 
@@ -391,7 +391,7 @@ A **final instance variable** must be assigned **exactly once**, and the assignm
 
 If the class has *multiple constructors*, the variable must be assigned in **all** of them.
 
-Example:
+- Example:
 ```java
 public class Person {
     final int id;   // must be assigned before constructor ends
@@ -411,7 +411,8 @@ public class Person {
 }
 ```
 
-Trying to compile without assigning `id` inside **every** constructor produces a compile-time error:
+> [!WARNING]
+> Trying to compile without assigning `id` inside **every** constructor produces a compile-time error:
 > variable id might not have been initialized
 
 **`static final` Class Variables (Constants)**
@@ -422,7 +423,7 @@ It must also be assigned exactly once, but assignment can occur in one of the fo
 1. **At the point of declaration**
 2. **Inside a static initializer block**
 
-Example:
+- Example:
 ```java
 public class AppConfig {
 
@@ -531,6 +532,7 @@ public int localMethod {
 > Local variables **never** get default values.
 > Instance & static fields **always** do.
 
+---
 
 ## 6.3 Wrapper Types
 
@@ -656,6 +658,8 @@ Attempting to unbox null causes a NullPointerException:
 Integer val = null;
 int z = val; // ❌ NullPointerException at runtime
 ```
+
+---
 
 ## 6.4 Equality in Java
 
@@ -831,6 +835,5 @@ System.out.println(s == null);   // true
 | `.equals()` | N/A | compares **content** if overridden | **content** comparison |
 
 
----
 
 
