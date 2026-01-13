@@ -33,32 +33,31 @@
 ---
 
 This chapter introduces the essential structural elements of a Java program:
-classes, methods, comments, access modifiers, packages, the `main` method, and the basic command-line tools (`javac` and `java`).
+`classes`, `methods`, `comments`, `access modifiers`, `packages`, the `main` method, and the basic command-line tools (`javac` and `java`).
 
 These are the minimum concepts needed to write, compile, organize, and run Java code in the JDK — without any IDE.
  
 ## 2.1 Class definition
 
 
-A **Java class** is the fundamental building block of a Java program.
-A class represents a **type** in Java: it defines structure (fields) and behavior (methods).
+A Java `class` is the fundamental building block of a Java program.
+A class represents a **type** in Java: it defines structure (`fields`) and behavior (`methods`).
 
 A class is a **blueprint**, while objects are **concrete instances** created at runtime.
 
 A Java class is composed of two main elements, known as its **members**:
-
 - **Fields** (or variables) — they represent the data that define the state of this newly created type.
 - **Methods** (or functions) — they represent the operations that can be performed on this data.
 
-Normally, each class is defined in its own **.java file**; for example, a class named Person will be defined in the corresponding file Person.java.
+Normally, each class is defined in its own "**.java**" file; for example, a class named Person will be defined in the corresponding file Person.java.
 
 Any class that is independently defined in its own source file is called a **top-level class**.
 
-Such a class can only be declared as public or package-private (i.e., with no access modifier).
+Such a class can only be declared as `public` or `package-private` (i.e., with no access modifier).
 
 A single file, however, may contain more than one class definition. **In this case, only one class can be declared public, and the file name must match that class**. 
 
-**Nested class**, which are classes declared inside another class, can declare any access modifier: public, protected, private, default (package-private).
+**Nested class**, which are classes declared inside another class, can declare any access modifier: `public`, `protected`, `private`, `default` (package-private).
 
 
 
