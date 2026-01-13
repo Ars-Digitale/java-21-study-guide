@@ -346,7 +346,7 @@ public class Calculator {
 Wildcard static imports behave exactly like normal wildcard imports:  
 they bring **all static members** of the class into scope.
 
-> [!REMEMBER]
+> [!WARNING]
 > You can **always** call a static member with the class name:
 > `Math.sqrt(16)` always works — even if imported statically.
 
