@@ -77,7 +77,10 @@ String msg = "Hello";     // "Hello" is a String literal
 Examples: `x`, `counter`, `MyClass`, `calculateSum`.
 	- **Keywords (reserved words):** predefined names reserved by the Java language and cannot be redefined.  
 Examples: `class`, `public`, `static`, `if`, `return`.
-> **Note:** Identifiers must follow Java naming rules: see [Java Naming Rules](naming-rules.md).
+
+> [!NOTE]
+> Identifiers must follow Java naming rules: see [Java Naming Rules](naming-rules.md).
+
 - **Theory:** Binding function: connects a name to a value or resource.
 
 **Java example (identifiers):**
