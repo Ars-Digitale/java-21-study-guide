@@ -353,7 +353,7 @@ System
 
 **Description:** The Mermaid diagram renders the same hierarchy in a top-down tree. It highlights that a Literal is the syntactic form of a Value.
 
-```text
+
 ```mermaid
 graph TD
     A[System]
@@ -370,3 +370,4 @@ graph TD
     J --> K[Identifier]
     K --> L[Literal]
     L --> M[Value]
+```
