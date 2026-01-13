@@ -55,10 +55,10 @@ Conceptually, a primitive is just a **cell in memory** holding a value:
 
 ## 4.2 Reference Types
 
-A reference type does not hold the object itself, but a **reference (pointer)** to it.  
+A `reference` type does not hold the `object` itself, but a **reference (pointer)** to it.  
 The reference has a fixed size (JVM-dependent, often 4 or 8 bytes), which points to a memory location where the actual object is stored.
 
-Example: a `String` reference variable points to a string object in the heap, which internally is composed of an array of `char` primitives.
+- Example: a `String` reference variable points to a string object in the heap, which internally is composed of an array of `char` primitives.
 
 Diagram:
 
@@ -124,7 +124,6 @@ When applying arithmetic or comparison operators to **primitive data types**, Ja
 
 These rules ensure consistent calculations and prevent data loss when mixing different numeric types.
 
----
 
 ### 4.6.1 🔹 Numeric Promotion Rules in Java
 
@@ -139,7 +138,6 @@ If two operands belong to **different numeric data types**, Java automatically p
 **Valid type promotion order (smallest → largest):**  
 `byte → short → int → long → float → double`
 
----
 
 #### 4.6.1.2 **Rule 2 – Integral + Floating-point → Integral promoted to floating-point**
 
@@ -151,7 +149,6 @@ the **integral value is promoted** to the **floating-point** type before the ope
 | `float f = 2.5F; int n = 3;`<br>`float result = f * n;` | `n` (int) is promoted to `float`. The result is a `float` (`7.5`). |
 | `double d = 10.0; long l = 3;`<br>`double result = d / l;` | `l` (long) is promoted to `double`. The result is a `double` (`3.333...`). |
 
----
 
 #### 4.6.1.3 **Rule 3 – `byte`, `short`, and `char` are promoted to `int` during arithmetic**
 
@@ -175,8 +172,6 @@ byte c = 20;
 byte d = b + c;     // ❌ Error: b + c is evaluated at runtime → int
 ```
 
----
-
 #### 4.6.1.4 **Rule 4 – Result type matches the promoted operand type**
 
 After promotions are applied, and both operands are of the same type,  
@@ -197,7 +192,6 @@ double result = 10.0 / 4; // ✅ 2.5
 int result = 10 / 4;      // ❌ 2 (fraction discarded)
 ```
 
----
 
 ### 4.6.2 ✅ Summary of Numeric Promotion Behavior
 
@@ -208,7 +202,6 @@ int result = 10 / 4;      // ❌ 2 (fraction discarded)
 | `byte`, `short`, `char` arithmetic | Promoted to `int` | `byte + byte → int` |
 | Result after promotion | Result matches promoted type | `float + long → float` |
 
----
 
 #### 4.6.2.1 🧠 Key Takeaways
 
@@ -222,26 +215,25 @@ int result = 10 / 4;      // ❌ 2 (fraction discarded)
 
 ## 4.7 Casting in Java
 
-**Casting** in Java è il processo di convertire esplicitamente un valore da un tipo a un altro.  
-Si applica sia ai **tipi primitivi** (numeri) sia ai **tipi riferimento** (oggetti in una gerarchia di classi).
+`Casting` in Java is the process of explicitly converting a value from one type to another.
+It applies both to `primitive types` (numbers) and to `reference types` (objects in a class hierarchy).
 
----
 
 ### 4.7.1 Primitive Casting
 
-Primitive casting cambia il tipo di un **valore numerico**.
+Primitive casting changes the type of a numeric value.
 
-Esistono due categorie:
+There are two categories of casting:
 
-| Type       | Description                               | Example              | Explicit? | Risk              |
-|------------|-------------------------------------------|----------------------|-----------|-------------------|
-| Widening   | tipo più piccolo → tipo più grande        | `int → double`       | No        | nessuna perdita   |
-| Narrowing  | tipo più grande → tipo più piccolo        | `double → int`       | Sì        | possibile perdita |
+| Type | Description | Example | Explicit? | Risk |
+| --- | --- | --- | --- | --- |
+| Widening | smaller type → larger type | int → double | No | no loss |
+| Narrowing | larger type → smaller type | double → int | Yes | possible loss |
 
-#### 4.7.1.1 Widening Implicit Casting
+### 4.7.1.1 Widening Implicit Casting
 
-Conversione automatica da un tipo “più piccolo” a uno “più grande” compatibile.  
-Gestita dal compilatore, **non richiede sintassi esplicita**.
+Automatic conversion from a “smaller” type to a compatible “larger” type.  
+Handled by the compiler, **does not require explicit syntax**.
 
 ```java
 int i = 100;
@@ -249,32 +241,31 @@ double d = i;  // implicit cast: int → double
 System.out.println(d); // 100.0
 ```
 
-✅ **Sicuro** – nessun overflow (ma attenzione comunque alla precisione in FP).
+✅ **Safe** – no overflow (though still be aware of floating-point precision).
 
-#### 4.7.1.2 Narrowing Explicit Casting
+### 4.7.1.2 Narrowing Explicit Casting
 
-Conversione manuale da un tipo “più grande” a uno “più piccolo”.  
-Richiede una **cast expression** perché può causare perdita di dati.
+Manual conversion from a “larger” type to a “smaller” one.  
+Requires a **cast expression** because it may cause data loss.
 
 ```java
 double d = 9.78;
 int i = (int) d;  // explicit cast: double → int
-System.out.println(i); // 9 (parte decimale scartata)
+System.out.println(i); // 9 (fraction discarded)
 ```
 
-⚠ Usalo solo se sei certo che il valore “entra” nel tipo target.
-
----
+> [!WARNING]
+> ⚠ Use only when you are sure the value fits in the target type.
 
 ### 4.7.2 Data Loss, Overflow and Underflow
 
-Quando un valore supera la capacità del tipo, può verificarsi:
+When a value exceeds a type’s capacity, you may get:
 
-- **Overflow**: il risultato è maggiore del valore massimo rappresentabile
-- **Underflow**: il risultato è minore del valore minimo rappresentabile
-- **Troncamento**: la parte che non entra va persa (es. parte decimale)
+- **Overflow**: result greater than the maximum representable value
+- **Underflow**: result lower than the minimum representable value
+- **Truncation**: data that does not fit is lost (e.g., decimals)
 
-**Esempio – overflow/underflow con `int`:**
+- Example – overflow/underflow with int
 
 ```java
 int max = Integer.MAX_VALUE;
@@ -284,87 +275,82 @@ int min = Integer.MIN_VALUE;
 int underflow = min - 1;    // "wrap-around" to positive
 ```
 
-Example: truncation
+- Example: truncation
 
 ```java
 double d = 9.99;
-int i = (int) d; // 9 (parte decimale scartata)
+int i = (int) d; // 9 (fraction discarded)
 ```
 
-> [!NOTE]  
-> I tipi floating point (`float`, `double`) non fanno wrap-around:  
-> overflow → `Infinity` / `-Infinity`  
-> underflow (valori molto piccoli) → 0.0 o valori denormalizzati.
-
----
+> [!NOTE]
+> Floating-point types (`float`, `double`) **do not wrap**:
+> - overflow → `Infinity` / `-Infinity`
+> - underflow (very small values) → 0.0 or denormalized values.
 
 ### 4.7.3 Casting Values versus Variables
 
-Java interpreta:
+Java treats:
 
-- i **letterali interi** come `int` di default  
-- i **letterali floating-point** come `double` di default
+- Integer **literals** as `int` by default
+- Floating-point **literals** as `double` by default
 
-Il compilatore **non richiede cast** quando un **letterale** rientra nel range del tipo target:
+The compiler **does not require a cast** when a literal fits within the target type range:
 
 ```java
-byte first = 10;        // OK: 10 entra in byte
-short second = 9 * 10;  // OK: espressione costante valutata a compile time
+byte first = 10;        // OK: 10 fits in byte
+short second = 9 * 10;  // OK: constant expression evaluated at compile time
 ```
 
-Ma:
+But:
 
 ```java
-long a = 5729685479;    // ❌ errore: literal int fuori range
-long b = 5729685479L;   // ✅ long literal (con suffisso L)
+long a = 5729685479;    // ❌ error: int literal out of range
+long b = 5729685479L;   // ✅ long literal (L suffix)
 
-float c = 3.14;         // ❌ double → float: richiede F o cast
+float c = 3.14;         // ❌ double → float: requires F or cast
 float d = 3.14F;        // ✅ float literal
 
-int e = 0x7FFF_FFFF;    // ✅ max int in esadecimale
-int f = 0x8000_0000;    // ❌ fuori range int (serve L)
+int e = 0x7FFF_FFFF;    // ✅ max int in hex
+int f = 0x8000_0000;    // ❌ out of int range (needs L)
 ```
 
-Per contro, quando entriamo nelle **regole di promozione numerica** viste prima:
+However, when numeric promotion rules apply:
 
-> Con variabili di tipo `byte`, `short` e `char` in un’espressione aritmetica,  
-> gli operandi vengono promossi ad `int` e il risultato dell’espressione è `int`.
+> With variables of type `byte`, `short`, and `char` in an arithmetic expression, operands are promoted to `int` and the result is `int`.
 
 ```java
 byte first = 10;
 short second = 9 + first;       // ❌ 9 (int literal) + first (byte → int) = int
-// second = (short) (9 + first);  // ✅ con cast sull'intera espressione
+// second = (short) (9 + first);  // ✅ cast entire expression
 ```
 
 ```java
 short b = 10;
 short a = 5 + b;               // ❌ 5 (int) + b (short → int) = int
-short a2 = (short) (5 + b);    // ✅ cast sull'espressione completa
+short a2 = (short) (5 + b);    // ✅ cast entire expression
 ```
 
-> [!WARNING]  
-> Il cast è un **operatore unario**:  
-> `short a = (short) 5 + b;` cast(a) si applica solo a `5` → il risultato dell’operazione resta `int` e l’assegnamento fallisce comunque.
-
----
+> [!WARNING]
+> Cast is a **unary operator**:
+>
+> `short a = (short) 5 + b;`
+> The cast applies only to `5` → the expression result remains int → assignment still fails.
 
 ### 4.7.4 Reference Casting Objects
 
-Il casting si applica anche ai **riferimenti a oggetti** in una gerarchia di classi (ereditarietà).  
-Non cambia l’oggetto in memoria, ma solo **il tipo della reference** attraverso cui accedi.
+Casting also applies to **object references** in a class hierarchy.  
+It does not change the object in memory — only **the reference type** used to access it.
 
-Quando lavori con “oggetti & riferimenti”, tieni a mente:
+Key rules:
 
-- Il **tipo reale dell’oggetto** determina quali campi/metodi *esistono* veramente in memoria.
-- Il **tipo della reference** determina quali campi/metodi **puoi usare** in quel punto di codice.
+- The **real object type** determines which fields/methods actually exist.
+- The **reference type** determines what you may access at that point in code.
 
----
+### 4.7.4.1 Upcasting (Widening Reference Cast)
 
-#### 4.7.4.1 Upcasting (Widening Reference Cast)
+Conversion from **subclass** to **superclass**.
 
-Conversione da tipo **sottoclasse** a tipo **superclasse**.
-
-- È **implicita** e **sempre sicura**: ogni `Dog` è anche un `Animal`.
+**Implicit** and **always safe**: every `Dog` is also an `Animal`.
 
 ```java
 class Animal { }
@@ -374,43 +360,37 @@ Dog dog = new Dog();
 Animal a = dog;    // implicit upcast: Dog → Animal
 ```
 
----
+### 4.7.4.2 Downcasting (Narrowing Reference Cast)
 
-#### 4.7.4.2 Downcasting (Narrowing Reference Cast)
+Conversion from **superclass** to **subclass**.
 
-Conversione da tipo **superclasse** a tipo **sottoclasse**.
-
-- È **esplicita**
-- Può fallire a runtime con `ClassCastException` se l’oggetto *non* è davvero di quel tipo.
+- **Explicit**
+- Can fail at runtime with `ClassCastException` if not truly that type
 
 ```java
 Animal a = new Dog();
-Dog d = (Dog) a;   // OK: a punta davvero a un Dog
+Dog d = (Dog) a;   // OK: a really points to a Dog
 
 Animal x = new Animal();
 Dog d2 = (Dog) x;  // ⚠ Runtime error: ClassCastException
 ```
 
-Per sicurezza, usa `instanceof`:
+For safety, use `instanceof`:
 
 ```java
 if (x instanceof Dog) {
-    Dog safeDog = (Dog) x;   // cast sicuro
+    Dog safeDog = (Dog) x;   // safe cast
 }
 ```
 
----
-
 ### 4.7.5 Key Points Summary
 
-| Casting Type          | Applies To   | Direction                | Syntax     | Safe?          | Performed By |
-|-----------------------|-------------|--------------------------|------------|----------------|-------------|
-| Widening Primitive    | Primitives  | small → large            | Implicit   | ✅ Sì           | Compiler    |
-| Narrowing Primitive   | Primitives  | large → small            | Explicit   | ⚠ No           | Programmer  |
-| Upcasting             | Objects     | subclass → superclass    | Implicit   | ✅ Sì           | Compiler    |
-| Downcasting           | Objects     | superclass → subclass    | Explicit   | ⚠ Runtime check| Programmer  |
-
----
+| Casting Type | Applies To | Direction | Syntax | Safe? | Performed By |
+| --- | --- | --- | --- | --- | --- |
+| Widening Primitive | Primitives | small → large | Implicit | Yes | Compiler |
+| Narrowing Primitive | Primitives | large → small | Explicit | No | Programmer |
+| Upcasting | Objects | subclass → superclass | Implicit | Yes | Compiler |
+| Downcasting | Objects | superclass → subclass | Explicit | Runtime check | Programmer |
 
 ### 4.7.6 Examples
 
@@ -418,20 +398,21 @@ if (x instanceof Dog) {
 // Primitive casting
 short s = 50;
 int i = s;           // widening
-byte b = (byte) i;   // narrowing (possibile perdita)
+byte b = (byte) i;   // narrowing (possible loss)
 
 // Object casting
 Object obj = "Hello";
-String str = (String) obj; // OK: obj punta a una String
+String str = (String) obj; // OK: obj points to a String
 
 Object n = Integer.valueOf(10);
-// String fail = (String) n;  // ClassCastException a runtime
+// String fail = (String) n;  // ClassCastException at runtime
 ```
 
-In sintesi:
+In summary:
 
-- Il **casting primitivo** cambia il tipo numerico.
-- Il **casting di riferimento** cambia la “vista” dell’oggetto nella gerarchia.
-- **Upcasting** → sicuro e implicito.  
-- **Downcasting** → esplicito, da usare con attenzione e spesso preceduto da `instanceof`.
+- **Primitive casting** changes the numeric type.
+- **Reference casting** changes the “view” of an object in the hierarchy.
+- **Upcasting** → safe and implicit.
+- **Downcasting** → explicit, to be used carefully (often after `instanceof`).
+
 
