@@ -1,194 +1,379 @@
-### 4.7.1 Primitive Casting
+# 1. Syntax Building Blocks
 
-Primitive casting changes the type of a numeric value.
+### Table of Contents
+- [1. Syntax Building Blocks](#1-syntax-building-blocks)
+- [1.1 Value](#11-value)
+- [1.2 Literal](#12-literal)
+- [1.3 Identifier](#13-identifier)
+- [1.4 Variable](#14-variable)
+- [1.5 Type](#15-type)
+- [1.6 Operator](#16-operator)
+- [1.7 Expression](#17-expression)
+- [1.8 Statement](#18-statement)
+- [1.9 Code Block](#19-code-block)
+- [1.10 Function / Method](#110--function--method)
+- [1.11 Class / Object](#111-class--object)
+- [1.12 Module / Package](#112-module--package)
+- [1.13 Program](#113-program)
+- [1.14 System](#114-system)
+- [1.15 Summary as a Growing Scale](#115--summary-as-a-growing-scale)
+- [1.16 Hierarchy Diagram ASCII](#116--hierarchy-diagram-ascii)
+- [1.17 Hierarchy Diagram Mermaid](#117--hierarchy-diagram-mermaid)
 
-There are two categories of casting:
+---
 
-| Type | Description | Example | Explicit? | Risk |
-| --- | --- | --- | --- | --- |
-| Widening | smaller type → larger type | int → double | No | no loss |
-| Narrowing | larger type → smaller type | double → int | Yes | possible loss |
+Every software system or computer program is composed of a set of **data** and a set of **operations** that are applied to this data in order to produce a result.
 
-### 4.7.1.1 Widening Implicit Casting
+More formally:
 
-Automatic conversion from a “smaller” type to a compatible “larger” type.  
-Handled by the compiler, **does not require explicit syntax**.
+> A computer program consists of a collection of data structures that represent the state of the system, together with algorithms that specify the operations to be performed on this state in order to produce outputs.
 
-```java
-int i = 100;
-double d = i;  // implicit cast: int → double
-System.out.println(d); // 100.0
-```
+This document describes a **hierarchy of abstractions**: the *elementary building blocks* which, combined into increasingly complex structures, form software.  
+The sequence is presented in **increasing order of complexity**, with general definitions (computer science) and Java references.
 
-✅ **Safe** – no overflow (though still be aware of floating-point precision).
+---
 
-### 4.7.1.2 Narrowing Explicit Casting
+### 1.1 **Value**
 
-Manual conversion from a “larger” type to a “smaller” one.  
-Requires a **cast expression** because it may cause data loss.
+- **Definition:** An abstract entity representing information (number, character, boolean, string, etc.).
+- **Theory:** A value belongs to a mathematical domain (set), such as ℕ for natural numbers or Σ* for strings.
+- **Example (abstract):** the number forty-two, the truth value *true*, the character "a".
 
-```java
-double d = 9.78;
-int i = (int) d;  // explicit cast: double → int
-System.out.println(i); // 9 (fraction discarded)
-```
-
-⚠ Use only when you are sure the value fits in the target type.
-
-### 4.7.2 Data Loss, Overflow and Underflow
-
-When a value exceeds a type’s capacity, you may get:
-
-- **Overflow**: result greater than the maximum representable value
-- **Underflow**: result lower than the minimum representable value
-- **Truncation**: data that does not fit is lost (e.g., decimals)
-
-**Example – overflow/underflow with int:**
+**Java example (values):**
 
 ```java
-int max = Integer.MAX_VALUE;
-int overflow = max + 1;     // "wrap-around" to negative
-
-int min = Integer.MIN_VALUE;
-int underflow = min - 1;    // "wrap-around" to positive
+// These are values:
+42        // an int value
+true      // a boolean value
+'a'       // a char value
+"Hello"   // a String value
 ```
 
-Example: truncation
+---
+
+### 1.2 **Literal**
+
+- **Definition:** A **literal** is the concrete notation in source code that directly denotes a fixed value.
+- **In Java:** `42`, `'a'`, `true`, `"Hello"`.
+- **Theory:** A literal is *syntax*, while a value is its *semantics*.
+- **Note:** Literals are the most common way to introduce values into programs.
+
+**Java example (literals):**
 
 ```java
-double d = 9.99;
-int i = (int) d; // 9 (fraction discarded)
+int answer = 42;          // 42 is an int literal
+char letter = 'a';        // 'a' is a char literal
+boolean flag = true;      // true is a boolean literal
+String msg = "Hello";     // "Hello" is a String literal
 ```
+
+---
+
+### 1.3 **Identifier**
+
+- **Definition:** A symbolic name that associates a value (or a structure) with a readable label.
+
+- **In Java:**
+- **User-defined identifiers:** chosen by the programmer to name variables, methods, classes, etc.  
+Examples: `x`, `counter`, `MyClass`, `calculateSum`.
+- **Keywords (reserved words):** predefined names reserved by the Java language and cannot be redefined.  
+Examples: `class`, `public`, `static`, `if`, `return`.
+
+> **Note:** Identifiers must follow Java naming rules: see [Java Naming Rules](naming-rules.md).
+
+- **Theory:** Binding function: connects a name to a value or resource.
+
+**Java example (identifiers):**
+
+```java
+int counter = 0;          // counter is an identifier (variable name)
+String userName = "Bob";  // userName is an identifier
+class MyService { }       // MyService is a class identifier
+```
+
+---
+
+### 1.4 **Variable**
+
+- **Definition:** A “memory cell” labeled by an identifier, which can hold and change value.
+- **In Java:** `int counter = 0; counter = counter + 1;`.
+- **Theory:** A mutable state that can vary over time during execution.
+
+**Java example (variable changing over time):**
+
+```java
+int counter = 0;       // variable initialized
+counter = counter + 1; // variable updated
+counter++;             // another update (post-increment)
+```
+
+---
+
+### 1.5 **Type**
+
+- **Definition:** A type is a set of values and a set of operations permitted on those values.
+
+- **In Java:**
+- - **Primitive (simple) types:** directly represent basic values.  
+  Examples: `int`, `double`, `boolean`, `char`, `byte`, `short`, `long`, `float`.
+- - **Reference types:** represent references (pointers) to objects in memory.  
+  Examples: `String`, arrays (e.g., `int[]`), classes, interfaces, and user-defined types.
 
 > [!NOTE]
-> Floating-point types (`float`, `double`) **do not wrap**:
-> overflow → `Infinity` / `-Infinity`
-> underflow (very small values) → 0.0 or denormalized values.
+> See [Java Data Types](data-types.md).
 
-### 4.7.3 Casting Values versus Variables
+- **Theory:** A type system is the set of rules that associates sets of values and admissible operations.
 
-Java treats:
-
-- Integer **literals** as `int` by default
-- Floating-point **literals** as `double` by default
-
-The compiler **does not require a cast** when a literal fits within the target type range:
+**Java example (types):**
 
 ```java
-byte first = 10;        // OK: 10 fits in byte
-short second = 9 * 10;  // OK: constant expression evaluated at compile time
+int age = 30;           // int type
+double price = 9.99;    // double type
+boolean active = true;  // boolean type
+String name = "Alice";  // reference type (class String)
 ```
 
-But:
+---
+
+### 1.6 **Operator**
+
+- **Definition:** A **symbol or keyword** that performs a computation or action on one or more operands.
+- **Role:** Operators combine values, variables, and expressions to produce new values or to modify program state.
+
+- **In Java (main categories):**  
+- Arithmetic: `+`, `-`, `*`, `/`, `%`  
+- Unary: `++`, `--`, `!`  
+- Comparison (relational): `<`, `>`, `<=`, `>=`, `==`, `!=`  
+- Logical: `&&`, `||`, `!`  
+- Assignment: `=`, `+=`, `-=`, `*=`, `/=`, `%=`  
+- Bitwise: `&`, `|`, `^`, `~`, `<<`, `>>`, `>>>`  
+- Ternary (conditional): `? :`
+
+- **Theory:** Operators define allowable computations over types; together with values and variables, they form **expressions**.
+
+**Java example (operators in context):**
 
 ```java
-long a = 5729685479;    // ❌ error: int literal out of range
-long b = 5729685479L;   // ✅ long literal (L suffix)
-
-float c = 3.14;         // ❌ double → float: requires F or cast
-float d = 3.14F;        // ✅ float literal
-
-int e = 0x7FFF_FFFF;    // ✅ max int in hex
-int f = 0x8000_0000;    // ❌ out of int range (needs L)
+int a = 5 + 3;          // + arithmetic
+boolean ok = a > 3;     // > comparison
+ok = ok && true;        // && logical
+a += 2;                 // += assignment
+int sign = (a >= 0) ? 1 : -1; // ?: ternary
 ```
 
-However, when numeric promotion rules apply:
+---
 
-> With variables of type `byte`, `short`, and `char` in an arithmetic expression,  
-> operands are promoted to `int` and the result is `int`.
+### 1.7 **Expression**
+
+- **Definition:** A combination of values, literals, variables, **operators**, and functions that produces a new value.
+- **In Java:** `x + 3`, `Math.sqrt(25)`, `"Hello" + " world"`.
+- **Theory:** A syntax tree that evaluates to a result.
+
+**Java example (expressions):**
 
 ```java
-byte first = 10;
-short second = 9 + first;       // ❌ 9 (int literal) + first (byte → int) = int
-// second = (short) (9 + first);  // ✅ cast entire expression
+int x = 10;
+int y = x + 3;               // x + 3 is an expression
+double r = Math.sqrt(25);    // Math.sqrt(25) is an expression
+String msg = "Hello" + " ";  // "Hello" + " " is an expression
+msg = msg + "world";         // msg + "world" is another expression
 ```
 
-```java
-short b = 10;
-short a = 5 + b;               // ❌ 5 (int) + b (short → int) = int
-short a2 = (short) (5 + b);    // ✅ cast entire expression
-```
+---
 
-> [!WARNING]
-> Cast is a **unary operator**:
-> `short a = (short) 5 + b;`
-> The cast applies only to `5` → the expression result remains int → assignment still fails.
+### 1.8 **Statement**
 
-### 4.7.4 Reference Casting Objects
+- **Definition:** A unit of execution that modifies state or controls flow.
+- **In Java:** `x = x + 1;`, `if (x > 0) { ... }`.
+- **Theory:** A sequence of actions that does not return a value as a result of the statement itself, but changes the configuration of the abstract machine.
 
-Casting also applies to **object references** in a class hierarchy.  
-It does not change the object in memory — only **the reference type** used to access it.
-
-Key rules:
-
-- The **real object type** determines which fields/methods actually exist.
-- The **reference type** determines what you may access at that point in code.
-
-### 4.7.4.1 Upcasting (Widening Reference Cast)
-
-Conversion from **subclass** to **superclass**.
-
-- **Implicit** and **always safe**: every `Dog` is also an `Animal`.
+**Java example (statements):**
 
 ```java
-class Animal { }
-class Dog extends Animal { }
+int x = 0;                // declaration statement
+x = x + 1;                // assignment statement
 
-Dog dog = new Dog();
-Animal a = dog;    // implicit upcast: Dog → Animal
-```
-
-### 4.7.4.2 Downcasting (Narrowing Reference Cast)
-
-Conversion from **superclass** to **subclass**.
-
-- **Explicit**
-- Can fail at runtime with `ClassCastException` if not truly that type
-
-```java
-Animal a = new Dog();
-Dog d = (Dog) a;   // OK: a really points to a Dog
-
-Animal x = new Animal();
-Dog d2 = (Dog) x;  // ⚠ Runtime error: ClassCastException
-```
-
-For safety, use `instanceof`:
-
-```java
-if (x instanceof Dog) {
-    Dog safeDog = (Dog) x;   // safe cast
+if (x > 0) {              // if statement
+    System.out.println("Positive");
 }
 ```
 
-### 4.7.5 Key Points Summary
+---
 
-| Casting Type | Applies To | Direction | Syntax | Safe? | Performed By |
-| --- | --- | --- | --- | --- | --- |
-| Widening Primitive | Primitives | small → large | Implicit | Yes | Compiler |
-| Narrowing Primitive | Primitives | large → small | Explicit | No | Programmer |
-| Upcasting | Objects | subclass → superclass | Implicit | Yes | Compiler |
-| Downcasting | Objects | superclass → subclass | Explicit | Runtime check | Programmer |
+### 1.9 **Code Block**
 
-### 4.7.6 Examples
+- **Definition:** A set of statements enclosed between delimiters forming an executable unit.
+- **In Java:** `{ int y = 5; x = x + y; }`.
+- **Theory:** A sequential composition of statements, with rules of *scope* (visibility).
+
+**Java example (code block and scope):**
 
 ```java
-// Primitive casting
-short s = 50;
-int i = s;           // widening
-byte b = (byte) i;   // narrowing (possible loss)
+int x = 10;
 
-// Object casting
-Object obj = "Hello";
-String str = (String) obj; // OK: obj points to a String
+{
+    int y = 5;        // y is only visible inside this block
+    x = x + y;        // OK: x is visible here
+}
 
-Object n = Integer.valueOf(10);
-// String fail = (String) n;  // ClassCastException at runtime
+// y is not visible here
+// x is still visible here
 ```
 
-In summary:
+---
 
-- **Primitive casting** changes the numeric type.
-- **Reference casting** changes the “view” of an object in the hierarchy.
-- **Upcasting** → safe and implicit.
-- **Downcasting** → explicit, to be used carefully (often after `instanceof`).
+### 1.10  **Function / Method**
+
+- **Definition:** A sequence of encapsulated statements, identified by a name, which can receive inputs (parameters) and return an output (value).
+
+- **In Java:**
+
+```java
+int square(int n) {
+    return n * n;
+}
+```
+
+- **Theory:** A mapping between input and output domains, with an operational body.
+
+**Java usage example:**
+
+```java
+int result = square(5); // result = 25
+```
+
+---
+
+### 1.11 **Class / Object**
+
+- **Definition:**
+- - **Class:** abstract description of a set of objects (state + behavior).
+- - **Object:** a concrete instance of the class.
+
+- **In Java:**
+
+```java
+class Point {
+    int x, y;
+
+    void move(int dx, int dy) {
+        x += dx;
+        y += dy;
+    }
+}
+
+Point p = new Point();   // p is an object (instance of Point)
+p.move(1, 2);            // method call on the object
+```
+
+- **Theory:** Abstraction of an *ADT* (Abstract Data Type).
+
+---
+
+### 1.12 **Module / Package**
+
+- **Definition:** Logical grouping of classes, functions, and resources with a common purpose.
+- **In Java:** `package java.util;` → collects utilities.
+- **Theory:** Mechanism of organization and reuse, reducing complexity.
+
+**Java example (package):**
+
+```java
+package com.example.app;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello");
+    }
+}
+```
+
+---
+
+### 1.13 **Program**
+
+- **Definition:** A coherent set of modules, classes, and functions that, when executed on a machine, realizes a global behavior.
+- **In Java:** The `main` method and everything it invokes.
+- **Theory:** A specification of transformations from input to output on an abstract machine.
+
+**Java example (minimal program):**
+
+```java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java 21!");
+    }
+}
+```
+
+---
+
+### 1.14 **System**
+
+- **Definition:** A set of cooperating programs that interact with external resources (user, network, devices).
+- **Example:** An enterprise Java platform with database, REST services, UI.
+- **Theory:** Complex architecture of software and hardware components.
+
+**Example (conceptual):**
+
+- A Java backend (Spring Boot service)
+- A database (PostgreSQL)
+- A front-end web app
+- External services (REST APIs, message queues)
+
+Together they form a *system*.
+
+---
+
+### 1.15 📌 Summary as a Growing Scale
+
+`Value → Literal → Identifier → Variable → Type → Operator → Expression → Statement → Code Block → Function/Method → Class/Object → Module/Package → Program → System`
+
+This scale shows how small conceptual units are combined into larger and more complex structures.
+
+---
+
+### 1.16 📊 Hierarchy Diagram (ASCII)
+
+**Description:** This ASCII diagram shows the hierarchical relation between building blocks, from the most complex (System) down to the simplest (Value and its concrete form, the Literal).
+
+```text
+System
+└── Program
+    └── Module / Package
+        └── Class / Object
+            └── Function / Method
+                └── Code Block
+                    └── Statement
+                        └── Expression
+                            └── Operator
+                                └── Type
+                                    └── Variable
+                                        └── Identifier
+                                            └── Literal
+                                                └── Value
+```
+
+---
+
+### 1.17 📊 Hierarchy Diagram (Mermaid)
+
+**Description:** The Mermaid diagram renders the same hierarchy in a top-down tree. It highlights that a Literal is the syntactic form of a Value.
+
+```text
+```mermaid
+graph TD
+    A[System]
+    A --> B[Program]
+    B --> C[Module / Package]
+    C --> D[Class / Object]
+    D --> E[Function / Method]
+    E --> F[Code Block]
+    F --> G[Statement]
+    G --> H[Expression]
+    H --> H2[Operator]
+    H2 --> I[Type]
+    I --> J[Variable]
+    J --> K[Identifier]
+    K --> L[Literal]
+    L --> M[Value]
