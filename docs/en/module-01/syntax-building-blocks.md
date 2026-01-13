@@ -11,7 +11,7 @@
   - [1.6 Expression](#16-expression)
   - [1.7 Statement](#17-statement)
   - [1.8 Code Block](#18-code-block)
-  - [1.9 Function / Method](#19-function--method)
+  - [1.9 Function / Method](#19--function--method)
   - [1.10 Class / Object](#110-class--object)
   - [1.11 Module / Package](#111-module--package)
   - [1.12 Program](#112-program)
