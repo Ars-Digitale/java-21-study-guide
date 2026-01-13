@@ -24,9 +24,12 @@ As long as you follow the naming rules described below, you are free to choose m
 
 ### 3.1.1 Reserved Words
 
-- Identifiers **cannot** be the same as Java’s **keywords** or **reserved literals**.  
-- Keywords are predefined, special words in the Java language which you are not allowed to use (see [Java Keywords](#java-reserved-keywords)).  
-- Literals such as `true`, `false`, and `null` are also reserved and cannot be used as identifiers.  
+Identifiers **cannot** be the same as Java’s **keywords** or **reserved literals**.
+  
+Keywords are predefined, special words in the Java language which you are not allowed to use (see [Java Keywords](#java-reserved-keywords)).
+  
+Literals such as `true`, `false`, and `null` are also reserved and cannot be used as identifiers.
+  
 - Example:  
 ```java
 int class = 5;        // invalid: 'class' is a keyword
@@ -49,7 +52,8 @@ int year = 2024;   	// valid
 | class    | finally  | long | strictfp | volatile |
 | const*   | float    | native | super | while |
 
-> \* `goto` and `const` are reserved but not used.  
+> [!NOTE]
+>  `goto` and `const` are reserved but not used.  
 
 #### 3.1.1.2 Reserved Literals
 
@@ -57,12 +61,12 @@ int year = 2024;   	// valid
 - `false`  
 - `null`  
 
----
 
 ### 3.1.2 Case Sensitivity
 
-- Identifiers in Java are **case sensitive**.  
-- This means `myVar`, `MyVar`, and `MYVAR` are all different identifiers.  
+Identifiers in Java are **case sensitive**.  
+This means `myVar`, `MyVar`, and `MYVAR` are all different identifiers.
+  
 - Example:  
 ```java
 int myVar = 1;
@@ -77,11 +81,10 @@ int CLASS = 6; // legal but, please, don't do it!!
 > Because of case sensitivity, you could use versions of keywords which differ in case. 
 > While legal, such naming is discouraged because it reduces readability and it is considered a very bad practice.
 
----
 
 ### 3.1.3 Beginning of Identifiers
 
-- Identifiers in Java must begin with a letter, a currency symbol ( $, €, £, ₹...) or a _ symbol.   
+Identifiers in Java must begin with a letter, a currency symbol ( $, €, £, ₹...) or a _ symbol.   
 
 Example:  
 ```java
@@ -94,11 +97,10 @@ String €uro = "currency"; // legal (rarely seen in practice)
 > [!NOTE]
 > Currency symbols are legal but not recommended in real-world code.
 
----
 
 ### 3.1.4 Numbers in Identifiers
 
-- Identifiers in Java can include numbers but they cannot start with them.   
+Identifiers in Java can include numbers but they cannot start with them.   
 
 Example:  
 ```java
@@ -107,14 +109,14 @@ int $myVar44;
 int 3myVarC; // invalid: identifier cannot start with a digit
 int var2024 = 10; // valid
 ```
----
+
 
 ### 3.1.5 Single `_` token
 
 - A single underscore (`_`) is not allowed as an identifier.
 - Since Java 9, `_` is a reserved token for future language use.
 
-Example:  
+- Example:  
 ```java
 int _;  // invalid since Java 9
 ```
@@ -122,14 +124,14 @@ int _;  // invalid since Java 9
 > [!REMEMBER]
 > `_` is legal inside number literals (see next section), but not as a standalone identifier.
 
----
 
 ### 3.1.6 Numeric literals & Underscore character
 
-- You can have one or more `_` (underscore) character in number literals in order to make them easier to read.
-- You can have underscores anywhere except at the beginning, at the end or right around (before/after) a decimal point.
+You can have one or more `_` (underscore) character in number literals in order to make them easier to read.
+
+You can have underscores anywhere except at the beginning, at the end or right around (before/after) a decimal point.
    
-Example:  
+- Example:  
 ```java
 int firstNum = 1_000_000;
 int secondNum = 1 _____________ 2;
@@ -147,5 +149,3 @@ long mask = 0b1111_0000;  // valid in binary literals
 > Underscores improve readability:
 > 1_000_000 is easier than 1000000.
 
-
----
