@@ -25,7 +25,7 @@
     - [2.6.3 Code Inside Packages (standard src → out layout)](#263-code-inside-packages-standard-src--out-layout)
     - [2.6.4 Compiling to Another Directory (-d)](#264-compiling-to-another-directory--d)
     - [2.6.5 Multiple Files Across Packages (Compile Whole Source Tree)](#265-multiple-files-across-packages-compile-whole-source-tree)
-    - [2.6.6 Single-File Source Execution (Quick Runs Without javac)](#266-singlefile-source-execution-quick-runs-without-javac)
+    - [2.6.6 Single-File Source Execution (Quick Runs Without javac)](#266-single-file-source-execution-quick-runs-without-javac)
     - [2.6.7 Passing Parameters to a Java Program](#267-passing-parameters-to-a-java-program)
 
 
