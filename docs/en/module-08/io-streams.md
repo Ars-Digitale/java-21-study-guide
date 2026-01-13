@@ -201,7 +201,7 @@ BufferedReader reader =
 
 #### 34.3.5.4 Bridging Byte Streams to Character Streams
 
-To convert between byte-based and character-based streams, Java provides bridge classes.
+To convert between byte-based and character-based streams, Java provides bridge classes that perform explicit charset decoding/encoding.
 
 - `InputStreamReader` converts bytes → characters
 - `OutputStreamWriter` converts characters → bytes
@@ -244,9 +244,10 @@ Closing the outermost stream automatically closes all wrapped streams.
 - Forgetting the bridge between byte and char streams
 - Assuming `Reader` works with binary data
 - Using default charset unintentionally
+- Closing inner streams manually (risking double-close): `close()` on the outer wrapper is enough and recommended
 
 
-## 34.4 Core java.io Base Classes and Key Methods
+## 34.4 Core `java.io` Base Classes and Key Methods
 
 The `java.io` package is built around a small set of **abstract base classes**.
 Understanding these classes and their contracts is essential, because all concrete I/O classes build on them.
@@ -446,7 +447,8 @@ try (BufferedReader reader =
 ```
 
 > [!NOTE]
-> The `readLine()` method is only available on BufferedReader, because it relies on buffering to efficiently detect line boundaries.
+> The `readLine()` method is only available on BufferedReader (not Reader), because it relies on buffering to efficiently detect line boundaries.
+
 
 ### 34.5.6 BufferedWriter Example
 

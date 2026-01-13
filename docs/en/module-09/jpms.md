@@ -2,7 +2,7 @@
 
 ### Table of Contents
 
-- [37 Java Platform Module System JPMS](#37-java-platform-module-system-jpms)
+- [37. Java Platform Module System (JPMS)](#37-java-platform-module-system-jpms)
   - [37.1 Why Modules Were Introduced](#371-why-modules-were-introduced)
     - [37.1.1 Problems with the Classpath](#3711-problems-with-the-classpath)
     - [37.1.2 Example of a Classpath Problem](#3712-example-of-a-classpath-problem)
@@ -49,6 +49,8 @@ The classpath is a flat list of JARs where:
 - there is no reliable dependency declaration
 - conflicting versions are common
 - encapsulation is weak or nonexistent
+- duplicate classes silently overwrite each other based on classpath order
+
 
 This led to well-known issues such as:
 - “JAR hell”
@@ -71,6 +73,9 @@ Which one is chosen depends on classpath order, not correctness.
 
 A `module` is a named, self-describing unit of code.
 
+Every named module has a unique name that identifies it to the compiler and module system.
+
+
 It explicitly declares:
 - what it depends on
 - what it exposes to other modules
@@ -91,9 +96,10 @@ A module is stronger than a package and more structured than a JAR.
 
 | Concept | Purpose | Encapsulation |
 | --- | --- | --- |
-| `Package` | Namespace | only Weak |
-| `JAR` | Deployment unit | None |
-| `Module` | Strong abstraction unit | Strong |
+| Package | Namespace grouping | Weak (public still visible) |
+| JAR     | Packaging / deployment | None (all classes visible when on classpath) |
+| Module  | Encapsulation + dependency unit | Strong (unexported packages hidden) |
+
 
 ## 37.3 The `module-info.java` Descriptor
 
@@ -107,7 +113,8 @@ This file describes the module to the compiler and the runtime.
 
 ### 37.3.1 Minimal Module Descriptor
 
-A minimal module descriptor declares only the module name.
+A minimal module descriptor declares only the module name. The filename must be exactly `module-info.java`, and it must be located in the root of the module source tree.
+
 
 ```java
 module com.example.hello {
@@ -136,6 +143,11 @@ Key points:
 - The **directory name matches the module name**
 - module-info.java is at the top of the module source root
 - packages follow standard Java naming rules
+
+> [!NOTE]
+> In IDE and build-tool projects, the file structure may differ (e.g. Maven uses `src/main/java`).  
+> What always remains true: `module-info.java` sits in the root of the module source tree and package paths follow standard Java naming.
+
 
 ## 37.5 A First Modular Program
 
@@ -171,11 +183,14 @@ In `JPMS`, packages are NOT accessible by default.
 
 Even public classes are hidden unless explicitly exported.
 
+In modules, `public` means “public to other modules *only if* the containing package is exported.”
+
+
 | Situation | Accessible from another module? |
 |-----------|---------------------------------|
 | Public class in non-exported package  | No |
 | Public class in exported package | Yes |
-| Protected member in exported package  | Yes (subject to Java inheritance rules) |
+| Protected member in exported package | Yes, but only via subclassing (not general access) |
 | Package-private class/member (any package) | No |
 | Private member | No |
 
@@ -190,5 +205,7 @@ Even public classes are hidden unless explicitly exported.
 - `module-info.java` is the central descriptor
 - Packages are hidden unless exported
 - Classpath-based visibility no longer applies in modules
+- Public visibility is no longer enough: module exports control accessibility
+
 
 

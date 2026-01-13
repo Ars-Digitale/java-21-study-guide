@@ -2,7 +2,7 @@
 
 ### Table of Contents
 
-- [38 Compiling Packaging and Running Modules](#38-compiling-packaging-and-running-modules)
+- [38. Compiling, Packaging, and Running Modules](#38-compiling-packaging-and-running-modules)
   - [38.1 The Module Path vs the Classpath](#381-the-module-path-vs-the-classpath)
   - [38.2 Compiling a Single Module](#382-compiling-a-single-module)
   - [38.3 Compiling Multiple Interdependent Modules](#383-compiling-multiple-interdependent-modules)
@@ -15,7 +15,9 @@
     - [38.6.4 exports-to-qualified-exports](#3864-exports--to-qualified-exports)
     - [38.6.5 opens](#3865-opens)
     - [38.6.6 opens-to-qualified-opens](#3866-opens--to-qualified-opens)
-    - [38.6.7 Summary of Core Directives](#3867-summary-of-core-directives)
+    - [38.6.7 Table of Core Directives](#3867-table-of-core-directives)
+	- [38.6.8 Exports vs Opens — Compile-Time vs Runtime Access](#3868-exports-vs-opens--compile-time-vs-runtime-access)
+
 
 ---
 
@@ -28,6 +30,8 @@ This section explains how the Java toolchain changes when modules are involved.
 `JPMS` introduces a new concept: the module path.
 It exists alongside the traditional classpath, but the two behave very differently.
 
+
+
 | Aspect | Classpath | Module path |
 | --- | --- | --- |
 | Structure | Flat list of JARs | Modules with identities |
@@ -37,8 +41,10 @@ It exists alongside the traditional classpath, but the two behave very different
 | Resolution order | Order-dependent | Deterministic |
 
 > [!NOTE]
-> A JAR placed on the classpath is treated as part of the `unnamed module`.
-> A JAR placed on the module path becomes a `named (or automatic) module`.
+> - A JAR placed on the classpath is treated as part of the `unnamed module`.
+> - A JAR placed on the module path becomes a `named (or automatic) module`.
+> - Split packages are allowed on the classpath but forbidden for named modules on the module path.
+
 
 ## 38.2 Compiling a Single Module
 
@@ -53,9 +59,9 @@ src/com.example.hello/com/example/hello/Main.java
 A more scalable approach uses --module-source-path.
 
 ```bash
-javac -d out
---module-source-path src
-$(find src -name "*.java")
+javac --module-source-path src \
+      -d out \
+      $(find src -name "*.java")
 ```
 
 > [!NOTE]
@@ -64,6 +70,9 @@ $(find src -name "*.java")
 ## 38.3 Compiling Multiple Interdependent Modules
 
 When modules depend on each other, their dependencies must be resolvable at compile time.
+
+`--module-path` mods should contain already-compiled modular JARs or compiled module directories (each with its own module-info.class).
+
 
 ```bash
 javac -d out
@@ -82,6 +91,9 @@ After compilation, modules are typically packaged as JAR files.
 
 A modular JAR contains a `module-info.class` at its root.
 
+If module-info.class is present, the JAR becomes a named module automatically and its name is taken from the descriptor (not the filename).
+
+
 ```bash
 jar --create
 --file mods/com.example.hello.jar
@@ -91,6 +103,7 @@ jar --create
 
 > [!NOTE]
 > A JAR with `module-info.class` is a `named module, not an automatic module`.
+> When a JAR contains a `module-info.class`, its module name is taken from that file and not inferred from the filename.
 
 ## 38.5 Running a Modular Application
 
@@ -106,6 +119,10 @@ You can shorten this using the `-m` option.
 ```bash
 java -p mods -m com.example.hello/com.example.hello.Main
 ```
+
+> [!NOTE]
+> When using named modules, the classpath is ignored for resolution of module dependencies.
+
 
 ## 38.6 Module Directives Explained
 
@@ -148,6 +165,9 @@ Meaning:
 
 > [!NOTE]
 > This is similar to “public dependencies” in other module systems.
+>
+> Readable ≠ exported: a transitive requirement does not export your packages automatically.
+
 
 ### 38.6.3 `exports`
 
@@ -201,7 +221,11 @@ module com.example.app {
 }
 ```
 
-### 38.6.7 Summary of Core Directives
+> [!NOTE]
+> `opens` affects reflection; `exports` affects compilation and type visibility.
+
+
+### 38.6.7 Table of Core Directives
 
 | Directive | Purpose |
 | --- | --- |
@@ -211,3 +235,18 @@ module com.example.app {
 | `exports ... to` | Expose to specific modules |
 | `opens` | Allow runtime reflection |
 | `opens ... to` | Restrict reflective access |
+
+
+### 38.6.8 Exports vs Opens — Compile-Time vs Runtime Access
+
+| Visibility | Compile-time? | Runtime reflection? |
+| --- | --- | --- |
+| `exports` | Yes | No |
+| `opens` | No | Yes |
+| `exports ... to` | Yes (limited modules) | No |
+| `opens ... to` | No | Yes (limited modules) |
+
+
+
+> [!IMPORTANT]
+> JPMS adds a module path, but the classpath still exists. They can coexist, but named modules take precedence.

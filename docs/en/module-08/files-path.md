@@ -62,7 +62,8 @@ At a conceptual level, a filesystem solves several fundamental problems:
 - Access control and permissions
 - Concurrency and consistency guarantees
 
-In Java NIO, a filesystem is represented by the `FileSystem` abstraction.
+In Java NIO, a filesystem is represented by the `FileSystem` abstraction, typically obtained via `FileSystems.getDefault()` for the OS filesystem.
+
 
 | Aspect | Meaning |
 | --- | --- |
@@ -171,6 +172,9 @@ A `symbolic link` is a special file containing a path to another entry.
 
 > [!NOTE]
 > Java NIO exposes link behavior explicitly via `LinkOption`.
+>
+> In many common filesystems, Java code cannot create hard links in a fully portable way, while symbolic links are directly supported via `Files.createSymbolicLink(...)` (where permitted by the OS / permissions).
+
 
 ## 32.7 Other Filesystem Entry Types
 
@@ -193,14 +197,16 @@ Java I/O APIs operate at different abstraction layers:
 - File (legacy API) / Files → queries or modifies filesystem state
 - Streams / Channels → move bytes or characters
 
+
 | Java API | Role |
 | --- | --- |
 | `Path` | Addressing |
-| `File (legacy APIs)` | Addressing / Filesystem operations |
+| `File` (legacy APIs) | Addressing / filesystem operations |
 | `Files` | Filesystem operations |
-| `InputStream / Reader` | Reading data |
-| `OutputStream / Writer` | Writing data |
-| `Channels` | Advanced data access |
+| `InputStream` / `Reader` | Reading data |
+| `OutputStream` / `Writer` | Writing data |
+| `Channel` / `SeekableByteChannel` | Advanced / random access |
+
 
 > [!NOTE]
 > No Java API “is” a file; APIs mediate access to filesystem-managed resources.
@@ -241,7 +247,7 @@ Yes — in the old I/O API, `java.io.File` confusingly plays two roles at the sa
 
 - `File` represents a filesystem path
 - `File` also exposes filesystem operations
-- It does not represent an open file nor file contents
+- It does **not** represent an open file, nor file contents
 
 > [!NOTE]
 > This mixing of responsibilities is considered a design flaw in hindsight.
@@ -371,8 +377,10 @@ An absolute path fully identifies a location from the filesystem root.
 
 
 > [!IMPORTANT]  
-> - a path starting with a forward slash `(/)` or with a drive letter `(C:)` is an absolute path.
-> The symbol `(.)` is a reference to the current directory while the symbol `(..)` is a reference to its parent directory.
+> - A path starting with a forward slash `(/)` (Unix-like) or with a drive letter such as `C:` (Windows) is **typically** considered an absolute path.  
+> - The symbol `.` is a reference to the current directory while `..` is a reference to its parent directory.
+> On Windows, a path like `\dir\file.txt` (without drive letter) is *rooted* on the current drive, not fully qualified with drive + path.
+
 
 Example:
 
@@ -428,7 +436,7 @@ Separators differ across platforms, but `Path` abstracts them.
 |	Comparison	|	Error-prone	|	Safer	|
 	
 > [!NOTE] 
-> Hardcoding "/" or "" is discouraged; Path handles this automatically.
+> Hardcoding `"/"` or `"\\"` is discouraged; `Path` handles this automatically.
 
 
 ## 32.15 What Files Actually Do (and What They Don’t)
@@ -437,7 +445,7 @@ The `Files` class performs real I/O operations.
 
 ### 32.15.1 Files DO
 
-- Open files
+- Open files indirectly (via streams / channels returned by its methods)
 - Create and delete filesystem entries
 - Throw checked exceptions on failure
 - Respect filesystem permissions
@@ -447,6 +455,8 @@ The `Files` class performs real I/O operations.
 - Maintain open resources after method returns (except streams)
 - Store file contents internally
 - Guarantee atomicity unless specified
+- Maintain a persistent handle to open files (streams/channels own the handle instead)
+
 
 > [!NOTE]
 > Methods returning streams (e.g. `Files.lines()`) DO keep the file open until the stream is closed.
@@ -456,12 +466,13 @@ The `Files` class performs real I/O operations.
 A major conceptual difference lies in error reporting.
 
 
-|	Aspect	|	java.io.File	|	java.nio.file.Files	|
-|-----------|-------------------|-----------------------|
-|	Error signaling	|	boolean / null	|	IOException	|
-|	Diagnostics	|	Poor	|	Rich	|
-|	Race awareness	|	Weak	|	Improved	|
-|	preference	|	Discouraged	|	Preferred	|
+| Aspect           | `java.io.File`          | `java.nio.file.Files`     |
+|------------------|-------------------------|---------------------------|
+| Error signaling  | boolean / `null`        | `IOException`             |
+| Diagnostics      | Poor                    | Rich                      |
+| Race awareness   | Weak                    | Improved                  |
+| Preference       | Discouraged             | Preferred                 |
+
 		
 
 ## 32.17 Common Misconceptions
@@ -471,4 +482,8 @@ A major conceptual difference lies in error reporting.
 - “Files.readAllLines streams data” → false
 - “Relative paths are portable” → false
 - “Creating a Path may fail due to permissions” → false
+
+> [!NOTE]
+> Many NIO methods that sound “safe” are purely syntactic (like `normalize` or `resolve`): they do **not** touch the filesystem and cannot detect missing files.
+
 

@@ -36,8 +36,7 @@
 
 ---
 
-
-This first section focuses on how to create filesystem locators using the legacy `java.io.File` API and the modern `java.nio.file.Path` API: how to convert between them and understanding overloads, defaults, and common pitfalls.
+This section focuses on how to create filesystem locators using the legacy `java.io.File` API and the modern `java.nio.file.Path` API: how to convert between them and understanding overloads, defaults, and common pitfalls.
 
 ## 33.1 Legacy `File` and NIO `Path`: Creation and Conversion
 
@@ -150,7 +149,7 @@ Combines paths in a filesystem-aware way.
 - Absolute argument replaces base path
 
 > [!NOTE]
-> `Path.resolve(...)` has a rule: if the argument is absolute, it returns the argument and discards the base (you cannot combine two absolute path using `resolve`)
+> `Path.resolve(...)` has a rule: if the argument is absolute, it returns the argument and discards the base (you cannot combine two absolute paths using `resolve`).
 
 #### 33.1.4.2 `relativize()`
 
@@ -252,8 +251,8 @@ Exception in thread "main" java.lang.IllegalArgumentException
 On Windows, paths with different drive letters cannot be relativized.
 
 ```java
-Path p1 = Path.of("C:\data\a");
-Path p2 = Path.of("D:\data\b");
+Path p1 = Path.of("C:\\data\\a");
+Path p2 = Path.of("D:\\data\\b");
 
 p1.relativize(p2); // IllegalArgumentException
 ```
@@ -318,15 +317,17 @@ File fFromUri = new File(u1);
 
 These terms are often mixed up. They are not the same.
 
-| Concept | Legacy (File) | NIO (Path) | Touches filesystem |
-|--------|----------------|------------|--------------------|
-| Absolute | `getAbsoluteFile()` | `toAbsolutePath()` | No |
-| Normalized | Canonical effect | `normalize()` | No |
-| Canonical / Real | `getCanonicalFile()` | `toRealPath()` | Yes |
+| Concept        | Legacy (File)                          | NIO (Path)        | Touches filesystem |
+|----------------|----------------------------------------|-------------------|--------------------|
+| Absolute       | `getAbsoluteFile()`                    | `toAbsolutePath()`| No                 |
+| Normalized     | (no pure normalize, use canonical)\*   | `normalize()`     | `normalize()`: No  |
+| Canonical / Real | `getCanonicalFile()`                 | `toRealPath()`    | Yes                |
 
 
 > [!NOTE]
 > `File.getCanonicalFile()` and `Path.toRealPath()` may resolve symlinks and require the path to exist, so they can throw `IOException`.
+>
+> File does not provide a method for purely syntactic normalization: historically many developers used getCanonicalFile(), but this accesses the filesystem and can fail.
 
 ```java
 import java.io.File;
@@ -361,7 +362,7 @@ Removes **redundant** name elements like `.` and `..`.
 - Does not check if path exists
 
 > [!NOTE]
-> normalize() can produce invalid paths if misused.
+> `normalize()` is purely syntactic, does not check existence, and can produce invalid paths if misused.
 
 
 ### 33.1.8 Quick Comparison Table (Creation + Conversion)
@@ -371,7 +372,7 @@ Removes **redundant** name elements like `.` and `..`.
 | Create from string | `new File("x")` | `Path.of("x")` | Path |
 | Parent + child | `new File(p, c)` | `Path.of(p, c)` or `resolve()` | Path |
 | Convert between APIs | `toPath()` | `toFile()` | Path-centric |
-| Normalize | Canonical | `normalize()` | Path |
+| Normalize | `getCanonicalFile()` (filesystem-based) | `normalize()` (syntactic only) | Path |
 | Resolve symlinks | Canonical | `toRealPath()` | Path |
 
 
@@ -506,7 +507,8 @@ FileOutputStream out = new FileOutputStream("dst.bin")) {
 ```
 
 > [!NOTE]
-> remember `read(byte[])` returns the number of bytes read; you must write only that count, not the full buffer.
+> Remember `read(byte[])` returns the number of bytes read; you must write only that count, not the full buffer.
+
 
 ### 33.2.4 Moving / Renaming and Replacing
 
@@ -651,20 +653,19 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 Path root = Path.of("dirToDelete");
 
-Files.walkFileTree(root, new SimpleFileVisitor<>() {
+Files.walkFileTree(root, new SimpleFileVisitor<Path>() {
+    @Override
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+        Files.delete(file);
+        return FileVisitResult.CONTINUE;
+    }
 
-@Override
-public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-	Files.delete(file);
-	return FileVisitResult.CONTINUE;
-}
-
-@Override
-public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-	if (exc != null) throw exc;
-	Files.delete(dir);
-	return FileVisitResult.CONTINUE;
-}
+    @Override
+    public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+        if (exc != null) throw exc;
+        Files.delete(dir);
+        return FileVisitResult.CONTINUE;
+    }
 });
 ```
 

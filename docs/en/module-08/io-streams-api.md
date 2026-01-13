@@ -70,12 +70,13 @@ A `stream` represents a continuous flow of data between a source and a destinati
 
 In `java.io`, streams are **unidirectional**: they are either **input** or **output**.
 
-| Stream | type | Direction | Data | unit |
-| --- | --- | --- | --- | --- |
-| `InputStream` | Input | Bytes |
-| `OutputStream` | Output | Bytes |
-| `Reader` | Input | Characters |
-| `Writer` | Output | Characters |
+| Stream        | Direction | Data unit    | Category          |
+|--------------|-----------|--------------|-------------------|
+| `InputStream`  | Input     | Bytes (8-bit) | Byte stream       |
+| `OutputStream` | Output    | Bytes (8-bit) | Byte stream       |
+| `Reader`       | Input     | Characters    | Character stream  |
+| `Writer`       | Output    | Characters    | Character stream  |
+
 
 Streams hide the concrete origin of data (file, network, memory) and expose a uniform read/write interface.
 
@@ -142,11 +143,12 @@ The `finalize()` method was called by the garbage collector before reclaiming me
 
 However, garbage collection timing is unpredictable.
 
-| Aspect | finalize() |
-| --- | --- |
-| `Execution` | time Unspecified |
-| `Reliability` | Low |
-| `Current` | status Deprecated |
+| Aspect          | finalize()                        |
+|-----------------|-----------------------------------|
+| Execution time  | Unspecified                       |
+| Reliability     | Low                               |
+| Current status  | Deprecated                        |
+
 
 > [!NOTE]
 > `finalize()` must never be used for I/O cleanup; it is deprecated and unsafe.
@@ -215,10 +217,11 @@ It does not represent an open resource.
 
 FileDescriptor represents a native OS handle to an open file or stream.
 
-| Class | Represents | Resource | ownership |
-| --- | --- | --- | --- |
-| `File` | Path | only | No |
-| `FileDescriptor` | Native | handle | Yes |
+| Class            | Represents             | Owns OS handle? |
+|------------------|------------------------|-----------------|
+| `File`           | Filesystem path        | No              |
+| `FileDescriptor` | Native OS file handle  | Yes             |
+
 
 > [!NOTE]
 > Multiple streams may share the same FileDescriptor.
@@ -244,11 +247,12 @@ Legacy streams hide memory management from the programmer.
 
 In contrast, `NIO` makes memory explicit through buffers.
 
-| Aspect | java.io | java.nio |
-| --- | --- | --- |
-| `Data` | flow | Push-based Pull-based |
-| `Memory` | Hidden | Explicit |
-| `Control` | Simple | More granular |
+| Aspect        | java.io                 | java.nio                            |
+|---------------|-------------------------|-------------------------------------|
+| Data model    | Stream-based (push)     | Buffer-based (pull from buffers)    |
+| Memory        | Hidden inside streams   | Explicit via buffers                |
+| Control       | Simple, coarse-grained  | More granular and configurable      |
+
 
 With NIO, the application controls when data is read into memory and how it is consumed.
 
@@ -320,10 +324,11 @@ ByteBuffer heap = ByteBuffer.allocate(1024);
 ByteBuffer direct = ByteBuffer.allocateDirect(1024);
 ```
 
-| Type | Memory | location | Characteristics |
-| --- | --- | --- | --- |
-| `Heap` | buffer | JVM | heap Garbage collected |
-| `Direct` | buffer | Native | memory Faster I/O, costly allocation |
+| Type        | Memory location | Characteristics                                   |
+|-------------|-----------------|--------------------------------------------------|
+| `Heap`      | JVM heap        | Garbage collected, cheap to allocate             |
+| `Direct`    | Native memory   | Better I/O throughput, more expensive to allocate |
+
 
 > [!NOTE]
 > Direct buffers reduce copying between JVM and OS but must be used carefully to avoid memory pressure.
@@ -335,11 +340,12 @@ such as a file, socket, or device.
 
 Unlike streams, **channels are bidirectional**.
 
-| Channel | type | Purpose |
-| --- | --- | --- |
-| `FileChannel` | File | I/O |
-| `SocketChannel` | TCP | sockets |
-| `DatagramChannel` | UDP | |
+| Channel           | Type | Purpose                    |
+|-------------------|------|----------------------------|
+| `FileChannel`     | File | File I/O                   |
+| `SocketChannel`   | TCP  | Stream (TCP) networking    |
+| `DatagramChannel` | UDP  | Datagram (UDP) networking  |
+
 
 ```java
 try (FileChannel channel =
@@ -386,11 +392,12 @@ This is useful for structured protocols (headers + payload).
 
 They are the foundation of scalable servers.
 
-| Component | Role |
-| --- | --- |
-| `Selector` | Monitors channels |
-| `SelectionKey` | Represents channel state |
-| `Interest` | set Operations of interest |
+| Component       | Role                             |
+|----------------|----------------------------------|
+| `Selector`      | Monitors multiple channels       |
+| `SelectionKey`  | Represents channel registration and state |
+| `Interest set`  | Operations the selector watches for (read, write, etc.) |
+
 
 
 ### 35.2.10 When to Use `java.nio`
@@ -468,9 +475,8 @@ boolean notExists = Files.notExists(p);
 ```
 
 > [!NOTE]
-> `exists()` and `notExists()` can both be false if the status cannot be determined (for example due to permissions).
->
-> This means: “the file status cannot be determined” (for example, due to permissions).
+> `exists()` and `notExists()` can both be `false` when the status cannot be determined (for example, due to permissions).
+
 
 This does not make the check more accurate — it merely makes the uncertainty explicit.
 
@@ -823,11 +829,12 @@ Files.walkFileTree(Path.of("."), new SimpleFileVisitor<>() {
 });
 ```
 
-| Goal | Legacy | Modern | Key | detail |
-| --- | --- | --- | --- | --- |
-| List | directory | list/listFiles | `newDirectoryStream` | Lazy, must be closed |
-| Walk | tree | (simple) | Manual | recursion `walk()` Stream must be closed |
-| Walk | tree | (control) | Manual | recursion `walkFileTree()` Error handling + pruning |
+| Goal       | Legacy                  | Modern                         | Key detail                                      |
+|-----------|-------------------------|---------------------------------|------------------------------------------------|
+| List directory | `list()` / `listFiles()` | `newDirectoryStream()`          | Lazy, must be closed                            |
+| Walk tree (simple) | Manual recursion      | `walk()` (Stream)               | Stream must be closed                           |
+| Walk tree (full control) | Manual recursion      | `walkFileTree()`                 | Fine-grained control, error handling, pruning  |
+
 
 ### 35.3.9 Searching and Filtering
 
@@ -945,10 +952,11 @@ Serialization does not automatically include:
 
 Java serialization is enabled by implementing one of these interfaces.
 
-| Interface Meaning Control level |
-| --- |
-| Serializable Opt-in marker, default mechanism Medium (custom hooks possible) |
-| Externalizable Requires manual read/write implementation High (full control) |
+| Interface      | Meaning                                    | Control level                      |
+|----------------|--------------------------------------------|------------------------------------|
+| `Serializable` | Opt-in marker, default mechanism           | Medium (custom hooks possible)     |
+| `Externalizable` | Requires manual read/write implementation | High (full control over format)    |
+
 
 > [!NOTE]
 > `Serializable` has no methods. It is a marker interface.
@@ -1238,10 +1246,11 @@ If such methods are found, the serialization framework calls them automatically 
 
 If they are not found, the framework performs default serialization instead.
 
-[!NOTE]
+> [!NOTE]
 > If the method signature is incorrect (wrong visibility, parameter type, return type, or declared exceptions), the serialization framework does not recognize the method and silently falls back to default serialization.
 >
 > This behavior often makes errors hard to diagnose.
+
 
 #### 35.4.9.3 Exact Required Signatures
 

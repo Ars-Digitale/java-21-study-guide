@@ -75,7 +75,8 @@ In Java, a **thread** represents an independent path of execution within a singl
 - **Java Thread**: An object of type `java.lang.Thread` that maps to an underlying execution unit.
 - **Runnable**: A functional interface representing a task whose `run()` method contains executable logic.
 
-A thread executes code by invoking its `run()` method, either directly or indirectly through the JVM thread scheduler: please check [Starting vs Running a Thread: Synchronous or Asynchronous](#9-starting-vs-running-a-thread-synchronous-or-asynchronous)
+A thread executes code by invoking its `run()` method, either directly or indirectly through the JVM thread scheduler: please see [Starting vs Running a Thread](#309-starting-vs-running-a-thread-synchronous-or-asynchronous)
+
 
 ## 30.6 Thread Categories in Java 21
 
@@ -87,6 +88,10 @@ Java 21 defines multiple kinds of threads, differing in lifecycle, scheduling, a
 - **Daemon Thread**: A background thread that does not prevent JVM termination. When only daemon threads remain, the JVM exits.
 - **User Thread**: Any non-daemon thread. The JVM waits for all user threads to complete before exiting.
 - **System Thread**: Threads created internally by the JVM for garbage collection, JIT compilation, and other runtime services.
+
+
+> [!NOTE]  
+> Virtual threads are lightweight user threads; they are **not** daemon by default.
 
 
 ## 30.7 Creating Threads in Java
@@ -148,6 +153,9 @@ Therefore, code such as `new Thread(r).run();` does NOT create concurrency. The 
 
 Asynchronous execution means the caller continues immediately while the new thread progresses independently, subject to scheduling. Synchronous execution means the caller waits for the operation to complete.
 
+> [!IMPORTANT]  
+> Concurrency starts **only** when `start()` is invoked.
+
 ## 30.10 Thread Priority and Scheduling
 
 Java threads have an associated priority hint that influences scheduling.
@@ -162,6 +170,9 @@ You can set **priority** on `platform threads`; for `virtual threads` the **prio
 ## 30.11 Thread Deferring and Yielding
 
 Threads can voluntarily influence scheduling behavior.
+
+Calling Thread.yield() signals willingness to pause execution.
+
 
 - Yielding: A thread hints that it is willing to pause execution to allow other runnable threads to proceed.
 - Sleeping: A thread suspends execution for a fixed duration, entering a timed waiting state.
@@ -193,7 +204,7 @@ When a thread is blocked in one of these methods and another thread interrupts i
 Threads that are not blocked must explicitly check whether they have been interrupted. Java provides two ways to do this.
 
 - `Thread.currentThread().isInterrupted()`: Returns the interruption status without clearing it.
-- `Thread.interrupted()`: Returns the interruption status and clears it.
+- `Thread.interrupted()`: Returns the interruption status and clears it. This is subtle: the next call will return false.
 
 Failing to check the interruption status may cause threads to ignore cancellation requests and run indefinitely.
 
@@ -241,6 +252,10 @@ main reached END
 Task interrupted, shutting down
 ```
 
+> [!NOTE]  
+> Output order may vary slightly due to scheduling.
+
+
 ### 30.12.5 Key Observations
 
 - Calling `interrupt()` does not stop the thread directly.
@@ -248,8 +263,8 @@ Task interrupted, shutting down
 - The worker thread terminates itself in a controlled manner.
 - Proper interruption handling allows threads to release resources and maintain program correctness.
 
-> **Note:** 
-Swallowing `InterruptedException` without terminating or restoring the interruption status is considered bad practice and may lead to unresponsive threads.
+> [!NOTE]
+> Swallowing `InterruptedException` without terminating or restoring the interruption status is considered bad practice and may lead to unresponsive threads.
 
 
 ## 30.13 Threads and the Main Thread
@@ -259,6 +274,8 @@ Every Java application starts with a **main thread**. This thread executes the `
 - The main thread is a user thread.
 - The JVM remains alive as long as at least one user thread is running.
 - If the main thread terminates but other user threads exist, the JVM continues execution waiting for the user threads to be done.
+- Daemon threads do not keep JVM alive.
+
 
 Understanding the role of the main thread is essential for reasoning about program termination and background processing.
 
@@ -270,8 +287,14 @@ Concurrency arises when multiple threads access shared mutable state.
 - Race Condition: A correctness error caused by unsynchronized access to shared state.
 - Visibility Problem: A thread observes stale data due to lack of proper memory synchronization.
 
-Java provides synchronization, volatile variables, and higher-level concurrency utilities to address these problems, which will be studied in subsequent sections.
+Java solves these with synchronization, volatile, locks, atomics, and high-level frameworks (Executors, futures).
+
+Synchronization, volatile variables, and higher-level concurrency utilities will be studied in subsequent sections.
+
 
 ## 30.15 Summary
 
-Threads are the fundamental building block of concurrent execution in Java. They exist within processes, share memory, and are scheduled by the JVM in cooperation with the operating system.
+- Threads are the fundamental building block of concurrent execution in Java. 
+- They exist within processes, share memory, and are scheduled by the JVM in cooperation with the operating system.
+- Correct thread management avoids leaks, deadlocks, and wasted CPU.
+

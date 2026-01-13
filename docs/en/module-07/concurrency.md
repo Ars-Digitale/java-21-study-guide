@@ -45,7 +45,8 @@ The `Java Concurrency API`, primarily located in the `java.util.concurrent` pack
 
 The API does not eliminate concurrency problems but provides disciplined tools to manage them safely and predictably. 
 
-Instead of explicitly creating and controlling threads, developers submit tasks and let the framework manage execution details.
+Instead of explicitly creating and controlling threads, developers submit tasks and let the framework manage **thread allocation, reuse, and synchronization**.
+
 
 ```java
 ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -92,6 +93,10 @@ synchronized (lockA) {
 ```
 
 If another thread acquires `lockB` first and then waits for `lockA`, a deadlock may occur.
+
+> [!NOTE]
+> Real-world deadlocks typically involve multiple locks and order inversion.
+
 
 ### 31.2.3 Starvation
 
@@ -186,6 +191,10 @@ Integer result = future.get();
 | T **get(long timeout, TimeUnit unit)**        | Blocks up to the given timeout and returns the result, or throws `TimeoutException` if not completed. |
 
 
+> [!WARNING]
+> `execute()` will drop exceptions silently unless handled inside the task.
+
+
 ### 31.4.2 Callable vs Runnable
 
 Both interfaces represent tasks, but with different capabilities.
@@ -217,12 +226,17 @@ scheduler.schedule(
 	2, TimeUnit.SECONDS);
 ```
 
+> [!IMPORTANT]
+> Never create threads manually in a loop:
+> use pools or virtual threads instead.
+
+
 ## 31.6 Executor Lifecycle and Termination
 
 Executors must be shut down explicitly to release resources and allow JVM termination.
 
 - **shutdown()**: Initiates orderly shutdown: completes waiting tasks but doesn't accept additionals ones.
-- **close()**: calls shutdown() and awaits terminating tasks.
+- **close()**: (Java 19+) calls shutdown() and waits for tasks to finish, behaving like try-with-resources support for ExecutorService.
 - **shutdownNow()**: Attempts immediate shutdown and interrupts running tasks.
 - **awaitTermination()**: Waits for completion or timeout.
 
@@ -261,6 +275,11 @@ The synchronized keyword can be applied to:
 - **Instance methods** (lock on `this`)
 - **Static methods** (lock on the `Class` object)
 - **Blocks** (lock on a specific object, allowing finer-grained control)
+
+
+> [!IMPORTANT]
+> Synchronization is simple but may hurt scalability under contention.
+
 
 ### 31.7.2 Atomic Variables
 
@@ -348,6 +367,10 @@ Key characteristics of the Lock framework:
 | **ReentrantReadWriteLock** | Provides separate reentrant read and write locks to improve read scalability. |
 | **StampedLock**         | Lock supporting optimistic, read, and write locking modes (non-reentrant). |
 
+> [!WARNING]
+> Unlike other locks, StampedLock is **not reentrant** — 
+> re-acquiring it from the same thread causes deadlock.
+
 
 #### 31.7.3.2 Common Lock methods
 
@@ -366,6 +389,12 @@ Unlike synchronized, locks do not release automatically, making proper try/final
 ### 31.7.4 Coordination Utilities
 
 Coordination utilities allow threads to coordinate execution phases without protecting shared data via mutual exclusion.
+
+Other coordination primitives include:
+- CountDownLatch
+- Semaphore
+- Phaser
+
 
 ```java
 import java.util.concurrent.CyclicBarrier;
@@ -458,6 +487,10 @@ queue.take();        // blocks if the queue is empty
 
 Blocking queues handle synchronization internally, simplifying coordination between producer and consumer threads.
 
+> [!CAUTION]
+> CopyOnWrite collections are memory-expensive; avoid in write-heavy workloads.
+
+
 
 ## 31.9 Parallel Streams
 
@@ -484,6 +517,9 @@ Because execution order is not guaranteed, parallel streams should avoid:
 - Blocking I/O
 - Order-dependent side effects
 
+> [!NOTE]
+> Use `forEachOrdered()` if deterministic output is required.
+
 
 ## 31.10 Relation to Virtual Threads
 
@@ -501,5 +537,6 @@ This allows blocking code to scale efficiently without redesigning APIs.
 
 ## 31.11 Summary
 
-The `Java Concurrency API` provides a robust, scalable, and safer alternative to manual thread management. 
-By abstracting execution, coordinating tasks, and offering thread-safe utilities, it enables developers to build concurrent systems that are both performant and maintainable.
+- The `Java Concurrency API` provides a robust, scalable, and safer alternative to manual thread management. 
+- By abstracting execution, coordinating tasks, and offering thread-safe utilities, it enables developers to build concurrent systems that are both performant and maintainable.
+- Choose the right tool: synchronized → locks → atomics → executors → virtual threads.

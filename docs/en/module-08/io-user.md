@@ -2,8 +2,8 @@
 
 ### Table of Contents
 
-- [36. Interacting with the User Standard IO Streams](#36-interacting-with-the-user-standard-io-streams)
-  - [36.1 The Standard IO Streams](#361-the-standard-io-streams)
+- [36. Interacting with the User Standard I/O Streams](#36-interacting-with-the-user-standard-io-streams)
+  - [36.1 The Standard I/O Streams](#361-the-standard-io-streams)
   - [36.2 PrintStream What It Is and Why It Exists](#362-printstream-what-it-is-and-why-it-exists)
     - [36.2.1 Key Characteristics of PrintStream](#3621-key-characteristics-of-printstream)
     - [36.2.2 Basic Usage of PrintStream](#3622-basic-usage-of-printstream)
@@ -59,10 +59,11 @@ It wraps another OutputStream and adds convenient printing methods.
 
 ### 36.2.1 Key Characteristics of PrintStream
 
+- Byte-oriented stream with text-printing helpers
 - Provides `print()` and `println()` methods
 - Converts values to text automatically
-- Does not throw IOException on write errors
-- Optionally supports auto-flushing
+- Does not throw `IOException` on write errors
+- Optionally supports auto-flushing on newline / `println()`
 
 > [!NOTE]
 > Unlike most streams, PrintStream suppresses IOExceptions.
@@ -128,7 +129,8 @@ new BufferedReader(new InputStreamReader(System.in));
 String line = reader.readLine();
 ```
 
-This converts `bytes → characters and allows line-based input`.
+This converts `bytes → characters` and allows line-based input.
+
 
 ## 36.4 The Scanner Class (Convenient but Subtle)
 
@@ -149,7 +151,7 @@ String text = sc.nextLine();
 
 ### 36.4.1 Common Scanner Pitfalls
 
-- Mixing `nextInt()` and `nextLine()` can skip input
+- Mixing `nextInt()` (and other `nextXxx()`) with `nextLine()` can appear to "skip" input because the trailing newline from the numeric token is still in the buffer.
 - Parsing errors throw InputMismatchException
 - Scanner is relatively slow for large input
 
@@ -157,13 +159,15 @@ String text = sc.nextLine();
 
 System streams are special and must be handled carefully.
 
-| Stream Close | explicitly? |
-| --- | --- |
-| System.out | No |
-| System.err | No |
-| System.in | Usually no |
+| Stream     | Close explicitly? |
+|------------|-------------------|
+| `System.out` | No                |
+| `System.err` | No                |
+| `System.in`  | Usually no        |
 
-Closing `System.out` or `System.err` closes the underlying OS stream and affects the entire JVM.
+
+Closing `System.out` or `System.err` closes the underlying OS stream and affects the entire JVM: closing these streams affects the entire JVM process, not just the current class or method.
+
 
 > [!NOTE]
 > In almost all applications, you should NOT close System.out or System.err.
@@ -176,6 +180,9 @@ It is designed specifically for interactive console programs.
 
 ```java
 Console console = System.console();
+if (console == null) {
+    throw new IllegalStateException("No console available");
+}
 ```
 
 > [!NOTE]
@@ -215,9 +222,10 @@ This uses the same format specifiers as `printf()`.
 
 | API | Use case | Strengths | Limitations |
 | --- | --- | --- | --- |
-| BufferedReader | Simple text input | Fast, predictable | Manual parsing |
-| Scanner | Token-based input | Convenient, expressive | Slow, subtle behavior |
-| Console | Interactive apps | Passwords, formatting | May be unavailable |
+| `BufferedReader` | Simple text input           | Fast, predictable, charset explicit | Manual parsing |
+| `Scanner`        | Token-based / parsed input  | Convenient, expressive              | Slower, subtle token behavior |
+| `Console`        | Interactive console apps    | Passwords, prompts, formatted I/O   | May be unavailable (`null`)    |
+
 
 ## 36.9 Redirection and Standard Streams
 
@@ -230,6 +238,10 @@ java App < input.txt > output.txt
 
 From the program’s perspective, System.in and System.out still behave like normal streams.
 
+> [!NOTE]
+> Redirection is handled by the operating system or shell. The Java code does not need to change to support it.
+
+
 ## 36.10 Common Traps and Best Practices
 
 - PrintStream suppresses IOExceptions
@@ -237,6 +249,8 @@ From the program’s perspective, System.in and System.out still behave like nor
 - Do not close `System.out` or `System.err`
 - Scanner mixes parsing and reading
 - Console is preferred for passwords
+- If you use `Scanner` on `System.in`, do not close the Scanner if other parts of the program still need to read from `System.in` (closing the Scanner closes `System.in`).
+
 
 ## 36.11 Final Summary
 

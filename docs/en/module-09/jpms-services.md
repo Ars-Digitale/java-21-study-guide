@@ -119,6 +119,10 @@ module com.example.consumer {
 
 > [!NOTE]
 > `uses` declares intent to discover implementations at runtime.
+>
+> A module that declares `uses` but has no matching provider on the module path compiles normally,
+> but ServiceLoader returns an empty result at runtime.
+
 
 ### 39.1.5 Loading Services at Runtime
 
@@ -141,6 +145,9 @@ Classpath-based “accidental” discovery is prevented.
 
 ### 39.1.6 Service Resolution Rules
 
+For a service to be discoverable by ServiceLoader, several conditions must be satisfied:
+
+
 | Rule | Meaning |
 | --- | --- |
 | Provider module must be readable | Resolved by requires graph |
@@ -151,6 +158,10 @@ Classpath-based “accidental” discovery is prevented.
 ## 39.2 Named, Automatic, and Unnamed Modules
 
 JPMS supports different kinds of modules to allow gradual migration from the classpath.
+
+JPMS must interoperate with legacy code.
+To support gradual adoption, the JVM recognizes three different module categories.
+
 
 ### 39.2.1 Named Modules
 
@@ -187,11 +198,12 @@ Code on the classpath belongs to the `unnamed module`.
 
 ### 39.2.4 Comparison Summary
 
-| Module type | module-info | Encapsulation Reads |
+| Module type | module-info present? | Encapsulation | Reads |
 | --- | --- | --- | --- |
 | Named | Yes | Strong | Declared only |
 | Automatic | No | Weak | All modules |
 | Unnamed | No | None | All modules |
+
 
 ## 39.3 Inspecting Modules and Dependencies
 
