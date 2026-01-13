@@ -72,15 +72,12 @@ String msg = "Hello";     // "Hello" is a String literal
 ### 1.3 **Identifier**
 
 - **Definition:** A symbolic name that associates a value (or a structure) with a readable label.
-
 - **In Java:**
-- **User-defined identifiers:** chosen by the programmer to name variables, methods, classes, etc.  
+ - **User-defined identifiers:** chosen by the programmer to name variables, methods, classes, etc.  
 Examples: `x`, `counter`, `MyClass`, `calculateSum`.
-- **Keywords (reserved words):** predefined names reserved by the Java language and cannot be redefined.  
+ - **Keywords (reserved words):** predefined names reserved by the Java language and cannot be redefined.  
 Examples: `class`, `public`, `static`, `if`, `return`.
-
 > **Note:** Identifiers must follow Java naming rules: see [Java Naming Rules](naming-rules.md).
-
 - **Theory:** Binding function: connects a name to a value or resource.
 
 **Java example (identifiers):**
@@ -140,16 +137,8 @@ String name = "Alice";  // reference type (class String)
 - **Definition:** A **symbol or keyword** that performs a computation or action on one or more operands.
 - **Role:** Operators combine values, variables, and expressions to produce new values or to modify program state.
 
-- **In Java (main categories):**  
-- Arithmetic: `+`, `-`, `*`, `/`, `%`  
-- Unary: `++`, `--`, `!`  
-- Comparison (relational): `<`, `>`, `<=`, `>=`, `==`, `!=`  
-- Logical: `&&`, `||`, `!`  
-- Assignment: `=`, `+=`, `-=`, `*=`, `/=`, `%=`  
-- Bitwise: `&`, `|`, `^`, `~`, `<<`, `>>`, `>>>`  
-- Ternary (conditional): `? :`
+- **In Java:**  
 
-> [!NOTE]
 > See [Java Operators](java-operators.md).
 
 - **Theory:** Operators define allowable computations over types; together with values and variables, they form **expressions**.
