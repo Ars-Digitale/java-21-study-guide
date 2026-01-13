@@ -9,13 +9,13 @@
   - [4.4 Notes](#44-notes)
   - [4.5 Recap](#45-recap)
   - [4.6 Arithmetic and Primitive Numeric Promotion](#46-arithmetic-and-primitive-numeric-promotion)
-    - [4.6.1 Numeric Promotion Rules in Java](#461-numeric-promotion-rules-in-java)
+    - [4.6.1 Numeric Promotion Rules in Java](#461--numeric-promotion-rules-in-java)
       - [4.6.1.1 Rule 1 – Mixed Data Types → Smaller type promoted to larger type](#4611-rule-1--mixed-data-types--smaller-type-promoted-to-larger-type)
       - [4.6.1.2 Rule 2 – Integral + Floating-point → Integral promoted to floating-point](#4612-rule-2--integral--floating-point--integral-promoted-to-floating-point)
       - [4.6.1.3 Rule 3 – byte short and char are promoted to int during arithmetic](#4613-rule-3--byte-short-and-char-are-promoted-to-int-during-arithmetic)
       - [4.6.1.4 Rule 4 – Result type matches the promoted operand type](#4614-rule-4--result-type-matches-the-promoted-operand-type)
-    - [4.6.2 Summary of Numeric Promotion Behavior](#462-summary-of-numeric-promotion-behavior)
-      - [4.6.2.1 Key Takeaways](#4621-key-takeaways)
+    - [4.6.2 Summary of Numeric Promotion Behavior](#462--summary-of-numeric-promotion-behavior)
+      - [4.6.2.1 Key Takeaways](#4621--key-takeaways)
   - [4.7 Casting in Java](#47-casting-in-java)
     - [4.7.1 Primitive Casting](#471-primitive-casting)
       - [4.7.1.1 Widening Implicit Casting](#4711-widening-implicit-casting)
@@ -408,6 +408,7 @@ String str = (String) obj; // OK: obj points to a String
 Object n = Integer.valueOf(10);
 // String fail = (String) n;  // ClassCastException at runtime
 ```
+---
 
 ## 4.8 Summary:
 
