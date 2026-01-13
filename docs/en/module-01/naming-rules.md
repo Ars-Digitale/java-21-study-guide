@@ -75,7 +75,7 @@ int MYVAR = 3;
 int CLASS = 6; // legal but, please, don't do it!!
 ```
   
-[!TIP]
+> [!TIP]
 > Java treats identifiers literally: Count, count, and COUNt are unrelated and may exist together.
 >
 > Because of case sensitivity, you could use versions of keywords which differ in case. 
