@@ -27,6 +27,7 @@
       - [4.7.4.2 Downcasting Narrowing Reference Cast](#4742-downcasting-narrowing-reference-cast)
     - [4.7.5 Key Points Summary](#475-key-points-summary)
     - [4.7.6 Examples](#476-examples)
+  - [4.8 Summary](#48-summary)
 
 ---
 
@@ -35,7 +36,7 @@ As we saw before in the [Syntax Building Blocks](syntax-building-blocks.md), Jav
 - **Primitive types**  
 - **Reference types**
 
-👉 For a complete overview of primitive types with their sizes, ranges, defaults, and examples, see the [Primitive Types Table](#primitive-types-table).
+👉 For a complete overview of primitive types with their sizes, ranges, defaults, and examples, see the [Primitive Types Table](#43-primitive-types-table).
 
 
 ## 4.1 Primitive Types
@@ -114,7 +115,7 @@ They also support special values: **`+Infinity`**, **`-Infinity`**, and **`NaN`*
 
 - **Primitive** = actual value, stored directly in memory.  
 - **Reference** = pointer to an object; the object itself may contain primitives and other references.  
-- For details of primitives, see the [Primitive Types Table](#primitive-types-table).
+- For details of primitives, see the [Primitive Types Table](#43-primitive-types-table).
 
 ---
 
@@ -408,7 +409,7 @@ Object n = Integer.valueOf(10);
 // String fail = (String) n;  // ClassCastException at runtime
 ```
 
-In summary:
+## 4.8 Summary:
 
 - **Primitive casting** changes the numeric type.
 - **Reference casting** changes the “view” of an object in the hierarchy.
