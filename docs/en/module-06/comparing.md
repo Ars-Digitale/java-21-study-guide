@@ -29,7 +29,7 @@ Java provides two main strategies for sorting and comparing: `Comparable` (natur
 Understanding their rules, constraints, and interactions with generics is essential.
 
 - For **numeric types**, sorting follows natural numerical order, meaning smaller values come before larger ones.
-- For **strings**, sorting follows Unicode (lexicographical) order: `digits` come first, then `uppercase letters`, and finally `lowercase letters`.
+- Sorting **strings** follows lexicographical (Unicode code point) order: character-by-character comparison; digits come before uppercase, uppercase before lowercase.
 
 This ordering is based on each character’s Unicode code point, not alphabetical intuition.
 
@@ -48,6 +48,8 @@ Output:
 [10, 2, A, Z, a, b]
 ```
 
+> [!NOTE]
+> Natural ordering is only defined for types that implement Comparable.
 
 ## 24.1 Comparable — Natural Ordering
 
@@ -72,30 +74,34 @@ Rules and expectations:
 > - Natural ordering must be consistent with equals(), unless explicitly documented otherwise:
 > - `compareTo()` is consistent with `equals()` if, and only if, `a.compareTo(b) == 0` and `a.equals(b) is true`.
 
+> [!WARNING]
+> compareTo may throw ClassCastException if given a non-comparable type — but this usually appears only with raw types.
+
+
 ### 24.1.2 Example: Class Implementing Comparable
 
 ```java
 public class Person implements Comparable<Person> {
 
-private String name;
-private int age;
+	private String name;
+	private int age;
 
-public Person(String n, int a) {
-    this.name = n;
-    this.age = a;
-}
+	public Person(String n, int a) {
+		this.name = n;
+		this.age = a;
+	}
 
-@Override
-public int compareTo(Person other) {
-    return Integer.compare(this.age, other.age);
-}
+	@Override
+	public int compareTo(Person other) {
+		return Integer.compare(this.age, other.age);
+	}
 
 
 }
 
 var list = List.of(new Person("Bob", 40), new Person("Alice", 30));
 
-list.stream().sorted().forEach(p -> System.out.println(p.age));
+list.stream().sorted().forEach(p -> System.out.println(p.getAge()));
 ```
 
 The list sorts by age, because that is the natural numbering order.
@@ -150,6 +156,8 @@ Additional helper methods:
 ### 24.2.2 Comparator Example
 
 ```java
+var people = List.of(new Person("Bob",40), new Person("Ann",30));
+
 Comparator<Person> byName = Comparator.comparing(Person::getName);
 
 Comparator<Person> byAgeDesc = Comparator.comparingInt(Person::getAge).reversed();
@@ -192,13 +200,17 @@ Collections.sort(list); // natural order
 Collections.sort(list, byName); // comparator
 ```
 
+> [!NOTE]
+> Collections.sort(list) delegates to list.sort(comparator) since Java 8.
+
+
 ## 24.5 Multi-Level Sorting (thenComparing)
 
 ```java
 var cmp = Comparator
-.comparing(Person::getLastName)
-.thenComparing(Person::getFirstName)
-.thenComparingInt(Person::getAge);
+	.comparing(Person::getLastName)
+		.thenComparing(Person::getFirstName)
+			.thenComparingInt(Person::getAge);
 ```
 
 ## 24.6 Comparing Primitives Efficiently
@@ -209,7 +221,8 @@ Comparator.comparingLong(...)
 Comparator.comparingDouble(...)
 ```
 
-> **Note:** These avoid boxing and are preferred in performance-sensitive code.
+> [!NOTE]
+> These avoid boxing and are preferred in performance-sensitive code.
 
 ## 24.7 Common Traps
 
@@ -219,6 +232,8 @@ Comparator.comparingDouble(...)
 - Null elements → unless Comparator handles them, sorting throws NPE
 - Comparator comparing fields of mixed types → ClassCastException
 - Using subtraction to compare ints can overflow → always use `Integer.compare()`
+- Sorting a list with null elements and natural order → NPE
+- compareTo must never return inconsistent negative/zero/positive on same two objects (no randomness)
 
 ## 24.8 Full Example
 
@@ -233,13 +248,18 @@ new Book("Java 21", 42.0, 2023)
 
 Comparator<Book> cmp =
 Comparator
-.comparingDouble(Book::price)
-.thenComparing(Book::year)
-.reversed();
+	.comparingDouble(Book::price)
+		.thenComparing(Book::year)
+			.reversed();
 
 books.stream().sorted(cmp)
-.forEach(System.out::println);
+	.forEach(System.out::println);
+
 ```
+
+> [!NOTE]
+> reversed() applies to the entire composed comparator, not just the first comparison key.
+
 
 ## 24.9 Summary
 

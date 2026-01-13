@@ -28,11 +28,11 @@
       - [21.8.1.1 Correct mental model](#21811-correct-mental-model)
     - [21.8.2 collect](#2182-collect)
     - [21.8.3 Why collect is different from reduce](#2183-why-collect-is-different-from-reduce)
-  - [21.9 Common Streams Pitfall](#219-common-streams-pitfall)
+  - [21.9 Common Streams Pitfalls](#219-common-streams-pitfalls)
   - [21.10 Primitive Streams](#2110-primitive-streams)
     - [21.10.1 Why primitive streams matter](#21101-why-primitive-streams-matter)
     - [21.10.2 Common creation methods](#21102-common-creation-methods)
-    - [21.10.3 Primitive-specialized mapping methods within-the-same-primitive-family](#21103-primitive-specialized-mapping-methods-within-the-same-primitive-family)
+    - [21.10.3 Primitive-specialized mapping methods](#21103-primitive-specialized-mapping-methods)
     - [21.10.4 Mapping table among StreamT and primitive streams](#21104-mapping-table-among-streamt-and-primitive-streams)
     - [21.10.5 Terminal operations and their result types](#21105-terminal-operations-and-their-result-types)
     - [21.10.6 Common pitfalls and gotchas](#21106-common-pitfalls-and-gotchas)
@@ -130,7 +130,8 @@ words.map(w -> w.length() > 1 ? Optional.of(w.length()) : Optional.<Integer>empt
 .flatMap(Optional::stream); // removes empties
 ```
 
-> **Note:** Before Java 9, this pattern required `filter(Optional::isPresent)` plus `map(Optional::get)`. 
+> [!NOTE]
+> Before Java 9, this pattern required `filter(Optional::isPresent)` plus `map(Optional::get)`. 
 
 ### 21.1.5 Primitive Optionals
 
@@ -150,7 +151,7 @@ int value = m.orElse(0); // 1
 
 - Do not call `get()` without checking presence; prefer `orElseThrow` or transformations
 - Avoid returning `null` instead of `Optional.empty()`; an Optional reference itself should not be null
-- Remember: `average()` on primitive streams returns `OptionalDouble` (even for `IntStream` and `LongStream`)
+- Remember: `average()` on primitive streams always returns `OptionalDouble` (even for `IntStream` and `LongStream`)
 - Use `orElseGet` when computing the default is expensive
 
 ---
@@ -170,9 +171,8 @@ Streams are designed for data processing, not data storage.
 - A stream can be consumed only once
 - Streams encourage side-effect-free operations
 
-
-> **Note:** 
-Streams are conceptually similar to database queries: they describe what to compute, not how to iterate.
+> [!NOTE]
+> Streams are conceptually similar to database queries: they describe what to compute, not how to iterate.
 
 
 ## 21.3 Stream Pipeline Architecture
@@ -214,15 +214,15 @@ Intermediate operations:
 
 #### 21.3.2.1 Table of Common intermediate operations:
 
-| Method | Common Input Params | Return value | Desctiption |
+| Method | Common input Params | Return value | Desctiption |
 |--------|--------------|--------------|--------------|
 |`filter` | Predicate | `Stream<T>` | filter the stream according to a predicate match |
-| `map` | Function | `Stream<T>` | transform a stream through a one to one mapping input/output |
-| `flatMap` | Function | `Stream<T>` | flatten all the contained elements to be top level in a sigle stream, removing empty elements |
-| `sorted` | void or Comparator | `Stream<T>` | sort according to natural order or provided Comparator |
-| `distinct` | void | `Stream<T>` | remove duplicate elements |
-| `limit` / `skip` |  long | `Stream<T>` | limit size or skip elements |
-| `peek` |  Consumer | `Stream<T>` | perform stream operations without changing the stream (Debug)  |
+| `map` | Function | `Stream<R>` | transform a stream through a one to one mapping input/output |
+| `flatMap` | Function | `Stream<R>` | flatten nested streams into a single stream |
+| `sorted` | (none) or Comparator | `Stream<T>` | sort by natural order or by the provided Comparator |
+| `distinct` | (none) | `Stream<T>` | remove duplicate elements |
+| `limit` / `skip` | long | `Stream<T>` | limit size or skip elements |
+| `peek` | Consumer | `Stream<T>` | run side-effect action for each element (debugging) |
 
 
 Example:
@@ -231,8 +231,8 @@ Example:
 Stream<String> s2 = names.stream().filter(n -> n.length() > 3).map(String::toUpperCase);
 ```
 
-> **Note:** 
-Intermediate operations only describe the computation. No element is processed yet.
+> [!NOTE]
+> Intermediate operations only describe the computation. No element is processed yet.
 
 
 ### 21.3.3 Terminal Operations
@@ -254,7 +254,7 @@ Terminal operations:
 | `collect` | varies | does not terminate |
 | `reduce` | varies | does not terminate |
 | `findFirst` / `findAny` |  **`Optional<T>`** |  terminates |
-| `anyMatch` / `allMatch` / `noneMatch` | **boolean** | sometimes terminate |
+| `anyMatch` / `allMatch` / `noneMatch` | **boolean** | may terminate early (short-circuit) |
 | `min` / `max` | **`Optional<T>`** | does not terminate |  
 |  `count` | **long** | does not terminate |
 
@@ -265,7 +265,7 @@ Terminal operations:
 var newNames = new ArrayList<String>();
 newNames.add("Bob");
 newNames.add("Dan");
-var stream = newNames.stream(); // Stream are lazily evaluated: This line does not create the stream, but an object which "knows" where to look for the data when needed.
+var stream = newNames.stream(); // Streams are lazily evaluated: this does not traverse the data yet, it only creates a pipeline description.
 newNames.add("Erin");
 stream.count(); // 3
 ```
@@ -286,8 +286,8 @@ Stream.of("a", "bb", "ccc").filter(s -> {
 
 Execution order:
 
-> **Note:** 
-Only the minimum number of elements required by the terminal operation are processed.
+> [!NOTE]
+> Only the minimum number of elements required by the terminal operation are processed.
 
 ```text
 --> filter a
@@ -308,8 +308,8 @@ Operations like `map` and `filter` process each element independently.
 Operations like `distinct`, `sorted`, and `limit` require maintaining internal state.
 
 
-> **Note:** 
-Stateful operations can severely impact parallel stream performance.
+> [!NOTE]
+> Stateful operations can severely impact parallel stream performance.
 
 
 ## 21.6 Stream Ordering and Determinism
@@ -326,8 +326,8 @@ Some operations respect encounter order:
 - `forEachOrdered`
 - `findFirst`
 
-
-> **Note:** In parallel streams, `forEach` does not guarantee order.
+> [!NOTE]
+> In parallel streams, `forEach` does not guarantee order.
 
 
 ## 21.7 Parallel Streams
@@ -350,8 +350,8 @@ Rules for safe parallel streams:
 - No mutable shared state
 - Associative operations only
 
-
-> **Note:** Parallel streams can be slower for small workloads.
+> [!NOTE]
+> Parallel streams can be slower for small workloads.
 
 ## 21.8 Reduction Operations
 
@@ -377,9 +377,8 @@ Reduction requires:
 - **Accumulator**: Incorporates one stream element into a partial result;
 - (Optional) **Combiner**: Merges two partial results; Used only when the stream is parallel; Ignored for sequential streams
 
-
-> **Note:** 
-The accumulator must be associative and stateless.
+> [!NOTE]
+> The accumulator must be associative and stateless.
 
 #### 21.8.1.1 Correct mental model
 
@@ -406,7 +405,7 @@ Suppose the stream is split:
 - Thread 1: "a", "bb" → 0 + 1 + 2 = 3
 - Thread 2: "ccc" → 0 + 3 = 3
 
-Output, Combines merges:
+Then the combiner merges the partial results:
 
 ```bash
 3 + 3 = 6
@@ -505,7 +504,7 @@ where Collectors.* provides prebuilt collectors (grouping, mapping, joining, cou
 		- it can avoid unnecessary copying
 		- it can pre-size or use specialized implementations (depending on collector)
 		- it’s the idiomatic and expected approach
-		- Using reduce() to build a collection often creates extra objects or forces unsafe mutation.
+		- using reduce() to build a collection often creates extra objects or forces unsafe mutation.
 
 
 Example: “collect into a List” the right way
@@ -537,7 +536,7 @@ What happens conceptually:
 
 
 
-## 21.9 Common Streams Pitfall
+## 21.9 Common Streams Pitfalls
 
 - Reusing a consumed stream → `IllegalStateException`
 - Modifying external variables inside lambdas
@@ -590,7 +589,7 @@ The following are the most frequently used ways to create primitive streams. Man
 > - Only `IntStream` and `LongStream` provide `range()` and `rangeClosed()`. 
 > - There is no `DoubleStream.range` because counting with doubles has rounding issues.
 
-### 21.10.3 Primitive-specialized mapping methods (within the same primitive family)
+### 21.10.3 Primitive-specialized mapping methods
 
 Primitive streams provide **primitive-only** mapping operations that avoid boxing:
 

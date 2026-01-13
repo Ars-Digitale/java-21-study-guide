@@ -48,6 +48,8 @@ List
 └── Vector (Legacy synchronized list — rarely used today)
 ```
 
+> [!NOTE]
+> Vector is legacy and synchronized — avoid unless explicitly required.
 
 ## 25.1 Characteristics of Lists
 
@@ -66,7 +68,8 @@ List<String> a2 = new ArrayList<>(50); // initial capacity
 List<String> a3 = new ArrayList<>(List.of("A", "B"));
 ```
 
-> **Note:** Initial capacity is not a size. It just decides how many elements the internal array can hold before resizing.
+> [!NOTE]
+> Initial capacity is not a size. It just decides how many elements the internal array can hold before resizing.
 
 ### 25.2.2 LinkedList Constructors
 
@@ -75,7 +78,8 @@ List<String> l1 = new LinkedList<>();
 List<String> l2 = new LinkedList<>(List.of("A", "B"));
 ```
 
-> **Note:** LinkedList also implements `Deque`.
+> [!NOTE]
+> LinkedList also implements `Deque`.
 
 ## 25.3 Factory Methods
 
@@ -87,7 +91,8 @@ list1.add("X"); // ❌ UnsupportedOperationException
 list1.set(0, "Z"); // ❌ UnsupportedOperationException
 ```
 
-> **Note:** All `List.of()` lists:
+> [!NOTE]
+> All `List.of()` lists:
 
 - reject nulls
 - are immutable
@@ -112,7 +117,8 @@ list.set(0, "Z"); // OK
 list.add("X"); // ❌ UOE — size is fixed
 ```
 
-> **Note:** The list is backed by the array: modifying one affects the other.
+> [!NOTE]
+> The list is backed by the array: modifying one affects the other.
 
 ## 25.4 Core List Operations
 
@@ -132,9 +138,10 @@ String x = list.get(0);
 list.set(1, "NewValue");
 ```
 
-> **Note:** `get()` throws `IndexOutOfBoundsException` for invalid indices.
+> [!NOTE]
+> `get()` throws `IndexOutOfBoundsException` for invalid indices.
 
-If you try to `update` an element in an empty List, event at index 0, you get an `IndexOutOfBoundsException`
+If you try to `update` an element in an empty List, even at index 0, you get an `IndexOutOfBoundsException`
 
 ```java
 List<Integer> list = new ArrayList<Integer>();
@@ -152,12 +159,13 @@ Output
 Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
 ```
 
-> **Note:** `get()` throws `IndexOutOfBoundsException` for invalid indices.
+> [!EXAMPLE]
+> Calling get/set with an invalid index throws IndexOutOfBoundsException
 
 ### 25.4.3 Removing Elements
 
 ```java
-list.remove(0); // removes by a "primitive" index. Overloaded version over the one implemented in Collection which removes an object match.
+list.remove(0); // remove(int index) — removes by index;  remove(Object) — removes first equal element
 list.remove("A"); // removes first occurrence
 list.removeIf(s -> s.startsWith("X"));
 list.clear();
@@ -191,7 +199,8 @@ List<String> b = List.of("A", "B");
 System.out.println(a.equals(b)); // true
 ```
 
-> **Note:** Order matters. Type of list does NOT matter.
+> [!NOTE]
+> Order matters. Type of list does NOT matter.
 
 ### 25.5.3 `hashCode()`
 
@@ -227,7 +236,11 @@ while (lit.hasNext()) {
 }
 ```
 
-> **Note:** Only `ListIterator` supports bidirectional traversal and modification.
+> [!WARNING]
+> All standard List iterators are fail-fast: structural modification outside iterator causes ConcurrentModificationException.
+
+> [!NOTE]
+> Only `ListIterator` supports bidirectional traversal and modification.
 
 ## 25.7 The `subList()` Method
 
@@ -288,10 +301,10 @@ view.clear();
 
 ### 25.7.7 Common Pitfalls
 
-- Assuming subList is independent	It is a view, not a copy
-- Assuming subList allows resizing	It allows add/remove only inside the subrange
-- Forgetting that parent modifications invalidate	Results in ConcurrentModificationException
-- Incorrect index expectations	End index is exclusive
+- Assuming subList is independent:	it is a view, not a copy
+- Assuming subList allows resizing:	works only on modifiable parent lists.
+- Forgetting that parent modifications invalidate results in ConcurrentModificationException
+- Incorrect index expectations:	End index is exclusive
 
 ## 25.8 Summary Table of Important Operations
 
@@ -301,7 +314,7 @@ view.clear();
 | add(E)			|	fast				|	fast				|	❌ unsupported			|
 | add(index,E)		|	slow (shift)		|	fast				|	❌						|
 | get(index)		|	fast				|	slow				|	fast					|
-| remove(index)		|	slow (shift)		|	fast				|	❌						|
+| remove(index) 	| 	slow 				| slow (unless removing first/last) 		  | ❌ |						
 | remove(Object)	|	slower				|	slower				|	❌						|
 | set(index,E)		|	fast				|	slow				|	❌						|
 | iterator()		|	fast				|	fast				|	fast					|

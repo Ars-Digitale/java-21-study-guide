@@ -4,7 +4,7 @@
 
 - [18. Generics in Java](#18-generics-in-java)
   - [18.1 Generic Type Basics](#181-generic-type-basics)
-  - [18.2 Why Generics Exist BeforeAfter](#182-why-generics-exist-beforeafter)
+  - [18.2 Why Generics Exist](#182-why-generics-exist)
   - [18.3 Generic Methods](#183-generic-methods)
   - [18.4 Type Erasure](#184-type-erasure)
     - [18.4.1 How Type Erasure Works](#1841-how-type-erasure-works)
@@ -33,7 +33,7 @@
   - [18.12 PECS Rule Producer Extends Consumer Super](#1812-pecs-rule-producer-extends-consumer-super)
   - [18.13 Common Pitfalls](#1813-common-pitfalls)
   - [18.14 Summary Table of Wildcards](#1814-summary-table-of-wildcards)
-  - [18.15 Summary Table of Concepts](#1815-summary-table-of-concepts)
+  - [18.15 Summary of Concepts](#1815-summary-of-concepts)
   - [18.16 Complete Example](#1816-complete-example)
 
 ---
@@ -74,7 +74,7 @@ class Pair<K, V> {
 ```
 
 
-## 18.2 Why Generics Exist: Before/After
+## 18.2 Why Generics Exist
 
 ```java
 List list = new ArrayList();          // pre-generics
@@ -165,8 +165,8 @@ Java allows multiple bounds:
 
 The critical rule:
 
-
-> **Note:** The erasure of `T` is always the **first bound**, which must be a class or interface.
+> [!NOTE]
+> The erasure of `T` is always the **first bound**, which must be a class or interface.
 
 Because `Runnable` is the first bound, the compiler erases `T` to `Runnable`.
 
@@ -205,7 +205,8 @@ Runtime bytecode instructions like `invokevirtual` require a single class or int
 
 Thus:
 
-> **Note:** Java selects the **first bound** as the runtime type, and uses the remaining bounds for **compile-time validation only**.
+> [!NOTE]
+> Java selects the **first bound** as the runtime type, and uses the remaining bounds for **compile-time validation only**.
 
 ### 18.4.6 A More Complex Example
 
@@ -232,18 +233,19 @@ Erased Version
 class Demo {
     void test(A value) {
         value.a();
-        // value.b();   // compiler inserts a synthetic bridge or cast
+        // value.b();   // ❌ not available after erasure: type is A, not B
     }
 }
 ```
 
-> **Note:** The compiler inserts additional type checks or bridge methods as needed, but erasure always uses **only the first bound** (A in this case).
+> [!NOTE]
+> The compiler may insert additional casts or bridge methods in more complex inheritance scenarios, but erasure always uses only the first bound (A in this case).
 
 
 ### 18.4.7 Overloading a Generic Method — Why Some Overloads Are Impossible
 
 When Java compiles generic code, it applies type erasure:
-generic type parameters such as T, String, or Integer are removed, and the compiler substitutes them with their erased type (usually Object or the first bound).
+type parameters such as T are removed, and the compiler substitutes them with their erased type (usually Object or the first bound).
 
 Because of this, two methods that look different at the source level may become identical after erasure.
 If the erased signatures are the same, Java cannot distinguish between them, therefore the code does not compile.
@@ -312,7 +314,7 @@ No collision → legal overloading.
 
 When returning a value from a method, Java follows a strict rule:
 
-The return type of an overriding method must be a subtype of the parent's return type, but the generic arguments must still respect type erasure rules.
+The return type of an overriding method must be a subtype of the parent's return type, and any generic arguments must remain type-compatible (even though they are erased at runtime).
 
 This often confuses developers, because generics on return types cause similar erasure-based conflicts as parameter types.
 
@@ -335,7 +337,7 @@ class B extends A {
 }
 ```
 
-Explanation
+Explanation:
 
 Even though generics are erased, Java still enforces source-level type safety:
 
@@ -420,7 +422,7 @@ void printAll(List<?> list) { ... }
 #### 18.5.3.2 Upper-Bounded Wildcard `? extends`
 
 ```java
-List<? extends Number> nums = List.of(1,2,3);
+List<? extends Number> nums = List.of(1, 2, 3);
 Number n = nums.get(0);   // OK
 // nums.add(5);           // ❌ cannot add: type safety
 ```
@@ -441,7 +443,9 @@ Rule: “Super accepts insertion, extends accepts extraction.”
 
 ## 18.6 Generics and Inheritance
 
-Important rule: **Generics do NOT participate in inheritance**.
+Important rule: **Generics do NOT participate in inheritance**.  
+A `List<String>` is not a subtype of `List<Object>`; parameterized types are invariant.
+
 
 ```java
 List<String> ls = new ArrayList<>();
@@ -474,7 +478,8 @@ raw.add("x");
 raw.add(10);   // allowed, but unsafe
 ```
 
-> **Note:** Raw types should be avoided.
+> [!NOTE]
+> Raw types should be avoided.
 
 
 ## 18.9 Generic Arrays (Not Allowed)
@@ -485,13 +490,13 @@ You cannot create arrays of parameterized types:
 List<String>[] arr = new List<String>[10];   // ❌ compile error
 ```
 
-Because arrays enforce runtime type safety while generics rely on compile time only.
+Because arrays enforce runtime type safety while generics rely on compile-time checks only.
 
 
 ## 18.10 Bounded Type Inference
 
 ```java
-<T extends Number> T identity(T x) { return x; }
+static <T extends Number> T identity(T x) { return x; }
 
 int v = identity(10);   // OK
 // String s = identity("x"); // ❌ not a Number
@@ -526,6 +531,9 @@ Use **? extends** when the parameter **produces** values.
 Use **? super** when the parameter **consumes** values.
 
 ```java
+List<? extends Number> listExtends = List.of(1, 2, 3);
+List<? super Integer> listSuper = new ArrayList<Number>();
+
 // ? extends → safe read
 Number n = listExtends.get(0);
 
@@ -545,14 +553,15 @@ listSuper.add(10);
 
 ## 18.14 Summary Table of Wildcards
 
-```text
-?              → unknown type (read-only except Object methods)
-? extends T     → read T safely, cannot add (except null)
-? super T       → can add T, retrieving gives Object
-```
+| Syntax       | Meaning                                         |
+|-------------|-------------------------------------------------|
+|?               | unknown type (read-only except Object methods) |
+|? extends T     | read T safely, cannot add (except null) |
+|? super T       | can add T, retrieving gives Object |
 
 
-## 18.15 Summary Table of Concepts
+
+## 18.15 Summary of Concepts
 
 ```text
 Generics = compile-time type safety

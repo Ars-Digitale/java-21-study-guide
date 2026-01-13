@@ -37,8 +37,8 @@ Two families of methods exist: ones that **throw exceptions** and ones that **re
 | Operation | Throws Exception | Returns Special Value | Description |
 |----------|------------------|------------------------|-------------|
 | Insert   | add(e)          | offer(e)              | Adds an element; offer preferred for bounded queues |
-| Remove   | E remove()        | E poll()                | Removes and returns head. remove throw NoSuchElementException if queue is empty, poll retutn null |
-| Read	   | E element()       | E peek()                | Returns head without removing. element throw NoSuchElementException if queue is empty, peek retutn null |
+| Remove   | E remove()        | E poll()                | Removes and returns head. remove() throws NoSuchElementException if queue is empty, poll() returns null |
+| Read	   | E element()       | E peek()                | Returns head without removing. element() throws NoSuchElementException if queue is empty, peek() returns null |
 
 
 
@@ -51,7 +51,11 @@ Common classes implementing `Queue`:
 - `PriorityQueue` — orders elements by natural order or comparator; not FIFO.
 - `ConcurrentLinkedQueue` — thread-safe, lock-free.
 
-> **Note:** `PriorityQueue` does not guarantee traversal order matching priority sorting.
+> [!NOTE]
+> `PriorityQueue` does not guarantee traversal order matching priority sorting.
+
+> [!WARNING]
+> Most Queue implementations reject null because null is used as a return value for “empty”.
 
 
 ## 27.2 Deque — Overview
@@ -80,7 +84,9 @@ It is more versatile than a Queue:
 - `LinkedList` — full-featured but slower due to node-based structure.
 - `ConcurrentLinkedDeque` — non-blocking concurrent deque.
 
-> **Note:** `Stack` is legacy; use `Deque` for stack behavior (push/pop).
+> [!NOTE]
+> `Stack` is legacy; use `Deque` for stack behavior (push/pop).
+> ArrayDeque, LinkedList queue ops (add/remove/peek) are O(1) amortized
 
 
 ## 27.3 Using a Queue
@@ -164,7 +170,11 @@ In concurrent environments, the `java.util.concurrent` package provides blocking
 - `PriorityBlockingQueue` — thread-safe priority queue.
 - `DelayQueue` — elements released after delays.
 
-> **Note:** BlockingQueue never allows `null`.
+> [!NOTE]
+> BlockingQueue never allows `null`.
+> put(e) — blocks until space available
+> take() — blocks until element available
+> BlockingQueue also supports timed operations: offer(e, timeout), poll(timeout)
 
 
 ## 27.7 Common Pitfalls

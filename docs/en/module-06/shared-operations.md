@@ -8,19 +8,23 @@
     - [23.1.2 Query Operations](#2312-query-operations)
   - [23.2 Equality](#232-equality)
   - [23.3 Fail-Fast Behavior](#233-fail-fast-behavior)
-  - [23.4 Bulk Operations Java-21](#234-bulk-operations-java-21)
+  - [23.4 Bulk Operations](#234-bulk-operations)
   - [23.5 Common Return Types and Exceptions](#235-common-return-types-and-exceptions)
   - [23.6 Summary Table — Shared Operations](#236-summary-table--shared-operations)
 
 ---
 
-This chapter covers the fundamental operations shared across the Java Collections API, including how equality is determined inside collections. These concepts apply to all main collection families (`List`, `Set`, `Queue`, `Deque`, `Map` and their Sequenced variants).
+This chapter covers the fundamental operations shared across the Java Collections API, including how equality is determined inside collections. These concepts apply to all main collection families based on Collection<E> (List, Set, Queue, Deque and their Sequenced variants).
+Map shares several conceptual behaviors (iteration, equality) but does not inherit Collection.
 
 Mastering these operations is essential, as they explain how collections behave when adding, searching, removing, comparing, iterating, and sorting elements.
 
 ## 23.1 Core Collection Methods (Available to Most Collections)
 
 The following methods come from the `Collection<E>` interface and are inherited by **all** major collections except `Map` (which has its own family of operations).
+
+> [!NOTE]
+> `Map` does not implement `Collection`, but its `keySet()`, `values()`, and `entrySet()` views **do**, and therefore expose these shared operations.
 
 ### 23.1.1 Mutating Operations
 
@@ -72,6 +76,12 @@ firstSet.equals(secondSet): true
 secondSet.equals(thirdSet): true
 ```
 
+> [!NOTE]
+> - Lists compare size, order, and element equality one-by-one.
+> - Sets compare size and membership only — encounter order is irrelevant.
+> - Two sets with the same logical elements are equal even if they maintain different iteration order internally.
+
+
 ## 23.3 Fail-Fast Behavior
 
 Most collection iterators (except concurrent collections) are fail-fast: modifying a collection structurally while iterating triggers a `ConcurrentModificationException`.
@@ -79,13 +89,16 @@ Most collection iterators (except concurrent collections) are fail-fast: modifyi
 ```java
 List<Integer> list = new ArrayList<>(List.of(1,2,3));
 for (Integer i : list) {
-list.add(99); // ❌ ConcurrentModificationException
+	list.add(99); // ❌ ConcurrentModificationException
 }
 ```
 
-> **Note:** Use `Iterator.remove()` when you must remove elements during iteration.
+> [!NOTE]
+> Use `Iterator.remove()` when you must remove elements during iteration.
+> Fail-fast behavior is **not guaranteed** — the exception is thrown on a best-effort basis.
+> You must not rely on catching it for program correctness.
 
-## 23.4 Bulk Operations (Java 21)
+## 23.4 Bulk Operations
 
 - `removeIf(Predicate<? super E> filter)` — Removes all matching items.
 - `replaceAll(UnaryOperator<E> op)` — Replaces every element.
@@ -98,7 +111,7 @@ list.add(99); // ❌ ConcurrentModificationException
 
 - `remove(Object)` returns boolean (not the removed element!).
 
-- `get(int)` throws `IndexOutOfBoundsException.
+- `get(int)` throws `IndexOutOfBoundsException`.
 
 - `iterator().remove()` throws `IllegalStateException` if called twice without next().
 
@@ -107,7 +120,7 @@ list.add(99); // ❌ ConcurrentModificationException
 ## 23.6 Summary Table — Shared Operations
 
 
-|	Operation 					|	Applies						|	 To Notes					|
+|	Operation 					|	Applies	To					|	 Notes					|
 |-------------------------------|-------------------------------|-------------------------------|
 |	`add(e)`					|	All collections except Map 	|	Lists allow duplicates		|
 |	`remove(o)`					|	All collections except Map 	|	Removes first occurrence	|
@@ -116,5 +129,5 @@ list.add(99); // ❌ ConcurrentModificationException
 |	`iterator()` 				|	All collections 			|	Fail-fast					|
 |	`clear()` 					|	All collections 			|	Removes all elements		|
 |	`stream()` 					|	All collections 			|	Returns sequential stream	|
-|	`removeIf(), replaceAll()`	| 	Lists, Sets, etc. 			|	Bulk operations				|
+|	`removeIf(), replaceAll()`	| 	Lists only (most Sets do not support replaceAll) 			|	Bulk operations				|
 |	`toArray()` 				|	All collections 			|	Returns Object[]			|

@@ -34,15 +34,20 @@ All Set implementations rely on **equality semantics** (either `equals()` or com
 
 ```text
 Set<E>
- ├── HashSet<E>           (unordered, fastest, uses hashing)
- ├── LinkedHashSet<E>     (maintains insertion order)
- └── SortedSet<E>         (interface)
-       └── TreeSet<E>     (sorted ascending by natural order or Comparator)
+ ├── SequencedSet<E> (Java 21+)
+ │    └── LinkedHashSet<E>   (ordered)
+ ├── HashSet<E>              (unordered)
+ └── SortedSet<E>
+      └── NavigableSet<E>
+           └── TreeSet<E>    (sorted)
 ```
 
 All `Set` implementations require:  
 - uniqueness of elements  
 - predictable equality and hashing (depending on implementation)
+
+> [!NOTE]
+> LinkedHashSet is now formally a SequencedSet since Java 21.
 
 ## 26.2 Characteristics of Each Set Implementation
 
@@ -95,8 +100,9 @@ tree.add(5);
 System.out.println(tree); // [1, 5, 10]
 ```
 
-> **Note:** TreeSet requires all elements to be mutually comparable —  
-mixing non-comparable types produces `ClassCastException`.
+> [!NOTE]
+> TreeSet requires all elements to be mutually comparable — mixing non-comparable types produces `ClassCastException`.
+> Operations (add, remove, contains) are O(log n).
 
 
 ## 26.3 Equality Rules in Sets
@@ -113,6 +119,8 @@ Two objects are considered the same element if:
 1. Their hash codes match  
 2. Their `equals()` method returns `true`  
 
+> [!WARNING]
+> If you mutate an object after adding it to a HashSet or LinkedHashSet, its hashCode may change and the set may lose track of it.
 
 ### 26.3.2 TreeSet
 
@@ -159,8 +167,9 @@ Set<String> s1 = Set.of("A", "B", "C");   // immutable
 Set<String> empty = Set.of();             // empty immutable set
 ```
 
-> **Note:** Factory-created sets are **immutable** —  
-adding or removing elements throws `UnsupportedOperationException`.
+> [!NOTE]
+> Factory-created sets are **immutable** — adding or removing elements throws `UnsupportedOperationException`.
+> Set.of(...) rejects duplicates at creation time → IllegalArgumentException and rejects null → NullPointerException
 
 
 ## 26.5 Main Operations on Sets
@@ -197,10 +206,12 @@ set.retainAll(otherSet); // intersection
 ## 26.6 Common Pitfalls
 
 - Using TreeSet with non-comparable objects → `ClassCastException`
+- TreeSet does not use equals() at all — only comparator/compareTo decides uniqueness.
 - Using mutable objects as Set keys → breaks hashing rules
 - Factory Set.of() is immutable — modification fails
 - HashSet does not guarantee iteration order
 - TreeSet treats objects with compare()==0 as duplicates even if not equal
+
 
 
 ## 26.7 Summary Table

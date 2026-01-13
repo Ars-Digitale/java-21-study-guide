@@ -34,8 +34,8 @@ Before understanding initialization order, it is useful to recall the three main
 - **Heap** — stores all objects and instance fields.
 - **Stack** — stores method calls, local variables, and references.
 
-> **Note:** Static members belong to the **class** and are created **once** in the Method Area.  
-Instance members belong to **each object** and live in the **Heap**.
+> [!NOTE] 
+> Static members belong to the **class** and are created **once** in the Method Area. Instance members belong to **each object** and live in the **Heap**.
 
 ## 15.2 Class Loading (with Inheritance)
 
@@ -74,7 +74,8 @@ Then class loading proceeds in this strict order:
 - **Step 2: Explicit static initializations run**.
 - **Step 3: Static initializer blocks** run in source order.
 
-> **Note:** After these steps, the class is fully prepared and may now be used (instantiated or referenced).
+> [!NOTE] 
+> After these steps, the class is fully prepared and may now be used (instantiated or referenced).
 
 ## 15.3 Object Creation (with Inheritance)
 
@@ -83,10 +84,10 @@ When the `new` keyword is used, **instance creation follows a strict and predict
 ### 15.3.1 Full Instance Creation Order
 
 - **1. Memory is allocated on the Heap for the new object** (fields get default values).
-- **2. Parent constructors must run first** — top of hierarchy → subclass.
+- **2. The constructor chain runs from parent to child** — the top of the hierarchy runs first, then each subclass.
 - **3. Instance variables receive explicit initializations**.
 - **4. Instance initializer blocks execute**.
-- **5. The constructor body runs**.
+- **5. The constructor body runs**: for each class in the inheritance chain, steps 3–5 (field initialization, instance blocks, constructor body) are applied from parent to child..
 
 ## 15.4 A Complete Example: Static + Instance Initialization Across Inheritance
 
@@ -214,9 +215,9 @@ C constructor
 
 - Static initialization happens **once** per class.
 - Static initializers run in parent → child order.
-- Instance initializers run **every time** an object is created.
-- Instance initialization runs in child → parent order for constructors,  
-but field initialization always runs **parent first**, then child.
+- Instance initialization runs every time an object is created.
+- For each class in the inheritance chain, instance fields and instance blocks run before that class’s constructor body.
+- Overall, both field/instance initialization and constructors execute from parent to child.
 - Constructors always call the parent constructor (explicitly or implicitly).
 
 ## 15.7 Summary Table
@@ -225,7 +226,6 @@ but field initialization always runs **parent first**, then child.
 |STATIC (Class Level)                   | INSTANCE (Object Level) |
 |--------------------------------------|------------------------------------- |
 |One-time-only                         | Happens at every 'new' |
-|Executed parent → child               | Initialization parent → child |
+|Executed parent → child               | Instance initialization and constructors parent → child |
 |static vars (default → explicit)      | instance vars (default → explicit) |
-|static blocks                         | instance blocks |
-|                                      | constructor |
+| static blocks                         | instance blocks + constructor |

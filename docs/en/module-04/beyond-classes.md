@@ -51,9 +51,9 @@ This chapter presents several advanced type mechanisms beyond the Java Class des
 
 An **interface** in Java is a reference type that defines a contract of methods that a class agrees to implement. 
 
-An interface is implicitly `abstract` and cannot be marked as `final`: as with top-level classes, an interface can declare visibility of type `public` or `default (package private)`.
+An interface is implicitly `abstract` and cannot be marked as `final`: as with top-level classes, an interface can declare visibility as `public` or `default` (package-private).
 
-A Java class may implement any number of interface through the `implements` keyword.
+A Java class may implement any number of interfaces through the `implements` keyword.
 
 An `interface` may in turn extend multiple interfaces using the `extends` keyword.
 
@@ -63,8 +63,8 @@ Interfaces enable abstraction, loose coupling, and multiple inheritance of type.
 
 - **Abstract methods** (implicitly `public` and `abstract`)
 - **Concrete methods**
-	- **Default methods** (include code and is implicitly `public`)
-	- **Static methods** (declared as `static`, include code and is implicitly `public`)
+	- **Default methods** (include code and are implicitly `public`)
+	- **Static methods** (declared as `static`, include code and are implicitly `public`)
 	- **Private methods** (Java 9+) for internal reuse
 - **Constants** → implicitly `public static final` and initialized at declaration
 
@@ -79,7 +79,8 @@ interface Calculator {
 ```
 
 > [!WARNING]
-> - Because interface abstract methods are implicitly `public`, you CAN'T reduce the access level on an implementing method
+> - Because interface abstract methods are implicitly `public`, you **cannot** reduce the access level on an implementing method.
+
 
 ### 17.1.2 Implementing an Interface
 
@@ -121,11 +122,12 @@ class Z implements X, Y {
 }
 ```
 
-In case you would still access a particular implementation of the `inherited default` method, you can do it through the following syntax:
+If you still want to access a particular implementation of the inherited default method, you can use the following syntax:
+
 
 ```java
-interface X { default int run() { } }
-interface Y { default int run() { } }
+interface X { default int run() { return 1; } }
+interface Y { default int run() { return 2; } }
 
 class Z implements X, Y {
     public int useARun(){
@@ -136,7 +138,8 @@ class Z implements X, Y {
  
 ### 17.1.5 Default methods
 
-A `default` method (declared with the `default` keyword) is a method that define an implementation and can be `overridden` by a class implementing the interface. 
+A `default` method (declared with the `default` keyword) is a method that defines an implementation and can be overridden by a class implementing the interface.
+
 
 - A default method include code and is implicitly `public`;
 - A default method cannot be `abstract`, `static` or `final`;
@@ -147,12 +150,12 @@ A `default` method (declared with the `default` keyword) is a method that define
 ### 17.1.6 Static methods
 
 - An interface can provide `static methods` (through the keyword `static`) which are implicitly `public`;
-- Static methods must include a method body and are accessed through the reference of the interface name;
+- Static methods must include a method body and are accessed using the interface name;
 - Static methods cannot be `abstract` or `final`;
 
 ### 17.1.7 Private interface methods
 
-Among all the concrete methods that an interface can implement we have also:
+Among all the concrete methods that an interface can implement, we also have:
 
 - **`private` methods**: visible only inside the declaring interface and which can only be invoked from a `non-static` context (`default` methods or other `non-static private methods`).
 - **`private static` methods**: visible only inside the declaring interface and which can be invoked by any method of the enclosing interface.
@@ -173,9 +176,9 @@ non-sealed class Rectangle extends Shape { }
 
 ### 17.2.1 Rules
 
-- A sealed Type must declare all permitted Sub-Types.
-- A permitted sub-type must be **final**, **sealed**, or **non-sealed**; because interfaces cannot be final, they can only be marked `sealed` or `non-sealed` when extending a sealed interface.
-- Sealed Types must be declared in the same package (or named module) as their direct sub-types.
+- A sealed Type must declare all permitted subtypes.
+- A permitted subtype must be **final**, **sealed**, or **non-sealed**; because interfaces cannot be final, they can only be marked `sealed` or `non-sealed` when extending a sealed interface.
+- Sealed types must be declared in the same package (or named module) as their direct sub-types.
 
 ---
 
@@ -214,14 +217,15 @@ public static void main(String[] args) {
 
 ### 17.3.3 Enum Methods
 
-- `values()` – returns an array of all the constants values that can be used, for example, in a `for-each` loop
+
+- `values()` – returns an array of all the constant values that can be used, for example, in a `for-each` loop
 - `valueOf(String)` – returns constant by name
 - `ordinal()` – index (int) of the constant
 
 ### 17.3.4 Rules
 
-- Enum Constructors are implicitly `private`;
-- Enum can contain `static` and `instance` methods;
+- Enum constructors are implicitly `private`;
+- Enums can contain `static` and `instance` methods;
 - Enums can implement `interfaces`;
 
 ---
@@ -230,7 +234,7 @@ public static void main(String[] args) {
 
 A **record** is a special class designed to model immutable data: they are, in fact, implicitly **final**. 
 
-You can't extend or inherit a record but it is allowed to implement a regular or sealed interface.
+You can't extend a record, but it is allowed to implement a regular or sealed interface.
 
 It automatically provides:
 
@@ -238,7 +242,7 @@ It automatically provides:
 - **constructor** with parameters in the same order as in the record declaration;
 - **getters** (named like fields)
 - **`equals()`, `hashCode()`, `toString()`**: you are also permitted to override those methods
-- Records can can include `nested classes`, `interfaces`, `records`, `enums` and `annotations`
+- **Records** can include `nested classes`, `interfaces`, `records`, `enums` and `annotations`
 
 ```java
 public record Point(int x, int y) { }
@@ -249,7 +253,8 @@ System.out.println(element.x);
 System.out.println(element.y);
 ```
 
-In case you need additional validation or tranformation over the provided fields, you can declare: `Long Constructors` or `Compact Constructors`.
+If you need additional validation or transformation of the provided fields, you can define a long constructor or a compact constructor.
+
 
 ### 17.4.1 Long Constructor
 
@@ -282,8 +287,9 @@ public record Point(int x, int y) {
 
 ### 17.4.2 Compact Constructor
 
-You can define a Compact constructor which implicitly set all fields, while letting you perform validations and transformations on some target fields.
-Java will execute the full constructor, setting all fields, after the Compact COnstructor has completed.
+You can define a compact constructor which implicitly sets all fields, while letting you perform validations and transformations on selected fields.
+Java will execute the full constructor, setting all fields, after the compact constructor has completed.
+
 
 ```java
 public record Person(String name, int age) {
@@ -342,7 +348,7 @@ void printInfo(Object obj) {
 }
 ```
 
-Here above the `Person` pattern includes a nested `Address` pattern. 
+In the example above, the `Person` pattern includes a nested `Address` pattern.
 Both are matched structurally.
 
 #### 17.4.4.2 Nested Record Patterns with `var`
@@ -489,7 +495,8 @@ An **inner class** is associated with an instance of the outer class and can acc
 - Declared without `static`.
 - Has an implicit reference to the enclosing instance.
 - Can access both static and instance members of the outer class.
-- Since it is not static, it has to be called through an instance of the enclosing class.
+- Since it is not static, it must be created through an instance of the enclosing class.
+
 
 ```java
 class Outer {

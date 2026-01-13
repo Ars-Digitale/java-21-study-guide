@@ -43,7 +43,8 @@ It allows a class (the *subclass*) to acquire the state and behavior of another 
 Inheritance enables a class to extend another class, automatically gaining its accessible fields and methods.  
 The extending class may add new features or override existing behaviors, creating more specialized versions of its parent.
 
-> **Note:** Inheritance expresses an *“is-a”* relationship: a Dog **is a** Animal.
+> [!NOTE] 
+> Inheritance expresses an *“is-a”* relationship: a Dog **is a** Animal.
 
 ## 16.2 Single Inheritance and java.lang.Object
 
@@ -80,14 +81,15 @@ However, this depends on access modifiers.
 - **default (package-private)** → inherited only within the same package
 - **private** → **NOT** inherited
 
-> **Note:** (Please refer to: [Access Modifiers](../module-01/basic-building-blocks.md#3-access-modifiers)) 
+> [!NOTE] 
+> (Please refer to: [Access Modifiers](../module-01/basic-building-blocks.md#3-access-modifiers)) 
 
 
 ## 16.5 Class Modifiers Affecting Inheritance
 
 Some class-level modifiers affect whether a class may be extended.
 
-```text
+
 | Modifier      | Meaning | Effect on Inheritance |
 |---------------|---------|-----------------------|
 | final         | Class cannot be extended | Inheritance STOP |
@@ -95,9 +97,10 @@ Some class-level modifiers affect whether a class may be extended.
 | sealed        | Only allows a fixed list of subclasses | Restricts inheritance |
 | non-sealed    | Subclass of sealed class that reopens inheritance | Inheritance allowed |
 | static        | Applies only to nested classes | Behaves like a top-level class inside its enclosing class |
-```
 
-> **Note:** A `static` class in Java can exist only as a **static nested class**.
+
+> [!NOTE] 
+> A `static` class in Java can exist only as a **static nested class**.
 
 
 ## 16.6 `this` and `super` References
@@ -140,9 +143,9 @@ The `super` reference gives access to members of the direct parent class.
 
 Useful when:  
 - The parent and child define a field/method with the same name: (See below: [Inheriting Members](#13-inheriting-members))
-- When a child class defines a `field` with the same name of an `inherited variable` defined in a parent class, we have **`variable hiding`** and the two variables exist indipendently of each other;  
-- When a child class defines a `method` with the same `signature` as a method defined in a parent class, we have **`method overridding`**; 
-- You want to explicitly refer to the inherited implementations
+- Parent and child define a field with the same name → variable hiding (two copies)
+- Parent and child define a method with the same signature → method overriding
+- You want to explicitly call the inherited implementation
 
 ```java
 class Parent { int value = 10; }
@@ -157,26 +160,30 @@ class Child extends Parent {
 }
 ```
 
-> **Note:** `super` cannot be used inside static contexts.
+> [!NOTE] 
+> `super` cannot be used inside static contexts.
 
 
 ## 16.7 Declaring Constructors in an Inheritance Chain
 
-A constructor initializes a newly created object.  
+A constructor initializes a newly created object. 
+ 
 Constructors are **never inherited**, but each subclass constructor must ensure that the superclass is initialized.
 
 Constructors are special methods with a name that matches the name of the class and that does not declare any return type.
 
-A class may implement `constructor overloading` declaring multiple constructors, each with a unique `signature`.
+A class may define multiple constructors (constructor overloading), each with a unique `signature`.
 
-You can explicitely declare a no-arg or a specific constructor or, if you don't, Java will  implicitely create a `default no-arg constructor`.
+You can explicitly declare a no-arg or a specific constructor or, if you don't, Java will  implicitly create a `default no-arg constructor`.
 
-If you explicitely declare a constructor, the Java compiler will not include any `default no-arg constructor`.
+If you explicitly declare a constructor, the Java compiler will not include any `default no-arg constructor`: this rule applies independently to every class in the hierarchy.
+A parent class still gets its own default constructor unless it also defines one.
+
 
 ## 16.8 Default `no-arg` Constructor
 
 If a class does not declare any constructor, Java automatically inserts a **default no-argument constructor**.  
-This constructor calls `super()` implicitly: the Java compiler implicitely insert a call to the no-arg constructor super(). 
+This constructor calls `super()` implicitly: the Java compiler implicitly insert a call to the no-arg constructor super(). 
 
 ```java
 class Parent { }
@@ -196,7 +203,7 @@ Rules:
 
 - Must be the **first** statement in the constructor
 - Cannot be combined with `super()`
-- There can only be one call to `this()` in any constructor
+- Only one call to this() is allowed in a constructor
 - Used to centralize initialization
 
 ```java
@@ -239,7 +246,7 @@ class Child extends Parent {
 ## 16.11 Default Constructor — Tips and Traps
 
 - **If the superclass does not have a no-arg constructor, the subclass MUST call `super(args)` explicitly.**
-- If the subclass defines any constructor, Java does NOT create a default constructor automatically for the parent class.
+- If the subclass defines any constructor, Java does NOT create a default constructor automatically for that subclass.
 - If you forget to call an existing parent constructor explicitly, the compiler inserts `super()` — which may not exist.
 
 ```java
@@ -298,7 +305,7 @@ A method in a subclass **overrides** a method in its superclass if:
 - the superclass method is `instance` (non static);
 - the subclass method has the same name, the same parameter list and a return type which is the same type or a subtype of the return type in the inherited method;
 - both methods are accessible (not private) and the subclass method is NOT less visible than the superclass one.
-- The overridding method cannot declare NEW or BROADER checked exceptions than those declared in the inherited method. 
+- The overriding method cannot declare new or broader checked exceptions. 
 
 Overriding is used to specialize behavior: a subclass can adapt or refine what the parent class does while still being used through a reference of the parent type.
 
@@ -347,10 +354,10 @@ class Student extends Person {
 }
 ```
 
-If both parent and child declare a member (field or method) with the same name, the child instance effectively has access to **two versions**:
+If both parent and child declare a member (field or method) with the same name, The child can access both:
 
-- the one defined in the child class (default when called directly);
-- the parent version, accessible using `super`.
+- the overridden version (default)
+- the parent version via `super`
 
 ```java
 class Base {
@@ -403,7 +410,7 @@ Static methods are **not overridden**; they are **hidden**.
 
 If a subclass defines a static method with the same signature as a static method in the parent, the subclass method **hides** the parent method. 
 
-If one of the method is marked as `static` and the other is not, the code will NOT compile.
+If one of the methods is marked as `static` and the other is not, the code will NOT compile.
 
 Method selection for static methods happens at **compile time**, based on the reference type, not the object type.
 
@@ -456,7 +463,7 @@ Abstract classes are used when you want to define a common **base behavior** and
 - An abstract class **cannot** be instantiated directly.
 - Abstract methods have no body and end with a semicolon.
 - **Abstract methods cannot be `final`, `static`, or `private`**, because they must be overridable.
-- The first concrete (non abstract) subclass in the hierarchy must implement all inherited abstract methods, otherwise it must itself be declared abstract.
+- The first concrete (non-abstract) subclass in the hierarchy must implement all inherited abstract methods, otherwise it must itself be declared abstract.
 
 ```java
 abstract class Shape {
@@ -547,7 +554,7 @@ In this example:
 - All fields are `private` and `final`, set only once in the constructor.
 - The list of hobbies is defensively copied on construction and wrapped as unmodifiable in the getter, so external code cannot modify the internal state.
 
-Designing immutable objects is especially important in multi thread contexts and when passing objects across layers of an application. 
+Designing immutable objects is especially important in multithread contexts and when passing objects across layers of an application. 
 
 
 

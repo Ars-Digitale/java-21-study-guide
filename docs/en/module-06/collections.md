@@ -40,7 +40,9 @@ At the heart of the Java Collections Framework is a small set of **root interfac
 
 - **List**: an `ordered` collection of elements that allows `duplicates`;
 - **Set**: a collection that does not allow `duplicates`;
-- **Queue**: a structure that maps keys to values, in which duplicate keys are not allowed; each key can map to at most one value.
+- **Queue**: a collection designed for holding elements prior to processing, typically FIFO (first-in-first-out), with variants like priority queues and deques.
+- **Map**: a structure that maps keys to values, where duplicate keys are not allowed; each key can map to at most one value.
+
 
 ### 22.2.1 Main Collection Interfaces
 
@@ -61,7 +63,7 @@ java.util
 │ │ 	│ 		└─ LinkedHashSet<E>
 │ │ 	├─ SortedSet<E>
 │ │ 	│ 		└─ NavigableSet<E>
-│ │ 	│ 		└─ TreeSet<E>
+│ │ 	│ 			└─ TreeSet<E>
 │ │ 	├─ HashSet<E>
 │ │ 	└─ (other Set implementations)
 │ ├─ Queue<E>
@@ -92,7 +94,7 @@ java.util
 	│ 	└─ LinkedHashMap<K,V>
 	├─ SortedMap<K,V>
 	│ 	└─ NavigableMap<K,V>
-	│ 	└─ TreeMap<K,V>
+	│ 		└─ TreeMap<K,V>
 	├─ HashMap<K,V>
 	├─ Hashtable<K,V>
 	└─ ConcurrentMap<K,V> (java.util.concurrent)
@@ -104,7 +106,7 @@ java.util
 Java 21 introduces the new interface `SequencedCollection`, which formalizes the idea that a collection maintains a **defined encounter order**.
 This was already true for List, LinkedHashSet, LinkedHashMap, Deque, etc., but now the behavior is standardized.
 
-- SequencedCollection: defines `getFirst()`, `getLast()`, `addFirst()`, `addLast()`.
+- `SequencedCollection` defines methods like `getFirst()`, `getLast()`, `addFirst()`, `addLast()`, `removeFirst()`, `removeLast()`, and `reversed()`.
 - SequencedSet, SequencedMap extend the idea for sets and maps.
 
 This drastically simplifies the specification of ordering behaviors and will be used throughout the following chapters.
@@ -136,7 +138,8 @@ List<String> names = new ArrayList<>();
 Map<Integer, String> map = new HashMap<>();
 ```
 
-> **Note:** Generics in collections work through type erasure: see [Type Erasure](../module-04/generics.md#4-type-erasure).
+> [!NOTE]
+> Generics in collections work through type erasure: see [Type Erasure](../module-04/generics.md#4-type-erasure).
 
 ## 22.7 Mutability vs. Immutability
 
@@ -166,13 +169,20 @@ List<String> immutable1 = List.of(vargs);
 immutable1.add("c"); // ❌ UnsupportedOperationException
 
 List<String> immutable2 = List.copyOf(fromAsList);
-immutable2.set(0, "k"); ❌ UnsupportedOperationException
+immutable2.set(0, "k"); // ❌ UnsupportedOperationException
 
 
-// We can't ADD or REMOVE elements to "fromAsList" but we can replace them, both by modifying the underline array "vargs" or by doing the opposite:
+// We can't ADD or REMOVE elements from "fromAsList" but we can replace them,
+// either by modifying the underlying array "vargs" or by mutating the list itself:
+
 
 fromAsList.set(0, "k");  // the update will be reflected on the backing array as well.
 ```
+
+> [!NOTE]
+> `Arrays.asList(...)` returns a fixed-size, but **mutable**, List view backed by the original array.
+> You cannot add/remove elements, but you can replace existing ones.
+
 
 ## 22.8 Big-O Performance Expectations
 
@@ -183,12 +193,13 @@ ArrayList: get() O(1), add() amortized O(1), remove() O(n)
 LinkedList: get() O(n), add/remove first/last O(1)
 HashSet: add(), contains(), remove() ~ O(1)
 TreeSet: add(), contains(), remove() O(log n)
-HashMap: get()/put() ~ O(1)
+HashMap: get()/put() ~ O(1) on average
 TreeMap: get()/put() O(log n)
 Deque: add/remove first/last O(1)
 ```
 
-> **Note:** These values are averages; worst-case may be different (especially for hash-based structures).
+> [!NOTE]
+> These values are averages; worst-case may be different (especially for hash-based structures).
 
 
 ## 22.9 Summary

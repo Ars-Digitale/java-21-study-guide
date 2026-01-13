@@ -27,7 +27,8 @@ Unlike other collection types, `Map` does **not** extend `Collection` and theref
 - Maps do not support positional (index-based) access
 - Iteration is performed over `keySet()`, `values()`, or `entrySet()`
 
-> **Note:** A `Map` is not a `Collection`, but its views (keySet, values, entrySet) are collections.
+> [!NOTE]
+> A `Map` is not a `Collection`, but its views (keySet, values, entrySet) are collections.
 
 ## 28.2 Main Map Implementations
 
@@ -39,7 +40,8 @@ Unlike other collection types, `Map` does **not** extend `Collection` and theref
 | Hashtable | No ordering | No | No | Yes | Legacy |
 | ConcurrentHashMap | No ordering | No | No | Yes | Concurrent-friendly |
 
-> **Note:** TreeMap ordering is determined either by `Comparable` or by a `Comparator` provided at construction.
+> [!NOTE]
+> TreeMap ordering is determined either by `Comparable` or by a `Comparator` provided at construction.
 
 
 ## 28.3 Creating Maps
@@ -58,7 +60,8 @@ Map<String, Integer> map5 = Map.ofEntries(
 );
 ```
 
-> **Note:** Maps created with `Map.of(...)` and `Map.ofEntries(...)` are **immutable**. Any modification attempt throws `UnsupportedOperationException`.
+> [!NOTE]
+> Maps created with `Map.of(...)` and `Map.ofEntries(...)` are **immutable**. Any modification attempt throws `UnsupportedOperationException`.
 
 
 ## 28.4 Basic Map Operations
@@ -66,6 +69,7 @@ Map<String, Integer> map5 = Map.ofEntries(
 | Method | Description | Return
 |------|-------------|---------------|
 | put(k, v) | Adds or replaces a mapping | Return prev. value or null |
+| putIfAbsent(k,v) | Adds only if key not present | Returns existing or null |
 | get(k) | Returns value or null | Return specific value or null |
 | getOrDefault(k, default) | Returns value or default | Return specific value or default |
 | remove(k) | Removes mapping | Remove and return specific value or null |
@@ -74,7 +78,7 @@ Map<String, Integer> map5 = Map.ofEntries(
 | size() | Number of entries | int |
 | isEmpty() | Empty check | boolean |
 | clear() | Removes all entries | void |
-| V merge(k, v, BiFunction(V, V, V)) | merge value with func. | Set value if not set; run func. if set for new value; Remove if v is null |
+| V merge(k, v, BiFunction(V, V, V)) | merge(k, v, remappingFunction) | if key absent → sets value; if key present → function(oldValue, newValue); if function returns null → mapping removed |
 
 ```java
 Map<String, String> map = new HashMap<>();
@@ -108,7 +112,8 @@ for (Map.Entry<String, String> e : map.entrySet()) {
 }
 ```
 
-> **Note:** Modifying the map while iterating over these views may throw `ConcurrentModificationException` (except for concurrent maps).
+> [!NOTE]
+> Modifying the map while iterating over these views may throw `ConcurrentModificationException` (except for concurrent maps).
 
 
 ## 28.6 Determining Equality in Maps
@@ -126,7 +131,8 @@ Map<String, Integer> m2 = Map.of("B", 2, "A", 1);
 System.out.println(m1.equals(m2)); // true
 ```
 
-> **Note:** Iteration order does not affect map equality.
+> [!NOTE]
+> Iteration order does not affect map equality.
 
 
 ## 28.7 Special Behavior of TreeMap
@@ -157,9 +163,12 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 | Hashtable | No | No |
 | ConcurrentHashMap | No | No |
 
+> [!NOTE]
+> TreeMap accepts null values only when they do not participate in key comparison. In practice this is rare, because null keys are banned and comparators may reject nulls.
+>
+> HashMap/LinkedHashMap allow only ONE null key — inserting another replaces the existing one.
 
-
-## 28.9 Common  Pitfalls
+## 28.9 Common Pitfalls
 
 - Assuming Map is a Collection
 - Forgetting that duplicate keys overwrite values

@@ -5,14 +5,14 @@
 - [19. Exceptions and Error Handling](#19-exceptions-and-error-handling)
   - [19.1 Exception hierarchy and types](#191-exception-hierarchy-and-types)
     - [19.1.1 Throwable](#1911-throwable)
-    - [19.1.2 Error unchecked](#1912-error-unchecked)
-    - [19.1.3 Checked Exceptions Exception](#1913-checked-exceptions-exception)
-    - [19.1.4 Unchecked Exceptions RuntimeException](#1914-unchecked-exceptions-runtimeexception)
+	- [19.1.2 Error (unchecked)](#1912-error-unchecked)
+	- [19.1.3 Checked Exceptions (`Exception`)](#1913-checked-exceptions-exception)
+	- [19.1.4 Unchecked Exceptions (`RuntimeException`)](#1914-unchecked-exceptions-runtimeexception)
   - [19.2 Declaring and throwing exceptions](#192-declaring-and-throwing-exceptions)
     - [19.2.1 Declaring exceptions with throws](#1921-declaring-exceptions-with-throws)
     - [19.2.2 Throwing exceptions](#1922-throwing-exceptions)
   - [19.3 Overriding methods and exception rules](#193-overriding-methods-and-exception-rules)
-  - [19.4 Handling exceptions try catch finally](#194-handling-exceptions-try-catch-finally)
+  - [19.4 Handling exceptions: try, catch, finally](#194-handling-exceptions-try-catch-finally)
     - [19.4.1 Basic try-catch syntax](#1941-basic-try-catch-syntax)
     - [19.4.2 Multiple catch blocks](#1942-multiple-catch-blocks)
     - [19.4.3 Multi-catch Java-7](#1943-multi-catch-java-7)
@@ -63,7 +63,7 @@ java.lang.Object
 ### 19.1.3 Checked Exceptions (`Exception`)
 
 - Subclasses of `Exception` **excluding** `RuntimeException`
-- Represent conditions applications may want to handle
+- Represent conditions that applications may want to handle
 - Must be either **caught** or **declared**
 - Examples: `IOException`, `SQLException`
 
@@ -87,7 +87,7 @@ void readFile(Path p) throws IOException {
 }
 ```
 > [!NOTE]
-> Only **checked exceptions** must be declared. Unchecked exceptions may be declared but are usually omitted.
+> Only **checked exceptions** must be declared. Unchecked exceptions may be declared, but are usually omitted.
 
 ### 19.2.2 Throwing exceptions
 
@@ -118,7 +118,7 @@ class Parent {
 class Child extends Parent {
 	@Override
 	void work() throws FileNotFoundException {} // OK (subclass)
-	}
+}
 ```
 
 > [!NOTE]
@@ -154,6 +154,8 @@ try {
 ```
 > [!NOTE]
 > More specific exceptions must come before more general ones, otherwise compilation fails.
+> If you place a catch for a superclass (e.g. `IOException`) before a catch for a subclass (e.g. `FileNotFoundException`), the subclass catch becomes unreachable.
+
 
 ### 19.4.3 Multi-catch (Java 7+)
 
@@ -184,7 +186,7 @@ try {
 - Executes even if `return` is used in try and/or catch block
 
 > [!NOTE]
-> A `finally` block can override a return value or swallow an exception.
+> A `finally` block can override a return value or swallow an exception. This is generally discouraged because it makes the control flow harder to reason about.
 
 
 ## 19.5 Automatic Resource Management (try-with-resources)
@@ -207,11 +209,9 @@ try (BufferedReader br = Files.newBufferedReader(path)) {
 ### 19.5.2 Declaring multiple resources
 
 ```java
-try (
-InputStream in = Files.newInputStream(p);
-OutputStream out = Files.newOutputStream(q)
-) {
-	in.transferTo(out);
+try (InputStream in = Files.newInputStream(p);
+		OutputStream out = Files.newOutputStream(q)) {
+    in.transferTo(out);
 }
 ```
 
@@ -221,7 +221,7 @@ OutputStream out = Files.newOutputStream(q)
 
 - Resources are in scope only inside the `try` block
 - They are implicitly `final`
-- You can declare resources ahead of time, outside the `try-with-resources`, provided they are declared as `final` or are effectively final.
+- Since Java 9, you can declare resources ahead of time, outside the `try-with-resources`, provided they are declared as `final` or are effectively final.
 
 ```java
 final var firstWriter = Files.newBufferedWriter(filePath);
@@ -262,7 +262,7 @@ catch (Exception e) {
 ## 19.7 Exceptions summary
 
 - Checked exceptions must be caught or declared
-- Override methods may not widen checked exceptions
+- Overriding methods may not widen checked exceptions
 - Use multi-catch for shared handling logic
 - Prefer try-with-resources over finally cleanup
 - Resources close in reverse order

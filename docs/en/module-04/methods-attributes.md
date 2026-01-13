@@ -63,7 +63,8 @@ A method declaration is composed of **mandatory** and **optional** components.
 They control *visibility*, not behavior.
 (Please refer to: [Access Modifiers](../module-01/basic-building-blocks.md#3-access-modifiers)) 
 
-#### 14.1.1.2 Return Type  
+#### 14.1.1.2 Return Type
+
 Appears **immediately before** the method name.
 
 - If the method returns a value → the return type specifies the value’s type.
@@ -77,7 +78,8 @@ Appears **immediately before** the method name.
 
 Follows the same rules as identifiers (Please refer to: [Java Naming Rules](../module-01/naming-rules.md)).
 
-#### 14.1.1.4 Method Signature  
+#### 14.1.1.4 Method Signature
+ 
 The **method signature** in Java includes:
 
 - the *method name*
@@ -101,7 +103,8 @@ void m(int a)
 void m(int b)
 ```
 
-#### 14.1.1.5 Method Body  
+#### 14.1.1.5 Method Body 
+ 
 A block `{ }` containing **zero or more statements**.  
 If the method is `abstract`, the body must be omitted.
 
@@ -432,7 +435,8 @@ void calculate() {
 
 Two special cases:
 
-#### 14.4.2.1 Effectively Final Local Variables  
+#### 14.4.2.1 Effectively Final Local Variables
+ 
 A local variable is *effectively final* if it is **assigned once**, even without `final`.
 
 Effectively final variables can be used in:
@@ -441,6 +445,7 @@ Effectively final variables can be used in:
 - local/anonymous classes
 
 #### 14.4.2.2 Parameters as Effectively Final  
+
 Method parameters behave as local variables and follow the same rules.
 
 

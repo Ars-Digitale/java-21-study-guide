@@ -5,7 +5,7 @@
 - [20. Functional Programming in Java](#20-functional-programming-in-java)
   - [20.1 Functional Interfaces](#201-functional-interfaces)
     - [20.1.1 Rules for Functional Interfaces](#2011-rules-for-functional-interfaces)
-    - [20.1.2 Common Functional Interfaces javautilfunction](#2012-common-functional-interfaces-javautilfunction)
+    - [20.1.2 Common Functional Interfaces (java.util.function)](#2012-common-functional-interfaces-javautilfunction)
     - [20.1.3 Convenience Methods on Functional Interfaces](#2013-convenience-methods-on-functional-interfaces)
     - [20.1.4 Primitive Functional Interfaces](#2014-primitive-functional-interfaces)
     - [20.1.5 Summary](#2015-summary)
@@ -39,7 +39,9 @@ In Java, a **functional interface** is an interface that contains **exactly one*
 
 Functional interfaces enable **Lambda Expressions** and **Method References**, forming the core of Java’s functional programming model.
 
-> **Note:** Java automatically treats any interface with a single abstract method as a functional interface, `@FunctionalInterface` annotation is optional but recommended.
+> [!NOTE]
+> Java automatically treats any interface with a single abstract method as a functional interface. The `@FunctionalInterface` annotation is optional but recommended.
+
 
 ### 20.1.1 Rules for Functional Interfaces
 
@@ -93,7 +95,7 @@ Predicate<Integer> positive = x -> x > 0;
 
 ### 20.1.3 Convenience Methods on Functional Interfaces
 
-Many Functional interfaces come with helper methods that allow chaining and composition.
+Many functional interfaces come with helper methods that allow chaining and composition.
 
 
 |Interface        | Method         | Description |
@@ -168,12 +170,12 @@ Java provides specialized versions of functional interfaces for primitives to av
 | ObjLongConsumer<T>           | void         | accept(T,long)          | 2 (T,long)   |
 | ObjDoubleConsumer<T>         | void         | accept(T,double)        | 2 (T,double) |
 |                              |              |                         |              |
-| DoubleToIntFunction          | int          | applyAsInt(double val.) | 1            |
-| DoubleToLongFunction         | long         | applyAsLong(double val.)| 1            |
-| IntToDoubleFunction          | double       | applyAsDouble(int val.) | 1            |
-| IntToLongFunction            | long         | applyAsLong(int value)  | 1            |
-| LongToDoubleFunction         | double       | applyAsDouble(long val.)| 1            |
-| LongToIntFunction            | int          | applyAsInt(long value)  | 1            |
+| DoubleToIntFunction          | int          | applyAsInt(double) 		| 1            |
+| DoubleToLongFunction         | long         | applyAsLong(double)		| 1            |
+| IntToDoubleFunction          | double       | applyAsDouble(int) 		| 1            |
+| IntToLongFunction            | long         | applyAsLong(int)  		| 1            |
+| LongToDoubleFunction         | double       | applyAsDouble(long)		| 1            |
+| LongToIntFunction            | int          | applyAsInt(long)  		| 1            |
 
 
 Example
@@ -189,7 +191,7 @@ IntUnaryOperator doubleIt = x -> x * 2;
 
 ### 20.1.5 Summary
 
-- Functional Interfaces contain exactly one abstract method (SAM).
+- Functional interfaces contain exactly one abstract method (SAM).
 - They power Lambdas and Method References.
 - Java offers many built-in FIs in java.util.function.
 - Primitive variants improve performance by removing boxing.
@@ -245,8 +247,8 @@ Function<Integer, String> f = (x) -> {
 - If a parameter has a type, all parameters must specify the type.
 - A single parameter does not require parentheses.
 - Multiple parameters require parentheses.
-- If the body is a single expression, `return` is not allowed.
-- If the body is in `{ }` brackets, `return` must appear if a value is returned.
+- If the body is a single expression (no `{ }`), `return` is not allowed; the expression itself is the return value.
+- If the body uses `{ }` (a block), `return` must appear if a value is returned.
 - Lambda expressions can only be assigned to functional interfaces (SAM types).
 
 ### 20.2.4 Type Inference
@@ -265,7 +267,8 @@ BiFunction<Integer, Integer, Integer> f = (Integer a, Integer b) -> a * b;
 
 ### 20.2.5 Restrictions in Lambda Bodies
 
-**Lambdas cannot reassign non-final (effectively final) local variables.**
+**Lambdas can only capture local variables that are final or effectively final (not reassigned).**
+
 
 ```java
 int x = 10;
@@ -398,7 +401,8 @@ BiPredicate<String, String> p2 = String::equals;   // method reference
 System.out.println(p2.test("abc", "abc"));  // true
 ```
 
-> **Note:** This form applies the method to the *first argument* of the lambda.
+> [!NOTE]
+> This form applies the method to the *first argument* of the lambda.
 
 
 ### 20.3.4 Reference to a Constructor
@@ -437,9 +441,9 @@ The table below summarizes all method reference categories.
 // ❌ Ambiguous: which println()? (println(int), println(String)...)
 Consumer<String> c = System.out::println; // OK only because FI parameter is String
 
-// ❌ No matching constructor
-Function<String, Integer> f = Integer::new; 
-// ERROR: Integer(String) exists, but return type Integer must match
+// ❌ No matching constructor: wrong functional interface
+Supplier<Integer> s = Integer::new;          // ✔ OK: calls Integer()
+Function<String, Long> f = Integer::new;     // ❌ ERROR: constructor returns Integer, not Long
 ```
 
 When in doubt, rewrite the method reference as a lambda — if the lambda works but the method reference does not, the problem is usually signature matching.
