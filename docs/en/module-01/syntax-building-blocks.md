@@ -117,7 +117,8 @@ counter++;             // another update (post-increment)
   - **Reference types:** represent references (pointers) to objects in memory.  
     Examples: `String`, arrays (e.g., `int[]`), classes, interfaces, and user-defined types.
 
-> **Note:** See [Java Data Types](data-types.md).
+> [!NOTE]
+> See [Java Data Types](data-types.md).
 
 - **Theory:** A type system is the set of rules that associates sets of values and admissible operations.
 
