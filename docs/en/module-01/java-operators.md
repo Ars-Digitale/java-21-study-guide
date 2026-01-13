@@ -126,8 +126,6 @@ int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 | 17 | **Arrow operator** | `->` | `(x, y) -> x + y` | Right → Left | Lambda expressions, switch rules |
 
 
----
-
 ### 5.5.1 ⚙️ Additional Notes
 
 - **String concatenation (`+`)** has lower precedence than arithmetic `+` with numbers.
@@ -200,7 +198,7 @@ They perform arithmetic, relational, logical, bitwise, and assignment operations
 > - `a || b` → `b` evaluated only if `a` is false
 
 
-**Some Examples**
+- Examples:
 
 Arithmetic Example:
 ```java
@@ -356,7 +354,7 @@ b += 1;         // ✅ works: implicit cast back to byte
 The **equality operators** in Java `==` (equal to) and `!=` (not equal to) are used to compare two operands for equality.  
 However, their behavior differs **depending on whether they are applied to primitive types or reference types (objects)**.
 
-> [!SUMMARY]
+> [!NOTE]
 > - `==` compares **values** for primitives  
 > - `==` compares **references** for objects  
 > - `.equals()` compares **object content** (if implemented)
@@ -451,7 +449,7 @@ Object n = null;
 System.out.println(n instanceof Object);  // false
 ```
 
-> [!REMEMBER]
+> [!WARNING]
 > `instanceof` always returns `false` when the left operand is `null`.
 
 
@@ -489,7 +487,7 @@ if (obj instanceof String str) {
 }
 ```
 
-Key properties
+Key properties:
 
 - If the test succeeds, the pattern variable (e.g., s) is definitely assigned and in scope in the true branch.
 - Pattern variables are implicitly final (cannot be reassigned).
@@ -498,7 +496,7 @@ Key properties
 
 #### 5.7.6.3 Flow Scoping & Short-Circuit Logic
 
-- Pattern variables become available based on flow analysis:
+Pattern variables become available based on flow analysis:
 
 ```java
 Object obj = "data";
@@ -526,7 +524,7 @@ if ((obj instanceof String s) && s.contains("a")) { // ✅ s in scope after grou
 }
 ```
 
-- Pattern matching with `null` evaluates, like always for `instanceof`, to `false`
+Pattern matching with `null` evaluates, like always for `instanceof`, to `false`
 
 ```java
 String str = null;
@@ -542,7 +540,7 @@ if (str instanceof String s) {
 }
 ```
 
-- Supported Types
+Supported Types:
 
 The type of the pattern variable must be a subtype, a supertype or of the same type of the reference variable.
 

@@ -41,7 +41,7 @@ As we saw before in the [Syntax Building Blocks](syntax-building-blocks.md), Jav
 
 ## 4.1 Primitive Types
 
-Primitives represent **single raw values** stored directly in memory.  
+`Primitives` represent **single raw values** stored directly in memory.  
 Each primitive type has a fixed size that determines how many bytes it occupies.
 
 Conceptually, a primitive is just a **cell in memory** holding a value:
@@ -107,7 +107,7 @@ They also support special values: **`+Infinity`**, **`-Infinity`**, and **`NaN`*
 
 - **FP** = floating point.  
 - `boolean` size is JVM-dependent but behaves logically as `true`/`false`.  
-- Default values apply to **fields** (class variables). Local variables must be explicitly initialized before use.
+- Default values apply to **fields** (class variables). **Local variables** must be explicitly initialized before use.
 
 ---
 
