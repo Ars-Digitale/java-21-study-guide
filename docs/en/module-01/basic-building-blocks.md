@@ -43,7 +43,7 @@ These are the minimum concepts needed to write, compile, organize, and run Java 
 A Java `class` is the fundamental building block of a Java program.
 A class represents a **type** in Java: it defines structure (`fields`) and behavior (`methods`).
 
-A class is a **blueprint**, while objects are **concrete instances** created at runtime.
+A `class` is a **blueprint**, while `objects` are **concrete instances** created at runtime.
 
 A Java class is composed of two main elements, known as its **members**:
 - **Fields** (or variables) — they represent the data that define the state of this newly created type.
