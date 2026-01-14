@@ -36,8 +36,6 @@
 
 ### 9.1.1 Strings
 
----
-
 #### 9.1.1.1 Initializing Strings
 
 In Java, a **String** is an object of the `java.lang.String` class, used to represent a sequence of characters.
