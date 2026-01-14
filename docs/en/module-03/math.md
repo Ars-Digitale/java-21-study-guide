@@ -44,7 +44,7 @@ public static long max(long x, long y);
 public static double max(double x, double y);
 ```
 
-Example:
+- Example:
 
 ```java
 System.out.println(Math.max(10.50, 7.5));   // 10.5
@@ -60,7 +60,7 @@ values with fractional part 0.5 and above are rounded up; below 0.5 are rounded 
 - `long round(double value)`
 - `int round(float value)`
 
-Examples:
+- Examples:
 
 ```java
 Math.round(3.2);    // 3   (returns long)
@@ -79,7 +79,7 @@ Math.round(-3.5f);  // -3  (float version returns int)
 **Overloads**
 - `double ceil(double value)`
 
-Examples:
+- Examples:
 
 ```java
 Math.ceil(3.1);   // 4.0
@@ -93,7 +93,7 @@ Math.ceil(-3.1);  // -3.0
 **Overloads**
 - `double floor(double value)`
 
-Examples:
+- Examples:
 
 ```java
 Math.floor(3.9);   // 3.0
@@ -107,7 +107,7 @@ Math.floor(-3.1);  // -4.0
 **Overloads**
 - `double pow(double base, double exponent)`
 
-Examples:
+- Examples:
 
 ```java
 Math.pow(2, 3);      // 8.0
@@ -122,7 +122,7 @@ Math.pow(10, -1);    // 0.1
 **Overloads**
 - `double random()`
 
-Examples:
+- Examples:
 
 ```java
 double r = Math.random();   // 0.0 <= r < 1.0
@@ -163,6 +163,8 @@ Math.sqrt(-1);   // NaN (not a number)
 | abs() | same type | int, long, float, double | Absolute value |
 | sqrt() | double | double | Square root |
 
+---
+
 ## 11.2 BigInteger and BigDecimal
 
 The classes `BigInteger` and `BigDecimal` (in `java.math`) provide arbitrary-precision number types.  
@@ -181,7 +183,8 @@ Floating-point types (`float`, `double`) use a binary representation. Many decim
 System.out.println(0.1 + 0.2); // 0.30000000000000004 
 ```
 
-For tasks like financial calculations, this is unacceptable.  
+For tasks like financial calculations, this is unacceptable.
+  
 `BigDecimal` solves this by representing numbers using a decimal model with a configurable scale (number of digits after the decimal point).
 
 ### 11.2.2 BigInteger — Arbitrary-Precision Integers
@@ -211,7 +214,7 @@ BigInteger(String val, int radix);
 BigInteger(int numBits, Random rnd);
 ```
 
-Examples:
+- Examples:
 
 ```java
 import java.math.BigInteger;
@@ -247,7 +250,7 @@ Instead, you must call methods (all of which return new instances). Here are som
 - `gcd(BigInteger val)`
 - `compareTo(BigInteger val)` – ordering
 
-Example:
+- Example:
 
 ```java
 BigInteger x = new BigInteger("100000000000000000000");
