@@ -816,7 +816,8 @@ System.out.println(c == d);        // false → not cached
 System.out.println(c.equals(d));   // true → same numeric value
 ```
 
-Be very careful with wrapper caching — heavily tested on exams.
+> [!WARNING]
+> Be very careful with wrapper caching
 
 
 ### 6.4.5 Equality and `null`
