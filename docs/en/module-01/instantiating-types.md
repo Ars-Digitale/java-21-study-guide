@@ -143,7 +143,8 @@ long exNumLit = 5729685479l;
 						 
 ```
   
-**Declaring** a reference type means reserving space in memory for a variable that will contain a reference (pointer) to an object of the specified type.  
+**Declaring** a `reference` type means reserving space in memory for a variable that will contain a reference (pointer) to an object of the specified type.
+  
 At this stage, no object is created yet — the variable only has the potential to point to one.
 
 > [!WARNING]  
@@ -173,9 +174,12 @@ String v1; v2; 							// ERROR - NOT LEGAL
 
 #### 6.1.2.1 Creating and Assigning a Reference
 
-**Assigning** a reference type means storing into the variable the memory address of an object.
+**Assigning** a `reference` type means storing into the variable the memory address of an object.
+
 This is normally done after the creation of the object with the **new** keyword and a Constructor, or by using a literal or a factory method.
+
 A reference can also be assigned to another object of the same or compatible type.
+
 Reference types can also be assigned **null**, which means that they do not refer to an object.
 
 - Syntax examples:
@@ -193,7 +197,8 @@ List<Integer> numbers = List.of(1, 2, 3);   // Example with a factory method.
   
 #### 6.1.2.2 Constructors
 
-In the example, **`Person()`** is a constructor — a special kind of method used to initialize new objects.  
+In the example, **`Person()`** is a constructor — a special kind of method used to initialize new objects.
+  
 Whenever you call `new Person()`, the constructor runs and sets up the newly created instance.
 
 **Constructors have three main characteristics:**
