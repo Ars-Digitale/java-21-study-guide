@@ -15,7 +15,7 @@
   - [16.8 Default no-arg Constructor](#168-default-no-arg-constructor)
   - [16.9 Using this and Constructor Overloading](#169-using-this-and-constructor-overloading)
   - [16.10 Calling the Parent Constructor Using super](#1610-calling-the-parent-constructor-using-super)
-  - [16.11 Default Constructor Tips and Traps](#1611-default-constructor-tips-and-traps)
+  - [16.11 Default Constructor Tips and Traps](#1611-default-constructor--tips-and-traps)
   - [16.12 super Always Refers to the Most Direct Parent](#1612-super-always-refers-to-the-most-direct-parent)
   - [16.13 Inheriting Members](#1613-inheriting-members)
     - [16.13.1 Method Overriding](#16131-method-overriding)
@@ -40,16 +40,21 @@ It allows a class (the *subclass*) to acquire the state and behavior of another 
 
 ## 16.1 General Definition of Inheritance
 
-Inheritance enables a class to extend another class, automatically gaining its accessible fields and methods.  
+Inheritance enables a class to extend another class, automatically gaining its accessible fields and methods.
+  
 The extending class may add new features or override existing behaviors, creating more specialized versions of its parent.
 
 > [!NOTE] 
 > Inheritance expresses an *“is-a”* relationship: a Dog **is a** Animal.
 
+---
+
 ## 16.2 Single Inheritance and java.lang.Object
 
-Java supports **single inheritance**, meaning every class may extend **only one** direct superclass.  
-All classes ultimately inherit from `java.lang.Object`, which sits at the top of the hierarchy.  
+Java supports **single inheritance**, meaning every class may extend **only one** direct superclass.
+  
+All classes ultimately inherit from `java.lang.Object`, which sits at the top of the hierarchy. 
+ 
 This ensures all Java objects share a minimal common behavior (e.g., `toString()`, `equals()`, `hashCode()`).
 
 ```java
@@ -60,9 +65,12 @@ class Dog extends Animal { }
 System.out.println(new Dog() instanceof Object); // true
 ```
 
+---
+
 ## 16.3 Transitive Inheritance
 
-Inheritance is **transitive**.  
+Inheritance is **transitive**. 
+ 
 If class C extends B and B extends A, then C effectively inherits accessible members from both B *and* A.
 
 ```java
@@ -71,10 +79,13 @@ class B extends A { }
 class C extends B { } // C inherits from both A and B
 ```
 
+---
+
 ## 16.4 What Gets Inherited? (Short Reminder)
 
-A subclass inherits all **accessible** members of the superclass.  
-However, this depends on access modifiers.
+A subclass inherits all **accessible** members of the superclass.
+  
+However, this depends on `access modifiers`.
 
 - **public** → always inherited
 - **protected** → inherited if accessible through package or subclass rules
@@ -82,8 +93,9 @@ However, this depends on access modifiers.
 - **private** → **NOT** inherited
 
 > [!NOTE] 
-> (Please refer to: [Access Modifiers](../module-01/basic-building-blocks.md#3-access-modifiers)) 
+> ( Please refer to Paragraph "**Access Modifiers**" in Chapter: [2. Basic Language Java Building Blocks](../module-01/basic-building-blocks.md) ) 
 
+---
 
 ## 16.5 Class Modifiers Affecting Inheritance
 
@@ -102,10 +114,12 @@ Some class-level modifiers affect whether a class may be extended.
 > [!NOTE] 
 > A `static` class in Java can exist only as a **static nested class**.
 
+---
 
 ## 16.6 `this` and `super` References
 
 ### 16.6.1 The `this` Reference
+
 The `this` reference refers to the current object instance and helps in disambiguing access to current and inherited members. 
  
 Java uses a **granular scope** rule:  
@@ -139,6 +153,7 @@ public class Person {
 > `this` cannot be used inside static methods because no instance exists.
 
 ### 16.6.2 The `super` Reference
+
 The `super` reference gives access to members of the direct parent class.  
 
 Useful when:  
@@ -163,6 +178,7 @@ class Child extends Parent {
 > [!NOTE] 
 > `super` cannot be used inside static contexts.
 
+---
 
 ## 16.7 Declaring Constructors in an Inheritance Chain
 
@@ -177,12 +193,15 @@ A class may define multiple constructors (constructor overloading), each with a 
 You can explicitly declare a no-arg or a specific constructor or, if you don't, Java will  implicitly create a `default no-arg constructor`.
 
 If you explicitly declare a constructor, the Java compiler will not include any `default no-arg constructor`: this rule applies independently to every class in the hierarchy.
+
 A parent class still gets its own default constructor unless it also defines one.
 
+---
 
 ## 16.8 Default `no-arg` Constructor
 
-If a class does not declare any constructor, Java automatically inserts a **default no-argument constructor**.  
+If a class does not declare any constructor, Java automatically inserts a **default no-argument constructor**. 
+ 
 This constructor calls `super()` implicitly: the Java compiler implicitly insert a call to the no-arg constructor super(). 
 
 ```java
@@ -194,6 +213,7 @@ class Child extends Parent {
 }
 ```
 
+---
 
 ## 16.9 Using `this()` and Constructor Overloading
 
@@ -222,10 +242,12 @@ class Car {
 }
 ```
 
+---
 
 ## 16.10 Calling the Parent Constructor Using `super()`
 
-Every constructor must call a superclass constructor, either explicitly or implicitly.  
+Every constructor must call a superclass constructor, either explicitly or implicitly.
+  
 `super()` must appear as the **first** line in the constructor (unless replaced by `this()`).
 
 
@@ -242,6 +264,7 @@ class Child extends Parent {
 }
 ```
 
+---
 
 ## 16.11 Default Constructor — Tips and Traps
 
@@ -260,6 +283,7 @@ class Child extends Parent {
 }
 ```
 
+---
 
 ## 16.12 `super()` Always Refers to the **Most Direct Parent**
 
@@ -287,6 +311,8 @@ A
 B
 C
 ```
+
+---
 
 ## 16.13 Inheriting Members
 
