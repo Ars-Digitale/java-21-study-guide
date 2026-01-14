@@ -491,7 +491,6 @@ raw.add("x");
 raw.add(10);   // allowed, but unsafe
 ```
 
-> [!NOTE]
 > Raw types should be avoided.
 
 ---
