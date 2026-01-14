@@ -136,7 +136,7 @@ An escape sequence starts with a backslash `\`.
 
 #### 9.1.1.4 Rules for String Concatenation
 
-As introduced in the chapter on [Java Operators](../module-01/java-operators.md), the symbol `+` normally represents **arithmetic addition** when used with numeric operands.
+As introduced in the Chapter on [5. Java Operators](../module-01/java-operators.md), the symbol `+` normally represents **arithmetic addition** when used with numeric operands.
 
 However, when applied to **Strings**, the same operator performs **string concatenation** — it creates a new string by joining operands together.
 
