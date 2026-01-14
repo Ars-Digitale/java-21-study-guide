@@ -29,7 +29,7 @@
       - [6.4.2.1 Identity Comparison](#6421-identity-comparison)
       - [6.4.2.2 equals Logical Comparison](#6422-equals-logical-comparison)
       - [6.4.2.3 Key Points](#6423-key-points)
-    - [6.4.3 String Pool and Equality](#string-pool)
+  - [6.4.3 String Pool and Equality](#643-string-pool-and-equality)
       - [6.4.3.1 The intern Method](#6431-the-intern-method)
     - [6.4.4 Equality with Wrapper Types](#644-equality-with-wrapper-types)
     - [6.4.5 Equality and null](#645-equality-and-null)
@@ -733,7 +733,7 @@ System.out.println(s1.equals(s2)); // true → same content
   to provide meaningful value comparison.
 
 
-### 6.4.3 String Pool and Equality  {#string-pool}
+### 6.4.3 String Pool and Equality
 
 String literals are stored in the **String pool**, so identical literals  
 refer to the **same object**.
