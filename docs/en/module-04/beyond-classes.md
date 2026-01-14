@@ -51,7 +51,7 @@ This chapter presents several advanced type mechanisms beyond the Java Class des
 
 An **interface** in Java is a reference type that defines a contract of methods that a class agrees to implement. 
 
-An interface is implicitly `abstract` and cannot be marked as `final`: as with top-level classes, an interface can declare visibility as `public` or `default` (package-private).
+An `interface` is implicitly `abstract` and cannot be marked as `final`: as with top-level classes, an interface can declare visibility as `public` or `default` (package-private).
 
 A Java class may implement any number of interfaces through the `implements` keyword.
 
@@ -79,7 +79,7 @@ interface Calculator {
 ```
 
 > [!WARNING]
-> - Because interface abstract methods are implicitly `public`, you **cannot** reduce the access level on an implementing method.
+> Because interface abstract methods are implicitly `public`, you **cannot** reduce the access level on an implementing method.
 
 
 ### 17.1.2 Implementing an Interface
@@ -91,7 +91,7 @@ class BasicCalc implements Calculator {
 ```
 
 > [!NOTE]
-> - **Every** abstract method must be implemented unless the class is abstract.
+> **Every** abstract method must be implemented unless the class is abstract.
 
 
 ### 17.1.3 Multiple Inheritance
@@ -160,11 +160,13 @@ Among all the concrete methods that an interface can implement, we also have:
 - **`private` methods**: visible only inside the declaring interface and which can only be invoked from a `non-static` context (`default` methods or other `non-static private methods`).
 - **`private static` methods**: visible only inside the declaring interface and which can be invoked by any method of the enclosing interface.
 
+---
+
 ## 17.2 Sealed, non-sealed, and final Types
 
-Sealed classes and interfaces (Java 17+) restrict which other classes (or interfaces) can extend or implement them.
+`Sealed` classes and interfaces (Java 17+) restrict which other classes (or interfaces) can extend or implement them.
 
-A sealed type is declared by placing the `sealed` modifier right before the class (or interface) keyword, and adding, after the Type name, the `permits` keyword followed by the list of types that can extend (or implement) it.
+A `sealed type` is declared by placing the `sealed` modifier right before the class (or interface) keyword, and adding, after the Type name, the `permits` keyword followed by the list of types that can extend (or implement) it.
 
 ```java
 public sealed class Shape permits Circle, Rectangle { }
@@ -189,6 +191,7 @@ non-sealed class Rectangle extends Shape { }
 Enums can declare fields, constructors, and methods as regular classes do but they can't be extended.
 
 The list of enum values must end with a semicolon `(;)` in case of `Complex Enums`, but this is not mandatory for `Simple Enums`.
+
 
 ### 17.3.1 `Simple` Enum Definition
 
@@ -331,6 +334,7 @@ Nested record patterns allow you to destructure records that contain other recor
 
 They combine the power of `record` deconstruction with pattern matching, giving you a concise and expressive way to navigate hierarchical data structures.
 
+
 #### 17.4.4.1 Basic Nested Record Pattern
 
 If a record contains another record, you can destructure both at once:
@@ -349,6 +353,7 @@ void printInfo(Object obj) {
 ```
 
 In the example above, the `Person` pattern includes a nested `Address` pattern.
+
 Both are matched structurally.
 
 #### 17.4.4.2 Nested Record Patterns with `var`

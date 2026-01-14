@@ -182,15 +182,15 @@ class Child extends Parent {
 
 ## 16.7 Declaring Constructors in an Inheritance Chain
 
-A constructor initializes a newly created object. 
+A `constructor` initializes a newly created object. 
  
 Constructors are **never inherited**, but each subclass constructor must ensure that the superclass is initialized.
 
-Constructors are special methods with a name that matches the name of the class and that does not declare any return type.
+`Constructors` are special methods with a name that matches the name of the class and that does not declare any return type.
 
 A class may define multiple constructors (constructor overloading), each with a unique `signature`.
 
-You can explicitly declare a no-arg or a specific constructor or, if you don't, Java will  implicitly create a `default no-arg constructor`.
+You can explicitly declare a `no-arg` or a specific constructor or, if you don't, Java will  implicitly create a `default no-arg constructor`.
 
 If you explicitly declare a constructor, the Java compiler will not include any `default no-arg constructor`: this rule applies independently to every class in the hierarchy.
 
