@@ -22,7 +22,7 @@
       - [14.3.1.5 For references Java picks the most specific reference type](#14315--for-references-java-picks-the-most-specific-reference-type)
       - [14.3.1.6 When there is no unambiguous most specific the-call-is-a-compile-error](#14316--when-there-is-no-unambiguous-most-specific-the-call-is-a-compile-error)
       - [14.3.1.7 Mixed primitive + wrapper overloads](#14317--mixed-primitive--wrapper-overloads)
-      - [14.3.1.8 When primitives mix with reference types](#14318-when-primitives-mix-with-reference-types)
+      - [14.3.1.8 When primitives mix with reference types](#14318--when-primitives-mix-with-reference-types)
       - [14.3.1.9 When Object wins](#14319--when-object-wins)
       - [14.3.1.10 Summary Table Overload Resolution](#143110-summary-table-overload-resolution)
   - [14.4 Local and Instance Variables](#144-local-and-instance-variables)
