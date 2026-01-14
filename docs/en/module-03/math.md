@@ -23,13 +23,16 @@
 
 ## 11.1 Math APIs
 
-The `java.lang.Math` class provides a set of static methods useful for numerical operations.  
-These methods work with primitive numeric types.  
+The `java.lang.Math` class provides a set of static methods useful for numerical operations.
+  
+These methods work with primitive numeric types.
+  
 Below is a summary of the most frequently used ones, together with their overloaded forms.
 
 ### 11.1.1 Maximum and Minimum Between Two Values
 
-`Math.max()` and `Math.min()` compare the two provided values and return the maximum or minimum between them.  
+`Math.max()` and `Math.min()` compare the two provided values and return the maximum or minimum between them.
+  
 There are four overloaded versions for each method:
 
 ```java
@@ -167,7 +170,8 @@ Math.sqrt(-1);   // NaN (not a number)
 
 ## 11.2 BigInteger and BigDecimal
 
-The classes `BigInteger` and `BigDecimal` (in `java.math`) provide arbitrary-precision number types.  
+The classes `BigInteger` and `BigDecimal` (in `java.math`) provide arbitrary-precision number types.
+  
 They are used when:
 
 - Primitive types (`int`, `long`, `double`, etc.) don’t have enough range.
@@ -236,7 +240,8 @@ BigInteger r = new BigInteger(128, new Random());      // random 128-bit number
 
 ### 11.2.4 Operations (No Operators!)
 
-You cannot use the standard arithmetic operators (`+`, `-`, `*`, `/`, `%`) with `BigInteger` or `BigDecimal`.  
+You cannot use the standard arithmetic operators (`+`, `-`, `*`, `/`, `%`) with `BigInteger` or `BigDecimal`.
+  
 Instead, you must call methods (all of which return new instances). Here are some common ones for `BigInteger`:
 
 - `add(BigInteger val)`
