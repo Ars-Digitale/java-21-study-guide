@@ -33,7 +33,7 @@
     - [13.3.2 CompactNumberFormat](#1332-compactnumberformat)
   - [13.4 Date and Time Formatting](#134-date-and-time-formatting)
     - [13.4.1 DateTimeFormatter](#1341-datetimeformatter)
-    - [13.4.2 Standard Date Time Symbols](#1342-standard-date-time-symbols)
+    - [13.4.2 Standard Date Time Symbols](#1342-standard-datetime-symbols)
     - [13.4.3 datetime.format vs formatter.format](#1343-datetimeformat-vs-formatterformat)
     - [13.4.4 Localizing Dates](#1344-localizing-dates)
   - [13.5 Internationalization i18n and Localization l10n](#135-internationalization-i18n-and-localization-l10n)
