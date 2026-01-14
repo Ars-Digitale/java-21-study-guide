@@ -74,6 +74,7 @@ java.lang.Object
 - Usually represent programming errors
 - Examples: `NullPointerException`, `IllegalArgumentException`
 
+---
 
 ## 19.2 Declaring and throwing exceptions
 
@@ -102,6 +103,8 @@ if (value < 0) {
 - `throw` throws exactly one exception instance
 - `throws` declares possible exceptions in the method signature
 
+---
+
 ## 19.3 Overriding methods and exception rules
 
 When overriding a method, exception rules are strictly enforced.
@@ -123,6 +126,8 @@ class Child extends Parent {
 
 > [!NOTE]
 > Changing only the **unchecked** exceptions never breaks the override contract.
+
+---
 
 ## 19.4 Handling exceptions: try, catch, finally
 
@@ -188,6 +193,7 @@ try {
 > [!NOTE]
 > A `finally` block can override a return value or swallow an exception. This is generally discouraged because it makes the control flow harder to reason about.
 
+---
 
 ## 19.5 Automatic Resource Management (try-with-resources)
 
@@ -234,6 +240,7 @@ try (firstWriter; var secondWriter = Files.newBufferedWriter(filePath)) {
 > [!NOTE]
 > Attempting to reassign a resource variable causes a compilation error.
 
+---
 
 ## 19.6 Suppressed exceptions
 
@@ -258,6 +265,7 @@ catch (Exception e) {
 - Primary exception is thrown
 - Secondary exceptions are accessible via `getSuppressed()`
 
+---
 
 ## 19.7 Exceptions summary
 
