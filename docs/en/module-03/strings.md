@@ -60,7 +60,7 @@ Because `String` objects are immutable and widely used, they could easily occupy
   
 To reduce duplication, Java reuses all strings that are declared as literals (see example above), storing them in a dedicated area of the JVM known as the **String Pool** or **Intern Pool**.
 
-Please check [1.5.3 String Pool and Equality](../module-01/instantiating-types.md#643-string-pool-and-equality) for a deeper explanation and examples.
+Please check [6.4.3 String Pool and Equality](../module-01/instantiating-types.md#643-string-pool-and-equality) for a deeper explanation and examples.
 
 #### 9.1.1.3 Special Characters and Escape Sequences
 
