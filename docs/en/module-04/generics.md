@@ -38,14 +38,15 @@
 
 ---
 
-`Java Generics` provide **compile-time type safety** by allowing `classes`, `interfaces`, and `methods` to work with **types as parameters**.  
-They prevent ClassCastException at runtime by moving type checks to **compile time**, and they increase code reusability by enabling type-agnostic algorithms.  
+`Java Generics` provide **compile-time type safety** by allowing `classes`, `interfaces`, and `methods` to work with **types as parameters**.
+  
+They prevent `ClassCastException` at runtime by moving type checks to **compile time**, and they increase code reusability by enabling type-agnostic algorithms.  
 
 Generics apply to:  
-- Classes
-- Interfaces
-- Methods (generic methods)
-- Constructors  
+- `Classes`
+- `Interfaces`
+- `Methods` (generic methods)
+- `Constructors`  
 
 
 ## 18.1 Generic Type Basics
@@ -73,6 +74,7 @@ class Pair<K, V> {
 }
 ```
 
+---
 
 ## 18.2 Why Generics Exist
 
@@ -90,6 +92,7 @@ list.add("hi");
 String x = list.get(0);               // type-safe, no cast
 ```
 
+---
 
 ## 18.3 Generic Methods
 
@@ -104,10 +107,13 @@ String s = Util.<String>pick("A", "B"); // explicit
 String t = Util.pick("A", "B");         // inference works
 ```
 
+---
 
 ## 18.4 Type Erasure
 
-Type erasure is the process by which the Java compiler removes all generic type information before generating bytecode. This ensures backward compatibility with pre-Java-5 JVMs.
+`Type erasure` is the process by which the Java compiler removes all generic type information before generating bytecode. 
+
+This ensures backward compatibility with pre-Java-5 JVMs.
 
 At compile time, generics are fully checked: type bounds, variance, method overloading with generics, etc. However, at runtime, all generic information disappears.
 
@@ -165,12 +171,12 @@ Java allows multiple bounds:
 
 The critical rule:
 
-> [!NOTE]
+> [!IMPORTANT]
 > The erasure of `T` is always the **first bound**, which must be a class or interface.
 
 Because `Runnable` is the first bound, the compiler erases `T` to `Runnable`.
 
-Example with Multiple Bounds (Fully Expanded)
+-Example with Multiple Bounds (Fully Expanded)
 
 ```java
 public static <T extends Runnable & Serializable & Cloneable>
@@ -248,9 +254,10 @@ When Java compiles generic code, it applies type erasure:
 type parameters such as T are removed, and the compiler substitutes them with their erased type (usually Object or the first bound).
 
 Because of this, two methods that look different at the source level may become identical after erasure.
+
 If the erased signatures are the same, Java cannot distinguish between them, therefore the code does not compile.
 
-Example: Two Methods That Collapse to the Same Signature
+- Example: Two Methods That Collapse to the Same Signature
 
 ```java
 public class Demo {
@@ -287,7 +294,7 @@ public class SubDemo extends Demo {
 
 Again, the compiler rejects the overload because the erased signatures collide.
 
-When Overloading Does Work
+<ins>**When Overloading Does Work**</ins>
 
 **Erasure only removes type parameters, not the actual class used in the method parameter**.
 
