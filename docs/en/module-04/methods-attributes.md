@@ -50,7 +50,8 @@ This chapter introduces fundamental Object-Oriented Programming (OOP) concepts i
 
 ## 14.1 Methods
 
-Methods represent the **operations/behaviors** that can be performed by a particular data type (a **class**).  
+Methods represent the **operations/behaviors** that can be performed by a particular data type (a **class**).
+  
 They describe *what the object can do* and how it interacts with its internal state and the outside world.
 
 A method declaration is composed of **mandatory** and **optional** components.
@@ -61,7 +62,8 @@ A method declaration is composed of **mandatory** and **optional** components.
 #### 14.1.1.1  Access Modifiers 
 
 They control *visibility*, not behavior.
-(Please refer to: [Access Modifiers](../module-01/basic-building-blocks.md#3-access-modifiers)) 
+
+(Please refer to Paragraph "**Access Modifiers**" in Chapter: [2. Basic Language Java Building Blocks](../module-01/basic-building-blocks.md)) 
 
 #### 14.1.1.2 Return Type
 
