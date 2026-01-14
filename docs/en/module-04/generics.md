@@ -436,7 +436,6 @@ Number n = nums.get(0);   // OK
 // nums.add(5);           // ❌ cannot add: type safety
 ```
 
-> [!WARNING]
 > **You cannot add elements (except null) to ? extends** because you don’t know the exact subtype.
 
 #### 18.5.3.3 Lower-Bounded Wildcard `? super`
@@ -447,14 +446,13 @@ list.add(10);    // OK
 Object o = list.get(0); // returns Object (lowest common supertype)
 ```
 
-> [!NOTE]
 > `Super` accepts insertion, `extends` accepts extraction.
 
 ---
 
 ## 18.6 Generics and Inheritance
 
-> [!NOTE]
+
 > **Generics do NOT participate in inheritance**. 
 > 
 > A `List<String>` is not a subtype of `List<Object>`; parameterized types are invariant.
