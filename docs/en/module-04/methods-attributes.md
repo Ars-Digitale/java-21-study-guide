@@ -40,7 +40,7 @@
       - [14.6.5.1 Recommended use class name](#14651-recommended-use-class-name)
       - [14.6.5.2 Also legal via instance reference](#14652-also-legal-via-instance-reference)
     - [14.6.6 Static and Inheritance](#1466-static-and-inheritance)
-    - [14.6.7 Common Pitfalls](#1467-common-pitfalls)
+    - [14.6.7 Common Pitfalls](#1467-common--pitfalls)
 
 
 ---
