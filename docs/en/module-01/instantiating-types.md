@@ -720,7 +720,7 @@ Many classes override `.equals()` to compare **values**, not memory addresses.
 System.out.println(s1.equals(s2)); // true → same content
 ```
 
-#### 6.4.2.3 ✔️ Key points
+#### 6.4.2.3 Key points
 - `.equals()` is defined in `Object`.
 - If a class does *not* override `.equals()`, it behaves like `==`.
 - Classes like `String`, `Integer`, `List`, etc. override `.equals()`  
