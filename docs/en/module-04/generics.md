@@ -307,7 +307,8 @@ public class Demo {
 }
 ```
 
-Why this works
+<ins>**Why this works**</ins>
+
 Even though ArrayList<String> erases to ArrayList, and List<Object> erases to List, these are different classes (ArrayList vs. List), so the signatures remain distinct:
 
 ```java
@@ -330,7 +331,7 @@ Key Points:
 - Generic arguments must remain compatible after erasure (they must match).
 - Two methods cannot differ only by generic parameter on the return type.
 
-Example: Illegal Return Type Change Due to Generic Mismatch
+- Example: Illegal Return Type Change Due to Generic Mismatch
 
 ```java
 class A {
@@ -352,7 +353,7 @@ Even though generics are erased, Java still enforces source-level type safety:
 
 Both erase to `List`, but Java rejects overriding that breaks type compatibility.
 
-Example: Legal Covariant Return Type
+- Example: Legal Covariant Return Type
 
 ```java
 class A {
@@ -368,7 +369,7 @@ This is allowed because:
 - The raw types are covariant (List extends Collection).
 - The generic arguments match (String vs. String).
 
-Example: Illegal Overload on Return Type Alone
+- Example: Illegal Overload on Return Type Alone
 
 Two methods differing only by the generic argument in the return type cannot coexist:
 
@@ -392,7 +393,7 @@ Java does not use the return type when distinguishing overloaded methods.
 - Casts are inserted to preserve compile-time typing.
 - Bridge methods may be generated to preserve polymorphism.
 
-
+---
 
 ## 18.5 Bounds on Type Parameters
 
@@ -410,6 +411,7 @@ class Stats<T extends Number> {
 ### 18.5.2 Multiple Bounds
 
 Syntax: `T extends Class & Interface1 & Interface2 ...`  
+
 The class must come first.
 
 ```java
@@ -434,8 +436,8 @@ Number n = nums.get(0);   // OK
 // nums.add(5);           // ❌ cannot add: type safety
 ```
 
-Rule: **You cannot add elements (except null) to ? extends**  
-because you don’t know the exact subtype.
+> [!IMPORTANT]
+> **You cannot add elements (except null) to ? extends** because you don’t know the exact subtype.
 
 #### 18.5.3.3 Lower-Bounded Wildcard `? super`
 
@@ -445,13 +447,17 @@ list.add(10);    // OK
 Object o = list.get(0); // returns Object (lowest common supertype)
 ```
 
-Rule: “Super accepts insertion, extends accepts extraction.”
+> [!IMPORTANT]
+> `Super` accepts insertion, `extends` accepts extraction.
 
+---
 
 ## 18.6 Generics and Inheritance
 
-Important rule: **Generics do NOT participate in inheritance**.  
-A `List<String>` is not a subtype of `List<Object>`; parameterized types are invariant.
+> [!IMPORTANT]
+> **Generics do NOT participate in inheritance**. 
+> 
+> A `List<String>` is not a subtype of `List<Object>`; parameterized types are invariant.
 
 
 ```java
@@ -465,6 +471,7 @@ Instead:
 List<? extends Object> ok = ls;   // works
 ```
 
+---
 
 ## 18.7 Type Inference (Diamond Operator)
 
@@ -474,6 +481,7 @@ Map<String, List<Integer>> map = new HashMap<>();
 
 The compiler infers generic arguments from the assignment.
 
+---
 
 ## 18.8 Raw Types (Legacy Compatibility)
 
@@ -488,6 +496,7 @@ raw.add(10);   // allowed, but unsafe
 > [!NOTE]
 > Raw types should be avoided.
 
+---
 
 ## 18.9 Generic Arrays (Not Allowed)
 
@@ -499,6 +508,7 @@ List<String>[] arr = new List<String>[10];   // ❌ compile error
 
 Because arrays enforce runtime type safety while generics rely on compile-time checks only.
 
+---
 
 ## 18.10 Bounded Type Inference
 
@@ -509,6 +519,7 @@ int v = identity(10);   // OK
 // String s = identity("x"); // ❌ not a Number
 ```
 
+---
 
 ## 18.11 Wildcards vs. Type Parameters
 
@@ -531,6 +542,7 @@ Better:
 }
 ```
 
+---
 
 ## 18.12 PECS Rule (Producer Extends, Consumer Super)
 
@@ -548,6 +560,7 @@ Number n = listExtends.get(0);
 listSuper.add(10);
 ```
 
+---
 
 ## 18.13 Common Pitfalls
 
@@ -557,6 +570,7 @@ listSuper.add(10);
 - Thinking generic types are preserved at runtime (they are erased).
 - Trying to overload methods using only different type parameters.
 
+---
 
 ## 18.14 Summary Table of Wildcards
 
@@ -567,6 +581,7 @@ listSuper.add(10);
 |? super T       | can add T, retrieving gives Object |
 
 
+---
 
 ## 18.15 Summary of Concepts
 
@@ -579,6 +594,7 @@ Type Erasure = generics disappear at runtime
 Bridge Methods = maintain polymorphism
 ```
 
+---
 
 ## 18.16 Complete Example
 
