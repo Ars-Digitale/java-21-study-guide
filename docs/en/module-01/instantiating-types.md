@@ -472,6 +472,7 @@ Thus, Java forces developers to explicitly initialize `final` fields.
 
 > [!TIP]
 > `final` means **assigned once**, not **immutable object**.
+>
 > A final reference can still point to a mutable object.
 
 ```java
@@ -769,6 +770,7 @@ System.out.println(a == b);  // false
 
 > [!TIP]
 > `"Hello" == "Hel" + "lo"` → true (compile-time constant)
+>
 > `"Hello" == getHello()` → false (runtime concatenation)
 
 ```java
