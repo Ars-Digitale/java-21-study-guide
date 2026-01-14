@@ -340,7 +340,7 @@ run(null);  // ❌ Compile-time error: ambiguous method call
 
 Java evaluates widening, boxing, and varargs in this order:
 
-**widening → boxing → varargs**
+`**widening → boxing → varargs**`
 
 Example:
 
