@@ -21,7 +21,7 @@
     - [18.5.1 Upper Bounds extends](#1851-upper-bounds-extends)
     - [18.5.2 Multiple Bounds](#1852-multiple-bounds)
     - [18.5.3 Wildcards: ?, ? extends, ? super](#1853-wildcards---extends--super)
-      - [18.5.3.1 Unbounded Wildcard](#18531-unbounded-wildcard)
+      - [18.5.3.1 Unbounded Wildcard](#18531-unbounded-wildcard-)
       - [18.5.3.2 Upper-Bounded Wildcard extends](#18532-upper-bounded-wildcard-extends)
       - [18.5.3.3 Lower-Bounded Wildcard super](#18533-lower-bounded-wildcard-super)
   - [18.6 Generics and Inheritance](#186-generics-and-inheritance)
