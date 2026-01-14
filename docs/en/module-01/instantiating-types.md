@@ -382,7 +382,7 @@ This applies to both:
 Java enforces this rule because a `final` variable represents a value that must be *known and fixed* before use.
 
 
-**`Final Instance Variables`**
+<u>**`Final Instance Variables`**</u>
 
 A **final instance variable** must be assigned **exactly once**, and the assignment must occur in *one* of the following:
 
@@ -416,7 +416,7 @@ public class Person {
 > Trying to compile without assigning `id` inside **every** constructor produces a compile-time error:
 > variable id might not have been initialized
 
-**`static final` Class Variables (Constants)**
+<u>**`static final` Class Variables (Constants)**</u>
 
 A **static final variable** belongs to the class rather than to any instance.  
 It must also be assigned exactly once, but assignment can occur in one of the following places:
@@ -441,7 +441,7 @@ public class AppConfig {
 Attempting to assign a `static final` in a constructor is illegal.
 
 
-**Key Rules for `final` Fields**
+<u>**Key Rules for `final` Fields**</u>
 
 | Scenario | Allowed? | Notes |
 |---------|----------|-------|
@@ -461,7 +461,7 @@ public class Example {
 Example e = new Example(); // ❌ compile-time error
 ```
 
-**Why `final` Variables Are Not Default-Initialized?**
+<u>**Why `final` Variables Are Not Default-Initialized?**</u>
 
 Because:
 - Their value must be **known and immutable**, and
