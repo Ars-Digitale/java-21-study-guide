@@ -63,7 +63,7 @@ A method declaration is composed of **mandatory** and **optional** components.
 
 They control *visibility*, not behavior.
 
-(Please refer to Paragraph "**Access Modifiers**" in Chapter: [2. Basic Language Java Building Blocks](../module-01/basic-building-blocks.md)) 
+( Please refer to Paragraph "**Access Modifiers**" in Chapter: [2. Basic Language Java Building Blocks](../module-01/basic-building-blocks.md) ) 
 
 #### 14.1.1.2 Return Type
 
@@ -78,7 +78,7 @@ Appears **immediately before** the method name.
 
 #### 14.1.1.3 Method Name
 
-Follows the same rules as identifiers (Please refer to: [Java Naming Rules](../module-01/naming-rules.md)).
+Follows the same rules as identifiers ( Please refer to Chapter: [3. Java Naming Rules](../module-01/naming-rules.md) ).
 
 #### 14.1.1.4 Method Signature
  
@@ -87,9 +87,10 @@ The **method signature** in Java includes:
 - the *method name*
 - the *parameter type list* (types + order)
 
+> [!NOTE]
 > **Parameter names do NOT belong to the signature**, only types and order matter.
 
-Example of distinct signatures:
+- Example of distinct signatures:
 
 ```java
 void process(int x)
@@ -97,7 +98,7 @@ void process(int x, int y)
 void process(int x, String y)
 ```
 
-Example of *same* signature (illegal overloading):
+- Example of *same* signature (illegal overloading):
 
 ```java
 // ❌ same signature: only parameter names differ
@@ -107,7 +108,8 @@ void m(int b)
 
 #### 14.1.1.5 Method Body 
  
-A block `{ }` containing **zero or more statements**.  
+A block `{ }` containing **zero or more statements**.
+  
 If the method is `abstract`, the body must be omitted.
 
 
@@ -128,7 +130,7 @@ Rules:
 - Optional modifiers may appear in **any order**.
 - All modifiers must appear **before the return type**.
 
-Example:
+- Example:
 
 ```java
 public static final int compute() {
@@ -158,6 +160,7 @@ Breakdown:
 | `throws IOException` | exception list |
 | method body | implementation |
 
+---
 
 ## 14.2 Java Is a “Pass-by-Value” Language
 
@@ -170,7 +173,7 @@ This means:
   - the reference itself cannot be changed by the method
   - the *object* **can** be modified through that reference
 
-Example:
+- Example:
 
 ```java
 void modify(int a, StringBuilder b) {
@@ -194,6 +197,7 @@ public static void methodTryModif(int num1){
 
 ```
 
+---
 
 ## 14.3 Overloading Methods
 
@@ -211,7 +215,7 @@ Overloading **does NOT depend on**:
 - access modifier  
 - exceptions  
 
-Example:
+- Example:
 
 ```java
 void print(int x)
@@ -230,7 +234,8 @@ double compute(int x)
 ### 14.3.1 Calling overloaded methods
 
 
-When multiple overloaded methods are available, Java applies **overload resolution** to decide which method to call.  
+When multiple overloaded methods are available, Java applies **overload resolution** to decide which method to call.
+  
 The compiler selects the method whose parameter types are the **most specific** and **compatible** with the provided arguments.
 
 Overload resolution happens **at compile time** (unlike overriding, which is run-time based).
@@ -258,7 +263,7 @@ Java prefers:
 2. **autoboxing** over varargs  
 3. **wider reference** only if more specific type is not available  
 
-Example with numeric primitives:
+- Example with numeric primitives:
 
 ```java
 void test(long x)   { System.out.println("long"); }
@@ -388,6 +393,7 @@ fun(LocalDate.now());       // Output: Y
 | Unrelated reference types | Ambiguous → compile error |
 | Mixed primitive + wrapper | Widening → boxing → varargs |
 
+---
 
 ## 14.4 Local and Instance Variables
 
@@ -406,7 +412,7 @@ Possible modifiers for instance variables:
 - `volatile`
 - `transient`
 
-Example:
+- Example:
 
 ```java
 public class Person {
@@ -424,7 +430,7 @@ Local variables:
 - have **no default values** → must be explicitly initialized before use
 - only modifier allowed: **final**
 
-Example:
+- Example:
 
 ```java
 void calculate() {
@@ -450,6 +456,7 @@ Effectively final variables can be used in:
 
 Method parameters behave as local variables and follow the same rules.
 
+---
 
 ## 14.5 Varargs (Variable-Length Argument Lists)
 
@@ -467,7 +474,7 @@ Rules:
 - It must be the **last** parameter in the list.
 - Varargs are treated as an **array** inside the method.
 
-Example:
+- Example:
 
 ```java
 void show(int x, String... values) {
@@ -479,9 +486,11 @@ show(10, "A");                // length = 1
 show(10, "A", "B", "C");      // length = 3
 ```
 
-> **Common pitfall**:  
+> [!IMPORTANT]  
 > Varargs and arrays participate in method overloading.  
 > Overload resolution may become ambiguous.
+
+---
 
 ## 14.6 Static Methods, Static Variables, and Static Initializers
 
@@ -506,7 +515,7 @@ Characteristics:
 - All objects see the **same value**.
 - May be marked `final`, `volatile`, or `transient`.
 
-Example:
+- Example:
 
 ```java
 public class Counter {
@@ -519,7 +528,6 @@ public class Counter {
     }
 }
 ```
-
 
 ### 14.6.2 Static Methods
 
@@ -535,7 +543,7 @@ Rules:
   - factory methods
   - global behaviors that do not depend on instance state
 
-Example:
+- Example:
 
 ```java
 public class MathUtil {
@@ -551,7 +559,7 @@ public class MathUtil {
 }
 ```
 
-Common pitfall:
+Common errors:
 
 ```java
 // ❌ Compile error: instance method cannot be accessed directly in static context
@@ -581,7 +589,7 @@ Usage:
 - performing class-level setup  
 - running code that must execute exactly once  
 
-Example:
+- Example:
 
 ```java
 public class Config {
@@ -596,13 +604,14 @@ public class Config {
 }
 ```
 
+> [!IMPORTANT]
 > Static initializer blocks run **once**, in the order they appear, before `main()` and before any static method is called.
 
 
 ### 14.6.4 Initialization Order (Static vs. Instance)
 
 
-(Please refer to: [Class Loading, Initialization, and Object Construction](class-loading.md)) 
+( Please refer to Chapter: [15. Class Loading, Initialization, and Object Construction](class-loading.md) ) 
 
 
 ### 14.6.5 Accessing Static Members
@@ -630,7 +639,7 @@ Static methods:
 - binding is **compile-time**, not runtime  
 - accessed based on **reference type**, not object type
 
-Example:
+- Example:
 
 ```java
 class A {
@@ -645,6 +654,7 @@ A ref = new B();
 ref.test();   // prints "A" — static binding!
 ```
 
+> [!NOTE]
 > Key rule: static methods use **reference type**, not object type.
 
 
