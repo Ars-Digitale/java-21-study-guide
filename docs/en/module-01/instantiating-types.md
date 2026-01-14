@@ -19,9 +19,9 @@
   - [6.3 Wrapper Types](#63-wrapper-types)
     - [6.3.1 Purpose of Wrapper Types](#631-purpose-of-wrapper-types)
     - [6.3.2 Autoboxing and Unboxing](#632-autoboxing-and-unboxing)
-    - [6.3.3 Parsing and Conversion](#633-parsing-and-conversion)
-    - [6.3.4 Helper Methods](#634-helper-methods)
-    - [6.3.5 Null Values](#635-null-values)
+    - [6.3.3 Parsing and Conversion](#633--parsing-and-conversion)
+    - [6.3.4 Helper Methods](#634--helper-methods)
+    - [6.3.5 Null Values](#635--null-values)
   - [6.4 Equality in Java](#64-equality-in-java)
     - [6.4.1 Equality with Primitive Types](#641-equality-with-primitive-types)
       - [6.4.1.1 Key Points](#6411-key-points)
@@ -49,9 +49,9 @@ The way instances are created depends on the category of the type:
   The JVM automatically allocates memory to hold the value, and no explicit keyword is needed. 
   
 ```java
-  int age = 30;         // creates a primitive int with value 30
-  boolean flag = true;  // creates a primitive boolean with value true
-  double pi = 3.14159;  // creates a primitive double with value 3.14159
+int age = 30;         // creates a primitive int with value 30
+boolean flag = true;  // creates a primitive boolean with value true
+double pi = 3.14159;  // creates a primitive double with value 3.14159
 ```
   
  - **Reference types (objects)**  
@@ -59,15 +59,15 @@ The way instances are created depends on the category of the type:
 	The new keyword allocates memory on the heap and invokes a constructor of the class.
   
 ```java
-	String name = new String("Alice"); // creates a new String object explicitly
-	Person p = new Person();           // creates a new Person object using its constructor
+String name = new String("Alice"); // creates a new String object explicitly
+Person p = new Person();           // creates a new Person object using its constructor
 ```
   
 It is also common to rely on literals or factory methods for object creation.
   
 ```java
-	String name = new String("Alice"); // creates a new String object explicitly
-	Person p = new Person();           // creates a new Person object using its constructor
+String name = new String("Alice"); // creates a new String object explicitly
+Person p = new Person();           // creates a new Person object using its constructor
 ``` 
 
 > [!IMPORTANT]
@@ -86,15 +86,16 @@ It is also common to rely on literals or factory methods for object creation.
 
 - Syntax examples for declaration only:
 
-  ```java
-  int number;
-  
-  boolean active;
-  
-  char letter;
-  
-  int x, y, z;          // Multiple declarations in one statement: Java allows declaring multiple variables of the same type
-  ```
+```java
+int number;
+
+boolean active;
+
+char letter;
+
+int x, y, z;          // Multiple declarations in one statement: Java allows declaring multiple variables of the same type
+```
+
 #### 6.1.1.2 Assigning a Primitive
 
 **Assigning** a primitive type (as with reference types) means storing a value into a declared variable of that given type.  
@@ -103,21 +104,21 @@ For primitives, the variable holds the value itself, while for reference types t
 - Syntax examples:
 
 ```java
-  int number;  					// Declaring an int type: a variable called "number"
-  
-  number = 10;  				// Assigning the value 10 to this variable
-  
-  char letter = 'A';    		// Declaring and Assigning in a single statement: declaration and assignment can be combined 
+int number;  					// Declaring an int type: a variable called "number"
 
-  int a1, a2;                   // Multiple declarations  
-  
-  int a = 1, b = 2, c = 3;  	// Multiple declarations & assignements
-  
-  char b1, b2, b3 = 'C';		// Mixed declarations (2 declarations + 1 assignment)
-  
-  double d1, double d2;         // ERROR - NOT LEGAL
-  
-  int v1; v2; 					// ERROR - NOT LEGAL
+number = 10;  				// Assigning the value 10 to this variable
+
+char letter = 'A';    		// Declaring and Assigning in a single statement: declaration and assignment can be combined 
+
+int a1, a2;                   // Multiple declarations  
+
+int a = 1, b = 2, c = 3;  	// Multiple declarations & assignements
+
+char b1, b2, b3 = 'C';		// Mixed declarations (2 declarations + 1 assignment)
+
+double d1, double d2;         // ERROR - NOT LEGAL
+
+int v1; v2; 					// ERROR - NOT LEGAL
 ```
   
 > [!IMPORTANT]
@@ -127,19 +128,19 @@ For primitives, the variable holds the value itself, while for reference types t
 - Syntax example for a numeric literal:
 
 ```java
-  long exNumLit = 5729685479; // ❌ Does not compile.
-                              // Even though the value would fit in a long,
-                              // a plain numeric literal is assumed to be an int,
-                              // and this number is too large for int.
-  
-  Changing the declaration adding the correct suffix (L or l) will solve:
-  
-  long exNumLit = 5729685479L;
-  
-  or
-  
-  long exNumLit = 5729685479l;
-							 
+long exNumLit = 5729685479; // ❌ Does not compile.
+						  // Even though the value would fit in a long,
+						  // a plain numeric literal is assumed to be an int,
+						  // and this number is too large for int.
+
+Changing the declaration adding the correct suffix (L or l) will solve:
+
+long exNumLit = 5729685479L;
+
+or
+
+long exNumLit = 5729685479l;
+						 
 ```
   
 **Declaring** a reference type means reserving space in memory for a variable that will contain a reference (pointer) to an object of the specified type.  
@@ -152,19 +153,19 @@ At this stage, no object is created yet — the variable only has the potential 
 - Syntax examples for declaration only:
 
 ```java
-  String name;
-  Person person;
-  List<Integer> numbers;
-  
-  Person p1, p2, p3;   // Multiple declarations in one statement
-   
-  String a = "abc", b = "def", c = "ghi";  	// Multiple declarations & assignements
-  
-  String b1, b2, b3 = "abc"					// Mixed declarations (b1, b2) with one assignement (b3)
-  
-  String d1, String d2;         			// ERROR - NOT LEGAL
-  
-  String v1; v2; 							// ERROR - NOT LEGAL
+String name;
+Person person;
+List<Integer> numbers;
+
+Person p1, p2, p3;   // Multiple declarations in one statement
+
+String a = "abc", b = "def", c = "ghi";  	// Multiple declarations & assignements
+
+String b1, b2, b3 = "abc"					// Mixed declarations (b1, b2) with one assignement (b3)
+
+String d1, String d2;         			// ERROR - NOT LEGAL
+
+String v1; v2; 							// ERROR - NOT LEGAL
 ```
 
 
@@ -180,13 +181,13 @@ Reference types can also be assigned **null**, which means that they do not refe
 - Syntax examples:
 
 ```java
-  Person person = new Person(); // Example with 'new' and a constructor 'Person()':
-                                // 'new Person()' creates a new Person object on the heap
-                                // and returns its reference, which is stored in the variable 'person'.
-  
-  String greeting = "Hello";	 // Example with literal (for String).
-  
-  List<Integer> numbers = List.of(1, 2, 3);   // Example with a factory method.
+Person person = new Person(); // Example with 'new' and a constructor 'Person()':
+							// 'new Person()' creates a new Person object on the heap
+							// and returns its reference, which is stored in the variable 'person'.
+
+String greeting = "Hello";	 // Example with literal (for String).
+
+List<Integer> numbers = List.of(1, 2, 3);   // Example with a factory method.
   
 ```
   
@@ -579,7 +580,7 @@ Integer	 arr1 = {11.5, 13.6}  // WARNING: Does not compile!!
 Double[] arr2 = {11, 22};     // WARNING: Does not compile!!
 ```
 
-> [!REMEMBER]
+> [!TIP]
 > Java **never** performs autoboxing + widening/narrowing in one step.
 
 
@@ -687,7 +688,7 @@ char c2 = 65;                   // same Unicode code point
 System.out.println(c1 == c2);   // true
 ```
 
-#### 6.4.1.1 ✔️ Key points
+#### 6.4.1.1 Key points
 - `==` performs **value comparison** for primitives.
 - Primitive types have **no `.equals()`** method.
 - Mixed primitive types follow numeric **promotion rules**  
@@ -766,7 +767,7 @@ System.out.println(a == b);  // false
 > Any String created at **runtime** does *not* go into the pool automatically.
 > Use `intern()` if you want pooling.
 
-> [!TRICK]
+> [!TIP]
 > `"Hello" == "Hel" + "lo"` → true (compile-time constant)
 > `"Hello" == getHello()` → false (runtime concatenation)
 
