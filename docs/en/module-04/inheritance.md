@@ -157,7 +157,7 @@ public class Person {
 The `super` reference gives access to members of the direct parent class.  
 
 Useful when:  
-- The parent and child define a field/method with the same name: (See below: [Inheriting Members](#13-inheriting-members))
+- The parent and child define a field/method with the same name:  See below: [Inheriting Members](#1613-inheriting-members) 
 - Parent and child define a field with the same name → variable hiding (two copies)
 - Parent and child define a method with the same signature → method overriding
 - You want to explicitly call the inherited implementation
