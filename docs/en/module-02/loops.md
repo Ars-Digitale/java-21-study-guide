@@ -6,7 +6,7 @@
   - [8.1 The while Loop](#81-the-while-loop)
   - [8.2 The do-while Loop](#82-the-do-while-loop)
   - [8.3 The for Loop](#83-the-for-loop)
-  - [8.4 The Enhanced for-each Loop](#84-the-enhanced-foreach-loop)
+  - [8.4 The Enhanced for-each Loop](#84-the-enhanced-for-each-loop)
   - [8.5 Nested Loops](#85-nested-loops)
   - [8.6 Infinite Loops](#86-infinite-loops)
   - [8.7 break and continue](#87-break-and-continue)
@@ -39,7 +39,7 @@ while (condition) {
 - The loop may execute zero or more times.
 - Common pitfalls include forgetting to update the loop variable, causing an infinite loop.
 
-Example:
+- Example:
 ```java
 int i = 0;
 while (i < 3) {
@@ -54,6 +54,8 @@ Output:
 1
 2
 ```
+
+---
 
 ## 8.2 The `do-while` Loop
 
@@ -70,7 +72,7 @@ do {
 > [!TIP]
 > `do-while` requires a semicolon after the closing parenthesis.
 
-Example:
+- Example:
 ```java
 int x = 5;
 do {
@@ -83,6 +85,8 @@ Output:
 ```bash
 5
 ```
+
+---
 
 ## 8.3 The `for` Loop
 
@@ -103,7 +107,7 @@ for (initialization; condition; update) {
 - Variables in initialization must all be of the same type.
 - Any component may be omitted, but semicolons remain.
 
-Example:
+- Example:
 ```java
 for (int i = 0; i < 3; i++) {
     System.out.println(i);
@@ -126,6 +130,8 @@ for (long i = 0, c = 3; x < 3 && i < 12; x++, i++) {
 }
 ```
 
+---
+
 ## 8.4 The Enhanced `for-each` Loop
 
 The enhanced `for` simplifies iteration over arrays and collections.
@@ -141,7 +147,7 @@ for (ElementType var : arrayOrCollection) {
 - Works with any `Iterable` or array.
 - Cannot remove elements without an iterator.
 
-Example:
+- Example:
 ```java
 String[] names = {"A", "B", "C"};
 for (String n : names) {
@@ -155,6 +161,8 @@ A
 B
 C
 ```
+
+---
 
 ## 8.5 Nested Loops
 
@@ -178,6 +186,8 @@ Output:
 2,3
 ```
 
+---
+
 ## 8.6 Infinite Loops
 
 A loop is infinite when its condition always evaluates to `true` or is omitted.
@@ -193,9 +203,11 @@ for (;;) { ... }
 > [!TIP]
 > Infinite loops must contain `break`, `return`, or external control.
 
+---
+
 ## 8.7 `break` and `continue`
 
-**break**
+<ins>**break**</ins>
 Exits the innermost loop immediately.
 ```java
 for (int i = 0; i < 5; i++) {
@@ -204,7 +216,7 @@ for (int i = 0; i < 5; i++) {
 }
 ```
 
-**continue**
+<ins>**continue**</ins>
 Skips the rest of the loop body and continues to next iteration.
 ```java
 for (int i = 0; i < 5; i++) {
@@ -213,7 +225,10 @@ for (int i = 0; i < 5; i++) {
 }
 ```
 
-> break and continue apply to the nearest loop unless labels are used.
+> [!NOTE]
+> `break` and `continue` apply to the nearest loop unless labels are used.
+
+---
 
 ## 8.8 Labeled Loops
 
@@ -228,7 +243,7 @@ for (...) {
 }
 ```
 
-Example:
+- Example:
 ```java
 outer:
 for (int i = 1; i <= 3; i++) {
@@ -238,6 +253,8 @@ for (int i = 1; i <= 3; i++) {
     }
 }
 ```
+
+---
 
 ## 8.9 Loop Variable Scope
 
@@ -251,11 +268,14 @@ for (int i = 0; i < 3; i++) {
 // i and x are not accessible here
 ```
 
+---
+
 ## 8.10 Unreachable code after `break`, `continue`, and `return`
 
 Any statement placed **after** `break`, `continue`, or `return` in the same block is considered unreachable and will not compile.
 
 ### 8.10.1 Unreachable Code After `break`
+
 ```java
 for (int i = 0; i < 3; i++) {
     break;
@@ -264,6 +284,7 @@ for (int i = 0; i < 3; i++) {
 ```
 
 ### 8.10.2 Unreachable Code After `continue`
+
 ```java
 for (int i = 0; i < 3; i++) {
     continue;
@@ -271,9 +292,11 @@ for (int i = 0; i < 3; i++) {
 }
 ```
 
-> continue jumps to the next iteration, so following code is never executed.
+> [!NOTE]
+> `continue` jumps to the next iteration, so following code is never executed.
 
 ### 8.10.3 Unreachable Code After `return`
+
 ```java
 int test() {
     return 5;
@@ -281,4 +304,5 @@ int test() {
 }
 ```
 
-> return exits the method immediately; no statements can follow.
+> [!NOTE]
+> `return` exits the method immediately; no statements can follow.
