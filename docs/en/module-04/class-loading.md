@@ -37,9 +37,12 @@ Before understanding initialization order, it is useful to recall the three main
 > [!NOTE] 
 > Static members belong to the **class** and are created **once** in the Method Area. Instance members belong to **each object** and live in the **Heap**.
 
+---
+
 ## 15.2 Class Loading (with Inheritance)
 
-When a Java program starts, the JVM loads classes *on demand*.  
+When a Java program starts, the JVM loads classes *on demand*.
+  
 When a class is referenced for the first time (e.g., by calling `new` or accessing a static member), **its entire inheritance chain must be loaded first**.
 
 ### 15.2.1 Class Loading Order
@@ -77,6 +80,8 @@ Then class loading proceeds in this strict order:
 > [!NOTE] 
 > After these steps, the class is fully prepared and may now be used (instantiated or referenced).
 
+---
+
 ## 15.3 Object Creation (with Inheritance)
 
 When the `new` keyword is used, **instance creation follows a strict and predictable sequence** involving all parent classes.
@@ -87,7 +92,9 @@ When the `new` keyword is used, **instance creation follows a strict and predict
 - **2. The constructor chain runs from parent to child** — the top of the hierarchy runs first, then each subclass.
 - **3. Instance variables receive explicit initializations**.
 - **4. Instance initializer blocks execute**.
-- **5. The constructor body runs**: for each class in the inheritance chain, steps 3–5 (field initialization, instance blocks, constructor body) are applied from parent to child..
+- **5. The constructor body runs**: for each class in the inheritance chain, steps 3–5 (field initialization, instance blocks, constructor body) are applied from parent to child.
+
+---
 
 ## 15.4 A Complete Example: Static + Instance Initialization Across Inheritance
 
@@ -180,6 +187,8 @@ C instance block
 C constructor
 ```
 
+---
+
 ## 15.5 Visualization Diagram
 
 ```text
@@ -211,6 +220,8 @@ C constructor
     +--> run C constructor
 ```
 
+---
+
 ## 15.6 Key Rules
 
 - Static initialization happens **once** per class.
@@ -219,6 +230,8 @@ C constructor
 - For each class in the inheritance chain, instance fields and instance blocks run before that class’s constructor body.
 - Overall, both field/instance initialization and constructors execute from parent to child.
 - Constructors always call the parent constructor (explicitly or implicitly).
+
+---
 
 ## 15.7 Summary Table
 
