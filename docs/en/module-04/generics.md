@@ -15,7 +15,7 @@
     - [18.4.6 A More Complex Example](#1846-a-more-complex-example)
     - [18.4.7 Overloading a Generic Method Why Some Overloads Are Impossible](#1847-overloading-a-generic-method--why-some-overloads-are-impossible)
     - [18.4.8 Overloading a Generic Method Inherited from a Parent Class](#1848-overloading-a-generic-method-inherited-from-a-parent-class)
-    - [18.4.9 Returning Generic Types Rules and Restrictions](#1849-returning-generic-types-rules-and-restrictions)
+    - [18.4.9 Returning Generic Types Rules and Restrictions](#1849-returning-generic-types--rules-and-restrictions)
     - [18.4.10 Summary of Erasure Rules](#18410-summary-of-erasure-rules)
   - [18.5 Bounds on Type Parameters](#185-bounds-on-type-parameters)
     - [18.5.1 Upper Bounds extends](#1851-upper-bounds-extends)
