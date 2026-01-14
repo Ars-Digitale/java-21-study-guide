@@ -11,7 +11,7 @@
     - [7.2.4 Pattern Matching in Switch](#724-pattern-matching-in-switch)
       - [7.2.4.1 Variable Names and Scope Across Branches](#7241-variable-names-and-scope-across-branches)
       - [7.2.4.2 Ordering Dominance and Exhaustiveness in Pattern Switches](#7242-ordering-dominance-and-exhaustiveness-in-pattern-switches)
-  - [7.3 Two Forms of switch Statement vs switch Expression](#73-two-forms-of-switch-statement-vs-switch-expression)
+  - [7.3 Two Forms of switch Statement vs switch Expression](#73-two-forms-of-switch-switch-statement-vs-switch-expression)
     - [7.3.1 The Switch Statement](#731-the-switch-statement)
       - [7.3.1.1 Fall-Through Behavior](#7311-fall-through-behavior)
     - [7.3.2 The Switch Expression](#732-the-switch-expression)
@@ -80,6 +80,8 @@ if (grade >= 90) {
 > 
 > An `if-else` chain is evaluated from top to bottom, and only the first branch with a condition evaluating to `true` is executed.
 
+---
+
 ## 7.2 The `switch` Statement & Expression
 
 The `switch` construct is a control-flow structure that selects one branch among multiple alternatives based on the value of an expression (the **selector**).
@@ -118,13 +120,10 @@ Both forms of `switch` share the same rules concerning the selector (switch **ta
 > [!WARNING]
 > **Not allowed** as selector types for switch:
 > 
-> `boolean`
-> 
-> `long`
-> 
-> `float`
-> 
-> `double`
+> - `boolean`
+> - `long`
+> - `float`
+> - `double`
 
 ### 7.2.2 Acceptable `case` Values
 
@@ -181,7 +180,7 @@ String describe(Object o) {
 
 With pattern matching, the pattern variable exists only in the scope of the arm in which it is defined. This means you can reuse the same variable name in different case branches.
 
-Example:
+- Example:
 
 ```java
 switch (o) {
@@ -200,7 +199,7 @@ When dealing with pattern matching, the ordering of branches is crucial because 
 
 A more general pattern must **not** appear before a more specific one, or the specific one becomes unreachable.
 
-Example (unreachable branch):
+- Example (unreachable branch):
 
 ```java
 return switch (o) {
@@ -209,7 +208,7 @@ return switch (o) {
 };
 ```
 
-Another example with a guard:
+- Another example with a guard:
 
 ```java
 return switch (o) {
@@ -226,7 +225,7 @@ This can be achieved by:
 - Providing a `default` case that handles all values not matched by any other case.
 - Providing a final case clause with a pattern type that matches the selector reference type.
 
-Example (not exhaustive):
+- Example (not exhaustive):
 
 ```java
 Number number = Short.valueOf(10);
@@ -264,11 +263,15 @@ switch (number) {
 }
 ```
 
+---
+
 ## 7.3 Two Forms of `switch`: `switch` Statement vs `switch` Expression
 
 ### 7.3.1 The Switch Statement
 
-A **switch statement** is used as a control-flow construct. It does not, by itself, evaluate to a value, although its branches may contain `return` statements that return from the enclosing method.
+A **switch statement** is used as a control-flow construct. 
+
+It does not, by itself, evaluate to a value, although its branches may contain `return` statements that return from the enclosing method.
 
 ```java
 switch (mode) { // switch statement
@@ -295,7 +298,9 @@ When present, `break` terminates the switch after executing its case; without it
 
 #### 7.3.1.1 Fall-Through Behavior
 
-With colon-style cases, execution jumps to the matching case label. If there is no `break`, it continues into the next case until a `break`, `return`, or `throw` is encountered.
+With colon-style cases, execution jumps to the matching case label. 
+
+If there is no `break`, it continues into the next case until a `break`, `return`, or `throw` is encountered.
 
 ```java
 int n = 2;
@@ -327,7 +332,7 @@ Output:
 
 A **switch expression** always produces a single value as its result.
 
-Example:
+- Example:
 
 ```java
 int len = switch (s) { // switch expression
@@ -384,6 +389,8 @@ int val = switch (s) {
 };
 ```
 
+---
+
 ## 7.4 Null Handling
 
 **Classic switch (without patterns)**
@@ -403,7 +410,7 @@ if (s == null) {
 }
 ```
 
-**Pattern switch (with `case null`)**
+<ins>**Pattern switch (with `case null`)**</ins>
 
 With pattern matching, you can handle `null` directly inside the switch:
 
