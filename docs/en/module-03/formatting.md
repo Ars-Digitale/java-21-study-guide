@@ -52,7 +52,8 @@ This chapter delivers a deep and practical treatment of formatting in Java 21.
 
 ### 13.1.1 String.format and formatted
 
-`String.format()` creates formatted strings using printf-style placeholders.  
+`String.format()` creates formatted strings using printf-style placeholders.
+  
 It is locale-sensitive and returns a new immutable `String`.
 
 ```java
@@ -263,11 +264,10 @@ NumberFormat nf = NumberFormat.getInstance(Locale.FRANCE);
 System.out.println(nf.format(1234567.89));
 ```
 
-**Important rules:**
-
-- Factory methods determine formatting style (general, integer, currency, percent, compact, ...).
-- Formatting depends on the provided `Locale`.
-- `NumberFormat` (and `DecimalFormat`) are not thread-safe.
+> [!IMPORTANT]
+> - Factory methods determine formatting style (general, integer, currency, percent, compact, ...).
+> - Formatting depends on the provided `Locale`.
+> - `NumberFormat` (and `DecimalFormat`) are not thread-safe.
 
 ### 13.2.2 Localizing Numbers
 
@@ -298,9 +298,10 @@ Or directly:
 DecimalFormat df = new DecimalFormat("#,##0.00");
 ```
 
-- `DecimalFormat` is mutable (you can change pattern, symbols, etc.).
-- `DecimalFormat` is **not** thread-safe.
-- Formatting is locale-sensitive via `DecimalFormatSymbols`.
+> [!NOTE]
+> - `DecimalFormat` is mutable (you can change pattern, symbols, etc.).
+> - `DecimalFormat` is **not** thread-safe.
+> - Formatting is locale-sensitive via `DecimalFormatSymbols`.
 
 ### 13.2.4 DecimalFormat Pattern Structure
 
@@ -310,9 +311,10 @@ A pattern may contain a positive and an optional negative subpattern, separated 
 #,##0.00;(#,##0.00)
 ```
 
-- First part → positive numbers.
-- Second part → negative numbers.
-- If the negative part is omitted, negative numbers use a leading `-` automatically.
+> [!NOTE]
+> - First part → positive numbers.
+> - Second part → negative numbers.
+> - If the negative part is omitted, negative numbers use a leading `-` automatically.
 
 ### 13.2.5 The `0` Symbol (Mandatory Digit)
 
@@ -585,7 +587,8 @@ Locale formats:
 
 ### 13.5.2 Locale Categories
 
-Locale categories separate formatting from UI language.  
+Locale categories separate formatting from UI language.
+  
 `Locale.Category` lets Java use different default locales for different purposes.
 
 There are two categories:
@@ -646,6 +649,8 @@ If none is found → `MissingResourceException`.
 > [!NOTE]
 > Traditional .properties files are specified as ISO-8859-1;  
 > non-ASCII characters must be encoded as Unicode escapes (for example, \u00E9 for é) unless you use alternate loading mechanisms.
+
+---
 
 ## 13.7 Common Rules and Pitfalls
 
