@@ -86,7 +86,7 @@ int size = 4;
 double[] values = new double[size];
 ```
 
-Illegal array creation examples:
+- Illegal array creation examples:
 
 ```java
 // int length = -1;           
@@ -106,7 +106,7 @@ Arrays (because they are objects) always receive **default initialization**:
 | char            | '\u0000'      |
 | Reference types | null          |
 
-Example:
+- Example:
 
 ```java
 int[] nums = new int[3]; 
@@ -156,6 +156,8 @@ int[] b = {1,2,3};
 // c = {1,2,3};  // ❌ does not compile
 ```
 
+---
+
 ## 10.2 Multidimensional Arrays (Arrays of Arrays)
 
 Java implements multi-dimensional arrays as **arrays of arrays**.
@@ -184,6 +186,8 @@ jagged[1] = new int[5];
 jagged[2] = new int[1];
 ```
 
+---
+
 ## 10.3 Array Length vs String Length
 
 - Arrays use `.length` (public final field).
@@ -197,6 +201,8 @@ jagged[2] = new int[1];
 // int y = s.length;     // ❌ does not compile: missing ()
 int yOk = s.length();
 ```
+
+---
 
 ## 10.4 Array Reference Assignments
 
@@ -235,6 +241,8 @@ Object[] objs = new String[3];
 // objs[0] = Integer.valueOf(5); // ❌ ArrayStoreException at runtime
 ```
 
+---
+
 ## 10.5 Comparing Arrays
 
 `==` compares references (identity):
@@ -257,6 +265,8 @@ To compare contents, use methods from `java.util.Arrays`:
 Arrays.equals(a, b);         // shallow comparison
 Arrays.deepEquals(o1, o2);   // deep comparison for nested arrays
 ```
+
+---
 
 ## 10.6 `Arrays` Utility Methods
 
@@ -325,7 +335,7 @@ It also provides a `compare()` method with these rules:
 - If the result `n > 0` → the first array is considered “greater” than the second.
 - If the result `n == 0` → the arrays are equal.
 
-Examples:
+- Examples:
 
 ```java
 int[] arr1 = new int[] {200, 300};
@@ -349,6 +359,8 @@ String[] arr10 = new String[] {"200", "300", "ABB"};
 System.out.println(Arrays.compare(arr9, arr10));    // -1 (null considered smaller)
 ```
 
+---
+
 ## 10.7 Enhanced for-loop with Arrays
 
 ```java
@@ -366,6 +378,8 @@ Common error:
 ```java
 // for (long v : new int[]{1,2}) {} // ❌ not allowed: int elements cannot be assigned to long in enhanced for-loop
 ```
+
+---
 
 ## 10.8 Common Pitfalls
 
@@ -389,6 +403,8 @@ Common error:
 
 - **Using `binarySearch` on unsorted arrays** → unpredictable results.
 - **Covariant array runtime exceptions** (`ArrayStoreException`).
+
+---
 
 ## 10.9 Summary
 
