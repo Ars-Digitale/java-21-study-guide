@@ -15,7 +15,7 @@
   - [32.8 How Java IO Interacts with These Concepts](#328-how-java-io-interacts-with-these-concepts)
   - [32.9 Core Conceptual Pitfalls](#329-core-conceptual-pitfalls)
   - [32.10 Why Path and Files Exist IO-Context](#3210-why-path-and-files-exist-io-context)
-  - [32.11 Is javaioFile legacy-apis both-a-path-and-a-file-operations-api](#3211-is-javaiofile-legacy-apis-both-a-path-and-a-file-operations-api)
+  - [32.11 Is File legacy-apis both a path and a file-operations api](#3211-is-file-legacy-apis-both-a-path-and-a-file-operations-api)
     - [32.11.1 What File Really Is](#32111-what-file-really-is)
     - [32.11.2 Path-like Responsibilities](#32112-path-like-responsibilities)
     - [32.11.3 Filesystem Operation Responsibilities](#32113-filesystem-operation-responsibilities)
