@@ -49,6 +49,8 @@ They are connected to the process environment (usually a terminal or console).
 >
 > They exist for the entire lifetime of the process.
 
+---
+
 ## 36.2 `PrintStream`: What It Is and Why It Exists
 
 `PrintStream` is a byte-oriented output stream designed for human-readable output.
@@ -99,6 +101,8 @@ System.out.printf("Name: %s, Age: %d%n", "Alice", 30);
 > [!NOTE]
 > `printf()` does not automatically add a newline unless you specify `%n`.
 
+---
+
 ## 36.3 Reading Input as an I/O Stream
 
 Standard input (System.in) is an InputStream connected to user input.
@@ -131,6 +135,7 @@ String line = reader.readLine();
 
 This converts `bytes → characters` and allows line-based input.
 
+---
 
 ## 36.4 The Scanner Class (Convenient but Subtle)
 
@@ -145,7 +150,7 @@ String text = sc.nextLine();
 ```
 
 > [!NOTE]
-> Scanner performs tokenization and parsing, not simple reading.
+> `Scanner` performs tokenization and parsing, not simple reading.
 >
 > This makes it convenient but slower and sometimes surprising.
 
@@ -155,9 +160,11 @@ String text = sc.nextLine();
 - Parsing errors throw InputMismatchException
 - Scanner is relatively slow for large input
 
+---
+
 ## 36.5 Closing System Streams
 
-System streams are special and must be handled carefully.
+`System streams` are special and must be handled carefully.
 
 | Stream     | Close explicitly? |
 |------------|-------------------|
@@ -170,7 +177,9 @@ Closing `System.out` or `System.err` closes the underlying OS stream and affects
 
 
 > [!NOTE]
-> In almost all applications, you should NOT close System.out or System.err.
+> In almost all applications, you should NOT close `System.out` or `System.err`.
+
+---
 
 ## 36.6 Acquiring Input with `Console`
 
@@ -208,6 +217,8 @@ char[] password = console.readPassword("Password: ");
 > [!NOTE]
 > Passwords are returned as `char[]` so they can be cleared from memory.
 
+---
+
 ## 36.7 Formatting Console Output
 
 Console also supports formatted output, similar to PrintStream.
@@ -218,6 +229,8 @@ console.printf("Welcome %s%n", name);
 
 This uses the same format specifiers as `printf()`.
 
+---
+
 ## 36.8 Comparing Console, Scanner, and BufferedReader
 
 | API | Use case | Strengths | Limitations |
@@ -226,6 +239,7 @@ This uses the same format specifiers as `printf()`.
 | `Scanner`        | Token-based / parsed input  | Convenient, expressive              | Slower, subtle token behavior |
 | `Console`        | Interactive console apps    | Passwords, prompts, formatted I/O   | May be unavailable (`null`)    |
 
+---
 
 ## 36.9 Redirection and Standard Streams
 
@@ -241,6 +255,7 @@ From the program’s perspective, System.in and System.out still behave like nor
 > [!NOTE]
 > Redirection is handled by the operating system or shell. The Java code does not need to change to support it.
 
+---
 
 ## 36.10 Common Traps and Best Practices
 
@@ -251,6 +266,7 @@ From the program’s perspective, System.in and System.out still behave like nor
 - Console is preferred for passwords
 - If you use `Scanner` on `System.in`, do not close the Scanner if other parts of the program still need to read from `System.in` (closing the Scanner closes `System.in`).
 
+---
 
 ## 36.11 Final Summary
 
