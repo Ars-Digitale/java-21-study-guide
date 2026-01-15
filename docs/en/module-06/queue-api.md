@@ -57,6 +57,7 @@ Common classes implementing `Queue`:
 > [!WARNING]
 > Most Queue implementations reject null because null is used as a return value for “empty”.
 
+---
 
 ## 27.2 Deque — Overview
 
@@ -77,7 +78,6 @@ It is more versatile than a Queue:
 | Examine  | getFirst(), peekFirst()    | getLast(), peekLast() |
 
 
-
 ### 27.2.2 Deque Implementations
 
 - `ArrayDeque` — recommended general-purpose implementation (fast, no capacity limit).
@@ -88,6 +88,7 @@ It is more versatile than a Queue:
 > `Stack` is legacy; use `Deque` for stack behavior (push/pop).
 > ArrayDeque, LinkedList queue ops (add/remove/peek) are O(1) amortized
 
+---
 
 ## 27.3 Using a Queue
 
@@ -105,6 +106,7 @@ System.out.println(q.poll());   // C
 System.out.println(q.poll());   // null (empty queue)
 ```
 
+---
 
 ## 27.4 Using a Deque (as Queue and as Stack)
 
@@ -137,6 +139,7 @@ System.out.println(stack.pop()); // B
 System.out.println(stack.pop()); // A
 ```
 
+---
 
 ## 27.5 PriorityQueue — Special Queue
 
@@ -160,6 +163,7 @@ System.out.println(pq.poll()); // 30
 System.out.println(pq.poll()); // 50
 ```
 
+---
 
 ## 27.6 Blocking Queues (Basics)
 
@@ -176,6 +180,7 @@ In concurrent environments, the `java.util.concurrent` package provides blocking
 > take() — blocks until element available
 > BlockingQueue also supports timed operations: offer(e, timeout), poll(timeout)
 
+---
 
 ## 27.7 Common Pitfalls
 
@@ -185,6 +190,7 @@ In concurrent environments, the `java.util.concurrent` package provides blocking
 - Using `Stack` is discouraged; use `Deque` instead.
 - Deque enables both FIFO and LIFO and has the **most complete** API.
 
+---
 
 ## 27.8 Summary Table
 
