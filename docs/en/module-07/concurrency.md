@@ -333,7 +333,7 @@ count.incrementAndGet();
 | **getAndAdd(delta)** | Atomically adds the given delta and returns the previous result. |
 
 
-Atomic variables:
+<ins>Atomic variables</ins>:
 
 - Perform single operations **atomically**
 - Provide **memory visibility guarantees** similar to `volatile`
@@ -343,7 +343,7 @@ However, atomic variables only guarantee atomicity for **individual operations**
 
 Composing multiple operations still requires external synchronization.
 
-Atomic variables are typically used for:
+<ins>Atomic variables are typically used for</ins>:
 
 - Counters and sequence generators
 - Flags and state indicators
