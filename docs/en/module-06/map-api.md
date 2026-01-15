@@ -158,8 +158,8 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 ```
 
 > [!WARNING]
-> All keys in a TreeMap must be mutually comparable. 
-> Mixing incompatible types causes `ClassCastException` at runtime.@@WARNING_END@@
+> All keys in a `TreeMap` must be mutually comparable. 
+> Mixing incompatible types causes `ClassCastException` at runtime.
 
 ---
 
