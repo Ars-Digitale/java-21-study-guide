@@ -39,9 +39,9 @@
     - [34.5.4 Buffered Output Example](#3454-buffered-output-example)
     - [34.5.5 BufferedReader vs Reader](#3455-bufferedreader-vs-reader)
     - [34.5.6 BufferedWriter Example](#3456-bufferedwriter-example)
-  - [34.6 javaio vs javanio and javaniofile](#346-javaio-vs-javanio-and-javaniofile)
+  - [34.6 java io vs java nio and java nio file](#346-java-io-vs-java-nio-and-java-nio-file)
     - [34.6.1 Conceptual Differences](#3461-conceptual-differences)
-    - [34.6.2 javaniofile Modern-File-IO](#3462-javaniofile-modern-file-io)
+    - [34.6.2 java-nio Modern-File-IO](#3462-java-nio-modern-file-io)
   - [34.7 When to Use Which API](#347-when-to-use-which-api)
   - [34.8 Common Traps and Tips](#348-common-traps-and-tips)
 
@@ -490,7 +490,7 @@ Modern Java applications increasingly favor NIO and NIO.2 APIs, but java.io rema
 >
 > Many NIO classes internally rely on streams or coexist with them.
 
-### 34.6.2 java.nio.file (Modern File I/O)
+### 34.6.2 java.nio (Modern File I/O)
 
 The java.nio.file package (NIO.2) provides a high-level, expressive, and safer file API.
 It is the preferred approach for file operations in Java 11+.
