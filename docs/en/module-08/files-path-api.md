@@ -285,7 +285,7 @@ File back = p.toFile();
 
 ### 33.1.6 URI Conversion (When Needed)
 
-URIs are useful when paths must be represented in a standard, absolute form (e.g., interoperating with networked resources or configuration). 
+`URIs` are useful when paths must be represented in a standard, absolute form (e.g., interoperating with networked resources or configuration). 
 
 Both APIs support URI conversion.
 
@@ -375,6 +375,7 @@ Removes **redundant** name elements like `.` and `..`.
 | Normalize | `getCanonicalFile()` (filesystem-based) | `normalize()` (syntactic only) | Path |
 | Resolve symlinks | Canonical | `toRealPath()` | Path |
 
+---
 
 ## 33.2 Managing Files and Directories: Create, Copy, Move, Replace, Compare, Delete (Legacy vs NIO)
 
