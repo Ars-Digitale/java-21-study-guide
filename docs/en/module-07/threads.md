@@ -173,7 +173,7 @@ A critical conceptual distinction exists between invoking `run()` and invoking `
 
 Therefore, code such as `new Thread(r).run();` does NOT create concurrency. The execution remains synchronous and blocks the calling thread until completion.
 
-> [NOTE]
+> [!NOTE]
 > `Asynchronous execution` means the caller continues immediately while the new thread progresses independently, subject to scheduling. 
 >
 > `Synchronous execution` means the caller waits for the operation to complete.
