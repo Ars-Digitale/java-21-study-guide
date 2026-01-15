@@ -8,15 +8,15 @@
     - [25.2.1 ArrayList Constructors](#2521-arraylist-constructors)
     - [25.2.2 LinkedList Constructors](#2522-linkedlist-constructors)
   - [25.3 Factory Methods](#253-factory-methods)
-    - [25.3.1 Listof immutable](#2531-listof-immutable)
-    - [25.3.2 ListcopyOf immutable-copy](#2532-listcopyof-immutable-copy)
-    - [25.3.3 ArraysasList fixed-size-list](#2533-arraysaslist-fixed-size-list)
+    - [25.3.1 List of immutable](#2531-list-of-immutable)
+    - [25.3.2 List copyOf immutable-copy](#2532-list-copyof-immutable-copy)
+    - [25.3.3 Arrays asList fixed-size-list](#2533-arrays-aslist-fixed-size-list)
   - [25.4 Core List Operations](#254-core-list-operations)
     - [25.4.1 Adding Elements](#2541-adding-elements)
     - [25.4.2 Accessing Elements](#2542-accessing-elements)
     - [25.4.3 Removing Elements](#2543-removing-elements)
     - [25.4.4 Important Behaviors and Characteristics](#2544-important-behaviors-and-characteristics)
-  - [25.5 contains equals and hashCode](#255-contains-equals-and-hashcode)
+  - [25.5 contains, equals and hashCode](#255-contains-equals-and-hashcode)
     - [25.5.1 contains](#2551-contains)
     - [25.5.2 Equality of Lists](#2552-equality-of-lists)
     - [25.5.3 hashCode](#2553-hashcode)
@@ -58,6 +58,8 @@ List
 - Allow duplicates — `List` does not enforce uniqueness.
 - Can contain null — unless using special implementations.
 
+---
+
 ## 25.2 Creating Lists (Constructors)
 
 ### 25.2.1 ArrayList Constructors
@@ -81,6 +83,8 @@ List<String> l2 = new LinkedList<>(List.of("A", "B"));
 > [!NOTE]
 > LinkedList also implements `Deque`.
 
+---
+
 ## 25.3 Factory Methods
 
 ### 25.3.1 `List.of()` (immutable)
@@ -93,10 +97,9 @@ list1.set(0, "Z"); // ❌ UnsupportedOperationException
 
 > [!NOTE]
 > All `List.of()` lists:
-
-- reject nulls
-- are immutable
-- throw `UOE` on structural modification
+> - reject nulls
+> - are immutable
+> - throw `UOE` on structural modification
 
 ### 25.3.2 `List.copyOf()` (immutable copy)
 
@@ -119,6 +122,8 @@ list.add("X"); // ❌ UOE — size is fixed
 
 > [!NOTE]
 > The list is backed by the array: modifying one affects the other.
+
+---
 
 ## 25.4 Core List Operations
 
@@ -159,7 +164,7 @@ Output
 Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
 ```
 
-> [!EXAMPLE]
+> [!WARNING]
 > Calling get/set with an invalid index throws IndexOutOfBoundsException
 
 ### 25.4.3 Removing Elements
@@ -175,18 +180,20 @@ list.clear();
 
 |		Operation		|		Behavior			|		Exception(s)			|
 |-----------------------|---------------------------|-------------------------------|
-|		add(E)			|	always appends			|		—						|
-|		add(int,E)		|	shifts elements right	|	IndexOutOfBoundsException	|
-|		get(int)		|	constant-time for ArrayList, linear for LinkedList |	IndexOutOfBoundsException	|
-|		set(int,E)		|	replaces element		|	IndexOutOfBoundsException	|
-|		remove(int)		|	shifts elements left	|	IndexOutOfBoundsException	|
-|		remove(Object)	|	removes first equal element	|	—	|
+|		`add(E)`			|	always appends			|		—						|
+|		`add(int,E)`		|	shifts elements right	|	IndexOutOfBoundsException	|
+|		`get(int)`		|	constant-time for ArrayList, linear for LinkedList |	IndexOutOfBoundsException	|
+|		`set(int,E)`		|	replaces element		|	IndexOutOfBoundsException	|
+|		`remove(int)`		|	shifts elements left	|	IndexOutOfBoundsException	|
+|		`remove(Object)`	|	removes first equal element	|	—	|
+
+---
 
 ## 25.5 `contains()`, `equals()`, and `hashCode()`
 
 ### 25.5.1 `contains()`
 
-Uses .equals() on elements.
+Uses `.equals()` on elements.
 
 ### 25.5.2 Equality of Lists
 
@@ -200,11 +207,14 @@ System.out.println(a.equals(b)); // true
 ```
 
 > [!NOTE]
-> Order matters. Type of list does NOT matter.
+> - Order matters. 
+> - Type of list does NOT matter.
 
 ### 25.5.3 `hashCode()`
 
 Computed based on the contents.
+
+---
 
 ## 25.6 Iterating Through a List
 
@@ -241,6 +251,8 @@ while (lit.hasNext()) {
 
 > [!NOTE]
 > Only `ListIterator` supports bidirectional traversal and modification.
+
+---
 
 ## 25.7 The `subList()` Method
 
@@ -306,18 +318,20 @@ view.clear();
 - Forgetting that parent modifications invalidate results in ConcurrentModificationException
 - Incorrect index expectations:	End index is exclusive
 
+---
+
 ## 25.8 Summary Table of Important Operations
 
 
 | 	Operation		| 		ArrayList		| 		LinkedList 		| 		Immutable Lists 	|
 |-------------------|-----------------------|-----------------------|---------------------------|
-| add(E)			|	fast				|	fast				|	❌ unsupported			|
-| add(index,E)		|	slow (shift)		|	fast				|	❌						|
-| get(index)		|	fast				|	slow				|	fast					|
-| remove(index) 	| 	slow 				| slow (unless removing first/last) 		  | ❌ |						
-| remove(Object)	|	slower				|	slower				|	❌						|
-| set(index,E)		|	fast				|	slow				|	❌						|
-| iterator()		|	fast				|	fast				|	fast					|
-| listIterator()	|	fast				|	fast				|	fast					|
-| contains(Object)	|	O(n)				|	O(n)				|	O(n)					|
+| `add(E)`			|	fast				|	fast				|	❌ unsupported			|
+| `add(index,E)`		|	slow (shift)		|	fast				|	❌						|
+| `get(index)`		|	fast				|	slow				|	fast					|
+| `remove(index)` 	| 	slow 				| slow (unless removing first/last) 		  | ❌ |						
+| `remove(Object)`	|	slower				|	slower				|	❌						|
+| `set(index,E)`		|	fast				|	slow				|	❌						|
+| `iterator()`		|	fast				|	fast				|	fast					|
+| `listIterator()`	|	fast				|	fast				|	fast					|
+| `contains(Object)`	|	O(n)				|	O(n)				|	O(n)					|
 		
