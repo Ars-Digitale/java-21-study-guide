@@ -16,7 +16,7 @@
   - [35.2 java.nio — Buffers, Channels, and Non-Blocking IO](#352-javanio--buffers-channels-and-non-blocking-io)
     - [35.2.1 From Streams to Buffers: A Conceptual Shift](#3521-from-streams-to-buffers-a-conceptual-shift)
     - [35.2.2 Buffers: Purpose and Structure](#3522-buffers-purpose-and-structure)
-    - [35.2.3 Buffer Lifecycle: Write → Flip → Read](#3523-buffer-lifecycle-write-flip-read)
+    - [35.2.3 Buffer Lifecycle: Write → Flip → Read](#3523-buffer-lifecycle-write--flip--read)
     - [35.2.4 clear() vs compact()](#3524-clear-vs-compact)
     - [35.2.5 Heap Buffers vs Direct Buffers](#3525-heap-buffers-vs-direct-buffers)
     - [35.2.6 Channels: What They Are](#3526-channels-what-they-are)
