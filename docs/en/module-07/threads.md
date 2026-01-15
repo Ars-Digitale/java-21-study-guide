@@ -319,11 +319,11 @@ Understanding the role of the main thread is essential for reasoning about progr
 
 ## 30.14 Thread Concurrency and Shared State
 
-Concurrency arises when multiple threads access shared mutable state.
+`Concurrency` arises when multiple threads access shared mutable state.
 
-- Shared State: Any heap-based data accessible by more than one thread.
-- Race Condition: A correctness error caused by unsynchronized access to shared state.
-- Visibility Problem: A thread observes stale data due to lack of proper memory synchronization.
+- `Shared State`: Any heap-based data accessible by more than one thread.
+- `Race Condition`: A correctness error caused by unsynchronized access to shared state.
+- `Visibility Problem`: A thread observes stale data due to lack of proper memory synchronization.
 
 Java solves these with synchronization, volatile, locks, atomics, and high-level frameworks (Executors, futures).
 
