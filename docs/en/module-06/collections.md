@@ -151,7 +151,7 @@ Map<Integer, String> map = new HashMap<>();
 ```
 
 > [!NOTE]
-> Generics in collections work through type erasure: Please check the Paragraph "**18.4 Type Erasure**" in Chapter: [18. Generics in Java](../module-04/generics.md).
+> Generics in collections work through `type erasure`: Please check the Paragraph "**18.4 Type Erasure**" in Chapter: [18. Generics in Java](../module-04/generics.md).
 
 ## 22.7 Mutability vs. Immutability
 
@@ -164,10 +164,10 @@ immutable.add("c"); // ❌ UnsupportedOperationException
 
 Java provides several ways to create immutable collections:
 
-- List.of(), Set.of(), Map.of()
-- List.copyOf(collection)
-- Collections.**unmodifiableList(...)** wrappers
-- Records used as immutable value containers
+- `List.of()`, `Set.of()`, `Map.of()`
+- `List.copyOf(collection)`
+- `Collections.unmodifiableList(...)` wrappers
+- `Records` used as immutable value containers
 
 > [!NOTE]
 > The method `Arrays.asList(varargs)`, which is backed by an array, behaves differently: see examples below.
