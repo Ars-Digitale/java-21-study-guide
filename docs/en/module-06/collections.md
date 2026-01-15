@@ -34,6 +34,8 @@ The Collections Framework provides:
 
 All major collection structures share a consistent design so that code working with one implementation can often be reused with another.
 
+---
+
 ## 22.2 The Core Interfaces
 
 At the heart of the Java Collections Framework is a small set of **root interfaces** that define generic data-handling behaviors.
@@ -101,6 +103,8 @@ java.util
 		└─ ConcurrentHashMap<K,V>
 ```
 
+---
+
 ## 22.3 Sequenced Collections (Java 21+)
 
 Java 21 introduces the new interface `SequencedCollection`, which formalizes the idea that a collection maintains a **defined encounter order**.
@@ -111,6 +115,8 @@ This was already true for List, LinkedHashSet, LinkedHashMap, Deque, etc., but n
 
 This drastically simplifies the specification of ordering behaviors and will be used throughout the following chapters.
 
+---
+
 ## 22.4 Why the Collections Framework Exists
 
 - Avoid reinventing data structures
@@ -118,7 +124,11 @@ This drastically simplifies the specification of ordering behaviors and will be 
 - Improve interoperability through shared interfaces
 - Support generic types for type-safe collections
 
-Before Java 1.2, data structures were ad-hoc, inconsistent, and untyped. The Collections Framework unified all of this into a consistent API.
+Before Java 1.2, data structures were ad-hoc, inconsistent, and untyped. 
+
+The Collections Framework unified all of this into a consistent API.
+
+---
 
 ## 22.5 The Two Sides of the Framework: Collections vs. Maps
 
@@ -128,6 +138,8 @@ A Map stores **pairs**, while a Collection stores **single elements**.
 
 - Collection = List, Set, Queue, Deque, SequencedCollection
 - Map = Dictionary-like key/value store
+
+---
 
 ## 22.6 Generic Types in the Collections Framework
 
@@ -139,7 +151,7 @@ Map<Integer, String> map = new HashMap<>();
 ```
 
 > [!NOTE]
-> Generics in collections work through type erasure: see [Type Erasure](../module-04/generics.md#4-type-erasure).
+> Generics in collections work through type erasure: Please check the Paragraph "**18.4 Type Erasure**" in Chapter: [18. Generics in Java](../module-04/generics.md).
 
 ## 22.7 Mutability vs. Immutability
 
