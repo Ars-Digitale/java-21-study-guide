@@ -14,8 +14,8 @@
     - [24.2.2 Comparator Example](#2422-comparator-example)
   - [24.3 Comparable vs Comparator](#243-comparable-vs-comparator)
   - [24.4 Sorting Arrays and Collections](#244-sorting-arrays-and-collections)
-    - [24.4.1 Arrayssort](#2441-arrayssort)
-    - [24.4.2 Collectionssort](#2442-collectionssort)
+    - [24.4.1 Arrays sort](#2441-arrays-sort)
+    - [24.4.2 Collections sort](#2442-collections-sort)
   - [24.5 Multi-Level Sorting thenComparing](#245-multi-level-sorting-thencomparing)
   - [24.6 Comparing Primitives Efficiently](#246-comparing-primitives-efficiently)
   - [24.7 Common Traps](#247-common-traps)
@@ -26,6 +26,7 @@
 
 
 Java provides two main strategies for sorting and comparing: `Comparable` (natural ordering) and `Comparator` (custom ordering).
+
 Understanding their rules, constraints, and interactions with generics is essential.
 
 - For **numeric types**, sorting follows natural numerical order, meaning smaller values come before larger ones.
@@ -54,6 +55,7 @@ Output:
 ## 24.1 Comparable — Natural Ordering
 
 The interface `Comparable<T>` defines the natural order of a type.
+
 A class implements it when it wants to define its default sorting rule.
 
 ### 24.1.1 Comparable Method Contract
@@ -113,6 +115,8 @@ The list sorts by age, because that is the natural numbering order.
 - Throwing exceptions inside compareTo() breaks sorting
 - Failing to implement the same logic as equals() → common trap
 
+---
+
 ## 24.2 Comparator — Custom Ordering
 
 The interface `Comparator<T>` allows defining multiple sorting strategies
@@ -165,6 +169,8 @@ Comparator<Person> byAgeDesc = Comparator.comparingInt(Person::getAge).reversed(
 var sorted = people.stream().sorted(byName.thenComparing(byAgeDesc)).toList();
 ```
 
+---
+
 ## 24.3 Comparable vs Comparator 
 
 
@@ -178,11 +184,12 @@ var sorted = people.stream().sorted(byName.thenComparing(byAgeDesc)).toList();
 |Allows Multiple Orders	| NO |	YES |
 |Used By Collections.sort	| YES |	YES |
 |Used By Arrays.sort	| YES	| YES |
-	
+
+---	
 
 ## 24.4 Sorting Arrays and Collections
 
-### 24.4.1 Arrays.sort()
+### 24.4.1 Arrays sort()
 
 ```java
 int[] nums = {3,1,2};
@@ -193,7 +200,7 @@ Arrays.sort(arr); // Person must implement Comparable
 Arrays.sort(arr, byName); // using Comparator
 ```
 
-### 24.4.2 Collections.sort()
+### 24.4.2 Collections sort()
 
 ```java
 Collections.sort(list); // natural order
@@ -203,6 +210,7 @@ Collections.sort(list, byName); // comparator
 > [!NOTE]
 > Collections.sort(list) delegates to list.sort(comparator) since Java 8.
 
+---
 
 ## 24.5 Multi-Level Sorting (thenComparing)
 
@@ -212,6 +220,8 @@ var cmp = Comparator
 		.thenComparing(Person::getFirstName)
 			.thenComparingInt(Person::getAge);
 ```
+
+---
 
 ## 24.6 Comparing Primitives Efficiently
 
@@ -224,6 +234,8 @@ Comparator.comparingDouble(...)
 > [!NOTE]
 > These avoid boxing and are preferred in performance-sensitive code.
 
+---
+
 ## 24.7 Common Traps
 
 - Sorting a list of Objects without Comparable → runtime ClassCastException
@@ -234,6 +246,8 @@ Comparator.comparingDouble(...)
 - Using subtraction to compare ints can overflow → always use `Integer.compare()`
 - Sorting a list with null elements and natural order → NPE
 - compareTo must never return inconsistent negative/zero/positive on same two objects (no randomness)
+
+---
 
 ## 24.8 Full Example
 
@@ -260,6 +274,7 @@ books.stream().sorted(cmp)
 > [!NOTE]
 > reversed() applies to the entire composed comparator, not just the first comparison key.
 
+---
 
 ## 24.9 Summary
 
