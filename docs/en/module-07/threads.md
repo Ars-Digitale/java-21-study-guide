@@ -50,7 +50,7 @@ Threads interact with memory in two fundamentally different ways.
 - **Thread Stack**: Private memory area for each thread. It stores method call frames, local variables, and execution state. Each thread has exactly one stack.
 - **Heap**: Shared memory area used for objects and class instances. All threads within the same process can access the heap.
 
-Because stacks are isolated and the heap is shared, concurrency problems arise when multiple threads access the same heap objects without proper coordination.
+Because `stacks are isolated` and the `heap is shared`, concurrency problems arise when multiple threads access the same heap objects without proper coordination.
 
 ---
 
