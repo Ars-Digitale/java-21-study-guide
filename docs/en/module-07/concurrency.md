@@ -31,7 +31,8 @@
 
 ---
 
-This chapter introduces the **Java Concurrency API**, which provides high-level abstractions for managing concurrent execution safely, efficiently, and scalably.<br>
+This chapter introduces the **Java Concurrency API**, which provides high-level abstractions for managing concurrent execution safely, efficiently, and scalably.
+
 Unlike low-level thread manipulation, the Concurrency API focuses on **tasks**, **executors**, and **coordination mechanisms**, allowing developers to reason about what should be done rather than how threads are scheduled.
 
 ## 31.1 Goals and Scope of the Concurrency API
@@ -54,11 +55,13 @@ executor.execute(() -> System.out.println("Task executed"));
 executor.shutdown();
 ```
 
+---
+
 ## 31.2 Fundamental Threading Problems
 
-Before understanding the Concurrency API, it is essential to understand the concurrency problems it is designed to mitigate. 
+Before understanding the `Concurrency API`, it is essential to understand the concurrency problems it is designed to mitigate. 
 
-These problems arise from shared mutable state, scheduling unpredictability, and improper coordination.
+These problems arise from `shared mutable state`, `scheduling unpredictability`, and `improper coordination`.
 
 ### 31.2.1 Race Conditions
 
@@ -126,6 +129,8 @@ while (!tryLock()) {
 
 Both threads may repeatedly retry, preventing forward progress.
 
+---
+
 ## 31.3 From Threads to Tasks
 
 The Concurrency API shifts the programming model from managing **threads** directly to submitting **tasks**. 
@@ -141,6 +146,8 @@ Callable<Integer> callable = () -> 42;
 ```
 
 This abstraction allows tasks to be reused, scheduled flexibly, and executed by different execution strategies.
+
+---
 
 ## 31.4 Executor Framework
 
@@ -199,8 +206,8 @@ Integer result = future.get();
 
 Both interfaces represent tasks, but with different capabilities.
 
-- Runnable: No return value, cannot throw checked exceptions.
-- Callable: Returns a value and supports checked exceptions.
+- `Runnable`: No return value, cannot throw checked exceptions.
+- `Callable`: Returns a value and supports checked exceptions.
 
 ```java
 Callable<String> c = () -> "done";
@@ -208,6 +215,8 @@ Runnable r = () -> System.out.println("done");
 ```
 
 For result-oriented asynchronous computation, `Callable` is generally preferred.
+
+---
 
 ## 31.5 Thread Pools and Scheduling
 
@@ -230,6 +239,7 @@ scheduler.schedule(
 > Never create threads manually in a loop:
 > use pools or virtual threads instead.
 
+---
 
 ## 31.6 Executor Lifecycle and Termination
 
@@ -244,6 +254,8 @@ Executors must be shut down explicitly to release resources and allow JVM termin
 executor.shutdown();
 executor.awaitTermination(5, TimeUnit.SECONDS);
 ```
+
+---
 
 ## 31.7 Thread Safety Strategies
 
@@ -328,6 +340,7 @@ Atomic variables:
 - Avoid thread blocking, making them highly scalable under contention
 
 However, atomic variables only guarantee atomicity for **individual operations**.
+
 Composing multiple operations still requires external synchronization.
 
 Atomic variables are typically used for:
@@ -338,7 +351,7 @@ Atomic variables are typically used for:
 
 ### 31.7.3 Lock Framework
 
-The java.util.concurrent.locks package provides explicit locking mechanisms that offer greater flexibility and control than synchronized.
+The `java.util.concurrent.locks` package provides explicit locking mechanisms that offer greater flexibility and control than synchronized.
 
 ```java
 ReentrantLock lock = new ReentrantLock();
@@ -391,9 +404,9 @@ Unlike synchronized, locks do not release automatically, making proper try/final
 Coordination utilities allow threads to coordinate execution phases without protecting shared data via mutual exclusion.
 
 Other coordination primitives include:
-- CountDownLatch
-- Semaphore
-- Phaser
+- `CountDownLatch`
+- `Semaphore`
+- `Phaser`
 
 
 ```java
@@ -450,7 +463,7 @@ Worker-1 performing next phase
 Worker-2 performing next phase
 ```
 
-A CyclicBarrier:
+A `CyclicBarrier`:
 
 - Blocks threads until a predefined number of threads reach the barrier
 - Releases all waiting threads simultaneously once the barrier is tripped
@@ -458,6 +471,7 @@ A CyclicBarrier:
 
 These utilities focus on execution ordering and synchronization, not data protection.
 
+---
 
 ## 31.8 Concurrent Collections
 
@@ -490,11 +504,11 @@ Blocking queues handle synchronization internally, simplifying coordination betw
 > [!CAUTION]
 > CopyOnWrite collections are memory-expensive; avoid in write-heavy workloads.
 
-
+---
 
 ## 31.9 Parallel Streams
 
-Parallel streams provide **declarative data parallelism**, allowing stream operations to be executed concurrently across multiple threads with minimal code changes.
+`Parallel streams` provide **declarative data parallelism**, allowing stream operations to be executed concurrently across multiple threads with minimal code changes.
 
 Key characteristics:
 - Activated via `parallelStream()` or `stream().parallel()`
@@ -520,10 +534,11 @@ Because execution order is not guaranteed, parallel streams should avoid:
 > [!NOTE]
 > Use `forEachOrdered()` if deterministic output is required.
 
+---
 
 ## 31.10 Relation to Virtual Threads
 
-In Java 21, the Executor framework integrates seamlessly with **virtual threads**, enabling massive concurrency with minimal resource usage.
+In Java 21, the `Executor framework` integrates seamlessly with **virtual threads**, enabling massive concurrency with minimal resource usage.
 
 ```java
 ExecutorService executor =
@@ -534,6 +549,8 @@ executor.close();
 ```
 
 This allows blocking code to scale efficiently without redesigning APIs.
+
+---
 
 ## 31.11 Summary
 
