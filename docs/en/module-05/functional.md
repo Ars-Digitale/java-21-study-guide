@@ -28,7 +28,8 @@
 
 ---
 
-Functional programming is a programming paradigm that focuses on describing what should be done rather than how it should be done.
+`Functional programming` is a programming paradigm that focuses on describing what should be done rather than how it should be done.
+
 Starting from Java 8, the language added several features that enable functional-style programming: `lambda expressions`, `functional interfaces`, and `method references`.
 
 These features allow developers to write more expressive, concise, and reusable code, especially when working with collections, concurrency APIs, and event-driven systems.
@@ -63,23 +64,23 @@ interface Adder {
 
 ### 20.1.2 Common Functional Interfaces (java.util.function)
 
-Below is a certification-grade summary of the most important functional interfaces.
+Below is a summary of the most important functional interfaces.
 
 
 |Functional Interface | Returns | Method | Parameters |
 |---------------------|---------|--------|-------------------- |
-|Supplier<T>          | T       | get()         | 0 |
-|Consumer<T>          | void    | accept(T)     | 1 |
-|BiConsumer<T,U>      | void    | accept(T,U)   | 2 |
-|Function<T,R>        | R       | apply(T)      | 1 |
-|BiFunction<T,U,R>    | R       | apply(T,U)    | 2 |
-|UnaryOperator<T>     | T       | apply(T)      | 1 (same types) |
-|BinaryOperator<T>    | T       | apply(T,T)    | 2 (same types) |
-|Predicate<T>         | boolean | test(T)       | 1 |
-|BiPredicate<T,U>     | boolean | test(T,U)     | 2 |
+|`Supplier<T>`          | T       | get()         | 0 |
+|`Consumer<T>`          | void    | accept(T)     | 1 |
+|`BiConsumer<T,U>`      | void    | accept(T,U)   | 2 |
+|`Function<T,R>`        | R       | apply(T)      | 1 |
+|`BiFunction<T,U,R>`    | R       | apply(T,U)    | 2 |
+|`UnaryOperator<T>`     | T       | apply(T)      | 1 (same types) |
+|`BinaryOperator<T>`    | T       | apply(T,T)    | 2 (same types) |
+|`Predicate<T>`         | boolean | test(T)       | 1 |
+|`BiPredicate<T,U>`     | boolean | test(T,U)     | 2 |
 
 
-Examples
+- Examples
 
 ```java
 Supplier<String> sup = () -> "Hello!";
@@ -111,7 +112,7 @@ Many functional interfaces come with helper methods that allow chaining and comp
 |BinaryOperator   | maxBy()        | comparator-based maximum |
 
 
-Examples
+- Examples
 
 ```java
 Function<Integer, Integer> times2 = x -> x * 2;
@@ -178,7 +179,7 @@ Java provides specialized versions of functional interfaces for primitives to av
 | LongToIntFunction            | int          | applyAsInt(long)  		| 1            |
 
 
-Example
+- Example
 
 ```java
 IntSupplier dice = () -> (int)(Math.random() * 6) + 1;
@@ -346,7 +347,8 @@ m(x -> x + 1);  // ❌ ambiguous
 
 ## 20.3 Method References
 
-Method references provide a shorthand syntax for using an existing method as a functional interface implementation.  
+Method references provide a shorthand syntax for using an existing method as a functional interface implementation. 
+ 
 They are equivalent to lambda expressions, but more concise, readable, and often preferred when the target method already exists.
 
 There are four categories of method references in Java:
@@ -391,7 +393,8 @@ The reference `prefix::concat` binds `concat` to **that specific object**.
 
 ### 20.3.3 Reference to an Instance Method of an Arbitrary Object of a Given Type
 
-This is the trickiest form.  
+This is the trickiest form.
+  
 The functional interface’s first parameter becomes the method’s receiver (`this`).
 
 ```java
