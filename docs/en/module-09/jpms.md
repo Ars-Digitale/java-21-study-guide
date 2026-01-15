@@ -36,9 +36,9 @@ Understanding JPMS is essential for modern Java, especially for large applicatio
 ## 37.1 Why Modules Were Introduced
 
 Before Java 9, Java applications were built using only:
-- packages
-- JAR files
-- the classpath
+- `packages`
+- `JAR` files
+- the `classpath`
 
 This model had serious limitations as applications grew.
 
