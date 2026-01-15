@@ -180,9 +180,9 @@ Streams are designed for data processing, not data storage.
 
 Every stream pipeline consists of three distinct phases:
 
-1️⃣ **Source**
-2️⃣ Zero or more **Intermediate Operations**
-3️⃣. Exactly one **Terminal Operation**
+- 1️⃣  **Source**
+- 2️⃣  Zero or more **Intermediate Operations**
+- 3️⃣. Exactly one **Terminal Operation**
 
 
 ### 21.3.1 Stream Sources
