@@ -78,11 +78,12 @@ In `java.io`, streams are **unidirectional**: they are either **input** or **out
 | `Writer`       | Output    | Characters    | Character stream  |
 
 
-Streams hide the concrete origin of data (file, network, memory) and expose a uniform read/write interface.
+`Streams` hide the concrete origin of data (file, network, memory) and expose a uniform read/write interface.
 
 ### 35.1.2 Stream Chaining and the Decorator Pattern
 
 Most java.io streams are designed to be combined.
+
 Each wrapper adds behavior without changing the underlying data source.
 
 ```java
@@ -399,7 +400,6 @@ They are the foundation of scalable servers.
 | `Interest set`  | Operations the selector watches for (read, write, etc.) |
 
 
-
 ### 35.2.10 When to Use `java.nio`
 
 `NIO` is appropriate when:
@@ -501,6 +501,7 @@ NIO.2 allows link-aware checks and explicit link inspection.
 Neither API provides reliable diagnostics through boolean checks alone.
 
 Correct NIO.2 code does not “check first”.
+
 Instead, it attempts the operation and handles the exception:
 
 ```java
@@ -758,7 +759,7 @@ Files.write(Path.of("out.bin"), data);
 
 ### 35.3.7 newInputStream/newOutputStream and newBufferedReader/newBufferedWriter
 
-These factory methods create stream/reader instances from a Path.
+These `factory methods` create stream/reader instances from a Path.
 
 They are the recommended bridge between classic streaming and NIO.2 path handling.
 
@@ -909,6 +910,7 @@ if (isLink) {
 ```
 
 Many methods follow links by default.
+
 To prevent this, pass `LinkOption.NOFOLLOW_LINKS` when supported.
 
 ### 35.3.12 Summary: Why Files Is an Enhancement
@@ -1008,7 +1010,7 @@ public class Demo {
 
 ### 35.4.4 Object Graphs, References, and Identity
 
-Serialization preserves object identity within the same stream.
+`Serialization` preserves object identity within the same stream.
 
 If the same object reference appears multiple times in the graph, Java writes it once and later writes back-references.
 
@@ -1060,7 +1062,7 @@ class Person implements Serializable {
 
 `transient` fields are excluded from serialization.
 
-On deserialization, transient fields are assigned default values (0, false, null) unless explicitly restored.
+On `deserialization`, transient fields are assigned default values (0, false, null) unless explicitly restored.
 
 `static` fields belong to the class, not to instances, so they are not serialized.
 
@@ -1238,7 +1240,7 @@ These methods are not overrides of methods from any interface or superclass.
 
 They do not belong to Serializable, and they are not part of the normal method call flow of your program.
 
-You never call writeObject or readObject yourself.
+You never call `writeObject` or `readObject` yourself.
 
 Instead, the serialization framework (ObjectOutputStream and ObjectInputStream) checks, using reflection, whether the class defines methods with these exact names and signatures.
 
