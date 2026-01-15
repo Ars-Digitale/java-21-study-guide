@@ -159,7 +159,7 @@ int value = m.orElse(0); // 1
 ## 21.2 What Is a Stream (And What It Is Not)
 
 
-A Java Stream represents a sequence of elements supporting functional-style operations. 
+A `Java Stream` represents a sequence of elements supporting functional-style operations. 
 
 Streams are designed for data processing, not data storage.
 
@@ -174,6 +174,7 @@ Streams are designed for data processing, not data storage.
 > [!NOTE]
 > Streams are conceptually similar to database queries: they describe what to compute, not how to iterate.
 
+---
 
 ## 21.3 Stream Pipeline Architecture
 
@@ -225,7 +226,7 @@ Intermediate operations:
 | `peek` | Consumer | `Stream<T>` | run side-effect action for each element (debugging) |
 
 
-Example:
+- Example:
 
 ```java
 Stream<String> s2 = names.stream().filter(n -> n.length() > 3).map(String::toUpperCase);
@@ -263,10 +264,13 @@ Terminal operations:
 
 ```java
 var newNames = new ArrayList<String>();
+
 newNames.add("Bob");
 newNames.add("Dan");
 var stream = newNames.stream(); // Streams are lazily evaluated: this does not traverse the data yet, it only creates a pipeline description.
+
 newNames.add("Erin");
+
 stream.count(); // 3
 ```
 
@@ -295,6 +299,8 @@ Execution order:
 ----> map bb
 ```
 
+---
+
 ## 21.5 Stateless vs Stateful Operations
 
 
@@ -311,6 +317,7 @@ Operations like `distinct`, `sorted`, and `limit` require maintaining internal s
 > [!NOTE]
 > Stateful operations can severely impact parallel stream performance.
 
+---
 
 ## 21.6 Stream Ordering and Determinism
 
@@ -329,6 +336,7 @@ Some operations respect encounter order:
 > [!NOTE]
 > In parallel streams, `forEach` does not guarantee order.
 
+---
 
 ## 21.7 Parallel Streams
 
@@ -352,6 +360,8 @@ Rules for safe parallel streams:
 
 > [!NOTE]
 > Parallel streams can be slower for small workloads.
+
+---
 
 ## 21.8 Reduction Operations
 
@@ -438,7 +448,7 @@ int result =
           );
 ```
 
-Why this is wrong
+<ins>Why this is wrong</ins>
 
 **Subtraction is not associative**.
 
@@ -488,26 +498,26 @@ where Collectors.* provides prebuilt collectors (grouping, mapping, joining, cou
 ### 21.8.3 Why `collect()` is different from `reduce()`
 
 - 1. Intent: mutation vs immutability
-	- reduce() is designed for immutable-style reduction: combine values into a new value (e.g. sum, min, max).
-	- collect() is designed for mutable containers: build up a List, Map, StringBuilder, etc.
+	- `reduce()` is designed for immutable-style reduction: combine values into a new value (e.g. sum, min, max).
+	- `collect()` is designed for mutable containers: build up a List, Map, StringBuilder, etc.
 - 2. Correctness in parallel
-	- reduce() requires the operation to be:
+	- `reduce()` requires the operation to be:
 		- associative
 		- stateless
 		- compatible with identity/combiner rules
-	- collect() is built to support parallelism safely by:
+	- `collect()` is built to support parallelism safely by:
 		- creating one container per thread (supplier)
 		- accumulating locally (accumulator)
 		- merging at the end (combiner)
 - 3. Performance
-	- collect() can be optimized because the stream runtime knows you are building containers:
+	- `collect()` can be optimized because the stream runtime knows you are building containers:
 		- it can avoid unnecessary copying
 		- it can pre-size or use specialized implementations (depending on collector)
 		- it’s the idiomatic and expected approach
 		- using reduce() to build a collection often creates extra objects or forces unsafe mutation.
 
 
-Example: “collect into a List” the right way
+- Example: “collect into a List” the right way
 
 ```java
 List<String> longNames =
@@ -516,7 +526,7 @@ List<String> longNames =
          .collect(Collectors.toList());
 ```
 
-Example: groupingBy (your snippet) with explanation
+- Example: groupingBy (your snippet) with explanation
 
 ```java
 Map<Integer, List<String>> byLength =
@@ -534,7 +544,7 @@ What happens conceptually:
 	- each thread builds its own partial maps
 	- the combiner merges maps by merging lists per key
 
-
+---
 
 ## 21.9 Common Streams Pitfalls
 
@@ -542,6 +552,8 @@ What happens conceptually:
 - Modifying external variables inside lambdas
 - Assuming execution order in parallel streams
 - Using `peek` for logic instead of debugging
+
+---
 
 ## 21.10 Primitive Streams
 
@@ -643,25 +655,26 @@ The “From” column tells you which methods are available and the resulting ta
 
 ### 21.10.5 Terminal operations and their result types
 
-Primitive streams have several terminal operations that are either unique or have primitive-specific return types. Many exam questions test the return type precisely.
+Primitive streams have several terminal operations that are either unique or have primitive-specific return types.
 
 
 | Terminal operation | IntStream returns | LongStream returns | DoubleStream returns |
 |--------------------|-------------------|--------------------|----------------------|
-| count() | long | long | long |
-| sum() | int | long | double |
-| min() / max() | OptionalInt | OptionalLong | OptionalDouble |
-| average() | OptionalDouble | OptionalDouble | OptionalDouble |
-| findFirst() / findAny() | OptionalInt | OptionalLong | OptionalDouble |
-| reduce(op) | OptionalInt | OptionalLong | OptionalDouble |
-| reduce(identity, op) | int | long | double |
-| summaryStatistics() | IntSummaryStatistics | LongSummaryStatistics | DoubleSummaryStatistics |
+| `count()` | long | long | long |
+| `sum()` | int | long | double |
+| `min()` / max() | OptionalInt | OptionalLong | OptionalDouble |
+| `average()` | OptionalDouble | OptionalDouble | OptionalDouble |
+| `findFirst()` / findAny() | OptionalInt | OptionalLong | OptionalDouble |
+| `reduce(op)` | OptionalInt | OptionalLong | OptionalDouble |
+| `reduce(identity, op)` | int | long | double |
+| `summaryStatistics()` | IntSummaryStatistics | LongSummaryStatistics | DoubleSummaryStatistics |
 			
 > [!WARNING]
 > - Even for `IntStream` and `LongStream`, **`average()`** returns `OptionalDouble` (not `OptionalInt` or `OptionalLong`).
 
 
-Example 1: `Stream<String>` → `IntStream` → primitive terminal operations.
+- Example 1: `Stream<String>` → `IntStream` → primitive terminal operations.
+
 ```java
 List<String> words = List.of("a", "bb", "ccc");
 
@@ -673,14 +686,16 @@ words.stream()
 // totalLength = 1 + 2 + 3 = 6
 ```
 
-Example 2: `IntStream` → boxed `Stream<Integer>` (boxing introduced).
+- Example 2: `IntStream` → boxed `Stream<Integer>` (boxing introduced).
+
 ```java
 Stream<Integer> boxed =
 IntStream.rangeClosed(1, 3) // 1,2,3
 .boxed(); // Stream<Integer>
 ```
 
-Example 3: primitive stream → object stream via `mapToObj`.
+- Example 3: primitive stream → object stream via `mapToObj`.
+
 ```java
 Stream<String> labels =
 IntStream.range(1, 4) // 1,2,3
@@ -695,6 +710,7 @@ IntStream.range(1, 4) // 1,2,3
 - Using `boxed()` reintroduces boxing; only do it if the downstream API requires objects (e.g., collecting to `List<Integer>`)
 - Be careful with narrowing conversions: `LongStream.mapToInt` and `DoubleStream.mapToInt` may truncate values
 
+---
 
 ## 21.11 Collectors (collect(), Collector, and the Collectors Factory Methods)
 
