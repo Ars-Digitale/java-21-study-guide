@@ -17,6 +17,7 @@
 ---
 
 The `Map` interface represents a collection of **key–value pairs**, where each key maps to at most one value.
+
 Unlike other collection types, `Map` does **not** extend `Collection` and therefore has its own hierarchy and rules.
 
 
@@ -30,23 +31,26 @@ Unlike other collection types, `Map` does **not** extend `Collection` and theref
 > [!NOTE]
 > A `Map` is not a `Collection`, but its views (keySet, values, entrySet) are collections.
 
+---
+
 ## 28.2 Main Map Implementations
 
 | Implementation | Ordering | Null Keys | Null Values | Thread-Safe | Notes |
 |----------------|---------|-----------|-------------|-------------|------|
-| HashMap | No ordering | 1 | Many | No | Fast, most common |
-| LinkedHashMap | Insertion order | 1 | Many | No | Predictable iteration |
-| TreeMap | Sorted by key | No | Many | No | Keys must be comparable |
-| Hashtable | No ordering | No | No | Yes | Legacy |
-| ConcurrentHashMap | No ordering | No | No | Yes | Concurrent-friendly |
+| `HashMap` | No ordering | 1 | Many | No | Fast, most common |
+| `LinkedHashMap` | Insertion order | 1 | Many | No | Predictable iteration |
+| `TreeMap` | Sorted by key | No | Many | No | Keys must be comparable |
+| `Hashtable` | No ordering | No | No | Yes | Legacy |
+| `ConcurrentHashMap` | No ordering | No | No | Yes | Concurrent-friendly |
 
 > [!NOTE]
-> TreeMap ordering is determined either by `Comparable` or by a `Comparator` provided at construction.
+> `TreeMap` ordering is determined either by `Comparable` or by a `Comparator` provided at construction.
 
+---
 
 ## 28.3 Creating Maps
 
-Maps can be created using constructors or factory methods.
+`Maps` can be created using constructors or factory methods.
 
 ```java
 Map<String, Integer> map1 = new HashMap<>();
@@ -63,22 +67,23 @@ Map<String, Integer> map5 = Map.ofEntries(
 > [!NOTE]
 > Maps created with `Map.of(...)` and `Map.ofEntries(...)` are **immutable**. Any modification attempt throws `UnsupportedOperationException`.
 
+---
 
 ## 28.4 Basic Map Operations
 
 | Method | Description | Return
 |------|-------------|---------------|
-| put(k, v) | Adds or replaces a mapping | Return prev. value or null |
-| putIfAbsent(k,v) | Adds only if key not present | Returns existing or null |
-| get(k) | Returns value or null | Return specific value or null |
-| getOrDefault(k, default) | Returns value or default | Return specific value or default |
-| remove(k) | Removes mapping | Remove and return specific value or null |
-| containsKey(k) | Checks key presence | boolean |
-| containsValue(v) | Checks value presence | boolean |
-| size() | Number of entries | int |
-| isEmpty() | Empty check | boolean |
-| clear() | Removes all entries | void |
-| V merge(k, v, BiFunction(V, V, V)) | merge(k, v, remappingFunction) | if key absent → sets value; if key present → function(oldValue, newValue); if function returns null → mapping removed |
+| `put(k, v)` | Adds or replaces a mapping | Return prev. value or null |
+| `putIfAbsent(k,v)` | Adds only if key not present | Returns existing or null |
+| `get(k)` | Returns value or null | Return specific value or null |
+| `getOrDefault(k, default)` | Returns value or default | Return specific value or default |
+| `remove(k)` | Removes mapping | Remove and return specific value or null |
+| `containsKey(k)` | Checks key presence | boolean |
+| `containsValue(v)` | Checks value presence | boolean |
+| `size()` | Number of entries | int |
+| `isEmpty()` | Empty check | boolean |
+| `clear()` | Removes all entries | void |
+| `V merge(k, v, BiFunction(V, V, V))` | merge(k, v, remappingFunction) | if key absent → sets value; if key present → function(oldValue, newValue); if function returns null → mapping removed |
 
 ```java
 Map<String, String> map = new HashMap<>();
@@ -89,6 +94,8 @@ map.put("A", "Avocado"); // overwrites value
 
 String v = map.get("B"); // Banana
 ```
+
+---
 
 ## 28.5 Iterating Over a Map
 
@@ -115,6 +122,7 @@ for (Map.Entry<String, String> e : map.entrySet()) {
 > [!NOTE]
 > Modifying the map while iterating over these views may throw `ConcurrentModificationException` (except for concurrent maps).
 
+---
 
 ## 28.6 Determining Equality in Maps
 
@@ -134,6 +142,7 @@ System.out.println(m1.equals(m2)); // true
 > [!NOTE]
 > Iteration order does not affect map equality.
 
+---
 
 ## 28.7 Special Behavior of TreeMap
 
@@ -152,6 +161,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 > All keys in a TreeMap must be mutually comparable. 
 > Mixing incompatible types causes `ClassCastException` at runtime.@@WARNING_END@@
 
+---
 
 ## 28.8 Null Handling
 
@@ -168,6 +178,8 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 >
 > HashMap/LinkedHashMap allow only ONE null key — inserting another replaces the existing one.
 
+---
+
 ## 28.9 Common Pitfalls
 
 - Assuming Map is a Collection
@@ -176,6 +188,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 - Confusing iteration order with equality
 - Trying to modify immutable maps created via Map.of
 
+---
 
 ## 28.10 Summary
 
