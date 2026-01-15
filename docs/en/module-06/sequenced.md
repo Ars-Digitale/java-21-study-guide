@@ -93,11 +93,11 @@ It standardizes operations that previously existed only in specific implementati
 
 | Method | Description |
 |--------|-------------|
-|Entry<K,V> firstEntry() | First map entry |
-|Entry<K,V> lastEntry() | Last map entry |
-|Entry<K,V> pollFirstEntry() | Removes and returns the first entry, or null if empty |
-|Entry<K,V> pollLastEntry() | Removes and returns last entry, or null if empty  |
-|SequencedMap<K,V> reversed() | Reversed view of the map |
+|`Entry<K,V> firstEntry()` | First map entry |
+|`Entry<K,V> lastEntry()` | Last map entry |
+|`Entry<K,V> pollFirstEntry()` | Removes and returns the first entry, or null if empty |
+|`Entry<K,V> pollLastEntry()` | Removes and returns last entry, or null if empty  |
+|`SequencedMap<K,V> reversed()` | Reversed view of the map |
 
 ### 29.3.2 Implementations of SequencedMap
 
