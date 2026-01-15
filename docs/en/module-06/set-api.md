@@ -26,9 +26,10 @@
 ---
 
 A **Set** in Java represents a collection that **contains no duplicate elements**.  
-It models the mathematical concept of a set: unordered (unless using an ordered implementation) and composed of unique values.
 
-All Set implementations rely on **equality semantics** (either `equals()` or comparator logic).
+It models the mathematical concept of a `set`: unordered (unless using an ordered implementation) and composed of unique values.
+
+All Set implementations rely on **equality semantics** (either `equals()` or `comparator` logic.
 
 ## 26.1 Set Hierarchy (Java Collections Framework)
 
@@ -47,11 +48,14 @@ All `Set` implementations require:
 - predictable equality and hashing (depending on implementation)
 
 > [!NOTE]
-> LinkedHashSet is now formally a SequencedSet since Java 21.
+> `LinkedHashSet` is now formally a `SequencedSet` since Java 21.
+
+---
 
 ## 26.2 Characteristics of Each Set Implementation
 
 ### 26.2.1 HashSet
+
 - Fastest general-purpose Set  
 - Unordered (no iteration order guarantee)  
 - Uses `hashCode()` and `equals()`  
@@ -67,6 +71,7 @@ System.out.println(set); // order not guaranteed
 ```
 
 ### 26.2.2 LinkedHashSet
+
 - Maintains **insertion order**  
 - Slightly slower than HashSet  
 - Useful when predictable iteration order is required
@@ -101,9 +106,10 @@ System.out.println(tree); // [1, 5, 10]
 ```
 
 > [!NOTE]
-> TreeSet requires all elements to be mutually comparable — mixing non-comparable types produces `ClassCastException`.
+> `TreeSet` requires all elements to be mutually comparable — mixing non-comparable types produces `ClassCastException`.
 > Operations (add, remove, contains) are O(log n).
 
+---
 
 ## 26.3 Equality Rules in Sets
 
@@ -111,11 +117,12 @@ The rules differ depending on implementation.
 
 ### 26.3.1 HashSet & LinkedHashSet
 
-Uniqueness is determined by two methods:  
+`Uniqueness` is determined by two methods:  
 - `hashCode()`  
 - `equals()`  
 
-Two objects are considered the same element if:  
+Two objects are considered the same element if:
+  
 1. Their hash codes match  
 2. Their `equals()` method returns `true`  
 
@@ -137,6 +144,8 @@ set.add("Yo"); // same length → treated as duplicate
 
 System.out.println(set);  // ["Hi"]
 ```
+
+---
 
 ## 26.4 Creating Set Instances
 
@@ -168,9 +177,11 @@ Set<String> empty = Set.of();             // empty immutable set
 ```
 
 > [!NOTE]
-> Factory-created sets are **immutable** — adding or removing elements throws `UnsupportedOperationException`.
-> Set.of(...) rejects duplicates at creation time → IllegalArgumentException and rejects null → NullPointerException
+> Factory-created sets are **immutable**: adding or removing elements throws `UnsupportedOperationException`.
+> `Set.of(...)` rejects duplicates at creation time → IllegalArgumentException and rejects null → NullPointerException
 
+
+---
 
 ## 26.5 Main Operations on Sets
 
@@ -202,17 +213,18 @@ set.removeAll(otherSet);
 set.retainAll(otherSet); // intersection
 ```
 
+---
 
 ## 26.6 Common Pitfalls
 
 - Using TreeSet with non-comparable objects → `ClassCastException`
-- TreeSet does not use equals() at all — only comparator/compareTo decides uniqueness.
+- TreeSet does not use `equals()` at all: only comparator/compareTo decides uniqueness.
 - Using mutable objects as Set keys → breaks hashing rules
 - Factory Set.of() is immutable — modification fails
 - HashSet does not guarantee iteration order
 - TreeSet treats objects with compare()==0 as duplicates even if not equal
 
-
+---
 
 ## 26.7 Summary Table
 
