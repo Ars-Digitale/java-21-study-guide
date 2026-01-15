@@ -21,9 +21,9 @@
 
 ---
 
-Once a module is defined with a `module-info.java` file, it must be compiled, packaged, and executed using module-aware tools.
+Once a `module` is defined with a `module-info.java` file, it must be compiled, packaged, and executed using module-aware tools.
 
-This section explains how the Java toolchain changes when modules are involved.
+This section explains how the `Java toolchain` changes when modules are involved.
 
 ## 38.1 The Module Path vs the Classpath
 
@@ -31,9 +31,8 @@ This section explains how the Java toolchain changes when modules are involved.
 It exists alongside the traditional classpath, but the two behave very differently.
 
 
-
 | Aspect | Classpath | Module path |
-| --- | --- | --- |
+| ---- | ---- | ---- |
 | Structure | Flat list of JARs | Modules with identities |
 | Encapsulation | None  | Strong |
 | Dependency checking | None | Strict |
@@ -45,6 +44,7 @@ It exists alongside the traditional classpath, but the two behave very different
 > - A JAR placed on the module path becomes a `named (or automatic) module`.
 > - Split packages are allowed on the classpath but forbidden for named modules on the module path.
 
+---
 
 ## 38.2 Compiling a Single Module
 
@@ -67,6 +67,8 @@ javac --module-source-path src \
 > [!NOTE]
 > `--module-source-path` tells javac where to find multiple modules at once.
 
+---
+
 ## 38.3 Compiling Multiple Interdependent Modules
 
 When modules depend on each other, their dependencies must be resolvable at compile time.
@@ -84,6 +86,8 @@ $(find src -name "*.java")
 Here:
 - `--module-source-path` locates module source trees
 - `--module-path` provides already-compiled modules
+
+---
 
 ## 38.4 Packaging a Module into a Modular JAR
 
@@ -105,6 +109,8 @@ jar --create
 > A JAR with `module-info.class` is a `named module, not an automatic module`.
 > When a JAR contains a `module-info.class`, its module name is taken from that file and not inferred from the filename.
 
+---
+
 ## 38.5 Running a Modular Application
 
 To run a modular application, you use the `module path` and specify the `module name`.
@@ -123,6 +129,7 @@ java -p mods -m com.example.hello/com.example.hello.Main
 > [!NOTE]
 > When using named modules, the classpath is ignored for resolution of module dependencies.
 
+---
 
 ## 38.6 Module Directives Explained
 
@@ -228,7 +235,7 @@ module com.example.app {
 ### 38.6.7 Table of Core Directives
 
 | Directive | Purpose |
-| --- | --- |
+| ---- | ---- |
 | `requires` | Declare a dependency |
 | `requires transitive` | Propagate dependency |
 | `exports` | Expose a package |
@@ -240,7 +247,7 @@ module com.example.app {
 ### 38.6.8 Exports vs Opens — Compile-Time vs Runtime Access
 
 | Visibility | Compile-time? | Runtime reflection? |
-| --- | --- | --- |
+| ---- | ---- | ---- |
 | `exports` | Yes | No |
 | `opens` | No | Yes |
 | `exports ... to` | Yes (limited modules) | No |
@@ -249,4 +256,4 @@ module com.example.app {
 
 
 > [!IMPORTANT]
-> JPMS adds a module path, but the classpath still exists. They can coexist, but named modules take precedence.
+> `JPMS` adds a `module path`, but the `classpath` still exists. They can coexist, but named modules take precedence.
