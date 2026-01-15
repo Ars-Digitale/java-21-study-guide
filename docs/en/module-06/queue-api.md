@@ -10,7 +10,7 @@
     - [27.2.1 Deque Core Methods](#2721-deque-core-methods)
     - [27.2.2 Deque Implementations](#2722-deque-implementations)
   - [27.3 Using a Queue](#273-using-a-queue)
-  - [27.4 Using a Deque as-Queue-and-as-Stack](#274-using-a-deque-as-queue-and-as-stack)
+  - [27.4 Using a Deque as-Queue and as-Stack](#274-using-a-deque-as-queue-and-as-stack)
     - [27.4.1 FIFO Example Queue-Behavior](#2741-fifo-example-queue-behavior)
     - [27.4.2 LIFO Example Stack-Behavior](#2742-lifo-example-stack-behavior)
   - [27.5 PriorityQueue — Special Queue](#275-priorityqueue--special-queue)
