@@ -69,6 +69,8 @@ Which one is chosen depends on classpath order, not correctness.
 > [!NOTE]
 > This problem cannot be reliably solved with the classpath alone.
 
+---
+
 ## 37.2 What Is a Module?
 
 A `module` is a named, self-describing unit of code.
@@ -100,10 +102,11 @@ A module is stronger than a package and more structured than a JAR.
 | JAR     | Packaging / deployment | None (all classes visible when on classpath) |
 | Module  | Encapsulation + dependency unit | Strong (unexported packages hidden) |
 
+---
 
 ## 37.3 The `module-info.java` Descriptor
 
-Every named module is defined by a module descriptor file named:
+Every `named module` is defined by a module descriptor file named:
 
 ```text
 module-info.java
@@ -123,6 +126,8 @@ module com.example.hello {
 
 > [!NOTE]
 > A module with no directives exports nothing and depends on nothing.
+
+---
 
 ## 37.4 Module Directory Structure
 
@@ -148,6 +153,7 @@ Key points:
 > In IDE and build-tool projects, the file structure may differ (e.g. Maven uses `src/main/java`).  
 > What always remains true: `module-info.java` sits in the root of the module source tree and package paths follow standard Java naming.
 
+---
 
 ## 37.5 A First Modular Program
 
@@ -177,6 +183,8 @@ The `exports directive` makes the package accessible to other modules.
 
 Without it, the package is encapsulated and inaccessible.
 
+---
+
 ## 37.6 Strong Encapsulation Explained
 
 In `JPMS`, packages are NOT accessible by default.
@@ -197,6 +205,8 @@ In modules, `public` means “public to other modules *only if* the containing p
 
 > [!NOTE]
 > This is a fundamental difference from the classpath model.
+
+---
 
 ## 37.7 Summary of Key Ideas
 
