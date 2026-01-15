@@ -25,7 +25,7 @@
 
 ---
 
-`JPMS` includes a built-in service mechanism that allows modules to discover and use implementations at runtime
+`JPMS` includes a built-in service mechanism that allows `modules` to discover and use implementations at runtime
 without hardcoding dependencies between providers and consumers.
 
 This mechanism is based on the existing `ServiceLoader API`, but modules make it reliable, explicit, and safe.
@@ -102,7 +102,7 @@ module com.example.provider.english {
 ```
 
 Key points:
-- The provider depends on the service interface
+- The `provider` depends on the `service interface`
 - The implementation class does not need to be exported
 - The provides directive registers the implementation
 
@@ -149,17 +149,20 @@ For a service to be discoverable by ServiceLoader, several conditions must be sa
 
 
 | Rule | Meaning |
-| --- | --- |
+| ---- | ---- |
 | Provider module must be readable | Resolved by requires graph |
 | Service interface must be exported | Consumers must see it |
 | Consumer must declare `uses` | Otherwise ServiceLoader fails |
 | Provider must declare `provides` | Implicit discovery is forbidden |
+
+---
 
 ## 39.2 Named, Automatic, and Unnamed Modules
 
 JPMS supports different kinds of modules to allow gradual migration from the classpath.
 
 JPMS must interoperate with legacy code.
+
 To support gradual adoption, the JVM recognizes three different module categories.
 
 
@@ -199,11 +202,12 @@ Code on the classpath belongs to the `unnamed module`.
 ### 39.2.4 Comparison Summary
 
 | Module type | module-info present? | Encapsulation | Reads |
-| --- | --- | --- | --- |
+| ---- | ---- | ---- | ---- |
 | Named | Yes | Strong | Declared only |
 | Automatic | No | Weak | All modules |
 | Unnamed | No | None | All modules |
 
+---
 
 ## 39.3 Inspecting Modules and Dependencies
 
@@ -239,6 +243,8 @@ To detect use of JDK internal APIs:
 jdeps --jdk-internals myapp.jar
 ```
 
+---
+
 ## 39.4 Creating Custom Runtime Images with `jlink`
 
 `jlink` builds a minimal Java runtime containing only the modules required by an application.
@@ -255,6 +261,8 @@ Benefits:
 - faster startup
 - no unused JDK modules
 
+---
+
 ## 39.5 Creating Self-Contained Applications with `jpackage`
 
 `jpackage` builds platform-specific installers or application images.
@@ -270,6 +278,8 @@ jpackage
 - .exe / .msi (Windows)
 - .pkg / .dmg (macOS)
 - .deb / .rpm (Linux)
+
+---
 
 ## 39.6 Final Summary: JPMS in Practice
 
