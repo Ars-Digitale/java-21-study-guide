@@ -200,15 +200,15 @@ fromAsList.set(0, "k");  // the update will be reflected on the backing array as
 
 Understanding complexity is essential. Here are common examples:
 
-| Type | Methods with Complexity |
-| ---- | ---- 
-| ArrayList | `get()` **O(1)**, `add()` **amortized O(1)**, `remove()` **O(n)** |
-| LinkedList | `get()` **O(n)**, `add/remove first/last` **O(1)** |
-| HashSet | `add()`, `contains()`, `remove()` ~ **O(1)** |
-| TreeSet | `add()`, `contains()`, `remove()` **O(log n)** |
-| HashMap | `get()/put()` ~ **O(1) on average** |
-| TreeMap | `get()/put()` **O(log n)** |
-| Deque | `add/remove first/last` **O(1)** |
+| Type | Methods | Complexity |
+| ---- | ---- | ---- |
+| ArrayList | `get()`, `add()`, `remove()` | **O(1)**, **amortized O(1)**, **O(n)**  |
+| LinkedList | `get()`, `add/remove first/last` | **O(n)**,  **O(1)** |
+| HashSet | `add()`, `contains()`, `remove()` |   ~ **O(1)** |
+| TreeSet | `add()`, `contains()`, `remove()`  | **O(log n)**  |
+| HashMap | `get()/put()`  | ~ **O(1) on average**  |
+| TreeMap | `get()/put()`  |  **O(log n)** |
+| Deque | `add/remove first/last`  | **O(1)**  |
 
 
 > [!NOTE]
