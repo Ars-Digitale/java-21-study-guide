@@ -3,7 +3,7 @@
 ### Table of Contents
 
 - [32. Files and Paths Fundamentals](#32-files-and-paths-fundamentals)
-  - [32.1 Conceptual Model Filesystem Files Directories Links-and-IO-Targets](#321-conceptual-model-filesystem-files-directories-links-and-io-targets)
+  - [32.1 Conceptual Model Filesystem, Files, Directories, Links and IO-Targets](#321-conceptual-model-filesystem-files-directories-links-and-io-targets)
   - [32.2 Filesystem – The Global Abstraction](#322-filesystem--the-global-abstraction)
   - [32.3 Path – Locating an Entry in a Filesystem](#323-path--locating-an-entry-in-a-filesystem)
   - [32.4 Files – Persistent Data Containers](#324-files--persistent-data-containers)
