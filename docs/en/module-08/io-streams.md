@@ -54,7 +54,7 @@ It covers classic **java.io** streams, contrasts them with **java.nio / java.nio
 
 ## 34.1 What Is an I/O Stream in Java?
 
-An I/O Stream represents a flow of data between a Java program and an external source or destination. 
+An `I/O Stream` represents a flow of data between a Java program and an external source or destination. 
 
 The data flows sequentially, like water in a pipe.
 
@@ -65,8 +65,10 @@ The data flows sequentially, like water in a pipe.
 
 In Java, streams are organized around two major dimensions:
 
-- Direction: Input vs Output
-- Data type: Byte vs Character
+- `Direction`: Input vs Output
+- `Data type`: Byte vs Character
+
+---
 
 ## 34.2 Byte Streams vs Character Streams
 
@@ -94,7 +96,8 @@ Java distinguishes streams based on the unit of data they process.
 |	`Base classes`	|	InputStream / OutputStream	|	Reader / Writer	|
 |	`Typical usage`	|	Binary files	|	Text files	|
 | 	`Focus`	|	Low-level I/O	|	Text processing	|
-	
+
+---
 
 ## 34.3 Low-Level vs High-Level Streams
 
@@ -118,7 +121,7 @@ Low-level streams connect directly to a data source or sink.
 |	`FileWriter`	|	Write characters to file	|
 
 
-Example: Low-Level Byte Stream
+- Example: Low-Level Byte Stream
 
 ```java
 try (InputStream in = new FileInputStream("data.bin")) {
@@ -153,7 +156,7 @@ High-level streams wrap other streams to add functionality.
 |	`PrintWriter`	|	Formatted text output	|
 
 
-Example: Stream Chaining
+- Example: Stream Chaining
 
 ```java
 try (BufferedReader reader =
@@ -246,6 +249,7 @@ Closing the outermost stream automatically closes all wrapped streams.
 - Using default charset unintentionally
 - Closing inner streams manually (risking double-close): `close()` on the outer wrapper is enough and recommended
 
+---
 
 ## 34.4 Core `java.io` Base Classes and Key Methods
 
@@ -347,17 +351,19 @@ Reader reader = new InputStreamReader(
 > 
 > They convert between `byte streams` and `character streams` using a `charset`.
 
+---
+
 ## 34.5 Buffered Streams and Performance
 
 `Buffered streams` wrap another stream and add an in-memory buffer.
 
 Instead of interacting with the operating system on every read or write, data is accumulated in memory and transferred in larger chunks.
 
-- BufferedInputStream / BufferedOutputStream for byte streams
-- BufferedReader / BufferedWriter for character streams
+- `BufferedInputStream` / `BufferedOutputStream` for byte streams
+- `BufferedReader` / `BufferedWriter` for character streams
 
 > [!NOTE]
-> Buffered streams are `decorators`: they do not replace the underlying stream, they enhance it by adding buffering behavior.
+> `Buffered streams` are `decorators`: they do not replace the underlying stream, they enhance it by adding buffering behavior.
 
 ### 34.5.1 Why Buffering Matters
 
@@ -391,7 +397,7 @@ try (InputStream in = new FileInputStream("data.bin")) {
 
 ### 34.5.3 How BufferedInputStream Works
 
-BufferedInputStream internally reads a large block of bytes into a buffer.
+`BufferedInputStream` internally reads a large block of bytes into a buffer.
 
 Subsequent `read()` calls are served directly from memory until the buffer is empty.
 
@@ -471,6 +477,8 @@ try (BufferedWriter writer =
 > 
 > Prefer BufferedInputStream / BufferedOutputStream for binary data
 
+---
+
 ## 34.6 java.io vs java.nio (and java.nio.file)
 
 Modern Java applications increasingly favor NIO and NIO.2 APIs, but java.io remains fundamental and widely used.
@@ -513,6 +521,8 @@ try (BufferedReader reader = new BufferedReader(new FileReader("file.txt"))) {
 }
 ```
 
+---
+
 ## 34.7 When to Use Which API
 
 | Scenario | Recommended API |
@@ -523,6 +533,7 @@ try (BufferedReader reader = new BufferedReader(new FileReader("file.txt"))) {
 | `High-performance servers` | java.nio.channels |
 | `Legacy APIs` | java.io |
 
+---
 
 ## 34.8 Common Traps and Tips
 
