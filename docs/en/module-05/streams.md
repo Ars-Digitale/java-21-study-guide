@@ -497,10 +497,10 @@ where Collectors.* provides prebuilt collectors (grouping, mapping, joining, cou
 
 ### 21.8.3 Why `collect()` is different from `reduce()`
 
-- 1. Intent: mutation vs immutability
+- **Intent**: mutation vs immutability
 	- `reduce()` is designed for immutable-style reduction: combine values into a new value (e.g. sum, min, max).
 	- `collect()` is designed for mutable containers: build up a List, Map, StringBuilder, etc.
-- 2. Correctness in parallel
+- **Correctness** in parallel
 	- `reduce()` requires the operation to be:
 		- associative
 		- stateless
@@ -509,7 +509,7 @@ where Collectors.* provides prebuilt collectors (grouping, mapping, joining, cou
 		- creating one container per thread (supplier)
 		- accumulating locally (accumulator)
 		- merging at the end (combiner)
-- 3. Performance
+- **Performance**
 	- `collect()` can be optimized because the stream runtime knows you are building containers:
 		- it can avoid unnecessary copying
 		- it can pre-size or use specialized implementations (depending on collector)
