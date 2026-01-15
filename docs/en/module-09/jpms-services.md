@@ -283,8 +283,8 @@ jpackage
 
 ## 39.6 Final Summary: JPMS in Practice
 
-- JPMS introduces strong encapsulation and reliable dependencies
-- Modules replace fragile classpath conventions
-- Services enable decoupled architectures
-- Automatic and unnamed modules support migration
-- jlink and jpackage enable modern deployment models
+- `JPMS` introduces `strong encapsulation` and reliable dependencies
+- `Modules` replace fragile classpath conventions
+- `Services` enable decoupled architectures
+- `Automatic` and `unnamed modules` support migration
+- `jlink` and `jpackage` enable modern deployment models
