@@ -239,7 +239,7 @@ The NIO.2 design (Java 7+) deliberately separates these concerns:
 > [!NOTE] 
 > A `Path` never opens a file and never touches the disk by itself.
 
-## 32.11 Is `java.io.File` (legacy APIs) both a `path` and a `file-operations` API?
+## 32.11 Is `File` (legacy APIs) both a `path` and a `file-operations` API?
 
 Yes — in the old I/O API, `java.io.File` confusingly plays two roles at the same time, and this design is exactly one of the reasons `java.nio.file` was introduced.
 
