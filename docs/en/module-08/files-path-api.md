@@ -16,7 +16,7 @@
       - [33.1.7.1 normalize](#33171-normalize)
     - [33.1.8 Quick Comparison Table Creation--Conversion](#3318-quick-comparison-table-creation--conversion)
   - [33.2 Managing Files and Directories Create-Copy-Move-Replace-Compare-Delete](#332-managing-files-and-directories-create-copy-move-replace-compare-delete-legacy-vs-nio)
-    - [33.2.1 Mental Model Path-Locator-vs-Operations](#3321-mental-model-path-locator-vs-operations)
+    - [33.2.1 Mental Model Path-Locator-vs-Operations](#3321-mental-model-pathlocator-vs-operations)
     - [33.2.2 Creating Files and Directories](#3322-creating-files-and-directories)
       - [33.2.2.1 Create a File](#33221-create-a-file)
       - [33.2.2.2 Create Directories](#33222-create-directories)
@@ -30,7 +30,7 @@
       - [33.2.5.1 Equality-vs-Same-File](#33251-equality-vs-same-file)
     - [33.2.6 Deleting Files and Directories](#3326-deleting-files-and-directories)
       - [33.2.6.1 Legacy Delete](#33261-legacy-delete)
-      - [33.2.6.2 NIO Delete-and-DeleteIfExists](#33262-nio-delete-and-deleteifexists)
+      - [33.2.6.2 NIO Delete and Delete-If-Exists](#33262-nio-delete-and-delete-if-exists)
     - [33.2.7 Recursively Copying--Deleting-Directory-Trees NIO-Pattern](#3327-recursively-copying--deleting-directory-trees-nio-pattern)
     - [33.2.8 Summary Checklist](#3328-summary-checklist)
 
@@ -614,7 +614,7 @@ System.out.println(ok);
 > [!NOTE]
 > Legacy `delete()` fails (returns false) for a non-empty directory and often provides no reason.
 
-#### 33.2.6.2 NIO Delete and DeleteIfExists
+#### 33.2.6.2 NIO Delete and Delete-If-Exists
 
 ```java
 import java.nio.file.Files;
