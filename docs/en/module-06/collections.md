@@ -204,7 +204,7 @@ Understanding complexity is essential. Here are common examples:
 | ---- | ---- 
 | ArrayList | `get()` **O(1)**, `add()` **amortized O(1)**, `remove()` **O(n)** |
 | LinkedList | `get()` **O(n)**, `add/remove first/last` **O(1)** |
-| HashSet | `add()`, `contains()`, `remove()` ~** O(1)** |
+| HashSet | `add()`, `contains()`, `remove()` ~ **O(1)** |
 | TreeSet | `add()`, `contains()`, `remove()` **O(log n)** |
 | HashMap | `get()/put()` ~ **O(1) on average** |
 | TreeMap | `get()/put()` **O(log n)** |
