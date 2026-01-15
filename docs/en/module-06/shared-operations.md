@@ -14,7 +14,10 @@
 
 ---
 
-This chapter covers the fundamental operations shared across the Java Collections API, including how equality is determined inside collections. These concepts apply to all main collection families based on Collection<E> (List, Set, Queue, Deque and their Sequenced variants).
+This chapter covers the fundamental operations shared across the Java Collections API, including how equality is determined inside collections. 
+
+These concepts apply to all main collection families based on Collection<E> (List, Set, Queue, Deque and their Sequenced variants).
+
 Map shares several conceptual behaviors (iteration, equality) but does not inherit Collection.
 
 Mastering these operations is essential, as they explain how collections behave when adding, searching, removing, comparing, iterating, and sorting elements.
@@ -43,13 +46,15 @@ The following methods come from the `Collection<E>` interface and are inherited 
 - `Iterator<E> iterator()` — Returns an iterator (fail-fast).
 - `Object[] toArray()` and `<T> T[] toArray(T[] a)` — Copy into an array.
 
+---
+
 ## 23.2 Equality
 
 A custom implementation of the method `equals()` allows us to compare the type and content of two collections.
 
 The implementation will differ depending if we are dealing with Lists or Sets.
 
-Example
+- Example
 
 ```java
 List<Integer> firstList = List.of(10, 11, 22);
@@ -81,10 +86,11 @@ secondSet.equals(thirdSet): true
 > - Sets compare size and membership only — encounter order is irrelevant.
 > - Two sets with the same logical elements are equal even if they maintain different iteration order internally.
 
+---
 
 ## 23.3 Fail-Fast Behavior
 
-Most collection iterators (except concurrent collections) are fail-fast: modifying a collection structurally while iterating triggers a `ConcurrentModificationException`.
+Most collection iterators (except concurrent collections) are `fail-fast`: modifying a collection structurally while iterating triggers a `ConcurrentModificationException`.
 
 ```java
 List<Integer> list = new ArrayList<>(List.of(1,2,3));
@@ -98,6 +104,8 @@ for (Integer i : list) {
 > Fail-fast behavior is **not guaranteed** — the exception is thrown on a best-effort basis.
 > You must not rely on catching it for program correctness.
 
+---
+
 ## 23.4 Bulk Operations
 
 - `removeIf(Predicate<? super E> filter)` — Removes all matching items.
@@ -105,17 +113,17 @@ for (Integer i : list) {
 - `forEach(Consumer<? super E> action)` — Applies action to each element.
 - `stream()` — Returns a stream for pipeline operations.
 
+---
+
 ## 23.5 Common Return Types and Exceptions
 
 - `add(E)` returns **boolean** — always `true` for `ArrayList`, may be `false` for `Set` if no change occurs.
-
 - `remove(Object)` returns boolean (not the removed element!).
-
 - `get(int)` throws `IndexOutOfBoundsException`.
-
 - `iterator().remove()` throws `IllegalStateException` if called twice without next().
-
 - `toArray()` always returns a `Object[]` — not `T[]`.
+
+---
 
 ## 23.6 Summary Table — Shared Operations
 
