@@ -34,7 +34,8 @@ Ce sont les concepts minimaux nécessaires pour écrire, compiler, organiser et 
 
 ## 2.1 Définition de classe
 
-Une `class` Java est le bloc fondamental d’un programme Java.  
+Une `class` Java est le bloc fondamental d’un programme Java.
+  
 Une classe représente un **type** en Java : elle définit une structure (`fields`) et un comportement (`methods`).
 
 Une `class` est un **plan** (blueprint), tandis que les `objects` sont des **instances concrètes** créées à l’exécution.
@@ -371,8 +372,7 @@ import static java.util.Set.of;
 
 Le compilateur ne sait pas quel `of()` vous souhaitez appeler → échec de compilation.
 
-> [!TIP]  
-> - Les imports statiques sont utiles, mais ne doivent pas **créer de confusion** — l’examen peut tester des cas ambigus.  
+> [!TIP]   
 > - Si deux imports statiques introduisent le même nom, **toute tentative d’utiliser ce nom provoque une erreur de compilation**.  
 > - Les imports statiques **n’importent pas les classes**, seulement les membres statiques.  
 > - Vous pouvez toujours appeler le membre statique avec le nom de la classe, même s’il est importé statiquement.

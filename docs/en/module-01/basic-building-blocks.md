@@ -41,6 +41,7 @@ These are the minimum concepts needed to write, compile, organize, and run Java 
 
 
 A Java `class` is the fundamental building block of a Java program.
+
 A class represents a **type** in Java: it defines structure (`fields`) and behavior (`methods`).
 
 A `class` is a **blueprint**, while `objects` are **concrete instances** created at runtime.
@@ -396,7 +397,6 @@ The compiler does not know which `of()` you intend to call → compilation fails
 
 
 >[!TIP]
-> - Static imports are fine but **should not create confusion** — the exam may test ambiguous cases.
 > - If two static imports introduce the same name, **any attempt to use that name causes a compile error**.
 > - Static imports do **not** import classes, only static members.
 > - You can still call the static member using the class name even if statically imported.
