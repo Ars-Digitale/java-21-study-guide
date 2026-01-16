@@ -1,30 +1,24 @@
-
----
-
-## 🇫🇷 CHAPITRE 1 — OURCODE (FR)
-
-```ourcode
 # 1. Blocs Syntaxiques Fondamentaux
 
 ### Table des matières
 - [1. Blocs Syntaxiques Fondamentaux](#1-blocs-syntaxiques-fondamentaux)
-- [1.1 Valeur](#11-valeur)
-- [1.2 Littéral](#12-littéral)
-- [1.3 Identifiant](#13-identifiant)
-- [1.4 Variable](#14-variable)
-- [1.5 Type](#15-type)
-- [1.6 Opérateur](#16-opérateur)
-- [1.7 Expression](#17-expression)
-- [1.8 Instruction](#18-instruction)
-- [1.9 Bloc de code](#19-bloc-de-code)
-- [1.10 Fonction / Méthode](#110--fonction--méthode)
-- [1.11 Classe / Objet](#111-classe--objet)
-- [1.12 Module / Package](#112-module--package)
-- [1.13 Programme](#113-programme)
-- [1.14 Système](#114-système)
-- [1.15 Résumé sous forme d’échelle croissante](#115-résumé-sous-forme-déchelle-croissante)
-- [1.16 Diagramme hiérarchique ASCII](#116-diagramme-hiérarchique-ascii)
-- [1.17 Diagramme hiérarchique Mermaid](#117-diagramme-hiérarchique-mermaid)
+	- [1.1 Valeur](#11-valeur)
+	- [1.2 Littéral](#12-littéral)
+	- [1.3 Identifiant](#13-identifiant)
+	- [1.4 Variable](#14-variable)
+	- [1.5 Type](#15-type)
+	- [1.6 Opérateur](#16-opérateur)
+	- [1.7 Expression](#17-expression)
+	- [1.8 Instruction](#18-instruction)
+	- [1.9 Bloc de code](#19-bloc-de-code)
+	- [1.10 Fonction / Méthode](#110--fonction--méthode)
+	- [1.11 Classe / Objet](#111-classe--objet)
+	- [1.12 Module / Package](#112-module--package)
+	- [1.13 Programme](#113-programme)
+	- [1.14 Système](#114-système)
+	- [1.15 Résumé sous forme d’échelle croissante](#115-résumé-sous-forme-déchelle-croissante)
+	- [1.16 Diagramme hiérarchique ASCII](#116-diagramme-hiérarchique-ascii)
+	- [1.17 Diagramme hiérarchique Mermaid](#117-diagramme-hiérarchique-mermaid)
 
 ---
 
@@ -34,7 +28,8 @@ Plus formellement :
 
 > Un programme informatique consiste en un ensemble de structures de données représentant l’état du système, accompagné d’algorithmes qui spécifient les opérations à effectuer sur cet état pour produire des sorties.
 
-Ce document décrit une **hiérarchie d’abstractions** : les *blocs élémentaires* qui, combinés en structures de plus en plus complexes, forment un logiciel.  
+Ce document décrit une **hiérarchie d’abstractions** : les *blocs élémentaires* qui, combinés en structures de plus en plus complexes, forment un logiciel.
+  
 La séquence est présentée dans un **ordre croissant de complexité**, avec des définitions générales (informatique) et des références à Java.
 
 ---
@@ -165,7 +160,7 @@ int sign = (a >= 0) ? 1 : -1; // ?: ternaire
 
 ### 1.7 **Expression**
 
-- **Définition :** Combinaison de valeurs, littéraux, variables, **opérateurs** et fonctions produisant une nouvelle valeur.
+- **Définition :** Combinaison de valeurs, littéraux, variables, opérateurs et fonctions produisant une nouvelle valeur.
 - **En Java :** `x + 3`, `Math.sqrt(25)`, `"Hello" + " world"`.
 - **Théorie :** Arbre syntaxique qui, une fois évalué, donne un résultat.
 

@@ -2,23 +2,23 @@
 
 ### Table of Contents
 - [1. Syntax Building Blocks](#1-syntax-building-blocks)
-- [1.1 Value](#11-value)
-- [1.2 Literal](#12-literal)
-- [1.3 Identifier](#13-identifier)
-- [1.4 Variable](#14-variable)
-- [1.5 Type](#15-type)
-- [1.6 Operator](#16-operator)
-- [1.7 Expression](#17-expression)
-- [1.8 Statement](#18-statement)
-- [1.9 Code Block](#19-code-block)
-- [1.10 Function / Method](#110--function--method)
-- [1.11 Class / Object](#111-class--object)
-- [1.12 Module / Package](#112-module--package)
-- [1.13 Program](#113-program)
-- [1.14 System](#114-system)
-- [1.15 Summary as a Growing Scale](#115--summary-as-a-growing-scale)
-- [1.16 Hierarchy Diagram ASCII](#116--hierarchy-diagram-ascii)
-- [1.17 Hierarchy Diagram Mermaid](#117--hierarchy-diagram-mermaid)
+	- [1.1 Value](#11-value)
+	- [1.2 Literal](#12-literal)
+	- [1.3 Identifier](#13-identifier)
+	- [1.4 Variable](#14-variable)
+	- [1.5 Type](#15-type)
+	- [1.6 Operator](#16-operator)
+	- [1.7 Expression](#17-expression)
+	- [1.8 Statement](#18-statement)
+	- [1.9 Code Block](#19-code-block)
+	- [1.10 Function / Method](#110--function--method)
+	- [1.11 Class / Object](#111-class--object)
+	- [1.12 Module / Package](#112-module--package)
+	- [1.13 Program](#113-program)
+	- [1.14 System](#114-system)
+	- [1.15 Summary as a Growing Scale](#115--summary-as-a-growing-scale)
+	- [1.16 Hierarchy Diagram ASCII](#116--hierarchy-diagram-ascii)
+	- [1.17 Hierarchy Diagram Mermaid](#117--hierarchy-diagram-mermaid)
 
 ---
 
@@ -28,7 +28,8 @@ More formally:
 
 > A computer program consists of a collection of data structures that represent the state of the system, together with algorithms that specify the operations to be performed on this state in order to produce outputs.
 
-This document describes a **hierarchy of abstractions**: the *elementary building blocks* which, combined into increasingly complex structures, form software.  
+This document describes a **hierarchy of abstractions**: the *elementary building blocks* which, combined into increasingly complex structures, form software.
+  
 The sequence is presented in **increasing order of complexity**, with general definitions (computer science) and Java references.
 
 ---
@@ -159,7 +160,7 @@ int sign = (a >= 0) ? 1 : -1; // ?: ternary
 
 ### 1.7 **Expression**
 
-- **Definition:** A combination of values, literals, variables, **operators**, and functions that produces a new value.
+- **Definition:** A combination of values, literals, variables, operators, and functions that produces a new value.
 - **In Java:** `x + 3`, `Math.sqrt(25)`, `"Hello" + " world"`.
 - **Theory:** A syntax tree that evaluates to a result.
 
