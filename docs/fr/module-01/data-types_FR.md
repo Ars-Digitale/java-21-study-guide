@@ -78,14 +78,14 @@ Référence (4 ou 8 octets)
 
 | Mot-clé | Type | Taille | Valeur min | Valeur max | Valeur par défaut | Exemple |
 | --- | --- | --- | --- | --- | --- | --- |
-| byte | int 8 bits | 1 octet | –128 | 127 | 0 | byte b = 100; |
-| short | int 16 bits | 2 octets | –32 768 | 32 767 | 0 | short s = 2000; |
-| int | int 32 bits | 4 octets | –2 147 483 648 (–2^31) | 2 147 483 647 (2^31–1) | 0 | int i = 123456; |
-| long | int 64 bits | 8 octets | –2^63 | 2^63–1 | 0L | long l = 123456789L; |
-| float | flottant 32 bits | 4 octets | voir note | voir note | 0.0f | float f = 3.14f; |
-| double | flottant 64 bits | 8 octets | voir note | voir note | 0.0 | double d = 2.718; |
-| char | UTF-16 | 2 octets | '\u0000' (0) | '\uffff' (65 535) | '\u0000' | char c = 'A'; |
-| boolean | true/false | dépend de la JVM (souvent 1 octet) | false | true | false | boolean b = true; |
+| `byte` | int 8 bits | 1 octet | –128 | 127 | 0 | `byte b = 100;` |
+| `short` | int 16 bits | 2 octets | –32 768 | 32 767 | 0 | `short s = 2000;` |
+| `int` | int 32 bits | 4 octets | –2 147 483 648 (–2^31) | 2 147 483 647 (2^31–1) | 0 | `int i = 123456;` |
+| `long` | int 64 bits | 8 octets | –2^63 | 2^63–1 | 0L | `long l = 123456789L;` |
+| `float` | flottant 32 bits | 4 octets | voir note | voir note | 0.0f | `float f = 3.14f;` |
+| `double` | flottant 64 bits | 8 octets | voir note | voir note | 0.0 | `double d = 2.718;` |
+| `char` | UTF-16 | 2 octets | `'\u0000'` (0) | `'\uffff'` (65 535) | `'\u0000'` | `char c = 'A';` |
+| `boolean` | true/false | dépend de la JVM (souvent 1 octet) | false | true | false | `boolean b = true;` |
 
 ---
 
@@ -133,7 +133,7 @@ Si deux opérandes appartiennent à des **types numériques différents**, Java 
 
 | Exemple | Explication |
 | --- | --- |
-| int x = 10; double y = 5.5; double result = x + y; | La valeur int x est promue en double, donc le résultat est un double (15.5). |
+| `int x = 10; double y = 5.5; double result = x + y;` | La valeur `int x` est promue en `double`, donc le résultat est un `double` (`15.5`). |
 
 **Ordre de promotion valide (du plus petit au plus grand)** :  
 `byte → short → int → long → float → double`
@@ -145,8 +145,8 @@ la **valeur entière est promue** vers le type flottant avant l’opération.
 
 | Exemple | Explication |
 | --- | --- |
-| float f = 2.5F; int n = 3; float result = f * n; | n (int) est promu en float. Le résultat est un float (7.5). |
-| double d = 10.0; long l = 3; double result = d / l; | l (long) est promu en double. Le résultat est un double (3.333...). |
+| `float f = 2.5F; int n = 3; float result = f * n;` | `n` (int) est promu en `float`. Le résultat est un `float` (`7.5`). |
+| `double d = 10.0; long l = 3; double result = d / l;` | `l` (long) est promu en `double`. Le résultat est un `double` (`3.333...`). |
 
 #### 4.6.1.3 Règle 3 – `byte`, `short` et `char` sont promus en `int` lors des opérations arithmétiques
 
@@ -155,9 +155,9 @@ Java les promeut automatiquement en **`int`**, même si **les deux opérandes so
 
 | Exemple | Explication |
 | --- | --- |
-| byte a = 10, b = 20; byte c = a + b; | ❌ Erreur de compilation : le résultat de a + b est un int, pas un byte. Il faut caster → byte c = (byte)(a + b); |
-| short s1 = 1000, s2 = 2000; short sum = (short)(s1 + s2); | Les opérandes sont promus en int, un cast explicite est nécessaire pour affecter à short. |
-| char c1 = 'A', c2 = 2; int result = c1 + c2; | 'A' (65) et 2 sont promus en int, résultat = 67. |
+| `byte a = 10, b = 20; byte c = a + b;` | ❌ Erreur de compilation : le résultat de `a + b` est un `int`, pas un `byte`. Il faut caster → `byte c = (byte)(a + b);` |
+| `short s1 = 1000, s2 = 2000; short sum = (short)(s1 + s2);` | Les opérandes sont promus en `int`, un cast explicite est nécessaire pour affecter à `short`. |
+| `char c1 = 'A', c2 = 2; int result = c1 + c2;` | `'A'` (65) et `2` sont promus en `int`, résultat = `67`. |
 
 > [!NOTE]  
 > Cette règle s’applique uniquement lorsqu’on utilise des **variables**.  
@@ -177,9 +177,9 @@ le **résultat** de l’expression a ce **même type promu**.
 
 | Exemple | Explication |
 | --- | --- |
-| int i = 5; double d = 6.0; var result = i * d; | i est promu en double, le résultat est un double. |
-| float f = 3.5F; long l = 4L; var result = f + l; | l est promu en float, le résultat est un float. |
-| int x = 10, y = 4; var div = x / y; | Les deux sont int, le résultat est un int (2), la partie fractionnaire est tronquée. |
+| `int i = 5; double d = 6.0; var result = i * d;` | `i` est promu en `double`, le résultat est un `double`. |
+| `float f = 3.5F; long l = 4L; var result = f + l;` | `l` est promu en `float`, le résultat est un `float`. |
+| `int x = 10, y = 4; var div = x / y;` | Les deux sont `int`, le résultat est un `int` (`2`), la partie fractionnaire est tronquée. |
 
 > [!WARNING]  
 > La division entière produit toujours un **résultat entier**.  
