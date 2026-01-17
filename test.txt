@@ -1,406 +1,345 @@
-## 12.2 Méthodes `withXxx(...)`
+### 13.2.4 Struttura del pattern DecimalFormat
 
-Les méthodes `with...` renvoient une copie de l’objet avec un champ modifié.  
-Elles ne mutent jamais l’instance originale.
+Un pattern può contenere una sottostruttura positiva e una negativa opzionale, separate da `;`.
 
-| Classe | Méthodes with... courantes (non exhaustif) | Description |
-| --- | --- | --- |
-| LocalDate | withYear(int year) | Même date, mais avec une année différente |
-| LocalDate | LocalDate.withMonth(int month) | Même date, mois différent (1–12) |
-| LocalDate | LocalDate.withDayOfMonth(int dayOfMonth) | Même date, jour du mois différent |
-| LocalDate | LocalDate.with(TemporalField field, long newValue) | Ajustement générique basé sur un champ |
-| LocalDate | LocalDate.with(TemporalAdjuster adjuster) | Utilise un adjuster (par ex. firstDayOfMonth()) |
-| LocalTime | withHour(int hour) | Même heure, heure différente |
-| LocalTime | LocalTime.withMinute(int minute) | Même heure, minute différente |
-| LocalTime | LocalTime.withSecond(int second) | Même heure, seconde différente |
-| LocalTime | LocalTime.withNano(int nanoOfSecond) | Même heure, nanoseconde différente |
-| LocalTime | LocalTime.with(TemporalField field, long newValue) | Ajustement générique basé sur un champ |
-| LocalTime | LocalTime.with(TemporalAdjuster adjuster) | Ajuster via un temporal adjuster |
-| LocalDateTime | withYear(int year), withMonth(int month), withDayOfMonth(int day) | Changer uniquement la partie date |
-| LocalDateTime | withHour(int hour), withMinute(int minute), withSecond(int second) | Changer uniquement la partie heure |
-| LocalDateTime | withNano(int nanoOfSecond) | Changer la nanoseconde |
-| LocalDateTime | with(TemporalField field, long newValue) | Ajustement générique basé sur un champ |
-| LocalDateTime | with(TemporalAdjuster adjuster) | Ajuster via un temporal adjuster |
-| ZonedDateTime | tous les withXxx(...) de LocalDateTime | Changer les composants locaux date/heure |
-| ZonedDateTime | withZoneSameInstant(ZoneId zone) | Même instant, zone différente (change l’heure locale) |
-| ZonedDateTime | withZoneSameLocal(ZoneId zone) | Même date/heure locale, zone différente (change l’instant) |
-
----
-
-## 12.3 Conversion et méthodes `at...` (lier date, heure et zone)
-
-Ces méthodes sont utilisées pour combiner ou convertir entre `LocalDate`, `LocalTime`, `LocalDateTime` et `ZonedDateTime`.
-
-| Depuis | Méthode | Résultat | Description |
-| --- | --- | --- | --- |
-| LocalDate | atTime(LocalTime time) | LocalDateTime | Combine cette date avec une heure donnée |
-| LocalDate | atTime(int hour, int minute) | LocalDateTime | Surcharges de convenance avec des composantes horaires numériques |
-| LocalDate | atTime(int hour, int minute, int second) | LocalDateTime | — |
-| LocalDate | atTime(int hour, int minute, int second, int nano) | LocalDateTime | — |
-| LocalDate | atStartOfDay() | LocalDateTime | Cette date à l’heure 00:00 |
-| LocalDate | atStartOfDay(ZoneId zone) | ZonedDateTime | Cette date au début de la journée dans une zone spécifique |
-| LocalTime | atDate(LocalDate date) | LocalDateTime | Combine cette heure avec une date donnée |
-| LocalDateTime | atZone(ZoneId zone) | ZonedDateTime | Ajoute un fuseau horaire à une date-heure locale |
-| LocalDateTime | toLocalDate() | LocalDate | Extrait la composante date |
-| LocalDateTime | toLocalTime() | LocalTime | Extrait la composante heure |
-| ZonedDateTime | toLocalDate() | LocalDate | Supprime zone/décalage, conserve la date locale |
-| ZonedDateTime | toLocalTime() | LocalTime | Supprime zone/décalage, conserve l’heure locale |
-| ZonedDateTime | toLocalDateTime() | LocalDateTime | Supprime zone/décalage, conserve la date-heure locale |
-
----
-
-## 12.4 Period, Duration et Instant
-
-Le package `java.time` fournit trois classes temporelles essentielles qui représentent des durées ou des points sur la timeline :
-
-- **Period** → durées humaines basées sur la date (années, mois, jours)
-- **Duration** → durées machine basées sur le temps (secondes, nanosecondes)
-- **Instant** → un point sur la timeline UTC
-
----
-
-## 12.5 `Period` — Durées humaines basées sur la date
-
-`Period` représente une durée basée sur la date, telle que “3 ans, 2 mois et 5 jours”.  
-
-Il est utilisé avec `LocalDate` et `LocalDateTime` (car ils contiennent des parties date).
-
-**Méthodes de création**
-
-| Méthode | Description |
-| --- | --- |
-| Period.ofYears(int years) | Uniquement des années |
-| Period.ofMonths(int months) | Uniquement des mois |
-| Period.ofWeeks(int weeks) | Convertit les semaines en jours |
-| Period.ofDays(int days) | Uniquement des jours |
-| Period.of(int years, int months, int days) | Période complète |
-| Period.parse(CharSequence text) | Format ISO-8601 : "P1Y2M3D", "P7D", "P1W", ... |
-
-**Propriétés clés**
-
-- Ne prend pas en charge les heures, minutes, secondes, nanosecondes.
-- Peut être négatif.
-- Immuable.
-
-- Exemples
-
-```java
-Period p1 = Period.ofYears(1);             // P1Y
-Period p2 = Period.of(1, 2, 3);            // P1Y2M3D
-Period p3 = Period.ofWeeks(2);             // P14D (converted to days)
-
-LocalDate base = LocalDate.of(2025, 1, 10);
-LocalDate result = base.plus(p2);          // 2026-03-13
+```text
+#,##0.00;(#,##0.00)
 ```
 
 > [!NOTE]
-> `Period.parse("P1W")` est autorisé et représente une période de 7 jours (équivalente à "P7D").
+> - La prima parte → numeri positivi.
+> - La seconda parte → numeri negativi.
+> - Se la parte negativa è omessa, i numeri negativi usano automaticamente un `-` iniziale.
 
-> [!TIP]
-> `Period` est basé sur le calendrier : ajouter une période de mois/années respecte la longueur des mois et les années bissextiles.
+### 13.2.5 Il simbolo `0` (cifra obbligatoria)
 
----
-
-## 12.6 `Duration` — Durées machine basées sur le temps
-
-`Duration` représente une durée basée sur le temps en secondes et nanosecondes.
-  
-Il est utilisé avec `LocalTime`, `LocalDateTime`, `ZonedDateTime` et `Instant`.
-
-**Méthodes de création**
-
-| Méthode | Description |
-| --- | --- |
-| Duration.ofDays(long days) | Convertit les jours en secondes |
-| Duration.ofHours(long hours) | Convertit les heures en secondes |
-| Duration.ofMinutes(long minutes) | Convertit les minutes en secondes |
-| Duration.ofSeconds(long seconds) | Représentation de base en secondes |
-| Duration.ofSeconds(long seconds, long nanoAdjustment) | Secondes plus nanos supplémentaires |
-| Duration.ofMillis(long millis) | Convertit les millisecondes en nanos |
-| Duration.ofNanos(long nanos) | Uniquement des nanosecondes |
-| Duration.between(Temporal start, Temporal end) | Calculer la durée entre deux instants |
-| Duration.parse(CharSequence text) | ISO : "PT20H", "PT15M", "PT10S" |
-
-**Caractéristiques clés**
-
-- Prend en charge des heures jusqu’aux nanosecondes, mais pas les années/mois/semaines directement.
-- Idéal pour des calculs temporels au niveau machine.
-- Immuable.
-
-- Exemples
+Il simbolo `0` forza la visualizzazione di una cifra, riempiendo con zeri se necessario.
 
 ```java
-Duration d1 = Duration.ofHours(5);           // PT5H
-Duration d2 = Duration.ofMinutes(90);        // PT1H30M
-
-LocalTime t = LocalTime.of(10, 0);
-LocalTime t2 = t.plus(d2);                   // 11:30
-
-ZonedDateTime z1 = ZonedDateTime.of(
-    2024, 3, 30, 1, 0, 0, 0,
-    ZoneId.of("Europe/Paris")
-);
-
-ZonedDateTime z2 = z1.plusHours(2);          // DST-aware
-ZonedDateTime z3 = z1.plus(d2);              // Duration-based
+DecimalFormat df = new DecimalFormat("0000.00");
+System.out.println(df.format(12.3));
 ```
+
+```bash
+0012.30
+```
+
+- Controlla il numero minimo di cifre.
+- Riempie con zeri se il numero ha meno cifre.
+- Utile per output a larghezza fissa o allineato.
+
+### 13.2.6 Il simbolo `#` (cifra opzionale)
+
+Il simbolo `#` visualizza una cifra solo se esiste.
+
+```java
+DecimalFormat df = new DecimalFormat("####.##");
+System.out.println(df.format(12.3));
+```
+
+```bash
+12.3
+```
+
+- Sopprime gli zeri iniziali.
+- Sopprime gli zeri finali non necessari.
+- Adatto a una formattazione “user-friendly”.
+
+### 13.2.7 Combinare `0` e `#`
+
+I pattern combinano spesso entrambi i simboli per maggiore flessibilità.
+
+```java
+DecimalFormat df = new DecimalFormat("#,##0.##");
+System.out.println(df.format(12));
+System.out.println(df.format(12.5));
+System.out.println(df.format(12345.678));
+```
+
+```bash
+12
+12.5
+12,345.68
+```
+
+Spiegazione del pattern:
+
+```text
+#,##0 . ##
+ ^  ^    ^
+ |  |    |
+ |  |    └─ cifre frazionarie opzionali (#)
+ |  └───── cifra intera obbligatoria (0)
+ └──────── pattern di raggruppamento (,)
+```
+
+- È garantita almeno una cifra intera (lo `0`).
+- Le cifre sono raggruppate per migliaia usando il separatore di raggruppamento.
+- Le cifre frazionarie sono opzionali (fino a due).
+
+### 13.2.8 Separatori decimali e di raggruppamento
+
+Nei pattern:
+
+- `.` → separatore decimale.
+- `,` → separatore di raggruppamento.
+
+I simboli effettivamente utilizzati a runtime dipendono dal `Locale` (ad esempio, virgola vs punto).
+
+### 13.2.9 DecimalFormatSymbols: simboli di formattazione specifici del Locale
+
+```java
+DecimalFormatSymbols symbols =
+        DecimalFormatSymbols.getInstance(Locale.FRANCE);
+
+DecimalFormat df =
+        new DecimalFormat("#,##0.00", symbols);
+
+System.out.println(df.format(1234.5));
+```
+
+```bash
+1 234,50
+```
+
+- Controlla i separatori decimali e di raggruppamento.
+- Controlla il segno meno e il simbolo di valuta.
+- Controlla le stringhe NaN e Infinity.
+
+### 13.2.10 Pattern speciali di DecimalFormat
+
+```text
+0.###E0   notazione scientifica
+###%      percentuale
+¤#,##0.00 valuta (¤ è il simbolo di valuta)
+```
+
+### 13.2.11 Regole ed errori comuni
+
+- `DecimalFormat` è una sottoclasse di `NumberFormat`.
+- `0` forza le cifre, `#` no.
+- I pattern controllano la formattazione, non la modalità di arrotondamento (usare `setRoundingMode()`).
+- Il raggruppamento funziona solo se il separatore (di solito `,`) è presente nel pattern.
+- Il parsing può riuscire parzialmente senza errore se sono presenti caratteri finali dopo un numero valido.
+- `DecimalFormat` è mutabile e non thread-safe.
+
+## 13.3 Parsing dei Numeri
+
+Il parsing converte testo localizzato in valori numerici. Per impostazione predefinita, il parsing è permissivo.
+
+```java
+NumberFormat nf = NumberFormat.getInstance(Locale.FRANCE);
+Number n = nf.parse("12 345,67abc"); // estrae 12345.67
+```
+
+- Il parsing si ferma al primo carattere non valido.
+- Il testo finale viene ignorato se non controllato esplicitamente.
+
+### 13.3.1 Parsing con DecimalFormat
+
+`DecimalFormat` può anche effettuare il parsing dei numeri. Il parsing è permissivo per impostazione predefinita.
+
+```java
+DecimalFormat df = new DecimalFormat("#,##0.##");
+Number n = df.parse("1,234.56abc");
+```
+
+- Il parsing si ferma al primo carattere non valido.
+- Il testo finale viene ignorato se presente.
+
+Per forzare un parsing rigoroso:
+
+```java
+df.setParseStrict(true);
+```
+
+### 13.3.2 CompactNumberFormat
+
+La formattazione compatta abbrevia i numeri grandi per la leggibilità umana.
+
+- Supporta stili SHORT e LONG.
+- Usa abbreviazioni dipendenti dal locale (ad esempio K, M, “million”).
+
+```java
+NumberFormat cnf =
+        NumberFormat.getCompactNumberInstance(
+                Locale.US, NumberFormat.Style.SHORT);
+
+System.out.println(cnf.format(1_200));        // 1.2K
+System.out.println(cnf.format(5_000_000));    // 5M
+
+NumberFormat cnf1 =
+        NumberFormat.getCompactNumberInstance(
+                Locale.US, NumberFormat.Style.SHORT);
+
+NumberFormat cnf2 =
+        NumberFormat.getCompactNumberInstance(
+                Locale.US, NumberFormat.Style.LONG);
+
+System.out.println(cnf1.format(315_000_000));   // 315M
+System.out.println(cnf2.format(315_000_000));   // 315 million
+```
+
+## 13.4 Formattazione di Data e Ora
+
+### 13.4.1 DateTimeFormatter
+
+Java 21 si basa su `java.time` e `DateTimeFormatter` per la formattazione moderna di data e ora.
+
+```java
+DateTimeFormatter f =
+        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+System.out.println(LocalDateTime.now().format(f));
+```
+
+**Proprietà principali:**
+
+- Immutabile.
+- Thread-safe.
+- Sensibile al locale.
+
+### 13.4.2 Simboli standard di data e ora
+
+```text
+y   anno
+M   numero del mese (o nome con più lettere)
+d   giorno del mese
+E   nome del giorno
+H   ora (0–23)
+h   ora (1–12)
+m   minuto
+s   secondo
+a   indicatore AM/PM
+z   fuso orario
+```
+
+### 13.4.3 datetime.format vs formatter.format
+
+Entrambi i metodi sono funzionalmente identici:
+
+```java
+date.format(formatter);
+formatter.format(date);
+```
+
+- `date.format(formatter)` → preferito per leggibilità (prima il dato, poi la formattazione).
+- `formatter.format(date)` → utile in codice funzionale o con formatter riutilizzabili.
+
+### 13.4.4 Localizzazione delle date
+
+Gli stili localizzati adattano l’output delle date alle norme culturali.
+
+```java
+DateTimeFormatter fullIt =
+        DateTimeFormatter
+                .ofLocalizedDate(FormatStyle.FULL)
+                .withLocale(Locale.ITALY);
+
+DateTimeFormatter shortIt =
+        DateTimeFormatter
+                .ofLocalizedDate(FormatStyle.SHORT)
+                .withLocale(Locale.ITALY);
+
+LocalDate today = LocalDate.of(2025, 12, 17);
+
+System.out.println(today.format(fullIt));
+System.out.println(today.format(shortIt));
+```
+
+Output possibile:
+
+```bash
+mercoledì 17 dicembre 2025
+17/12/25
+```
+
+## 13.5 Internazionalizzazione (i18n) e Localizzazione (l10n)
+
+### 13.5.1 Locales
+
+Un `Locale` definisce lingua, paese e una variante opzionale.
+
+```java
+Locale l1 = Locale.US;
+Locale l2 = Locale.of("fr", "FR");
+Locale l3 = new Locale.Builder()
+        .setLanguage("en")
+        .setRegion("US")
+        .build();
+```
+
+Formati di Locale:
+
+- `en` (it, fr, ecc.): codice lingua minuscolo.
+- `en_US` (fr_CA, it_IT, ecc.): codice lingua minuscolo + underscore + codice paese maiuscolo.
+
+### 13.5.2 Categorie di Locale
+
+Le categorie di Locale separano la formattazione dalla lingua dell’interfaccia utente.
+
+`Locale.Category` consente a Java di usare Locale predefiniti diversi per scopi diversi.
+
+Esistono due categorie:
+
+| Category | Usata per |
+| --- | --- |
+| FORMAT | Numeri, date, valuta, altra formattazione |
+| DISPLAY | Testo leggibile (UI, nomi, messaggi) |
+
+### 13.5.3 Esempio reale
+
+Un utente francese che vive in Germania potrebbe desiderare:
+
+- Numeri e date → formato tedesco.
+- Lingua dell’interfaccia → francese.
+
+Prima di Java 7, questo non era possibile.
+
+```java
+Locale.setDefault(Locale.Category.FORMAT, Locale.GERMANY);
+Locale.setDefault(Locale.Category.DISPLAY, Locale.FRANCE);
+```
+
+Effetti di esempio:
+
+| Aspetto | Risultato (esempio) |
+| --- | --- |
+| Numeri | 1.234,56 |
+| Date | 31.12.2025 |
+| Valuta | € |
+| Testo UI | Francese |
+| Nomi dei mesi | décembre |
+| Nomi dei paesi | Allemagne |
+
+## 13.6 Properties e Resource Bundles
+
+I resource bundle esternalizzano il testo e consentono la localizzazione senza modifiche al codice.
+
+```java
+ResourceBundle rb =
+        ResourceBundle.getBundle("messages", Locale.GERMAN);
+
+String msg = rb.getString("welcome");
+```
+
+### 13.6.1 Regole di risoluzione dei Resource Bundle
+
+Java cerca i bundle seguendo un ordine di fallback rigoroso. Ad esempio, con nome base `messages` e locale `de_DE`:
+
+- messages_de_DE.properties
+- messages_de.properties
+- messages.properties
+
+Se nessuno viene trovato → `MissingResourceException`.
 
 > [!NOTE]
-> `Duration.ofDays(1)` représente exactement 24 heures de temps machine.  
-> Dans une zone avec DST, 24 heures peuvent ne pas correspondre à “la même heure locale demain”.
-
----
-
-## 12.7 `Instant` — Point sur la chronologie UTC
-
-`Instant` représente un seul moment dans le temps par rapport à UTC, avec une précision à la nanoseconde.
-
-Il contient :
-
-- Des secondes depuis l’époque (1970-01-01T00:00Z).
-- Un ajustement de nanosecondes.
-
-**Méthodes de création**
-
-| Méthode | Description |
-| --- | --- |
-| Instant.now() | Moment actuel en UTC |
-| Instant.ofEpochSecond(long seconds) | À partir des secondes depuis l’époque |
-| Instant.ofEpochSecond(long seconds, long nanos) | À partir des secondes plus nanos |
-| Instant.ofEpochMilli(long millis) | À partir des millisecondes depuis l’époque |
-| Instant.parse(CharSequence text) | ISO : "2024-01-01T10:15:30Z" |
-
-**Conversions**
-
-| Action | Méthode |
-| --- | --- |
-| Instant → heure zonée | instant.atZone(zoneId) |
-| ZonedDateTime → Instant | zdt.toInstant() |
-| LocalDateTime → Instant | Non autorisé directement (nécessite une zone) |
-
-- Exemple
-
-```java
-Instant i = Instant.now();
-
-ZonedDateTime z = i.atZone(ZoneId.of("Europe/Paris"));
-Instant back = z.toInstant();  // same moment
-
-// Duration between instants
-Instant start = Instant.parse("2024-01-01T10:00:00Z");
-Instant end   = Instant.parse("2024-01-01T12:30:00Z");
-
-Duration between = Duration.between(start, end); // PT2H30M
-```
-
-> [!IMPORTANT]
-> `Instant` est toujours en UTC, sans information de fuseau horaire attachée.  
-> Il ne peut pas être combiné avec une `Period` ; utilisez `Duration` à la place.
-
----
-
-## 12.8 Tableau récapitulatif (Period vs Duration vs Instant)
-
-| Concept | Représente | Bon pour | Fonctionne avec | Notes |
-| --- | --- | --- | --- | --- |
-| Period | Années, mois, jours | Arithmétique calendaire | LocalDate, LocalDateTime | Unités humaines |
-| Duration | Heures à nanosecondes | Calculs temporels précis | LocalTime, LocalDateTime, ZonedDateTime, Instant | Unités machine |
-| Instant | Point exact sur la timeline UTC | Représentation d’horodatage | Convertible vers/depuis ZonedDateTime | Ne peut pas être combiné avec Period |
-
-**Pièges courants**
-
-- `Period.of(1, 0, 0)` n’est pas la même chose que `Duration.ofDays(365)` (années bissextiles !).
-- `Duration.ofDays(1)` peut ne pas être égal à une “journée calendaire” complète dans une zone DST.
-- `LocalDateTime` ne peut pas être converti en `Instant` sans fuseau horaire.
-- `Period.parse("P1W")` est valide et donne une période de 7 jours.
-
----
-
-## 12.9 TemporalUnit et TemporalAmount
-
-L’API `java.time` repose sur deux interfaces clés qui définissent comment les dates, les heures et les durées sont manipulées :
-
-- `TemporalUnit` → représente une unité de temps (par exemple, DAYS, HOURS, MINUTES).
-- `TemporalAmount` → représente une quantité de temps (par exemple, `Period`, `Duration`).
-
-Les deux sont essentiels pour comprendre comment fonctionnent les méthodes `plus`, `minus` et `with`, et ils apparaissent fréquemment dans les questions de certification.
-
-### 12.9.1 `TemporalUnit`
-
-`TemporalUnit` représente une seule unité de mesure date/heure.  
-L’implémentation principale utilisée en Java est :
-
-### 12.9.2 Enum `ChronoUnit`
-
-Cet enum fournit les unités standard utilisées dans la chronologie ISO-8601 :
-
-| Catégorie | Unités |
-| --- | --- |
-| Unités de date | DAYS, WEEKS, MONTHS, YEARS, DECADES, CENTURIES, MILLENNIA, ERAS |
-| Unités de temps | NANOS, MICROS, MILLIS, SECONDS, MINUTES, HOURS, HALF_DAYS |
-| Spécial | FOREVER |
-
-Un `TemporalUnit` peut être utilisé directement avec les méthodes `plus()` et `minus()`.
-
-- Exemples avec `ChronoUnit` :
-
-```java
-LocalDate date = LocalDate.of(2025, 3, 10);
-
-LocalDate d1 = date.plus(10, ChronoUnit.DAYS);     // 2025-03-20
-LocalDate d2 = date.minus(2, ChronoUnit.MONTHS);   // 2025-01-10
-
-LocalTime time = LocalTime.of(10, 0);
-LocalTime t1 = time.plus(90, ChronoUnit.MINUTES);  // 11:30
-```
-
-> [!IMPORTANT]
-> Vous ne pouvez pas utiliser des unités basées sur le temps avec `LocalDate`, ni des unités basées sur la date avec `LocalTime`.
-
-- Exemples :
-
-```java
-// ❌ UnsupportedTemporalTypeException
-LocalDate d = LocalDate.now().plus(5, ChronoUnit.HOURS);
-
-// ❌ UnsupportedTemporalTypeException
-LocalTime t = LocalTime.now().plus(1, ChronoUnit.DAYS);
-```
-
-### 12.9.3 `TemporalAmount`
-
-`TemporalAmount` représente une quantité de temps à unités multiples (par exemple, “2 ans, 3 mois”, ou “90 minutes”).  
-Elle est implémentée par :
-
-- `Period` → années, mois, jours (basé sur la date)
-- `Duration` → secondes, nanosecondes (basé sur le temps)
-
-Les deux peuvent être passés aux objets date/heure pour les ajuster via `plus()` et `minus()`.
-
-### 12.9.4 `Period` en tant que `TemporalAmount`
-
-`Period` représente une quantité humaine : années, mois, jours.
-
-- Exemples :
-
-```java
-Period p = Period.of(1, 2, 3);  // 1 year, 2 months, 3 days
-
-LocalDate base = LocalDate.of(2025, 3, 10);
-LocalDate result = base.plus(p); // 2026-05-13
-```
-
-Notes
-
-- `Period` ne peut pas être utilisé avec `LocalTime` (pas de composante date).
-- `Period.ofWeeks(n)` est converti en interne en jours (n × 7).
-
-### 12.9.5 `Duration` en tant que `TemporalAmount`
-
-`Duration` représente un temps machine : secondes + nanosecondes.
-
-- Exemples :
-
-```java
-Duration d = Duration.ofHours(5).plusMinutes(30); // PT5H30M
-
-LocalDateTime ldt = LocalDateTime.of(2025, 3, 10, 10, 0);
-LocalDateTime result = ldt.plus(d); // 2025-03-10T15:30
-```
-
-Notes
-
-- `Duration` peut être utilisée avec des classes qui ont des composantes de temps (`LocalTime`, `LocalDateTime`, `ZonedDateTime`, `Instant`).
-- `Duration` ne peut pas être appliquée à `LocalDate` → cela lance `UnsupportedTemporalTypeException`.
-- `Duration` interagit avec les zones et les transitions DST lorsqu’elle est appliquée à `ZonedDateTime`.
-
-### 12.9.6 Utiliser `TemporalAmount` vs `TemporalUnit`
-
-Utiliser un `TemporalUnit` :
-
-```java
-LocalDate d1 = LocalDate.now().plus(5, ChronoUnit.DAYS);
-```
-
-Utiliser un `TemporalAmount` :
-
-```java
-Period p = Period.ofDays(5);
-LocalDate d2 = LocalDate.now().plus(p);
-```
-
-Les deux produisent le même résultat lorsque c’est pris en charge.
-
-**Différences**
-
-| Aspect | TemporalUnit | TemporalAmount |
-| --- | --- | --- |
-| Représente | Une seule unité (par ex. DAYS) | Une quantité structurée (par ex. 2Y, 5M, 3D) |
-| Exemples | ChronoUnit.DAYS | Period.of(2,5,3) |
-| Prend en charge plusieurs champs | Non | Oui |
-| Bon pour | Incréments simples | Incréments complexes |
-| Fréquent avec | Toutes les classes date/heure | Restreint selon le type |
-
-### 12.9.7 Méthodes `between(...)`
-
-De nombreuses classes fournissent une méthode `between` via `ChronoUnit`, `Duration` ou `Period`.
-
-**Utiliser `Duration.between` (pour les classes basées sur le temps)**
-
-```java
-Duration d = Duration.between(
-    LocalTime.of(10, 0),
-    LocalTime.of(13, 30)
-);
-// PT3H30M
-```
-
-**Utiliser `Period.between` (uniquement pour les dates)**
-
-```java
-Period p = Period.between(
-    LocalDate.of(2025, 3, 1),
-    LocalDate.of(2025, 5, 10)
-);
-// P2M9D
-```
-
-**Utiliser `ChronoUnit` `between@@CODE_END@**
-
-```java
-long days = ChronoUnit.DAYS.between(
-    LocalDate.of(2025, 3, 1),
-    LocalDate.of(2025, 3, 10)
-);
-// 9
-```
-
-> [!IMPORTANT]
-> `ChronoUnit.between(...)` renvoie toujours un `long`,  
-> tandis que `Period.between` renvoie une `Period`,  
-> et `Duration.between` renvoie une `Duration`.
-
-### 12.9.8 Pièges courants
-
-- Appliquer le mauvais `TemporalAmount` :
-
-```java
-// LocalTime.plus(Period.ofDays(1))   // ❌ compile-time error
-// LocalDate.plus(Duration.ofHours(1)) // ❌ runtime error: UnsupportedTemporalTypeException
-```
-
-- Changements DST avec `Duration` : ajouter 24 heures n’est pas toujours “demain” dans une zone avec DST.
-- `Period.ofWeeks(1)` fait exactement 7 jours ; les effets DST apparaissent lorsqu’il est appliqué à des types sensibles à la zone.
-- `Instant.plus(Period)` → `UnsupportedTemporalTypeException` à l’exécution ; utilisez `Duration` à la place.
-- `Instant` ne peut pas être créé directement depuis un `LocalDateTime` ; vous devez d’abord appliquer une zone : `ldt.atZone(zone).toInstant()`.
-
-### 12.9.9 Résumé
-
-| Fonctionnalité | TemporalUnit | TemporalAmount | ChronoUnit | Period | Duration |
-| --- | --- | --- | --- | --- | --- |
-| Représente | Une unité | Une quantité | enum d’unités | Y/M/J | S + nanos |
-| Multi-champ | Non | Oui | Non | Oui | Non |
-| Fonctionne avec | plus/minus | plus/minus | date/heure | LocalDate/LocalDateTime | Temps/zone |
-| Basé sur l’humain | Non | Oui | Non | Oui | Non |
-| Basé sur la machine | Oui | Oui | Oui | Non | Oui |
-
+> I file `.properties` tradizionali sono specificati come ISO-8859-1;
+> i caratteri non ASCII devono essere codificati come escape Unicode (ad esempio `\u00E9` per é), a meno di usare meccanismi di caricamento alternativi.
+
+## 13.7 Regole ed errori comuni
+
+- `DateTimeFormatter` è immutabile e thread-safe.
+- `NumberFormat` / `DecimalFormat` sono mutabili e non thread-safe.
+- Cambiare il `Locale` influisce su come i valori sono formattati e interpretati, non sui valori numerici o temporali sottostanti.
+- Il parsing con `NumberFormat` o `DecimalFormat` può riuscire parzialmente senza eccezioni se dopo un numero valido è presente testo aggiuntivo.
+- `java.time` sostituisce la maggior parte degli usi delle vecchie API `java.util.Date` / `Calendar` nel codice moderno e nell’esame.
