@@ -18,7 +18,7 @@
 	- [12.5 Period — Durées humaines basées sur la date](#125-period--durées-humaines-basées-sur-la-date)
 	- [12.6 Duration — Durées machine basées sur le temps](#126-duration--durées-machine-basées-sur-le-temps)
 	- [12.7 Instant — Point sur la chronologie UTC](#127-instant--point-sur-la-chronologie-utc)
-	- [12.8 Tableau récapitulatif : Period vs Duration vs Instant](#128-tableau-récapitulatif--period-vs-duration-vs-instant)
+	- [12.8 Tableau récapitulatif : Period vs Duration vs Instant](#128-tableau-récapitulatif-period-vs-duration-vs-instant)
 	- [12.9 TemporalUnit et TemporalAmount](#129-temporalunit-et-temporalamount)
 		- [12.9.1 TemporalUnit](#1291-temporalunit)
 		- [12.9.2 Enum ChronoUnit](#1292-enum-chronounit)
