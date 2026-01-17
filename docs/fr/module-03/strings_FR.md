@@ -13,7 +13,7 @@
 		- [9.1.2 Text Blocks (depuis Java 15)](#912-text-blocks-depuis-java-15)
 			- [9.1.2.1 Mise en forme : espaces essentiels vs incidentels](#9121-mise-en-forme--espaces-essentiels-vs-incidentels)
 			- [9.1.2.2 Nombre de lignes, lignes vides et retours à la ligne](#9122-nombre-de-lignes-lignes-vides-et-retours-à-la-ligne)
-			- [9.1.2.3 Text Blocks et caractères d’échappement](#9123-text-blocks-et-caractères-déchapperment)
+			- [9.1.2.3 Text Blocks et caractères d’échappement](#9123-text-blocks-et-caractères-déchappement)
 			- [9.1.2.4 Erreurs courantes (avec corrections)](#9124-erreurs-courantes-avec-corrections)
 	- [9.2 Méthodes principales des chaînes](#92-méthodes-principales-des-chaînes)
 		- [9.2.1 Indexation des chaînes](#921-indexation-des-chaînes)
