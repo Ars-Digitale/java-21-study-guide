@@ -11,18 +11,18 @@
 	- [1.7 Espressione](#17-espressione)
 	- [1.8 Istruzione](#18-istruzione)
 	- [1.9 Blocco di Codice](#19-blocco-di-codice)
-	- [1.10 Funzione / Metodo](#110--funzione--metodo)
+	- [1.10 Funzione / Metodo](#110-funzione--metodo)
 	- [1.11 Classe / Oggetto](#111-classe--oggetto)
 	- [1.12 Modulo / Package](#112-modulo--package)
 	- [1.13 Programma](#113-programma)
 	- [1.14 Sistema](#114-sistema)
-	- [1.15 Riepilogo come scala crescente](#115-riepilogo-come-scala-crescente)
-	- [1.16 Diagramma gerarchico ASCII](#116-diagramma-gerarchico-ascii)
-	- [1.17 Diagramma gerarchico Mermaid](#117-diagramma-gerarchico-mermaid)
+	- [1.15 Riepilogo come scala crescente](#115--riepilogo-come-scala-crescente)
+	- [1.16 Diagramma gerarchico ASCII](#116--diagramma-gerarchico-ascii)
+	- [1.17 Diagramma gerarchico Mermaid](#117--diagramma-gerarchico-mermaid)
 
 ---
 
-Ogni sistema software o programma informatico è composto da un insieme di **dati** e da un insieme di **operazioni** che vengono applicate a questi dati per produrre un risultato.
+Ogni sistema software o programma informatico è composto da un insieme di **dati** e da un insieme di **operazioni** che vengono applicate a questi ultimi per produrre un risultato.
 
 Più formalmente:
 
