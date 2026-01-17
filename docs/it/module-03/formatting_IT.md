@@ -39,7 +39,7 @@
    - [13.5 Internazionalizzazione (i18n) e Localizzazione (l10n)](#135-internationalization-i18n-and-localization-l10n)
      - [13.5.1 Locales](#1351-locales)
      - [13.5.2 Categorie di Locale](#1352-locale-categories)
-       - [13.5.3 Esempio reale](#1353-real-world-example)
+     - [13.5.3 Esempio reale](#1353-real-world-example)
    - [13.6 Properties e Resource Bundles](#136-properties-and-resource-bundles)
      - [13.6.1 Regole di risoluzione dei Resource Bundle](#1361-resource-bundle-resolution-rules)
    - [13.7 Regole ed errori comuni](#137-common-rules-and-pitfalls)

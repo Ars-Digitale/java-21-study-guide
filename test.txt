@@ -1,19 +1,205 @@
-### 13.2.4 Struttura del pattern DecimalFormat
+### 13.1.1.3 Largeur (m)
 
-Un pattern può contenere una sottostruttura positiva e una negativa opzionale, separate da `;`.
+La largeur définit le nombre total minimal de caractères dans la sortie.
+
+```java
+System.out.printf("%8.2f%n", 12.34);
+```
+
+```bash
+   12.34
+```
+
+- Remplit avec des espaces par défaut.
+- Si la valeur est plus longue, la largeur est ignorée (elle ne tronque jamais).
+- Le remplissage est appliqué à gauche par défaut.
+
+### 13.1.1.4 Indicateur de remplissage par zéro `0`
+
+L’indicateur `0` remplace le remplissage par des espaces par des zéros.
+
+```java
+System.out.printf("%08.2f%n", 12.34);
+```
+
+```bash
+00012.34
+```
+
+- Nécessite une largeur.
+- Les zéros sont insérés après le signe.
+- Ignoré si la justification à gauche est présente (indicateur `-`).
+
+### 13.1.1.5 Justification à gauche Indicateur `-`
+
+L’indicateur `-` aligne la valeur à gauche à l’intérieur de la largeur.
+
+```java
+System.out.printf("%-8.2f%n", 12.34);
+```
+
+```bash
+12.34   
+```
+
+- Le remplissage est déplacé vers la droite.
+- Écrase le remplissage par zéro.
+
+### 13.1.1.6 Signe explicite Indicateur `+`
+
+L’indicateur `+` force l’affichage du signe pour les nombres positifs.
+
+```java
+System.out.printf("%+8.2f%n", 12.34);
+```
+
+```bash
+   +12.34
+```
+
+- Les nombres négatifs affichent déjà `-`.
+- Écrase l’indicateur espace (qui affiche un espace en tête pour les valeurs positives).
+
+### 13.1.1.7 Parenthèses pour les négatifs Indicateur `(`
+
+L’indicateur `(` formate les nombres négatifs en utilisant des parenthèses.
+
+```java
+System.out.printf("%(8.2f%n", -12.34);
+```
+
+```bash
+ (12.34)
+```
+
+- N’affecte que les valeurs négatives.
+- Rarement utilisé en pratique, mais pertinent pour la certification.
+
+### 13.1.1.8 Combinaison des indicateurs
+
+```java
+System.out.printf("%+010.2f%n", 12.34);
+```
+
+```bash
++000012.34
+```
+
+Ordre d’évaluation (simplifié) :
+
+- La précision est appliquée.
+- Le signe est traité.
+- La largeur est appliquée.
+- Le remplissage (espaces ou zéros) est appliqué.
+
+### 13.1.1.9 Effets du Locale
+
+```java
+System.out.printf(Locale.FRANCE, "%,.2f%n", 12345.67);
+```
+
+```bash
+12 345,67
+```
+
+Les séparateurs décimaux et de groupement dépendent du `Locale` actif.
+
+### 13.1.1.10 Erreurs courantes
+
+- `%f` utilise 6 décimales par défaut si aucune précision n’est spécifiée.
+- La largeur ne tronque jamais la sortie ; elle ne fait qu’ajouter du remplissage si nécessaire.
+- L’indicateur `0` est ignoré lorsque `-` est présent.
+- `+` écrase l’indicateur espace.
+- Le groupement et les séparateurs dépendent du Locale.
+
+### 13.1.2 Valeurs de texte personnalisées et échappement
+
+Certains caractères ont une signification particulière dans les chaînes de format et doivent être échappés.
+
+- `%%` → signe pourcentage littéral.
+- `\n`, `\t` → échappements Java standards.
+
+```java
+String msg = String.format("Completion: %d%%%nStatus: OK", 100);
+System.out.println(msg);
+```
+
+Sortie :
+
+```bash
+Completion: 100%
+Status: OK
+```
+
+> [!NOTE]
+> Un seul % sans spécificateur valide provoque une IllegalFormatException à l’exécution.
+
+## 13.2 Mise en forme des nombres
+
+### 13.2.1 NumberFormat
+
+`NumberFormat` est une classe abstraite utilisée pour formater et analyser les nombres de manière sensible au locale.
+
+```java
+NumberFormat nf = NumberFormat.getInstance(Locale.FRANCE);
+System.out.println(nf.format(1234567.89));
+```
+
+> [!IMPORTANT]
+> - Les méthodes factory déterminent le style de formatage (général, entier, monnaie, pourcentage, compact, ...).
+> - Le formatage dépend du `Locale` fourni.
+> - `NumberFormat` (et `DecimalFormat`) ne sont pas thread-safe.
+
+### 13.2.2 Localisation des nombres
+
+La localisation des nombres affecte les séparateurs décimaux, les séparateurs de groupement et les symboles monétaires.
+
+```java
+NumberFormat nfUS = NumberFormat.getInstance(Locale.US);
+NumberFormat nfIT = NumberFormat.getInstance(Locale.ITALY);
+
+System.out.println(nfUS.format(1234.56)); // 1,234.56
+System.out.println(nfIT.format(1234.56)); // 1.234,56
+```
+
+### 13.2.3 DecimalFormat et NumberFormat
+
+`DecimalFormat` est une sous-classe concrète de `NumberFormat` qui offre un contrôle fin de la mise en forme numérique à l’aide de patterns.
+
+`NumberFormat` définit un formatage sensible au locale via des méthodes factory, tandis que `DecimalFormat` permet un contrôle explicite basé sur des patterns.
+
+```java
+NumberFormat nf = NumberFormat.getInstance(Locale.US);
+DecimalFormat df = (DecimalFormat) nf;
+```
+
+Ou directement :
+
+```java
+DecimalFormat df = new DecimalFormat("#,##0.00");
+```
+
+> [!NOTE]
+> - `DecimalFormat` est mutable (on peut modifier le pattern, les symboles, etc.).
+> - `DecimalFormat` n’est pas thread-safe.
+> - Le formatage est sensible au locale via `DecimalFormatSymbols`.
+
+### 13.2.4 Structure du pattern DecimalFormat
+
+Un pattern peut contenir une sous-structure positive et une sous-structure négative optionnelle, séparées par `;`.
 
 ```text
 #,##0.00;(#,##0.00)
 ```
 
 > [!NOTE]
-> - La prima parte → numeri positivi.
-> - La seconda parte → numeri negativi.
-> - Se la parte negativa è omessa, i numeri negativi usano automaticamente un `-` iniziale.
+> - Première partie → nombres positifs.
+> - Seconde partie → nombres négatifs.
+> - Si la partie négative est omise, les nombres négatifs utilisent automatiquement un `-` en tête.
 
-### 13.2.5 Il simbolo `0` (cifra obbligatoria)
+### 13.2.5 Le symbole `0` (chiffre obligatoire)
 
-Il simbolo `0` forza la visualizzazione di una cifra, riempiendo con zeri se necessario.
+Le symbole `0` force l’affichage d’un chiffre, en complétant avec des zéros si nécessaire.
 
 ```java
 DecimalFormat df = new DecimalFormat("0000.00");
@@ -24,13 +210,13 @@ System.out.println(df.format(12.3));
 0012.30
 ```
 
-- Controlla il numero minimo di cifre.
-- Riempie con zeri se il numero ha meno cifre.
-- Utile per output a larghezza fissa o allineato.
+- Contrôle le nombre minimal de chiffres.
+- Complète avec des zéros si le nombre contient moins de chiffres.
+- Utile pour des sorties à largeur fixe ou alignées.
 
-### 13.2.6 Il simbolo `#` (cifra opzionale)
+### 13.2.6 Le symbole `#` (chiffre optionnel)
 
-Il simbolo `#` visualizza una cifra solo se esiste.
+Le symbole `#` affiche un chiffre uniquement s’il existe.
 
 ```java
 DecimalFormat df = new DecimalFormat("####.##");
@@ -41,13 +227,13 @@ System.out.println(df.format(12.3));
 12.3
 ```
 
-- Sopprime gli zeri iniziali.
-- Sopprime gli zeri finali non necessari.
-- Adatto a una formattazione “user-friendly”.
+- Supprime les zéros initiaux.
+- Supprime les zéros finaux inutiles.
+- Adapté à un formatage « convivial ».
 
-### 13.2.7 Combinare `0` e `#`
+### 13.2.7 Combiner `0` et `#`
 
-I pattern combinano spesso entrambi i simboli per maggiore flessibilità.
+Les patterns combinent souvent les deux symboles pour plus de flexibilité.
 
 ```java
 DecimalFormat df = new DecimalFormat("#,##0.##");
@@ -62,31 +248,31 @@ System.out.println(df.format(12345.678));
 12,345.68
 ```
 
-Spiegazione del pattern:
+Explication du pattern :
 
 ```text
 #,##0 . ##
  ^  ^    ^
  |  |    |
- |  |    └─ cifre frazionarie opzionali (#)
- |  └───── cifra intera obbligatoria (0)
- └──────── pattern di raggruppamento (,)
+ |  |    └─ chiffres fractionnaires optionnels (#)
+ |  └───── chiffre entier obligatoire (0)
+ └──────── pattern de groupement (,)
 ```
 
-- È garantita almeno una cifra intera (lo `0`).
-- Le cifre sono raggruppate per migliaia usando il separatore di raggruppamento.
-- Le cifre frazionarie sono opzionali (fino a due).
+- Au moins un chiffre entier est garanti (le `0`).
+- Les chiffres sont regroupés par milliers à l’aide du séparateur de groupement.
+- Les chiffres fractionnaires sont optionnels (jusqu’à deux).
 
-### 13.2.8 Separatori decimali e di raggruppamento
+### 13.2.8 Séparateurs décimaux et de groupement
 
-Nei pattern:
+Dans les patterns :
 
-- `.` → separatore decimale.
-- `,` → separatore di raggruppamento.
+- `.` → séparateur décimal.
+- `,` → séparateur de groupement.
 
-I simboli effettivamente utilizzati a runtime dipendono dal `Locale` (ad esempio, virgola vs punto).
+Les symboles effectivement utilisés à l’exécution dépendent du `Locale` (par exemple, virgule vs point).
 
-### 13.2.9 DecimalFormatSymbols: simboli di formattazione specifici del Locale
+### 13.2.9 DecimalFormatSymbols : symboles de format spécifiques au Locale
 
 ```java
 DecimalFormatSymbols symbols =
@@ -102,52 +288,52 @@ System.out.println(df.format(1234.5));
 1 234,50
 ```
 
-- Controlla i separatori decimali e di raggruppamento.
-- Controlla il segno meno e il simbolo di valuta.
-- Controlla le stringhe NaN e Infinity.
+- Contrôle les séparateurs décimaux et de groupement.
+- Contrôle le signe moins et le symbole monétaire.
+- Contrôle les chaînes NaN et Infinity.
 
-### 13.2.10 Pattern speciali di DecimalFormat
+### 13.2.10 Patterns spéciaux de DecimalFormat
 
 ```text
-0.###E0   notazione scientifica
-###%      percentuale
-¤#,##0.00 valuta (¤ è il simbolo di valuta)
+0.###E0   notation scientifique
+###%      pourcentage
+¤#,##0.00 monnaie (¤ est le symbole monétaire)
 ```
 
-### 13.2.11 Regole ed errori comuni
+### 13.2.11 Règles et erreurs courantes
 
-- `DecimalFormat` è una sottoclasse di `NumberFormat`.
-- `0` forza le cifre, `#` no.
-- I pattern controllano la formattazione, non la modalità di arrotondamento (usare `setRoundingMode()`).
-- Il raggruppamento funziona solo se il separatore (di solito `,`) è presente nel pattern.
-- Il parsing può riuscire parzialmente senza errore se sono presenti caratteri finali dopo un numero valido.
-- `DecimalFormat` è mutabile e non thread-safe.
+- `DecimalFormat` est une sous-classe de `NumberFormat`.
+- `0` force les chiffres, `#` non.
+- Les patterns contrôlent le formatage, pas le mode d’arrondi (utiliser `setRoundingMode()`).
+- Le groupement fonctionne uniquement si le séparateur (généralement `,`) est présent dans le pattern.
+- Le parsing peut réussir partiellement sans erreur si des caractères finaux suivent un nombre valide.
+- `DecimalFormat` est mutable et non thread-safe.
 
-## 13.3 Parsing dei Numeri
+## 13.3 Analyse (parsing) des nombres
 
-Il parsing converte testo localizzato in valori numerici. Per impostazione predefinita, il parsing è permissivo.
+L’analyse convertit un texte localisé en valeurs numériques. Par défaut, l’analyse est permissive.
 
 ```java
 NumberFormat nf = NumberFormat.getInstance(Locale.FRANCE);
-Number n = nf.parse("12 345,67abc"); // estrae 12345.67
+Number n = nf.parse("12 345,67abc"); // analyse 12345.67
 ```
 
-- Il parsing si ferma al primo carattere non valido.
-- Il testo finale viene ignorato se non controllato esplicitamente.
+- L’analyse s’arrête au premier caractère invalide.
+- Le texte final est ignoré sauf vérification explicite.
 
-### 13.3.1 Parsing con DecimalFormat
+### 13.3.1 Parsing avec DecimalFormat
 
-`DecimalFormat` può anche effettuare il parsing dei numeri. Il parsing è permissivo per impostazione predefinita.
+`DecimalFormat` peut également analyser des nombres. L’analyse est permissive par défaut.
 
 ```java
 DecimalFormat df = new DecimalFormat("#,##0.##");
 Number n = df.parse("1,234.56abc");
 ```
 
-- Il parsing si ferma al primo carattere non valido.
-- Il testo finale viene ignorato se presente.
+- L’analyse s’arrête au premier caractère invalide.
+- Le texte final est ignoré s’il est présent.
 
-Per forzare un parsing rigoroso:
+Pour imposer une analyse stricte :
 
 ```java
 df.setParseStrict(true);
@@ -155,10 +341,10 @@ df.setParseStrict(true);
 
 ### 13.3.2 CompactNumberFormat
 
-La formattazione compatta abbrevia i numeri grandi per la leggibilità umana.
+La mise en forme compacte abrège les grands nombres pour une meilleure lisibilité humaine.
 
-- Supporta stili SHORT e LONG.
-- Usa abbreviazioni dipendenti dal locale (ad esempio K, M, “million”).
+- Prend en charge les styles SHORT et LONG.
+- Utilise des abréviations dépendantes du locale (par exemple K, M, « million »).
 
 ```java
 NumberFormat cnf =
@@ -180,11 +366,11 @@ System.out.println(cnf1.format(315_000_000));   // 315M
 System.out.println(cnf2.format(315_000_000));   // 315 million
 ```
 
-## 13.4 Formattazione di Data e Ora
+## 13.4 Mise en forme des dates et heures
 
 ### 13.4.1 DateTimeFormatter
 
-Java 21 si basa su `java.time` e `DateTimeFormatter` per la formattazione moderna di data e ora.
+Java 21 repose sur `java.time` et `DateTimeFormatter` pour la mise en forme moderne des dates et heures.
 
 ```java
 DateTimeFormatter f =
@@ -192,42 +378,42 @@ DateTimeFormatter f =
 System.out.println(LocalDateTime.now().format(f));
 ```
 
-**Proprietà principali:**
+**Propriétés principales :**
 
-- Immutabile.
+- Immuable.
 - Thread-safe.
-- Sensibile al locale.
+- Sensible au locale.
 
-### 13.4.2 Simboli standard di data e ora
+### 13.4.2 Symboles standard de date et d’heure
 
 ```text
-y   anno
-M   numero del mese (o nome con più lettere)
-d   giorno del mese
-E   nome del giorno
-H   ora (0–23)
-h   ora (1–12)
-m   minuto
-s   secondo
-a   indicatore AM/PM
-z   fuso orario
+y   année
+M   numéro du mois (ou nom avec plus de lettres)
+d   jour du mois
+E   nom du jour
+H   heure (0–23)
+h   heure (1–12)
+m   minute
+s   seconde
+a   indicateur AM/PM
+z   fuseau horaire
 ```
 
 ### 13.4.3 datetime.format vs formatter.format
 
-Entrambi i metodi sono funzionalmente identici:
+Les deux méthodes sont fonctionnellement identiques :
 
 ```java
 date.format(formatter);
 formatter.format(date);
 ```
 
-- `date.format(formatter)` → preferito per leggibilità (prima il dato, poi la formattazione).
-- `formatter.format(date)` → utile in codice funzionale o con formatter riutilizzabili.
+- `date.format(formatter)` → préféré pour la lisibilité (données d’abord, puis formatage).
+- `formatter.format(date)` → parfois pratique dans un code fonctionnel ou avec des formatters réutilisables.
 
-### 13.4.4 Localizzazione delle date
+### 13.4.4 Localisation des dates
 
-Gli stili localizzati adattano l’output delle date alle norme culturali.
+Les styles localisés adaptent l’affichage des dates aux normes culturelles.
 
 ```java
 DateTimeFormatter fullIt =
@@ -246,18 +432,18 @@ System.out.println(today.format(fullIt));
 System.out.println(today.format(shortIt));
 ```
 
-Output possibile:
+Sortie possible :
 
 ```bash
 mercoledì 17 dicembre 2025
 17/12/25
 ```
 
-## 13.5 Internazionalizzazione (i18n) e Localizzazione (l10n)
+## 13.5 Internationalisation (i18n) et localisation (l10n)
 
 ### 13.5.1 Locales
 
-Un `Locale` definisce lingua, paese e una variante opzionale.
+Un `Locale` définit la langue, le pays et une variante optionnelle.
 
 ```java
 Locale l1 = Locale.US;
@@ -268,52 +454,52 @@ Locale l3 = new Locale.Builder()
         .build();
 ```
 
-Formati di Locale:
+Formats de Locale :
 
-- `en` (it, fr, ecc.): codice lingua minuscolo.
-- `en_US` (fr_CA, it_IT, ecc.): codice lingua minuscolo + underscore + codice paese maiuscolo.
+- `en` (it, fr, etc.) : code langue en minuscules.
+- `en_US` (fr_CA, it_IT, etc.) : code langue en minuscules + underscore + code pays en majuscules.
 
-### 13.5.2 Categorie di Locale
+### 13.5.2 Catégories de Locale
 
-Le categorie di Locale separano la formattazione dalla lingua dell’interfaccia utente.
+Les catégories de Locale séparent la mise en forme de la langue de l’interface utilisateur.
 
-`Locale.Category` consente a Java di usare Locale predefiniti diversi per scopi diversi.
+`Locale.Category` permet à Java d’utiliser différents Locale par défaut selon les usages.
 
-Esistono due categorie:
+Il existe deux catégories :
 
-| Category | Usata per |
+| Catégorie | Utilisée pour |
 | --- | --- |
-| FORMAT | Numeri, date, valuta, altra formattazione |
-| DISPLAY | Testo leggibile (UI, nomi, messaggi) |
+| FORMAT | Nombres, dates, monnaie, autre formatage |
+| DISPLAY | Texte lisible (UI, noms, messages) |
 
-### 13.5.3 Esempio reale
+### 13.5.3 Exemple réel
 
-Un utente francese che vive in Germania potrebbe desiderare:
+Un utilisateur français vivant en Allemagne peut souhaiter :
 
-- Numeri e date → formato tedesco.
-- Lingua dell’interfaccia → francese.
+- Nombres et dates → format allemand.
+- Langue de l’interface → français.
 
-Prima di Java 7, questo non era possibile.
+Avant Java 7, cela n’était pas possible.
 
 ```java
 Locale.setDefault(Locale.Category.FORMAT, Locale.GERMANY);
 Locale.setDefault(Locale.Category.DISPLAY, Locale.FRANCE);
 ```
 
-Effetti di esempio:
+Exemples d’effets :
 
-| Aspetto | Risultato (esempio) |
+| Aspect | Résultat (exemple) |
 | --- | --- |
-| Numeri | 1.234,56 |
-| Date | 31.12.2025 |
-| Valuta | € |
-| Testo UI | Francese |
-| Nomi dei mesi | décembre |
-| Nomi dei paesi | Allemagne |
+| Nombres | 1.234,56 |
+| Dates | 31.12.2025 |
+| Monnaie | € |
+| Texte UI | Français |
+| Noms des mois | décembre |
+| Noms des pays | Allemagne |
 
-## 13.6 Properties e Resource Bundles
+## 13.6 Properties et Resource Bundles
 
-I resource bundle esternalizzano il testo e consentono la localizzazione senza modifiche al codice.
+Les resource bundles externalisent le texte et permettent la localisation sans modifier le code.
 
 ```java
 ResourceBundle rb =
@@ -322,24 +508,24 @@ ResourceBundle rb =
 String msg = rb.getString("welcome");
 ```
 
-### 13.6.1 Regole di risoluzione dei Resource Bundle
+### 13.6.1 Règles de résolution des Resource Bundles
 
-Java cerca i bundle seguendo un ordine di fallback rigoroso. Ad esempio, con nome base `messages` e locale `de_DE`:
+Java recherche les bundles selon un ordre de repli strict. Par exemple, avec le nom de base `messages` et le locale `de_DE` :
 
 - messages_de_DE.properties
 - messages_de.properties
 - messages.properties
 
-Se nessuno viene trovato → `MissingResourceException`.
+Si aucun n’est trouvé → `MissingResourceException`.
 
 > [!NOTE]
-> I file `.properties` tradizionali sono specificati come ISO-8859-1;
-> i caratteri non ASCII devono essere codificati come escape Unicode (ad esempio `\u00E9` per é), a meno di usare meccanismi di caricamento alternativi.
+> Les fichiers `.properties` traditionnels sont spécifiés en ISO-8859-1 ;
+> les caractères non ASCII doivent être encodés via des échappements Unicode (par exemple `\u00E9` pour é), sauf si des mécanismes de chargement alternatifs sont utilisés.
 
-## 13.7 Regole ed errori comuni
+## 13.7 Règles et erreurs courantes
 
-- `DateTimeFormatter` è immutabile e thread-safe.
-- `NumberFormat` / `DecimalFormat` sono mutabili e non thread-safe.
-- Cambiare il `Locale` influisce su come i valori sono formattati e interpretati, non sui valori numerici o temporali sottostanti.
-- Il parsing con `NumberFormat` o `DecimalFormat` può riuscire parzialmente senza eccezioni se dopo un numero valido è presente testo aggiuntivo.
-- `java.time` sostituisce la maggior parte degli usi delle vecchie API `java.util.Date` / `Calendar` nel codice moderno e nell’esame.
+- `DateTimeFormatter` est immuable et thread-safe.
+- `NumberFormat` / `DecimalFormat` sont mutables et non thread-safe.
+- Modifier le `Locale` affecte la manière dont les valeurs sont formatées et analysées, et non les valeurs numériques ou temporelles sous-jacentes.
+- L’analyse avec `NumberFormat` ou `DecimalFormat` peut réussir partiellement sans exception si du texte supplémentaire suit un nombre valide.
+- `java.time` remplace la plupart des usages des anciennes API `java.util.Date` / `Calendar` dans le code moderne et à l’examen.
