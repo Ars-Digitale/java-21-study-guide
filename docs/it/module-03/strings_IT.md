@@ -54,7 +54,7 @@ String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
 > - I letterali stringa sono memorizzati nel `String` pool, un’area speciale di memoria usata per evitare di creare oggetti stringa duplicati.
 > - L’uso della keyword `new` crea sempre un nuovo oggetto al di fuori del pool.
 
-### 9.1.1.2 Il String Pool
+### 9.1.1.2 Lo String Pool
 
 Poiché gli oggetti `String` sono immutabili e ampiamente usati, potrebbero facilmente occupare una grande quantità di memoria in un programma Java.
   
