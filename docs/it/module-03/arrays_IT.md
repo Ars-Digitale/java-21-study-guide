@@ -3,7 +3,7 @@
 ### Indice
 
 - [10. Array in Java](#10-array-in-java)
-	- [10.1 Che cos’è un array](#101-che-cose-un-array)
+	- [10.1 Che cos’è un array](#101-che-cosè-un-array)
 		- [10.1.1 Dichiarare gli array](#1011-dichiarare-gli-array)
 		- [10.1.2 Creare array (istanza)](#1012-creare-array-istanza)
 		- [10.1.3 Valori predefiniti negli array](#1013-valori-predefiniti-negli-array)
