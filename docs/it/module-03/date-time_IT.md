@@ -723,7 +723,7 @@ long days = ChronoUnit.DAYS.between(
 - `Instant.plus(Period)` → runtime `UnsupportedTemporalTypeException`; usa `Duration` se possibile.
 - `Instant` non puo esser creata direttamente da `LocalDateTime`; devi applicare prima una time zone: `ldt.atZone(zone).toInstant()`.
 
-### 12.9.9 Summary
+### 12.9.9 Riepilogo
 
 | Feature | TemporalUnit | TemporalAmount | ChronoUnit | Period | Duration |
 | --- | --- | --- | --- | --- | --- |
