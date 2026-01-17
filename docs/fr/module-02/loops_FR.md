@@ -3,19 +3,19 @@
 ### Table des matières
 
 - [8. Constructions de boucle en Java](#8-looping-constructs-in-java)
-- [8.1 La boucle while](#81-the-while-loop)
-- [8.2 La boucle do-while](#82-the-do-while-loop)
-- [8.3 La boucle for](#83-the-for-loop)
-- [8.4 La boucle for-each améliorée](#84-the-enhanced-for-each-loop)
-- [8.5 Boucles imbriquées](#85-nested-loops)
-- [8.6 Boucles infinies](#86-infinite-loops)
-- [8.7 break et continue](#87-break-and-continue)
-- [8.8 Boucles étiquetées](#88-labeled-loops)
-- [8.9 Portée des variables de boucle](#89-loop-variable-scope)
-- [8.10 Code inatteignable après break continue et return](#810-unreachable-code-after-break-continue-and-return)
-- [8.10.1 Code inatteignable après break](#8101-unreachable-code-after-break)
-- [8.10.2 Code inatteignable après continue](#8102-unreachable-code-after-continue)
-- [8.10.3 Code inatteignable après return](#8103-unreachable-code-after-return)
+	- [8.1 La boucle while](#81-the-while-loop)
+	- [8.2 La boucle do-while](#82-the-do-while-loop)
+	- [8.3 La boucle for](#83-the-for-loop)
+	- [8.4 La boucle for-each améliorée](#84-the-enhanced-for-each-loop)
+	- [8.5 Boucles imbriquées](#85-nested-loops)
+	- [8.6 Boucles infinies](#86-infinite-loops)
+	- [8.7 break et continue](#87-break-and-continue)
+	- [8.8 Boucles étiquetées](#88-labeled-loops)
+	- [8.9 Portée des variables de boucle](#89-loop-variable-scope)
+	- [8.10 Code inatteignable après break continue et return](#810-unreachable-code-after-break-continue-and-return)
+		- [8.10.1 Code inatteignable après break](#8101-unreachable-code-after-break)
+		- [8.10.2 Code inatteignable après continue](#8102-unreachable-code-after-continue)
+		- [8.10.3 Code inatteignable après return](#8103-unreachable-code-after-return)
 
 ---
 
