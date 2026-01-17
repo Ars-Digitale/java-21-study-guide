@@ -2,8 +2,8 @@
 
 ### Table of Contents
 
-- [6. Introduction](#6-introduction)
-  - [6.1 Instantiating Types](#61-instantiating-types)
+- [6. Instantiating Types](#6-instantiating-types)
+  - [6.1 Introduction](#61-introduction)
     - [6.1.1 Handling Primitive Types](#611-handling-primitive-types)
       - [6.1.1.1 Declaring a Primitive](#6111-declaring-a-primitive)
       - [6.1.1.2 Assigning a Primitive](#6112-assigning-a-primitive)

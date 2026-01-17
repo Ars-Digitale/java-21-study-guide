@@ -2,8 +2,8 @@
 
 ### Table des matières
 
-- [6. Introduction](#6-introduction)
-  - [6.1 Instanciation des types](#61-instanciation-des-types)
+- [6. Instanciation des types](#6-instanciation-des-types)
+  - [6.1 Introduction](#61-introduction)
     - [6.1.1 Gestion des types primitifs](#611-gestion-des-types-primitifs)
       - [6.1.1.1 Déclarer un primitif](#6111-declarer-un-primitif)
       - [6.1.1.2 Affecter un primitif](#6112-affecter-un-primitif)
@@ -39,7 +39,7 @@
 ---
 
 
-## 6.1 Instanciation des types
+## 6.1 Introduction
  
 En Java, un **type** peut être soit un **type primitif** (comme `int`, `double`, `boolean`, etc.), soit un **type référence** (classes, interfaces, tableaux, enums, records, etc.). Voir : [Java Data Types and Casting](data-types.md)
 

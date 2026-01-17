@@ -2,8 +2,8 @@
 
 ### Indice
 
-- [6. Introduzione](#6-introduzione)
-  - [6.1 Istanziazione dei tipi](#61-istanziazione-dei-tipi)
+- [6. Istanziazione dei tipi](#6-istanziazione-dei-tipi)
+  - [6.1 Introduzione](#61-introduzione)
     - [6.1.1 Gestione dei tipi primitivi](#611-gestione-dei-tipi-primitivi)
       - [6.1.1.1 Dichiarare un primitivo](#6111-dichiarare-un-primitivo)
       - [6.1.1.2 Assegnare un primitivo](#6112-assegnare-un-primitivo)
@@ -38,7 +38,7 @@
 ---
 
 
-## 6.1 Istanziazione dei tipi
+## 6.1 Introduzione
  
 In Java, un **tipo** può essere un **tipo primitivo** (come `int`, `double`, `boolean`, ecc.) oppure un **tipo riferimento** (classi, interfacce, array, enum, record, ecc.). Vedi: [Java Data Types and Casting](data-types.md)
 
