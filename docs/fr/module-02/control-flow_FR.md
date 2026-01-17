@@ -102,7 +102,7 @@ Java 21 prend en charge :
 
 Les deux formes de `switch` partagent les mêmes règles concernant le selector (la **variable cible** du switch) et les valeurs case acceptables.
 
-### 7.2.1 La `target variable` du switch peut être
+### 7.2.1 La `variable cible` du switch peut être
 
 | Control Variable type |
 | --- |
