@@ -17,7 +17,7 @@
 		- [11.2.1 Pourquoi double et float ne suffisent pas](#1121-pourquoi-double-et-float-ne-suffisent-pas)
 		- [11.2.2 BigInteger — Entiers à précision arbitraire](#1122-biginteger--entiers-à-précision-arbitraire)
 		- [11.2.3 Créer BigInteger](#1123-créer-biginteger)
-		- [11.2.4 Opérations (pas d’opérateurs)](#1124-opérations-pas-dopérateurs)
+		- [11.2.4 Opérations (pas d’opérateurs)](#1124-opérations-pas-dopérateurs-)
 
 
 ---
