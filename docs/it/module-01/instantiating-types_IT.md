@@ -26,7 +26,7 @@
     - [6.4.1 Uguaglianza con i tipi primitivi](#641-uguaglianza-con-i-tipi-primitivi)
       - [6.4.1.1 Punti chiave](#6411-punti-chiave)
     - [6.4.2 Uguaglianza con i tipi riferimento](#642-uguaglianza-con-i-tipi-riferimento)
-      - [6.4.2.1 Confronto di identità](#6421-confronto-di-identita)
+      - [6.4.2.1 Confronto di identità](#6421--confronto-di-identità)
       - [6.4.2.2 equals Confronto logico](#6422-equals-confronto-logico)
       - [6.4.2.3 Punti chiave](#6423-punti-chiave)
   - [6.4.3 String Pool e uguaglianza](#643-string-pool-e-uguaglianza)
