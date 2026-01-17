@@ -7,7 +7,7 @@
 		- [9.1.1 Chaînes](#911-chaînes)
 			- [9.1.1.1 Initialiser des chaînes](#9111-initialiser-des-chaînes)
 			- [9.1.1.2 Le String Pool](#9112-le-string-pool)
-			- [9.1.1.3 Caractères spéciaux et séquences d’échappement](#9113-caractères-spéciaux-et-séquences-déchapperment)
+			- [9.1.1.3 Caractères spéciaux et séquences d’échappement](#9113-caractères-spéciaux-et-séquences-déchappement)
 			- [9.1.1.4 Règles de concaténation des chaînes](#9114-règles-de-concaténation-des-chaînes)
 			- [9.1.1.5 Règles de concaténation](#9115-règles-de-concaténation)
 		- [9.1.2 Text Blocks (depuis Java 15)](#912-text-blocks-depuis-java-15)
