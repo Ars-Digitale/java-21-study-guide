@@ -24,7 +24,7 @@
     - [6.3.5 Valeurs null](#635-valeurs-null)
   - [6.4 Égalité en Java](#64-égalité-en-java)
     - [6.4.1 Égalité avec les types primitifs](#641-égalité-avec-les-types-primitifs)
-      - [6.4.1.1 Points clés](#6411-points-cles)
+      - [6.4.1.1 Points clés](#6411-points-clés))
     - [6.4.2 Égalité avec les types référence](#642-égalité-avec-les-types-référence)
       - [6.4.2.1 Comparaison d’identité](#6421-comparaison-didentité)
       - [6.4.2.2 equals Comparaison logique](#6422-equals-comparaison-logique)
@@ -33,7 +33,7 @@
       - [6.4.3.1 La méthode intern](#6431-la-méthode-intern)
     - [6.4.4 Égalité avec les types wrapper](#644-égalité-avec-les-types-wrapper)
     - [6.4.5 Égalité et null](#645-égalité-et-null)
-    - [6.4.6 Tableau récapitulatif](#646-tableau-recapitulatif)
+    - [6.4.6 Tableau récapitulatif](#646-tableau-récapitulatif)
 
 
 ---
