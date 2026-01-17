@@ -3,32 +3,32 @@
 ### Indice
 
 - [12. Data e ora in Java](#12-date-and-time-in-java)
-- [12.1 Data e ora](#121-date-and-time)
-- [12.1.1 Creare date e ore specifiche](#1211-creating-specific-dates-and-times)
-- [12.1.2 Aritmetica su data e ora: metodi plus e minus](#1212-date-and-time-arithmetic-plus-and-minus-methods)
-- [12.1.3 Pattern comuni](#1213-common-patterns)
-- [12.1.4 Aritmetica su LocalDate](#1214-localdate-arithmetic)
-- [12.1.5 Aritmetica su LocalTime](#1215-localtime-arithmetic)
-- [12.1.6 Aritmetica su LocalDateTime](#1216-localdatetime-arithmetic)
-- [12.1.7 Aritmetica su ZonedDateTime](#1217-zoneddatetime-arithmetic)
-- [12.1.8 Tabella riassuntiva](#1218-summary-table)
-- [12.2 Metodi withXxx](#122-withxxx-methods)
-- [12.3 Conversione e metodi at: collegare data, ora e zona](#123-conversion--at-methods-linking-date-time-and-zone)
-- [12.4 Period, Duration e Instant](#124-period-duration-and-instant)
-- [12.5 Period — quantità “umane” di data](#125-period--human-date-amounts)
-- [12.6 Duration — quantità “macchina” di tempo](#126-duration--machine-time-amounts)
-- [12.7 Instant — punto sulla timeline UTC](#127-instant--point-on-the-utc-timeline)
-- [12.8 Tabella riassuntiva: Period vs Duration vs Instant](#128-summary-table-period-vs-duration-vs-instant)
-- [12.9 TemporalUnit e TemporalAmount](#129-temporalunit-and-temporalamount)
-- [12.9.1 TemporalUnit](#1291-temporalunit)
-- [12.9.2 enum ChronoUnit](#1292-chronounit-enum)
-- [12.9.3 TemporalAmount](#1293-temporalamount)
-- [12.9.4 Period come TemporalAmount](#1294-period-as-a-temporalamount)
-- [12.9.5 Duration come TemporalAmount](#1295-duration-as-a-temporalamount)
-- [12.9.6 Usare TemporalAmount vs TemporalUnit](#1296-using-temporalamount-vs-temporalunit)
-- [12.9.7 Metodi between](#1297-between-methods)
-- [12.9.8 Problemi comuni](#1298-common-pitfalls)
-- [12.9.9 Riepilogo](#1299-summary)
+	- [12.1 Data e ora](#121-date-and-time)
+		- [12.1.1 Creare date e ore specifiche](#1211-creating-specific-dates-and-times)
+		- [12.1.2 Aritmetica su data e ora: metodi plus e minus](#1212-date-and-time-arithmetic-plus-and-minus-methods)
+		- [12.1.3 Pattern comuni](#1213-common-patterns)
+		- [12.1.4 Aritmetica su LocalDate](#1214-localdate-arithmetic)
+		- [12.1.5 Aritmetica su LocalTime](#1215-localtime-arithmetic)
+		- [12.1.6 Aritmetica su LocalDateTime](#1216-localdatetime-arithmetic)
+		- [12.1.7 Aritmetica su ZonedDateTime](#1217-zoneddatetime-arithmetic)
+		- [12.1.8 Tabella riassuntiva](#1218-summary-table)
+	- [12.2 Metodi withXxx](#122-withxxx-methods)
+	- [12.3 Conversione e metodi at: collegare data, ora e zona](#123-conversion--at-methods-linking-date-time-and-zone)
+	- [12.4 Period, Duration e Instant](#124-period-duration-and-instant)
+	- [12.5 Period — quantità “umane” di data](#125-period--human-date-amounts)
+	- [12.6 Duration — quantità “macchina” di tempo](#126-duration--machine-time-amounts)
+	- [12.7 Instant — punto sulla timeline UTC](#127-instant--point-on-the-utc-timeline)
+	- [12.8 Tabella riassuntiva: Period vs Duration vs Instant](#128-summary-table-period-vs-duration-vs-instant)
+	- [12.9 TemporalUnit e TemporalAmount](#129-temporalunit-and-temporalamount)
+		- [12.9.1 TemporalUnit](#1291-temporalunit)
+		- [12.9.2 enum ChronoUnit](#1292-chronounit-enum)
+		- [12.9.3 TemporalAmount](#1293-temporalamount)
+		- [12.9.4 Period come TemporalAmount](#1294-period-as-a-temporalamount)
+		- [12.9.5 Duration come TemporalAmount](#1295-duration-as-a-temporalamount)
+		- [12.9.6 Usare TemporalAmount vs TemporalUnit](#1296-using-temporalamount-vs-temporalunit)
+		- [12.9.7 Metodi between](#1297-between-methods)
+		- [12.9.8 Problemi comuni](#1298-common-pitfalls)
+		- [12.9.9 Riepilogo](#1299-summary)
 
 ---
 
@@ -160,18 +160,18 @@ Questi consentono un’aritmetica su data/ora flessibile e leggibile.
 
 | Metodo | Descrizione |
 | --- | --- |
-| plusDays(long days) | Aggiunge giorni |
-| plusWeeks(long weeks) | Aggiunge settimane |
-| plusMonths(long months) | Aggiunge mesi |
-| plusYears(long years) | Aggiunge anni |
-| minusDays(long days) | Sottrae giorni |
-| minusWeeks(long weeks) | Sottrae settimane |
-| minusMonths(long months) | Sottrae mesi |
-| minusYears(long years) | Sottrae anni |
-| plus(TemporalAmount amount) | Aggiunge un Period |
-| minus(TemporalAmount amount) | Sottrae un Period |
-| plus(long amountToAdd, TemporalUnit unit) | Aggiunge usando ChronoUnit (es., DAYS, MONTHS) |
-| minus(long amountToSubtract, TemporalUnit unit) | Sottrae usando ChronoUnit |
+| `plusDays(long days)` | Aggiunge giorni |
+| `plusWeeks(long weeks)` | Aggiunge settimane |
+| `plusMonths(long months)` | Aggiunge mesi |
+| `plusYears(long years)` | Aggiunge anni |
+| `minusDays(long days)` | Sottrae giorni |
+| `minusWeeks(long weeks)` | Sottrae settimane |
+| `minusMonths(long months)` | Sottrae mesi |
+| `minusYears(long years)` | Sottrae anni |
+| `plus(TemporalAmount amount)` | Aggiunge un Period |
+| `minus(TemporalAmount amount)` | Sottrae un Period |
+| `plus(long amountToAdd, TemporalUnit unit)` | Aggiunge usando ChronoUnit (es., DAYS, MONTHS) |
+| `minus(long amountToSubtract, TemporalUnit unit)` | Sottrae usando ChronoUnit |
 
 - Esempi:
 
@@ -199,18 +199,18 @@ LocalDate d6 = date.plus(p);
 
 | Metodo | Descrizione |
 | --- | --- |
-| plusNanos(long nanos) | Aggiunge nanosecondi |
-| plusSeconds(long seconds) | Aggiunge secondi |
-| plusMinutes(long minutes) | Aggiunge minuti |
-| plusHours(long hours) | Aggiunge ore |
-| minusNanos(long nanos) | Sottrae nanosecondi |
-| minusSeconds(long seconds) | Sottrae secondi |
-| minusMinutes(long minutes) | Sottrae minuti |
-| minusHours(long hours) | Sottrae ore |
-| plus(TemporalAmount amount) | Aggiunge una Duration |
-| minus(TemporalAmount amount) | Sottrae una Duration |
-| plus(long amountToAdd, TemporalUnit unit) | Aggiunge usando ChronoUnit |
-| minus(long amountToSubtract, TemporalUnit unit) | Sottrae usando ChronoUnit |
+| `plusNanos(long nanos)` | Aggiunge nanosecondi |
+| `plusSeconds(long seconds)` | Aggiunge secondi |
+| `plusMinutes(long minutes)` | Aggiunge minuti |
+| `plusHours(long hours)` | Aggiunge ore |
+| `minusNanos(long nanos)` | Sottrae nanosecondi |
+| `minusSeconds(long seconds)` | Sottrae secondi |
+| `minusMinutes(long minutes)` | Sottrae minuti |
+| `minusHours(long hours)` | Sottrae ore |
+| `plus(TemporalAmount amount)` | Aggiunge una Duration |
+| `minus(TemporalAmount amount)` | Sottrae una Duration |
+| `plus(long amountToAdd, TemporalUnit unit)` | Aggiunge usando ChronoUnit |
+| `minus(long amountToSubtract, TemporalUnit unit)` | Sottrae usando ChronoUnit |
 
 - Esempi
 
@@ -242,16 +242,16 @@ Supporta sia le scorciatoie legate alla data sia quelle legate all’ora.
 
 | Metodo | Descrizione |
 | --- | --- |
-| plusYears(long years) / minusYears(long years) | Regola gli anni |
-| plusMonths(long months) / minusMonths(long months) | Regola i mesi |
-| plusWeeks(long weeks) / minusWeeks(long weeks) | Regola le settimane |
-| plusDays(long days) / minusDays(long days) | Regola i giorni |
-| plusHours(long hours) / minusHours(long hours) | Regola le ore |
-| plusMinutes(long minutes) / minusMinutes(long minutes) | Regola i minuti |
-| plusSeconds(long seconds) / minusSeconds(long seconds) | Regola i secondi |
-| plusNanos(long nanos) / minusNanos(long nanos) | Regola i nanosecondi |
-| plus(TemporalAmount amount) / minus(TemporalAmount amount) | Aggiunge/sottrae Period o Duration |
-| plus(long amountToAdd, TemporalUnit unit) / minus(long amountToSubtract, TemporalUnit unit) | Usando ChronoUnit |
+| `plusYears(long years)` / `minusYears(long years)` | Regola gli anni |
+| `plusMonths(long months)` / `minusMonths(long months)` | Regola i mesi |
+| `plusWeeks(long weeks)` / `minusWeeks(long weeks)` | Regola le settimane |
+| `plusDays(long days)` / `minusDays(long days)` | Regola i giorni |
+| `plusHours(long hours)` / `minusHours(long hours)` | Regola le ore |
+| `plusMinutes(long minutes)` / `minusMinutes(long minutes)` | Regola i minuti |
+| `plusSeconds(long seconds)` / `minusSeconds(long seconds)` | Regola i secondi |
+| `plusNanos(long nanos)` / `minusNanos(long nanos)` | Regola i nanosecondi |
+| `plus(TemporalAmount amount)` / `minus(TemporalAmount amount)` | Aggiunge/sottrae Period o Duration |
+| `plus(long amountToAdd, TemporalUnit unit)` / `minus(long amountToSubtract, TemporalUnit unit)` | Usando ChronoUnit |
 
 - Esempi
 
@@ -283,16 +283,16 @@ Supporta gli stessi metodi `plus`/`minus` di `LocalDateTime`, ma con attenzione 
 
 | Metodo | Descrizione |
 | --- | --- |
-| plusYears(long years) / minusYears(long years) | Regola gli anni |
-| plusMonths(long months) / minusMonths(long months) | Regola i mesi |
-| plusWeeks(long weeks) / minusWeeks(long weeks) | Regola le settimane |
-| plusDays(long days) / minusDays(long days) | Regola i giorni |
-| plusHours(long hours) / minusHours(long hours) | Regola le ore |
-| plusMinutes(long minutes) / minusMinutes(long minutes) | Regola i minuti |
-| plusSeconds(long seconds) / minusSeconds(long seconds) | Regola i secondi |
-| plusNanos(long nanos) / minusNanos(long nanos) | Regola i nanosecondi |
-| plus(TemporalAmount amount) / minus(TemporalAmount amount) | Period / Duration |
-| plus(long amountToAdd, TemporalUnit unit) / minus(long amountToSubtract, TemporalUnit unit) | Usando ChronoUnit |
+| `plusYears(long years)` / `minusYears(long years)` | Regola gli anni |
+| `plusMonths(long months)` / `minusMonths(long months)` | Regola i mesi |
+| `plusWeeks(long weeks)` / `minusWeeks(long weeks)` | Regola le settimane |
+| `plusDays(long days)` / `minusDays(long days)` | Regola i giorni |
+| `plusHours(long hours)` / `minusHours(long hours)` | Regola le ore |
+| `plusMinutes(long minutes)` / `minusMinutes(long minutes)` | Regola i minuti |
+| `plusSeconds(long seconds)` / `minusSeconds(long seconds)` | Regola i secondi |
+| `plusNanos(long nanos)` / `minusNanos(long nanos)` | Regola i nanosecondi |
+| `plus(TemporalAmount amount)` / `minus(TemporalAmount amount)` | Period / Duration |
+| `plus(long amountToAdd, TemporalUnit unit)` / `minus(long amountToSubtract, TemporalUnit unit)` | Usando ChronoUnit |
 
 - Esempi (con fusi orari e DST):
 
@@ -334,23 +334,23 @@ Non mutano mai l’istanza originale.
 
 | Classe | Metodi with... comuni (non esaustivo) | Descrizione |
 | --- | --- | --- |
-| LocalDate | withYear(int year) | Stessa data, ma con un anno diverso |
+| `LocalDate` | withYear(int year) | Stessa data, ma con un anno diverso |
 | LocalDate | LocalDate.withMonth(int month) | Stessa data, mese diverso (1–12) |
 | LocalDate | LocalDate.withDayOfMonth(int dayOfMonth) | Stessa data, giorno del mese diverso |
 | LocalDate | LocalDate.with(TemporalField field, long newValue) | Regolazione generica basata su campo |
 | LocalDate | LocalDate.with(TemporalAdjuster adjuster) | Usa un adjuster (es. firstDayOfMonth()) |
-| LocalTime | withHour(int hour) | Stessa ora, ora (hour) diversa |
+| `LocalTime` | withHour(int hour) | Stessa ora, ora (hour) diversa |
 | LocalTime | LocalTime.withMinute(int minute) | Stessa ora, minuto diverso |
 | LocalTime | LocalTime.withSecond(int second) | Stessa ora, secondo diverso |
 | LocalTime | LocalTime.withNano(int nanoOfSecond) | Stessa ora, nanosecondo diverso |
 | LocalTime | LocalTime.with(TemporalField field, long newValue) | Regolazione generica basata su campo |
 | LocalTime | LocalTime.with(TemporalAdjuster adjuster) | Regola usando un temporal adjuster |
-| LocalDateTime | withYear(int year), withMonth(int month), withDayOfMonth(int day) | Cambia solo la parte data |
+| `LocalDateTime` | withYear(int year), withMonth(int month), withDayOfMonth(int day) | Cambia solo la parte data |
 | LocalDateTime | withHour(int hour), withMinute(int minute), withSecond(int second) | Cambia solo la parte ora |
 | LocalDateTime | withNano(int nanoOfSecond) | Cambia il nanosecondo |
 | LocalDateTime | with(TemporalField field, long newValue) | Regolazione generica basata su campo |
 | LocalDateTime | with(TemporalAdjuster adjuster) | Regola usando un temporal adjuster |
-| ZonedDateTime | tutti i withXxx(...) di LocalDateTime | Cambia i componenti locali di data/ora |
+| `ZonedDateTime` | tutti i withXxx(...) di LocalDateTime | Cambia i componenti locali di data/ora |
 | ZonedDateTime | withZoneSameInstant(ZoneId zone) | Stesso istante, zona diversa (cambia l’ora locale) |
 | ZonedDateTime | withZoneSameLocal(ZoneId zone) | Stessa data/ora locale, zona diversa (cambia l’istante) |
 
@@ -362,17 +362,17 @@ Questi metodi sono usati per combinare o convertire tra `LocalDate`, `LocalTime`
 
 | Da | Metodo | Risultato | Descrizione |
 | --- | --- | --- | --- |
-| LocalDate | atTime(LocalTime time) | LocalDateTime | Combina questa data con un’ora data |
+| `LocalDate` | atTime(LocalTime time) | LocalDateTime | Combina questa data con un’ora data |
 | LocalDate | atTime(int hour, int minute) | LocalDateTime | Overload di convenienza con componenti numerici dell’ora |
 | LocalDate | atTime(int hour, int minute, int second) | LocalDateTime | — |
 | LocalDate | atTime(int hour, int minute, int second, int nano) | LocalDateTime | — |
 | LocalDate | atStartOfDay() | LocalDateTime | Questa data all’ora 00:00 |
 | LocalDate | atStartOfDay(ZoneId zone) | ZonedDateTime | Questa data all’inizio del giorno in una zona specifica |
-| LocalTime | atDate(LocalDate date) | LocalDateTime | Combina questa ora con una data data |
-| LocalDateTime | atZone(ZoneId zone) | ZonedDateTime | Aggiunge un fuso orario a una data/ora locale |
+| `LocalTime` | atDate(LocalDate date) | LocalDateTime | Combina questa ora con una data data |
+| `LocalDateTime` | atZone(ZoneId zone) | ZonedDateTime | Aggiunge un fuso orario a una data/ora locale |
 | LocalDateTime | toLocalDate() | LocalDate | Estrae il componente data |
 | LocalDateTime | toLocalTime() | LocalTime | Estrae il componente ora |
-| ZonedDateTime | toLocalDate() | LocalDate | Rimuove zona/offset, mantiene la data locale |
+| `ZonedDateTime` | toLocalDate() | LocalDate | Rimuove zona/offset, mantiene la data locale |
 | ZonedDateTime | toLocalTime() | LocalTime | Rimuove zona/offset, mantiene l’ora locale |
 | ZonedDateTime | toLocalDateTime() | LocalDateTime | Rimuove zona/offset, mantiene la data/ora locale |
 
@@ -718,4 +718,15 @@ long days = ChronoUnit.DAYS.between(
 
 - Cambi DST con Duration: aggiungere 24 ore non è sempre “domani” in una zona con cambi DST.
 - `Period.ofWeeks(1)` è esattamente 7 giorni; gli effetti DST compaiono quando applicato a tipi consapevoli della zona.
-- `Instant.plus(Period)` → `UnsupportedTemporalTypeException` a runtime_
+- `Instant.plus(Period)` → runtime `UnsupportedTemporalTypeException`; usa `Duration` se possibile.
+- `Instant` non puo esser creata direttamente da `LocalDateTime`; devi applicare prima una time zone: `ldt.atZone(zone).toInstant()`.
+
+### 12.9.9 Summary
+
+| Feature | TemporalUnit | TemporalAmount | ChronoUnit | Period | Duration |
+| --- | --- | --- | --- | --- | --- |
+| Represents | A unit | An amount | enum of units | Y/M/D | S + nanos |
+| Multi-field | No | Yes | No | Yes | No |
+| Works with | plus/minus | plus/minus | date/time | LocalDate/LocalDateTime | Time/time-zone |
+| Human-based | No | Yes | No | Yes | No |
+| Machine-based | Yes | Yes | Yes | No | Yes |

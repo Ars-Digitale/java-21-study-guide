@@ -367,17 +367,17 @@ These methods are used to combine or convert between `LocalDate`, `LocalTime`, `
 
 | From | Method | Result | Description |
 | --- | --- | --- | --- |
-| LocalDate | `atTime(LocalTime time)` | LocalDateTime | Combines this date with a given time |
+| `LocalDate` | `atTime(LocalTime time)` | LocalDateTime | Combines this date with a given time |
 | LocalDate | `atTime(int hour, int minute)` | LocalDateTime | Convenience overloads with numeric time components |
 | LocalDate | `atTime(int hour, int minute, int second)` | LocalDateTime | — |
 | LocalDate | `atTime(int hour, int minute, int second, int nano)` | LocalDateTime | — |
 | LocalDate | `atStartOfDay()` | LocalDateTime | This date at time 00:00 |
 | LocalDate | `atStartOfDay(ZoneId zone)` | ZonedDateTime | This date at start of day in a specific zone |
-| LocalTime | `atDate(LocalDate date)` | LocalDateTime | Combines this time with a given date |
-| LocalDateTime | `atZone(ZoneId zone)` | ZonedDateTime | Adds a time zone to a local date-time |
+| `LocalTime` | `atDate(LocalDate date)` | LocalDateTime | Combines this time with a given date |
+| `LocalDateTime` | `atZone(ZoneId zone)` | ZonedDateTime | Adds a time zone to a local date-time |
 | LocalDateTime | `toLocalDate()` | LocalDate | Extracts the date component |
 | LocalDateTime | `toLocalTime()` | LocalTime | Extracts the time component |
-| ZonedDateTime | `toLocalDate()` | LocalDate | Drops zone/offset, keeps local date |
+| `ZonedDateTime` | `toLocalDate()` | LocalDate | Drops zone/offset, keeps local date |
 | ZonedDateTime | `toLocalTime()` | LocalTime | Drops zone/offset, keeps local time |
 | ZonedDateTime | `toLocalDateTime()` | LocalDateTime | Drops zone/offset, keeps local date-time |
 
