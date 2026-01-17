@@ -20,7 +20,7 @@
 		- [10.4.2 Assegnazioni incompatibili (errori a compile-time)](#1042-assegnazioni-incompatibili-errori-a-compile-time)
 		- [10.4.3 Rischio runtime della covarianza: ArrayStoreException](#1043-rischio-runtime-della-covarianza-arraystoreexception)
 	- [10.5 Confrontare gli array](#105-confrontare-gli-array)
-	- [10.6 Metodi di utilita di Arrays](#106-metodi-di-utilita-di-arrays)
+	- [10.6 Metodi di utilita di Arrays](#106-metodi-di-utilità-di-arrays)
 		- [10.6.1 Arrays.toString](#1061-arraystostring)
 		- [10.6.2 Arrays.deepToString per array annidati](#1062-arraysdeeptostring-per-array-annidati)
 		- [10.6.3 Arrays.sort](#1063-arrayssort)
