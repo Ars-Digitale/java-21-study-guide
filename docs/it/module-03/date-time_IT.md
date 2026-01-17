@@ -35,7 +35,8 @@
 ## 12.1 Data e ora
 
 Java fornisce un’API moderna, coerente e immutabile per data/ora nel package `java.time.*`.
-Questa API sostituisce le vecchie classi `java.util.Date` e `java.util.Calendar` ed è ampiamente testata negli esami di certificazione.
+
+Questa API sostituisce le vecchie classi `java.util.Date` e `java.util.Calendar`.
 
 A seconda del livello di dettaglio richiesto, Java offre quattro classi principali:
 
