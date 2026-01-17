@@ -86,24 +86,24 @@ Vous pouvez construire des objets date/heure précis en utilisant les méthodes 
 
 Toutes les classes incluent plusieurs versions surchargées de `of()` (seules les plus courantes sont listées ici).
 
-**LocalDate — formes surchargées de `of()@@CODE_END@**
-- `of(int year, int month, int dayOfMonth)`@LIST_ITEM_END@@
-- `of(int year, Month month, int dayOfMonth)`@LIST_ITEM_END@@
+**LocalDate — formes surchargées de `of()`
+- `of(int year, int month, int dayOfMonth)`
+- `of(int year, Month month, int dayOfMonth)`
 
-**LocalTime — formes surchargées de `of()@@CODE_END@**
-- `of(int hour, int minute)`@LIST_ITEM_END@@
-- `of(int hour, int minute, int second)`@LIST_ITEM_END@@
-- `of(int hour, int minute, int second, int nanoOfSecond)`@LIST_ITEM_END@@
+**LocalTime — formes surchargées de `of()`
+- `of(int hour, int minute)`
+- `of(int hour, int minute, int second)`
+- `of(int hour, int minute, int second, int nanoOfSecond)`
 
-**LocalDateTime — formes surchargées de `of()@@CODE_END@**
-- `of(int year, int month, int day, int hour, int minute)`@LIST_ITEM_END@@
-- `of(int year, int month, int day, int hour, int minute, int second)`@LIST_ITEM_END@@
-- `of(int year, int month, int day, int hour, int minute, int second, int nano)`@LIST_ITEM_END@@
-- `of(LocalDate date, LocalTime time)`@LIST_ITEM_END@@
+**LocalDateTime — formes surchargées de `of()`
+- `of(int year, int month, int day, int hour, int minute)`
+- `of(int year, int month, int day, int hour, int minute, int second)`
+- `of(int year, int month, int day, int hour, int minute, int second, int nano)`
+- `of(LocalDate date, LocalTime time)`
 
-**ZonedDateTime — formes surchargées de `of()@@CODE_END@**
-- `of(LocalDate date, LocalTime time, ZoneId zone)`@LIST_ITEM_END@@
-- `of(int y, int m, int d, int h, int min, int s, int nano, ZoneId zone)`@LIST_ITEM_END@@
+**ZonedDateTime — formes surchargées de `of()`
+- `of(LocalDate date, LocalTime time, ZoneId zone)`
+- `of(int y, int m, int d, int h, int min, int s, int nano, ZoneId zone)`
 
 - Exemples
 
@@ -130,7 +130,7 @@ var localDateTime2 = LocalDateTime.of(localDate1, localTime1);
 var zoned = ZonedDateTime.of(2025, 7, 31, 13, 55, 22, 0, ZoneId.of("Europe/Paris"));
 ```
 
-### 12.1.2 Arithmétique date/heure : méthodes `plus` et `minus@@CODE_END@
+### 12.1.2 Arithmétique date/heure : méthodes `plus` et `minus`
 
 Toutes les classes du package `java.time` (comme `LocalDate`, `LocalTime`, `LocalDateTime`, `ZonedDateTime`, etc.) sont **immutables**.
  
@@ -698,7 +698,7 @@ Period p = Period.between(
 // P2M9D
 ```
 
-**Utiliser `ChronoUnit` `between@@CODE_END@**
+**Utiliser `ChronoUnit` `between`**
 
 ```java
 long days = ChronoUnit.DAYS.between(
