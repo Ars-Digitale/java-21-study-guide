@@ -4,7 +4,7 @@
 
 - [7. Flux de contrôle](#7-flux-de-contrôle)
 	- [7.1 L’instruction if](#71-linstruction-if)
-	- [7.2 L’instruction & l’expression switch](#72-linstruction--lexpression-switch)
+	- [7.2 L’instruction & l’expression switch](#72-linstruction-switch--lexpression)
 		- [7.2.1 La variable cible du switch peut être](#721-la-variable-cible-du-switch-peut-être)
 		- [7.2.2 Valeurs case acceptables](#722-valeurs-case-acceptables)
 		- [7.2.3 Compatibilité de type entre selector et case](#723-compatibilité-de-type-entre-selector-et-case)
