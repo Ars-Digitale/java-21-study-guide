@@ -2,22 +2,25 @@
 
 ### Table des matières
 
-- [7. Flux de contrôle](#7-control-flow)
-	- [7.1 L’instruction if](#71-the-if-statement)
-	- [7.2 L’instruction & l’expression switch](#72-the-switch-statement--expression)
-		- [7.2.1 La variable cible du switch peut être](#721-the-switch-target-variable-can-be)
-		- [7.2.2 Valeurs case acceptables](#722-acceptable-case-values)
-		- [7.2.3 Compatibilité de type entre selector et case](#723-type-compatibility-between-selector-and-case)
-		- [7.2.4 Pattern matching dans switch](#724-pattern-matching-in-switch)
-			- [7.2.4.1 Noms de variables et portée entre les branches](#7241-variable-names-and-scope-across-branches)
-			- [7.2.4.2 Ordonnancement, dominance et exhaustivité dans les switch à patterns](#7242-ordering-dominance-and-exhaustiveness-in-pattern-switches)
-	- [7.3 Deux formes de switch : instruction switch vs expression switch](#73-two-forms-of-switch-switch-statement-vs-switch-expression)
-		- [7.3.1 L’instruction switch](#731-the-switch-statement)
-			- [7.3.1.1 Comportement de fall-through](#7311-fall-through-behavior)
-		- [7.3.2 L’expression switch](#732-the-switch-expression)
-			- [7.3.2.1 yield dans les blocs d’expression switch](#7321-yield-in-switch-expression-blocks)
-			- [7.3.2.2 Exhaustivité pour les expressions switch](#7322-exhaustiveness-for-switch-expressions)
-- [7.4 Gestion de null](#74-null-handling)
+- [7. Flux de contrôle](#7-flux-de-contrôle)
+	- [7.1 L’instruction if](#71-linstruction-if)
+	- [7.2 L’instruction & l’expression switch](#72-linstruction--lexpression-switch)
+		- [7.2.1 La variable cible du switch peut être](#721-la-variable-cible-du-switch-peut-être)
+		- [7.2.2 Valeurs case acceptables](#722-valeurs-case-acceptables)
+		- [7.2.3 Compatibilité de type entre selector et case](#723-compatibilité-de-type-entre-selector-et-case)
+		- [7.2.4 Pattern matching dans switch](#724-pattern-matching-dans-switch)
+			- [7.2.4.1 Noms de variables et portée entre les branches](#7241-noms-de-variables-et-portée-entre-les-branches)
+			- [7.2.4.2 Ordonnancement, dominance et exhaustivité dans les switch à patterns](#7242-ordonnancement-dominance-et-exhaustivité-dans-les-switch-à-patterns)
+	- [7.3 Deux formes de switch : instruction switch vs expression switch](#73-deux-formes-de-switch--instruction-switch-vs-expression-switch)
+		- [7.3.1 L’instruction switch](#731-linstruction-switch)
+			- [7.3.1.1 Comportement de fall-through](#7311-comportement-de-fall-through)
+		- [7.3.2 L’expression switch](#732-lexpression-switch)
+			- [7.3.2.1 yield dans les blocs d’expression switch](#7321-yield-dans-les-blocs-dexpression-switch)
+			- [7.3.2.2 Exhaustivité pour les expressions switch](#7322-exhaustivité-pour-les-expressions-switch)
+- [7.4 Gestion de null](#74-gestion-de-null)
+
+
+---
 
 Le **flux de contrôle** en Java fait référence à l’**ordre dans lequel les instructions individuelles, les commandes ou les appels de méthode sont exécutés** pendant l’exécution du programme.
 
