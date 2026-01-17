@@ -9,13 +9,13 @@
   - [4.4 Notes](#44-notes)
   - [4.5 Récapitulatif](#45-récapitulatif)
   - [4.6 Arithmétique et promotion numérique primitive](#46-arithmétique-et-promotion-numérique-primitive)
-    - [4.6.1 Règles de promotion numérique en Java](#461-règles-de-promotion-numérique-en-java)
+    - [4.6.1 Règles de promotion numérique en Java](#461--règles-de-promotion-numérique-en-java)
       - [4.6.1.1 Règle 1 – Types numériques mixtes → le plus petit type est promu vers le plus grand](#4611-règle-1--types-numériques-mixtes--le-plus-petit-type-est-promu-vers-le-plus-grand)
       - [4.6.1.2 Règle 2 – Entier + flottant → l’entier est promu vers le flottant](#4612-règle-2--entier--flottant--lentier-est-promu-vers-le-flottant)
       - [4.6.1.3 Règle 3 – byte, short et char sont promus en int lors des opérations arithmétiques](#4613-règle-3--byte-short-et-char-sont-promus-en-int-lors-des-opérations-arithmétiques)
       - [4.6.1.4 Règle 4 – Le type du résultat correspond au type promu des opérandes](#4614-règle-4--le-type-du-résultat-correspond-au-type-promu-des-opérandes)
-    - [4.6.2 Récapitulatif du comportement de promotion numérique](#462-récapitulatif-du-comportement-de-promotion-numérique)
-      - [4.6.2.1 Points clés](#4621-points-clés)
+    - [4.6.2 Récapitulatif du comportement de promotion numérique](#462--récapitulatif-du-comportement-de-promotion-numérique)
+      - [4.6.2.1 Points clés](#4621--points-clés)
   - [4.7 Cast en Java](#47-cast-en-java)
     - [4.7.1 Cast primitif](#471-cast-primitif)
       - [4.7.1.1 Cast large implicite](#4711-cast-large-implicite)
@@ -388,7 +388,7 @@ if (x instanceof Dog) {
 
 ---
 
-### 4.7.5 Key Points Summary
+### 4.7.5 Résumé des points clés
 
 | Type de cast | S’applique à | Direction | Syntaxe | Sûr ? | Effettué par |
 | --- | --- | --- | --- | --- | --- |
@@ -399,7 +399,7 @@ if (x instanceof Dog) {
 
 ---
 
-### 4.7.6 Examples
+### 4.7.6 Exemples
 
 ```java
 // Cast primitif
@@ -417,7 +417,7 @@ Object n = Integer.valueOf(10);
 
 ---
 
-## 4.8 Summary
+## 4.8 Résumé
 
 - Le **cast primitif** change le type numérique.  
 - Le **cast de référence** change la “vue” d’un objet dans la hiérarchie.  
