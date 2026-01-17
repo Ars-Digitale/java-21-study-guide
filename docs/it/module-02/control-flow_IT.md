@@ -8,7 +8,7 @@
 		- [7.2.1 La variabile target dello switch può essere](#721-la-variable-target-dello-switch-può-essere)
 		- [7.2.2 Valori case accettabili](#722-valori-case-accettabili)
 		- [7.2.3 Compatibilità di tipo tra selector e case](#723-compatibilità-di-tipo-tra-selector-e-case)
-		- [7.2.4 Pattern matching nello switch](#724-pattern-matching-nello-switch)
+		- [7.2.4 Pattern Matching nello Switch](#724-pattern-matching-nello-switch)
 			- [7.2.4.1 Nomi delle variabili e scope tra i rami](#7241-nomi-delle-variabili-e-scope-tra-i-rami)
 			- [7.2.4.2 Ordinamento, dominanza ed esaustività negli switch con pattern](#7242-ordinamento-dominanza-ed-esaustività-negli-switch-con-pattern)
 	- [7.3 Due forme di switch: istruzione switch vs espressione switch](#73-due-forme-di-switch-istruzione-switch-vs-espressione-switch)
