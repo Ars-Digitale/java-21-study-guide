@@ -18,7 +18,7 @@
 	- [10.4 Affectations de références de tableaux](#104-affectations-de-références-de-tableaux)
 		- [10.4.1 Affecter des références compatibles](#1041-affecter-des-références-compatibles)
 		- [10.4.2 Affectations incompatibles (erreurs à la compilation)](#1042-affectations-incompatibles-erreurs-à-la-compilation)
-		- [10.4.3 Danger d’exécution de la covariance : ArrayStoreException](#1043-danger-dexécution-de-la-covariance-arraystoreexception)
+		- [10.4.3 Danger d’exécution de la covariance : ArrayStoreException](#1043-danger-dexécution-de-la-covariance--arraystoreexception)
 	- [10.5 Comparer des tableaux](#105-comparer-des-tableaux)
 	- [10.6 Méthodes utilitaires de Arrays](#106-méthodes-utilitaires-de-arrays)
 		- [10.6.1 Arrays.toString](#1061-arraystostring)
