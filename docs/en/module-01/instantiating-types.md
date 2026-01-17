@@ -2,7 +2,7 @@
 
 ### Table of Contents
 
-- [6. Instantiating Types](#6-instantiating-types)
+- [6. Introduction](#6-introduction)
   - [6.1 Instantiating Types](#61-instantiating-types)
     - [6.1.1 Handling Primitive Types](#611-handling-primitive-types)
       - [6.1.1.1 Declaring a Primitive](#6111-declaring-a-primitive)
@@ -38,7 +38,7 @@
 ---
 
 
-## 6.1 Instantiating Types
+## 6.1 Introduction
  
 In Java, a **type** can be either a **primitive type** (such as `int`, `double`, `boolean`, etc.) or a **reference type** (classes, interfaces, arrays, enums, records, etc.). See: [Java Data Types and Casting](data-types.md)
 
