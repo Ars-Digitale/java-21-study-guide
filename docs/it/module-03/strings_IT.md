@@ -72,12 +72,12 @@ Una sequenza di escape inizia con un backslash `\`.
 
 | Escape | Significato | Esempio Java | Risultato |
 | --- | --- | --- | --- |
-| `\\"` | doppia virgoletta | `"She said \\"Hi\\""` | `She said "Hi"` |
-| `\\\\` | backslash | `"C:\\\\Users\\\\Alex"` | `C:\Users\Alex` |
+| `\"` | doppia virgoletta | `"She said \"Hi\""` | `She said "Hi"` |
+| `\\` | backslash | `"C:\\Users\\Alex"` | `C:\Users\Alex` |
 | `\n` | a capo (LF) | `"Hello\nWorld"` | `Hello` + line break + `World` |
 | `\r` | ritorno carrello (CR) | `"A\rB"` | `CR before B` |
 | `\t` | tab | `"Name\tAge"` | `Name    Age` |
-| `\''` | virgoletta singola | `"It\'s ok"` | `It's ok` |
+| `\'` | virgoletta singola | `"It\'s ok"` | `It's ok` |
 | `\b` | backspace | `"AB\bC"` | `AC` (il `B` viene rimosso visivamente) |
 | `\uXXXX` | unità di codice Unicode | `"\u00A9"` | `©` |
 
