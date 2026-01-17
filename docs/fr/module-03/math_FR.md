@@ -3,21 +3,21 @@
 ### Table des matières
 
 - [11. Mathématiques en Java](#11-math-in-java)
-- [11.1 API Math](#111-math-apis)
-- [11.1.1 Maximum et minimum entre deux valeurs](#1111-maximum-and-minimum-between-two-values)
-- [11.1.2 Math.round](#1112-mathround)
-- [11.1.3 Math.ceil (Ceiling)](#1113-mathceil-ceiling)
-- [11.1.4 Math.floor (Floor)](#1114-mathfloor-floor)
-- [11.1.5 Math.pow](#1115-mathpow)
-- [11.1.6 Math.random](#1116-mathrandom)
-- [11.1.7 Math.abs](#1117-mathabs)
-- [11.1.8 Math.sqrt](#1118-mathsqrt)
-- [11.1.9 Tableau récapitulatif](#1119-summary-table)
-- [11.2 BigInteger et BigDecimal](#112-biginteger-and-bigdecimal)
-- [11.2.1 Pourquoi double et float ne suffisent pas](#1121-why-double-and-float-are-not-enough)
-- [11.2.2 BigInteger — Entiers à précision arbitraire](#1122-biginteger--arbitrary-precision-integers)
-- [11.2.3 Créer BigInteger](#1123-creating-biginteger)
-- [11.2.4 Opérations (pas d’opérateurs)](#1124-operations-no-operators)
+	- [11.1 API Math](#111-math-apis)
+		- [11.1.1 Maximum et minimum entre deux valeurs](#1111-maximum-and-minimum-between-two-values)
+		- [11.1.2 Math.round](#1112-mathround)
+		- [11.1.3 Math.ceil (Ceiling)](#1113-mathceil-ceiling)
+		- [11.1.4 Math.floor (Floor)](#1114-mathfloor-floor)
+		- [11.1.5 Math.pow](#1115-mathpow)
+		- [11.1.6 Math.random](#1116-mathrandom)
+		- [11.1.7 Math.abs](#1117-mathabs)
+		- [11.1.8 Math.sqrt](#1118-mathsqrt)
+		- [11.1.9 Tableau récapitulatif](#1119-summary-table)
+	- [11.2 BigInteger et BigDecimal](#112-biginteger-and-bigdecimal)
+		- [11.2.1 Pourquoi double et float ne suffisent pas](#1121-why-double-and-float-are-not-enough)
+		- [11.2.2 BigInteger — Entiers à précision arbitraire](#1122-biginteger--arbitrary-precision-integers)
+		- [11.2.3 Créer BigInteger](#1123-creating-biginteger)
+		- [11.2.4 Opérations (pas d’opérateurs)](#1124-operations-no-operators)
 
 ---
 
@@ -60,8 +60,8 @@ System.out.println(Math.min(10, -20));      // -20
 les valeurs dont la partie fractionnaire est 0.5 et au-dessus sont arrondies vers le haut ; en dessous de 0.5 elles sont arrondies vers le bas (vers l’entier le plus proche).
 
 **Surcharges**
-- `long round(double value)`@LIST_ITEM_END@@
-- `int round(float value)`@LIST_ITEM_END@@
+- `long round(double value)`
+- `int round(float value)`
 
 - Exemples :
 
@@ -80,7 +80,7 @@ Math.round(-3.5f);  // -3  (float version returns int)
 `ceil()` renvoie la plus petite valeur `double` qui est supérieure ou égale à l’argument.
 
 **Surcharge**
-- `double ceil(double value)`@LIST_ITEM_END@@
+- `double ceil(double value)`
 
 - Exemples :
 
@@ -94,7 +94,7 @@ Math.ceil(-3.1);  // -3.0
 `floor()` renvoie la plus grande valeur `double` qui est inférieure ou égale à l’argument.
 
 **Surcharge**
-- `double floor(double value)`@LIST_ITEM_END@@
+- `double floor(double value)`
 
 - Exemples :
 
@@ -108,7 +108,7 @@ Math.floor(-3.1);  // -4.0
 `pow()` élève une valeur à une puissance.
 
 **Surcharge**
-- `double pow(double base, double exponent)`@LIST_ITEM_END@@
+- `double pow(double base, double exponent)`
 
 - Exemples :
 
@@ -123,7 +123,7 @@ Math.pow(10, -1);    // 0.1
 `random()` renvoie un `double` dans l’intervalle `[0.0, 1.0)` (0.0 inclus, 1.0 exclus).
 
 **Surcharge**
-- `double random()`@LIST_ITEM_END@@
+- `double random()`
 
 - Exemples :
 
@@ -139,10 +139,10 @@ int x = (int)(Math.random() * 10);
 `abs()` renvoie la valeur absolue (distance à zéro).
 
 **Surcharges**
-- `int abs(int value)`@LIST_ITEM_END@@
-- `long abs(long value)`@LIST_ITEM_END@@
-- `float abs(float value)`@LIST_ITEM_END@@
-- `double abs(double value)`@LIST_ITEM_END@@
+- `int abs(int value)`
+- `long abs(long value)`
+- `float abs(float value)`
+- `double abs(double value)`
 
 ### 11.1.8 `Math.sqrt()`
 
@@ -199,20 +199,20 @@ Pour des tâches comme les calculs financiers, cela est inacceptable.
 
 Méthodes courantes :
 
-**À partir d’un long@@BOLD_END@
+**À partir d’un long**
 
 ```java
 static BigInteger valueOf(long val);
 ```
 
-**À partir d’une String@@BOLD_END@
+**À partir d’une String**
 
 ```java
 BigInteger(String val);        // decimal by default
 BigInteger(String val, int radix);
 ```
 
-**Grande valeur aléatoire@@BOLD_END@
+**Valeur aléatoire**
 
 ```java
 BigInteger(int numBits, Random rnd);
@@ -244,15 +244,15 @@ Vous ne pouvez pas utiliser les opérateurs arithmétiques standards (`+`, `-`, 
   
 À la place, vous devez appeler des méthodes (qui renvoient toutes de nouvelles instances). En voici quelques-unes courantes pour `BigInteger` :
 
-- `add(BigInteger val)`@LIST_ITEM_END@@
-- `subtract(BigInteger val)`@LIST_ITEM_END@@
-- `multiply(BigInteger val)`@LIST_ITEM_END@@
+- `add(BigInteger val)`
+- `subtract(BigInteger val)`
+- `multiply(BigInteger val)`
 - `divide(BigInteger val)` – division entière
-- `remainder(BigInteger val)`@LIST_ITEM_END@@
-- `pow(int exponent)`@LIST_ITEM_END@@
-- `negate()`@LIST_ITEM_END@@
-- `abs()`@LIST_ITEM_END@@
-- `gcd(BigInteger val)`@LIST_ITEM_END@@
+- `remainder(BigInteger val)`
+- `pow(int exponent)`
+- `negate()`
+- `abs()`
+- `gcd(BigInteger val)`
 - `compareTo(BigInteger val)` – ordre
 
 - Exemple :
