@@ -49,7 +49,7 @@ A seconda del livello di dettaglio richiesto, Java offre quattro classi principa
 > - Un **offset di zona** è uno spostamento fisso rispetto a UTC/GMT (ad esempio, `+01:00`, `-07:00`).  
 > - Per confrontare due istanti provenienti da fusi orari diversi, convertili in UTC (GMT) applicando l’offset.
 
-**Ottenere la data/ora corrente@@BOLD_END@
+**Ottenere la data/ora corrente**
 
 Puoi recuperare i valori correnti del sistema usando i metodi statici `now()`:
 
@@ -84,24 +84,24 @@ Entrambi rappresentano lo stesso istante nel tempo, semplicemente espresso in fu
 Puoi costruire oggetti di data/ora precisi usando i metodi factory `of()`.
 Tutte le classi includono più versioni sovraccaricate di `of()` (qui sono elencate solo le più comuni).
 
-**LocalDate — forme sovraccaricate di `of()`@BOLD_END@
-- `of(int year, int month, int dayOfMonth)`@LIST_ITEM_END@@
-- `of(int year, Month month, int dayOfMonth)`@LIST_ITEM_END@@
+**LocalDate — forme sovraccaricate di `of()`**
+- `of(int year, int month, int dayOfMonth)`
+- `of(int year, Month month, int dayOfMonth)`
 
-**LocalTime — forme sovraccaricate di `of()`@BOLD_END@
-- `of(int hour, int minute)`@LIST_ITEM_END@@
-- `of(int hour, int minute, int second)`@LIST_ITEM_END@@
-- `of(int hour, int minute, int second, int nanoOfSecond)`@LIST_ITEM_END@@
+**LocalTime — forme sovraccaricate di `of()`**
+- `of(int hour, int minute)`
+- `of(int hour, int minute, int second)`
+- `of(int hour, int minute, int second, int nanoOfSecond)`
 
-**LocalDateTime — forme sovraccaricate di `of()`@BOLD_END@
-- `of(int year, int month, int day, int hour, int minute)`@LIST_ITEM_END@@
-- `of(int year, int month, int day, int hour, int minute, int second)`@LIST_ITEM_END@@
-- `of(int year, int month, int day, int hour, int minute, int second, int nano)`@LIST_ITEM_END@@
-- `of(LocalDate date, LocalTime time)`@LIST_ITEM_END@@
+**LocalDateTime — forme sovraccaricate di `of()`**
+- `of(int year, int month, int day, int hour, int minute)`
+- `of(int year, int month, int day, int hour, int minute, int second)`
+- `of(int year, int month, int day, int hour, int minute, int second, int nano)`
+- `of(LocalDate date, LocalTime time)`
 
-**ZonedDateTime — forme sovraccaricate di `of()`@BOLD_END@
-- `of(LocalDate date, LocalTime time, ZoneId zone)`@LIST_ITEM_END@@
-- `of(int y, int m, int d, int h, int min, int s, int nano, ZoneId zone)`@LIST_ITEM_END@@
+**ZonedDateTime — forme sovraccaricate di `of()`
+- `of(LocalDate date, LocalTime time, ZoneId zone)`
+- `of(int y, int m, int d, int h, int min, int s, int nano, ZoneId zone)`
 
 - Esempi
 
@@ -128,7 +128,7 @@ var localDateTime2 = LocalDateTime.of(localDate1, localTime1);
 var zoned = ZonedDateTime.of(2025, 7, 31, 13, 55, 22, 0, ZoneId.of("Europe/Paris"));
 ```
 
-### 12.1.2 Aritmetica su data e ora: metodi `plus` e `minus@@CODE_END@
+### 12.1.2 Aritmetica su data e ora: metodi `plus` e `minus`
 
 Tutte le classi nel package `java.time` (come `LocalDate`, `LocalTime`, `LocalDateTime`, `ZonedDateTime`, ecc.) sono **immutabili**.
 Ciò significa che metodi come `plusXxx()` e `minusXxx()` non modificano mai l’oggetto originale — restituiscono invece una nuova istanza con il valore regolato.
@@ -137,18 +137,18 @@ Ciò significa che metodi come `plusXxx()` e `minusXxx()` non modificano mai l�
 
 La maggior parte delle classi di data/ora supporta tre tipi di metodi aritmetici:
 
-- **Scorciatoie specifiche per tipo**@LIST_ITEM_END@@
-- `plusDays(long daysToAdd)`@LIST_ITEM_END@@
-- `plusHours(long hoursToAdd)`@LIST_ITEM_END@@
+- **Scorciatoie specifiche per tipo**
+- `plusDays(long daysToAdd)`
+- `plusHours(long hoursToAdd)`
 - ecc.
 
-- **Metodi generici basati su “amount”**@LIST_ITEM_END@@
-- `plus(TemporalAmount amount)` → ad esempio `Period`, `Duration`@LIST_ITEM_END@@
-- `minus(TemporalAmount amount)`@LIST_ITEM_END@@
+- **Metodi generici basati su “amount”**
+- `plus(TemporalAmount amount)` → ad esempio `Period`, `Duration`
+- `minus(TemporalAmount amount)`
 
-- **Metodi generici basati su “unit”**@LIST_ITEM_END@@
-- `plus(long amountToAdd, TemporalUnit unit)`@LIST_ITEM_END@@
-- `minus(long amountToSubtract, TemporalUnit unit)`@LIST_ITEM_END@@
+- **Metodi generici basati su “unit”**
+- `plus(long amountToAdd, TemporalUnit unit)`
+- `minus(long amountToSubtract, TemporalUnit unit)`
 
 Questi consentono un’aritmetica su data/ora flessibile e leggibile.
 
@@ -156,7 +156,7 @@ Questi consentono un’aritmetica su data/ora flessibile e leggibile.
 
 `LocalDate` rappresenta solo una data (niente ora, niente zona).
 
-**Principali metodi `plus` / `minus` (overload)@@BOLD_END@
+**Principali metodi `plus` / `minus` (overload)**
 
 | Metodo | Descrizione |
 | --- | --- |
@@ -195,7 +195,7 @@ LocalDate d6 = date.plus(p);
 
 `LocalTime` rappresenta solo un orario (niente data, niente zona).
 
-**Principali metodi `plus` / `minus` (overload)@@BOLD_END@
+**Principali metodi `plus` / `minus` (overload)**
 
 | Metodo | Descrizione |
 | --- | --- |
@@ -238,7 +238,7 @@ LocalTime t5 = time.plus(d);                // 15:00
 `LocalDateTime` combina data + ora, ma ancora senza fuso orario.
 Supporta sia le scorciatoie legate alla data sia quelle legate all’ora.
 
-**Principali metodi `plus` / `minus` (overload)@@BOLD_END@
+**Principali metodi `plus` / `minus` (overload)**
 
 | Metodo | Descrizione |
 | --- | --- |
@@ -279,7 +279,7 @@ LocalDateTime l6 = ldt.plus(d);    // 2025-03-10T18:30
 
 Supporta gli stessi metodi `plus`/`minus` di `LocalDateTime`, ma con attenzione aggiuntiva ai fusi orari e all’ora legale (DST).
 
-**Principali metodi `plus` / `minus` (overload)@@BOLD_END@
+**Principali metodi `plus` / `minus` (overload)**
 
 | Metodo | Descrizione |
 | --- | --- |
@@ -327,7 +327,7 @@ A seconda delle regole dell’ora legale per quella data:
 
 ---
 
-## 12.2 Metodi `withXxx(...)@@CODE_END@
+## 12.2 Metodi `withXxx(...)`
 
 I metodi `with...` restituiscono una copia dell’oggetto con un campo modificato.
 Non mutano mai l’istanza originale.
@@ -393,7 +393,7 @@ Il package `java.time` fornisce tre classi temporali essenziali che rappresentan
 `Period` rappresenta una quantità di tempo basata su data, come “3 anni, 2 mesi e 5 giorni”.
 Si usa con `LocalDate` e `LocalDateTime` (perché contengono parti di data).
 
-**Metodi di creazione@@BOLD_END@
+**Metodi di creazione**
 
 | Metodo | Descrizione |
 | --- | --- |
@@ -404,7 +404,7 @@ Si usa con `LocalDate` e `LocalDateTime` (perché contengono parti di data).
 | Period.of(int years, int months, int days) | Periodo completo |
 | Period.parse(CharSequence text) | Formato ISO-8601: "P1Y2M3D", "P7D", "P1W", ... |
 
-**Proprietà chiave@@BOLD_END@
+**Proprietà chiave**
 
 - Non supporta ore, minuti, secondi, nanosecondi.
 - Può essere negativo.
@@ -434,7 +434,7 @@ LocalDate result = base.plus(p2);          // 2026-03-13
 `Duration` rappresenta una quantità di tempo basata su secondi e nanosecondi.
 Si usa con `LocalTime`, `LocalDateTime`, `ZonedDateTime` e `Instant`.
 
-**Metodi di creazione@@BOLD_END@
+**Metodi di creazione**
 
 | Metodo | Descrizione |
 | --- | --- |
@@ -448,7 +448,7 @@ Si usa con `LocalTime`, `LocalDateTime`, `ZonedDateTime` e `Instant`.
 | Duration.between(Temporal start, Temporal end) | Calcola la durata tra due istanti |
 | Duration.parse(CharSequence text) | ISO: "PT20H", "PT15M", "PT10S" |
 
-**Caratteristiche chiave@@BOLD_END@
+**Caratteristiche chiave**
 
 - Supporta ore fino ai nanosecondi, ma non anni/mesi/settimane direttamente.
 - Ideale per calcoli temporali a livello “macchina”.
@@ -487,7 +487,7 @@ Contiene:
 - Secondi dall’epoca (1970-01-01T00:00Z).
 - Un’aggiunta di nanosecondi.
 
-**Metodi di creazione@@BOLD_END@
+**Metodi di creazione**
 
 | Metodo | Descrizione |
 | --- | --- |
@@ -497,7 +497,7 @@ Contiene:
 | Instant.ofEpochMilli(long millis) | Da millisecondi dall’epoca |
 | Instant.parse(CharSequence text) | ISO: "2024-01-01T10:15:30Z" |
 
-**Conversioni@@BOLD_END@
+**Conversioni**
 
 | Azione | Metodo |
 | --- | --- |
@@ -534,7 +534,7 @@ Duration between = Duration.between(start, end); // PT2H30M
 | Duration | Ore fino ai nanosecondi | Calcoli temporali precisi | LocalTime, LocalDateTime, ZonedDateTime, Instant | Basato su “macchina” |
 | Instant | Punto esatto sulla timeline UTC | Rappresentazione timestamp | Convertibile da/a ZonedDateTime | Non combinabile con Period |
 
-**Trappole comuni@@BOLD_END@
+**Trappole comuni**
 
 - `Period.of(1, 0, 0)` non è la stessa cosa di `Duration.ofDays(365)` (anni bisestili!).
 - `Duration.ofDays(1)` potrebbe non essere uguale a un “giorno di calendario” pieno in una zona con DST.
@@ -658,7 +658,7 @@ LocalDate d2 = LocalDate.now().plus(p);
 
 Entrambi producono lo stesso risultato quando supportati.
 
-**Differenze@@BOLD_END@
+**Differenze**
 
 | Aspetto | TemporalUnit | TemporalAmount |
 | --- | --- | --- |
@@ -672,7 +672,7 @@ Entrambi producono lo stesso risultato quando supportati.
 
 Molte classi forniscono un metodo `between` da `ChronoUnit`, `Duration` o `Period`.
 
-**Usare `Duration.between` (per classi basate sul tempo)@@BOLD_END@
+**Usare `Duration.between` (per classi basate sul tempo)**
 
 ```java
 Duration d = Duration.between(
@@ -682,7 +682,7 @@ Duration d = Duration.between(
 // PT3H30M
 ```
 
-**Usare `Period.between` (solo per date)@@BOLD_END@
+**Usare `Period.between` (solo per date)**
 
 ```java
 Period p = Period.between(
@@ -692,7 +692,7 @@ Period p = Period.between(
 // P2M9D
 ```
 
-**Usare `ChronoUnit` `between`@BOLD_END@
+**Usare `ChronoUnit` `between`**
 
 ```java
 long days = ChronoUnit.DAYS.between(
