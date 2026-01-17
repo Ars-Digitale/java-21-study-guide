@@ -10,7 +10,7 @@
     - [6.1.2 Gestione dei tipi riferimento](#612-gestione-dei-tipi-riferimento)
       - [6.1.2.1 Creare e assegnare un riferimento](#6121-creare-e-assegnare-un-riferimento)
       - [6.1.2.2 Costruttori](#6122-costruttori)
-      - [6.1.2.3 Blocchi di inizializzazione-distanza](#6123-blocchi-di-inizializzazione-distanza)
+      - [6.1.2.3 Blocchi di inizializzazione-istanza](#6123-blocchi-di-inizializzazione-istanza)
   - [6.2 Inizializzazione predefinita delle variabili](#62-inizializzazione-predefinita-delle-variabili)
     - [6.2.1 Variabili di istanza e di classe](#621-variabili-di-istanza-e-di-classe)
     - [6.2.2 Variabili final di istanza](#622-variabili-final-di-istanza)
@@ -272,7 +272,7 @@ Person p2 = new Person("Bob", 25);   // name = "Bob", age = 25
 > - I costruttori non sono ereditati: se una superclasse definisce costruttori, non sono automaticamente disponibili nella sottoclasse — devi dichiararli esplicitamente.
 > - Se dichiari un qualsiasi costruttore in una classe, il compilatore non genera il costruttore di default senza argomenti: se ti serve ancora un costruttore senza argomenti, devi dichiararlo manualmente.
 
-#### 6.1.2.3 Blocchi di inizializzazione d’istanza
+#### 6.1.2.3 Blocchi di inizializzazione istanza
 
 Oltre ai costruttori, Java offre un meccanismo chiamato **initializer blocks** per aiutare a inizializzare gli oggetti.  
 Sono blocchi di codice all’interno di una classe, racchiusi tra `{ }`, che vengono eseguiti **ogni volta che viene creata un’istanza**, subito prima dell’esecuzione del corpo del costruttore.
