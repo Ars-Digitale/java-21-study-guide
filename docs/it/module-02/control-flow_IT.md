@@ -146,7 +146,7 @@ Il tipo del selector e ogni etichetta `case` devono essere compatibili:
 - Per un selector `enum`, le etichette case devono essere costanti di quell’`enum`.
 - Per un selector `String`, le etichette case devono essere costanti stringa.
 
-### 7.2.4 Pattern Matching in Switch
+### 7.2.4 Pattern Matching nello Switch
 
 Lo switch in Java 21 supporta il pattern matching, inclusi:
 
