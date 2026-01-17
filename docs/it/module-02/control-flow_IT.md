@@ -11,7 +11,7 @@
 		- [7.2.4 Pattern Matching nello Switch](#724-pattern-matching-nello-switch)
 			- [7.2.4.1 Nomi delle variabili e scope tra i rami](#7241-nomi-delle-variabili-e-scope-tra-i-rami)
 			- [7.2.4.2 Ordinamento, dominanza ed esaustività negli switch con pattern](#7242-ordinamento-dominanza-ed-esaustività-negli-switch-con-pattern)
-	- [7.3 Due forme di switch: istruzione switch vs espressione switch](#73-due-forme-di-switch-istruzione-switch-vs-espressione-switch)
+	- [7.3 Due forme di switch: switch Statement vs switch Expression](#73-due-forme-di-switch-switch-statement-vs-switch-expression)
 		- [7.3.1 L’istruzione switch](#731-listruzione-switch)
 			- [7.3.1.1 Comportamento di fall-through](#7311-comportamento-di-fall-through)
 		- [7.3.2 L’espressione switch](#732-lespressione-switch)
