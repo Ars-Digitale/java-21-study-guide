@@ -24,7 +24,7 @@
        - [14.3.1.7 Surcharges mixtes primitifs + wrappers](#14317--surcharges-mixtes-primitifs--wrappers)
        - [14.3.1.8 Quand les primitifs se mélangent avec les types de référence](#14318--quand-les-primitifs-se-mélangent-avec-les-types-de-référence)
        - [14.3.1.9 Quand Object gagne](#14319--quand-object-gagne)
-       - [14.3.1.10 Tableau récapitulatif de la résolution de surcharge](#143110-tableau-récapitulatif-de-la-résolution-de-surcharge)
+       - [14.3.1.10 Tableau récapitulatif de la résolution de surcharge](#143110-tableau-récapitulatif-résolution-de-la-surcharge)
    - [14.4 Variables locales et d’instance](#144-variables-locales-et-dinstance)
      - [14.4.1 Variables d’instance](#1441-variables-dinstance)
      - [14.4.2 Variables locales](#1442-variables-locales)
@@ -37,8 +37,8 @@
      - [14.6.3 Blocs d’initialisation statique](#1463-blocs-dinitialisation-statique)
      - [14.6.4 Ordre d’initialisation statique vs instance](#1464-ordre-dinitialisation-statique-vs-instance)
      - [14.6.5 Accès aux membres statiques](#1465-accès-aux-membres-statiques)
-       - [14.6.5.1 Recommandé : utiliser le nom de la classe](#14651-recommandé-utiliser-le-nom-de-la-classe)
-       - [14.6.5.2 Aussi légal : via référence d’instance](#14652-aussi-légal-via-référence-dinstance)
+       - [14.6.5.1 Utiliser le nom de la classe](#14651-utiliser-le-nom-de-la-classe)
+       - [14.6.5.2 Via référence d’instance](#14652-via-référence-dinstance)
      - [14.6.6 Statique et héritage](#1466-statique-et-héritage)
      - [14.6.7 Pièges courants](#1467-pièges-courants)
 
@@ -609,9 +609,9 @@ public class Config {
 ( Se référer au chapitre : [15. Class Loading, Initialization, and Object Construction](class-loading.md) )
 
 
-### 14.6.5 Accéder aux membres statiques
+### 14.6.5 Accès aux membres statiques
 
-### 14.6.5.1 Recommandé : utiliser le nom de la classe
+### 14.6.5.1 Utiliser le nom de la classe
 
 ```java
 Math.sqrt(16);
@@ -619,7 +619,7 @@ MyClass.staticMethod();
 ```
 
 
-### 14.6.5.2 Aussi légal : via une référence d’instance
+### 14.6.5.2 Via une référence d’instance
 
 ```java
 MyClass obj = new MyClass();
