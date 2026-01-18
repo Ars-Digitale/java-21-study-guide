@@ -162,6 +162,7 @@ Scomposizione:
 | throws IOException | lista delle eccezioni |
 | method body | implementazione |
 
+---
 
 ## 14.2 Java è un linguaggio “Pass-by-Value”
 
@@ -394,6 +395,8 @@ fun(LocalDate.now());       // Output: Y
 | Mixed primitive + wrapper | Widening → boxing → varargs |
 
 
+---
+
 ## 14.4 Variabili locali e di istanza
 
 ### 14.4.1 Variabili di istanza
@@ -458,6 +461,8 @@ Le variabili effettivamente final possono essere usate in:
 I parametri di metodo si comportano come variabili locali e seguono le stesse regole.
 
 
+---
+
 ## 14.5 Varargs (Liste di argomenti a lunghezza variabile)
 
 I varargs permettono a un metodo di accettare **zero o più** parametri dello stesso tipo.
@@ -490,6 +495,7 @@ show(10, "A", "B", "C");      // length = 3
 > Varargs e array partecipano all’overloading dei metodi.
 > La risoluzione dell’overload può diventare ambigua.
 
+---
 
 ## 14.6 Metodi statici, variabili statiche e inizializzatori statici
 
@@ -527,7 +533,6 @@ public class Counter {
     }
 }
 ```
-
 
 ### 14.6.2 Metodi statici
 
