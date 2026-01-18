@@ -42,6 +42,7 @@
      - [14.6.6 Statico ed ereditarietà](#1466-statico-ed-ereditarieta)
      - [14.6.7 Errori comuni](#1467-errori-comuni)
 
+---
 
 Questo capitolo introduce concetti fondamentali di Programmazione Orientata agli Oggetti (OOP) in Java, iniziando con **metodi**, **passaggio dei parametri**, **overloading**, **variabili locali vs. di istanza** e **varargs**.
 
@@ -195,6 +196,8 @@ public static void methodTryModif(int num1){
 	num1 = 10;  // questa nuova assegnazione influisce solo sul parametro del metodo che, accidentalmente, ha lo stesso nome della variabile esterna.
 }
 ```
+
+---
 
 ## 14.3 Overloading dei metodi
 
