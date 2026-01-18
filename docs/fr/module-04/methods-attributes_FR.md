@@ -38,7 +38,7 @@
      - [14.6.4 Ordre d’initialisation statique vs instance](#1464-ordre-dinitialisation-statique-vs-instance)
      - [14.6.5 Accès aux membres statiques](#1465-accès-aux-membres-statiques)
        - [14.6.5.1 Utiliser le nom de la classe](#14651-utiliser-le-nom-de-la-classe)
-       - [14.6.5.2 Via référence d’instance](#14652-via-référence-dinstance)
+       - [14.6.5.2 Via une référence d’instance](#14652-via-une-référence-dinstance)
      - [14.6.6 Statique et héritage](#1466-statique-et-héritage)
      - [14.6.7 Pièges courants](#1467-pièges-courants)
 
