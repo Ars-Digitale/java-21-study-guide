@@ -1,4 +1,4 @@
-# COURSE INDEX
+# INDEX
 
 ## Modules
 
