@@ -1,54 +1,107 @@
-# INDEX
+# Course Index (Java 21)
 
-## Modules
+This index provides the complete **English (EN)** curriculum for the  
+**Java 21 Certification Guide**.
 
-- [Module 0: Prerequisites]
-	- [Prerequisite material](docs/en/module-00/prerequisites.md)
-- [Module 1: Basics]
-	- [Syntax Bulding blocks](docs/en/module-01/syntax-building-blocks.md)
-	- [Basic Language Building Blocks](docs/en/module-01/basic-building-blocks.md)
-	- [Java Naming Rules](docs/en/module-01/naming-rules.md)
-	- [Java Data Types and Casting](docs/en/module-01/data-types.md)
-	- [Java Operators](docs/en/module-01/java-operators.md)
-	- [Instantiating Types](docs/en/module-01/instantiating-types.md)
-- [Module 2: Control Flow]
-	- [Control Flow](docs/en/module-02/control-flow.md)
-    - [Loops](docs/en/module-02/loops.md)
-- [Module 3: Standard APIs]
-	- [Strings in Java](docs/en/module-03/strings.md)
-	- [Arrays in Java](docs/en/module-03/arrays.md)
-	- [Math in Java](docs/en/module-03/math.md)
-	- [Dates and Time](docs/en/module-03/date-time.md)
-	- [Formatting and Localizing](docs/en/module-03/formatting.md)
-- [Module 4: Object-Oriented Fundamentals]
-	- [Methods, Attributes and Variables](docs/en/module-04/methods-attributes.md)
-	- [Class Loading, Initialization, and Object Construction](docs/en/module-04/class-loading.md)
-	- [Inheritance](docs/en/module-04/inheritance.md)
-	- [Beyond Classes](docs/en/module-04/beyond-classes.md)
-	- [Generics in Java](docs/en/module-04/generics.md)
-	- [Exceptions and Error Handling](docs/en/module-04/exceptions.md)
-- [Module 5: Functional Programming]
-	- [Functional programming in Java](docs/en/module-05/functional.md)
-	- [Java Streams](docs/en/module-05/streams.md)
-- [Module 6: Collections APIs]
-	- [Introduction to the Collections Framework](docs/en/module-06/collections.md)
-	- [Shared Collection Operations & Equality](docs/en/module-06/shared-operations.md)
-	- [Sorting and Comparing](docs/en/module-06/comparing.md)
-	- [List APIs](docs/en/module-06/list-api.md)
-	- [Set APIs](docs/en/module-06/set-api.md)
-	- [Queue & Deque API](docs/en/module-06/queue-api.md)
-	- [Map API](docs/en/module-06/map-api.md)
-	- [Sequenced Collections](docs/en/module-06/sequenced.md)
-- [Module 7: Threads]
-	- [Threads Fundamentals](docs/en/module-07/threads.md)
-	- [Concurrency APIs](docs/en/module-07/concurrency.md)
-- [Module 8: Java I/O]
-	- [Files and Paths Fundamentals](docs/en/module-08/files-path.md)
-	- [Files and Paths APIs](docs/en/module-08/files-path-api.md)		
-	- [Java I/O Streams](docs/en/module-08/io-streams.md)
-	- [I/O Streams APIs](docs/en/module-08/io-streams-api.md)
-	- [Interacting with the User](docs/en/module-08/io-user.md)
-- [Module 9: Java Platform Module System (JPMS)]
-	- [JPMS Fundamentals](docs/en/module-09/jpms.md)
-	- [Compiling, Packaging, and Running Modules](docs/en/module-09/jpms-compiling.md)
-	- [Services in JPMS](docs/en/module-09/jpms-services.md)
+Modules are designed to be read **sequentially**, but each topic can also be used as a standalone reference.
+
+---
+
+## Module 00 — Prerequisites & Setup
+
+- [Prerequisite material](docs/en/module-00/prerequisites.md)
+- [Eclipse shortcuts (optional)](docs/en/module-00/eclipse-shortcuts.md)
+
+---
+
+## Module 01 — Java Language Basics
+
+- [Syntax building blocks](docs/en/module-01/syntax-building-blocks.md)
+- [Basic language building blocks](docs/en/module-01/basic-building-blocks.md)
+- [Java naming rules](docs/en/module-01/naming-rules.md)
+- [Java data types and casting](docs/en/module-01/data-types.md)
+- [Java operators](docs/en/module-01/java-operators.md)
+- [Instantiating types](docs/en/module-01/instantiating-types.md)
+
+---
+
+## Module 02 — Control Flow
+
+- [Control flow statements](docs/en/module-02/control-flow.md)
+- [Loops](docs/en/module-02/loops.md)
+
+---
+
+## Module 03 — Core Standard APIs
+
+- [Strings in Java](docs/en/module-03/strings.md)
+- [Arrays in Java](docs/en/module-03/arrays.md)
+- [Math utilities](docs/en/module-03/math.md)
+- [Dates and time](docs/en/module-03/date-time.md)
+- [Formatting and localization](docs/en/module-03/formatting.md)
+
+---
+
+## Module 04 — Object-Oriented Fundamentals
+
+- [Methods, attributes, and variables](docs/en/module-04/methods-attributes.md)
+- [Class loading, initialization, and object construction](docs/en/module-04/class-loading.md)
+- [Inheritance](docs/en/module-04/inheritance.md)
+- [Beyond classes](docs/en/module-04/beyond-classes.md)
+- [Generics in Java](docs/en/module-04/generics.md)
+- [Exceptions and error handling](docs/en/module-04/exceptions.md)
+
+---
+
+## Module 05 — Functional Programming
+
+- [Functional programming in Java](docs/en/module-05/functional.md)
+- [Java streams](docs/en/module-05/streams.md)
+
+---
+
+## Module 06 — Collections Framework
+
+- [Introduction to the collections framework](docs/en/module-06/collections.md)
+- [Shared collection operations and equality](docs/en/module-06/shared-operations.md)
+- [Sorting and comparing](docs/en/module-06/comparing.md)
+- [List APIs](docs/en/module-06/list-api.md)
+- [Set APIs](docs/en/module-06/set-api.md)
+- [Queue and deque APIs](docs/en/module-06/queue-api.md)
+- [Map APIs](docs/en/module-06/map-api.md)
+- [Sequenced collections](docs/en/module-06/sequenced.md)
+
+---
+
+## Module 07 — Concurrency and Threads
+
+- [Thread fundamentals](docs/en/module-07/threads.md)
+- [Concurrency APIs](docs/en/module-07/concurrency.md)
+
+---
+
+## Module 08 — Java I/O and NIO
+
+- [Files and paths fundamentals](docs/en/module-08/files-path.md)
+- [Files and paths APIs](docs/en/module-08/files-path-api.md)
+- [Java I/O streams](docs/en/module-08/io-streams.md)
+- [I/O streams APIs](docs/en/module-08/io-streams-api.md)
+- [Interacting with the user](docs/en/module-08/io-user.md)
+
+---
+
+## Module 09 — Java Platform Module System (JPMS)
+
+- [JPMS fundamentals](docs/en/module-09/jpms.md)
+- [Compiling, packaging, and running modules](docs/en/module-09/jpms-compiling.md)
+- [Services in JPMS](docs/en/module-09/jpms-services.md)
+
+---
+
+## Translations (Work in Progress)
+
+- Italian: `docs/it/`
+- French: `docs/fr/`
+
+The English version is the reference source.  
+Translations are aligned progressively, module by module.
