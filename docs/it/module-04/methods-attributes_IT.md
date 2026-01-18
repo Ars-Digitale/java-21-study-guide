@@ -37,9 +37,9 @@
      - [14.6.3 Blocchi di inizializzazione statica](#1463-blocchi-di-inizializzazione-statica)
      - [14.6.4 Ordine di inizializzazione statico vs istanza](#1464-ordine-di-inizializzazione-statico-vs-istanza)
      - [14.6.5 Accesso ai membri statici](#1465-accesso-ai-membri-statici)
-       - [14.6.5.1 Consigliato uso del nome della classe](#14651-consigliato-uso-del-nome-della-classe)
-       - [14.6.5.2 Anche legale tramite riferimento di istanza](#14652-anche-legale-tramite-riferimento-di-istanza)
-     - [14.6.6 Statico ed ereditarietà](#1466-statico-ed-ereditarieta)
+       - [14.6.5.1 Utilizzare nome della classe](#14651-utilizzare-nome-della-classe)
+       - [14.6.5.2 Utilizzare riferimento di istanza](#14652-utilizzare-riferimento-di-istanza)
+     - [14.6.6 Static ed ereditarietà](#1466-static-ed-ereditarietà)
      - [14.6.7 Errori comuni](#1467-errori-comuni)
 
 ---
@@ -615,7 +615,7 @@ public class Config {
 
 ### 14.6.5 Accesso ai membri statici
 
-### 14.6.5.1 Consigliato: usare il nome della classe
+### 14.6.5.1 Utilizzare nome della classe
 
 ```java
 Math.sqrt(16);
@@ -623,7 +623,7 @@ MyClass.staticMethod();
 ```
 
 
-### 14.6.5.2 Anche legale: tramite riferimento di istanza
+### 14.6.5.2 Utilizzare riferimento di istanza
 
 ```java
 MyClass obj = new MyClass();
@@ -631,7 +631,7 @@ obj.staticMethod();
 ```
 
 
-### 14.6.6 Statico ed ereditarietà
+### 14.6.6 Static ed ereditarietà
 
 I metodi statici:
 
