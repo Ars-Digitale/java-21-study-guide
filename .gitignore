@@ -36,3 +36,7 @@ Thumbs.db
 # ---- If you keep 'bin' or a custom classes dir ----
 /bin/
 /examples-bin/
+
+# local-only translation helpers
+decode_md.sh
+test.txt
