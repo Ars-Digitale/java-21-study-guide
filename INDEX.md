@@ -1,7 +1,7 @@
 # Course Index (Java 21)
 
 This index provides the complete **English (EN)** curriculum for the  
-**Java 21 Certification Guide**.
+**Java 21 Study Guide**.
 
 Modules are designed to be read **sequentially**, but each topic can also be used as a standalone reference.
 

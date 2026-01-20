@@ -48,7 +48,6 @@ For larger structural changes, please open an issue first to discuss the proposa
 - Code samples should remain:
   - simple
   - focused
-  - aligned with Java 21 certification objectives
 - Avoid adding framework-specific or production-heavy examples unless explicitly discussed
 
 ---

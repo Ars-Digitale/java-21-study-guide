@@ -1,9 +1,8 @@
-# Java 21 Certification Guide
+# Java 21 Study Guide
 
-This repository contains a **structured, certification-oriented study guide for Java 21 (JDK 21 LTS)**.
+This repository contains a **structured, study guide for Java 21 (JDK 21 LTS)**.
 
 It is designed as a **living handbook** to support:
-- Java 21 certification preparation
 - systematic revision of core and advanced Java concepts
 - engineers who want a clear, organized reference aligned with modern Java
 
@@ -86,7 +85,6 @@ Each module focuses on a coherent set of Java 21 topics and can be read independ
 Java examples are located under `code/` and are intended to be:
 - small
 - focused
-- aligned with certification topics
 
 You can import them into your IDE as standard Java projects and run individual classes.
 
