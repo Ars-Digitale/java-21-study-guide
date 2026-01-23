@@ -134,3 +134,4 @@ Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) before submitting changes.
 This project is released under the license specified in [`LICENSE`](LICENSE).
 
 Unless otherwise stated, the material is intended for **educational use**.
+© 2026 Alessandro Fabri  
