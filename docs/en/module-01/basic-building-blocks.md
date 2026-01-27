@@ -310,7 +310,8 @@ java.util.List myList = new java.util.ArrayList<>();
 ### 2.4.5 Static imports
 
 
-In addition to importing classes from a package, Java allows another kind of import: the **static import**.  
+In addition to importing classes from a package, Java allows another kind of import: the **static import**.
+  
 A *static import* lets you import **static members** of a class — such as static methods and static variables — so you can use them **without referencing the class name**.
 
 You may import either **specific** static members or use a **wildcard** to import all static members of a class.

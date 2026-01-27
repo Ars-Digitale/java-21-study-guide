@@ -97,6 +97,26 @@ char letter;
 int x, y, z;          // Déclarations multiples dans une seule instruction : Java autorise la déclaration de plusieurs variables du même type
 ```
 
+> [!WARNING]
+> Les modificateurs et le type déclarés au début d’une déclaration de variables s’appliquent à toutes les variables déclarées dans la même instruction.
+> Exception : lors de la déclaration de tableaux en utilisant les crochets après le nom de la variable, les crochets font partie du déclarateur de la variable individuelle, et non du type de base.
+
+- Examples
+
+```java
+static int a, b, c;
+
+// est équivalent à :
+
+static int a;
+static int b;
+static int c;
+
+
+int[] a, b;   // les deux sont des tableaux de int
+int c[], d;   // seul c est un tableau, d est un int normal
+```
+
 #### 6.1.1.2 Affecter un primitif
 
 **Affecter** un type primitif (comme pour les types référence) signifie stocker une valeur dans une variable déclarée de ce type.  

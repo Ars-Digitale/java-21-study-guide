@@ -4,7 +4,7 @@
 
 - [7. Flusso di controllo](#7-flusso-di-controllo)
 	- [7.1 L’istruzione if](#71-listruzione-if)
-	- [7.2 L’istruzione & espressione switch](#72-listruzione-switch--espressione)
+	- [7.2 L’istruzione & espressione switch](#72-listruzione-switch--expression)
 		- [7.2.1 La variabile target dello switch può essere](#721-la-variable-target-dello-switch-può-essere)
 		- [7.2.2 Valori case accettabili](#722-valori-case-accettabili)
 		- [7.2.3 Compatibilità di tipo tra selector e case](#723-compatibilità-di-tipo-tra-selector-e-case)
@@ -81,7 +81,7 @@ if (grade >= 90) {
 
 ---
 
-## 7.2 L’istruzione `switch` & espressione
+## 7.2 L’istruzione `switch` & Expression
 
 Il costrutto `switch` è una struttura di controllo del flusso che seleziona un ramo tra più alternative in base al valore di un’espressione (il **selector**).
 
@@ -90,9 +90,8 @@ Rispetto a lunghe catene di `if-else-if`, uno `switch`:
 - È spesso **più facile da leggere** quando si testano molti valori discreti (costanti, enum, stringhe).
 - Può essere **più sicuro e più conciso** quando usato come **espressione switch** perché:
 
-Produce un valore.
-
-Il compilatore può imporre **esaustività** e **coerenza di tipo**.
+1) Produce un valore.
+2) Il compilatore può imporre **esaustività** e **coerenza di tipo**.
 
 Java 21 supporta:
 
@@ -100,7 +99,7 @@ Java 21 supporta:
 - La `switch` come **espressione** (produce un risultato).
 - **Pattern matching** dentro `switch`, inclusi type pattern e guard.
 
-Entrambe le forme di `switch` condividono le stesse regole riguardanti il selector (la **variabile target** dello switch) e i valori case accettabili.
+Entrambe le forme di `switch` condividono le stesse regole riguardanti il selector (la **variabile target** dello switch) e i valori `case` accettabili.
 
 ### 7.2.1 La `variable target` dello switch può essere
 
@@ -127,13 +126,13 @@ Entrambe le forme di `switch` condividono le stesse regole riguardanti il select
 
 Per uno switch non-pattern, ogni etichetta `case` deve essere una costante a compile-time compatibile con il tipo del selector.
 
-Consentito come etichette case:
+Sono consentite, come etichette `case`:
 
 - **Letterali** come `0`, `'A'`, `"ON"`.
 - **Costanti enum**, ad es. `RED` o `Color.GREEN`.
 - **Variabili costanti final** (costanti a compile-time).
 
-Una variabile costante a compile-time:
+Una costante a compile-time:
 
 - Deve essere dichiarata con `final` e inizializzata nella stessa istruzione.
 - Il suo inizializzatore deve a sua volta essere un’espressione costante (tipicamente usando letterali e altre costanti a compile-time).
@@ -148,7 +147,7 @@ Il tipo del selector e ogni etichetta `case` devono essere compatibili:
 
 ### 7.2.4 Pattern Matching nello Switch
 
-Lo switch in Java 21 supporta il pattern matching, inclusi:
+Lo switch in Java 21 supporta il `pattern matching`, inclusi:
 
 - **Type pattern**: `case String s`
 - **Guarded pattern**: `case String s when s.length() > 3`
@@ -171,12 +170,12 @@ String describe(Object o) {
 **Punti chiave**:
 
 - Ogni pattern introduce una pattern variable (come `i` o `s`).
-- Le pattern variable sono in scope solo all’interno del proprio arm (o dei percorsi in cui è noto che il pattern corrisponde).
+- Le pattern variable sono in scope solo all’interno del proprio `ramo` (o dei percorsi in cui è noto che il pattern corrisponde).
 - L’ordine è importante a causa della **dominanza**: i pattern più specifici devono precedere quelli più generali.
 
 ### 7.2.4.1 Nomi delle variabili e scope tra i rami
 
-Con il pattern matching, la variabile di pattern esiste solo nello scope dell’arm in cui è definita. Questo significa che puoi riutilizzare lo stesso nome di variabile in diversi rami case.
+Con il pattern matching, la variabile di pattern esiste solo nello scope del ramo in cui è definita. Questo significa che puoi riutilizzare lo stesso nome di variabile in diversi rami `case` senza che i nomi entrino in conflitto.
 
 - Esempio:
 
@@ -221,7 +220,7 @@ Quando si usa il pattern matching, gli switch devono essere **esaustivi**; cioè
 Questo può essere ottenuto tramite:
 
 - Fornire un case `default` che gestisce tutti i valori non corrispondenti a nessun altro case.
-- Fornire una clausola case finale con un tipo di pattern che corrisponde al tipo reference del selector.
+- Fornire una clausola case terminale con un tipo di pattern che corrisponde al tipo reference del selector.
 
 - Esempio (non esaustivo):
 
@@ -237,7 +236,7 @@ Per correggere questo, puoi:
 
 - Cambiare il tipo reference di `number` in `Short` (allora l’esaustività è soddisfatta dal singolo case).
 - Aggiungere una clausola `default` che copre tutti i valori rimanenti.
-- Aggiungere una clausola case finale che copre il tipo della variabile selector, per esempio:
+- Aggiungere una clausola `case` finale che copre il tipo della variabile selector, per esempio:
 
 ```java
 Number number = Short.valueOf(10);
@@ -269,7 +268,7 @@ switch (number) {
 
 Una **istruzione switch** è usata come costrutto di controllo del flusso.
 
-Non, di per sé, viene valutata come un valore, anche se i suoi rami possono contenere istruzioni `return` che ritornano dal metodo contenitore.
+Non viene valutata, di per sé, come un valore, anche se i suoi rami possono contenere istruzioni `return` che ritornano dal metodo contenitore.
 
 ```java
 switch (mode) { // switch statement
@@ -286,17 +285,17 @@ switch (mode) { // switch statement
 
 **Punti chiave**:
 
-- Ogni clausola `case` include uno o più valori corrispondenti separati da virgole `,`. Segue un separatore, che può essere due punti `:` o, meno comunemente per le istruzioni, l’operatore freccia `->`.
+- Ogni clausola `case` include uno o più valori corrispondenti separati da virgole `,`. Segue un separatore, che può essere due punti `:` o, meno comunemente per le `istruzioni`, l’operatore freccia `->`.
 Infine, un’espressione o un blocco (racchiuso in `{}`) definisce il codice da eseguire quando si verifica una corrispondenza.
-Se usi l’operatore freccia per una clausola, devi usarlo per tutte le clausole in quella istruzione switch.
-- Il fall-through è possibile per i case in stile con due punti a meno che un ramo usi `break`, `return` o `throw`.
+**Se si usa l’operatore freccia per una clausola, si deve usare per tutte le clausole in quella istruzione switch**.
+- Il fall-through è possibile per i `case` in stile "due punti" a meno che un ramo usi `break`, `return` o `throw`.
 Quando presente, `break` termina lo switch dopo l’esecuzione del suo case; senza di esso, l’esecuzione continua, in ordine, nei rami successivi.
 - Una clausola `default` è opzionale e può apparire ovunque nell’istruzione switch. Viene eseguita se non c’è corrispondenza per i case precedenti.
-- Un’istruzione switch non produce un valore come espressione; non puoi assegnare un’istruzione switch direttamente a una variabile.
+- Un’istruzione switch non produce un valore come nell'expression; non puoi assegnare un’istruzione switch direttamente a una variabile.
 
 ### 7.3.1.1 Comportamento di Fall-Through
 
-Con i case in stile con due punti, l’esecuzione salta all’etichetta case corrispondente.
+Con i `case` in stile "due punti", l’esecuzione salta all’etichetta `case` corrispondente.
 
 Se non c’è un `break`, continua nel case successivo finché non viene incontrato un `break`, `return` o `throw`.
 
@@ -342,15 +341,15 @@ int len = switch (s) { // switch expression
 
 **Punti chiave**:
 
-- Ogni clausola `case` include uno o più valori corrispondenti separati da virgole `,`, seguiti dall’operatore freccia `->`. Poi un’espressione o un blocco (racchiuso in `{}`) definisce il risultato per quell’arm.
+- Ogni clausola `case` include uno o più valori corrispondenti separati da virgole `,`, seguiti dall’operatore freccia `->`. Poi un’espressione o un blocco (racchiuso in `{}`) definisce il risultato per quel ramo.
 - Quando usata con un’assegnazione o un’istruzione `return`, un’espressione switch richiede un punto e virgola finale `;` dopo l’espressione.
-- Non c’è fall-through tra gli arm con freccia. Ogni arm corrispondente viene eseguito esattamente una volta.
+- Non c’è fall-through tra i rami in stile "freccia". Ogni ramo corrispondente viene eseguito esattamente una volta.
 - Un’espressione switch deve essere **esaustiva**: tutti i possibili valori del selector devono essere coperti (tramite case espliciti e/o `default`).
-- Il tipo del risultato deve essere coerente tra tutti i rami. Per esempio, se un arm produce un `int`, gli altri arm devono produrre valori compatibili con `int`.
+- Il tipo del risultato deve essere coerente tra tutti i rami. Per esempio, se un ramo produce un `int`, gli altri rami devono produrre valori compatibili con `int`.
 
 ### 7.3.2.1 `yield` nei blocchi di espressione switch
 
-Quando un arm di un’espressione switch usa un blocco invece di una singola espressione, devi usare `yield` per fornire il risultato di quell’arm.
+Quando un ramo di un’espressione switch usa un blocco invece di una singola espressione, devi usare `yield` per fornire il risultato di quel ramo.
 
 ```java
 int len = switch (s) {

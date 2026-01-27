@@ -96,6 +96,26 @@ char letter;
 int x, y, z;          // Multiple declarations in one statement: Java allows declaring multiple variables of the same type
 ```
 
+> [!WARNING]
+> The modifiers and the type declared at the beginning of a variable declaration apply to all variables declared in the same statement.
+> Exception: when declaring arrays using brackets after the variable name, the brackets are part of the individual variable declarator, not the base type.
+
+- Examples
+
+```java
+static int a, b, c;
+
+// is equivalent to :
+
+static int a;
+static int b;
+static int c;
+
+
+int[] a, b;   // both are arrays of int
+int c[], d;   // only c is an array, d is a regular int
+```
+
 #### 6.1.1.2 Assigning a Primitive
 
 **Assigning** a primitive type (as with reference types) means storing a value into a declared variable of that given type.  

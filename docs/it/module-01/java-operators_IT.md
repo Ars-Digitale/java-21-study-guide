@@ -80,7 +80,8 @@ Gli operatori possono anche essere raggruppati, in base al loro scopo, in catego
 
 ## 5.4 Precedenza degli operatori e ordine di valutazione
 
-La **precedenza degli operatori** determina come gli operatori sono raggruppati in un’espressione — cioè, quali operazioni vengono eseguite per prime.  
+La **precedenza degli operatori** determina come gli operatori sono raggruppati in un’espressione — cioè, quali operazioni vengono eseguite per prime.
+  
 L’**associatività** (o **ordine di valutazione**) determina se l’espressione viene valutata da **sinistra a destra** o da **destra a sinistra** quando gli operatori hanno la stessa precedenza.
 
 Esempio:

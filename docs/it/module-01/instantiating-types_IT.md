@@ -96,6 +96,27 @@ char letter;
 int x, y, z;          // Dichiarazioni multiple in un’unica istruzione: Java consente di dichiarare più variabili dello stesso tipo
 ```
 
+> [!WARNING]
+> I modificatori e il tipo dichiarati all’inizio di una dichiarazione di variabili si applicano a tutte le variabili dichiarate in quella stessa istruzione.
+> Eccezione: quando si dichiarano array usando le parentesi quadre dopo il nome della variabile, le parentesi fanno parte del dichiaratore della singola variabile, non del tipo base.
+
+
+- Esempi
+
+```java
+static int a, b, c;
+
+// è equivalente a:
+
+static int a;
+static int b;
+static int c;
+
+
+int[] a, b;   // entrambi sono arrays di int
+int c[], d;   // solo c è un array, d è un normale int
+```
+
 #### 6.1.1.2 Assegnare un primitivo
 
 **Assegnare** un tipo primitivo (come per i tipi reference) significa memorizzare un valore in una variabile dichiarata di quel tipo.
@@ -540,7 +561,7 @@ public int localMethod {
 
 > [!WARNING]
 > Le variabili locali **non** ricevono mai valori di default.
-> I campi di istanza e static **sì**, sempre.
+> Le variabili di istanza e di classe (static) **sì**, sempre.
 
 ---
 
@@ -561,7 +582,7 @@ Ogni primitivo ha una corrispondente classe wrapper nel package `java.lang`:
 | `char` | `Character` |
 | `boolean` | `Boolean` |
 
-Gli oggetti wrapper sono immutabili — una volta creati, il loro valore non può cambiare.
+**Gli oggetti wrapper sono immutabili** — una volta creati, il loro valore non può cambiare.
 
 ### 6.3.1 Scopo dei tipi wrapper
 - Consentono di usare i primitivi in contesti che richiedono oggetti (es. collezioni, generics).  
@@ -591,7 +612,7 @@ Double[] arr2 = {11, 22};     // WARNING: Does not compile!!
 ```
 
 > [!TIP]
-> Java **non** esegue mai autoboxing + widening/narrowing in un solo passo.
+> Java **non** esegue mai `autoboxing + widening/narrowing` in un solo passo.
 
 > [!WARNING]
 > - **AUTOBOXING** e **cast implicito** non sono consentiti nella stessa istruzione: non puoi fare entrambe le cose contemporaneamente. (vedi esempio sopra)
@@ -678,7 +699,7 @@ Java fornisce due meccanismi distinti per verificare l’uguaglianza:
 - `==` (operatore di uguaglianza)
 - `.equals()` (metodo definito in `Object` e ridefinito in molte classi)
 
-Capire la differenza è essenziale.
+Capirne la differenza è essenziale.
 
 
 ### 6.4.1 Uguaglianza con i tipi primitivi
