@@ -98,7 +98,7 @@ int x, y, z;          // Multiple declarations in one statement: Java allows dec
 
 
 > [!IMPORTANT]
-> The modifiers and the type declared at the beginning of a variable declaration apply to all variables declared in the same statement.
+> The `modifiers` and the `type` declared at the beginning of a variable declaration apply to all variables declared in the same statement.
 >
 > **Exception**: when declaring arrays using brackets after the variable name, the brackets are part of the individual variable declarator, not the base type.
 
