@@ -96,9 +96,11 @@ char letter;
 int x, y, z;          // Dichiarazioni multiple in un’unica istruzione: Java consente di dichiarare più variabili dello stesso tipo
 ```
 
-> [!WARNING]
+
+> [!IMPORTANT]
 > I modificatori e il tipo dichiarati all’inizio di una dichiarazione di variabili si applicano a tutte le variabili dichiarate in quella stessa istruzione.
-> Eccezione: quando si dichiarano array usando le parentesi quadre dopo il nome della variabile, le parentesi fanno parte del dichiaratore della singola variabile, non del tipo base.
+>
+> **Eccezione**: quando si dichiarano array usando le parentesi quadre dopo il nome della variabile, le parentesi fanno parte del dichiaratore della singola variabile, non del tipo base.
 
 
 - Esempi

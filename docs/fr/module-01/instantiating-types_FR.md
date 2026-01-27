@@ -97,9 +97,11 @@ char letter;
 int x, y, z;          // Déclarations multiples dans une seule instruction : Java autorise la déclaration de plusieurs variables du même type
 ```
 
-> [!WARNING]
+
+> [!IMPORTANT]
 > Les modificateurs et le type déclarés au début d’une déclaration de variables s’appliquent à toutes les variables déclarées dans la même instruction.
-> Exception : lors de la déclaration de tableaux en utilisant les crochets après le nom de la variable, les crochets font partie du déclarateur de la variable individuelle, et non du type de base.
+>
+> **Exception** : lors de la déclaration de tableaux en utilisant les crochets après le nom de la variable, les crochets font partie du déclarateur de la variable individuelle, et non du type de base.
 
 - Examples
 
