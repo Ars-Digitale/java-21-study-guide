@@ -7,8 +7,8 @@
     - [6.1.1 Gestione dei tipi primitivi](#611-gestione-dei-tipi-primitivi)
       - [6.1.1.1 Dichiarare un primitivo](#6111-dichiarare-un-primitivo)
       - [6.1.1.2 Assegnare un primitivo](#6112-assegnare-un-primitivo)
-    - [6.1.2 Gestione dei tipi riferimento](#612-gestione-dei-tipi-riferimento)
-      - [6.1.2.1 Creare e assegnare un riferimento](#6121-creare-e-assegnare-un-riferimento)
+    - [6.1.2 Gestione dei tipi reference](#612-gestione-dei-tipi-reference)
+      - [6.1.2.1 Creare e assegnare un reference](#6121-creare-e-assegnare-un-reference)
       - [6.1.2.2 Costruttori](#6122-costruttori)
       - [6.1.2.3 Blocchi di inizializzazione-istanza](#6123-blocchi-di-inizializzazione-istanza)
   - [6.2 Inizializzazione predefinita delle variabili](#62-inizializzazione-predefinita-delle-variabili)
@@ -25,7 +25,7 @@
   - [6.4 Uguaglianza in Java](#64-uguaglianza-in-java)
     - [6.4.1 Uguaglianza con i tipi primitivi](#641-uguaglianza-con-i-tipi-primitivi)
       - [6.4.1.1 Punti chiave](#6411-punti-chiave)
-    - [6.4.2 Uguaglianza con i tipi riferimento](#642-uguaglianza-con-i-tipi-riferimento)
+    - [6.4.2 Uguaglianza con i tipi reference](#642-uguaglianza-con-i-tipi-reference)
       - [6.4.2.1 Confronto di identità](#6421--confronto-di-identità)
       - [6.4.2.2 equals Confronto logico](#6422-equals-confronto-logico)
       - [6.4.2.3 Punti chiave](#6423-punti-chiave)
@@ -40,7 +40,7 @@
 
 ## 6.1 Introduzione
  
-In Java, un **tipo** può essere un **tipo primitivo** (come `int`, `double`, `boolean`, ecc.) oppure un **tipo riferimento** (classi, interfacce, array, enum, record, ecc.). Vedi: [Java Data Types and Casting](data-types.md)
+In Java, un **tipo** può essere un **tipo primitivo** (come `int`, `double`, `boolean`, ecc.) oppure un **tipo reference** (classi, interfacce, array, enum, record, ecc.). Vedi: [Java Data Types and Casting](data-types.md)
 
 Il modo in cui vengono create le istanze dipende dalla categoria del tipo:
 
@@ -54,9 +54,9 @@ boolean flag = true;  // crea un boolean primitivo con valore true
 double pi = 3.14159;  // crea un double primitivo con valore 3.14159
 ```
   
-- **Tipi riferimento (oggetti)**  
+- **Tipi reference (oggetti)**  
 	Le istanze dei tipi classe vengono create usando la keyword `new` (eccetto alcuni casi speciali come i letterali String, i record con costruttori canonici, o i metodi factory).
-	La keyword `new` alloca memoria sull’heap e invoca un costruttore della classe.
+	La keyword `new` alloca memoria nell’heap e invoca un costruttore della classe.
   
 ```java
 String name = new String("Alice"); // crea esplicitamente un nuovo oggetto String
@@ -72,17 +72,17 @@ Person p = new Person();           // crea un nuovo oggetto Person usando il suo
 
 > [!IMPORTANT]
 > I letterali String **non richiedono `new`** e sono memorizzati nello **String pool**.
-> Usare `new String("x")` crea sempre un nuovo oggetto sull’heap.
+> Usare `new String("x")` crea sempre un nuovo oggetto nell’heap.
 
   
 ### 6.1.1 Gestione dei tipi primitivi
 
 #### 6.1.1.1 Dichiarare un primitivo
 
-**Dichiarare** un tipo primitivo (come per i tipi riferimento) significa riservare spazio in memoria per una variabile di un dato tipo, senza necessariamente assegnarle un valore.  
+**Dichiarare** un tipo primitivo (come per i tipi reference) significa riservare spazio in memoria per una variabile di un determinato tipo, senza necessariamente assegnarle un valore.  
 
 > [!WARNING]
-> A differenza dei primitivi, la cui dimensione dipende dal tipo specifico (es. `int` vs `long`), i tipi riferimento occupano sempre la stessa dimensione fissa in memoria — ciò che varia è la dimensione dell’oggetto a cui puntano.
+> A differenza dei primitivi, la cui dimensione dipende dal tipo specifico (es. `int` vs `long`), i tipi reference occupano sempre la stessa dimensione fissa in memoria — ciò che varia è la dimensione dell’oggetto a cui puntano.
 
 - Esempi di sintassi (solo dichiarazione):
 
@@ -98,8 +98,9 @@ int x, y, z;          // Dichiarazioni multiple in un’unica istruzione: Java c
 
 #### 6.1.1.2 Assegnare un primitivo
 
-**Assegnare** un tipo primitivo (come per i tipi riferimento) significa memorizzare un valore in una variabile dichiarata di quel tipo.  
-Per i primitivi, la variabile contiene il valore stesso; per i tipi riferimento, la variabile contiene l’indirizzo di memoria (un riferimento) dell’oggetto puntato.
+**Assegnare** un tipo primitivo (come per i tipi reference) significa memorizzare un valore in una variabile dichiarata di quel tipo.
+  
+Per i primitivi, la variabile contiene il valore stesso; per i tipi reference, la variabile contiene l’indirizzo di memoria (un reference) dell’oggetto puntato.
 
 - Esempi di sintassi:
 
@@ -123,7 +124,7 @@ int v1; v2; 					 // ERROR - NOT LEGAL
   
 > [!IMPORTANT]
 > Quando scrivi un numero direttamente nel codice (un letterale numerico), Java assume per default che sia di tipo **int**.  
-> Se il valore non entra in un `int`, il codice non compila a meno che tu non lo marchi esplicitamente con il suffisso corretto.
+> Se il valore non entra in un `int`, il codice non compila a meno che non sia marcato esplicitamente con il suffisso corretto.
 
 - Esempio di sintassi per un letterale numerico:
 
@@ -142,13 +143,13 @@ or
 long exNumLit = 5729685479l;
 ```
   
-**Dichiarare** un tipo `reference` significa riservare spazio in memoria per una variabile che conterrà un riferimento (puntatore) a un oggetto del tipo specificato.
+**Dichiarare** un tipo `reference` significa riservare spazio in memoria per una variabile che conterrà un reference (puntatore) a un oggetto del tipo specificato.
   
 A questo stadio non viene ancora creato alcun oggetto — la variabile ha solo la potenzialità di puntarne uno.
 
 > [!WARNING]
-> A differenza dei primitivi, la cui dimensione dipende dal tipo specifico (es. `int` vs `long`), le variabili riferimento occupano sempre la stessa dimensione fissa in memoria (sufficiente per memorizzare un riferimento).  
-> Ciò che varia è la dimensione dell’oggetto puntato, che viene allocato separatamente sull’heap.
+> A differenza dei primitivi, la cui dimensione dipende dal tipo specifico (es. `int` vs `long`), le variabili reference occupano sempre la stessa dimensione fissa in memoria (sufficiente per memorizzare un reference).  
+> Ciò che varia è la dimensione dell’oggetto puntato, che viene allocato separatamente nell’heap.
 
 - Esempi di sintassi (solo dichiarazione):
 
@@ -169,24 +170,24 @@ String v1; v2; 							// ERROR - NOT LEGAL
 ```
 
 
-### 6.1.2 Gestione dei tipi riferimento
+### 6.1.2 Gestione dei tipi reference
 
-#### 6.1.2.1 Creare e assegnare un riferimento
+#### 6.1.2.1 Creare e assegnare un reference
 
 **Assegnare** un tipo `reference` significa memorizzare nella variabile l’indirizzo di memoria di un oggetto.
 
 Questo si fa normalmente dopo la creazione dell’oggetto con la keyword **new** e un costruttore, oppure usando un letterale o un metodo factory.
 
-Un riferimento può anche essere assegnato a un altro oggetto dello stesso tipo o di tipo compatibile.
+Un reference può anche essere assegnato a un altro oggetto dello stesso tipo o di tipo compatibile.
 
-I tipi riferimento possono anche essere assegnati a **null**, il che significa che non fanno riferimento ad alcun oggetto.
+I tipi reference possono anche essere assegnati a **null**, il che significa che non faranno riferimento ad alcun oggetto.
 
 - Esempi di sintassi:
 
 ```java
 Person person = new Person(); // Esempio con 'new' e un costruttore 'Person()':
-							// 'new Person()' crea un nuovo oggetto Person sull’heap
-							// e restituisce il suo riferimento, che viene memorizzato nella variabile 'person'.
+							// 'new Person()' crea un nuovo oggetto Person nell’heap
+							// e restituisce il suo reference, che viene memorizzato nella variabile 'person'.
 
 String greeting = "Hello";	 // Esempio con letterale (per String).
 
@@ -274,7 +275,8 @@ Person p2 = new Person("Bob", 25);   // name = "Bob", age = 25
 
 #### 6.1.2.3 Blocchi di inizializzazione istanza
 
-Oltre ai costruttori, Java offre un meccanismo chiamato **initializer blocks** per aiutare a inizializzare gli oggetti.  
+Oltre ai costruttori, Java offre un meccanismo chiamato **initializer blocks** per l'inizializzazione degli oggetti.  
+
 Sono blocchi di codice all’interno di una classe, racchiusi tra `{ }`, che vengono eseguiti **ogni volta che viene creata un’istanza**, subito prima dell’esecuzione del corpo del costruttore.
 
 **Caratteristiche**
@@ -373,7 +375,8 @@ Se non inizializzate, variabili di istanza e di classe ricevono un valore di def
 
 ### 6.2.2 Variabili final di istanza
 
-A differenza delle normali variabili di istanza e di classe, le variabili **`final` non vengono inizializzate di default dal compilatore**.  
+A differenza delle normali variabili di istanza e di classe, le variabili **`final` non vengono inizializzate di default dal compilatore**. 
+ 
 Una variabile `final` **deve essere assegnata esplicitamente esattamente una volta**, altrimenti il codice non compila.
 
 Questo vale sia per:
@@ -423,6 +426,7 @@ public class Person {
 <ins>**Variabili di classe `static final` (Costanti)**</ins>
 
 Una **variabile static final** appartiene alla classe, non a una specifica istanza.  
+
 Deve anch’essa essere assegnata esattamente una volta, ma l’assegnazione può avvenire in uno dei seguenti punti:
 
 1. **Nel punto di dichiarazione**
@@ -477,12 +481,12 @@ Per questo Java costringe gli sviluppatori a inizializzare esplicitamente i camp
 > [!TIP]
 > `final` significa **assegnato una volta**, non **oggetto immutabile**.
 >   
-> Un riferimento final può comunque puntare a un oggetto mutabile.
+> Un reference final può comunque puntare a un oggetto mutabile.
 
 ```java
 final List<String> list = new ArrayList<>();
 list.add("ok");      // consentito
-list = new ArrayList<>(); // ❌ non puoi riassegnare il riferimento
+list = new ArrayList<>(); // ❌ non puoi riassegnare il reference
 ```
 
 ### 6.2.3 Variabili locali
@@ -530,7 +534,7 @@ public int localMethod {
 	
 	var first, second = 15; // ERROR: var non può essere usata per definire due variabili nella stessa istruzione
 	
-	var x = null;           // ERROR: var non può essere inizializzata con null ma può essere riassegnata a null purché il tipo sottostante sia un tipo riferimento.
+	var x = null;           // ERROR: var non può essere inizializzata con null ma può essere riassegnata a null purché il tipo sottostante sia un tipo reference.
 }
 ```
 
@@ -542,7 +546,8 @@ public int localMethod {
 
 ## 6.3 Tipi wrapper
 
-In Java, i **tipi wrapper** sono rappresentazioni a oggetti degli otto tipi primitivi.  
+In Java, i **tipi wrapper** sono rappresentazioni a oggetti degli otto tipi primitivi. 
+ 
 Ogni primitivo ha una corrispondente classe wrapper nel package `java.lang`:
 
 | Primitive | Wrapper Class |
@@ -699,9 +704,9 @@ System.out.println(c1 == c2);   // true
   (es. `int == long` → `int` promosso a `long`).
 
 
-### 6.4.2 Uguaglianza con i tipi riferimento
+### 6.4.2 Uguaglianza con i tipi reference
 
-Con gli oggetti (tipi riferimento), il significato di `==` cambia.
+Con gli oggetti (tipi reference), il significato di `==` cambia.
 
 #### 6.4.2.1 `==` (Confronto di identità)  
 `==` verifica se **due riferimenti puntano allo stesso oggetto in memoria**.
@@ -733,7 +738,7 @@ System.out.println(s1.equals(s2)); // true → stesso contenuto
 
 ### 6.4.3 String Pool e uguaglianza
 
-I letterali String sono memorizzati nello **String pool**, quindi letterali identici  
+I letterali String sono memorizzati nello **String pool**, quindi letterali identici che
 si riferiscono **allo stesso oggetto**.
 
 ```java
@@ -768,8 +773,8 @@ System.out.println(a == b);  // false
 ```
 
 > [!WARNING]
-> Qualsiasi String creata a **runtime** *non* entra nello pool automaticamente.
-> Usa `intern()` se vuoi il pooling.
+> Qualsiasi String creata a **runtime** *non* entra nel pool automaticamente.
+> Usa `intern()` se si vuole il pooling.
 
 > [!TIP]
 > `"Hello" == "Hel" + "lo"` → true (costante a compile-time)
@@ -825,7 +830,7 @@ System.out.println(c.equals(d));   // true → stesso valore numerico
 ### 6.4.5 Uguaglianza e `null`
 
 - `== null` è sempre sicuro.
-- Chiamare `.equals()` su un riferimento `null` genera una `NullPointerException`.
+- Chiamare `.equals()` su un reference `null` genera una `NullPointerException`.
 
 ```java
 String s = null;
