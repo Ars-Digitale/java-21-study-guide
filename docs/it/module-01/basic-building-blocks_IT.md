@@ -44,6 +44,18 @@ Una classe Java è composta da due elementi principali, detti **membri** della c
 - **Field** (o variabili) — rappresentano i dati che definiscono lo stato del nuovo tipo.
 - **Method** (o funzioni) — rappresentano le operazioni che possono essere eseguite su questi dati.
 
+Alcuni membri possono essere dichiarati con la keyword **static**.
+
+Un membro static appartiene alla classe stessa, non agli oggetti creati da essa.
+
+Ciò significa che:
+
+- esiste una sola copia condivisa tra tutte le istanze
+- può essere utilizzato senza creare un oggetto della classe
+- è caricato in memoria quando la classe viene caricata dalla JVM
+
+I membri non statici (detti **di istanza**) appartengono invece ai singoli oggetti e ogni istanza possiede la propria copia.
+
 Normalmente, ogni classe è definita nel proprio file "**.java**"; per esempio, una classe chiamata `Person` sarà definita nel corrispondente file `Person.java`.
 
 Qualsiasi classe definita in modo indipendente nel proprio file sorgente è detta **top-level class**.

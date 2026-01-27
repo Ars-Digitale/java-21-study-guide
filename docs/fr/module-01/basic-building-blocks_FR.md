@@ -44,6 +44,18 @@ Une classe Java est composée de deux éléments principaux, appelés ses **memb
 - **Fields** (ou variables) — représentent les données qui définissent l’état de ce nouveau type.
 - **Methods** (ou fonctions) — représentent les opérations qui peuvent être effectuées sur ces données.
 
+Certains membres peuvent être déclarés avec le mot-clé **static**.
+
+Un membre static appartient à la classe elle-même, et non aux objets créés à partir d’elle.
+
+Cela signifie que :
+
+- il existe une seule copie partagée entre toutes les instances
+- il peut être utilisé sans créer un objet de la classe
+- il est chargé en mémoire lorsque la classe est chargée par la JVM
+
+Les membres non static (appelés **d’instance**) appartiennent en revanche aux objets individuels et chaque instance possède sa propre copie.
+
 Normalement, chaque classe est définie dans son propre fichier "**.java**" ; par exemple, une classe nommée `Person` sera définie dans le fichier correspondant `Person.java`.
 
 Toute classe définie indépendamment dans son propre fichier source est appelée **top-level class**.
