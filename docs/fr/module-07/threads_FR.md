@@ -105,7 +105,7 @@ Java 21 définit différents types de thread, qui diffèrent par cycle de vie, s
 - **Thread Système**: Des thread créés en interne par la JVM pour le garbage collection, la compilation JIT et d’autres services runtime.
 
 > [!NOTE]
-> Les `thread virtuali` sont des thread utilisateur légers; ils **ne** sont pas daemon par défaut.
+> Les `thread virtuels` sont des thread utilisateur légers; ils **ne** sont pas daemon par défaut.
 
 ---
 
@@ -189,7 +189,7 @@ Les thread Java ont une priorité associée qui influence le scheduling.
 
 La priorité du thread influence la probabilité de scheduling mais ne garantit jamais l’ordre d’exécution. Le code Java portable ne doit jamais dépendre des priorités pour la correction.
 
-Il est possible de définir la **priorité** sur les `thread di piattaforma`; pour les `thread virtuali` la **priorité** est toujours fixée à **5** (`Thread.NORM_PRIORITY`) et tenter de la modifier n’a aucun effet.
+Il est possible de définir la **priorité** sur les `platform threads`; pour les `thread virtuels` la **priorité** est toujours fixée à **5** (`Thread.NORM_PRIORITY`) et tenter de la modifier n’a aucun effet.
 
 ---
 
