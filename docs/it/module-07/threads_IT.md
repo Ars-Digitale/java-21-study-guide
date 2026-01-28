@@ -18,7 +18,7 @@
     - [30.12.1 Cosa Significa Interrompere un Thread](#30121-cosa-significa-interrompere-un-thread)
     - [30.12.2 Interrompere Operazioni Bloccanti](#30122-interrompere-operazioni-bloccanti)
     - [30.12.3 Controllare lo Stato di Interruzione](#30123-controllare-lo-stato-di-interruzione)
-    - [30.12.4 Esempio Interrompere-un-Thread-in-Sleep](#30124-esempio-interrompere-un-thread-in-sleep)
+    - [30.12.4 Esempio Interrompere un Thread in Sleep](#30124-esempio-interrompere-un-thread-in-sleep)
     - [30.12.5 Osservazioni Chiave](#30125-osservazioni-chiave)
   - [30.13 Thread e il Thread Principale](#3013-thread-e-il-thread-principale)
   - [30.14 Concorrenza dei Thread e Stato Condiviso](#3014-concorrenza-dei-thread-e-stato-condiviso)
