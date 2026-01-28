@@ -1,4 +1,4 @@
-# 30. Thread Java – Fondamenti e Modello di Esecuzione (PART 1)
+# 30. Thread Java – Fondamenti e Modello di Esecuzione
 
 ### Indice
 
