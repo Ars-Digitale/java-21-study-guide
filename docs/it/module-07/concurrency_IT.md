@@ -14,7 +14,7 @@
     - [31.4.1 Submitting Task e Futures](#3141-submitting-task-e-futures)
     - [31.4.2 Callable vs Runnable](#3142-callable-vs-runnable)
   - [31.5 Thread Pools e Scheduling](#315-thread-pools-e-scheduling)
-  - [31.6 Lifecycle e Terminazione dellExecutor](#316-lifecycle-e-terminazione-dellexecutor)
+  - [31.6 Lifecycle e Terminazione dell'Executor](#316-lifecycle-e-terminazione-dellexecutor)
   - [31.7 Strategie di Thread Safety](#317-strategie-di-thread-safety)
     - [31.7.1 Sincronizzazione](#3171-sincronizzazione)
     - [31.7.2 Variabili Atomiche](#3172-variabili-atomiche)
