@@ -2,7 +2,7 @@
 
 ### Indice
 
-[30. Thread Java – Fondamenti e Modello di Esecuzione](#30-thread-java--fondamenti-e-modello-di-esecuzione)
+- [30. Thread Java – Fondamenti e Modello di Esecuzione](#30-thread-java--fondamenti-e-modello-di-esecuzione)
   - [30.1 Thread, Processi e il Sistema Operativo](#301-thread-processi-e-il-sistema-operativo)
   - [30.2 Modello di Memoria Stack e Heap](#302-modello-di-memoria-stack-e-heap)
   - [30.3 Contesto e Context Switching](#303-contesto-e-context-switching)
