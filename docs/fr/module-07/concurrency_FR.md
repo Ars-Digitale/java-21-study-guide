@@ -217,6 +217,8 @@ Les executor gèrent des **thread pools**, qui réutilisent un nombre fixe ou dy
 - **Single-thread executor**: Garantit l’exécution séquentielle des task.
 - **Scheduled executor**: Supporte des task delayed et périodiques.
 
+`Task scheduling` : les task soumis à un executor sont placés dans une file et récupérés par les threads du pool ; l’ordre d’exécution dépend de l’implémentation de l’executor, de la politique de file et de la disponibilité des threads. Dans un scheduled executor, les task sont ordonnés selon leur temps d’activation ; les task périodiques sont réinsérés dans la file après chaque exécution.
+
 ```java
 ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
@@ -224,6 +226,13 @@ scheduler.schedule(
 	() -> System.out.println("Delayed"),
 	2, TimeUnit.SECONDS);
 ```
+
+| Method | Description |
+| --- | --- |
+| ScheduledFuture<?> schedule(Runnable command, long delay, TimeUnit unit) | Planifie une action one-shot qui devient exécutable après le delay spécifié. |
+| <V> ScheduledFuture<V> schedule(Callable<V> callable, long delay, TimeUnit unit) | Planifie un task one-shot qui retourne une valeur après le delay spécifié. |
+| ScheduledFuture<?> scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit) | Planifie une exécution périodique à fixed rate : chaque exécution est planifiée par rapport au temps initial ; si une exécution est retardée, les suivantes peuvent tenter de « rattraper ». |
+| ScheduledFuture<?> scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit) | Planifie une exécution périodique avec fixed delay : chaque exécution est planifiée par rapport à la fin de la précédente ; aucun comportement de rattrapage. |
 
 > [!IMPORTANT]
 > Ne jamais créer des thread manuellement dans une boucle:

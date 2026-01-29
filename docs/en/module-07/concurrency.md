@@ -227,6 +227,9 @@ Executors manage **thread pools**, which reuse a fixed or dynamic number of thre
 - **Single-thread executor**: Ensures sequential task execution.
 - **Scheduled executor**: Supports delayed and periodic tasks.
 
+`Task scheduling`: tasks submitted to an executor are enqueued and picked by pool threads; the execution order depends on the executor implementation, queue policy, and thread availability. 
+For scheduled executors, tasks are ordered by trigger time; periodic tasks are re-queued after each run.
+
 ```java
 ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
@@ -234,6 +237,13 @@ scheduler.schedule(
 	() -> System.out.println("Delayed"),
 	2, TimeUnit.SECONDS);
 ```
+
+| Method | Description |
+| --- | --- |
+| ScheduledFuture<?> schedule(Runnable command, long delay, TimeUnit unit) | Schedules a one-shot action that becomes enabled after the given delay. |
+| <V> ScheduledFuture<V> schedule(Callable<V> callable, long delay, TimeUnit unit) | Schedules a one-shot task that returns a value after the given delay. |
+| ScheduledFuture<?> scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit) | Schedules periodic execution at a fixed rate: each execution is scheduled relative to the initial start time; if a run is delayed, subsequent runs may attempt to "catch up". |
+| ScheduledFuture<?> scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit) | Schedules periodic execution with fixed delay: each execution is scheduled relative to the completion time of the previous run; no catch-up behavior. |
 
 > [!IMPORTANT]
 > Never create threads manually in a loop:

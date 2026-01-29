@@ -210,12 +210,15 @@ Per computazione asincrona orientata al risultato, `Callable` è generalmente pr
 
 ## 31.5 Thread Pools e Scheduling
 
-Gli executor gestiscono **thread pools**, che riusano un numero fisso o dinamico di thread per eseguire task in modo efficiente.
+Gli executor gestiscono thread pools che riutilizzano un numero fisso o dinamico di thread per eseguire i task in modo efficiente.
 
 - **Fixed thread pool**: Limita la concorrenza a un numero fisso di thread.
 - **Cached thread pool**: Cresce e si riduce dinamicamente in base alla domanda: crea nuovi thread quando necessario ma riusa thread disponibili.
 - **Single-thread executor**: Garantisce esecuzione sequenziale dei task.
 - **Scheduled executor**: Supporta task delayed e periodici.
+
+`Task scheduling`: i task sottomessi a un executor vengono messi in coda e prelevati dai thread del pool; l’ordine di esecuzione dipende dall’implementazione dell’executor, dalla politica della coda e dalla disponibilità dei thread. 
+Nei scheduled executor, i task sono ordinati in base al delay di attivazione; i task periodici vengono reinseriti in coda dopo ogni esecuzione.
 
 ```java
 ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
@@ -224,6 +227,13 @@ scheduler.schedule(
 	() -> System.out.println("Delayed"),
 	2, TimeUnit.SECONDS);
 ```
+
+| Metodo | Descrizione|
+| --- | --- |
+| ScheduledFuture<?> schedule(Runnable command, long delay, TimeUnit unit) | Pianifica un’azione one-shot che diventa eseguibile dopo il delay specificato. |
+| <V> ScheduledFuture<V> schedule(Callable<V> callable, long delay, TimeUnit unit) | Pianifica un task one-shot che restituisce un valore dopo il delay specificato. |
+| ScheduledFuture<?> scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit) | Pianifica un’esecuzione periodica a fixed rate: ogni esecuzione è pianificata rispetto al tempo iniziale; se un’esecuzione è in ritardo, le successive possono tentare di “recuperare”. |
+| ScheduledFuture<?> scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit) | Pianifica un’esecuzione periodica con fixed delay: ogni esecuzione è pianificata rispetto al completamento della precedente; non esiste comportamento di recupero. |
 
 > [!IMPORTANT]
 > Non creare mai thread manualmente in un loop:
