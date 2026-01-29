@@ -217,6 +217,24 @@ Gli executor gestiscono thread pools che riutilizzano un numero fisso o dinamico
 - **Single-thread executor**: Garantisce esecuzione sequenziale dei task.
 - **Scheduled executor**: Supporta task delayed e periodici.
 
+| Metodo Factory | Tipo di Ritorno | Descrizione |
+| --- | --- | --- |
+| `Executors.newFixedThreadPool(int nThreads)` | ExecutorService | Crea un thread pool con un numero fisso di thread. |
+| `Executors.newFixedThreadPool(int nThreads, ThreadFactory threadFactory)` | ExecutorService | Come newFixedThreadPool ma con un ThreadFactory personalizzato. |
+| `Executors.newSingleThreadExecutor()` | ExecutorService | Crea un thread pool a singolo thread che esegue i task in modo sequenziale. |
+| `Executors.newSingleThreadExecutor(ThreadFactory threadFactory)` | ExecutorService | Executor a singolo thread con un ThreadFactory personalizzato. |
+| `Executors.newCachedThreadPool()` | ExecutorService | Crea un thread pool che crea nuovi thread quando necessario e riutilizza quelli inattivi. |
+| `Executors.newCachedThreadPool(ThreadFactory threadFactory)` | ExecutorService | Thread pool cached con un ThreadFactory personalizzato. |
+| `Executors.newSingleThreadScheduledExecutor()` | ScheduledExecutorService | Crea un scheduled executor a singolo thread. |
+| `Executors.newSingleThreadScheduledExecutor(ThreadFactory threadFactory)` | ScheduledExecutorService | Scheduled executor a singolo thread con ThreadFactory personalizzato. |
+| `Executors.newScheduledThreadPool(int corePoolSize)` | ScheduledExecutorService | Crea un scheduled thread pool con la dimensione core specificata. |
+| `Executors.newScheduledThreadPool(int corePoolSize, ThreadFactory threadFactory)` | ScheduledExecutorService | Scheduled thread pool con ThreadFactory personalizzato. |
+| `Executors.newWorkStealingPool()` | ExecutorService | Crea un work-stealing pool usando il numero di processori disponibili come livello di parallelismo. |
+| `Executors.newWorkStealingPool(int parallelism)` | ExecutorService | Crea un work-stealing pool con il livello di parallelismo specificato. |
+| `Executors.newThreadPerTaskExecutor(ThreadFactory threadFactory)` | ExecutorService | Crea un executor che avvia un nuovo thread per ogni task. |
+| `Executors.newVirtualThreadPerTaskExecutor()` | ExecutorService | Crea un executor che avvia un nuovo virtual thread per ogni task. |
+
+
 `Task scheduling`: i task sottomessi a un executor vengono messi in coda e prelevati dai thread del pool; l’ordine di esecuzione dipende dall’implementazione dell’executor, dalla politica della coda e dalla disponibilità dei thread. 
 Nei scheduled executor, i task sono ordinati in base al delay di attivazione; i task periodici vengono reinseriti in coda dopo ogni esecuzione.
 
