@@ -120,7 +120,7 @@ counter++;             // altro aggiornamento (post-incremento)
     Esempi: `String`, array (ad es. `int[]`), classi, interfacce e tipi definiti dall’utente.
 
 > [!NOTE]  
-> Vedi [Tipi di dato Java e casting](data_types.md).
+> Vedi [Tipi di dato Java e casting](data-types.md).
 
 - **Teoria:** Un sistema di tipi è l’insieme di regole che associa insiemi di valori e operazioni ammissibili.
 
