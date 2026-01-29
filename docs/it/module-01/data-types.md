@@ -9,13 +9,13 @@
   - [4.4 Note](#44-note)
   - [4.5 Riepilogo](#45-riepilogo)
   - [4.6 Aritmetica e promozione numerica dei primitivi](#46-aritmetica-e-promozione-numerica-dei-primitivi)
-    - [4.6.1 🔹 Regole di promozione numerica in Java](#461--regole-di-promozione-numerica-in-java)
+    - [4.6.1 Regole di promozione numerica in Java](#461-regole-di-promozione-numerica-in-java)
       - [4.6.1.1 Regola 1 – Tipi misti → il tipo più piccolo viene promosso a quello più grande](#4611-regola-1--tipi-misti--il-tipo-più-piccolo-viene-promosso-a-quello-più-grande)
       - [4.6.1.2 Regola 2 – Integrale + floating-point → l’integrale viene promosso a floating-point](#4612-regola-2--integrale--floating-point--lintegrale-viene-promosso-a-floating-point)
       - [4.6.1.3 Regola 3 – byte, short e char vengono promossi a int durante l’aritmetica](#4613-regola-3--byte-short-e-char-vengono-promossi-a-int-durante-laritmetica)
       - [4.6.1.4 Regola 4 – Il tipo del risultato coincide con il tipo promosso](#4614-regola-4--il-tipo-del-risultato-coincide-con-il-tipo-promosso)
-    - [4.6.2 ✅ Riepilogo del comportamento di promozione numerica](#462--riepilogo-del-comportamento-di-promozione-numerica)
-      - [4.6.2.1 🧠 Punti chiave](#4621--punti-chiave)
+    - [4.6.2 Riepilogo del comportamento di promozione numerica](#462-riepilogo-del-comportamento-di-promozione-numerica)
+      - [4.6.2.1 Punti chiave](#4621-punti-chiave)
   - [4.7 Casting in Java](#47-casting-in-java)
     - [4.7.1 Casting dei primitivi](#471-casting-dei-primitivi)
       - [4.7.1.1 Widening implicit casting](#4711-widening-implicit-casting)
@@ -31,7 +31,7 @@
 
 ---
 
-Come abbiamo visto in [Syntax Building Blocks](syntax-building-blocks.md), Java ha due categorie di tipi di dato:
+Come abbiamo visto in [Mattoni Sintattici di Base](syntax-building-blocks.md), Java ha due categorie di tipi di dato:
 
 - **Primitive types**  
 - **Reference types**
@@ -40,7 +40,8 @@ Come abbiamo visto in [Syntax Building Blocks](syntax-building-blocks.md), Java 
 
 ## 4.1 Tipi primitivi
 
-I `primitive` rappresentano **singoli valori grezzi** memorizzati direttamente in memoria.  
+I `primitive` rappresentano **singoli valori grezzi** memorizzati direttamente in memoria.
+  
 Ogni tipo primitivo ha una dimensione fissa che determina quanti byte occupa.
 
 Concettualmente, un primitivo è semplicemente una **cella di memoria** che contiene un valore:
@@ -55,8 +56,9 @@ Concettualmente, un primitivo è semplicemente una **cella di memoria** che cont
 
 ## 4.2 Tipi reference
 
-Un tipo `reference` non contiene l’`object` stesso, ma un **reference (puntatore)** ad esso.  
-La reference ha dimensione fissa (dipende dalla JVM, spesso 4 o 8 byte) e punta a una locazione di memoria dove è memorizzato l’oggetto reale.
+Un tipo `reference` contiene l'indirizzo di memoria di un istanza di un tipo complesso; esso non contiene l’`object` stesso, ma un **reference (puntatore)**, appunto, ad esso.
+  
+Il reference ha dimensione fissa (dipende dalla JVM, spesso 4 o 8 byte) e punta a una locazione di memoria dove è memorizzato l’oggetto reale.
 
 - Esempio: una variabile reference di tipo `String` punta a un oggetto stringa nello heap, che internamente è composto da un array di primitivi `char`.
 
@@ -91,7 +93,7 @@ Reference (4 or 8 bytes)
 
 ## 4.4 Note
 
-`float` e `double` non hanno limiti interi fissi come i tipi integrali.  
+`float` e `double` non hanno limiti interi fissi come i tipi interi.  
 Invece, seguono lo standard IEEE 754:
 
 - **Più piccoli valori positivi non nulli**:  
@@ -114,18 +116,18 @@ Supportano anche valori speciali: **`+Infinity`**, **`-Infinity`** e **`NaN`** (
 ## 4.5 Riepilogo
 
 - **Primitive** = valore reale, memorizzato direttamente in memoria.  
-- **Reference** = puntatore a un oggetto; l’oggetto stesso può contenere primitivi e altre reference.  
+- **Reference** = puntatore a un oggetto; l’oggetto stesso può contenere primitivi e altri reference.  
 - Per i dettagli sui primitivi, vedi la [Tabella dei tipi primitivi](#43-tabella-dei-tipi-primitivi).
 
 ---
 
 ## 4.6 Aritmetica e promozione numerica dei primitivi
 
-Quando applichi operatori aritmetici o di confronto ai **tipi primitivi**, Java converte automaticamente (o *promuove*) i valori a tipi compatibili secondo regole ben definite di **numeric promotion**.
+Quando si applicano operatori aritmetici o di confronto ai **tipi primitivi**, Java converte automaticamente (o *promuove*) i valori a tipi compatibili secondo regole ben definite di **numeric promotion**.
 
 Queste regole garantiscono calcoli coerenti e riducono il rischio di perdita di dati quando si mescolano tipi numerici differenti.
 
-### 4.6.1 🔹 Regole di promozione numerica in Java
+### 4.6.1 Regole di promozione numerica in Java
 
 #### 4.6.1.1 Regola 1 – Tipi misti → il tipo più piccolo viene promosso a quello più grande
 
@@ -138,10 +140,10 @@ Se due operandi appartengono a **tipi numerici diversi**, Java promuove automati
 **Ordine di promozione valido (dal più piccolo al più grande):**  
 `byte → short → int → long → float → double`
 
-#### 4.6.1.2 Regola 2 – Integrale + floating-point → l’integrale viene promosso a floating-point
+#### 4.6.1.2 Regola 2 – Intero + floating-point → l’intero viene promosso a floating-point
 
-Se un operando è di tipo **integrale** (`byte`, `short`, `char`, `int`, `long`) e l’altro è di tipo **floating-point** (`float`, `double`),  
-il valore integrale viene **promosso** al tipo **floating-point** prima dell’operazione.
+Se un operando è di tipo **intero** (`byte`, `short`, `char`, `int`, `long`) e l’altro è di tipo **floating-point** (`float`, `double`),  
+il valore intero viene **promosso** al tipo **floating-point** prima dell’operazione.
 
 | Example | Explanation |
 | --- | --- |
@@ -160,7 +162,8 @@ Java le promuove automaticamente a **`int`**, anche se **entrambi gli operandi s
 | `char c1 = 'A', c2 = 2;`<br>`int result = c1 + c2;` | `'A'` (65) e `2` sono promossi a `int`, risultato = `67`. |
 
 > [!NOTE]  
-> Questa regola si applica quando si usano **variabili**.  
+> Questa regola si applica quando si usano **variabili**.
+>  
 > Quando si usano **letterali costanti**, il compilatore può a volte valutare l’espressione a compile-time e assegnarla in sicurezza.
 
 ```java
@@ -182,15 +185,16 @@ il **risultato** dell’espressione avrà quel **medesimo tipo promosso**.
 | `int x = 10, y = 4;`<br>`var div = x / y;` | Entrambi sono `int`, il risultato è `int` (`2`), la parte frazionaria viene troncata. |
 
 > [!WARNING]  
-> La divisione tra interi produce sempre un **risultato intero**.  
-> Per ottenere un risultato decimale, **almeno un operando deve essere floating-point**:
+> La divisione tra interi produce sempre un **risultato intero**.
+>  
+> Per ottenere un risultato decimale, **almeno un operando deve essere di tipo floating-point**:
 
 ```java
 double result = 10.0 / 4; // ✅ 2.5
 int result = 10 / 4;      // ❌ 2 (la parte frazionaria è scartata)
 ```
 
-### 4.6.2 ✅ Riepilogo del comportamento di promozione numerica
+### 4.6.2 Riepilogo del comportamento di promozione numerica
 
 | Situation | Promotion Result | Example |
 | --- | --- | --- |
@@ -199,19 +203,19 @@ int result = 10 / 4;      // ❌ 2 (la parte frazionaria è scartata)
 | Aritmetica con `byte`, `short`, `char` | Promozione a `int` | `byte + byte → int` |
 | Risultato dopo la promozione | Il risultato ha il tipo promosso | `float + long → float` |
 
-#### 4.6.2.1 🧠 Punti chiave
+#### 4.6.2.1 Punti chiave
 
-- Considera sempre la **promozione di tipo** quando mescoli tipi diversi in un’espressione aritmetica.  
-- Per i tipi piccoli (`byte`, `short`, `char`), la promozione a `int` è automatica quando si usano variabili in un’operazione aritmetica.  
+- Considera sempre la **promozione di tipo** quando misceli tipi diversi in un’espressione aritmetica.  
+- Per i tipi piccoli (`byte`, `short`, `char`), la promozione a `int` è automatica quando si usano **variabili** in un’operazione aritmetica.  
 - Usa il **casting esplicito** solo quando sei sicuro che il risultato rientri nel tipo di destinazione.  
 - Ricorda: la **divisione tra interi tronca**, la **divisione tra floating-point mantiene i decimali**.  
-- Comprendere le regole di promozione è cruciale per evitare **perdite di precisione inattese** o **errori di compilazione** durante l’esame di certificazione Java.
+- Comprendere le regole di promozione è cruciale per evitare **perdite di precisione inattese** o **errori di compilazione**.
 
 ---
 
 ## 4.7 Casting in Java
 
-Il `casting` in Java è il processo con cui converti esplicitamente un valore da un tipo a un altro.  
+Il `casting` in Java è il processo con cui si converte esplicitamente un valore da un tipo a un altro.  
 Si applica sia ai `primitive types` (numeri) sia ai `reference types` (oggetti in una gerarchia di classi).
 
 ### 4.7.1 Casting dei primitivi
@@ -254,7 +258,7 @@ System.out.println(i); // 9 (la parte frazionaria viene scartata)
 
 ### 4.7.2 Perdita di dati, overflow e underflow
 
-Quando un valore supera la capacità di un tipo, puoi ottenere:
+Quando un valore eccede la capacità di un tipo, puoi ottenere:
 
 - **Overflow**: il risultato è maggiore del massimo valore rappresentabile
 - **Underflow**: il risultato è minore del minimo valore rappresentabile
@@ -311,7 +315,7 @@ int f = 0x8000_0000;    // ❌ fuori range int (serve L)
 
 Tuttavia, quando si applicano le regole di promozione numerica:
 
-> Con variabili di tipo `byte`, `short` e `char` in un’espressione aritmetica, gli operandi vengono promossi a `int` e il risultato è `int`.
+> Con **variabili** di tipo `byte`, `short` e `char` in un’espressione aritmetica, gli operandi vengono promossi a `int` e il risultato è `int`.
 
 ```java
 byte first = 10;
@@ -333,13 +337,13 @@ short a2 = (short) (5 + b);    // ✅ cast dell’intera espressione
 
 ### 4.7.4 Casting di reference (oggetti)
 
-Il casting si applica anche alle **reference a oggetti** in una gerarchia di classi.  
+Il casting si applica anche ai **reference a oggetti** in una gerarchia di classi.  
 Non modifica l’oggetto in memoria — cambia solo **il tipo di reference** usato per accedervi.
 
 Regole fondamentali:
 
 - Il **tipo reale dell’oggetto** determina quali field/metodi esistono effettivamente.
-- Il **tipo della reference** determina cosa puoi accedere in quel punto del codice.
+- Il **tipo del reference** determina cosa puoi accedere in quel punto del codice.
 
 #### 4.7.4.1 Upcasting (widening reference cast)
 

@@ -36,9 +36,9 @@ Questi sono i concetti minimi necessari per scrivere, compilare, organizzare ed 
 
 Una `class` Java è il mattone fondamentale di un programma Java. 
  
-Una classe rappresenta un **tipo** in Java: definisce una struttura (`field`) e un comportamento (`method`).
+Una classe rappresenta un **tipo** in Java: definisce un insieme di dati (`fields`) e un comportamento (`methods`).
 
-Una `class` è un **blueprint** (modello), mentre gli `object` sono **istanze concrete** create a runtime.
+Una `class` è un **blueprint** (modello), mentre gli `object` sono **istanze concrete** create a runtime sulla base di questo modello.
 
 Una classe Java è composta da due elementi principali, detti **membri** della classe:
 - **Field** (o variabili) — rappresentano i dati che definiscono lo stato del nuovo tipo.
@@ -54,7 +54,7 @@ Ciò significa che:
 - può essere utilizzato senza creare un oggetto della classe
 - è caricato in memoria quando la classe viene caricata dalla JVM
 
-I membri non statici (detti **di istanza**) appartengono invece ai singoli oggetti e ogni istanza possiede la propria copia.
+I membri non statici (detti **di istanza**) appartengono invece ai singoli oggetti e ogni istanza ne possiede la propria copia.
 
 Normalmente, ogni classe è definita nel proprio file "**.java**"; per esempio, una classe chiamata `Person` sarà definita nel corrispondente file `Person.java`.
 
@@ -176,7 +176,8 @@ produrrà un errore di compilazione perché, mentre i primi due simboli fanno pa
 
 ## 2.3 Modificatori di accesso
 
-In Java, un **access modifier** è una keyword che specifica la visibilità (o accessibilità) di una **class**, **method** o **field**. Determina quali altre classi possono usare o vedere quell’elemento.
+In Java, un **access modifier** è una keyword che specifica la visibilità (o accessibilità) di una **class**, **method** o **field**. 
+Questo modificatore determina quali altre classi possono usare o vedere quel particolare elemento.
 
 > [!NOTE]  
 > **Tabella dei modificatori di accesso disponibili in Java**
@@ -190,7 +191,7 @@ In Java, un **access modifier** è una keyword che specifica la visibilità (o a
 
 > [!TIP]  
 > **private > default > protected > public**  
-> Pensa che la “visibilità si allarga verso l’esterno”.
+> La “visibilità si amplia" secondo questo schema.
 
 ---
 
@@ -201,15 +202,15 @@ Aiutano a organizzare codebase grandi, evitare conflitti di nomi e fornire acces
 
 ### 2.4.1 Organizzazione e scopo
 
-- I nomi dei package seguono le stesse regole dei nomi di variabile. Vedi: *Java Naming Rules*.
-- I package sono come **cartelle** per il tuo codice sorgente Java.  
+- I nomi dei package seguono le stesse regole dei nomi di variabile. Vedi [Regole di naming Java](naming-rules.md).
+- I package sono come **cartelle** per il codice sorgente Java.  
 - Permettono di raggruppare classi correlate (ad esempio tutte le utility in `java.util`, tutte le classi di rete in `java.net`).  
-- Usando i package puoi evitare **conflitti di nomi**: ad esempio puoi avere due classi chiamate `Date`, ma una è `java.util.Date` e l’altra è `java.sql.Date`.
+- Usando i package puoi evitare **conflitti di nomi**; ad esempio, puoi avere due classi chiamate `Date`, ma una è `java.util.Date` e l’altra è `java.sql.Date`.
 
 ### 2.4.2 Mappatura con il file system e dichiarazione di un package
 
 - I package corrispondono direttamente alla **gerarchia di directory** sul file system.
-- Dichiari il package all’inizio del file sorgente (**prima di qualsiasi import**).
+- Il package va dichiarato all’inizio del file sorgente (**prima di qualsiasi import**).
 - Se non dichiari un package, la classe appartiene al package di default.
   - Questo non è raccomandato nei progetti reali, perché rende più complicate l’organizzazione e gli import.
 
@@ -224,7 +225,7 @@ public class MyApp{
 ```
 
 > [!IMPORTANT]  
-> Questa dichiarazione significa che la classe deve trovarsi nella directory: **com/example/myapp/utils/MyApp.java**
+> Questa dichiarazione ci dice che la classe appartiene al package `com.example.myapp.utils` e che il suo file deve trovarsi nel path fisico: **com/example/myapp/utils/MyApp.java**
 
 ### 2.4.3 Appartenere allo stesso package
 
@@ -240,8 +241,8 @@ Le classi in `A.B` non possono accedere direttamente ai membri **package-private
 
 Le classi nello stesso package:
 
-- Possono accedere ai membri package-private l’una dell’altra (cioè membri senza modificatore di accesso esplicito).
-- Condividono lo stesso namespace, quindi non hai bisogno di importarle per poterle usare.
+- Possono accedere ai membri `package-private` l’una dell’altra (cioè membri senza modificatore di accesso esplicito).
+- Condividono lo stesso namespace, quindi non si ha bisogno di importarle per poterle usare.
 
 Esempio: Due file nello stesso package
 
@@ -267,7 +268,7 @@ public class Runner {
 
 ### 2.4.4 Importare da un package
 
-Per usare classi da un altro package, devi importarle:
+Per usare classi da un altro package, si deve importarle:
 
 - Esempio:
 
@@ -275,28 +276,30 @@ Per usare classi da un altro package, devi importarle:
 import java.util.List;       // importa una specifica classe
 import java.util.*;          // importa tutte le classi in java.util
 
-import java.nio.file.*.*     // ERROR! only one wildcard is allowed and it must be at the end!
+import java.nio.file.*.*     // ERROR! solo una wildcard è permessa e deve comparire alla fine!
 ```
 
 > [!NOTE]  
 > Il carattere wildcard `*` importa tutti i tipi nel package, ma non i sotto-package.
 
-Puoi sempre usare il nome completo (fully qualified name) invece di importare tutte le classi del package:
+Nel codice comunque, puoi sempre usare il nome completo (fully qualified name) della classe invece di importare tutte le classi del package:
 
 ```java
 java.util.List myList = new java.util.ArrayList<>();
 ```
 
 > [!NOTE]  
-> Se importi esplicitamente un nome di classe, questo ha precedenza su qualsiasi import con wildcard;  
-> se vuoi usare due classi con lo stesso nome (ad esempio `Date` da `java.util` e da `java.sql`), è meglio usare un import con nome completamente qualificato.
+> Se importi esplicitamente un nome di classe, questo ha precedenza su qualsiasi import con wildcard;
+>  
+> Se vuoi usare due classi con lo stesso nome (ad esempio `Date` da `java.util` e da `java.sql`), è piu prudente usare una import con nome completamente qualificato.
 
 ### 2.4.5 Import statici
 
-Oltre a importare classi da un package, Java permette un altro tipo di import: lo **static import**.  
-Uno *static import* ti consente di importare i **membri statici** di una classe — come metodi statici e variabili statiche — in modo da poterli usare **senza dover specificare il nome della classe**.
+Oltre a importare classi da un package, Java permette un altro tipo di import: lo **static import**.
+  
+Uno *static import* ti consente di importare i **membri statici** di una classe — come `metodi statici` e `variabili statiche` — in modo da poterli usare **senza dover specificare il nome della classe**.
 
-Puoi importare membri statici **specifici** oppure usare una **wildcard** per importare tutti i membri statici di una classe.
+Puoi importare membri statici **specifici** oppure usare una **wildcard** per importare tutti i membri statici di una particolare classe.
 
 Esempio — Static import specifico
 
@@ -306,7 +309,7 @@ import static java.util.Arrays.asList;   // Imports Arrays.asList()
 public class Example {
 
     List<String> arr = asList("first", "second");
-    // We can call asList() directly, without using Arrays.asList()
+    // Puoi invocare asList() direttamente, senza usare Arrays.asList()
 }
 ```
 
@@ -332,7 +335,7 @@ import static java.lang.Math.*;
 public class Calculator {
     double x = sqrt(49);   // 7.0
     double y = max(10, 20); 
-    double z = random();   // calls Math.random()
+    double z = random();   // invoca Math.random()
 }
 ```
 
@@ -369,20 +372,21 @@ public class Test {
 ```
 
 > [!WARNING]  
-> - Uno static import deve sempre seguire l’esatta sintassi: `import static`.  
-> - Il compilatore proibisce di importare **due membri statici con lo stesso simple name** se questo crea ambiguità — anche se provengono da classi o package diversi.
+> Uno static import deve sempre seguire l’esatta sintassi: `import static`. 
+> 
+> Il compilatore proibisce di importare **due membri statici con lo stesso simple name** se questo crea ambiguità — anche se provengono da classi o package diversi.
 
 Esempio — **Non consentito**:
 
 ```java
 import static java.util.Collections.emptyList;
-import static java.util.List.of;
 
-// ❌ ERROR: both methods have the same name `of()`
+import static java.util.List.of;
 import static java.util.Set.of;
+// ❌ ERROR: entrambi hanno lo stesso nome di metodo `of()`
 ```
 
-Il compilatore non sa quale `of()` intendi usare → errore di compilazione.
+Il compilatore non sa quale `of()` si intenda usare → errore di compilazione.
 
 > [!TIP]   
 > - Se due static import introducono lo stesso nome, **qualsiasi tentativo di usare quel nome provoca un errore di compilazione**.  
@@ -413,7 +417,7 @@ La sua dichiarazione corretta è fondamentale perché la JVM possa riconoscerlo.
 
 ### 2.5.1 Firma del metodo main
 
-Osserviamo la firma del metodo `main` all’interno di due delle classi più semplici possibili:
+Analizziamo la firma del metodo `main` all’interno di due delle classi tra le più semplici possibili:
 
 - Esempio: senza modificatori opzionali
 
@@ -448,16 +452,16 @@ public class MainSecondExample {
 
 | Token / Identifier | Category | Meaning | Optional? |
 | --- | --- | --- | --- |
-| public | Keyword / Access Modifier | Rende il metodo accessibile da qualunque punto. Necessario perché la JVM possa chiamarlo dall’esterno della classe. | Mandatory |
-| static | Keyword | Indica che il metodo appartiene alla classe stessa e può essere chiamato senza creare un oggetto. Necessario perché la JVM non ha un’istanza quando avvia il programma. | Mandatory |
-| final (before return type) | Modifier | Impedisce che il metodo venga sovrascritto (overridden). Può comparire legalmente prima del tipo di ritorno, ma non ha effetti pratici su `main` e non è richiesto. | Optional |
-| main | Method name (predefined) | Il nome esatto che la JVM cerca come punto di ingresso del programma. Deve essere scritto esattamente `main` (minuscolo). | Mandatory |
-| void | Return Type / Keyword | Dichiara che il metodo non restituisce alcun valore alla JVM. | Mandatory |
-| String[] args | Parameter list | Array di `String` che contiene gli argomenti da riga di comando passati al programma. Può essere scritto anche come `String args[]` o `String... args`. Il nome del parametro (`args`) è arbitrario. | Mandatory (il tipo del parametro è richiesto, il nome può variare) |
-| final (in parameter) | Modifier | Indica che il parametro non può essere riassegnato all’interno del metodo (non puoi riassegnare `args` a un altro array). | Optional |
+| `public` | Keyword / Access Modifier | Rende il metodo accessibile da qualunque punto. Necessario perché la JVM possa chiamarlo dall’esterno della classe. | Mandatory |
+| `static` | Keyword | Indica che il metodo appartiene alla classe stessa e può essere chiamato senza creare un oggetto. Necessario perché la JVM non ha un’istanza quando avvia il programma. | Mandatory |
+| `final` (before return type) | Modifier | Impedisce che il metodo venga sovrascritto (overridden). Può comparire legalmente prima del tipo di ritorno, ma non ha effetti pratici su `main` e non è richiesto. | Optional |
+| `main` | Method name (predefined) | Il nome esatto che la JVM cerca come punto di ingresso del programma. Deve essere scritto esattamente `main` (minuscolo). | Mandatory |
+| `void` | Return Type / Keyword | Dichiara che il metodo non restituisce alcun valore alla JVM. | Mandatory |
+| `String[] args` | Parameter list | Array di `String` che contiene gli argomenti da riga di comando passati al programma. Può essere scritto anche come `String args[]` o `String... args`. Il nome del parametro (`args`) è arbitrario. | Mandatory (il tipo del parametro è richiesto, il nome può variare) |
+| `final (in parameter)` | Modifier | Indica che il parametro non può essere riassegnato all’interno del metodo (non puoi riassegnare `args` a un altro array). | Optional |
 
 > [!IMPORTANT]  
-> I modificatori `public`, `static` (obbligatori) e `final` (se presente) possono essere scambiati d’ordine; `public` e `static` non possono essere omessi.  
+> I modificatori `public`, `static` (obbligatori) e `final` (se presente) possono essere scambiati d’ordine; `public` e `static` **non possono essere omessi**.  
 >  
 > Java considera `String[] args` e `String... args` equivalenti.  
 > Entrambe le firme compilano e funzionano correttamente come punti di ingresso.
@@ -466,15 +470,15 @@ public class MainSecondExample {
 
 ## 2.6 Compilare ed eseguire il codice
 
-Questa sezione mostra comandi `javac` e `java` **corretti e funzionanti** per i casi più comuni in Java 21: file singoli, più file, package, directory di output separate, uso di classpath/module-path.
+Questa sezione mostra l'uso dei comandi `javac` e `java` per i casi più comuni in Java 21: file singoli, più file, package, directory di output separate, uso di classpath/module-path.
 
 Segui i layout delle directory esattamente.
 
 > check your tools
 
 ```bash
-javac -version   # should print: javac 21.x
-java  -version   # should print: java version "21.0.7" ... (the output could be different depending on the implementation of the jvm you installed)
+javac -version   # output atteso: javac 21.x
+java  -version   # output atteso: java version "21.0.7" ... (l'output potrebbe variare a seconda della jvm in uso)
 ```
 
 > [!WARNING]  
@@ -551,7 +555,7 @@ e
 javac packagex/A.java packagey/B.java
 ```
 
-**Eseguire il punto di ingresso**: la classe che contiene un metodo `main`
+**Eseguire il punto di ingresso del programma**: la classe che contiene un metodo `main`
 
 ```bash
 java A    # se A ha main(...)

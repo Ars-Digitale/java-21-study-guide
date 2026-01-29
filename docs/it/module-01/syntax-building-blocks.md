@@ -80,7 +80,7 @@ String msg = "Hello";     // "Hello" è un letterale String
     Esempi: `class`, `public`, `static`, `if`, `return`.
 
 > [!NOTE]  
-> Gli identificatori devono rispettare le regole di naming di Java: vedi *Java Naming Rules*.
+> Gli identificatori devono rispettare le regole di naming di Java: vedi [Regole di naming Java](naming-rules.md)
 
 - **Teoria:** Funzione di binding: collega un nome a un valore o a una risorsa.
 
@@ -120,7 +120,7 @@ counter++;             // altro aggiornamento (post-incremento)
     Esempi: `String`, array (ad es. `int[]`), classi, interfacce e tipi definiti dall’utente.
 
 > [!NOTE]  
-> Vedi *Java Data Types*.
+> Vedi [Tipi di dato Java e casting](data_types.md).
 
 - **Teoria:** Un sistema di tipi è l’insieme di regole che associa insiemi di valori e operazioni ammissibili.
 
@@ -142,7 +142,7 @@ String name = "Alice";  // tipo reference (classe String)
 - **In Java:**
 
 > [!NOTE]  
-> Vedi *Java Operators*.
+> Vedi [Operatori Java](java-operators.md).
 
 - **Teoria:** Gli operatori definiscono le computazioni ammesse sui tipi; insieme a valori e variabili formano le **espressioni**.
 

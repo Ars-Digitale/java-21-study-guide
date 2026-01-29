@@ -40,3 +40,4 @@ Thumbs.db
 # local-only translation helpers
 decode_md.sh
 test.txt
+rename_lang.sh
