@@ -40,7 +40,7 @@
 
 ## 6.1 Introduzione
  
-In Java, un **tipo** può essere un **tipo primitivo** (come `int`, `double`, `boolean`, ecc.) oppure un **tipo reference** (classi, interfacce, array, enum, record, ecc.). Vedi: [Java Data Types and Casting](data-types.md)
+In Java, un **tipo** può essere un **tipo primitivo** (come `int`, `double`, `boolean`, ecc.) oppure un **tipo reference** (classi, interfacce, array, enum, record, ecc.). Vedi: [Tipi di dato Java e casting](data-types.md)
 
 Il modo in cui vengono create le istanze dipende dalla categoria del tipo:
 

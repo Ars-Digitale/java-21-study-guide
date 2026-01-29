@@ -17,7 +17,7 @@
 
 Java definisce regole precise per gli **identificatori**, ovvero i nomi assegnati a variabili, metodi, classi, interfacce e package.
 
-Finché rispetti le regole di naming descritte di seguito, sei libero di scegliere nomi significativi per gli elementi del tuo programma.
+Finché si rispettano le regole di naming descritte di seguito, si è liberi di scegliere nomi significativi per gli elementi del programma.
 
 ## 3.1 Regole per gli identificatori
 
@@ -25,15 +25,15 @@ Finché rispetti le regole di naming descritte di seguito, sei libero di sceglie
 
 Gli `identifier` **non possono** coincidere con le **keyword** Java o con i **letterali riservati**.
 
-Le `keyword` sono parole speciali predefinite nel linguaggio Java che non puoi usare come identificatori (vedi tabella qui sotto).
+Le `keyword` sono parole speciali predefinite nel linguaggio Java che non si possono usare come identificatori (vedi tabella qui sotto).
 
 I `literal` come `true`, `false` e `null` sono anch’essi riservati e non possono essere usati come identificatori.
 
 - Esempio:
 ```java
-int class = 5;        // invalid: 'class' is a keyword
-boolean true = false; // invalid: 'true' is a literal
-int year = 2024;   	  // valid
+int class = 5;        // non valido: 'class' è una keyword
+boolean true = false; // non valido: 'true' è un literal
+int year = 2024;   	  // valido
 ```
 
 #### 3.1.1.1 Keyword Java riservate
@@ -70,25 +70,25 @@ Questo significa che `myVar`, `MyVar` e `MYVAR` sono tutti identificatori divers
 int myVar = 1;
 int MyVar = 2;
 int MYVAR = 3;
-int CLASS = 6; // legal but, please, don't do it!!
+int CLASS = 6; // legale ma, please, non farlo!!
 ```
 
 > [!TIP]  
 > Java tratta gli identificatori letteralmente: `Count`, `count` e `COUNt` sono entità distinte e possono coesistere.  
 >  
-> A causa della sensibilità a maiuscole/minuscole, potresti usare varianti delle keyword che differiscono solo nel case.  
+> A causa della sensibilità a maiuscole/minuscole, si potrebbero usare varianti delle keyword che differiscono solo nel case.  
 > Anche se è legale, questo stile è fortemente sconsigliato perché riduce la leggibilità ed è considerata una pessima pratica.
 
 ### 3.1.3 Inizio degli identificatori
 
-Gli identificatori in Java devono iniziare con una lettera, un simbolo di valuta (`$`, `€`, `£`, `₹`...) oppure il simbolo `_`.
+Gli identificatori in Java devono iniziare con una **lettera**, un **simbolo di valuta** (`$`, `€`, `£`, `₹`...) oppure il simbolo **`_`**.
 
 Esempio:
 ```java
 int myVarA;
 int $myVarB;
 int _myVarC;
-String €uro = "currency"; // legal (rarely seen in practice)
+String €uro = "currency"; // legale (usato raramente in pratica)
 ```
 
 > [!NOTE]  
@@ -102,8 +102,8 @@ Esempio:
 ```java
 int my33VarA;
 int $myVar44;
-int 3myVarC; // invalid: identifier cannot start with a digit
-int var2024 = 10; // valid
+int 3myVarC; // non valido: identifier non possono iniziare con una cifra
+int var2024 = 10; // valido
 ```
 
 ### 3.1.5 Singolo token `_`
@@ -121,7 +121,7 @@ int _;  // invalid since Java 9
 
 ### 3.1.6 Letterali numerici e carattere underscore
 
-Puoi usare uno o più caratteri `_` (underscore) nei letterali numerici per renderli più facili da leggere.
+Si possono usare uno o più caratteri `_` (underscore) nei letterali numerici per renderli più facili da leggere.
 
 Puoi inserire underscore quasi ovunque, **tranne** all’inizio, alla fine o immediatamente prima/dopo il punto decimale.
 
