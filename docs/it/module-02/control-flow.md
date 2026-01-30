@@ -139,9 +139,9 @@ Una costante a compile-time:
 - Deve essere dichiarata con `final` e inizializzata nella stessa istruzione.
 - Il suo inizializzatore deve a sua volta essere un’espressione costante (tipicamente usando letterali e altre costanti a compile-time).
 
-### 7.2.3 Compatibilità di tipo tra selector e case
+### 7.2.3 Compatibilità di tipo tra `selector` e `case`
 
-Il tipo del selector e ogni etichetta `case` devono essere compatibili:
+Il tipo del `selector` e ogni etichetta `case` devono essere compatibili:
 
 - Le costanti numeriche dei case devono essere entro l’intervallo del tipo del selector.
 - Per un selector `enum`, le etichette `case` devono essere costanti di quell’`enum`.
