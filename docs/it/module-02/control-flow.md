@@ -29,7 +29,7 @@ Per impostazione predefinita, le istruzioni vengono eseguite sequenzialmente dal
 Java fornisce tre categorie principali di costrutti di controllo del flusso:
 
 - **Istruzioni decisionali** — `if`, `if-else`, `switch`
-- **Istruzioni di iterazione** — `for`, `while`, `do-while` e il **for** avanzato
+- **Istruzioni di iterazione** — `for`, `while`, `do-while` e il **`for`** avanzato
 - **Istruzioni di diramazione** — `break`, `continue` e `return`
 
 > [!TIP]
@@ -37,7 +37,9 @@ Java fornisce tre categorie principali di costrutti di controllo del flusso:
 
 ## 7.1 L’istruzione `if`
 
-L’istruzione `if` è una struttura condizionale di controllo del flusso che esegue un blocco di codice solo se una specifica espressione booleana viene valutata come `true`. Consente al programma di prendere decisioni a runtime.
+L’istruzione `if` è una struttura condizionale di controllo del flusso che esegue un blocco di codice solo se una specifica espressione booleana viene valutata come `true`. 
+
+L’istruzione consente al programma di prendere decisioni a runtime.
 
 **Sintassi:**
 
@@ -96,7 +98,7 @@ Rispetto a lunghe catene di `if-else-if`, uno `switch`:
 Java 21 supporta:
 
 - La `switch` classica come **istruzione** (solo controllo del flusso).
-- La `switch` come **espressione** (produce un risultato).
+- La `switch` come **Expression** (produce un risultato).
 - **Pattern matching** dentro `switch`, inclusi type pattern e guard.
 
 Entrambe le forme di `switch` condividono le stesse regole riguardanti il selector (la **variabile target** dello switch) e i valori `case` accettabili.
@@ -115,7 +117,7 @@ Entrambe le forme di `switch` condividono le stesse regole riguardanti il select
 | `var` (if it resolves to one of the allowed types) |
 
 > [!WARNING]
-> **Non consentito** come tipo selector per switch:
+> **Non consentiti** come type selector per switch:
 > 
 > - `boolean`
 > - `long`
@@ -124,7 +126,7 @@ Entrambe le forme di `switch` condividono le stesse regole riguardanti il select
 
 ### 7.2.2 Valori `case` accettabili
 
-Per uno switch non-pattern, ogni etichetta `case` deve essere una costante a compile-time compatibile con il tipo del selector.
+Per uno switch `non-pattern`, ogni etichetta `case` deve essere una **costante a compile-time compatibile con il tipo del selector**.
 
 Sono consentite, come etichette `case`:
 
@@ -142,12 +144,12 @@ Una costante a compile-time:
 Il tipo del selector e ogni etichetta `case` devono essere compatibili:
 
 - Le costanti numeriche dei case devono essere entro l’intervallo del tipo del selector.
-- Per un selector `enum`, le etichette case devono essere costanti di quell’`enum`.
-- Per un selector `String`, le etichette case devono essere costanti stringa.
+- Per un selector `enum`, le etichette `case` devono essere costanti di quell’`enum`.
+- Per un selector `String`, le etichette `case` devono essere costanti stringa.
 
 ### 7.2.4 Pattern Matching nello Switch
 
-Lo switch in Java 21 supporta il `pattern matching`, inclusi:
+Lo switch in Java 21 supporta il `pattern matching`, includendo:
 
 - **Type pattern**: `case String s`
 - **Guarded pattern**: `case String s when s.length() > 3`
@@ -169,13 +171,15 @@ String describe(Object o) {
 
 **Punti chiave**:
 
-- Ogni pattern introduce una pattern variable (come `i` o `s`).
+- Ogni pattern introduce una `pattern variable` (come `i` o `s`).
 - Le pattern variable sono in scope solo all’interno del proprio `ramo` (o dei percorsi in cui è noto che il pattern corrisponde).
-- L’ordine è importante a causa della **dominanza**: i pattern più specifici devono precedere quelli più generali.
+- L’ordine è importante a causa della **dominanza**: **i pattern più specifici devono precedere quelli più generali**.
 
 ### 7.2.4.1 Nomi delle variabili e scope tra i rami
 
-Con il pattern matching, la variabile di pattern esiste solo nello scope del ramo in cui è definita. Questo significa che puoi riutilizzare lo stesso nome di variabile in diversi rami `case` senza che i nomi entrino in conflitto.
+Con il `pattern matching`, la variabile di pattern esiste solo nello scope del ramo in cui è definita. 
+
+Questo significa che puoi riutilizzare lo stesso nome di variabile in diversi rami `case` senza che i nomi entrino in conflitto.
 
 - Esempio:
 
@@ -188,7 +192,7 @@ switch (o) {
 ```
 
 > [!NOTE]
-> Quest’ultimo esempio non restituisce un valore, quindi è una **istruzione switch**, non un’espressione switch.
+> Quest’ultimo esempio non restituisce un valore, quindi è in realtà una **istruzione switch**, non una switch Expression.
 
 ### 7.2.4.2 Ordinamento, dominanza ed esaustività negli switch con pattern
 
@@ -201,7 +205,7 @@ Un pattern più generale **non** deve apparire prima di uno più specifico, altr
 ```java
 return switch (o) {
 	case Object obj -> "object";
-	case String s -> "string"; // ❌ DOES NOT COMPILE: unreachable, String is already matched by Object
+	case String s -> "string"; // ❌ DOES NOT COMPILE: irraggiungibile, String è già intercettata da Object
 };
 ```
 
@@ -210,7 +214,7 @@ return switch (o) {
 ```java
 return switch (o) {
 	case Integer a -> "First";
-	case Integer a when a > 0 -> "Second"; // ❌ DOES NOT COMPILE: unreachable, the first case matches all Integers
+	case Integer a when a > 0 -> "Second"; // ❌ DOES NOT COMPILE: irraggiungibile, il primo case intercetta tutti gli Integers
 	// ...
 };
 ```
@@ -220,7 +224,7 @@ Quando si usa il pattern matching, gli switch devono essere **esaustivi**; cioè
 Questo può essere ottenuto tramite:
 
 - Fornire un case `default` che gestisce tutti i valori non corrispondenti a nessun altro case.
-- Fornire una clausola case terminale con un tipo di pattern che corrisponde al tipo reference del selector.
+- Fornire una clausola `case terminale` con un tipo di pattern che corrisponde al tipo reference del selector.
 
 - Esempio (non esaustivo):
 
@@ -228,7 +232,7 @@ Questo può essere ottenuto tramite:
 Number number = Short.valueOf(10);
 
 switch (number) {
-	case Short s -> System.out.println("A"); // ❌ DOES NOT COMPILE: not exhaustive, selector is of type Number
+	case Short s -> System.out.println("A"); // ❌ DOES NOT COMPILE: non esaustivo, il selector è di tipo Number
 }
 ```
 
@@ -291,7 +295,7 @@ Infine, un’espressione o un blocco (racchiuso in `{}`) definisce il codice da 
 - Il fall-through è possibile per i `case` in stile "due punti" a meno che un ramo usi `break`, `return` o `throw`.
 Quando presente, `break` termina lo switch dopo l’esecuzione del suo case; senza di esso, l’esecuzione continua, in ordine, nei rami successivi.
 - Una clausola `default` è opzionale e può apparire ovunque nell’istruzione switch. Viene eseguita se non c’è corrispondenza per i case precedenti.
-- Un’istruzione switch non produce un valore come nell'expression; non puoi assegnare un’istruzione switch direttamente a una variabile.
+- Un’istruzione switch non produce un valore come nell'Expression; non puoi assegnare un’istruzione switch direttamente a una variabile.
 
 ### 7.3.1.1 Comportamento di Fall-Through
 
@@ -363,7 +367,7 @@ int len = switch (s) {
 ```
 
 > [!NOTE]
-> `yield` è usato solo nelle espressioni switch.
+> `yield` è usato solo nelle Expressions switch.
 > `break value;` non è consentito come modo per restituire un valore da un’espressione switch.
 
 ### 7.3.2.2 Esaustività per le espressioni switch
@@ -419,12 +423,12 @@ int len = switch (s) {
 ```
 
 > [!NOTE]
-> Per le espressioni switch:
+> Per le Expressions switch:
 > 
 > Se non gestisci `null` e il selector è `null`, viene lanciata una `NullPointerException`.
 > 
 > Usare `case null` rende lo switch esplicitamente null-safe.
 
 > [!WARNING]
-> Ogni volta che `case null` viene usato in uno switch, lo switch viene trattato come un pattern switch, e si applicano tutte le regole per i pattern switch (incluse esaustività e dominanza).
+> Ogni volta che `case null` viene usato in uno switch, lo switch viene trattato come un `pattern switch`, e si applicano tutte le regole per i pattern switch (incluse esaustività e dominanza).
 

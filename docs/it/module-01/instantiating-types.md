@@ -49,9 +49,9 @@ Il modo in cui vengono create le istanze dipende dalla categoria del tipo:
   La JVM alloca automaticamente la memoria per contenere il valore e non è necessaria alcuna keyword esplicita. 
   
 ```java
-int age = 30;         // crea un int primitivo con valore 30
-boolean flag = true;  // crea un boolean primitivo con valore true
-double pi = 3.14159;  // crea un double primitivo con valore 3.14159
+int age = 30;         // crea un primitivo int con valore 30
+boolean flag = true;  // crea un primitivo boolean con valore true
+double pi = 3.14159;  // crea un primitivo double con valore 3.14159
 ```
   
 - **Tipi reference (oggetti)**  
@@ -66,13 +66,19 @@ Person p = new Person();           // crea un nuovo oggetto Person usando il suo
 È anche comune affidarsi a letterali o metodi factory per la creazione degli oggetti.
   
 ```java
-String name = new String("Alice"); // crea esplicitamente un nuovo oggetto String
-Person p = new Person();           // crea un nuovo oggetto Person usando il suo costruttore
+String text = "Hello World";
+
+List<String> list = List.of("A", "B", "C");              // factory method immutabile
+Map<String, Integer> map = Map.of("one", 1, "two", 2);   // factory method immutabile
+Optional<String> opt = Optional.of("value");             // factory method
+
+LocalDate date = LocalDate.of(2025, 3, 15);
+Integer boxed = Integer.valueOf(10);
 ```
 
 > [!IMPORTANT]
 > I letterali String **non richiedono `new`** e sono memorizzati nello **String pool**.
-> Usare `new String("x")` crea sempre un nuovo oggetto nell’heap.
+> Usare `new String("x")` crea invece sempre un nuovo oggetto nell’heap.
 
   
 ### 6.1.1 Gestione dei tipi primitivi
@@ -98,7 +104,7 @@ int x, y, z;          // Dichiarazioni multiple in un’unica istruzione: Java c
 
 
 > [!IMPORTANT]
-> I `modificatori` e il `tipo` dichiarati all’inizio di una dichiarazione di variabili si applicano a tutte le variabili dichiarate in quella stessa istruzione.
+> I `modificatori` e il `tipo` dichiarati all’inizio di una dichiarazione multipla di variabili si applicano a tutte le variabili dichiarate in quella stessa istruzione.
 >
 > **Eccezione**: quando si dichiarano array usando le parentesi quadre dopo il nome della variabile, le parentesi fanno parte del dichiaratore della singola variabile, non del tipo base.
 
@@ -147,7 +153,7 @@ int v1; v2; 					 // ERROR - NOT LEGAL
   
 > [!IMPORTANT]
 > Quando scrivi un numero direttamente nel codice (un letterale numerico), Java assume per default che sia di tipo **int**.  
-> Se il valore non entra in un `int`, il codice non compila a meno che non sia marcato esplicitamente con il suffisso corretto.
+> Se il valore non entra in un `int`, il codice non compila a meno che il letterale non sia marcato esplicitamente con il suffisso corretto.
 
 - Esempio di sintassi per un letterale numerico:
 
@@ -293,7 +299,7 @@ Person p2 = new Person("Bob", 25);   // name = "Bob", age = 25
 ```
 
 > [!IMPORTANT]
-> - I costruttori non sono ereditati: se una superclasse definisce costruttori, non sono automaticamente disponibili nella sottoclasse — devi dichiararli esplicitamente.
+> - **I costruttori non sono ereditati**: se una superclasse definisce costruttori, non sono automaticamente disponibili nella sottoclasse — devi dichiararli esplicitamente.
 > - Se dichiari un qualsiasi costruttore in una classe, il compilatore non genera il costruttore di default senza argomenti: se ti serve ancora un costruttore senza argomenti, devi dichiararlo manualmente.
 
 #### 6.1.2.3 Blocchi di inizializzazione istanza
@@ -304,7 +310,7 @@ Sono blocchi di codice all’interno di una classe, racchiusi tra `{ }`, che ven
 
 **Caratteristiche**
 - Chiamati anche **instance initializer blocks**.  
-- Eseguiti, insieme agli initializer dei campi, nell’ordine in cui appaiono nella definizione della classe ma sempre prima dei costruttori.    
+- Eseguiti, insieme all'inizializzazione dei campi, nell’ordine in cui appaiono nella definizione della classe ma sempre prima dei costruttori.    
 - Utili quando più costruttori devono condividere un codice comune di inizializzazione.
 
 Esempio: usare un Instance Initializer Block
@@ -400,7 +406,7 @@ Se non inizializzate, variabili di istanza e di classe ricevono un valore di def
 
 A differenza delle normali variabili di istanza e di classe, le variabili **`final` non vengono inizializzate di default dal compilatore**. 
  
-Una variabile `final` **deve essere assegnata esplicitamente esattamente una volta**, altrimenti il codice non compila.
+Una variabile `final` **deve essere assegnata esplicitamente esattamente una sola volta**, altrimenti il codice non compila.
 
 Questo vale sia per:
 - **variabili final di istanza**
@@ -414,7 +420,7 @@ Java impone questa regola perché una variabile `final` rappresenta un valore ch
 
 <ins>**`Final Instance Variables`**</ins>
 
-Una **variabile final di istanza** deve essere assegnata **esattamente una volta**, e l’assegnazione deve avvenire in *una* delle seguenti modalità:
+Una **variabile final di istanza** deve essere assegnata **esattamente una sola volta**, e l’assegnazione deve avvenire in *una* delle seguenti modalità:
 
 1. **Nel punto di dichiarazione**
 2. **In un blocco di inizializzazione d’istanza**
@@ -444,13 +450,13 @@ public class Person {
 
 > [!WARNING]
 > Provare a compilare senza assegnare `id` dentro **ogni** costruttore produce un errore a compile-time:
-> variable id might not have been initialized
+> *variable id might not have been initialized*
 
 <ins>**Variabili di classe `static final` (Costanti)**</ins>
 
 Una **variabile static final** appartiene alla classe, non a una specifica istanza.  
 
-Deve anch’essa essere assegnata esattamente una volta, ma l’assegnazione può avvenire in uno dei seguenti punti:
+Deve anch’essa essere assegnata esattamente una sola volta, ma l’assegnazione può avvenire in uno dei seguenti punti:
 
 1. **Nel punto di dichiarazione**
 2. **Dentro un blocco di inizializzazione statico**
@@ -514,7 +520,7 @@ list = new ArrayList<>(); // ❌ non puoi riassegnare il reference
 
 ### 6.2.3 Variabili locali
 
-Le **variabili locali** sono variabili definite all’interno di un costruttore, di un metodo o di un blocco di inizializzazione;
+Le **variabili locali** sono variabili definite all’interno di un `costruttore`, di un `metodo` o di un `blocco di inizializzazione`;
 
 Le variabili locali non hanno valori di default e devono essere inizializzate prima di poter essere usate. Se provi a usare una variabile locale non inizializzata, il compilatore segnalerà un ERRORE.
 
@@ -672,13 +678,13 @@ Le classi wrapper `Boolean` e `Character` includono: `booleanValue()` e `charVal
 
 Double baseDouble = Double.valueOf("300.56");
 
-Double wrapDouble = baseDouble.doubleValue();
+double wrapDouble = baseDouble.doubleValue();
 System.out.println("baseDouble.doubleValue(): " + wrapDouble);  // 300.56
 
-Byte wrapByte = baseDouble.byteValue();
+byte wrapByte = baseDouble.byteValue();
 System.out.println("baseDouble.byteValue(): " + wrapByte);		// 44  -> There is no 300 in byte
 
-Integer wrapInt = baseDouble.intValue();
+int wrapInt = baseDouble.intValue();
 System.out.println("baseDouble.intValue(): " + wrapInt);		// 300 -> The value is truncated
 ```
 
@@ -767,7 +773,7 @@ si riferiscono **allo stesso oggetto**.
 ```java
 String a = "Java";
 String b = "Java";
-System.out.println(a == b);       // true → stesso literal nello pool
+System.out.println(a == b);       // true → stesso literal nel pool
 ```
 
 Ma usare `new` crea un oggetto diverso:
@@ -797,7 +803,7 @@ System.out.println(a == b);  // false
 
 > [!WARNING]
 > Qualsiasi String creata a **runtime** *non* entra nel pool automaticamente.
-> Usa `intern()` se si vuole il pooling.
+> Si usi `intern()` se si vuole il pooling.
 
 > [!TIP]
 > `"Hello" == "Hel" + "lo"` → true (costante a compile-time)
@@ -832,7 +838,7 @@ Le classi wrapper (`Integer`, `Double`, ecc.) si comportano come oggetti:
 - `==` → confronta i riferimenti  
 - `.equals()` → confronta i valori  
 
-Tuttavia, alcuni wrapper vengono **cache-ati** (Integer da −128 a 127):
+Tuttavia, alcuni wrapper vengono **cache-ati** (Integer **da −128 a 127**):
 
 ```java
 Integer a = 100;
@@ -847,7 +853,7 @@ System.out.println(c.equals(d));   // true → stesso valore numerico
 ```
 
 > [!WARNING]
-> Fai molta attenzione alla cache dei wrapper.
+> Attenzione alla cache dei wrapper.
 
 
 ### 6.4.5 Uguaglianza e `null`

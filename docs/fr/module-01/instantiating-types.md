@@ -67,8 +67,14 @@ Person p = new Person();           // crée un nouvel objet Person via son const
 Il est aussi courant de s’appuyer sur des littéraux ou des méthodes factory pour créer des objets.
   
 ```java
-String name = new String("Alice"); // crée explicitement un nouvel objet String
-Person p = new Person();           // crée un nouvel objet Person via son constructeur
+String text = "Hello World";
+
+List<String> list = List.of("A", "B", "C");              // factory method immutabile
+Map<String, Integer> map = Map.of("one", 1, "two", 2);   // factory method immutabile
+Optional<String> opt = Optional.of("value");             // factory method
+
+LocalDate date = LocalDate.of(2025, 3, 15);
+Integer boxed = Integer.valueOf(10);
 ```
 
 > [!IMPORTANT]
@@ -667,13 +673,13 @@ Les classes wrapper `Boolean` et `Character` incluent : `booleanValue()` et `cha
 
 Double baseDouble = Double.valueOf("300.56");
 
-Double wrapDouble = baseDouble.doubleValue();
+double wrapDouble = baseDouble.doubleValue();
 System.out.println("baseDouble.doubleValue(): " + wrapDouble);  // 300.56
 
-Byte wrapByte = baseDouble.byteValue();
+byte wrapByte = baseDouble.byteValue();
 System.out.println("baseDouble.byteValue(): " + wrapByte);		// 44  -> There is no 300 in byte
 
-Integer wrapInt = baseDouble.intValue();
+int wrapInt = baseDouble.intValue();
 System.out.println("baseDouble.intValue(): " + wrapInt);		// 300 -> The value is truncated
 ```
 

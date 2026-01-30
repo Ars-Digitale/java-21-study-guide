@@ -25,7 +25,8 @@ I cicli sono essenziali per l’iterazione, l’attraversamento di strutture dat
 
 ## 8.1 Il ciclo `while`
 
-Il ciclo `while` valuta la propria **condizione booleana prima di ogni iterazione**.  
+Il ciclo `while` valuta la propria **condizione booleana prima di ogni iterazione**.
+  
 Se la condizione è `false` fin dall’inizio, il corpo non viene mai eseguito.
 
 **Sintassi**
@@ -35,9 +36,9 @@ while (condition) {
 }
 ```
 
-- La condizione deve essere valutata come un booleano.
+- La condizione deve essere valutata come un **booleano**.
 - Il ciclo può essere eseguito zero o più volte.
-- Tra gli errori comuni c’è dimenticare di aggiornare la variabile di ciclo, causando un ciclo infinito.
+- Tra gli errori comuni c’è il dimenticare di aggiornare la variabile del ciclo, causando un ciclo infinito.
 
 - Esempio:
 ```java
@@ -59,7 +60,7 @@ Output:
 
 ## 8.2 Il ciclo `do-while`
 
-Il ciclo `do-while` valuta la propria condizione **dopo** aver eseguito il corpo, assicurando che il corpo venga eseguito almeno una volta.
+Il ciclo `do-while` valuta la propria condizione **dopo** aver eseguito il corpo, assicurando che **il corpo venga eseguito almeno una volta**.
 
 **Sintassi**
 ```java
@@ -69,7 +70,7 @@ do {
 ```
 
 > [!TIP]
-> `do-while` richiede un punto e virgola dopo la parentesi di chiusura.
+> `do-while` richiede un **punto e virgola** dopo la parentesi di chiusura.
 
 - Esempio:
 ```java
@@ -77,7 +78,7 @@ int x = 5;
 do {
     System.out.println(x);
     x--;
-} while (x > 5); // body runs once even though condition is false
+} while (x > 5); // il body è eseguito almeno una volta anche se la condizione è false
 ```
 
 Output:
@@ -90,7 +91,8 @@ Output:
 ## 8.3 Il ciclo `for`
 
 Il ciclo `for` tradizionale è più adatto per cicli con una variabile contatore.
-È composto da tre parti: inizializzazione, condizione, aggiornamento.
+
+È composto da tre parti: `inizializzazione`, `condizione`, `aggiornamento`.
 
 **Sintassi**
 ```java
@@ -99,11 +101,11 @@ for (initialization; condition; update) {
 }
 ```
 
-- L’inizializzazione viene eseguita una volta prima dell’inizio del ciclo.
-- La condizione viene valutata prima di ogni iterazione.
-- L’aggiornamento viene eseguito dopo ogni iterazione.
-- Inizializzazione e aggiornamento possono contenere più istruzioni separate da virgole.
-- Le variabili nell’inizializzazione devono essere tutte dello stesso tipo.
+- L’`inizializzazione` viene **eseguita una volta prima dell’inizio del ciclo**.
+- La `condizione` viene **valutata prima di ogni iterazione**.
+- L’`aggiornamento` viene **eseguito dopo ogni iterazione**.
+- `Inizializzazione` e `aggiornamento` possono contenere più istruzioni separate da virgole.
+- Le variabili nell’inizializzazione devono essere **tutte dello stesso tipo**.
 - Qualsiasi componente può essere omesso, ma i punti e virgola rimangono.
 
 - Esempio:
@@ -133,7 +135,7 @@ for (long i = 0, c = 3; x < 3 && i < 12; x++, i++) {
 
 ## 8.4 Il ciclo `for-each` avanzato
 
-Il `for` avanzato semplifica l’iterazione su array e collezioni.
+Il `for` avanzato semplifica l’iterazione su `array` e `collezioni`.
 
 **Sintassi**
 ```java
@@ -231,7 +233,7 @@ for (int i = 0; i < 5; i++) {
 
 ## 8.8 Cicli etichettati
 
-Un’etichetta (identificatore + due punti) può essere applicata a un ciclo per consentire a break/continue di influire sui cicli esterni.
+Un’`etichetta` (identificatore + due punti) può essere applicata a un ciclo per consentire a break/continue di influire sui cicli esterni.
 
 ```java
 labelName:
