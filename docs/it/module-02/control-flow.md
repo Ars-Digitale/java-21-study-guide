@@ -4,7 +4,7 @@
 
 - [7. Flusso di controllo](#7-flusso-di-controllo)
 	- [7.1 L’istruzione if](#71-listruzione-if)
-	- [7.2 L’istruzione & espressione switch](#72-listruzione-switch--expression)
+	- [7.2 L’istruzione Switch & la Switch Expression](#72-listruzione-switch--la-switch-expression)
 		- [7.2.1 La variabile target dello switch può essere](#721-la-variable-target-dello-switch-può-essere)
 		- [7.2.2 Valori case accettabili](#722-valori-case-accettabili)
 		- [7.2.3 Compatibilità di tipo tra selector e case](#723-compatibilità-di-tipo-tra-selector-e-case)
@@ -83,7 +83,7 @@ if (grade >= 90) {
 
 ---
 
-## 7.2 L’istruzione `switch` & Expression
+## 7.2 L’istruzione `switch` & la `switch Expression`
 
 Il costrutto `switch` è una struttura di controllo del flusso che seleziona un ramo tra più alternative in base al valore di un’espressione (il **selector**).
 
