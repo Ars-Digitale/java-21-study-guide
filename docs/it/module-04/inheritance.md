@@ -405,7 +405,7 @@ class Derived extends Base {
 - **Accessibilità**: il metodo in overriding non può essere meno accessibile del metodo originario (ad esempio, non si può passare da `public` a `protected` o `private`). Può soltanto mantenere la stessa visibilità o aumentarla.
 - **Checked exceptions**: il metodo in overriding non può dichiarare nuove o più ampie `checked exceptions` rispetto al `parent method`; può dichiararne meno, dichiarare checked exceptions più specifiche o, eventualmente, rimuoverle completamente.
 - **Unchecked exceptions**: possono essere aggiunte o rimosse senza restrizioni.
-- **final methods**: non possono essere partecipare all'`override`.
+- **final methods**: non possono partecipare all'`override`.
 
 ```java
 class Parent {
@@ -522,7 +522,7 @@ Un oggetto è **immutable** se, dopo che è stato creato, il suo stato **non pu�
 
 Tutti gli attributi che ne rappresentano lo stato, rimangono costanti per l'intero ciclo di vita di quell’oggetto.
 
-Gli `immutable objects` sono più semplici da comprendere, intrinsecamente `thread safe` (se progettati correttamente), e ampiamente usati nella Java Standard Library (ad esempio `String`, wrapper classes come `Integer`, e molte classi in `java.time`).
+Gli `immutable objects` sono semplici da comprendere, intrinsecamente `thread safe` (se progettati correttamente), e ampiamente usati nella Java Standard Library (ad esempio `String`, wrapper classes come `Integer`, e molte classi in `java.time`).
 
 #### 16.13.3.2 Linee Guida per Progettare Classi Immutable
 
