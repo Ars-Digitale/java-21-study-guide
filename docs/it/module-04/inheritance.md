@@ -20,7 +20,7 @@
 	- [16.13 Ereditare Membri](#1613-ereditare-membri)
 		- [16.13.1 Method Overriding](#16131-method-overriding)
 			- [16.13.1.1 Definizione e Ruolo nell’Ereditarietà](#161311-definizione-e-ruolo-nellereditarietà)
-			- [16.13.1.2 Usare super per Chiamare l’Implementazione del Parent](#161312-usare-super-per-chiamare-limplementazione-del-parent)
+			- [16.13.1.2 Usare super per chiamare l’Implementazione del Parent](#161312-usare-super-per-chiamare-limplementazione-del-parent)
 			- [16.13.1.3 Regole di Overriding Instance Methods](#161313-regole-di-overriding-instance-methods)
 			- [16.13.1.4 Nascondere Static Methods Method Hiding](#161314-nascondere-static-methods-method-hiding)
 		- [16.13.2 Abstract Classes](#16132-abstract-classes)
@@ -352,7 +352,7 @@ public class TestOverride {
 }
 ```
 
-#### 16.13.1.2 Usare super per Chiamare l’Implementazione del Parent
+#### 16.13.1.2 Usare super per chiamare l’Implementazione del Parent
 
 Quando una subclass fa override di un metodo, può comunque accedere all’implementazione "originaria" della superclass, tramite il riferimento `super`.
 
