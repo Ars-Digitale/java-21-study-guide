@@ -34,7 +34,7 @@
 
 L'`Inheritance` (Ereditarietà) è uno dei pilastri fondamentali dell'Object-Oriented Programming.
 
-Essa permette a una classe `figlia` (child), la *subclass*, di acquisire lo stato e il comportamento di un’altra classe `genitrice` (parent), la *superclass*, creando relazioni gerarchiche che promuovono riuso del codice, specializzazione e polimorfismo.
+Essa permette a una classe `figlia` ( child ), la **subclass**, di acquisire lo stato e il comportamento di un’altra classe `genitrice` ( parent ), la **superclass**, creando relazioni gerarchiche che promuovono riuso del codice, specializzazione e polimorfismo.
 
 ## 16.1 Definizione Generale di Ereditarietà
 
