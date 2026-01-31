@@ -14,7 +14,7 @@
 	- [16.7 Dichiarare Costruttori in una catena ereditaria](#167-dichiarare-costruttori-in-una-catena-ereditaria)
 	- [16.8 Costruttore no-arg di Default](#168-costruttore-no-arg-di-default)
 	- [16.9 Usare this e Constructor Overloading](#169-usare-this-e-constructor-overloading)
-	- [16.10 Chiamare il Costruttore del Parent Usando super](#1610-chiamare-il-costruttore-del-parent-usando-super)
+	- [16.10 Chiamare il Costruttore del Parent usando super](#1610-chiamare-il-costruttore-del-parent-usando-super)
 	- [16.11 Suggerimenti e Trappole sul Costruttore di Default](#1611-suggerimenti-e-trappole-sul-costruttore-di-default)
 	- [16.12 super si Riferisce Sempre al Parent più Diretto](#1612-super-si-riferisce-sempre-al-parent-più-diretto)
 	- [16.13 Ereditare Membri](#1613-ereditare-membri)
@@ -240,7 +240,7 @@ class Car {
 
 ---
 
-## 16.10 Chiamare il Costruttore del Parent Usando `super()`
+## 16.10 Chiamare il Costruttore del Parent usando `super()`
 
 Ogni costruttore deve chiamare un costruttore della superclasse, esplicitamente o implicitamente.
 
