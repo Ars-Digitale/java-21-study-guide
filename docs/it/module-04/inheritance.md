@@ -38,12 +38,12 @@ Essa permette a una classe `figlia` ( child ), la **subclass**, di acquisire lo 
 
 ## 16.1 Definizione Generale di Ereditarietà
 
-L’ereditarietà consente a una classe di estenderne un’altra, ottenendone automaticamente i suoi `field` e `method` accessibili.
+L’ereditarietà consente a una classe di estenderne un’altra, ottenendone automaticamente i suoi `attributi` e i suoi `metodi` accessibili.
 
-La classe che estende può aggiungere nuove funzionalità o fare `override` dei comportamenti esistenti, creando versioni più specializzate del proprio genitore.
+La classe che estende può aggiungere nuove funzionalità o ridefinire (fare `override`) i comportamenti esistenti, creando versioni più specializzate della propria classe parent.
 
 > [!NOTE]
-> L’Inheritance esprime una relazione *“is-a”* (è-un): un Cane **is a** (è-un) Animale.
+> L’Ereditarietà esprime una relazione *“is-a”* (è-un): un Cane **is a** (è-un) Animale.
 
 ---
 
