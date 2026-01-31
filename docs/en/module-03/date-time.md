@@ -557,7 +557,7 @@ The `java.time` API is built on two key interfaces that define how dates, times,
 - `TemporalUnit` → represents a unit of time (for example, DAYS, HOURS, MINUTES).
 - `TemporalAmount` → represents an amount of time (for example, `Period`, `Duration`).
 
-Both are essential for understanding how the `plus`, `minus`, and `with` methods work, and they frequently appear in certification questions.
+Both are essential for understanding how the `plus`, `minus`, and `with` methods work.
 
 ### 12.9.1 `TemporalUnit`
 

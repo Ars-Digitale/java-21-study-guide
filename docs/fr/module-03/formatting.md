@@ -89,14 +89,14 @@ String price = String.format(Locale.GERMANY, "%.2f", 1234.5);
 `%f` est utilisé pour formater les nombres à virgule flottante (`float`, `double`, `BigDecimal`) en notation décimale.
 
 ```java
-System.out.printf("%f%n", 12.345);
+System.out.printf("%f", 12.345);
 ```
 
 ```bash
 12.345000
 ```
 
-- Affiche toujours 6 chiffres après le séparateur décimal par défaut.
+- **Affiche toujours 6 chiffres après le séparateur décimal** par défaut.
 - Utilise l’arrondi (et non la troncature).
 - Est sensible au locale pour le séparateur décimal.
 
@@ -105,7 +105,7 @@ System.out.printf("%f%n", 12.345);
 La précision définit le nombre de chiffres affichés **après** le séparateur décimal.
 
 ```java
-System.out.printf("%.2f%n", 12.345);
+System.out.printf("%.2f", 12.345);
 ```
 
 ```bash
@@ -122,14 +122,14 @@ System.out.printf("%.2f%n", 12.345);
 La largeur définit le nombre total minimal de caractères dans la sortie.
 
 ```java
-System.out.printf("%8.2f%n", 12.34);
+System.out.printf("%8.2f", 12.34);
 ```
 
 ```bash
    12.34
 ```
 
-- Remplit avec des espaces par défaut.
+- **Remplit avec des espaces** par défaut.
 - Si la valeur est plus longue, la largeur est ignorée (elle ne tronque jamais).
 - Le remplissage est appliqué à gauche par défaut.
 
@@ -138,7 +138,7 @@ System.out.printf("%8.2f%n", 12.34);
 L’indicateur `0` remplace le remplissage par des espaces par des zéros.
 
 ```java
-System.out.printf("%08.2f%n", 12.34);
+System.out.printf("%08.2f", 12.34);
 ```
 
 ```bash
@@ -154,7 +154,7 @@ System.out.printf("%08.2f%n", 12.34);
 L’indicateur `-` aligne la valeur à gauche à l’intérieur de la largeur.
 
 ```java
-System.out.printf("%-8.2f%n", 12.34);
+System.out.printf("%-8.2f", 12.34);
 ```
 
 ```bash
@@ -169,7 +169,7 @@ System.out.printf("%-8.2f%n", 12.34);
 L’indicateur `+` force l’affichage du signe pour les nombres positifs.
 
 ```java
-System.out.printf("%+8.2f%n", 12.34);
+System.out.printf("%+8.2f", 12.34);
 ```
 
 ```bash
@@ -184,7 +184,7 @@ System.out.printf("%+8.2f%n", 12.34);
 L’indicateur `(` formate les nombres négatifs en utilisant des parenthèses.
 
 ```java
-System.out.printf("%(8.2f%n", -12.34);
+System.out.printf("%(8.2f", -12.34);
 ```
 
 ```bash
@@ -192,12 +192,12 @@ System.out.printf("%(8.2f%n", -12.34);
 ```
 
 - N’affecte que les valeurs négatives.
-- Rarement utilisé en pratique, mais pertinent pour la certification.
+- Rarement utilisé en pratique.
 
 ### 13.1.1.8 Combinaison des indicateurs
 
 ```java
-System.out.printf("%+010.2f%n", 12.34);
+System.out.printf("%+010.2f", 12.34);
 ```
 
 ```bash
@@ -214,7 +214,7 @@ Ordre d’évaluation (simplifié) :
 ### 13.1.1.9 Effets du Locale
 
 ```java
-System.out.printf(Locale.FRANCE, "%,.2f%n", 12345.67);
+System.out.printf(Locale.FRANCE, "%,.2f", 12345.67);
 ```
 
 ```bash

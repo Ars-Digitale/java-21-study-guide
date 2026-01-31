@@ -51,7 +51,7 @@ String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
 ```
 
 > [!NOTE]
-> - String literals are stored in the `String` pool, a special memory area used to avoid creating duplicate string objects.
+> - String literals are stored in the `String pool`, a special memory area used to avoid creating duplicate string objects.
 > - Using the `new` keyword always creates a new object outside the pool.
 
 #### 9.1.1.2 The String Pool

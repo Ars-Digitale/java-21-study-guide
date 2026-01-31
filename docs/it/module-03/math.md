@@ -115,13 +115,13 @@ Math.floor(-3.1);  // -4.0
 
 ```java
 Math.pow(2, 3);      // 8.0
-Math.pow(9, 0.5);    // 3.0  (square root)
+Math.pow(9, 0.5);    // 3.0  (radice quadrata)
 Math.pow(10, -1);    // 0.1
 ```
 
 ### 11.1.6 `Math.random()`
 
-`random()` restituisce un `double` nell’intervallo `[0.0, 1.0)` (0.0 incluso, 1.0 escluso).
+`random()` restituisce un `double` randomico nell’intervallo `[0.0, 1.0)` (0.0 incluso, 1.0 escluso).
 
 **Overload**
 - `double random()`
@@ -158,14 +158,14 @@ Math.sqrt(-1);   // NaN (not a number)
 
 | Metodo | Restituisce | Overload | Note |
 | --- | --- | --- | --- |
-| round() | int o long | float, double | Intero più vicino |
-| ceil() | double | double | Valore più piccolo >= argomento |
-| floor() | double | double | Valore più grande <= argomento |
-| pow() | double | double, double | Esponenziazione |
-| random() | double | none | 0.0 <= r < 1.0 |
-| min()/max() | stesso tipo | int, long, float, double | Confronta due valori |
-| abs() | stesso tipo | int, long, float, double | Valore assoluto |
-| sqrt() | double | double | Radice quadrata |
+| `round()` | int o long | float, double | Intero più vicino |
+| `ceil()` | double | double | Valore più piccolo >= argomento |
+| `floor()` | double | double | Valore più grande <= argomento |
+| `pow()` | double | double, double | Esponenziazione |
+| `random()` | double | none | 0.0 <= r < 1.0 |
+| `min()/max()` | stesso tipo | int, long, float, double | Confronta due valori |
+| `abs()` | stesso tipo | int, long, float, double | Valore assoluto |
+| `sqrt()` | double | double | Radice quadrata |
 
 ---
 
@@ -228,7 +228,7 @@ import java.util.Random;
 
 BigInteger a = BigInteger.valueOf(10L);
 
-// You can pass a long to both types, but a double only to BigDecimal
+// Si puo passare un long a entrambi, ma un double solo a BigDecimal
 
 BigInteger g = BigInteger.valueOf(3000L);
 BigDecimal p = BigDecimal.valueOf(3000L);

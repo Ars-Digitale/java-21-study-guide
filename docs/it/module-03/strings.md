@@ -51,7 +51,7 @@ String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
 ```
 
 > [!NOTE]
-> - I letterali stringa sono memorizzati nel `String` pool, un’area speciale di memoria usata per evitare di creare oggetti stringa duplicati.
+> - I letterali stringa sono memorizzati nello `String pool`, un’area speciale di memoria usata per evitare di creare oggetti stringa duplicati.
 > - L’uso della keyword `new` crea sempre un nuovo oggetto al di fuori del pool.
 
 ### 9.1.1.2 Lo String Pool
@@ -60,7 +60,7 @@ Poiché gli oggetti `String` sono immutabili e ampiamente usati, potrebbero faci
   
 Per ridurre la duplicazione, Java riutilizza tutte le stringhe dichiarate come letterali (vedi l’esempio sopra), memorizzandole in un’area dedicata della JVM nota come **String Pool** o **Intern Pool**.
 
-Per una spiegazione più approfondita e esempi, controlla il paragrafo: **"6.4.3 String Pool and Equality"** nel capitolo: [6. Instantiating Types](../module-01/instantiating-types.md).
+Per una spiegazione più approfondita e esempi, controlla il paragrafo: **"6.4.3 String Pool and Equality"** nel capitolo: [Istanziazione dei tipi](../module-01/instantiating-types.md).
 
 ### 9.1.1.3 Caratteri speciali e sequenze di escape
 
@@ -83,7 +83,7 @@ Una sequenza di escape inizia con un backslash `\`.
 
 ### 9.1.1.4 Regole per la concatenazione di stringhe
 
-Come introdotto nel capitolo su [5. Java Operators](../module-01/java-operators.md), il simbolo `+` normalmente rappresenta l’**addizione aritmetica** quando viene usato con operandi numerici.
+Come introdotto nel capitolo su [Operatori Java](../module-01/java-operators.md), il simbolo `+` normalmente rappresenta l’**addizione aritmetica** quando viene usato con operandi numerici.
 
 Tuttavia, quando applicato alle **String**, lo stesso operatore esegue la **concatenazione di stringhe** — crea una nuova stringa unendo gli operandi tra loro.
 
@@ -181,7 +181,7 @@ String html = """
 
 ### 9.1.2.1 Formattazione: whitespace essenziale vs incidentale
 
-- **Whitespace essenziale**: spazi e newline che fanno parte del contenuto della stringa inteso.
+- **Whitespace essenziale**: spazi e newline che fanno parte del contenuto della stringa.
 - **Whitespace incidentale**: indentazione nel codice sorgente che non consideri concettualmente parte del testo.
 
 ```java

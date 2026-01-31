@@ -194,7 +194,7 @@ jagged[2] = new int[1];
 - Strings use `.length()` (method).
 
 > [!TIP]
-> This is a classic exam trap: fields vs methods.
+> This is a classic trap: fields vs methods.
 
 ```java
 // int x = arr.length;   // OK

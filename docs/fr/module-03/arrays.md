@@ -195,7 +195,7 @@ jagged[2] = new int[1];
 - Les chaînes utilisent `.length()` (méthode).
 
 > [!TIP]
-> C’est un piège classique d’examen : champs vs méthodes.
+> C’est un piège classique: champs vs méthodes.
 
 ```java
 // int x = arr.length;   // OK

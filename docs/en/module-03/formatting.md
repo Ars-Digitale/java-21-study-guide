@@ -88,14 +88,14 @@ String price = String.format(Locale.GERMANY, "%.2f", 1234.5);
 `%f` is used to format floating-point numbers (`float`, `double`, `BigDecimal`) using decimal notation.
 
 ```java
-System.out.printf("%f%n", 12.345);
+System.out.printf("%f", 12.345);
 ```
 
 ```bash
 12.345000
 ```
 
-- Always prints 6 digits after the decimal point by default.
+- **Always prints 6 digits after the decimal point** by default.
 - Uses rounding (not truncation).
 - Is locale-sensitive for the decimal separator.
 
@@ -104,7 +104,7 @@ System.out.printf("%f%n", 12.345);
 Precision defines the number of digits printed **after** the decimal point.
 
 ```java
-System.out.printf("%.2f%n", 12.345);
+System.out.printf("%.2f", 12.345);
 ```
 
 ```bash
@@ -120,14 +120,14 @@ System.out.printf("%.2f%n", 12.345);
 Width defines the minimum total number of characters in the output.
 
 ```java
-System.out.printf("%8.2f%n", 12.34);
+System.out.printf("%8.2f", 12.34);
 ```
 
 ```bash
    12.34
 ```
 
-- Pads with spaces by default.
+- **Pads with spaces** by default.
 - If the value is longer, width is ignored (it never truncates).
 - Padding is applied on the left by default.
 
@@ -136,7 +136,7 @@ System.out.printf("%8.2f%n", 12.34);
 The `0` flag replaces space padding with zeros.
 
 ```java
-System.out.printf("%08.2f%n", 12.34);
+System.out.printf("%08.2f", 12.34);
 ```
 
 ```bash
@@ -152,7 +152,7 @@ System.out.printf("%08.2f%n", 12.34);
 The `-` flag left-aligns the value within the width.
 
 ```java
-System.out.printf("%-8.2f%n", 12.34);
+System.out.printf("%-8.2f", 12.34);
 ```
 
 ```bash
@@ -167,7 +167,7 @@ System.out.printf("%-8.2f%n", 12.34);
 The `+` flag forces display of the sign for positive numbers.
 
 ```java
-System.out.printf("%+8.2f%n", 12.34);
+System.out.printf("%+8.2f", 12.34);
 ```
 
 ```bash
@@ -182,7 +182,7 @@ System.out.printf("%+8.2f%n", 12.34);
 The `(` flag formats negative numbers using parentheses.
 
 ```java
-System.out.printf("%(8.2f%n", -12.34);
+System.out.printf("%(8.2f", -12.34);
 ```
 
 ```bash
@@ -190,12 +190,12 @@ System.out.printf("%(8.2f%n", -12.34);
 ```
 
 - Only affects negative values.
-- Rarely used in practice, but certification-relevant.
+- Rarely used in practice.
 
 #### 13.1.1.8 Combining Flags
 
 ```java
-System.out.printf("%+010.2f%n", 12.34);
+System.out.printf("%+010.2f", 12.34);
 ```
 
 ```bash
@@ -212,7 +212,7 @@ Evaluation order (semplificato):
 #### 13.1.1.9 Locale Effects
 
 ```java
-System.out.printf(Locale.FRANCE, "%,.2f%n", 12345.67);
+System.out.printf(Locale.FRANCE, "%,.2f", 12345.67);
 ```
 
 ```bash

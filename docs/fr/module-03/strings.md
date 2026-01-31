@@ -52,7 +52,7 @@ String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
 ```
 
 > [!NOTE]
-> - Les littéraux de chaîne sont stockés dans le pool de `String`, une zone mémoire spéciale utilisée pour éviter de créer des objets chaîne en double.
+> - Les littéraux de chaîne sont stockés dans le `pool de String`, une zone mémoire spéciale utilisée pour éviter de créer des objets chaîne en double.
 > - L’utilisation du mot-clé `new` crée toujours un nouvel objet en dehors du pool.
 
 ### 9.1.1.2 Le String Pool
@@ -61,7 +61,7 @@ Comme les objets `String` sont immuables et largement utilisés, ils pourraient 
   
 Pour réduire la duplication, Java réutilise toutes les chaînes déclarées comme littéraux (voir l’exemple ci-dessus), en les stockant dans une zone dédiée de la JVM appelée **String Pool** ou **Intern Pool**.
 
-Veuillez consulter le paragraphe : **"6.4.3 String Pool and Equality"** dans le chapitre : [6. Instantiating Types](../module-01/instantiating-types.md) pour une explication et des exemples plus détaillés.
+Veuillez consulter le paragraphe : **"6.4.3 String Pool and Equality"** dans le chapitre : [Instanciation des types](../module-01/instantiating-types.md) pour une explication et des exemples plus détaillés.
 
 ### 9.1.1.3 Caractères spéciaux et séquences d’échappement
 
@@ -84,7 +84,7 @@ Une séquence d’échappement commence par un backslash `\`.
 
 ### 9.1.1.4 Règles de concaténation des chaînes
 
-Comme introduit dans le chapitre sur [5. Java Operators](../module-01/java-operators.md), le symbole `+` représente normalement l’**addition arithmétique** lorsqu’il est utilisé avec des opérandes numériques.
+Comme introduit dans le chapitre sur [Opérateurs Java](../module-01/java-operators.md), le symbole `+` représente normalement l’**addition arithmétique** lorsqu’il est utilisé avec des opérandes numériques.
 
 Cependant, lorsqu’il est appliqué aux **String**, le même opérateur effectue la **concaténation de chaînes** — il crée une nouvelle chaîne en joignant les opérandes.
 

@@ -104,11 +104,11 @@ Some class-level modifiers affect whether a class may be extended.
 
 | Modifier      | Meaning | Effect on Inheritance |
 |---------------|---------|-----------------------|
-| final         | Class cannot be extended | Inheritance STOP |
-| abstract      | Class cannot be instantiated | Must be extended |
-| sealed        | Only allows a fixed list of subclasses | Restricts inheritance |
-| non-sealed    | Subclass of sealed class that reopens inheritance | Inheritance allowed |
-| static        | Applies only to nested classes | Behaves like a top-level class inside its enclosing class |
+| `final`         | Class cannot be extended | Inheritance STOP |
+| `abstract`      | Class cannot be instantiated | Must be extended |
+| `sealed`        | Only allows a fixed list of subclasses | Restricts inheritance |
+| `non-sealed`    | Subclass of sealed class that reopens inheritance | Inheritance allowed |
+| `static`        | Applies only to nested classes | Behaves like a top-level class inside its enclosing class |
 
 
 > [!NOTE] 
@@ -150,7 +150,7 @@ public class Person {
 ```
 
 > [!WARNING]
-> `this` cannot be used inside static methods because no instance exists.
+> `this` cannot be used inside static methods because, in that context, no instance exists.
 
 ### 16.6.2 The `super` Reference
 

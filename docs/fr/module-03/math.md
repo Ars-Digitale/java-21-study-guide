@@ -158,14 +158,14 @@ Math.sqrt(-1);   // NaN (not a number)
 
 | Méthode | Renvoie | Surcharges | Notes |
 | --- | --- | --- | --- |
-| round() | int ou long | float, double | Entier le plus proche |
-| ceil() | double | double | Plus petite valeur >= argument |
-| floor() | double | double | Plus grande valeur <= argument |
-| pow() | double | double, double | Exponentiation |
-| random() | double | none | 0.0 <= r < 1.0 |
-| min()/max() | même type | int, long, float, double | Compare deux valeurs |
-| abs() | même type | int, long, float, double | Valeur absolue |
-| sqrt() | double | double | Racine carrée |
+| `round()` | int ou long | float, double | Entier le plus proche |
+| `ceil()` | double | double | Plus petite valeur >= argument |
+| `floor()` | double | double | Plus grande valeur <= argument |
+| `pow()` | double | double, double | Exponentiation |
+| `random()` | double | none | 0.0 <= r < 1.0 |
+| `min()/max()` | même type | int, long, float, double | Compare deux valeurs |
+| `abs()` | même type | int, long, float, double | Valeur absolue |
+| `sqrt()` | double | double | Racine carrée |
 
 ---
 

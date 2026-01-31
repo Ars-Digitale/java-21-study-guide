@@ -1,3 +1,4 @@
+
 # 13. Formattazione e Localizzazione in Java
 
 ## Indice
@@ -88,14 +89,14 @@ String price = String.format(Locale.GERMANY, "%.2f", 1234.5);
 `%f` è usato per formattare numeri in virgola mobile (`float`, `double`, `BigDecimal`) usando la notazione decimale.
 
 ```java
-System.out.printf("%f%n", 12.345);
+System.out.printf("%f", 12.345);
 ```
 
 ```bash
 12.345000
 ```
 
-- Stampa sempre 6 cifre dopo il punto decimale per impostazione predefinita.
+- **Stampa sempre 6 cifre dopo il punto decimale** per impostazione predefinita.
 - Utilizza l’arrotondamento (non il troncamento).
 - È sensibile al locale per il separatore decimale.
 
@@ -104,7 +105,7 @@ System.out.printf("%f%n", 12.345);
 La precisione definisce il numero di cifre stampate **dopo** il punto decimale.
 
 ```java
-System.out.printf("%.2f%n", 12.345);
+System.out.printf("%.2f", 12.345);
 ```
 
 ```bash
@@ -120,14 +121,14 @@ System.out.printf("%.2f%n", 12.345);
 La larghezza definisce il numero minimo totale di caratteri nell’output.
 
 ```java
-System.out.printf("%8.2f%n", 12.34);
+System.out.printf("%8.2f", 12.34);
 ```
 
 ```bash
    12.34
 ```
 
-- Per impostazione predefinita riempie con spazi.
+- Per impostazione predefinita **riempie con spazi**.
 - Se il valore è più lungo, la larghezza viene ignorata (non viene mai troncato).
 - Il riempimento è applicato a sinistra per impostazione predefinita.
 
@@ -136,7 +137,7 @@ System.out.printf("%8.2f%n", 12.34);
 Il flag `0` sostituisce il riempimento con spazi con zeri.
 
 ```java
-System.out.printf("%08.2f%n", 12.34);
+System.out.printf("%08.2f", 12.34);
 ```
 
 ```bash
@@ -152,7 +153,7 @@ System.out.printf("%08.2f%n", 12.34);
 Il flag `-` allinea il valore a sinistra all’interno della larghezza.
 
 ```java
-System.out.printf("%-8.2f%n", 12.34);
+System.out.printf("%-8.2f", 12.34);
 ```
 
 ```bash
@@ -167,7 +168,7 @@ System.out.printf("%-8.2f%n", 12.34);
 Il flag `+` forza la visualizzazione del segno per i numeri positivi.
 
 ```java
-System.out.printf("%+8.2f%n", 12.34);
+System.out.printf("%+8.2f", 12.34);
 ```
 
 ```bash
@@ -182,7 +183,7 @@ System.out.printf("%+8.2f%n", 12.34);
 Il flag `(` formatta i numeri negativi usando le parentesi.
 
 ```java
-System.out.printf("%(8.2f%n", -12.34);
+System.out.printf("%(8.2f", -12.34);
 ```
 
 ```bash
@@ -190,12 +191,12 @@ System.out.printf("%(8.2f%n", -12.34);
 ```
 
 - Influenza solo i valori negativi.
-- Raramente usato nella pratica, ma rilevante per la certificazione.
+- Raramente usato nella pratica.
 
 ### 13.1.1.8 Combinazione dei flag
 
 ```java
-System.out.printf("%+010.2f%n", 12.34);
+System.out.printf("%+010.2f", 12.34);
 ```
 
 ```bash
@@ -212,7 +213,7 @@ Ordine di valutazione (semplificato):
 ### 13.1.1.9 Effetti del Locale
 
 ```java
-System.out.printf(Locale.FRANCE, "%,.2f%n", 12345.67);
+System.out.printf(Locale.FRANCE, "%,.2f", 12345.67);
 ```
 
 ```bash

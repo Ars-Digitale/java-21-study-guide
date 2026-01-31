@@ -61,7 +61,7 @@ Una `dichiarazione di metodo` è composta da componenti **obbligatori** e **opzi
 
 I `Modificatori di accesso` controllano la *visibilità*, non il comportamento.
 
-( Fare riferimento al Paragrafo "**Access Modifiers**" nel Capitolo: [2. Basic Language Java Building Blocks](../module-01/basic-building-blocks.md) )
+( Fare riferimento al Paragrafo "**Access Modifiers**" nel Capitolo: [Mattoni di base del linguaggio Java](../module-01/basic-building-blocks.md) )
 
 
 ### 14.1.1.2 Tipo di ritorno
@@ -78,7 +78,7 @@ Appare **immediatamente prima** del nome del metodo.
 
 ### 14.1.1.3 Nome del metodo
 
-Segue le stesse regole degli identificatori ( Fare riferimento al Capitolo: [3. Java Naming Rules](../module-01/naming-rules.md) ).
+Segue le stesse regole degli identificatori ( Fare riferimento al Capitolo: [Regole di naming Java](../module-01/naming-rules.md) ).
 
 
 ### 14.1.1.4 Firma del metodo
@@ -89,7 +89,7 @@ La **firma del metodo** in Java include:
 - la *lista dei tipi dei parametri* (tipi + ordine)
 
 > [!NOTE]
-> I **nomi dei parametri NON fanno parte della firma**, contano solo tipi e ordine.
+> I **nomi dei parametri NON fanno parte della firma**, contano solo `tipi` e `ordine`.
 
 - Esempio di firme distinte:
 
@@ -153,14 +153,14 @@ Scomposizione:
 
 | Part | Significato |
 | --- | --- |
-| public | modificatore di accesso |
-| final | non può essere sovrascritto |
-| synchronized | modificatore di controllo dei thread |
-| String | tipo di ritorno |
-| formatValue | nome del metodo |
-| (int x, double y) | lista dei parametri |
-| throws IOException | lista delle eccezioni |
-| method body | implementazione |
+| `public` | modificatore di accesso |
+| `final` | non può essere sovrascritto |
+| `synchronized` | modificatore di controllo dei thread |
+| `String` | tipo di ritorno |
+| `formatValue` | nome del metodo |
+| `(int x, double y)` | lista dei parametri |
+| `throws IOException` | lista delle eccezioni |
+| `method body` | implementazione |
 
 ---
 
@@ -173,14 +173,14 @@ Questo significa:
 - Per i **tipi primitivi** → il metodo riceve una *copia del valore*.
 - Per i **tipi riferimento** → il metodo riceve una *copia del riferimento*, il che significa:
 -   - il riferimento stesso non può essere cambiato dal metodo
--   - l’*oggetto* **può** essere modificato tramite quel riferimento
+-   - l’*oggetto puntato* **può** essere modificato tramite quel riferimento
 
 - Esempio:
 
 ```java
 void modify(int a, StringBuilder b) {
-    a = 50;           // modifica la *copia* → nessun effetto all’esterno
-    b.append("!");    // modifica l’*oggetto* → visibile all’esterno
+    a = 50;           // modifica la *copia* locale → nessun effetto all’esterno
+    b.append("!");    // modifica l’*oggetto puntato* → visibile all’esterno
 }
 ```
 
@@ -204,7 +204,7 @@ public static void methodTryModif(int num1){
 
 L’overloading dei metodi significa **stesso nome del metodo**, **firma diversa**.
 
-Due metodi sono considerati overloaded se differiscono per:
+Due metodi sono considerati `overloaded` se differiscono per:
 
 - numero di parametri
 - tipi dei parametri
@@ -239,7 +239,7 @@ Quando sono disponibili più metodi overloaded, Java applica la **risoluzione de
   
 Il compilatore seleziona il metodo i cui tipi di parametro sono i **più specifici** e **compatibili** con gli argomenti forniti.
 
-La risoluzione dell’overload avviene **a compile-time** (a differenza dell’overriding, che è basato sul run-time).
+La risoluzione dell’overload avviene **a compile-time** (a differenza dell’`overriding`, che è basato sul **run-time**).
 
 Java segue queste regole:
 
@@ -314,7 +314,7 @@ ref("abc");             // "abc" è una String → più specifica di Object
 Più specifico significa *più in basso nella gerarchia di ereditarietà*.
 
 
-### 14.3.1.6 — Quando non esiste un “più specifico” non ambiguo, la chiamata è un errore di compilazione
+### 14.3.1.6 — Quando non esiste un “più specifico” non ambiguo, la chiamata genera un errore di compilazione
 
 Esempio con classi sorelle:
 
@@ -339,7 +339,7 @@ run(null);  // ❌ Errore a compile-time: chiamata di metodo ambigua
 
 ### 14.3.1.7 — Overload misti primitivi + wrapper
 
-Java valuta widening, boxing e varargs in questo ordine:
+Java valuta `widening`, `boxing` e `varargs` in questo ordine:
 
 **`widening → boxing → varargs`**
 
@@ -357,7 +357,7 @@ mix(s);   // short → int → long  (widening)
 ```
 
 
-### 14.3.1.8 — Quando i primitivi si mescolano con i tipi di riferimento
+### 14.3.1.8 — Quando i primitivi si mescolano con i tipi reference
 
 ```java
 void fun(Object o)     { System.out.println("Object"); }
@@ -409,7 +409,7 @@ Le variabili di istanza sono:
 
 Modificatori possibili per le variabili di istanza:
 
-- modificatori di accesso (`public`, `protected`, `private`)
+- modificatori di accesso (`public`, `protected`, `private`, `package-private`)
 - `final`
 - `volatile`
 - `transient`
@@ -504,7 +504,7 @@ Questo significa:
 
 - Sono **caricati una sola volta** in memoria quando la classe è caricata per la prima volta dalla JVM.
 - Sono condivisi tra **tutte le istanze**.
-- Possono essere accessi **senza creare un oggetto** della classe.
+- Vi si puo accedere **senza creare un oggetto** della classe.
 
 I membri statici sono memorizzati nella **method area** della JVM (memoria a livello di classe), mentre i membri di istanza vivono nello **heap**.
 
@@ -615,7 +615,7 @@ public class Config {
 
 ### 14.6.4 Ordine di inizializzazione (Statico vs. Istanza)
 
-( Fare riferimento al Capitolo: [15. Class Loading, Initialization, and Object Construction](class-loading.md) )
+( Fare riferimento al Capitolo: [Class Loading, Inizializzazione, e Costruzione degli Oggetti](class-loading.md) )
 
 
 ### 14.6.5 Accesso ai membri statici

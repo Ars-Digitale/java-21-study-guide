@@ -37,19 +37,19 @@
 
 Gli array in Java sono collezioni **a dimensione fissa**, **indicizzate**, **ordinate** di elementi dello stesso tipo.
   
-Sono **oggetti**, anche quando gli elementi sono primitivi.
+Sono **oggetti**, anche quando gli elementi contenuti sono primitivi.
 
 ### 10.1.1 Dichiarare gli array
 
 Puoi dichiarare un array in due modi:
 
 ```java
-int[] a;      // preferred modern syntax
-int b[];      // legal, older style
+int[] a;      // sintassi moderna preferita
+int b[];      // legale, stile vetusto
 String[] names;
 Person[] people;
 
-// [] can be before or after the name: all the following declarations are equivalent.
+// [] possono trovarsi prima o dopo il nome: tutte le seguenti dichiarazioni sono equivalenti.
 
 int[] x;
 int [] x1;
@@ -59,10 +59,10 @@ int x5 [];
 
 // MULTIPLE ARRAY DECLARATIONS
 
-int[] arr1, arr2;   // Declares two arrays of int
+int[] arr1, arr2;   // Dichiara due array di interi
 
 // WARNING:
-// Here arr1 is an int[] and arr2 is just an int (NOT an array!)
+// QUi arr1 è un int[] e arr2 è solo un int (NON un array!)
 int arr1[], arr2;
 ```
 
@@ -133,7 +133,7 @@ System.out.println(a[1]); // 20
 
 ```java
 // int[] x = new int[2];
-// System.out.println(x[2]); // ❌ index 2 out of bounds
+// System.out.println(x[2]); // ❌ indice 2 out of bounds
 ```
 
 ### 10.1.5 Scorciatoie di inizializzazione degli array
@@ -150,7 +150,7 @@ int[] a = new int[] {1,2,3};
 int[] b = {1,2,3};
 ```
 
-> La sintassi breve `{1,2,3}` può essere usata solo nel punto di dichiarazione.
+> La sintassi breve `{1,2,3}` può essere usata **solo nel punto di dichiarazione**.
 
 ```java
 // int[] c;
@@ -173,7 +173,7 @@ String[][][] cube;
 ### 10.2.1 Creare un array rettangolare
 
 ```java
-int[][] rect = new int[3][4]; // 3 rows, 4 columns each
+int[][] rect = new int[3][4]; // 3 righe, 4 colonne
 ```
 
 ### 10.2.2 Creare un array frastagliato (irregolare)
@@ -195,7 +195,7 @@ jagged[2] = new int[1];
 - Le stringhe usano `.length()` (metodo).
 
 > [!TIP]
-> Questo è un classico tranello d’esame: campi vs metodi.
+> Questo è un classico errore: campi vs metodi.
 
 ```java
 // int x = arr.length;   // OK
@@ -211,7 +211,7 @@ int yOk = s.length();
 
 ```java
 int[] a = {1,2,3};
-int[] b = a; // both now point to the same array
+int[] b = a; // entrambi puntano ora allo stesso array
 ```
 
 Modificare un riferimento influisce sull’altro:
@@ -224,8 +224,8 @@ System.out.println(a[0]); // 99
 ### 10.4.2 Assegnazioni incompatibili (errori a compile-time)
 
 ```java
-// int[] x = new int[3];
-// long[] y = x;     // ❌ incompatible types
+int[] x = new int[3];
+// long[] y = x;     // ❌ tipo incompatibile
 ```
 
 I riferimenti ad array seguono le normali regole di ereditarietà:
@@ -239,7 +239,7 @@ Object[] o = s;      // OK: arrays are covariant
 
 ```java
 Object[] objs = new String[3];
-// objs[0] = Integer.valueOf(5); // ❌ ArrayStoreException at runtime
+// objs[0] = Integer.valueOf(5); // ❌ ArrayStoreException a runtime
 ```
 
 ---
@@ -254,7 +254,7 @@ int[] b = {1,2};
 System.out.println(a == b); // false
 ```
 
-`equals()` sugli array non confronta i contenuti (si comporta come `==`):
+`equals()` **sugli array non confronta i contenuti (si comporta come `==`)**:
 
 ```java
 System.out.println(a.equals(b)); // false
@@ -264,7 +264,7 @@ Per confrontare i contenuti, usa i metodi di `java.util.Arrays`:
 
 ```java
 Arrays.equals(a, b);         // shallow comparison
-Arrays.deepEquals(o1, o2);   // deep comparison for nested arrays
+Arrays.deepEquals(o1, o2);   // deep comparison per arrays annidati
 ```
 
 ---
@@ -293,7 +293,7 @@ Arrays.sort(a); // [1, 3, 4]
 
 > [!TIP]
 > - Le stringhe sono ordinate in ordine naturale (lessicografico).
-> - I numeri ordinano prima delle lettere, e le lettere maiuscole ordinano prima delle minuscole (numeri < maiuscole < minuscole).
+> - **I numeri ordinano prima delle lettere, e le lettere maiuscole ordinano prima delle minuscole** (numeri < maiuscole < minuscole).
 > - Per i tipi di riferimento, `null` è considerato più piccolo di qualsiasi valore non-null.
 
 ```java
@@ -306,7 +306,7 @@ System.out.println(Arrays.toString(arr));  // [10, 99, AB, Ba, ac, bA]
 
 ### 10.6.4 `Arrays.binarySearch()`
 
-Requisiti: l’array deve essere ordinato usando lo stesso ordinamento; altrimenti il risultato è imprevedibile.
+Requisiti: l’array deve essere ordinato; altrimenti il risultato è imprevedibile.
 
 ```java
 int[] a = {1,3,5,7};
@@ -317,7 +317,7 @@ Quando il valore non viene trovato, `binarySearch` restituisce `-(insertionPoint
 
 ```java
 int pos = Arrays.binarySearch(a, 4); // returns -3
-// Insertion point is index 2 → -(2) - 1 = -3
+// Il punto d'inserimento sarebbe all'indice 2 → -(2) - 1 = -3
 ```
 
 ### 10.6.5 `Arrays.compare()`
@@ -372,7 +372,7 @@ for (int value : new int[]{1,2,3}) {
 
 **Regole**
 - Il lato destro deve essere un array o un `Iterable`.
-- Il tipo della variabile di ciclo deve essere compatibile con il tipo degli elementi (qui non c’è widening di primitivi).
+- Il tipo della variabile di ciclo deve essere compatibile con il tipo degli elementi (**qui non c’è widening di primitivi**).
 
 Errore comune:
 
@@ -394,9 +394,9 @@ Errore comune:
 ```
 
 - **Confondere `.length` e `.length()`**
-- **Dimenticare che gli array sono oggetti** (vivono sull’heap e sono referenziati).
+- **Dimenticare che gli array sono oggetti** (vivono nell’heap e sono referenziati).
 
-- **Mescolare array di primitivi e array di wrapper**
+- **Miscelare array di primitivi e array di wrapper**
 
 ```java
 // int[] p = new Integer[3]; // ❌ incompatible

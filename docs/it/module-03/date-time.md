@@ -74,7 +74,7 @@ System.out.println(ZonedDateTime.now());
 - Esempio: conversione di `ZonedDateTime` in GMT (UTC)
 
 ```java
-// Conceptual examples (not real code, just illustrating offsets):
+// Conceptual examples (codice d'esempio, solo per illustrare l'offsets):
 // 2024-07-01T12:00+09:00[Asia/Tokyo]        ---> 12:00 minus 9 hours ---> 03:00 UTC
 // 2024-07-01T20:00-07:00[America/Los_Angeles] ---> 20:00 plus 7 hours ---> 03:00 UTC
 ```
@@ -552,7 +552,7 @@ L’API `java.time` si basa su due interfacce chiave che definiscono come date, 
 - `TemporalUnit` → rappresenta un’unità di tempo (ad esempio, DAYS, HOURS, MINUTES).
 - `TemporalAmount` → rappresenta una quantità di tempo (ad esempio, `Period`, `Duration`).
 
-Entrambe sono essenziali per capire come funzionano i metodi `plus`, `minus` e `with`, e compaiono spesso nelle domande di certificazione.
+Entrambe sono essenziali per capire come funzionano i metodi `plus`, `minus` e `with`.
 
 ### 12.9.1 `TemporalUnit`
 
