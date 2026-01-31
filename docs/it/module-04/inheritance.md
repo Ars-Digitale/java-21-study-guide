@@ -16,7 +16,7 @@
 	- [16.9 Usare this e Constructor Overloading](#169-usare-this-e-constructor-overloading)
 	- [16.10 Chiamare il Costruttore del Parent usando super](#1610-chiamare-il-costruttore-del-parent-usando-super)
 	- [16.11 Suggerimenti e Trappole sul Costruttore di Default](#1611-suggerimenti-e-trappole-sul-costruttore-di-default)
-	- [16.12 super si Riferisce Sempre al Parent più Diretto](#1612-super-si-riferisce-sempre-al-parent-più-diretto)
+	- [16.12 super si Riferisce Sempre al Parent più diretto](#1612-super-si-riferisce-sempre-al-parent-più-diretto)
 	- [16.13 Ereditare Membri](#1613-ereditare-membri)
 		- [16.13.1 Method Overriding](#16131-method-overriding)
 			- [16.13.1.1 Definizione e Ruolo nell’Ereditarietà](#161311-definizione-e-ruolo-nellereditarietà)
@@ -280,7 +280,7 @@ class Child extends Parent {
 
 ---
 
-## 16.12 `super()` si Riferisce Sempre al **Most Direct Parent**
+## 16.12 `super()` si Riferisce Sempre al Parent più diretto
 
 Anche in lunghe catene ereditarie, `super()` invoca sempre (e soltanto) il costruttore della classe genitrice **immediata**.
 
