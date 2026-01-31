@@ -69,9 +69,9 @@ System.out.println(new Dog() instanceof Object); // true
 
 ## 16.3 Transitive Inheritance
 
-Inheritance is **transitive**. 
+`Inheritance` is **transitive**. 
  
-If class C extends B and B extends A, then C effectively inherits accessible members from both B *and* A.
+If class `C` extends `B` and `B` extends `A`, then `C` effectively inherits accessible members from both `B` *and* `A`.
 
 ```java
 class A { }

@@ -67,9 +67,9 @@ System.out.println(new Dog() instanceof Object); // true
 
 ## 16.3 Ereditarietà Transitiva
 
-L’Inheritance è **transitiva**.
+L’`Inheritance` è **transitiva**.
 
-Se la classe C estende B e B estende A, allora C eredita effettivamente i membri accessibili sia da B *sia* da A.
+Se la classe `C` estende `B` e `B` estende `A`, allora `C` eredita effettivamente i membri accessibili sia da `B` *sia* da `A`.
 
 ```java
 class A { }
