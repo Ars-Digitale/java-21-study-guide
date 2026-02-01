@@ -111,7 +111,7 @@ class C implements A, B {
 
 ### 17.1.4 Interface Inheritance and Conflicts
 
-If two interfaces provide default methods with the same signature, the implementing class must override the method.
+If two interfaces provide `default` methods with the same signature, the implementing class must override the method.
 
 ```java
 interface X { default void run() { } }
@@ -122,7 +122,7 @@ class Z implements X, Y {
 }
 ```
 
-If you still want to access a particular implementation of the inherited default method, you can use the following syntax:
+If you still want to access a particular implementation of the inherited `default` method, you can use the following syntax:
 
 
 ```java
@@ -136,7 +136,7 @@ class Z implements X, Y {
 }
 ```
  
-### 17.1.5 Default methods
+### 17.1.5 `Default` methods
 
 A `default` method (declared with the `default` keyword) is a method that defines an implementation and can be overridden by a class implementing the interface.
 
@@ -147,13 +147,13 @@ A `default` method (declared with the `default` keyword) is a method that define
 - An implementig class may of course rely on the provided implementation of the `default` method without overriding it;
 - The `default` method can be invoked on an instance of the implementing class and NOT as a `static` method of the containing interface;
 
-### 17.1.6 Static methods
+### 17.1.6 `Static` methods
 
 - An interface can provide `static methods` (through the keyword `static`) which are implicitly `public`;
 - Static methods must include a method body and are accessed using the interface name;
 - Static methods cannot be `abstract` or `final`;
 
-### 17.1.7 Private interface methods
+### 17.1.7 `Private` interface methods
 
 Among all the concrete methods that an interface can implement, we also have:
 
@@ -188,7 +188,7 @@ non-sealed class Rectangle extends Shape { }
 
 **Enums** define a fixed set of constant values. 
 
-Enums can declare fields, constructors, and methods as regular classes do but they can't be extended.
+`Enums` can declare `fields`, `constructors`, and `methods` as regular classes do but **they can't be extended**.
 
 The list of enum values must end with a semicolon `(;)` in case of `Complex Enums`, but this is not mandatory for `Simple Enums`.
 
@@ -196,7 +196,7 @@ The list of enum values must end with a semicolon `(;)` in case of `Complex Enum
 ### 17.3.1 `Simple` Enum Definition
 
 ```java
-enum Day { MON, TUE, WED, THU, FRI, SAT, SUN }
+enum Day { MON, TUE, WED, THU, FRI, SAT, SUN } // semicolon not present
 ```
 
 
@@ -204,7 +204,7 @@ enum Day { MON, TUE, WED, THU, FRI, SAT, SUN }
 
 ```java
 enum Level {
-    LOW(1), MEDIUM(5), HIGH(10);
+    LOW(1), MEDIUM(5), HIGH(10); // mandatory semicolon
 	
     private int code; 
 	
@@ -256,7 +256,7 @@ System.out.println(element.x);
 System.out.println(element.y);
 ```
 
-If you need additional validation or transformation of the provided fields, you can define a long constructor or a compact constructor.
+If you need additional validation or transformation of the provided fields, you can define a `long constructor` or a `compact constructor`.
 
 
 ### 17.4.1 Long Constructor
@@ -290,7 +290,8 @@ public record Point(int x, int y) {
 
 ### 17.4.2 Compact Constructor
 
-You can define a compact constructor which implicitly sets all fields, while letting you perform validations and transformations on selected fields.
+You can define a `compact constructor` which implicitly sets all fields, while letting you perform validations and transformations on selected fields.
+
 Java will execute the full constructor, setting all fields, after the compact constructor has completed.
 
 
@@ -415,7 +416,7 @@ Generic mismatch
 
 ```java
 // ❌ ERROR: expecting Box<String> but found Box<Integer>
-case Wrapper(Box<String>(var v)) -> ...
+case Wrapper(Box<Integer>(var v)) -> ...
 ```
 
 Illegal placement of `var`
@@ -432,8 +433,10 @@ case var(Person(var n, var a)) -> ...
 
 ## 17.5 Nested Classes in Java
 
-Java supports several kinds of **nested classes** — classes declared inside another class.  
-They are a fundamental tool for encapsulation, code organization, event-handling patterns, and representing logical hierarchies.  
+Java supports several kinds of **nested classes** — classes declared inside another class.
+  
+They are a fundamental tool for encapsulation, code organization, event-handling patterns, and representing logical hierarchies.
+  
 A nested class always belongs to an **enclosing class** and has special accessibility and instantiation rules depending on its category.
 
 Java defines four kinds of nested classes:
@@ -547,7 +550,8 @@ class Outer {
 
 ### 17.5.3 Local Classes
 
-A **local class** is a nested class defined inside a block — most commonly a method.  
+A **local class** is a nested class defined inside a block — most commonly a method.
+  
 It has no access modifier and is visible only within the block where it is declared.
 
 #### 17.5.3.1 Characteristics
