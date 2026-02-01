@@ -462,8 +462,9 @@ Object o = list.get(0); // retourne Object (supertype commun minimal)
 ```
 
 > [!IMPORTANT]
-> - `super` accepte **l’insertion**
-> - `extends` accepte **l’extraction**.
+> `super` accepte **l’insertion**
+>
+> `extends` accepte **l’extraction**.
 
 ---
 
