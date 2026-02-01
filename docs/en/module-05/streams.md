@@ -285,7 +285,7 @@ Stream.of("a", "bb", "ccc").filter(s -> {
 }).map(s -> {
 	System.out.println("map " + s);
 	return s.toUpperCase();
-}).findFirst();
+}).forEach(System.out::println);
 ```
 
 Execution order:
@@ -294,9 +294,13 @@ Execution order:
 > Only the minimum number of elements required by the terminal operation are processed.
 
 ```text
---> filter a
---> filter bb
-----> map bb
+filter a
+filter bb
+	--> map bb
+		--> BB
+filter ccc
+	--> map ccc
+		--> CCC
 ```
 
 ---
