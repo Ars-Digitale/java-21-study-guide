@@ -1,6 +1,6 @@
 # 16. Héritage en Java
 
-### Indice
+### Table des matières
 
 - [16. Héritage en Java](#16-héritage-en-java)
 	- [16.1 Définition Générale de l’Héritage](#161-définition-générale-de-lhéritage)

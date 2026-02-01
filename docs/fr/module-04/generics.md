@@ -1,6 +1,6 @@
 # 18. Generics en Java
 
-### Indice
+### Table des matières
 
 - [18. Generics en Java](#18-generics-en-java)
 	- [18.1 Bases des Types Génériques](#181-bases-des-types-génériques)

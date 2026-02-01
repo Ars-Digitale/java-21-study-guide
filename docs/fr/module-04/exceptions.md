@@ -1,6 +1,6 @@
 # 19. Exceptions et Gestion des Erreurs
 
-### Indice
+### Table des matières
 
 - [19. Exceptions et Gestion des Erreurs](#19-exceptions-et-gestion-des-erreurs)
 	- [19.1 Hiérarchie et types dexceptions](#191-hiérarchie-et-types-dexceptions)

@@ -35,7 +35,9 @@ Before understanding initialization order, it is useful to recall the three main
 - **Stack** — stores method calls, local variables, and references.
 
 > [!NOTE] 
-> Static members belong to the **class** and are created **once** in the Method Area. Instance members belong to **each object** and live in the **Heap**.
+> Static members belong to the **class** and are created **once** in the Method Area. 
+> 
+> Instance members belong to **each object** and live in the **Heap**.
 
 ---
 
@@ -43,7 +45,7 @@ Before understanding initialization order, it is useful to recall the three main
 
 When a Java program starts, the JVM loads classes *on demand*.
   
-When a class is referenced for the first time (e.g., by calling `new` or accessing a static member), **its entire inheritance chain must be loaded first**.
+When a class is referenced for the first time (e.g., by calling `new` or accessing a static member), **its entire inheritance chain must be loaded in memory first**.
 
 ### 15.2.1 Class Loading Order
 
@@ -89,7 +91,7 @@ When the `new` keyword is used, **instance creation follows a strict and predict
 ### 15.3.1 Full Instance Creation Order
 
 - **1. Memory is allocated on the Heap for the new object** (fields get default values).
-- **2. The constructor chain runs from parent to child** — the top of the hierarchy runs first, then each subclass.
+- **2. The constructor chain runs (not yet the bodies) from parent to child** — the top of the hierarchy runs first, then each subclass.
 - **3. Instance variables receive explicit initializations**.
 - **4. Instance initializer blocks execute**.
 - **5. The constructor body runs**: for each class in the inheritance chain, steps 3–5 (field initialization, instance blocks, constructor body) are applied from parent to child.
