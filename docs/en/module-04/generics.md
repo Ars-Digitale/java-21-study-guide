@@ -38,9 +38,15 @@
 
 ---
 
-`Java Generics` provide **compile-time type safety** by allowing `classes`, `interfaces`, and `methods` to work with **types as parameters**.
-  
-They prevent `ClassCastException` at runtime by moving type checks to **compile time**, and they increase code reusability by enabling type-agnostic algorithms.  
+Java `Generics` allow you to create classes, interfaces, and methods that work with user-specified types, ensuring that only objects of the correct type are used.
+
+All type checks are performed by the compiler at compile time.
+
+During compilation, the compiler verifies type correctness and then removes the generic type information, replacing it with concrete types (a process known as **type erasure**) or with Object when necessary.
+
+The resulting bytecode does not contain generics: it only contains concrete types and, when needed, casts automatically inserted by the compiler.
+
+In this way, type errors are caught before execution, making the code safer, more readable, and more reusable.
 
 Generics apply to:  
 - `Classes`
@@ -190,11 +196,13 @@ void runAll(List<T> list) {
 Erased Version
 
 ```java
-public static void runAll(List<Runnable> list) {
-    for (Runnable t : list) {
+public static void runAll(List list) {
+    for (Object obj : list) {
+        Runnable t = (Runnable) obj;   // cast set by the compiler
         t.run();
     }
 }
+
 ```
 
 What happens to the other bounds (Serializable, Cloneable)?
@@ -382,13 +390,13 @@ class Demo {
 }
 ```
 
-Java does not use the return type when distinguishing overloaded methods.
+**Java does not use the return type when distinguishing overloaded methods**.
 
 ### 18.4.10 Summary of Erasure Rules
 
-- Unbounded T → erased to Object.
-- T extends X → erased to X.
-- T extends X & Y & Z → erased to X.
+- `Unbounded T` → erased to Object.
+- `T extends X` → erased to X.
+- `T extends X & Y & Z` → erased to X.
 - All generic parameters are erased in method signatures.
 - Casts are inserted to preserve compile-time typing.
 - Bridge methods may be generated to preserve polymorphism.
@@ -439,6 +447,8 @@ Number n = nums.get(0);   // OK
 > **You cannot add elements (except null) to ? extends** because you don’t know the exact subtype.
 
 #### 18.5.3.3 Lower-Bounded Wildcard `? super`
+
+`<? super Integer>` means **the type must be Integer or a superclass of Integer**.
 
 ```java
 List<? super Integer> list = new ArrayList<Number>();
@@ -573,9 +583,9 @@ listSuper.add(10);
 
 | Syntax       | Meaning                                         |
 |-------------|-------------------------------------------------|
-|?               | unknown type (read-only except Object methods) |
-|? extends T     | read T safely, cannot add (except null) |
-|? super T       | can add T, retrieving gives Object |
+|`?`               | unknown type (read-only except Object methods) |
+|`? extends T`     | read T safely, cannot add (except null) |
+|`? super T`       | can add T, retrieving gives Object |
 
 
 ---
