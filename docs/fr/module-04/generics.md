@@ -511,7 +511,7 @@ raw.add(10);   // permis, mais non sûr
 
 ---
 
-## 18.9 Tableaux Génériques (Non Permessi)
+## 18.9 Tableaux Génériques (Non Autorisés)
 
 Tu ne peux pas créer des tableaux de types paramétrés:
 
