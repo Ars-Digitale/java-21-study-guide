@@ -461,7 +461,7 @@ list.add(10);    // OK
 Object o = list.get(0); // retourne Object (supertype commun minimal)
 ```
 
-> [!WARNING]
+> [!IMPORTANT]
 > - `super` accepte **l’insertion**
 > - `extends` accepte **l’extraction**.
 

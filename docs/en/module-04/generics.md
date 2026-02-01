@@ -456,7 +456,7 @@ list.add(10);    // OK
 Object o = list.get(0); // returns Object (lowest common supertype)
 ```
 
-> [!WARNING]
+> [!IMPORTANT]
 > - `Super` accepts **insertion** 
 > - `extends` accepts **extraction**.
 
