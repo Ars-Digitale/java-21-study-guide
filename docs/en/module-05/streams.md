@@ -267,25 +267,42 @@ var newNames = new ArrayList<String>();
 
 newNames.add("Bob");
 newNames.add("Dan");
-var stream = newNames.stream(); // Streams are lazily evaluated: this does not traverse the data yet, it only creates a pipeline description.
+
+// Streams are lazily evaluated: this does not traverse the data yet,
+// it only creates a pipeline description bound to the source.
+var stream = newNames.stream();
 
 newNames.add("Erin");
 
+// Terminal operation triggers evaluation. The stream sees the updated source,
+// so the count includes "Erin".
 stream.count(); // 3
 ```
 
+**Important note :**  
+A stream is bound to its *source* (`newNames`), and the pipeline is not executed until a terminal operation is invoked.  
+For this reason, if you **modify the collection before the terminal operation**, the terminal operation “sees” the new elements (here, `Erin`).  
+In general, however, **modifying the source while a stream pipeline is in use is bad practice** and can lead to non-deterministic behavior (or `ConcurrentModificationException` with some sources/operations). 
+The practical rule is: *build the source, then create and execute the stream without mutating it*.
 
-Streams process elements one at a time, flowing through the pipeline vertically, not stage-by-stage.
 
+
+Streams process elements **one at a time**, flowing “vertically” through the pipeline rather than stage-by-stage.
+
+Below we modify the example to use a **short-circuiting** terminal operation: `findFirst()`.
 
 ```java
-Stream.of("a", "bb", "ccc").filter(s -> {
-	System.out.println("filter " + s);
-	return s.length() > 1;
-}).map(s -> {
-	System.out.println("map " + s);
-	return s.toUpperCase();
-}).forEach(System.out::println);
+Stream.of("a", "bb", "ccc")
+    .filter(s -> {
+        System.out.println("filter " + s);
+        return s.length() > 1;
+    })
+    .map(s -> {
+        System.out.println("map " + s);
+        return s.toUpperCase();
+    })
+    .findFirst()
+    .ifPresent(System.out::println);
 ```
 
 Execution order:
@@ -296,12 +313,14 @@ Execution order:
 ```text
 filter a
 filter bb
-	--> map bb
-		--> BB
-filter ccc
-	--> map ccc
-		--> CCC
+map bb
+BB
 ```
+
+`findFirst()` is satisfied as soon as it finds the **first** element that successfully passes through the pipeline (here `"bb"`), therefore:
+- `"ccc"` is never processed (neither `filter` nor `map`);
+- lazy evaluation avoids unnecessary work compared to a terminal operation that consumes all elements (such as `forEach` or `count`).
+
 
 ---
 
