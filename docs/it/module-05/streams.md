@@ -38,7 +38,7 @@
     - [21.10.6 Trappole e gotcha comuni](#21106-trappole-e-gotcha-comuni)
   - [21.11 Collector (collect(), Collector e i Metodi Factory di Collectors)](#2111-collector-collect-collector-e-i-metodi-factory-di-collectors)
     - [21.11.1 collect() vs Collector](#21111-collect-vs-collector)
-    - [21.11.2 Collector core (riferimento rapido)](#21112-collector-core-riferimento-rapido)
+    - [21.11.2 Collector core](#21112-collector-core)
     - [21.11.3 Collector di raggruppamento](#21113-collector-di-raggruppamento)
     - [21.11.4 partitioningBy](#21114-partitioningby)
     - [21.11.5 toMap e regole di merge](#21115-tomap-e-regole-di-merge)
