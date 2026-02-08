@@ -30,7 +30,7 @@
     - [21.8.3 Perché `collect()` è diverso da `reduce()`](#2183-perché-collect-è-diverso-da-reduce)
   - [21.9 Trappole Comuni degli Stream](#219-trappole-comuni-degli-stream)
   - [21.10 Stream Primitivi](#2110-stream-primitivi)
-    - [21.10.1 Perché gli stream primitivi contano](#21101-perche-gli-stream-primitivi-contano)
+    - [21.10.1 Perché gli stream primitivi sono importanti](#21101-perché-gli-stream-primitivi-sono-importanti)
     - [21.10.2 Metodi comuni di creazione](#21102-metodi-comuni-di-creazione)
     - [21.10.3 Metodi di mapping specializzati per primitivi](#21103-metodi-di-mapping-specializzati-per-primitivi)
     - [21.10.4 Tabella di mapping tra `Stream<T>` e stream primitivi](#21104-tabella-di-mapping-tra-streamt-e-stream-primitivi)
