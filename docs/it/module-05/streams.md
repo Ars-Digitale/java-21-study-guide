@@ -10,7 +10,7 @@
     - [21.1.4 Optional e Stream](#2114-optional-e-stream)
     - [21.1.5 Optional per tipi primitivi](#2115-optional-per-tipi-primitivi)
     - [21.1.6 Trappole comuni](#2116-trappole-comuni)
-  - [21.2 Che Cos’è uno Stream (E Cos’è Non)](#212-che-cos-e-uno-stream-e-cos-e-non)
+  - [21.2 Che Cos’è uno Stream (E cosa Non è)](#212-che-cosè-uno-stream-e-cosa-non-è)
   - [21.3 Architettura della Pipeline Stream](#213-architettura-della-pipeline-stream)
     - [21.3.1 Sorgenti di Stream](#2131-sorgenti-di-stream)
     - [21.3.2 Operazioni Intermedie](#2132-operazioni-intermedie)
