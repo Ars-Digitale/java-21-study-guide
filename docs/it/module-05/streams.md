@@ -27,7 +27,7 @@
     - [21.8.1 `reduce()`: combinare uno stream in un singolo oggetto](#2181-reduce-combinare-uno-stream-in-un-singolo-oggetto)
       - [21.8.1.1 Modello mentale corretto](#21811-modello-mentale-corretto)
     - [21.8.2 `collect()`](#2182-collect)
-    - [21.8.3 Perché `collect()` è diverso da `reduce()`](#2183-perche-collect-e-diverso-da-reduce)
+    - [21.8.3 Perché `collect()` è diverso da `reduce()`](#2183-perché-collect-è-diverso-da-reduce)
   - [21.9 Trappole Comuni degli Stream](#219-trappole-comuni-degli-stream)
   - [21.10 Stream Primitivi](#2110-stream-primitivi)
     - [21.10.1 Perché gli stream primitivi contano](#21101-perche-gli-stream-primitivi-contano)
