@@ -1,14 +1,14 @@
-# 21. Java Optional e Stream
+# 21. Java Optional e Streams
 
 ### Indice
 
-- [21. Java Optional e Stream](#21-java-optional-e-stream)
+- [21. Java Optional e Streams](#21-java-optional-e-streams)
   - [21.1 Optional (Optional OptionalInt OptionalLong OptionalDouble)](#211-optional-optional-optionalint-optionallong-optionaldouble)
     - [21.1.1 Creare Optional](#2111-creare-optional)
     - [21.1.2 Leggere valori in sicurezza](#2112-leggere-valori-in-sicurezza)
     - [21.1.3 Trasformare Optional](#2113-trasformare-optional)
     - [21.1.4 Optional e Stream](#2114-optional-e-stream)
-    - [21.1.5 Optional primitivi](#2115-optional-primitivi)
+    - [21.1.5 Optional per tipi primitivi](#2115-optional-per-tipi-primitivi)
     - [21.1.6 Trappole comuni](#2116-trappole-comuni)
   - [21.2 Che Cos’è uno Stream (E Cos’è Non)](#212-che-cos-e-uno-stream-e-cos-e-non)
   - [21.3 Architettura della Pipeline Stream](#213-architettura-della-pipeline-stream)
