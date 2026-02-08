@@ -8,7 +8,7 @@
     - [21.1.2 Lire des valeurs en toute sécurité](#2112-lire-des-valeurs-en-toute-sécurité)
     - [21.1.3 Transformer des Optional](#2113-transformer-des-optional)
     - [21.1.4 Optional et Streams](#2114-optional-et-streams)
-    - [21.1.5 Optional primitifs](#2115-optional-primitifs)
+    - [21.1.5 Optional pour les types primitifs](#2115-optional-pour-les-types-primitifs)
     - [21.1.6 Pièges courants](#2116-pièges-courants)
   - [21.2 Qu’est-ce qu’un Stream (et ce que ce n’est pas)](#212-quest-ce-quun-stream-et-ce-que-ce-nest-pas)
   - [21.3 Architecture du pipeline Stream](#213-architecture-du-pipeline-stream)
