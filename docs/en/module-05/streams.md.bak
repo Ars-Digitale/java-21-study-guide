@@ -106,20 +106,10 @@ Optionals support functional transformations similar to streams, but with “0 o
 Optional<String> name = Optional.of("Alice");
 
 Optional<Integer> len =
-	name.map(String::length); // Optional[5]
+name.map(String::length); // Optional[5]
 
 Optional<String> filtered =
-	name.filter(n -> n.startsWith("A")); // Optional[Alice]
-	
-System.out.println(len.orElse(0));
-System.out.println(filtered.orElseGet(() -> "11"));
-```
-
-Output:
-
-```text
-5
-Alice
+name.filter(n -> n.startsWith("A")); // Optional[Alice]
 ```
 
 > [!NOTE]
@@ -133,17 +123,11 @@ A very common pipeline pattern is to map to an Optional and then remove empties.
 Since Java 9, `Optional` provides `stream()` to convert “present → one element” and “empty → zero elements”.
 
 ```java
-		Stream<String> words = Stream.of("a", "bb", "ccc");
+Stream<String> words = Stream.of("a", "bb", "ccc");
 
-		words.map(w -> w.length() > 1 ? Optional.of(w.length()) : Optional.<Integer>empty()).flatMap(Optional::stream) // rimuove gli elementi vuoti
-				.forEach(System.out::println); 
-```
-
-Output:
-
-```text
-2
-3
+Stream<Integer> lengthsOverOne =
+words.map(w -> w.length() > 1 ? Optional.of(w.length()) : Optional.<Integer>empty())
+.flatMap(Optional::stream); // removes empties
 ```
 
 > [!NOTE]
@@ -245,16 +229,7 @@ Intermediate operations:
 - Example:
 
 ```java
-		List<String> names = List.of("Ana", "Bob", "Carla", "Mario");
-		
-		names.stream().filter(n -> n.length() > 3).map(String::toUpperCase).forEach(System.out::println);
-```
-
-Output:
-
-```text
-CARLA
-MARIO
+Stream<String> s2 = names.stream().filter(n -> n.length() > 3).map(String::toUpperCase);
 ```
 
 > [!NOTE]
@@ -394,8 +369,8 @@ Parallel streams divide work across threads using the ForkJoinPool.commonPool().
 ```java
 int sum =
 IntStream.range(1, 1_000_000)
-	.parallel()
-		.sum();
+.parallel()
+.sum();
 ```
 
 
@@ -424,8 +399,9 @@ There are three method signatures for this operation:
 
 
 ```java
-int sum = Stream.of(1, 2, 3)
-	.reduce(0, Integer::sum);
+int sum =
+Stream.of(1, 2, 3)
+.reduce(0, Integer::sum);
 ```
 
 Reduction requires:
@@ -570,10 +546,10 @@ where Collectors.* provides prebuilt collectors (grouping, mapping, joining, cou
 List<String> longNames =
     names.stream()
          .filter(s -> s.length() > 3)
-			.collect(Collectors.toList());
+         .collect(Collectors.toList());
 ```
 
-- Example: groupingBy with explanation
+- Example: groupingBy (your snippet) with explanation
 
 ```java
 Map<Integer, List<String>> byLength =
@@ -725,9 +701,10 @@ Primitive streams have several terminal operations that are either unique or hav
 ```java
 List<String> words = List.of("a", "bb", "ccc");
 
-int totalLength = words.stream()
-	.mapToInt(String::length) // IntStream
-		.sum(); // int
+int totalLength =
+words.stream()
+.mapToInt(String::length) // IntStream
+.sum(); // int
 
 // totalLength = 1 + 2 + 3 = 6
 ```
@@ -735,15 +712,17 @@ int totalLength = words.stream()
 - Example 2: `IntStream` → boxed `Stream<Integer>` (boxing introduced).
 
 ```java
-Stream<Integer> boxed = IntStream.rangeClosed(1, 3) // 1,2,3
-	.boxed(); // Stream<Integer>
+Stream<Integer> boxed =
+IntStream.rangeClosed(1, 3) // 1,2,3
+.boxed(); // Stream<Integer>
 ```
 
 - Example 3: primitive stream → object stream via `mapToObj`.
 
 ```java
-Stream<String> labels = IntStream.range(1, 4) // 1,2,3
-	.mapToObj(i -> "N=" + i); // Stream<String>
+Stream<String> labels =
+IntStream.range(1, 4) // 1,2,3
+.mapToObj(i -> "N=" + i); // Stream<String>
 ```
 
 ### 21.10.6 Common pitfalls and gotchas
