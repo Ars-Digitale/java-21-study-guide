@@ -17,7 +17,7 @@
       - [21.3.2.1 Tableau des opérations intermédiaires courantes](#21321-tableau-des-opérations-intermédiaires-courantes)
     - [21.3.3 Opérations terminales](#2133-opérations-terminales)
       - [21.3.3.1 Tableau des opérations terminales](#21331-tableau-des-opérations-terminales)
-  - [21.4 Évaluation paresseuse et court-circuitage](#214-evaluation-paresseuse-et-court-circuitage)
+  - [21.4 Évaluation paresseuse et court-circuitage](#214-évaluation-paresseuse-et-court-circuitage)
   - [21.5 Opérations stateless vs stateful](#215-opérations-stateless-vs-stateful)
     - [21.5.1 Opérations stateless](#2151-opérations-stateless)
     - [21.5.2 Opérations stateful](#2152-opérations-stateful)
