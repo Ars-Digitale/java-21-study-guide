@@ -24,7 +24,7 @@
   - [21.6 Ordonnancement des Streams et déterminisme](#216-ordonnancement-des-streams-et-déterminisme)
   - [21.7 Streams parallèles](#217-streams-parallèles)
   - [21.8 Opérations de réduction](#218-opérations-de-réduction)
-    - [21.8.1 `reduce()` : combiner un stream en un seul objet](#2181-reduce-combiner-un-stream-en-un-seul-objet)
+    - [21.8.1 `reduce()` : combiner un stream en un seul objet](#2181-reduce--combiner-un-stream-en-un-seul-objet)
       - [21.8.1.1 Modèle mental correct](#21811-modèle-mental-correct)
     - [21.8.2 `collect()`](#2182-collect)
     - [21.8.3 Pourquoi `collect()` est différent de `reduce()`](#2183-pourquoi-collect-est-différent-de-reduce)
