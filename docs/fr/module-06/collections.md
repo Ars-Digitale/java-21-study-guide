@@ -13,7 +13,7 @@
   - [22.6 Types génériques dans le Framework des Collections](#226-types-génériques-dans-le-framework-des-collections)
   - [22.7 Mutabilité vs Immutabilité](#227-mutabilité-vs-immutabilité)
   - [22.8 Attentes de Performance Big-O](#228-attentes-de-performance-big-o)
-  - [22.9 Résumé](#229-resume)
+  - [22.9 Résumé](#229-résumé)
 
 ---
 
