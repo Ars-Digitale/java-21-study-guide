@@ -3,15 +3,15 @@
 ### Indice
 
 - [22. Introduzione al Framework delle Collezioni](#22-introduzione-al-framework-delle-collezioni)
-  - [22.1 Che cos’è il Framework delle Collezioni](#221-che-cos-e-il-framework-delle-collezioni)
+  - [22.1 Che cos’è il Framework delle Collezioni](#221-che-cosè-il-framework-delle-collezioni)
   - [22.2 Le Interfacce Principali](#222-le-interfacce-principali)
     - [22.2.1 Principali interfacce di Collection](#2221-principali-interfacce-di-collection)
     - [22.2.2 Gerarchia di Map](#2222-gerarchia-di-map)
   - [22.3 Collezioni Sequenced Java-21](#223-collezioni-sequenced-java-21)
-  - [22.4 Perché esiste il Framework delle Collezioni](#224-perche-esiste-il-framework-delle-collezioni)
+  - [22.4 Perché esiste il Framework delle Collezioni](#224-perché-esiste-il-framework-delle-collezioni)
   - [22.5 I due lati del Framework Collections-vs-Maps](#225-i-due-lati-del-framework-collections-vs-maps)
   - [22.6 Tipi generici nel Framework delle Collezioni](#226-tipi-generici-nel-framework-delle-collezioni)
-  - [22.7 Mutabilità vs Immutabilità](#227-mutabilita-vs-immutabilita)
+  - [22.7 Mutabilità vs Immutabilità](#227-mutabilità-vs-immutabilità)
   - [22.8 Aspettative di Prestazioni Big-O](#228-aspettative-di-prestazioni-big-o)
   - [22.9 Riepilogo](#229-riepilogo)
 
