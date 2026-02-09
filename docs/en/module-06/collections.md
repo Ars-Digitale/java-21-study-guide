@@ -222,4 +222,4 @@ Understanding complexity is essential. Here are common examples:
 - Maps are not Collections — they form a parallel hierarchy.
 - Collections rely heavily on generics.
 - Mutability matters — factory methods often return immutable collections.
-- Performance characteristics are predictable and must be known for the exam.
+- Performance characteristics are predictable.
