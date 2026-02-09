@@ -3,15 +3,15 @@
 ### Table des matières
 
 - [22. Introduction au Framework des Collections](#22-introduction-au-framework-des-collections)
-  - [22.1 Qu’est-ce que le Framework des Collections](#221-quest-ce-que-le-framework-des-collections)
+  - [22.1 Qu’est-ce que le Framework des Collections](#221-quest-ce-que-le-framework-des-collections-)
   - [22.2 Les Interfaces Principales](#222-les-interfaces-principales)
     - [22.2.1 Principales interfaces de Collection](#2221-principales-interfaces-de-collection)
-    - [22.2.2 Hiérarchie de Map](#2222-hierarchie-de-map)
+    - [22.2.2 Hiérarchie de Map](#2222-hiérarchie-de-map)
   - [22.3 Collections Sequenced Java-21](#223-collections-sequenced-java-21)
   - [22.4 Pourquoi le Framework des Collections existe](#224-pourquoi-le-framework-des-collections-existe)
-  - [22.5 Les deux côtés du Framework Collections-vs-Maps](#225-les-deux-cotes-du-framework-collections-vs-maps)
-  - [22.6 Types génériques dans le Framework des Collections](#226-types-generiques-dans-le-framework-des-collections)
-  - [22.7 Mutabilité vs Immutabilité](#227-mutabilite-vs-immutabilite)
+  - [22.5 Les deux côtés du Framework Collections-vs-Maps](#225-les-deux-côtés-du-framework--collections-vs-maps)
+  - [22.6 Types génériques dans le Framework des Collections](#226-types-génériques-dans-le-framework-des-collections)
+  - [22.7 Mutabilité vs Immutabilité](#227-mutabilité-vs-immutabilité)
   - [22.8 Attentes de Performance Big-O](#228-attentes-de-performance-big-o)
   - [22.9 Résumé](#229-resume)
 
