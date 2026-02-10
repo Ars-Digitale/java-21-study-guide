@@ -26,6 +26,7 @@ This addition solves long-standing inconsistencies between lists, sets, queues, 
 ## 29.1 Motivation and Background
 
 Before Java 21, ordered collections (such as List, LinkedHashSet, Deque, or LinkedHashMap) exposed ordering operations through different methods or not at all.
+
 Developers had to rely on implementation-specific APIs or indirect workarounds.
 
 Sequenced interfaces introduce a consistent contract for all ordered collections and maps, making order-based operations explicit, safe, and uniform.
@@ -59,9 +60,9 @@ The following standard types implement SequencedCollection:
 
 |	Type	|	Notes  |
 |-----------|----------|
-|List	|	Ordered by index |
-|Deque	|	Double-ended queue |
-|LinkedHashSet	|	Maintains insertion order |
+|**List**	|	Ordered by index |
+|**Deque**	|	Double-ended queue |
+|**LinkedHashSet**	|	Maintains insertion order |
 
 ### 29.2.3 Reversed Views
 
@@ -87,7 +88,7 @@ System.out.println(list); // [1, 2]
 
 `SequencedMap<K,V>` extends `Map<K,V>` and represents maps with a defined encounter order of entries.
 
-It standardizes operations that previously existed only in specific implementations such as LinkedHashMap.
+It standardizes operations that previously existed only in specific implementations such as `LinkedHashMap`.
 
 ### 29.3.1 Core Methods of SequencedMap
 
