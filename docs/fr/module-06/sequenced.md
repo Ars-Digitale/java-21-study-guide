@@ -1,6 +1,6 @@
 # 29. Collections Séquencées & Map Séquencées
 
-### Indice
+### Table des matières
 
 - [29. Collections Séquencées & Map Séquencées](#29-collections-séquencées--map-séquencées)
   - [29.1 Motivation et Contexte](#291-motivation-et-contexte)
