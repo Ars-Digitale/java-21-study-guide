@@ -56,7 +56,7 @@ List
 - Ordered — elements preserve insertion order.
 - Indexed — accessible via `get(int)` and `set(int,E)`.
 - Allow duplicates — `List` does not enforce uniqueness.
-- Can contain null — unless using special implementations.
+- Can contain `null` — unless using special implementations.
 
 ---
 
@@ -81,7 +81,7 @@ List<String> l2 = new LinkedList<>(List.of("A", "B"));
 ```
 
 > [!NOTE]
-> LinkedList also implements `Deque`.
+> `LinkedList` also implements `Deque`.
 
 ---
 
@@ -97,7 +97,7 @@ list1.set(0, "Z"); // ❌ UnsupportedOperationException
 
 > [!NOTE]
 > All `List.of()` lists:
-> - reject nulls
+> - reject `nulls`
 > - are immutable
 > - throw `UOE` on structural modification
 
@@ -193,7 +193,7 @@ list.clear();
 
 ### 25.5.1 `contains()`
 
-Uses `.equals()` on elements.
+Method `contains()` uses `.equals()` on elements.
 
 ### 25.5.2 Equality of Lists
 
