@@ -23,7 +23,7 @@
 Java’s `Queue` and `Deque` interfaces model ordered collections designed for processing elements in a particular sequence.
 
 A **Queue** typically models a **FIFO** (First-In, First-Out) structure.  
-A **Deque** (“double-ended queue”) allows insertion and removal from both ends, enabling **FIFO** and **LIFO** behavior in a single API.
+A **Deque** (`double-ended queue`) allows insertion and removal from both ends, enabling **FIFO** and **LIFO** behavior in a single API.
 
 
 ## 27.1 Queue — Overview
@@ -36,9 +36,9 @@ Two families of methods exist: ones that **throw exceptions** and ones that **re
 
 | Operation | Throws Exception | Returns Special Value | Description |
 |----------|------------------|------------------------|-------------|
-| Insert   | add(e)          | offer(e)              | Adds an element; offer preferred for bounded queues |
-| Remove   | E remove()        | E poll()                | Removes and returns head. remove() throws NoSuchElementException if queue is empty, poll() returns null |
-| Read	   | E element()       | E peek()                | Returns head without removing. element() throws NoSuchElementException if queue is empty, peek() returns null |
+| Insert   | `add(e)`          | `offer(e)`              | Adds an element; offer preferred for bounded queues |
+| Remove   | `E remove()`        | `E poll()`                | Removes and returns head. `remove()` throws NoSuchElementException if queue is empty, `poll()` returns null |
+| Read	   | `E element()`       | `E peek()`                | Returns head without removing. `element()` throws NoSuchElementException if queue is empty, `peek()` returns null |
 
 
 
@@ -55,7 +55,7 @@ Common classes implementing `Queue`:
 > `PriorityQueue` does not guarantee traversal order matching priority sorting.
 
 > [!WARNING]
-> Most Queue implementations reject null because null is used as a return value for “empty”.
+> Most Queue implementations reject `null` because `null` is used as a return value for “empty”.
 
 ---
 
@@ -86,7 +86,7 @@ It is more versatile than a Queue:
 
 > [!NOTE]
 > `Stack` is legacy; use `Deque` for stack behavior (push/pop).
-> ArrayDeque, LinkedList queue ops (add/remove/peek) are O(1) amortized
+> ArrayDeque, LinkedList queue operations (add/remove/peek) are O(1) amortized
 
 ---
 
