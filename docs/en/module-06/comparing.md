@@ -40,11 +40,10 @@ More precisely:
 a `Unicode code point` is an integer (written in hexadecimal as U+XXXX) that represents a specific character, symbol, or control mark—independent of font, language, or platform.
 
 - Examples:
-
-- U+0041 → A
-- U+0061 → a
-- U+0030 → 0
-- U+1F600 → 😀
+	- U+0041 → A
+	- U+0061 → a
+	- U+0030 → 0
+	- U+1F600 → 😀
 
 A code point is not a byte sequence. It’s an abstract number.
 

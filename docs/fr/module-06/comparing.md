@@ -40,11 +40,10 @@ Plus précisément :
 un `Unicode code point` est un entier (écrit en hexadécimal sous la forme U+XXXX) qui représente un caractère, un symbole ou un caractère spécial spécifique indépendamment de la police, de la langue ou de la plateforme.
 
 - Exemples :
-
-- U+0041 → A
-- U+0061 → a
-- U+0030 → 0
-- U+1F600 → 😀
+	- U+0041 → A
+	- U+0061 → a
+	- U+0030 → 0
+	- U+1F600 → 😀
 
 Un code point n’est pas une séquence d’octets ; c’est un nombre abstrait.
 
