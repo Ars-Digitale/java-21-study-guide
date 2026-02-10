@@ -1,6 +1,6 @@
 # 25. L’API List
 
-### Indice
+### Table des matières
 
 - [25. L’API List](#25-lapi-list)
   - [25.1 Caractéristiques des List](#251-caractéristiques-des-list)
