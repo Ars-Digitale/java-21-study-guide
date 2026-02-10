@@ -5,7 +5,7 @@
 - [24. Comparable, Comparator & Tri en Java](#24-comparable-comparator--tri-en-java)
   - [24.1 Comparable — Ordre Naturel](#241-comparable--ordre-naturel)
     - [24.1.1 Contrat de la Méthode Comparable](#2411-contrat-de-la-méthode-comparable)
-    - [24.1.2 Classe d’Exemple Implémentant Comparable](#2412-classe-dexemple-implémentant-comparable)
+    - [24.1.2 Classe d’Exemple Implémentant Comparable](#2412-exemple--classe-implémentant-comparable)
     - [24.1.3 Erreurs Courantes de Comparable](#2413-erreurs-courantes-de-comparable)
   - [24.2 Comparator — Ordre Personnalisé](#242-comparator--ordre-personnalisé)
     - [24.2.1 Méthodes Principales de Comparator](#2421-méthodes-principales-de-comparator)
