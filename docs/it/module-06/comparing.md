@@ -5,7 +5,7 @@
 - [24. Comparable, Comparator & Ordinamento in Java](#24-comparable-comparator--ordinamento-in-java)
   - [24.1 Comparable — Ordinamento Naturale](#241-comparable--ordinamento-naturale)
     - [24.1.1 Contratto del Metodo di Comparable](#2411-contratto-del-metodo-di-comparable)
-    - [24.1.2 Classe di Esempio che Implementa Comparable](#2412-classe-di-esempio-che-implementa-comparable)
+    - [24.1.2 Classe di Esempio che Implementa Comparable](#2412-esempio-classe-che-implementa-comparable)
     - [24.1.3 Errori Comuni di Comparable](#2413-errori-comuni-di-comparable)
   - [24.2 Comparator — Ordinamento Personalizzato](#242-comparator--ordinamento-personalizzato)
     - [24.2.1 Metodi Principali di Comparator](#2421-metodi-principali-di-comparator)
