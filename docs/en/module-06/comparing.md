@@ -27,12 +27,35 @@
 
 Java provides two main strategies for sorting and comparing: `Comparable` (natural ordering) and `Comparator` (custom ordering).
 
-Understanding their rules, constraints, and interactions with generics is essential.
+Understanding their rules, constraints, and interactions with `generics` is essential.
 
 - For **numeric types**, sorting follows natural numerical order, meaning smaller values come before larger ones.
 - Sorting **strings** follows lexicographical (Unicode code point) order: character-by-character comparison; digits come before uppercase, uppercase before lowercase.
 
 This ordering is based on each character’s Unicode code point, not alphabetical intuition.
+
+A **Unicode code point** is a unique numerical value assigned to a character in the Unicode standard.
+
+More precisely:
+a `Unicode code point` is an integer (written in hexadecimal as U+XXXX) that represents a specific character, symbol, or control mark—independent of font, language, or platform.
+
+- Examples:
+
+- U+0041 → A
+- U+0061 → a
+- U+0030 → 0
+- U+1F600 → 😀
+
+A code point is not a byte sequence. It’s an abstract number.
+
+How a code point is stored in memory depends on the encoding (UTF-8, UTF-16, UTF-32).
+
+Unicode defines code points from U+0000 to U+10FFFF.
+
+In short:
+Unicode code points define what the character is; encodings define how it is represented in bytes.
+
+- Example natural ordering
 
 ```java
 List<String> items = List.of("10", "2", "A", "Z", "a", "b");
@@ -68,12 +91,12 @@ public interface Comparable<T> {
 
 Rules and expectations:
 
-- Return negative → `this` < `other`
-- Return zero → `this` == `other`
-- Return positive → `this` > `other`
+- Return **negative** → `this` < `other`
+- Return **zero** → `this` == `other`
+- Return **positive** → `this` > `other`
 
 > [!IMPORTANT]
-> - Natural ordering must be consistent with equals(), unless explicitly documented otherwise:
+> - Natural ordering must be consistent with `equals()`, unless explicitly documented otherwise:
 > - `compareTo()` is consistent with `equals()` if, and only if, `a.compareTo(b) == 0` and `a.equals(b) is true`.
 
 > [!WARNING]
@@ -272,7 +295,7 @@ books.stream().sorted(cmp)
 ```
 
 > [!NOTE]
-> reversed() applies to the entire composed comparator, not just the first comparison key.
+> `reversed()` applies to the entire composed comparator, not just the first comparison key.
 
 ---
 
