@@ -8,7 +8,7 @@
     - [25.2.1 Costruttori di ArrayList](#2521-costruttori-di-arraylist)
     - [25.2.2 Costruttori di LinkedList](#2522-costruttori-di-linkedlist)
   - [25.3 Metodi Factory](#253-metodi-factory)
-    - [25.3.1 List of immutable](#2531-list-of-immutable)
+    - [25.3.1 List of immutable](#2531-listof-immutabile)
     - [25.3.2 List copyOf immutable-copy](#2532-list-copyof-immutable-copy)
     - [25.3.3 Arrays asList fixed-size-list](#2533-arrays-aslist-fixed-size-list)
   - [25.4 Operazioni Fondamentali di List](#254-operazioni-fondamentali-di-list)
