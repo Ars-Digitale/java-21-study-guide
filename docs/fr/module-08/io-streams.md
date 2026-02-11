@@ -1,9 +1,9 @@
 # 34. Streams I/O Java
 
-### Indice
+### Table des matières
 
 - [34. Streams I/O Java](#34-streams-io-java)
-  - [34.1 Qu’est-ce qu’un flux I/O en Java](#341-quest-ce-quun-flux-io-en-java)
+  - [34.1 Qu’est-ce qu’un flux I/O en Java](#341-quest-ce-quun-flux-io-en-java-)
   - [34.2 Flux d’octets vs flux de caractères](#342-flux-doctets-vs-flux-de-caractères)
     - [34.2.1 Flux d’octets](#3421-flux-doctets)
     - [34.2.2 Flux de caractères](#3422-flux-de-caractères)
