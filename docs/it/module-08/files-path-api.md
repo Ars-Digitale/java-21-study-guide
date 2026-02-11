@@ -3,7 +3,7 @@
 ### Indice
 
 - [33. API di Files e Path](#33-api-di-files-e-path)
-  - [33.1 Creazione-e-Conversione di File legacy e Path NIO](#331-creazione-e-conversione-di-file-legacy-e-path-nio)
+  - [33.1 Creazione-e-Conversione di File legacy e Path NIO](#331-file-legacy-e-path-nio-creazione-e-conversione)
     - [33.1.1 Creare un File Legacy](#3311-creare-un-file-legacy)
     - [33.1.2 Creare un Path NIO-v2](#3312-creare-un-path-nio-v2)
     - [33.1.3 Assoluto vs Relativo Cosa Significa Relativo](#3313-assoluto-vs-relativo-cosa-significa-relativo)
