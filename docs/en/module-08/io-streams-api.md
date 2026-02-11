@@ -652,7 +652,7 @@ Files.copy(
 
 | Goal            | Legacy approach        | Modern (Files)                         | Key detail                                                             |
 |-----------------|------------------------|----------------------------------------|------------------------------------------------------------------------|
-| Copy file       | Manual stream loop     | `Files.copy(Path, Path, …)`              | Options include REPLACE_EXISTING and COPY_ATTRIBUTES                   |
+| Copy file       | Manual stream loop     | `Files.copy(Path, Path, …)`              | Options include `REPLACE_EXISTING` and `COPY_ATTRIBUTES`                   |
 | Copy stream     | InputStream/OutputStream | `Files.copy(InputStream, Path, …)`       | Useful for uploads, downloads, and piping data                         |
 | Copy directory  | Manual recursion       | `walkFileTree + Files.copy`              | No single one-liner for full directory tree copy                        |
 
