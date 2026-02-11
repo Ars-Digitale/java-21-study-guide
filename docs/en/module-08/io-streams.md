@@ -50,7 +50,7 @@
 
 This chapter provides a detailed explanation of `Java I/O Streams`. 
 
-It covers classic **java.io** streams, contrasts them with **java.nio / java.nio.file**, and explains design principles, APIs, edge cases, and exam-relevant distinctions.
+It covers classic **java.io** streams, contrasts them with **java.nio / java.nio.file**, and explains design principles, APIs, edge cases, and relevant distinctions.
 
 ## 34.1 What Is an I/O Stream in Java?
 
@@ -222,7 +222,7 @@ BufferedReader reader =
 
 #### 34.3.5.6 Ordering Rules in Stream Chains
 
-The order of wrapping is not arbitrary and is often tested in certification exams.
+The order of wrapping is not arbitrary.
 
 - Low-level stream must be innermost
 - Bridges (if needed) come next
@@ -381,7 +381,7 @@ Buffering minimizes them by grouping multiple logical reads or writes into fewer
 
 In an unbuffered stream, each call to read() may result in a native system call.
 
-This is especially inefficient when reading small amounts of data.
+This is especially inefficient when reading large amounts of data.
 
 ```java
 try (InputStream in = new FileInputStream("data.bin")) {
@@ -453,7 +453,7 @@ try (BufferedReader reader =
 ```
 
 > [!NOTE]
-> The `readLine()` method is only available on BufferedReader (not Reader), because it relies on buffering to efficiently detect line boundaries.
+> The `readLine()` method is only available on `BufferedReader` (not `Reader`), because it relies on buffering to efficiently detect line boundaries.
 
 
 ### 34.5.6 BufferedWriter Example
@@ -500,7 +500,7 @@ Modern Java applications increasingly favor NIO and NIO.2 APIs, but java.io rema
 
 ### 34.6.2 java.nio (Modern File I/O)
 
-The java.nio.file package (NIO.2) provides a high-level, expressive, and safer file API.
+The `java.nio.file` package (NIO.2) provides a high-level, expressive, and safer file API.
 It is the preferred approach for file operations in Java 11+.
 
 Example: Reading a File (NIO)
