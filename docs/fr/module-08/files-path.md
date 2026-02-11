@@ -33,7 +33,7 @@
   - [32.15 Ce que Files fait réellement et ce qu’il ne fait pas](#3215-ce-que-files-fait-réellement-et-ce-quil-ne-fait-pas)
     - [32.15.1 Files FAIT](#32151-files-fait)
     - [32.15.2 Files NE FAIT PAS](#32152-files-ne-fait-pas)
-  - [32.16 Philosophie de gestion des erreurs : Old-vs-NIO](#3216-philosophie-de-gestion-des-erreurs-old-vs-nio)
+  - [32.16 Philosophie de gestion des erreurs : Old-vs-NIO](#3216-philosophie-de-gestion-des-erreurs--old-vs-nio)
   - [32.17 Idées fausses courantes](#3217-idées-fausses-courantes)
 
 ---
