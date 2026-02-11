@@ -3,7 +3,7 @@
 ### Table des matières
 
 - [32. Fondamentaux des fichiers et des chemins](#32-fondamentaux-des-fichiers-et-des-chemins)
-  - [32.1 Modèle conceptuel : système de fichiers, fichiers, répertoires, liens et cibles-d’E/S](#321-modèle-conceptuel-système-de-fichiers-fichiers-répertoires-liens-et-cibles-des)
+  - [32.1 Modèle conceptuel : système de fichiers, fichiers, répertoires, liens et cibles-d’E/S](#321-modèle-conceptuel--système-de-fichiers-fichiers-répertoires-liens-et-cibles-des)
   - [32.2 Système de fichiers – L’abstraction globale](#322-système-de-fichiers--labstraction-globale)
   - [32.3 Chemin – Localiser une entrée dans un système de fichiers](#323-chemin--localiser-une-entrée-dans-un-système-de-fichiers)
   - [32.4 Fichiers – Conteneurs persistants de données](#324-fichiers--conteneurs-persistants-de-données)
