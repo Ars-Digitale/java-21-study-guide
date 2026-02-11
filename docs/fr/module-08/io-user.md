@@ -1,6 +1,6 @@
 # 36. Interagir avec l’Utilisateur (Flux E/S Standard)
 
-### Sommaire
+### Table des matières
 
 - [36. Interagir avec l'Utilisateur Flux E/S Standard](#36-interagir-avec-lutilisateur-flux-es-standard)
   - [36.1 Les Flux E/S Standard](#361-les-flux-es-standard)
