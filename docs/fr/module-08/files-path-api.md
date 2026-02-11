@@ -16,7 +16,7 @@
       - [33.1.7.1 normalize](#33171-normalize)
     - [33.1.8 Tableau de comparaison rapide création--conversion](#3318-tableau-de-comparaison-rapide-création--conversion)
   - [33.2 Gérer les fichiers et répertoires : créer-copier-déplacer-remplacer-comparer-supprimer](#332-gérer-les-fichiers-et-répertoires--créer-copier-déplacer-remplacer-comparer-supprimer-legacy-vs-nio)
-    - [33.2.1 Modèle mental Path-Locator-vs-Opérations](#3321-modèle-mental-pathlocator-vs-opérations)
+    - [33.2.1 Modèle mental Path-Locator-vs-Opérations](#3321-modèle-mental--pathlocator-vs-opérations)
     - [33.2.2 Créer des fichiers et des répertoires](#3322-créer-des-fichiers-et-des-répertoires)
       - [33.2.2.1 Créer un fichier](#33221-créer-un-fichier)
       - [33.2.2.2 Créer des répertoires](#33222-créer-des-répertoires)
