@@ -41,7 +41,7 @@
     - [34.5.6 Exemple de BufferedWriter](#3456-exemple-de-bufferedwriter)
   - [34.6 java io vs java nio et java nio file](#346-javaio-vs-javanio-et-javaniofile)
     - [34.6.1 Différences conceptuelles](#3461-différences-conceptuelles)
-    - [34.6.2 java-nio I/O de fichier moderne](#3462-java-nio-io-de-fichier-moderne)
+    - [34.6.2 java-nio I/O de fichier moderne](#3462-javanio-io-de-fichier-moderne)
   - [34.7 Quand utiliser quelle API](#347-quand-utiliser-quelle-api)
   - [34.8 Pièges courants et conseils](#348-pièges-courants-et-conseils)
 
