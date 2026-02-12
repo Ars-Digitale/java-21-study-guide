@@ -18,3 +18,10 @@ nav:
   - English: en/index.md
   - Italiano: it/index.md
   - Français: fr/index.md
+  - Ars Digitale: https://www.ars-digitale.com/
+
+extra:
+  social:
+    - icon: fontawesome/solid/globe
+      link: https://www.ars-digitale.com/
+      name: Ars Digitale
