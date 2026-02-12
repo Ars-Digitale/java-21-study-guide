@@ -10,10 +10,9 @@ The project is intentionally **documentation-first**, with modular Markdown note
 
 ---
 
-## 🚧 Project status
+## ✅ Project status
 
-- ✅ **English**: complete and actively maintained (source language)
-- 🚧 **Italian / French**: work in progress (progressive translation)
+- ✅ **English / Italian / French**: complete and aligned
 - 📘 Slides, exercises, and solutions are **planned** but not yet published
 
 This repository is public for educational purposes and evolves incrementally.
@@ -32,7 +31,7 @@ The index provides the full curriculum with direct links to each module.
 ## 📚 Repository structure
 
 - **`docs/en/`** – Core course material in English (Markdown)
-- **`docs/it/`**, **`docs/fr/`** – Italian and French translations (in progress)
+- **`docs/it/`**, **`docs/fr/`** – Italian and French translations
 - **`code/`** – Java source code and examples aligned with the modules
 - **`assets/`** – Images and diagrams used in the documentation
 - **`slides/`** – *Planned* (not available yet)
@@ -47,8 +46,8 @@ The index provides the full curriculum with direct links to each module.
 | Language | Status | Location |
 |--------|--------|----------|
 | 🇬🇧 English | Complete (reference) | `docs/en/` |
-| 🇮🇹 Italiano | In progress | `docs/it/` |
-| 🇫🇷 Français | En cours | `docs/fr/` |
+| 🇮🇹 Italiano | Complete | `docs/it/` |
+| 🇫🇷 Français | Complete | `docs/fr/` |
 
 If you would like to contribute to translations or corrections, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
@@ -123,7 +122,7 @@ The guide currently covers:
 Contributions are welcome:
 - fixes and clarifications
 - improvements to explanations
-- translation help (IT / FR)
+- improvements and corrections (EN / IT / FR)
 
 Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) before submitting changes.
 
