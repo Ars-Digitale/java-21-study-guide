@@ -1,6 +1,6 @@
 # 37. Java Platform Module System (JPMS)
 
-### Sommaire
+### Table des matières
 
 - [37. Java Platform Module System (JPMS)](#37-java-platform-module-system-jpms)
   - [37.1 Pourquoi les modules ont été introduits](#371-pourquoi-les-modules-ont-été-introduits)
