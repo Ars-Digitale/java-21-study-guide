@@ -12,9 +12,9 @@
     - [38.6.1 requires](#3861-requires)
     - [38.6.2 requires transitive](#3862-requires-transitive)
     - [38.6.3 exports](#3863-exports)
-    - [38.6.4 exports-to-qualified-exports](#3864-exports--to-qualified-exports)
+    - [38.6.4 exports-to-qualified-exports](#3864-exports--to-export-qualificati)
     - [38.6.5 opens](#3865-opens)
-    - [38.6.6 opens-to-qualified-opens](#3866-opens--to-qualified-opens)
+    - [38.6.6 opens-to-qualified-opens](#3866-opens--to-opens-qualificati)
     - [38.6.7 Tabella delle Direttive Principali](#3867-tabella-delle-direttive-principali)
     - [38.6.8 Exports vs Opens — Accesso a Compile-Time vs Runtime](#3868-exports-vs-opens--accesso-a-compile-time-vs-runtime)
 
