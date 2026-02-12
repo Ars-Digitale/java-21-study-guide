@@ -4,101 +4,84 @@
 
 ---
 
-# Course Index (Java 21)
-
-This index provides the complete **English (EN)** curriculum for the  
-**Java 21 Study Guide**.
-
-Modules are designed to be read **sequentially**, but each topic can also be used as a standalone reference.
-
----
+# Index du cours (Java 21)
 
 ## Module 00 — Prerequisites & Setup
 
-- [Prerequisite material](module-00/prerequisites.md)
-- [Eclipse shortcuts (optional)](module-00/eclipse-shortcuts.md)
-
+- [Matériel préalable](module-00/prerequisites.md)
+- [Eclipse shortcuts](module-00/eclipse-shortcuts.md)
 ---
 
 ## Module 01 — Java Language Basics
 
-- [Syntax building blocks](module-01/syntax-building-blocks.md)
-- [Basic language building blocks](module-01/basic-building-blocks.md)
-- [Java naming rules](module-01/naming-rules.md)
-- [Java data types and casting](module-01/data-types.md)
-- [Java operators](module-01/java-operators.md)
-- [Instantiating types](module-01/instantiating-types.md)
-
+- [1. Blocs Syntaxiques Fondamentaux](module-01/syntax-building-blocks.md)
+- [2. Blocs de base du langage Java](module-01/basic-building-blocks.md)
+- [3. Règles de nommage Java](module-01/naming-rules.md)
+- [4. Types de données Java et cast](module-01/data-types.md)
+- [5. Opérateurs Java](module-01/java-operators.md)
+- [6. Instanciation des types](module-01/instantiating-types.md)
 ---
 
 ## Module 02 — Control Flow
 
-- [Control flow statements](module-02/control-flow.md)
-- [Loops](module-02/loops.md)
-
+- [7. Flux de contrôle](module-02/control-flow.md)
+- [8. Constructions de boucle en Java](module-02/loops.md)
 ---
 
 ## Module 03 — Core Standard APIs
 
-- [Strings in Java](module-03/strings.md)
-- [Arrays in Java](module-03/arrays.md)
-- [Math utilities](module-03/math.md)
-- [Dates and time](module-03/date-time.md)
-- [Formatting and localization](module-03/formatting.md)
-
+- [9. Chaînes de caractères en Java](module-03/strings.md)
+- [10. Tableaux en Java](module-03/arrays.md)
+- [11. Mathématiques en Java](module-03/math.md)
+- [12. Date et heure en Java](module-03/date-time.md)
+- [13. Mise en forme et localisation en Java](module-03/formatting.md)
 ---
 
 ## Module 04 — Object-Oriented Fundamentals
 
-- [Methods, attributes, and variables](module-04/methods-attributes.md)
-- [Class loading, initialization, and object construction](module-04/class-loading.md)
-- [Inheritance](module-04/inheritance.md)
-- [Beyond classes](module-04/beyond-classes.md)
-- [Generics in Java](module-04/generics.md)
-- [Exceptions and error handling](module-04/exceptions.md)
-
+- [14. Méthodes, Attributs et Variables](module-04/methods-attributes.md)
+- [15. Chargement des Classes, Initialisation et Construction des Objets](module-04/class-loading.md)
+- [16. Héritage en Java](module-04/inheritance.md)
+- [17. Au-delà des Classes](module-04/beyond-classes.md)
+- [18. Generics en Java](module-04/generics.md)
+- [19. Exceptions et Gestion des Erreurs](module-04/exceptions.md)
 ---
 
 ## Module 05 — Functional Programming
 
-- [Functional programming in Java](module-05/functional.md)
-- [Java streams](module-05/streams.md)
-
+- [20. Programmation Fonctionnelle en Java](module-05/functional.md)
+- [21. Java Optional et Streams](module-05/streams.md)
 ---
 
 ## Module 06 — Collections Framework
 
-- [Introduction to the collections framework](module-06/collections.md)
-- [Shared collection operations and equality](module-06/shared-operations.md)
-- [Sorting and comparing](module-06/comparing.md)
-- [List APIs](module-06/list-api.md)
-- [Set APIs](module-06/set-api.md)
-- [Queue and deque APIs](module-06/queue-api.md)
-- [Map APIs](module-06/map-api.md)
-- [Sequenced collections](module-06/sequenced.md)
-
+- [22. Introduction au Framework des Collections](module-06/collections.md)
+- [23. Opérations Partagées des Collections & Égalité](module-06/shared-operations.md)
+- [24. Comparable, Comparator & Tri en Java](module-06/comparing.md)
+- [25. L’API List](module-06/list-api.md)
+- [26. Set API](module-06/set-api.md)
+- [27. API Queue & Deque](module-06/queue-api.md)
+- [28. Map API](module-06/map-api.md)
+- [29. Collections Séquencées & Map Séquencées](module-06/sequenced.md)
 ---
 
 ## Module 07 — Concurrency and Threads
 
-- [Thread fundamentals](module-07/threads.md)
-- [Concurrency APIs](module-07/concurrency.md)
-
+- [30. Thread Java – Fondamentaux et Modèle d’Exécution](module-07/threads.md)
+- [31. Java Concurrency APIs](module-07/concurrency.md)
 ---
 
 ## Module 08 — Java I/O and NIO
 
-- [Files and paths fundamentals](module-08/files-path.md)
-- [Files and paths APIs](module-08/files-path-api.md)
-- [Java I/O streams](module-08/io-streams.md)
-- [I/O streams APIs](module-08/io-streams-api.md)
-- [Interacting with the user](module-08/io-user.md)
-
+- [32. Fondamentaux des fichiers et des chemins](module-08/files-path.md)
+- [33. APIs des fichiers et des chemins](module-08/files-path-api.md)
+- [34. Streams I/O Java](module-08/io-streams.md)
+- [35. API Java d’E/S (Legacy et NIO)](module-08/io-streams-api.md)
+- [36. Interagir avec l’Utilisateur (Flux E/S Standard)](module-08/io-user.md)
 ---
 
 ## Module 09 — Java Platform Module System (JPMS)
 
-- [JPMS fundamentals](module-09/jpms.md)
-- [Compiling, packaging, and running modules](module-09/jpms-compiling.md)
-- [Services in JPMS](module-09/jpms-services.md)
-
+- [37. Java Platform Module System (JPMS)](module-09/jpms.md)
+- [38. Compiler, Empaqueter et Exécuter des Modules](module-09/jpms-compiling.md)
+- [39. Services en JPMS (Le Modèle ServiceLoader)](module-09/jpms-services.md)

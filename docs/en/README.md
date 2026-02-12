@@ -16,7 +16,7 @@ Modules are designed to be read **sequentially**, but each topic can also be use
 ## Module 00 — Prerequisites & Setup
 
 - [Prerequisite material](module-00/prerequisites.md)
-- [Eclipse shortcuts (optional)](module-00/eclipse-shortcuts.md)
+- [Eclipse shortcuts](module-00/eclipse-shortcuts.md)
 
 ---
 
