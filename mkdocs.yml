@@ -1,0 +1,19 @@
+site_name: Java 21 Study Guide
+repo_url: https://github.com/Ars-Digitale/java-21-study-guide
+repo_name: Ars-Digitale/java-21-study-guide
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: en
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - English: en/index.md
+  - Italiano: it/index.md
+  - Français: fr/index.md
