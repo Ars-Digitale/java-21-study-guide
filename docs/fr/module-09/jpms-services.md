@@ -21,7 +21,7 @@
     - [39.3.3 Analyser les Dépendances avec jdeps](#3933-analyser-les-dépendances-avec-jdeps)
   - [39.4 Créer des Images Runtime Personnalisées avec jlink](#394-créer-des-images-runtime-personnalisées-avec-jlink)
   - [39.5 Créer des Applications Autonomes avec jpackage](#395-créer-des-applications-autonomes-avec-jpackage)
-  - [39.6 Synthèse Finale JPMS en Pratique](#396-synthèse-finale-jpms-en-pratique)
+  - [39.6 Synthèse Finale JPMS en Pratique](#396-synthèse-finale--jpms-en-pratique)
 
 ---
 
