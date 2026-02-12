@@ -22,7 +22,7 @@
 
 The `Java Platform Module System` (**JPMS**) was introduced in Java 9.
 
-It is a language-level and runtime-level mechanism for structuring Java applications into strongly encapsulated units called modules.
+It is a language-level and runtime-level mechanism for structuring Java applications into strongly encapsulated units called `modules`.
 
 JPMS affects how code is:
 - organized
@@ -125,7 +125,7 @@ module com.example.hello {
 ```
 
 > [!NOTE]
-> A module with no directives exports nothing and depends on nothing.
+> **A module with no directives exports nothing and depends on nothing.**
 
 ---
 
@@ -146,7 +146,7 @@ src/
 
 Key points:
 - The **directory name matches the module name**
-- module-info.java is at the top of the module source root
+- `module-info.java` is at the top of the module source root
 - packages follow standard Java naming rules
 
 > [!NOTE]
