@@ -27,8 +27,9 @@ This section explains how the `Java toolchain` changes when modules are involved
 
 ## 38.1 The Module Path vs the Classpath
 
-`JPMS` introduces a new concept: the module path.
-It exists alongside the traditional classpath, but the two behave very differently.
+`JPMS` introduces a new concept: the **module path**.
+
+It exists alongside the traditional **classpath**, but the two behave very differently.
 
 
 | Aspect | Classpath | Module path |
@@ -40,8 +41,8 @@ It exists alongside the traditional classpath, but the two behave very different
 | Resolution order | Order-dependent | Deterministic |
 
 > [!NOTE]
+> - A JAR placed on the `module path` becomes a `named (or automatic) module`.
 > - A JAR placed on the classpath is treated as part of the `unnamed module`.
-> - A JAR placed on the module path becomes a `named (or automatic) module`.
 > - Split packages are allowed on the classpath but forbidden for named modules on the module path.
 
 ---
@@ -51,12 +52,12 @@ It exists alongside the traditional classpath, but the two behave very different
 To compile a module, you must specify the module source path and the destination directory.
 
 ```bash
-javac -d out
-src/com.example.hello/module-info.java
+javac -d out \
+src/com.example.hello/module-info.java \
 src/com.example.hello/com/example/hello/Main.java
 ```
 
-A more scalable approach uses --module-source-path.
+A more scalable approach uses `--module-source-path`.
 
 ```bash
 javac --module-source-path src \
@@ -73,13 +74,13 @@ javac --module-source-path src \
 
 When modules depend on each other, their dependencies must be resolvable at compile time.
 
-`--module-path` mods should contain already-compiled modular JARs or compiled module directories (each with its own module-info.class).
+`--module-path` **mods** (sample dir containing interdependent moules) should contain already-compiled modular JARs or compiled module directories (each with its own module-info.class).
 
 
 ```bash
-javac -d out
---module-source-path src
---module-path mods
+javac -d out \
+--module-source-path src \
+--module-path mods \
 $(find src -name "*.java")
 ```
 
@@ -95,13 +96,13 @@ After compilation, modules are typically packaged as JAR files.
 
 A modular JAR contains a `module-info.class` at its root.
 
-If module-info.class is present, the JAR becomes a named module automatically and its name is taken from the descriptor (not the filename).
+If `module-info.class` is present, the JAR becomes a `named module` automatically and its `name` is taken from the descriptor (not the filename).
 
 
 ```bash
-jar --create
---file mods/com.example.hello.jar
---main-class com.example.hello.Main
+jar --create \
+--file mods/com.example.hello.jar \
+--main-class com.example.hello.Main \
 -C out/com.example.hello .
 ```
 
@@ -116,11 +117,11 @@ jar --create
 To run a modular application, you use the `module path` and specify the `module name`.
 
 ```bash
-java --module-path mods
+java --module-path mods \
 --module com.example.hello/com.example.hello.Main
 ```
 
-You can shorten this using the `-m` option.
+You can shorten this using the `-p` and `-m` options.
 
 ```bash
 java -p mods -m com.example.hello/com.example.hello.Main
@@ -133,13 +134,13 @@ java -p mods -m com.example.hello/com.example.hello.Main
 
 ## 38.6 Module Directives Explained
 
-The module-info.java file contains directives that describe dependencies, visibility, and services.
+The `module-info.java` file contains directives that describe dependencies, visibility, and services.
 
 Each directive has a precise meaning.
 
 ### 38.6.1 `requires`
 
-The requires directive declares a dependency on another module.
+The `requires` directive declares a dependency on another module.
 
 Without it, types from the dependency module cannot be used.
 
