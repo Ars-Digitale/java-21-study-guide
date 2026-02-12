@@ -26,7 +26,7 @@
 ---
 
 `JPMS` includes a built-in service mechanism that allows `modules` to discover and use implementations at runtime
-without hardcoding dependencies between providers and consumers.
+without hardcoding dependencies between `providers` and `consumers`.
 
 This mechanism is based on the existing `ServiceLoader API`, but modules make it reliable, explicit, and safe.
 
@@ -57,7 +57,7 @@ The `JPMS service model` involves four distinct roles.
 
 ### 39.1.2 Service Interface Module
 
-The `service interface` defines the API that consumers depend on.
+The `service interface` defines the API that `consumers` depend on.
 
 It must be exported so other modules can see it.
 
@@ -121,7 +121,7 @@ module com.example.consumer {
 > `uses` declares intent to discover implementations at runtime.
 >
 > A module that declares `uses` but has no matching provider on the module path compiles normally,
-> but ServiceLoader returns an empty result at runtime.
+> but `ServiceLoader` returns an empty result at runtime.
 
 
 ### 39.1.5 Loading Services at Runtime
@@ -139,7 +139,7 @@ for (GreetingService service : loader) {
 }
 ```
 
-JPMS guarantees that only declared providers are discovered.
+`JPMS` guarantees that only declared providers are discovered.
 
 Classpath-based “accidental” discovery is prevented.
 
@@ -159,7 +159,7 @@ For a service to be discoverable by ServiceLoader, several conditions must be sa
 
 ## 39.2 Named, Automatic, and Unnamed Modules
 
-JPMS supports different kinds of modules to allow gradual migration from the classpath.
+`JPMS` supports different kinds of modules to allow gradual migration from the classpath.
 
 JPMS must interoperate with legacy code.
 
@@ -168,7 +168,7 @@ To support gradual adoption, the JVM recognizes three different module categorie
 
 ### 39.2.1 Named Modules
 
-A `named module` has a module-info.class and a stable identity.
+A `named module` has a `module-info.class` and a stable identity.
 
 - Strong encapsulation
 - Explicit dependencies
@@ -176,7 +176,7 @@ A `named module` has a module-info.class and a stable identity.
 
 ### 39.2.2 Automatic Modules
 
-A JAR without module-info placed on the module path becomes an `automatic module`.
+A JAR without module-info `placed on the module path` becomes an `automatic module`.
 
 Its name is derived from the JAR file name.
 
@@ -203,9 +203,9 @@ Code on the classpath belongs to the `unnamed module`.
 
 | Module type | module-info present? | Encapsulation | Reads |
 | ---- | ---- | ---- | ---- |
-| Named | Yes | Strong | Declared only |
-| Automatic | No | Weak | All modules |
-| Unnamed | No | None | All modules |
+| `Named` | Yes | Strong | Declared only |
+| `Automatic` | No | Weak | All modules |
+| `Unnamed` | No | None | All modules |
 
 ---
 
