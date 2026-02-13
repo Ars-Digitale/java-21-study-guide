@@ -5,6 +5,9 @@ Version 1.0 — February 2026
 
 ---
 
+**Publisher:** [Ars Digitale](https://www.ars-digitale.com/)
+
+
 This guide is part of the **Ars Digitale Technical Guides** series —  
 a structured collection of engineering-focused references.
 

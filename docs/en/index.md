@@ -1,3 +1,7 @@
+🌍 **Language:** [English](../en/) | [Italiano](../it/) | [Français](../fr/)
+
+---
+
 # 🌍 Language
 
 [🇬🇧 English](../en/README.md) | [🇮🇹 Italiano](../it/README.md) | [🇫🇷 Français](../fr/README.md)
