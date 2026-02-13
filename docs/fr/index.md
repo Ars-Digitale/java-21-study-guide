@@ -6,7 +6,7 @@
 
 ## Module 00 — Prerequisites & Setup
 
-- [Matériel préalable](module-00/prerequisites.md)
+- [Matériel de support](module-00/prerequisites.md)
 - [Eclipse shortcuts](module-00/eclipse-shortcuts.md)
 ---
 

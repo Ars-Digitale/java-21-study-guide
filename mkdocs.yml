@@ -15,9 +15,169 @@ plugins:
 
 nav:
   - Home: index.md
-  - English: en/index.md
-  - Italiano: it/index.md
-  - Français: fr/index.md
+
+  - English:
+      - Index: en/index.md
+      - Module 00 — Prerequisites & Setup:
+          - Prerequisite material: en/module-00/prerequisites.md
+          - Eclipse shortcuts: en/module-00/eclipse-shortcuts.md
+      - Module 01 — Java Language Basics:
+          - Syntax building blocks: en/module-01/syntax-building-blocks.md
+          - Basic language building blocks: en/module-01/basic-building-blocks.md
+          - Java naming rules: en/module-01/naming-rules.md
+          - Java data types and casting: en/module-01/data-types.md
+          - Java operators: en/module-01/java-operators.md
+          - Instantiating types: en/module-01/instantiating-types.md
+      - Module 02 — Control Flow:
+          - Control flow statements: en/module-02/control-flow.md
+          - Loops: en/module-02/loops.md
+      - Module 03 — Core Standard APIs:
+          - Strings in Java: en/module-03/strings.md
+          - Arrays in Java: en/module-03/arrays.md
+          - Math utilities: en/module-03/math.md
+          - Dates and time: en/module-03/date-time.md
+          - Formatting and localization: en/module-03/formatting.md
+      - Module 04 — Object-Oriented Fundamentals:
+          - Methods, attributes, and variables: en/module-04/methods-attributes.md
+          - Class loading, initialization, and object construction: en/module-04/class-loading.md
+          - Inheritance: en/module-04/inheritance.md
+          - Beyond classes: en/module-04/beyond-classes.md
+          - Generics in Java: en/module-04/generics.md
+          - Exceptions and error handling: en/module-04/exceptions.md
+      - Module 05 — Functional Programming:
+          - Functional programming in Java: en/module-05/functional.md
+          - Java streams: en/module-05/streams.md
+      - Module 06 — Collections Framework:
+          - Introduction to the collections framework: en/module-06/collections.md
+          - Shared collection operations and equality: en/module-06/shared-operations.md
+          - Sorting and comparing: en/module-06/comparing.md
+          - List APIs: en/module-06/list-api.md
+          - Set APIs: en/module-06/set-api.md
+          - Queue and deque APIs: en/module-06/queue-api.md
+          - Map APIs: en/module-06/map-api.md
+          - Sequenced collections: en/module-06/sequenced.md
+      - Module 07 — Concurrency and Threads:
+          - Thread fundamentals: en/module-07/threads.md
+          - Concurrency APIs: en/module-07/concurrency.md
+      - Module 08 — Java I/O and NIO:
+          - Files and paths fundamentals: en/module-08/files-path.md
+          - Files and paths APIs: en/module-08/files-path-api.md
+          - Java I/O streams: en/module-08/io-streams.md
+          - I/O streams APIs: en/module-08/io-streams-api.md
+          - Interacting with the user: en/module-08/io-user.md
+      - Module 09 — Java Platform Module System (JPMS):
+          - JPMS fundamentals: en/module-09/jpms.md
+          - Compiling, packaging, and running modules: en/module-09/jpms-compiling.md
+          - Services in JPMS: en/module-09/jpms-services.md
+
+  - Italiano:
+      - Indice: it/index.md
+      - Module 00 — Prerequisites & Setup:
+          - Materiale propedeutico: it/module-00/prerequisites.md
+          - Eclipse shortcuts: it/module-00/eclipse-shortcuts.md
+      - Modulo 01 — Fondamenti del Linguaggio Java:
+          - Blocchi di sintassi: it/module-01/syntax-building-blocks.md
+          - Elementi base del linguaggio: it/module-01/basic-building-blocks.md
+          - Regole di naming Java: it/module-01/naming-rules.md
+          - Tipi di dati e casting: it/module-01/data-types.md
+          - Operatori Java: it/module-01/java-operators.md
+          - Istanziare i tipi: it/module-01/instantiating-types.md
+      - Modulo 02 — Controllo di Flusso:
+          - Istruzioni di controllo: it/module-02/control-flow.md
+          - Cicli: it/module-02/loops.md
+      - Modulo 03 — API Standard:
+          - Stringhe in Java: it/module-03/strings.md
+          - Array in Java: it/module-03/arrays.md
+          - Utilità Math: it/module-03/math.md
+          - Data e ora: it/module-03/date-time.md
+          - Formattazione e localizzazione: it/module-03/formatting.md
+      - Modulo 04 — Fondamenti OOP:
+          - Metodi, attributi e variabili: it/module-04/methods-attributes.md
+          - Class loading e costruzione oggetti: it/module-04/class-loading.md
+          - Ereditarietà: it/module-04/inheritance.md
+          - Oltre le classi: it/module-04/beyond-classes.md
+          - Generics in Java: it/module-04/generics.md
+          - Eccezioni e gestione errori: it/module-04/exceptions.md
+      - Modulo 05 — Programmazione Funzionale:
+          - Programmazione funzionale in Java: it/module-05/functional.md
+          - Stream Java: it/module-05/streams.md
+      - Modulo 06 — Collections Framework:
+          - Introduzione alle collections: it/module-06/collections.md
+          - Operazioni condivise ed equality: it/module-06/shared-operations.md
+          - Sorting e comparing: it/module-06/comparing.md
+          - API List: it/module-06/list-api.md
+          - API Set: it/module-06/set-api.md
+          - API Queue/Deque: it/module-06/queue-api.md
+          - API Map: it/module-06/map-api.md
+          - Sequenced collections: it/module-06/sequenced.md
+      - Modulo 07 — Concorrenza e Thread:
+          - Fondamenti thread: it/module-07/threads.md
+          - API di concorrenza: it/module-07/concurrency.md
+      - Modulo 08 — I/O e NIO:
+          - Files e paths (fondamenti): it/module-08/files-path.md
+          - Files e paths (API): it/module-08/files-path-api.md
+          - Stream I/O: it/module-08/io-streams.md
+          - Stream I/O (API): it/module-08/io-streams-api.md
+          - Interazione con l’utente: it/module-08/io-user.md
+      - Modulo 09 — JPMS:
+          - Fondamenti JPMS: it/module-09/jpms.md
+          - Compilare e avviare moduli: it/module-09/jpms-compiling.md
+          - Services in JPMS: it/module-09/jpms-services.md
+
+  - Français:
+      - Index: fr/index.md
+      - Module 00 — Prerequisites & Setup:
+          - Matériel de support: fr/module-00/prerequisites.md
+          - Eclipse shortcuts: fr/module-00/eclipse-shortcuts.md
+      - Module 01 — Bases du Langage Java:
+          - Blocs de syntaxe: fr/module-01/syntax-building-blocks.md
+          - Éléments de base du langage: fr/module-01/basic-building-blocks.md
+          - Règles de nommage Java: fr/module-01/naming-rules.md
+          - Types de données et casting: fr/module-01/data-types.md
+          - Opérateurs Java: fr/module-01/java-operators.md
+          - Instanciation des types: fr/module-01/instantiating-types.md
+      - Module 02 — Contrôle de flux:
+          - Instructions de contrôle: fr/module-02/control-flow.md
+          - Boucles: fr/module-02/loops.md
+      - Module 03 — API Standard:
+          - Chaînes (String) en Java: fr/module-03/strings.md
+          - Tableaux (Arrays) en Java: fr/module-03/arrays.md
+          - Utilitaires Math: fr/module-03/math.md
+          - Date et heure: fr/module-03/date-time.md
+          - Formatage et localisation: fr/module-03/formatting.md
+      - Module 04 — Fondamentaux OO:
+          - Méthodes, attributs et variables: fr/module-04/methods-attributes.md
+          - Chargement de classes et construction: fr/module-04/class-loading.md
+          - Héritage: fr/module-04/inheritance.md
+          - Au-delà des classes: fr/module-04/beyond-classes.md
+          - Generics en Java: fr/module-04/generics.md
+          - Exceptions et gestion des erreurs: fr/module-04/exceptions.md
+      - Module 05 — Programmation fonctionnelle:
+          - Programmation fonctionnelle en Java: fr/module-05/functional.md
+          - Streams Java: fr/module-05/streams.md
+      - Module 06 — Framework des Collections:
+          - Introduction au framework des collections: fr/module-06/collections.md
+          - Opérations partagées et égalité: fr/module-06/shared-operations.md
+          - Tri et comparaison: fr/module-06/comparing.md
+          - API List: fr/module-06/list-api.md
+          - API Set: fr/module-06/set-api.md
+          - API Queue/Deque: fr/module-06/queue-api.md
+          - API Map: fr/module-06/map-api.md
+          - Sequenced collections: fr/module-06/sequenced.md
+      - Module 07 — Concurrence et Threads:
+          - Fondamentaux des threads: fr/module-07/threads.md
+          - API de concurrence: fr/module-07/concurrency.md
+      - Module 08 — I/O et NIO:
+          - Files et paths (fondamentaux): fr/module-08/files-path.md
+          - Files et paths (API): fr/module-08/files-path-api.md
+          - Flux I/O: fr/module-08/io-streams.md
+          - Flux I/O (API): fr/module-08/io-streams-api.md
+          - Interaction avec l’utilisateur: fr/module-08/io-user.md
+      - Module 09 — JPMS:
+          - Fondamentaux JPMS: fr/module-09/jpms.md
+          - Compiler et exécuter des modules: fr/module-09/jpms-compiling.md
+          - Services en JPMS: fr/module-09/jpms-services.md
+
   - Ars Digitale: https://www.ars-digitale.com/
 
 extra:
@@ -25,3 +185,4 @@ extra:
     - icon: fontawesome/solid/globe
       link: https://www.ars-digitale.com/
       name: Ars Digitale
+
