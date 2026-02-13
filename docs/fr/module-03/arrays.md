@@ -194,8 +194,8 @@ jagged[2] = new int[1];
 - Les tableaux utilisent `.length` (champ `public final`).
 - Les chaînes utilisent `.length()` (méthode).
 
-> [!TIP]
-> C’est un piège classique: champs vs méthodes.
+!!! tip
+    C’est un piège classique: champs vs méthodes.
 
 ```java
 // int x = arr.length;   // OK
@@ -291,10 +291,10 @@ int[] a = {4,1,3};
 Arrays.sort(a); // [1, 3, 4]
 ```
 
-> [!TIP]
-> - Les chaînes sont triées selon l’ordre naturel (lexicographique).
-> - Les nombres sont triés avant les lettres, et les lettres majuscules sont triées avant les minuscules (nombres < majuscules < minuscules).
-> - Pour les types référence, `null` est considéré plus petit que toute valeur non nulle.
+!!! tip
+    - Les chaînes sont triées selon l’ordre naturel (lexicographique).
+    - Les nombres sont triés avant les lettres, et les lettres majuscules sont triées avant les minuscules (nombres < majuscules < minuscules).
+    - Pour les types référence, `null` est considéré plus petit que toute valeur non nulle.
 
 ```java
 String[] arr = {"AB", "ac", "Ba", "bA", "10", "99"};

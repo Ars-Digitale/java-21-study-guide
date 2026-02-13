@@ -95,9 +95,9 @@ Les parenthèses `()` peuvent être utilisées pour **surclasser la priorité** 
 int result = (10 + 5) * 2;  // Les parenthèses sont évaluées en premier → result = 30
 ```
 
-> [!NOTE]
-> - La **priorité** des opérateurs concerne le *regroupement*, pas l’ordre concret d’évaluation.
-> - Utilise les parenthèses pour la priorité et la clarté dans les expressions complexes.
+!!! note
+    - La **priorité** des opérateurs concerne le *regroupement*, pas l’ordre concret d’évaluation.
+    - Utilise les parenthèses pour la priorité et la clarté dans les expressions complexes.
 
 ---
 
@@ -162,10 +162,10 @@ int a = 5;                  // binaire : 0000 0101
 System.out.println(~a);     // -6 → binaire : 1111 1010 (complément à deux)
 ```
 
-> [!NOTE]
-> - Préfixe (`++x` / `--x`) : met à jour la valeur d’abord, puis renvoie la nouvelle valeur.
-> - Postfixe (`x++` / `x--`) : renvoie d’abord la valeur courante, puis la met à jour.
-> - L’opérateur `!` s’applique aux valeurs boolean ; `~` s’applique aux types numériques intégraux.
+!!! note
+    - Préfixe (`++x` / `--x`) : met à jour la valeur d’abord, puis renvoie la nouvelle valeur.
+    - Postfixe (`x++` / `x--`) : renvoie d’abord la valeur courante, puis la met à jour.
+    - L’opérateur `!` s’applique aux valeurs boolean ; `~` s’applique aux types numériques intégraux.
 
 ---
 
@@ -186,11 +186,11 @@ Ils effectuent des opérations arithmétiques, relationnelles, logiques, bit à 
 | Assignment | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 3` | Modifie puis affecte. |
 | String Concatenation | `+` | `"Hello " + name` | Concatène des chaînes. |
 
-> [!IMPORTANT]
-> - Les opérateurs **logiques** (`&`, `|`, `^`) *évaluent toujours les deux côtés*.
-> - Les opérateurs **conditionnels** (`&&`, `||`) sont **short-circuit** :
->   - `a && b` → `b` est évalué uniquement si `a` est true
->   - `a || b` → `b` est évalué uniquement si `a` est false
+!!! important
+    - Les opérateurs **logiques** (`&`, `|`, `^`) *évaluent toujours les deux côtés*.
+    - Les opérateurs **conditionnels** (`&&`, `||`) sont **short-circuit** :
+      - `a && b` → `b` est évalué uniquement si `a` est true
+      - `a || b` → `b` est évalué uniquement si `a` est false
 
 Exemples :
 
@@ -296,8 +296,8 @@ if (flag == true) {
 }
 ```
 
-> [!WARNING]
-> Si tu vois `if (x = quelque chose)`, stop : c’est une **affectation**, pas une comparaison.
+!!! warning
+    Si tu vois `if (x = quelque chose)`, stop : c’est une **affectation**, pas une comparaison.
 
 ### 5.7.4 Opérateurs d’affectation composée
 
@@ -336,19 +336,19 @@ byte b = 10;
 b += 1;         // ✅ fonctionne : cast implicite vers byte
 ```
 
-> [!NOTE]
-> Les affectations composées effectuent un **cast implicite** vers le type de la variable à gauche.  
-> C’est pourquoi `b += 1` compile alors que `b = b + 1` ne compile pas.
+!!! note
+    Les affectations composées effectuent un **cast implicite** vers le type de la variable à gauche.
+    C’est pourquoi `b += 1` compile alors que `b = b + 1` ne compile pas.
 
 ### 5.7.5 Opérateurs d’égalité (`==` et `!=`)
 
 Les **opérateurs d’égalité** en Java `==` (égal à) et `!=` (différent de) servent à comparer deux opérandes.  
 Cependant, leur comportement diffère **selon qu’ils s’appliquent à des types primitifs ou à des types référence (objets)**.
 
-> [!NOTE]
-> - `==` compare les **valeurs** pour les primitifs  
-> - `==` compare les **références** pour les objets  
-> - `.equals()` compare le **contenu** d’un objet (si implémenté)
+!!! note
+    - `==` compare les **valeurs** pour les primitifs
+    - `==` compare les **références** pour les objets  
+    - `.equals()` compare le **contenu** d’un objet (si implémenté)
 
 #### 5.7.5.1 Égalité avec les types primitifs
 
@@ -360,9 +360,9 @@ System.out.println(a == b);  // true  → mêmes valeurs
 System.out.println(a != b);  // false → valeurs égales
 ```
 
-> [!IMPORTANT]
-> - Si les opérandes sont de types numériques différents, Java les promeut automatiquement vers un type commun avant la comparaison.
-> - Cependant, comparer float et double peut produire des résultats inattendus à cause des erreurs de précision (voir ci-dessous).
+!!! important
+    - Si les opérandes sont de types numériques différents, Java les promeut automatiquement vers un type commun avant la comparaison.
+    - Cependant, comparer float et double peut produire des résultats inattendus à cause des erreurs de précision (voir ci-dessous).
 
 ```java
 int x = 10;
@@ -439,8 +439,8 @@ Object n = null;
 System.out.println(n instanceof Object);  // false
 ```
 
-> [!WARNING]
-> `instanceof` renvoie toujours `false` lorsque l’opérande gauche est `null`.
+!!! warning
+    `instanceof` renvoie toujours `false` lorsque l’opérande gauche est `null`.
 
 #### 5.7.6.1 Vérification à la compilation vs à l’exécution
 
@@ -562,14 +562,14 @@ System.out.println(list instanceof java.util.List<?>); // ✅ true
 L’**opérateur ternaire** (`? :`) est le seul opérateur en Java qui prend **trois opérandes**.  
 Il agit comme une forme concise d’une instruction `if-else`.
 
-> [!TIP]
-> L’opérateur ternaire **doit** produire une valeur d’un type *compatible*.  
-> Si les deux branches produisent des types sans relation, la compilation échoue.
-> 
-> ```java
-> String s = true ? "ok" : 5; // ❌ erreur de compilation : types incompatibles
-> ```
-> 
+!!! tip
+    L’opérateur ternaire **doit** produire une valeur d’un type *compatible*.
+    Si les deux branches produisent des types sans relation, la compilation échoue.
+    
+    ```java
+    String s = true ? "ok" : 5; // ❌ erreur de compilation : types incompatibles
+    ```
+    
 
 ### 5.8.1 Syntaxe
 
@@ -597,7 +597,6 @@ System.out.println(grade); // "B"
 
 ### 5.8.4 Notes
 
-> [!WARNING]
-> 
-> - Les expressions ternaires imbriquées peuvent réduire la lisibilité. Utilise des parenthèses pour plus de clarté.
-> - L’opérateur ternaire renvoie une valeur, contrairement à if-else, qui est une instruction.
+!!! warning
+    - Les expressions ternaires imbriquées peuvent réduire la lisibilité. Utilise des parenthèses pour plus de clarté.
+    - L’opérateur ternaire renvoie une valeur, contrairement à if-else, qui est une instruction.

@@ -51,9 +51,9 @@ String s2 = new String("Hello");        // using constructor (not recommended)
 String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
 ```
 
-> [!NOTE]
-> - Les littéraux de chaîne sont stockés dans le `pool de String`, une zone mémoire spéciale utilisée pour éviter de créer des objets chaîne en double.
-> - L’utilisation du mot-clé `new` crée toujours un nouvel objet en dehors du pool.
+!!! note
+    - Les littéraux de chaîne sont stockés dans le `pool de String`, une zone mémoire spéciale utilisée pour éviter de créer des objets chaîne en double.
+    - L’utilisation du mot-clé `new` crée toujours un nouvel objet en dehors du pool.
 
 ### 9.1.1.2 Le String Pool
 
@@ -68,8 +68,8 @@ Veuillez consulter le paragraphe : **"6.4.3 String Pool and Equality"** dans le 
 Les chaînes peuvent contenir des caractères d’échappement, qui permettent d’inclure des symboles spéciaux ou des caractères de contrôle (caractères ayant une signification spéciale en Java).  
 Une séquence d’échappement commence par un backslash `\`.
 
-> [!NOTE]
-> **Table des caractères spéciaux & séquences d’échappement dans les chaînes**
+!!! note
+    **Table des caractères spéciaux & séquences d’échappement dans les chaînes**
 
 | Escape | Signification | Exemple Java | Résultat |
 | --- | --- | --- | --- |
@@ -98,8 +98,8 @@ Comme l’opérateur `+` peut apparaître dans des expressions où des nombres e
 
 Cela signifie qu’une fois qu’une `String` apparaît sur le côté gauche de l’expression, toutes les opérations `+` suivantes deviennent des concaténations.
 
-> [!TIP]
-> Comme l’évaluation se fait de gauche à droite, la position du premier opérande `String` détermine comment le reste de l’expression est évalué.
+!!! tip
+    Comme l’évaluation se fait de gauche à droite, la position du premier opérande `String` détermine comment le reste de l’expression est évalué.
 
 - Exemples
 
@@ -175,10 +175,10 @@ String html = """
     """;
 ```
 
-> [!NOTE]
-> - Les text blocks incluent automatiquement les retours à la ligne et l’indentation pour la lisibilité. Les newlines sont normalisés en `\n`.
-> - Les guillemets doubles à l’intérieur du bloc n’ont généralement pas besoin d’être échappés.
-> - Le compilateur interprète le contenu entre les triples guillemets d’ouverture et de fermeture comme la valeur de la chaîne.
+!!! note
+    - Les text blocks incluent automatiquement les retours à la ligne et l’indentation pour la lisibilité. Les newlines sont normalisés en `\n`.
+    - Les guillemets doubles à l’intérieur du bloc n’ont généralement pas besoin d’être échappés.
+    - Le compilateur interprète le contenu entre les triples guillemets d’ouverture et de fermeture comme la valeur de la chaîne.
 
 ### 9.1.2.1 Mise en forme : espaces essentiels vs incidentels
 
@@ -193,11 +193,11 @@ String text = """
         """;
 ```
 
-> [!IMPORTANT]
-> - **Caractère le plus à gauche (baseline)** : la position du premier caractère non-espace sur l’ensemble des lignes (ou les `"""` de fermeture) définit la baseline d’indentation. Les espaces à gauche de cette baseline sont considérés comme incidentels et sont supprimés.
-> - La ligne immédiatement après les `"""` d’ouverture n’est pas incluse dans la sortie si elle est vide (mise en forme typique).
-> - Le newline avant les `"""` de fermeture est inclus dans le contenu.  
->   Dans l’exemple ci-dessus, la chaîne résultante se termine par un newline après `"Line 3"` : il y a 4 lignes au total.
+!!! important
+    - **Caractère le plus à gauche (baseline)** : la position du premier caractère non-espace sur l’ensemble des lignes (ou les `"""` de fermeture) définit la baseline d’indentation. Les espaces à gauche de cette baseline sont considérés comme incidentels et sont supprimés.
+    - La ligne immédiatement après les `"""` d’ouverture n’est pas incluse dans la sortie si elle est vide (mise en forme typique).
+    - Le newline avant les `"""` de fermeture est inclus dans le contenu.  
+      Dans l’exemple ci-dessus, la chaîne résultante se termine par un newline après `"Line 3"` : il y a 4 lignes au total.
 
 Sortie avec numéros de ligne (montrant la ligne vide finale) :
 

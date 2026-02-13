@@ -50,9 +50,9 @@ String s2 = new String("Hello");        // using constructor (not recommended)
 String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
 ```
 
-> [!NOTE]
-> - String literals are stored in the `String pool`, a special memory area used to avoid creating duplicate string objects.
-> - Using the `new` keyword always creates a new object outside the pool.
+!!! note
+    - String literals are stored in the `String pool`, a special memory area used to avoid creating duplicate string objects.
+    - Using the `new` keyword always creates a new object outside the pool.
 
 #### 9.1.1.2 The String Pool
 
@@ -67,8 +67,8 @@ Please check the Paragraph: "**6.4.3 String Pool and Equality**" in Chapter: [6.
 Strings can contain escape characters, which allow you to include special symbols or control characters (characters with a special meaning in Java).  
 An escape sequence starts with a backslash `\`.
 
-> [!NOTE]
-> **Table of Special Characters & Escape Sequences in Strings**
+!!! note
+    **Table of Special Characters & Escape Sequences in Strings**
 
 <table>
   <thead>
@@ -150,8 +150,8 @@ Since the operator `+` may appear in expressions where both numbers and strings 
 
 This means that once a `String` appears on the left side of the expression, all subsequent `+` operations become concatenations.
 
-> [!TIP]
-> Because evaluation is left-to-right, the position of the first `String` operand determines how the rest of the expression is evaluated.
+!!! tip
+    Because evaluation is left-to-right, the position of the first `String` operand determines how the rest of the expression is evaluated.
 
 - Examples
 
@@ -227,10 +227,10 @@ String html = """
     """;
 ```
 
-> [!NOTE]
-> - Text blocks automatically include line breaks and indentation for readability. Newlines are normalized to `\n`.
-> - Double quotes inside the block usually don’t need escaping.
-> - The compiler interprets the content between the opening and closing triple quotes as the string’s value.
+!!! note
+    - Text blocks automatically include line breaks and indentation for readability. Newlines are normalized to `\n`.
+    - Double quotes inside the block usually don’t need escaping.
+    - The compiler interprets the content between the opening and closing triple quotes as the string’s value.
 
 #### 9.1.2.1 Formatting: Essential vs Incidental Whitespace
 
@@ -245,11 +245,11 @@ String text = """
         """;
 ```
 
-> [!IMPORTANT]
-> - **Leftmost character (baseline)**: the position of the first non-space character across all lines (or the closing `"""`) defines the indentation baseline. Spaces to the left of this baseline are considered incidental and are removed.
-> - The line immediately following the opening `"""` is not included in the output if it’s empty (typical formatting).
-> - The newline before the closing `"""` is included in the content.  
->   In the example above, the resulting string ends with a newline after `"Line 3"`: there are 4 lines in total.
+!!! important
+    - **Leftmost character (baseline)**: the position of the first non-space character across all lines (or the closing `"""`) defines the indentation baseline. Spaces to the left of this baseline are considered incidental and are removed.
+    - The line immediately following the opening `"""` is not included in the output if it’s empty (typical formatting).
+    - The newline before the closing `"""` is included in the content.  
+      In the example above, the resulting string ends with a newline after `"Line 3"`: there are 4 lines in total.
 
 Output with line numbers (showing the trailing blank line):
 

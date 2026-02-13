@@ -71,8 +71,8 @@ Sortie :
 [10, 2, A, Z, a, b]
 ```
 
-> [!NOTE]
-> L’ordre naturel est défini uniquement pour les types qui implémentent `Comparable`.
+!!! note
+    L’ordre naturel est défini uniquement pour les types qui implémentent `Comparable`.
 
 ## 24.1 Comparable — Ordre Naturel
 
@@ -94,12 +94,12 @@ Règles et valeur de retour :
 - Retourne **zéro** → `this` == `other`
 - Retourne **positif** → `this` > `other`
 
-> [!IMPORTANT]
-> - L’ordre naturel doit être cohérent avec `equals()`, sauf si explicitement documenté autrement :
-> - `compareTo()` est cohérent avec `equals()` si, et seulement si, `a.compareTo(b) == 0` et `a.equals(b) est true`.
+!!! important
+    - L’ordre naturel doit être cohérent avec `equals()`, sauf si explicitement documenté autrement :
+    - `compareTo()` est cohérent avec `equals()` si, et seulement si, `a.compareTo(b) == 0` et `a.equals(b) est true`.
 
-> [!WARNING]
-> compareTo peut lever une ClassCastException s’il reçoit un type non comparable — mais cela se produit généralement uniquement avec des types raw.
+!!! warning
+    compareTo peut lever une ClassCastException s’il reçoit un type non comparable — mais cela se produit généralement uniquement avec des types raw.
 
 
 ### 24.1.2 Exemple : Classe Implémentant Comparable
@@ -229,8 +229,8 @@ Collections.sort(list); // ordre naturel
 Collections.sort(list, byName); // comparator
 ```
 
-> [!NOTE]
-> Collections.sort(list) délègue à list.sort(comparator) depuis Java 8.
+!!! note
+    Collections.sort(list) délègue à list.sort(comparator) depuis Java 8.
 
 ---
 
@@ -253,8 +253,8 @@ Comparator.comparingLong(...)
 Comparator.comparingDouble(...)
 ```
 
-> [!NOTE]
-> Ceux-ci évitent le boxing et sont préférés dans le code sensible aux performances.
+!!! note
+    Ceux-ci évitent le boxing et sont préférés dans le code sensible aux performances.
 
 ---
 
@@ -293,8 +293,8 @@ books.stream().sorted(cmp)
 
 ```
 
-> [!NOTE]
-> `reversed()` s’applique à l’ensemble du comparator composé, et non uniquement à la première clé de comparaison.
+!!! note
+    `reversed()` s’applique à l’ensemble du comparator composé, et non uniquement à la première clé de comparaison.
 
 ---
 

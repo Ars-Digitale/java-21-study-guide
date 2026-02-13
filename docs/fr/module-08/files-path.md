@@ -71,8 +71,8 @@ En Java NIO, un système de fichiers est représenté par l’abstraction `FileS
 | Multiplicité | Plusieurs systèmes de fichiers peuvent exister |
 | Exemples | Disk FS, ZIP FS, in-memory FS |
 
-> [!NOTE]
-> Java n’implémente pas de systèmes de fichiers ; il s’adapte aux implémentations fournies par le SE ou par des providers personnalisés.
+!!! note
+    Java n’implémente pas de systèmes de fichiers ; il s’adapte aux implémentations fournies par le SE ou par des providers personnalisés.
 
 ---
 
@@ -95,8 +95,8 @@ Un `chemin` résout le problème de l’`addressing` :
 | Immuable | Oui |
 | Ressource du SE | Non |
 
-> [!NOTE]
-> En Java, `Path` représente des entrées potentielles du système de fichiers, pas des entrées réelles.
+!!! note
+    En Java, `Path` représente des entrées potentielles du système de fichiers, pas des entrées réelles.
 
 ---
 
@@ -125,8 +125,8 @@ Du point de vue du système de fichiers, un fichier a :
 | Durée de vie | Indépendante des processus |
 | Accès Java | Streams, channels, méthodes de Files |
 
-> [!NOTE]
-> `Texte` vs `binaire` n’est pas un concept de système de fichiers ; c’est une interprétation au niveau application.
+!!! note
+    `Texte` vs `binaire` n’est pas un concept de système de fichiers ; c’est une interprétation au niveau application.
 
 ---
 
@@ -147,8 +147,8 @@ Les `répertoires` résolvent le problème de l’évolutivité et de l’organi
 | Lecture/écriture | Structurelle, pas basée sur le contenu |
 | Accès Java | Files.list, Files.walk |
 
-> [!NOTE]
-> Un répertoire n’est pas un fichier avec du contenu, même si les deux partagent des métadonnées communes.
+!!! note
+    Un répertoire n’est pas un fichier avec du contenu, même si les deux partagent des métadonnées communes.
 
 ---
 
@@ -177,10 +177,10 @@ Un `lien symbolique` est un fichier spécial qui contient un chemin vers une aut
 | Physique | Données | Non | Transparent |
 | Symbolique | Chemin | Oui | Contrôle explicite |
 
-> [!NOTE]
-> Java NIO expose le comportement des liens explicitement via `LinkOption`.
->
-> Dans de nombreux systèmes de fichiers courants, le code Java ne peut pas créer des liens physiques de manière pleinement portable, tandis que les liens symboliques sont supportés directement via `Files.createSymbolicLink(...)` (là où autorisé par le SE / permissions).
+!!! note
+    Java NIO expose le comportement des liens explicitement via `LinkOption`.
+    
+    Dans de nombreux systèmes de fichiers courants, le code Java ne peut pas créer des liens physiques de manière pleinement portable, tandis que les liens symboliques sont supportés directement via `Files.createSymbolicLink(...)` (là où autorisé par le SE / permissions).
 
 ---
 
@@ -194,8 +194,8 @@ Certaines entrées du système de fichiers ne sont pas des conteneurs de donnée
 | FIFO / Pipe | Communication inter-processus |
 | Fichier socket | Communication réseau |
 
-> [!NOTE]
-> Java I/O peut interagir avec ces entrées, mais le comportement dépend de la plateforme.
+!!! note
+    Java I/O peut interagir avec ces entrées, mais le comportement dépend de la plateforme.
 
 ---
 
@@ -216,8 +216,8 @@ Les API Java I/O opèrent à différents niveaux d’abstraction :
 | `OutputStream` / `Writer` | Écriture de données |
 | `Channel` / `SeekableByteChannel` | Avancé / accès aléatoire |
 
-> [!NOTE]
-> Aucune API Java “n’est” un fichier ; les API médiatisent l’accès à des ressources gérées par le système de fichiers.
+!!! note
+    Aucune API Java “n’est” un fichier ; les API médiatisent l’accès à des ressources gérées par le système de fichiers.
 
 ---
 
@@ -228,8 +228,8 @@ Les API Java I/O opèrent à différents niveaux d’abstraction :
 - Supposer que les répertoires stockent les données des fichiers
 - Supposer que les liens sont toujours résolus automatiquement
 
-> [!NOTE]
-> Séparer toujours emplacement, structure et flux de données lorsqu’on raisonne sur les E/S.
+!!! note
+    Séparer toujours emplacement, structure et flux de données lorsqu’on raisonne sur les E/S.
 
 ---
 
@@ -247,8 +247,8 @@ La conception NIO.2 (Java 7+) sépare délibérément ces préoccupations :
 - `Files` → effectue des opérations sur le système de fichiers
 - `Streams / Channels` → déplacent des données
 
-> [!NOTE]
-> Un `Path` n’ouvre jamais un fichier et ne touche jamais le disque à lui seul.
+!!! note
+    Un `Path` n’ouvre jamais un fichier et ne touche jamais le disque à lui seul.
 
 ---
 
@@ -262,8 +262,8 @@ Oui — dans l’ancienne API d’E/S, `java.io.File` joue de manière confuse d
 - `File` expose aussi des opérations sur le système de fichiers
 - Il ne représente **ni** un fichier ouvert, **ni** le contenu du fichier
 
-> [!NOTE]
-> Ce mélange de responsabilités est considéré comme un défaut de conception rétrospectivement.
+!!! note
+    Ce mélange de responsabilités est considéré comme un défaut de conception rétrospectivement.
 
 ### 32.11.1 Ce qu’est vraiment File
 
@@ -278,8 +278,8 @@ Conceptuellement, `File` est plus proche de ce que nous appelons aujourd’hui u
 | Modifie le système de fichiers | Oui |
 | Contient un handle SE | Non |
 
-> [!NOTE]
-> Un objet `File` peut exister même si le fichier n’existe pas.
+!!! note
+    Un objet `File` peut exister même si le fichier n’existe pas.
 
 ### 32.11.2 Responsabilités de type-Path
 
@@ -308,8 +308,8 @@ En même temps, `File` expose des méthodes qui touchent le système de fichiers
 - mkdir(), mkdirs()
 - list(), listFiles()
 
-> [!NOTE]
-> La plupart de ces méthodes renvoient `boolean` au lieu de lancer `IOException`, ce qui masque les causes des échecs.
+!!! note
+    La plupart de ces méthodes renvoient `boolean` au lieu de lancer `IOException`, ce qui masque les causes des échecs.
 
 ### 32.11.4 Ce que File N’EST PAS
 
@@ -339,8 +339,8 @@ NIO.2 sépare explicitement les responsabilités :
 | `Opérations sur le système de fichiers` | `File` | `Files` |
 | `Accès aux données` | Streams | Streams / Channels |
 
-> [!NOTE]
-> Cette séparation est l’une des améliorations conceptuelles les plus importantes en Java I/O.
+!!! note
+    Cette séparation est l’une des améliorations conceptuelles les plus importantes en Java I/O.
 
 ### 32.11.7 Résumé
 
@@ -368,8 +368,8 @@ Ceci est fondamentalement différent des streams ou des channels.
 | `Contient handle SE` | Non | Oui |
 | `Immuable` | Oui | Non |
 
-> [!NOTE]
-> Créer un Path ne peut pas lancer `IOException` car aucun E/S ne se produit.
+!!! note
+    Créer un Path ne peut pas lancer `IOException` car aucun E/S ne se produit.
 
 ---
 
@@ -389,10 +389,10 @@ Un chemin absolu identifie complètement un emplacement depuis la racine du syst
 | Unix | `/home/user/file.txt` |
 | Windows | `C:\Users\User\file.txt` |
 
-> [!IMPORTANT]
-> - Un chemin commençant par un slash `(/)` (type Unix) ou par une lettre de drive telle que `C:` (Windows) est **typiquement** considéré comme un chemin absolu.
-> - Le symbole `.` est une référence au répertoire courant tandis que `..` est une référence à son répertoire parent.
-> Sur Windows, un chemin comme `\dir\file.txt` (sans lettre de drive) est *rooted* sur le drive courant, pas pleinement qualifié avec drive + chemin.
+!!! important
+    - Un chemin commençant par un slash `(/)` (type Unix) ou par une lettre de drive telle que `C:` (Windows) est **typiquement** considéré comme un chemin absolu.
+    - Le symbole `.` est une référence au répertoire courant tandis que `..` est une référence à son répertoire parent.
+    Sur Windows, un chemin comme `\dir\file.txt` (sans lettre de drive) est *rooted* sur le drive courant, pas pleinement qualifié avec drive + chemin.
 
 Exemple :
 
@@ -413,8 +413,8 @@ Un chemin relatif est résolu par rapport au répertoire de travail courant de l
 - Dépend de l’endroit où la JVM a été lancée
 - Source courante de bugs
 
-> [!NOTE]
-> Le répertoire de travail est typiquement disponible via `System.getProperty("user.dir")`.
+!!! note
+    Le répertoire de travail est typiquement disponible via `System.getProperty("user.dir")`.
 
 Exemple :
 
@@ -435,8 +435,8 @@ Un `FileSystem` représente une implémentation concrète spécifique de systèm
 - Le système de fichiers par défaut correspond au système de fichiers du SE
 - D’autres systèmes de fichiers possibles (ZIP, mémoire, réseau)
 
-> [!NOTE]
-> Les chemins sont toujours associés à exactement UN FileSystem.
+!!! note
+    Les chemins sont toujours associés à exactement UN FileSystem.
 
 ### 32.14.2 Séparateurs de chemin
 
@@ -448,8 +448,8 @@ Les séparateurs diffèrent selon les plateformes, mais `Path` les abstrait.
 | Portabilité | Gestion manuelle | Automatique |
 | Comparaison | Sujette aux erreurs | Plus sûre |
 
-> [!NOTE]
-> Hardcoder `"/"` ou `"\\"` est déconseillé ; `Path` le gère automatiquement.
+!!! note
+    Hardcoder `"/"` ou `"\\"` est déconseillé ; `Path` le gère automatiquement.
 
 ---
 
@@ -471,8 +471,8 @@ La classe `Files` effectue de vraies opérations d’E/S.
 - Garantir l’atomicité sauf si spécifié
 - Maintenir un handle persistant vers des fichiers ouverts (les streams/channels possèdent le handle à la place)
 
-> [!NOTE]
-> Les méthodes qui renvoient des streams (par ex. `Files.lines()`) gardent le fichier ouvert jusqu’à ce que le stream soit fermé.
+!!! note
+    Les méthodes qui renvoient des streams (par ex. `Files.lines()`) gardent le fichier ouvert jusqu’à ce que le stream soit fermé.
 
 ---
 
@@ -497,5 +497,5 @@ Une grande différence conceptuelle réside dans le reporting des erreurs.
 - “Les chemins relatifs sont portables” → faux
 - “Créer un Path peut échouer à cause des permissions” → faux
 
-> [!NOTE]
-> De nombreuses méthodes NIO qui semblent “sûres” sont purement syntaxiques (comme `normalize` ou `resolve`) : elles ne touchent **pas** le système de fichiers et ne peuvent pas détecter des fichiers manquants.
+!!! note
+    De nombreuses méthodes NIO qui semblent “sûres” sont purement syntaxiques (comme `normalize` ou `resolve`) : elles ne touchent **pas** le système de fichiers et ne peuvent pas détecter des fichiers manquants.

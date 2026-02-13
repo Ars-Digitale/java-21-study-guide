@@ -48,8 +48,8 @@ List
 └── Vector (Liste synchronisée legacy — rarement utilisée aujourd’hui)
 ```
 
-> [!NOTE]
-> Vector est legacy et synchronisé — à éviter sauf si explicitement requis.
+!!! note
+    Vector est legacy et synchronisé — à éviter sauf si explicitement requis.
 
 ## 25.1 Caractéristiques des List
 
@@ -70,8 +70,8 @@ List<String> a2 = new ArrayList<>(50); // capacité initiale
 List<String> a3 = new ArrayList<>(List.of("A", "B"));
 ```
 
-> [!NOTE]
-> La capacité initiale n’est pas une taille. Elle décide seulement combien d’éléments le tableau interne peut contenir avant redimensionnement.
+!!! note
+    La capacité initiale n’est pas une taille. Elle décide seulement combien d’éléments le tableau interne peut contenir avant redimensionnement.
 
 ### 25.2.2 Constructeurs de LinkedList
 
@@ -80,8 +80,8 @@ List<String> l1 = new LinkedList<>();
 List<String> l2 = new LinkedList<>(List.of("A", "B"));
 ```
 
-> [!NOTE]
-> `LinkedList` implémente aussi `Deque`.
+!!! note
+    `LinkedList` implémente aussi `Deque`.
 
 ---
 
@@ -95,11 +95,11 @@ list1.add("X"); // ❌ UnsupportedOperationException
 list1.set(0, "Z"); // ❌ UnsupportedOperationException
 ```
 
-> [!NOTE]
-> Toutes les listes `List.of()` :
-> - rejettent les `null`
-> - sont immuables
-> - lèvent `UOE` lors d’une modification structurelle
+!!! note
+    Toutes les listes `List.of()` :
+    - rejettent les `null`
+    - sont immuables
+    - lèvent `UOE` lors d’une modification structurelle
 
 ### 25.3.2 `List.copyOf()` (copie immuable)
 
@@ -120,8 +120,8 @@ list.set(0, "Z"); // OK
 list.add("X"); // ❌ UOE — la taille est fixe
 ```
 
-> [!NOTE]
-> La liste est adossée au tableau : modifier l’un affecte l’autre.
+!!! note
+    La liste est adossée au tableau : modifier l’un affecte l’autre.
 
 ---
 
@@ -143,8 +143,8 @@ String x = list.get(0);
 list.set(1, "NewValue");
 ```
 
-> [!NOTE]
-> `get()` lève `IndexOutOfBoundsException` pour des index invalides.
+!!! note
+    `get()` lève `IndexOutOfBoundsException` pour des index invalides.
 
 Si vous essayez de `mettre à jour` un élément dans une List vide, même à l’index 0, vous obtenez une `IndexOutOfBoundsException`
 
@@ -164,8 +164,8 @@ Sortie
 Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
 ```
 
-> [!WARNING]
-> Appeler get/set avec un index invalide lève IndexOutOfBoundsException
+!!! warning
+    Appeler get/set avec un index invalide lève IndexOutOfBoundsException
 
 ### 25.4.3 Supprimer des Éléments
 
@@ -206,9 +206,9 @@ List<String> b = List.of("A", "B");
 System.out.println(a.equals(b)); // true
 ```
 
-> [!NOTE]
-> - L’ordre compte.
-> - Le type de liste ne compte PAS.
+!!! note
+    - L’ordre compte.
+    - Le type de liste ne compte PAS.
 
 ### 25.5.3 `hashCode()`
 
@@ -246,11 +246,11 @@ while (lit.hasNext()) {
 }
 ```
 
-> [!WARNING]
-> Tous les itérateurs standard de List sont fail-fast : une modification structurelle en dehors de l’itérateur cause ConcurrentModificationException.
+!!! warning
+    Tous les itérateurs standard de List sont fail-fast : une modification structurelle en dehors de l’itérateur cause ConcurrentModificationException.
 
-> [!NOTE]
-> Seul `ListIterator` supporte la traversée bidirectionnelle et la modification.
+!!! note
+    Seul `ListIterator` supporte la traversée bidirectionnelle et la modification.
 
 ---
 

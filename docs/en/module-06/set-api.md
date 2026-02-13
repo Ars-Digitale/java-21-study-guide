@@ -47,8 +47,8 @@ All `Set` implementations require:
 - uniqueness of elements  
 - predictable equality and hashing (depending on implementation)
 
-> [!NOTE]
-> `LinkedHashSet` is now formally a `SequencedSet` since Java 21.
+!!! note
+    `LinkedHashSet` is now formally a `SequencedSet` since Java 21.
 
 ---
 
@@ -105,9 +105,9 @@ tree.add(5);
 System.out.println(tree); // [1, 5, 10]
 ```
 
-> [!NOTE]
-> `TreeSet` requires all elements to be mutually comparable — mixing non-comparable types produces `ClassCastException`.
-> Operations (add, remove, contains) are O(log n).
+!!! note
+    `TreeSet` requires all elements to be mutually comparable — mixing non-comparable types produces `ClassCastException`.
+    Operations (add, remove, contains) are O(log n).
 
 ---
 
@@ -126,8 +126,8 @@ Two objects are considered the same element if:
 1. Their hash codes match  
 2. Their `equals()` method returns `true`  
 
-> [!WARNING]
-> If you mutate an object after adding it to a HashSet or LinkedHashSet, its hashCode may change and the set may lose track of it.
+!!! warning
+    If you mutate an object after adding it to a HashSet or LinkedHashSet, its hashCode may change and the set may lose track of it.
 
 ### 26.3.2 TreeSet
 
@@ -176,9 +176,9 @@ Set<String> s1 = Set.of("A", "B", "C");   // immutable
 Set<String> empty = Set.of();             // empty immutable set
 ```
 
-> [!NOTE]
-> Factory-created sets are **immutable**: adding or removing elements throws `UnsupportedOperationException`.
-> `Set.of(...)` rejects duplicates at creation time → IllegalArgumentException and rejects null → NullPointerException
+!!! note
+    Factory-created sets are **immutable**: adding or removing elements throws `UnsupportedOperationException`.
+    `Set.of(...)` rejects duplicates at creation time → IllegalArgumentException and rejects null → NullPointerException
 
 
 ---

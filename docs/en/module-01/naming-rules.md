@@ -52,8 +52,8 @@ int year = 2024;   	// valid
 | class    | finally  | long | strictfp | volatile |
 | const*   | float    | native | super | while |
 
-> [!NOTE]
->  `goto` and `const` are reserved but not used.  
+!!! note
+     `goto` and `const` are reserved but not used.
 
 #### 3.1.1.2 Reserved Literals
 
@@ -75,11 +75,11 @@ int MYVAR = 3;
 int CLASS = 6; // legal but, please, don't do it!!
 ```
   
-> [!TIP]
-> Java treats identifiers literally: Count, count, and COUNt are unrelated and may exist together.
->
-> Because of case sensitivity, you could use versions of keywords which differ in case. 
-> While legal, such naming is discouraged because it reduces readability and it is considered a very bad practice.
+!!! tip
+    Java treats identifiers literally: Count, count, and COUNt are unrelated and may exist together.
+    
+    Because of case sensitivity, you could use versions of keywords which differ in case. 
+    While legal, such naming is discouraged because it reduces readability and it is considered a very bad practice.
 
 
 ### 3.1.3 Beginning of Identifiers
@@ -94,8 +94,8 @@ int _myVarC;
 String €uro = "currency"; // legal (rarely seen in practice)
 ```
 
-> [!NOTE]
-> Currency symbols are legal but not recommended in real-world code.
+!!! note
+    Currency symbols are legal but not recommended in real-world code.
 
 
 ### 3.1.4 Numbers in Identifiers
@@ -121,8 +121,8 @@ int var2024 = 10; // valid
 int _;  // invalid since Java 9
 ```
 
-> [!WARNING]
-> `_` is legal inside number literals (see next section), but not as a standalone identifier.
+!!! warning
+    `_` is legal inside number literals (see next section), but not as a standalone identifier.
 
 
 ### 3.1.6 Numeric literals & Underscore character
@@ -145,7 +145,7 @@ double pi = 3.14_159_265; // valid
 long mask = 0b1111_0000;  // valid in binary literals
 ```
 
-> [!TIP]
-> Underscores improve readability:
-> 1_000_000 is easier than 1000000.
+!!! tip
+    Underscores improve readability:
+    1_000_000 is easier than 1000000.
 

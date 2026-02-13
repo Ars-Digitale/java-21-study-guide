@@ -87,8 +87,8 @@ The **method signature** in Java includes:
 - the *method name*
 - the *parameter type list* (types + order)
 
-> [!NOTE]
-> **Parameter names do NOT belong to the signature**, only types and order matter.
+!!! note
+    **Parameter names do NOT belong to the signature**, only types and order matter.
 
 - Example of distinct signatures:
 
@@ -486,9 +486,9 @@ show(10, "A");                // length = 1
 show(10, "A", "B", "C");      // length = 3
 ```
 
-> [!IMPORTANT]  
-> Varargs and arrays participate in method overloading.  
-> Overload resolution may become ambiguous.
+!!! important
+    Varargs and arrays participate in method overloading.
+    Overload resolution may become ambiguous.
 
 ---
 
@@ -604,8 +604,8 @@ public class Config {
 }
 ```
 
-> [!IMPORTANT]
-> Static initializer blocks run **once**, in the order they appear, before `main()` and before any static method is called.
+!!! important
+    Static initializer blocks run **once**, in the order they appear, before `main()` and before any static method is called.
 
 
 ### 14.6.4 Initialization Order (Static vs. Instance)
@@ -654,8 +654,8 @@ A ref = new B();
 ref.test();   // prints "A" — static binding!
 ```
 
-> [!NOTE]
-> Key rule: static methods use **reference type**, not object type.
+!!! note
+    Key rule: static methods use **reference type**, not object type.
 
 
 ### 14.6.7 Common  Pitfalls

@@ -69,8 +69,8 @@ do {
 } while (condition);
 ```
 
-> [!TIP]
-> `do-while` richiede un **punto e virgola** dopo la parentesi di chiusura.
+!!! tip
+    `do-while` richiede un **punto e virgola** dopo la parentesi di chiusura.
 
 - Esempio:
 ```java
@@ -201,8 +201,8 @@ while (true) { ... }
 for (;;) { ... }
 ```
 
-> [!TIP]
-> I cicli infiniti devono contenere `break`, `return` o un controllo esterno.
+!!! tip
+    I cicli infiniti devono contenere `break`, `return` o un controllo esterno.
 
 ---
 
@@ -226,8 +226,8 @@ for (int i = 0; i < 5; i++) {
 }
 ```
 
-> [!NOTE]
-> `break` e `continue` si applicano al ciclo più vicino a meno che non vengano usate etichette.
+!!! note
+    `break` e `continue` si applicano al ciclo più vicino a meno che non vengano usate etichette.
 
 ---
 
@@ -293,8 +293,8 @@ for (int i = 0; i < 3; i++) {
 }
 ```
 
-> [!NOTE]
-> `continue` salta alla successiva iterazione, quindi il codice successivo non viene mai eseguito.
+!!! note
+    `continue` salta alla successiva iterazione, quindi il codice successivo non viene mai eseguito.
 
 ### 8.10.3 Codice irraggiungibile dopo `return`
 
@@ -305,5 +305,5 @@ int test() {
 }
 ```
 
-> [!NOTE]
-> `return` esce immediatamente dal metodo; nessuna istruzione può seguirlo.
+!!! note
+    `return` esce immediatamente dal metodo; nessuna istruzione può seguirlo.

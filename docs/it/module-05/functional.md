@@ -40,8 +40,8 @@ In Java, un’**interfaccia funzionale** è un’interfaccia che contiene **esat
 
 Le interfacce funzionali abilitano **Lambda Expressions** e **Method References**, formando il nucleo del modello di programmazione funzionale di Java.
 
-> [!NOTE]
-> Java tratta automaticamente come interfaccia funzionale qualsiasi interfaccia con un solo metodo astratto. L’annotazione `@FunctionalInterface` è opzionale ma consigliata.
+!!! note
+    Java tratta automaticamente come interfaccia funzionale qualsiasi interfaccia con un solo metodo astratto. L’annotazione `@FunctionalInterface` è opzionale ma consigliata.
 
 ### 20.1.1 Regole per le Interfacce Funzionali
 
@@ -392,8 +392,8 @@ BiPredicate<String, String> p2 = String::equals;   // method reference
 System.out.println(p2.test("abc", "abc"));  // true
 ```
 
-> [!NOTE]
-> Questa forma applica il metodo al *primo argomento* della lambda.
+!!! note
+    Questa forma applica il metodo al *primo argomento* della lambda.
 
 ### 20.3.4 Riferimento a un Costruttore
 

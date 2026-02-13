@@ -47,8 +47,8 @@ Toutes les implémentations de `Set` requièrent :
 - l’unicité des éléments  
 - une égalité et un hashing prévisibles (selon l’implémentation)
 
-> [!NOTE]
-> `LinkedHashSet` est désormais formellement un `SequencedSet` depuis Java 21.
+!!! note
+    `LinkedHashSet` est désormais formellement un `SequencedSet` depuis Java 21.
 
 ---
 
@@ -103,9 +103,9 @@ tree.add(5);
 System.out.println(tree); // [1, 5, 10]
 ```
 
-> [!NOTE]
-> `TreeSet` exige que tous les éléments soient mutuellement comparables — mélanger des types non comparables produit une `ClassCastException`.
-> Les opérations (add, remove, contains) sont en O(log n).
+!!! note
+    `TreeSet` exige que tous les éléments soient mutuellement comparables — mélanger des types non comparables produit une `ClassCastException`.
+    Les opérations (add, remove, contains) sont en O(log n).
 
 ---
 
@@ -124,8 +124,8 @@ Deux objets sont considérés comme le même élément si :
 1. Leurs hash codes correspondent  
 2. Leur méthode `equals()` retourne `true`  
 
-> [!WARNING]
-> Si vous modifiez un objet après l’avoir ajouté à un HashSet ou LinkedHashSet, son hashCode peut changer et le set peut perdre la référence à cet élément.
+!!! warning
+    Si vous modifiez un objet après l’avoir ajouté à un HashSet ou LinkedHashSet, son hashCode peut changer et le set peut perdre la référence à cet élément.
 
 ### 26.3.2 TreeSet
 
@@ -174,9 +174,9 @@ Set<String> s1 = Set.of("A", "B", "C");   // immuable
 Set<String> empty = Set.of();             // set immuable vide
 ```
 
-> [!NOTE]
-> Les set créés via les factory sont **immuables** : ajouter ou supprimer des éléments lève `UnsupportedOperationException`.
-> `Set.of(...)` rejette les doublons à la création → IllegalArgumentException et rejette null → NullPointerException
+!!! note
+    Les set créés via les factory sont **immuables** : ajouter ou supprimer des éléments lève `UnsupportedOperationException`.
+    `Set.of(...)` rejette les doublons à la création → IllegalArgumentException et rejette null → NullPointerException
 
 ---
 

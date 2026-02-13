@@ -38,10 +38,10 @@ Esiste accanto al tradizionale **classpath**, ma i due si comportano in modo mol
 | Split packages | Consentiti | Vietati (moduli nominati) |
 | Ordine di risoluzione | Dipendente dall’ordine | Deterministico |
 
-> [!NOTE]
-> - Un JAR posizionato sul `module path` diventa un `modulo nominato (o automatico)`.
-> - Un JAR posizionato sul classpath è trattato come parte del `modulo non nominato`.
-> - Gli split package sono consentiti sul classpath ma vietati per i moduli nominati sul module path.
+!!! note
+    - Un JAR posizionato sul `module path` diventa un `modulo nominato (o automatico)`.
+    - Un JAR posizionato sul classpath è trattato come parte del `modulo non nominato`.
+    - Gli split package sono consentiti sul classpath ma vietati per i moduli nominati sul module path.
 
 ---
 
@@ -63,8 +63,8 @@ javac --module-source-path src \
       $(find src -name "*.java")
 ```
 
-> [!NOTE]
-> `--module-source-path` indica a javac dove trovare più moduli contemporaneamente.
+!!! note
+    `--module-source-path` indica a javac dove trovare più moduli contemporaneamente.
 
 ---
 
@@ -102,9 +102,9 @@ jar --create \
 -C out/com.example.hello .
 ```
 
-> [!NOTE]
-> Un JAR con `module-info.class` è un `modulo nominato, non un modulo automatico`.
-> Quando un JAR contiene un `module-info.class`, il suo nome di modulo è preso da quel file e non è dedotto dal nome del file.
+!!! note
+    Un JAR con `module-info.class` è un `modulo nominato, non un modulo automatico`.
+    Quando un JAR contiene un `module-info.class`, il suo nome di modulo è preso da quel file e non è dedotto dal nome del file.
 
 ---
 
@@ -123,8 +123,8 @@ Puoi abbreviare usando le opzioni `-p` e `-m`.
 java -p mods -m com.example.hello/com.example.hello.Main
 ```
 
-> [!NOTE]
-> Quando si usano moduli nominati, il classpath è ignorato per la risoluzione delle dipendenze tra moduli.
+!!! note
+    Quando si usano moduli nominati, il classpath è ignorato per la risoluzione delle dipendenze tra moduli.
 
 ---
 
@@ -167,10 +167,10 @@ Significato:
 - **Qualsiasi modulo che richiede com.example.lib legge automaticamente com.example.util**
 - **I chiamanti non devono dichiarare requires com.example.util esplicitamente**
 
-> [!NOTE]
-> Questo è simile alle “dipendenze pubbliche” in altri sistemi di moduli.
->
-> Leggibile ≠ esportato: un requisito transitivo non esporta automaticamente i tuoi package.
+!!! note
+    Questo è simile alle “dipendenze pubbliche” in altri sistemi di moduli.
+    
+    Leggibile ≠ esportato: un requisito transitivo non esporta automaticamente i tuoi package.
 
 ### 38.6.3 `exports`
 
@@ -210,9 +210,9 @@ module com.example.app {
 }
 ```
 
-> [!NOTE]
-> opens NON rende un package accessibile a compile-time.
-> Influenza solo la reflection a runtime.
+!!! note
+    opens NON rende un package accessibile a compile-time.
+    Influenza solo la reflection a runtime.
 
 ### 38.6.6 `opens ... to` (Opens Qualificati)
 
@@ -224,8 +224,8 @@ module com.example.app {
 }
 ```
 
-> [!NOTE]
-> `opens` influenza la reflection; `exports` influenza la compilazione e la visibilità dei tipi.
+!!! note
+    `opens` influenza la reflection; `exports` influenza la compilazione e la visibilità dei tipi.
 
 ### 38.6.7 Tabella delle Direttive Principali
 
@@ -247,5 +247,5 @@ module com.example.app {
 | `exports ... to` | Sì (moduli limitati) | No |
 | `opens ... to` | No | Sì (moduli limitati) |
 
-> [!IMPORTANT]
-> `JPMS` aggiunge un `module path`, ma il `classpath` esiste ancora. Possono coesistere, ma i moduli nominati hanno la precedenza.
+!!! important
+    `JPMS` aggiunge un `module path`, ma il `classpath` esiste ancora. Possono coesistere, ma i moduli nominati hanno la precedenza.

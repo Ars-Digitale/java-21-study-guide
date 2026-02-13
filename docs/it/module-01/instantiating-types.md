@@ -76,9 +76,9 @@ LocalDate date = LocalDate.of(2025, 3, 15);
 Integer boxed = Integer.valueOf(10);
 ```
 
-> [!IMPORTANT]
-> I letterali String **non richiedono `new`** e sono memorizzati nello **String pool**.
-> Usare `new String("x")` crea invece sempre un nuovo oggetto nell’heap.
+!!! important
+    I letterali String **non richiedono `new`** e sono memorizzati nello **String pool**.
+    Usare `new String("x")` crea invece sempre un nuovo oggetto nell’heap.
 
   
 ### 6.1.1 Gestione dei tipi primitivi
@@ -87,8 +87,8 @@ Integer boxed = Integer.valueOf(10);
 
 **Dichiarare** un tipo primitivo (come per i tipi reference) significa riservare spazio in memoria per una variabile di un determinato tipo, senza necessariamente assegnarle un valore.  
 
-> [!WARNING]
-> A differenza dei primitivi, la cui dimensione dipende dal tipo specifico (es. `int` vs `long`), i tipi reference occupano sempre la stessa dimensione fissa in memoria — ciò che varia è la dimensione dell’oggetto a cui puntano.
+!!! warning
+    A differenza dei primitivi, la cui dimensione dipende dal tipo specifico (es. `int` vs `long`), i tipi reference occupano sempre la stessa dimensione fissa in memoria — ciò che varia è la dimensione dell’oggetto a cui puntano.
 
 - Esempi di sintassi (solo dichiarazione):
 
@@ -103,10 +103,10 @@ int x, y, z;          // Dichiarazioni multiple in un’unica istruzione: Java c
 ```
 
 
-> [!IMPORTANT]
-> I `modificatori` e il `tipo` dichiarati all’inizio di una dichiarazione multipla di variabili si applicano a tutte le variabili dichiarate in quella stessa istruzione.
->
-> **Eccezione**: quando si dichiarano array usando le parentesi quadre dopo il nome della variabile, le parentesi fanno parte del dichiaratore della singola variabile, non del tipo base.
+!!! important
+    I `modificatori` e il `tipo` dichiarati all’inizio di una dichiarazione multipla di variabili si applicano a tutte le variabili dichiarate in quella stessa istruzione.
+    
+    **Eccezione**: quando si dichiarano array usando le parentesi quadre dopo il nome della variabile, le parentesi fanno parte del dichiaratore della singola variabile, non del tipo base.
 
 
 - Esempi
@@ -151,9 +151,9 @@ double d1, double d2;            // ERROR - NOT LEGAL
 int v1; v2; 					 // ERROR - NOT LEGAL
 ```
   
-> [!IMPORTANT]
-> Quando scrivi un numero direttamente nel codice (un letterale numerico), Java assume per default che sia di tipo **int**.  
-> Se il valore non entra in un `int`, il codice non compila a meno che il letterale non sia marcato esplicitamente con il suffisso corretto.
+!!! important
+    Quando scrivi un numero direttamente nel codice (un letterale numerico), Java assume per default che sia di tipo **int**.
+    Se il valore non entra in un `int`, il codice non compila a meno che il letterale non sia marcato esplicitamente con il suffisso corretto.
 
 - Esempio di sintassi per un letterale numerico:
 
@@ -176,9 +176,9 @@ long exNumLit = 5729685479l;
   
 A questo stadio non viene ancora creato alcun oggetto — la variabile ha solo la potenzialità di puntarne uno.
 
-> [!WARNING]
-> A differenza dei primitivi, la cui dimensione dipende dal tipo specifico (es. `int` vs `long`), le variabili reference occupano sempre la stessa dimensione fissa in memoria (sufficiente per memorizzare un reference).  
-> Ciò che varia è la dimensione dell’oggetto puntato, che viene allocato separatamente nell’heap.
+!!! warning
+    A differenza dei primitivi, la cui dimensione dipende dal tipo specifico (es. `int` vs `long`), le variabili reference occupano sempre la stessa dimensione fissa in memoria (sufficiente per memorizzare un reference).
+    Ciò che varia è la dimensione dell’oggetto puntato, che viene allocato separatamente nell’heap.
 
 - Esempi di sintassi (solo dichiarazione):
 
@@ -235,9 +235,9 @@ Ogni volta che chiami `new Person()`, il costruttore viene eseguito e imposta la
 - I costruttori **non dichiarano un tipo di ritorno** (nemmeno `void`).  
 - Se non definisci alcun costruttore nella tua classe, il compilatore fornisce automaticamente un **costruttore di default senza argomenti** che non fa nulla.
 
-> [!WARNING]
-> Se vedi un metodo che ha lo stesso nome della classe **ma dichiara anche un tipo di ritorno**, **non** è un costruttore.  
-> È semplicemente un metodo normale (anche se iniziare i nomi dei metodi con una lettera maiuscola va contro le convenzioni di naming in Java).
+!!! warning
+    Se vedi un metodo che ha lo stesso nome della classe **ma dichiara anche un tipo di ritorno**, **non** è un costruttore.
+    È semplicemente un metodo normale (anche se iniziare i nomi dei metodi con una lettera maiuscola va contro le convenzioni di naming in Java).
 
 Lo **scopo di un costruttore** è inizializzare lo stato di un oggetto appena creato — tipicamente assegnando valori ai suoi campi, con valori di default oppure usando parametri passati al costruttore.
 
@@ -298,9 +298,9 @@ Person p1 = new Person();            // name = "Unknown", age = 0
 Person p2 = new Person("Bob", 25);   // name = "Bob", age = 25
 ```
 
-> [!IMPORTANT]
-> - **I costruttori non sono ereditati**: se una superclasse definisce costruttori, non sono automaticamente disponibili nella sottoclasse — devi dichiararli esplicitamente.
-> - Se dichiari un qualsiasi costruttore in una classe, il compilatore non genera il costruttore di default senza argomenti: se ti serve ancora un costruttore senza argomenti, devi dichiararlo manualmente.
+!!! important
+    - **I costruttori non sono ereditati**: se una superclasse definisce costruttori, non sono automaticamente disponibili nella sottoclasse — devi dichiararli esplicitamente.
+    - Se dichiari un qualsiasi costruttore in una classe, il compilatore non genera il costruttore di default senza argomenti: se ti serve ancora un costruttore senza argomenti, devi dichiararlo manualmente.
 
 #### 6.1.2.3 Blocchi di inizializzazione istanza
 
@@ -341,9 +341,9 @@ Person p1 = new Person();          // prints "Instance initializer block execute
 Person p2 = new Person("Alice");   // prints "Instance initializer block executed"
 ```
 
-> [!NOTE]
-> In questo esempio, il blocco di inizializzazione viene eseguito prima del corpo di entrambi i costruttori.
-> Sia p1 che p2 partiranno con age = 18, indipendentemente da quale costruttore viene usato.
+!!! note
+    In questo esempio, il blocco di inizializzazione viene eseguito prima del corpo di entrambi i costruttori.
+    Sia p1 che p2 partiranno con age = 18, indipendentemente da quale costruttore viene usato.
 
 **Blocchi di inizializzazione multipli**: se una classe contiene più initializer blocks, essi vengono eseguiti nell’ordine in cui compaiono nel file sorgente:
 
@@ -366,20 +366,20 @@ Example ex = new Example();
 // Second block
 ```
 
-> [!NOTE]
-> I blocchi di inizializzazione d’istanza sono meno comuni nella pratica, perché una logica simile può spesso essere messa direttamente nei costruttori.
-> È importante sapere che:
-> - Vengono sempre eseguiti prima del corpo del costruttore.
-> - Sono eseguiti nell’ordine di dichiarazione nella classe.
-> - Possono essere combinati con i costruttori per evitare duplicazioni di codice.
+!!! note
+    I blocchi di inizializzazione d’istanza sono meno comuni nella pratica, perché una logica simile può spesso essere messa direttamente nei costruttori.
+    È importante sapere che:
+    - Vengono sempre eseguiti prima del corpo del costruttore.
+    - Sono eseguiti nell’ordine di dichiarazione nella classe.
+    - Possono essere combinati con i costruttori per evitare duplicazioni di codice.
 
-> [!WARNING]
-> **Ordine di inizializzazione quando si crea un oggetto**
-> 1. Campi statici
-> 2. Blocchi di inizializzazione statici
-> 3. Campi di istanza
-> 4. Blocchi di inizializzazione d’istanza
-> 5. Corpo del costruttore
+!!! warning
+    **Ordine di inizializzazione quando si crea un oggetto**
+    1. Campi statici
+    2. Blocchi di inizializzazione statici
+    3. Campi di istanza
+    4. Blocchi di inizializzazione d’istanza
+    5. Corpo del costruttore
 
 ---
 
@@ -412,8 +412,8 @@ Questo vale sia per:
 - **variabili final di istanza**
 - **variabili di classe static final**
 
-> [!NOTE]
-> Possiamo assegnare un valore `null` a una variabile final di istanza o di classe, purché venga impostato esplicitamente.
+!!! note
+    Possiamo assegnare un valore `null` a una variabile final di istanza o di classe, purché venga impostato esplicitamente.
 
 Java impone questa regola perché una variabile `final` rappresenta un valore che deve essere *noto e fissato* prima dell’uso.
 
@@ -448,9 +448,9 @@ public class Person {
 }
 ```
 
-> [!WARNING]
-> Provare a compilare senza assegnare `id` dentro **ogni** costruttore produce un errore a compile-time:
-> *variable id might not have been initialized*
+!!! warning
+    Provare a compilare senza assegnare `id` dentro **ogni** costruttore produce un errore a compile-time:
+    *variable id might not have been initialized*
 
 <ins>**Variabili di classe `static final` (Costanti)**</ins>
 
@@ -507,10 +507,10 @@ Perché:
 
 Per questo Java costringe gli sviluppatori a inizializzare esplicitamente i campi `final`.
 
-> [!TIP]
-> `final` significa **assegnato una volta**, non **oggetto immutabile**.
->   
-> Un reference final può comunque puntare a un oggetto mutabile.
+!!! tip
+    `final` significa **assegnato una volta**, non **oggetto immutabile**.
+    
+    Un reference final può comunque puntare a un oggetto mutabile.
 
 ```java
 final List<String> list = new ArrayList<>();
@@ -543,10 +543,10 @@ public int localMethod {
 
 In certe condizioni puoi usare la keyword **var** al posto del tipo appropriato quando dichiari variabili **locali**;
 
-> [!WARNING]
-> - **var** NON è una parola riservata in Java;
-> - **var** può essere usata solo per variabili locali: NON può essere usata per **parametri del costruttore**, **variabili di istanza** o **parametri dei metodi**;
-> - Il compilatore inferisce il tipo guardando SOLO il codice **sulla riga della dichiarazione**; una volta inferito il tipo, non puoi riassegnare a un altro tipo.
+!!! warning
+    - **var** NON è una parola riservata in Java;
+    - **var** può essere usata solo per variabili locali: NON può essere usata per **parametri del costruttore**, **variabili di istanza** o **parametri dei metodi**;
+    - Il compilatore inferisce il tipo guardando SOLO il codice **sulla riga della dichiarazione**; una volta inferito il tipo, non puoi riassegnare a un altro tipo.
 
 - Esempio
 
@@ -567,9 +567,9 @@ public int localMethod {
 }
 ```
 
-> [!WARNING]
-> Le variabili locali **non** ricevono mai valori di default.
-> Le variabili di istanza e di classe (static) **sì**, sempre.
+!!! warning
+    Le variabili locali **non** ricevono mai valori di default.
+    Le variabili di istanza e di classe (static) **sì**, sempre.
 
 ---
 
@@ -619,12 +619,12 @@ Integer	 arr1 = {11.5, 13.6}  // WARNING: Does not compile!!
 Double[] arr2 = {11, 22};     // WARNING: Does not compile!!
 ```
 
-> [!TIP]
-> Java **non** esegue mai `autoboxing + widening/narrowing` in un solo passo.
+!!! tip
+    Java **non** esegue mai `autoboxing + widening/narrowing` in un solo passo.
 
-> [!WARNING]
-> - **AUTOBOXING** e **cast implicito** non sono consentiti nella stessa istruzione: non puoi fare entrambe le cose contemporaneamente. (vedi esempio sopra)
-> - Questa regola vale anche nelle chiamate ai metodi.
+!!! warning
+    - **AUTOBOXING** e **cast implicito** non sono consentiti nella stessa istruzione: non puoi fare entrambe le cose contemporaneamente. (vedi esempio sopra)
+    - Questa regola vale anche nelle chiamate ai metodi.
 
 ### 6.3.3 Parsing e conversione
 
@@ -661,8 +661,8 @@ Integer.valueOf("F", 16);	// 15
 Integer.valueOf("G", 16);	// NumberFormatException
 ```
 
-> [!NOTE]
-> I metodi **parseXxx()** restituiscono un primitivo mentre **valueOf()** restituisce un oggetto wrapper.
+!!! note
+    I metodi **parseXxx()** restituiscono un primitivo mentre **valueOf()** restituisce un oggetto wrapper.
 
 ### 6.3.4 Metodi di supporto
 
@@ -801,14 +801,14 @@ b += "string literal";
 System.out.println(a == b);  // false
 ```
 
-> [!WARNING]
-> Qualsiasi String creata a **runtime** *non* entra nel pool automaticamente.
-> Si usi `intern()` se si vuole il pooling.
+!!! warning
+    Qualsiasi String creata a **runtime** *non* entra nel pool automaticamente.
+    Si usi `intern()` se si vuole il pooling.
 
-> [!TIP]
-> `"Hello" == "Hel" + "lo"` → true (costante a compile-time)
-> 
-> `"Hello" == getHello()` → false (concatenazione a runtime)
+!!! tip
+    `"Hello" == "Hel" + "lo"` → true (costante a compile-time)
+    
+    `"Hello" == getHello()` → false (concatenazione a runtime)
 
 ```java
 String x = "Hello";
@@ -852,8 +852,8 @@ System.out.println(c == d);        // false → non cached
 System.out.println(c.equals(d));   // true → stesso valore numerico
 ```
 
-> [!WARNING]
-> Attenzione alla cache dei wrapper.
+!!! warning
+    Attenzione alla cache dei wrapper.
 
 
 ### 6.4.5 Uguaglianza e `null`

@@ -96,9 +96,9 @@ Le parentesi tonde `()` possono essere usate per **forzare la precedenza**:
 int result = (10 + 5) * 2;  // Le parentesi vengono valutate per prime → result = 30
 ```
 
-> [!NOTE]
-> - La **precedenza** degli operatori riguarda il *raggruppamento*, non l’ordine effettivo di valutazione nel bytecode.
-> - Usa sempre le parentesi per rendere esplicita la precedenza e migliorare la leggibilità nelle espressioni complesse.
+!!! note
+    - La **precedenza** degli operatori riguarda il *raggruppamento*, non l’ordine effettivo di valutazione nel bytecode.
+    - Usa sempre le parentesi per rendere esplicita la precedenza e migliorare la leggibilità nelle espressioni complesse.
 
 ---
 
@@ -163,10 +163,10 @@ int a = 5;                  // binario: 0000 0101
 System.out.println(~a);     // -6 → binario: 1111 1010 (complemento a due)
 ```
 
-> [!NOTE]
-> - Prefisso (`++x` / `--x`): aggiorna prima il valore, poi restituisce il nuovo valore.
-> - Postfisso (`x++` / `x--`): restituisce prima il valore corrente, poi lo aggiorna.
-> - L’operatore `!` si applica a valori boolean; `~` si applica a tipi numerici interi.
+!!! note
+    - Prefisso (`++x` / `--x`): aggiorna prima il valore, poi restituisce il nuovo valore.
+    - Postfisso (`x++` / `x--`): restituisce prima il valore corrente, poi lo aggiorna.
+    - L’operatore `!` si applica a valori boolean; `~` si applica a tipi numerici interi.
 
 ---
 
@@ -187,11 +187,11 @@ Eseguono operazioni aritmetiche, relazionali, logiche, bit a bit e di assegnazio
 | Assignment | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 3` | Modificano e assegnano. |
 | String Concatenation | `+` | `"Hello " + name` | Uniscono stringhe. |
 
-> [!IMPORTANT]
-> - Gli operatori **logici** (`&`, `|`, `^`) *valutano sempre entrambi i lati*.
-> - Gli operatori **condizionali** (`&&`, `||`) sono **short-circuit**:
->   - `a && b` → `b` è valutato solo se `a` è true
->   - `a || b` → `b` è valutato solo se `a` è false
+!!! important
+    - Gli operatori **logici** (`&`, `|`, `^`) *valutano sempre entrambi i lati*.
+    - Gli operatori **condizionali** (`&&`, `||`) sono **short-circuit**:
+      - `a && b` → `b` è valutato solo se `a` è true
+      - `a || b` → `b` è valutato solo se `a` è false
 
 Esempi:
 
@@ -297,8 +297,8 @@ if (flag == true) {
 }
 ```
 
-> [!WARNING]
-> Se vedi `if (x = qualcosa)`, fermati: è una **assegnazione**, non un confronto.
+!!! warning
+    Se vedi `if (x = qualcosa)`, fermati: è una **assegnazione**, non un confronto.
 
 ### 5.7.4 Operatori di assegnazione composta
 
@@ -337,19 +337,19 @@ byte b = 10;
 b += 1;         // ✅ funziona: cast implicito di nuovo verso byte
 ```
 
-> [!NOTE]
-> Gli operatori di assegnazione composta **eseguono un cast implicito** verso il tipo della variabile a sinistra.  
-> Per questo motivo `b += 1` compila anche se `b = b + 1` non compila.
+!!! note
+    Gli operatori di assegnazione composta **eseguono un cast implicito** verso il tipo della variabile a sinistra.
+    Per questo motivo `b += 1` compila anche se `b = b + 1` non compila.
 
 ### 5.7.5 Operatori di uguaglianza (`==` e `!=`)
 
 Gli **operatori di uguaglianza** in Java `==` (uguale a) e `!=` (diverso da) vengono usati per confrontare due operandi.  
 Tuttavia, il loro comportamento differisce **a seconda che siano applicati a tipi primitivi o a tipi reference (oggetti)**.
 
-> [!NOTE]
-> - `==` confronta i **valori** per i tipi primitivi  
-> - `==` confronta i **riferimenti** per gli oggetti  
-> - `.equals()` confronta il **contenuto dell’oggetto** (se implementato)
+!!! note
+    - `==` confronta i **valori** per i tipi primitivi
+    - `==` confronta i **riferimenti** per gli oggetti  
+    - `.equals()` confronta il **contenuto dell’oggetto** (se implementato)
 
 #### 5.7.5.1 Uguaglianza con tipi primitivi
 
@@ -361,9 +361,9 @@ System.out.println(a == b);  // true  → hanno lo stesso valore
 System.out.println(a != b);  // false → i valori sono uguali
 ```
 
-> [!IMPORTANT]
-> - Se gli operandi sono di tipi numerici diversi, Java li promuove automaticamente a un tipo comune prima del confronto.
-> - Tuttavia, confrontare float e double può produrre risultati inattesi a causa di errori di precisione (vedi esempio sotto).
+!!! important
+    - Se gli operandi sono di tipi numerici diversi, Java li promuove automaticamente a un tipo comune prima del confronto.
+    - Tuttavia, confrontare float e double può produrre risultati inattesi a causa di errori di precisione (vedi esempio sotto).
 
 ```java
 int x = 10;
@@ -440,8 +440,8 @@ Object n = null;
 System.out.println(n instanceof Object);  // false
 ```
 
-> [!WARNING]
-> `instanceof` restituisce sempre `false` quando l’operando a sinistra è `null`.
+!!! warning
+    `instanceof` restituisce sempre `false` quando l’operando a sinistra è `null`.
 
 #### 5.7.6.1 Controllo in fase di compilazione vs fase di esecuzione
 
@@ -563,13 +563,13 @@ System.out.println(list instanceof java.util.List<?>); // ✅ true
 L’**operatore ternario** (`? :`) è l’unico operatore in Java che prende **tre operandi**.  
 Funziona come una forma compatta di un’istruzione `if-else`.
 
-> [!TIP]
-> L’operatore ternario **deve** produrre un valore di un tipo *compatibile*.  
-> Se i due rami producono tipi non correlati, la compilazione fallisce.
-> 
-> ```java
-> String s = true ? "ok" : 5; // ❌ errore di compilazione: tipi incompatibili
-> ```
+!!! tip
+    L’operatore ternario **deve** produrre un valore di un tipo *compatibile*.
+    Se i due rami producono tipi non correlati, la compilazione fallisce.
+    
+    ```java
+    String s = true ? "ok" : 5; // ❌ errore di compilazione: tipi incompatibili
+    ```
 
 ### 5.8.1 Sintassi
 
@@ -597,7 +597,6 @@ System.out.println(grade); // "B"
 
 ### 5.8.4 Note
 
-> [!WARNING]
-> 
-> - Espressioni ternarie annidate possono ridurre la leggibilità. Usa le parentesi per maggiore chiarezza.
-> - L’operatore ternario restituisce un valore, a differenza di if-else, che è un’istruzione.
+!!! warning
+    - Espressioni ternarie annidate possono ridurre la leggibilità. Usa le parentesi per maggiore chiarezza.
+    - L’operatore ternario restituisce un valore, a differenza di if-else, che è un’istruzione.

@@ -34,10 +34,10 @@ Prima di comprendere l’ordine di inizializzazione, è utile ricordare le tre p
 - **Heap** — memorizza tutti gli oggetti e i campi di istanza.  
 - **Stack** — memorizza le chiamate ai metodi, le variabili locali e i riferimenti.  
 
-> [!NOTE]  
-> I membri statici appartengono alla **classe** e vengono creati **una sola volta** nella Method Area. 
->
-> I membri di istanza appartengono a **ogni oggetto** e vivono nell’**Heap**.
+!!! note
+    I membri statici appartengono alla **classe** e vengono creati **una sola volta** nella Method Area.
+    
+    I membri di istanza appartengono a **ogni oggetto** e vivono nell’**Heap**.
 
 ---
 
@@ -79,8 +79,8 @@ Allora il caricamento delle classi procede in questo ordine rigoroso:
 - **Passo 2: Vengono eseguite le inizializzazioni statiche esplicite**.  
 - **Passo 3: Vengono eseguiti i blocchi di inizializzazione statica** nell’ordine in cui compaiono nel codice.  
 
-> [!NOTE]  
-> Dopo questi passaggi, la classe è completamente pronta e può essere utilizzata (istanziata o referenziata).
+!!! note
+    Dopo questi passaggi, la classe è completamente pronta e può essere utilizzata (istanziata o referenziata).
 
 ---
 

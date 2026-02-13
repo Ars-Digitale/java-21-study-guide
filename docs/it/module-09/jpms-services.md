@@ -75,8 +75,8 @@ module com.example.service {
 }
 ```
 
-> [!NOTE]
-> Il modulo dell’interfaccia di servizio non dovrebbe contenere implementazioni.
+!!! note
+    Il modulo dell’interfaccia di servizio non dovrebbe contenere implementazioni.
 
 ### 39.1.3 Modulo Provider del Servizio
 
@@ -117,11 +117,11 @@ module com.example.consumer {
 }
 ```
 
-> [!NOTE]
-> `uses` dichiara l’intenzione di scoprire implementazioni a runtime.
->
-> Un modulo che dichiara `uses` ma non ha alcun provider corrispondente sul module path compila normalmente,
-> ma `ServiceLoader` restituisce un risultato vuoto a runtime.
+!!! note
+    `uses` dichiara l’intenzione di scoprire implementazioni a runtime.
+    
+    Un modulo che dichiara `uses` ma non ha alcun provider corrispondente sul module path compila normalmente,
+    ma `ServiceLoader` restituisce un risultato vuoto a runtime.
 
 ### 39.1.5 Caricamento dei Servizi a Runtime
 
@@ -181,9 +181,9 @@ Il suo nome è derivato dal nome del file JAR.
 - Esporta tutti i package
 - Nessun incapsulamento forte
 
-> [!NOTE]
-> I moduli automatic esistono per facilitare la migrazione.
-> Non sono adatti come soluzione di lungo termine.
+!!! note
+    I moduli automatic esistono per facilitare la migrazione.
+    Non sono adatti come soluzione di lungo termine.
 
 ### 39.2.3 Modulo Unnamed
 
@@ -193,8 +193,8 @@ Il codice sul classpath appartiene al `modulo unnamed`.
 - Tutti i package sono aperti
 - Non può essere richiesto da moduli named
 
-> [!NOTE]
-> Il `modulo unnamed` preserva il comportamento legacy del classpath.
+!!! note
+    Il `modulo unnamed` preserva il comportamento legacy del classpath.
 
 ### 39.2.4 Sintesi Comparativa
 

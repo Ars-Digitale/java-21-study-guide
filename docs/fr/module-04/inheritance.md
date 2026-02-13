@@ -42,8 +42,8 @@ L’héritage permet à une classe d’en étendre une autre, en obtenant automa
 
 La classe qui étend peut ajouter de nouvelles fonctionnalités ou redéfinir (faire `override`) les comportements existants, en créant des versions plus spécialisées de sa propre classe parent.
 
-> [!NOTE]
-> L’Héritage exprime une relation *“is-a”* (est-un) : un Chien **is a** (est-un) Animal.
+!!! note
+    L’Héritage exprime une relation *“is-a”* (est-un) : un Chien **is a** (est-un) Animal.
 
 ---
 
@@ -90,8 +90,8 @@ Cependant, spécifiquement, cela dépend des `access modifiers`.
 - **default (package-private)** → hérité seulement dans le même package
 - **private** → **NON** hérité
 
-> [!NOTE]
-> ( Faire référence au Paragraphe "**Access Modifiers**" dans le Chapitre: [Briques de base du langage Java](../module-01/basic-building-blocks.md) )
+!!! note
+    ( Faire référence au Paragraphe "**Access Modifiers**" dans le Chapitre: [Briques de base du langage Java](../module-01/basic-building-blocks.md) )
 
 ---
 
@@ -107,8 +107,8 @@ Certains modificateurs au niveau de la classe déterminent si une classe peut ê
 | `non-sealed` | Subclass d’une sealed class qui rouvre l’inheritance | Inheritance permis |
 | `static` | S’applique seulement aux nested classes | Se comporte comme une top-level class à l’intérieur de sa classe conteneur |
 
-> [!NOTE]
-> Une classe `static` en Java peut exister seulement comme **static nested class**.
+!!! note
+    Une classe `static` en Java peut exister seulement comme **static nested class**.
 
 ---
 
@@ -144,8 +144,8 @@ public class Person {
 }
 ```
 
-> [!WARNING]
-> `this` NE peut PAS être utilisé à l’intérieur de méthodes statiques parce que, dans ce contexte, aucune instance n’existe.
+!!! warning
+    `this` NE peut PAS être utilisé à l’intérieur de méthodes statiques parce que, dans ce contexte, aucune instance n’existe.
 
 ### 16.6.2 La Référence `super`
 
@@ -170,8 +170,8 @@ class Child extends Parent {
 }
 ```
 
-> [!NOTE]
-> `super` NE peut PAS être utilisé dans des contextes statiques.
+!!! note
+    `super` NE peut PAS être utilisé dans des contextes statiques.
 
 ---
 
@@ -455,9 +455,9 @@ public class TestStatic {
 }
 ```
 
-> [!IMPORTANT]
-> - méthodes statiques **final** ne peuvent pas être `hidden` (masquées); méthodes d’instance déclarées **final** ne peuvent pas être `overriden`.
-> - Si on essaye de les redéfinir dans une subclass, le code ne compilera pas.
+!!! important
+    - méthodes statiques **final** ne peuvent pas être `hidden` (masquées); méthodes d’instance déclarées **final** ne peuvent pas être `overriden`.
+    - Si on essaye de les redéfinir dans une subclass, le code ne compilera pas.
 
 ### 16.13.2 Abstract Classes
 
@@ -508,9 +508,9 @@ class Circle extends Shape {
 }
 ```
 
-> [!NOTE]
-> - Bien qu’une `abstract class` ne puisse pas être instanciée, ses constructeurs sont quand même appelés quand on crée des instances de classes filles concrètes.
-> - Le flux des instanciations, dans la `chaîne héréditaire`, part toujours du sommet de la hiérarchie et se déplace vers le bas.
+!!! note
+    - Bien qu’une `abstract class` ne puisse pas être instanciée, ses constructeurs sont quand même appelés quand on crée des instances de classes filles concrètes.
+    - Le flux des instanciations, dans la `chaîne héréditaire`, part toujours du sommet de la hiérarchie et se déplace vers le bas.
 
 ### 16.13.3 Créer des Objets Immutables
 

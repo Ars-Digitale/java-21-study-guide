@@ -77,10 +77,10 @@ rev.removeFirst(); // rimuove 3
 System.out.println(list); // [1, 2]
 ```
 
-> [!NOTE]
-> Le viste invertite condividono la stessa collezione sottostante.  
-> Le modifiche strutturali in una delle due viste influenzano anche l’altra:
-> modificare sia la collezione originale sia la vista invertita ha effetto su entrambe.
+!!! note
+    Le viste invertite condividono la stessa collezione sottostante.
+    Le modifiche strutturali in una delle due viste influenzano anche l’altra:
+    modificare sia la collezione originale sia la vista invertita ha effetto su entrambe.
 
 ---
 
@@ -108,10 +108,10 @@ Attualmente, la principale implementazione standard è:
 |------|-------------|
 | `LinkedHashMap` | Ordine di inserimento (o ordine di accesso se configurato) |
 
-> [!NOTE]
-> LinkedHashMap può riordinare le entry in lettura se costruita con `accessOrder=true`.
->
-> In tal caso, “prima” e “ultima” riflettono l’ordine di accesso più recente.
+!!! note
+    LinkedHashMap può riordinare le entry in lettura se costruita con `accessOrder=true`.
+    
+    In tal caso, “prima” e “ultima” riflettono l’ordine di accesso più recente.
 
 ### 29.3.3 Map Invertite
 
@@ -127,8 +127,8 @@ rev.pollFirstEntry(); // rimuove C=3
 System.out.println(map); // {A=1, B=2}
 ```
 
-> [!NOTE]
-> Come per SequencedCollection, `reversed()` restituisce una vista live — le mutazioni si applicano a entrambe le map.
+!!! note
+    Come per SequencedCollection, `reversed()` restituisce una vista live — le mutazioni si applicano a entrambe le map.
 
 ---
 
@@ -156,8 +156,8 @@ e se implementano le nuove interfacce Sequenced.
 | `HashMap` | ✘ No | ✘ No | ✘ No |
 | `TreeMap` | ✔ Sì (ordinato) | ✘ No | ✘ No |
 
-> [!NOTE]
-> `TreeSet` è ordinato, ma implementa `SortedSet`/`NavigableSet`, non `SequencedCollection`.
+!!! note
+    `TreeSet` è ordinato, ma implementa `SortedSet`/`NavigableSet`, non `SequencedCollection`.
 
 ---
 

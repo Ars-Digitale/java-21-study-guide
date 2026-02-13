@@ -128,8 +128,8 @@ try (InputStream in = new FileInputStream("data.bin")) {
 }
 ```
 
-> [!NOTE]
-> Les flux de bas niveau sont rarement utilisés seuls dans des applications réelles en raison de performances médiocres et de fonctionnalités limitées.
+!!! note
+    Les flux de bas niveau sont rarement utilisés seuls dans des applications réelles en raison de performances médiocres et de fonctionnalités limitées.
 
 ### 34.3.3 Flux de haut niveau (Filter / Processing Streams)
 
@@ -179,8 +179,8 @@ Un flux ne peut envelopper qu’un autre flux d’un niveau d’abstraction comp
 - Les flux de caractères ne peuvent envelopper que des flux de caractères
 - Les flux de haut niveau nécessitent un flux de bas niveau sous-jacent
 
-> [!NOTE]
-> Vous ne pouvez pas mélanger arbitrairement `InputStream` avec `Reader` ou `OutputStream` avec `Writer`.
+!!! note
+    Vous ne pouvez pas mélanger arbitrairement `InputStream` avec `Reader` ou `OutputStream` avec `Writer`.
 
 #### 34.3.5.2 Incompatibilité flux d’octets vs flux de caractères
 
@@ -193,8 +193,8 @@ BufferedReader reader =
 	new BufferedReader(new FileInputStream("text.txt"));
 ```
 
-> [!NOTE]
-> Cela échoue parce que `BufferedReader` attend un `Reader`, pas un `InputStream`.
+!!! note
+    Cela échoue parce que `BufferedReader` attend un `Reader`, pas un `InputStream`.
 
 #### 34.3.5.4 Pont entre flux d’octets et flux de caractères
 
@@ -211,8 +211,8 @@ BufferedReader reader =
 		new InputStreamReader(new FileInputStream("text.txt")));
 ```
 
-> [!NOTE]
-> La passerelle gère le décodage des caractères en utilisant un charset (par défaut ou explicite).
+!!! note
+    La passerelle gère le décodage des caractères en utilisant un charset (par défaut ou explicite).
 
 #### 34.3.5.6 Règles d’ordre dans les chaînes de flux
 
@@ -232,8 +232,8 @@ FileInputStream → InputStreamReader → BufferedReader
 
 Fermer le flux le plus externe ferme automatiquement tous les flux enveloppés.
 
-> [!NOTE]
-> C’est pourquoi try-with-resources devrait référencer uniquement le flux de plus haut niveau.
+!!! note
+    C’est pourquoi try-with-resources devrait référencer uniquement le flux de plus haut niveau.
 
 #### 34.3.5.9 Pièges courants
 
@@ -265,10 +265,10 @@ Tous les flux d’entrée lisent des octets bruts (valeurs 8 bits) depuis une so
 | int `available()`	|	Octets lisibles sans bloquer (indice, pas garantie) |
 | void `close()`	|	Libère la ressource sous-jacente |
 
-> [!NOTE]
-> Les méthodes `read()` sont bloquantes par défaut.
->
-> Elles suspendent le thread appelant jusqu’à ce que des données soient disponibles, que la fin de flux soit atteinte, ou qu’une erreur I/O se produise.
+!!! note
+    Les méthodes `read()` sont bloquantes par défaut.
+    
+    Elles suspendent le thread appelant jusqu’à ce que des données soient disponibles, que la fin de flux soit atteinte, ou qu’une erreur I/O se produise.
 
 La méthode `read()` à octet unique est principalement un primitif de bas niveau.
 
@@ -302,10 +302,10 @@ Elle représente une destination où des octets bruts peuvent être écrits.
 | void `flush()`	|	Force l’écriture des données tamponnées |
 | void `close()`	|	Effectue flush et libère la ressource |
 
-> [!NOTE]
-> Appeler `close()` appelle implicitement `flush()`.
->
-> Ne pas faire flush ou close sur un OutputStream peut entraîner une perte de données.
+!!! note
+    Appeler `close()` appelle implicitement `flush()`.
+    
+    Ne pas faire flush ou close sur un OutputStream peut entraîner une perte de données.
 
 #### 34.4.2.2 Exemple d’utilisation typique
 
@@ -340,10 +340,10 @@ Reader reader = new InputStreamReader(
 );
 ```
 
-> [!NOTE]
-> `InputStreamReader` et `OutputStreamWriter` sont des classes passerelles.
->
-> Ils convertissent entre `flux d’octets` et `flux de caractères` en utilisant un `charset`.
+!!! note
+    `InputStreamReader` et `OutputStreamWriter` sont des classes passerelles.
+    
+    Ils convertissent entre `flux d’octets` et `flux de caractères` en utilisant un `charset`.
 
 ---
 
@@ -356,8 +356,8 @@ Au lieu d’interagir avec le système d’exploitation à chaque read ou write,
 - `BufferedInputStream` / `BufferedOutputStream` pour les flux d’octets
 - `BufferedReader` / `BufferedWriter` pour les flux de caractères
 
-> [!NOTE]
-> Les `flux tamponnés` sont des `decorators` : ils ne remplacent pas le flux sous-jacent, ils l’améliorent en ajoutant un comportement de mise en tampon.
+!!! note
+    Les `flux tamponnés` sont des `decorators` : ils ne remplacent pas le flux sous-jacent, ils l’améliorent en ajoutant un comportement de mise en tampon.
 
 ### 34.5.1 Pourquoi la mise en tampon compte
 
@@ -386,8 +386,8 @@ try (InputStream in = new FileInputStream("data.bin")) {
 }
 ```
 
-> [!NOTE]
-> Lire octet par octet sans mise en tampon est presque toujours un anti-pattern de performance.
+!!! note
+    Lire octet par octet sans mise en tampon est presque toujours un anti-pattern de performance.
 
 ### 34.5.3 Comment fonctionne BufferedInputStream
 
@@ -405,8 +405,8 @@ try (InputStream in =
 }
 ```
 
-> [!NOTE]
-> Le programme appelle toujours `read()` de manière répétée, mais le système d’exploitation n’est accédé que lorsque le buffer interne doit être rempli à nouveau.
+!!! note
+    Le programme appelle toujours `read()` de manière répétée, mais le système d’exploitation n’est accédé que lorsque le buffer interne doit être rempli à nouveau.
 
 ### 34.5.4 Exemple de sortie tamponnée
 
@@ -424,10 +424,10 @@ try (OutputStream out =
 }
 ```
 
-> [!NOTE]
-> `close()` appelle automatiquement flush().
->
-> Appeler `flush()` explicitement est utile lorsque les données doivent être visibles immédiatement.
+!!! note
+    `close()` appelle automatiquement flush().
+    
+    Appeler `flush()` explicitement est utile lorsque les données doivent être visibles immédiatement.
 
 ### 34.5.5 BufferedReader vs Reader
 
@@ -446,8 +446,8 @@ try (BufferedReader reader =
 }
 ```
 
-> [!NOTE]
-> La méthode `readLine()` n’est disponible que sur `BufferedReader` (pas sur `Reader`), car elle s’appuie sur la mise en tampon pour détecter efficacement les limites de ligne.
+!!! note
+    La méthode `readLine()` n’est disponible que sur `BufferedReader` (pas sur `Reader`), car elle s’appuie sur la mise en tampon pour détecter efficacement les limites de ligne.
 
 ### 34.5.6 Exemple de BufferedWriter
 
@@ -463,12 +463,12 @@ try (BufferedWriter writer =
 
 `BufferedWriter` minimise l’accès disque et fournit des méthodes pratiques telles que newLine().
 
-> [!NOTE]
-> Enveloppez toujours les flux de fichiers avec une mise en tampon sauf s’il y a une forte raison de ne pas le faire
->
-> Préférez BufferedReader / BufferedWriter pour le texte
->
-> Préférez BufferedInputStream / BufferedOutputStream pour les données binaires
+!!! note
+    Enveloppez toujours les flux de fichiers avec une mise en tampon sauf s’il y a une forte raison de ne pas le faire
+    
+    Préférez BufferedReader / BufferedWriter pour le texte
+    
+    Préférez BufferedInputStream / BufferedOutputStream pour les données binaires
 
 ---
 
@@ -486,10 +486,10 @@ Les applications Java modernes favorisent de plus en plus les API NIO et NIO.2, 
 | `Scalabilité` | Limitée | Élevée |
 | `Introduit` | Java 1.0 | Java 4 / Java 7 |
 
-> [!NOTE]
-> `java.nio` ne remplace pas `java.io`.
->
-> De nombreuses classes NIO s’appuient en interne sur des flux ou coexistent avec eux.
+!!! note
+    `java.nio` ne remplace pas `java.io`.
+    
+    De nombreuses classes NIO s’appuient en interne sur des flux ou coexistent avec eux.
 
 ### 34.6.2 java.nio (I/O de fichier moderne)
 
@@ -537,5 +537,5 @@ try (BufferedReader reader = new BufferedReader(new FileReader("file.txt"))) {
 - Les méthodes utilitaires Files lancent des IOException checked
 - `available()` ne doit pas être utilisé pour détecter EOF
 
-> [!NOTE]
-> La plupart des bugs I/O proviennent d’hypothèses incorrectes sur le blocking, la mise en tampon ou l’encodage des caractères.
+!!! note
+    La plupart des bugs I/O proviennent d’hypothèses incorrectes sur le blocking, la mise en tampon ou l’encodage des caractères.

@@ -45,10 +45,10 @@ Depending on the level of detail required, Java offers four main classes:
 - `LocalDateTime` → combines date + time, but no time zone
 - `ZonedDateTime` → full date + time + offset + time zone
 
-> [!NOTE]
-> - A **time zone** defines rules such as daylight saving changes (for example, `Europe/Paris`).  
-> - A **zone offset** is a fixed shift from UTC/GMT (for example, `+01:00`, `-07:00`).  
-> - To compare two instants from different time zones, convert them to UTC (GMT) by applying the offset.
+!!! note
+    - A **time zone** defines rules such as daylight saving changes (for example, `Europe/Paris`).
+    - A **zone offset** is a fixed shift from UTC/GMT (for example, `+01:00`, `-07:00`).  
+    - To compare two instants from different time zones, convert them to UTC (GMT) by applying the offset.
 
 **Getting the Current Date/Time**
 
@@ -233,9 +233,9 @@ Duration d = Duration.ofMinutes(90);
 LocalTime t5 = time.plus(d);                // 15:00
 ```
 
-> [!NOTE]
-> When time arithmetic crosses midnight, the date is ignored with `LocalTime`.  
-> For example, 23:30 + 2 hours = 01:30 (with no date involved).
+!!! note
+    When time arithmetic crosses midnight, the date is ignored with `LocalTime`.
+    For example, 23:30 + 2 hours = 01:30 (with no date involved).
 
 ### 12.1.6 `LocalDateTime` Arithmetic
 
@@ -318,8 +318,8 @@ Depending on Daylight Saving rules for that date:
 - The local time might jump from 02:00 to 03:00 or similar.
 - `ZonedDateTime` adjusts the offset and local time according to the zone rules, but still represents the correct instant on the timeline.
 
-> [!IMPORTANT]
-> For `ZonedDateTime`, arithmetic is defined in terms of the local timeline and time zone rules, which can cause hour shifts during DST transitions.
+!!! important
+    For `ZonedDateTime`, arithmetic is defined in terms of the local timeline and time zone rules, which can cause hour shifts during DST transitions.
 
 ### 12.1.8 Summary Table
 
@@ -427,11 +427,11 @@ LocalDate base = LocalDate.of(2025, 1, 10);
 LocalDate result = base.plus(p2);          // 2026-03-13
 ```
 
-> [!NOTE]
-> Period.parse("P1W") is allowed and represents a period of 7 days (equivalent to "P7D").
+!!! note
+    Period.parse("P1W") is allowed and represents a period of 7 days (equivalent to "P7D").
 
-> [!TIP]
-> Period is calendar-based: adding a period of months/years respects month lengths and leap years.
+!!! tip
+    Period is calendar-based: adding a period of months/years respects month lengths and leap years.
 
 ---
 
@@ -479,9 +479,9 @@ ZonedDateTime z2 = z1.plusHours(2);          // DST-aware
 ZonedDateTime z3 = z1.plus(d2);              // Duration-based
 ```
 
-> [!NOTE]
-> Duration.ofDays(1) represents exactly 24 hours of machine time.  
-> In a zone with DST, 24 hours may not align with “the same local time tomorrow”.
+!!! note
+    Duration.ofDays(1) represents exactly 24 hours of machine time.
+    In a zone with DST, 24 hours may not align with “the same local time tomorrow”.
 
 ---
 
@@ -527,9 +527,9 @@ Instant end   = Instant.parse("2024-01-01T12:30:00Z");
 Duration between = Duration.between(start, end); // PT2H30M
 ```
 
-> [!IMPORTANT]
-> Instant is always UTC, with no time zone information attached.  
-> It cannot be combined with a Period; use Duration instead.
+!!! important
+    Instant is always UTC, with no time zone information attached.
+    It cannot be combined with a Period; use Duration instead.
 
 ---
 
@@ -588,8 +588,8 @@ LocalTime time = LocalTime.of(10, 0);
 LocalTime t1 = time.plus(90, ChronoUnit.MINUTES);  // 11:30
 ```
 
-> [!IMPORTANT]
-> You cannot use time-based units with LocalDate, nor date-based units with LocalTime.
+!!! important
+    You cannot use time-based units with LocalDate, nor date-based units with LocalTime.
 
 - Examples:
 
@@ -709,10 +709,10 @@ long days = ChronoUnit.DAYS.between(
 // 9
 ```
 
-> [!IMPORTANT]
-> ChronoUnit.between(...) always returns a long,  
-> while Period.between returns a Period,  
-> and Duration.between returns a Duration.
+!!! important
+    ChronoUnit.between(...) always returns a long,
+    while Period.between returns a Period,  
+    and Duration.between returns a Duration.
 
 ### 12.9.8 Common Pitfalls
 

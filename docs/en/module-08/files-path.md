@@ -74,8 +74,8 @@ In Java NIO, a filesystem is represented by the `FileSystem` abstraction, typica
 | Multiplicity | Multiple filesystems may exist |
 | Examples | Disk FS, ZIP FS, in-memory FS |
 
-> [!NOTE]
-> Java does not implement filesystems; it adapts to filesystem implementations provided by the OS or custom providers.
+!!! note
+    Java does not implement filesystems; it adapts to filesystem implementations provided by the OS or custom providers.
 
 ---
 
@@ -98,8 +98,8 @@ A `path` solves the problem of `addressing`:
 | Immutable | Yes |
 | OS resource | No |
 
-> [!NOTE]
-> In Java, `Path` represents potential filesystem entries, not actual ones.
+!!! note
+    In Java, `Path` represents potential filesystem entries, not actual ones.
 
 ---
 
@@ -128,8 +128,8 @@ From the filesystem perspective, a file has:
 | Lifetime | Independent of processes |
 | Java access | Streams, channels, Files methods |
 
-> [!NOTE]
-> `Text` vs `binary` is not a filesystem concept; it is an application-level interpretation.
+!!! note
+    `Text` vs `binary` is not a filesystem concept; it is an application-level interpretation.
 
 ---
 
@@ -150,8 +150,8 @@ A `directory (or folder)` is a filesystem entry whose purpose is to organize oth
 | Read/write | Structural, not content-based |
 | Java access | Files.list, Files.walk |
 
-> [!NOTE]
-> A directory is not a file with content, even if both share common metadata.
+!!! note
+    A directory is not a file with content, even if both share common metadata.
 
 ---
 
@@ -180,10 +180,10 @@ A `symbolic link` is a special file containing a path to another entry:
 | Hard | Data | No | Transparent |
 | Symbolic | Path | Yes | Explicit control |
 
-> [!NOTE]
-> Java NIO exposes link behavior explicitly via `LinkOption`.
->
-> In many common filesystems, Java code cannot create hard links in a fully portable way, while symbolic links are directly supported via `Files.createSymbolicLink(...)` (where permitted by the OS / permissions).
+!!! note
+    Java NIO exposes link behavior explicitly via `LinkOption`.
+    
+    In many common filesystems, Java code cannot create hard links in a fully portable way, while symbolic links are directly supported via `Files.createSymbolicLink(...)` (where permitted by the OS / permissions).
 
 ---
 
@@ -197,8 +197,8 @@ Some filesystem entries are not data containers but interaction endpoints.
 | FIFO / Pipe | Inter-process communication |
 | Socket file | Network communication |
 
-> [!NOTE]
-> Java I/O may interact with these entries, but behavior is platform-dependent.
+!!! note
+    Java I/O may interact with these entries, but behavior is platform-dependent.
 
 ---
 
@@ -221,8 +221,8 @@ Java I/O APIs operate at different abstraction layers:
 | `Channel` / `SeekableByteChannel` | Advanced / random access |
 
 
-> [!NOTE]
-> No Java API “is” a file; APIs mediate access to filesystem-managed resources.
+!!! note
+    No Java API “is” a file; APIs mediate access to filesystem-managed resources.
 
 ---
 
@@ -233,8 +233,8 @@ Java I/O APIs operate at different abstraction layers:
 - Assuming directories store file data
 - Assuming links are always resolved automatically
 
-> [!NOTE]
-> Always separate location, structure, and data flow when reasoning about I/O.
+!!! note
+    Always separate location, structure, and data flow when reasoning about I/O.
 
 ---
 
@@ -252,8 +252,8 @@ The NIO.2 design (Java 7+) deliberately separates these concerns:
 - `Files` → performs filesystem operations
 - `Streams / Channels` → move data
 
-> [!NOTE] 
-> A `Path` never opens a file and never touches the disk by itself.
+!!! note
+    A `Path` never opens a file and never touches the disk by itself.
 
 ---
 
@@ -267,8 +267,8 @@ Yes — in the old I/O API, `java.io.File` confusingly plays two roles at the sa
 - `File` also exposes filesystem operations
 - It does **not** represent an open file, nor file contents
 
-> [!NOTE]
-> This mixing of responsibilities is considered a design flaw in hindsight.
+!!! note
+    This mixing of responsibilities is considered a design flaw in hindsight.
 
 ### 32.11.1 What `File` Really Is
 
@@ -283,8 +283,8 @@ Conceptually, `File` is closer to what we now call a `Path`, but with added oper
 | Modifies filesystem | Yes |
 | Holds OS handle | No |
 
-> [!NOTE]
-> A `File` object can exist even if the file does not.
+!!! note
+    A `File` object can exist even if the file does not.
 
 ### 32.11.2 Path-like Responsibilities
 
@@ -313,8 +313,8 @@ At the same time, `File` exposes methods that touch the filesystem:
 - mkdir(), mkdirs()
 - list(), listFiles()
 
-> [!NOTE]
-> Most of these methods return `boolean` instead of throwing `IOException`, which hides failure causes.
+!!! note
+    Most of these methods return `boolean` instead of throwing `IOException`, which hides failure causes.
 
 ### 32.11.4 What `File` Is NOT
 
@@ -344,8 +344,8 @@ NIO.2 explicitly separates responsibilities:
 | `Filesystem operations` | `File` | `Files` |
 | `Data access` | Streams | Streams / Channels |
 
-> [!NOTE]
-> This separation is one of the most important conceptual improvements in Java I/O.
+!!! note
+    This separation is one of the most important conceptual improvements in Java I/O.
 
 ### 32.11.7 Summary
 
@@ -375,8 +375,8 @@ This is fundamentally different from streams or channels.
 |	`Immutable`	|	Yes	|	No	|
 	
 
-> [!NOTE]  
-> Creating a Path cannot throw `IOException` because no I/O happens.
+!!! note
+    Creating a Path cannot throw `IOException` because no I/O happens.
 
 ---
 
@@ -398,10 +398,10 @@ An absolute path fully identifies a location from the filesystem root.
 |	Windows	|	`C:\Users\User\file.txt`	|
 
 
-> [!IMPORTANT]  
-> - A path starting with a forward slash `(/)` (Unix-like) or with a drive letter such as `C:` (Windows) is **typically** considered an absolute path.  
-> - The symbol `.` is a reference to the current directory while `..` is a reference to its parent directory.
-> On Windows, a path like `\dir\file.txt` (without drive letter) is *rooted* on the current drive, not fully qualified with drive + path.
+!!! important
+    - A path starting with a forward slash `(/)` (Unix-like) or with a drive letter such as `C:` (Windows) is **typically** considered an absolute path.
+    - The symbol `.` is a reference to the current directory while `..` is a reference to its parent directory.
+    On Windows, a path like `\dir\file.txt` (without drive letter) is *rooted* on the current drive, not fully qualified with drive + path.
 
 
 Example:
@@ -423,8 +423,8 @@ A relative path is resolved against the JVM current working directory.
 - Depends on where JVM was launched
 - Common source of bugs
 
-> [!NOTE]
->  The working directory is typically available via `System.getProperty("user.dir")`.
+!!! note
+     The working directory is typically available via `System.getProperty("user.dir")`.
 
 Example:
 
@@ -445,8 +445,8 @@ A `FileSystem` represents a concrete filesystem implementation.
 - Default filesystem corresponds to OS filesystem
 - Other filesystems possible (ZIP, memory, network)
 
-> [!NOTE] 
-> Paths are always associated with exactly ONE FileSystem.
+!!! note
+    Paths are always associated with exactly ONE FileSystem.
 
 ### 32.14.2 Path Separators
 
@@ -458,8 +458,8 @@ Separators differ across platforms, but `Path` abstracts them.
 |	Portability	|	Manual handling	|	Automatic	|
 |	Comparison	|	Error-prone	|	Safer	|
 	
-> [!NOTE] 
-> Hardcoding `"/"` or `"\\"` is discouraged; `Path` handles this automatically.
+!!! note
+    Hardcoding `"/"` or `"\\"` is discouraged; `Path` handles this automatically.
 
 ---
 
@@ -482,8 +482,8 @@ The `Files` class performs real I/O operations.
 - Maintain a persistent handle to open files (streams/channels own the handle instead)
 
 
-> [!NOTE]
-> Methods returning streams (e.g. `Files.lines()`) DO keep the file open until the stream is closed.
+!!! note
+    Methods returning streams (e.g. `Files.lines()`) DO keep the file open until the stream is closed.
 
 ---
 
@@ -509,7 +509,7 @@ A major conceptual difference lies in error reporting.
 - “Relative paths are portable” → false
 - “Creating a Path may fail due to permissions” → false
 
-> [!NOTE]
-> Many NIO methods that sound “safe” are purely syntactic (like `normalize` or `resolve`): they do **not** touch the filesystem and cannot detect missing files.
+!!! note
+    Many NIO methods that sound “safe” are purely syntactic (like `normalize` or `resolve`): they do **not** touch the filesystem and cannot detect missing files.
 
 

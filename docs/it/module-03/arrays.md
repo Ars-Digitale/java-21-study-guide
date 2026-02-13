@@ -194,8 +194,8 @@ jagged[2] = new int[1];
 - Gli array usano `.length` (campo `public final`).
 - Le stringhe usano `.length()` (metodo).
 
-> [!TIP]
-> Questo è un classico errore: campi vs metodi.
+!!! tip
+    Questo è un classico errore: campi vs metodi.
 
 ```java
 // int x = arr.length;   // OK
@@ -291,10 +291,10 @@ int[] a = {4,1,3};
 Arrays.sort(a); // [1, 3, 4]
 ```
 
-> [!TIP]
-> - Le stringhe sono ordinate in ordine naturale (lessicografico).
-> - **I numeri ordinano prima delle lettere, e le lettere maiuscole ordinano prima delle minuscole** (numeri < maiuscole < minuscole).
-> - Per i tipi di riferimento, `null` è considerato più piccolo di qualsiasi valore non-null.
+!!! tip
+    - Le stringhe sono ordinate in ordine naturale (lessicografico).
+    - **I numeri ordinano prima delle lettere, e le lettere maiuscole ordinano prima delle minuscole** (numeri < maiuscole < minuscole).
+    - Per i tipi di riferimento, `null` è considerato più piccolo di qualsiasi valore non-null.
 
 ```java
 String[] arr = {"AB", "ac", "Ba", "bA", "10", "99"};

@@ -53,9 +53,9 @@
 
 È stato pensato per rendere esplicita l’“assenza di un valore” e per ridurre il rischio di `NullPointerException` forzando i chiamanti a gestire il caso di "assenza".
 
-> [!NOTE]
-> - `Optional` è inteso principalmente per **tipi di ritorno**. 
-> - È generalmente sconsigliato per attributi, parametri di metodo e contesti di serializzazione (a meno che un contratto API specifico lo richieda).
+!!! note
+    - `Optional` è inteso principalmente per **tipi di ritorno**.
+    - È generalmente sconsigliato per attributi, parametri di metodo e contesti di serializzazione (a meno che un contratto API specifico lo richieda).
 
 ### 21.1.1 Creare Optional
 
@@ -90,9 +90,9 @@ String v2 = opt.orElseGet(() -> "computed");
 String v3 = opt.orElseThrow(); // ok perché opt è presente
 ```
 
-> [!NOTE]
-> - Una trappola comune: `orElse(...)` valuta il suo argomento anche se l’Optional è presente. 
-> - Usa `orElseGet(...)` quando il default è laborioso da calcolare.
+!!! note
+    - Una trappola comune: `orElse(...)` valuta il suo argomento anche se l’Optional è presente.
+    - Usa `orElseGet(...)` quando il default è laborioso da calcolare.
 
 ### 21.1.3 Trasformare Optional
 
@@ -122,9 +122,9 @@ Output:
 Alice
 ```
 
-> [!NOTE]
-> - `map` incapsula il risultato in un Optional. 
-> - Se la tua funzione di mapping restituisce già un Optional, usa `flatMap` per evitare l’annidamento `Optional<Optional<T>>`.
+!!! note
+    - `map` incapsula il risultato in un Optional.
+    - Se la tua funzione di mapping restituisce già un Optional, usa `flatMap` per evitare l’annidamento `Optional<Optional<T>>`.
 
 ### 21.1.4 Optional e Stream
 
@@ -147,8 +147,8 @@ Output:
 ```
 
 
-> [!NOTE]
-> Prima di Java 9, questo pattern richiedeva `filter(Optional::isPresent)` più `map(Optional::get)`. 
+!!! note
+    Prima di Java 9, questo pattern richiedeva `filter(Optional::isPresent)` più `map(Optional::get)`.
 
 ### 21.1.5 Optional per tipi primitivi
 
@@ -188,8 +188,8 @@ Gli stream sono progettati per l’elaborazione dei dati, non per l’archiviazi
 - Uno stream può essere consumato soltanto una volta
 - Gli stream incoraggiano operazioni senza effetti collaterali
 
-> [!NOTE]
-> Gli stream sono concettualmente simili a query di database: descrivono cosa calcolare, non come iterare.
+!!! note
+    Gli stream sono concettualmente simili a query di database: descrivono cosa calcolare, non come iterare.
 
 ---
 
@@ -259,8 +259,8 @@ CARLA
 MARIO
 ```
 
-> [!NOTE]
-> Le operazioni intermedie descrivono solo il calcolo. Nessun elemento è ancora elaborato.
+!!! note
+    Le operazioni intermedie descrivono solo il calcolo. Nessun elemento è ancora elaborato.
 
 
 ### 21.3.3 Operazioni Terminali
@@ -334,8 +334,8 @@ Stream.of("a", "bb", "ccc")
 
 Ordine di esecuzione:
 
-> [!NOTE]
-> Viene processato solo il numero minimo di elementi richiesti dall’operazione terminale.
+!!! note
+    Viene processato solo il numero minimo di elementi richiesti dall’operazione terminale.
 
 ```text
 filter a
@@ -364,8 +364,8 @@ Operazioni come `map` e `filter` processano ogni elemento indipendentemente.
 Operazioni come `distinct`, `sorted` e `limit` richiedono il mantenimento di stato interno.
 
 
-> [!NOTE]
-> Le operazioni stateful possono impattare severamente le prestazioni degli stream paralleli.
+!!! note
+    Le operazioni stateful possono impattare severamente le prestazioni degli stream paralleli.
 
 ---
 
@@ -383,8 +383,8 @@ Alcune operazioni rispettano l’ordine di encounter:
 - `forEachOrdered`
 - `findFirst`
 
-> [!NOTE]
-> Negli stream paralleli, `forEach` non garantisce ordine.
+!!! note
+    Negli stream paralleli, `forEach` non garantisce ordine.
 
 ---
 
@@ -408,8 +408,8 @@ Regole per stream paralleli sicuri:
 - Nessuno stato condiviso mutabile
 - Solo operazioni associative
 
-> [!NOTE]
-> Gli stream paralleli possono essere più lenti per carichi di lavoro leggeri.
+!!! note
+    Gli stream paralleli possono essere più lenti per carichi di lavoro leggeri.
 
 ---
 
@@ -436,8 +436,8 @@ La riduzione richiede:
 - **Accumulator**: incorpora un elemento dello stream in un risultato parziale;
 - (Opzionale) **Combiner**: unisce due risultati parziali; Usato solo quando lo stream è parallelo; Ignorato per stream sequenziali
 
-> [!NOTE]
-> L’accumulator deve essere associativo e stateless.
+!!! note
+    L’accumulator deve essere associativo e stateless.
 
 #### 21.8.1.1 Modello mentale corretto
 
@@ -518,8 +518,8 @@ Il risultato sequenziale sarebbe:
 (((0 - 1) - 2) - 3) - 4 = -10
 ```
 
-> [!WARNING]
-> ❌ I risultati paralleli e sequenziali differiscono → riduzione illegale
+!!! warning
+    ❌ I risultati paralleli e sequenziali differiscono → riduzione illegale
 
 ### 21.8.2 `collect()`
 
@@ -614,8 +614,8 @@ Java fornisce tre tipi di stream specializzati per evitare overhead di boxing e 
 
 Gli stream primitivi sono comunque stream (pipeline lazy, operazioni intermedie + terminali, single-use), ma non sono **generici** e usano interfacce funzionali specializzate per primitivi (es. `IntPredicate`, `LongUnaryOperator`, `DoubleConsumer`).
 
-> [!NOTE]
-> Usa stream primitivi quando i dati sono naturalmente numerici o quando le prestazioni contano: evitano overhead di boxing/unboxing e forniscono operazioni terminali numeriche aggiuntive.
+!!! note
+    Usa stream primitivi quando i dati sono naturalmente numerici o quando le prestazioni contano: evitano overhead di boxing/unboxing e forniscono operazioni terminali numeriche aggiuntive.
 
 ### 21.10.1 Perché gli stream primitivi sono importanti
 
@@ -646,9 +646,9 @@ I seguenti sono i modi usati più frequentemente per creare stream primitivi. Mo
 | DoubleStream.iterate(double seed, DoublePredicate hasNext, DoubleUnaryOperator f) |
 | DoubleStream.generate(DoubleSupplier s) |
 
-> [!IMPORTANT]
-> - Solo `IntStream` e `LongStream` forniscono `range()` e `rangeClosed()`. 
-> - Non esiste `DoubleStream.range` perché contare con double ha problemi di arrotondamento.
+!!! important
+    - Solo `IntStream` e `LongStream` forniscono `range()` e `rangeClosed()`.
+    - Non esiste `DoubleStream.range` perché contare con double ha problemi di arrotondamento.
 
 ### 21.10.3 Metodi di mapping specializzati per primitivi
 
@@ -698,9 +698,9 @@ La colonna “From” ti dice quali metodi sono disponibili e il tipo di stream 
 | IntStream | DoubleStream | asDoubleStream() |
 | LongStream | DoubleStream | asDoubleStream() |
 		
-> [!IMPORTANT]
-> - Non esiste un’operazione **`unboxed()`**. 
-> - Per passare da wrapper a primitivi devi partire da `Stream<T>` e usare `mapToInt` / `mapToLong` / `mapToDouble`.
+!!! important
+    - Non esiste un’operazione **`unboxed()`**.
+    - Per passare da wrapper a primitivi devi partire da `Stream<T>` e usare `mapToInt` / `mapToLong` / `mapToDouble`.
 
 ### 21.10.5 Operazioni terminali e i loro tipi di risultato
 
@@ -718,8 +718,8 @@ Gli stream primitivi hanno diverse operazioni terminali che sono uniche o hanno 
 | `reduce(identity, op)` | int | long | double |
 | `summaryStatistics()` | IntSummaryStatistics | LongSummaryStatistics | DoubleSummaryStatistics |
 			
-> [!WARNING]
-> - Anche per `IntStream` e `LongStream`, **`average()`** restituisce `OptionalDouble` (non `OptionalInt` o `OptionalLong`).
+!!! warning
+    - Anche per `IntStream` e `LongStream`, **`average()`** restituisce `OptionalDouble` (non `OptionalInt` o `OptionalLong`).
 
 
 - Esempio 1: `Stream<String>` → `IntStream` → operazioni terminali primitive.
@@ -784,8 +784,8 @@ Stream.of("a", "b")
 	.collect(StringBuilder::new, StringBuilder::append, StringBuilder::append);
 ```
 
-> [!NOTE]
-> Usa `collect(supplier, accumulator, combiner)` quando ti serve un contenitore mutabile custom e non vuoi implementare un `Collector` completo.
+!!! note
+    Usa `collect(supplier, accumulator, combiner)` quando ti serve un contenitore mutabile custom e non vuoi implementare un `Collector` completo.
 
 ### 21.11.2 Collector core
 
@@ -844,8 +844,8 @@ setByLen: {1=[a], 2=[bb, dd], 3=[ccc]}
 ```
 
 
-> [!WARNING]
-> Fai attenzione al tipo del valore della mappa risultante. Esempio: `groupingBy(..., counting())` produce `Map<K, Long>` (non `int`).
+!!! warning
+    Fai attenzione al tipo del valore della mappa risultante. Esempio: `groupingBy(..., counting())` produce `Map<K, Long>` (non `int`).
 
 ### 21.11.4 partitioningBy
 
@@ -864,8 +864,8 @@ Output:
 parts: {false=[a], true=[bb, ccc]}
 ```
 
-> [!NOTE]
-> `partitioningBy` crea sempre due bucket, mentre `groupingBy` può crearne molti. Entrambi supportano collector downstream.
+!!! note
+    `partitioningBy` crea sempre due bucket, mentre `groupingBy` può crearne molti. Entrambi supportano collector downstream.
 
 ### 21.11.5 toMap e regole di merge
 
@@ -905,8 +905,8 @@ I collector sono progettati per funzionare con stream paralleli usando supplier/
 - Il combiner unisce i contenitori (richiesto per esecuzione parallela)
 - Alcuni collector sono “concurrent” o hanno caratteristiche che influenzano prestazioni e ordinamento
 
-> [!NOTE]
-> preferisci `collect(Collectors.toList())` rispetto a usare `reduce` per costruire collezioni. `reduce` è per riduzioni in stile immutabile; `collect` è per contenitori mutabili.
+!!! note
+    preferisci `collect(Collectors.toList())` rispetto a usare `reduce` per costruire collezioni. `reduce` è per riduzioni in stile immutabile; `collect` è per contenitori mutabili.
 
 
 

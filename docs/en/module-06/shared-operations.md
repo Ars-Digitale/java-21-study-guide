@@ -26,8 +26,8 @@ Mastering these operations is essential, as they explain how collections behave 
 
 The following methods come from the `Collection<E>` interface and are inherited by **all** major collections except `Map` (which has its own family of operations).
 
-> [!NOTE]
-> `Map` does not implement `Collection`, but its `keySet()`, `values()`, and `entrySet()` views **do**, and therefore expose these shared operations.
+!!! note
+    `Map` does not implement `Collection`, but its `keySet()`, `values()`, and `entrySet()` views **do**, and therefore expose these shared operations.
 
 ### 23.1.1 Mutating Operations
 
@@ -81,10 +81,10 @@ firstSet.equals(secondSet): true
 secondSet.equals(thirdSet): true
 ```
 
-> [!NOTE]
-> - Lists compare size, order, and element equality one-by-one.
-> - Sets compare size and membership only — encounter order is irrelevant.
-> - Two sets with the same logical elements are equal even if they maintain different iteration order internally.
+!!! note
+    - Lists compare size, order, and element equality one-by-one.
+    - Sets compare size and membership only — encounter order is irrelevant.
+    - Two sets with the same logical elements are equal even if they maintain different iteration order internally.
 
 ---
 
@@ -99,10 +99,10 @@ for (Integer i : list) {
 }
 ```
 
-> [!NOTE]
-> Use `Iterator.remove()` when you must remove elements during iteration.
-> Fail-fast behavior is **not guaranteed** — the exception is thrown on a best-effort basis.
-> You must not rely on catching it for program correctness.
+!!! note
+    Use `Iterator.remove()` when you must remove elements during iteration.
+    Fail-fast behavior is **not guaranteed** — the exception is thrown on a best-effort basis.
+    You must not rely on catching it for program correctness.
 
 ---
 

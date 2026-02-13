@@ -83,8 +83,8 @@ La **signature de la méthode** en Java inclut :
 - le *nom de la méthode*
 - la *liste des types de paramètres* (types + ordre)
 
-> [!NOTE]
-> Les **noms des paramètres NE font PAS partie de la signature**, seuls les types et l’ordre comptent.
+!!! note
+    Les **noms des paramètres NE font PAS partie de la signature**, seuls les types et l’ordre comptent.
 
 - Exemple de signatures distinctes :
 
@@ -481,9 +481,9 @@ show(10, "A");                // length = 1
 show(10, "A", "B", "C");      // length = 3
 ```
 
-> [!IMPORTANT]
-> Les varargs et les tableaux participent à la surcharge des méthodes.
-> La résolution de la surcharge peut devenir ambiguë.
+!!! important
+    Les varargs et les tableaux participent à la surcharge des méthodes.
+    La résolution de la surcharge peut devenir ambiguë.
 
 ---
 
@@ -600,8 +600,8 @@ public class Config {
 }
 ```
 
-> [!IMPORTANT]
-> Les blocs d’initialisation statique s’exécutent **une seule fois**, dans l’ordre où ils apparaissent, avant `main()` et avant qu’une méthode statique ne soit appelée.
+!!! important
+    Les blocs d’initialisation statique s’exécutent **une seule fois**, dans l’ordre où ils apparaissent, avant `main()` et avant qu’une méthode statique ne soit appelée.
 
 
 ### 14.6.4 Ordre d’initialisation (Statique vs. Instance)
@@ -650,8 +650,8 @@ A ref = new B();
 ref.test();   // affiche "A" — binding statique !
 ```
 
-> [!NOTE]
-> Règle clé : les méthodes statiques utilisent le **type de la référence**, et non le type de l’objet.
+!!! note
+    Règle clé : les méthodes statiques utilisent le **type de la référence**, et non le type de l’objet.
 
 
 ### 14.6.7 Pièges courants

@@ -150,8 +150,8 @@ List<String> names = new ArrayList<>();
 Map<Integer, String> map = new HashMap<>();
 ```
 
-> [!NOTE]
-> Generics in collections work through `type erasure`: Please check the Paragraph "**18.4 Type Erasure**" in Chapter: [18. Generics in Java](../module-04/generics.md).
+!!! note
+    Generics in collections work through `type erasure`: Please check the Paragraph "**18.4 Type Erasure**" in Chapter: [18. Generics in Java](../module-04/generics.md).
 
 ## 22.7 Mutability vs. Immutability
 
@@ -169,8 +169,8 @@ Java provides several ways to create immutable collections:
 - `Collections.unmodifiableList(...)` wrappers
 - `Records` used as immutable value containers
 
-> [!NOTE]
-> The method `Arrays.asList(varargs)`, which is backed by an array, behaves differently: see examples below.
+!!! note
+    The method `Arrays.asList(varargs)`, which is backed by an array, behaves differently: see examples below.
 
 ```java
 
@@ -191,9 +191,9 @@ immutable2.set(0, "k"); // ❌ UnsupportedOperationException
 fromAsList.set(0, "k");  // the update will be reflected on the backing array as well.
 ```
 
-> [!NOTE]
-> `Arrays.asList(...)` returns a fixed-size, but **mutable**, List view backed by the original array.
-> You cannot add/remove elements, but you can replace existing ones.
+!!! note
+    `Arrays.asList(...)` returns a fixed-size, but **mutable**, List view backed by the original array.
+    You cannot add/remove elements, but you can replace existing ones.
 
 
 ## 22.8 Big-O Performance Expectations
@@ -211,8 +211,8 @@ Understanding complexity is essential. Here are common examples:
 | Deque | `add/remove first/last`  | **`O(1)`**  |
 
 
-> [!NOTE]
-> These values are averages; worst-case may be different (especially for hash-based structures).
+!!! note
+    These values are averages; worst-case may be different (especially for hash-based structures).
 
 
 ## 22.9 Summary

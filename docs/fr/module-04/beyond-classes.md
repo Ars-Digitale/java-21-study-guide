@@ -80,8 +80,8 @@ interface Calculator {
 }
 ```
 
-> [!WARNING]
-> Puisque les méthodes abstraites des interfaces sont implicitement `public`, **vous ne pouvez pas** réduire le niveau d’accès sur une méthode d’implémentation.
+!!! warning
+    Puisque les méthodes abstraites des interfaces sont implicitement `public`, **vous ne pouvez pas** réduire le niveau d’accès sur une méthode d’implémentation.
 
 ### 17.1.2 Implémenter une Interface
 
@@ -91,8 +91,8 @@ class BasicCalc implements Calculator {
 }
 ```
 
-> [!NOTE]
-> **Chaque** méthode abstraite doit être implémentée, sauf si la classe est elle-même abstraite.
+!!! note
+    **Chaque** méthode abstraite doit être implémentée, sauf si la classe est elle-même abstraite.
 
 ### 17.1.3 Héritage Multiple
 
@@ -279,9 +279,9 @@ public record Point(int x, int y) {
 }
 ```
 
-> [!NOTE]
-> - Le compilateur n’insérera pas de constructeur si vous en fournissez manuellement un avec la même liste de paramètres dans l’ordre défini ;
-> - Dans ce cas, vous devez définir explicitement chaque champ manuellement ;
+!!! note
+    - Le compilateur n’insérera pas de constructeur si vous en fournissez manuellement un avec la même liste de paramètres dans l’ordre défini ;
+    - Dans ce cas, vous devez définir explicitement chaque champ manuellement ;
 
 ### 17.4.2 Constructeur Compact
 
@@ -302,8 +302,8 @@ public record Person(String name, int age) {
 }
 ```
 
-> [!WARNING]
-> - Si vous essayez de modifier un attribut de Record dans un Constructeur Compact, votre code ne compilera pas
+!!! warning
+    - Si vous essayez de modifier un attribut de Record dans un Constructeur Compact, votre code ne compilera pas
 
 ### 17.4.3 Pattern Matching pour les Records
 
@@ -361,9 +361,9 @@ Au lieu de spécifier des types exacts pour chaque champ, vous pouvez utiliser `
 
 `var` dans les patterns fonctionne comme `var` dans les variables locales : cela signifie "inférer le type".
 
-> [!WARNING]
-> - Vous avez toujours besoin du type du record englobant (Person, Address) ;
-> - seuls les types des champs peuvent être remplacés par `var`.
+!!! warning
+    - Vous avez toujours besoin du type du record englobant (Person, Address) ;
+    - seuls les types des champs peuvent être remplacés par `var`.
 
 #### 17.4.4.3 Nested Record Patterns et Generics
 
@@ -418,8 +418,8 @@ Placement illégal de `var`
 case var(Person(var n, var a)) -> ...
 ```
 
-> [!NOTE]
-> - `var` ne peut pas remplacer l’ensemble du pattern, seulement les composants individuels.
+!!! note
+    - `var` ne peut pas remplacer l’ensemble du pattern, seulement les composants individuels.
 
 ---
 
@@ -534,8 +534,8 @@ class Outer {
 }
 ```
 
-> [!WARNING]
-> - Instancier une inner class SANS instance externe est illégal.
+!!! warning
+    - Instancier une inner class SANS instance externe est illégal.
 
 ### 17.5.3 Classes Locales
 

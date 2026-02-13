@@ -40,8 +40,8 @@ In Java, a **functional interface** is an interface that contains **exactly one*
 
 Functional interfaces enable **Lambda Expressions** and **Method References**, forming the core of Java’s functional programming model.
 
-> [!NOTE]
-> Java automatically treats any interface with a single abstract method as a functional interface. The `@FunctionalInterface` annotation is optional but recommended.
+!!! note
+    Java automatically treats any interface with a single abstract method as a functional interface. The `@FunctionalInterface` annotation is optional but recommended.
 
 
 ### 20.1.1 Rules for Functional Interfaces
@@ -404,8 +404,8 @@ BiPredicate<String, String> p2 = String::equals;   // method reference
 System.out.println(p2.test("abc", "abc"));  // true
 ```
 
-> [!NOTE]
-> This form applies the method to the *first argument* of the lambda.
+!!! note
+    This form applies the method to the *first argument* of the lambda.
 
 
 ### 20.3.4 Reference to a Constructor

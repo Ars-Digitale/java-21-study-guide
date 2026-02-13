@@ -97,9 +97,9 @@ Parentheses `()` can be used to **override precedence**:
 int result = (10 + 5) * 2;  // Parentheses evaluated first → result = 30
 ```
 
-> [!NOTE] 
-> - Operator **precedence** is about *grouping*, not evaluation order.  
-> - Use parentheses for precedence and clarity in complex expressions.
+!!! note
+    - Operator **precedence** is about *grouping*, not evaluation order.
+    - Use parentheses for precedence and clarity in complex expressions.
 
 ---
 
@@ -166,10 +166,10 @@ int a = 5;                  // binary: 0000 0101
 System.out.println(~a);     // -6 → binary: 1111 1010 (two's complement)
 ```
 
-> [!NOTE]
-> - Prefix (`++x` / `--x`): updates the value first, then returns the new value.
-> - Postfix (`x++` / `x--`): returns the current value first, then updates it.
-> - The `!` operator applies to boolean values; `~` applies to integral numeric types.
+!!! note
+    - Prefix (`++x` / `--x`): updates the value first, then returns the new value.
+    - Postfix (`x++` / `x--`): returns the current value first, then updates it.
+    - The `!` operator applies to boolean values; `~` applies to integral numeric types.
 
 ---
 
@@ -190,12 +190,12 @@ They perform arithmetic, relational, logical, bitwise, and assignment operations
 | **Assignment** | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 3` | Modify and assign. |
 | **String Concatenation** | `+` | `"Hello " + name` | Joins strings together. |
 
-> [!IMPORTANT]
-> **Logical operators** (`&`, `|`, `^`) *always evaluate both sides*.
->  
-> **Conditional operators** (`&&`, `||`) are **short-circuiting**:
-> - `a && b` → `b` evaluated only if `a` is true
-> - `a || b` → `b` evaluated only if `a` is false
+!!! important
+    **Logical operators** (`&`, `|`, `^`) *always evaluate both sides*.
+    
+    **Conditional operators** (`&&`, `||`) are **short-circuiting**:
+    - `a && b` → `b` evaluated only if `a` is true
+    - `a || b` → `b` evaluated only if `a` is false
 
 
 - Examples:
@@ -303,8 +303,8 @@ if (flag == true) {
 }
 ```
 
-> [!WARNING]
-> If you see `if (x = something)`, stop: it’s **assignment**, not comparison.
+!!! warning
+    If you see `if (x = something)`, stop: it’s **assignment**, not comparison.
 
 
 ### 5.7.4 Compound Assignment Operators
@@ -344,9 +344,9 @@ byte b = 10;
 b += 1;         // ✅ works: implicit cast back to byte
 ```
 
-> [!NOTE]
-> Compound assignments **perform an implicit cast** to the variable type on the left.
-> That’s why `b += 1` compiles even though `b = b + 1` does not.
+!!! note
+    Compound assignments **perform an implicit cast** to the variable type on the left.
+    That’s why `b += 1` compiles even though `b = b + 1` does not.
 
 
 ### 5.7.5 Equality Operators (`==` and `!=`)
@@ -354,10 +354,10 @@ b += 1;         // ✅ works: implicit cast back to byte
 The **equality operators** in Java `==` (equal to) and `!=` (not equal to) are used to compare two operands for equality.  
 However, their behavior differs **depending on whether they are applied to primitive types or reference types (objects)**.
 
-> [!NOTE]
-> - `==` compares **values** for primitives  
-> - `==` compares **references** for objects  
-> - `.equals()` compares **object content** (if implemented)
+!!! note
+    - `==` compares **values** for primitives
+    - `==` compares **references** for objects  
+    - `.equals()` compares **object content** (if implemented)
 
 
 #### 5.7.5.1 Equality with Primitive Types
@@ -369,9 +369,9 @@ int a = 5, b = 5;
 System.out.println(a == b);  // true  → both have the same value
 System.out.println(a != b);  // false → values are equal
 ```
-> [!IMPORTANT]
-> - If the operands are of different numeric types, Java automatically promotes them to a common type before comparison.
-> - However, comparing float and double can produce unexpected results due to precision errors (check example below)
+!!! important
+    - If the operands are of different numeric types, Java automatically promotes them to a common type before comparison.
+    - However, comparing float and double can produce unexpected results due to precision errors (check example below)
 
 ```java
 int x = 10;
@@ -449,8 +449,8 @@ Object n = null;
 System.out.println(n instanceof Object);  // false
 ```
 
-> [!WARNING]
-> `instanceof` always returns `false` when the left operand is `null`.
+!!! warning
+    `instanceof` always returns `false` when the left operand is `null`.
 
 
 #### 5.7.6.1 Compile-Time Check vs Runtime Check
@@ -576,13 +576,13 @@ System.out.println(list instanceof java.util.List<?>); // ✅ true
 The **ternary operator** (`? :`) is the only operator in Java that takes **three operands**.  
 It acts as a concise form of an `if-else` statement.
 
-> [!TIP]
-> The ternary operator **must** produce a value of a *compatible type*.
-> If the two branches produce unrelated types, compilation fails.
-> 
-> ```java
-> String s = true ? "ok" : 5; // ❌ compile error: incompatible types
-> ```
+!!! tip
+    The ternary operator **must** produce a value of a *compatible type*.
+    If the two branches produce unrelated types, compilation fails.
+    
+    ```java
+    String s = true ? "ok" : 5; // ❌ compile error: incompatible types
+    ```
 
 
 ### 5.8.1 Syntax
@@ -610,6 +610,6 @@ System.out.println(grade);  // "B"
 
 ### 5.8.4 Notes
 
-> [!WARNING]
-> - Nested ternary expressions can reduce readability. Use parentheses for clarity.  
-> - The ternary operator returns a **value**, unlike `if-else`, which is a statement.
+!!! warning
+    - Nested ternary expressions can reduce readability. Use parentheses for clarity.
+    - The ternary operator returns a **value**, unlike `if-else`, which is a statement.

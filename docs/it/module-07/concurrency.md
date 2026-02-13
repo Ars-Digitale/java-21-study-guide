@@ -94,8 +94,8 @@ synchronized (lockA) {
 
 Se un altro thread acquisisce prima `lockB` e poi attende `lockA`, può verificarsi un deadlock.
 
-> [!NOTE]
-> I deadlock nel mondo reale coinvolgono tipicamente lock multipli e inversioni d’ordine.
+!!! note
+    I deadlock nel mondo reale coinvolgono tipicamente lock multipli e inversioni d’ordine.
 
 ### 31.2.3 Starvation
 
@@ -191,8 +191,8 @@ Integer result = future.get();
 | T **get()** | Blocca fino al completamento e restituisce il risultato, o lancia un’eccezione se fallito o cancellato. |
 | T **get(long timeout, TimeUnit unit)** | Blocca fino al timeout dato e restituisce il risultato, o lancia `TimeoutException` se non completato. |
 
-> [!WARNING]
-> `execute()` scarterà le eccezioni silenziosamente a meno che non vengano gestite all’interno del task.
+!!! warning
+    `execute()` scarterà le eccezioni silenziosamente a meno che non vengano gestite all’interno del task.
 
 ### 31.4.2 Callable vs Runnable
 
@@ -253,9 +253,9 @@ scheduler.schedule(
 | ScheduledFuture<?> scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit) | Pianifica un’esecuzione periodica a fixed rate: ogni esecuzione è pianificata rispetto al tempo iniziale; se un’esecuzione è in ritardo, le successive possono tentare di “recuperare”. |
 | ScheduledFuture<?> scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit) | Pianifica un’esecuzione periodica con fixed delay: ogni esecuzione è pianificata rispetto al completamento della precedente; non esiste comportamento di recupero. |
 
-> [!IMPORTANT]
-> Non creare mai thread manualmente in un loop:
-> usa invece pools o virtual threads.
+!!! important
+    Non creare mai thread manualmente in un loop:
+    usa invece pools o virtual threads.
 
 ---
 
@@ -306,8 +306,8 @@ La keyword synchronized può essere applicata a:
 - **Metodi statici** (lock sull’oggetto `Class`)
 - **Blocchi** (lock su un oggetto specifico, permettendo controllo più fine)
 
-> [!IMPORTANT]
-> La sincronizzazione è semplice ma può ridurre la scalabilità sotto contention.
+!!! important
+    La sincronizzazione è semplice ma può ridurre la scalabilità sotto contention.
 
 ---
 
@@ -399,9 +399,9 @@ Caratteristiche chiave del Lock framework:
 | **ReentrantReadWriteLock** | Fornisce lock separati reentrant di read e write per migliorare la scalabilità in lettura. |
 | **StampedLock** | Lock che supporta modalità optimistic, read e write locking (non-reentrant). |
 
-> [!WARNING]
-> A differenza di altri lock, StampedLock **non è reentrant** —
-> riacquisirlo dallo stesso thread causa deadlock.
+!!! warning
+    A differenza di altri lock, StampedLock **non è reentrant** —
+    riacquisirlo dallo stesso thread causa deadlock.
 
 ### 31.7.3.2 Common Lock methods
 
@@ -517,8 +517,8 @@ queue.take();        // blocks if the queue is empty
 
 Le blocking queue gestiscono la synchronization internamente, semplificando la coordination tra thread producer e consumer.
 
-> [!CAUTION]
-> Le CopyOnWrite collections sono memory-expensive; evitarle in workload write-heavy.
+!!! caution
+    Le CopyOnWrite collections sono memory-expensive; evitarle in workload write-heavy.
 
 ---
 
@@ -547,8 +547,8 @@ Poiché l’ordine di esecuzione non è garantito, i parallel streams dovrebbero
 - Blocking I/O
 - Order-dependent side effects
 
-> [!NOTE]
-> Usa `forEachOrdered()` se è richiesto output deterministico.
+!!! note
+    Usa `forEachOrdered()` se è richiesto output deterministico.
 
 ---
 

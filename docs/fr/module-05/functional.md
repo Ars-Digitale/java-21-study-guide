@@ -40,8 +40,8 @@ En Java, une **interface fonctionnelle** est une interface qui contient **exacte
 
 Les interfaces fonctionnelles permettent les **Lambda Expressions** et les **Method References**, et constituent le cœur du modèle de programmation fonctionnelle de Java.
 
-> [!NOTE]
-> Java considère automatiquement comme interface fonctionnelle toute interface ayant une seule méthode abstraite. L’annotation `@FunctionalInterface` est optionnelle mais recommandée.
+!!! note
+    Java considère automatiquement comme interface fonctionnelle toute interface ayant une seule méthode abstraite. L’annotation `@FunctionalInterface` est optionnelle mais recommandée.
 
 ### 20.1.1 Règles pour les Interfaces Fonctionnelles
 
@@ -392,8 +392,8 @@ BiPredicate<String, String> p2 = String::equals;   // method reference
 System.out.println(p2.test("abc", "abc"));  // true
 ```
 
-> [!NOTE]
-> Cette forme applique la méthode au *premier argument* de la lambda.
+!!! note
+    Cette forme applique la méthode au *premier argument* de la lambda.
 
 ### 20.3.4 Référence à un Constructeur
 

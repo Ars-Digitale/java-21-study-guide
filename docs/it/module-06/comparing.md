@@ -71,8 +71,8 @@ Output:
 [10, 2, A, Z, a, b]
 ```
 
-> [!NOTE]
-> L’ordinamento naturale è definito solo per i tipi che implementano `Comparable`.
+!!! note
+    L’ordinamento naturale è definito solo per i tipi che implementano `Comparable`.
 
 ## 24.1 Comparable — Ordinamento Naturale
 
@@ -94,12 +94,12 @@ Regole e restituzione:
 - Restituisce **zero** → `this` == `other`
 - Restituisce **positivo** → `this` > `other`
 
-> [!IMPORTANT]
-> - L’ordinamento naturale deve essere consistente con `equals()`, a meno che non sia esplicitamente documentato diversamente:
-> - `compareTo()` è consistente con `equals()` se, e solo se, `a.compareTo(b) == 0` e `a.equals(b) è true`.
+!!! important
+    - L’ordinamento naturale deve essere consistente con `equals()`, a meno che non sia esplicitamente documentato diversamente:
+    - `compareTo()` è consistente con `equals()` se, e solo se, `a.compareTo(b) == 0` e `a.equals(b) è true`.
 
-> [!WARNING]
-> compareTo può lanciare ClassCastException se riceve un tipo non confrontabile — ma questo di solito succede solo con tipi raw.
+!!! warning
+    compareTo può lanciare ClassCastException se riceve un tipo non confrontabile — ma questo di solito succede solo con tipi raw.
 
 
 ### 24.1.2 Esempio: Classe che Implementa Comparable
@@ -229,8 +229,8 @@ Collections.sort(list); // ordine naturale
 Collections.sort(list, byName); // comparator
 ```
 
-> [!NOTE]
-> Collections.sort(list) delega a list.sort(comparator) da Java 8.
+!!! note
+    Collections.sort(list) delega a list.sort(comparator) da Java 8.
 
 ---
 
@@ -253,8 +253,8 @@ Comparator.comparingLong(...)
 Comparator.comparingDouble(...)
 ```
 
-> [!NOTE]
-> Questi evitano il boxing e sono preferiti nel codice sensibile alle prestazioni.
+!!! note
+    Questi evitano il boxing e sono preferiti nel codice sensibile alle prestazioni.
 
 ---
 
@@ -293,8 +293,8 @@ books.stream().sorted(cmp)
 
 ```
 
-> [!NOTE]
-> `reversed()` si applica all’intero comparator composto, non solo alla prima chiave di confronto.
+!!! note
+    `reversed()` si applica all’intero comparator composto, non solo alla prima chiave di confronto.
 
 ---
 

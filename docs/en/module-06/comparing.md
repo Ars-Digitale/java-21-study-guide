@@ -71,8 +71,8 @@ Output:
 [10, 2, A, Z, a, b]
 ```
 
-> [!NOTE]
-> Natural ordering is only defined for types that implement Comparable.
+!!! note
+    Natural ordering is only defined for types that implement Comparable.
 
 ## 24.1 Comparable — Natural Ordering
 
@@ -94,12 +94,12 @@ Rules and expectations:
 - Return **zero** → `this` == `other`
 - Return **positive** → `this` > `other`
 
-> [!IMPORTANT]
-> - Natural ordering must be consistent with `equals()`, unless explicitly documented otherwise:
-> - `compareTo()` is consistent with `equals()` if, and only if, `a.compareTo(b) == 0` and `a.equals(b) is true`.
+!!! important
+    - Natural ordering must be consistent with `equals()`, unless explicitly documented otherwise:
+    - `compareTo()` is consistent with `equals()` if, and only if, `a.compareTo(b) == 0` and `a.equals(b) is true`.
 
-> [!WARNING]
-> compareTo may throw ClassCastException if given a non-comparable type — but this usually appears only with raw types.
+!!! warning
+    compareTo may throw ClassCastException if given a non-comparable type — but this usually appears only with raw types.
 
 
 ### 24.1.2 Example: Class Implementing Comparable
@@ -229,8 +229,8 @@ Collections.sort(list); // natural order
 Collections.sort(list, byName); // comparator
 ```
 
-> [!NOTE]
-> Collections.sort(list) delegates to list.sort(comparator) since Java 8.
+!!! note
+    Collections.sort(list) delegates to list.sort(comparator) since Java 8.
 
 ---
 
@@ -253,8 +253,8 @@ Comparator.comparingLong(...)
 Comparator.comparingDouble(...)
 ```
 
-> [!NOTE]
-> These avoid boxing and are preferred in performance-sensitive code.
+!!! note
+    These avoid boxing and are preferred in performance-sensitive code.
 
 ---
 
@@ -293,8 +293,8 @@ books.stream().sorted(cmp)
 
 ```
 
-> [!NOTE]
-> `reversed()` applies to the entire composed comparator, not just the first comparison key.
+!!! note
+    `reversed()` applies to the entire composed comparator, not just the first comparison key.
 
 ---
 

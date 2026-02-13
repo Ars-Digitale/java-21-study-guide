@@ -159,9 +159,9 @@ Java les promeut automatiquement en **`int`**, même si **les deux opérandes so
 | `short s1 = 1000, s2 = 2000; short sum = (short)(s1 + s2);` | Les opérandes sont promus en `int`, un cast explicite est nécessaire pour affecter à `short`. |
 | `char c1 = 'A', c2 = 2; int result = c1 + c2;` | `'A'` (65) et `2` sont promus en `int`, résultat = `67`. |
 
-> [!NOTE]  
-> Cette règle s’applique uniquement lorsqu’on utilise des **variables**.  
-> Lorsque l’on utilise des **littéraux constants**, le compilateur peut parfois évaluer l’expression à la compilation et l’affecter sans problème.
+!!! note
+    Cette règle s’applique uniquement lorsqu’on utilise des **variables**.
+    Lorsque l’on utilise des **littéraux constants**, le compilateur peut parfois évaluer l’expression à la compilation et l’affecter sans problème.
 
 ```java
 byte a = 10 + 20;   // ✅ OK : expression constante qui tient dans un byte
@@ -181,9 +181,9 @@ le **résultat** de l’expression a ce **même type promu**.
 | `float f = 3.5F; long l = 4L; var result = f + l;` | `l` est promu en `float`, le résultat est un `float`. |
 | `int x = 10, y = 4; var div = x / y;` | Les deux sont `int`, le résultat est un `int` (`2`), la partie fractionnaire est tronquée. |
 
-> [!WARNING]  
-> La division entière produit toujours un **résultat entier**.  
-> Pour obtenir un résultat décimal, **au moins un opérande doit être flottant** :
+!!! warning
+    La division entière produit toujours un **résultat entier**.
+    Pour obtenir un résultat décimal, **au moins un opérande doit être flottant** :
 
 ```java
 double result = 10.0 / 4; // ✅ 2.5
@@ -251,8 +251,8 @@ int i = (int) d;  // cast explicite : double → int
 System.out.println(i); // 9 (fraction supprimée)
 ```
 
-> [!WARNING]  
-> ⚠ À utiliser uniquement lorsque vous êtes sûr que la valeur tient dans le type cible.
+!!! warning
+    ⚠ À utiliser uniquement lorsque vous êtes sûr que la valeur tient dans le type cible.
 
 ---
 
@@ -281,10 +281,10 @@ double d = 9.99;
 int i = (int) d; // 9 (fraction supprimée)
 ```
 
-> [!NOTE]  
-> Les types flottants (`float`, `double`) **ne font pas de wrap-around** :  
-> - overflow → `Infinity` / `-Infinity`  
-> - underflow (valeurs très petites) → 0.0 ou valeurs dénormalisées.
+!!! note
+    Les types flottants (`float`, `double`) **ne font pas de wrap-around** :
+    - overflow → `Infinity` / `-Infinity`  
+    - underflow (valeurs très petites) → 0.0 ou valeurs dénormalisées.
 
 ---
 
@@ -331,11 +331,11 @@ short a = 5 + b;               // ❌ 5 (int) + b (short → int) = int
 short a2 = (short) (5 + b);    // ✅ cast de l’expression entière
 ```
 
-> [!WARNING]  
-> Le cast est un **opérateur unaire** :
->
-> `short a = (short) 5 + b;`  
-> Le cast s’applique uniquement à `5` → le résultat de l’expression reste un int → l’affectation échoue toujours.
+!!! warning
+    Le cast est un **opérateur unaire** :
+    
+    `short a = (short) 5 + b;`  
+    Le cast s’applique uniquement à `5` → le résultat de l’expression reste un int → l’affectation échoue toujours.
 
 ---
 

@@ -104,8 +104,8 @@ Java 21 définit différents types de thread, qui diffèrent par cycle de vie, s
 - **Thread Utilisateur**: Tout thread non-daemon. La JVM attend que tous les thread utilisateur terminent avant de se terminer.
 - **Thread Système**: Des thread créés en interne par la JVM pour le garbage collection, la compilation JIT et d’autres services runtime.
 
-> [!NOTE]
-> Les `thread virtuels` sont des thread utilisateur légers; ils **ne** sont pas daemon par défaut.
+!!! note
+    Les `thread virtuels` sont des thread utilisateur légers; ils **ne** sont pas daemon par défaut.
 
 ---
 
@@ -141,9 +141,9 @@ Runnable runnable = ...
   ThreadFactory factory = Thread.ofVirtual().factory();
 ```
 
-> [!WARNING]
-> - La seule création d’un thread ne démarre pas son exécution.
-> - L’exécution commence seulement lorsque le scheduler de la JVM est impliqué.
+!!! warning
+    - La seule création d’un thread ne démarre pas son exécution.
+    - L’exécution commence seulement lorsque le scheduler de la JVM est impliqué.
 
 ---
 
@@ -172,13 +172,13 @@ Il existe une distinction conceptuelle critique entre invoquer `run()` et invoqu
 
 Par conséquent, du code comme `new Thread(r).run();` NE crée PAS de concurrence. L’exécution reste synchrone et bloque le thread appelant jusqu’à l’achèvement.
 
-> [!NOTE]
-> `Exécution asynchrone` signifie que l’appelant continue immédiatement tandis que le nouveau thread progresse de manière indépendante, soumis au scheduling.
-> 
-> `Exécution synchrone` signifie que l’appelant attend que l’opération soit terminée.
+!!! note
+    `Exécution asynchrone` signifie que l’appelant continue immédiatement tandis que le nouveau thread progresse de manière indépendante, soumis au scheduling.
+    
+    `Exécution synchrone` signifie que l’appelant attend que l’opération soit terminée.
 
-> [!IMPORTANT]
-> La concurrence commence **seulement** lorsque `start()` est invoqué.
+!!! important
+    La concurrence commence **seulement** lorsque `start()` est invoqué.
 
 ## 30.10 Priorité des Thread et Scheduling
 
@@ -289,8 +289,8 @@ main reached END
 Task interrupted, shutting down
 ```
 
-> [!NOTE]
-> L’ordre de l’output peut varier légèrement à cause du scheduling.
+!!! note
+    L’ordre de l’output peut varier légèrement à cause du scheduling.
 
 ---
 
@@ -301,8 +301,8 @@ Task interrupted, shutting down
 - Le thread worker se termine de lui-même de manière contrôlée.
 - Une gestion correcte de l’interruption permet aux thread de libérer des ressources et de maintenir la cohérence du programme.
 
-> [!NOTE]
-> Ignorer `InterruptedException` sans terminer ou restaurer le statut d’interruption est considéré comme une mauvaise pratique et peut mener à des thread non réactifs.
+!!! note
+    Ignorer `InterruptedException` sans terminer ou restaurer le statut d’interruption est considéré comme une mauvaise pratique et peut mener à des thread non réactifs.
 
 ---
 

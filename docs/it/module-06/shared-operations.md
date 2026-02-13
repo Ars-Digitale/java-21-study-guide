@@ -26,8 +26,8 @@ Padroneggiare queste operazioni è essenziale, poiché spiegano come le collezio
 
 I seguenti metodi provengono dall’interfaccia `Collection<E>` e sono ereditati da **tutte** le principali collezioni eccetto `Map` (che ha una propria famiglia di operazioni).
 
-> [!NOTE]
-> `Map` non implementa `Collection`, ma le sue viste `keySet()`, `values()` ed `entrySet()` **sì**, e quindi espongono queste operazioni condivise.
+!!! note
+    `Map` non implementa `Collection`, ma le sue viste `keySet()`, `values()` ed `entrySet()` **sì**, e quindi espongono queste operazioni condivise.
 
 ### 23.1.1 Operazioni di Mutazione
 
@@ -81,10 +81,10 @@ firstSet.equals(secondSet): true
 secondSet.equals(thirdSet): true
 ```
 
-> [!NOTE]
-> - Le List confrontano dimensione, ordine ed uguaglianza degli elementi uno per uno.
-> - I Set confrontano solo dimensione e appartenenza — l’ordine di encounter è irrilevante.
-> - Due set con gli stessi elementi logici sono uguali anche se mantengono internamente ordini di iterazione diversi.
+!!! note
+    - Le List confrontano dimensione, ordine ed uguaglianza degli elementi uno per uno.
+    - I Set confrontano solo dimensione e appartenenza — l’ordine di encounter è irrilevante.
+    - Due set con gli stessi elementi logici sono uguali anche se mantengono internamente ordini di iterazione diversi.
 
 ---
 
@@ -99,10 +99,10 @@ for (Integer i : list) {
 }
 ```
 
-> [!NOTE]
-> Usa `Iterator.remove()` quando devi rimuovere elementi durante l’iterazione.
-> Il comportamento fail-fast **non è garantito** — l’eccezione viene lanciata secondo il principio del best-effort.
-> Non devi fare affidamento sulla sua intercettazione per la correttezza del programma.
+!!! note
+    Usa `Iterator.remove()` quando devi rimuovere elementi durante l’iterazione.
+    Il comportamento fail-fast **non è garantito** — l’eccezione viene lanciata secondo il principio del best-effort.
+    Non devi fare affidamento sulla sua intercettazione per la correttezza del programma.
 
 ---
 

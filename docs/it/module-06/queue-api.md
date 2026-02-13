@@ -48,11 +48,11 @@ Classi comuni che implementano `Queue`:
 - `PriorityQueue` — ordina gli elementi per ordine naturale o comparator; non è FIFO.
 - `ConcurrentLinkedQueue` — thread-safe, lock-free.
 
-> [!NOTE]
-> `PriorityQueue` non garantisce che l’ordine di iterazione corrisponda all’ordinamento per priorità.
+!!! note
+    `PriorityQueue` non garantisce che l’ordine di iterazione corrisponda all’ordinamento per priorità.
 
-> [!WARNING]
-> La maggior parte delle implementazioni di Queue rifiuta `null` perché `null` è usato come valore di ritorno per “vuoto”.
+!!! warning
+    La maggior parte delle implementazioni di Queue rifiuta `null` perché `null` è usato come valore di ritorno per “vuoto”.
 
 ---
 
@@ -79,9 +79,9 @@ Classi comuni che implementano `Queue`:
 - `LinkedList` — completa ma più lenta a causa della struttura a nodi.
 - `ConcurrentLinkedDeque` — deque concorrente non bloccante.
 
-> [!NOTE]
-> `Stack` è legacy; usare `Deque` per il comportamento di stack (push/pop).
-> Le operazioni di queue di ArrayDeque e LinkedList (add/remove/peek) sono O(1) ammortizzato.
+!!! note
+    `Stack` è legacy; usare `Deque` per il comportamento di stack (push/pop).
+    Le operazioni di queue di ArrayDeque e LinkedList (add/remove/peek) sono O(1) ammortizzato.
 
 ---
 
@@ -168,11 +168,11 @@ Negli ambienti concorrenti, il package `java.util.concurrent` fornisce tipi di q
 - `PriorityBlockingQueue` — priority queue thread-safe.
 - `DelayQueue` — elementi rilasciati dopo un ritardo.
 
-> [!NOTE]
-> BlockingQueue non consente mai `null`.
-> put(e) — blocca finché c’è spazio disponibile
-> take() — blocca finché un elemento è disponibile
-> BlockingQueue supporta anche operazioni temporizzate: offer(e, timeout), poll(timeout)
+!!! note
+    BlockingQueue non consente mai `null`.
+    put(e) — blocca finché c’è spazio disponibile
+    take() — blocca finché un elemento è disponibile
+    BlockingQueue supporta anche operazioni temporizzate: offer(e, timeout), poll(timeout)
 
 ---
 

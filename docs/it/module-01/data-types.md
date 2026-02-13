@@ -161,10 +161,10 @@ Java le promuove automaticamente a **`int`**, anche se **entrambi gli operandi s
 | `short s1 = 1000, s2 = 2000;`<br>`short sum = (short)(s1 + s2);` | Gli operandi sono promossi a `int`, quindi è richiesto un cast esplicito per assegnare a `short`. |
 | `char c1 = 'A', c2 = 2;`<br>`int result = c1 + c2;` | `'A'` (65) e `2` sono promossi a `int`, risultato = `67`. |
 
-> [!NOTE]  
-> Questa regola si applica quando si usano **variabili**.
->  
-> Quando si usano **letterali costanti**, il compilatore può a volte valutare l’espressione a compile-time e assegnarla in sicurezza.
+!!! note
+    Questa regola si applica quando si usano **variabili**.
+    
+    Quando si usano **letterali costanti**, il compilatore può a volte valutare l’espressione a compile-time e assegnarla in sicurezza.
 
 ```java
 byte a = 10 + 20;   // ✅ OK: espressione costante che rientra in byte
@@ -184,10 +184,10 @@ il **risultato** dell’espressione avrà quel **medesimo tipo promosso**.
 | `float f = 3.5F; long l = 4L;`<br>`var result = f + l;` | `l` viene promosso a `float`, il risultato è `float`. |
 | `int x = 10, y = 4;`<br>`var div = x / y;` | Entrambi sono `int`, il risultato è `int` (`2`), la parte frazionaria viene troncata. |
 
-> [!WARNING]  
-> La divisione tra interi produce sempre un **risultato intero**.
->  
-> Per ottenere un risultato decimale, **almeno un operando deve essere di tipo floating-point**:
+!!! warning
+    La divisione tra interi produce sempre un **risultato intero**.
+    
+    Per ottenere un risultato decimale, **almeno un operando deve essere di tipo floating-point**:
 
 ```java
 double result = 10.0 / 4; // ✅ 2.5
@@ -253,8 +253,8 @@ int i = (int) d;  // explicit cast: double → int
 System.out.println(i); // 9 (la parte frazionaria viene scartata)
 ```
 
-> [!WARNING]  
-> ⚠ Usalo solo quando sei certo che il valore rientri nel tipo di destinazione.
+!!! warning
+    ⚠ Usalo solo quando sei certo che il valore rientri nel tipo di destinazione.
 
 ### 4.7.2 Perdita di dati, overflow e underflow
 
@@ -281,10 +281,10 @@ double d = 9.99;
 int i = (int) d; // 9 (fraction discarded)
 ```
 
-> [!NOTE]  
-> I tipi floating-point (`float`, `double`) **non fanno wrap-around**:  
-> - overflow → `Infinity` / `-Infinity`  
-> - underflow (valori molto piccoli) → 0.0 o valori denormalizzati.
+!!! note
+    I tipi floating-point (`float`, `double`) **non fanno wrap-around**:
+    - overflow → `Infinity` / `-Infinity`  
+    - underflow (valori molto piccoli) → 0.0 o valori denormalizzati.
 
 ### 4.7.3 Casting di valori vs. variabili
 
@@ -329,11 +329,11 @@ short a = 5 + b;               // ❌ 5 (int) + b (short → int) = int
 short a2 = (short) (5 + b);    // ✅ cast dell’intera espressione
 ```
 
-> [!WARNING]  
-> Il cast è un **operatore unario**:
->
-> `short a = (short) 5 + b;`  
-> Il cast si applica solo a `5` → il risultato dell’espressione resta di tipo `int` → l’assegnazione fallisce comunque.
+!!! warning
+    Il cast è un **operatore unario**:
+    
+    `short a = (short) 5 + b;`  
+    Il cast si applica solo a `5` → il risultato dell’espressione resta di tipo `int` → l’assegnazione fallisce comunque.
 
 ### 4.7.4 Casting di reference (oggetti)
 

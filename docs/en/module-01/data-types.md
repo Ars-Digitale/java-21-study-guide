@@ -162,9 +162,9 @@ Java automatically promotes them to **`int`**, even if **both operands are small
 | `short s1 = 1000, s2 = 2000;`<br>`short sum = (short)(s1 + s2);` | The operands are promoted to `int`, so explicit casting is required to assign to `short`. |
 | `char c1 = 'A', c2 = 2;`<br>`int result = c1 + c2;` | `'A'` (65) and `2` are promoted to `int`, result = `67`. |
 
-> [!NOTE]  
-> This rule applies only when **using variables**.  
-> When **using constant literals**, the compiler can sometimes evaluate the expression at compile time and assign it safely.
+!!! note
+    This rule applies only when **using variables**.
+    When **using constant literals**, the compiler can sometimes evaluate the expression at compile time and assign it safely.
 
 ```java
 byte a = 10 + 20;   // ✅ OK: constant expression fits in byte
@@ -184,9 +184,9 @@ the **result** of the expression has that **same promoted type**.
 | `float f = 3.5F; long l = 4L;`<br>`var result = f + l;` | `l` is promoted to `float`, result is `float`. |
 | `int x = 10, y = 4;`<br>`var div = x / y;` | Both are `int`, result = `int` (`2`), fractional part truncated. |
 
-> [!WARNING]  
-> Integer division always produces an **integer result**.  
-> To obtain a decimal result, **at least one operand must be floating-point**:
+!!! warning
+    Integer division always produces an **integer result**.
+    To obtain a decimal result, **at least one operand must be floating-point**:
 
 ```java
 double result = 10.0 / 4; // ✅ 2.5
@@ -255,8 +255,8 @@ int i = (int) d;  // explicit cast: double → int
 System.out.println(i); // 9 (fraction discarded)
 ```
 
-> [!WARNING]
-> ⚠ Use only when you are sure the value fits in the target type.
+!!! warning
+    ⚠ Use only when you are sure the value fits in the target type.
 
 ### 4.7.2 Data Loss, Overflow and Underflow
 
@@ -283,10 +283,10 @@ double d = 9.99;
 int i = (int) d; // 9 (fraction discarded)
 ```
 
-> [!NOTE]
-> Floating-point types (`float`, `double`) **do not wrap**:
-> - overflow → `Infinity` / `-Infinity`
-> - underflow (very small values) → 0.0 or denormalized values.
+!!! note
+    Floating-point types (`float`, `double`) **do not wrap**:
+    - overflow → `Infinity` / `-Infinity`
+    - underflow (very small values) → 0.0 or denormalized values.
 
 ### 4.7.3 Casting Values versus Variables
 
@@ -331,11 +331,11 @@ short a = 5 + b;               // ❌ 5 (int) + b (short → int) = int
 short a2 = (short) (5 + b);    // ✅ cast entire expression
 ```
 
-> [!WARNING]
-> Cast is a **unary operator**:
->
-> `short a = (short) 5 + b;`
-> The cast applies only to `5` → the expression result remains int → assignment still fails.
+!!! warning
+    Cast is a **unary operator**:
+    
+    `short a = (short) 5 + b;`
+    The cast applies only to `5` → the expression result remains int → assignment still fails.
 
 ### 4.7.4 Reference Casting Objects
 

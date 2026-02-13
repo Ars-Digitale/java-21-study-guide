@@ -64,9 +64,9 @@ File f3 = new File(new File("/tmp"), "data.txt");
 File f4 = new File(URI.create("file:///tmp/data.txt"));
 ```
 
-> [!NOTE]
-> - `new File(...)` never opens the file. 
-> - Existence/permissions are checked only when you call methods like `exists()`, `length()`, or when you open a stream/channel.
+!!! note
+    - `new File(...)` never opens the file.
+    - Existence/permissions are checked only when you call methods like `exists()`, `length()`, or when you open a stream/channel.
 
 ### 33.1.2 Creating a `Path` (NIO v.2)
 
@@ -92,9 +92,9 @@ Path p3 = Paths.get("data.txt"); // legacy factory style
 Path p4 = Path.of(URI.create("file:///tmp/data.txt"));
 ```
 
-> [!NOTE]
-> - `Path.of(...)` and `Paths.get(...)` are equivalent for the default filesystem. 
-> - Prefer `Path.of` in modern code.
+!!! note
+    - `Path.of(...)` and `Paths.get(...)` are equivalent for the default filesystem.
+    - Prefer `Path.of` in modern code.
 
 ### 33.1.3 Absolute vs Relative: What “Relative” Means
 
@@ -116,8 +116,8 @@ System.out.println(rf.getAbsolutePath());
 System.out.println(rp.toAbsolutePath());
 ```
 
-> [!NOTE]
-> Relative paths are a common source of “works on my machine” bugs because `user.dir` depends on how/where the JVM was launched.
+!!! note
+    Relative paths are a common source of “works on my machine” bugs because `user.dir` depends on how/where the JVM was launched.
 
 ### 33.1.4 Joining / Building Paths
 
@@ -148,8 +148,8 @@ Combines paths in a filesystem-aware way.
 - Relative paths are appended
 - Absolute argument replaces base path
 
-> [!NOTE]
-> `Path.resolve(...)` has a rule: if the argument is absolute, it returns the argument and discards the base (you cannot combine two absolute paths using `resolve`).
+!!! note
+    `Path.resolve(...)` has a rule: if the argument is absolute, it returns the argument and discards the base (you cannot combine two absolute paths using `resolve`).
 
 #### 33.1.4.2 `relativize()`
 
@@ -172,8 +172,8 @@ In other words:
 | Root components must match | same root (on Windows, same drive) |
 | Result is never absolute | always relative |
 
-> [!NOTE]
-> If one path is absolute and the other relative, `IllegalArgumentException` is thrown.
+!!! note
+    If one path is absolute and the other relative, `IllegalArgumentException` is thrown.
 
 **Simple Relative Example**:
 
@@ -243,8 +243,8 @@ abs.relativize(rel); // throws exception
 Exception in thread "main" java.lang.IllegalArgumentException
 ```
 
-> [!NOTE]
-> `relativize` does NOT attempt to convert paths to absolute automatically.
+!!! note
+    `relativize` does NOT attempt to convert paths to absolute automatically.
 
 **Example**: Different Roots (Windows-Specific Trap)
 
@@ -257,8 +257,8 @@ Path p2 = Path.of("D:\\data\\b");
 p1.relativize(p2); // IllegalArgumentException
 ```
 
-> [!NOTE]
-> On Unix-like systems, the root is always `/`, so this issue does not occur.
+!!! note
+    On Unix-like systems, the root is always `/`, so this issue does not occur.
 
 ### 33.1.5 Converting Between `File` and `Path`
 
@@ -280,8 +280,8 @@ Path p = f.toPath();
 File back = p.toFile();
 ```
 
-> [!NOTE]
-> Conversion does not validate existence. It only converts representations.
+!!! note
+    Conversion does not validate existence. It only converts representations.
 
 ### 33.1.6 URI Conversion (When Needed)
 
@@ -310,8 +310,8 @@ Path pFromUri = Path.of(u2);
 File fFromUri = new File(u1);
 ```
 
-> [!NOTE]
-> `new File(URI)` requires a `file:` URI and throws `IllegalArgumentException` if the URI is not hierarchical or not a file URI.
+!!! note
+    `new File(URI)` requires a `file:` URI and throws `IllegalArgumentException` if the URI is not hierarchical or not a file URI.
 
 ### 33.1.7 Canonical vs Absolute vs Normalized (Core Differences)
 
@@ -324,10 +324,10 @@ These terms are often mixed up. They are not the same.
 | Canonical / Real | `getCanonicalFile()`                 | `toRealPath()`    | Yes                |
 
 
-> [!NOTE]
-> `File.getCanonicalFile()` and `Path.toRealPath()` may resolve symlinks and require the path to exist, so they can throw `IOException`.
->
-> File does not provide a method for purely syntactic normalization: historically many developers used getCanonicalFile(), but this accesses the filesystem and can fail.
+!!! note
+    `File.getCanonicalFile()` and `Path.toRealPath()` may resolve symlinks and require the path to exist, so they can throw `IOException`.
+    
+    File does not provide a method for purely syntactic normalization: historically many developers used getCanonicalFile(), but this accesses the filesystem and can fail.
 
 ```java
 import java.io.File;
@@ -361,8 +361,8 @@ Removes **redundant** name elements like `.` and `..`.
 - Purely syntactic
 - Does not check if path exists
 
-> [!NOTE]
-> `normalize()` is purely syntactic, does not check existence, and can produce invalid paths if misused.
+!!! note
+    `normalize()` is purely syntactic, does not check existence, and can produce invalid paths if misused.
 
 
 ### 33.1.8 Quick Comparison Table (Creation + Conversion)
@@ -396,8 +396,8 @@ Both APIs use objects that represent a path, but operations differ:
 | Filesystem operations | `File` | `Files` |
 | Rich error reporting | Weak (booleans) | Strong (exceptions) |
 
-> [!NOTE]
-> legacy methods often return `boolean` (silent failure), while NIO throws `IOException` with cause.
+!!! note
+    legacy methods often return `boolean` (silent failure), while NIO throws `IOException` with cause.
 
 ### 33.2.2 Creating Files and Directories
 
@@ -435,8 +435,8 @@ Path p = Path.of("created-nio.txt");
 Files.createFile(p);
 ```
 
-> [!NOTE]
-> `Files.createFile` throws `FileAlreadyExistsException` if the entry exists.
+!!! note
+    `Files.createFile` throws `FileAlreadyExistsException` if the entry exists.
 
 #### 33.2.2.2 Create Directories
 
@@ -458,8 +458,8 @@ Files.createDirectory(d); // parent must exist
 Files.createDirectories(d); // creates parents, ok if already exists
 ```
 
-> [!NOTE]
-> Legacy `mkdir()/mkdirs()` return `false` on failure without telling why. NIO throws `IOException`.
+!!! note
+    Legacy `mkdir()/mkdirs()` return `false` on failure without telling why. NIO throws `IOException`.
 
 ### 33.2.3 Copying Files and Directories
 
@@ -486,8 +486,8 @@ Files.copy(src, dst); // fails if dst exists
 Files.copy(src, dst, StandardCopyOption.REPLACE_EXISTING);
 ```
 
-> [!NOTE]
-> `Files.copy` throws `FileAlreadyExistsException` if the target exists and you did not use `REPLACE_EXISTING`.
+!!! note
+    `Files.copy` throws `FileAlreadyExistsException` if the target exists and you did not use `REPLACE_EXISTING`.
 
 #### 33.2.3.2 Manual Copy (Legacy, Stream-Based)
 
@@ -507,8 +507,8 @@ FileOutputStream out = new FileOutputStream("dst.bin")) {
 }
 ```
 
-> [!NOTE]
-> Remember `read(byte[])` returns the number of bytes read; you must write only that count, not the full buffer.
+!!! note
+    Remember `read(byte[])` returns the number of bytes read; you must write only that count, not the full buffer.
 
 
 ### 33.2.4 Moving / Renaming and Replacing
@@ -533,9 +533,9 @@ boolean ok = from.renameTo(to); // may fail silently
 System.out.println(ok);
 ```
 
-> [!NOTE]
-> - `renameTo` is notoriously platform-dependent and returns only `boolean`. 
-> - It may fail because target exists, file is open, permissions, or cross-filesystem move.
+!!! note
+    - `renameTo` is notoriously platform-dependent and returns only `boolean`.
+    - It may fail because target exists, file is open, permissions, or cross-filesystem move.
 
 #### 33.2.4.2 NIO Move (Preferred)
 
@@ -552,8 +552,8 @@ Files.move(from, to); // fails if target exists
 Files.move(from, to, StandardCopyOption.REPLACE_EXISTING);
 ```
 
-> [!NOTE]
-> `Files.move` throws `FileAlreadyExistsException` when the target exists and `REPLACE_EXISTING` is not specified.
+!!! note
+    `Files.move` throws `FileAlreadyExistsException` when the target exists and `REPLACE_EXISTING` is not specified.
 
 ### 33.2.5 Comparing Paths and Files
 
@@ -589,8 +589,8 @@ try {
 }
 ```
 
-> [!NOTE]
-> `Files.isSameFile` may access the filesystem and can throw `IOException` (permission issues, missing files, etc.).
+!!! note
+    `Files.isSameFile` may access the filesystem and can throw `IOException` (permission issues, missing files, etc.).
 
 ### 33.2.6 Deleting Files and Directories
 
@@ -612,8 +612,8 @@ boolean ok = f.delete(); // false if not deleted
 System.out.println(ok);
 ```
 
-> [!NOTE]
-> Legacy `delete()` fails (returns false) for a non-empty directory and often provides no reason.
+!!! note
+    Legacy `delete()` fails (returns false) for a non-empty directory and often provides no reason.
 
 #### 33.2.6.2 NIO Delete and Delete-If-Exists
 
@@ -640,8 +640,8 @@ boolean deleted = Files.deleteIfExists(p);
 System.out.println(deleted);
 ```
 
-> [!NOTE]
-> Certification tip: `Files.delete` throws `NoSuchFileException` if missing, while `deleteIfExists` returns `false`.
+!!! note
+    Certification tip: `Files.delete` throws `NoSuchFileException` if missing, while `deleteIfExists` returns `false`.
 
 ### 33.2.7 Recursively Copying / Deleting Directory Trees (NIO Pattern)
 
@@ -670,8 +670,8 @@ Files.walkFileTree(root, new SimpleFileVisitor<Path>() {
 });
 ```
 
-> [!NOTE]
-> Deleting a directory tree requires deleting files first, then directories (post-order). This is a common reasoning question.
+!!! note
+    Deleting a directory tree requires deleting files first, then directories (post-order). This is a common reasoning question.
 
 ### 33.2.8 Summary Checklist
 

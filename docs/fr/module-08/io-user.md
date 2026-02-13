@@ -44,10 +44,10 @@ Ils sont connectés à l’environnement du processus (en général un terminal 
 | Erreur standard | `System.err` | PrintStream | Sortie d’erreur |
 | Entrée standard | `System.in` | InputStream | Entrée de l’utilisateur |
 
-> [!NOTE]
-> Ces flux sont créés par la JVM, pas par le programme.
->
-> Ils existent pendant toute la durée du processus.
+!!! note
+    Ces flux sont créés par la JVM, pas par le programme.
+    
+    Ils existent pendant toute la durée du processus.
 
 ---
 
@@ -67,10 +67,10 @@ Il enveloppe un autre OutputStream et ajoute des méthodes d’impression pratiq
 - Ne lance pas `IOException` sur erreurs d’écriture
 - Supporte optionnellement l’auto-flush sur newline / `println()`
 
-> [!NOTE]
-> Contrairement à la plupart des flux, PrintStream supprime les IOExceptions.
->
-> Les erreurs doivent être vérifiées en utilisant checkError().
+!!! note
+    Contrairement à la plupart des flux, PrintStream supprime les IOExceptions.
+    
+    Les erreurs doivent être vérifiées en utilisant checkError().
 
 ### 36.2.2 Utilisation de Base de PrintStream
 
@@ -98,8 +98,8 @@ System.out.printf("Name: %s, Age: %d%n", "Alice", 30);
 | `%f` | Virgule flottante |
 | `%n` | Nouvelle ligne indépendante de la plateforme |
 
-> [!NOTE]
-> `printf()` n’ajoute pas automatiquement une nouvelle ligne à moins qu’on spécifie `%n`.
+!!! note
+    `printf()` n’ajoute pas automatiquement une nouvelle ligne à moins qu’on spécifie `%n`.
 
 ---
 
@@ -119,8 +119,8 @@ Ceci est rarement pratique pour des programmes interactifs.
 int b = System.in.read();
 ```
 
-> [!NOTE]
-> `System.in.read()` bloque jusqu’à ce que l’entrée soit disponible.
+!!! note
+    `System.in.read()` bloque jusqu’à ce que l’entrée soit disponible.
 
 ### 36.3.2 Utilisation de InputStreamReader et BufferedReader
 
@@ -149,10 +149,10 @@ int value = sc.nextInt();
 String text = sc.nextLine();
 ```
 
-> [!NOTE]
-> `Scanner` effectue tokenisation et parsing, pas une simple lecture.
->
-> Cela la rend pratique mais plus lente et parfois surprenante.
+!!! note
+    `Scanner` effectue tokenisation et parsing, pas une simple lecture.
+    
+    Cela la rend pratique mais plus lente et parfois surprenante.
 
 ### 36.4.1 Problèmes Communs de Scanner
 
@@ -174,8 +174,8 @@ Les `flux système` sont spéciaux et doivent être gérés avec attention.
 
 Fermer `System.out` ou `System.err` ferme le flux sous-jacent du système d’exploitation et affecte l’ensemble de la JVM: fermer ces flux affecte l’ensemble du processus JVM, pas seulement la classe ou la méthode courante.
 
-> [!NOTE]
-> Dans presque toutes les applications, tu ne devrais PAS fermer `System.out` ou `System.err`.
+!!! note
+    Dans presque toutes les applications, tu ne devrais PAS fermer `System.out` ou `System.err`.
 
 ---
 
@@ -192,9 +192,9 @@ if (console == null) {
 }
 ```
 
-> [!NOTE]
-> `System.console()` peut retourner `null` quand aucune console n’est disponible
-> (par ex. IDE, entrée redirigée).
+!!! note
+    `System.console()` peut retourner `null` quand aucune console n’est disponible
+    (par ex. IDE, entrée redirigée).
 
 ### 36.6.1 Lire l’Input depuis Console
 
@@ -212,8 +212,8 @@ Console permet de lire des mots de passe sans afficher les caractères.
 char[] password = console.readPassword("Password: ");
 ```
 
-> [!NOTE]
-> Les mots de passe sont retournés en `char[]` afin qu’ils puissent être effacés de la mémoire.
+!!! note
+    Les mots de passe sont retournés en `char[]` afin qu’ils puissent être effacés de la mémoire.
 
 ---
 
@@ -250,8 +250,8 @@ java App < input.txt > output.txt
 
 Du point de vue du programme, `System.in` et `System.out` se comportent encore comme des flux normaux.
 
-> [!NOTE]
-> La redirection est gérée par le système d’exploitation ou par le shell. Le code Java ne doit pas changer pour la supporter.
+!!! note
+    La redirection est gérée par le système d’exploitation ou par le shell. Le code Java ne doit pas changer pour la supporter.
 
 ---
 

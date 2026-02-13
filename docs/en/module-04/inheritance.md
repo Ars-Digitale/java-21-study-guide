@@ -44,8 +44,8 @@ Inheritance enables a class to extend another class, automatically gaining its a
   
 The extending class may add new features or override existing behaviors, creating more specialized versions of its parent.
 
-> [!NOTE] 
-> Inheritance expresses an *“is-a”* relationship: a Dog **is a** Animal.
+!!! note
+    Inheritance expresses an *“is-a”* relationship: a Dog **is a** Animal.
 
 ---
 
@@ -92,8 +92,8 @@ However, this depends on `access modifiers`.
 - **default (package-private)** → inherited only within the same package
 - **private** → **NOT** inherited
 
-> [!NOTE] 
-> ( Please refer to Paragraph "**Access Modifiers**" in Chapter: [2. Basic Language Java Building Blocks](../module-01/basic-building-blocks.md) ) 
+!!! note
+    ( Please refer to Paragraph "**Access Modifiers**" in Chapter: [2. Basic Language Java Building Blocks](../module-01/basic-building-blocks.md) )
 
 ---
 
@@ -111,8 +111,8 @@ Some class-level modifiers affect whether a class may be extended.
 | `static`        | Applies only to nested classes | Behaves like a top-level class inside its enclosing class |
 
 
-> [!NOTE] 
-> A `static` class in Java can exist only as a **static nested class**.
+!!! note
+    A `static` class in Java can exist only as a **static nested class**.
 
 ---
 
@@ -149,8 +149,8 @@ public class Person {
 }
 ```
 
-> [!WARNING]
-> `this` cannot be used inside static methods because, in that context, no instance exists.
+!!! warning
+    `this` cannot be used inside static methods because, in that context, no instance exists.
 
 ### 16.6.2 The `super` Reference
 
@@ -175,8 +175,8 @@ class Child extends Parent {
 }
 ```
 
-> [!NOTE] 
-> `super` cannot be used inside static contexts.
+!!! note
+    `super` cannot be used inside static contexts.
 
 ---
 
@@ -464,9 +464,9 @@ public class TestStatic {
 }
 ```
 
-> [!IMPORTANT] 
-> - **final** static methods cannot be hidden, and instance methods declared **final** cannot be overridden. 
-> - If you try to redefine them in a subclass, the code will not compile.
+!!! important
+    - **final** static methods cannot be hidden, and instance methods declared **final** cannot be overridden.
+    - If you try to redefine them in a subclass, the code will not compile.
 
 
 ### 16.13.2 Abstract Classes
@@ -520,9 +520,9 @@ class Circle extends Shape {
 ```
 
 
-> [!NOTE]
-> - Although an abstract class cannot be instantiated, its constructors are still called when creating instances of concrete subclasses. 
-> - The chain always starts from the top of the hierarchy and moves down.
+!!! note
+    - Although an abstract class cannot be instantiated, its constructors are still called when creating instances of concrete subclasses.
+    - The chain always starts from the top of the hierarchy and moves down.
 
 ### 16.13.3 Creating Immutable Objects
 

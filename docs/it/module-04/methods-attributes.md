@@ -88,8 +88,8 @@ La **firma del metodo** in Java include:
 - il *nome del metodo*
 - la *lista dei tipi dei parametri* (tipi + ordine)
 
-> [!NOTE]
-> I **nomi dei parametri NON fanno parte della firma**, contano solo `tipi` e `ordine`.
+!!! note
+    I **nomi dei parametri NON fanno parte della firma**, contano solo `tipi` e `ordine`.
 
 - Esempio di firme distinte:
 
@@ -491,9 +491,9 @@ show(10, "A");                // length = 1
 show(10, "A", "B", "C");      // length = 3
 ```
 
-> [!IMPORTANT]
-> Varargs e array partecipano all’overloading dei metodi.
-> La risoluzione dell’overload può diventare ambigua.
+!!! important
+    Varargs e array partecipano all’overloading dei metodi.
+    La risoluzione dell’overload può diventare ambigua.
 
 ---
 
@@ -609,8 +609,8 @@ public class Config {
 }
 ```
 
-> [!IMPORTANT]
-> I blocchi di inizializzazione statica vengono eseguiti **una sola volta**, nell’ordine in cui appaiono, prima di `main()` e prima che qualsiasi metodo statico sia chiamato.
+!!! important
+    I blocchi di inizializzazione statica vengono eseguiti **una sola volta**, nell’ordine in cui appaiono, prima di `main()` e prima che qualsiasi metodo statico sia chiamato.
 
 
 ### 14.6.4 Ordine di inizializzazione (Statico vs. Istanza)
@@ -659,8 +659,8 @@ A ref = new B();
 ref.test();   // stampa "A" — binding statico!
 ```
 
-> [!NOTE]
-> Regola chiave: i metodi statici usano il **tipo del riferimento**, non il tipo dell’oggetto.
+!!! note
+    Regola chiave: i metodi statici usano il **tipo del riferimento**, non il tipo dell’oggetto.
 
 
 ### 14.6.7 Errori comuni

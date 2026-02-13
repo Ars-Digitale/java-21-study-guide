@@ -250,8 +250,8 @@ Completion: 100%
 Status: OK
 ```
 
-> [!NOTE]
-> Un seul % sans spécificateur valide provoque une IllegalFormatException à l’exécution.
+!!! note
+    Un seul % sans spécificateur valide provoque une IllegalFormatException à l’exécution.
 
 ## 13.2 Mise en forme des nombres
 
@@ -264,10 +264,10 @@ NumberFormat nf = NumberFormat.getInstance(Locale.FRANCE);
 System.out.println(nf.format(1234567.89));
 ```
 
-> [!IMPORTANT]
-> - Les méthodes factory déterminent le style de formatage (général, entier, monnaie, pourcentage, compact, ...).
-> - Le formatage dépend du `Locale` fourni.
-> - `NumberFormat` (et `DecimalFormat`) ne sont pas thread-safe.
+!!! important
+    - Les méthodes factory déterminent le style de formatage (général, entier, monnaie, pourcentage, compact, ...).
+    - Le formatage dépend du `Locale` fourni.
+    - `NumberFormat` (et `DecimalFormat`) ne sont pas thread-safe.
 
 ### 13.2.2 Localisation des nombres
 
@@ -298,10 +298,10 @@ Ou directement :
 DecimalFormat df = new DecimalFormat("#,##0.00");
 ```
 
-> [!NOTE]
-> - `DecimalFormat` est mutable (on peut modifier le pattern, les symboles, etc.).
-> - `DecimalFormat` n’est pas thread-safe.
-> - Le formatage est sensible au locale via `DecimalFormatSymbols`.
+!!! note
+    - `DecimalFormat` est mutable (on peut modifier le pattern, les symboles, etc.).
+    - `DecimalFormat` n’est pas thread-safe.
+    - Le formatage est sensible au locale via `DecimalFormatSymbols`.
 
 ### 13.2.4 Structure du pattern DecimalFormat
 
@@ -311,10 +311,10 @@ Un pattern peut contenir une sous-structure positive et une sous-structure néga
 #,##0.00;(#,##0.00)
 ```
 
-> [!NOTE]
-> - Première partie → nombres positifs.
-> - Seconde partie → nombres négatifs.
-> - Si la partie négative est omise, les nombres négatifs utilisent automatiquement un `-` en tête.
+!!! note
+    - Première partie → nombres positifs.
+    - Seconde partie → nombres négatifs.
+    - Si la partie négative est omise, les nombres négatifs utilisent automatiquement un `-` en tête.
 
 ### 13.2.5 Le symbole `0` (chiffre obligatoire)
 
@@ -637,9 +637,9 @@ Java recherche les bundles selon un ordre de repli strict. Par exemple, avec le 
 
 Si aucun n’est trouvé → `MissingResourceException`.
 
-> [!NOTE]
-> Les fichiers `.properties` traditionnels sont spécifiés en ISO-8859-1 ;
-> les caractères non ASCII doivent être encodés via des échappements Unicode (par exemple `\u00E9` pour é), sauf si des mécanismes de chargement alternatifs sont utilisés.
+!!! note
+    Les fichiers `.properties` traditionnels sont spécifiés en ISO-8859-1 ;
+    les caractères non ASCII doivent être encodés via des échappements Unicode (par exemple `\u00E9` pour é), sauf si des mécanismes de chargement alternatifs sont utilisés.
 
 ## 13.7 Règles et erreurs courantes
 

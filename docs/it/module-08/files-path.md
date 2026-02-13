@@ -71,8 +71,8 @@ In Java NIO, un filesystem è rappresentato dall’astrazione `FileSystem`, tipi
 | Molteplicità | Possono esistere più filesystem |
 | Esempi | Disk FS, ZIP FS, in-memory FS |
 
-> [!NOTE]
-> Java non implementa filesystem; si adatta a implementazioni di filesystem fornite dal SO o da providers custom.
+!!! note
+    Java non implementa filesystem; si adatta a implementazioni di filesystem fornite dal SO o da providers custom.
 
 ---
 
@@ -95,8 +95,8 @@ Un `path` risolve il problema dell’`addressing`:
 | Immutabile | Sì |
 | Risorsa del SO | No |
 
-> [!NOTE]
-> In Java, `Path` rappresenta entry potenziali del filesystem, non entry reali.
+!!! note
+    In Java, `Path` rappresenta entry potenziali del filesystem, non entry reali.
 
 ---
 
@@ -125,8 +125,8 @@ Dal punto di vista del filesystem, un file ha:
 | Durata | Indipendente dai processi |
 | Accesso Java | Stream, channel, metodi di Files |
 
-> [!NOTE]
-> `Testo` vs `binario` non è un concetto del filesystem; è un’interpretazione a livello applicazione.
+!!! note
+    `Testo` vs `binario` non è un concetto del filesystem; è un’interpretazione a livello applicazione.
 
 ---
 
@@ -147,8 +147,8 @@ Le `directory` risolvono il problema della scalabilità e dell’organizzazione:
 | Lettura/scrittura | Strutturale, non basata sul contenuto |
 | Accesso Java | Files.list, Files.walk |
 
-> [!NOTE]
-> Una directory non è un file con contenuto, anche se entrambi condividono metadati comuni.
+!!! note
+    Una directory non è un file con contenuto, anche se entrambi condividono metadati comuni.
 
 ---
 
@@ -177,10 +177,10 @@ Un `link simbolico` è un file speciale che contiene un path verso un’altra en
 | Hard | Dati | No | Trasparente |
 | Simbolico | Path | Sì | Controllo esplicito |
 
-> [!NOTE]
-> Java NIO espone il comportamento dei link in modo esplicito tramite `LinkOption`.
->
-> In molti filesystem comuni, il codice Java non può creare hard link in modo pienamente portabile, mentre i link simbolici sono supportati direttamente tramite `Files.createSymbolicLink(...)` (dove permesso dal SO / permessi).
+!!! note
+    Java NIO espone il comportamento dei link in modo esplicito tramite `LinkOption`.
+    
+    In molti filesystem comuni, il codice Java non può creare hard link in modo pienamente portabile, mentre i link simbolici sono supportati direttamente tramite `Files.createSymbolicLink(...)` (dove permesso dal SO / permessi).
 
 ---
 
@@ -194,8 +194,8 @@ Alcune entry del filesystem non sono contenitori di dati ma endpoint di interazi
 | FIFO / Pipe | Comunicazione tra processi |
 | Socket file | Comunicazione di rete |
 
-> [!NOTE]
-> Java I/O può interagire con queste entry, ma il comportamento dipende dalla piattaforma.
+!!! note
+    Java I/O può interagire con queste entry, ma il comportamento dipende dalla piattaforma.
 
 ---
 
@@ -216,8 +216,8 @@ Le API Java I/O operano a diversi livelli di astrazione:
 | `OutputStream` / `Writer` | Scrittura dati |
 | `Channel` / `SeekableByteChannel` | Avanzato / accesso random |
 
-> [!NOTE]
-> Nessuna API Java “è” un file; le API mediano l’accesso a risorse gestite dal filesystem.
+!!! note
+    Nessuna API Java “è” un file; le API mediano l’accesso a risorse gestite dal filesystem.
 
 ---
 
@@ -228,8 +228,8 @@ Le API Java I/O operano a diversi livelli di astrazione:
 - Assumere che le directory memorizzino i dati dei file
 - Assumere che i link siano sempre risolti automaticamente
 
-> [!NOTE]
-> Separare sempre posizione, struttura e flusso dati quando si ragiona su I/O.
+!!! note
+    Separare sempre posizione, struttura e flusso dati quando si ragiona su I/O.
 
 ---
 
@@ -247,8 +247,8 @@ Il design di NIO.2 (Java 7+) separa deliberatamente queste responsabilità:
 - `Files` → esegue operazioni sul filesystem
 - `Streams / Channels` → spostano dati
 
-> [!NOTE]
-> Un `Path` non apre mai un file e non tocca mai il disco da solo.
+!!! note
+    Un `Path` non apre mai un file e non tocca mai il disco da solo.
 
 ---
 
@@ -262,8 +262,8 @@ Sì — nella vecchia API di I/O, `java.io.File` gioca in modo confuso due ruoli
 - `File` espone anche operazioni sul filesystem
 - Non rappresenta **né** un file aperto, **né** i contenuti del file
 
-> [!NOTE]
-> Questo mix di responsabilità è considerato un difetto di design.
+!!! note
+    Questo mix di responsabilità è considerato un difetto di design.
 
 ### 32.11.1 Cosa È Davvero File
 
@@ -278,8 +278,8 @@ Concettualmente, `File` è più vicino a ciò che oggi chiamiamo `Path`, ma con 
 | Modifica il filesystem | Sì |
 | Contiene handle del SO | No |
 
-> [!NOTE]
-> Un oggetto `File` può esistere anche se il file non esiste.
+!!! note
+    Un oggetto `File` può esistere anche se il file non esiste.
 
 ### 32.11.2 Responsabilità tipo-Path
 
@@ -308,8 +308,8 @@ Allo stesso tempo, `File` espone metodi che toccano il filesystem:
 - mkdir(), mkdirs()
 - list(), listFiles()
 
-> [!NOTE]
-> La maggior parte di questi metodi restituisce `boolean` invece di lanciare `IOException`, il che nasconde le cause degli eventuali problemi.
+!!! note
+    La maggior parte di questi metodi restituisce `boolean` invece di lanciare `IOException`, il che nasconde le cause degli eventuali problemi.
 
 ### 32.11.4 Cosa NON È File
 
@@ -339,8 +339,8 @@ NIO.2 separa esplicitamente le responsabilità:
 | `Operazioni su filesystem` | `File` | `Files` |
 | `Accesso ai dati` | Stream | Stream / Channel |
 
-> [!NOTE]
-> Questa separazione è uno dei miglioramenti concettuali più importanti in Java I/O.
+!!! note
+    Questa separazione è uno dei miglioramenti concettuali più importanti in Java I/O.
 
 ### 32.11.7 Riepilogo
 
@@ -368,8 +368,8 @@ Questo è fondamentalmente diverso da stream o channel.
 | `Contiene handle SO` | No | Sì |
 | `Immutabile` | Sì | No |
 
-> [!NOTE]
-> Creare un Path non può lanciare `IOException` perché non avviene alcun I/O.
+!!! note
+    Creare un Path non può lanciare `IOException` perché non avviene alcun I/O.
 
 ---
 
@@ -389,10 +389,10 @@ Un path assoluto identifica interamente una posizione dalla root del filesystem.
 | Unix | `/home/user/file.txt` |
 | Windows | `C:\Users\User\file.txt` |
 
-> [!IMPORTANT]
-> - Un path che inizia con una slash `(/)` (tipo Unix) o con una lettera di drive come `C:` (Windows) è **tipicamente** considerato un path assoluto.
-> - Il simbolo `.` è un riferimento alla directory corrente mentre `..` è un riferimento alla directory padre.
-> Su Windows, un path come `\dir\file.txt` (senza lettera di drive) è *rooted* sul drive corrente, non pienamente qualificato con drive + path.
+!!! important
+    - Un path che inizia con una slash `(/)` (tipo Unix) o con una lettera di drive come `C:` (Windows) è **tipicamente** considerato un path assoluto.
+    - Il simbolo `.` è un riferimento alla directory corrente mentre `..` è un riferimento alla directory padre.
+    Su Windows, un path come `\dir\file.txt` (senza lettera di drive) è *rooted* sul drive corrente, non pienamente qualificato con drive + path.
 
 Esempio:
 
@@ -413,8 +413,8 @@ Un path relativo viene risolto rispetto alla directory di lavoro corrente della 
 - Dipende da dove è stata avviata la JVM
 - Fonte comune di bug
 
-> [!NOTE]
-> La working directory è tipicamente disponibile tramite `System.getProperty("user.dir")`.
+!!! note
+    La working directory è tipicamente disponibile tramite `System.getProperty("user.dir")`.
 
 Esempio:
 
@@ -435,8 +435,8 @@ Un `FileSystem` rappresenta una specifica implementazione concreta di filesystem
 - Il filesystem di default corrisponde al filesystem del SO
 - Possibili altri filesystem (ZIP, memoria, rete)
 
-> [!NOTE]
-> I path sono sempre associati a esattamente UN FileSystem.
+!!! note
+    I path sono sempre associati a esattamente UN FileSystem.
 
 ### 32.14.2 Separatori di Path
 
@@ -448,8 +448,8 @@ I separatori differiscono tra piattaforme, ma `Path` li astrae.
 | Portabilità | Gestione manuale | Automatica |
 | Comparazione | Soggetta a errori | Più sicura |
 
-> [!NOTE]
-> Hardcodare `"/"` o `"\\"` è sconsigliato; `Path` lo gestisce automaticamente.
+!!! note
+    Hardcodare `"/"` o `"\\"` è sconsigliato; `Path` lo gestisce automaticamente.
 
 ---
 
@@ -471,8 +471,8 @@ La classe `Files` esegue vere operazioni di I/O.
 - Garantire atomicità se non specificato
 - Mantenere un handle persistente a file aperti (sono stream/channel a possedere l’handle)
 
-> [!NOTE]
-> I metodi che restituiscono stream (es. `Files.lines()`) tengono il file aperto finché lo stream non viene chiuso.
+!!! note
+    I metodi che restituiscono stream (es. `Files.lines()`) tengono il file aperto finché lo stream non viene chiuso.
 
 ---
 
@@ -497,5 +497,5 @@ Una grande differenza concettuale risiede nel reporting degli errori.
 - “I path relativi sono portabili” → falso
 - “Creare un Path può fallire per permessi” → falso
 
-> [!NOTE]
-> Molti metodi NIO che suonano “sicuri” sono puramente sintattici (come `normalize` o `resolve`): non toccano il filesystem e non possono rilevare file mancanti.
+!!! note
+    Molti metodi NIO che suonano “sicuri” sono puramente sintattici (come `normalize` o `resolve`): non toccano il filesystem e non possono rilevare file mancanti.

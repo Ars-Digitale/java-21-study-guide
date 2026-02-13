@@ -184,8 +184,8 @@ Java permette bound multipli:
 <T extends Runnable & Serializable & Cloneable>
 ```
 
-> [!IMPORTANT]
-> L’erasure di `T` è sempre il **primo bound**, che deve essere una classe o interfaccia.
+!!! important
+    L’erasure di `T` è sempre il **primo bound**, che deve essere una classe o interfaccia.
 
 Poiché `Runnable` è il primo bound, il compilatore effettua l’erasure di `T` a `Runnable`.
 
@@ -223,8 +223,8 @@ Perché la JVM deve operare usando un singolo tipo di riferimento concreto per o
 
 Le istruzioni bytecode a runtime come `invokevirtual` richiedono una singola classe o interfaccia, non un tipo composto come “Runnable & Serializable & Cloneable”.
 
-> [!NOTE]
-> Java seleziona il **primo bound** come tipo a runtime, e usa i bound restanti solo per la **validazione a compile-time**.
+!!! note
+    Java seleziona il **primo bound** come tipo a runtime, e usa i bound restanti solo per la **validazione a compile-time**.
 
 ### 18.4.6 Un Esempio Più Complesso
 
@@ -256,8 +256,8 @@ class Demo {
 }
 ```
 
-> [!NOTE]
-> Il compilatore può inserire cast aggiuntivi o metodi bridge in scenari di ereditarietà più complessi, ma l’erasure usa sempre solo il primo bound (A in questo caso).
+!!! note
+    Il compilatore può inserire cast aggiuntivi o metodi bridge in scenari di ereditarietà più complessi, ma l’erasure usa sempre solo il primo bound (A in questo caso).
 
 ### 18.4.7 Overloading di un Metodo Generico — Perché Alcuni Overload Sono Impossibili
 

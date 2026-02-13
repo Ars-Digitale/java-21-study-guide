@@ -57,8 +57,8 @@ java.lang.Object
 - Not intended to be caught or handled
 - Examples: `OutOfMemoryError`, `StackOverflowError`
 
-> [!NOTE]
-> Errors indicate conditions from which the application is generally not expected to recover.
+!!! note
+    Errors indicate conditions from which the application is generally not expected to recover.
 
 ### 19.1.3 Checked Exceptions (`Exception`)
 
@@ -87,8 +87,8 @@ void readFile(Path p) throws IOException {
 	Files.readString(p);
 }
 ```
-> [!NOTE]
-> Only **checked exceptions** must be declared. Unchecked exceptions may be declared, but are usually omitted.
+!!! note
+    Only **checked exceptions** must be declared. Unchecked exceptions may be declared, but are usually omitted.
 
 ### 19.2.2 Throwing exceptions
 
@@ -124,8 +124,8 @@ class Child extends Parent {
 }
 ```
 
-> [!NOTE]
-> Changing only the **unchecked** exceptions never breaks the override contract.
+!!! note
+    Changing only the **unchecked** exceptions never breaks the override contract.
 
 ---
 
@@ -157,9 +157,9 @@ try {
 	log();
 }
 ```
-> [!NOTE]
-> More specific exceptions must come before more general ones, otherwise compilation fails.
-> If you place a catch for a superclass (e.g. `IOException`) before a catch for a subclass (e.g. `FileNotFoundException`), the subclass catch becomes unreachable.
+!!! note
+    More specific exceptions must come before more general ones, otherwise compilation fails.
+    If you place a catch for a superclass (e.g. `IOException`) before a catch for a subclass (e.g. `FileNotFoundException`), the subclass catch becomes unreachable.
 
 
 ### 19.4.3 Multi-catch (Java 7+)
@@ -190,8 +190,8 @@ try {
 - Used for cleanup logic
 - Executes even if `return` is used in try and/or catch block
 
-> [!NOTE]
-> A `finally` block can override a return value or swallow an exception. This is generally discouraged because it makes the control flow harder to reason about.
+!!! note
+    A `finally` block can override a return value or swallow an exception. This is generally discouraged because it makes the control flow harder to reason about.
 
 ---
 
@@ -237,8 +237,8 @@ try (firstWriter; var secondWriter = Files.newBufferedWriter(filePath)) {
 }
 ```
 
-> [!NOTE]
-> Attempting to reassign a resource variable causes a compilation error.
+!!! note
+    Attempting to reassign a resource variable causes a compilation error.
 
 ---
 

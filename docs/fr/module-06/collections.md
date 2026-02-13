@@ -150,8 +150,8 @@ List<String> names = new ArrayList<>();
 Map<Integer, String> map = new HashMap<>();
 ```
 
-> [!NOTE]
-> Les generics dans les collections fonctionnent via le `type erasure` : se référer au paragraphe "**18.4 Type Erasure**" dans le chapitre : [Generics in Java](../module-04/generics.md).
+!!! note
+    Les generics dans les collections fonctionnent via le `type erasure` : se référer au paragraphe "**18.4 Type Erasure**" dans le chapitre : [Generics in Java](../module-04/generics.md).
 
 ## 22.7 Mutabilité vs Immutabilité
 
@@ -169,8 +169,8 @@ Java fournit plusieurs moyens de créer des collections immuables :
 - wrappers `Collections.unmodifiableList(...)`
 - `Records` utilisés comme conteneurs de valeurs immuables
 
-> [!NOTE]
-> La méthode `Arrays.asList(varargs)`, qui est construite sur un tableau, se comporte différemment : voir les exemples ci-dessous.
+!!! note
+    La méthode `Arrays.asList(varargs)`, qui est construite sur un tableau, se comporte différemment : voir les exemples ci-dessous.
 
 ```java
 
@@ -191,9 +191,9 @@ immutable2.set(0, "k"); // ❌ UnsupportedOperationException
 fromAsList.set(0, "k");  // la mise à jour sera également reflétée dans le tableau sous-jacent.
 ```
 
-> [!NOTE]
-> `Arrays.asList(...)` renvoie une vue List de taille fixe, mais **mutable**, supportée par le tableau d’origine.
-> Vous ne pouvez pas ajouter/supprimer des éléments, mais vous pouvez remplacer ceux existants.
+!!! note
+    `Arrays.asList(...)` renvoie une vue List de taille fixe, mais **mutable**, supportée par le tableau d’origine.
+    Vous ne pouvez pas ajouter/supprimer des éléments, mais vous pouvez remplacer ceux existants.
 
 
 ## 22.8 Attentes de Performance Big-O
@@ -211,8 +211,8 @@ Comprendre la complexité des types de collection est essentiel. Voici quelques 
 | Deque | `add/remove first/last`  | **`O(1)`**  |
 
 
-> [!NOTE]
-> Ces valeurs sont des moyennes ; le pire cas peut être différent (en particulier pour les structures basées sur le hachage).
+!!! note
+    Ces valeurs sont des moyennes ; le pire cas peut être différent (en particulier pour les structures basées sur le hachage).
 
 
 ## 22.9 Résumé

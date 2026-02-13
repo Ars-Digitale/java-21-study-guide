@@ -94,10 +94,10 @@ In questo esempio:
 - `FileInputStream` esegue l’accesso reale al file
 - `BufferedInputStream` aggiunge un buffer in memoria
 
-> [!NOTE]
-> Questo design è noto come **Decorator Pattern**.
->
-> Permette di stratificare funzionalità in modo dinamico.
+!!! note
+    Questo design è noto come **Decorator Pattern**.
+    
+    Permette di stratificare funzionalità in modo dinamico.
 
 ### 35.1.3 I/O bloccante: cosa significa
 
@@ -110,8 +110,8 @@ Per esempio, quando chiami `read()`:
 - se non ci sono dati, il thread attende
 - se si raggiunge la fine dello stream, viene restituito -1
 
-> [!NOTE]
-> Il comportamento bloccante semplifica la programmazione, ma limita la scalabilità.
+!!! note
+    Il comportamento bloccante semplifica la programmazione, ma limita la scalabilità.
 
 ### 35.1.4 Gestione risorse: `close()`, `flush()` e perché esistono
 
@@ -131,8 +131,8 @@ try (OutputStream out = new FileOutputStream("file.bin")) {
 } // close() chiamato automaticamente
 ```
 
-> [!NOTE]
-> Non chiudere gli stream può causare perdita di dati o esaurimento delle risorse.
+!!! note
+    Non chiudere gli stream può causare perdita di dati o esaurimento delle risorse.
 
 ### 35.1.5 `finalize()`: perché esiste e perché fallisce
 
@@ -148,8 +148,8 @@ Tuttavia, i tempi del GC sono imprevedibili.
 | Affidabilità    | Bassa           |
 | Stato attuale   | Deprecato       |
 
-> [!NOTE]
-> `finalize()` non va mai usato per pulizia I/O; è deprecato e non sicuro.
+!!! note
+    `finalize()` non va mai usato per pulizia I/O; è deprecato e non sicuro.
 
 ### 35.1.6 `available()`: scopo e abuso
 
@@ -167,9 +167,9 @@ if (in.available() > 0) {
 }
 ```
 
-> [!NOTE]
-> `available()` non deve essere usato per rilevare EOF.
-> Solo `read()`, che ritorna -1, segnala la fine dello stream.
+!!! note
+    `available()` non deve essere usato per rilevare EOF.
+    Solo `read()`, che ritorna -1, segnala la fine dello stream.
 
 ### 35.1.7 `mark()` e `reset()`: backtracking controllato
 
@@ -201,10 +201,10 @@ Se non specifichi un charset, viene usato quello di default della piattaforma.
 new FileReader("file.txt"); // encoding di default della piattaforma
 ```
 
-> [!NOTE]
-> Affidarsi al charset di default porta a bug di non portabilità.
->
-> Specifica sempre un charset esplicitamente.
+!!! note
+    Affidarsi al charset di default porta a bug di non portabilità.
+    
+    Specifica sempre un charset esplicitamente.
 
 ### 35.1.9 File vs FileDescriptor
 
@@ -219,10 +219,10 @@ Non rappresenta una risorsa aperta.
 | `File`           | Percorso filesystem       | No                  |
 | `FileDescriptor` | Handle file nativo OS     | Sì                  |
 
-> [!NOTE]
-> Più stream possono condividere lo stesso FileDescriptor.
->
-> Chiudendone uno, si chiude la risorsa sottostante per tutti.
+!!! note
+    Più stream possono condividere lo stesso FileDescriptor.
+    
+    Chiudendone uno, si chiude la risorsa sottostante per tutti.
 
 ---
 
@@ -296,8 +296,8 @@ while (buffer.hasRemaining()) {
 buffer.clear(); // pronto a scrivere di nuovo
 ```
 
-> [!NOTE]
-> `flip()` non cancella i dati: regola position e limit.
+!!! note
+    `flip()` non cancella i dati: regola position e limit.
 
 ### 35.2.4 `clear()` vs `compact()`
 
@@ -324,8 +324,8 @@ ByteBuffer direct = ByteBuffer.allocateDirect(1024);
 | `Heap`     | Heap JVM          | GC, economico da allocare |
 | `Direct`   | Memoria nativa    | Miglior throughput I/O, più costoso da allocare |
 
-> [!NOTE]
-> I direct buffer riducono le copie tra JVM e OS, ma vanno usati con attenzione per evitare pressione di memoria.
+!!! note
+    I direct buffer riducono le copie tra JVM e OS, ma vanno usati con attenzione per evitare pressione di memoria.
 
 ### 35.2.6 Channel: cosa sono
 
@@ -362,8 +362,8 @@ In modalità **non bloccante**:
 - `read()` può ritornare subito con 0 byte
 - `write()` può scrivere solo una parte dei dati
 
-> [!NOTE]
-> L’I/O non bloccante sposta complessità dal SO all’applicazione.
+!!! note
+    L’I/O non bloccante sposta complessità dal SO all’applicazione.
 
 ### 35.2.8 Scatter/Gather I/O
 
@@ -464,8 +464,8 @@ NIO.2 aggiunge un metodo esplicito per esprimere incertezza:
 boolean notExists = Files.notExists(p);
 ```
 
-> [!NOTE]
-> `exists()` e `notExists()` possono essere entrambi `false` quando lo stato non è determinabile (per esempio per permessi).
+!!! note
+    `exists()` e `notExists()` possono essere entrambi `false` quando lo stato non è determinabile (per esempio per permessi).
 
 Questo non rende la verifica più accurata: rende solo l’incertezza esplicita.
 
@@ -504,8 +504,8 @@ try {
 }
 ```
 
-> [!NOTE]
-> Il vero vantaggio di NIO.2 è la diagnostica tramite eccezioni durante le azioni, non check di esistenza più “accurati”.
+!!! note
+    Il vero vantaggio di NIO.2 è la diagnostica tramite eccezioni durante le azioni, non check di esistenza più “accurati”.
 
 ##### 35.3.1.2.3 Tabella riassuntiva
 
@@ -550,10 +550,10 @@ Path dirDeep = Path.of("a/b/c");
 Files.createDirectories(dirDeep);
 ```
 
-> [!NOTE]
-> `Files.createFile` lancia `FileAlreadyExistsException` se il file esiste.
->
-> Spesso è preferibile ai check boolean perché è race-safe.
+!!! note
+    `Files.createFile` lancia `FileAlreadyExistsException` se il file esiste.
+    
+    Spesso è preferibile ai check boolean perché è race-safe.
 
 | Obiettivo         | Legacy (File)         | Moderno (Files)               | Dettaglio chiave |
 |------------------|------------------------|-------------------------------|------------------|
@@ -631,10 +631,10 @@ Files.copy(
 );
 ```
 
-> [!NOTE]
-> `Files.copy` lancia FileAlreadyExistsException per default.
->
-> Usa `REPLACE_EXISTING` quando l’overwrite è intenzionale.
+!!! note
+    `Files.copy` lancia FileAlreadyExistsException per default.
+    
+    Usa `REPLACE_EXISTING` quando l’overwrite è intenzionale.
 
 | Obiettivo         | Approccio legacy        | Moderno (Files)                          | Dettaglio chiave |
 |------------------|--------------------------|------------------------------------------|------------------|
@@ -673,9 +673,9 @@ Files.move(
 );
 ```
 
-> [!NOTE]
-> ATOMIC_MOVE è garantito solo se lo spostamento avviene nello stesso filesystem.
-> Altrimenti viene lanciata un’eccezione.
+!!! note
+    ATOMIC_MOVE è garantito solo se lo spostamento avviene nello stesso filesystem.
+    Altrimenti viene lanciata un’eccezione.
 
 | Obiettivo        | Legacy (File)  | Moderno (Files)             | Dettaglio chiave |
 |-----------------|-----------------|-----------------------------|------------------|
@@ -724,10 +724,10 @@ byte[] data = Files.readAllBytes(Path.of("data.bin"));
 Files.write(Path.of("out.bin"), data);
 ```
 
-> [!IMPORTANT]
-> `readAllBytes` e `readAllLines` caricano tutto in memoria.
->
-> Usa `Files.lines()` (lazy) o, per file grandi, preferisci API streaming come newBufferedReader/newInputStream.
+!!! important
+    `readAllBytes` e `readAllLines` caricano tutto in memoria.
+    
+    Usa `Files.lines()` (lazy) o, per file grandi, preferisci API streaming come newBufferedReader/newInputStream.
 
 | Task            | Metodo legacy                    | Metodo NIO.2 Files                    | Dettaglio chiave |
 |-----------------|----------------------------------|----------------------------------------|------------------|
@@ -787,9 +787,9 @@ Files.walk(Path.of("."))
 	.forEach(System.out::println);
 ```
 
-> [!NOTE]
-> `Files.walk` restituisce uno Stream che va chiuso.
-> Usa `try-with-resources`.
+!!! note
+    `Files.walk` restituisce uno Stream che va chiuso.
+    Usa `try-with-resources`.
 
 ```java
 try (Stream<Path> s = Files.walk(Path.of("."))) {
@@ -869,10 +869,10 @@ Object v = Files.getAttribute(Path.of("a.txt"), "basic:size");
 Files.setAttribute(Path.of("a.txt"), "basic:lastModifiedTime", FileTime.fromMillis(0));
 ```
 
-> [!NOTE]
-> Le attribute view dipendono dal filesystem.
->
-> Attributi non supportati generano eccezioni.
+!!! note
+    Le attribute view dipendono dal filesystem.
+    
+    Attributi non supportati generano eccezioni.
 
 ### 35.3.11 Link simbolici e follow dei link
 
@@ -937,10 +937,10 @@ La serializzazione Java è abilitata implementando una di queste interfacce.
 | `Serializable`   | Marker opt-in, meccanismo di default          | Medio (hook possibili) |
 | `Externalizable` | Richiede implementazione manuale read/write   | Alto (controllo totale sul formato) |
 
-> [!NOTE]
-> `Serializable` non ha metodi: è una marker interface.
->
-> `Externalizable` estende Serializable e aggiunge readExternal/writeExternal.
+!!! note
+    `Serializable` non ha metodi: è una marker interface.
+    
+    `Externalizable` estende Serializable e aggiunge readExternal/writeExternal.
 
 ### 35.4.3 Esempio base: scrivere e leggere un oggetto
 
@@ -981,9 +981,9 @@ public class Demo {
 }
 ```
 
-> [!NOTE]
-> `readObject()` ritorna Object: serve cast.
-> `readObject()` può lanciare ClassNotFoundException.
+!!! note
+    `readObject()` ritorna Object: serve cast.
+    `readObject()` può lanciare ClassNotFoundException.
 
 ### 35.4.4 Grafi di oggetti, riferimenti e identità
 
@@ -1001,8 +1001,8 @@ Object[] restored = (Object[]) in.readObject();
 // restored[0] e restored[1] puntano allo stesso oggetto
 ```
 
-> [!NOTE]
-> Questo previene ricorsione infinita in grafi ciclici.
+!!! note
+    Questo previene ricorsione infinita in grafi ciclici.
 
 ### 35.4.5 `serialVersionUID`: la chiave di versioning
 
@@ -1030,8 +1030,8 @@ class Person implements Serializable {
 | Cambiare nome/pacchetto | Incompatibile |
 | Cambiare serialVersionUID | Incompatibile |
 
-> [!NOTE]
-> Dichiarare un serialVersionUID stabile è il modo standard per controllare la compatibilità.
+!!! note
+    Dichiarare un serialVersionUID stabile è il modo standard per controllare la compatibilità.
 
 ### 35.4.6 Campi `transient` e `static`
 
@@ -1052,8 +1052,8 @@ class Session implements Serializable {
 }
 ```
 
-> [!NOTE]
-> Se un transient serve dopo la deserializzazione, va ricalcolato o ripristinato manualmente.
+!!! note
+    Se un transient serve dopo la deserializzazione, va ricalcolato o ripristinato manualmente.
 
 ### 35.4.7 Campi non serializzabili e NotSerializableException
 
@@ -1085,8 +1085,8 @@ Durante la deserializzazione di una classe Serializable, i suoi costruttori NON 
 
 L’istanza viene creata senza chiamare quei costruttori e i campi vengono iniettati dallo stream.
 
-> [!NOTE]
-> Per questo i costruttori delle classi Serializable non devono contenere logica di inizializzazione essenziale: non verrebbe eseguita in deserializzazione.
+!!! note
+    Per questo i costruttori delle classi Serializable non devono contenere logica di inizializzazione essenziale: non verrebbe eseguita in deserializzazione.
 
 #### 35.4.8.2 Regola di ereditarietà: viene chiamata la prima superclass non-Serializable
 
@@ -1171,8 +1171,8 @@ Spiegazione:
 - A non è Serializable → A() viene chiamato (no-arg)
 - I campi di B e C vengono ripristinati dallo stream
 
-> [!NOTE]
-> Se la prima superclasse non-Serializable non ha un no-arg accessibile, la deserializzazione fallisce.
+!!! note
+    Se la prima superclasse non-Serializable non ha un no-arg accessibile, la deserializzazione fallisce.
 
 ### 35.4.9 Hook di serializzazione custom: `writeObject` e `readObject`
 
@@ -1205,8 +1205,8 @@ Il framework di serializzazione (ObjectOutputStream/ObjectInputStream) li indivi
 
 Se non esistono (o la firma è sbagliata), viene usata la serializzazione di default.
 
-> [!NOTE]
-> Se la firma è errata (visibilità, parametri, return type, eccezioni), il framework non la riconosce e torna silenziosamente al default.
+!!! note
+    Se la firma è errata (visibilità, parametri, return type, eccezioni), il framework non la riconosce e torna silenziosamente al default.
 
 #### 35.4.9.3 Firme richieste (esatte)
 
@@ -1264,8 +1264,8 @@ private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundE
 }
 ```
 
-> [!NOTE]
-> Se scrivi valori extra (int/string/etc.), devi leggerli nella stessa sequenza, altrimenti la deserializzazione fallisce o corrompe lo stato.
+!!! note
+    Se scrivi valori extra (int/string/etc.), devi leggerli nella stessa sequenza, altrimenti la deserializzazione fallisce o corrompe lo stato.
 
 ### 35.4.10 Esempio d’uso: ripristinare un campo derivato transient
 
@@ -1327,9 +1327,9 @@ class Point implements Externalizable {
 }
 ```
 
-> [!NOTE]
-> Con Externalizable controlli il formato.
-> Se lo cambi, devi gestire tu la backward compatibility.
+!!! note
+    Con Externalizable controlli il formato.
+    Se lo cambi, devi gestire tu la backward compatibility.
 
 ### 35.4.12 Considerazioni di sicurezza su `readObject()`
 

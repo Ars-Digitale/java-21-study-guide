@@ -76,9 +76,9 @@ LocalDate date = LocalDate.of(2025, 3, 15);
 Integer boxed = Integer.valueOf(10);
 ``` 
 
-> [!IMPORTANT]
-> String literals **do not require `new`** and are stored in the **String pool**.
-> Using `new String("x")` always creates a new object on the heap.
+!!! important
+    String literals **do not require `new`** and are stored in the **String pool**.
+    Using `new String("x")` always creates a new object on the heap.
 
   
 ### 6.1.1 Handling Primitive Types
@@ -87,8 +87,8 @@ Integer boxed = Integer.valueOf(10);
 
 **Declaring** a primitive type (as with reference types) means reserving space in memory for a variable of a given type, without necessarily giving it a value.  
 
-> [!WARNING]
-> Unlike primitives, whose size depends on their specific type (e.g., `int` vs `long`), reference types always occupy the same fixed size in memory — what varies is the size of the object they point to.
+!!! warning
+    Unlike primitives, whose size depends on their specific type (e.g., `int` vs `long`), reference types always occupy the same fixed size in memory — what varies is the size of the object they point to.
 
 - Syntax examples for declaration only:
 
@@ -103,10 +103,10 @@ int x, y, z;          // Multiple declarations in one statement: Java allows dec
 ```
 
 
-> [!IMPORTANT]
-> The `modifiers` and the `type` declared at the beginning of a variable declaration apply to all variables declared in the same statement.
->
-> **Exception**: when declaring arrays using brackets after the variable name, the brackets are part of the individual variable declarator, not the base type.
+!!! important
+    The `modifiers` and the `type` declared at the beginning of a variable declaration apply to all variables declared in the same statement.
+    
+    **Exception**: when declaring arrays using brackets after the variable name, the brackets are part of the individual variable declarator, not the base type.
 
 - Examples
 
@@ -149,9 +149,9 @@ double d1, double d2;         // ERROR - NOT LEGAL
 int v1; v2; 					// ERROR - NOT LEGAL
 ```
   
-> [!IMPORTANT]
-> When you write a number directly in the code (a numeric literal), Java assumes by default that it is of type **int**.  
-> If the value does not fit into an `int`, the code will not compile unless you explicitly mark it with the correct suffix.
+!!! important
+    When you write a number directly in the code (a numeric literal), Java assumes by default that it is of type **int**.
+    If the value does not fit into an `int`, the code will not compile unless you explicitly mark it with the correct suffix.
 
 - Syntax example for a numeric literal:
 
@@ -175,9 +175,9 @@ long exNumLit = 5729685479l;
   
 At this stage, no object is created yet — the variable only has the potential to point to one.
 
-> [!WARNING]  
-> Unlike primitives, whose size depends on their specific type (e.g., `int` vs `long`), reference variables always occupy the same fixed size in memory (enough to store a reference).  
-> What varies is the size of the object they point to, which is allocated separately on the heap.
+!!! warning
+    Unlike primitives, whose size depends on their specific type (e.g., `int` vs `long`), reference variables always occupy the same fixed size in memory (enough to store a reference).
+    What varies is the size of the object they point to, which is allocated separately on the heap.
 
 - Syntax examples for declaration only:
 
@@ -235,9 +235,9 @@ Whenever you call `new Person()`, the constructor runs and sets up the newly cre
 - Constructors **do not declare a return type** (not even `void`).  
 - If you do not define any constructor in your class, the compiler will automatically provide a **default no-argument constructor** that does nothing.
 
-> [!WARNING]  
-> If you see a method that has the same name as the class **but also declares a return type**, it is **not** a constructor.  
-> It is simply a regular method (though starting method names with a capital letter is against Java naming conventions).
+!!! warning
+    If you see a method that has the same name as the class **but also declares a return type**, it is **not** a constructor.
+    It is simply a regular method (though starting method names with a capital letter is against Java naming conventions).
 
 The **purpose of a constructor** is to initialize the state of a newly created object — typically by assigning values to its fields, either with default values or using parameters passed to the constructor.
 
@@ -298,9 +298,9 @@ Person p1 = new Person();            // name = "Unknown", age = 0
 Person p2 = new Person("Bob", 25);   // name = "Bob", age = 25
 ```
 
-> [!IMPORTANT]
-> - Constructors are not inherited: if a superclass defines constructors, they are not automatically available in the subclass — you must declare them explicitly.
-> - If you declare any constructor in a class, the compiler does not generate the default no-argument constructor: if you still need a no-argument constructor, you must declare it manually.
+!!! important
+    - Constructors are not inherited: if a superclass defines constructors, they are not automatically available in the subclass — you must declare them explicitly.
+    - If you declare any constructor in a class, the compiler does not generate the default no-argument constructor: if you still need a no-argument constructor, you must declare it manually.
 
 #### 6.1.2.3 Instance Initializer Blocks
 
@@ -339,9 +339,9 @@ public class Person {
 Person p1 = new Person();          // prints "Instance initializer block executed"
 Person p2 = new Person("Alice");   // prints "Instance initializer block executed"
 ```
-> [!NOTE]
-> In this example, the initializer block runs before either constructor body.
-> Both p1 and p2 will start with age = 18, regardless of which constructor is used.
+!!! note
+    In this example, the initializer block runs before either constructor body.
+    Both p1 and p2 will start with age = 18, regardless of which constructor is used.
 
 **Multiple Initializer Blocks**: if a class contains multiple initializer blocks, they are executed in the order they appear in the source file:
 
@@ -364,20 +364,20 @@ Example ex = new Example();
 // Second block
 ```
 
-> [!NOTE]
-> Instance initializer blocks are less common in practice, because similar logic can often be placed directly in constructors.
-> It is important to know that:
-> - They always run before the constructor body.
-> - They are executed in the order of declaration in the class.
-> - They can be combined with constructors to avoid code duplication.
+!!! note
+    Instance initializer blocks are less common in practice, because similar logic can often be placed directly in constructors.
+    It is important to know that:
+    - They always run before the constructor body.
+    - They are executed in the order of declaration in the class.
+    - They can be combined with constructors to avoid code duplication.
 
-> [!WARNING]
-> **Order of initialization when creating an object**
-> 1. Static fields
-> 2. Static initializer blocks
-> 3. Instance fields
-> 4. Instance initializer blocks
-> 5. Constructor body
+!!! warning
+    **Order of initialization when creating an object**
+    1. Static fields
+    2. Static initializer blocks
+    3. Instance fields
+    4. Instance initializer blocks
+    5. Constructor body
 
 ---
 
@@ -409,8 +409,8 @@ This applies to both:
 - **final instance variables**
 - **static final class variables**
 
-> [!NOTE]
-> We can assign a `null` value to a `final` instance or class instance variables as long they are explicitely set.
+!!! note
+    We can assign a `null` value to a `final` instance or class instance variables as long they are explicitely set.
 
 Java enforces this rule because a `final` variable represents a value that must be *known and fixed* before use.
 
@@ -445,9 +445,9 @@ public class Person {
 }
 ```
 
-> [!WARNING]
-> Trying to compile without assigning `id` inside **every** constructor produces a compile-time error:
-> variable id might not have been initialized
+!!! warning
+    Trying to compile without assigning `id` inside **every** constructor produces a compile-time error:
+    variable id might not have been initialized
 
 <ins>**`static final` Class Variables (Constants)**</ins>
 
@@ -503,10 +503,10 @@ Because:
 
 Thus, Java forces developers to explicitly initialize `final` fields.
 
-> [!TIP]
-> `final` means **assigned once**, not **immutable object**.
->
-> A final reference can still point to a mutable object.
+!!! tip
+    `final` means **assigned once**, not **immutable object**.
+    
+    A final reference can still point to a mutable object.
 
 ```java
 final List<String> list = new ArrayList<>();
@@ -539,10 +539,10 @@ public int localMethod {
 
 Under certain conditions you can use the keyword **var** in place of the appropriate type when declaring **local** variables;
 
-> [!WARNING]
-> - **var** IS NOT a reserved word in java;
-> - **var** can be used only for local variables: it CAN'T be used for **constructor parameters**, **instance variables** or **method parameters**;
-> - The compiler infere the type by looking ONLY at the code **on the line of the declaration**; once the right type has been inferred you can't reassign to another type.
+!!! warning
+    - **var** IS NOT a reserved word in java;
+    - **var** can be used only for local variables: it CAN'T be used for **constructor parameters**, **instance variables** or **method parameters**;
+    - The compiler infere the type by looking ONLY at the code **on the line of the declaration**; once the right type has been inferred you can't reassign to another type.
 
 - example
 
@@ -563,9 +563,9 @@ public int localMethod {
 }
 ```
 
-> [!WARNING]
-> Local variables **never** get default values.
-> Instance & static fields **always** do.
+!!! warning
+    Local variables **never** get default values.
+    Instance & static fields **always** do.
 
 ---
 
@@ -614,13 +614,13 @@ Integer	 arr1 = {11.5, 13.6}  // WARNING: Does not compile!!
 Double[] arr2 = {11, 22};     // WARNING: Does not compile!!
 ```
 
-> [!TIP]
-> Java **never** performs autoboxing + widening/narrowing in one step.
+!!! tip
+    Java **never** performs autoboxing + widening/narrowing in one step.
 
 
-> [!WARNING]
-> - **AUTOBOXING** and **Implicit cast** are not allowed in the same statement: you can't do both at the same time. (see example above)
-> - This rule apply also in method calls.
+!!! warning
+    - **AUTOBOXING** and **Implicit cast** are not allowed in the same statement: you can't do both at the same time. (see example above)
+    - This rule apply also in method calls.
 
 ### 6.3.3  Parsing and Conversion
 
@@ -657,8 +657,8 @@ Integer.valueOf("F", 16);	// 15
 Integer.valueOf("G", 16);	// NumberFormatException
 ```
 
-> [!NOTE]
-> methods **parseXxx()** return a primitive while **valueOf()** returns a wrapper object.
+!!! note
+    methods **parseXxx()** return a primitive while **valueOf()** returns a wrapper object.
 
 ### 6.3.4  Helper methods
 
@@ -797,14 +797,14 @@ b += "string literal";
 System.out.println(a == b);  // false
 ```
 
-> [!WARNING]
-> Any String created at **runtime** does *not* go into the pool automatically.
-> Use `intern()` if you want pooling.
+!!! warning
+    Any String created at **runtime** does *not* go into the pool automatically.
+    Use `intern()` if you want pooling.
 
-> [!TIP]
-> `"Hello" == "Hel" + "lo"` → true (compile-time constant)
->
-> `"Hello" == getHello()` → false (runtime concatenation)
+!!! tip
+    `"Hello" == "Hel" + "lo"` → true (compile-time constant)
+    
+    `"Hello" == getHello()` → false (runtime concatenation)
 
 ```java
 String x = "Hello";
@@ -849,8 +849,8 @@ System.out.println(c == d);        // false → not cached
 System.out.println(c.equals(d));   // true → same numeric value
 ```
 
-> [!WARNING]
-> Be very careful with wrapper caching
+!!! warning
+    Be very careful with wrapper caching
 
 
 ### 6.4.5 Equality and `null`

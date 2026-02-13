@@ -47,8 +47,8 @@ Tutte le implementazioni di `Set` richiedono:
 - unicità degli elementi  
 - uguaglianza e hashing prevedibili (a seconda dell’implementazione)
 
-> [!NOTE]
-> `LinkedHashSet` è ora formalmente un `SequencedSet` a partire da Java 21.
+!!! note
+    `LinkedHashSet` è ora formalmente un `SequencedSet` a partire da Java 21.
 
 ---
 
@@ -103,9 +103,9 @@ tree.add(5);
 System.out.println(tree); // [1, 5, 10]
 ```
 
-> [!NOTE]
-> `TreeSet` richiede che tutti gli elementi siano mutuamente confrontabili — mescolare tipi non confrontabili produce `ClassCastException`.
-> Le operazioni (add, remove, contains) sono O(log n).
+!!! note
+    `TreeSet` richiede che tutti gli elementi siano mutuamente confrontabili — mescolare tipi non confrontabili produce `ClassCastException`.
+    Le operazioni (add, remove, contains) sono O(log n).
 
 ---
 
@@ -124,8 +124,8 @@ Due oggetti sono considerati lo stesso elemento se:
 1. I loro hash code coincidono  
 2. Il loro metodo `equals()` restituisce `true`  
 
-> [!WARNING]
-> Se si muta un oggetto dopo averlo aggiunto a un HashSet o LinkedHashSet, il suo hashCode può cambiare e il set può perdere il riferimento a quell’elemento.
+!!! warning
+    Se si muta un oggetto dopo averlo aggiunto a un HashSet o LinkedHashSet, il suo hashCode può cambiare e il set può perdere il riferimento a quell’elemento.
 
 ### 26.3.2 TreeSet
 
@@ -174,9 +174,9 @@ Set<String> s1 = Set.of("A", "B", "C");   // immutabile
 Set<String> empty = Set.of();             // set immutabile vuoto
 ```
 
-> [!NOTE]
-> I set creati tramite factory sono **immutabili**: aggiungere o rimuovere elementi lancia `UnsupportedOperationException`.
-> `Set.of(...)` rifiuta duplicati in fase di creazione → IllegalArgumentException e rifiuta null → NullPointerException
+!!! note
+    I set creati tramite factory sono **immutabili**: aggiungere o rimuovere elementi lancia `UnsupportedOperationException`.
+    `Set.of(...)` rifiuta duplicati in fase di creazione → IllegalArgumentException e rifiuta null → NullPointerException
 
 ---
 

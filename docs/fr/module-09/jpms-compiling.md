@@ -38,10 +38,10 @@ Il existe aux côtés du **classpath** traditionnel, mais les deux se comportent
 | Split packages | Autorisés | Interdits (modules nommés) |
 | Ordre de résolution | Dépendant de l’ordre | Déterministe |
 
-> [!NOTE]
-> - Un JAR placé sur le `module path` devient un `module nommé (ou automatique)`.
-> - Un JAR placé sur le classpath est traité comme faisant partie du `module non nommé`.
-> - Les split packages sont autorisés sur le classpath mais interdits pour les modules nommés sur le module path.
+!!! note
+    - Un JAR placé sur le `module path` devient un `module nommé (ou automatique)`.
+    - Un JAR placé sur le classpath est traité comme faisant partie du `module non nommé`.
+    - Les split packages sont autorisés sur le classpath mais interdits pour les modules nommés sur le module path.
 
 ---
 
@@ -63,8 +63,8 @@ javac --module-source-path src \
       $(find src -name "*.java")
 ```
 
-> [!NOTE]
-> `--module-source-path` indique à javac où trouver plusieurs modules à la fois.
+!!! note
+    `--module-source-path` indique à javac où trouver plusieurs modules à la fois.
 
 ---
 
@@ -102,9 +102,9 @@ jar --create \
 -C out/com.example.hello .
 ```
 
-> [!NOTE]
-> Un JAR avec `module-info.class` est un `module nommé, pas un module automatique`.
-> Lorsqu’un JAR contient un `module-info.class`, son nom de module est pris depuis ce fichier et n’est pas déduit du nom du fichier.
+!!! note
+    Un JAR avec `module-info.class` est un `module nommé, pas un module automatique`.
+    Lorsqu’un JAR contient un `module-info.class`, son nom de module est pris depuis ce fichier et n’est pas déduit du nom du fichier.
 
 ---
 
@@ -123,8 +123,8 @@ Vous pouvez raccourcir cela en utilisant les options `-p` et `-m`.
 java -p mods -m com.example.hello/com.example.hello.Main
 ```
 
-> [!NOTE]
-> Lors de l’utilisation de modules nommés, le classpath est ignoré pour la résolution des dépendances entre modules.
+!!! note
+    Lors de l’utilisation de modules nommés, le classpath est ignoré pour la résolution des dépendances entre modules.
 
 ---
 
@@ -167,10 +167,10 @@ Signification :
 - **Tout module qui requiert com.example.lib lit automatiquement com.example.util**
 - **Les appelants n’ont pas besoin de déclarer requires com.example.util explicitement**
 
-> [!NOTE]
-> Cela est similaire aux « dépendances publiques » dans d’autres systèmes de modules.
->
-> Lisible ≠ exporté : une dépendance transitive n’exporte pas automatiquement vos packages.
+!!! note
+    Cela est similaire aux « dépendances publiques » dans d’autres systèmes de modules.
+    
+    Lisible ≠ exporté : une dépendance transitive n’exporte pas automatiquement vos packages.
 
 ### 38.6.3 `exports`
 
@@ -210,9 +210,9 @@ module com.example.app {
 }
 ```
 
-> [!NOTE]
-> opens NE rend PAS un package accessible à la compilation.
-> Il affecte uniquement la réflexion à l’exécution.
+!!! note
+    opens NE rend PAS un package accessible à la compilation.
+    Il affecte uniquement la réflexion à l’exécution.
 
 ### 38.6.6 `opens ... to` (Opens Qualifiés)
 
@@ -224,8 +224,8 @@ module com.example.app {
 }
 ```
 
-> [!NOTE]
-> `opens` affecte la réflexion ; `exports` affecte la compilation et la visibilité des types.
+!!! note
+    `opens` affecte la réflexion ; `exports` affecte la compilation et la visibilité des types.
 
 ### 38.6.7 Table des Directives Principales
 
@@ -247,5 +247,5 @@ module com.example.app {
 | `exports ... to` | Oui (modules limités) | Non |
 | `opens ... to` | Non | Oui (modules limités) |
 
-> [!IMPORTANT]
-> `JPMS` ajoute un `module path`, mais le `classpath` existe toujours. Ils peuvent coexister, mais les modules nommés ont la priorité.
+!!! important
+    `JPMS` ajoute un `module path`, mais le `classpath` existe toujours. Ils peuvent coexister, mais les modules nommés ont la priorité.

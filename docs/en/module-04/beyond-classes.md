@@ -78,8 +78,8 @@ interface Calculator {
 }
 ```
 
-> [!WARNING]
-> Because interface abstract methods are implicitly `public`, you **cannot** reduce the access level on an implementing method.
+!!! warning
+    Because interface abstract methods are implicitly `public`, you **cannot** reduce the access level on an implementing method.
 
 
 ### 17.1.2 Implementing an Interface
@@ -90,8 +90,8 @@ class BasicCalc implements Calculator {
 }
 ```
 
-> [!NOTE]
-> **Every** abstract method must be implemented unless the class is abstract.
+!!! note
+    **Every** abstract method must be implemented unless the class is abstract.
 
 
 ### 17.1.3 Multiple Inheritance
@@ -284,9 +284,9 @@ public record Point(int x, int y) {
 }
 ```
 
->[!NOTE]
-> - The compiler will not insert a constructor if you manually provide one with the same list of parameters in the defined order;
-> - In this case, you must explicitly set every field manually;
+!!! note
+    - The compiler will not insert a constructor if you manually provide one with the same list of parameters in the defined order;
+    - In this case, you must explicitly set every field manually;
 
 ### 17.4.2 Compact Constructor
 
@@ -308,8 +308,8 @@ public record Person(String name, int age) {
 }
 ```
 
-> [!WARNING]
-> - If you try to modify a Record field inside a Compact Constructor, your code will not compile
+!!! warning
+    - If you try to modify a Record field inside a Compact Constructor, your code will not compile
 
 
 ### 17.4.3 Pattern Matching for Records
@@ -369,9 +369,9 @@ Instead of specifying exact types for each field, you can use `var` inside the p
 
 `var` in patterns works like `var` in local variables: it means "infer the type".
 
-> [!WARNING]
-> - You still need the enclosing record type (Person, Address); 
-> - only the field types can be replaced with `var`.
+!!! warning
+    - You still need the enclosing record type (Person, Address);
+    - only the field types can be replaced with `var`.
 
 #### 17.4.4.3 Nested Record Patterns and Generics
 
@@ -426,8 +426,8 @@ Illegal placement of `var`
 case var(Person(var n, var a)) -> ...
 ```
 
-> [!NOTE]
-> - `var` cannot stand in for the whole pattern, only for individual components.
+!!! note
+    - `var` cannot stand in for the whole pattern, only for individual components.
 
 ---
 
@@ -544,8 +544,8 @@ class Outer {
 }
 ```
 
-> [!WARNING]
-> - Instantiating an inner class WITHOUT an outer instance is illegal.
+!!! warning
+    - Instantiating an inner class WITHOUT an outer instance is illegal.
 
 
 ### 17.5.3 Local Classes

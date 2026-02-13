@@ -96,10 +96,10 @@ In this example:
 - `FileInputStream` performs the actual file access
 - `BufferedInputStream` adds an in-memory buffer
 
-> [!NOTE]
-> This design is known as the Decorator Pattern.
->
-> It allows features to be layered dynamically.
+!!! note
+    This design is known as the Decorator Pattern.
+    
+    It allows features to be layered dynamically.
 
 ### 35.1.3 Blocking I/O: What It Means
 
@@ -112,8 +112,8 @@ For example, when calling `read()`:
 - If no data is available, the thread waits
 - If end-of-stream is reached, -1 is returned
 
-> [!NOTE]
-> Blocking behavior simplifies programming but limits scalability.
+!!! note
+    Blocking behavior simplifies programming but limits scalability.
 
 ### 35.1.4 Resource Management: `close()`, `flush()`, and Why They Exist
 
@@ -133,8 +133,8 @@ try (OutputStream out = new FileOutputStream("file.bin")) {
 } // close() called automatically
 ```
 
-> [!NOTE]
-> Failing to close streams may cause data loss or resource exhaustion.
+!!! note
+    Failing to close streams may cause data loss or resource exhaustion.
 
 ### 35.1.5 `finalize()`: Why It Exists and Why It Fails
 
@@ -151,8 +151,8 @@ However, garbage collection timing is unpredictable.
 | Current status  | Deprecated                        |
 
 
-> [!NOTE]
-> `finalize()` must never be used for I/O cleanup; it is deprecated and unsafe.
+!!! note
+    `finalize()` must never be used for I/O cleanup; it is deprecated and unsafe.
 
 ### 35.1.6 `available()`: Purpose and Misuse
 
@@ -170,9 +170,9 @@ if (in.available() > 0) {
 }
 ```
 
-> [!NOTE]
-> `available()` must not be used to detect end-of-file.
-> Only `read()` returning -1 signals EOF.
+!!! note
+    `available()` must not be used to detect end-of-file.
+    Only `read()` returning -1 signals EOF.
 
 ### 35.1.7 `mark()` and `reset()`: Controlled Backtracking
 
@@ -205,10 +205,10 @@ If no charset is specified, the platform default is used.
 new FileReader("file.txt"); // platform default encoding
 ```
 
-> [!NOTE]
-> Relying on the platform default charset leads to non-portable bugs.
->
-> Always specify a charset explicitly.
+!!! note
+    Relying on the platform default charset leads to non-portable bugs.
+    
+    Always specify a charset explicitly.
 
 ### 35.1.9 File vs FileDescriptor
 
@@ -224,10 +224,10 @@ FileDescriptor represents a native OS handle to an open file or stream.
 | `FileDescriptor` | Native OS file handle  | Yes             |
 
 
-> [!NOTE]
-> Multiple streams may share the same FileDescriptor.
->
-> Closing one closes the underlying resource for all.
+!!! note
+    Multiple streams may share the same FileDescriptor.
+    
+    Closing one closes the underlying resource for all.
 
 ---
 
@@ -302,8 +302,8 @@ while (buffer.hasRemaining()) {
 buffer.clear(); // ready for writing again
 ```
 
-> [!NOTE]
-> `flip()` does not erase data: it adjusts position and limit.
+!!! note
+    `flip()` does not erase data: it adjusts position and limit.
 
 ### 35.2.4 `clear()` vs `compact()`
 
@@ -331,8 +331,8 @@ ByteBuffer direct = ByteBuffer.allocateDirect(1024);
 | `Direct`    | Native memory   | Better I/O throughput, more expensive to allocate |
 
 
-> [!NOTE]
-> Direct buffers reduce copying between JVM and OS but must be used carefully to avoid memory pressure.
+!!! note
+    Direct buffers reduce copying between JVM and OS but must be used carefully to avoid memory pressure.
 
 ### 35.2.6 Channels: What They Are
 
@@ -370,8 +370,8 @@ In `**non-blocking mode**`:
 - `read()` may return immediately with 0 bytes
 - `write()` may write only part of the data
 
-> [!NOTE]
-> Non-blocking I/O shifts complexity from the OS to the application.
+!!! note
+    Non-blocking I/O shifts complexity from the OS to the application.
 
 ### 35.2.8 Scatter/Gather I/O
 
@@ -474,8 +474,8 @@ NIO.2 adds an explicit method to express uncertainty:
 boolean notExists = Files.notExists(p);
 ```
 
-> [!NOTE]
-> `exists()` and `notExists()` can both be `false` when the status cannot be determined (for example, due to permissions).
+!!! note
+    `exists()` and `notExists()` can both be `false` when the status cannot be determined (for example, due to permissions).
 
 
 This does not make the check more accurate — it merely makes the uncertainty explicit.
@@ -516,8 +516,8 @@ try {
 }
 ```
 
-> [!NOTE]
-> NIO.2’s real advantage is exception-based diagnostics during operations, not more accurate existence or accessibility checks.
+!!! note
+    NIO.2’s real advantage is exception-based diagnostics during operations, not more accurate existence or accessibility checks.
 
 ##### 35.3.1.2.3 Summary Table
 
@@ -562,10 +562,10 @@ Path dirDeep = Path.of("a/b/c");
 Files.createDirectories(dirDeep);
 ```
 
-> [!NOTE]
-> `Files.createFile` throws `FileAlreadyExistsException` if the file exists.
->
-> This is often preferred over boolean checks because it is race-safe.
+!!! note
+    `Files.createFile` throws `FileAlreadyExistsException` if the file exists.
+    
+    This is often preferred over boolean checks because it is race-safe.
 
 | Goal              | Legacy (File)        | Modern (Files)           | Key detail                                                     |
 |-------------------|----------------------|--------------------------|----------------------------------------------------------------|
@@ -645,10 +645,10 @@ Files.copy(
 );
 ```
 
-> [!NOTE]
-> `Files.copy` throws FileAlreadyExistsException by default.
->
-> Use `REPLACE_EXISTING` when overwriting is intended.
+!!! note
+    `Files.copy` throws FileAlreadyExistsException by default.
+    
+    Use `REPLACE_EXISTING` when overwriting is intended.
 
 | Goal            | Legacy approach        | Modern (Files)                         | Key detail                                                             |
 |-----------------|------------------------|----------------------------------------|------------------------------------------------------------------------|
@@ -690,9 +690,9 @@ Files.move(
 );
 ```
 
-> [!NOTE]
-> ATOMIC_MOVE is only guaranteed when the move occurs within the same filesystem.
-> Otherwise an exception is thrown.
+!!! note
+    ATOMIC_MOVE is only guaranteed when the move occurs within the same filesystem.
+    Otherwise an exception is thrown.
 
 | Goal            | Legacy (File)      | Modern (Files)                 | Key detail                                                       |
 |-----------------|--------------------|--------------------------------|------------------------------------------------------------------|
@@ -742,10 +742,10 @@ byte[] data = Files.readAllBytes(Path.of("data.bin"));
 Files.write(Path.of("out.bin"), data);
 ```
 
-> [!IMPORTANT]
-> `readAllBytes` and `readAllLines` load the entire file into memory.
->
-> Use `Files.lines()` instead which lazily process each line or, for large files, prefer streaming APIs such as newBufferedReader or newInputStream.
+!!! important
+    `readAllBytes` and `readAllLines` load the entire file into memory.
+    
+    Use `Files.lines()` instead which lazily process each line or, for large files, prefer streaming APIs such as newBufferedReader or newInputStream.
 
 | Task          | Legacy method                     | NIO.2 Files method                 | Key detail                                                     |
 |---------------|-----------------------------------|------------------------------------|----------------------------------------------------------------|
@@ -806,9 +806,9 @@ Files.walk(Path.of("."))
 		.forEach(System.out::println);
 ```
 
-> [!NOTE]
-> `Files.walk` returns a Stream that must be closed.
-> Prefer try-with-resources when using it.
+!!! note
+    `Files.walk` returns a Stream that must be closed.
+    Prefer try-with-resources when using it.
 
 ```java
 try (Stream<Path> s = Files.walk(Path.of("."))) {
@@ -889,10 +889,10 @@ Object v = Files.getAttribute(Path.of("a.txt"), "basic:size");
 Files.setAttribute(Path.of("a.txt"), "basic:lastModifiedTime", FileTime.fromMillis(0));
 ```
 
-> [!NOTE]
-> Attribute views are filesystem-dependent.
->
-> Unsupported attributes cause exceptions.
+!!! note
+    Attribute views are filesystem-dependent.
+    
+    Unsupported attributes cause exceptions.
 
 ### 35.3.11 Symbolic Links and Link Following
 
@@ -960,10 +960,10 @@ Java serialization is enabled by implementing one of these interfaces.
 | `Externalizable` | Requires manual read/write implementation | High (full control over format)    |
 
 
-> [!NOTE]
-> `Serializable` has no methods. It is a marker interface.
->
-> `Externalizable` extends Serializable and adds readExternal/writeExternal.
+!!! note
+    `Serializable` has no methods. It is a marker interface.
+    
+    `Externalizable` extends Serializable and adds readExternal/writeExternal.
 
 ### 35.4.3 Basic Example: Writing and Reading an Object
 
@@ -1004,9 +1004,9 @@ public class Demo {
 }
 ```
 
-> [!NOTE]
-> `readObject()` returns Object. A cast is required.
-> `readObject()` can throw ClassNotFoundException.
+!!! note
+    `readObject()` returns Object. A cast is required.
+    `readObject()` can throw ClassNotFoundException.
 
 ### 35.4.4 Object Graphs, References, and Identity
 
@@ -1024,8 +1024,8 @@ Object[] restored = (Object[]) in.readObject();
 // restored[0] and restored[1] refer to the same object instance
 ```
 
-> [!NOTE]
-> This behavior prevents infinite recursion on cyclic graphs.
+!!! note
+    This behavior prevents infinite recursion on cyclic graphs.
 
 ### 35.4.5 `serialVersionUID`: The Versioning Key
 
@@ -1055,8 +1055,8 @@ class Person implements Serializable {
 | Change class name/package Incompatible |
 | Change serialVersionUID Incompatible |
 
-> [!NOTE]
-> Declaring a stable serialVersionUID is the standard way to control serialization compatibility.
+!!! note
+    Declaring a stable serialVersionUID is the standard way to control serialization compatibility.
 
 ### 35.4.6 `transient` and `static` Fields
 
@@ -1079,8 +1079,8 @@ String user;                 // serialized
 }
 ```
 
-> [!NOTE]
-> If a transient field is required after deserialization, you must recompute it or restore it manually.
+!!! note
+    If a transient field is required after deserialization, you must recompute it or restore it manually.
 
 ### 35.4.7 Non-Serializable Fields and NotSerializableException
 
@@ -1114,10 +1114,10 @@ During deserialization of a Serializable class, the constructors of that class a
 
 The instance is created without calling those constructors, and field values are injected from the stream.
 
-> [!NOTE]
-> This is why constructors of Serializable classes must not contain essential initialization logic.
->
-> That initialization would not run during deserialization.
+!!! note
+    This is why constructors of Serializable classes must not contain essential initialization logic.
+    
+    That initialization would not run during deserialization.
 
 #### 35.4.8.2 Inheritance Rule: The First Non-Serializable Superclass Constructor Is Called
 
@@ -1209,8 +1209,8 @@ Explanation:
 - A is not Serializable, so A() is called (no-arg constructor)
 - Fields of B and C are restored from the stream instead of constructors running
 
-> [!NOTE]
-> If the first non-Serializable superclass has no accessible no-arg constructor, deserialization fails.
+!!! note
+    If the first non-Serializable superclass has no accessible no-arg constructor, deserialization fails.
 
 
 ### 35.4.9 Custom Serialization Hooks: `writeObject` and `readObject`
@@ -1248,10 +1248,10 @@ If such methods are found, the serialization framework calls them automatically 
 
 If they are not found, the framework performs default serialization instead.
 
-> [!NOTE]
-> If the method signature is incorrect (wrong visibility, parameter type, return type, or declared exceptions), the serialization framework does not recognize the method and silently falls back to default serialization.
->
-> This behavior often makes errors hard to diagnose.
+!!! note
+    If the method signature is incorrect (wrong visibility, parameter type, return type, or declared exceptions), the serialization framework does not recognize the method and silently falls back to default serialization.
+    
+    This behavior often makes errors hard to diagnose.
 
 
 #### 35.4.9.3 Exact Required Signatures
@@ -1313,9 +1313,9 @@ private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundE
 }
 ```
 
-> [!NOTE]
-> If you write extra values (ints/strings/etc.), you must read them back in the same sequence.
-> Otherwise deserialization will fail or restore corrupted state.
+!!! note
+    If you write extra values (ints/strings/etc.), you must read them back in the same sequence.
+    Otherwise deserialization will fail or restore corrupted state.
 
 ### 35.4.10 Example Use Case: Restoring a transient Derived Field
 
@@ -1379,9 +1379,9 @@ public void readExternal(ObjectInput in) throws IOException {
 }
 ```
 
-> [!NOTE]
-> With Externalizable, you control the format.
-> If you change the format later, you must handle backward compatibility yourself.
+!!! note
+    With Externalizable, you control the format.
+    If you change the format later, you must handle backward compatibility yourself.
 
 ### 35.4.12 `readObject()` Security Considerations
 

@@ -40,10 +40,10 @@ It exists alongside the traditional **classpath**, but the two behave very diffe
 | Split packages | Allowed | Forbidden (named modules) |
 | Resolution order | Order-dependent | Deterministic |
 
-> [!NOTE]
-> - A JAR placed on the `module path` becomes a `named (or automatic) module`.
-> - A JAR placed on the classpath is treated as part of the `unnamed module`.
-> - Split packages are allowed on the classpath but forbidden for named modules on the module path.
+!!! note
+    - A JAR placed on the `module path` becomes a `named (or automatic) module`.
+    - A JAR placed on the classpath is treated as part of the `unnamed module`.
+    - Split packages are allowed on the classpath but forbidden for named modules on the module path.
 
 ---
 
@@ -65,8 +65,8 @@ javac --module-source-path src \
       $(find src -name "*.java")
 ```
 
-> [!NOTE]
-> `--module-source-path` tells javac where to find multiple modules at once.
+!!! note
+    `--module-source-path` tells javac where to find multiple modules at once.
 
 ---
 
@@ -106,9 +106,9 @@ jar --create \
 -C out/com.example.hello .
 ```
 
-> [!NOTE]
-> A JAR with `module-info.class` is a `named module, not an automatic module`.
-> When a JAR contains a `module-info.class`, its module name is taken from that file and not inferred from the filename.
+!!! note
+    A JAR with `module-info.class` is a `named module, not an automatic module`.
+    When a JAR contains a `module-info.class`, its module name is taken from that file and not inferred from the filename.
 
 ---
 
@@ -127,8 +127,8 @@ You can shorten this using the `-p` and `-m` options.
 java -p mods -m com.example.hello/com.example.hello.Main
 ```
 
-> [!NOTE]
-> When using named modules, the classpath is ignored for resolution of module dependencies.
+!!! note
+    When using named modules, the classpath is ignored for resolution of module dependencies.
 
 ---
 
@@ -171,10 +171,10 @@ Meaning:
 - **Any module requiring com.example.lib automatically reads com.example.util**
 - **Callers do not need to declare requires com.example.util explicitly**
 
-> [!NOTE]
-> This is similar to “public dependencies” in other module systems.
->
-> Readable ≠ exported: a transitive requirement does not export your packages automatically.
+!!! note
+    This is similar to “public dependencies” in other module systems.
+    
+    Readable ≠ exported: a transitive requirement does not export your packages automatically.
 
 
 ### 38.6.3 `exports`
@@ -215,9 +215,9 @@ module com.example.app {
 }
 ```
 
-> [!NOTE]
-> opens does NOT make a package accessible at compile time.
-> It only affects runtime reflection.
+!!! note
+    opens does NOT make a package accessible at compile time.
+    It only affects runtime reflection.
 
 ### 38.6.6 `opens ... to` (Qualified Opens)
 
@@ -229,8 +229,8 @@ module com.example.app {
 }
 ```
 
-> [!NOTE]
-> `opens` affects reflection; `exports` affects compilation and type visibility.
+!!! note
+    `opens` affects reflection; `exports` affects compilation and type visibility.
 
 
 ### 38.6.7 Table of Core Directives
@@ -256,5 +256,5 @@ module com.example.app {
 
 
 
-> [!IMPORTANT]
-> `JPMS` adds a `module path`, but the `classpath` still exists. They can coexist, but named modules take precedence.
+!!! important
+    `JPMS` adds a `module path`, but the `classpath` still exists. They can coexist, but named modules take precedence.

@@ -44,10 +44,10 @@ They are connected to the process environment (usually a terminal or console).
 | Standard error | `System.err` | PrintStream | Error output |
 | Standard input | `System.in` | InputStream | User input |
 
-> [!NOTE]
-> These streams are created by the JVM, not by your program.
->
-> They exist for the entire lifetime of the process.
+!!! note
+    These streams are created by the JVM, not by your program.
+    
+    They exist for the entire lifetime of the process.
 
 ---
 
@@ -67,10 +67,10 @@ It wraps another OutputStream and adds convenient printing methods.
 - Does not throw `IOException` on write errors
 - Optionally supports auto-flushing on newline / `println()`
 
-> [!NOTE]
-> Unlike most streams, PrintStream suppresses IOExceptions.
->
-> Errors must be checked using checkError().
+!!! note
+    Unlike most streams, PrintStream suppresses IOExceptions.
+    
+    Errors must be checked using checkError().
 
 ### 36.2.2 Basic Usage of PrintStream
 
@@ -98,8 +98,8 @@ System.out.printf("Name: %s, Age: %d%n", "Alice", 30);
 | `%f` | Floating-point |
 | `%n` | Platform-independent newline |
 
-> [!NOTE]
-> `printf()` does not automatically add a newline unless you specify `%n`.
+!!! note
+    `printf()` does not automatically add a newline unless you specify `%n`.
 
 ---
 
@@ -119,8 +119,8 @@ This is rarely convenient for interactive programs.
 int b = System.in.read();
 ```
 
-> [!NOTE]
-> `System.in.read()` blocks until input is available.
+!!! note
+    `System.in.read()` blocks until input is available.
 
 ### 36.3.2 Using InputStreamReader and BufferedReader
 
@@ -149,10 +149,10 @@ int value = sc.nextInt();
 String text = sc.nextLine();
 ```
 
-> [!NOTE]
-> `Scanner` performs tokenization and parsing, not simple reading.
->
-> This makes it convenient but slower and sometimes surprising.
+!!! note
+    `Scanner` performs tokenization and parsing, not simple reading.
+    
+    This makes it convenient but slower and sometimes surprising.
 
 ### 36.4.1 Common Scanner Pitfalls
 
@@ -176,8 +176,8 @@ String text = sc.nextLine();
 Closing `System.out` or `System.err` closes the underlying OS stream and affects the entire JVM: closing these streams affects the entire JVM process, not just the current class or method.
 
 
-> [!NOTE]
-> In almost all applications, you should NOT close `System.out` or `System.err`.
+!!! note
+    In almost all applications, you should NOT close `System.out` or `System.err`.
 
 ---
 
@@ -194,9 +194,9 @@ if (console == null) {
 }
 ```
 
-> [!NOTE]
-> `System.console()` may return null when no console is available
-> (e.g. IDEs, redirected input).
+!!! note
+    `System.console()` may return null when no console is available
+    (e.g. IDEs, redirected input).
 
 ### 36.6.1 Reading Input from Console
 
@@ -214,8 +214,8 @@ Console allows reading passwords without echoing characters.
 char[] password = console.readPassword("Password: ");
 ```
 
-> [!NOTE]
-> Passwords are returned as `char[]` so they can be cleared from memory.
+!!! note
+    Passwords are returned as `char[]` so they can be cleared from memory.
 
 ---
 
@@ -252,8 +252,8 @@ java App < input.txt > output.txt
 
 From the program’s perspective, System.in and System.out still behave like normal streams.
 
-> [!NOTE]
-> Redirection is handled by the operating system or shell. The Java code does not need to change to support it.
+!!! note
+    Redirection is handled by the operating system or shell. The Java code does not need to change to support it.
 
 ---
 

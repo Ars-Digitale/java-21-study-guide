@@ -50,8 +50,8 @@ java.lang.Object
 - Non destiné à être capturé ou géré
 - Exemples: `OutOfMemoryError`, `StackOverflowError`
 
-> [!NOTE]
-> Les erreurs indiquent des conditions dont lapplication ne peut généralement pas se remettre.
+!!! note
+    Les erreurs indiquent des conditions dont lapplication ne peut généralement pas se remettre.
 
 ### 19.1.3 Exceptions Checked (`Exception`)
 - Sous-classes de `Exception` **à lexclusion** de `RuntimeException`
@@ -76,8 +76,8 @@ void readFile(Path p) throws IOException {
 }
 ```
 
-> [!NOTE]
-> Seules les **exceptions checked** doivent être déclarées. Les exceptions unchecked peuvent lêtre, mais sont généralement omises.
+!!! note
+    Seules les **exceptions checked** doivent être déclarées. Les exceptions unchecked peuvent lêtre, mais sont généralement omises.
 
 ### 19.2.2 Lancer des exceptions
 Les exceptions sont créées avec `new` et lancées explicitement avec `throw`.
@@ -109,8 +109,8 @@ class Child extends Parent {
 }
 ```
 
-> [!NOTE]
-> Modifier uniquement les exceptions unchecked ne viole jamais le contrat de redéfinition.
+!!! note
+    Modifier uniquement les exceptions unchecked ne viole jamais le contrat de redéfinition.
 
 ## 19.4 Gestion des exceptions: try, catch, finally
 
@@ -139,9 +139,9 @@ try {
 }
 ```
 
-> [!NOTE]
-> Les exceptions plus spécifiques doivent précéder les plus générales, sinon la compilation échoue.
-> Si un `catch` pour une superclasse précède celui dune sous-classe, ce dernier devient inatteignable.
+!!! note
+    Les exceptions plus spécifiques doivent précéder les plus générales, sinon la compilation échoue.
+    Si un `catch` pour une superclasse précède celui dune sous-classe, ce dernier devient inatteignable.
 
 ### 19.4.3 Multi-catch Java-7
 
@@ -170,8 +170,8 @@ try {
 - Utilisé pour la logique de nettoyage
 - Sexécute même si `return` est utilisé dans try ou catch
 
-> [!NOTE]
-> Un bloc `finally` peut écraser une valeur de retour ou avaler une exception. Cela est déconseillé car cela complique le flux de contrôle.
+!!! note
+    Un bloc `finally` peut écraser une valeur de retour ou avaler une exception. Cela est déconseillé car cela complique le flux de contrôle.
 
 ## 19.5 Gestion automatique des ressources try-with-resources
 
@@ -213,8 +213,8 @@ try (firstWriter; var secondWriter = Files.newBufferedWriter(filePath)) {
 }
 ```
 
-> [!NOTE]
-> Tenter de réaffecter une variable ressource provoque une erreur de compilation.
+!!! note
+    Tenter de réaffecter une variable ressource provoque une erreur de compilation.
 
 ## 19.6 Exceptions supprimées
 

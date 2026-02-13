@@ -177,8 +177,8 @@ Java allows multiple bounds:
 
 The critical rule:
 
-> [!IMPORTANT]
-> The erasure of `T` is always the **first bound**, which must be a class or interface.
+!!! important
+    The erasure of `T` is always the **first bound**, which must be a class or interface.
 
 Because `Runnable` is the first bound, the compiler erases `T` to `Runnable`.
 
@@ -219,8 +219,8 @@ Runtime bytecode instructions like `invokevirtual` require a single class or int
 
 Thus:
 
-> [!NOTE]
-> Java selects the **first bound** as the runtime type, and uses the remaining bounds for **compile-time validation only**.
+!!! note
+    Java selects the **first bound** as the runtime type, and uses the remaining bounds for **compile-time validation only**.
 
 ### 18.4.6 A More Complex Example
 
@@ -252,8 +252,8 @@ class Demo {
 }
 ```
 
-> [!NOTE]
-> The compiler may insert additional casts or bridge methods in more complex inheritance scenarios, but erasure always uses only the first bound (A in this case).
+!!! note
+    The compiler may insert additional casts or bridge methods in more complex inheritance scenarios, but erasure always uses only the first bound (A in this case).
 
 
 ### 18.4.7 Overloading a Generic Method — Why Some Overloads Are Impossible

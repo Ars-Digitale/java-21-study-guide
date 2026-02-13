@@ -50,9 +50,9 @@ String s2 = new String("Hello");        // using constructor (not recommended)
 String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
 ```
 
-> [!NOTE]
-> - I letterali stringa sono memorizzati nello `String pool`, un’area speciale di memoria usata per evitare di creare oggetti stringa duplicati.
-> - L’uso della keyword `new` crea sempre un nuovo oggetto al di fuori del pool.
+!!! note
+    - I letterali stringa sono memorizzati nello `String pool`, un’area speciale di memoria usata per evitare di creare oggetti stringa duplicati.
+    - L’uso della keyword `new` crea sempre un nuovo oggetto al di fuori del pool.
 
 ### 9.1.1.2 Lo String Pool
 
@@ -67,8 +67,8 @@ Per una spiegazione più approfondita e esempi, controlla il paragrafo: **"6.4.3
 Le stringhe possono contenere caratteri di escape, che permettono di includere simboli speciali o caratteri di controllo (caratteri con un significato speciale in Java).  
 Una sequenza di escape inizia con un backslash `\`.
 
-> [!NOTE]
-> **Tabella dei caratteri speciali & sequenze di escape nelle stringhe**
+!!! note
+    **Tabella dei caratteri speciali & sequenze di escape nelle stringhe**
 
 | Escape | Significato | Esempio Java | Risultato |
 | --- | --- | --- | --- |
@@ -97,8 +97,8 @@ Poiché l’operatore `+` può apparire in espressioni in cui sono presenti sia 
 
 Questo significa che, una volta che una `String` appare sul lato sinistro dell’espressione, tutte le successive operazioni `+` diventano concatenazioni.
 
-> [!TIP]
-> Poiché la valutazione è da sinistra a destra, la posizione del primo operando `String` determina come viene valutato il resto dell’espressione.
+!!! tip
+    Poiché la valutazione è da sinistra a destra, la posizione del primo operando `String` determina come viene valutato il resto dell’espressione.
 
 - Esempi
 
@@ -174,10 +174,10 @@ String html = """
     """;
 ```
 
-> [!NOTE]
-> - I text block includono automaticamente line break e indentazione per la leggibilità. I newline sono normalizzati a `\n`.
-> - Le doppie virgolette all’interno del blocco di solito non richiedono escape.
-> - Il compilatore interpreta il contenuto tra le triple virgolette di apertura e chiusura come il valore della stringa.
+!!! note
+    - I text block includono automaticamente line break e indentazione per la leggibilità. I newline sono normalizzati a `\n`.
+    - Le doppie virgolette all’interno del blocco di solito non richiedono escape.
+    - Il compilatore interpreta il contenuto tra le triple virgolette di apertura e chiusura come il valore della stringa.
 
 ### 9.1.2.1 Formattazione: whitespace essenziale vs incidentale
 
@@ -192,11 +192,11 @@ String text = """
         """;
 ```
 
-> [!IMPORTANT]
-> - **Carattere più a sinistra (baseline)**: la posizione del primo carattere non-spazio su tutte le righe (o la `"""` di chiusura) definisce la baseline di indentazione. Gli spazi a sinistra di questa baseline sono considerati incidentali e vengono rimossi.
-> - La riga immediatamente successiva alla `"""` di apertura non è inclusa nell’output se è vuota (formattazione tipica).
-> - Il newline prima della `"""` di chiusura è incluso nel contenuto.  
->   Nell’esempio sopra, la stringa risultante termina con un newline dopo `"Line 3"`: in totale ci sono 4 righe.
+!!! important
+    - **Carattere più a sinistra (baseline)**: la posizione del primo carattere non-spazio su tutte le righe (o la `"""` di chiusura) definisce la baseline di indentazione. Gli spazi a sinistra di questa baseline sono considerati incidentali e vengono rimossi.
+    - La riga immediatamente successiva alla `"""` di apertura non è inclusa nell’output se è vuota (formattazione tipica).
+    - Il newline prima della `"""` di chiusura è incluso nel contenuto.  
+      Nell’esempio sopra, la stringa risultante termina con un newline dopo `"Line 3"`: in totale ci sono 4 righe.
 
 Output con numeri di riga (mostrando la riga vuota finale):
 

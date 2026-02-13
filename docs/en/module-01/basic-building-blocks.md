@@ -96,8 +96,8 @@ public class Person {
 }
 ```
 
-> [!NOTE]
-> In its simplest form, we could theoretically have a class with no methods and no fields. Although such a class would compile, it would hardly make much sense.
+!!! note
+    In its simplest form, we could theoretically have a class with no methods and no fields. Although such a class would compile, it would hardly make much sense.
 
 | Token / Identifier | Category | Meaning | Optional? |
 |---|---|---|---|
@@ -111,9 +111,9 @@ public class Person {
 | return | Keyword | Exits a method and gives back a value. | Mandatory (in methods with a non-void return type) |
 | void | Return Type / Keyword | Indicates the method does not return a value. | Mandatory (if the method does not return a value) |
 
-> [!NOTE]
-> Mandatory = required by Java syntax,  
-> Optional = not required by syntax; depends on design. 
+!!! note
+    Mandatory = required by Java syntax,
+    Optional = not required by syntax; depends on design. 
 
 ---
 
@@ -170,8 +170,8 @@ A **Javadoc comment** is similar to a **multiline comment**, except it starts wi
 
 ```
 
-> [!WARNING] 
-> In Java, every block comment must be properly closed with */.
+!!! warning
+    In Java, every block comment must be properly closed with */.
 
 - Example:
 
@@ -197,8 +197,8 @@ will cause a compilation error because, while the first two symbols are part of 
 
 In Java, an **access modifier** is a keyword that specifies the visibility (or accessibility) of a **class**, **method**, or **field**. It determines which other classes can use or see that element.
 
-> [!NOTE]
-> **Table of the access modifiers available in Java**
+!!! note
+    **Table of the access modifiers available in Java**
 
 | Token / Identifier | Category | Meaning | Optional? |
 |---|---|---|---|
@@ -207,9 +207,9 @@ In Java, an **access modifier** is a keyword that specifies the visibility (or a
 | protected |	Keyword / access modifier |	Visible within the same package and by subclasses (even in other packages) | Yes |
 | private	| Keyword / access modifier	| Visible only within the same class | Yes |
 
-> [!TIP]
-> **private > default > protected > public**  
-> Think “visibility grows outward”.
+!!! tip
+    **private > default > protected > public**
+    Think “visibility grows outward”.
 
 ---
 
@@ -239,8 +239,8 @@ public class MyApp{
 }
 ```
 
-> [!IMPORTANT] 
-> This declaration means the class must be located in the directory: **com/example/myapp/utils/MyApp.java**
+!!! important
+    This declaration means the class must be located in the directory: **com/example/myapp/utils/MyApp.java**
 
 ### 2.4.3 Belonging to the Same Package
 
@@ -294,8 +294,8 @@ import java.util.*;          // imports all classes in java.util
 import java.nio.file.*.*     // ERROR! only one wildcard is allowed and it must be at the end!
 ```
 
-> [!NOTE]
-> The wildcard character  **\***  imports all types in the package but not its subpackages.
+!!! note
+    The wildcard character  **\***  imports all types in the package but not its subpackages.
 
 You can always use the fully qualified name instead of importing all the classes in that package:
 
@@ -303,9 +303,9 @@ You can always use the fully qualified name instead of importing all the classes
 java.util.List myList = new java.util.ArrayList<>();
 ```
 
-> [!NOTE]
-> If you explicitely import a class name, it takes precedence over any wildcard import;
-> if you want two use two class with the same name (ex. `Date` from java.util and from java.sql), it is better to use a fully qualified name import.
+!!! note
+    If you explicitely import a class name, it takes precedence over any wildcard import;
+    if you want two use two class with the same name (ex. `Date` from java.util and from java.sql), it is better to use a fully qualified name import.
 
 ### 2.4.5 Static imports
 
@@ -360,9 +360,9 @@ public class Calculator {
 Wildcard static imports behave exactly like normal wildcard imports:  
 they bring **all static members** of the class into scope.
 
-> [!WARNING]
-> You can **always** call a static member with the class name:
-> `Math.sqrt(16)` always works — even if imported statically.
+!!! warning
+    You can **always** call a static member with the class name:
+    `Math.sqrt(16)` always works — even if imported statically.
 
 
 
@@ -392,9 +392,9 @@ public class Test {
 ```
 
 
-> [!WARNING]
-> - A static import **must** follow the exact syntax: `import static`.
-> - The compiler forbids importing **two static members with the same simple name** if it creates ambiguity — even if they come from different classes or packages.
+!!! warning
+    - A static import **must** follow the exact syntax: `import static`.
+    - The compiler forbids importing **two static members with the same simple name** if it creates ambiguity — even if they come from different classes or packages.
 
 Example — **Not allowed**:
 
@@ -409,10 +409,10 @@ import static java.util.Set.of;
 The compiler does not know which `of()` you intend to call → compilation fails.
 
 
->[!TIP]
-> - If two static imports introduce the same name, **any attempt to use that name causes a compile error**.
-> - Static imports do **not** import classes, only static members.
-> - You can still call the static member using the class name even if statically imported.
+!!! tip
+    - If two static imports introduce the same name, **any attempt to use that name causes a compile error**.
+    - Static imports do **not** import classes, only static members.
+    - You can still call the static member using the class name even if statically imported.
 
 Example:
 
@@ -468,8 +468,8 @@ public class MainSecondExample {
 }
 ```
 
-> [!NOTE]
-> **Table of the access modifiers for the main method**
+!!! note
+    **Table of the access modifiers for the main method**
 
 | Token / Identifier | Category | Meaning | Optional? |
 |---|---|---|---|
@@ -482,11 +482,11 @@ public class MainSecondExample {
 | final (in parameter) | Modifier | Marks the parameter as unchangeable inside the method body (you cannot reassign `args` to another array). | Optional |
 
 
-> [!IMPORTANT]
-> Modifiers `public`, `static` (mandatory) and `final` (if present) can be swapped in order;  `public` and `static` can't be omitted.
->
-> Java treats `String[] args` and `String... args` the same.  
-> Both compile and run correctly as entry points.
+!!! important
+    Modifiers `public`, `static` (mandatory) and `final` (if present) can be swapped in order;  `public` and `static` can't be omitted.
+    
+    Java treats `String[] args` and `String... args` the same.  
+    Both compile and run correctly as entry points.
 
 
 ---
@@ -506,12 +506,12 @@ javac -version   # should print: javac 21.x
 java  -version   # should print: java version "21.0.7" ... (the output could be different depending on the implementation of the jvm you installed)
 ```
 
-> [!WARNING]
-> When running a class inside a package, **java requires the fully qualified name**, NEVER the path:
->
-> `java com.example.app.Main` ✔
-> 
-> `java src/com/example/app/Main` ❌
+!!! warning
+    When running a class inside a package, **java requires the fully qualified name**, NEVER the path:
+    
+    `java com.example.app.Main` ✔
+    
+    `java src/com/example/app/Main` ❌
 
 
 ### 2.6.1 Compiling one file, default package (single directory)
@@ -545,8 +545,8 @@ Once you have the .class file, in this case Hello.class, you can run the program
 java Hello
 ```
 
-> [!IMPORTANT]
-> You don't have to specify the ".class" extension when executing the program
+!!! important
+    You don't have to specify the ".class" extension when executing the program
 
 
 
@@ -589,8 +589,8 @@ java B
 ```
 
 
-> [!IMPORTANT]
-> The path to your classes is, in Java, the **classpath**. You can specify the **classpath** with one of the following options:
+!!! important
+    The path to your classes is, in Java, the **classpath**. You can specify the **classpath** with one of the following options:
 
 - **-cp** `<classpath>`
 - **-classpath** `<classpath>`
@@ -610,8 +610,8 @@ java B
 └── out/
 ```
 
-> [!NOTE]
-> The `src` and `out` folders are not part of our packages, being only the directory containing all our source files and the compiled .class files;
+!!! note
+    The `src` and `out` folders are not part of our packages, being only the directory containing all our source files and the compiled .class files;
 
 **Main.java**
 ```java
@@ -671,8 +671,8 @@ javac -d out   src/com/example/util/Utils.java   src/com/example/app/Main.java
 javac -d out -sourcepath src   src/com/example/app/Main.java
 ```
 
-> [!IMPORTANT]
-> **-sourcepath** `<sourcepath>` tells `javac` where to look for other `.java` files that a given source depends on.
+!!! important
+    **-sourcepath** `<sourcepath>` tells `javac` where to look for other `.java` files that a given source depends on.
 
 
 ### 2.6.6 Single-file source execution (quick runs without `javac`)

@@ -34,8 +34,8 @@ Avant de comprendre l’ordre d’initialisation, il est utile de rappeler les t
 - **Heap** — stocke tous les objets et les champs d’instance.  
 - **Stack** — stocke les appels de méthodes, les variables locales et les références.  
 
-> [!NOTE]  
-> Les membres statiques appartiennent à la **classe** et sont créés **une seule fois** dans la Method Area. Les membres d’instance appartiennent à **chaque objet** et vivent dans le **Heap**.
+!!! note
+    Les membres statiques appartiennent à la **classe** et sont créés **une seule fois** dans la Method Area. Les membres d’instance appartiennent à **chaque objet** et vivent dans le **Heap**.
 
 ---
 
@@ -77,8 +77,8 @@ Alors le chargement des classes se déroule dans cet ordre strict :
 - **Étape 2 : Les initialisations statiques explicites s’exécutent**.  
 - **Étape 3 : Les blocs d’initialisation statique** s’exécutent dans l’ordre du code source.  
 
-> [!NOTE]  
-> Après ces étapes, la classe est complètement prête et peut maintenant être utilisée (instanciée ou référencée).
+!!! note
+    Après ces étapes, la classe est complètement prête et peut maintenant être utilisée (instanciée ou référencée).
 
 ---
 

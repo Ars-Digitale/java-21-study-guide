@@ -89,8 +89,8 @@ public class Person {
 }
 ```
 
-> [!NOTE]  
-> Nella sua forma più semplice, potremmo teoricamente avere una classe senza metodi e senza field. Sebbene una classe del genere venga compilata, avrebbe ben poco senso pratico.
+!!! note
+    Nella sua forma più semplice, potremmo teoricamente avere una classe senza metodi e senza field. Sebbene una classe del genere venga compilata, avrebbe ben poco senso pratico.
 
 | Token / Identifier | Category | Meaning | Optional? |
 | --- | --- | --- | --- |
@@ -104,9 +104,9 @@ public class Person {
 | return | Keyword | Termina un metodo e restituisce un valore. | Mandatory (nei metodi con tipo di ritorno non void) |
 | void | Return Type / Keyword | Indica che il metodo non restituisce alcun valore. | Mandatory (se il metodo non restituisce alcun valore) |
 
-> [!NOTE]  
-> Mandatory = richiesto dalla sintassi Java,  
-> Optional = non richiesto dalla sintassi; dipende dal design.
+!!! note
+    Mandatory = richiesto dalla sintassi Java,
+    Optional = non richiesto dalla sintassi; dipende dal design.
 
 ---
 
@@ -155,8 +155,8 @@ Un **Javadoc comment** è simile a un **multiline comment**, tranne per il fatto
  */
 ```
 
-> [!WARNING]  
-> In Java, ogni block comment deve essere chiuso correttamente con `*/`.
+!!! warning
+    In Java, ogni block comment deve essere chiuso correttamente con `*/`.
 
 - Esempio:
 
@@ -179,8 +179,8 @@ produrrà un errore di compilazione perché, mentre i primi due simboli fanno pa
 In Java, un **access modifier** è una keyword che specifica la visibilità (o accessibilità) di una **class**, **method** o **field**. 
 Questo modificatore determina quali altre classi possono usare o vedere quel particolare elemento.
 
-> [!NOTE]  
-> **Tabella dei modificatori di accesso disponibili in Java**
+!!! note
+    **Tabella dei modificatori di accesso disponibili in Java**
 
 | Token / Identifier | Category | Meaning | Optional? |
 | --- | --- | --- | --- |
@@ -189,9 +189,9 @@ Questo modificatore determina quali altre classi possono usare o vedere quel par
 | protected | Keyword / access modifier | Visibile nello stesso package e dalle sottoclassi (anche in altri package) | Sì |
 | private | Keyword / access modifier | Visibile solo all’interno della stessa classe | Sì |
 
-> [!TIP]  
-> **private > default > protected > public**  
-> La “visibilità si amplia" secondo questo schema.
+!!! tip
+    **private > default > protected > public**
+    La “visibilità si amplia" secondo questo schema.
 
 ---
 
@@ -224,8 +224,8 @@ public class MyApp{
 }
 ```
 
-> [!IMPORTANT]  
-> Questa dichiarazione ci dice che la classe appartiene al package `com.example.myapp.utils` e che il suo file deve trovarsi nel path fisico: **com/example/myapp/utils/MyApp.java**
+!!! important
+    Questa dichiarazione ci dice che la classe appartiene al package `com.example.myapp.utils` e che il suo file deve trovarsi nel path fisico: **com/example/myapp/utils/MyApp.java**
 
 ### 2.4.3 Appartenere allo stesso package
 
@@ -279,8 +279,8 @@ import java.util.*;          // importa tutte le classi in java.util
 import java.nio.file.*.*     // ERROR! solo una wildcard è permessa e deve comparire alla fine!
 ```
 
-> [!NOTE]  
-> Il carattere wildcard `*` importa tutti i tipi nel package, ma non i sotto-package.
+!!! note
+    Il carattere wildcard `*` importa tutti i tipi nel package, ma non i sotto-package.
 
 Nel codice comunque, puoi sempre usare il nome completo (fully qualified name) della classe invece di importare tutte le classi del package:
 
@@ -288,10 +288,10 @@ Nel codice comunque, puoi sempre usare il nome completo (fully qualified name) d
 java.util.List myList = new java.util.ArrayList<>();
 ```
 
-> [!NOTE]  
-> Se importi esplicitamente un nome di classe, questo ha precedenza su qualsiasi import con wildcard;
->  
-> Se vuoi usare due classi con lo stesso nome (ad esempio `Date` da `java.util` e da `java.sql`), è piu prudente usare una import con nome completamente qualificato.
+!!! note
+    Se importi esplicitamente un nome di classe, questo ha precedenza su qualsiasi import con wildcard;
+    
+    Se vuoi usare due classi con lo stesso nome (ad esempio `Date` da `java.util` e da `java.sql`), è piu prudente usare una import con nome completamente qualificato.
 
 ### 2.4.5 Import statici
 
@@ -342,9 +342,9 @@ public class Calculator {
 Gli static import con wildcard si comportano esattamente come gli import normali con wildcard:  
 portano in scope **tutti i membri statici** della classe.
 
-> [!WARNING]  
-> Puoi **sempre** chiamare un membro statico usando il nome della classe:  
-> `Math.sqrt(16)` funziona sempre — anche se è stato importato staticamente.
+!!! warning
+    Puoi **sempre** chiamare un membro statico usando il nome della classe:
+    `Math.sqrt(16)` funziona sempre — anche se è stato importato staticamente.
 
 #### 2.4.5.1 Regole di precedenza
 
@@ -371,10 +371,10 @@ public class Test {
 }
 ```
 
-> [!WARNING]  
-> Uno static import deve sempre seguire l’esatta sintassi: `import static`. 
-> 
-> Il compilatore proibisce di importare **due membri statici con lo stesso simple name** se questo crea ambiguità — anche se provengono da classi o package diversi.
+!!! warning
+    Uno static import deve sempre seguire l’esatta sintassi: `import static`.
+    
+    Il compilatore proibisce di importare **due membri statici con lo stesso simple name** se questo crea ambiguità — anche se provengono da classi o package diversi.
 
 Esempio — **Non consentito**:
 
@@ -388,10 +388,10 @@ import static java.util.Set.of;
 
 Il compilatore non sa quale `of()` si intenda usare → errore di compilazione.
 
-> [!TIP]   
-> - Se due static import introducono lo stesso nome, **qualsiasi tentativo di usare quel nome provoca un errore di compilazione**.  
-> - Gli static import **non** importano le classi, solo i membri statici.  
-> - Puoi sempre chiamare il membro statico usando il nome della classe, anche se lo hai importato staticamente.
+!!! tip
+    - Se due static import introducono lo stesso nome, **qualsiasi tentativo di usare quel nome provoca un errore di compilazione**.
+    - Gli static import **non** importano le classi, solo i membri statici.  
+    - Puoi sempre chiamare il membro statico usando il nome della classe, anche se lo hai importato staticamente.
 
 Esempio:
 
@@ -447,8 +447,8 @@ public class MainSecondExample {
 }
 ```
 
-> [!NOTE]  
-> **Tabella dei modificatori per il metodo main**
+!!! note
+    **Tabella dei modificatori per il metodo main**
 
 | Token / Identifier | Category | Meaning | Optional? |
 | --- | --- | --- | --- |
@@ -460,11 +460,11 @@ public class MainSecondExample {
 | `String[] args` | Parameter list | Array di `String` che contiene gli argomenti da riga di comando passati al programma. Può essere scritto anche come `String args[]` o `String... args`. Il nome del parametro (`args`) è arbitrario. | Mandatory (il tipo del parametro è richiesto, il nome può variare) |
 | `final (in parameter)` | Modifier | Indica che il parametro non può essere riassegnato all’interno del metodo (non puoi riassegnare `args` a un altro array). | Optional |
 
-> [!IMPORTANT]  
-> I modificatori `public`, `static` (obbligatori) e `final` (se presente) possono essere scambiati d’ordine; `public` e `static` **non possono essere omessi**.  
->  
-> Java considera `String[] args` e `String... args` equivalenti.  
-> Entrambe le firme compilano e funzionano correttamente come punti di ingresso.
+!!! important
+    I modificatori `public`, `static` (obbligatori) e `final` (se presente) possono essere scambiati d’ordine; `public` e `static` **non possono essere omessi**.
+    
+    Java considera `String[] args` e `String... args` equivalenti.  
+    Entrambe le firme compilano e funzionano correttamente come punti di ingresso.
 
 ---
 
@@ -481,11 +481,11 @@ javac -version   # output atteso: javac 21.x
 java  -version   # output atteso: java version "21.0.7" ... (l'output potrebbe variare a seconda della jvm in uso)
 ```
 
-> [!WARNING]  
-> Quando esegui una classe all’interno di un package, **java richiede il nome completamente qualificato**, MAI il path:
->
-> `java com.example.app.Main` ✔  
-> `java src/com/example/app/Main` ❌
+!!! warning
+    Quando esegui una classe all’interno di un package, **java richiede il nome completamente qualificato**, MAI il path:
+    
+    `java com.example.app.Main` ✔  
+    `java src/com/example/app/Main` ❌
 
 ### 2.6.1 Compilare un file, package di default (singola directory)
 
@@ -520,8 +520,8 @@ Una volta che hai il file `.class`, in questo caso `Hello.class`, puoi eseguire 
 java Hello
 ```
 
-> [!IMPORTANT]  
-> Non devi specificare l’estensione ".class" quando esegui il programma.
+!!! important
+    Non devi specificare l’estensione ".class" quando esegui il programma.
 
 ### 2.6.2 Più file, package di default (singola directory)
 
@@ -563,12 +563,12 @@ java A    # se A ha main(...)
 java B
 ```
 
-> [!IMPORTANT]  
-> Il path verso le classi è, in Java, il **classpath**. Puoi specificare il **classpath** con una delle seguenti opzioni:
->
-> - `-cp <classpath>`  
-> - `-classpath <classpath>`  
-> - `--class-path <classpath>`
+!!! important
+    Il path verso le classi è, in Java, il **classpath**. Puoi specificare il **classpath** con una delle seguenti opzioni:
+    
+    - `-cp <classpath>`  
+    - `-classpath <classpath>`  
+    - `--class-path <classpath>`
 
 ### 2.6.3 Codice dentro package (layout standard src → out)
 
@@ -583,8 +583,8 @@ java B
 └── out/
 ```
 
-> [!NOTE]  
-> Le cartelle `src` e `out` non fanno parte dei nostri package: sono solo le directory che contengono tutti i file sorgenti e i file `.class` compilati.
+!!! note
+    Le cartelle `src` e `out` non fanno parte dei nostri package: sono solo le directory che contengono tutti i file sorgenti e i file `.class` compilati.
 
 **Main.java**
 
@@ -648,8 +648,8 @@ javac -d out   src/com/example/util/Utils.java   src/com/example/app/Main.java
 javac -d out -sourcepath src   src/com/example/app/Main.java
 ```
 
-> [!IMPORTANT]  
-> `-sourcepath <sourcepath>` dice a `javac` dove cercare altri file `.java` da cui i sorgenti dipendono.
+!!! important
+    `-sourcepath <sourcepath>` dice a `javac` dove cercare altri file `.java` da cui i sorgenti dipendono.
 
 ### 2.6.6 Esecuzione di un singolo sorgente (run veloce senza `javac`)
 

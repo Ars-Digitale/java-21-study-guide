@@ -97,8 +97,8 @@ synchronized (lockA) {
 
 If another thread acquires `lockB` first and then waits for `lockA`, a deadlock may occur.
 
-> [!NOTE]
-> Real-world deadlocks typically involve multiple locks and order inversion.
+!!! note
+    Real-world deadlocks typically involve multiple locks and order inversion.
 
 
 ### 31.2.3 Starvation
@@ -198,8 +198,8 @@ Integer result = future.get();
 | T **get(long timeout, TimeUnit unit)**        | Blocks up to the given timeout and returns the result, or throws `TimeoutException` if not completed. |
 
 
-> [!WARNING]
-> `execute()` will drop exceptions silently unless handled inside the task.
+!!! warning
+    `execute()` will drop exceptions silently unless handled inside the task.
 
 
 ### 31.4.2 Callable vs Runnable
@@ -262,9 +262,9 @@ scheduler.schedule(
 | ScheduledFuture<?> scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit) | Schedules periodic execution at a fixed rate: each execution is scheduled relative to the initial start time; if a run is delayed, subsequent runs may attempt to "catch up". |
 | ScheduledFuture<?> scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit) | Schedules periodic execution with fixed delay: each execution is scheduled relative to the completion time of the previous run; no catch-up behavior. |
 
-> [!IMPORTANT]
-> Never create threads manually in a loop:
-> use pools or virtual threads instead.
+!!! important
+    Never create threads manually in a loop:
+    use pools or virtual threads instead.
 
 ---
 
@@ -316,8 +316,8 @@ The synchronized keyword can be applied to:
 - **Blocks** (lock on a specific object, allowing finer-grained control)
 
 
-> [!IMPORTANT]
-> Synchronization is simple but may hurt scalability under contention.
+!!! important
+    Synchronization is simple but may hurt scalability under contention.
 
 
 ### 31.7.2 Atomic Variables
@@ -407,9 +407,9 @@ Key characteristics of the Lock framework:
 | **ReentrantReadWriteLock** | Provides separate reentrant read and write locks to improve read scalability. |
 | **StampedLock**         | Lock supporting optimistic, read, and write locking modes (non-reentrant). |
 
-> [!WARNING]
-> Unlike other locks, StampedLock is **not reentrant** — 
-> re-acquiring it from the same thread causes deadlock.
+!!! warning
+    Unlike other locks, StampedLock is **not reentrant** —
+    re-acquiring it from the same thread causes deadlock.
 
 
 #### 31.7.3.2 Common Lock methods
@@ -528,8 +528,8 @@ queue.take();        // blocks if the queue is empty
 
 Blocking queues handle synchronization internally, simplifying coordination between producer and consumer threads.
 
-> [!CAUTION]
-> CopyOnWrite collections are memory-expensive; avoid in write-heavy workloads.
+!!! caution
+    CopyOnWrite collections are memory-expensive; avoid in write-heavy workloads.
 
 ---
 
@@ -558,8 +558,8 @@ Because execution order is not guaranteed, parallel streams should avoid:
 - Blocking I/O
 - Order-dependent side effects
 
-> [!NOTE]
-> Use `forEachOrdered()` if deterministic output is required.
+!!! note
+    Use `forEachOrdered()` if deterministic output is required.
 
 ---
 

@@ -77,9 +77,9 @@ LocalDate date = LocalDate.of(2025, 3, 15);
 Integer boxed = Integer.valueOf(10);
 ```
 
-> [!IMPORTANT]
-> Les littéraux String **ne nécessitent pas `new`** et sont stockés dans le **String pool**.
-> Utiliser `new String("x")` crée toujours un nouvel objet sur le heap.
+!!! important
+    Les littéraux String **ne nécessitent pas `new`** et sont stockés dans le **String pool**.
+    Utiliser `new String("x")` crée toujours un nouvel objet sur le heap.
 
   
 ### 6.1.1 Gestion des types primitifs
@@ -88,8 +88,8 @@ Integer boxed = Integer.valueOf(10);
 
 **Déclarer** un type primitif (comme pour les types référence) signifie réserver un espace mémoire pour une variable d’un type donné, sans nécessairement lui attribuer une valeur.  
 
-> [!WARNING]
-> Contrairement aux primitifs, dont la taille dépend du type spécifique (par ex. `int` vs `long`), les variables référence occupent toujours la même taille fixe en mémoire — ce qui varie, c’est la taille de l’objet qu’elles pointent.
+!!! warning
+    Contrairement aux primitifs, dont la taille dépend du type spécifique (par ex. `int` vs `long`), les variables référence occupent toujours la même taille fixe en mémoire — ce qui varie, c’est la taille de l’objet qu’elles pointent.
 
 - Exemples de syntaxe (déclaration uniquement) :
 
@@ -104,10 +104,10 @@ int x, y, z;          // Déclarations multiples dans une seule instruction : Ja
 ```
 
 
-> [!IMPORTANT]
-> Les `modificateurs` et le `type` déclarés au début d’une déclaration de variables s’appliquent à toutes les variables déclarées dans la même instruction.
->
-> **Exception** : lors de la déclaration de tableaux en utilisant les crochets après le nom de la variable, les crochets font partie du déclarateur de la variable individuelle, et non du type de base.
+!!! important
+    Les `modificateurs` et le `type` déclarés au début d’une déclaration de variables s’appliquent à toutes les variables déclarées dans la même instruction.
+    
+    **Exception** : lors de la déclaration de tableaux en utilisant les crochets après le nom de la variable, les crochets font partie du déclarateur de la variable individuelle, et non du type de base.
 
 - Examples
 
@@ -150,9 +150,9 @@ double d1, double d2;            // ERROR - NOT LEGAL
 int v1; v2; 					 // ERROR - NOT LEGAL
 ```
   
-> [!IMPORTANT]
-> Quand tu écris un nombre directement dans le code (un littéral numérique), Java suppose par défaut qu’il est de type **int**.  
-> Si la valeur ne tient pas dans un `int`, le code ne compile pas, à moins de le marquer explicitement avec le suffixe approprié.
+!!! important
+    Quand tu écris un nombre directement dans le code (un littéral numérique), Java suppose par défaut qu’il est de type **int**.
+    Si la valeur ne tient pas dans un `int`, le code ne compile pas, à moins de le marquer explicitement avec le suffixe approprié.
 
 - Exemple de syntaxe pour un littéral numérique :
 
@@ -175,9 +175,9 @@ long exNumLit = 5729685479l;
   
 À ce stade, aucun objet n’est encore créé — la variable a seulement la capacité d’en référencer un.
 
-> [!WARNING]
-> Contrairement aux primitifs, dont la taille dépend du type spécifique (par ex. `int` vs `long`), les variables référence occupent toujours la même taille fixe en mémoire (suffisante pour stocker une référence).  
-> Ce qui varie, c’est la taille de l’objet pointé, qui est alloué séparément sur le heap.
+!!! warning
+    Contrairement aux primitifs, dont la taille dépend du type spécifique (par ex. `int` vs `long`), les variables référence occupent toujours la même taille fixe en mémoire (suffisante pour stocker une référence).
+    Ce qui varie, c’est la taille de l’objet pointé, qui est alloué séparément sur le heap.
 
 - Exemples de syntaxe (déclaration uniquement) :
 
@@ -234,9 +234,9 @@ Chaque fois que tu appelles `new Person()`, le constructeur s’exécute et conf
 - Les constructeurs **ne déclarent pas de type de retour** (pas même `void`).  
 - Si tu ne définis aucun constructeur dans ta classe, le compilateur fournit automatiquement un **constructeur par défaut sans argument** qui ne fait rien.
 
-> [!WARNING]
-> Si tu vois une méthode qui a le même nom que la classe **mais qui déclare un type de retour**, ce n’est **pas** un constructeur.  
-> C’est simplement une méthode ordinaire (même si commencer les noms de méthodes par une majuscule va à l’encontre des conventions de nommage Java).
+!!! warning
+    Si tu vois une méthode qui a le même nom que la classe **mais qui déclare un type de retour**, ce n’est **pas** un constructeur.
+    C’est simplement une méthode ordinaire (même si commencer les noms de méthodes par une majuscule va à l’encontre des conventions de nommage Java).
 
 Le **but d’un constructeur** est d’initialiser l’état d’un objet nouvellement créé — généralement en affectant des valeurs à ses champs, soit avec des valeurs par défaut, soit à partir de paramètres passés au constructeur.
 
@@ -297,9 +297,9 @@ Person p1 = new Person();            // name = "Unknown", age = 0
 Person p2 = new Person("Bob", 25);   // name = "Bob", age = 25
 ```
 
-> [!IMPORTANT]
-> - Les constructeurs ne sont pas hérités : si une superclasse définit des constructeurs, ils ne sont pas automatiquement disponibles dans la sous-classe — tu dois les déclarer explicitement.
-> - Si tu déclares un constructeur quelconque dans une classe, le compilateur ne génère pas le constructeur par défaut sans argument : si tu as encore besoin d’un constructeur sans argument, tu dois le déclarer manuellement.
+!!! important
+    - Les constructeurs ne sont pas hérités : si une superclasse définit des constructeurs, ils ne sont pas automatiquement disponibles dans la sous-classe — tu dois les déclarer explicitement.
+    - Si tu déclares un constructeur quelconque dans une classe, le compilateur ne génère pas le constructeur par défaut sans argument : si tu as encore besoin d’un constructeur sans argument, tu dois le déclarer manuellement.
 
 #### 6.1.2.3 Blocs d’initialisation d’instance
 
@@ -339,9 +339,9 @@ Person p1 = new Person();          // prints "Instance initializer block execute
 Person p2 = new Person("Alice");   // prints "Instance initializer block executed"
 ```
 
-> [!NOTE]
-> Dans cet exemple, le bloc d’initialisation s’exécute avant le corps de chacun des constructeurs.
-> p1 et p2 commenceront tous les deux avec age = 18, quel que soit le constructeur utilisé.
+!!! note
+    Dans cet exemple, le bloc d’initialisation s’exécute avant le corps de chacun des constructeurs.
+    p1 et p2 commenceront tous les deux avec age = 18, quel que soit le constructeur utilisé.
 
 **Plusieurs blocs d’initialisation** : si une classe contient plusieurs blocs d’initialisation, ils s’exécutent dans l’ordre où ils apparaissent dans le fichier source :
 
@@ -364,20 +364,20 @@ Example ex = new Example();
 // Second block
 ```
 
-> [!NOTE]
-> Les blocs d’initialisation d’instance sont moins courants en pratique, car une logique similaire peut souvent être placée directement dans les constructeurs.
-> Il est important de savoir que :
-> - Ils s’exécutent toujours avant le corps du constructeur.
-> - Ils sont exécutés dans l’ordre de déclaration dans la classe.
-> - Ils peuvent être combinés avec les constructeurs pour éviter la duplication de code.
+!!! note
+    Les blocs d’initialisation d’instance sont moins courants en pratique, car une logique similaire peut souvent être placée directement dans les constructeurs.
+    Il est important de savoir que :
+    - Ils s’exécutent toujours avant le corps du constructeur.
+    - Ils sont exécutés dans l’ordre de déclaration dans la classe.
+    - Ils peuvent être combinés avec les constructeurs pour éviter la duplication de code.
 
-> [!WARNING]
-> **Ordre d’initialisation lors de la création d’un objet**
-> 1. Champs statiques
-> 2. Blocs d’initialisation statiques
-> 3. Champs d’instance
-> 4. Blocs d’initialisation d’instance
-> 5. Corps du constructeur
+!!! warning
+    **Ordre d’initialisation lors de la création d’un objet**
+    1. Champs statiques
+    2. Blocs d’initialisation statiques
+    3. Champs d’instance
+    4. Blocs d’initialisation d’instance
+    5. Corps du constructeur
 
 ---
 
@@ -409,8 +409,8 @@ Cela s’applique aux :
 - **variables final d’instance**
 - **variables de classe static final**
 
-> [!NOTE]
-> On peut affecter une valeur `null` à une variable final d’instance ou de classe tant que cela est fait explicitement.
+!!! note
+    On peut affecter une valeur `null` à une variable final d’instance ou de classe tant que cela est fait explicitement.
 
 Java impose cette règle car une variable `final` représente une valeur qui doit être *connue et fixée* avant usage.
 
@@ -445,9 +445,9 @@ public class Person {
 }
 ```
 
-> [!WARNING]
-> Compiler sans affecter `id` dans **chaque** constructeur produit une erreur de compilation :
-> variable id might not have been initialized
+!!! warning
+    Compiler sans affecter `id` dans **chaque** constructeur produit une erreur de compilation :
+    variable id might not have been initialized
 
 <ins>**Variables de classe `static final` (constantes)**</ins>
 
@@ -503,10 +503,10 @@ Parce que :
 
 Ainsi, Java oblige les développeurs à initialiser explicitement les champs `final`.
 
-> [!TIP]
-> `final` signifie **affecté une seule fois**, pas **objet immuable**.
->   
-> Une référence final peut toujours pointer vers un objet mutable.
+!!! tip
+    `final` signifie **affecté une seule fois**, pas **objet immuable**.
+    
+    Une référence final peut toujours pointer vers un objet mutable.
 
 ```java
 final List<String> list = new ArrayList<>();
@@ -539,10 +539,10 @@ public int localMethod {
 
 Dans certaines conditions, tu peux utiliser le mot-clé **var** à la place du type approprié lors de la déclaration de variables **locales** ;
 
-> [!WARNING]
-> - **var** N’EST PAS un mot réservé en Java ;
-> - **var** ne peut être utilisé que pour les variables locales : il NE PEUT PAS être utilisé pour les **paramètres de constructeur**, les **variables d’instance** ou les **paramètres de méthode** ;
-> - Le compilateur infère le type en regardant UNIQUEMENT le code **sur la ligne de déclaration** ; une fois le bon type inféré, tu ne peux pas réaffecter avec un autre type.
+!!! warning
+    - **var** N’EST PAS un mot réservé en Java ;
+    - **var** ne peut être utilisé que pour les variables locales : il NE PEUT PAS être utilisé pour les **paramètres de constructeur**, les **variables d’instance** ou les **paramètres de méthode** ;
+    - Le compilateur infère le type en regardant UNIQUEMENT le code **sur la ligne de déclaration** ; une fois le bon type inféré, tu ne peux pas réaffecter avec un autre type.
 
 - Exemple
 
@@ -563,9 +563,9 @@ public int localMethod {
 }
 ```
 
-> [!WARNING]
-> Les variables locales **n’obtiennent jamais** de valeurs par défaut.
-> Les champs d’instance et statiques **en obtiennent toujours**.
+!!! warning
+    Les variables locales **n’obtiennent jamais** de valeurs par défaut.
+    Les champs d’instance et statiques **en obtiennent toujours**.
 
 ---
 
@@ -614,12 +614,12 @@ Integer	 arr1 = {11.5, 13.6}  // WARNING: Does not compile!!
 Double[] arr2 = {11, 22};     // WARNING: Does not compile!!
 ```
 
-> [!TIP]
-> Java **ne réalise jamais** autoboxing + widening/narrowing en une seule étape.
+!!! tip
+    Java **ne réalise jamais** autoboxing + widening/narrowing en une seule étape.
 
-> [!WARNING]
-> - **AUTOBOXING** et **cast implicite** ne sont pas autorisés dans la même instruction : tu ne peux pas faire les deux en même temps. (voir l’exemple ci-dessus)
-> - Cette règle s’applique aussi aux appels de méthode.
+!!! warning
+    - **AUTOBOXING** et **cast implicite** ne sont pas autorisés dans la même instruction : tu ne peux pas faire les deux en même temps. (voir l’exemple ci-dessus)
+    - Cette règle s’applique aussi aux appels de méthode.
 
 ### 6.3.3 Parsing et conversion
 
@@ -656,8 +656,8 @@ Integer.valueOf("F", 16);	// 15
 Integer.valueOf("G", 16);	// NumberFormatException
 ```
 
-> [!NOTE]
-> Les méthodes **parseXxx()** renvoient un primitif tandis que **valueOf()** renvoie un objet wrapper.
+!!! note
+    Les méthodes **parseXxx()** renvoient un primitif tandis que **valueOf()** renvoie un objet wrapper.
 
 ### 6.3.4 Méthodes utilitaires
 
@@ -796,14 +796,14 @@ b += "string literal";
 System.out.println(a == b);  // false
 ```
 
-> [!WARNING]
-> Toute String créée à **l’exécution** n’entre *pas* automatiquement dans le pool.
-> Utilise `intern()` si tu veux le pooling.
+!!! warning
+    Toute String créée à **l’exécution** n’entre *pas* automatiquement dans le pool.
+    Utilise `intern()` si tu veux le pooling.
 
-> [!TIP]
-> `"Hello" == "Hel" + "lo"` → true (constante à la compilation)
-> 
-> `"Hello" == getHello()` → false (concaténation à l’exécution)
+!!! tip
+    `"Hello" == "Hel" + "lo"` → true (constante à la compilation)
+    
+    `"Hello" == getHello()` → false (concaténation à l’exécution)
 
 ```java
 String x = "Hello";
@@ -847,8 +847,8 @@ System.out.println(c == d);        // false → not cached
 System.out.println(c.equals(d));   // true → même valeur numérique
 ```
 
-> [!WARNING]
-> Fais très attention au caching des wrappers.
+!!! warning
+    Fais très attention au caching des wrappers.
 
 
 ### 6.4.5 Égalité et `null`

@@ -79,8 +79,8 @@ Examples: `x`, `counter`, `MyClass`, `calculateSum`.
 	- **Keywords (reserved words):** predefined names reserved by the Java language and cannot be redefined.  
 Examples: `class`, `public`, `static`, `if`, `return`.
 
-> [!NOTE]
-> Identifiers must follow Java naming rules: see [Java Naming Rules](naming-rules.md).
+!!! note
+    Identifiers must follow Java naming rules: see [Java Naming Rules](naming-rules.md).
 
 - **Theory:** Binding function: connects a name to a value or resource.
 
@@ -119,8 +119,8 @@ counter++;             // another update (post-increment)
 	- **Reference types:** represent references (pointers) to objects in memory.  
   Examples: `String`, arrays (e.g., `int[]`), classes, interfaces, and user-defined types.
 
-> [!NOTE]
-> See [Java Data Types](data-types.md).
+!!! note
+    See [Java Data Types](data-types.md).
 
 - **Theory:** A type system is the set of rules that associates sets of values and admissible operations.
 
@@ -141,8 +141,8 @@ String name = "Alice";  // reference type (class String)
 - **Role:** Operators combine values, variables, and expressions to produce new values or to modify program state.
 - **In Java:**  
 
-> [!NOTE]
-> See [Java Operators](java-operators.md).
+!!! note
+    See [Java Operators](java-operators.md).
 
 - **Theory:** Operators define allowable computations over types; together with values and variables, they form **expressions**.
 

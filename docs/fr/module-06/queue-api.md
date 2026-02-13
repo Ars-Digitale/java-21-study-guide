@@ -48,11 +48,11 @@ Classes courantes implémentant `Queue` :
 - `PriorityQueue` — ordonne les éléments par ordre naturel ou comparator ; n’est pas FIFO.
 - `ConcurrentLinkedQueue` — thread-safe, lock-free.
 
-> [!NOTE]
-> `PriorityQueue` ne garantit pas que l’ordre d’itération corresponde à l’ordre de priorité.
+!!! note
+    `PriorityQueue` ne garantit pas que l’ordre d’itération corresponde à l’ordre de priorité.
 
-> [!WARNING]
-> La plupart des implémentations de Queue rejettent `null` car `null` est utilisé comme valeur de retour pour “vide”.
+!!! warning
+    La plupart des implémentations de Queue rejettent `null` car `null` est utilisé comme valeur de retour pour “vide”.
 
 ---
 
@@ -79,9 +79,9 @@ Elle est plus polyvalente qu’une Queue :
 - `LinkedList` — complète mais plus lente en raison de la structure à nœuds.
 - `ConcurrentLinkedDeque` — deque concurrente non bloquante.
 
-> [!NOTE]
-> `Stack` est legacy ; utiliser `Deque` pour le comportement de stack (push/pop).
-> Les opérations de queue de ArrayDeque et LinkedList (add/remove/peek) sont en O(1) amorti.
+!!! note
+    `Stack` est legacy ; utiliser `Deque` pour le comportement de stack (push/pop).
+    Les opérations de queue de ArrayDeque et LinkedList (add/remove/peek) sont en O(1) amorti.
 
 ---
 
@@ -168,11 +168,11 @@ Dans les environnements concurrents, le package `java.util.concurrent` fournit d
 - `PriorityBlockingQueue` — priority queue thread-safe.
 - `DelayQueue` — éléments libérés après des délais.
 
-> [!NOTE]
-> BlockingQueue n’autorise jamais `null`.
-> put(e) — bloque jusqu’à ce qu’un espace soit disponible
-> take() — bloque jusqu’à ce qu’un élément soit disponible
-> BlockingQueue prend aussi en charge des opérations temporisées : offer(e, timeout), poll(timeout)
+!!! note
+    BlockingQueue n’autorise jamais `null`.
+    put(e) — bloque jusqu’à ce qu’un espace soit disponible
+    take() — bloque jusqu’à ce qu’un élément soit disponible
+    BlockingQueue prend aussi en charge des opérations temporisées : offer(e, timeout), poll(timeout)
 
 ---
 

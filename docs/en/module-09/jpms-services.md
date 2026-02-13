@@ -75,8 +75,8 @@ module com.example.service {
 }
 ```
 
-> [!NOTE]
-> The service interface module should contain no implementations.
+!!! note
+    The service interface module should contain no implementations.
 
 ### 39.1.3 Service Provider Module
 
@@ -117,11 +117,11 @@ module com.example.consumer {
 }
 ```
 
-> [!NOTE]
-> `uses` declares intent to discover implementations at runtime.
->
-> A module that declares `uses` but has no matching provider on the module path compiles normally,
-> but `ServiceLoader` returns an empty result at runtime.
+!!! note
+    `uses` declares intent to discover implementations at runtime.
+    
+    A module that declares `uses` but has no matching provider on the module path compiles normally,
+    but `ServiceLoader` returns an empty result at runtime.
 
 
 ### 39.1.5 Loading Services at Runtime
@@ -184,9 +184,9 @@ Its name is derived from the JAR file name.
 - Exports all packages
 - No strong encapsulation
 
-> [!NOTE]
-> Automatic modules exist to ease migration.
-> They are not suitable as a long-term design.
+!!! note
+    Automatic modules exist to ease migration.
+    They are not suitable as a long-term design.
 
 ### 39.2.3 Unnamed Module
 
@@ -196,8 +196,8 @@ Code on the classpath belongs to the `unnamed module`.
 - All packages are open
 - Cannot be required by named modules
 
-> [!NOTE]
-> The `unnamed module` preserves legacy classpath behavior.
+!!! note
+    The `unnamed module` preserves legacy classpath behavior.
 
 ### 39.2.4 Comparison Summary
 

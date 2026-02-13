@@ -48,8 +48,8 @@ List
 └── Vector (Legacy synchronized list — rarely used today)
 ```
 
-> [!NOTE]
-> Vector is legacy and synchronized — avoid unless explicitly required.
+!!! note
+    Vector is legacy and synchronized — avoid unless explicitly required.
 
 ## 25.1 Characteristics of Lists
 
@@ -70,8 +70,8 @@ List<String> a2 = new ArrayList<>(50); // initial capacity
 List<String> a3 = new ArrayList<>(List.of("A", "B"));
 ```
 
-> [!NOTE]
-> Initial capacity is not a size. It just decides how many elements the internal array can hold before resizing.
+!!! note
+    Initial capacity is not a size. It just decides how many elements the internal array can hold before resizing.
 
 ### 25.2.2 LinkedList Constructors
 
@@ -80,8 +80,8 @@ List<String> l1 = new LinkedList<>();
 List<String> l2 = new LinkedList<>(List.of("A", "B"));
 ```
 
-> [!NOTE]
-> `LinkedList` also implements `Deque`.
+!!! note
+    `LinkedList` also implements `Deque`.
 
 ---
 
@@ -95,11 +95,11 @@ list1.add("X"); // ❌ UnsupportedOperationException
 list1.set(0, "Z"); // ❌ UnsupportedOperationException
 ```
 
-> [!NOTE]
-> All `List.of()` lists:
-> - reject `nulls`
-> - are immutable
-> - throw `UOE` on structural modification
+!!! note
+    All `List.of()` lists:
+    - reject `nulls`
+    - are immutable
+    - throw `UOE` on structural modification
 
 ### 25.3.2 `List.copyOf()` (immutable copy)
 
@@ -120,8 +120,8 @@ list.set(0, "Z"); // OK
 list.add("X"); // ❌ UOE — size is fixed
 ```
 
-> [!NOTE]
-> The list is backed by the array: modifying one affects the other.
+!!! note
+    The list is backed by the array: modifying one affects the other.
 
 ---
 
@@ -143,8 +143,8 @@ String x = list.get(0);
 list.set(1, "NewValue");
 ```
 
-> [!NOTE]
-> `get()` throws `IndexOutOfBoundsException` for invalid indices.
+!!! note
+    `get()` throws `IndexOutOfBoundsException` for invalid indices.
 
 If you try to `update` an element in an empty List, even at index 0, you get an `IndexOutOfBoundsException`
 
@@ -164,8 +164,8 @@ Output
 Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
 ```
 
-> [!WARNING]
-> Calling get/set with an invalid index throws IndexOutOfBoundsException
+!!! warning
+    Calling get/set with an invalid index throws IndexOutOfBoundsException
 
 ### 25.4.3 Removing Elements
 
@@ -206,9 +206,9 @@ List<String> b = List.of("A", "B");
 System.out.println(a.equals(b)); // true
 ```
 
-> [!NOTE]
-> - Order matters. 
-> - Type of list does NOT matter.
+!!! note
+    - Order matters.
+    - Type of list does NOT matter.
 
 ### 25.5.3 `hashCode()`
 
@@ -246,11 +246,11 @@ while (lit.hasNext()) {
 }
 ```
 
-> [!WARNING]
-> All standard List iterators are fail-fast: structural modification outside iterator causes ConcurrentModificationException.
+!!! warning
+    All standard List iterators are fail-fast: structural modification outside iterator causes ConcurrentModificationException.
 
-> [!NOTE]
-> Only `ListIterator` supports bidirectional traversal and modification.
+!!! note
+    Only `ListIterator` supports bidirectional traversal and modification.
 
 ---
 

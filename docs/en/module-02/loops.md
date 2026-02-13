@@ -69,8 +69,8 @@ do {
 } while (condition);
 ```
 
-> [!TIP]
-> `do-while` requires a semicolon after the closing parenthesis.
+!!! tip
+    `do-while` requires a semicolon after the closing parenthesis.
 
 - Example:
 ```java
@@ -200,8 +200,8 @@ while (true) { ... }
 for (;;) { ... }
 ```
 
-> [!TIP]
-> Infinite loops must contain `break`, `return`, or external control.
+!!! tip
+    Infinite loops must contain `break`, `return`, or external control.
 
 ---
 
@@ -225,8 +225,8 @@ for (int i = 0; i < 5; i++) {
 }
 ```
 
-> [!NOTE]
-> `break` and `continue` apply to the nearest loop unless labels are used.
+!!! note
+    `break` and `continue` apply to the nearest loop unless labels are used.
 
 ---
 
@@ -292,8 +292,8 @@ for (int i = 0; i < 3; i++) {
 }
 ```
 
-> [!NOTE]
-> `continue` jumps to the next iteration, so following code is never executed.
+!!! note
+    `continue` jumps to the next iteration, so following code is never executed.
 
 ### 8.10.3 Unreachable Code After `return`
 
@@ -304,5 +304,5 @@ int test() {
 }
 ```
 
-> [!NOTE]
-> `return` exits the method immediately; no statements can follow.
+!!! note
+    `return` exits the method immediately; no statements can follow.

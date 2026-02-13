@@ -12,7 +12,11 @@ theme:
 
 plugins:
   - search
-  - callouts
+  
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
 
 nav:
   - Home: index.md

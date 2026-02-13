@@ -42,8 +42,8 @@ L’ereditarietà consente a una classe di estenderne un’altra, ottenendone au
 
 La classe che estende può aggiungere nuove funzionalità o ridefinire (fare `override`) i comportamenti esistenti, creando versioni più specializzate della propria classe parent.
 
-> [!NOTE]
-> L’Ereditarietà esprime una relazione *“is-a”* (è-un): un Cane **is a** (è-un) Animale.
+!!! note
+    L’Ereditarietà esprime una relazione *“is-a”* (è-un): un Cane **is a** (è-un) Animale.
 
 ---
 
@@ -90,8 +90,8 @@ Tuttavia, nello specifico, questo dipende dagli `access modifiers`.
 - **default (package-private)** → ereditato solo nello stesso package
 - **private** → **NON** ereditato
 
-> [!NOTE]
-> ( Fare riferimento al Paragrafo "**Access Modifiers**" nel Capitolo: [Mattoni di base del linguaggio Java](../module-01/basic-building-blocks.md) )
+!!! note
+    ( Fare riferimento al Paragrafo "**Access Modifiers**" nel Capitolo: [Mattoni di base del linguaggio Java](../module-01/basic-building-blocks.md) )
 
 ---
 
@@ -107,8 +107,8 @@ Alcuni modificatori a livello di classe determinano se una classe possa essere e
 | `non-sealed` | Subclass di una sealed class che riapre l’inheritance | Inheritance permesso |
 | `static` | Si applica solo alle nested classes | Si comporta come una top-level class all’interno della sua classe contenitore |
 
-> [!NOTE]
-> Una classe `static` in Java può esistere solo come **static nested class**.
+!!! note
+    Una classe `static` in Java può esistere solo come **static nested class**.
 
 ---
 
@@ -145,8 +145,8 @@ public class Person {
 ```
 
 
-> [!WARNING]
-> `this` NON può essere usato all’interno di metodi statici perché, in quel contesto, non esiste alcuna istanza.
+!!! warning
+    `this` NON può essere usato all’interno di metodi statici perché, in quel contesto, non esiste alcuna istanza.
 
 
 ### 16.6.2 Il Riferimento `super`
@@ -172,8 +172,8 @@ class Child extends Parent {
 }
 ```
 
-> [!NOTE]
-> `super` NON può essere usato dentro contesti static.
+!!! note
+    `super` NON può essere usato dentro contesti static.
 
 ---
 
@@ -457,9 +457,9 @@ public class TestStatic {
 }
 ```
 
-> [!IMPORTANT]
-> - metodi statici **final** non possono essere `hidden` (nascosti); metodi d'istanza dichiarati **final** non possono essere `overriden`.
-> - Se si prova a ridefinirli in una subclass, il codice non compilerà.
+!!! important
+    - metodi statici **final** non possono essere `hidden` (nascosti); metodi d'istanza dichiarati **final** non possono essere `overriden`.
+    - Se si prova a ridefinirli in una subclass, il codice non compilerà.
 
 ### 16.13.2 Abstract Classes
 
@@ -510,9 +510,9 @@ class Circle extends Shape {
 }
 ```
 
-> [!NOTE]
-> - Sebbene una `abstract class` non possa essere istanziata, i suoi costruttori vengono comunque chiamati quando si creano istanze di classi figlie concrete.
-> - Il flusso delle istanziazioni, nella `catena ereditaria`, parte sempre dal top della gerarchia e si muove verso il basso.
+!!! note
+    - Sebbene una `abstract class` non possa essere istanziata, i suoi costruttori vengono comunque chiamati quando si creano istanze di classi figlie concrete.
+    - Il flusso delle istanziazioni, nella `catena ereditaria`, parte sempre dal top della gerarchia e si muove verso il basso.
 
 ### 16.13.3 Creare Oggetti Immutabili
 

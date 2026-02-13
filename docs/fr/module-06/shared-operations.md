@@ -26,8 +26,8 @@ Maîtriser ces opérations est essentiel, car elles expliquent comment les colle
 
 Les méthodes suivantes proviennent de l’interface `Collection<E>` et sont héritées par **toutes** les principales collections à l’exception de `Map` (qui possède sa propre famille d’opérations).
 
-> [!NOTE]
-> `Map` n’implémente pas `Collection`, mais ses vues `keySet()`, `values()` et `entrySet()` **l’implémentent**, et exposent donc ces opérations partagées.
+!!! note
+    `Map` n’implémente pas `Collection`, mais ses vues `keySet()`, `values()` et `entrySet()` **l’implémentent**, et exposent donc ces opérations partagées.
 
 ### 23.1.1 Opérations de Mutation
 
@@ -81,10 +81,10 @@ firstSet.equals(secondSet): true
 secondSet.equals(thirdSet): true
 ```
 
-> [!NOTE]
-> - Les List comparent la taille, l’ordre et l’égalité des éléments un par un.
-> - Les Set comparent uniquement la taille et l’appartenance — l’ordre de parcours est sans importance.
-> - Deux sets contenant les mêmes éléments logiques sont égaux même s’ils maintiennent des ordres d’itération internes différents.
+!!! note
+    - Les List comparent la taille, l’ordre et l’égalité des éléments un par un.
+    - Les Set comparent uniquement la taille et l’appartenance — l’ordre de parcours est sans importance.
+    - Deux sets contenant les mêmes éléments logiques sont égaux même s’ils maintiennent des ordres d’itération internes différents.
 
 ---
 
@@ -99,10 +99,10 @@ for (Integer i : list) {
 }
 ```
 
-> [!NOTE]
-> Utilisez `Iterator.remove()` lorsque vous devez supprimer des éléments pendant l’itération.
-> Le comportement fail-fast **n’est pas garanti** — l’exception est levée selon un principe de best-effort.
-> Vous ne devez pas compter sur sa capture pour assurer la correction du programme.
+!!! note
+    Utilisez `Iterator.remove()` lorsque vous devez supprimer des éléments pendant l’itération.
+    Le comportement fail-fast **n’est pas garanti** — l’exception est levée selon un principe de best-effort.
+    Vous ne devez pas compter sur sa capture pour assurer la correction du programme.
 
 ---
 

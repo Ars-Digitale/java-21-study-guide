@@ -46,10 +46,10 @@ Selon le niveau de détail requis, Java propose quatre classes principales :
 - `LocalDateTime` → combine date + heure, mais sans fuseau horaire
 - `ZonedDateTime` → date + heure + décalage + fuseau horaire
 
-> [!NOTE]
-> - Un **fuseau horaire** définit des règles comme les changements d’heure d’été (par exemple, `Europe/Paris`).  
-> - Un **décalage de zone** (zone offset) est un décalage fixe par rapport à UTC/GMT (par exemple, `+01:00`, `-07:00`).  
-> - Pour comparer deux instants provenant de fuseaux horaires différents, convertissez-les en UTC (GMT) en appliquant le décalage.
+!!! note
+    - Un **fuseau horaire** définit des règles comme les changements d’heure d’été (par exemple, `Europe/Paris`).
+    - Un **décalage de zone** (zone offset) est un décalage fixe par rapport à UTC/GMT (par exemple, `+01:00`, `-07:00`).  
+    - Pour comparer deux instants provenant de fuseaux horaires différents, convertissez-les en UTC (GMT) en appliquant le décalage.
 
 **Obtenir la date/heure actuelle**
 
@@ -233,9 +233,9 @@ Duration d = Duration.ofMinutes(90);
 LocalTime t5 = time.plus(d);                // 15:00
 ```
 
-> [!NOTE]
-> Quand l’arithmétique des heures franchit minuit, la date est ignorée avec `LocalTime`.  
-> Par exemple, 23:30 + 2 heures = 01:30 (sans date impliquée).
+!!! note
+    Quand l’arithmétique des heures franchit minuit, la date est ignorée avec `LocalTime`.
+    Par exemple, 23:30 + 2 heures = 01:30 (sans date impliquée).
 
 ### 12.1.6 Arithmétique `LocalDateTime`
 
@@ -318,8 +318,8 @@ Selon les règles d’heure d’été pour cette date :
 - L’heure locale peut passer de 02:00 à 03:00 ou similaire.
 - `ZonedDateTime` ajuste le décalage et l’heure locale selon les règles de zone, mais représente toujours le bon instant sur la timeline.
 
-> [!IMPORTANT]
-> Pour `ZonedDateTime`, l’arithmétique est définie en fonction de la timeline locale et des règles de fuseau horaire, ce qui peut provoquer des décalages d’heures pendant les transitions DST.
+!!! important
+    Pour `ZonedDateTime`, l’arithmétique est définie en fonction de la timeline locale et des règles de fuseau horaire, ce qui peut provoquer des décalages d’heures pendant les transitions DST.
 
 ### 12.1.8 Tableau récapitulatif
 
@@ -427,11 +427,11 @@ LocalDate base = LocalDate.of(2025, 1, 10);
 LocalDate result = base.plus(p2);          // 2026-03-13
 ```
 
-> [!NOTE]
-> `Period.parse("P1W")` est autorisé et représente une période de 7 jours (équivalente à "P7D").
+!!! note
+    `Period.parse("P1W")` est autorisé et représente une période de 7 jours (équivalente à "P7D").
 
-> [!TIP]
-> `Period` est basé sur le calendrier : ajouter une période de mois/années respecte la longueur des mois et les années bissextiles.
+!!! tip
+    `Period` est basé sur le calendrier : ajouter une période de mois/années respecte la longueur des mois et les années bissextiles.
 
 ---
 
@@ -479,9 +479,9 @@ ZonedDateTime z2 = z1.plusHours(2);          // DST-aware
 ZonedDateTime z3 = z1.plus(d2);              // Duration-based
 ```
 
-> [!NOTE]
-> `Duration.ofDays(1)` représente exactement 24 heures de temps machine.  
-> Dans une zone avec DST, 24 heures peuvent ne pas correspondre à “la même heure locale demain”.
+!!! note
+    `Duration.ofDays(1)` représente exactement 24 heures de temps machine.
+    Dans une zone avec DST, 24 heures peuvent ne pas correspondre à “la même heure locale demain”.
 
 ---
 
@@ -527,9 +527,9 @@ Instant end   = Instant.parse("2024-01-01T12:30:00Z");
 Duration between = Duration.between(start, end); // PT2H30M
 ```
 
-> [!IMPORTANT]
-> `Instant` est toujours en UTC, sans information de fuseau horaire attachée.  
-> Il ne peut pas être combiné avec une `Period` ; utilisez `Duration` à la place.
+!!! important
+    `Instant` est toujours en UTC, sans information de fuseau horaire attachée.
+    Il ne peut pas être combiné avec une `Period` ; utilisez `Duration` à la place.
 
 ---
 
@@ -588,8 +588,8 @@ LocalTime time = LocalTime.of(10, 0);
 LocalTime t1 = time.plus(90, ChronoUnit.MINUTES);  // 11:30
 ```
 
-> [!IMPORTANT]
-> Vous ne pouvez pas utiliser des unités basées sur le temps avec `LocalDate`, ni des unités basées sur la date avec `LocalTime`.
+!!! important
+    Vous ne pouvez pas utiliser des unités basées sur le temps avec `LocalDate`, ni des unités basées sur la date avec `LocalTime`.
 
 - Exemples :
 
@@ -709,10 +709,10 @@ long days = ChronoUnit.DAYS.between(
 // 9
 ```
 
-> [!IMPORTANT]
-> `ChronoUnit.between(...)` renvoie toujours un `long`,  
-> tandis que `Period.between` renvoie une `Period`,  
-> et `Duration.between` renvoie une `Duration`.
+!!! important
+    `ChronoUnit.between(...)` renvoie toujours un `long`,
+    tandis que `Period.between` renvoie une `Period`,  
+    et `Duration.between` renvoie une `Duration`.
 
 ### 12.9.8 Pièges courants
 

@@ -66,8 +66,8 @@ Une seule version peut être placée sur le classpath.
 
 La version choisie dépend uniquement de l’ordre du classpath, et non de l’appropriation réelle.
 
-> [!NOTE]
-> Ce problème ne peut pas être résolu de manière fiable avec le seul outil du classpath.
+!!! note
+    Ce problème ne peut pas être résolu de manière fiable avec le seul outil du classpath.
 
 ---
 
@@ -124,8 +124,8 @@ module com.example.hello {
 }
 ```
 
-> [!NOTE]
-> **Un module sans directives n’exporte rien et ne dépend de rien**.
+!!! note
+    **Un module sans directives n’exporte rien et ne dépend de rien**.
 
 ---
 
@@ -150,9 +150,9 @@ Points clés :
 - `module-info.java` se trouve en haut de la racine des sources du module
 - les packages suivent les règles standard de nommage Java
 
-> [!NOTE]
-> Dans les projets IDE et build-tool, la structure des fichiers peut différer (par ex. Maven utilise `src/main/java`).  
-> Ce qui reste toujours vrai : `module-info.java` se trouve à la racine de l’arbre des sources du module et les chemins des packages suivent le nommage standard Java.
+!!! note
+    Dans les projets IDE et build-tool, la structure des fichiers peut différer (par ex. Maven utilise `src/main/java`).
+    Ce qui reste toujours vrai : `module-info.java` se trouve à la racine de l’arbre des sources du module et les chemins des packages suivent le nommage standard Java.
 
 ---
 
@@ -204,8 +204,8 @@ Dans les modules, `public` signifie “public vers les autres modules *seulement
 | Membre private | Non |
 
 
-> [!NOTE]
-> C’est une différence fondamentale par rapport au modèle basé sur le classpath.
+!!! note
+    C’est une différence fondamentale par rapport au modèle basé sur le classpath.
 
 ---
 

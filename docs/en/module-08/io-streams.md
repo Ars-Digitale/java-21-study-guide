@@ -132,8 +132,8 @@ try (InputStream in = new FileInputStream("data.bin")) {
 }
 ```
 
-> [!NOTE]
-> Low-level streams are rarely used alone in real applications due to poor performance and limited features.
+!!! note
+    Low-level streams are rarely used alone in real applications due to poor performance and limited features.
 
 ### 34.3.3 High-Level Streams (Filter / Processing Streams)
 
@@ -185,8 +185,8 @@ A stream can only wrap another stream of a compatible abstraction level.
 - Character streams can only wrap character streams
 - High-level streams require an underlying low-level stream
 
-> [!NOTE]
-> You cannot arbitrarily mix `InputStream` with `Reader` or `OutputStream` with `Writer`.
+!!! note
+    You cannot arbitrarily mix `InputStream` with `Reader` or `OutputStream` with `Writer`.
 
 #### 34.3.5.2 Byte vs Character Stream Incompatibility
 
@@ -199,8 +199,8 @@ BufferedReader reader =
 	new BufferedReader(new FileInputStream("text.txt"));
 ```
 
-> [!NOTE]
-> This fails because `BufferedReader` expects a `Reader`, not an `InputStream`.
+!!! note
+    This fails because `BufferedReader` expects a `Reader`, not an `InputStream`.
 
 #### 34.3.5.4 Bridging Byte Streams to Character Streams
 
@@ -217,8 +217,8 @@ BufferedReader reader =
 		new InputStreamReader(new FileInputStream("text.txt")));
 ```
 
-> [!NOTE]
-> The bridge handles character decoding using a charset (default or explicit).
+!!! note
+    The bridge handles character decoding using a charset (default or explicit).
 
 #### 34.3.5.6 Ordering Rules in Stream Chains
 
@@ -238,8 +238,8 @@ FileInputStream → InputStreamReader → BufferedReader
 
 Closing the outermost stream automatically closes all wrapped streams.
 
-> [!NOTE]
-> This is why try-with-resources should reference only the highest-level stream.
+!!! note
+    This is why try-with-resources should reference only the highest-level stream.
 
 #### 34.3.5.9 Common Pitfalls
 
@@ -271,10 +271,10 @@ All input streams read raw bytes (8-bit values) from a source such as a file, ne
 | int `available()`	|	Bytes readable without blocking (hint, not guarantee) |
 | void `close()`	|	Releases the underlying resource |
 
-> [!NOTE]
-> The `read()` methods are blocking by default.
->
-> They suspend the calling thread until data is available, end-of-stream is reached, or an I/O error occurs.
+!!! note
+    The `read()` methods are blocking by default.
+    
+    They suspend the calling thread until data is available, end-of-stream is reached, or an I/O error occurs.
 
 The `single-byte read()` method is primarily a low-level primitive.
 
@@ -308,10 +308,10 @@ It represents a destination where raw bytes can be written.
 | void `flush()`	|	Forces buffered data to be written |
 | void `close()`	|	Flushes and releases the resource |
 
-> [!NOTE]
-> Calling `close()` implicitly calls `flush()`.
->
-> Failing to flush or close an OutputStream may result in data loss.
+!!! note
+    Calling `close()` implicitly calls `flush()`.
+    
+    Failing to flush or close an OutputStream may result in data loss.
 
 #### 34.4.2.2 Typical Usage Example
 
@@ -346,10 +346,10 @@ Reader reader = new InputStreamReader(
 );
 ```
 
-> [!NOTE]
-> `InputStreamReader` and `OutputStreamWriter` are bridge classes.
-> 
-> They convert between `byte streams` and `character streams` using a `charset`.
+!!! note
+    `InputStreamReader` and `OutputStreamWriter` are bridge classes.
+    
+    They convert between `byte streams` and `character streams` using a `charset`.
 
 ---
 
@@ -362,8 +362,8 @@ Instead of interacting with the operating system on every read or write, data is
 - `BufferedInputStream` / `BufferedOutputStream` for byte streams
 - `BufferedReader` / `BufferedWriter` for character streams
 
-> [!NOTE]
-> `Buffered streams` are `decorators`: they do not replace the underlying stream, they enhance it by adding buffering behavior.
+!!! note
+    `Buffered streams` are `decorators`: they do not replace the underlying stream, they enhance it by adding buffering behavior.
 
 ### 34.5.1 Why Buffering Matters
 
@@ -392,8 +392,8 @@ try (InputStream in = new FileInputStream("data.bin")) {
 }
 ```
 
-> [!NOTE]
-> Reading byte-by-byte without buffering is almost always a performance anti-pattern.
+!!! note
+    Reading byte-by-byte without buffering is almost always a performance anti-pattern.
 
 ### 34.5.3 How BufferedInputStream Works
 
@@ -411,8 +411,8 @@ try (InputStream in =
 }
 ```
 
-> [!NOTE]
-> The program still calls `read()` repeatedly, but the operating system is accessed only when the internal buffer needs refilling.
+!!! note
+    The program still calls `read()` repeatedly, but the operating system is accessed only when the internal buffer needs refilling.
 
 ### 34.5.4 Buffered Output Example
 
@@ -430,10 +430,10 @@ try (OutputStream out =
 }
 ```
 
-> [!NOTE]
-> `close()` automatically calls flush().
->
-> Calling `flush()` explicitly is useful when data must be visible immediately.
+!!! note
+    `close()` automatically calls flush().
+    
+    Calling `flush()` explicitly is useful when data must be visible immediately.
 
 ### 34.5.5 BufferedReader vs Reader
 
@@ -452,8 +452,8 @@ try (BufferedReader reader =
 }
 ```
 
-> [!NOTE]
-> The `readLine()` method is only available on `BufferedReader` (not `Reader`), because it relies on buffering to efficiently detect line boundaries.
+!!! note
+    The `readLine()` method is only available on `BufferedReader` (not `Reader`), because it relies on buffering to efficiently detect line boundaries.
 
 
 ### 34.5.6 BufferedWriter Example
@@ -470,12 +470,12 @@ try (BufferedWriter writer =
 
 `BufferedWriter` minimizes disk access and provides convenience methods such as newLine().
 
-> [!NOTE]
-> Always wrap file streams with buffering unless there is a strong reason not to
-> 
-> Prefer BufferedReader / BufferedWriter for text
-> 
-> Prefer BufferedInputStream / BufferedOutputStream for binary data
+!!! note
+    Always wrap file streams with buffering unless there is a strong reason not to
+    
+    Prefer BufferedReader / BufferedWriter for text
+    
+    Prefer BufferedInputStream / BufferedOutputStream for binary data
 
 ---
 
@@ -493,10 +493,10 @@ Modern Java applications increasingly favor NIO and NIO.2 APIs, but java.io rema
 | `Scalability` | Limited | High |
 | `Introduced` | Java 1.0 | Java 4 / Java 7 |
 
-> [!NOTE]
-> `java.nio` does not replace `java.io`.
->
-> Many NIO classes internally rely on streams or coexist with them.
+!!! note
+    `java.nio` does not replace `java.io`.
+    
+    Many NIO classes internally rely on streams or coexist with them.
 
 ### 34.6.2 java.nio (Modern File I/O)
 
@@ -544,6 +544,6 @@ try (BufferedReader reader = new BufferedReader(new FileReader("file.txt"))) {
 - Files utility methods throw checked IOException
 - `available()` must not be used to detect EOF
 
-> [!NOTE]
-> Most I/O bugs come from incorrect assumptions about blocking, buffering, or character encoding.
+!!! note
+    Most I/O bugs come from incorrect assumptions about blocking, buffering, or character encoding.
 

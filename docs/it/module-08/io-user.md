@@ -44,10 +44,10 @@ Sono connessi all’ambiente del processo (di solito un terminale o una console)
 | Errore standard | `System.err` | PrintStream | Output di errore |
 | Input standard | `System.in` | InputStream | Input dell’utente |
 
-> [!NOTE]
-> Questi stream sono creati dalla JVM, non dal programma.
->
-> Essi esistono per l’intera durata del processo.
+!!! note
+    Questi stream sono creati dalla JVM, non dal programma.
+    
+    Essi esistono per l’intera durata del processo.
 
 ---
 
@@ -67,10 +67,10 @@ Avvolge un altro OutputStream e aggiunge metodi di stampa convenienti.
 - Non lancia `IOException` su errori di scrittura
 - Supporta opzionalmente l’auto-flush su newline / `println()`
 
-> [!NOTE]
-> A differenza della maggior parte degli stream, PrintStream sopprime le IOExceptions.
->
-> Gli errori devono essere verificati usando checkError().
+!!! note
+    A differenza della maggior parte degli stream, PrintStream sopprime le IOExceptions.
+    
+    Gli errori devono essere verificati usando checkError().
 
 ### 36.2.2 Uso Base di PrintStream
 
@@ -98,8 +98,8 @@ System.out.printf("Name: %s, Age: %d%n", "Alice", 30);
 | `%f` | Virgola mobile |
 | `%n` | Nuova linea indipendente dalla piattaforma |
 
-> [!NOTE]
-> `printf()` non aggiunge automaticamente una nuova linea a meno che non si specifichi `%n`.
+!!! note
+    `printf()` non aggiunge automaticamente una nuova linea a meno che non si specifichi `%n`.
 
 ---
 
@@ -119,8 +119,8 @@ Questo è raramente conveniente per programmi interattivi.
 int b = System.in.read();
 ```
 
-> [!NOTE]
-> `System.in.read()` si blocca finché l’input non è disponibile.
+!!! note
+    `System.in.read()` si blocca finché l’input non è disponibile.
 
 ### 36.3.2 Uso di InputStreamReader e BufferedReader
 
@@ -149,10 +149,10 @@ int value = sc.nextInt();
 String text = sc.nextLine();
 ```
 
-> [!NOTE]
-> `Scanner` esegue tokenizzazione e parsing, non semplice lettura.
->
-> Questo la rende comoda ma più lenta e talvolta sorprendente.
+!!! note
+    `Scanner` esegue tokenizzazione e parsing, non semplice lettura.
+    
+    Questo la rende comoda ma più lenta e talvolta sorprendente.
 
 ### 36.4.1 Problemi Comuni di Scanner
 
@@ -174,8 +174,8 @@ Gli `stream di sistema` sono speciali e devono essere gestiti con attenzione.
 
 Chiudere `System.out` o `System.err` chiude lo stream sottostante del sistema operativo e influisce sull’intera JVM: chiudere questi stream influisce sull’intero processo JVM, non solo sulla classe o metodo corrente.
 
-> [!NOTE]
-> In quasi tutte le applicazioni, NON dovresti chiudere `System.out` o `System.err`.
+!!! note
+    In quasi tutte le applicazioni, NON dovresti chiudere `System.out` o `System.err`.
 
 ---
 
@@ -192,9 +192,9 @@ if (console == null) {
 }
 ```
 
-> [!NOTE]
-> `System.console()` può restituire `null` quando nessuna console è disponibile
-> (ad es. IDE, input rediretto).
+!!! note
+    `System.console()` può restituire `null` quando nessuna console è disponibile
+    (ad es. IDE, input rediretto).
 
 ### 36.6.1 Leggere Input da Console
 
@@ -212,8 +212,8 @@ Console permette di leggere password senza mostrare i caratteri.
 char[] password = console.readPassword("Password: ");
 ```
 
-> [!NOTE]
-> Le password sono restituite come `char[]` così possono essere cancellate dalla memoria.
+!!! note
+    Le password sono restituite come `char[]` così possono essere cancellate dalla memoria.
 
 ---
 
@@ -250,8 +250,8 @@ java App < input.txt > output.txt
 
 Dal punto di vista del programma, `System.in` e `System.out` si comportano ancora come normali stream.
 
-> [!NOTE]
-> La redirezione è gestita dal sistema operativo o dalla shell. Il codice Java non deve cambiare per supportarla.
+!!! note
+    La redirezione è gestita dal sistema operativo o dalla shell. Il codice Java non deve cambiare per supportarla.
 
 ---
 

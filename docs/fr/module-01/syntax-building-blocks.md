@@ -79,8 +79,8 @@ String msg = "Hello";     // "Hello" est un littéral String
   - **Mots-clés (réservés) :** noms prédéfinis réservés par le langage Java et qui ne peuvent pas être redéfinis.  
     Exemples : `class`, `public`, `static`, `if`, `return`.
 
-> [!NOTE]  
-> Les identifiants doivent respecter les règles de nommage de Java : voir *Java Naming Rules*.
+!!! note
+    Les identifiants doivent respecter les règles de nommage de Java : voir *Java Naming Rules*.
 
 - **Théorie :** Fonction de liaison (binding) : relie un nom à une valeur ou une ressource.
 
@@ -119,8 +119,8 @@ counter++;             // autre mise à jour (post-incrément)
   - **Types référence :** représentent des références (pointeurs) vers des objets en mémoire.  
     Exemples : `String`, tableaux (par ex. `int[]`), classes, interfaces et types définis par l’utilisateur.
 
-> [!NOTE]  
-> Voir *Java Data Types*.
+!!! note
+    Voir *Java Data Types*.
 
 - **Théorie :** Un système de types est l’ensemble des règles qui associent des ensembles de valeurs et des opérations admissibles.
 
@@ -141,8 +141,8 @@ String name = "Alice";  // type référence (classe String)
 - **Rôle :** Les opérateurs combinent valeurs, variables et expressions pour produire de nouvelles valeurs ou modifier l’état du programme.
 - **En Java :**
 
-> [!NOTE]  
-> Voir *Java Operators*.
+!!! note
+    Voir *Java Operators*.
 
 - **Théorie :** Les opérateurs définissent les calculs autorisés sur les types ; avec les valeurs et variables, ils forment les **expressions**.
 

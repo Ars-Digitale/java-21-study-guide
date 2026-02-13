@@ -32,8 +32,8 @@ Java fornisce tre categorie principali di costrutti di controllo del flusso:
 - **Istruzioni di iterazione** — `for`, `while`, `do-while` e il **`for`** avanzato
 - **Istruzioni di diramazione** — `break`, `continue` e `return`
 
-> [!TIP]
-> Comprendere il flusso di controllo è essenziale per vedere come i dati si muovono all’interno del programma e come ogni decisione logica viene valutata passo dopo passo.
+!!! tip
+    Comprendere il flusso di controllo è essenziale per vedere come i dati si muovono all’interno del programma e come ogni decisione logica viene valutata passo dopo passo.
 
 ## 7.1 L’istruzione `if`
 
@@ -73,13 +73,12 @@ if (grade >= 90) {
 }
 ```
 
-> [!NOTE]
-> 
-> La condizione di `if` deve essere valutata come **boolean**; i tipi numerici o gli oggetti non possono essere usati direttamente come condizioni.
-> 
-> Le parentesi graffe `{}` sono opzionali per singole istruzioni ma sono fortemente consigliate per prevenire sottili errori di logica.
-> 
-> Una catena `if-else` viene valutata dall’alto verso il basso, e viene eseguito solo il primo ramo con una condizione valutata come `true`.
+!!! note
+    La condizione di `if` deve essere valutata come **boolean**; i tipi numerici o gli oggetti non possono essere usati direttamente come condizioni.
+    
+    Le parentesi graffe `{}` sono opzionali per singole istruzioni ma sono fortemente consigliate per prevenire sottili errori di logica.
+    
+    Una catena `if-else` viene valutata dall’alto verso il basso, e viene eseguito solo il primo ramo con una condizione valutata come `true`.
 
 ---
 
@@ -116,13 +115,13 @@ Entrambe le forme di `switch` condividono le stesse regole riguardanti il select
 | Any reference type (with pattern matching) |
 | `var` (if it resolves to one of the allowed types) |
 
-> [!WARNING]
-> **Non consentiti** come type selector per switch:
-> 
-> - `boolean`
-> - `long`
-> - `float`
-> - `double`
+!!! warning
+    **Non consentiti** come type selector per switch:
+    
+    - `boolean`
+    - `long`
+    - `float`
+    - `double`
 
 ### 7.2.2 Valori `case` accettabili
 
@@ -191,8 +190,8 @@ switch (o) {
 }
 ```
 
-> [!NOTE]
-> Quest’ultimo esempio non restituisce un valore, quindi è in realtà una **istruzione switch**, non una switch Expression.
+!!! note
+    Quest’ultimo esempio non restituisce un valore, quindi è in realtà una **istruzione switch**, non una switch Expression.
 
 ### 7.2.4.2 Ordinamento, dominanza ed esaustività negli switch con pattern
 
@@ -251,8 +250,8 @@ switch (number) {
 }
 ```
 
-> [!WARNING]
-> Il seguente esempio, che usa sia una clausola `default` sia una clausola finale con lo stesso tipo della variabile selector, **non** compila: il compilatore considera uno dei due case come sempre dominante rispetto all’altro.
+!!! warning
+    Il seguente esempio, che usa sia una clausola `default` sia una clausola finale con lo stesso tipo della variabile selector, **non** compila: il compilatore considera uno dei due case come sempre dominante rispetto all’altro.
 
 ```java
 Number number = Short.valueOf(10);
@@ -326,8 +325,8 @@ Output:
 3
 ```
 
-> [!NOTE]
-> Se nell’esempio precedente rimuoviamo il `break` sul `case 3`, verrà stampato anche il messaggio del ramo `default`.
+!!! note
+    Se nell’esempio precedente rimuoviamo il `break` sul `case 3`, verrà stampato anche il messaggio del ramo `default`.
 
 ### 7.3.2 L’espressione Switch
 
@@ -366,9 +365,9 @@ int len = switch (s) {
 };
 ```
 
-> [!NOTE]
-> `yield` è usato solo nelle Expressions switch.
-> `break value;` non è consentito come modo per restituire un valore da un’espressione switch.
+!!! note
+    `yield` è usato solo nelle Expressions switch.
+    `break value;` non è consentito come modo per restituire un valore da un’espressione switch.
 
 ### 7.3.2.2 Esaustività per le espressioni switch
 
@@ -422,13 +421,13 @@ int len = switch (s) {
 };
 ```
 
-> [!NOTE]
-> Per le Expressions switch:
-> 
-> Se non gestisci `null` e il selector è `null`, viene lanciata una `NullPointerException`.
-> 
-> Usare `case null` rende lo switch esplicitamente null-safe.
+!!! note
+    Per le Expressions switch:
+    
+    Se non gestisci `null` e il selector è `null`, viene lanciata una `NullPointerException`.
+    
+    Usare `case null` rende lo switch esplicitamente null-safe.
 
-> [!WARNING]
-> Ogni volta che `case null` viene usato in uno switch, lo switch viene trattato come un `pattern switch`, e si applicano tutte le regole per i pattern switch (incluse esaustività e dominanza).
+!!! warning
+    Ogni volta che `case null` viene usato in uno switch, lo switch viene trattato come un `pattern switch`, e si applicano tutte le regole per i pattern switch (incluse esaustività e dominanza).
 

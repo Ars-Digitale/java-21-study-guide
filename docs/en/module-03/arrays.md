@@ -193,8 +193,8 @@ jagged[2] = new int[1];
 - Arrays use `.length` (public final field).
 - Strings use `.length()` (method).
 
-> [!TIP]
-> This is a classic trap: fields vs methods.
+!!! tip
+    This is a classic trap: fields vs methods.
 
 ```java
 // int x = arr.length;   // OK
@@ -290,10 +290,10 @@ int[] a = {4,1,3};
 Arrays.sort(a); // [1, 3, 4]
 ```
 
-> [!TIP]
-> - Strings are sorted in natural (lexicographic) order.
-> - Numbers sort before letters, and uppercase letters sort before lowercase letters (numbers < uppercase < lowercase).
-> - For reference types, `null` is considered smaller than any non-null value.
+!!! tip
+    - Strings are sorted in natural (lexicographic) order.
+    - Numbers sort before letters, and uppercase letters sort before lowercase letters (numbers < uppercase < lowercase).
+    - For reference types, `null` is considered smaller than any non-null value.
 
 ```java
 String[] arr = {"AB", "ac", "Ba", "bA", "10", "99"};

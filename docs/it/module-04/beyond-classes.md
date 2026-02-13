@@ -80,8 +80,8 @@ interface Calculator {
 }
 ```
 
-> [!WARNING]
-> Poiché i metodi astratti delle interfacce sono implicitamente `public`, **non puoi** ridurre il livello di accesso su un metodo di implementazione.
+!!! warning
+    Poiché i metodi astratti delle interfacce sono implicitamente `public`, **non puoi** ridurre il livello di accesso su un metodo di implementazione.
 
 ### 17.1.2 Implementare un’Interfaccia
 
@@ -91,8 +91,8 @@ class BasicCalc implements Calculator {
 }
 ```
 
-> [!NOTE]
-> **Ogni** metodo astratto deve essere implementato a meno che la classe non sia astratta essa stessa.
+!!! note
+    **Ogni** metodo astratto deve essere implementato a meno che la classe non sia astratta essa stessa.
 
 ### 17.1.3 Ereditarietà Multipla
 
@@ -284,9 +284,9 @@ public record Point(int x, int y) {
 }
 ```
 
-> [!NOTE]
-> - Il compilatore non inserirà un costruttore se ne fornisci manualmente uno con la stessa lista di parametri nell’ordine definito;
-> - In questo caso, devi impostare esplicitamente ogni campo manualmente;
+!!! note
+    - Il compilatore non inserirà un costruttore se ne fornisci manualmente uno con la stessa lista di parametri nell’ordine definito;
+    - In questo caso, devi impostare esplicitamente ogni campo manualmente;
 
 ### 17.4.2 Costruttore Compatto
 
@@ -307,8 +307,8 @@ public record Person(String name, int age) {
 }
 ```
 
-> [!WARNING]
-> - Se provi a modificare un attributo di Record dentro un Costruttore Compatto, il tuo codice non compilerà
+!!! warning
+    - Se provi a modificare un attributo di Record dentro un Costruttore Compatto, il tuo codice non compilerà
 
 ### 17.4.3 Pattern Matching per i Record
 
@@ -366,9 +366,9 @@ Invece di specificare tipi esatti per ogni campo, puoi usare `var` dentro il pat
 
 `var` nei pattern funziona come `var` nelle variabili locali: significa "inferisci il tipo".
 
-> [!WARNING]
-> - Ti serve ancora il tipo del record contenitore (Person, Address); 
-> - solo i tipi dei campi possono essere sostituiti con `var`.
+!!! warning
+    - Ti serve ancora il tipo del record contenitore (Person, Address);
+    - solo i tipi dei campi possono essere sostituiti con `var`.
 
 #### 17.4.4.3 Nested Record Patterns e Generics
 
@@ -423,8 +423,8 @@ Posizionamento illegale di `var`
 case var(Person(var n, var a)) -> ...
 ```
 
-> [!NOTE]
-> - `var` non può sostituire l’intero pattern, solo i singoli componenti.
+!!! note
+    - `var` non può sostituire l’intero pattern, solo i singoli componenti.
 
 ---
 
@@ -539,8 +539,8 @@ class Outer {
 }
 ```
 
-> [!WARNING]
-> - Istanziare una inner class SENZA un’istanza esterna è illegale.
+!!! warning
+    - Istanziare una inner class SENZA un’istanza esterna è illegale.
 
 ### 17.5.3 Classi Locali
 

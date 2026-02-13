@@ -150,8 +150,8 @@ List<String> names = new ArrayList<>();
 Map<Integer, String> map = new HashMap<>();
 ```
 
-> [!NOTE]
-> I generics nelle collezioni funzionano tramite `type erasure`: fai riferimento al Paragrafo "**18.4 Type Erasure**" nel Capitolo: [Generics in Java](../module-04/generics.md).
+!!! note
+    I generics nelle collezioni funzionano tramite `type erasure`: fai riferimento al Paragrafo "**18.4 Type Erasure**" nel Capitolo: [Generics in Java](../module-04/generics.md).
 
 ## 22.7 Mutabilità vs. Immutabilità
 
@@ -169,8 +169,8 @@ Java fornisce diversi modi per creare collezioni immutabili:
 - wrapper `Collections.unmodifiableList(...)`
 - `Records` usati come contenitori di valori immutabili
 
-> [!NOTE]
-> Il metodo `Arrays.asList(varargs)`, che è costruito su un array, si comporta diversamente: vedi esempi sotto.
+!!! note
+    Il metodo `Arrays.asList(varargs)`, che è costruito su un array, si comporta diversamente: vedi esempi sotto.
 
 ```java
 
@@ -191,9 +191,9 @@ immutable2.set(0, "k"); // ❌ UnsupportedOperationException
 fromAsList.set(0, "k");  // l’aggiornamento sarà riflesso anche sull’array sottostante.
 ```
 
-> [!NOTE]
-> `Arrays.asList(...)` restituisce una vista List a dimensione fissa, ma **mutabile**, supportata dall’array originale.
-> Non puoi aggiungere/rimuovere elementi, ma puoi sostituire quelli esistenti.
+!!! note
+    `Arrays.asList(...)` restituisce una vista List a dimensione fissa, ma **mutabile**, supportata dall’array originale.
+    Non puoi aggiungere/rimuovere elementi, ma puoi sostituire quelli esistenti.
 
 
 ## 22.8 Aspettative di Prestazioni Big-O
@@ -211,8 +211,8 @@ Capire la complessità dei tipi "Collectio" è essenziale. Ecco alcuni esempi co
 | Deque | `add/remove first/last`  | **`O(1)`**  |
 
 
-> [!NOTE]
-> Questi valori sono medie; il caso peggiore può essere diverso (specialmente per strutture basate su hash).
+!!! note
+    Questi valori sono medie; il caso peggiore può essere diverso (specialmente per strutture basate su hash).
 
 
 ## 22.9 Riepilogo

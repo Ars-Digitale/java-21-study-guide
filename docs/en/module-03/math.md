@@ -71,9 +71,9 @@ Math.round(3.6);    // 4
 Math.round(-3.5f);  // -3  (float version returns int)
 ```
 
-> [!NOTE]
-> - The float version returns an `int`.  
-> - The double version returns a `long`.
+!!! note
+    - The float version returns an `int`.
+    - The double version returns a `long`.
 
 ### 11.1.3 `Math.ceil()` (Ceiling)
 

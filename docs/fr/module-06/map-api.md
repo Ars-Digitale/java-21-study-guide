@@ -27,8 +27,8 @@ Contrairement aux autres types de collections, `Map` **n’étend pas** `Collect
 - Les Map ne prennent pas en charge l’accès positionnel (basé sur des indices)
 - L’itération s’effectue via `keySet()`, `values()` ou `entrySet()`
 
-> [!NOTE]
-> Une `Map` n’est pas une `Collection`, mais ses vues (keySet, values, entrySet) sont des collections.
+!!! note
+    Une `Map` n’est pas une `Collection`, mais ses vues (keySet, values, entrySet) sont des collections.
 
 ---
 
@@ -42,8 +42,8 @@ Contrairement aux autres types de collections, `Map` **n’étend pas** `Collect
 | `Hashtable` | Aucun ordre | Non | Non | Oui | Legacy |
 | `ConcurrentHashMap` | Aucun ordre | Non | Non | Oui | Adaptée à la concurrence |
 
-> [!NOTE]
-> L’ordre de `TreeMap` est déterminé soit par `Comparable`, soit par un `Comparator` fourni lors de la construction.
+!!! note
+    L’ordre de `TreeMap` est déterminé soit par `Comparable`, soit par un `Comparator` fourni lors de la construction.
 
 ---
 
@@ -63,8 +63,8 @@ Map<String, Integer> map5 = Map.ofEntries(
 );
 ```
 
-> [!NOTE]
-> Les Map créées avec `Map.of(...)` et `Map.ofEntries(...)` sont **immuables**. Toute tentative de modification lève `UnsupportedOperationException`.
+!!! note
+    Les Map créées avec `Map.of(...)` et `Map.ofEntries(...)` sont **immuables**. Toute tentative de modification lève `UnsupportedOperationException`.
 
 ---
 
@@ -118,8 +118,8 @@ for (Map.Entry<String, String> e : map.entrySet()) {
 }
 ```
 
-> [!NOTE]
-> Modifier la map pendant l’itération sur ces vues peut lever `ConcurrentModificationException` (sauf pour les map concurrentes).
+!!! note
+    Modifier la map pendant l’itération sur ces vues peut lever `ConcurrentModificationException` (sauf pour les map concurrentes).
 
 ---
 
@@ -138,8 +138,8 @@ Map<String, Integer> m2 = Map.of("B", 2, "A", 1);
 System.out.println(m1.equals(m2)); // true
 ```
 
-> [!NOTE]
-> L’ordre d’itération n’affecte pas l’égalité des map.
+!!! note
+    L’ordre d’itération n’affecte pas l’égalité des map.
 
 ---
 
@@ -156,9 +156,9 @@ tm.put(2, "B");
 System.out.println(tm); // {1=A, 2=B, 3=C}
 ```
 
-> [!WARNING]
-> Toutes les clés d’une `TreeMap` doivent être mutuellement comparables.
-> Mélanger des types incompatibles provoque une `ClassCastException` à l’exécution.
+!!! warning
+    Toutes les clés d’une `TreeMap` doivent être mutuellement comparables.
+    Mélanger des types incompatibles provoque une `ClassCastException` à l’exécution.
 
 ---
 
@@ -172,10 +172,10 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 | Hashtable | Non | Non |
 | ConcurrentHashMap | Non | Non |
 
-> [!NOTE]
-> `TreeMap` accepte les valeurs `null` uniquement lorsqu’elles ne participent pas à la comparaison des clés. En pratique, cela est rare, car les clés null sont interdites et les comparators peuvent rejeter les null.
->
-> `HashMap` et `LinkedHashMap` autorisent une seule clé null — en insérer une autre remplace l’existante.
+!!! note
+    `TreeMap` accepte les valeurs `null` uniquement lorsqu’elles ne participent pas à la comparaison des clés. En pratique, cela est rare, car les clés null sont interdites et les comparators peuvent rejeter les null.
+    
+    `HashMap` et `LinkedHashMap` autorisent une seule clé null — en insérer une autre remplace l’existante.
 
 ---
 

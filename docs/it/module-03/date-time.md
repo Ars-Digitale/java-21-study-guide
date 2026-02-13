@@ -46,10 +46,10 @@ A seconda del livello di dettaglio richiesto, Java offre quattro classi principa
 - `LocalDateTime` → combina data + ora, ma senza fuso orario
 - `ZonedDateTime` → data + ora + offset + fuso orario completi
 
-> [!NOTE]
-> - Un **fuso orario** definisce regole come i cambi dell’ora legale (ad esempio, `Europe/Paris`).  
-> - Un **offset di zona** è uno spostamento fisso rispetto a UTC/GMT (ad esempio, `+01:00`, `-07:00`).  
-> - Per confrontare due istanti provenienti da fusi orari diversi, convertili in UTC (GMT) applicando l’offset.
+!!! note
+    - Un **fuso orario** definisce regole come i cambi dell’ora legale (ad esempio, `Europe/Paris`).
+    - Un **offset di zona** è uno spostamento fisso rispetto a UTC/GMT (ad esempio, `+01:00`, `-07:00`).  
+    - Per confrontare due istanti provenienti da fusi orari diversi, convertili in UTC (GMT) applicando l’offset.
 
 **Ottenere la data/ora corrente**
 
@@ -231,9 +231,9 @@ Duration d = Duration.ofMinutes(90);
 LocalTime t5 = time.plus(d);                // 15:00
 ```
 
-> [!NOTE]
-> Quando l’aritmetica sull’ora supera la mezzanotte, con `LocalTime` la data viene ignorata.  
-> Per esempio, 23:30 + 2 ore = 01:30 (senza alcuna data coinvolta).
+!!! note
+    Quando l’aritmetica sull’ora supera la mezzanotte, con `LocalTime` la data viene ignorata.
+    Per esempio, 23:30 + 2 ore = 01:30 (senza alcuna data coinvolta).
 
 ### 12.1.6 Aritmetica su `LocalDateTime`
 
@@ -315,8 +315,8 @@ A seconda delle regole dell’ora legale per quella data:
 - L’orario locale potrebbe saltare da 02:00 a 03:00 o simile.
 - `ZonedDateTime` regola l’offset e l’orario locale secondo le regole della zona, ma rappresenta comunque l’istante corretto sulla timeline.
 
-> [!IMPORTANT]
-> Per `ZonedDateTime`, l’aritmetica è definita in termini di timeline locale e regole del fuso orario, il che può causare spostamenti di ore durante le transizioni DST.
+!!! important
+    Per `ZonedDateTime`, l’aritmetica è definita in termini di timeline locale e regole del fuso orario, il che può causare spostamenti di ore durante le transizioni DST.
 
 ### 12.1.8 Tabella riassuntiva
 
@@ -423,11 +423,11 @@ LocalDate base = LocalDate.of(2025, 1, 10);
 LocalDate result = base.plus(p2);          // 2026-03-13
 ```
 
-> [!NOTE]
-> Period.parse("P1W") is allowed and represents a period of 7 days (equivalent to "P7D").
+!!! note
+    Period.parse("P1W") is allowed and represents a period of 7 days (equivalent to "P7D").
 
-> [!TIP]
-> Period is calendar-based: adding a period of months/years respects month lengths and leap years.
+!!! tip
+    Period is calendar-based: adding a period of months/years respects month lengths and leap years.
 
 ---
 
@@ -474,9 +474,9 @@ ZonedDateTime z2 = z1.plusHours(2);          // DST-aware
 ZonedDateTime z3 = z1.plus(d2);              // Duration-based
 ```
 
-> [!NOTE]
-> Duration.ofDays(1) represents exactly 24 hours of machine time.  
-> In a zone with DST, 24 hours may not align with “the same local time tomorrow”.
+!!! note
+    Duration.ofDays(1) represents exactly 24 hours of machine time.
+    In a zone with DST, 24 hours may not align with “the same local time tomorrow”.
 
 ---
 
@@ -522,9 +522,9 @@ Instant end   = Instant.parse("2024-01-01T12:30:00Z");
 Duration between = Duration.between(start, end); // PT2H30M
 ```
 
-> [!IMPORTANT]
-> Instant è sempre UTC, senza informazioni di fuso orario associate.  
-> Non può essere combinato con un Period; usa invece Duration.
+!!! important
+    Instant è sempre UTC, senza informazioni di fuso orario associate.
+    Non può essere combinato con un Period; usa invece Duration.
 
 ---
 
@@ -583,8 +583,8 @@ LocalTime time = LocalTime.of(10, 0);
 LocalTime t1 = time.plus(90, ChronoUnit.MINUTES);  // 11:30
 ```
 
-> [!IMPORTANT]
-> Non puoi usare unità basate sul tempo con LocalDate, né unità basate sulla data con LocalTime.
+!!! important
+    Non puoi usare unità basate sul tempo con LocalDate, né unità basate sulla data con LocalTime.
 
 - Esempi:
 
@@ -704,10 +704,10 @@ long days = ChronoUnit.DAYS.between(
 // 9
 ```
 
-> [!IMPORTANT]
-> ChronoUnit.between(...) always returns a long,  
-> while Period.between returns a Period,  
-> and Duration.between returns a Duration.
+!!! important
+    ChronoUnit.between(...) always returns a long,
+    while Period.between returns a Period,  
+    and Duration.between returns a Duration.
 
 ### 12.9.8 Problemi comuni
 

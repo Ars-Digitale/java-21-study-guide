@@ -78,9 +78,9 @@ rev.removeFirst(); // removes 3
 System.out.println(list); // [1, 2]
 ```
 
-> [!NOTE]
-> Reversed views share the same backing collection. Structural changes in either view affect the other:
-> modifying either the original collection or the reversed view affects the other.
+!!! note
+    Reversed views share the same backing collection. Structural changes in either view affect the other:
+    modifying either the original collection or the reversed view affects the other.
 
 ---
 
@@ -108,10 +108,10 @@ Currently, the primary standard implementation is:
 |---------|-------------|
 |	LinkedHashMap  |	Insertion order (or access order if configured) |
 
-> [!NOTE]
-> LinkedHashMap can reorder entries on read if constructed with accessOrder=true.
->
-> In that case, “first” and “last” reflect most-recent-access order.
+!!! note
+    LinkedHashMap can reorder entries on read if constructed with accessOrder=true.
+    
+    In that case, “first” and “last” reflect most-recent-access order.
 
 ### 29.3.3 Reversed Maps
 
@@ -127,8 +127,8 @@ rev.pollFirstEntry(); // removes C=3
 System.out.println(map); // {A=1, B=2}
 ```
 
-> [!NOTE]
-> Like SequencedCollection, `reversed()` returns a live view — mutations apply to both maps.
+!!! note
+    Like SequencedCollection, `reversed()` returns a live view — mutations apply to both maps.
 
 ---
 
@@ -156,8 +156,8 @@ and whether they implement the new Sequenced interfaces.
 | `HashMap`           | ✘ No     | ✘ No                 | ✘ No           |
 | `TreeMap`           | ✔ Yes (sorted) | ✘ No        | ✘ No           |
 
-> [!NOTE]
-> `TreeSet` is ordered, but implements `SortedSet`/`NavigableSet`, not `SequencedCollection`.
+!!! note
+    `TreeSet` is ordered, but implements `SortedSet`/`NavigableSet`, not `SequencedCollection`.
 
 ---
 

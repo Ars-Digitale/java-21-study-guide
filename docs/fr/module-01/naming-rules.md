@@ -51,8 +51,8 @@ int year = 2024;   	  // valid
 | class | finally | long | strictfp | volatile |
 | const* | float | native | super | while |
 
-> [!NOTE]  
-> `goto` et `const` sont réservés mais non utilisés.
+!!! note
+    `goto` et `const` sont réservés mais non utilisés.
 
 #### 3.1.1.2 Littéraux réservés
 
@@ -73,11 +73,11 @@ int MYVAR = 3;
 int CLASS = 6; // legal but, please, don't do it!!
 ```
 
-> [!TIP]  
-> Java traite les identifiants littéralement : `Count`, `count` et `COUNt` sont indépendants et peuvent coexister.  
->  
-> À cause de la sensibilité à la casse, il est possible d’utiliser des variantes de mots-clés qui diffèrent uniquement par la casse.  
-> Même si c’est légal, ce type de nommage est fortement déconseillé, car il nuit à la lisibilité et est considéré comme une très mauvaise pratique.
+!!! tip
+    Java traite les identifiants littéralement : `Count`, `count` et `COUNt` sont indépendants et peuvent coexister.
+    
+    À cause de la sensibilité à la casse, il est possible d’utiliser des variantes de mots-clés qui diffèrent uniquement par la casse.  
+    Même si c’est légal, ce type de nommage est fortement déconseillé, car il nuit à la lisibilité et est considéré comme une très mauvaise pratique.
 
 ### 3.1.3 Début des identifiants
 
@@ -91,8 +91,8 @@ int _myVarC;
 String €uro = "currency"; // legal (rarely seen in practice)
 ```
 
-> [!NOTE]  
-> Les symboles de devise sont autorisés, mais ils ne sont pas recommandés dans du code réel.
+!!! note
+    Les symboles de devise sont autorisés, mais ils ne sont pas recommandés dans du code réel.
 
 ### 3.1.4 Chiffres dans les identifiants
 
@@ -116,8 +116,8 @@ int var2024 = 10; // valid
 int _;  // invalid since Java 9
 ```
 
-> [!WARNING]  
-> `_` est autorisé à l’intérieur des littéraux numériques (voir section suivante), mais pas comme identifiant isolé.
+!!! warning
+    `_` est autorisé à l’intérieur des littéraux numériques (voir section suivante), mais pas comme identifiant isolé.
 
 ### 3.1.6 Littéraux numériques et caractère underscore
 
@@ -139,6 +139,6 @@ double pi = 3.14_159_265; // valid
 long mask = 0b1111_0000;  // valid in binary literals
 ```
 
-> [!TIP]  
-> Les underscores améliorent la lisibilité :
-> `1_000_000` est plus facile à lire que `1000000`.
+!!! tip
+    Les underscores améliorent la lisibilité :
+    `1_000_000` est plus facile à lire que `1000000`.

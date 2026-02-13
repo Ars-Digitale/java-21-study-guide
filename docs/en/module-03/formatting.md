@@ -248,8 +248,8 @@ Completion: 100%
 Status: OK
 ```
 
-> [!NOTE]
-> A single % without a valid specifier causes an IllegalFormatException at runtime.
+!!! note
+    A single % without a valid specifier causes an IllegalFormatException at runtime.
 
 ---
 
@@ -264,10 +264,10 @@ NumberFormat nf = NumberFormat.getInstance(Locale.FRANCE);
 System.out.println(nf.format(1234567.89));
 ```
 
-> [!IMPORTANT]
-> - Factory methods determine formatting style (general, integer, currency, percent, compact, ...).
-> - Formatting depends on the provided `Locale`.
-> - `NumberFormat` (and `DecimalFormat`) are not thread-safe.
+!!! important
+    - Factory methods determine formatting style (general, integer, currency, percent, compact, ...).
+    - Formatting depends on the provided `Locale`.
+    - `NumberFormat` (and `DecimalFormat`) are not thread-safe.
 
 ### 13.2.2 Localizing Numbers
 
@@ -298,10 +298,10 @@ Or directly:
 DecimalFormat df = new DecimalFormat("#,##0.00");
 ```
 
-> [!NOTE]
-> - `DecimalFormat` is mutable (you can change pattern, symbols, etc.).
-> - `DecimalFormat` is **not** thread-safe.
-> - Formatting is locale-sensitive via `DecimalFormatSymbols`.
+!!! note
+    - `DecimalFormat` is mutable (you can change pattern, symbols, etc.).
+    - `DecimalFormat` is **not** thread-safe.
+    - Formatting is locale-sensitive via `DecimalFormatSymbols`.
 
 ### 13.2.4 DecimalFormat Pattern Structure
 
@@ -311,10 +311,10 @@ A pattern may contain a positive and an optional negative subpattern, separated 
 #,##0.00;(#,##0.00)
 ```
 
-> [!NOTE]
-> - First part → positive numbers.
-> - Second part → negative numbers.
-> - If the negative part is omitted, negative numbers use a leading `-` automatically.
+!!! note
+    - First part → positive numbers.
+    - Second part → negative numbers.
+    - If the negative part is omitted, negative numbers use a leading `-` automatically.
 
 ### 13.2.5 The `0` Symbol (Mandatory Digit)
 
@@ -646,9 +646,9 @@ Java searches bundles in a strict fallback order. For example, with base name `m
 
 If none is found → `MissingResourceException`.
 
-> [!NOTE]
-> Traditional .properties files are specified as ISO-8859-1;  
-> non-ASCII characters must be encoded as Unicode escapes (for example, \u00E9 for é) unless you use alternate loading mechanisms.
+!!! note
+    Traditional .properties files are specified as ISO-8859-1;
+    non-ASCII characters must be encoded as Unicode escapes (for example, \u00E9 for é) unless you use alternate loading mechanisms.
 
 ---
 

@@ -79,8 +79,8 @@ String msg = "Hello";     // "Hello" è un letterale String
   - **Parole chiave (keyword, riservate):** nomi predefiniti riservati dal linguaggio Java che non possono essere ridefiniti.  
     Esempi: `class`, `public`, `static`, `if`, `return`.
 
-> [!NOTE]  
-> Gli identificatori devono rispettare le regole di naming di Java: vedi [Regole di naming Java](naming-rules.md)
+!!! note
+    Gli identificatori devono rispettare le regole di naming di Java: vedi [Regole di naming Java](naming-rules.md)
 
 - **Teoria:** Funzione di binding: collega un nome a un valore o a una risorsa.
 
@@ -119,8 +119,8 @@ counter++;             // altro aggiornamento (post-incremento)
   - **Tipi reference:** rappresentano riferimenti (puntatori) a oggetti in memoria.  
     Esempi: `String`, array (ad es. `int[]`), classi, interfacce e tipi definiti dall’utente.
 
-> [!NOTE]  
-> Vedi [Tipi di dato Java e casting](data-types.md).
+!!! note
+    Vedi [Tipi di dato Java e casting](data-types.md).
 
 - **Teoria:** Un sistema di tipi è l’insieme di regole che associa insiemi di valori e operazioni ammissibili.
 
@@ -141,8 +141,8 @@ String name = "Alice";  // tipo reference (classe String)
 - **Ruolo:** Gli operatori combinano valori, variabili ed espressioni per produrre nuovi valori o modificare lo stato del programma.
 - **In Java:**
 
-> [!NOTE]  
-> Vedi [Operatori Java](java-operators.md).
+!!! note
+    Vedi [Operatori Java](java-operators.md).
 
 - **Teoria:** Gli operatori definiscono le computazioni ammesse sui tipi; insieme a valori e variabili formano le **espressioni**.
 

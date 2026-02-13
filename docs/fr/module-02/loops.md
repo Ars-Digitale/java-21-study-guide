@@ -68,8 +68,8 @@ do {
 } while (condition);
 ```
 
-> [!TIP]
-> `do-while` nécessite un point-virgule après la parenthèse fermante.
+!!! tip
+    `do-while` nécessite un point-virgule après la parenthèse fermante.
 
 - Exemple :
 ```java
@@ -199,8 +199,8 @@ while (true) { ... }
 for (;;) { ... }
 ```
 
-> [!TIP]
-> Les boucles infinies doivent contenir `break`, `return` ou un contrôle externe.
+!!! tip
+    Les boucles infinies doivent contenir `break`, `return` ou un contrôle externe.
 
 ---
 
@@ -224,8 +224,8 @@ for (int i = 0; i < 5; i++) {
 }
 ```
 
-> [!NOTE]
-> `break` et `continue` s’appliquent à la boucle la plus proche à moins que des étiquettes ne soient utilisées.
+!!! note
+    `break` et `continue` s’appliquent à la boucle la plus proche à moins que des étiquettes ne soient utilisées.
 
 ---
 
@@ -291,8 +291,8 @@ for (int i = 0; i < 3; i++) {
 }
 ```
 
-> [!NOTE]
-> `continue` saute à l’itération suivante, donc le code qui suit n’est jamais exécuté.
+!!! note
+    `continue` saute à l’itération suivante, donc le code qui suit n’est jamais exécuté.
 
 ### 8.10.3 Code inatteignable après `return`
 
@@ -303,5 +303,5 @@ int test() {
 }
 ```
 
-> [!NOTE]
-> `return` quitte la méthode immédiatement ; aucune instruction ne peut le suivre.
+!!! note
+    `return` quitte la méthode immédiatement ; aucune instruction ne peut le suivre.

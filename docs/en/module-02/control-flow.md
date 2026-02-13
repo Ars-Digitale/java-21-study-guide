@@ -33,8 +33,8 @@ Java provides three main categories of control flow constructs:
 - **Looping statements** — `for`, `while`, `do-while`, and the enhanced `for`
 - **Branching statements** — `break`, `continue`, and `return`
 
-> [!TIP]
-> Understanding control flow is essential to seeing how data moves through your program and how each logic decision is evaluated step by step.
+!!! tip
+    Understanding control flow is essential to seeing how data moves through your program and how each logic decision is evaluated step by step.
 
 ## 7.1 The `if` Statement
 
@@ -72,13 +72,12 @@ if (grade >= 90) {
 }
 ```
 
-> [!NOTE]
-> 
-> The `if` condition must evaluate to a **boolean**; numeric or object types cannot be used directly as conditions.
-> 
-> Curly braces `{}` are optional for single statements but strongly recommended to prevent subtle logic errors.
-> 
-> An `if-else` chain is evaluated from top to bottom, and only the first branch with a condition evaluating to `true` is executed.
+!!! note
+    The `if` condition must evaluate to a **boolean**; numeric or object types cannot be used directly as conditions.
+    
+    Curly braces `{}` are optional for single statements but strongly recommended to prevent subtle logic errors.
+    
+    An `if-else` chain is evaluated from top to bottom, and only the first branch with a condition evaluating to `true` is executed.
 
 ---
 
@@ -117,13 +116,13 @@ Both forms of `switch` share the same rules concerning the selector (switch **ta
 | Any reference type (with pattern matching) |
 | `var` (if it resolves to one of the allowed types) |
 
-> [!WARNING]
-> **Not allowed** as selector types for switch:
-> 
-> - `boolean`
-> - `long`
-> - `float`
-> - `double`
+!!! warning
+    **Not allowed** as selector types for switch:
+    
+    - `boolean`
+    - `long`
+    - `float`
+    - `double`
 
 ### 7.2.2 Acceptable `case` Values
 
@@ -190,8 +189,8 @@ switch (o) {
 }
 ```
 
-> [!NOTE]
-> This last example does not return a value, so it is a **statement switch**, not a switch expression.
+!!! note
+    This last example does not return a value, so it is a **statement switch**, not a switch expression.
 
 #### 7.2.4.2 Ordering, Dominance and Exhaustiveness in Pattern Switches
 
@@ -250,8 +249,8 @@ switch (number) {
 }
 ```
 
-> [!WARNING]
-> The following example, which uses both a `default` clause and a final clause with the same type as the selector variable, does **not** compile: the compiler considers one of the two cases as always dominating the other.
+!!! warning
+    The following example, which uses both a `default` clause and a final clause with the same type as the selector variable, does **not** compile: the compiler considers one of the two cases as always dominating the other.
 
 ```java
 Number number = Short.valueOf(10);
@@ -325,8 +324,8 @@ Output:
 3
 ```
 
-> [!NOTE]
-> If in the previous example we remove the `break` on `case 3`, the message from the `default` branch will also be printed.
+!!! note
+    If in the previous example we remove the `break` on `case 3`, the message from the `default` branch will also be printed.
 
 ### 7.3.2 The Switch Expression
 
@@ -365,9 +364,9 @@ int len = switch (s) {
 };
 ```
 
-> [!NOTE]
-> `yield` is used only in switch expressions.
-> `break value;` is not allowed as a way to return a value from a switch expression.
+!!! note
+    `yield` is used only in switch expressions.
+    `break value;` is not allowed as a way to return a value from a switch expression.
 
 #### 7.3.2.2 Exhaustiveness for Switch Expressions
 
@@ -421,12 +420,12 @@ int len = switch (s) {
 };
 ```
 
-> [!NOTE]
-> For switch expressions:
-> 
-> If you do not handle `null` and the selector is `null`, a `NullPointerException` is thrown.
-> 
-> Using `case null` makes the switch explicitly null-safe.
+!!! note
+    For switch expressions:
+    
+    If you do not handle `null` and the selector is `null`, a `NullPointerException` is thrown.
+    
+    Using `case null` makes the switch explicitly null-safe.
 
-> [!WARNING]
-> Any time `case null` is used in a switch, the switch is treated as a pattern switch, and all the rules for pattern switches (including exhaustiveness and dominance) apply.
+!!! warning
+    Any time `case null` is used in a switch, the switch is treated as a pattern switch, and all the rules for pattern switches (including exhaustiveness and dominance) apply.

@@ -51,8 +51,8 @@ int year = 2024;   	  // valido
 | class | finally | long | strictfp | volatile |
 | const* | float | native | super | while |
 
-> [!NOTE]  
-> `goto` e `const` sono riservate ma non utilizzate.
+!!! note
+    `goto` e `const` sono riservate ma non utilizzate.
 
 #### 3.1.1.2 Letterali riservati
 
@@ -73,11 +73,11 @@ int MYVAR = 3;
 int CLASS = 6; // legale ma, please, non farlo!!
 ```
 
-> [!TIP]  
-> Java tratta gli identificatori letteralmente: `Count`, `count` e `COUNt` sono entità distinte e possono coesistere.  
->  
-> A causa della sensibilità a maiuscole/minuscole, si potrebbero usare varianti delle keyword che differiscono solo nel case.  
-> Anche se è legale, questo stile è fortemente sconsigliato perché riduce la leggibilità ed è considerata una pessima pratica.
+!!! tip
+    Java tratta gli identificatori letteralmente: `Count`, `count` e `COUNt` sono entità distinte e possono coesistere.
+    
+    A causa della sensibilità a maiuscole/minuscole, si potrebbero usare varianti delle keyword che differiscono solo nel case.  
+    Anche se è legale, questo stile è fortemente sconsigliato perché riduce la leggibilità ed è considerata una pessima pratica.
 
 ### 3.1.3 Inizio degli identificatori
 
@@ -91,8 +91,8 @@ int _myVarC;
 String €uro = "currency"; // legale (usato raramente in pratica)
 ```
 
-> [!NOTE]  
-> I simboli di valuta sono legali ma non raccomandati nel codice reale.
+!!! note
+    I simboli di valuta sono legali ma non raccomandati nel codice reale.
 
 ### 3.1.4 Numeri negli identificatori
 
@@ -116,8 +116,8 @@ int var2024 = 10; // valido
 int _;  // invalid since Java 9
 ```
 
-> [!WARNING]  
-> `_` è legale all’interno dei letterali numerici (vedi sezione successiva), ma non come identificatore a sé stante.
+!!! warning
+    `_` è legale all’interno dei letterali numerici (vedi sezione successiva), ma non come identificatore a sé stante.
 
 ### 3.1.6 Letterali numerici e carattere underscore
 
@@ -139,6 +139,6 @@ double pi = 3.14_159_265; // valid
 long mask = 0b1111_0000;  // valid in binary literals
 ```
 
-> [!TIP]  
-> Gli underscore migliorano la leggibilità:
-> `1_000_000` è più leggibile di `1000000`.
+!!! tip
+    Gli underscore migliorano la leggibilità:
+    `1_000_000` è più leggibile di `1000000`.

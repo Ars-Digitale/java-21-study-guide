@@ -64,9 +64,9 @@ File f3 = new File(new File("/tmp"), "data.txt");
 File f4 = new File(URI.create("file:///tmp/data.txt"));
 ```
 
-> [!NOTE]
-> - `new File(...)` n’ouvre jamais le fichier.
-> - Existence/permissions sont vérifiées seulement lorsque vous appelez des méthodes comme `exists()`, `length()`, ou lorsque vous ouvrez un stream/channel.
+!!! note
+    - `new File(...)` n’ouvre jamais le fichier.
+    - Existence/permissions sont vérifiées seulement lorsque vous appelez des méthodes comme `exists()`, `length()`, ou lorsque vous ouvrez un stream/channel.
 
 ### 33.1.2 Créer un `Path` (NIO v.2)
 
@@ -92,9 +92,9 @@ Path p3 = Paths.get("data.txt"); // style factory legacy
 Path p4 = Path.of(URI.create("file:///tmp/data.txt"));
 ```
 
-> [!NOTE]
-> - `Path.of(...)` et `Paths.get(...)` sont équivalents pour le système de fichiers par défaut.
-> - Préférez `Path.of` dans le code moderne.
+!!! note
+    - `Path.of(...)` et `Paths.get(...)` sont équivalents pour le système de fichiers par défaut.
+    - Préférez `Path.of` dans le code moderne.
 
 ### 33.1.3 Absolu vs relatif : ce que signifie “relatif”
 
@@ -116,8 +116,8 @@ System.out.println(rf.getAbsolutePath());
 System.out.println(rp.toAbsolutePath());
 ```
 
-> [!NOTE]
-> Les chemins relatifs sont une source courante de bugs “works on my machine” parce que `user.dir` dépend de la manière/où la JVM a été lancée.
+!!! note
+    Les chemins relatifs sont une source courante de bugs “works on my machine” parce que `user.dir` dépend de la manière/où la JVM a été lancée.
 
 ### 33.1.4 Joindre / construire des paths
 
@@ -147,8 +147,8 @@ Combine des paths d’une manière filesystem-aware.
 - Les paths relatifs sont ajoutés
 - Un argument absolu remplace le path de base
 
-> [!NOTE]
-> `Path.resolve(...)` a une règle : si l’argument est absolu, il retourne l’argument et ignore la base (vous ne pouvez pas combiner deux paths absolus en utilisant `resolve`).
+!!! note
+    `Path.resolve(...)` a une règle : si l’argument est absolu, il retourne l’argument et ignore la base (vous ne pouvez pas combiner deux paths absolus en utilisant `resolve`).
 
 #### 33.1.4.2 `relativize()`
 
@@ -171,8 +171,8 @@ Autrement dit :
 | Les composants de root doivent correspondre | même root (sur Windows, même drive) |
 | Le résultat n’est jamais absolu | toujours relatif |
 
-> [!NOTE]
-> Si un path est absolu et l’autre relatif, `IllegalArgumentException` est lancée.
+!!! note
+    Si un path est absolu et l’autre relatif, `IllegalArgumentException` est lancée.
 
 **Exemple relatif simple** :
 
@@ -240,8 +240,8 @@ abs.relativize(rel); // lance une exception
 Exception in thread "main" java.lang.IllegalArgumentException
 ```
 
-> [!NOTE]
-> `relativize` NE tente PAS de convertir automatiquement des paths en absolus.
+!!! note
+    `relativize` NE tente PAS de convertir automatiquement des paths en absolus.
 
 **Exemple** : roots différentes (piège spécifique Windows)
 
@@ -254,8 +254,8 @@ Path p2 = Path.of("D:\\data\\b");
 p1.relativize(p2); // IllegalArgumentException
 ```
 
-> [!NOTE]
-> Sur les systèmes Unix-like, la root est toujours `/`, donc ce problème ne se produit pas.
+!!! note
+    Sur les systèmes Unix-like, la root est toujours `/`, donc ce problème ne se produit pas.
 
 ### 33.1.5 Convertir entre `File` et `Path`
 
@@ -276,8 +276,8 @@ Path p = f.toPath();
 File back = p.toFile();
 ```
 
-> [!NOTE]
-> La conversion ne valide pas l’existence. Elle convertit seulement des représentations.
+!!! note
+    La conversion ne valide pas l’existence. Elle convertit seulement des représentations.
 
 ### 33.1.6 Conversion URI (quand nécessaire)
 
@@ -305,8 +305,8 @@ Path pFromUri = Path.of(u2);
 File fFromUri = new File(u1);
 ```
 
-> [!NOTE]
-> `new File(URI)` requiert un URI `file:` et lance `IllegalArgumentException` si l’URI n’est pas hiérarchique ou n’est pas un file URI.
+!!! note
+    `new File(URI)` requiert un URI `file:` et lance `IllegalArgumentException` si l’URI n’est pas hiérarchique ou n’est pas un file URI.
 
 ### 33.1.7 Canonique vs absolu vs normalisé (différences fondamentales)
 
@@ -318,10 +318,10 @@ Ces termes sont souvent mélangés. Ils ne sont pas identiques.
 | Normalisé      | (pas de normalize pur, utiliser canonical)\* | `normalize()` | `normalize()`: Non            |
 | Canonique / Réel | `getCanonicalFile()`                 | `toRealPath()`    | Oui                           |
 
-> [!NOTE]
-> `File.getCanonicalFile()` et `Path.toRealPath()` peuvent résoudre des symlinks et exigent que le path existe, donc ils peuvent lancer `IOException`.
->
-> File ne fournit pas de méthode pour une normalisation purement syntaxique : historiquement beaucoup de développeurs utilisaient getCanonicalFile(), mais ceci accède au système de fichiers et peut échouer.
+!!! note
+    `File.getCanonicalFile()` et `Path.toRealPath()` peuvent résoudre des symlinks et exigent que le path existe, donc ils peuvent lancer `IOException`.
+    
+    File ne fournit pas de méthode pour une normalisation purement syntaxique : historiquement beaucoup de développeurs utilisaient getCanonicalFile(), mais ceci accède au système de fichiers et peut échouer.
 
 ```java
 import java.io.File;
@@ -355,8 +355,8 @@ Supprime des éléments de nom **redondants** comme `.` et `..`.
 - Purement syntaxique
 - Ne vérifie pas si le path existe
 
-> [!NOTE]
-> `normalize()` est purement syntaxique, ne vérifie pas l’existence, et peut produire des paths invalides s’il est mal utilisé.
+!!! note
+    `normalize()` est purement syntaxique, ne vérifie pas l’existence, et peut produire des paths invalides s’il est mal utilisé.
 
 ### 33.1.8 Tableau de comparaison rapide (création + conversion)
 
@@ -389,8 +389,8 @@ Les deux APIs utilisent des objets qui représentent un path, mais les opératio
 | Opérations sur le système de fichiers | `File` | `Files` |
 | Reporting riche des erreurs | Faible (booleans) | Fort (exceptions) |
 
-> [!NOTE]
-> Les méthodes legacy retournent souvent `boolean` (échec silencieux), tandis que NIO lance `IOException` avec cause.
+!!! note
+    Les méthodes legacy retournent souvent `boolean` (échec silencieux), tandis que NIO lance `IOException` avec cause.
 
 ### 33.2.2 Créer des fichiers et des répertoires
 
@@ -428,8 +428,8 @@ Path p = Path.of("created-nio.txt");
 Files.createFile(p);
 ```
 
-> [!NOTE]
-> `Files.createFile` lance `FileAlreadyExistsException` si l’entrée existe.
+!!! note
+    `Files.createFile` lance `FileAlreadyExistsException` si l’entrée existe.
 
 #### 33.2.2.2 Créer des répertoires
 
@@ -451,8 +451,8 @@ Files.createDirectory(d); // le parent doit exister
 Files.createDirectories(d); // crée les parents, ok si déjà existe
 ```
 
-> [!NOTE]
-> Legacy `mkdir()/mkdirs()` retournent `false` en cas d’échec sans dire pourquoi. NIO lance `IOException`.
+!!! note
+    Legacy `mkdir()/mkdirs()` retournent `false` en cas d’échec sans dire pourquoi. NIO lance `IOException`.
 
 ### 33.2.3 Copier des fichiers et des répertoires
 
@@ -479,8 +479,8 @@ Files.copy(src, dst); // échoue si dst existe
 Files.copy(src, dst, StandardCopyOption.REPLACE_EXISTING);
 ```
 
-> [!NOTE]
-> `Files.copy` lance `FileAlreadyExistsException` si la cible existe et que vous n’avez pas utilisé `REPLACE_EXISTING`.
+!!! note
+    `Files.copy` lance `FileAlreadyExistsException` si la cible existe et que vous n’avez pas utilisé `REPLACE_EXISTING`.
 
 #### 33.2.3.2 Copie manuelle (Legacy, basée sur stream)
 
@@ -500,8 +500,8 @@ FileOutputStream out = new FileOutputStream("dst.bin")) {
 }
 ```
 
-> [!NOTE]
-> Rappelez-vous `read(byte[])` retourne le nombre de bytes lus ; vous devez écrire seulement ce compte, pas le buffer entier.
+!!! note
+    Rappelez-vous `read(byte[])` retourne le nombre de bytes lus ; vous devez écrire seulement ce compte, pas le buffer entier.
 
 ### 33.2.4 Déplacer / renommer et remplacer
 
@@ -525,9 +525,9 @@ boolean ok = from.renameTo(to); // peut échouer silencieusement
 System.out.println(ok);
 ```
 
-> [!NOTE]
-> - `renameTo` est notoirement platform-dependent et retourne seulement `boolean`.
-> - Il peut échouer parce que la cible existe, le fichier est ouvert, permissions, ou déplacement cross-filesystem.
+!!! note
+    - `renameTo` est notoirement platform-dependent et retourne seulement `boolean`.
+    - Il peut échouer parce que la cible existe, le fichier est ouvert, permissions, ou déplacement cross-filesystem.
 
 #### 33.2.4.2 NIO Move (préféré)
 
@@ -544,8 +544,8 @@ Files.move(from, to); // échoue si la cible existe
 Files.move(from, to, StandardCopyOption.REPLACE_EXISTING);
 ```
 
-> [!NOTE]
-> `Files.move` lance `FileAlreadyExistsException` quand la cible existe et que `REPLACE_EXISTING` n’est pas spécifié.
+!!! note
+    `Files.move` lance `FileAlreadyExistsException` quand la cible existe et que `REPLACE_EXISTING` n’est pas spécifié.
 
 ### 33.2.5 Comparer des paths et des fichiers
 
@@ -581,8 +581,8 @@ try {
 }
 ```
 
-> [!NOTE]
-> `Files.isSameFile` peut accéder au système de fichiers et peut lancer `IOException` (problèmes de permissions, fichiers manquants, etc.).
+!!! note
+    `Files.isSameFile` peut accéder au système de fichiers et peut lancer `IOException` (problèmes de permissions, fichiers manquants, etc.).
 
 ### 33.2.6 Supprimer des fichiers et des répertoires
 
@@ -604,8 +604,8 @@ boolean ok = f.delete(); // false si non supprimé
 System.out.println(ok);
 ```
 
-> [!NOTE]
-> Legacy `delete()` échoue (retourne false) pour un répertoire non vide et souvent ne fournit aucune raison.
+!!! note
+    Legacy `delete()` échoue (retourne false) pour un répertoire non vide et souvent ne fournit aucune raison.
 
 #### 33.2.6.2 NIO Delete et Delete-If-Exists
 
@@ -632,8 +632,8 @@ boolean deleted = Files.deleteIfExists(p);
 System.out.println(deleted);
 ```
 
-> [!NOTE]
-> Certification tip: `Files.delete` lance `NoSuchFileException` si manquant, tandis que `deleteIfExists` retourne `false`.
+!!! note
+    Certification tip: `Files.delete` lance `NoSuchFileException` si manquant, tandis que `deleteIfExists` retourne `false`.
 
 ### 33.2.7 Copier / supprimer récursivement des arbres de répertoires (pattern NIO)
 
@@ -662,8 +662,8 @@ Files.walkFileTree(root, new SimpleFileVisitor<Path>() {
 });
 ```
 
-> [!NOTE]
-> Supprimer un arbre de répertoires exige de supprimer d’abord les fichiers, puis les répertoires (post-order). C’est une question de raisonnement courante.
+!!! note
+    Supprimer un arbre de répertoires exige de supprimer d’abord les fichiers, puis les répertoires (post-order). C’est une question de raisonnement courante.
 
 ### 33.2.8 Checklist de résumé
 

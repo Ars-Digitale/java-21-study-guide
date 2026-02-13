@@ -105,8 +105,8 @@ Java 21 defines multiple kinds of threads, differing in lifecycle, scheduling, a
 - **System Thread**: Threads created internally by the JVM for garbage collection, JIT compilation, and other runtime services.
 
 
-> [!NOTE]  
-> `Virtual threads` are lightweight user threads; they are **not** daemon by default.
+!!! note
+    `Virtual threads` are lightweight user threads; they are **not** daemon by default.
 
 ---
 
@@ -142,9 +142,9 @@ Runnable runnable = ...
   ThreadFactory factory = Thread.ofVirtual().factory();
 ```
 
-> [!WARNING]
-> - Thread creation alone does not start execution. 
-> - Execution begins only when the JVM scheduler is engaged.
+!!! warning
+    - Thread creation alone does not start execution.
+    - Execution begins only when the JVM scheduler is engaged.
 
 ---
 
@@ -173,13 +173,13 @@ A critical conceptual distinction exists between invoking `run()` and invoking `
 
 Therefore, code such as `new Thread(r).run();` does NOT create concurrency. The execution remains synchronous and blocks the calling thread until completion.
 
-> [!NOTE]
-> `Asynchronous execution` means the caller continues immediately while the new thread progresses independently, subject to scheduling. 
->
-> `Synchronous execution` means the caller waits for the operation to complete.
+!!! note
+    `Asynchronous execution` means the caller continues immediately while the new thread progresses independently, subject to scheduling.
+    
+    `Synchronous execution` means the caller waits for the operation to complete.
 
-> [!IMPORTANT]  
-> Concurrency starts **only** when `start()` is invoked.
+!!! important
+    Concurrency starts **only** when `start()` is invoked.
 
 ---
 
@@ -287,8 +287,8 @@ main reached END
 Task interrupted, shutting down
 ```
 
-> [!NOTE]  
-> Output order may vary slightly due to scheduling.
+!!! note
+    Output order may vary slightly due to scheduling.
 
 
 ### 30.12.5 Key Observations
@@ -298,8 +298,8 @@ Task interrupted, shutting down
 - The worker thread terminates itself in a controlled manner.
 - Proper interruption handling allows threads to release resources and maintain program correctness.
 
-> [!NOTE]
-> Swallowing `InterruptedException` without terminating or restoring the interruption status is considered bad practice and may lead to unresponsive threads.
+!!! note
+    Swallowing `InterruptedException` without terminating or restoring the interruption status is considered bad practice and may lead to unresponsive threads.
 
 ---
 

@@ -34,10 +34,10 @@ Before understanding initialization order, it is useful to recall the three main
 - **Heap** — stores all objects and instance fields.
 - **Stack** — stores method calls, local variables, and references.
 
-> [!NOTE] 
-> Static members belong to the **class** and are created **once** in the Method Area. 
-> 
-> Instance members belong to **each object** and live in the **Heap**.
+!!! note
+    Static members belong to the **class** and are created **once** in the Method Area.
+    
+    Instance members belong to **each object** and live in the **Heap**.
 
 ---
 
@@ -79,8 +79,8 @@ Then class loading proceeds in this strict order:
 - **Step 2: Explicit static initializations run**.
 - **Step 3: Static initializer blocks** run in source order.
 
-> [!NOTE] 
-> After these steps, the class is fully prepared and may now be used (instantiated or referenced).
+!!! note
+    After these steps, the class is fully prepared and may now be used (instantiated or referenced).
 
 ---
 
