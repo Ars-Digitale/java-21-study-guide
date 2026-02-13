@@ -1,7 +1,23 @@
-# Java 21 Study Guide — Index (EN / IT / FR)
+# Ars Digitale Technical Guides
 
-Choose your language:
+## Volume I — Java 21  
+Version 1.0 — February 2026
 
-- 🇬🇧 **English** → [Course index (EN)](en/index.md)
-- 🇮🇹 **Italiano** → [Indice del corso (IT)](it/index.md)
-- 🇫🇷 **Français** → [Index du cours (FR)](fr/index.md)
+---
+
+This guide is part of the **Ars Digitale Technical Guides** series —  
+a structured collection of engineering-focused references.
+
+The Java 21 volume provides a modular, concept-driven overview of the language and core APIs, designed for engineers who prefer clarity, structure, and long-term understanding.
+
+---
+
+## 🌍 Choose your language
+
+- 🇬🇧 **English** → [English Edition](en/index.md)
+- 🇮🇹 **Italiano** → [Edizione Italiana](it/index.md)
+- 🇫🇷 **Français** → [Édition Française](fr/index.md)
+
+---
+
+© 2026 Ars Digitale
