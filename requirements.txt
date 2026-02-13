@@ -1,2 +1,4 @@
 mkdocs>=1.5
 mkdocs-material>=9.5
+mkdocs-callouts>=1.9
+
