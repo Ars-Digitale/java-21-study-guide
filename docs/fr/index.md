@@ -2,12 +2,6 @@
 
 ---
 
-# 🌍 Langue
-
-[🇬🇧 English](../en/README.md) | [🇮🇹 Italiano](../it/README.md) | [🇫🇷 Français](../fr/README.md)
-
----
-
 # Index du cours (Java 21)
 
 ## Module 00 — Prerequisites & Setup

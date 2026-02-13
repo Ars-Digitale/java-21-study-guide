@@ -2,12 +2,6 @@
 
 ---
 
-# 🌍 Language
-
-[🇬🇧 English](../en/README.md) | [🇮🇹 Italiano](../it/README.md) | [🇫🇷 Français](../fr/README.md)
-
----
-
 # Course Index (Java 21)
 
 This index provides the complete **English (EN)** curriculum for the  
