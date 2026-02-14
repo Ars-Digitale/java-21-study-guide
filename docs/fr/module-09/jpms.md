@@ -75,6 +75,10 @@ La version choisie dépend uniquement de l’ordre du classpath, et non de l’a
 
 Un `module` est une unité de code nommée et auto-descriptive.
 
+De manière synthétique, un module est un ensemble d’un ou plusieurs packages liés, accompagné d’un fichier descripteur de module qui définit explicitement ses dépendances et les fonctionnalités qu’il met à disposition.  
+
+Un module fournit ainsi à ses utilisateurs un ensemble de fonctionnalités clairement défini et contrôlé.
+
 Chaque module nommé possède un nom unique qui l’identifie auprès du compilateur et du système de modules.
 
 

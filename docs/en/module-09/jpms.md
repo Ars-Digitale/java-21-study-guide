@@ -75,6 +75,10 @@ Which one is chosen depends on classpath order, not correctness.
 
 A `module` is a named, self-describing unit of code.
 
+In summary, a module is a collection of one or more related packages, together with a module descriptor file that explicitly defines its dependencies and the functionality it makes available.  
+
+A module therefore provides its consumers with a clearly defined and controlled set of capabilities.
+
 Every named module has a unique name that identifies it to the compiler and module system.
 
 

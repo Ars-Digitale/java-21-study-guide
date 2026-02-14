@@ -75,6 +75,10 @@ Quale viene scelta dipende solamente dall’ordine del classpath, non dalla appr
 
 Un `modulo` è un’unità di codice nominata e auto-descrittiva.
 
+In sintesi, un modulo è una collezione di uno o più package correlati, insieme a un file descrittore del modulo che ne definisce esplicitamente le sue dipendenze e le funzionalità che rende disponibili.  
+
+Un modulo offre quindi a chi lo utilizza un complesso ben definito e controllato di funzionalità.
+
 Ogni modulo nominato ha un nome unico che lo identifica al compilatore e al sistema dei moduli.
 
 
