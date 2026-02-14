@@ -7,7 +7,7 @@
   - [38.2 Module-Related Command-Line Options](#382-module-related-command-line-options)
     - [38.2.1 Options Available in Both java and javac](#3821-options-available-in-both-java-and-javac)
     - [38.2.2 Options Applicable Only to javac](#3822-options-applicable-only-to-javac)
-    - [38.2.3 Options Applicable Only to java](#3823-options-available-in-both-java-and-java)
+    - [38.2.3 Options Applicable Only to java](#3823--options-applicable-only-to-java)
     - [38.2.4 Important Distinctions](#3824-important-distinctions)
   - [38.3 Compiling a Single Module](#383-compiling-a-single-module)
   - [38.4 Compiling Multiple Interdependent Modules](#384-compiling-multiple-interdependent-modules)
