@@ -4,19 +4,24 @@
 
 - [38. Compilare, Impacchettare ed Eseguire Moduli](#38-compilare-impacchettare-ed-eseguire-moduli)
   - [38.1 Il Module Path vs il Classpath](#381-il-module-path-vs-il-classpath)
-  - [38.2 Compilare un Singolo Modulo](#382-compilare-un-singolo-modulo)
-  - [38.3 Compilare Moduli Multipli Interdipendenti](#383-compilare-moduli-multipli-interdipendenti)
-  - [38.4 Impacchettare un Modulo in un JAR Modulare](#384-impacchettare-un-modulo-in-un-jar-modulare)
-  - [38.5 Eseguire un’Applicazione Modulare](#385-eseguire-unapplicazione-modulare)
-  - [38.6 Spiegazione delle Direttive del Modulo](#386-spiegazione-delle-direttive-del-modulo)
-    - [38.6.1 requires](#3861-requires)
-    - [38.6.2 requires transitive](#3862-requires-transitive)
-    - [38.6.3 exports](#3863-exports)
-    - [38.6.4 exports-to-qualified-exports](#3864-exports--to-export-qualificati)
-    - [38.6.5 opens](#3865-opens)
-    - [38.6.6 opens-to-qualified-opens](#3866-opens--to-opens-qualificati)
-    - [38.6.7 Tabella delle Direttive Principali](#3867-tabella-delle-direttive-principali)
-    - [38.6.8 Exports vs Opens — Accesso a Compile-Time vs Runtime](#3868-exports-vs-opens--accesso-a-compile-time-vs-runtime)
+  - [38.2 Opzioni della Riga di Comando Relative ai Moduli](#382-opzioni-della-riga-di-comando-relative-ai-moduli)
+    - [38.2.1 Opzioni Disponibili sia in java che in javac](#3821-opzioni-disponibili-sia-in-java-che-in-javac)
+    - [38.2.2 Opzioni Applicabili Solo a javac](#3822-opzioni-applicabili-solo-a-javac)
+    - [38.2.3 Opzioni Applicabili Solo a java](#3823-opzioni-applicabili-solo-a-java)
+    - [38.2.4 Distinzioni Importanti](#3824-distinzioni-importanti)
+  - [38.3 Compilare un Singolo Modulo](#383-compilare-un-singolo-modulo)
+  - [38.4 Compilare Moduli Multipli Interdipendenti](#384-compilare-moduli-multipli-interdipendenti)
+  - [38.5 Impacchettare un Modulo in un JAR Modulare](#385-impacchettare-un-modulo-in-un-jar-modulare)
+  - [38.6 Eseguire un’Applicazione Modulare](#386-eseguire-unapplicazione-modulare)
+  - [38.7 Spiegazione delle Direttive del Modulo](#387-spiegazione-delle-direttive-del-modulo)
+    - [38.7.1 requires](#3871-requires)
+    - [38.7.2 requires transitive](#3872-requires-transitive)
+    - [38.7.3 exports](#3873-exports)
+    - [38.7.4 exports-to-qualified-exports](#3874-exports--to-export-qualificati)
+    - [38.7.5 opens](#3875-opens)
+    - [38.7.6 opens-to-qualified-opens](#3876-opens--to-opens-qualificati)
+    - [38.7.7 Tabella delle Direttive Principali](#3877-tabella-delle-direttive-principali)
+    - [38.7.8 Exports vs Opens — Accesso a Compile-Time vs Runtime](#3878-exports-vs-opens--accesso-a-compile-time-vs-runtime)
 
 ---
 
@@ -45,7 +50,74 @@ Esiste accanto al tradizionale **classpath**, ma i due si comportano in modo mol
 
 ---
 
-## 38.2 Compilare un Singolo Modulo
+## 38.2 Opzioni della Riga di Comando Relative ai Moduli
+
+Quando si lavora con il Java Module System, sia `java` che `javac` forniscono opzioni specifiche per compilare ed eseguire applicazioni modulari. 
+
+Alcune opzioni sono condivise, mentre altre sono specifiche di uno strumento.
+
+
+### 38.2.1 Opzioni Disponibili sia in `java` che in `javac`
+
+Queste opzioni possono essere utilizzate sia durante la compilazione sia durante l’esecuzione:
+
+- **`--module`** o **`-m`**  
+  Utilizzata per compilare o eseguire solo il modulo specificato.
+
+- **`--module-path`** o **`-p`**  
+  Specifica i percorsi nei quali `java` o `javac` cercheranno le definizioni dei moduli.
+
+
+### 38.2.2 Opzioni Applicabili Solo a `javac`
+
+Queste opzioni si applicano solo in fase di compilazione:
+
+- **`--module-source-path`**  
+  (nessuna forma abbreviata)  
+  Utilizzata da `javac` per individuare le definizioni dei moduli sorgente.
+
+- **`-d`**  
+  Specifica la directory di destinazione nella quale verranno generati i file `.class` dopo la compilazione.
+
+
+
+### 38.2.3 Opzioni Applicabili Solo a `java`
+
+Queste opzioni si applicano solo in fase di esecuzione:
+
+- **`--list-modules`**  
+  (nessuna forma abbreviata)  
+  Elenca tutti i moduli osservabili e quindi termina.
+
+- **`--show-module-resolution`**  
+  (nessuna forma abbreviata)  
+  Mostra i dettagli della risoluzione dei moduli durante l’avvio dell’applicazione.
+
+- **`--describe-module`** o **`-d`**  
+  Descrive un modulo specificato e quindi termina.
+
+
+
+### 38.2.4 Distinzioni Importanti
+
+L’opzione `-d` ha significati diversi a seconda dello strumento:
+
+- In **`javac`**, `-d` definisce la directory di destinazione per i file di classe compilati.
+- In **`java`**, `-d` è una forma abbreviata di `--describe-module`.
+
+Inoltre, `-d` non deve essere confusa con **`-D`** (D maiuscola).
+
+- **`-D`** viene utilizzata durante l’esecuzione di un programma Java per definire proprietà di sistema come coppie nome-valore nella riga di comando.
+
+```bash
+java -Dconfig.file=app.properties com.example.Main
+```
+
+In questo esempio, `-Dconfig.file=app.properties` imposta una proprietà di sistema che può essere letta a runtime tramite `System.getProperty("config.file")`.
+
+---
+
+## 38.3 Compilare un Singolo Modulo
 
 Per compilare un modulo, devi specificare il percorso dei sorgenti del modulo e la directory di destinazione.
 
@@ -68,7 +140,7 @@ javac --module-source-path src \
 
 ---
 
-## 38.3 Compilare Moduli Multipli Interdipendenti
+## 38.4 Compilare Moduli Multipli Interdipendenti
 
 Quando i moduli dipendono l’uno dall’altro, le loro dipendenze devono essere risolvibili in fase di compilazione.
 
@@ -87,7 +159,7 @@ Qui:
 
 ---
 
-## 38.4 Impacchettare un Modulo in un JAR Modulare
+## 38.5 Impacchettare un Modulo in un JAR Modulare
 
 Dopo la compilazione, i moduli sono tipicamente impacchettati come file JAR.
 
@@ -108,7 +180,7 @@ jar --create \
 
 ---
 
-## 38.5 Eseguire un’Applicazione Modulare
+## 38.6 Eseguire un’Applicazione Modulare
 
 Per eseguire un’applicazione modulare, si utilizza il `module path` e si specifica il `nome del modulo`.
 
@@ -128,13 +200,13 @@ java -p mods -m com.example.hello/com.example.hello.Main
 
 ---
 
-## 38.6 Spiegazione delle Direttive del Modulo
+## 38.7 Spiegazione delle Direttive del Modulo
 
 Il file `module-info.java` contiene direttive che descrivono dipendenze, visibilità e servizi.
 
 Ogni direttiva ha un significato preciso.
 
-### 38.6.1 `requires`
+### 38.7.1 `requires`
 
 La direttiva `requires` dichiara una dipendenza da un altro modulo.
 
@@ -150,7 +222,7 @@ Effetti di requires:
 - La dipendenza deve essere presente a compile-time e a runtime
 - I package esportati del modulo richiesto diventano accessibili
 
-### 38.6.2 `requires transitive`
+### 38.7.2 `requires transitive`
 
 `requires transitive` espone una dipendenza ai moduli a valle.
 
@@ -172,7 +244,7 @@ Significato:
     
     Leggibile ≠ esportato: un requisito transitivo non esporta automaticamente i tuoi package.
 
-### 38.6.3 `exports`
+### 38.7.3 `exports`
 
 `exports` rende un package accessibile ad altri moduli.
 
@@ -186,7 +258,7 @@ module com.example.lib {
 
 I package non esportati rimangono fortemente incapsulati.
 
-### 38.6.4 `exports ... to` (Export Qualificati)
+### 38.7.4 `exports ... to` (Export Qualificati)
 
 Un export qualificato limita l’accesso a moduli specifici.
 
@@ -198,7 +270,7 @@ module com.example.lib {
 
 Solo i moduli elencati possono accedere al package esportato.
 
-### 38.6.5 `opens`
+### 38.7.5 `opens`
 
 `opens` consente un accesso riflessivo profondo a un package.
 
@@ -214,7 +286,7 @@ module com.example.app {
     opens NON rende un package accessibile a compile-time.
     Influenza solo la reflection a runtime.
 
-### 38.6.6 `opens ... to` (Opens Qualificati)
+### 38.7.6 `opens ... to` (Opens Qualificati)
 
 Puoi limitare l’accesso riflessivo a moduli specifici.
 
@@ -227,7 +299,7 @@ module com.example.app {
 !!! note
     `opens` influenza la reflection; `exports` influenza la compilazione e la visibilità dei tipi.
 
-### 38.6.7 Tabella delle Direttive Principali
+### 38.7.7 Tabella delle Direttive Principali
 
 | Direttiva | Scopo |
 | ---- | ---- |
@@ -238,7 +310,7 @@ module com.example.app {
 | `opens` | Consentire reflection a runtime |
 | `opens ... to` | Limitare l’accesso riflessivo |
 
-### 38.6.8 Exports vs Opens — Accesso a Compile-Time vs Runtime
+### 38.7.8 Exports vs Opens — Accesso a Compile-Time vs Runtime
 
 | Visibilità | Compile-time? | Reflection a runtime? |
 | ---- | ---- | ---- |

@@ -4,19 +4,24 @@
 
 - [38. Compiling, Packaging, and Running Modules](#38-compiling-packaging-and-running-modules)
   - [38.1 The Module Path vs the Classpath](#381-the-module-path-vs-the-classpath)
-  - [38.2 Compiling a Single Module](#382-compiling-a-single-module)
-  - [38.3 Compiling Multiple Interdependent Modules](#383-compiling-multiple-interdependent-modules)
-  - [38.4 Packaging a Module into a Modular JAR](#384-packaging-a-module-into-a-modular-jar)
-  - [38.5 Running a Modular Application](#385-running-a-modular-application)
-  - [38.6 Module Directives Explained](#386-module-directives-explained)
-    - [38.6.1 requires](#3861-requires)
-    - [38.6.2 requires transitive](#3862-requires-transitive)
-    - [38.6.3 exports](#3863-exports)
-    - [38.6.4 exports-to-qualified-exports](#3864-exports--to-qualified-exports)
-    - [38.6.5 opens](#3865-opens)
-    - [38.6.6 opens-to-qualified-opens](#3866-opens--to-qualified-opens)
-    - [38.6.7 Table of Core Directives](#3867-table-of-core-directives)
-	- [38.6.8 Exports vs Opens — Compile-Time vs Runtime Access](#3868-exports-vs-opens--compile-time-vs-runtime-access)
+  - [38.2 Module-Related Command-Line Options](#382-module-related-command-line-options)
+    - [38.2.1 Options Available in Both java and javac](#3821-options-available-in-both-java-and-javac)
+    - [38.2.2 Options Applicable Only to javac](#3822-options-applicable-only-to-javac)
+    - [38.2.3 Options Applicable Only to java](#3823-options-available-in-both-java-and-java)
+    - [38.2.4 Important Distinctions](#3824-important-distinctions)
+  - [38.3 Compiling a Single Module](#383-compiling-a-single-module)
+  - [38.4 Compiling Multiple Interdependent Modules](#384-compiling-multiple-interdependent-modules)
+  - [38.5 Packaging a Module into a Modular JAR](#385-packaging-a-module-into-a-modular-jar)
+  - [38.6 Running a Modular Application](#386-running-a-modular-application)
+  - [38.7 Module Directives Explained](#386-module-directives-explained)
+    - [38.7.1 requires](#3871-requires)
+    - [38.7.2 requires transitive](#3872-requires-transitive)
+    - [38.7.3 exports](#3873-exports)
+    - [38.7.4 exports-to-qualified-exports](#3874-exports--to-qualified-exports)
+    - [38.7.5 opens](#3875-opens)
+    - [38.7.6 opens-to-qualified-opens](#3876-opens--to-qualified-opens)
+    - [38.7.7 Table of Core Directives](#3877-table-of-core-directives)
+	- [38.7.8 Exports vs Opens — Compile-Time vs Runtime Access](#3878-exports-vs-opens--compile-time-vs-runtime-access)
 
 
 ---
@@ -42,12 +47,79 @@ It exists alongside the traditional **classpath**, but the two behave very diffe
 
 !!! note
     - A JAR placed on the `module path` becomes a `named (or automatic) module`.
-    - A JAR placed on the classpath is treated as part of the `unnamed module`.
+    - A JAR placed on the `classpath` is treated as part of the `unnamed module`.
     - Split packages are allowed on the classpath but forbidden for named modules on the module path.
 
 ---
 
-## 38.2 Compiling a Single Module
+## 38.2 Module-Related Command-Line Options
+
+When working with the Java Module System, both `java` and `javac` provide specific options for compiling and running modular applications. 
+
+Some options are shared, while others are specific to one tool.
+
+
+### 38.2.1 Options Available in Both `java` and `javac`
+
+These options can be used during compilation as well as execution:
+
+- **`--module`** or **`-m`**  
+  Used to compile or run only the specified module.
+
+- **`--module-path`** or **`-p`**  
+  Specifies the paths where `java` or `javac` will look for module definitions.
+
+
+### 38.2.2 Options Applicable Only to `javac`
+
+These options apply only at compile time:
+
+- **`--module-source-path`**  
+  (no shortcut)  
+  Used by `javac` to locate source module definitions.
+
+- **`-d`**  
+  Specifies the output directory where the `.class` files will be generated after compilation.
+
+
+
+### 38.2.3 Options Applicable Only to `java`
+
+These options apply only at runtime:
+
+- **`--list-modules`**  
+  (no shortcut)  
+  Lists all observable modules and then exits.
+
+- **`--show-module-resolution`**  
+  (no shortcut)  
+  Displays module resolution details during application startup.
+
+- **`--describe-module`** or **`-d`**  
+  Describes a specified module and then exits.
+
+
+
+### 38.2.4 Important Distinctions
+
+The option `-d` has different meanings depending on the tool:
+
+- In **`javac`**, `-d` defines the output directory for compiled class files.
+- In **`java`**, `-d` is a shortcut for `--describe-module`.
+
+Additionally, `-d` must not be confused with **`-D`** (uppercase D).
+
+- **`-D`** is used when running a Java program to define system properties as name-value pairs on the command line.
+
+```bash
+java -Dconfig.file=app.properties com.example.Main
+```
+
+In this example, `-Dconfig.file=app.properties` sets a system property that can be accessed at runtime using `System.getProperty("config.file")`.
+
+---
+
+## 38.3 Compiling a Single Module
 
 To compile a module, you must specify the module source path and the destination directory.
 
@@ -70,7 +142,7 @@ javac --module-source-path src \
 
 ---
 
-## 38.3 Compiling Multiple Interdependent Modules
+## 38.4 Compiling Multiple Interdependent Modules
 
 When modules depend on each other, their dependencies must be resolvable at compile time.
 
@@ -90,7 +162,7 @@ Here:
 
 ---
 
-## 38.4 Packaging a Module into a Modular JAR
+## 38.5 Packaging a Module into a Modular JAR
 
 After compilation, modules are typically packaged as JAR files.
 
@@ -112,7 +184,7 @@ jar --create \
 
 ---
 
-## 38.5 Running a Modular Application
+## 38.6 Running a Modular Application
 
 To run a modular application, you use the `module path` and specify the `module name`.
 
@@ -132,13 +204,13 @@ java -p mods -m com.example.hello/com.example.hello.Main
 
 ---
 
-## 38.6 Module Directives Explained
+## 38.7 Module Directives Explained
 
 The `module-info.java` file contains directives that describe dependencies, visibility, and services.
 
 Each directive has a precise meaning.
 
-### 38.6.1 `requires`
+### 38.7.1 `requires`
 
 The `requires` directive declares a dependency on another module.
 
@@ -154,7 +226,7 @@ Effects of requires:
 - Dependency must be present at compile and runtime
 - Exported packages of the required module become accessible
 
-### 38.6.2 `requires transitive`
+### 38.7.2 `requires transitive`
 
 `requires transitive` exposes a dependency to downstream modules.
 
@@ -177,7 +249,7 @@ Meaning:
     Readable ≠ exported: a transitive requirement does not export your packages automatically.
 
 
-### 38.6.3 `exports`
+### 38.7.3 `exports`
 
 `exports` makes a package accessible to other modules.
 
@@ -191,7 +263,7 @@ module com.example.lib {
 
 Non-exported packages remain strongly encapsulated.
 
-### 38.6.4 `exports ... to` (Qualified Exports)
+### 38.7.4 `exports ... to` (Qualified Exports)
 
 A qualified export restricts access to specific modules.
 
@@ -203,7 +275,7 @@ module com.example.lib {
 
 Only the listed modules can access the exported package.
 
-### 38.6.5 `opens`
+### 38.7.5 `opens`
 
 `opens` allows deep reflective access to a package.
 
@@ -219,7 +291,7 @@ module com.example.app {
     opens does NOT make a package accessible at compile time.
     It only affects runtime reflection.
 
-### 38.6.6 `opens ... to` (Qualified Opens)
+### 38.7.6 `opens ... to` (Qualified Opens)
 
 You can restrict reflective access to specific modules.
 
@@ -233,7 +305,7 @@ module com.example.app {
     `opens` affects reflection; `exports` affects compilation and type visibility.
 
 
-### 38.6.7 Table of Core Directives
+### 38.7.7 Table of Core Directives
 
 | Directive | Purpose |
 | ---- | ---- |
@@ -245,7 +317,7 @@ module com.example.app {
 | `opens ... to` | Restrict reflective access |
 
 
-### 38.6.8 Exports vs Opens — Compile-Time vs Runtime Access
+### 38.7.8 Exports vs Opens — Compile-Time vs Runtime Access
 
 | Visibility | Compile-time? | Runtime reflection? |
 | ---- | ---- | ---- |
