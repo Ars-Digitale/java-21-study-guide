@@ -195,6 +195,19 @@ if (console == null) {
 !!! note
     `System.console()` può restituire `null` quando nessuna console è disponibile
     (ad es. IDE, input rediretto).
+	
+	
+
+La presenza di una console dipende dalla piattaforma sottostante e da come viene avviata la JVM.
+
+Se la JVM viene avviata da una riga di comando interattiva e i flussi di input/output standard non sono reindirizzati, una console è tipicamente disponibile.  
+In questo caso, la console è solitamente collegata alla tastiera e al display da cui è stato lanciato il programma.
+
+Se la JVM viene avviata in un contesto non interattivo — ad esempio da un IDE, un pianificatore di processi in background, un gestore di servizi, o con flussi standard reindirizzati — di solito una console non sarà disponibile.
+
+Quando una console esiste, è rappresentata da un’istanza unica della classe Console, che può essere ottenuta invocando il metodo `System.console()`. 
+Se non è disponibile alcun dispositivo console, questo metodo restituirà `null`.
+
 
 ### 36.6.1 Leggere Input da Console
 
