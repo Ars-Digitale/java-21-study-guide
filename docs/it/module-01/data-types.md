@@ -20,6 +20,7 @@
     - [4.7.1 Casting dei primitivi](#471-casting-dei-primitivi)
       - [4.7.1.1 Widening implicit casting](#4711-widening-implicit-casting)
       - [4.7.1.2 Narrowing explicit casting](#4712-narrowing-explicit-casting)
+      - [4.7.1.3 Narrowing Implicito a Compile-Time](#4712-narrowing-implicito-a-compile-time)
     - [4.7.2 Perdita di dati, overflow e underflow](#472-perdita-di-dati-overflow-e-underflow)
     - [4.7.3 Casting di valori vs. variabili](#473-casting-di-valori-vs-variabili)
     - [4.7.4 Casting di reference (oggetti)](#474-casting-di-reference-oggetti)
@@ -242,19 +243,57 @@ System.out.println(d); // 100.0
 
 ✅ **Sicuro** – nessun overflow (anche se bisogna comunque essere consapevoli della precisione dei floating-point).
 
-#### 4.7.1.2 Narrowing explicit casting
+### 4.7.1.2 Narrowing Explicit Casting
 
 Conversione manuale da un tipo “più grande” a uno “più piccolo”.  
-Richiede un’**espressione di cast** perché può causare perdita di dati.
+Richiede una **cast expression** perché può causare perdita di dati.
 
 ```java
 double d = 9.78;
 int i = (int) d;  // explicit cast: double → int
-System.out.println(i); // 9 (la parte frazionaria viene scartata)
+System.out.println(i); // 9 (fraction discarded)
 ```
 
 !!! warning
-    ⚠ Usalo solo quando sei certo che il valore rientri nel tipo di destinazione.
+    ⚠ Usare solo quando si è sicuri che il valore rientri nel tipo di destinazione.
+
+
+### 4.7.1.3 Narrowing Implicito a Compile-Time
+
+In alcuni casi specifici, il compilatore permette una conversione di narrowing **senza un cast esplicito**.
+
+Se una variabile è dichiarata `final` ed è inizializzata con una constant expression il cui valore rientra nel tipo di destinazione, il compilatore può eseguire la conversione in modo sicuro a compile time.
+
+```java
+final int k = 11;
+byte b = k;  // allowed: value 11 fits into byte range
+
+final int x = 200;
+byte c = x;  // does NOT compile: 200 is outside byte range
+```
+
+Questo funziona perché il compilatore conosce il valore esatto di una variabile `final` e può verificare che sia all'interno dell'intervallo del tipo più piccolo.
+
+Questo tipo di narrowing è consentito tra:
+- `byte`
+- `short`
+- `char`
+- `int`
+
+Tuttavia, non si applica a:
+- `long`
+- `float`
+- `double`
+
+Per esempio:
+
+```java
+final float f = 10.0f;
+int n = f;   // does not compile
+```
+
+Anche se il valore sembra compatibile, i tipi floating-point non sono idonei per questa forma di narrowing implicito.
+
 
 ### 4.7.2 Perdita di dati, overflow e underflow
 

@@ -20,6 +20,7 @@
     - [4.7.1 Cast primitif](#471-cast-primitif)
       - [4.7.1.1 Cast large implicite](#4711-cast-large-implicite)
       - [4.7.1.2 Cast étroit explicite](#4712-cast-étroit-explicite)
+      - [4.7.1.3 Cast étroit Implicite à la Compilation](#4712-cast-étroit-implicite-à-la-compilation)
     - [4.7.2 Perte de données, dépassement et sous-dépassement](#472-perte-de-données-dépassement-et-sous-dépassement)
     - [4.7.3 Cast de valeurs versus variables](#473-cast-de-valeurs-versus-variables)
     - [4.7.4 Cast de référence d’objets](#474-cast-de-référence-dobjets)
@@ -240,21 +241,58 @@ System.out.println(d); // 100.0
 
 ✅ **Sûr** – pas de dépassement (même s’il faut garder en tête la précision des flottants).
 
-#### 4.7.1.2 Cast étroit explicite
 
-Conversion manuelle d’un type “plus grand” vers un type “plus petit”.  
-Nécessite une **expression de cast** car cela peut entraîner une perte de données.
+### 4.7.1.2 Cast étroit explicite
+
+Conversion manuelle d’un type « plus grand » vers un type « plus petit ».  
+Nécessite une **cast expression** car cela peut provoquer une perte de données.
 
 ```java
 double d = 9.78;
-int i = (int) d;  // cast explicite : double → int
-System.out.println(i); // 9 (fraction supprimée)
+int i = (int) d;  // explicit cast: double → int
+System.out.println(i); // 9 (fraction discarded)
 ```
 
 !!! warning
-    ⚠ À utiliser uniquement lorsque vous êtes sûr que la valeur tient dans le type cible.
+    ⚠ Utiliser uniquement lorsque vous êtes certain que la valeur tient dans le type cible.
 
----
+
+### 4.7.1.3 Cast étroit Implicite à la Compilation
+
+Dans certains cas spécifiques, le compilateur autorise une conversion de narrowing **sans cast explicite**.
+
+Si une variable est déclarée `final` et initialisée avec une constant expression dont la valeur tient dans le type cible, le compilateur peut effectuer la conversion en toute sécurité au moment de la compilation.
+
+```java
+final int k = 10;
+byte b = k;  // allowed: value 10 fits into byte range
+
+final int x = 200;
+byte c = x;  // does NOT compile: 200 is outside byte range
+```
+
+Cela fonctionne parce que le compilateur connaît la valeur exacte d’une variable `final` et peut vérifier qu’elle se situe dans l’intervalle du type plus petit.
+
+Ce type de narrowing est autorisé entre :
+- `byte`
+- `short`
+- `char`
+- `int`
+
+Cependant, cela ne s’applique pas à :
+- `long`
+- `float`
+- `double`
+
+Par exemple :
+
+```java
+final float f = 10.0f;
+int n = f;   // does not compile
+```
+
+Même si la valeur semble compatible, les types à virgule flottante ne sont pas éligibles pour cette forme de narrowing implicite.
+
 
 ### 4.7.2 Perte de données, dépassement et sous-dépassement
 

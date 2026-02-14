@@ -20,6 +20,7 @@
     - [4.7.1 Primitive Casting](#471-primitive-casting)
       - [4.7.1.1 Widening Implicit Casting](#4711-widening-implicit-casting)
       - [4.7.1.2 Narrowing Explicit Casting](#4712-narrowing-explicit-casting)
+      - [4.7.1.3 Compile-Time Implicit Narrowing](#4712-compile-time-implicit-narrowing)
     - [4.7.2 Data Loss Overflow and Underflow](#472-data-loss-overflow-and-underflow)
     - [4.7.3 Casting Values versus Variables](#473-casting-values-versus-variables)
     - [4.7.4 Reference Casting Objects](#474-reference-casting-objects)
@@ -257,6 +258,44 @@ System.out.println(i); // 9 (fraction discarded)
 
 !!! warning
     ⚠ Use only when you are sure the value fits in the target type.
+
+
+### 4.7.1.3 Compile-Time Implicit Narrowing
+
+In some specific cases, the compiler allows a narrowing conversion **without an explicit cast**.
+
+If a variable is declared `final` and initialized with a constant expression whose value fits into the target type, the compiler can safely perform the conversion at compile time.
+
+```java
+final int k = 11;
+byte b = k;  // allowed: value 11 fits into byte range
+
+final int x = 200;
+byte c = x;  // does NOT compile: 200 is outside byte range
+```
+
+This works because the compiler knows the exact value of a `final` variable and can verify that it is within the range of the smaller type.
+
+This kind of narrowing is allowed between:
+- `byte`
+- `short`
+- `char`
+- `int`
+
+However, it does **not** apply to:
+- `long`
+- `float`
+- `double`
+
+For example:
+
+```java
+final float f = 10.0f;
+int n = f;   // does not compile
+```
+
+Even though the value seems compatible, floating-point types are not eligible for this form of implicit narrowing.
+
 
 ### 4.7.2 Data Loss, Overflow and Underflow
 
