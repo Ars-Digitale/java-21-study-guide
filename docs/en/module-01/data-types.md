@@ -20,7 +20,7 @@
     - [4.7.1 Primitive Casting](#471-primitive-casting)
       - [4.7.1.1 Widening Implicit Casting](#4711-widening-implicit-casting)
       - [4.7.1.2 Narrowing Explicit Casting](#4712-narrowing-explicit-casting)
-      - [4.7.1.3 Compile-Time Implicit Narrowing](#4712-compile-time-implicit-narrowing)
+      - [4.7.1.3 Compile-Time Implicit Narrowing](#4713-compile-time-implicit-narrowing)
     - [4.7.2 Data Loss Overflow and Underflow](#472-data-loss-overflow-and-underflow)
     - [4.7.3 Casting Values versus Variables](#473-casting-values-versus-variables)
     - [4.7.4 Reference Casting Objects](#474-reference-casting-objects)

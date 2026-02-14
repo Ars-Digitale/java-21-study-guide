@@ -20,7 +20,7 @@
     - [4.7.1 Cast primitif](#471-cast-primitif)
       - [4.7.1.1 Cast large implicite](#4711-cast-large-implicite)
       - [4.7.1.2 Cast étroit explicite](#4712-cast-étroit-explicite)
-      - [4.7.1.3 Cast étroit Implicite à la Compilation](#4712-cast-étroit-implicite-à-la-compilation)
+      - [4.7.1.3 Cast étroit Implicite à la Compilation](#4713-cast-étroit-implicite-à-la-compilation)
     - [4.7.2 Perte de données, dépassement et sous-dépassement](#472-perte-de-données-dépassement-et-sous-dépassement)
     - [4.7.3 Cast de valeurs versus variables](#473-cast-de-valeurs-versus-variables)
     - [4.7.4 Cast de référence d’objets](#474-cast-de-référence-dobjets)

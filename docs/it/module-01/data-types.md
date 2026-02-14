@@ -20,7 +20,7 @@
     - [4.7.1 Casting dei primitivi](#471-casting-dei-primitivi)
       - [4.7.1.1 Widening implicit casting](#4711-widening-implicit-casting)
       - [4.7.1.2 Narrowing explicit casting](#4712-narrowing-explicit-casting)
-      - [4.7.1.3 Narrowing Implicito a Compile-Time](#4712-narrowing-implicito-a-compile-time)
+      - [4.7.1.3 Narrowing Implicito a Compile-Time](#4713-narrowing-implicito-a-compile-time)
     - [4.7.2 Perdita di dati, overflow e underflow](#472-perdita-di-dati-overflow-e-underflow)
     - [4.7.3 Casting di valori vs. variabili](#473-casting-di-valori-vs-variabili)
     - [4.7.4 Casting di reference (oggetti)](#474-casting-di-reference-oggetti)
