@@ -22,6 +22,18 @@
     - [38.7.6 opens-to-qualified-opens](#3876-opens--to-opens-qualificati)
     - [38.7.7 Tabella delle Direttive Principali](#3877-tabella-delle-direttive-principali)
     - [38.7.8 Exports vs Opens — Accesso a Compile-Time vs Runtime](#3878-exports-vs-opens--accesso-a-compile-time-vs-runtime)
+  - [38.8 Moduli Named, Automatici e Unnamed](#388-moduli-named-automatici-e-unnamed)
+    - [38.8.1 Moduli Named](#3881-moduli-named)
+    - [38.8.2 Moduli Automatici](#3882-moduli-automatici)
+    - [38.8.3 Modulo Unnamed](#3883-modulo-unnamed)
+    - [38.8.4 Riepilogo Comparativo](#3884-riepilogo-comparativo)
+  - [38.9 Ispezionare Moduli e Dipendenze](#389-ispezionare-moduli-e-dipendenze)
+    - [38.9.1 Descrivere Moduli con java](#3891-descrivere-moduli-con-java)
+    - [38.9.2 Descrivere JAR Modulari](#3892-descrivere-jar-modulari)
+    - [38.9.3 Analizzare le Dipendenze con jdeps](#3893-analizzare-le-dipendenze-con-jdeps)
+  - [38.10 Creare Immagini Runtime Personalizzate con jlink](#3810-creare-immagini-runtime-personalizzate-con-jlink)
+  - [38.11 Creare Applicazioni Self-Contained con jpackage](#3811-creare-applicazioni-self-contained-con-jpackage)
+  - [38.12 Riepilogo Finale JPMS in Pratica](#3812-riepilogo-finale-jpms-in-pratica)
 
 ---
 
@@ -321,3 +333,137 @@ module com.example.app {
 
 !!! important
     `JPMS` aggiunge un `module path`, ma il `classpath` esiste ancora. Possono coesistere, ma i moduli nominati hanno la precedenza.
+
+
+---
+
+## 38.8 Moduli Named, Automatici e Unnamed
+
+`JPMS` supporta differenti tipi di moduli per permettere una migrazione graduale dal classpath.
+
+JPMS deve interoperare con codice legacy.
+
+Per supportare l’adozione graduale, la JVM riconosce tre differenti categorie di moduli.
+
+### 38.8.1 Moduli Named
+
+Un `modulo named` possiede un `module-info.class` e una identità stabile.
+
+- Incapsulamento forte
+- Dipendenze esplicite
+- Supporto completo JPMS
+
+### 38.8.2 Moduli Automatici
+
+Un JAR senza `module-info` posizionato nel `module path` diventa un `modulo automatico`.
+
+Il suo nome è derivato dal nome del file JAR.
+
+- Legge tutti gli altri moduli
+- Esporta tutti i package
+- Nessun incapsulamento forte
+
+!!! note
+    I moduli automatici esistono per facilitare la migrazione.
+    Non sono adatti come design a lungo termine.
+
+### 38.8.3 Modulo Unnamed
+
+Il codice nel classpath appartiene al `modulo unnamed`.
+
+- Legge tutti i moduli named
+- Tutti i package sono aperti
+- Non può essere richiesto da moduli named
+
+!!! note
+    Il `modulo unnamed` preserva il comportamento legacy del classpath.
+
+### 38.8.4 Riepilogo Comparativo
+
+| Tipo di modulo | module-info presente? | Incapsulamento | Legge |
+| ---- | ---- | ---- | ---- |
+| `Named` | Sì | Forte | Solo dichiarati |
+| `Automatic` | No | Debole | Tutti i moduli |
+| `Unnamed` | No | Nessuno | Tutti i moduli |
+
+---
+
+## 38.9 Ispezionare Moduli e Dipendenze
+
+### 38.9.1 Descrivere Moduli con java
+
+```bash
+java --describe-module java.sql
+```
+
+Questo mostra `exports`, `requires` e `services` di un modulo.
+
+### 38.9.2 Descrivere JAR Modulari
+
+```bash
+jar --describe-module --file mylib.jar
+```
+
+### 38.9.3 Analizzare le Dipendenze con `jdeps`
+
+`jdeps` analizza staticamente le dipendenze di classi e moduli.
+
+```bash
+jdeps myapp.jar
+```
+
+```bash
+jdeps --module-path mods --check my.module
+```
+
+Per rilevare l’uso di API interne del JDK:
+
+```bash
+jdeps --jdk-internals myapp.jar
+```
+
+---
+
+## 38.10 Creare Immagini Runtime Personalizzate con `jlink`
+
+`jlink` costruisce un runtime Java minimale contenente solo i moduli richiesti da una applicazione.
+
+```bash
+jlink
+--module-path $JAVA_HOME/jmods:mods
+--add-modules com.example.app
+--output runtime-image
+```
+
+Benefici:
+- runtime più piccolo
+- avvio più rapido
+- nessun modulo JDK inutilizzato
+
+---
+
+## 38.11 Creare Applicazioni Self-Contained con `jpackage`
+
+`jpackage` costruisce installer specifici per piattaforma o immagini applicative.
+
+```bash
+jpackage
+--name MyApp
+--input mods
+--main-module com.example.app/com.example.Main
+```
+
+`jpackage` può produrre:
+- .exe / .msi (Windows)
+- .pkg / .dmg (macOS)
+- .deb / .rpm (Linux)
+
+---
+
+## 38.12 Riepilogo Finale JPMS in Pratica
+
+- `JPMS` introduce `incapsulamento forte` e dipendenze affidabili
+- I `moduli` sostituiscono convenzioni fragili del classpath
+- I `servizi` abilitano architetture disaccoppiate
+- `Moduli automatici` e `modulo unnamed` supportano la migrazione
+- `jlink` e `jpackage` abilitano modelli moderni di deployment

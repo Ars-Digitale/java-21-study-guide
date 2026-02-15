@@ -10,18 +10,10 @@
     - [39.1.4 Service Consumer Module](#3914-service-consumer-module)
     - [39.1.5 Loading Services at Runtime](#3915-loading-services-at-runtime)
     - [39.1.6 Service Resolution Rules](#3916-service-resolution-rules)
-  - [39.2 Named Automatic and Unnamed Modules](#392-named-automatic-and-unnamed-modules)
-    - [39.2.1 Named Modules](#3921-named-modules)
-    - [39.2.2 Automatic Modules](#3922-automatic-modules)
-    - [39.2.3 Unnamed Module](#3923-unnamed-module)
-    - [39.2.4 Comparison Summary](#3924-comparison-summary)
-  - [39.3 Inspecting Modules and Dependencies](#393-inspecting-modules-and-dependencies)
-    - [39.3.1 Describing Modules with java](#3931-describing-modules-with-java)
-    - [39.3.2 Describing Modular JARs](#3932-describing-modular-jars)
-    - [39.3.3 Analyzing Dependencies with jdeps](#3933-analyzing-dependencies-with-jdeps)
-  - [39.4 Creating Custom Runtime Images with jlink](#394-creating-custom-runtime-images-with-jlink)
-  - [39.5 Creating Self-Contained Applications with jpackage](#395-creating-self-contained-applications-with-jpackage)
-  - [39.6 Final Summary JPMS in Practice](#396-final-summary-jpms-in-practice)
+    - [39.1.7 Service Locator Layer](#3917-service-locator-layer)
+    - [39.1.8 Sequential Invocation Diagram](#3918-sequential-invocation-diagram)
+    - [39.1.9 Component Summary Table](#3919-component-summary-table)
+
 
 ---
 
@@ -104,7 +96,7 @@ module com.example.provider.english {
 Key points:
 - The `provider` depends on the `service interface`
 - The implementation class does not need to be exported
-- The provides directive registers the implementation
+- The `provides` directive registers the implementation
 
 ### 39.1.4 Service Consumer Module
 
@@ -122,7 +114,6 @@ module com.example.consumer {
     
     A module that declares `uses` but has no matching provider on the module path compiles normally,
     but `ServiceLoader` returns an empty result at runtime.
-
 
 ### 39.1.5 Loading Services at Runtime
 
@@ -145,146 +136,108 @@ Classpath-based “accidental” discovery is prevented.
 
 ### 39.1.6 Service Resolution Rules
 
-For a service to be discoverable by ServiceLoader, several conditions must be satisfied:
-
+For a service to be discoverable by `ServiceLoader`, several conditions must be satisfied:
 
 | Rule | Meaning |
 | ---- | ---- |
-| Provider module must be readable | Resolved by requires graph |
+| Provider module must be readable | Resolved by `requires` graph |
 | Service interface must be exported | Consumers must see it |
 | Consumer must declare `uses` | Otherwise ServiceLoader fails |
 | Provider must declare `provides` | Implicit discovery is forbidden |
 
----
+### 39.1.7 Service Locator Layer
 
-## 39.2 Named, Automatic, and Unnamed Modules
+It is possible to introduce an additional layer called `Service Locator`.
 
-`JPMS` supports different kinds of modules to allow gradual migration from the classpath.
+In this architecture:
 
-JPMS must interoperate with legacy code.
+- The `consumer` does not directly use `ServiceLoader`
+- The `Service Locator` is the only component that declares `uses`
+- The `consumer` depends on the `Service Locator`
 
-To support gradual adoption, the JVM recognizes three different module categories.
+Architectural structure:
 
-
-### 39.2.1 Named Modules
-
-A `named module` has a `module-info.class` and a stable identity.
-
-- Strong encapsulation
-- Explicit dependencies
-- Full JPMS support
-
-### 39.2.2 Automatic Modules
-
-A JAR without module-info `placed on the module path` becomes an `automatic module`.
-
-Its name is derived from the JAR file name.
-
-- Reads all other modules
-- Exports all packages
-- No strong encapsulation
-
-!!! note
-    Automatic modules exist to ease migration.
-    They are not suitable as a long-term design.
-
-### 39.2.3 Unnamed Module
-
-Code on the classpath belongs to the `unnamed module`.
-
-- Reads all named modules
-- All packages are open
-- Cannot be required by named modules
-
-!!! note
-    The `unnamed module` preserves legacy classpath behavior.
-
-### 39.2.4 Comparison Summary
-
-| Module type | module-info present? | Encapsulation | Reads |
-| ---- | ---- | ---- | ---- |
-| `Named` | Yes | Strong | Declared only |
-| `Automatic` | No | Weak | All modules |
-| `Unnamed` | No | None | All modules |
-
----
-
-## 39.3 Inspecting Modules and Dependencies
-
-### 39.3.1 Describing Modules with java
-
-```bash
-java --describe-module java.sql
+```
+Consumer → Service Locator → ServiceLoader → Provider
 ```
 
-This shows exports, requires, and services of a module.
+Service Locator module:
 
-### 39.3.2 Describing Modular JARs
-
-```bash
-jar --describe-module --file mylib.jar
+```java
+module com.example.locator {
+	requires com.example.service;
+	uses com.example.service.GreetingService;
+}
 ```
 
-### 39.3.3 Analyzing Dependencies with `jdeps`
+Service Locator class:
 
-`jdeps` analyzes class and module dependencies statically.
+```java
+package com.example.locator;
 
-```bash
-jdeps myapp.jar
+import java.util.ServiceLoader;
+import com.example.service.GreetingService;
+
+public class GreetingLocator {
+
+	public static GreetingService getService() {
+		return ServiceLoader
+				.load(GreetingService.class)
+				.findFirst()
+				.orElseThrow();
+	}
+}
 ```
 
-```bash
-jdeps --module-path mods --check my.module
+Consumer module:
+
+```java
+module com.example.consumer {
+	requires com.example.locator;
+}
 ```
 
-To detect use of JDK internal APIs:
+The consumer does not declare `uses` because it does not directly invoke `ServiceLoader`.
 
-```bash
-jdeps --jdk-internals myapp.jar
+### 39.1.8 Sequential Invocation Diagram
+
+Execution sequence:
+
+1. The `Consumer` invokes `GreetingLocator.getService()`
+2. The `Service Locator` invokes `ServiceLoader.load(...)`
+3. The `ServiceLoader` consults the module graph
+4. The system identifies modules that declare `provides`
+5. The `Provider` implementation is instantiated
+6. The instance is returned to the `Consumer`
+
+Sequential diagram:
+
+```
+Consumer
+   │
+   │ 1. getService()
+   ▼
+Service Locator
+   │
+   │ 2. ServiceLoader.load()
+   ▼
+ServiceLoader
+   │
+   │ 3. Provider resolution
+   ▼
+Provider Implementation
+   │
+   │ 4. Instance returned
+   ▼
+Consumer
 ```
 
----
+### 39.1.9 Component Summary Table
 
-## 39.4 Creating Custom Runtime Images with `jlink`
+| Component | Role | exports | requires | uses | provides |
+|------------|-------|---------|----------|------|----------|
+| SPI | Defines contract | ✅ | ❌ | ❌ | ❌ |
+| Provider | Implements service | ❌ | ✅ | ❌ | ✅ |
+| Service Locator | Performs discovery | (optional) | ✅ | ✅ | ❌ |
+| Consumer | Uses the service | ❌ | ✅ | ❌ | ❌ |
 
-`jlink` builds a minimal Java runtime containing only the modules required by an application.
-
-```bash
-jlink
---module-path $JAVA_HOME/jmods:mods
---add-modules com.example.app
---output runtime-image
-```
-
-Benefits:
-- smaller runtime
-- faster startup
-- no unused JDK modules
-
----
-
-## 39.5 Creating Self-Contained Applications with `jpackage`
-
-`jpackage` builds platform-specific installers or application images.
-
-```bash
-jpackage
---name MyApp
---input mods
---main-module com.example.app/com.example.Main
-```
-
-`jpackage` can produce:
-- .exe / .msi (Windows)
-- .pkg / .dmg (macOS)
-- .deb / .rpm (Linux)
-
----
-
-## 39.6 Final Summary: JPMS in Practice
-
-- `JPMS` introduces `strong encapsulation` and reliable dependencies
-- `Modules` replace fragile classpath conventions
-- `Services` enable decoupled architectures
-- `Automatic` and `unnamed modules` support migration
-- `jlink` and `jpackage` enable modern deployment models
