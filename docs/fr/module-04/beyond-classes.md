@@ -434,9 +434,18 @@ Une classe imbriquée appartient toujours à une **classe englobante** et a des 
 Java définit quatre types de classes imbriquées :
 
 - **Static Nested Classes** – déclarées avec `static` à l’intérieur d’une autre classe.
-- **Inner Classes** (non-static nested classes).
+- **Inner Classes** (non-static **nested** classes).
 - **Local Classes** – déclarées dans un bloc (méthode, constructeur ou initializer).
 - **Anonymous Classes** – classes sans nom créées inline, généralement pour redéfinir une méthode ou implémenter une interface.
+
+
+!!! warning
+	- `static` s’applique uniquement aux classes **membres imbriquées**
+	- Les classes `Top-level` → ne peuvent pas être static
+	- Les classes `Local` (déclarées dans les méthodes) → ne peuvent pas être static
+	- Les classes `Anonymous` → ne peuvent pas être static
+	- Une classe `static nested` ne peut pas accéder aux membres d’instance sans une référence explicite à un objet externe.
+	
 
 ### 17.5.1 Static Nested Classes
 

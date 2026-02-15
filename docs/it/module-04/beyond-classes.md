@@ -439,9 +439,18 @@ Una classe annidata appartiene sempre a una **classe contenitore** e ha regole s
 Java definisce quattro tipi di classi annidate:
 
 - **Static Nested Classes** – dichiarate con `static` dentro un’altra classe.
-- **Inner Classes** (non-static nested classes).
+- **Inner Classes** (non-static **nested** classes).
 - **Local Classes** – dichiarate dentro un blocco (metodo, costruttore o initializer).
 - **Anonymous Classes** – classi senza nome create inline, di solito per fare override di un metodo o implementare un’interfaccia.
+
+
+!!! warning
+	- `static` si applica solo alle classi **membro nested**
+	- Le classi `Top-level` → non possono essere static
+	- Le classi `Local` (dichiarate nei metodi) → non possono essere static
+	- Le classi `Anonymous` → non possono essere static
+	- Una classe `static nested` non può accedere ai membri di istanza senza un riferimento esplicito a un oggetto esterno.
+	
 
 ### 17.5.1 Static Nested Classes
 

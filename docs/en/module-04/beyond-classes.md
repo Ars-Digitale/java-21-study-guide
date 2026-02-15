@@ -442,10 +442,18 @@ A nested class always belongs to an **enclosing class** and has special accessib
 Java defines four kinds of nested classes:
 
 - **Static Nested Classes** – declared with `static` inside another class.
-- **Inner Classes** (non-static nested classes).
+- **Inner Classes** (non-static **nested** classes).
 - **Local Classes** – declared inside a block (method, constructor, or initializer).
 - **Anonymous Classes** – unnamed classes created inline, usually to override a method or implement an interface.
 
+
+!!! warning
+    - `static` applies only to **nested member** classes
+	- `Top-level` classes → cannot be static
+	- `Local` classes (inside methods) → cannot be static
+	- `Anonymous` classes → cannot be static
+	- A `static nested` class cannot access instance members without an explicit outer object reference.
+	
 
 ### 17.5.1 Static Nested Classes
 
