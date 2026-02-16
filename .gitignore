@@ -42,4 +42,5 @@ decode_md.sh
 test.txt
 rename_lang.sh
 generate_indexes.sh
+add_explicit_anchors.py
 site/
