@@ -3,7 +3,6 @@ site_url: https://ars-digitale.github.io/java-21-study-guide/
 repo_url: https://github.com/Ars-Digitale/java-21-study-guide
 repo_name: Ars-Digitale/java-21-study-guide
 
-strict: true
 
 docs_dir: docs
 site_dir: site
