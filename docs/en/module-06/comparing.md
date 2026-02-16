@@ -75,7 +75,7 @@ Output:
 !!! note
     Natural ordering is only defined for types that implement Comparable.
 
-<a id="241-comparable-natural-ordering"></a>
+<a id="241-comparable--natural-ordering"></a>
 ## 24.1 Comparable — Natural Ordering
 
 The interface `Comparable<T>` defines the natural order of a type.
@@ -144,7 +144,7 @@ The list sorts by age, because that is the natural numbering order.
 
 ---
 
-<a id="242-comparator-custom-ordering"></a>
+<a id="242-comparator--custom-ordering"></a>
 ## 24.2 Comparator — Custom Ordering
 
 The interface `Comparator<T>` allows defining multiple sorting strategies

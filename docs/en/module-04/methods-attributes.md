@@ -62,7 +62,7 @@ A `method declaration` is composed of **mandatory** and **optional** components.
 <a id="1411-mandatory-components-of-a-method"></a>
 ### 14.1.1 Mandatory Components of a Method
 
-<a id="14111-access-modifiers"></a>
+<a id="14111--access-modifiers"></a>
 #### 14.1.1.1  Access Modifiers 
 
 `Access Modifiers` control *visibility*, not behavior.
@@ -269,7 +269,7 @@ call(5); // prints: int (exact match for int)
 ```
 
 
-<a id="14312-if-no-exact-match-exists-java-picks-the-most-specific-compatible-type"></a>
+<a id="14312--if-no-exact-match-exists-java-picks-the-most-specific-compatible-type"></a>
 #### 14.3.1.2 — If no exact match exists, Java picks the *most specific* compatible type
 
 Java prefers:
@@ -290,7 +290,7 @@ test(5);  // int literal: can widen to long or float
 ```
 
 
-<a id="14313-primitive-widening-beats-boxing"></a>
+<a id="14313--primitive-widening-beats-boxing"></a>
 #### 14.3.1.3 — Primitive widening beats boxing
 
 If a primitive argument can either widen or autobox, Java chooses widening.
@@ -305,7 +305,7 @@ m(b);               // byte → int (widening) wins
 ```
 
 
-<a id="14314-boxing-beats-varargs"></a>
+<a id="14314--boxing-beats-varargs"></a>
 #### 14.3.1.4 — Boxing beats varargs
 
 ```java
@@ -317,7 +317,7 @@ show(5);                // int → Integer (boxing) preferred
 ```
 
 
-<a id="14315-for-references-java-picks-the-most-specific-reference-type"></a>
+<a id="14315--for-references-java-picks-the-most-specific-reference-type"></a>
 #### 14.3.1.5 — For references, Java picks the most specific reference type
 
 ```java
@@ -331,7 +331,7 @@ ref("abc");             // "abc" is a String → more specific than Object
 More specific means *lower in the inheritance hierarchy*.
 
 
-<a id="14316-when-there-is-no-unambiguous-most-specific-the-call-is-a-compile-error"></a>
+<a id="14316--when-there-is-no-unambiguous-most-specific-the-call-is-a-compile-error"></a>
 #### 14.3.1.6 — When there is no unambiguous “most specific”, the call is a compile error
 
 Example with sibling classes:
@@ -355,7 +355,7 @@ run(null);  // ❌ Compile-time error: ambiguous method call
 ```
 
 
-<a id="14317-mixed-primitive-wrapper-overloads"></a>
+<a id="14317--mixed-primitive--wrapper-overloads"></a>
 #### 14.3.1.7 — Mixed primitive + wrapper overloads
 
 Java evaluates widening, boxing, and varargs in this order:
@@ -376,7 +376,7 @@ mix(s);   // short → int → long  (widening)
 ```
 
 
-<a id="14318-when-primitives-mix-with-reference-types"></a>
+<a id="14318--when-primitives-mix-with-reference-types"></a>
 #### 14.3.1.8 — When primitives mix with reference types
 
 ```java
@@ -392,7 +392,7 @@ fun(i);                 // reference accepted → Object
 ```
 
 
-<a id="14319-when-object-wins"></a>
+<a id="14319--when-object-wins"></a>
 #### 14.3.1.9 — When Object wins
 
 ```java
@@ -696,7 +696,7 @@ ref.test();   // prints "A" — static binding!
     Key rule: static methods use **reference type**, not object type.
 
 
-<a id="1467-common-pitfalls"></a>
+<a id="1467-common--pitfalls"></a>
 ### 14.6.7 Common  Pitfalls
 
 - Attempting to reference an instance variable/method from a static context.

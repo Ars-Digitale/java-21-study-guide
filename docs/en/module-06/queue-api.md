@@ -27,7 +27,7 @@ A **Queue** typically models a **FIFO** (First-In, First-Out) structure.
 A **Deque** (`double-ended queue`) allows insertion and removal from both ends, enabling **FIFO** and **LIFO** behavior in a single API.
 
 
-<a id="271-queue-overview"></a>
+<a id="271-queue--overview"></a>
 ## 27.1 Queue — Overview
 
 The `Queue` interface extends `Collection` and is commonly used in asynchronous programming, work distribution, algorithms, and buffering.
@@ -63,7 +63,7 @@ Common classes implementing `Queue`:
 
 ---
 
-<a id="272-deque-overview"></a>
+<a id="272-deque--overview"></a>
 ## 27.2 Deque — Overview
 
 `Deque` (double-ended queue) supports insertion, removal, and inspection from both the head and the tail.
@@ -152,7 +152,7 @@ System.out.println(stack.pop()); // A
 
 ---
 
-<a id="275-priorityqueue-special-queue"></a>
+<a id="275-priorityqueue--special-queue"></a>
 ## 27.5 PriorityQueue — Special Queue
 
 `PriorityQueue` orders elements by **natural order** or by a provided `Comparator`.

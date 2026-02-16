@@ -204,7 +204,7 @@ For tasks like financial calculations, this is unacceptable.
   
 `BigDecimal` solves this by representing numbers using a decimal model with a configurable scale (number of digits after the decimal point).
 
-<a id="1122-biginteger-arbitrary-precision-integers"></a>
+<a id="1122-biginteger--arbitrary-precision-integers"></a>
 ### 11.2.2 BigInteger — Arbitrary-Precision Integers
 
 `BigInteger` represents integer values of virtually any size, limited only by available memory.

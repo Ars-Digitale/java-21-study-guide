@@ -33,7 +33,7 @@
 
 ---
 
-<a id="91-strings-text-blocks"></a>
+<a id="#91-strings--text-blocks"></a>
 ## 9.1 Strings & Text Blocks
 
 <a id="911-strings"></a>
@@ -318,7 +318,7 @@ Output:
 7:
 ```
 
-<a id="9123-text-blocks-escape-characters"></a>
+<a id="9123-text-blocks--escape-characters"></a>
 #### 9.1.2.3 Text Blocks & Escape Characters
 
 Escape sequences still work inside text blocks when needed (for example, for backslashes or explicit control characters).
@@ -453,7 +453,7 @@ This rule applies to most substring-based methods.
 | lastIndexOf(String) | Last occurrence | — | — | "banana".lastIndexOf("a") → 5 |
 | lastIndexOf(String, fromIndex) | Search backward from index | fromIndex | fromIndex inclusive | "banana".lastIndexOf("a", 3) → 3 |
 
-<a id="925-methods-with-start-inclusive-end-exclusive"></a>
+<a id="925-methods-with-start-inclusive--end-exclusive"></a>
 ### 9.2.5 Methods with Start Inclusive / End Exclusive
 
 These methods follow the same slicing behavior: `start` included, `end` excluded.

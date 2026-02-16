@@ -279,7 +279,7 @@ class Child extends Parent {
 
 ---
 
-<a id="1611-default-constructor-tips-and-traps"></a>
+<a id="1611-default-constructor--tips-and-traps"></a>
 ## 16.11 Default Constructor — Tips and Traps
 
 - **If the superclass does not have a no-arg constructor, the subclass MUST call `super(args)` explicitly.**

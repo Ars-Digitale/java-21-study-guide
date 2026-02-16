@@ -133,7 +133,7 @@ for (Integer i : list) {
 
 ---
 
-<a id="236-summary-table-shared-operations"></a>
+<a id="236-summary-table--shared-operations"></a>
 ## 23.6 Summary Table — Shared Operations
 
 

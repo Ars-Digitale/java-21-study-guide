@@ -124,7 +124,7 @@ System.out.println(rp.toAbsolutePath());
 !!! note
     Relative paths are a common source of “works on my machine” bugs because `user.dir` depends on how/where the JVM was launched.
 
-<a id="3314-joining-building-paths"></a>
+<a id="3314-joining--building-paths"></a>
 ### 33.1.4 Joining / Building Paths
 
 - Legacy `File` uses constructors (parent + child). 
@@ -377,7 +377,7 @@ Removes **redundant** name elements like `.` and `..`.
     `normalize()` is purely syntactic, does not check existence, and can produce invalid paths if misused.
 
 
-<a id="3318-quick-comparison-table-creation-conversion"></a>
+<a id="3318-quick-comparison-table-creation--conversion"></a>
 ### 33.1.8 Quick Comparison Table (Creation + Conversion)
 
 | Need | Legacy (File) | NIO (Path) | Preferred today |
@@ -532,7 +532,7 @@ FileOutputStream out = new FileOutputStream("dst.bin")) {
     Remember `read(byte[])` returns the number of bytes read; you must write only that count, not the full buffer.
 
 
-<a id="3324-moving-renaming-and-replacing"></a>
+<a id="3324-moving--renaming-and-replacing"></a>
 ### 33.2.4 Moving / Renaming and Replacing
 
 In both APIs, rename/move is “metadata-level” when possible, but can behave like copy+delete across filesystems. NIO makes this explicit via options.
@@ -672,7 +672,7 @@ System.out.println(deleted);
 !!! note
     Certification tip: `Files.delete` throws `NoSuchFileException` if missing, while `deleteIfExists` returns `false`.
 
-<a id="3327-recursively-copying-deleting-directory-trees-nio-pattern"></a>
+<a id="3327-recursively-copying--deleting-directory-trees-nio-pattern"></a>
 ### 33.2.7 Recursively Copying / Deleting Directory Trees (NIO Pattern)
 
 NIO doesn’t provide a single “copyTree/deleteTree” method, but the standard approach uses `Files.walk` or `Files.walkFileTree`. 

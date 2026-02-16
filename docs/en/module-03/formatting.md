@@ -154,7 +154,7 @@ System.out.printf("%08.2f", 12.34);
 - Zeros are inserted after the sign.
 - Ignored if left-justified (`-` flag).
 
-<a id="13115-left-justification-flag"></a>
+<a id="13115-left-justification---flag"></a>
 #### 13.1.1.5 Left Justification `-` Flag
 
 The `-` flag left-aligns the value within the width.
@@ -170,7 +170,7 @@ System.out.printf("%-8.2f", 12.34);
 - Padding is moved to the right.
 - Overrides zero padding.
 
-<a id="13116-explicit-sign-flag"></a>
+<a id="13116-explicit-sign--flag"></a>
 #### 13.1.1.6 Explicit Sign `+` Flag
 
 The `+` flag forces display of the sign for positive numbers.
@@ -186,7 +186,7 @@ System.out.printf("%+8.2f", 12.34);
 - Negative numbers already show `-`.
 - Overrides the space flag (which prints a leading space for positive values).
 
-<a id="13117-parentheses-for-negatives-flag"></a>
+<a id="13117-parentheses-for-negatives--flag"></a>
 #### 13.1.1.7 Parentheses for Negatives `(` Flag
 
 The `(` flag formats negative numbers using parentheses.
@@ -353,7 +353,7 @@ System.out.println(df.format(12.3));
 - Pads with zeros if the number has fewer digits.
 - Useful for fixed-width or aligned output.
 
-<a id="1326-the-symbol-optional-digit"></a>
+<a id="1326-the--symbol-optional-digit"></a>
 ### 13.2.6 The `#` Symbol (Optional Digit)
 
 The `` symbol displays a digit only if it exists.
@@ -371,7 +371,7 @@ System.out.println(df.format(12.3));
 - Suppresses unnecessary trailing zeros.
 - Good for “human-friendly” formatting.
 
-<a id="1327-combining-0-and"></a>
+<a id="1327-combining-0-and-"></a>
 ### 13.2.7 Combining `0` and `#`
 
 Patterns often combine both symbols for flexibility.

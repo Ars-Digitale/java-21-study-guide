@@ -54,7 +54,7 @@ This section defines those concepts independently of Java, then explains how Jav
 
 ---
 
-<a id="322-filesystem-the-global-abstraction"></a>
+<a id="322-filesystem--the-global-abstraction"></a>
 ## 32.2 Filesystem – The Global Abstraction
 
 A `filesystem` is a structured mechanism provided by an operating system to organize, store, retrieve, and manage data on persistent storage devices.
@@ -82,7 +82,7 @@ In Java NIO, a filesystem is represented by the `FileSystem` abstraction, typica
 
 ---
 
-<a id="323-path-locating-an-entry-in-a-filesystem"></a>
+<a id="323-path--locating-an-entry-in-a-filesystem"></a>
 ## 32.3 Path – Locating an Entry in a Filesystem
 
 A `path` is a logical locator, not a resource. 
@@ -107,7 +107,7 @@ A `path` solves the problem of `addressing`:
 
 ---
 
-<a id="324-files-persistent-data-containers"></a>
+<a id="324-files--persistent-data-containers"></a>
 ## 32.4 Files – Persistent Data Containers
 
 A `file` is a filesystem entry whose primary role is to store data. 
@@ -138,7 +138,7 @@ From the filesystem perspective, a file has:
 
 ---
 
-<a id="325-directories-structural-containers"></a>
+<a id="325-directories--structural-containers"></a>
 ## 32.5 Directories – Structural Containers
 
 A `directory (or folder)` is a filesystem entry whose purpose is to organize other entries.
@@ -161,7 +161,7 @@ A `directory (or folder)` is a filesystem entry whose purpose is to organize oth
 
 ---
 
-<a id="326-links-indirection-mechanisms"></a>
+<a id="326-links--indirection-mechanisms"></a>
 ## 32.6 Links – Indirection Mechanisms
 
 A `link` is a filesystem entry that refers to another entry. 

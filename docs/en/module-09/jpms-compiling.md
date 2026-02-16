@@ -14,7 +14,7 @@
   - [38.4 Compiling Multiple Interdependent Modules](#384-compiling-multiple-interdependent-modules)
   - [38.5 Packaging a Module into a Modular JAR](#385-packaging-a-module-into-a-modular-jar)
   - [38.6 Running a Modular Application](#386-running-a-modular-application)
-  - [38.7 Module Directives Explained](#386-module-directives-explained)
+  - [38.7 Module Directives Explained](#387-module-directives-explained)
     - [38.7.1 requires](#3871-requires)
     - [38.7.2 requires transitive](#3872-requires-transitive)
     - [38.7.3 exports](#3873-exports)
@@ -23,7 +23,6 @@
     - [38.7.6 opens-to-qualified-opens](#3876-opens--to-qualified-opens)
     - [38.7.7 Table of Core Directives](#3877-table-of-core-directives)
 	- [38.7.8 Exports vs Opens — Compile-Time vs Runtime Access](#3878-exports-vs-opens--compile-time-vs-runtime-access)
-    - [38.7.8 Exports vs Opens — Accès à la Compilation vs à lExécution](#3878-exports-vs-opens--accès-à-la-compilation-vs-à-lexécution)
   - [38.8 Named, Automatic, and Unnamed Modules](#388-named-automatic-and-unnamed-modules)
     - [38.8.1 Named Modules](#3881-named-modules)
     - [38.8.2 Automatic Modules](#3882-automatic-modules)
@@ -101,7 +100,7 @@ These options apply only at compile time:
 
 
 
-<a id="3823-options-applicable-only-to-java"></a>
+<a id="3823--options-applicable-only-to-java"></a>
 ### 38.2.3 Options Applicable Only to `java`
 
 These options apply only at runtime:
@@ -291,7 +290,7 @@ module com.example.lib {
 
 Non-exported packages remain strongly encapsulated.
 
-<a id="3874-exports-to-qualified-exports"></a>
+<a id="3874-exports--to-qualified-exports"></a>
 ### 38.7.4 `exports ... to` (Qualified Exports)
 
 A qualified export restricts access to specific modules.
@@ -321,7 +320,7 @@ module com.example.app {
     opens does NOT make a package accessible at compile time.
     It only affects runtime reflection.
 
-<a id="3876-opens-to-qualified-opens"></a>
+<a id="3876-opens--to-qualified-opens"></a>
 ### 38.7.6 `opens ... to` (Qualified Opens)
 
 You can restrict reflective access to specific modules.
@@ -349,7 +348,7 @@ module com.example.app {
 | `opens ... to` | Restrict reflective access |
 
 
-<a id="3878-exports-vs-opens-compile-time-vs-runtime-access"></a>
+<a id="3878-exports-vs-opens--compile-time-vs-runtime-access"></a>
 ### 38.7.8 Exports vs Opens — Compile-Time vs Runtime Access
 
 | Visibility | Compile-time? | Runtime reflection? |

@@ -267,7 +267,7 @@ class Demo {
     The compiler may insert additional casts or bridge methods in more complex inheritance scenarios, but erasure always uses only the first bound (A in this case).
 
 
-<a id="1847-overloading-a-generic-method-why-some-overloads-are-impossible"></a>
+<a id="1847-overloading-a-generic-method--why-some-overloads-are-impossible"></a>
 ### 18.4.7 Overloading a Generic Method — Why Some Overloads Are Impossible
 
 When Java compiles generic code, it applies type erasure:
@@ -339,7 +339,7 @@ void testInput(ArrayList inputParam)
 
 No collision → legal overloading.
 
-<a id="1849-returning-generic-types-rules-and-restrictions"></a>
+<a id="1849-returning-generic-types--rules-and-restrictions"></a>
 ### 18.4.9 Returning Generic Types — Rules and Restrictions
 
 When returning a value from a method, Java follows a strict rule:
@@ -444,10 +444,10 @@ The class must come first.
 class C<T extends Number & Comparable<T>> { }
 ```
 
-<a id="1853-wildcards-extends-super"></a>
+<a id="1853-wildcards---extends--super"></a>
 ### 18.5.3 Wildcards: `?`, `? extends`, `? super`
 
-<a id="18531-unbounded-wildcard"></a>
+<a id="18531-unbounded-wildcard-"></a>
 #### 18.5.3.1 Unbounded Wildcard `?`
 
 Use when you want to accept a list of unknown type:
@@ -456,7 +456,7 @@ Use when you want to accept a list of unknown type:
 void printAll(List<?> list) { ... }
 ```
 
-<a id="18532-upper-bounded-wildcard-extends"></a>
+<a id="18532-upper-bounded-wildcard--extends"></a>
 #### 18.5.3.2 Upper-Bounded Wildcard `? extends`
 
 ```java
@@ -467,7 +467,7 @@ Number n = nums.get(0);   // OK
 
 > **You cannot add elements (except null) to ? extends** because you don’t know the exact subtype.
 
-<a id="18533-lower-bounded-wildcard-super"></a>
+<a id="18533-lower-bounded-wildcard--super"></a>
 #### 18.5.3.3 Lower-Bounded Wildcard `? super`
 
 `<? super Integer>` means **the type must be Integer or a superclass of Integer**.

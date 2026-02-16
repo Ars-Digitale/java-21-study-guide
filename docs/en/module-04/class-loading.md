@@ -105,7 +105,7 @@ When the `new` keyword is used, **instance creation follows a strict and predict
 
 ---
 
-<a id="154-a-complete-example-static-instance-initialization-across-inheritance"></a>
+<a id="154-a-complete-example-static--instance-initialization-across-inheritance"></a>
 ## 15.4 A Complete Example: Static + Instance Initialization Across Inheritance
 
 Consider the following three-level hierarchy:
