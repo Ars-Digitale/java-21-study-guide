@@ -43,7 +43,7 @@
       - [17.5.4.2 Classe Anonima che Estende una Classe](#17542-classe-anonima-che-estende-una-classe)
     - [17.5.5 Confronto dei Tipi di Classi Annidate](#1755-confronto-dei-tipi-di-classi-annidate)
   - [17.6 Nesting delle Interfacce in Java](#176-nesting-delle-interfacce-in-java)
-    - [17.6.1 Dove può essere dichiarata un’interfaccia](#1761-dove-puo-essere-dichiarata-uninterfaccia)
+    - [17.6.1 Dove può essere dichiarata un’interfaccia](#1761-dove-può-essere-dichiarata-uninterfaccia)
     - [17.6.2 Interfacce annidate (Nested Interfaces)](#1762-interfacce-annidate-nested-interfaces)
       - [17.6.2.1 Interfaccia annidata in una Classe](#17621-interfaccia-annidata-in-una-classe)
       - [17.6.2.2 Interfaccia annidata in una un’altra Interfaccia](#17622-interfaccia-annidata-in-una-unaltra-interfaccia)
