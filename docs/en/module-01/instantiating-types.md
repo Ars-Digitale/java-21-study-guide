@@ -639,7 +639,7 @@ Double[] arr2 = {11, 22};     // WARNING: Does not compile!!
     - **AUTOBOXING** and **Implicit cast** are not allowed in the same statement: you can't do both at the same time. (see example above)
     - This rule apply also in method calls.
 
-<a id="633-parsing-and-conversion"></a>
+<a id="633--parsing-and-conversion"></a>
 ### 6.3.3  Parsing and Conversion
 
 Wrappers provide static methods to convert strings or other types into primitives:
@@ -678,7 +678,7 @@ Integer.valueOf("G", 16);	// NumberFormatException
 !!! note
     methods **parseXxx()** return a primitive while **valueOf()** returns a wrapper object.
 
-<a id="634-helper-methods"></a>
+<a id="634--helper-methods"></a>
 ### 6.3.4  Helper methods
 
 All the numeric wrapper classes extend the Number class and, for that, they inherit some helper methods such as: byteValue(), shortValue(), intValue(), longValue(), floatValue(), doubleValue().
@@ -703,7 +703,7 @@ The Boolean and Character wrapper classes include: booleanValue() and charValue(
 		System.out.println("baseDouble.intValue(): " + wrapInt);		// 300 -> The value is truncated
 ```
 
-<a id="635-null-values"></a>
+<a id="635--null-values"></a>
 ### 6.3.5  Null Values
 
 Unlike primitives, wrapper types can hold **null**. 

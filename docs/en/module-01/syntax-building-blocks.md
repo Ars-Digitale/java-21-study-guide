@@ -227,7 +227,7 @@ int x = 10;
 
 ---
 
-<a id="110-function-method"></a>
+<a id="110--function--method"></a>
 ### 1.10  **Function / Method**
 
 - **Definition:** A sequence of encapsulated statements, identified by a name, which can receive inputs (parameters) and return an output (value).
@@ -249,7 +249,7 @@ int result = square(5); // result = 25
 
 ---
 
-<a id="111-class-object"></a>
+<a id="111-class--object"></a>
 ### 1.11 **Class / Object**
 
 - **Definition:**
@@ -276,7 +276,7 @@ p.move(1, 2);            // method call on the object
 
 ---
 
-<a id="112-module-package"></a>
+<a id="112-module--package"></a>
 ### 1.12 **Module / Package**
 
 - **Definition:** Logical grouping of classes, functions, and resources with a common purpose.
@@ -334,7 +334,7 @@ Together they form a *system*.
 
 ---
 
-<a id="115-summary-as-a-growing-scale"></a>
+<a id="115--summary-as-a-growing-scale"></a>
 ### 1.15 📌 Summary as a Growing Scale
 
 `Value → Literal → Identifier → Variable → Type → Operator → Expression → Statement → Code Block → Function/Method → Class/Object → Module/Package → Program → System`
@@ -343,7 +343,7 @@ This scale shows how small conceptual units are combined into larger and more co
 
 ---
 
-<a id="116-hierarchy-diagram-ascii"></a>
+<a id="116--hierarchy-diagram-ascii"></a>
 ### 1.16 📊 Hierarchy Diagram (ASCII)
 
 **Description:** This ASCII diagram shows the hierarchical relation between building blocks, from the most complex (System) down to the simplest (Value and its concrete form, the Literal).
@@ -367,7 +367,7 @@ System
 
 ---
 
-<a id="117-hierarchy-diagram-mermaid"></a>
+<a id="117--hierarchy-diagram-mermaid"></a>
 ### 1.17 📊 Hierarchy Diagram (Mermaid)
 
 **Description:** The Mermaid diagram renders the same hierarchy in a top-down tree. It highlights that a Literal is the syntactic form of a Value.

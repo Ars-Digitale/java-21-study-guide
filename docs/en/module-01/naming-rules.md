@@ -134,7 +134,7 @@ int _;  // invalid since Java 9
     `_` is legal inside number literals (see next section), but not as a standalone identifier.
 
 
-<a id="316-numeric-literals-underscore-character"></a>
+<a id="316-numeric-literals--underscore-character"></a>
 ### 3.1.6 Numeric literals & Underscore character
 
 You can have one or more `_` (underscore) character in number literals in order to make them easier to read.

@@ -614,7 +614,7 @@ java B
 - **--class-path** `<classpath>`
 
 
-<a id="263-code-inside-packages-standard-src-out-layout"></a>
+<a id="263-code-inside-packages-standard-src--out-layout"></a>
 ### 2.6.3 Code inside packages (standard src → out layout)
 
 **Files**
@@ -648,7 +648,7 @@ public class Main {
 javac src/com/example/app/Main.java
 ```
 
-<a id="264-compiling-to-another-directory-d"></a>
+<a id="264-compiling-to-another-directory--d"></a>
 ### 2.6.4 Compiling to another directory (`-d`)
 
 `-d out` places compiled `.class` files into the `out/` directory, creating package subfolders that mirror your `package` names:
@@ -719,7 +719,7 @@ java Main.java Helper.java
 
 You can send data to your Java program through the parameters of the `main` entry point.
 
-As we learned before, the `main` method can receive an array of strings in the form: **String[] args**. See [the section on main](#a-main-method-signature).
+As we learned before, the `main` method can receive an array of strings in the form: **String[] args**. See [the section on main](#251-main-method-signature).
 
 **Main.java printing out two parameters received in input by the "main" method**: 
 ```java

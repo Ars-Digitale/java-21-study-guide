@@ -134,10 +134,10 @@ When applying arithmetic or comparison operators to **primitive data types**, Ja
 These rules ensure consistent calculations and prevent data loss when mixing different numeric types.
 
 
-<a id="461-numeric-promotion-rules-in-java"></a>
+<a id="461--numeric-promotion-rules-in-java"></a>
 ### 4.6.1 🔹 Numeric Promotion Rules in Java
 
-<a id="4611-rule-1-mixed-data-types-smaller-type-promoted-to-larger-type"></a>
+<a id="4611-rule-1--mixed-data-types--smaller-type-promoted-to-larger-type"></a>
 #### 4.6.1.1 **Rule 1 – Mixed Data Types → Smaller type promoted to larger type**
 
 If two operands belong to **different numeric data types**, Java automatically promotes the **smaller** type to the **larger** type before performing the operation.
@@ -150,7 +150,7 @@ If two operands belong to **different numeric data types**, Java automatically p
 `byte → short → int → long → float → double`
 
 
-<a id="4612-rule-2-integral-floating-point-integral-promoted-to-floating-point"></a>
+<a id="4612-rule-2--integral--floating-point--integral-promoted-to-floating-point"></a>
 #### 4.6.1.2 **Rule 2 – Integral + Floating-point → Integral promoted to floating-point**
 
 If one operand is an **integral type** (`byte`, `short`, `char`, `int`, `long`) and the other is a **floating-point type** (`float`, `double`),  
@@ -162,7 +162,7 @@ the **integral value is promoted** to the **floating-point** type before the ope
 | `double d = 10.0; long l = 3;`<br>`double result = d / l;` | `l` (long) is promoted to `double`. The result is a `double` (`3.333...`). |
 
 
-<a id="4613-rule-3-byte-short-and-char-are-promoted-to-int-during-arithmetic"></a>
+<a id="4613-rule-3--byte-short-and-char-are-promoted-to-int-during-arithmetic"></a>
 #### 4.6.1.3 **Rule 3 – `byte`, `short`, and `char` are promoted to `int` during arithmetic**
 
 When performing arithmetic **with variables** (not literal constants) of type `byte`, `short`, or `char`,  
@@ -185,7 +185,7 @@ byte c = 20;
 byte d = b + c;     // ❌ Error: b + c is evaluated at runtime → int
 ```
 
-<a id="4614-rule-4-result-type-matches-the-promoted-operand-type"></a>
+<a id="4614-rule-4--result-type-matches-the-promoted-operand-type"></a>
 #### 4.6.1.4 **Rule 4 – Result type matches the promoted operand type**
 
 After promotions are applied, and both operands are of the same type,  
@@ -207,7 +207,7 @@ int result = 10 / 4;      // ❌ 2 (fraction discarded)
 ```
 
 
-<a id="462-summary-of-numeric-promotion-behavior"></a>
+<a id="462--summary-of-numeric-promotion-behavior"></a>
 ### 4.6.2 ✅ Summary of Numeric Promotion Behavior
 
 | Situation | Promotion Result | Example |
@@ -218,7 +218,7 @@ int result = 10 / 4;      // ❌ 2 (fraction discarded)
 | Result after promotion | Result matches promoted type | `float + long → float` |
 
 
-<a id="4621-key-takeaways"></a>
+<a id="4621--key-takeaways"></a>
 #### 4.6.2.1 🧠 Key Takeaways
 
 - Always consider **type promotion** when mixing data types in arithmetic.  

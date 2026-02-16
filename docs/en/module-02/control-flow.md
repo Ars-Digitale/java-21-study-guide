@@ -83,7 +83,7 @@ if (grade >= 90) {
 
 ---
 
-<a id="72-the-switch-statement-expression"></a>
+<a id="72-the-switch-statement--expression"></a>
 ## 7.2 The `switch` Statement & Expression
 
 The `switch` construct is a control-flow structure that selects one branch among multiple alternatives based on the value of an expression (the **selector**).

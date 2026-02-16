@@ -364,7 +364,7 @@ b += 1;         // ✅ works: implicit cast back to byte
     That’s why `b += 1` compiles even though `b = b + 1` does not.
 
 
-<a id="575-equality-operators-and"></a>
+<a id="575-equality-operators--and-"></a>
 ### 5.7.5 Equality Operators (`==` and `!=`)
 
 The **equality operators** in Java `==` (equal to) and `!=` (not equal to) are used to compare two operands for equality.  
@@ -515,7 +515,7 @@ Key properties:
 - The name must not clash with an existing variable in the same scope.
 
 
-<a id="5763-flow-scoping-short-circuit-logic"></a>
+<a id="5763-flow-scoping--short-circuit-logic"></a>
 #### 5.7.6.3 Flow Scoping & Short-Circuit Logic
 
 Pattern variables become available based on flow analysis:

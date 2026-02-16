@@ -372,7 +372,7 @@ They never mutate the original instance.
 
 ---
 
-<a id="123-conversion-at-methods-linking-date-time-and-zone"></a>
+<a id="123-conversion--at-methods-linking-date-time-and-zone"></a>
 ## 12.3 Conversion & `at...` Methods (Linking Date, Time, and Zone)
 
 These methods are used to combine or convert between `LocalDate`, `LocalTime`, `LocalDateTime`, and `ZonedDateTime`.
@@ -406,7 +406,7 @@ The `java.time` package provides three essential temporal classes that represent
 
 ---
 
-<a id="125-period-human-date-amounts"></a>
+<a id="125-period--human-date-amounts"></a>
 ## 12.5 `Period` — Human Date Amounts
 
 `Period` represents a date-based amount of time, such as “3 years, 2 months, and 5 days”.  
@@ -449,7 +449,7 @@ LocalDate result = base.plus(p2);          // 2026-03-13
 
 ---
 
-<a id="126-duration-machine-time-amounts"></a>
+<a id="126-duration--machine-time-amounts"></a>
 ## 12.6 `Duration` — Machine Time Amounts
 
 `Duration` represents a time-based amount in seconds and nanoseconds.
@@ -500,7 +500,7 @@ ZonedDateTime z3 = z1.plus(d2);              // Duration-based
 
 ---
 
-<a id="127-instant-point-on-the-utc-timeline"></a>
+<a id="127-instant--point-on-the-utc-timeline"></a>
 ## 12.7 `Instant` — Point on the UTC Timeline
 
 `Instant` represents a single moment in time relative to UTC, with nanosecond precision.
