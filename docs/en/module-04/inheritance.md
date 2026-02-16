@@ -1,5 +1,6 @@
 # 16. Inheritance in Java
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [16. Inheritance in Java](#16-inheritance-in-java)
@@ -38,6 +39,7 @@
  
 It allows a class (the *subclass*) to acquire the state and behavior of another class (the *superclass*), creating hierarchical relationships that promote code reuse, specialization, and polymorphism.
 
+<a id="161-general-definition-of-inheritance"></a>
 ## 16.1 General Definition of Inheritance
 
 Inheritance enables a class to extend another class, automatically gaining its accessible fields and methods.
@@ -49,6 +51,7 @@ The extending class may add new features or override existing behaviors, creatin
 
 ---
 
+<a id="162-single-inheritance-and-javalangobject"></a>
 ## 16.2 Single Inheritance and java.lang.Object
 
 Java supports **single inheritance**, meaning every class may extend **only one** direct superclass.
@@ -67,6 +70,7 @@ System.out.println(new Dog() instanceof Object); // true
 
 ---
 
+<a id="163-transitive-inheritance"></a>
 ## 16.3 Transitive Inheritance
 
 `Inheritance` is **transitive**. 
@@ -81,6 +85,7 @@ class C extends B { } // C inherits from both A and B
 
 ---
 
+<a id="164-what-gets-inherited-short-reminder"></a>
 ## 16.4 What Gets Inherited? (Short Reminder)
 
 A subclass inherits all **accessible** members of the superclass.
@@ -97,6 +102,7 @@ However, this depends on `access modifiers`.
 
 ---
 
+<a id="165-class-modifiers-affecting-inheritance"></a>
 ## 16.5 Class Modifiers Affecting Inheritance
 
 Some class-level modifiers affect whether a class may be extended.
@@ -116,8 +122,10 @@ Some class-level modifiers affect whether a class may be extended.
 
 ---
 
+<a id="166-this-and-super-references"></a>
 ## 16.6 `this` and `super` References
 
+<a id="1661-the-this-reference"></a>
 ### 16.6.1 The `this` Reference
 
 The `this` reference refers to the current object instance and helps in disambiguing access to current and inherited members. 
@@ -152,6 +160,7 @@ public class Person {
 !!! warning
     `this` cannot be used inside static methods because, in that context, no instance exists.
 
+<a id="1662-the-super-reference"></a>
 ### 16.6.2 The `super` Reference
 
 The `super` reference gives access to members of the direct parent class.  
@@ -180,6 +189,7 @@ class Child extends Parent {
 
 ---
 
+<a id="167-declaring-constructors-in-an-inheritance-chain"></a>
 ## 16.7 Declaring Constructors in an Inheritance Chain
 
 A `constructor` initializes a newly created object. 
@@ -198,6 +208,7 @@ A parent class still gets its own default constructor unless it also defines one
 
 ---
 
+<a id="168-default-no-arg-constructor"></a>
 ## 16.8 Default `no-arg` Constructor
 
 If a class does not declare any constructor, Java automatically inserts a **default no-argument constructor**. 
@@ -215,6 +226,7 @@ class Child extends Parent {
 
 ---
 
+<a id="169-using-this-and-constructor-overloading"></a>
 ## 16.9 Using `this()` and Constructor Overloading
 
 **this()** calls another constructor in the same class. 
@@ -244,6 +256,7 @@ class Car {
 
 ---
 
+<a id="1610-calling-the-parent-constructor-using-super"></a>
 ## 16.10 Calling the Parent Constructor Using `super()`
 
 Every constructor must call a superclass constructor, either explicitly or implicitly.
@@ -266,6 +279,7 @@ class Child extends Parent {
 
 ---
 
+<a id="1611-default-constructor-tips-and-traps"></a>
 ## 16.11 Default Constructor — Tips and Traps
 
 - **If the superclass does not have a no-arg constructor, the subclass MUST call `super(args)` explicitly.**
@@ -285,6 +299,7 @@ class Child extends Parent {
 
 ---
 
+<a id="1612-super-always-refers-to-the-most-direct-parent"></a>
 ## 16.12 `super()` Always Refers to the **Most Direct Parent**
 
 Even in long inheritance chains, `super()` always calls the constructor of the **immediate** superclass, not any higher ancestor.
@@ -314,8 +329,10 @@ C
 
 ---
 
+<a id="1613-inheriting-members"></a>
 ## 16.13 Inheriting Members
 
+<a id="16131-method-overriding"></a>
 ### 16.13.1 Method Overriding
 
 Method overriding is a core concept of inheritance: it allows a subclass to provide a **new implementation** for a method that is already defined in its superclass.
@@ -324,6 +341,7 @@ At runtime, the version of the method that is executed depends on the **actual o
  
 This is called **dynamic dispatch** and it is what enables polymorphism in Java.
 
+<a id="161311-definition-and-role-in-inheritance"></a>
 #### 16.13.1.1 Definition and Role in Inheritance
 
 A method in a subclass **overrides** a method in its superclass if:
@@ -358,6 +376,7 @@ public class TestOverride {
 }
 ```
 
+<a id="161312-using-super-to-call-the-parent-implementation"></a>
 #### 16.13.1.2 Using `super` to Call the Parent Implementation
 
 When a subclass overrides a method, it can still access the superclass implementation via the `super` reference. 
@@ -405,6 +424,7 @@ class Derived extends Base {
 }
 ```
 
+<a id="161313-overriding-rules-instance-methods"></a>
 #### 16.13.1.3 Overriding Rules (Instance Methods)
 
 - **Same signature**: same method name, same parameter types and order.
@@ -430,6 +450,7 @@ class Child extends Parent {
 }
 ```
 
+<a id="161314-hiding-static-methods-method-hiding"></a>
 #### 16.13.1.4 Hiding Static Methods (Method Hiding)
 
 Static methods are **not overridden**; they are **hidden**. 
@@ -469,8 +490,10 @@ public class TestStatic {
     - If you try to redefine them in a subclass, the code will not compile.
 
 
+<a id="16132-abstract-classes"></a>
 ### 16.13.2 Abstract Classes
 
+<a id="161321-definition-and-purpose"></a>
 #### 16.13.2.1 Definition and Purpose
 
 An **abstract class** is a class that cannot be instantiated directly and is intended to be extended. 
@@ -483,6 +506,7 @@ It may contain:
 
 Abstract classes are used when you want to define a common **base behavior** and contract, but leave some details to be implemented by concrete subclasses.
 
+<a id="161322-rules-for-abstract-classes"></a>
 #### 16.13.2.2 Rules for Abstract Classes
 
 - A class with at least one abstract method **must** be declared abstract.
@@ -524,8 +548,10 @@ class Circle extends Shape {
     - Although an abstract class cannot be instantiated, its constructors are still called when creating instances of concrete subclasses.
     - The chain always starts from the top of the hierarchy and moves down.
 
+<a id="16133-creating-immutable-objects"></a>
 ### 16.13.3 Creating Immutable Objects
 
+<a id="161331-what-is-an-immutable-object"></a>
 #### 16.13.3.1 What Is an Immutable Object?
 
 An object is **immutable** if, after it has been created, its state **cannot change**. 
@@ -534,6 +560,7 @@ All fields that represent the state remain constant for the lifetime of that obj
 
 Immutable objects are simpler to reason about, inherently thread safe (if properly designed), and widely used in the Java Standard Library (for example, `String`, wrapper classes like `Integer`, and many classes in `java.time`).
 
+<a id="161332-guidelines-for-designing-immutable-classes"></a>
 #### 16.13.3.2 Guidelines for Designing Immutable Classes
 
 - Declare the class **final** so it cannot be subclassed (or make all constructors private and provide controlled factory methods).

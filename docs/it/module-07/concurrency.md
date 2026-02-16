@@ -1,5 +1,6 @@
 # 31. Java Concurrency APIs
 
+<a id="indice"></a>
 ### Indice
 
 - [31. Java Concurrency APIs](#31-java-concurrency-apis)
@@ -33,6 +34,7 @@ Questo capitolo introduce la **Java Concurrency API**, che fornisce astrazioni d
 
 A differenza della manipolazione di basso livello dei thread presentata nel capitolo precedente, la Concurrency API si concentra su **task**, **executor** e **meccanismi di coordination**, permettendo ai programmatori di ragionare su cosa debba essere fatto piuttosto che su come i thread vengano schedulati.
 
+<a id="311-obiettivi-e-ambito-della-concurrency-api"></a>
 ## 31.1 Obiettivi e Ambito della Concurrency API
 
 La `Java Concurrency API`, principalmente collocata nel package `java.util.concurrent`, è stata introdotta per affrontare problemi fondamentali inerenti alla gestione manuale dei thread.
@@ -54,12 +56,14 @@ executor.shutdown();
 
 ---
 
+<a id="312-problemi-fondamentali-del-threading"></a>
 ## 31.2 Problemi Fondamentali del Threading
 
 Prima di comprendere la `Concurrency API`, è essenziale comprendere le problematiche di concorrenza che essa vuole mitigare.
 
 Questi problemi sorgono da `shared mutable state`, `scheduling unpredictability` e `improper coordination`.
 
+<a id="3121-race-conditions"></a>
 ### 31.2.1 Race Conditions
 
 Una **race condition** si verifica quando più thread accedono a `shared mutable state` (uno stato mutabile e condiviso) e la correttezza del programma dipende dal timing o dall’intercalare della loro esecuzione.
@@ -78,6 +82,7 @@ class Counter {
 
 Se più thread invocano `increment()` in modo concorrente, alcuni incrementi possono andare persi perché l’operazione non è atomica.
 
+<a id="3122-deadlock"></a>
 ### 31.2.2 Deadlock
 
 Un **deadlock** si verifica quando due o più thread sono bloccati in modo permanente, ciascuno in attesa di una risorsa detenuta da un altro thread.
@@ -97,6 +102,7 @@ Se un altro thread acquisisce prima `lockB` e poi attende `lockA`, può verifica
 !!! note
     I deadlock nel mondo reale coinvolgono tipicamente lock multipli e inversioni d’ordine.
 
+<a id="3123-starvation"></a>
 ### 31.2.3 Starvation
 
 La **starvation** si verifica quando a un thread viene negato indefinitamente l’accesso alle risorse, anche se tali risorse sono disponibili.
@@ -110,6 +116,7 @@ ReentrantLock lock = new ReentrantLock(false); // unfair lock
 
 Alcuni thread possono acquisire ripetutamente il lock mentre altri attendono indefinitamente.
 
+<a id="3124-livelock"></a>
 ### 31.2.4 Livelock
 
 In un **livelock**, i thread non sono bloccati ma reagiscono continuamente l’uno all’altro in un modo che ne impedisce il progresso.
@@ -127,6 +134,7 @@ Entrambi i thread possono ripetere continuamente il retry, impedendo il forward 
 
 ---
 
+<a id="313-dai-thread-ai-task"></a>
 ## 31.3 Dai Thread ai Task
 
 La Concurrency API sposta il modello di programmazione dalla gestione diretta dei **thread** alla sottomissione di **task**.
@@ -145,6 +153,7 @@ Questa astrazione permette ai task di essere riusati, schedulati in modo flessib
 
 ---
 
+<a id="314-executor-framework"></a>
 ## 31.4 Executor Framework
 
 L’**Executor Framework** è il cuore della Concurrency API.
@@ -162,6 +171,7 @@ executor.execute(() -> System.out.println("Task 2"));
 executor.shutdown();
 ```
 
+<a id="3141-submitting-task-e-futures"></a>
 ### 31.4.1 Submitting Task e Futures
 
 I task sottomessi tramite `execute()` restituiscono `void`: è un metodo "fire-and-forget" che non restituisce alcuna informazione sul risultato del task.
@@ -194,6 +204,7 @@ Integer result = future.get();
 !!! warning
     `execute()` scarterà le eccezioni silenziosamente a meno che non vengano gestite all’interno del task.
 
+<a id="3142-callable-vs-runnable"></a>
 ### 31.4.2 Callable vs Runnable
 
 Entrambe le interfacce rappresentano task, ma con capacità differenti.
@@ -208,6 +219,7 @@ Runnable r = () -> System.out.println("done");
 
 Per computazione asincrona orientata al risultato, `Callable` è generalmente preferito.
 
+<a id="315-thread-pools-e-scheduling"></a>
 ## 31.5 Thread Pools e Scheduling
 
 Gli executor gestiscono thread pools che riutilizzano un numero fisso o dinamico di thread per eseguire i task in modo efficiente.
@@ -259,6 +271,7 @@ scheduler.schedule(
 
 ---
 
+<a id="316-lifecycle-e-terminazione-dellexecutor"></a>
 ## 31.6 Lifecycle e Terminazione dell'Executor
 
 Gli executor devono essere chiusi esplicitamente per rilasciare risorse e permettere la terminazione della JVM.
@@ -275,10 +288,12 @@ executor.awaitTermination(5, TimeUnit.SECONDS);
 
 ---
 
+<a id="317-strategie-di-thread-safety"></a>
 ## 31.7 Strategie di Thread Safety
 
 La Concurrency API fornisce molteplici strategie complementari per ottenere thread safety.
 
+<a id="3171-sincronizzazione"></a>
 ### 31.7.1 Sincronizzazione
 
 La sincronizzazione impone `mutual exclusion` e `memory visibility` usando un lock intrinseco (monitor) associato a un oggetto o a una classe.
@@ -311,6 +326,7 @@ La keyword synchronized può essere applicata a:
 
 ---
 
+<a id="3172-variabili-atomiche"></a>
 ### 31.7.2 Variabili Atomiche
 
 Le `atomic classes` forniscono operazioni lock-free, thread-safe implementate usando primitive CPU di basso livello come Compare-And-Swap (CAS).
@@ -320,6 +336,7 @@ AtomicInteger count = new AtomicInteger();
 count.incrementAndGet();
 ```
 
+<a id="31721-atomic-classes"></a>
 ### 31.7.2.1 Atomic classes
 
 | Atomic Class | Description |
@@ -334,6 +351,7 @@ count.incrementAndGet();
 | **AtomicStampedReference<T>** | Aggiorna atomicamente un reference con un integer stamp per evitare problemi ABA. |
 | **AtomicMarkableReference<T>** | Aggiorna atomicamente un reference con un boolean mark. |
 
+<a id="31722-metodi-atomici"></a>
 ### 31.7.2.2 Metodi Atomici
 
 | Method | Description |
@@ -368,6 +386,7 @@ Comporre più operazioni richiede comunque synchronization esterna.
 
 ---
 
+<a id="3173-lock-framework"></a>
 ### 31.7.3 Lock Framework
 
 Il package `java.util.concurrent.locks` fornisce meccanismi di locking espliciti che offrono maggiore flessibilità e controllo rispetto a synchronized.
@@ -389,6 +408,7 @@ Caratteristiche chiave del Lock framework:
 - I lock possono essere configurati con fairness policy (parametro) quando l’ordering è richiesto (quando devi controllare l’ordine in cui i thread girano)
 - Più oggetti Condition possono essere associati a un singolo lock
 
+<a id="31731-lock-implementations"></a>
 ### 31.7.3.1 Lock implementations
 
 | Lock Implementation | Description |
@@ -403,6 +423,7 @@ Caratteristiche chiave del Lock framework:
     A differenza di altri lock, StampedLock **non è reentrant** —
     riacquisirlo dallo stesso thread causa deadlock.
 
+<a id="31732-common-lock-methods"></a>
 ### 31.7.3.2 Common Lock methods
 
 | Method | Description |
@@ -416,6 +437,7 @@ Caratteristiche chiave del Lock framework:
 
 A differenza di synchronized, i lock non vengono rilasciati automaticamente, rendendo essenziale l’uso corretto di try/finally per evitare deadlock.
 
+<a id="3174-coordination-utilities"></a>
 ### 31.7.4 Coordination Utilities
 
 Le coordination utilities permettono ai thread di coordinare fasi di esecuzione senza proteggere dati condivisi tramite mutual exclusion.
@@ -489,6 +511,7 @@ Queste utilities si concentrano su execution ordering e synchronization, non su 
 
 ---
 
+<a id="318-concurrent-collections"></a>
 ## 31.8 Concurrent Collections
 
 Le concurrent collections sono **thread-safe data structures** progettate per supportare **alti livelli di concorrenza** senza richiedere sincronizzazione esterna.
@@ -522,6 +545,7 @@ Le blocking queue gestiscono la synchronization internamente, semplificando la c
 
 ---
 
+<a id="319-parallel-streams"></a>
 ## 31.9 Parallel Streams
 
 I `parallel streams` forniscono **declarative data parallelism**, permettendo che le operazioni dello stream vengano eseguite in modo concorrente su più thread con cambiamenti minimi di codice.
@@ -552,6 +576,7 @@ Poiché l’ordine di esecuzione non è garantito, i parallel streams dovrebbero
 
 ---
 
+<a id="3110-relazione-con-virtual-threads"></a>
 ## 31.10 Relazione con Virtual Threads
 
 In Java 21, l’`Executor framework` integra in modo seamless con **virtual threads**, abilitando massive concurrency con uso minimo di risorse.
@@ -568,6 +593,7 @@ Questo permette al codice blocking di scalare efficientemente senza ridisegnare 
 
 ---
 
+<a id="3111-summary"></a>
 ## 31.11 Summary
 
 - La `Java Concurrency API` fornisce un’alternativa robusta, scalabile e più sicura alla gestione manuale dei thread.

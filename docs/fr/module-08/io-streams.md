@@ -1,5 +1,6 @@
 # 34. Streams I/O Java
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [34. Streams I/O Java](#34-streams-io-java)
@@ -51,6 +52,7 @@ Ce chapitre fournit une explication détaillée des `flux I/O Java`.
 
 Il couvre les flux classiques **java.io**, les compare à **java.nio / java.nio.file**, et explique les principes de conception, les API, les cas limites et les distinctions pertinentes.
 
+<a id="341-quest-ce-quun-flux-io-en-java"></a>
 ## 34.1 Qu’est-ce qu’un flux I/O en Java ?
 
 Un `flux I/O` représente un flux de données entre un programme Java et une source ou une destination externe.
@@ -69,22 +71,26 @@ En Java, les flux sont organisés autour de deux dimensions majeures :
 
 ---
 
+<a id="342-flux-doctets-vs-flux-de-caractères"></a>
 ## 34.2 Flux d’octets vs flux de caractères
 
 Java distingue les flux selon l’unité de données qu’ils traitent.
 
+<a id="3421-flux-doctets"></a>
 ### 34.2.1 Flux d’octets
 
 - Fonctionnent avec des octets bruts 8 bits
 - Utilisés pour les données binaires (images, audio, PDF, ZIP)
 - Classes de base : `InputStream` et `OutputStream`
 
+<a id="3422-flux-de-caractères"></a>
 ### 34.2.2 Flux de caractères
 
 - Fonctionnent avec des caractères Unicode 16 bits
 - Gèrent automatiquement l’encodage des caractères
 - Classes de base : `Reader` et `Writer`
 
+<a id="3423-tableau-récapitulatif"></a>
 ### 34.2.3 Tableau récapitulatif
 
 |	Aspect	|	Flux d’octets	|	Flux de caractères	|
@@ -97,10 +103,12 @@ Java distingue les flux selon l’unité de données qu’ils traitent.
 
 ---
 
+<a id="343-flux-de-bas-niveau-vs-flux-de-haut-niveau"></a>
 ## 34.3 Flux de bas niveau vs flux de haut niveau
 
 Les flux dans `java.io` suivent un pattern decorator. Les flux sont empilés pour ajouter des fonctionnalités.
 
+<a id="3431-flux-de-bas-niveau-node-streams"></a>
 ### 34.3.1 Flux de bas niveau (Node Streams)
 
 Les flux de bas niveau se connectent directement à une source ou un puits de données.
@@ -108,6 +116,7 @@ Les flux de bas niveau se connectent directement à une source ou un puits de do
 - Ils savent lire/écrire des octets ou des caractères
 - Ils ne fournissent PAS de mise en tampon, de formatage ou de gestion d’objets
 
+<a id="3432-flux-de-bas-niveau-courants"></a>
 ### 34.3.2 Flux de bas niveau courants
 
 |	Classe de flux	|	Objectif	|
@@ -131,6 +140,7 @@ try (InputStream in = new FileInputStream("data.bin")) {
 !!! note
     Les flux de bas niveau sont rarement utilisés seuls dans des applications réelles en raison de performances médiocres et de fonctionnalités limitées.
 
+<a id="3433-flux-de-haut-niveau-filter-processing-streams"></a>
 ### 34.3.3 Flux de haut niveau (Filter / Processing Streams)
 
 Les flux de haut niveau enveloppent d’autres flux pour ajouter des fonctionnalités.
@@ -140,6 +150,7 @@ Les flux de haut niveau enveloppent d’autres flux pour ajouter des fonctionnal
 - Sérialisation d’objets
 - Lecture/écriture de primitifs
 
+<a id="3434-flux-de-haut-niveau-courants"></a>
 ### 34.3.4 Flux de haut niveau courants
 
 |	Classe de flux	|	Ajoute des fonctionnalités	|
@@ -165,12 +176,14 @@ try (BufferedReader reader =
 }
 ```
 
+<a id="3435-règles-de-chaînage-des-flux-et-erreurs-courantes"></a>
 ### 34.3.5 Règles de chaînage des flux et erreurs courantes
 
 L’exemple précédent illustre le chaînage des flux, un concept central de `java.io` basé sur le pattern decorator.
 
 Chaque flux enveloppe un autre flux, ajoutant des fonctionnalités tout en préservant une hiérarchie de types stricte.
 
+<a id="34351-règle-fondamentale-de-chaînage"></a>
 #### 34.3.5.1 Règle fondamentale de chaînage
 
 Un flux ne peut envelopper qu’un autre flux d’un niveau d’abstraction compatible.
@@ -182,10 +195,12 @@ Un flux ne peut envelopper qu’un autre flux d’un niveau d’abstraction comp
 !!! note
     Vous ne pouvez pas mélanger arbitrairement `InputStream` avec `Reader` ou `OutputStream` avec `Writer`.
 
+<a id="34352-incompatibilité-flux-doctets-vs-flux-de-caractères"></a>
 #### 34.3.5.2 Incompatibilité flux d’octets vs flux de caractères
 
 Une erreur très courante consiste à tenter d’envelopper un flux d’octets directement avec une classe basée sur les caractères (ou inversement).
 
+<a id="34353-chaînage-invalide-erreur-de-compilation"></a>
 #### 34.3.5.3 Chaînage invalide (erreur de compilation)
 
 ```java
@@ -196,6 +211,7 @@ BufferedReader reader =
 !!! note
     Cela échoue parce que `BufferedReader` attend un `Reader`, pas un `InputStream`.
 
+<a id="34354-pont-entre-flux-doctets-et-flux-de-caractères"></a>
 #### 34.3.5.4 Pont entre flux d’octets et flux de caractères
 
 Pour convertir entre les flux basés sur les octets et ceux basés sur les caractères, Java fournit des classes passerelles qui effectuent un décodage/encodage explicite du charset.
@@ -203,6 +219,7 @@ Pour convertir entre les flux basés sur les octets et ceux basés sur les carac
 - `InputStreamReader` convertit octets → caractères
 - `OutputStreamWriter` convertit caractères → octets
 
+<a id="34355-patron-correct-de-conversion"></a>
 #### 34.3.5.5 Patron correct de conversion
 
 ```java
@@ -214,6 +231,7 @@ BufferedReader reader =
 !!! note
     La passerelle gère le décodage des caractères en utilisant un charset (par défaut ou explicite).
 
+<a id="34356-règles-dordre-dans-les-chaînes-de-flux"></a>
 #### 34.3.5.6 Règles d’ordre dans les chaînes de flux
 
 L’ordre d’enveloppement n’est pas arbitraire.
@@ -222,12 +240,14 @@ L’ordre d’enveloppement n’est pas arbitraire.
 - Les passerelles (si nécessaires) viennent ensuite
 - Les flux tamponnés ou de traitement viennent en dernier
 
+<a id="34357-ordre-logique-correct"></a>
 #### 34.3.5.7 Ordre logique correct
 
 ```text
 FileInputStream → InputStreamReader → BufferedReader
 ```
 
+<a id="34358-règle-de-gestion-des-ressources"></a>
 #### 34.3.5.8 Règle de gestion des ressources
 
 Fermer le flux le plus externe ferme automatiquement tous les flux enveloppés.
@@ -235,6 +255,7 @@ Fermer le flux le plus externe ferme automatiquement tous les flux enveloppés.
 !!! note
     C’est pourquoi try-with-resources devrait référencer uniquement le flux de plus haut niveau.
 
+<a id="34359-pièges-courants"></a>
 #### 34.3.5.9 Pièges courants
 
 - Essayer de tamponner un flux du mauvais type
@@ -245,16 +266,19 @@ Fermer le flux le plus externe ferme automatiquement tous les flux enveloppés.
 
 ---
 
+<a id="344-classes-de-base-principales-de-javaio-et-méthodes-clés"></a>
 ## 34.4 Classes de base principales de `java.io` et méthodes clés
 
 Le package `java.io` est construit autour d’un petit ensemble de **classes de base abstraites**.
 Comprendre ces classes et leurs contrats est essentiel, car toutes les classes I/O concrètes s’appuient sur elles.
 
+<a id="3441-inputstream"></a>
 ### 34.4.1 InputStream
 
 Classe de base abstraite pour l’entrée orientée octets.
 Tous les flux d’entrée lisent des octets bruts (valeurs 8 bits) depuis une source telle qu’un fichier, un socket réseau, ou un buffer mémoire.
 
+<a id="34411-méthodes-clés"></a>
 #### 34.4.1.1 Méthodes clés
 
 | Méthode | Description |
@@ -274,6 +298,7 @@ La méthode `read()` à octet unique est principalement un primitif de bas nivea
 
 En pratique, lire un octet à la fois est inefficace et devrait presque toujours être évité au profit de lectures tamponnées.
 
+<a id="34412-exemple-dutilisation-typique"></a>
 #### 34.4.1.2 Exemple d’utilisation typique
 
 ```java
@@ -286,12 +311,14 @@ try (InputStream in = new FileInputStream("data.bin")) {
 }
 ```
 
+<a id="3442-outputstream"></a>
 ### 34.4.2 OutputStream
 
 Classe de base abstraite pour la sortie orientée octets.
 
 Elle représente une destination où des octets bruts peuvent être écrits.
 
+<a id="34421-méthodes-clés"></a>
 #### 34.4.2.1 Méthodes clés
 
 | Méthode | Description |
@@ -307,6 +334,7 @@ Elle représente une destination où des octets bruts peuvent être écrits.
     
     Ne pas faire flush ou close sur un OutputStream peut entraîner une perte de données.
 
+<a id="34422-exemple-dutilisation-typique"></a>
 #### 34.4.2.2 Exemple d’utilisation typique
 
 ```java
@@ -316,6 +344,7 @@ try (OutputStream out = new FileOutputStream("out.bin")) {
 }
 ```
 
+<a id="3443-reader-et-writer"></a>
 ### 34.4.3 Reader et Writer
 
 `Reader` et `Writer` sont les équivalents `orientés caractères` de InputStream et OutputStream.
@@ -331,6 +360,7 @@ Readers et Writers impliquent toujours un `charset`, explicitement ou implicitem
 
 Cela en fait l’abstraction correcte pour le traitement de texte.
 
+<a id="34431-gestion-du-charset"></a>
 #### 34.4.3.1 Gestion du charset
 
 ```java
@@ -347,6 +377,7 @@ Reader reader = new InputStreamReader(
 
 ---
 
+<a id="345-flux-tamponnés-et-performance"></a>
 ## 34.5 Flux tamponnés et performance
 
 Les `flux tamponnés` enveloppent un autre flux et ajoutent un buffer en mémoire.
@@ -359,6 +390,7 @@ Au lieu d’interagir avec le système d’exploitation à chaque read ou write,
 !!! note
     Les `flux tamponnés` sont des `decorators` : ils ne remplacent pas le flux sous-jacent, ils l’améliorent en ajoutant un comportement de mise en tampon.
 
+<a id="3451-pourquoi-la-mise-en-tampon-compte"></a>
 ### 34.5.1 Pourquoi la mise en tampon compte
 
 | Aspect | Non tamponné | Tamponné |
@@ -371,6 +403,7 @@ Les appels système sont des opérations coûteuses.
 
 La mise en tampon les minimise en regroupant plusieurs lectures ou écritures logiques en moins d’opérations I/O physiques.
 
+<a id="3452-comment-fonctionne-la-lecture-non-tamponnée"></a>
 ### 34.5.2 Comment fonctionne la lecture non tamponnée
 
 Dans un flux non tamponné, chaque appel à read() peut entraîner un appel système natif.
@@ -389,6 +422,7 @@ try (InputStream in = new FileInputStream("data.bin")) {
 !!! note
     Lire octet par octet sans mise en tampon est presque toujours un anti-pattern de performance.
 
+<a id="3453-comment-fonctionne-bufferedinputstream"></a>
 ### 34.5.3 Comment fonctionne BufferedInputStream
 
 `BufferedInputStream` lit en interne un grand bloc d’octets dans un buffer.
@@ -408,6 +442,7 @@ try (InputStream in =
 !!! note
     Le programme appelle toujours `read()` de manière répétée, mais le système d’exploitation n’est accédé que lorsque le buffer interne doit être rempli à nouveau.
 
+<a id="3454-exemple-de-sortie-tamponnée"></a>
 ### 34.5.4 Exemple de sortie tamponnée
 
 La sortie tamponnée accumule les données en mémoire et les écrit en plus gros blocs.
@@ -429,6 +464,7 @@ try (OutputStream out =
     
     Appeler `flush()` explicitement est utile lorsque les données doivent être visibles immédiatement.
 
+<a id="3455-bufferedreader-vs-reader"></a>
 ### 34.5.5 BufferedReader vs Reader
 
 `BufferedReader` ajoute une `**lecture par lignes**` efficace au-dessus d’un Reader.
@@ -449,6 +485,7 @@ try (BufferedReader reader =
 !!! note
     La méthode `readLine()` n’est disponible que sur `BufferedReader` (pas sur `Reader`), car elle s’appuie sur la mise en tampon pour détecter efficacement les limites de ligne.
 
+<a id="3456-exemple-de-bufferedwriter"></a>
 ### 34.5.6 Exemple de BufferedWriter
 
 ```java
@@ -472,10 +509,12 @@ try (BufferedWriter writer =
 
 ---
 
+<a id="346-javaio-vs-javanio-et-javaniofile"></a>
 ## 34.6 java.io vs java.nio (et java.nio.file)
 
 Les applications Java modernes favorisent de plus en plus les API NIO et NIO.2, mais java.io reste fondamental et largement utilisé.
 
+<a id="3461-différences-conceptuelles"></a>
 ### 34.6.1 Différences conceptuelles
 
 | Aspect | java.io | java.nio / nio.2 |
@@ -491,6 +530,7 @@ Les applications Java modernes favorisent de plus en plus les API NIO et NIO.2, 
     
     De nombreuses classes NIO s’appuient en interne sur des flux ou coexistent avec eux.
 
+<a id="3462-javanio-io-de-fichier-moderne"></a>
 ### 34.6.2 java.nio (I/O de fichier moderne)
 
 Le package `java.nio.file` (NIO.2) fournit une API fichiers de haut niveau, expressive et plus sûre.
@@ -516,6 +556,7 @@ try (BufferedReader reader = new BufferedReader(new FileReader("file.txt"))) {
 
 ---
 
+<a id="347-quand-utiliser-quelle-api"></a>
 ## 34.7 Quand utiliser quelle API
 
 | Scénario | API recommandée |
@@ -528,6 +569,7 @@ try (BufferedReader reader = new BufferedReader(new FileReader("file.txt"))) {
 
 ---
 
+<a id="348-pièges-courants-et-conseils"></a>
 ## 34.8 Pièges courants et conseils
 
 - La fin de fichier est indiquée par -1, pas par une exception

@@ -1,5 +1,6 @@
 # 30. Thread Java – Fondamentaux et Modèle d’Exécution
 
+<a id="indice"></a>
 ### Indice
 
 - [30. Thread Java – Fondamentaux et Modèle d’Exécution](#30-thread-java--fondamentaux-et-modèle-dexécution)
@@ -28,6 +29,7 @@ Ce chapitre introduit les **thread** à partir des principes de base et explique
 
 Ce texte établit également les fondations conceptuelles nécessaires pour comprendre `concurrency`, `synchronization` et la `Java Concurrency API` traitée dans le prochain chapitre.
 
+<a id="301-thread-processus-et-le-système-dexploitation"></a>
 ## 30.1 Thread, Processus et le Système d’Exploitation
 
 Pour comprendre les thread, nous devons partir du modèle d’exécution du système d’exploitation.
@@ -43,6 +45,7 @@ Un seul processus peut contenir de nombreux thread, tous opérant dans le même 
 
 ---
 
+<a id="302-modèle-de-mémoire-stack-et-heap"></a>
 ## 30.2 Modèle de Mémoire: Stack et Heap
 
 Les thread interagissent avec la mémoire de deux manières fondamentalement différentes.
@@ -54,6 +57,7 @@ Puisque les `stack sont isolés` et le `heap est partagé`, les problèmes de co
 
 ---
 
+<a id="303-contexte-et-context-switching"></a>
 ## 30.3 Contexte et Context Switching
 
 Le système d’exploitation planifie l’exécution des thread sur les core de la CPU.
@@ -69,6 +73,7 @@ Les programmeurs Java doivent concevoir des systèmes qui équilibrent concurren
 
 ---
 
+<a id="304-concurrency-vs-parallelisme"></a>
 ## 30.4 Concurrency vs Parallelisme
 
 Ces deux termes sont souvent confondus mais décrivent des concepts différents.
@@ -82,6 +87,7 @@ Même sur un système single-core, les thread Java peuvent être concurrents via
 
 ---
 
+<a id="305-thread-en-java-modèle-conceptuel"></a>
 ## 30.5 Thread en Java: Modèle Conceptuel
 
 En Java, un **thread** représente un chemin indépendant d’exécution à l’intérieur d’un seul processus JVM. Tous les thread Java opèrent dans le même heap et dans le même contexte de `class loading`, à moins qu’ils ne soient explicitement isolés via des mécanismes avancés.
@@ -93,6 +99,7 @@ Un thread exécute du code en invoquant sa propre méthode `run()`, directement 
 
 ---
 
+<a id="306-catégories-de-thread-en-java-21"></a>
 ## 30.6 Catégories de Thread en Java 21
 
 Java 21 définit différents types de thread, qui diffèrent par cycle de vie, scheduling et usage prévu.
@@ -109,6 +116,7 @@ Java 21 définit différents types de thread, qui diffèrent par cycle de vie, s
 
 ---
 
+<a id="307-créer-des-thread-en-java"></a>
 ## 30.7 Créer des Thread en Java
 
 Les thread peuvent être créés de différentes manières, toutes conceptuellement centrées sur la fourniture de logique exécutable.
@@ -147,6 +155,7 @@ Runnable runnable = ...
 
 ---
 
+<a id="308-cycle-de-vie-et-exécution-dun-thread"></a>
 ## 30.8 Cycle de Vie et Exécution d’un Thread
 
 Un thread Java traverse des états bien définis au cours de son cycle de vie.
@@ -163,6 +172,7 @@ Les thread dans l’état `BLOCKED`, `WAITING` ou `TIMED_WAITING` **n’utilisen
 
 ---
 
+<a id="309-démarrer-vs-exécuter-un-thread-synchrone-ou-asynchrone"></a>
 ## 30.9 Démarrer vs Exécuter un Thread: Synchrone ou Asynchrone
 
 Il existe une distinction conceptuelle critique entre invoquer `run()` et invoquer `start()`.
@@ -180,6 +190,7 @@ Par conséquent, du code comme `new Thread(r).run();` NE crée PAS de concurrenc
 !!! important
     La concurrence commence **seulement** lorsque `start()` est invoqué.
 
+<a id="3010-priorité-des-thread-et-scheduling"></a>
 ## 30.10 Priorité des Thread et Scheduling
 
 Les thread Java ont une priorité associée qui influence le scheduling.
@@ -193,6 +204,7 @@ Il est possible de définir la **priorité** sur les `platform threads`; pour le
 
 ---
 
+<a id="3011-différément-et-yield-des-thread"></a>
 ## 30.11 Différément et Yield des Thread
 
 Les thread peuvent influencer volontairement le comportement de scheduling.
@@ -206,6 +218,7 @@ Ces mécanismes ne garantissent pas l’exécution immédiate d’autres thread;
 
 ---
 
+<a id="3012-interruption-des-thread-et-annulation-coopérative"></a>
 ## 30.12 Interruption des Thread et Annulation Coopérative
 
 Les thread Java ne peuvent pas être arrêtés de force depuis l’extérieur.
@@ -214,6 +227,7 @@ Les thread Java ne peuvent pas être arrêtés de force depuis l’extérieur.
 
 Le thread cible décide comment et quand répondre.
 
+<a id="30121-ce-que-signifie-interrompre-un-thread"></a>
 ### 30.12.1 Ce que Signifie Interrompre un Thread
 
 Interrompre un thread **ne** le termine **pas**. Appeler `interrupt()` définit un **flag d’interruption** interne sur le thread cible. Il est de la responsabilité du thread en exécution d’observer ce flag et de réagir de manière appropriée.
@@ -224,6 +238,7 @@ Interrompre un thread **ne** le termine **pas**. Appeler `interrupt()` définit 
 
 ---
 
+<a id="30122-interrompre-des-opérations-bloquantes"></a>
 ### 30.12.2 Interrompre des Opérations Bloquantes
 
 Certaines méthodes bloquantes en Java répondent immédiatement à l’interruption en lançant `InterruptedException` et en mettant à zéro le flag d’interruption. Ces méthodes incluent `sleep()`, `wait()` et `join()`.
@@ -232,6 +247,7 @@ Lorsqu’un thread est bloqué dans l’une de ces méthodes et qu’un autre th
 
 ---
 
+<a id="30123-vérifier-le-statut-dinterruption"></a>
 ### 30.12.3 Vérifier le Statut d’Interruption
 
 Les thread qui ne sont pas bloqués doivent vérifier explicitement s’ils ont été interrompus. Java fournit deux façons de le faire.
@@ -243,6 +259,7 @@ Ne pas vérifier le statut d’interruption peut amener les thread à ignorer de
 
 ---
 
+<a id="30124-exemple-interrompre-un-thread-en-sleep"></a>
 ### 30.12.4 Exemple: Interrompre un Thread en Sleep
 
 L’exemple suivant démontre l’annulation coopérative via interruption.
@@ -294,6 +311,7 @@ Task interrupted, shutting down
 
 ---
 
+<a id="30125-observations-clés"></a>
 ### 30.12.5 Observations Clés
 
 - Appeler `interrupt()` n’arrête pas directement le thread.
@@ -306,6 +324,7 @@ Task interrupted, shutting down
 
 ---
 
+<a id="3013-thread-et-le-thread-principal"></a>
 ## 30.13 Thread et le Thread Principal
 
 Chaque application Java commence avec un **thread principal**. Ce thread exécute la méthode `main(String[])`.
@@ -319,6 +338,7 @@ Comprendre le rôle du thread principal est essentiel pour raisonner sur la term
 
 ---
 
+<a id="3014-concurrency-des-thread-et-état-partagé"></a>
 ## 30.14 Concurrency des Thread et État Partagé
 
 La `Concurrence` naît lorsque plusieurs thread accèdent à un état mutable partagé.
@@ -333,6 +353,7 @@ La synchronization, les variables volatile et les utilities de concurrence de ha
 
 ---
 
+<a id="3015-sommaire"></a>
 ## 30.15 Sommaire
 
 - Les `Thread` sont le bloc de construction fondamental de l’exécution concurrente en Java.

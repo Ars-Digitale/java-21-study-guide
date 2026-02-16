@@ -1,5 +1,6 @@
 # 34. Java I/O Streams
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [34. Java I/O Streams](#34-java-io-streams)
@@ -52,6 +53,7 @@ This chapter provides a detailed explanation of `Java I/O Streams`.
 
 It covers classic **java.io** streams, contrasts them with **java.nio / java.nio.file**, and explains design principles, APIs, edge cases, and relevant distinctions.
 
+<a id="341-what-is-an-io-stream-in-java"></a>
 ## 34.1 What Is an I/O Stream in Java?
 
 An `I/O Stream` represents a flow of data between a Java program and an external source or destination. 
@@ -70,22 +72,26 @@ In Java, streams are organized around two major dimensions:
 
 ---
 
+<a id="342-byte-streams-vs-character-streams"></a>
 ## 34.2 Byte Streams vs Character Streams
 
 Java distinguishes streams based on the unit of data they process.
 
+<a id="3421-byte-streams"></a>
 ### 34.2.1 Byte Streams
 
 - Work with raw 8-bit bytes
 - Used for binary data (images, audio, PDFs, ZIPs)
 - Base classes: `InputStream` and `OutputStream` 
 
+<a id="3422-character-streams"></a>
 ### 34.2.2 Character Streams
 
 - Work with 16-bit Unicode characters
 - Handle character encoding automatically
 - Base classes: `Reader` and `Writer` 
 
+<a id="3423-summary-table"></a>
 ### 34.2.3 Summary Table
 
 
@@ -99,10 +105,12 @@ Java distinguishes streams based on the unit of data they process.
 
 ---
 
+<a id="343-low-level-vs-high-level-streams"></a>
 ## 34.3 Low-Level vs High-Level Streams
 
 Streams in `java.io` follow a decorator pattern. Streams are stacked to add functionality.
 
+<a id="3431-low-level-streams-node-streams"></a>
 ### 34.3.1 Low-Level Streams (Node Streams)
 
 Low-level streams connect directly to a data source or sink.
@@ -110,6 +118,7 @@ Low-level streams connect directly to a data source or sink.
 - They know how to read/write bytes or characters
 - They do NOT provide buffering, formatting, or object handling
 
+<a id="3432-common-low-level-streams"></a>
 ### 34.3.2 Common Low-Level Streams
 
 
@@ -135,6 +144,7 @@ try (InputStream in = new FileInputStream("data.bin")) {
 !!! note
     Low-level streams are rarely used alone in real applications due to poor performance and limited features.
 
+<a id="3433-high-level-streams-filter-processing-streams"></a>
 ### 34.3.3 High-Level Streams (Filter / Processing Streams)
 
 High-level streams wrap other streams to add functionality.
@@ -144,6 +154,7 @@ High-level streams wrap other streams to add functionality.
 - Object serialization
 - Primitive reading/writing
 
+<a id="3434-common-high-level-streams"></a>
 ### 34.3.4 Common High-Level Streams
 
 
@@ -171,12 +182,14 @@ try (BufferedReader reader =
 }
 ```
 
+<a id="3435-stream-chaining-rules-and-common-errors"></a>
 ### 34.3.5 Stream Chaining Rules and Common Errors
 
 The previous example illustrates stream chaining, a core concept in `java.io` based on the decorator pattern. 
 
 Each stream wraps another stream, adding functionality while preserving a strict type hierarchy.
 
+<a id="34351-fundamental-chaining-rule"></a>
 #### 34.3.5.1 Fundamental Chaining Rule
 
 A stream can only wrap another stream of a compatible abstraction level.
@@ -188,10 +201,12 @@ A stream can only wrap another stream of a compatible abstraction level.
 !!! note
     You cannot arbitrarily mix `InputStream` with `Reader` or `OutputStream` with `Writer`.
 
+<a id="34352-byte-vs-character-stream-incompatibility"></a>
 #### 34.3.5.2 Byte vs Character Stream Incompatibility
 
 A very common error is attempting to wrap a byte stream directly with a character-based class (or vice versa).
 
+<a id="34353-invalid-chaining-compile-time-error"></a>
 #### 34.3.5.3 Invalid Chaining (Compile-Time Error)
 
 ```java
@@ -202,6 +217,7 @@ BufferedReader reader =
 !!! note
     This fails because `BufferedReader` expects a `Reader`, not an `InputStream`.
 
+<a id="34354-bridging-byte-streams-to-character-streams"></a>
 #### 34.3.5.4 Bridging Byte Streams to Character Streams
 
 To convert between byte-based and character-based streams, Java provides bridge classes that perform explicit charset decoding/encoding.
@@ -209,6 +225,7 @@ To convert between byte-based and character-based streams, Java provides bridge 
 - `InputStreamReader` converts bytes → characters
 - `OutputStreamWriter` converts characters → bytes
 
+<a id="34355-correct-conversion-pattern"></a>
 #### 34.3.5.5 Correct Conversion Pattern
 
 ```java
@@ -220,6 +237,7 @@ BufferedReader reader =
 !!! note
     The bridge handles character decoding using a charset (default or explicit).
 
+<a id="34356-ordering-rules-in-stream-chains"></a>
 #### 34.3.5.6 Ordering Rules in Stream Chains
 
 The order of wrapping is not arbitrary.
@@ -228,12 +246,14 @@ The order of wrapping is not arbitrary.
 - Bridges (if needed) come next
 - Buffered or processing streams come last
 
+<a id="34357-correct-logical-order"></a>
 #### 34.3.5.7 Correct Logical Order
 
 ```text
 FileInputStream → InputStreamReader → BufferedReader
 ```
 
+<a id="34358-resource-management-rule"></a>
 #### 34.3.5.8 Resource Management Rule
 
 Closing the outermost stream automatically closes all wrapped streams.
@@ -241,6 +261,7 @@ Closing the outermost stream automatically closes all wrapped streams.
 !!! note
     This is why try-with-resources should reference only the highest-level stream.
 
+<a id="34359-common-pitfalls"></a>
 #### 34.3.5.9 Common Pitfalls
 
 - Trying to buffer a stream of the wrong type
@@ -251,16 +272,19 @@ Closing the outermost stream automatically closes all wrapped streams.
 
 ---
 
+<a id="344-core-javaio-base-classes-and-key-methods"></a>
 ## 34.4 Core `java.io` Base Classes and Key Methods
 
 The `java.io` package is built around a small set of **abstract base classes**.
 Understanding these classes and their contracts is essential, because all concrete I/O classes build on them.
 
+<a id="3441-inputstream"></a>
 ### 34.4.1 InputStream
 
 Abstract base class for byte-oriented input.
 All input streams read raw bytes (8-bit values) from a source such as a file, network socket, or memory buffer.
 
+<a id="34411-key-methods"></a>
 #### 34.4.1.1 Key Methods
 
 | Method | Description |
@@ -280,6 +304,7 @@ The `single-byte read()` method is primarily a low-level primitive.
 
 In practice, reading one byte at a time is inefficient and should almost always be avoided in favor of buffered reads.
 
+<a id="34412-typical-usage-example"></a>
 #### 34.4.1.2 Typical Usage Example
 
 ```java
@@ -292,12 +317,14 @@ try (InputStream in = new FileInputStream("data.bin")) {
 }
 ```
 
+<a id="3442-outputstream"></a>
 ### 34.4.2 OutputStream
 
 Abstract base class for byte-oriented output.
 
 It represents a destination where raw bytes can be written.
 
+<a id="34421-key-methods"></a>
 #### 34.4.2.1 Key Methods
 
 | Method | Description |
@@ -313,6 +340,7 @@ It represents a destination where raw bytes can be written.
     
     Failing to flush or close an OutputStream may result in data loss.
 
+<a id="34422-typical-usage-example"></a>
 #### 34.4.2.2 Typical Usage Example
 
 ```java
@@ -322,6 +350,7 @@ try (OutputStream out = new FileOutputStream("out.bin")) {
 }
 ```
 
+<a id="3443-reader-and-writer"></a>
 ### 34.4.3 Reader and Writer
 
 `Reader` and `Writer` are the `character-oriented` counterparts of InputStream and OutputStream.
@@ -337,6 +366,7 @@ Readers and Writers always involve a `charset`, either explicitly or implicitly.
 
 This makes them the correct abstraction for text processing.
 
+<a id="34431-charset-handling"></a>
 #### 34.4.3.1 Charset Handling
 
 ```java
@@ -353,6 +383,7 @@ Reader reader = new InputStreamReader(
 
 ---
 
+<a id="345-buffered-streams-and-performance"></a>
 ## 34.5 Buffered Streams and Performance
 
 `Buffered streams` wrap another stream and add an in-memory buffer.
@@ -365,6 +396,7 @@ Instead of interacting with the operating system on every read or write, data is
 !!! note
     `Buffered streams` are `decorators`: they do not replace the underlying stream, they enhance it by adding buffering behavior.
 
+<a id="3451-why-buffering-matters"></a>
 ### 34.5.1 Why Buffering Matters
 
 | Aspect | Unbuffered | Buffered |
@@ -377,6 +409,7 @@ System calls are expensive operations.
 
 Buffering minimizes them by grouping multiple logical reads or writes into fewer physical I/O operations.
 
+<a id="3452-how-unbuffered-reading-works"></a>
 ### 34.5.2 How Unbuffered Reading Works
 
 In an unbuffered stream, each call to read() may result in a native system call.
@@ -395,6 +428,7 @@ try (InputStream in = new FileInputStream("data.bin")) {
 !!! note
     Reading byte-by-byte without buffering is almost always a performance anti-pattern.
 
+<a id="3453-how-bufferedinputstream-works"></a>
 ### 34.5.3 How BufferedInputStream Works
 
 `BufferedInputStream` internally reads a large block of bytes into a buffer.
@@ -414,6 +448,7 @@ try (InputStream in =
 !!! note
     The program still calls `read()` repeatedly, but the operating system is accessed only when the internal buffer needs refilling.
 
+<a id="3454-buffered-output-example"></a>
 ### 34.5.4 Buffered Output Example
 
 Buffered output accumulates data in memory and writes it in larger chunks.
@@ -435,6 +470,7 @@ try (OutputStream out =
     
     Calling `flush()` explicitly is useful when data must be visible immediately.
 
+<a id="3455-bufferedreader-vs-reader"></a>
 ### 34.5.5 BufferedReader vs Reader
 
 `BufferedReader` adds efficient `**line-based reading**` on top of a Reader.
@@ -456,6 +492,7 @@ try (BufferedReader reader =
     The `readLine()` method is only available on `BufferedReader` (not `Reader`), because it relies on buffering to efficiently detect line boundaries.
 
 
+<a id="3456-bufferedwriter-example"></a>
 ### 34.5.6 BufferedWriter Example
 
 ```java
@@ -479,10 +516,12 @@ try (BufferedWriter writer =
 
 ---
 
+<a id="346-javaio-vs-javanio-and-javaniofile"></a>
 ## 34.6 java.io vs java.nio (and java.nio.file)
 
 Modern Java applications increasingly favor NIO and NIO.2 APIs, but java.io remains fundamental and widely used.
 
+<a id="3461-conceptual-differences"></a>
 ### 34.6.1 Conceptual Differences
 
 | Aspect | java.io | java.nio / nio.2 |
@@ -498,6 +537,7 @@ Modern Java applications increasingly favor NIO and NIO.2 APIs, but java.io rema
     
     Many NIO classes internally rely on streams or coexist with them.
 
+<a id="3462-javanio-modern-file-io"></a>
 ### 34.6.2 java.nio (Modern File I/O)
 
 The `java.nio.file` package (NIO.2) provides a high-level, expressive, and safer file API.
@@ -523,6 +563,7 @@ try (BufferedReader reader = new BufferedReader(new FileReader("file.txt"))) {
 
 ---
 
+<a id="347-when-to-use-which-api"></a>
 ## 34.7 When to Use Which API
 
 | Scenario | Recommended API |
@@ -535,6 +576,7 @@ try (BufferedReader reader = new BufferedReader(new FileReader("file.txt"))) {
 
 ---
 
+<a id="348-common-traps-and-tips"></a>
 ## 34.8 Common Traps and Tips
 
 - End-of-file is indicated by -1, not by an exception

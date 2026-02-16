@@ -1,5 +1,6 @@
 # 29. Sequenced Collections & Sequenced Maps
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [29. Sequenced Collections & Sequenced Maps](#29-sequenced-collections--sequenced-maps)
@@ -23,6 +24,7 @@ Java 21 introduces `Sequenced Collections` and `Sequenced Maps` to unify and for
 
 This addition solves long-standing inconsistencies between lists, sets, queues, deques, and maps, providing a common API to work with the first and last elements, as well as reversed views.
 
+<a id="291-motivation-and-background"></a>
 ## 29.1 Motivation and Background
 
 Before Java 21, ordered collections (such as List, LinkedHashSet, Deque, or LinkedHashMap) exposed ordering operations through different methods or not at all.
@@ -33,6 +35,7 @@ Sequenced interfaces introduce a consistent contract for all ordered collections
 
 ---
 
+<a id="292-sequencedcollection-interface"></a>
 ## 29.2 SequencedCollection Interface
 
 `SequencedCollection<E>` is a new interface that extends Collection<E> and represents collections with a well-defined encounter order.
@@ -40,6 +43,7 @@ Sequenced interfaces introduce a consistent contract for all ordered collections
 Implemented by `List`, `Deque`, and `LinkedHashSet` (TreeSet is ordered but does not implement SequencedCollection directly).
 
 
+<a id="2921-core-methods-of-sequencedcollection"></a>
 ### 29.2.1 Core Methods of SequencedCollection
 
 The interface defines methods to access and manipulate elements at both ends of the collection.
@@ -54,6 +58,7 @@ The interface defines methods to access and manipulate elements at both ends of 
 |	`E removeLast()`	|	Removes and returns the last element |
 |	`SequencedCollection<E> reversed()`	|	Returns a reversed view |
 
+<a id="2922-implementations-of-sequencedcollection"></a>
 ### 29.2.2 Implementations of SequencedCollection
 
 The following standard types implement SequencedCollection:
@@ -64,6 +69,7 @@ The following standard types implement SequencedCollection:
 |**Deque**	|	Double-ended queue |
 |**LinkedHashSet**	|	Maintains insertion order |
 
+<a id="2923-reversed-views"></a>
 ### 29.2.3 Reversed Views
 
 Calling reversed() does not create a copy.
@@ -84,12 +90,14 @@ System.out.println(list); // [1, 2]
 
 ---
 
+<a id="293-sequencedmap-interface"></a>
 ## 29.3 SequencedMap Interface
 
 `SequencedMap<K,V>` extends `Map<K,V>` and represents maps with a defined encounter order of entries.
 
 It standardizes operations that previously existed only in specific implementations such as `LinkedHashMap`.
 
+<a id="2931-core-methods-of-sequencedmap"></a>
 ### 29.3.1 Core Methods of SequencedMap
 
 | Method | Description |
@@ -100,6 +108,7 @@ It standardizes operations that previously existed only in specific implementati
 |`Entry<K,V> pollLastEntry()` | Removes and returns last entry, or null if empty  |
 |`SequencedMap<K,V> reversed()` | Reversed view of the map |
 
+<a id="2932-implementations-of-sequencedmap"></a>
 ### 29.3.2 Implementations of SequencedMap
 
 Currently, the primary standard implementation is:
@@ -113,6 +122,7 @@ Currently, the primary standard implementation is:
     
     In that case, “first” and “last” reflect most-recent-access order.
 
+<a id="2933-reversed-maps"></a>
 ### 29.3.3 Reversed Maps
 
 As with collections, reversed() on a sequenced map returns a view, not a copy.
@@ -132,6 +142,7 @@ System.out.println(map); // {A=1, B=2}
 
 ---
 
+<a id="294-relationship-with-existing-apis"></a>
 ## 29.4 Relationship with Existing APIs
 
 Sequenced interfaces do not replace existing collection types.
@@ -140,6 +151,7 @@ They sit above them in the hierarchy and unify common behaviors.
 
 All existing ordered collections automatically benefit from these APIs without breaking backward compatibility.
 
+<a id="2941-which-built-in-types-are-sequenced"></a>
 ### 29.4.1 Which Built-in Types Are Sequenced?
 
 The following table summarizes whether standard collection types are ordered,
@@ -161,6 +173,7 @@ and whether they implement the new Sequenced interfaces.
 
 ---
 
+<a id="295-common-pitfalls"></a>
 ## 29.5 Common Pitfalls
 
 - Sequenced interfaces define views, not copies
@@ -172,6 +185,7 @@ and whether they implement the new Sequenced interfaces.
 
 ---
 
+<a id="296-summary"></a>
 ## 29.6 Summary
 
 - Sequenced interfaces formalize encounter order

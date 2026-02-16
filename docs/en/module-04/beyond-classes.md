@@ -1,5 +1,6 @@
 # 17. Beyond Classes
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [17. Beyond Classes](#17-beyond-classes)
@@ -56,6 +57,7 @@
 
 This chapter presents several advanced type mechanisms beyond the Java Class design: **interfaces**, **enums**, **sealed / non-sealed classes**, **records**, and **nested classes**. 
 
+<a id="171-interfaces"></a>
 ## 17.1 Interfaces
 
 An **interface** in Java is a reference type that defines a contract of methods that a class agrees to implement. 
@@ -68,6 +70,7 @@ An `interface` may in turn extend multiple interfaces using the `extends` keywor
 
 Interfaces enable abstraction, loose coupling, and multiple inheritance of type.
 
+<a id="1711-what-interfaces-can-contain"></a>
 ### 17.1.1 What Interfaces Can Contain
 
 - **Abstract methods** (implicitly `public` and `abstract`)
@@ -91,6 +94,7 @@ interface Calculator {
     Because interface abstract methods are implicitly `public`, you **cannot** reduce the access level on an implementing method.
 
 
+<a id="1712-implementing-an-interface"></a>
 ### 17.1.2 Implementing an Interface
 
 ```java
@@ -103,6 +107,7 @@ class BasicCalc implements Calculator {
     **Every** abstract method must be implemented unless the class is abstract.
 
 
+<a id="1713-multiple-inheritance"></a>
 ### 17.1.3 Multiple Inheritance
 
 A class may implement multiple interfaces.
@@ -118,6 +123,7 @@ class C implements A, B {
 ```
 
 
+<a id="1714-interface-inheritance-and-conflicts"></a>
 ### 17.1.4 Interface Inheritance and Conflicts
 
 If two interfaces provide `default` methods with the same signature, the implementing class must override the method.
@@ -145,6 +151,7 @@ class Z implements X, Y {
 }
 ```
  
+<a id="1715-default-methods"></a>
 ### 17.1.5 `Default` methods
 
 A `default` method (declared with the `default` keyword) is a method that defines an implementation and can be overridden by a class implementing the interface.
@@ -156,12 +163,14 @@ A `default` method (declared with the `default` keyword) is a method that define
 - An implementig class may of course rely on the provided implementation of the `default` method without overriding it;
 - The `default` method can be invoked on an instance of the implementing class and NOT as a `static` method of the containing interface;
 
+<a id="1716-static-methods"></a>
 ### 17.1.6 `Static` methods
 
 - An interface can provide `static methods` (through the keyword `static`) which are implicitly `public`;
 - Static methods must include a method body and are accessed using the interface name;
 - Static methods cannot be `abstract` or `final`;
 
+<a id="1717-private-interface-methods"></a>
 ### 17.1.7 `Private` interface methods
 
 Among all the concrete methods that an interface can implement, we also have:
@@ -171,6 +180,7 @@ Among all the concrete methods that an interface can implement, we also have:
 
 ---
 
+<a id="172-sealed-non-sealed-and-final-types"></a>
 ## 17.2 Sealed, non-sealed, and final Types
 
 `Sealed` classes and interfaces (Java 17+) restrict which other classes (or interfaces) can extend or implement them.
@@ -185,6 +195,7 @@ final class Circle extends Shape { }
 non-sealed class Rectangle extends Shape { }
 ```
 
+<a id="1721-rules"></a>
 ### 17.2.1 Rules
 
 - A sealed Type must declare all permitted subtypes.
@@ -193,6 +204,7 @@ non-sealed class Rectangle extends Shape { }
 
 ---
 
+<a id="173-enums"></a>
 ## 17.3 Enums
 
 **Enums** define a fixed set of constant values. 
@@ -202,6 +214,7 @@ non-sealed class Rectangle extends Shape { }
 The list of enum values must end with a semicolon `(;)` in case of `Complex Enums`, but this is not mandatory for `Simple Enums`.
 
 
+<a id="1731-simple-enum-definition"></a>
 ### 17.3.1 `Simple` Enum Definition
 
 ```java
@@ -209,6 +222,7 @@ enum Day { MON, TUE, WED, THU, FRI, SAT, SUN } // semicolon not present
 ```
 
 
+<a id="1732-complex-enums-with-state-and-behavior"></a>
 ### 17.3.2 `Complex` Enums with State and Behavior
 
 ```java
@@ -227,6 +241,7 @@ public static void main(String[] args) {
 }
 ```
 
+<a id="1733-enum-methods"></a>
 ### 17.3.3 Enum Methods
 
 
@@ -234,6 +249,7 @@ public static void main(String[] args) {
 - `valueOf(String)` – returns constant by name
 - `ordinal()` – index (int) of the constant
 
+<a id="1734-rules"></a>
 ### 17.3.4 Rules
 
 - Enum constructors are implicitly `private`;
@@ -242,6 +258,7 @@ public static void main(String[] args) {
 
 ---
 
+<a id="174-records-java-16"></a>
 ## 17.4 Records (Java 16+)
 
 A **record** is a special class designed to model immutable data: they are, in fact, implicitly **final**. 
@@ -267,6 +284,7 @@ System.out.println(element.y);
 
 If you need additional validation or transformation of the provided fields, you can define a `long constructor` or a `compact constructor`.
 
+<a id="1741-summary-of-basic-rules-for-records"></a>
 ### 17.4.1 Summary of Basic Rules for Records
 
 A record may be declared in three locations:
@@ -310,6 +328,7 @@ The body of a record must NOT contain:
 
 
 
+<a id="1742-long-constructor"></a>
 ### 17.4.2 Long Constructor
 
 ```java
@@ -339,6 +358,7 @@ public record Point(int x, int y) {
     - The compiler will not insert a constructor if you manually provide one with the same list of parameters in the defined order;
     - In this case, you must explicitly set every field manually;
 
+<a id="1743-compact-constructor"></a>
 ### 17.4.3 Compact Constructor
 
 You can define a `compact constructor` which implicitly sets all fields, while letting you perform validations and transformations on selected fields.
@@ -363,6 +383,7 @@ public record Person(String name, int age) {
     - If you try to modify a Record field inside a Compact Constructor, your code will not compile
 
 
+<a id="1744-pattern-matching-for-records"></a>
 ### 17.4.4 Pattern Matching for Records
 
 When you use pattern matching with `instanceof` or with `switch`, a record pattern must specify:
@@ -380,6 +401,7 @@ if (obj instanceof Point(int a, int b)) {
 }
 ```
 
+<a id="1745-nested-record-patterns-and-matching-records-with-var-and-generics"></a>
 ### 17.4.5 Nested Record Patterns and Matching Records with `var` and Generics
 
 Nested record patterns allow you to destructure records that contain other records or complex types, extracting values recursively directly within the pattern itself.
@@ -387,6 +409,7 @@ Nested record patterns allow you to destructure records that contain other recor
 They combine the power of `record` deconstruction with pattern matching, giving you a concise and expressive way to navigate hierarchical data structures.
 
 
+<a id="17451-basic-nested-record-pattern"></a>
 #### 17.4.5.1 Basic Nested Record Pattern
 
 If a record contains another record, you can destructure both at once:
@@ -408,6 +431,7 @@ In the example above, the `Person` pattern includes a nested `Address` pattern.
 
 Both are matched structurally.
 
+<a id="17452-nested-record-patterns-with-var"></a>
 #### 17.4.5.2 Nested Record Patterns with `var`
 
 Instead of specifying exact types for each field, you can use `var` inside the pattern to let the compiler infer the type. 
@@ -424,6 +448,7 @@ Instead of specifying exact types for each field, you can use `var` inside the p
     - You still need the enclosing record type (Person, Address);
     - only the field types can be replaced with `var`.
 
+<a id="17453-nested-record-patterns-and-generics"></a>
 #### 17.4.5.3 Nested Record Patterns and Generics
 
 Record patterns also work with generic records.
@@ -445,6 +470,7 @@ In this example:
 - The pattern requires exactly `Box<String>`, not `Box<Integer>`.
 - Inside the pattern, `var v` captures the unboxed generic value.
 
+<a id="17454-common-errors-with-nested-record-patterns"></a>
 #### 17.4.5.4 Common Errors with Nested Record Patterns
 
 Mismatched record structure
@@ -482,6 +508,7 @@ case var(Person(var n, var a)) -> ...
 
 ---
 
+<a id="175-nested-classes-in-java"></a>
 ## 17.5 Nested Classes in Java
 
 Java supports several kinds of **nested classes** — classes declared inside another class.
@@ -506,6 +533,7 @@ Java defines four kinds of nested classes:
 	- A `static nested` class cannot access instance members without an explicit outer object reference.
 	
 
+<a id="1751-static-nested-classes"></a>
 ### 17.5.1 Static Nested Classes
 
 A **static nested class** behaves like a top-level class that is namespaced inside its enclosing class.  
@@ -513,6 +541,7 @@ It **cannot** access instance members of the outer class but **can** access stat
 It does **not** hold a reference to an instance of the enclosing class.
 A static nested class can contain non-static member variables.
 
+<a id="17511-syntax-and-access-rules"></a>
 #### 17.5.1.1 Syntax and Access Rules
 
 - Declared using `static class` inside another class.
@@ -539,6 +568,7 @@ class Test {
 }
 ```
 
+<a id="17512-common-pitfalls"></a>
 #### 17.5.1.2 Common Pitfalls
 
 - Static nested classes **cannot access instance variables**:
@@ -554,10 +584,12 @@ class Outer {
 }
 ```
 
+<a id="1752-inner-classes-non-static-nested-classes"></a>
 ### 17.5.2 Inner Classes (Non-Static Nested Classes)
 
 An **inner class** is associated with an instance of the outer class and can access **all members** of the outer class, including **private** ones.
 
+<a id="17521-syntax-and-access-rules"></a>
 #### 17.5.2.1 Syntax and Access Rules
 
 - Declared without `static`.
@@ -591,6 +623,7 @@ class Test {
 }
 ```
 
+<a id="17522-common-pitfalls"></a>
 #### 17.5.2.2 Common Pitfalls
 
 - Inner classes **cannot declare static members** except **static final constants**.
@@ -608,12 +641,14 @@ class Outer {
     - Instantiating an inner class WITHOUT an outer instance is illegal.
 
 
+<a id="1753-local-classes"></a>
 ### 17.5.3 Local Classes
 
 A **local class** is a nested class defined inside a block — most commonly a method.
   
 It has no access modifier and is visible only within the block where it is declared.
 
+<a id="17531-characteristics"></a>
 #### 17.5.3.1 Characteristics
 
 - Declared inside a method, constructor, or initializer.
@@ -637,6 +672,7 @@ class Outer {
 }
 ```
 
+<a id="17532-common-pitfalls"></a>
 #### 17.5.3.2 Common Pitfalls
 
 - `base` must be effectively final; changing it breaks compilation.
@@ -649,10 +685,12 @@ void compute() {
 }
 ```
 
+<a id="1754-anonymous-classes"></a>
 ### 17.5.4 Anonymous Classes
 
 An **anonymous class** is a one-off class created inline, usually to implement an interface or override a method without naming a new class.
 
+<a id="17541-syntax-and-usage"></a>
 #### 17.5.4.1 Syntax and Usage
 
 - Created using `new` + type + body.
@@ -668,6 +706,7 @@ Runnable r = new Runnable() {
 };
 ```
 
+<a id="17542-anonymous-class-extending-a-class"></a>
 #### 17.5.4.2 Anonymous Class Extending a Class
 
 ```java
@@ -681,6 +720,7 @@ b.onClick(new ClickHandler() {
 ```
 
 
+<a id="1755-comparison-of-nested-class-types"></a>
 ### 17.5.5 Comparison of Nested Class Types
 
 A quick table summarizing all kinds of nested classes.
@@ -696,10 +736,12 @@ A quick table summarizing all kinds of nested classes.
 
 ---
 
+<a id="176-nesting-of-interfaces-in-java"></a>
 ## 17.6 Nesting of Interfaces in Java
 
 In Java, an interface can be declared in different locations and follows specific rules regarding nesting and permitted members.
 
+<a id="1761-where-an-interface-can-be-declared"></a>
 ### 17.6.1 Where an Interface Can Be Declared
 
 An interface can be:
@@ -714,10 +756,12 @@ Interfaces can only be `top-level` or `member`.
 
 ---
 
+<a id="1762-nested-interfaces"></a>
 ### 17.6.2 Nested Interfaces
 
 A Nested Interface can be declared inside:
 
+<a id="17621-interface-nested-inside-a-class"></a>
 #### 17.6.2.1 Interface Nested Inside a Class
 
 - It is implicitly `static`
@@ -744,6 +788,7 @@ class Outer {
 }
 ```
 
+<a id="17622-interface-nested-inside-another-interface"></a>
 #### 17.6.2.2 Interface Nested Inside Another Interface
 
 - It is implicitly `public` and `static`
@@ -758,6 +803,7 @@ interface A {
 ```
 
 
+<a id="1763-access-rules"></a>
 ### 17.6.3 Access Rules
 
 A `nested interface`:
@@ -767,6 +813,7 @@ A `nested interface`:
 - **Can access only `static` members of the enclosing class**
 
 
+<a id="1764-nested-types-inside-interfaces"></a>
 ### 17.6.4 Nested Types Inside Interfaces
 
 An interface may contain:
@@ -777,6 +824,7 @@ An interface may contain:
 - Other nested interfaces (implicitly `public static`)
 
 
+<a id="1765-essential-summary"></a>
 ### 17.6.5 Essential Summary
 
 - Nested interfaces are always `static`

@@ -1,5 +1,6 @@
 # 27. Queue & Deque API
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [27. Queue & Deque API](#27-queue--deque-api)
@@ -26,12 +27,14 @@ A **Queue** typically models a **FIFO** (First-In, First-Out) structure.
 A **Deque** (`double-ended queue`) allows insertion and removal from both ends, enabling **FIFO** and **LIFO** behavior in a single API.
 
 
+<a id="271-queue-overview"></a>
 ## 27.1 Queue — Overview
 
 The `Queue` interface extends `Collection` and is commonly used in asynchronous programming, work distribution, algorithms, and buffering.
 
 Two families of methods exist: ones that **throw exceptions** and ones that **return special values** (usually `null`).
 
+<a id="2711-queue-core-methods"></a>
 ### 27.1.1 Queue Core Methods
 
 | Operation | Throws Exception | Returns Special Value | Description |
@@ -42,6 +45,7 @@ Two families of methods exist: ones that **throw exceptions** and ones that **re
 
 
 
+<a id="2712-queue-implementations"></a>
 ### 27.1.2 Queue Implementations
 
 Common classes implementing `Queue`:
@@ -59,6 +63,7 @@ Common classes implementing `Queue`:
 
 ---
 
+<a id="272-deque-overview"></a>
 ## 27.2 Deque — Overview
 
 `Deque` (double-ended queue) supports insertion, removal, and inspection from both the head and the tail.
@@ -68,6 +73,7 @@ It is more versatile than a Queue:
 - LIFO (stack-like)  
 - Bidirectional algorithms
 
+<a id="2721-deque-core-methods"></a>
 ### 27.2.1 Deque Core Methods
 
 
@@ -78,6 +84,7 @@ It is more versatile than a Queue:
 | Examine  | getFirst(), peekFirst()    | getLast(), peekLast() |
 
 
+<a id="2722-deque-implementations"></a>
 ### 27.2.2 Deque Implementations
 
 - `ArrayDeque` — recommended general-purpose implementation (fast, no capacity limit).
@@ -90,6 +97,7 @@ It is more versatile than a Queue:
 
 ---
 
+<a id="273-using-a-queue"></a>
 ## 27.3 Using a Queue
 
 ```java
@@ -108,8 +116,10 @@ System.out.println(q.poll());   // null (empty queue)
 
 ---
 
+<a id="274-using-a-deque-as-queue-and-as-stack"></a>
 ## 27.4 Using a Deque (as Queue and as Stack)
 
+<a id="2741-fifo-example-queue-behavior"></a>
 ### 27.4.1 FIFO Example (Queue Behavior)
 
 ```java
@@ -125,6 +135,7 @@ System.out.println(dq.pollFirst()); // C
 ```
 
 
+<a id="2742-lifo-example-stack-behavior"></a>
 ### 27.4.2 LIFO Example (Stack Behavior)
 
 ```java
@@ -141,6 +152,7 @@ System.out.println(stack.pop()); // A
 
 ---
 
+<a id="275-priorityqueue-special-queue"></a>
 ## 27.5 PriorityQueue — Special Queue
 
 `PriorityQueue` orders elements by **natural order** or by a provided `Comparator`.
@@ -165,6 +177,7 @@ System.out.println(pq.poll()); // 50
 
 ---
 
+<a id="276-blocking-queues-basics"></a>
 ## 27.6 Blocking Queues (Basics)
 
 In concurrent environments, the `java.util.concurrent` package provides blocking queue types.
@@ -182,6 +195,7 @@ In concurrent environments, the `java.util.concurrent` package provides blocking
 
 ---
 
+<a id="277-common-pitfalls"></a>
 ## 27.7 Common Pitfalls
 
 - `Queue` and `Deque` methods come in “exception” and “special-value” variants — memorize which is which.
@@ -192,6 +206,7 @@ In concurrent environments, the `java.util.concurrent` package provides blocking
 
 ---
 
+<a id="278-summary-table"></a>
 ## 27.8 Summary Table
 
 

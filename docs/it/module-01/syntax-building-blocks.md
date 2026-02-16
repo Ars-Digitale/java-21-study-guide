@@ -1,5 +1,6 @@
 # 1. Mattoni Sintattici di Base
 
+<a id="indice"></a>
 ### Indice
 - [1. Mattoni Sintattici di Base](#1-mattoni-sintattici-di-base)
 	- [1.1 Valore](#11-valore)
@@ -34,6 +35,7 @@ La sequenza è presentata in **ordine crescente di complessità**, con definizio
 
 ---
 
+<a id="11-valore"></a>
 ### 1.1 **Valore**
 
 - **Definizione:** Entità astratta che rappresenta informazione (numero, carattere, boolean, stringa, ecc.).
@@ -52,6 +54,7 @@ true      // un valore boolean
 
 ---
 
+<a id="12-letterale"></a>
 ### 1.2 **Letterale**
 
 - **Definizione:** Un **letterale** è la notazione concreta nel codice sorgente che denota direttamente un valore fisso.
@@ -70,6 +73,7 @@ String msg = "Hello";     // "Hello" è un letterale String
 
 ---
 
+<a id="13-identificatore"></a>
 ### 1.3 **Identificatore**
 
 - **Definizione:** Un nome simbolico che associa un valore (o una struttura) a un’etichetta leggibile.
@@ -94,6 +98,7 @@ class MyService { }       // MyService è un identificatore di classe
 
 ---
 
+<a id="14-variabile"></a>
 ### 1.4 **Variabile**
 
 - **Definizione:** Una “cella di memoria” etichettata da un identificatore, che può contenere e cambiare valore.
@@ -110,6 +115,7 @@ counter++;             // altro aggiornamento (post-incremento)
 
 ---
 
+<a id="15-tipo"></a>
 ### 1.5 **Tipo**
 
 - **Definizione:** Un tipo è un insieme di valori e un insieme di operazioni consentite su tali valori.
@@ -135,6 +141,7 @@ String name = "Alice";  // tipo reference (classe String)
 
 ---
 
+<a id="16-operatore"></a>
 ### 1.6 **Operatore**
 
 - **Definizione:** Un **simbolo o parola chiave** che esegue un calcolo o un’azione su uno o più operandi.
@@ -158,6 +165,7 @@ int sign = (a >= 0) ? 1 : -1; // ?: ternario
 
 ---
 
+<a id="17-espressione"></a>
 ### 1.7 **Espressione**
 
 - **Definizione:** Una combinazione di valori, letterali, variabili, operatori e funzioni che produce un nuovo valore.
@@ -176,6 +184,7 @@ msg = msg + "world";         // msg + "world" è un’altra espressione
 
 ---
 
+<a id="18-istruzione"></a>
 ### 1.8 **Istruzione**
 
 - **Definizione:** Unità di esecuzione che modifica lo stato o controlla il flusso.
@@ -195,6 +204,7 @@ if (x > 0) {              // istruzione if
 
 ---
 
+<a id="19-blocco-di-codice"></a>
 ### 1.9 **Blocco di Codice**
 
 - **Definizione:** Insieme di istruzioni racchiuse tra delimitatori che formano un’unità eseguibile.
@@ -217,6 +227,7 @@ int x = 10;
 
 ---
 
+<a id="110-funzione-metodo"></a>
 ### 1.10 **Funzione / Metodo**
 
 - **Definizione:** Sequenza di istruzioni incapsulata, identificata da un nome, che può ricevere input (parametri) e restituire un output (valore).
@@ -238,6 +249,7 @@ int result = square(5); // result = 25
 
 ---
 
+<a id="111-classe-oggetto"></a>
 ### 1.11 **Classe / Oggetto**
 
 - **Definizione:**
@@ -264,6 +276,7 @@ p.move(1, 2);            // chiamata di metodo sull’oggetto
 
 ---
 
+<a id="112-modulo-package"></a>
 ### 1.12 **Modulo / Package**
 
 - **Definizione:** Raggruppamento logico di classi, funzioni e risorse con uno scopo comune.
@@ -284,6 +297,7 @@ public class Main {
 
 ---
 
+<a id="113-programma"></a>
 ### 1.13 **Programma**
 
 - **Definizione:** Insieme coerente di moduli, classi e funzioni che, quando eseguiti su una macchina, realizzano un comportamento globale.
@@ -302,6 +316,7 @@ public class HelloWorld {
 
 ---
 
+<a id="114-sistema"></a>
 ### 1.14 **Sistema**
 
 - **Definizione:** Insieme di programmi cooperanti che interagiscono con risorse esterne (utente, rete, dispositivi).
@@ -319,6 +334,7 @@ Insieme formano un **sistema**.
 
 ---
 
+<a id="115-riepilogo-come-scala-crescente"></a>
 ### 1.15 📌 Riepilogo come scala crescente
 
 `Valore → Letterale → Identificatore → Variabile → Tipo → Operatore → Espressione → Istruzione → Blocco di Codice → Funzione/Metodo → Classe/Oggetto → Modulo/Package → Programma → Sistema`
@@ -327,6 +343,7 @@ Questa scala mostra come unità concettuali piccole vengano combinate in struttu
 
 ---
 
+<a id="116-diagramma-gerarchico-ascii"></a>
 ### 1.16 📊 Diagramma gerarchico (ASCII)
 
 **Descrizione:** Questo diagramma ASCII mostra la relazione gerarchica tra i mattoni, dal più complesso (Sistema) al più semplice (Valore e la sua forma concreta, il Letterale).
@@ -350,6 +367,7 @@ Sistema
 
 ---
 
+<a id="117-diagramma-gerarchico-mermaid"></a>
 ### 1.17 📊 Diagramma gerarchico (Mermaid)
 
 **Descrizione:** Il diagramma Mermaid rende la stessa gerarchia in un albero dall’alto verso il basso. Evidenzia che il Letterale è la forma sintattica di un Valore.

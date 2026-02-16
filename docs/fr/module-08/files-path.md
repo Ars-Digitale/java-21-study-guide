@@ -1,5 +1,6 @@
 # 32. Fondamentaux des fichiers et des chemins
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [32. Fondamentaux des fichiers et des chemins](#32-fondamentaux-des-fichiers-et-des-chemins)
@@ -40,6 +41,7 @@
 
 Cette section se concentre sur `Path`, `File`, `Files` et les classes associées, en expliquant pourquoi elles existent, quels problèmes elles résolvent et quelles sont les différences entre les API legacy `java.io` et `NIO v.2` (nouvelles API d’E/S), avec une attention particulière à la sémantique du système de fichiers, à la résolution des chemins et aux idées fausses courantes.
 
+<a id="321-modèle-conceptuel-système-de-fichiers-fichiers-répertoires-liens-et-cibles-des"></a>
 ## 32.1 Modèle conceptuel : système de fichiers, fichiers, répertoires, liens et cibles-d’E/S
 
 Avant de comprendre les API d’E/S Java, il est essentiel de comprendre avec quoi elles interagissent.
@@ -50,6 +52,7 @@ Cette section définit ces concepts indépendamment de Java, puis explique comme
 
 ---
 
+<a id="322-système-de-fichiers-labstraction-globale"></a>
 ## 32.2 Système de fichiers – L’abstraction globale
 
 Un `système de fichiers` est un mécanisme structuré fourni par un système d’exploitation pour organiser, stocker, récupérer et gérer des données sur des dispositifs de stockage persistant.
@@ -76,6 +79,7 @@ En Java NIO, un système de fichiers est représenté par l’abstraction `FileS
 
 ---
 
+<a id="323-chemin-localiser-une-entrée-dans-un-système-de-fichiers"></a>
 ## 32.3 Chemin – Localiser une entrée dans un système de fichiers
 
 Un `chemin` est un localisateur logique, pas une ressource.
@@ -100,6 +104,7 @@ Un `chemin` résout le problème de l’`addressing` :
 
 ---
 
+<a id="324-fichiers-conteneurs-persistants-de-données"></a>
 ## 32.4 Fichiers – Conteneurs persistants de données
 
 Un `fichier` est une entrée du système de fichiers dont le rôle principal est de stocker des données.
@@ -130,6 +135,7 @@ Du point de vue du système de fichiers, un fichier a :
 
 ---
 
+<a id="325-répertoires-conteneurs-structurels"></a>
 ## 32.5 Répertoires – Conteneurs structurels
 
 Un `répertoire (ou dossier)` est une entrée du système de fichiers dont le but est d’organiser d’autres entrées.
@@ -152,12 +158,14 @@ Les `répertoires` résolvent le problème de l’évolutivité et de l’organi
 
 ---
 
+<a id="326-liens-mécanismes-dindirection"></a>
 ## 32.6 Liens – Mécanismes d’indirection
 
 Un `lien` est une entrée du système de fichiers qui référence une autre entrée.
 
 Les liens résolvent le problème de l’indirection et de la réutilisation.
 
+<a id="3261-liens-physiques"></a>
 ### 32.6.1 Liens physiques
 
 Un `lien physique` est un nom supplémentaire pour les mêmes données sous-jacentes.
@@ -165,6 +173,7 @@ Un `lien physique` est un nom supplémentaire pour les mêmes données sous-jace
 - Plusieurs chemins pointent vers les mêmes données de fichier
 - La suppression n’a lieu que lorsque tous les liens sont supprimés
 
+<a id="3262-liens-symboliques-soft"></a>
 ### 32.6.2 Liens symboliques (Soft)
 
 Un `lien symbolique` est un fichier spécial qui contient un chemin vers une autre entrée :
@@ -184,6 +193,7 @@ Un `lien symbolique` est un fichier spécial qui contient un chemin vers une aut
 
 ---
 
+<a id="327-autres-types-dentrées-du-système-de-fichiers"></a>
 ## 32.7 Autres types d’entrées du système de fichiers
 
 Certaines entrées du système de fichiers ne sont pas des conteneurs de données mais des endpoints d’interaction.
@@ -199,6 +209,7 @@ Certaines entrées du système de fichiers ne sont pas des conteneurs de donnée
 
 ---
 
+<a id="328-comment-java-io-interagit-avec-ces-concepts"></a>
 ## 32.8 Comment Java IO interagit avec ces concepts
 
 Les API Java I/O opèrent à différents niveaux d’abstraction :
@@ -221,6 +232,7 @@ Les API Java I/O opèrent à différents niveaux d’abstraction :
 
 ---
 
+<a id="329-pièges-conceptuels-fondamentaux"></a>
 ## 32.9 Pièges conceptuels fondamentaux
 
 - Confondre les chemins avec les fichiers
@@ -233,6 +245,7 @@ Les API Java I/O opèrent à différents niveaux d’abstraction :
 
 ---
 
+<a id="3210-pourquoi-path-et-files-existent-contexte-io"></a>
 ## 32.10 Pourquoi Path et Files existent (contexte-IO)
 
 Le classique `java.io` mélangeait trois préoccupations différentes dans des API mal séparées :
@@ -252,6 +265,7 @@ La conception NIO.2 (Java 7+) sépare délibérément ces préoccupations :
 
 ---
 
+<a id="3211-file-est-api-legacy-à-la-fois-un-path-et-une-api-dopérations-sur-fichiers"></a>
 ## 32.11 File est (API legacy) à la fois un path et une api-d’opérations-sur-fichiers
 
 Oui — dans l’ancienne API d’E/S, `java.io.File` joue de manière confuse deux rôles en même temps, et cette conception est exactement l’une des raisons pour lesquelles `java.nio.file` a été introduit.
@@ -265,6 +279,7 @@ Oui — dans l’ancienne API d’E/S, `java.io.File` joue de manière confuse d
 !!! note
     Ce mélange de responsabilités est considéré comme un défaut de conception rétrospectivement.
 
+<a id="32111-ce-quest-vraiment-file"></a>
 ### 32.11.1 Ce qu’est vraiment File
 
 Conceptuellement, `File` est plus proche de ce que nous appelons aujourd’hui un `Path`, mais avec des méthodes opérationnelles ajoutées.
@@ -281,6 +296,7 @@ Conceptuellement, `File` est plus proche de ce que nous appelons aujourd’hui u
 !!! note
     Un objet `File` peut exister même si le fichier n’existe pas.
 
+<a id="32112-responsabilités-de-type-path"></a>
 ### 32.11.2 Responsabilités de type-Path
 
 `File` se comporte comme une abstraction de chemin parce qu’il :
@@ -297,6 +313,7 @@ File abs = f.getAbsoluteFile(); // chemin absolu
 File canon = f.getCanonicalFile(); // normalisé + résolu
 ```
 
+<a id="32113-responsabilités-dopérations-sur-le-système-de-fichiers"></a>
 ### 32.11.3 Responsabilités d’opérations sur le système de fichiers
 
 En même temps, `File` expose des méthodes qui touchent le système de fichiers :
@@ -311,6 +328,7 @@ En même temps, `File` expose des méthodes qui touchent le système de fichiers
 !!! note
     La plupart de ces méthodes renvoient `boolean` au lieu de lancer `IOException`, ce qui masque les causes des échecs.
 
+<a id="32114-ce-que-file-nest-pas"></a>
 ### 32.11.4 Ce que File N’EST PAS
 
 - Ce n’est pas un file descriptor ouvert
@@ -320,6 +338,7 @@ En même temps, `File` expose des méthodes qui touchent le système de fichiers
 
 Il faut tout de même utiliser des streams ou des reader/writer pour accéder au contenu.
 
+<a id="32115-lancien-double-rôle"></a>
 ### 32.11.5 L’ancien double rôle
 
 Le double rôle de `File` a causé plusieurs problèmes :
@@ -329,6 +348,7 @@ Le double rôle de `File` a causé plusieurs problèmes :
 - Support faible pour les liens et les systèmes de fichiers multiples
 - Comportement dépendant de la plateforme
 
+<a id="32116-comment-nio-a-corrigé-cela"></a>
 ### 32.11.6 Comment NIO a corrigé cela
 
 NIO.2 sépare explicitement les responsabilités :
@@ -342,6 +362,7 @@ NIO.2 sépare explicitement les responsabilités :
 !!! note
     Cette séparation est l’une des améliorations conceptuelles les plus importantes en Java I/O.
 
+<a id="32117-résumé"></a>
 ### 32.11.7 Résumé
 
 - `File` représente un chemin ET effectue des opérations sur le système de fichiers
@@ -351,6 +372,7 @@ NIO.2 sépare explicitement les responsabilités :
 
 ---
 
+<a id="3212-path-est-une-description-pas-une-ressource"></a>
 ## 32.12 Path est une description, pas une ressource
 
 Un `Path` est une abstraction pure représentant une séquence d’éléments de nom dans un système de fichiers.
@@ -373,10 +395,12 @@ Ceci est fondamentalement différent des streams ou des channels.
 
 ---
 
+<a id="3213-chemins-absolus-vs-relatifs"></a>
 ## 32.13 Chemins absolus vs relatifs
 
 Comprendre la résolution des chemins est essentiel.
 
+<a id="32131-chemins-absolus"></a>
 ### 32.13.1 Chemins absolus
 
 Un chemin absolu identifie complètement un emplacement depuis la racine du système de fichiers.
@@ -406,6 +430,7 @@ is equivalent to:
 // in this example the symbols were redundant and unnecessary
 ```
 
+<a id="32132-chemins-relatifs"></a>
 ### 32.13.2 Chemins relatifs
 
 Un chemin relatif est résolu par rapport au répertoire de travail courant de la JVM.
@@ -424,10 +449,12 @@ dirB/dirC/content.txt
 
 ---
 
+<a id="3214-connaissance-du-système-de-fichiers-et-séparateurs"></a>
 ## 32.14 Connaissance du système de fichiers et séparateurs
 
 NIO introduit l’abstraction de système de fichiers, qui était largement absente dans java.io.
 
+<a id="32141-filesystem"></a>
 ### 32.14.1 FileSystem
 
 Un `FileSystem` représente une implémentation concrète spécifique de système de fichiers.
@@ -438,6 +465,7 @@ Un `FileSystem` représente une implémentation concrète spécifique de systèm
 !!! note
     Les chemins sont toujours associés à exactement UN FileSystem.
 
+<a id="32142-séparateurs-de-chemin"></a>
 ### 32.14.2 Séparateurs de chemin
 
 Les séparateurs diffèrent selon les plateformes, mais `Path` les abstrait.
@@ -453,10 +481,12 @@ Les séparateurs diffèrent selon les plateformes, mais `Path` les abstrait.
 
 ---
 
+<a id="3215-ce-que-files-fait-réellement-et-ce-quil-ne-fait-pas"></a>
 ## 32.15 Ce que Files fait réellement et ce qu’il ne fait pas
 
 La classe `Files` effectue de vraies opérations d’E/S.
 
+<a id="32151-files-fait"></a>
 ### 32.15.1 Files FAIT
 
 - Ouvre des fichiers indirectement (via streams / channels renvoyés par ses méthodes)
@@ -464,6 +494,7 @@ La classe `Files` effectue de vraies opérations d’E/S.
 - Lance des exceptions checked en cas d’échec
 - Respecte les permissions du système de fichiers
 
+<a id="32152-files-ne-fait-pas"></a>
 ### 32.15.2 Files NE FAIT PAS
 
 - Maintenir des ressources ouvertes après le retour de la méthode (sauf les streams)
@@ -476,6 +507,7 @@ La classe `Files` effectue de vraies opérations d’E/S.
 
 ---
 
+<a id="3216-philosophie-de-gestion-des-erreurs-old-vs-nio"></a>
 ## 32.16 Philosophie de gestion des erreurs : Old-vs-NIO
 
 Une grande différence conceptuelle réside dans le reporting des erreurs.
@@ -489,6 +521,7 @@ Une grande différence conceptuelle réside dans le reporting des erreurs.
 
 ---
 
+<a id="3217-idées-fausses-courantes"></a>
 ## 32.17 Idées fausses courantes
 
 - “Path représente un fichier” → faux

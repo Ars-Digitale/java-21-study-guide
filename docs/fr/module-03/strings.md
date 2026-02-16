@@ -1,5 +1,6 @@
 # 9. Chaînes de caractères en Java
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [9. Chaînes de caractères en Java](#9-chaînes-de-caractères-en-java)
@@ -33,10 +34,13 @@
 
 ---
 
+<a id="91-chaînes-text-blocks"></a>
 ## 9.1 Chaînes & Text Blocks
 
+<a id="911-chaînes"></a>
 ### 9.1.1 Chaînes
 
+<a id="9111-initialiser-des-chaînes"></a>
 ### 9.1.1.1 Initialiser des chaînes
 
 En Java, une **String** est un objet de la classe `java.lang.String`, utilisé pour représenter une séquence de caractères.
@@ -55,6 +59,7 @@ String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
     - Les littéraux de chaîne sont stockés dans le `pool de String`, une zone mémoire spéciale utilisée pour éviter de créer des objets chaîne en double.
     - L’utilisation du mot-clé `new` crée toujours un nouvel objet en dehors du pool.
 
+<a id="9112-le-string-pool"></a>
 ### 9.1.1.2 Le String Pool
 
 Comme les objets `String` sont immuables et largement utilisés, ils pourraient facilement occuper une grande quantité de mémoire dans un programme Java.
@@ -63,6 +68,7 @@ Pour réduire la duplication, Java réutilise toutes les chaînes déclarées co
 
 Veuillez consulter le paragraphe : **"6.4.3 String Pool and Equality"** dans le chapitre : [Instanciation des types](../module-01/instantiating-types.md) pour une explication et des exemples plus détaillés.
 
+<a id="9113-caractères-spéciaux-et-séquences-déchappement"></a>
 ### 9.1.1.3 Caractères spéciaux et séquences d’échappement
 
 Les chaînes peuvent contenir des caractères d’échappement, qui permettent d’inclure des symboles spéciaux ou des caractères de contrôle (caractères ayant une signification spéciale en Java).  
@@ -82,6 +88,7 @@ Une séquence d’échappement commence par un backslash `\`.
 | `\b` | retour arrière (backspace) | `"AB\bC"` | `AC` (le `B` est supprimé visuellement) |
 | `\uXXXX` | unité de code Unicode | `"\u00A9"` | `©` |
 
+<a id="9114-règles-de-concaténation-des-chaînes"></a>
 ### 9.1.1.4 Règles de concaténation des chaînes
 
 Comme introduit dans le chapitre sur [Opérateurs Java](../module-01/java-operators.md), le symbole `+` représente normalement l’**addition arithmétique** lorsqu’il est utilisé avec des opérandes numériques.
@@ -90,6 +97,7 @@ Cependant, lorsqu’il est appliqué aux **String**, le même opérateur effectu
 
 Comme l’opérateur `+` peut apparaître dans des expressions où des nombres et des chaînes sont présents, Java applique un ensemble spécifique de règles pour déterminer si `+` signifie **addition numérique** ou **concaténation de chaînes**.
 
+<a id="9115-règles-de-concaténation"></a>
 ### 9.1.1.5 Règles de concaténation
 
 - Si les deux opérandes sont numériques, `+` effectue l’**addition numérique**.
@@ -157,6 +165,7 @@ System.out.println("AB" + null);
 // ABnull
 ```
 
+<a id="912-text-blocks-depuis-java-15"></a>
 ### 9.1.2 Text Blocks (depuis Java 15)
 
 Un text block est un littéral de chaîne multi-ligne introduit pour simplifier l’écriture de grandes chaînes (comme du HTML, du JSON ou du code) sans avoir besoin de nombreuses séquences d’échappement.
@@ -180,6 +189,7 @@ String html = """
     - Les guillemets doubles à l’intérieur du bloc n’ont généralement pas besoin d’être échappés.
     - Le compilateur interprète le contenu entre les triples guillemets d’ouverture et de fermeture comme la valeur de la chaîne.
 
+<a id="9121-mise-en-forme-espaces-essentiels-vs-incidentels"></a>
 ### 9.1.2.1 Mise en forme : espaces essentiels vs incidentels
 
 - **Espaces essentiels** : espaces et newlines qui font partie du contenu de chaîne voulu.
@@ -228,6 +238,7 @@ String textNoTrail_2 = """
         Line 3""";
 ```
 
+<a id="9122-nombre-de-lignes-lignes-vides-et-retours-à-la-ligne"></a>
 ### 9.1.2.2 Nombre de lignes, lignes vides et retours à la ligne
 
 - Chaque retour à la ligne visible à l’intérieur du bloc devient `\n`.
@@ -255,6 +266,7 @@ Sortie :
 7:
 ```
 
+<a id="9123-text-blocks-et-caractères-déchappement"></a>
 ### 9.1.2.3 Text Blocks et caractères d’échappement
 
 Les séquences d’échappement fonctionnent toujours à l’intérieur des text blocks lorsque nécessaire (par exemple, pour les backslashes ou des caractères de contrôle explicites).
@@ -277,6 +289,7 @@ String card = """
     """.formatted("Alice", 30);
 ```
 
+<a id="9124-erreurs-courantes-avec-corrections"></a>
 ### 9.1.2.4 Erreurs courantes (avec corrections)
 
 ```java
@@ -318,8 +331,10 @@ String correct = """
 
 ---
 
+<a id="92-méthodes-principales-des-chaînes"></a>
 ## 9.2 Méthodes principales des chaînes
 
+<a id="921-indexation-des-chaînes"></a>
 ### 9.2.1 Indexation des chaînes
 
 Les chaînes en Java utilisent une **indexation à base zéro**, ce qui signifie :
@@ -338,6 +353,7 @@ String s = "Java";
 char c = s.charAt(2); // 'v'
 ```
 
+<a id="922-méthode-length"></a>
 ### 9.2.2 Méthode `length()`
 
 `length()` renvoie le nombre de caractères dans la chaîne.
@@ -349,6 +365,7 @@ System.out.println(s.length());  // 5
 
 Le dernier index valide est toujours `length() - 1`.
 
+<a id="923-règles-de-bornes-index-de-début-vs-index-de-fin"></a>
 ### 9.2.3 Règles de bornes : index de début vs index de fin
 
 De nombreuses méthodes de `String` utilisent deux indices :
@@ -372,6 +389,7 @@ s.substring(1, 4); // "bcd" (indexes 1,2,3)
 
 Cette règle s’applique à la plupart des méthodes basées sur substring.
 
+<a id="924-méthodes-utilisant-uniquement-lindex-de-début-inclusif"></a>
 ### 9.2.4 Méthodes utilisant uniquement l’index de début (inclusif)
 
 | Méthode | Description | Paramètres | Règle d’index | Exemple |
@@ -382,6 +400,7 @@ Cette règle s’applique à la plupart des méthodes basées sur substring.
 | lastIndexOf(String) | Dernière occurrence | — | — | "banana".lastIndexOf("a") → 5 |
 | lastIndexOf(String, fromIndex) | Recherche à rebours depuis l’index | fromIndex | fromIndex inclusif | "banana".lastIndexOf("a", 3) → 3 |
 
+<a id="925-méthodes-avec-début-inclusif-fin-exclusive"></a>
 ### 9.2.5 Méthodes avec début inclusif / fin exclusive
 
 Ces méthodes suivent le même comportement de découpage : `start` inclus, `end` exclus.
@@ -393,6 +412,7 @@ Ces méthodes suivent le même comportement de découpage : `start` inclus, `end
 | getBytes(int srcBegin, int srcEnd, byte[] dst, int dstBegin) | Copie des caractères dans un tableau de bytes | début inclusif, fin exclusive | Copie les caractères dans [srcBegin, srcEnd) |
 | copyValueOf(char[] data, int offset, int count) | Crée une nouvelle chaîne | offset inclusif ; offset+count exclusif | Même règle que substring |
 
+<a id="926-méthodes-opérant-sur-toute-la-chaîne"></a>
 ### 9.2.6 Méthodes opérant sur toute la chaîne
 
 | Méthode | Description | Exemple |
@@ -406,6 +426,7 @@ Ces méthodes suivent le même comportement de découpage : `start` inclus, `end
 | isBlank() | Vrai si vide ou uniquement des espaces | "  ".isBlank() → true |
 | isEmpty() | Vrai si length == 0 | "".isEmpty() → true |
 
+<a id="927-accès-aux-caractères"></a>
 ### 9.2.7 Accès aux caractères
 
 | Méthode | Description | Exemple |
@@ -413,6 +434,7 @@ Ces méthodes suivent le même comportement de découpage : `start` inclus, `end
 | charAt(int index) | Renvoie le caractère à l’index | "Java".charAt(2) → 'v' |
 | codePointAt(int index) | Renvoie le point de code Unicode | Utile pour les emojis ou les caractères au-delà du BMP |
 
+<a id="928-recherche"></a>
 ### 9.2.8 Recherche
 
 | Méthode | Description | Exemple |
@@ -422,6 +444,7 @@ Ces méthodes suivent le même comportement de découpage : `start` inclus, `end
 | startsWith(String, offset) | Préfixe à l’index | "abc".startsWith("b", 1) → true |
 | endsWith(String) | Suffixe | "abcdef".endsWith("def") → true |
 
+<a id="929-méthodes-de-remplacement"></a>
 ### 9.2.9 Méthodes de remplacement
 
 | Méthode | Description | Exemple |
@@ -431,6 +454,7 @@ Ces méthodes suivent le même comportement de découpage : `start` inclus, `end
 | replaceAll(String regex, String replacement) | Remplacement regex global | "a1a2".replaceAll("\\d","") → "aa" |
 | replaceFirst(String regex, String replacement) | Seulement la première correspondance regex | "a1a2".replaceFirst("\\d","") → "aa2" |
 
+<a id="9210-découpage-et-jonction"></a>
 ### 9.2.10 Découpage et jonction
 
 | Méthode | Description | Exemple |
@@ -438,6 +462,7 @@ Ces méthodes suivent le même comportement de découpage : `start` inclus, `end
 | split(String regex) | Découpe par regex | "a,b,c".split(",") → ["a","b","c"] |
 | split(String regex, int limit) | Découpe avec limite | limit < 0 conserve toutes les chaînes vides finales |
 
+<a id="9211-méthodes-retournant-des-tableaux"></a>
 ### 9.2.11 Méthodes retournant des tableaux
 
 | Méthode | Description | Exemple |
@@ -445,6 +470,7 @@ Ces méthodes suivent le même comportement de découpage : `start` inclus, `end
 | toCharArray() | Renvoie char[] | "abc".toCharArray() |
 | getBytes() | Renvoie byte[] en utilisant l’encodage plateforme/par défaut | "á".getBytes() |
 
+<a id="9212-indentation"></a>
 ### 9.2.12 Indentation
 
 | Méthode | Description | Exemple |
@@ -506,6 +532,7 @@ c
 length: 5
 ```
 
+<a id="9213-exemples-supplémentaires"></a>
 ### 9.2.13 Exemples supplémentaires
 
 - Exemple 1 — Extraire `[start, end)`

@@ -1,5 +1,6 @@
 # 11. Math in Java
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [11. Math in Java](#11-math-in-java)
@@ -21,6 +22,7 @@
 
 ---
 
+<a id="111-math-apis"></a>
 ## 11.1 Math APIs
 
 The `java.lang.Math` class provides a set of static methods useful for numerical operations.
@@ -29,6 +31,7 @@ These methods work with primitive numeric types.
   
 Below is a summary of the most frequently used ones, together with their overloaded forms.
 
+<a id="1111-maximum-and-minimum-between-two-values"></a>
 ### 11.1.1 Maximum and Minimum Between Two Values
 
 `Math.max()` and `Math.min()` compare the two provided values and return the maximum or minimum between them.
@@ -54,6 +57,7 @@ System.out.println(Math.max(10.50, 7.5));   // 10.5
 System.out.println(Math.min(10, -20));      // -20
 ```
 
+<a id="1112-mathround"></a>
 ### 11.1.2 `Math.round()`
 
 `round()` returns the nearest integer to its argument, following standard rounding rules:  
@@ -75,6 +79,7 @@ Math.round(-3.5f);  // -3  (float version returns int)
     - The float version returns an `int`.
     - The double version returns a `long`.
 
+<a id="1113-mathceil-ceiling"></a>
 ### 11.1.3 `Math.ceil()` (Ceiling)
 
 `ceil()` returns the smallest `double` value that is greater than or equal to the argument.
@@ -89,6 +94,7 @@ Math.ceil(3.1);   // 4.0
 Math.ceil(-3.1);  // -3.0
 ```
 
+<a id="1114-mathfloor-floor"></a>
 ### 11.1.4 `Math.floor()` (Floor)
 
 `floor()` returns the largest `double` value that is less than or equal to the argument.
@@ -103,6 +109,7 @@ Math.floor(3.9);   // 3.0
 Math.floor(-3.1);  // -4.0
 ```
 
+<a id="1115-mathpow"></a>
 ### 11.1.5 `Math.pow()`
 
 `pow()` raises a value to a power.
@@ -118,6 +125,7 @@ Math.pow(9, 0.5);    // 3.0  (square root)
 Math.pow(10, -1);    // 0.1
 ```
 
+<a id="1116-mathrandom"></a>
 ### 11.1.6 `Math.random()`
 
 `random()` returns a `double` in the range `[0.0, 1.0)` (0.0 inclusive, 1.0 exclusive).
@@ -134,6 +142,7 @@ double r = Math.random();   // 0.0 <= r < 1.0
 int x = (int)(Math.random() * 10);
 ```
 
+<a id="1117-mathabs"></a>
 ### 11.1.7 `Math.abs()`
 
 `abs()` returns the absolute value (distance from zero).
@@ -144,6 +153,7 @@ int x = (int)(Math.random() * 10);
 - `float abs(float value)`
 - `double abs(double value)`
 
+<a id="1118-mathsqrt"></a>
 ### 11.1.8 `Math.sqrt()`
 
 `sqrt()` computes the square root and returns a `double`.
@@ -153,6 +163,7 @@ Math.sqrt(9);    // 3.0
 Math.sqrt(-1);   // NaN (not a number)
 ```
 
+<a id="1119-summary-table"></a>
 ### 11.1.9 Summary Table
 
 | Method | Returns | Overloads | Notes |
@@ -168,6 +179,7 @@ Math.sqrt(-1);   // NaN (not a number)
 
 ---
 
+<a id="112-biginteger-and-bigdecimal"></a>
 ## 11.2 BigInteger and BigDecimal
 
 The classes `BigInteger` and `BigDecimal` (in `java.math`) provide arbitrary-precision number types.
@@ -179,6 +191,7 @@ They are used when:
 
 Both are **immutable**: every operation returns a new instance.
 
+<a id="1121-why-double-and-float-are-not-enough"></a>
 ### 11.2.1 Why `double` and `float` Are Not Enough
 
 Floating-point types (`float`, `double`) use a binary representation. Many decimal fractions can’t be represented exactly (like 0.1 or 0.2), so you get rounding errors:
@@ -191,10 +204,12 @@ For tasks like financial calculations, this is unacceptable.
   
 `BigDecimal` solves this by representing numbers using a decimal model with a configurable scale (number of digits after the decimal point).
 
+<a id="1122-biginteger-arbitrary-precision-integers"></a>
 ### 11.2.2 BigInteger — Arbitrary-Precision Integers
 
 `BigInteger` represents integer values of virtually any size, limited only by available memory.
 
+<a id="1123-creating-biginteger"></a>
 ### 11.2.3 Creating BigInteger
 
 Common ways:
@@ -238,6 +253,7 @@ BigInteger c = new BigInteger("FF", 16);               // 255 in base 16
 BigInteger r = new BigInteger(128, new Random());      // random 128-bit number
 ```
 
+<a id="1124-operations-no-operators"></a>
 ### 11.2.4 Operations (No Operators!)
 
 You cannot use the standard arithmetic operators (`+`, `-`, `*`, `/`, `%`) with `BigInteger` or `BigDecimal`.

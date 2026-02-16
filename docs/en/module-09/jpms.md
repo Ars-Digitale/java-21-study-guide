@@ -1,5 +1,6 @@
 # 37. Java Platform Module System (JPMS)
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [37. Java Platform Module System (JPMS)](#37-java-platform-module-system-jpms)
@@ -33,6 +34,7 @@ JPMS affects how code is:
 
 Understanding JPMS is essential for modern Java, especially for large applications, libraries, runtime images, and deployment tooling.
 
+<a id="371-why-modules-were-introduced"></a>
 ## 37.1 Why Modules Were Introduced
 
 Before Java 9, Java applications were built using only:
@@ -42,6 +44,7 @@ Before Java 9, Java applications were built using only:
 
 This model had serious limitations as applications grew.
 
+<a id="3711-problems-with-the-classpath"></a>
 ### 37.1.1 Problems with the Classpath
 
 The classpath is a flat list of JARs where:
@@ -58,6 +61,7 @@ This led to well-known issues such as:
 - accidental use of internal APIs
 - runtime failures that were not detected at compile time
 
+<a id="3712-example-of-a-classpath-problem"></a>
 ### 37.1.2 Example of a Classpath Problem
 
 Suppose two libraries depend on different versions of the same third-party JAR.
@@ -71,6 +75,7 @@ Which one is chosen depends on classpath order, not correctness.
 
 ---
 
+<a id="372-what-is-a-module"></a>
 ## 37.2 What Is a Module?
 
 A `module` is a named, self-describing unit of code.
@@ -89,6 +94,7 @@ It explicitly declares:
 
 A module is stronger than a package and more structured than a JAR.
 
+<a id="3721-core-properties-of-modules"></a>
 ### 37.2.1 Core Properties of Modules
 
 | Property | Description |
@@ -98,6 +104,7 @@ A module is stronger than a package and more structured than a JAR.
 | Reliable configuration | Missing dependencies cause errors early |
 | Named identity | Each module has a unique name |
 
+<a id="3722-module-vs-package-vs-jar"></a>
 ### 37.2.2 Module vs Package vs JAR
 
 | Concept | Purpose | Encapsulation |
@@ -108,6 +115,7 @@ A module is stronger than a package and more structured than a JAR.
 
 ---
 
+<a id="373-the-module-infojava-descriptor"></a>
 ## 37.3 The `module-info.java` Descriptor
 
 Every `named module` is defined by a module descriptor file named:
@@ -118,6 +126,7 @@ module-info.java
 
 This file describes the module to the compiler and the runtime.
 
+<a id="3731-minimal-module-descriptor"></a>
 ### 37.3.1 Minimal Module Descriptor
 
 A minimal module descriptor declares only the module name. The filename must be exactly `module-info.java`, and it must be located in the root of the module source tree.
@@ -133,6 +142,7 @@ module com.example.hello {
 
 ---
 
+<a id="374-module-directory-structure"></a>
 ## 37.4 Module Directory Structure
 
 A modular project follows a standard directory layout.
@@ -159,10 +169,12 @@ Key points:
 
 ---
 
+<a id="375-a-first-modular-program"></a>
 ## 37.5 A First Modular Program
 
 Let’s create a minimal modular application.
 
+<a id="3751-main-class"></a>
 ### 37.5.1 Main Class
 
 ```java
@@ -175,6 +187,7 @@ public class Main {
 }
 ```
 
+<a id="3752-module-descriptor"></a>
 ### 37.5.2 Module Descriptor
 
 ```java
@@ -189,6 +202,7 @@ Without it, the package is encapsulated and inaccessible.
 
 ---
 
+<a id="376-strong-encapsulation-explained"></a>
 ## 37.6 Strong Encapsulation Explained
 
 In `JPMS`, packages are NOT accessible by default.
@@ -212,6 +226,7 @@ In modules, `public` means “public to other modules *only if* the containing p
 
 ---
 
+<a id="377-summary-of-key-ideas"></a>
 ## 37.7 Summary of Key Ideas
 
 - `JPMS` introduces modules as strong units of encapsulation

@@ -1,5 +1,6 @@
 # 10. Tableaux en Java
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [10. Tableaux en Java](#10-tableaux-en-java)
@@ -33,12 +34,14 @@
 
 ---
 
+<a id="101-ce-quest-un-tableau"></a>
 ## 10.1 Ce qu’est un tableau
 
 Les tableaux en Java sont des collections **à taille fixe**, **indexées**, **ordonnées** d’éléments du même type.
   
 Ce sont des **objets**, même lorsque les éléments sont des primitifs.
 
+<a id="1011-déclarer-des-tableaux"></a>
 ### 10.1.1 Déclarer des tableaux
 
 Vous pouvez déclarer un tableau de deux façons :
@@ -68,6 +71,7 @@ int arr1[], arr2;
 
 **Déclarer ne crée PAS le tableau** — cela crée seulement une variable capable d’en référencer un.
 
+<a id="1012-créer-des-tableaux-instanciation"></a>
 ### 10.1.2 Créer des tableaux (instanciation)
 
 Un tableau est créé en utilisant `new` suivi du type des éléments et de la longueur du tableau :
@@ -96,6 +100,7 @@ double[] values = new double[size];
 // int[] arr = new int[2.5];  // Compile error: size must be int
 ```
 
+<a id="1013-valeurs-par-défaut-dans-les-tableaux"></a>
 ### 10.1.3 Valeurs par défaut dans les tableaux
 
 Les tableaux (puisque ce sont des objets) reçoivent toujours une **initialisation par défaut** :
@@ -117,6 +122,7 @@ String[] s = new String[3];
 System.out.println(s[0]);    // null
 ```
 
+<a id="1014-accéder-aux-éléments"></a>
 ### 10.1.4 Accéder aux éléments
 
 On accède aux éléments en utilisant une indexation à base zéro :
@@ -136,14 +142,17 @@ System.out.println(a[1]); // 20
 // System.out.println(x[2]); // ❌ index 2 out of bounds
 ```
 
+<a id="1015-raccourcis-dinitialisation-de-tableaux"></a>
 ### 10.1.5 Raccourcis d’initialisation de tableaux
 
+<a id="10151-création-anonyme-de-tableau"></a>
 ### 10.1.5.1 Création anonyme de tableau
 
 ```java
 int[] a = new int[] {1,2,3};
 ```
 
+<a id="10152-syntaxe-courte-uniquement-à-la-déclaration"></a>
 ### 10.1.5.2 Syntaxe courte (uniquement à la déclaration)
 
 ```java
@@ -159,6 +168,7 @@ int[] b = {1,2,3};
 
 ---
 
+<a id="102-tableaux-multidimensionnels-tableaux-de-tableaux"></a>
 ## 10.2 Tableaux multidimensionnels (tableaux de tableaux)
 
 Java implémente les tableaux multi-dimensionnels comme des **tableaux de tableaux**.
@@ -170,12 +180,14 @@ int[][] matrix;
 String[][][] cube;
 ```
 
+<a id="1021-créer-un-tableau-rectangulaire"></a>
 ### 10.2.1 Créer un tableau rectangulaire
 
 ```java
 int[][] rect = new int[3][4]; // 3 rows, 4 columns each
 ```
 
+<a id="1022-créer-un-tableau-dentelé-irrégulier"></a>
 ### 10.2.2 Créer un tableau dentelé (irrégulier)
 
 Vous pouvez créer des lignes de longueurs différentes :
@@ -189,6 +201,7 @@ jagged[2] = new int[1];
 
 ---
 
+<a id="103-longueur-dun-tableau-vs-longueur-dune-chaîne"></a>
 ## 10.3 Longueur d’un tableau vs longueur d’une chaîne
 
 - Les tableaux utilisent `.length` (champ `public final`).
@@ -205,8 +218,10 @@ int yOk = s.length();
 
 ---
 
+<a id="104-affectations-de-références-de-tableaux"></a>
 ## 10.4 Affectations de références de tableaux
 
+<a id="1041-affecter-des-références-compatibles"></a>
 ### 10.4.1 Affecter des références compatibles
 
 ```java
@@ -221,6 +236,7 @@ b[0] = 99;
 System.out.println(a[0]); // 99
 ```
 
+<a id="1042-affectations-incompatibles-erreurs-à-la-compilation"></a>
 ### 10.4.2 Affectations incompatibles (erreurs à la compilation)
 
 ```java
@@ -235,6 +251,7 @@ String[] s = new String[3];
 Object[] o = s;      // OK: arrays are covariant
 ```
 
+<a id="1043-danger-dexécution-de-la-covariance-arraystoreexception"></a>
 ### 10.4.3 Danger d’exécution de la covariance : `ArrayStoreException`
 
 ```java
@@ -244,6 +261,7 @@ Object[] objs = new String[3];
 
 ---
 
+<a id="105-comparer-des-tableaux"></a>
 ## 10.5 Comparer des tableaux
 
 `==` compare les références (identité) :
@@ -269,14 +287,17 @@ Arrays.deepEquals(o1, o2);   // deep comparison for nested arrays
 
 ---
 
+<a id="106-méthodes-utilitaires-de-arrays"></a>
 ## 10.6 Méthodes utilitaires de `Arrays`
 
+<a id="1061-arraystostring"></a>
 ### 10.6.1 `Arrays.toString()`
 
 ```java
 System.out.println(Arrays.toString(new int[]{1,2,3})); // [1, 2, 3]
 ```
 
+<a id="1062-arraysdeeptostring-pour-les-tableaux-imbriqués"></a>
 ### 10.6.2 `Arrays.deepToString()` (pour les tableaux imbriqués)
 
 ```java
@@ -284,6 +305,7 @@ System.out.println(Arrays.deepToString(new int[][] {{1,2},{3,4}}));
 // [[1, 2], [3, 4]]
 ```
 
+<a id="1063-arrayssort"></a>
 ### 10.6.3 `Arrays.sort()`
 
 ```java
@@ -304,6 +326,7 @@ Arrays.sort(arr);
 System.out.println(Arrays.toString(arr));  // [10, 99, AB, Ba, ac, bA]
 ```
 
+<a id="1064-arraysbinarysearch"></a>
 ### 10.6.4 `Arrays.binarySearch()`
 
 Exigences : le tableau doit être trié selon le même ordre ; sinon le résultat est imprévisible.
@@ -320,6 +343,7 @@ int pos = Arrays.binarySearch(a, 4); // returns -3
 // Insertion point is index 2 → -(2) - 1 = -3
 ```
 
+<a id="1065-arrayscompare"></a>
 ### 10.6.5 `Arrays.compare()`
 
 La classe `Arrays` propose un `equals()` surchargé qui vérifie si deux tableaux contiennent les mêmes éléments (et ont la même longueur) :
@@ -362,6 +386,7 @@ System.out.println(Arrays.compare(arr9, arr10));    // -1 (null considered small
 
 ---
 
+<a id="107-boucle-for-améliorée-avec-les-tableaux"></a>
 ## 10.7 Boucle for améliorée avec les tableaux
 
 ```java
@@ -382,6 +407,7 @@ Erreur courante :
 
 ---
 
+<a id="108-pièges-courants"></a>
 ## 10.8 Pièges courants
 
 - **Accès hors limites** → lance `ArrayIndexOutOfBoundsException`.
@@ -407,6 +433,7 @@ Erreur courante :
 
 ---
 
+<a id="109-résumé"></a>
 ## 10.9 Résumé
 
 Les tableaux en Java sont :

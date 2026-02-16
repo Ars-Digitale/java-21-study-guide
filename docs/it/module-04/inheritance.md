@@ -1,5 +1,6 @@
 # 16. Ereditarietà in Java
 
+<a id="indice"></a>
 ### Indice
 
 - [16. Ereditarietà in Java](#16-ereditarietà-in-java)
@@ -36,6 +37,7 @@ L'`Inheritance` (Ereditarietà) è uno dei pilastri fondamentali dell'Object-Ori
 
 Essa permette a una classe `figlia` ( child ), la **subclass**, di acquisire lo stato e il comportamento di un’altra classe `genitrice` ( parent ), la **superclass**, creando relazioni gerarchiche che promuovono riuso del codice, specializzazione e polimorfismo.
 
+<a id="161-definizione-generale-di-ereditarietà"></a>
 ## 16.1 Definizione Generale di Ereditarietà
 
 L’ereditarietà consente a una classe di estenderne un’altra, ottenendone automaticamente i suoi `attributi` e i suoi `metodi` accessibili.
@@ -47,6 +49,7 @@ La classe che estende può aggiungere nuove funzionalità o ridefinire (fare `ov
 
 ---
 
+<a id="162-ereditarietà-singola-e-javalangobject"></a>
 ## 16.2 Ereditarietà Singola e java.lang.Object
 
 Java supporta la **single inheritance**, il che significa che ogni classe può estendere **una sola** superclasse diretta.
@@ -65,6 +68,7 @@ System.out.println(new Dog() instanceof Object); // true
 
 ---
 
+<a id="163-ereditarietà-transitiva"></a>
 ## 16.3 Ereditarietà Transitiva
 
 L’`Inheritance` è **transitiva**.
@@ -79,6 +83,7 @@ class C extends B { } // C inherits from both A and B
 
 ---
 
+<a id="164-cosa-viene-ereditato-breve-promemoria"></a>
 ## 16.4 Cosa Viene Ereditato, Breve Promemoria
 
 Una subclass eredita tutti i membri **accessibili** della classe genitrice.
@@ -95,6 +100,7 @@ Tuttavia, nello specifico, questo dipende dagli `access modifiers`.
 
 ---
 
+<a id="165-modificatori-di-classe-che-influenzano-lereditarietà"></a>
 ## 16.5 Modificatori di Classe che influenzano l’Ereditarietà
 
 Alcuni modificatori a livello di classe determinano se una classe possa essere estesa.
@@ -112,8 +118,10 @@ Alcuni modificatori a livello di classe determinano se una classe possa essere e
 
 ---
 
+<a id="166-riferimenti-this-e-super"></a>
 ## 16.6 Riferimenti `this` e `super`
 
+<a id="1661-il-riferimento-this"></a>
 ### 16.6.1 Il Riferimento `this`
 
 Il riferimento `this` si riferisce all’istanza corrente dell’oggetto e permette di disambiguare l’accesso ai membri correnti ed ereditati.
@@ -149,6 +157,7 @@ public class Person {
     `this` NON può essere usato all’interno di metodi statici perché, in quel contesto, non esiste alcuna istanza.
 
 
+<a id="1662-il-riferimento-super"></a>
 ### 16.6.2 Il Riferimento `super`
 
 Il riferimento `super` dà accesso ai membri della classe genitrice (parent) diretta.
@@ -177,6 +186,7 @@ class Child extends Parent {
 
 ---
 
+<a id="167-dichiarare-costruttori-in-una-catena-ereditaria"></a>
 ## 16.7 Dichiarare Costruttori in una catena ereditaria
 
 Un `costruttore` inizializza un oggetto appena creato.
@@ -195,6 +205,7 @@ Una classe parent continua ad avere il proprio costruttore di default a meno che
 
 ---
 
+<a id="168-costruttore-no-arg-di-default"></a>
 ## 16.8 Costruttore `no-arg` di Default
 
 Se una classe non dichiara alcun costruttore, Java inserisce automaticamente un **default no-argument constructor**.
@@ -212,6 +223,7 @@ class Child extends Parent {
 
 ---
 
+<a id="169-usare-this-e-constructor-overloading"></a>
 ## 16.9 Usare `this()` e Constructor Overloading
 
 **this()** invoca un altro costruttore nella stessa classe.
@@ -240,6 +252,7 @@ class Car {
 
 ---
 
+<a id="1610-chiamare-il-costruttore-del-parent-usando-super"></a>
 ## 16.10 Chiamare il Costruttore del Parent usando `super()`
 
 Ogni costruttore deve chiamare un costruttore della superclasse, esplicitamente o implicitamente.
@@ -261,6 +274,7 @@ class Child extends Parent {
 
 ---
 
+<a id="1611-suggerimenti-e-trappole-sul-costruttore-di-default"></a>
 ## 16.11 Suggerimenti e Trappole sul Costruttore di Default
 
 - **Se la classe genitore non ha un no-arg constructor, la classe figlia DEVE invocare lo specifico `super(args)` esplicitamente.**
@@ -280,6 +294,7 @@ class Child extends Parent {
 
 ---
 
+<a id="1612-super-si-riferisce-sempre-al-parent-più-diretto"></a>
 ## 16.12 `super()` si Riferisce Sempre al Parent più diretto
 
 Anche in lunghe catene ereditarie, `super()` invoca sempre (e soltanto) il costruttore della classe genitrice **immediata**.
@@ -309,8 +324,10 @@ C
 
 ---
 
+<a id="1613-ereditare-membri"></a>
 ## 16.13 Ereditare Membri
 
+<a id="16131-method-overriding"></a>
 ### 16.13.1 Method Overriding
 
 Il `method overriding` è un concetto fondamentale dell'ereditarietà: permette a una classe figlia di fornire una **nuova implementazione** per un metodo già definito in una sua classe parent.
@@ -319,6 +336,7 @@ A runtime, la versione del metodo eseguita dipende dal **tipo reale dell’ogget
 
 Questo comportamento è chiamato **dynamic dispatch** ed è ciò che rende possibile il polimorfismo in Java.
 
+<a id="161311-definizione-e-ruolo-nellereditarietà"></a>
 #### 16.13.1.1 Definizione e Ruolo nell’Ereditarietà
 
 Un metodo in una subclass fa **override** di un metodo di una sua superclass se:
@@ -352,6 +370,7 @@ public class TestOverride {
 }
 ```
 
+<a id="161312-usare-super-per-chiamare-limplementazione-del-parent"></a>
 #### 16.13.1.2 Usare super per chiamare l’Implementazione del Parent
 
 Quando una subclass fa override di un metodo, può comunque accedere all’implementazione "originaria" della superclass, tramite il riferimento `super`.
@@ -398,6 +417,7 @@ class Derived extends Base {
 }
 ```
 
+<a id="161313-regole-di-overriding-instance-methods"></a>
 #### 16.13.1.3 Regole di Overriding (Instance Methods)
 
 - **Stessa firma (signature)**: stesso nome di metodo, stessi tipi e ordine dei parametri.
@@ -423,6 +443,7 @@ class Child extends Parent {
 }
 ```
 
+<a id="161314-nascondere-static-methods-method-hiding"></a>
 #### 16.13.1.4 Nascondere Static Methods (Method Hiding)
 
 I metodi statici non partecipano all'`overriding`; risultano invece, eventualmente, nascosti (**hidden**).
@@ -461,8 +482,10 @@ public class TestStatic {
     - metodi statici **final** non possono essere `hidden` (nascosti); metodi d'istanza dichiarati **final** non possono essere `overriden`.
     - Se si prova a ridefinirli in una subclass, il codice non compilerà.
 
+<a id="16132-abstract-classes"></a>
 ### 16.13.2 Abstract Classes
 
+<a id="161321-definizione-e-scopo"></a>
 #### 16.13.2.1 Definizione e Scopo
 
 Una **abstract class** è una classe che non può essere istanziata direttamente ed è destinata a essere estesa.
@@ -474,6 +497,7 @@ Può contenere:
 
 Le abstract classes sono usate quando si vuole definire un comportamento comune (e un contratto) di **base**, ma lasciare alcuni dettagli da implementare alle subclasses concrete.
 
+<a id="161322-regole-per-le-abstract-classes"></a>
 #### 16.13.2.2 Regole per le Abstract Classes
 
 - Una classe con almeno un metodo astratto **deve** essere dichiarata `abstract`.
@@ -514,8 +538,10 @@ class Circle extends Shape {
     - Sebbene una `abstract class` non possa essere istanziata, i suoi costruttori vengono comunque chiamati quando si creano istanze di classi figlie concrete.
     - Il flusso delle istanziazioni, nella `catena ereditaria`, parte sempre dal top della gerarchia e si muove verso il basso.
 
+<a id="16133-creare-oggetti-immutabili"></a>
 ### 16.13.3 Creare Oggetti Immutabili
 
+<a id="161331-cosè-un-oggetto-immutable"></a>
 #### 16.13.3.1 Cos’è un Oggetto `Immutable`
 
 Un oggetto è **immutable** se, dopo che è stato creato, il suo stato **non può cambiare**.
@@ -524,6 +550,7 @@ Tutti gli attributi che ne rappresentano lo stato, rimangono costanti per l'inte
 
 Gli `immutable objects` sono semplici da comprendere, intrinsecamente `thread safe` (se progettati correttamente), e ampiamente usati nella Java Standard Library (ad esempio `String`, wrapper classes come `Integer`, e molte classi in `java.time`).
 
+<a id="161332-linee-guida-per-progettare-classi-immutable"></a>
 #### 16.13.3.2 Linee Guida per Progettare Classi Immutable
 
 - Dichiarare una classe **final** cosicché non possa essere estesa (oppure rendere tutti i costruttori privati e fornire factory methods protetti).

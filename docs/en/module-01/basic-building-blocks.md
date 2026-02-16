@@ -1,6 +1,7 @@
 # 2. Basic Language Java Building Blocks
 
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 
@@ -37,6 +38,7 @@ This chapter introduces the essential structural elements of a Java program:
 
 These are the minimum concepts needed to write, compile, organize, and run Java code in the JDK — without any IDE.
  
+<a id="21-class-definition"></a>
 ## 2.1 Class definition
 
 
@@ -117,6 +119,7 @@ public class Person {
 
 ---
 
+<a id="22-comments"></a>
 ## 2.2 Comments
 
 Comments are not executable code: they **explain** the code but are ignored by the compiler.
@@ -193,6 +196,7 @@ will cause a compilation error because, while the first two symbols are part of 
 
 ---
 
+<a id="23-access-modifiers"></a>
 ## 2.3 Access modifiers
 
 In Java, an **access modifier** is a keyword that specifies the visibility (or accessibility) of a **class**, **method**, or **field**. It determines which other classes can use or see that element.
@@ -213,16 +217,19 @@ In Java, an **access modifier** is a keyword that specifies the visibility (or a
 
 ---
 
+<a id="24-packages"></a>
 ## 2.4 Packages
 
 **Java packages** are logical groupings of classes, interfaces, and sub-packages. They help organize large codebases, avoid name conflicts, and provide controlled access between different parts of an application.
 
+<a id="241-organization-and-purpose"></a>
 ### 2.4.1 Organization and Purpose
 - Naming of packages follow the same rules of variable names. see: [Java Naming Rules](naming-rules.md)
 - Packages are like **folders** for your Java source code.  
 - They let you group related classes together (e.g., all utility classes in `java.util`, all networking classes in `java.net`).  
 - By using packages, you can prevent **naming conflicts**: for example, you may have two classes named `Date`, but one is `java.util.Date` and another is `java.sql.Date`.
 
+<a id="242-mapping-with-the-file-system-and-declaration-of-a-package"></a>
 ### 2.4.2 Mapping with the File System and declaration of a package
 - Packages map directly to the **directory hierarchy** on your file system.
 - You declare the package at the top of the source file (**before any imports**).
@@ -242,6 +249,7 @@ public class MyApp{
 !!! important
     This declaration means the class must be located in the directory: **com/example/myapp/utils/MyApp.java**
 
+<a id="243-belonging-to-the-same-package"></a>
 ### 2.4.3 Belonging to the Same Package
 
 Two classes belong to the same package if and only if:
@@ -281,6 +289,7 @@ public class Runner {
 }
 ```
 
+<a id="244-importing-from-a-package"></a>
 ### 2.4.4 Importing from a Package
 
 To use classes from another package, you need to import them:
@@ -307,6 +316,7 @@ java.util.List myList = new java.util.ArrayList<>();
     If you explicitely import a class name, it takes precedence over any wildcard import;
     if you want two use two class with the same name (ex. `Date` from java.util and from java.sql), it is better to use a fully qualified name import.
 
+<a id="245-static-imports"></a>
 ### 2.4.5 Static imports
 
 
@@ -366,6 +376,7 @@ they bring **all static members** of the class into scope.
 
 
 
+<a id="2451-precedence-rules"></a>
 #### 2.4.5.1 Precedence Rules
 
 If the current class already declares a method or variable with the same name as the statically imported one:
@@ -424,6 +435,7 @@ double b = Math.sqrt(25);   // fully qualified — always allowed
 ```
 
 
+<a id="246-standard-vs-user-defined-packages"></a>
 ### 2.4.6 Standard vs. User-Defined Packages
 
 **Standard packages**: shipped with the JDK (e.g., java.lang, java.util, java.io).
@@ -432,10 +444,12 @@ double b = Math.sqrt(25);   // fully qualified — always allowed
 
 ---
 
+<a id="25-the-main-method"></a>
 ## 2.5 The `main` Method
 
 In Java, the `main` method serves as the **entry point** of a standalone application. Its correct declaration is critical for the JVM to recognize it:
 
+<a id="251-main-method-signature"></a>
 ### 2.5.1 `main` method signature
 
 Let's review the `main` method signature inside two of the simplest possible classes:
@@ -491,6 +505,7 @@ public class MainSecondExample {
 
 ---
 
+<a id="26-compiling-and-running-your-code"></a>
 ## 2.6 Compiling and running your code
 
 
@@ -514,6 +529,7 @@ java  -version   # should print: java version "21.0.7" ... (the output could be 
     `java src/com/example/app/Main` ❌
 
 
+<a id="261-compiling-one-file-default-package-single-directory"></a>
 ### 2.6.1 Compiling one file, default package (single directory)
 
 **Files**
@@ -550,6 +566,7 @@ java Hello
 
 
 
+<a id="262-multiple-files-default-package-single-directory"></a>
 ### 2.6.2 Multiple files, default package (single directory)
 
 **Files**
@@ -597,6 +614,7 @@ java B
 - **--class-path** `<classpath>`
 
 
+<a id="263-code-inside-packages-standard-src-out-layout"></a>
 ### 2.6.3 Code inside packages (standard src → out layout)
 
 **Files**
@@ -630,6 +648,7 @@ public class Main {
 javac src/com/example/app/Main.java
 ```
 
+<a id="264-compiling-to-another-directory-d"></a>
 ### 2.6.4 Compiling to another directory (`-d`)
 
 `-d out` places compiled `.class` files into the `out/` directory, creating package subfolders that mirror your `package` names:
@@ -647,6 +666,7 @@ java -cp out com.example.app.Main
 java -cp out com.example.app.Main
 ```
 
+<a id="265-multiple-files-across-packages-compile-whole-source-tree"></a>
 ### 2.6.5 Multiple files across packages (compile whole source tree)
 
 **Files**
@@ -675,6 +695,7 @@ javac -d out -sourcepath src   src/com/example/app/Main.java
     **-sourcepath** `<sourcepath>` tells `javac` where to look for other `.java` files that a given source depends on.
 
 
+<a id="266-single-file-source-execution-quick-runs-without-javac"></a>
 ### 2.6.6 Single-file source execution (quick runs without `javac`)
 
 Java 21 (since Java 11) lets you run small programs directly from source:
@@ -693,6 +714,7 @@ java Main.java Helper.java
 > If you use **packages**, prefer compiling to `out/` and running with `-cp`.
 
 
+<a id="267-passing-parameters-to-a-java-program"></a>
 ### 2.6.7 Passing Parameters to a Java program
 
 You can send data to your Java program through the parameters of the `main` entry point.

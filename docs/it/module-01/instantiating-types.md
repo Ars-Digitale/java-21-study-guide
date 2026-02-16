@@ -1,5 +1,6 @@
 # 6. Istanziazione dei tipi
 
+<a id="indice"></a>
 ### Indice
 
 - [6. Istanziazione dei tipi](#6-istanziazione-dei-tipi)
@@ -38,6 +39,7 @@
 ---
 
 
+<a id="61-introduzione"></a>
 ## 6.1 Introduzione
  
 In Java, un **tipo** può essere un **tipo primitivo** (come `int`, `double`, `boolean`, ecc.) oppure un **tipo reference** (classi, interfacce, array, enum, record, ecc.). Vedi: [Tipi di dato Java e casting](data-types.md)
@@ -81,8 +83,10 @@ Integer boxed = Integer.valueOf(10);
     Usare `new String("x")` crea invece sempre un nuovo oggetto nell’heap.
 
   
+<a id="611-gestione-dei-tipi-primitivi"></a>
 ### 6.1.1 Gestione dei tipi primitivi
 
+<a id="6111-dichiarare-un-primitivo"></a>
 #### 6.1.1.1 Dichiarare un primitivo
 
 **Dichiarare** un tipo primitivo (come per i tipi reference) significa riservare spazio in memoria per una variabile di un determinato tipo, senza necessariamente assegnarle un valore.  
@@ -125,6 +129,7 @@ int[] a, b;   // entrambi sono arrays di int
 int c[], d;   // solo c è un array, d è un normale int
 ```
 
+<a id="6112-assegnare-un-primitivo"></a>
 #### 6.1.1.2 Assegnare un primitivo
 
 **Assegnare** un tipo primitivo (come per i tipi reference) significa memorizzare un valore in una variabile dichiarata di quel tipo.
@@ -199,8 +204,10 @@ String v1; v2; 							// ERROR - NOT LEGAL
 ```
 
 
+<a id="612-gestione-dei-tipi-reference"></a>
 ### 6.1.2 Gestione dei tipi reference
 
+<a id="6121-creare-e-assegnare-un-reference"></a>
 #### 6.1.2.1 Creare e assegnare un reference
 
 **Assegnare** un tipo `reference` significa memorizzare nella variabile l’indirizzo di memoria di un oggetto.
@@ -223,6 +230,7 @@ String greeting = "Hello";	 // Esempio con letterale (per String).
 List<Integer> numbers = List.of(1, 2, 3);   // Esempio con un metodo factory.
 ```
   
+<a id="6122-costruttori"></a>
 #### 6.1.2.2 Costruttori
 
 Nell’esempio, **`Person()`** è un costruttore — un tipo speciale di metodo usato per inizializzare nuovi oggetti.
@@ -302,6 +310,7 @@ Person p2 = new Person("Bob", 25);   // name = "Bob", age = 25
     - **I costruttori non sono ereditati**: se una superclasse definisce costruttori, non sono automaticamente disponibili nella sottoclasse — devi dichiararli esplicitamente.
     - Se dichiari un qualsiasi costruttore in una classe, il compilatore non genera il costruttore di default senza argomenti: se ti serve ancora un costruttore senza argomenti, devi dichiararlo manualmente.
 
+<a id="6123-blocchi-di-inizializzazione-istanza"></a>
 #### 6.1.2.3 Blocchi di inizializzazione istanza
 
 Oltre ai costruttori, Java offre un meccanismo chiamato **initializer blocks** per l'inizializzazione degli oggetti.  
@@ -383,8 +392,10 @@ Example ex = new Example();
 
 ---
 
+<a id="62-inizializzazione-predefinita-delle-variabili"></a>
 ## 6.2 Inizializzazione predefinita delle variabili
 
+<a id="621-variabili-di-istanza-e-di-classe"></a>
 ### 6.2.1 Variabili di istanza e di classe
 
 - Una **variabile di istanza (un field)** è un valore definito all’interno di un’istanza di un oggetto;
@@ -402,6 +413,7 @@ Se non inizializzate, variabili di istanza e di classe ricevono un valore di def
 | char | '\u0000' (NUL) |
 
 
+<a id="622-variabili-final-di-istanza"></a>
 ### 6.2.2 Variabili final di istanza
 
 A differenza delle normali variabili di istanza e di classe, le variabili **`final` non vengono inizializzate di default dal compilatore**. 
@@ -518,6 +530,7 @@ list.add("ok");      // consentito
 list = new ArrayList<>(); // ❌ non puoi riassegnare il reference
 ```
 
+<a id="623-variabili-locali"></a>
 ### 6.2.3 Variabili locali
 
 Le **variabili locali** sono variabili definite all’interno di un `costruttore`, di un `metodo` o di un `blocco di inizializzazione`;
@@ -539,6 +552,7 @@ public int localMethod {
 }
 ```
 
+<a id="6231-inferire-i-tipi-con-var"></a>
 #### 6.2.3.1 Inferire i tipi con var
 
 In certe condizioni puoi usare la keyword **var** al posto del tipo appropriato quando dichiari variabili **locali**;
@@ -573,6 +587,7 @@ public int localMethod {
 
 ---
 
+<a id="63-tipi-wrapper"></a>
 ## 6.3 Tipi wrapper
 
 In Java, i **tipi wrapper** sono rappresentazioni a oggetti degli otto tipi primitivi. 
@@ -592,11 +607,13 @@ Ogni primitivo ha una corrispondente classe wrapper nel package `java.lang`:
 
 **Gli oggetti wrapper sono immutabili** — una volta creati, il loro valore non può cambiare.
 
+<a id="631-scopo-dei-tipi-wrapper"></a>
 ### 6.3.1 Scopo dei tipi wrapper
 - Consentono di usare i primitivi in contesti che richiedono oggetti (es. collezioni, generics).  
 - Forniscono metodi di utilità per parsing, conversione e manipolazione dei valori.  
 - Supportano costanti come `Integer.MAX_VALUE` o `Double.MIN_VALUE`.  
 
+<a id="632-autoboxing-e-unboxing"></a>
 ### 6.3.2 Autoboxing e unboxing
 Da Java 5, il compilatore converte automaticamente tra primitivi e wrapper:
 - **Autoboxing**: primitivo → wrapper  
@@ -626,6 +643,7 @@ Double[] arr2 = {11, 22};     // WARNING: Does not compile!!
     - **AUTOBOXING** e **cast implicito** non sono consentiti nella stessa istruzione: non puoi fare entrambe le cose contemporaneamente. (vedi esempio sopra)
     - Questa regola vale anche nelle chiamate ai metodi.
 
+<a id="633-parsing-e-conversione"></a>
 ### 6.3.3 Parsing e conversione
 
 I wrapper forniscono metodi statici per convertire stringhe o altri tipi in primitivi:
@@ -664,6 +682,7 @@ Integer.valueOf("G", 16);	// NumberFormatException
 !!! note
     I metodi **parseXxx()** restituiscono un primitivo mentre **valueOf()** restituisce un oggetto wrapper.
 
+<a id="634-metodi-di-supporto"></a>
 ### 6.3.4 Metodi di supporto
 
 Tutte le classi wrapper numeriche estendono la classe `Number` e, per questo, ereditano alcuni metodi di supporto come: `byteValue()`, `shortValue()`, `intValue()`, `longValue()`, `floatValue()`, `doubleValue()`.
@@ -688,6 +707,7 @@ int wrapInt = baseDouble.intValue();
 System.out.println("baseDouble.intValue(): " + wrapInt);		// 300 -> The value is truncated
 ```
 
+<a id="635-valori-null"></a>
 ### 6.3.5 Valori null
 
 A differenza dei primitivi, i tipi wrapper possono contenere **null**.  
@@ -700,6 +720,7 @@ int z = val; // ❌ NullPointerException at runtime
 
 ---
 
+<a id="64-uguaglianza-in-java"></a>
 ## 6.4 Uguaglianza in Java
 
 Java fornisce due meccanismi distinti per verificare l’uguaglianza:
@@ -710,6 +731,7 @@ Java fornisce due meccanismi distinti per verificare l’uguaglianza:
 Capirne la differenza è essenziale.
 
 
+<a id="641-uguaglianza-con-i-tipi-primitivi"></a>
 ### 6.4.1 Uguaglianza con i tipi primitivi
 
 Per i **valori primitivi** (`int`, `double`, `char`, `boolean`, ecc.),  
@@ -726,6 +748,7 @@ char c2 = 65;                   // stesso code point Unicode
 System.out.println(c1 == c2);   // true
 ```
 
+<a id="6411-punti-chiave"></a>
 #### 6.4.1.1 Punti chiave
 - `==` esegue un **confronto di valori** per i primitivi.
 - I tipi primitivi **non** hanno un metodo `.equals()`.
@@ -733,10 +756,12 @@ System.out.println(c1 == c2);   // true
   (es. `int == long` → `int` promosso a `long`).
 
 
+<a id="642-uguaglianza-con-i-tipi-reference"></a>
 ### 6.4.2 Uguaglianza con i tipi reference
 
 Con gli oggetti (tipi reference), il significato di `==` cambia.
 
+<a id="6421-confronto-di-identità"></a>
 #### 6.4.2.1 `==` (Confronto di identità)  
 `==` verifica se **due riferimenti puntano allo stesso oggetto in memoria**.
 
@@ -751,6 +776,7 @@ Anche se i contenuti sono identici, `==` è false a meno che entrambe le variabi
 **allo stesso identico oggetto**.
 
 
+<a id="6422-equals-confronto-logico"></a>
 #### 6.4.2.2 `.equals()` (Confronto logico)  
 Molte classi ridefiniscono `.equals()` per confrontare i **valori**, non gli indirizzi di memoria.
 
@@ -758,6 +784,7 @@ Molte classi ridefiniscono `.equals()` per confrontare i **valori**, non gli ind
 System.out.println(s1.equals(s2)); // true → stesso contenuto
 ```
 
+<a id="6423-punti-chiave"></a>
 #### 6.4.2.3 Punti chiave
 - `.equals()` è definito in `Object`.
 - Se una classe *non* ridefinisce `.equals()`, si comporta come `==`.
@@ -765,6 +792,7 @@ System.out.println(s1.equals(s2)); // true → stesso contenuto
   per fornire un confronto di valori significativo.
 
 
+<a id="643-string-pool-e-uguaglianza"></a>
 ### 6.4.3 String Pool e uguaglianza
 
 I letterali String sono memorizzati nello **String pool**, quindi letterali identici che
@@ -820,6 +848,7 @@ System.out.println(x == y); // true
 System.out.println(x == z); // false
 ```
 
+<a id="6431-il-metodo-intern"></a>
 #### 6.4.3.1 Il metodo intern
 
 Puoi anche dire a Java di usare una String dallo String Pool (nel caso esista già) tramite il metodo `intern()`:
@@ -831,6 +860,7 @@ String y = new String("Java").intern();
 System.out.println(x == y);       // true
 ```
 
+<a id="644-uguaglianza-con-i-tipi-wrapper"></a>
 ### 6.4.4 Uguaglianza con i tipi wrapper
 
 Le classi wrapper (`Integer`, `Double`, ecc.) si comportano come oggetti:
@@ -856,6 +886,7 @@ System.out.println(c.equals(d));   // true → stesso valore numerico
     Attenzione alla cache dei wrapper.
 
 
+<a id="645-uguaglianza-e-null"></a>
 ### 6.4.5 Uguaglianza e `null`
 
 - `== null` è sempre sicuro.
@@ -867,6 +898,7 @@ System.out.println(s == null);   // true
 // s.equals("Hi");               // ❌ NullPointerException
 ```
 
+<a id="646-tabella-riepilogativa"></a>
 ### 6.4.6 Tabella riepilogativa
 
 | Comparison | Primitives | Objects / Wrappers | Strings |

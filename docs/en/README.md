@@ -13,6 +13,7 @@ Modules are designed to be read **sequentially**, but each topic can also be use
 
 ---
 
+<a id="module-00-prerequisites-setup"></a>
 ## Module 00 — Prerequisites & Setup
 
 - [Prerequisite material](module-00/prerequisites.md)
@@ -20,6 +21,7 @@ Modules are designed to be read **sequentially**, but each topic can also be use
 
 ---
 
+<a id="module-01-java-language-basics"></a>
 ## Module 01 — Java Language Basics
 
 - [Syntax building blocks](module-01/syntax-building-blocks.md)
@@ -31,6 +33,7 @@ Modules are designed to be read **sequentially**, but each topic can also be use
 
 ---
 
+<a id="module-02-control-flow"></a>
 ## Module 02 — Control Flow
 
 - [Control flow statements](module-02/control-flow.md)
@@ -38,6 +41,7 @@ Modules are designed to be read **sequentially**, but each topic can also be use
 
 ---
 
+<a id="module-03-core-standard-apis"></a>
 ## Module 03 — Core Standard APIs
 
 - [Strings in Java](module-03/strings.md)
@@ -48,6 +52,7 @@ Modules are designed to be read **sequentially**, but each topic can also be use
 
 ---
 
+<a id="module-04-object-oriented-fundamentals"></a>
 ## Module 04 — Object-Oriented Fundamentals
 
 - [Methods, attributes, and variables](module-04/methods-attributes.md)
@@ -59,6 +64,7 @@ Modules are designed to be read **sequentially**, but each topic can also be use
 
 ---
 
+<a id="module-05-functional-programming"></a>
 ## Module 05 — Functional Programming
 
 - [Functional programming in Java](module-05/functional.md)
@@ -66,6 +72,7 @@ Modules are designed to be read **sequentially**, but each topic can also be use
 
 ---
 
+<a id="module-06-collections-framework"></a>
 ## Module 06 — Collections Framework
 
 - [Introduction to the collections framework](module-06/collections.md)
@@ -79,6 +86,7 @@ Modules are designed to be read **sequentially**, but each topic can also be use
 
 ---
 
+<a id="module-07-concurrency-and-threads"></a>
 ## Module 07 — Concurrency and Threads
 
 - [Thread fundamentals](module-07/threads.md)
@@ -86,6 +94,7 @@ Modules are designed to be read **sequentially**, but each topic can also be use
 
 ---
 
+<a id="module-08-java-io-and-nio"></a>
 ## Module 08 — Java I/O and NIO
 
 - [Files and paths fundamentals](module-08/files-path.md)
@@ -96,6 +105,7 @@ Modules are designed to be read **sequentially**, but each topic can also be use
 
 ---
 
+<a id="module-09-java-platform-module-system-jpms"></a>
 ## Module 09 — Java Platform Module System (JPMS)
 
 - [JPMS fundamentals](module-09/jpms.md)

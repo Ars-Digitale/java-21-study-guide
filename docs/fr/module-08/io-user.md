@@ -1,5 +1,6 @@
 # 36. Interagir avec l’Utilisateur (Flux E/S Standard)
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [36. Interagir avec l'Utilisateur Flux E/S Standard](#36-interagir-avec-lutilisateur-flux-es-standard)
@@ -32,6 +33,7 @@ Cette interaction est implémentée en utilisant les flux E/S standard, qui sont
 Ce chapitre explique comment Java interagit avec la console et l’entrée/sortie standard,
 en partant des concepts les plus basiques et en passant aux API de niveau plus élevé.
 
+<a id="361-les-flux-es-standard"></a>
 ## 36.1 Les Flux E/S Standard
 
 Chaque programme Java commence avec trois flux prédéfinis fournis par la JVM.
@@ -51,6 +53,7 @@ Ils sont connectés à l’environnement du processus (en général un terminal 
 
 ---
 
+<a id="362-printstream-quest-ce-et-pourquoi-il-existe"></a>
 ## 36.2 `PrintStream`: Qu’est-ce et Pourquoi il Existe
 
 `PrintStream` est un flux de sortie orienté octets conçu pour une sortie lisible par l’utilisateur.
@@ -59,6 +62,7 @@ Il enveloppe un autre OutputStream et ajoute des méthodes d’impression pratiq
 
 `System.out` et `System.err` sont tous deux des instances de `PrintStream`.
 
+<a id="3621-caractéristiques-clés-de-printstream"></a>
 ### 36.2.1 Caractéristiques Clés de PrintStream
 
 - Flux orienté octets avec des helpers pour l’impression de texte
@@ -72,6 +76,7 @@ Il enveloppe un autre OutputStream et ajoute des méthodes d’impression pratiq
     
     Les erreurs doivent être vérifiées en utilisant checkError().
 
+<a id="3622-utilisation-de-base-de-printstream"></a>
 ### 36.2.2 Utilisation de Base de PrintStream
 
 ```java
@@ -82,6 +87,7 @@ System.out.println(42);
 
 `println()` ajoute automatiquement le séparateur de ligne spécifique à la plateforme.
 
+<a id="3623-formater-loutput-avec-printstream"></a>
 ### 36.2.3 Formater l’Output avec PrintStream
 
 PrintStream supporte une sortie formatée en utilisant `printf()` et `format()`,
@@ -103,12 +109,14 @@ System.out.printf("Name: %s, Age: %d%n", "Alice", 30);
 
 ---
 
+<a id="363-lire-linput-comme-flux-es"></a>
 ## 36.3 Lire l’Input comme Flux E/S
 
 L’entrée standard (System.in) est un InputStream connecté à l’entrée de l’utilisateur.
 
 Elle fournit des octets bruts et doit être adaptée pour un usage pratique.
 
+<a id="3631-lecture-de-bas-niveau-depuis-systemin"></a>
 ### 36.3.1 Lecture de Bas Niveau depuis System.in
 
 Au niveau le plus bas, tu peux lire des octets bruts depuis System.in.
@@ -122,6 +130,7 @@ int b = System.in.read();
 !!! note
     `System.in.read()` bloque jusqu’à ce que l’entrée soit disponible.
 
+<a id="3632-utilisation-de-inputstreamreader-et-bufferedreader"></a>
 ### 36.3.2 Utilisation de InputStreamReader et BufferedReader
 
 Pour lire une entrée textuelle, `System.in` est typiquement enveloppé dans un Reader et bufferisé.
@@ -137,6 +146,7 @@ Ceci convertit `octets → caractères` et permet une entrée basée sur des lig
 
 ---
 
+<a id="364-la-classe-scanner-pratique-mais-subtile"></a>
 ## 36.4 La Classe Scanner (Pratique mais Subtile)
 
 `Scanner` est un utilitaire de haut niveau pour le parsing d’entrée textuelle.
@@ -154,6 +164,7 @@ String text = sc.nextLine();
     
     Cela la rend pratique mais plus lente et parfois surprenante.
 
+<a id="3641-problèmes-communs-de-scanner"></a>
 ### 36.4.1 Problèmes Communs de Scanner
 
 - Mélanger `nextInt()` (et autres `nextXxx()`) avec `nextLine()` peut sembler “sauter” l’entrée car le newline final du token numérique est encore dans le buffer.
@@ -162,6 +173,7 @@ String text = sc.nextLine();
 
 ---
 
+<a id="365-fermeture-des-flux-système"></a>
 ## 36.5 Fermeture des Flux Système
 
 Les `flux système` sont spéciaux et doivent être gérés avec attention.
@@ -179,6 +191,7 @@ Fermer `System.out` ou `System.err` ferme le flux sous-jacent du système d’ex
 
 ---
 
+<a id="366-acquérir-linput-avec-console"></a>
 ## 36.6 Acquérir l’Input avec `Console`
 
 La classe `Console` fournit une manière de niveau plus élevé et plus sûre d’interagir avec l’utilisateur.
@@ -206,6 +219,7 @@ Si la JVM est démarrée dans un contexte non interactif — par exemple depuis 
 
 Lorsqu’une console existe, elle est représentée par une instance unique de la classe Console, qui peut être obtenue en invoquant la méthode `System.console()`. Si aucun périphérique console n’est disponible, cette méthode retourne `null`.
 
+<a id="3661-lire-linput-depuis-console"></a>
 ### 36.6.1 Lire l’Input depuis Console
 
 ```java
@@ -214,6 +228,7 @@ String name = console.readLine("Name: ");
 
 `readLine()` affiche un prompt et lit une ligne complète d’entrée.
 
+<a id="3662-lire-des-mots-de-passe-de-manière-sécurisée"></a>
 ### 36.6.2 Lire des Mots de Passe de Manière Sécurisée
 
 Console permet de lire des mots de passe sans afficher les caractères.
@@ -227,6 +242,7 @@ char[] password = console.readPassword("Password: ");
 
 ---
 
+<a id="367-formater-loutput-de-la-console"></a>
 ## 36.7 Formater l’Output de la Console
 
 Console supporte aussi une sortie formatée, similaire à PrintStream.
@@ -239,6 +255,7 @@ Ceci utilise les mêmes spécificateurs de format que `printf()`.
 
 ---
 
+<a id="368-comparaison-entre-console-scanner-et-bufferedreader"></a>
 ## 36.8 Comparaison entre Console, Scanner et BufferedReader
 
 | API | Cas d’usage | Points forts | Limitations |
@@ -249,6 +266,7 @@ Ceci utilise les mêmes spécificateurs de format que `printf()`.
 
 ---
 
+<a id="369-redirection-et-flux-standard"></a>
 ## 36.9 Redirection et Flux Standard
 
 Les flux standard peuvent être redirigés par le système d’exploitation.
@@ -265,6 +283,7 @@ Du point de vue du programme, `System.in` et `System.out` se comportent encore c
 
 ---
 
+<a id="3610-pièges-communs-et-bonnes-pratiques"></a>
 ## 36.10 Pièges Communs et Bonnes Pratiques
 
 - PrintStream supprime les IOExceptions
@@ -276,6 +295,7 @@ Du point de vue du programme, `System.in` et `System.out` se comportent encore c
 
 ---
 
+<a id="3611-synthèse-finale"></a>
 ## 36.11 Synthèse Finale
 
 - `System.out` et `System.err` sont des PrintStream pour la sortie

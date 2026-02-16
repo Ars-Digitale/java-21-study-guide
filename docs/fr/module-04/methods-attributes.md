@@ -1,5 +1,6 @@
 # 14. Méthodes, Attributs et Variables
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [14. Méthodes, Attributs et Variables](#14-méthodes-attributs-et-variables)
@@ -46,6 +47,7 @@
 
 Ce chapitre introduit des concepts fondamentaux de la Programmation Orientée Objet (OOP) en Java, en commençant par les **méthodes**, le **passage des paramètres**, la **surcharge**, les **variables locales vs. d’instance** et les **varargs**.
 
+<a id="141-méthodes"></a>
 ## 14.1 Méthodes
 
 Les `méthodes` représentent les **opérations/comportements** qui peuvent être effectués par un type de données particulier (une **classe**).
@@ -54,13 +56,16 @@ Elles décrivent *ce que l’objet peut faire* et comment il interagit avec son 
 
 Une `déclaration de méthode` est composée de composants **obligatoires** et **optionnels**.
 
+<a id="1411-composants-obligatoires-dune-méthode"></a>
 ### 14.1.1 Composants obligatoires d’une méthode
 
+<a id="14111-modificateurs-daccès"></a>
 ### 14.1.1.1 Modificateurs d’accès
 
 Les `modificateurs d’accès` contrôlent la *visibilité*, pas le comportement.
 ( Se référer au paragraphe "**Access Modifiers**" dans le chapitre : [2. Basic Language Java Building Blocks](../module-01/basic-building-blocks.md) )
 
+<a id="14112-type-de-retour"></a>
 ### 14.1.1.2 Type de retour
 
 Apparaît **immédiatement avant** le nom de la méthode.
@@ -72,10 +77,12 @@ Apparaît **immédiatement avant** le nom de la méthode.
 -   - omettre une instruction return
 -   - inclure `return;` (sans **aucune** valeur)
 
+<a id="14113-nom-de-la-méthode"></a>
 ### 14.1.1.3 Nom de la méthode
 
 Suit les mêmes règles que les identificateurs ( Se référer au chapitre : [3. Java Naming Rules](../module-01/naming-rules.md) ).
 
+<a id="14114-signature-de-la-méthode"></a>
 ### 14.1.1.4 Signature de la méthode
 
 La **signature de la méthode** en Java inclut :
@@ -102,12 +109,14 @@ void m(int a)
 void m(int b)
 ```
 
+<a id="14115-corps-de-la-méthode"></a>
 ### 14.1.1.5 Corps de la méthode
 
 Un bloc `{ }` contenant **zéro ou plusieurs instructions**.
 Si la méthode est `abstract`, le corps doit être omis.
 
 
+<a id="1412-modificateurs-optionnels"></a>
 ### 14.1.2 Modificateurs optionnels
 
 Les modificateurs optionnels de méthode incluent :
@@ -134,6 +143,7 @@ public static final int compute() {
 ```
 
 
+<a id="1413-déclarer-des-méthodes"></a>
 ### 14.1.3 Déclarer des méthodes
 
 ```java
@@ -157,6 +167,7 @@ Décomposition :
 
 ---
 
+<a id="142-java-est-un-langage-pass-by-value"></a>
 ## 14.2 Java est un langage « Pass-by-Value »
 
 Java utilise **uniquement le pass-by-value**, sans exception.
@@ -193,6 +204,7 @@ public static void methodTryModif(int num1){
 
 ---
 
+<a id="143-surcharge-des-méthodes"></a>
 ## 14.3 Surcharge des méthodes
 
 La surcharge des méthodes signifie **même nom de méthode**, **signature différente**.
@@ -225,6 +237,7 @@ int compute(int x)
 double compute(int x)
 ```
 
+<a id="1431-appeler-des-méthodes-surchargées"></a>
 ### 14.3.1 Appeler des méthodes surchargées
 
 Lorsque plusieurs méthodes surchargées sont disponibles, Java applique la **résolution de surcharge** pour décider quelle méthode appeler.
@@ -236,6 +249,7 @@ La résolution de surcharge a lieu **au moment de la compilation** (contrairemen
 Java suit ces règles :
 
 
+<a id="14311-la-correspondance-exacte-lemporte"></a>
 ### 14.3.1.1 La correspondance exacte l’emporte
 
 Si un argument correspond exactement à un paramètre de méthode, cette méthode est choisie.
@@ -248,6 +262,7 @@ call(5); // affiche : int (correspondance exacte pour int)
 ```
 
 
+<a id="14312-sil-nexiste-pas-de-correspondance-exacte-java-choisit-le-type-compatible-le-plus-spécifique"></a>
 ### 14.3.1.2 — S’il n’existe pas de correspondance exacte, Java choisit le type compatible *le plus spécifique*
 
 Java préfère :
@@ -268,6 +283,7 @@ test(5);  // littéral int : peut être élargi en long ou float
 ```
 
 
+<a id="14313-lélargissement-des-primitifs-bat-le-boxing"></a>
 ### 14.3.1.3 — L’élargissement des primitifs bat le boxing
 
 Si un argument primitif peut être soit élargi soit autoboxé, Java choisit l’élargissement.
@@ -282,6 +298,7 @@ m(b);               // byte → int (élargissement) l’emporte
 ```
 
 
+<a id="14314-le-boxing-bat-les-varargs"></a>
 ### 14.3.1.4 — Le boxing bat les varargs
 
 ```java
@@ -293,6 +310,7 @@ show(5);                // int → Integer (boxing) préféré
 ```
 
 
+<a id="14315-pour-les-références-java-choisit-le-type-de-référence-le-plus-spécifique"></a>
 ### 14.3.1.5 — Pour les références, Java choisit le type de référence le plus spécifique
 
 ```java
@@ -306,6 +324,7 @@ ref("abc");             // "abc" est une String → plus spécifique que Object
 Plus spécifique signifie *plus bas dans la hiérarchie d’héritage*.
 
 
+<a id="14316-lorsquil-ny-a-pas-de-plus-spécifique-non-ambigu-lappel-est-une-erreur-de-compilation"></a>
 ### 14.3.1.6 — Lorsqu’il n’y a pas de « plus spécifique » non ambigu, l’appel est une erreur de compilation
 
 Exemple avec des classes sœurs :
@@ -329,6 +348,7 @@ run(null);  // ❌ Erreur à la compilation : appel de méthode ambigu
 ```
 
 
+<a id="14317-surcharges-mixtes-primitifs-wrappers"></a>
 ### 14.3.1.7 — Surcharges mixtes primitifs + wrappers
 
 Java évalue l’élargissement, le boxing et les varargs dans cet ordre :
@@ -349,6 +369,7 @@ mix(s);   // short → int → long  (élargissement)
 ```
 
 
+<a id="14318-quand-les-primitifs-se-mélangent-avec-les-types-de-référence"></a>
 ### 14.3.1.8 — Quand les primitifs se mélangent avec les types de référence
 
 ```java
@@ -364,6 +385,7 @@ fun(i);                 // référence acceptée → Object
 ```
 
 
+<a id="14319-quand-object-gagne"></a>
 ### 14.3.1.9 — Quand Object gagne
 
 ```java
@@ -375,6 +397,7 @@ fun(LocalDate.now());       // Output : Y
 ```
 
 
+<a id="143110-tableau-récapitulatif-résolution-de-la-surcharge"></a>
 ### 14.3.1.10 Tableau récapitulatif (Résolution de la surcharge)
 
 | Situation | Règle |
@@ -388,8 +411,10 @@ fun(LocalDate.now());       // Output : Y
 
 ---
 
+<a id="144-variables-locales-et-dinstance"></a>
 ## 14.4 Variables locales et d’instance
 
+<a id="1441-variables-dinstance"></a>
 ### 14.4.1 Variables d’instance
 
 Les variables d’instance sont :
@@ -415,6 +440,7 @@ public class Person {
 ```
 
 
+<a id="1442-variables-locales"></a>
 ### 14.4.2 Variables locales
 
 Les variables locales :
@@ -437,6 +463,7 @@ void calculate() {
 Deux cas particuliers :
 
 
+<a id="14421-variables-locales-effectivement-final"></a>
 ### 14.4.2.1 Variables locales effectivement final
  
 Une variable locale est *effectivement final* si elle est **assignée une seule fois**, même sans `final`.
@@ -447,12 +474,14 @@ Les variables effectivement final peuvent être utilisées dans :
 - classes locales/anonimes
 
 
+<a id="14422-paramètres-comme-effectivement-final"></a>
 ### 14.4.2.2 Paramètres comme effectivement final
 
 Les paramètres de méthode se comportent comme des variables locales et suivent les mêmes règles.
 
 ---
 
+<a id="145-varargs-listes-darguments-à-longueur-variable"></a>
 ## 14.5 Varargs (Listes d’arguments à longueur variable)
 
 Les varargs permettent à une méthode d’accepter **zéro ou plusieurs** paramètres du même type.
@@ -487,6 +516,7 @@ show(10, "A", "B", "C");      // length = 3
 
 ---
 
+<a id="146-méthodes-statiques-variables-statiques-et-initialiseurs-statiques"></a>
 ## 14.6 Méthodes statiques, variables statiques et initialiseurs statiques
 
 En Java, le mot-clé **`static`** marque des éléments qui **appartiennent à la classe elle-même**, et non aux instances individuelles.
@@ -499,6 +529,7 @@ Cela signifie :
 Les membres statiques sont stockés dans la **method area** de la JVM (mémoire au niveau de la classe), tandis que les membres d’instance vivent dans le **heap**.
 
 
+<a id="1461-variables-statiques-variables-de-classe"></a>
 ### 14.6.1 Variables statiques (Variables de classe)
 
 Une **variable statique** est une variable définie au niveau de la classe et partagée par toutes les instances.
@@ -525,6 +556,7 @@ public class Counter {
 ```
 
 
+<a id="1462-méthodes-statiques"></a>
 ### 14.6.2 Méthodes statiques
 
 Une **méthode statique** appartient à la classe, et non à une instance d’objet.
@@ -567,6 +599,7 @@ void run() { }
 ```
 
 
+<a id="1463-blocs-dinitialisation-statique"></a>
 ### 14.6.3 Blocs d’initialisation statique
 
 Les blocs d’initialisation statique permettent d’exécuter du code **une seule fois**, lorsque la classe est chargée.
@@ -604,13 +637,16 @@ public class Config {
     Les blocs d’initialisation statique s’exécutent **une seule fois**, dans l’ordre où ils apparaissent, avant `main()` et avant qu’une méthode statique ne soit appelée.
 
 
+<a id="1464-ordre-dinitialisation-statique-vs-instance"></a>
 ### 14.6.4 Ordre d’initialisation (Statique vs. Instance)
 
 ( Se référer au chapitre : [15. Class Loading, Initialization, and Object Construction](class-loading.md) )
 
 
+<a id="1465-accès-aux-membres-statiques"></a>
 ### 14.6.5 Accès aux membres statiques
 
+<a id="14651-utiliser-le-nom-de-la-classe"></a>
 ### 14.6.5.1 Utiliser le nom de la classe
 
 ```java
@@ -619,6 +655,7 @@ MyClass.staticMethod();
 ```
 
 
+<a id="14652-via-une-référence-dinstance"></a>
 ### 14.6.5.2 Via une référence d’instance
 
 ```java
@@ -627,6 +664,7 @@ obj.staticMethod();
 ```
 
 
+<a id="1466-statique-et-héritage"></a>
 ### 14.6.6 Statique et héritage
 
 Les méthodes statiques :
@@ -654,6 +692,7 @@ ref.test();   // affiche "A" — binding statique !
     Règle clé : les méthodes statiques utilisent le **type de la référence**, et non le type de l’objet.
 
 
+<a id="1467-pièges-courants"></a>
 ### 14.6.7 Pièges courants
 
 - Tenter de référencer une variable ou une méthode d’instance depuis un contexte statique.

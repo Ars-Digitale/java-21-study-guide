@@ -1,5 +1,6 @@
 # 5. Opérateurs Java
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [5. Opérateurs Java](#5-opérateurs-java)
@@ -34,6 +35,7 @@
 
 ---
 
+<a id="51-définition"></a>
 ## 5.1 Définition
 
 En Java, les **opérateurs** sont des symboles spéciaux qui effectuent des opérations sur des variables et des valeurs.  
@@ -50,6 +52,7 @@ Ici, `+` et `*` sont des opérateurs, et `a`, `b` et `c` sont des opérandes.
 
 ---
 
+<a id="52-types-dopérateurs"></a>
 ## 5.2 Types d’opérateurs
 
 Java définit trois types d’opérateurs, regroupés selon le nombre d’opérandes qu’ils utilisent :
@@ -62,6 +65,7 @@ Java définit trois types d’opérateurs, regroupés selon le nombre d’opéra
 
 ---
 
+<a id="53-catégories-dopérateurs"></a>
 ## 5.3 Catégories d’opérateurs
 
 Les opérateurs peuvent également être regroupés, selon leur objectif, en catégories :
@@ -78,6 +82,7 @@ Les opérateurs peuvent également être regroupés, selon leur objectif, en cat
 
 ---
 
+<a id="54-priorité-des-opérateurs-et-ordre-dévaluation"></a>
 ## 5.4 Priorité des opérateurs et ordre d’évaluation
 
 La **priorité des opérateurs** détermine comment les opérateurs sont regroupés dans une expression — c’est-à-dire quelles opérations sont effectuées en premier.  
@@ -101,6 +106,7 @@ int result = (10 + 5) * 2;  // Les parenthèses sont évaluées en premier → r
 
 ---
 
+<a id="55-tableau-récapitulatif-des-opérateurs-java"></a>
 ## 5.5 Tableau récapitulatif des opérateurs Java
 
 | Priorité (Haute → Basse) | Type | Opérateurs | Exemple | Ordre d’évaluation | Applicable à |
@@ -123,6 +129,7 @@ int result = (10 + 5) * 2;  // Les parenthèses sont évaluées en premier → r
 | 16 | Assignment | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 5` | Droite → Gauche | Tous les types assignables |
 | 17 | Arrow operator | `->` | `(x, y) -> x + y` | Droite → Gauche | Expressions lambda, switch rules |
 
+<a id="551-notes-complémentaires"></a>
 ### 5.5.1 Notes complémentaires
 
 - La **concaténation de chaînes (`+`)** a une priorité plus faible que le `+` arithmétique sur les nombres.
@@ -130,11 +137,13 @@ int result = (10 + 5) * 2;  // Les parenthèses sont évaluées en premier → r
 
 ---
 
+<a id="56-opérateurs-unaires"></a>
 ## 5.6 Opérateurs unaires
 
 Les opérateurs unaires opèrent sur **un seul opérande** pour produire une nouvelle valeur.  
 Ils sont utilisés pour des opérations comme l’incrémentation/décrémentation, la négation d’une valeur, l’inversion d’un booléen ou le complément bit à bit.
 
+<a id="561-catégories-dopérateurs-unaires"></a>
 ### 5.6.1 Catégories d’opérateurs unaires
 
 | Opérateur | Nom | Description | Exemple | Résultat |
@@ -147,6 +156,7 @@ Ils sont utilisés pour des opérations comme l’incrémentation/décrémentati
 | `~` | Bitwise complement | Inverse chaque bit d’un entier. | `~5` | `-6` |
 | `(type)` | Cast | Convertit la valeur vers un autre type. | `(int) 3.9` | `3` |
 
+<a id="562-exemples"></a>
 ### 5.6.2 Exemples
 
 ```java
@@ -169,11 +179,13 @@ System.out.println(~a);     // -6 → binaire : 1111 1010 (complément à deux)
 
 ---
 
+<a id="57-opérateurs-binaires"></a>
 ## 5.7 Opérateurs binaires
 
 Les opérateurs binaires nécessitent **deux opérandes**.  
 Ils effectuent des opérations arithmétiques, relationnelles, logiques, bit à bit et d’affectation.
 
+<a id="571-catégories-dopérateurs-binaires"></a>
 ### 5.7.1 Catégories d’opérateurs binaires
 
 | Catégorie | Opérateurs | Exemple | Description |
@@ -232,6 +244,7 @@ System.out.println(a << 1); // 10 (1010)
 System.out.println(a >> 1); // 2  (0010)
 ```
 
+<a id="572-opérateurs-de-division-et-de-modulo-reste"></a>
 ### 5.7.2 Opérateurs de division et de modulo (reste)
 
 L’opérateur modulo donne le reste lorsque deux nombres sont divisés.  
@@ -257,6 +270,7 @@ System.out.println(2 % 4);      // GIVES 2
 System.out.println(-8 % 9);     // GIVES -8
 ```
 
+<a id="573-la-valeur-de-retour-de-lopérateur-daffectation"></a>
 ### 5.7.3 La valeur de retour de l’opérateur d’affectation
 
 En Java, l’**opérateur d’affectation (`=`)** ne fait pas que stocker une valeur dans une variable —  
@@ -299,6 +313,7 @@ if (flag == true) {
 !!! warning
     Si tu vois `if (x = quelque chose)`, stop : c’est une **affectation**, pas une comparaison.
 
+<a id="574-opérateurs-daffectation-composée"></a>
 ### 5.7.4 Opérateurs d’affectation composée
 
 Les **opérateurs d’affectation composée** en Java combinent une opération arithmétique ou bit à bit avec une affectation en une seule étape.  
@@ -340,6 +355,7 @@ b += 1;         // ✅ fonctionne : cast implicite vers byte
     Les affectations composées effectuent un **cast implicite** vers le type de la variable à gauche.
     C’est pourquoi `b += 1` compile alors que `b = b + 1` ne compile pas.
 
+<a id="575-opérateurs-dégalité-et"></a>
 ### 5.7.5 Opérateurs d’égalité (`==` et `!=`)
 
 Les **opérateurs d’égalité** en Java `==` (égal à) et `!=` (différent de) servent à comparer deux opérandes.  
@@ -350,6 +366,7 @@ Cependant, leur comportement diffère **selon qu’ils s’appliquent à des typ
     - `==` compare les **références** pour les objets  
     - `.equals()` compare le **contenu** d’un objet (si implémenté)
 
+<a id="5751-égalité-avec-les-types-primitifs"></a>
 #### 5.7.5.1 Égalité avec les types primitifs
 
 Lorsqu’on compare des **valeurs primitives**, `==` et `!=` comparent les **valeurs stockées**.
@@ -373,6 +390,7 @@ double d = 0.1 + 0.2;
 System.out.println(d == 0.3); // false → problème d’arrondi floating-point
 ```
 
+<a id="5752-égalité-avec-les-types-référence-objets"></a>
 #### 5.7.5.2 Égalité avec les types référence (objets)
 
 Pour les objets, `==` et `!=` comparent les références, pas le contenu.  
@@ -420,6 +438,7 @@ int j = 100;
 System.out.println(i == j);   // true → unboxing avant comparaison
 ```
 
+<a id="576-lopérateur-instanceof"></a>
 ### 5.7.6 L’opérateur `instanceof`
 
 `instanceof` est un **opérateur relationnel** qui teste si une référence est une **instance** d’un certain **type référence** à l’exécution.  
@@ -442,6 +461,7 @@ System.out.println(n instanceof Object);  // false
 !!! warning
     `instanceof` renvoie toujours `false` lorsque l’opérande gauche est `null`.
 
+<a id="5761-vérification-à-la-compilation-vs-à-lexécution"></a>
 #### 5.7.6.1 Vérification à la compilation vs à l’exécution
 
 - À la compilation, le compilateur rejette les types inconvertibles (qui ne peuvent pas être liés à l’exécution).
@@ -458,6 +478,7 @@ System.out.println(num instanceof Integer); // true à l’exécution
 System.out.println(num instanceof Double);  // false à l’exécution
 ```
 
+<a id="5762-pattern-matching-pour-instanceof"></a>
 #### 5.7.6.2 Pattern matching pour instanceof
 
 Java supporte les *type patterns* avec `instanceof`, qui testent et lient une variable si le test réussit.  
@@ -481,6 +502,7 @@ Propriétés clés :
 - Les variables de pattern sont implicitement final (ne peuvent pas être réassignées).
 - Le nom ne doit pas entrer en conflit avec une variable existante dans le même scope.
 
+<a id="5763-flow-scoping-logique-short-circuit"></a>
 #### 5.7.6.3 Flow scoping & logique short-circuit
 
 Les variables de pattern deviennent disponibles selon l’analyse de flux :
@@ -540,6 +562,7 @@ if (num instanceof Object s) {}  // ✅ Ok
 if (num instanceof Number s) {}  // ✅ Ok
 ```
 
+<a id="5764-tableaux-et-types-réifiables"></a>
 #### 5.7.6.4 Tableaux et types réifiables
 
 `instanceof` fonctionne avec les tableaux (réifiables) et avec des formes génériques effacées ou avec wildcard.  
@@ -557,6 +580,7 @@ System.out.println(list instanceof java.util.List<?>); // ✅ true
 
 ---
 
+<a id="58-opérateur-ternaire"></a>
 ## 5.8 Opérateur ternaire
 
 L’**opérateur ternaire** (`? :`) est le seul opérateur en Java qui prend **trois opérandes**.  
@@ -571,12 +595,14 @@ Il agit comme une forme concise d’une instruction `if-else`.
     ```
     
 
+<a id="581-syntaxe"></a>
 ### 5.8.1 Syntaxe
 
 ```java
 condition ? expressionIfTrue : expressionIfFalse;
 ```
 
+<a id="582-exemple"></a>
 ### 5.8.2 Exemple
 
 ```java
@@ -585,6 +611,7 @@ String access = (age >= 18) ? "Allowed" : "Denied";
 System.out.println(access); // "Allowed"
 ```
 
+<a id="583-exemple-de-ternaire-imbriqué"></a>
 ### 5.8.3 Exemple de ternaire imbriqué
 
 ```java
@@ -595,6 +622,7 @@ String grade = (score >= 90) ? "A" :
 System.out.println(grade); // "B"
 ```
 
+<a id="584-notes"></a>
 ### 5.8.4 Notes
 
 !!! warning

@@ -1,5 +1,6 @@
 # 4. Java Data Types and Casting
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [4. Java Data Types and Casting](#4-java-data-types-and-casting)
@@ -40,6 +41,7 @@ As we saw before in the [Syntax Building Blocks](syntax-building-blocks.md), Jav
 👉 For a complete overview of primitive types with their sizes, ranges, defaults, and examples, see the [Primitive Types Table](#43-primitive-types-table).
 
 
+<a id="41-primitive-types"></a>
 ## 4.1 Primitive Types
 
 `Primitives` represent **single raw values** stored directly in memory.  
@@ -55,6 +57,7 @@ Conceptually, a primitive is just a **cell in memory** holding a value:
 
 ---
 
+<a id="42-reference-types"></a>
 ## 4.2 Reference Types
 
 A `reference` type does not hold the `object` itself, but a **reference (pointer)** to it.  
@@ -76,6 +79,7 @@ Reference (4 or 8 bytes)
 
 ---
 
+<a id="43-primitive-types-table"></a>
 ## 4.3 Primitive Types Table
 
 | Keyword  | Type      | Size      | Min Value                  | Max Value                  | Default Value | Example |
@@ -91,6 +95,7 @@ Reference (4 or 8 bytes)
 
 ---
 
+<a id="44-notes"></a>
 ## 4.4 Notes
 
 `float` and `double` do not have fixed integer bounds like integral types.  
@@ -112,6 +117,7 @@ They also support special values: **`+Infinity`**, **`-Infinity`**, and **`NaN`*
 
 ---
 
+<a id="45-recap"></a>
 ## 4.5 Recap
 
 - **Primitive** = actual value, stored directly in memory.  
@@ -120,6 +126,7 @@ They also support special values: **`+Infinity`**, **`-Infinity`**, and **`NaN`*
 
 ---
 
+<a id="46-arithmetic-and-primitive-numeric-promotion"></a>
 ## 4.6 Arithmetic and Primitive Numeric Promotion
 
 When applying arithmetic or comparison operators to **primitive data types**, Java automatically converts (or *promotes*) values to compatible types according to well-defined **numeric promotion rules**.
@@ -127,8 +134,10 @@ When applying arithmetic or comparison operators to **primitive data types**, Ja
 These rules ensure consistent calculations and prevent data loss when mixing different numeric types.
 
 
+<a id="461-numeric-promotion-rules-in-java"></a>
 ### 4.6.1 🔹 Numeric Promotion Rules in Java
 
+<a id="4611-rule-1-mixed-data-types-smaller-type-promoted-to-larger-type"></a>
 #### 4.6.1.1 **Rule 1 – Mixed Data Types → Smaller type promoted to larger type**
 
 If two operands belong to **different numeric data types**, Java automatically promotes the **smaller** type to the **larger** type before performing the operation.
@@ -141,6 +150,7 @@ If two operands belong to **different numeric data types**, Java automatically p
 `byte → short → int → long → float → double`
 
 
+<a id="4612-rule-2-integral-floating-point-integral-promoted-to-floating-point"></a>
 #### 4.6.1.2 **Rule 2 – Integral + Floating-point → Integral promoted to floating-point**
 
 If one operand is an **integral type** (`byte`, `short`, `char`, `int`, `long`) and the other is a **floating-point type** (`float`, `double`),  
@@ -152,6 +162,7 @@ the **integral value is promoted** to the **floating-point** type before the ope
 | `double d = 10.0; long l = 3;`<br>`double result = d / l;` | `l` (long) is promoted to `double`. The result is a `double` (`3.333...`). |
 
 
+<a id="4613-rule-3-byte-short-and-char-are-promoted-to-int-during-arithmetic"></a>
 #### 4.6.1.3 **Rule 3 – `byte`, `short`, and `char` are promoted to `int` during arithmetic**
 
 When performing arithmetic **with variables** (not literal constants) of type `byte`, `short`, or `char`,  
@@ -174,6 +185,7 @@ byte c = 20;
 byte d = b + c;     // ❌ Error: b + c is evaluated at runtime → int
 ```
 
+<a id="4614-rule-4-result-type-matches-the-promoted-operand-type"></a>
 #### 4.6.1.4 **Rule 4 – Result type matches the promoted operand type**
 
 After promotions are applied, and both operands are of the same type,  
@@ -195,6 +207,7 @@ int result = 10 / 4;      // ❌ 2 (fraction discarded)
 ```
 
 
+<a id="462-summary-of-numeric-promotion-behavior"></a>
 ### 4.6.2 ✅ Summary of Numeric Promotion Behavior
 
 | Situation | Promotion Result | Example |
@@ -205,6 +218,7 @@ int result = 10 / 4;      // ❌ 2 (fraction discarded)
 | Result after promotion | Result matches promoted type | `float + long → float` |
 
 
+<a id="4621-key-takeaways"></a>
 #### 4.6.2.1 🧠 Key Takeaways
 
 - Always consider **type promotion** when mixing data types in arithmetic.  
@@ -215,12 +229,14 @@ int result = 10 / 4;      // ❌ 2 (fraction discarded)
 
 ---
 
+<a id="47-casting-in-java"></a>
 ## 4.7 Casting in Java
 
 `Casting` in Java is the process of explicitly converting a value from one type to another.
 It applies both to `primitive types` (numbers) and to `reference types` (objects in a class hierarchy).
 
 
+<a id="471-primitive-casting"></a>
 ### 4.7.1 Primitive Casting
 
 Primitive casting changes the type of a numeric value.
@@ -232,6 +248,7 @@ There are two categories of casting:
 | Widening | smaller type → larger type | int → double | No | no loss |
 | Narrowing | larger type → smaller type | double → int | Yes | possible loss |
 
+<a id="4711-widening-implicit-casting"></a>
 ### 4.7.1.1 Widening Implicit Casting
 
 Automatic conversion from a “smaller” type to a compatible “larger” type.  
@@ -245,6 +262,7 @@ System.out.println(d); // 100.0
 
 ✅ **Safe** – no overflow (though still be aware of floating-point precision).
 
+<a id="4712-narrowing-explicit-casting"></a>
 ### 4.7.1.2 Narrowing Explicit Casting
 
 Manual conversion from a “larger” type to a “smaller” one.  
@@ -260,6 +278,7 @@ System.out.println(i); // 9 (fraction discarded)
     ⚠ Use only when you are sure the value fits in the target type.
 
 
+<a id="4713-compile-time-implicit-narrowing"></a>
 ### 4.7.1.3 Compile-Time Implicit Narrowing
 
 In some specific cases, the compiler allows a narrowing conversion **without an explicit cast**.
@@ -297,6 +316,7 @@ int n = f;   // does not compile
 Even though the value seems compatible, floating-point types are not eligible for this form of implicit narrowing.
 
 
+<a id="472-data-loss-overflow-and-underflow"></a>
 ### 4.7.2 Data Loss, Overflow and Underflow
 
 When a value exceeds a type’s capacity, you may get:
@@ -327,6 +347,7 @@ int i = (int) d; // 9 (fraction discarded)
     - overflow → `Infinity` / `-Infinity`
     - underflow (very small values) → 0.0 or denormalized values.
 
+<a id="473-casting-values-versus-variables"></a>
 ### 4.7.3 Casting Values versus Variables
 
 Java treats:
@@ -376,6 +397,7 @@ short a2 = (short) (5 + b);    // ✅ cast entire expression
     `short a = (short) 5 + b;`
     The cast applies only to `5` → the expression result remains int → assignment still fails.
 
+<a id="474-reference-casting-objects"></a>
 ### 4.7.4 Reference Casting Objects
 
 Casting also applies to **object references** in a class hierarchy.  
@@ -386,6 +408,7 @@ Key rules:
 - The **real object type** determines which fields/methods actually exist.
 - The **reference type** determines what you may access at that point in code.
 
+<a id="4741-upcasting-widening-reference-cast"></a>
 ### 4.7.4.1 Upcasting (Widening Reference Cast)
 
 Conversion from **subclass** to **superclass**.
@@ -400,6 +423,7 @@ Dog dog = new Dog();
 Animal a = dog;    // implicit upcast: Dog → Animal
 ```
 
+<a id="4742-downcasting-narrowing-reference-cast"></a>
 ### 4.7.4.2 Downcasting (Narrowing Reference Cast)
 
 Conversion from **superclass** to **subclass**.
@@ -423,6 +447,7 @@ if (x instanceof Dog) {
 }
 ```
 
+<a id="475-key-points-summary"></a>
 ### 4.7.5 Key Points Summary
 
 | Casting Type | Applies To | Direction | Syntax | Safe? | Performed By |
@@ -432,6 +457,7 @@ if (x instanceof Dog) {
 | Upcasting | Objects | subclass → superclass | Implicit | Yes | Compiler |
 | Downcasting | Objects | superclass → subclass | Explicit | Runtime check | Programmer |
 
+<a id="476-examples"></a>
 ### 4.7.6 Examples
 
 ```java
@@ -449,6 +475,7 @@ Object n = Integer.valueOf(10);
 ```
 ---
 
+<a id="48-summary"></a>
 ## 4.8 Summary:
 
 - **Primitive casting** changes the numeric type.

@@ -1,5 +1,6 @@
 # 26. Set API
 
+<a id="indice"></a>
 ### Indice
 
 - [26. Set API ](#26-set-api)
@@ -31,6 +32,7 @@ Modella il concetto matematico di `insieme`: non ordinato (a meno di usare un’
 
 Tutte le implementazioni di Set si basano su **semantiche di uguaglianza** (tramite `equals()` oppure logica di `Comparator`).
 
+<a id="261-gerarchia-dei-set-java-collections-framework"></a>
 ## 26.1 Gerarchia dei Set (Java Collections Framework)
 
 ```text
@@ -52,8 +54,10 @@ Tutte le implementazioni di `Set` richiedono:
 
 ---
 
+<a id="262-caratteristiche-di-ogni-implementazione-di-set"></a>
 ## 26.2 Caratteristiche di Ogni Implementazione di Set
 
+<a id="2621-hashset"></a>
 ### 26.2.1 HashSet
 
 - Set generico più veloce  
@@ -69,6 +73,7 @@ set.add("A");   // duplicato ignorato
 System.out.println(set); // ordine non garantito
 ```
 
+<a id="2622-linkedhashset"></a>
 ### 26.2.2 LinkedHashSet
 
 - Mantiene l’**ordine di inserimento**  
@@ -83,6 +88,7 @@ set.add("B");
 System.out.println(set);  // [A, C, B]
 ```
 
+<a id="2623-treeset"></a>
 ### 26.2.3 TreeSet
 
 Un Set **ordinato** il cui ordine è determinato da:  
@@ -109,10 +115,12 @@ System.out.println(tree); // [1, 5, 10]
 
 ---
 
+<a id="263-regole-di-uguaglianza-nei-set"></a>
 ## 26.3 Regole di Uguaglianza nei Set
 
 Le regole differiscono in base all’implementazione.
 
+<a id="2631-hashset-linkedhashset"></a>
 ### 26.3.1 HashSet & LinkedHashSet
 
 L’`unicità` è determinata da due metodi:  
@@ -127,6 +135,7 @@ Due oggetti sono considerati lo stesso elemento se:
 !!! warning
     Se si muta un oggetto dopo averlo aggiunto a un HashSet o LinkedHashSet, il suo hashCode può cambiare e il set può perdere il riferimento a quell’elemento.
 
+<a id="2632-treeset"></a>
 ### 26.3.2 TreeSet
 
 L’unicità è basata su `compareTo()` o sul `Comparator` fornito.  
@@ -145,8 +154,10 @@ System.out.println(set);  // ["Hi"]
 
 ---
 
+<a id="264-creare-istanze-di-set"></a>
 ## 26.4 Creare Istanze di Set
 
+<a id="2641-usando-i-costruttori"></a>
 ### 26.4.1 Usando i Costruttori
 
 ```java
@@ -155,6 +166,7 @@ Set<String> s2 = new LinkedHashSet<>();
 Set<String> s3 = new TreeSet<>();
 ```
 
+<a id="2642-costruttori-di-copia"></a>
 ### 26.4.2 Costruttori di Copia
 
 ```java
@@ -167,6 +179,7 @@ Set<String> ordered = new LinkedHashSet<>(list); // mantiene l’ordine della li
 System.out.println(ordered);
 ```
 
+<a id="2643-metodi-factory"></a>
 ### 26.4.3 Metodi Factory
 
 ```java
@@ -180,8 +193,10 @@ Set<String> empty = Set.of();             // set immutabile vuoto
 
 ---
 
+<a id="265-operazioni-principali-sui-set"></a>
 ## 26.5 Operazioni Principali sui Set
 
+<a id="2651-aggiungere-elementi"></a>
 ### 26.5.1 Aggiungere Elementi
 
 ```java
@@ -189,12 +204,14 @@ set.add("A");          // restituisce true se aggiunto
 set.add("A");          // restituisce false se duplicato
 ```
 
+<a id="2652-verificare-lappartenenza"></a>
 ### 26.5.2 Verificare l’Appartenenza
 
 ```java
 set.contains("A");
 ```
 
+<a id="2653-rimuovere-elementi"></a>
 ### 26.5.3 Rimuovere Elementi
 
 ```java
@@ -202,6 +219,7 @@ set.remove("A");
 set.clear();
 ```
 
+<a id="2654-operazioni-bulk"></a>
 ### 26.5.4 Operazioni Bulk
 
 ```java
@@ -212,6 +230,7 @@ set.retainAll(otherSet); // intersezione
 
 ---
 
+<a id="266-trappole-comuni"></a>
 ## 26.6 Trappole Comuni
 
 - Usare TreeSet con oggetti non confrontabili → `ClassCastException`
@@ -223,6 +242,7 @@ set.retainAll(otherSet); // intersezione
 
 ---
 
+<a id="267-tabella-riassuntiva"></a>
 ## 26.7 Tabella Riassuntiva
 
 

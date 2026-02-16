@@ -1,5 +1,6 @@
 # 1. Syntax Building Blocks
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 - [1. Syntax Building Blocks](#1-syntax-building-blocks)
 	- [1.1 Value](#11-value)
@@ -34,6 +35,7 @@ The sequence is presented in **increasing order of complexity**, with general de
 
 ---
 
+<a id="11-value"></a>
 ### 1.1 **Value**
 
 - **Definition:** An abstract entity representing information (number, character, boolean, string, etc.).
@@ -52,6 +54,7 @@ true      // a boolean value
 
 ---
 
+<a id="12-literal"></a>
 ### 1.2 **Literal**
 
 - **Definition:** A **literal** is the concrete notation in source code that directly denotes a fixed value.
@@ -70,6 +73,7 @@ String msg = "Hello";     // "Hello" is a String literal
 
 ---
 
+<a id="13-identifier"></a>
 ### 1.3 **Identifier**
 
 - **Definition:** A symbolic name that associates a value (or a structure) with a readable label.
@@ -94,6 +98,7 @@ class MyService { }       // MyService is a class identifier
 
 ---
 
+<a id="14-variable"></a>
 ### 1.4 **Variable**
 
 - **Definition:** A “memory cell” labeled by an identifier, which can hold and change value.
@@ -110,6 +115,7 @@ counter++;             // another update (post-increment)
 
 ---
 
+<a id="15-type"></a>
 ### 1.5 **Type**
 
 - **Definition:** A type is a set of values and a set of operations permitted on those values.
@@ -135,6 +141,7 @@ String name = "Alice";  // reference type (class String)
 
 ---
 
+<a id="16-operator"></a>
 ### 1.6 **Operator**
 
 - **Definition:** A **symbol or keyword** that performs a computation or action on one or more operands.
@@ -158,6 +165,7 @@ int sign = (a >= 0) ? 1 : -1; // ?: ternary
 
 ---
 
+<a id="17-expression"></a>
 ### 1.7 **Expression**
 
 - **Definition:** A combination of values, literals, variables, operators, and functions that produces a new value.
@@ -176,6 +184,7 @@ msg = msg + "world";         // msg + "world" is another expression
 
 ---
 
+<a id="18-statement"></a>
 ### 1.8 **Statement**
 
 - **Definition:** A unit of execution that modifies state or controls flow.
@@ -195,6 +204,7 @@ if (x > 0) {              // if statement
 
 ---
 
+<a id="19-code-block"></a>
 ### 1.9 **Code Block**
 
 - **Definition:** A set of statements enclosed between delimiters forming an executable unit.
@@ -217,6 +227,7 @@ int x = 10;
 
 ---
 
+<a id="110-function-method"></a>
 ### 1.10  **Function / Method**
 
 - **Definition:** A sequence of encapsulated statements, identified by a name, which can receive inputs (parameters) and return an output (value).
@@ -238,6 +249,7 @@ int result = square(5); // result = 25
 
 ---
 
+<a id="111-class-object"></a>
 ### 1.11 **Class / Object**
 
 - **Definition:**
@@ -264,6 +276,7 @@ p.move(1, 2);            // method call on the object
 
 ---
 
+<a id="112-module-package"></a>
 ### 1.12 **Module / Package**
 
 - **Definition:** Logical grouping of classes, functions, and resources with a common purpose.
@@ -284,6 +297,7 @@ public class Main {
 
 ---
 
+<a id="113-program"></a>
 ### 1.13 **Program**
 
 - **Definition:** A coherent set of modules, classes, and functions that, when executed on a machine, realizes a global behavior.
@@ -302,6 +316,7 @@ public class HelloWorld {
 
 ---
 
+<a id="114-system"></a>
 ### 1.14 **System**
 
 - **Definition:** A set of cooperating programs that interact with external resources (user, network, devices).
@@ -319,6 +334,7 @@ Together they form a *system*.
 
 ---
 
+<a id="115-summary-as-a-growing-scale"></a>
 ### 1.15 📌 Summary as a Growing Scale
 
 `Value → Literal → Identifier → Variable → Type → Operator → Expression → Statement → Code Block → Function/Method → Class/Object → Module/Package → Program → System`
@@ -327,6 +343,7 @@ This scale shows how small conceptual units are combined into larger and more co
 
 ---
 
+<a id="116-hierarchy-diagram-ascii"></a>
 ### 1.16 📊 Hierarchy Diagram (ASCII)
 
 **Description:** This ASCII diagram shows the hierarchical relation between building blocks, from the most complex (System) down to the simplest (Value and its concrete form, the Literal).
@@ -350,6 +367,7 @@ System
 
 ---
 
+<a id="117-hierarchy-diagram-mermaid"></a>
 ### 1.17 📊 Hierarchy Diagram (Mermaid)
 
 **Description:** The Mermaid diagram renders the same hierarchy in a top-down tree. It highlights that a Literal is the syntactic form of a Value.

@@ -1,5 +1,6 @@
 # 8. Looping Constructs in Java
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [8. Looping Constructs in Java](#8-looping-constructs-in-java)
@@ -23,6 +24,7 @@ Java provides several **looping constructs** that allow repeated execution of a 
 
 Loops are essential for iteration, traversal of data structures, repeated computations, and implementing algorithms.
 
+<a id="81-the-while-loop"></a>
 ## 8.1 The `while` Loop
 
 The `while` loop evaluates its **boolean condition before each iteration**.  
@@ -57,6 +59,7 @@ Output:
 
 ---
 
+<a id="82-the-do-while-loop"></a>
 ## 8.2 The `do-while` Loop
 
 The `do-while` loop evaluates its condition *after* executing the body,
@@ -88,6 +91,7 @@ Output:
 
 ---
 
+<a id="83-the-for-loop"></a>
 ## 8.3 The `for` Loop
 
 The traditional `for` loop is best suited for loops with a counter variable.
@@ -132,6 +136,7 @@ for (long i = 0, c = 3; x < 3 && i < 12; x++, i++) {
 
 ---
 
+<a id="84-the-enhanced-for-each-loop"></a>
 ## 8.4 The Enhanced `for-each` Loop
 
 The enhanced `for` simplifies iteration over arrays and collections.
@@ -164,6 +169,7 @@ C
 
 ---
 
+<a id="85-nested-loops"></a>
 ## 8.5 Nested Loops
 
 Loops may be nested; each maintains its own variables and conditions.
@@ -188,6 +194,7 @@ Output:
 
 ---
 
+<a id="86-infinite-loops"></a>
 ## 8.6 Infinite Loops
 
 A loop is infinite when its condition always evaluates to `true` or is omitted.
@@ -205,6 +212,7 @@ for (;;) { ... }
 
 ---
 
+<a id="87-break-and-continue"></a>
 ## 8.7 `break` and `continue`
 
 <ins>**break**</ins>
@@ -230,6 +238,7 @@ for (int i = 0; i < 5; i++) {
 
 ---
 
+<a id="88-labeled-loops"></a>
 ## 8.8 Labeled Loops
 
 A label (identifier + colon) may be applied to a loop to allow break/continue to affect outer loops.
@@ -256,6 +265,7 @@ for (int i = 1; i <= 3; i++) {
 
 ---
 
+<a id="89-loop-variable-scope"></a>
 ## 8.9 Loop Variable Scope
 
 - Variables declared in the loop header are scoped to that loop.
@@ -270,10 +280,12 @@ for (int i = 0; i < 3; i++) {
 
 ---
 
+<a id="810-unreachable-code-after-break-continue-and-return"></a>
 ## 8.10 Unreachable code after `break`, `continue`, and `return`
 
 Any statement placed **after** `break`, `continue`, or `return` in the same block is considered unreachable and will not compile.
 
+<a id="8101-unreachable-code-after-break"></a>
 ### 8.10.1 Unreachable Code After `break`
 
 ```java
@@ -283,6 +295,7 @@ for (int i = 0; i < 3; i++) {
 }
 ```
 
+<a id="8102-unreachable-code-after-continue"></a>
 ### 8.10.2 Unreachable Code After `continue`
 
 ```java
@@ -295,6 +308,7 @@ for (int i = 0; i < 3; i++) {
 !!! note
     `continue` jumps to the next iteration, so following code is never executed.
 
+<a id="8103-unreachable-code-after-return"></a>
 ### 8.10.3 Unreachable Code After `return`
 
 ```java

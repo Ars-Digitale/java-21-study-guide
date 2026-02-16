@@ -1,5 +1,6 @@
 # 4. Types de données Java et cast
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [4. Types de données Java et cast](#4-types-de-données-java-et-cast)
@@ -39,6 +40,7 @@ Comme nous l’avons vu dans les [Blocs Syntaxiques](syntax-building-blocks.md),
 
 👉 Pour une vue complète des types primitifs avec leur taille, plage de valeurs, valeurs par défaut et exemples, voir le [Tableau des types primitifs](#43-tableau-des-types-primitifs).
 
+<a id="41-types-primitifs"></a>
 ## 4.1 Types primitifs
 
 Les `primitives` représentent des **valeurs brutes uniques** stockées directement en mémoire.  
@@ -54,6 +56,7 @@ Conceptuellement, un primitif est simplement une **cellule mémoire** contenant 
 
 ---
 
+<a id="42-types-référence"></a>
 ## 4.2 Types référence
 
 Un type `référence` ne contient pas l’`objet` lui-même, mais une **référence (pointeur)** vers celui-ci.  
@@ -75,6 +78,7 @@ Référence (4 ou 8 octets)
 
 ---
 
+<a id="43-tableau-des-types-primitifs"></a>
 ## 4.3 Tableau des types primitifs
 
 | Mot-clé | Type | Taille | Valeur min | Valeur max | Valeur par défaut | Exemple |
@@ -90,6 +94,7 @@ Référence (4 ou 8 octets)
 
 ---
 
+<a id="44-notes"></a>
 ## 4.4 Notes
 
 `float` et `double` n’ont pas de bornes entières fixes comme les types entiers.  
@@ -112,6 +117,7 @@ Ils supportent également des valeurs spéciales : **`+Infinity`**, **`-Infinity
 
 ---
 
+<a id="45-récapitulatif"></a>
 ## 4.5 Récapitulatif
 
 - **Primitif** = valeur réelle, stockée directement en mémoire.  
@@ -120,14 +126,17 @@ Ils supportent également des valeurs spéciales : **`+Infinity`**, **`-Infinity
 
 ---
 
+<a id="46-arithmétique-et-promotion-numérique-primitive"></a>
 ## 4.6 Arithmétique et promotion numérique primitive
 
 Lorsqu’on applique des opérateurs arithmétiques ou de comparaison à des **types primitifs**, Java convertit (ou *promeut*) automatiquement les valeurs vers des types compatibles selon des **règles de promotion numérique** bien définies.
 
 Ces règles garantissent des calculs cohérents et évitent la perte de données lors du mélange de types numériques différents.
 
+<a id="461-règles-de-promotion-numérique-en-java"></a>
 ### 4.6.1 🔹 Règles de promotion numérique en Java
 
+<a id="4611-règle-1-types-numériques-mixtes-le-plus-petit-type-est-promu-vers-le-plus-grand"></a>
 #### 4.6.1.1 Règle 1 – Types numériques mixtes → le plus petit type est promu vers le plus grand
 
 Si deux opérandes appartiennent à des **types numériques différents**, Java promeut automatiquement le type le **plus petit** vers le type le **plus grand** avant d’effectuer l’opération.
@@ -139,6 +148,7 @@ Si deux opérandes appartiennent à des **types numériques différents**, Java 
 **Ordre de promotion valide (du plus petit au plus grand)** :  
 `byte → short → int → long → float → double`
 
+<a id="4612-règle-2-entier-flottant-lentier-est-promu-vers-le-flottant"></a>
 #### 4.6.1.2 Règle 2 – Entier + flottant → l’entier est promu vers le flottant
 
 Si un opérande est de type **entier** (`byte`, `short`, `char`, `int`, `long`) et l’autre de type **flottant** (`float`, `double`),  
@@ -149,6 +159,7 @@ la **valeur entière est promue** vers le type flottant avant l’opération.
 | `float f = 2.5F; int n = 3; float result = f * n;` | `n` (int) est promu en `float`. Le résultat est un `float` (`7.5`). |
 | `double d = 10.0; long l = 3; double result = d / l;` | `l` (long) est promu en `double`. Le résultat est un `double` (`3.333...`). |
 
+<a id="4613-règle-3-byte-short-et-char-sont-promus-en-int-lors-des-opérations-arithmétiques"></a>
 #### 4.6.1.3 Règle 3 – `byte`, `short` et `char` sont promus en `int` lors des opérations arithmétiques
 
 Lorsqu’on effectue une opération arithmétique sur des **variables** (et non des constantes littérales) de type `byte`, `short` ou `char`,  
@@ -171,6 +182,7 @@ byte c = 20;
 byte d = b + c;     // ❌ Erreur : b + c est évalué à l’exécution → int
 ```
 
+<a id="4614-règle-4-le-type-du-résultat-correspond-au-type-promu-des-opérandes"></a>
 #### 4.6.1.4 Règle 4 – Le type du résultat correspond au type promu des opérandes
 
 Une fois les promotions appliquées, et lorsque les deux opérandes sont du même type,  
@@ -193,6 +205,7 @@ int result2 = 10 / 4;     // ❌ 2 (fraction ignorée)
 
 ---
 
+<a id="462-récapitulatif-du-comportement-de-promotion-numérique"></a>
 ### 4.6.2 ✅ Récapitulatif du comportement de promotion numérique
 
 | Situation | Résultat de promotion | Exemple |
@@ -202,6 +215,7 @@ int result2 = 10 / 4;     // ❌ 2 (fraction ignorée)
 | Arithmétique sur byte, short, char | Promu en int | byte + byte → int |
 | Résultat après promotion | Le type du résultat correspond au type promu | float + long → float |
 
+<a id="4621-points-clés"></a>
 #### 4.6.2.1 🧠 Points clés
 
 - Toujours tenir compte de la **promotion de type** lorsqu’on mélange des types dans une expression arithmétique.  
@@ -212,11 +226,13 @@ int result2 = 10 / 4;     // ❌ 2 (fraction ignorée)
 
 ---
 
+<a id="47-cast-en-java"></a>
 ## 4.7 Cast en Java
 
 En Java, le `cast` est le processus par lequel on convertit explicitement une valeur d’un type vers un autre.  
 Cela s’applique à la fois aux `types primitifs` (nombres) et aux `types référence` (objets dans une hiérarchie de classes).
 
+<a id="471-cast-primitif"></a>
 ### 4.7.1 Cast primitif
 
 Le cast primitif modifie le type d’une valeur numérique.
@@ -228,6 +244,7 @@ Il existe deux catégories de cast :
 | Widening | plus petit type → plus grand type | int → double | Non | Aucune perte |
 | Narrowing | plus grand type → plus petit type | double → int | Oui | Perte possible |
 
+<a id="4711-cast-large-implicite"></a>
 #### 4.7.1.1 Cast large implicite
 
 Conversion automatique d’un type “plus petit” vers un type compatible “plus grand”.  
@@ -242,6 +259,7 @@ System.out.println(d); // 100.0
 ✅ **Sûr** – pas de dépassement (même s’il faut garder en tête la précision des flottants).
 
 
+<a id="4712-cast-étroit-explicite"></a>
 ### 4.7.1.2 Cast étroit explicite
 
 Conversion manuelle d’un type « plus grand » vers un type « plus petit ».  
@@ -257,6 +275,7 @@ System.out.println(i); // 9 (fraction discarded)
     ⚠ Utiliser uniquement lorsque vous êtes certain que la valeur tient dans le type cible.
 
 
+<a id="4713-cast-étroit-implicite-à-la-compilation"></a>
 ### 4.7.1.3 Cast étroit Implicite à la Compilation
 
 Dans certains cas spécifiques, le compilateur autorise une conversion de narrowing **sans cast explicite**.
@@ -294,6 +313,7 @@ int n = f;   // does not compile
 Même si la valeur semble compatible, les types à virgule flottante ne sont pas éligibles pour cette forme de narrowing implicite.
 
 
+<a id="472-perte-de-données-dépassement-et-sous-dépassement"></a>
 ### 4.7.2 Perte de données, dépassement et sous-dépassement
 
 Lorsqu’une valeur dépasse la capacité d’un type, on peut obtenir :
@@ -326,6 +346,7 @@ int i = (int) d; // 9 (fraction supprimée)
 
 ---
 
+<a id="473-cast-de-valeurs-versus-variables"></a>
 ### 4.7.3 Cast de valeurs versus variables
 
 Java traite :
@@ -377,6 +398,7 @@ short a2 = (short) (5 + b);    // ✅ cast de l’expression entière
 
 ---
 
+<a id="474-cast-de-référence-dobjets"></a>
 ### 4.7.4 Cast de référence d’objets
 
 Le cast s’applique aussi aux **références d’objets** dans une hiérarchie de classes.  
@@ -387,6 +409,7 @@ Règles importantes :
 - Le **type réel de l’objet** détermine quels champs/méthodes existent réellement.
 - Le **type de la référence** détermine ce que vous pouvez appeler/accéder à cet endroit du code.
 
+<a id="4741-upcasting-cast-large-de-référence"></a>
 #### 4.7.4.1 Upcasting (cast large de référence)
 
 Conversion d’une **sous-classe** vers une **super-classe**.
@@ -401,6 +424,7 @@ Dog dog = new Dog();
 Animal a = dog;    // upcast implicite : Dog → Animal
 ```
 
+<a id="4742-downcasting-cast-étroit-de-référence"></a>
 #### 4.7.4.2 Downcasting (cast étroit de référence)
 
 Conversion d’une **super-classe** vers une **sous-classe**.
@@ -426,6 +450,7 @@ if (x instanceof Dog) {
 
 ---
 
+<a id="475-résumé-des-points-clés"></a>
 ### 4.7.5 Résumé des points clés
 
 | Type de cast | S’applique à | Direction | Syntaxe | Sûr ? | Effettué par |
@@ -437,6 +462,7 @@ if (x instanceof Dog) {
 
 ---
 
+<a id="476-exemples"></a>
 ### 4.7.6 Exemples
 
 ```java
@@ -455,6 +481,7 @@ Object n = Integer.valueOf(10);
 
 ---
 
+<a id="48-résumé"></a>
 ## 4.8 Résumé
 
 - Le **cast primitif** change le type numérique.  

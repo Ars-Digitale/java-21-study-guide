@@ -1,5 +1,6 @@
 # 24. Comparable, Comparator & Ordinamento in Java
 
+<a id="indice"></a>
 ### Indice
 
 - [24. Comparable, Comparator & Ordinamento in Java](#24-comparable-comparator--ordinamento-in-java)
@@ -74,12 +75,14 @@ Output:
 !!! note
     L’ordinamento naturale è definito solo per i tipi che implementano `Comparable`.
 
+<a id="241-comparable-ordinamento-naturale"></a>
 ## 24.1 Comparable — Ordinamento Naturale
 
 L’interfaccia `Comparable<T>` definisce l’ordine naturale di un tipo.
 
 Una classe la implementa quando vuole definire la propria regola di ordinamento predefinita.
 
+<a id="2411-contratto-del-metodo-di-comparable"></a>
 ### 24.1.1 Contratto del Metodo di Comparable
 
 ```java
@@ -102,6 +105,7 @@ Regole e restituzione:
     compareTo può lanciare ClassCastException se riceve un tipo non confrontabile — ma questo di solito succede solo con tipi raw.
 
 
+<a id="2412-esempio-classe-che-implementa-comparable"></a>
 ### 24.1.2 Esempio: Classe che Implementa Comparable
 
 ```java
@@ -130,6 +134,7 @@ list.stream().sorted().forEach(p -> System.out.println(p.getAge()));
 
 La lista viene ordinata per età, perché quello è l’ordine numerico naturale.
 
+<a id="2413-errori-comuni-di-comparable"></a>
 ### 24.1.3 Errori Comuni di Comparable
 
 - Confrontare tutti i campi rilevanti → risultati inconsistenti se non lo si fa
@@ -139,11 +144,13 @@ La lista viene ordinata per età, perché quello è l’ordine numerico naturale
 
 ---
 
+<a id="242-comparator-ordinamento-personalizzato"></a>
 ## 24.2 Comparator — Ordinamento Personalizzato
 
 L’interfaccia `Comparator<T>` consente di definire più strategie di ordinamento
 senza modificare la classe stessa.
 
+<a id="2421-metodi-principali-di-comparator"></a>
 ### 24.2.1 Metodi Principali di Comparator
 
 ```java
@@ -152,6 +159,7 @@ int compare(T a, T b);
 
 Metodi di supporto aggiuntivi:
 
+<a id="24211-metodi-di-supporto-statici-di-comparator"></a>
 #### 24.2.1.1 Metodi di Supporto **Statici** di Comparator
 
 |Metodo	| Statico / Istanza | Tipo di Ritorno |	Parametri	| Descrizione |
@@ -167,6 +175,7 @@ Metodi di supporto aggiuntivi:
 |`Comparator.nullsLast(comparator)`	| statico	| Comparator<T>	| Comparator<T>	| Incapsula un comparator in modo che i null vengano confrontati dopo i non-null.|
 
 
+<a id="24212-metodi-di-istanza-su-comparator"></a>
 #### 24.2.1.2 Metodi di **Istanza** su Comparator
 
 |Metodo	| Statico / Istanza |	Tipo di Ritorno	| Parametri | Descrizione |
@@ -179,6 +188,7 @@ Metodi di supporto aggiuntivi:
 |`thenComparingDouble(keyExtractor)`	| istanza	| Comparator<T>	| ToDoubleFunction<T>	| Confronto numerico secondario.|
 |`reversed()`	| istanza	| Comparator<T>	| none	| Restituisce un comparator invertito per la stessa logica di confronto.|
 
+<a id="2422-esempio-di-comparator"></a>
 ### 24.2.2 Esempio di Comparator
 
 ```java
@@ -193,6 +203,7 @@ var sorted = people.stream().sorted(byName.thenComparing(byAgeDesc)).toList();
 
 ---
 
+<a id="243-comparable-vs-comparator"></a>
 ## 24.3 Comparable vs Comparator 
 
 
@@ -209,8 +220,10 @@ var sorted = people.stream().sorted(byName.thenComparing(byAgeDesc)).toList();
 
 ---	
 
+<a id="244-ordinamento-di-array-e-collezioni"></a>
 ## 24.4 Ordinamento di Array e Collezioni
 
+<a id="2441-arrays-sort"></a>
 ### 24.4.1 Arrays sort()
 
 ```java
@@ -222,6 +235,7 @@ Arrays.sort(arr); // Person deve implementare Comparable
 Arrays.sort(arr, byName); // usando Comparator
 ```
 
+<a id="2442-collections-sort"></a>
 ### 24.4.2 Collections sort()
 
 ```java
@@ -234,6 +248,7 @@ Collections.sort(list, byName); // comparator
 
 ---
 
+<a id="245-ordinamento-multi-livello-thencomparing"></a>
 ## 24.5 Ordinamento Multi-Livello (thenComparing)
 
 ```java
@@ -245,6 +260,7 @@ var cmp = Comparator
 
 ---
 
+<a id="246-confrontare-primitivi-in-modo-efficiente"></a>
 ## 24.6 Confrontare Primitivi in Modo Efficiente
 
 ```java
@@ -258,6 +274,7 @@ Comparator.comparingDouble(...)
 
 ---
 
+<a id="247-trappole-comuni"></a>
 ## 24.7 Trappole Comuni
 
 - Ordinare una lista di Object senza Comparable → ClassCastException a runtime
@@ -271,6 +288,7 @@ Comparator.comparingDouble(...)
 
 ---
 
+<a id="248-esempio-completo"></a>
 ## 24.8 Esempio Completo
 
 ```java
@@ -298,6 +316,7 @@ books.stream().sorted(cmp)
 
 ---
 
+<a id="249-riepilogo"></a>
 ## 24.9 Riepilogo
 
 - Usare `Comparable` per l’ordinamento naturale (1 ordine predefinito).

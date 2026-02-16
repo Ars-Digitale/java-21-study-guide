@@ -1,5 +1,6 @@
 # 3. Regole di naming Java
 
+<a id="indice"></a>
 ### Indice
 
 - [3. Regole di naming Java](#3-regole-di-naming-java)
@@ -19,8 +20,10 @@ Java definisce regole precise per gli **identificatori**, ovvero i nomi assegnat
 
 Finché si rispettano le regole di naming descritte di seguito, si è liberi di scegliere nomi significativi per gli elementi del programma.
 
+<a id="31-regole-per-gli-identificatori"></a>
 ## 3.1 Regole per gli identificatori
 
+<a id="311-parole-riservate"></a>
 ### 3.1.1 Parole riservate
 
 Gli `identifier` **non possono** coincidere con le **keyword** Java o con i **letterali riservati**.
@@ -36,6 +39,7 @@ boolean true = false; // non valido: 'true' è un literal
 int year = 2024;   	  // valido
 ```
 
+<a id="3111-keyword-java-riservate"></a>
 #### 3.1.1.1 Keyword Java riservate
 
 | a -> c | c -> f | f -> n | n -> s | s -> w |
@@ -54,12 +58,14 @@ int year = 2024;   	  // valido
 !!! note
     `goto` e `const` sono riservate ma non utilizzate.
 
+<a id="3112-letterali-riservati"></a>
 #### 3.1.1.2 Letterali riservati
 
 - `true`  
 - `false`  
 - `null`  
 
+<a id="312-sensibilità-alle-maiuscoleminuscole"></a>
 ### 3.1.2 Sensibilità alle maiuscole/minuscole
 
 Gli identificatori in Java sono **case sensitive**.  
@@ -79,6 +85,7 @@ int CLASS = 6; // legale ma, please, non farlo!!
     A causa della sensibilità a maiuscole/minuscole, si potrebbero usare varianti delle keyword che differiscono solo nel case.  
     Anche se è legale, questo stile è fortemente sconsigliato perché riduce la leggibilità ed è considerata una pessima pratica.
 
+<a id="313-inizio-degli-identificatori"></a>
 ### 3.1.3 Inizio degli identificatori
 
 Gli identificatori in Java devono iniziare con una **lettera**, un **simbolo di valuta** (`$`, `€`, `£`, `₹`...) oppure il simbolo **`_`**.
@@ -94,6 +101,7 @@ String €uro = "currency"; // legale (usato raramente in pratica)
 !!! note
     I simboli di valuta sono legali ma non raccomandati nel codice reale.
 
+<a id="314-numeri-negli-identificatori"></a>
 ### 3.1.4 Numeri negli identificatori
 
 Gli identificatori in Java possono includere numeri, ma **non possono iniziare** con un numero.
@@ -106,6 +114,7 @@ int 3myVarC; // non valido: identifier non possono iniziare con una cifra
 int var2024 = 10; // valido
 ```
 
+<a id="315-singolo-token"></a>
 ### 3.1.5 Singolo token `_`
 
 - Un singolo underscore (`_`) non è consentito come identificatore.
@@ -119,6 +128,7 @@ int _;  // invalid since Java 9
 !!! warning
     `_` è legale all’interno dei letterali numerici (vedi sezione successiva), ma non come identificatore a sé stante.
 
+<a id="316-letterali-numerici-e-carattere-underscore"></a>
 ### 3.1.6 Letterali numerici e carattere underscore
 
 Si possono usare uno o più caratteri `_` (underscore) nei letterali numerici per renderli più facili da leggere.

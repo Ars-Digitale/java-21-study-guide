@@ -1,5 +1,6 @@
 # 3. Java Naming Rules
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [3. Java Naming Rules](#3-java-naming-rules)
@@ -20,8 +21,10 @@ Java defines precise rules for **identifiers**, which are the names given to var
 As long as you follow the naming rules described below, you are free to choose meaningful names for your program elements.
 
 
+<a id="31-rules-for-identifiers"></a>
 ## 3.1 Rules for Identifiers
 
+<a id="311-reserved-words"></a>
 ### 3.1.1 Reserved Words
 
 `Identifiers` **cannot** be the same as Java’s **keywords** or **reserved literals**.
@@ -37,6 +40,7 @@ boolean true = false; // invalid: 'true' is a literal
 int year = 2024;   	// valid
 ```
 
+<a id="3111-java-reserved-keywords"></a>
 #### 3.1.1.1 Java Reserved Keywords
 
 | a -> c | c -> f  | f -> n | n -> s | s -> w|
@@ -55,6 +59,7 @@ int year = 2024;   	// valid
 !!! note
      `goto` and `const` are reserved but not used.
 
+<a id="3112-reserved-literals"></a>
 #### 3.1.1.2 Reserved Literals
 
 - `true`  
@@ -62,6 +67,7 @@ int year = 2024;   	// valid
 - `null`  
 
 
+<a id="312-case-sensitivity"></a>
 ### 3.1.2 Case Sensitivity
 
 Identifiers in Java are **case sensitive**.  
@@ -82,6 +88,7 @@ int CLASS = 6; // legal but, please, don't do it!!
     While legal, such naming is discouraged because it reduces readability and it is considered a very bad practice.
 
 
+<a id="313-beginning-of-identifiers"></a>
 ### 3.1.3 Beginning of Identifiers
 
 Identifiers in Java must begin with a letter, a currency symbol ( $, €, £, ₹...) or a _ symbol.   
@@ -98,6 +105,7 @@ String €uro = "currency"; // legal (rarely seen in practice)
     Currency symbols are legal but not recommended in real-world code.
 
 
+<a id="314-numbers-in-identifiers"></a>
 ### 3.1.4 Numbers in Identifiers
 
 Identifiers in Java can include numbers but they cannot start with them.   
@@ -111,6 +119,7 @@ int var2024 = 10; // valid
 ```
 
 
+<a id="315-single-token"></a>
 ### 3.1.5 Single `_` token
 
 - A single underscore (`_`) is not allowed as an identifier.
@@ -125,6 +134,7 @@ int _;  // invalid since Java 9
     `_` is legal inside number literals (see next section), but not as a standalone identifier.
 
 
+<a id="316-numeric-literals-underscore-character"></a>
 ### 3.1.6 Numeric literals & Underscore character
 
 You can have one or more `_` (underscore) character in number literals in order to make them easier to read.

@@ -1,5 +1,6 @@
 # Ars Digitale Technical Guides
 
+<a id="volume-i-java-21"></a>
 ## Volume I — Java 21  
 Version 1.0 — February 2026
 
@@ -15,6 +16,7 @@ The Java 21 volume provides a modular, concept-driven overview of the language a
 
 ---
 
+<a id="choose-your-language"></a>
 ## 🌍 Choose your language
 
 - 🇬🇧 **English** → [English Edition](en/index.md)

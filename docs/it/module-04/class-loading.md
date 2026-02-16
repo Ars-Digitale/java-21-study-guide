@@ -1,5 +1,6 @@
 # 15. Caricamento delle Classi, Inizializzazione e Costruzione degli Oggetti
 
+<a id="indice"></a>
 ### Indice
 
 - [15. Caricamento delle Classi, Inizializzazione e Costruzione degli Oggetti](#15-caricamento-delle-classi-inizializzazione-e-costruzione-degli-oggetti)
@@ -26,6 +27,7 @@ Questo capitolo fornisce una spiegazione unificata e chiara su:
 - Come vengono eseguiti i costruttori in una catena ereditaria  
 - Come le diverse aree di memoria (Heap, Stack, Method Area) partecipano al processo  
 
+<a id="151-aree-di-memoria-java-rilevanti-per-linizializzazione-di-classi-e-oggetti"></a>
 ## 15.1 Aree di Memoria Java rilevanti per l’Inizializzazione di Classi e Oggetti
 
 Prima di comprendere l’ordine di inizializzazione, è utile ricordare le tre principali aree di memoria coinvolte:
@@ -41,12 +43,14 @@ Prima di comprendere l’ordine di inizializzazione, è utile ricordare le tre p
 
 ---
 
+<a id="152-caricamento-delle-classi-con-ereditarietà"></a>
 ## 15.2 Caricamento delle Classi (con Ereditarietà)
 
 Quando un programma Java si avvia, la JVM carica le classi *su richiesta*.
 
 Quando una classe viene referenziata per la prima volta (ad esempio tramite `new` o accedendo a un membro statico), **l’intera catena ereditaria deve essere caricata prima in memoria**.
 
+<a id="1521-ordine-di-caricamento-delle-classi"></a>
 ### 15.2.1 Ordine di Caricamento delle Classi
 
 Data una gerarchia di classi:
@@ -73,6 +77,7 @@ Allora il caricamento delle classi procede in questo ordine rigoroso:
 - Carica la classe B e ripete la stessa logica  
 - Carica la classe C e ripete la stessa logica  
 
+<a id="1522-cosa-succede-durante-il-caricamento-di-una-classe"></a>
 ### 15.2.2 Cosa Succede Durante il Caricamento di una Classe
 
 - **Passo 1: Le variabili statiche vengono allocate** (prima con valori di default).  
@@ -84,10 +89,12 @@ Allora il caricamento delle classi procede in questo ordine rigoroso:
 
 ---
 
+<a id="153-creazione-degli-oggetti-con-ereditarietà"></a>
 ## 15.3 Creazione degli Oggetti (con Ereditarietà)
 
 Quando viene usata la parola chiave `new`, **la creazione dell’istanza segue una sequenza rigorosa e prevedibile** che coinvolge tutte le classi genitrici.
 
+<a id="1531-ordine-completo-di-creazione-delle-istanze"></a>
 ### 15.3.1 Ordine Completo di Creazione delle Istanze
 
 - **1. Viene allocata memoria sull’Heap per il nuovo oggetto** (gli attributi ricevono valori di default).  
@@ -98,6 +105,7 @@ Quando viene usata la parola chiave `new`, **la creazione dell’istanza segue u
 
 ---
 
+<a id="154-esempio-completo-inizializzazione-statica-di-istanza-nellereditarietà"></a>
 ## 15.4 Esempio Completo: Inizializzazione Statica + di Istanza nell’Ereditarietà
 
 Consideriamo la seguente gerarchia a tre livelli:
@@ -191,6 +199,7 @@ C constructor
 
 ---
 
+<a id="155-diagramma-di-visualizzazione"></a>
 ## 15.5 Diagramma di Visualizzazione
 
 ```text
@@ -224,6 +233,7 @@ C constructor
 
 ---
 
+<a id="156-regole-chiave"></a>
 ## 15.6 Regole Chiave
 
 - L’inizializzazione statica avviene **una sola volta** per classe.  
@@ -235,6 +245,7 @@ C constructor
 
 ---
 
+<a id="157-tabella-riassuntiva"></a>
 ## 15.7 Tabella Riassuntiva
 
 | STATIC (Livello Classe) | INSTANCE (Livello Oggetto) |

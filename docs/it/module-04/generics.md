@@ -1,5 +1,6 @@
 # 18. Generics in Java
 
+<a id="indice"></a>
 ### Indice
 
 - [18. Generics in Java](#18-generics-in-java)
@@ -54,6 +55,7 @@ I Generics si applicano a:
 - `Metodi` (metodi generici)
 - `Costruttori`
 
+<a id="181-basi-dei-tipi-generici"></a>
 ## 18.1 Basi dei Tipi Generici
 
 Una classe o interfaccia generica introduce uno o più **parametri di tipo**, racchiusi tra parentesi angolari.
@@ -83,6 +85,7 @@ class Pair<K, V> {
 
 ---
 
+<a id="182-perché-esistono-i-generics"></a>
 ## 18.2 Perché Esistono i Generics
 
 ```java
@@ -103,6 +106,7 @@ String x = list.get(0);               // type-safe, nessun cast
 
 ---
 
+<a id="183-metodi-generici"></a>
 ## 18.3 Metodi Generici
 
 Un **metodo generico** introduce i propri parametri di tipo, indipendenti dalla classe.
@@ -120,6 +124,7 @@ String t = Util.pick("A", "B");         // l’inferenza funziona
 
 ---
 
+<a id="184-type-erasure"></a>
 ## 18.4 Type Erasure
 
 La `Type erasure` è il processo attraverso cui il compilatore Java rimuove tutte le informazioni sui tipi generici prima di generare il bytecode.
@@ -130,12 +135,14 @@ A `compile time`, i generics sono completamente controllati: bound sui tipi, var
 
 Tuttavia, a runtime, tutte le informazioni generiche scompaiono.
 
+<a id="1841-come-funziona-la-type-erasure"></a>
 ### 18.4.1 Come Funziona la Type Erasure
 
 - Sostituire tutte le variabili di tipo (come `T`) con il loro tipo erasure.
 - Inserire cast dove necessario.
 - Rimuovere tutti gli argomenti di tipo generico (es. `List<String>` → `List`).
 
+<a id="1842-erasure-dei-parametri-di-tipo-senza-bound"></a>
 ### 18.4.2 Erasure dei Parametri di Tipo Senza Bound
 
 Se una variabile di tipo non ha bound:
@@ -156,6 +163,7 @@ class Box {
 }
 ```
 
+<a id="1843-erasure-dei-parametri-di-tipo-con-bound"></a>
 ### 18.4.3 Erasure dei Parametri di Tipo con Bound
 
 Se il parametro di tipo ha bound:
@@ -176,6 +184,7 @@ class TaskRunner {
 }
 ```
 
+<a id="1844-bound-multipli-il-primo-bound-determina-lerasure"></a>
 ### 18.4.4 Bound Multipli: Il Primo Bound Determina l’Erasure
 
 Java permette bound multipli:
@@ -217,6 +226,7 @@ Cosa succede agli altri bound (Serializable, Cloneable)?
 - NON compaiono nel bytecode.
 - Nessuna interfaccia aggiuntiva viene associata al tipo con erasure.
 
+<a id="1845-perché-solo-il-primo-bound-diventa-il-tipo-a-runtime"></a>
 ### 18.4.5 Perché Solo il Primo Bound Diventa il Tipo a Runtime?
 
 Perché la JVM deve operare usando un singolo tipo di riferimento concreto per ogni variabile o parametro.
@@ -226,6 +236,7 @@ Le istruzioni bytecode a runtime come `invokevirtual` richiedono una singola cla
 !!! note
     Java seleziona il **primo bound** come tipo a runtime, e usa i bound restanti solo per la **validazione a compile-time**.
 
+<a id="1846-un-esempio-più-complesso"></a>
 ### 18.4.6 Un Esempio Più Complesso
 
 ```java
@@ -259,6 +270,7 @@ class Demo {
 !!! note
     Il compilatore può inserire cast aggiuntivi o metodi bridge in scenari di ereditarietà più complessi, ma l’erasure usa sempre solo il primo bound (A in questo caso).
 
+<a id="1847-overloading-di-un-metodo-generico-perché-alcuni-overload-sono-impossibili"></a>
 ### 18.4.7 Overloading di un Metodo Generico — Perché Alcuni Overload Sono Impossibili
 
 Quando Java compila codice generico, applica la type erasure:
@@ -292,6 +304,7 @@ void testInput(List inputParam)
 
 Java non permette due metodi con signature identiche nella stessa classe, quindi l’overload viene rifiutato a compile time.
 
+<a id="1848-overloading-di-un-metodo-generico-ereditato-da-una-classe-parent"></a>
 ### 18.4.8 Overloading di un Metodo Generico Ereditato da una Classe Parent
 
 La stessa regola si applica quando una subclass tenta di introdurre un metodo che, dopo erasure, ha la stessa signature di uno nella superclass.
@@ -329,6 +342,7 @@ void testInput(ArrayList inputParam)
 
 Nessuna collisione → overloading legale.
 
+<a id="1849-restituire-tipi-generici-regole-e-restrizioni"></a>
 ### 18.4.9 Restituire Tipi Generici — Regole e Restrizioni
 
 Quando si restituisce un valore da un metodo, Java segue una regola rigida:
@@ -396,6 +410,7 @@ class Demo {
 
 **Java non usa il tipo di ritorno per distinguere metodi in overload**.
 
+<a id="18410-riepilogo-delle-regole-di-erasure"></a>
 ### 18.4.10 Riepilogo delle Regole di Erasure
 
 - `T senza bound` → erasure a Object.
@@ -407,8 +422,10 @@ class Demo {
 
 ---
 
+<a id="185-bound-sui-parametri-di-tipo"></a>
 ## 18.5 Bound sui Parametri di Tipo
 
+<a id="1851-upper-bounds-extends"></a>
 ### 18.5.1 Upper Bounds: extends
 
 `<T extends Number>` significa **T deve essere Number o una sottoclasse**.
@@ -420,6 +437,7 @@ class Stats<T extends Number> {
 }
 ```
 
+<a id="1852-bound-multipli"></a>
 ### 18.5.2 Bound Multipli
 
 Sintassi: `T extends Class & Interface1 & Interface2 ...`
@@ -429,8 +447,10 @@ La classe deve comparire per prima.
 class C<T extends Number & Comparable<T>> { }
 ```
 
+<a id="1853-wildcard-extends-super"></a>
 ### 18.5.3 Wildcard: `?`, `? extends`, `? super`
 
+<a id="18531-wildcard-non-limitata"></a>
 #### 18.5.3.1 Wildcard Non Limitata `?`
 
 Da utilizzare quando si vuole accettare una lista di tipo sconosciuto:
@@ -439,6 +459,7 @@ Da utilizzare quando si vuole accettare una lista di tipo sconosciuto:
 void printAll(List<?> list) { ... }
 ```
 
+<a id="18532-wildcard-con-upper-bound-extends"></a>
 #### 18.5.3.2 Wildcard con Upper Bound `? extends`
 
 ```java
@@ -450,6 +471,7 @@ Number n = nums.get(0);   // OK
 
 > Non puoi aggiungere elementi (eccetto null) a `? extends` perché non conosci il sottotipo esatto.
 
+<a id="18533-wildcard-con-lower-bound-super"></a>
 #### 18.5.3.3 Wildcard con Lower Bound `? super`
 
 `<? super Integer>` significa **il tipo deve essere Integer o una superclasse di Integer**.
@@ -469,6 +491,7 @@ Object o = list.get(0); // restituisce Object (supertype comune minimo)
 
 ---
 
+<a id="186-generics-ed-ereditarietà"></a>
 ## 18.6 Generics ed Ereditarietà
 
 > I generics NON partecipano all’ereditarietà.  
@@ -487,6 +510,7 @@ List<? extends Object> ok = ls;   // funziona
 
 ---
 
+<a id="187-type-inference-operatore-diamond"></a>
 ## 18.7 Type Inference (Operatore Diamond)
 
 ```java
@@ -497,6 +521,7 @@ Il compilatore deduce gli argomenti generici dall’assegnazione.
 
 ---
 
+<a id="188-raw-types-compatibilità-legacy"></a>
 ## 18.8 Raw Types (Compatibilità Legacy)
 
 Un **raw type** disabilita i generics, reintroducendo comportamenti non sicuri.
@@ -511,6 +536,7 @@ raw.add(10);   // permesso, ma non sicuro
 
 ---
 
+<a id="189-array-generici-non-permessi"></a>
 ## 18.9 Array Generici (Non Permessi)
 
 Non puoi creare array di tipi parametrizzati:
@@ -523,6 +549,7 @@ Perché gli array applicano type safety a runtime mentre i generics si basano so
 
 ---
 
+<a id="1810-bounded-type-inference"></a>
 ## 18.10 Bounded Type Inference
 
 ```java
@@ -534,6 +561,7 @@ int v = identity(10);   // OK
 
 ---
 
+<a id="1811-wildcard-vs-parametri-di-tipo"></a>
 ## 18.11 Wildcard vs Parametri di Tipo
 
 Usa le **wildcard** quando ti serve flessibilità nei parametri.
@@ -557,6 +585,7 @@ Meglio:
 
 ---
 
+<a id="1812-regola-pecs-producer-extends-consumer-super"></a>
 ## 18.12 Regola PECS (Producer Extends, Consumer Super)
 
 Usa **? extends** quando il parametro **produce** valori.
@@ -575,6 +604,7 @@ listSuper.add(10);
 
 ---
 
+<a id="1813-errori-comuni"></a>
 ## 18.13 Errori Comuni
 
 - Ordinare liste con wildcard: List<? extends Number> non può accettare inserimenti.
@@ -585,6 +615,7 @@ listSuper.add(10);
 
 ---
 
+<a id="1814-tabella-riassuntiva-delle-wildcard"></a>
 ## 18.14 Tabella Riassuntiva delle Wildcard
 
 | Sintassi | Significato |
@@ -595,6 +626,7 @@ listSuper.add(10);
 
 ---
 
+<a id="1815-riepilogo-dei-concetti"></a>
 ## 18.15 Riepilogo dei Concetti
 
 ```text
@@ -608,6 +640,7 @@ Bridge Methods = mantengono il polimorfismo
 
 ---
 
+<a id="1816-esempio-completo"></a>
 ## 18.16 Esempio Completo
 
 ```java

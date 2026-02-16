@@ -1,5 +1,6 @@
 # 11. Mathématiques en Java
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [11. Mathématiques en Java](#11-mathématiques-en-java)
@@ -22,6 +23,7 @@
 
 ---
 
+<a id="111-api-math"></a>
 ## 11.1 API Math
 
 La classe `java.lang.Math` fournit un ensemble de méthodes statiques utiles pour les opérations numériques.
@@ -30,6 +32,7 @@ Ces méthodes fonctionnent avec les types numériques primitifs.
   
 Ci-dessous se trouve un résumé des plus fréquemment utilisées, ainsi que leurs formes surchargées.
 
+<a id="1111-maximum-et-minimum-entre-deux-valeurs"></a>
 ### 11.1.1 Maximum et minimum entre deux valeurs
 
 `Math.max()` et `Math.min()` comparent les deux valeurs fournies et renvoient le maximum ou le minimum entre elles.
@@ -55,6 +58,7 @@ System.out.println(Math.max(10.50, 7.5));   // 10.5
 System.out.println(Math.min(10, -20));      // -20
 ```
 
+<a id="1112-mathround"></a>
 ### 11.1.2 `Math.round()`
 
 `round()` renvoie l’entier le plus proche de son argument, en suivant les règles d’arrondi standard :  
@@ -76,6 +80,7 @@ Math.round(-3.5f);  // -3  (float version returns int)
     - La version `float` renvoie un `int`.
     - La version `double` renvoie un `long`.
 
+<a id="1113-mathceil-ceiling"></a>
 ### 11.1.3 `Math.ceil()` (Ceiling)
 
 `ceil()` renvoie la plus petite valeur `double` qui est supérieure ou égale à l’argument.
@@ -90,6 +95,7 @@ Math.ceil(3.1);   // 4.0
 Math.ceil(-3.1);  // -3.0
 ```
 
+<a id="1114-mathfloor-floor"></a>
 ### 11.1.4 `Math.floor()` (Floor)
 
 `floor()` renvoie la plus grande valeur `double` qui est inférieure ou égale à l’argument.
@@ -104,6 +110,7 @@ Math.floor(3.9);   // 3.0
 Math.floor(-3.1);  // -4.0
 ```
 
+<a id="1115-mathpow"></a>
 ### 11.1.5 `Math.pow()`
 
 `pow()` élève une valeur à une puissance.
@@ -119,6 +126,7 @@ Math.pow(9, 0.5);    // 3.0  (square root)
 Math.pow(10, -1);    // 0.1
 ```
 
+<a id="1116-mathrandom"></a>
 ### 11.1.6 `Math.random()`
 
 `random()` renvoie un `double` dans l’intervalle `[0.0, 1.0)` (0.0 inclus, 1.0 exclus).
@@ -135,6 +143,7 @@ double r = Math.random();   // 0.0 <= r < 1.0
 int x = (int)(Math.random() * 10);
 ```
 
+<a id="1117-mathabs"></a>
 ### 11.1.7 `Math.abs()`
 
 `abs()` renvoie la valeur absolue (distance à zéro).
@@ -145,6 +154,7 @@ int x = (int)(Math.random() * 10);
 - `float abs(float value)`
 - `double abs(double value)`
 
+<a id="1118-mathsqrt"></a>
 ### 11.1.8 `Math.sqrt()`
 
 `sqrt()` calcule la racine carrée et renvoie un `double`.
@@ -154,6 +164,7 @@ Math.sqrt(9);    // 3.0
 Math.sqrt(-1);   // NaN (not a number)
 ```
 
+<a id="1119-tableau-récapitulatif"></a>
 ### 11.1.9 Tableau récapitulatif
 
 | Méthode | Renvoie | Surcharges | Notes |
@@ -169,6 +180,7 @@ Math.sqrt(-1);   // NaN (not a number)
 
 ---
 
+<a id="112-biginteger-et-bigdecimal"></a>
 ## 11.2 BigInteger et BigDecimal
 
 Les classes `BigInteger` et `BigDecimal` (dans `java.math`) fournissent des types numériques à précision arbitraire.
@@ -180,6 +192,7 @@ Elles sont utilisées lorsque :
 
 Les deux sont **immutables** : chaque opération renvoie une nouvelle instance.
 
+<a id="1121-pourquoi-double-et-float-ne-suffisent-pas"></a>
 ### 11.2.1 Pourquoi `double` et `float` ne suffisent pas
 
 Les types en virgule flottante (`float`, `double`) utilisent une représentation binaire. Beaucoup de fractions décimales ne peuvent pas être représentées exactement (comme 0.1 ou 0.2), ce qui produit des erreurs d’arrondi :
@@ -192,10 +205,12 @@ Pour des tâches comme les calculs financiers, cela est inacceptable.
   
 `BigDecimal` résout ce problème en représentant les nombres à l’aide d’un modèle décimal avec une échelle configurable (nombre de chiffres après la virgule).
 
+<a id="1122-biginteger-entiers-à-précision-arbitraire"></a>
 ### 11.2.2 BigInteger — Entiers à précision arbitraire
 
 `BigInteger` représente des valeurs entières de taille pratiquement quelconque, limitée uniquement par la mémoire disponible.
 
+<a id="1123-créer-biginteger"></a>
 ### 11.2.3 Créer BigInteger
 
 Méthodes courantes :
@@ -239,6 +254,7 @@ BigInteger c = new BigInteger("FF", 16);               // 255 in base 16
 BigInteger r = new BigInteger(128, new Random());      // random 128-bit number
 ```
 
+<a id="1124-opérations-pas-dopérateurs"></a>
 ### 11.2.4 Opérations (pas d’opérateurs !)
 
 Vous ne pouvez pas utiliser les opérateurs arithmétiques standards (`+`, `-`, `*`, `/`, `%`) avec `BigInteger` ou `BigDecimal`.

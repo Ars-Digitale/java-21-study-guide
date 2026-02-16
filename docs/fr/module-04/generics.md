@@ -1,5 +1,6 @@
 # 18. Generics en Java
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [18. Generics en Java](#18-generics-en-java)
@@ -54,6 +55,7 @@ Les Generics s’appliquent à:
 - `Méthodes` (méthodes génériques)
 - `Constructeurs`
 
+<a id="181-bases-des-types-génériques"></a>
 ## 18.1 Bases des Types Génériques
 
 Une classe ou interface générique introduit un ou plusieurs **paramètres de type**, encadrés par des chevrons.
@@ -83,6 +85,7 @@ class Pair<K, V> {
 
 ---
 
+<a id="182-pourquoi-les-generics-existent"></a>
 ## 18.2 Pourquoi les Generics Existent
 
 ```java
@@ -103,6 +106,7 @@ String x = list.get(0);               // type-safe, aucun cast
 
 ---
 
+<a id="183-méthodes-génériques"></a>
 ## 18.3 Méthodes Génériques
 
 Une **méthode générique** introduit ses propres paramètres de type, indépendants de la classe.
@@ -120,6 +124,7 @@ String t = Util.pick("A", "B");         // l’inférence fonctionne
 
 ---
 
+<a id="184-type-erasure"></a>
 ## 18.4 Type Erasure
 
 La `Type erasure` est le processus par lequel le compilateur Java supprime toutes les informations sur les types génériques avant de générer le bytecode.
@@ -130,12 +135,14 @@ Cela garantit la compatibilité avec les JVM précédentes à Java 5.
 
 Cependant, à runtime, toutes les informations génériques disparaissent.
 
+<a id="1841-comment-fonctionne-la-type-erasure"></a>
 ### 18.4.1 Comment Fonctionne la Type Erasure
 
 - Remplacer toutes les variables de type (comme `T`) par leur type erasure.
 - Insérer des casts lorsque nécessaire.
 - Supprimer tous les arguments de type générique (ex. `List<String>` → `List`).
 
+<a id="1842-erasure-des-paramètres-de-type-sans-bound"></a>
 ### 18.4.2 Erasure des Paramètres de Type Sans Bound
 
 Si une variable de type n’a pas de bound:
@@ -156,6 +163,7 @@ class Box {
 }
 ```
 
+<a id="1843-erasure-des-paramètres-de-type-avec-bound"></a>
 ### 18.4.3 Erasure des Paramètres de Type Avec Bound
 
 Si le paramètre de type a un bound:
@@ -176,6 +184,7 @@ class TaskRunner {
 }
 ```
 
+<a id="1844-bounds-multiples-le-premier-bound-détermine-lerasure"></a>
 ### 18.4.4 Bounds Multiples: Le Premier Bound Détermine l’Erasure
 
 Java permet des bounds multiples:
@@ -217,6 +226,7 @@ Que se passe-t-il avec les autres bounds (Serializable, Cloneable)?
 - Ils n’apparaissent PAS dans le bytecode.
 - Aucune interface supplémentaire n’est associée au type avec erasure.
 
+<a id="1845-pourquoi-seulement-le-premier-bound-devient-le-type-à-runtime"></a>
 ### 18.4.5 Pourquoi Seulement le Premier Bound Devient le Type à Runtime?
 
 Parce que la JVM doit opérer en utilisant un seul type de référence concret pour chaque variable ou paramètre.
@@ -226,6 +236,7 @@ Les instructions bytecode à runtime comme `invokevirtual` exigent une seule cla
 !!! note
     Java sélectionne le **premier bound** comme type à runtime, et utilise les bounds restants seulement pour la **validation à compile-time**.
 
+<a id="1846-un-exemple-plus-complexe"></a>
 ### 18.4.6 Un Exemple Plus Complexe
 
 ```java
@@ -259,6 +270,7 @@ class Demo {
 !!! note
     Le compilateur peut insérer des casts supplémentaires ou des méthodes bridge dans des scénarios d’héritage plus complexes, mais l’erasure utilise toujours seulement le premier bound (A dans ce cas).
 
+<a id="1847-surcharge-dune-méthode-générique-pourquoi-certaines-surcharges-sont-impossibles"></a>
 ### 18.4.7 Surcharge d’une Méthode Générique — Pourquoi Certaines Surcharges Sont Impossibles
 
 Quand Java compile du code générique, il applique la type erasure:
@@ -292,6 +304,7 @@ void testInput(List inputParam)
 
 Java ne permet pas deux méthodes avec des signatures identiques dans la même classe, donc la surcharge est rejetée à compile time.
 
+<a id="1848-surcharge-dune-méthode-générique-héritée-dune-classe-parent"></a>
 ### 18.4.8 Surcharge d’une Méthode Générique Héritée d’une Classe Parent
 
 La même règle s’applique quand une subclass tente d’introduire une méthode qui, après erasure, a la même signature qu’une dans la superclass.
@@ -329,6 +342,7 @@ void testInput(ArrayList inputParam)
 
 Aucune collision → surcharge légale.
 
+<a id="1849-retourner-des-types-génériques-règles-et-restrictions"></a>
 ### 18.4.9 Retourner des Types Génériques — Règles et Restrictions
 
 Quand on retourne une valeur depuis une méthode, Java suit une règle rigide:
@@ -396,6 +410,7 @@ class Demo {
 
 **Java n’utilise pas le type de retour pour distinguer les méthodes en surcharge**.
 
+<a id="18410-récapitulatif-des-règles-derasure"></a>
 ### 18.4.10 Récapitulatif des Règles d’Erasure
 
 - `T sans bound` → erasure à Object.
@@ -407,8 +422,10 @@ class Demo {
 
 ---
 
+<a id="185-bounds-sur-les-paramètres-de-type"></a>
 ## 18.5 Bounds sur les Paramètres de Type
 
+<a id="1851-upper-bounds-extends"></a>
 ### 18.5.1 Upper Bounds: extends
 
 `<T extends Number>` signifie **T doit être Number ou une sous-classe**.
@@ -420,6 +437,7 @@ class Stats<T extends Number> {
 }
 ```
 
+<a id="1852-bounds-multiples"></a>
 ### 18.5.2 Bounds Multiples
 
 Syntaxe: `T extends Class & Interface1 & Interface2 ...`
@@ -429,8 +447,10 @@ La classe doit apparaître en premier.
 class C<T extends Number & Comparable<T>> { }
 ```
 
+<a id="1853-wildcard-extends-super"></a>
 ### 18.5.3 Wildcard: `?`, `? extends`, `? super`
 
+<a id="18531-wildcard-non-limitée"></a>
 #### 18.5.3.1 Wildcard Non Limitée `?`
 
 À utiliser quand on veut accepter une liste de type inconnu:
@@ -439,6 +459,7 @@ class C<T extends Number & Comparable<T>> { }
 void printAll(List<?> list) { ... }
 ```
 
+<a id="18532-wildcard-avec-upper-bound-extends"></a>
 #### 18.5.3.2 Wildcard avec Upper Bound `? extends`
 
 ```java
@@ -450,6 +471,7 @@ Number n = nums.get(0);   // OK
 
 > Tu ne peux pas ajouter des éléments (sauf null) à `? extends` parce que tu ne connais pas le sous-type exact.
 
+<a id="18533-wildcard-avec-lower-bound-super"></a>
 #### 18.5.3.3 Wildcard avec Lower Bound `? super`
 
 `<? super Integer>` signifie **le type doit être Integer ou une superclasse de Integer**.
@@ -469,6 +491,7 @@ Object o = list.get(0); // retourne Object (supertype commun minimal)
 
 ---
 
+<a id="186-generics-et-héritage"></a>
 ## 18.6 Generics et Héritage
 
 > I generics ne participent PAS à l’héritage.  
@@ -487,6 +510,7 @@ List<? extends Object> ok = ls;   // fonctionne
 
 ---
 
+<a id="187-type-inference-opérateur-diamond"></a>
 ## 18.7 Type Inference (Opérateur Diamond)
 
 ```java
@@ -497,6 +521,7 @@ Le compilateur déduit les arguments génériques à partir de l’affectation.
 
 ---
 
+<a id="188-raw-types-compatibilité-legacy"></a>
 ## 18.8 Raw Types (Compatibilité Legacy)
 
 Un **raw type** désactive les generics, réintroduisant des comportements non sûrs.
@@ -511,6 +536,7 @@ raw.add(10);   // permis, mais non sûr
 
 ---
 
+<a id="189-tableaux-génériques-non-autorisés"></a>
 ## 18.9 Tableaux Génériques (Non Autorisés)
 
 Tu ne peux pas créer des tableaux de types paramétrés:
@@ -523,6 +549,7 @@ Parce que les tableaux appliquent la type safety à runtime tandis que les gener
 
 ---
 
+<a id="1810-bounded-type-inference"></a>
 ## 18.10 Bounded Type Inference
 
 ```java
@@ -534,6 +561,7 @@ int v = identity(10);   // OK
 
 ---
 
+<a id="1811-wildcard-vs-paramètres-de-type"></a>
 ## 18.11 Wildcard vs Paramètres de Type
 
 Utilise les **wildcards** quand tu as besoin de flexibilité dans les paramètres.
@@ -557,6 +585,7 @@ Mieux:
 
 ---
 
+<a id="1812-règle-pecs-producer-extends-consumer-super"></a>
 ## 18.12 Règle PECS (Producer Extends, Consumer Super)
 
 Utilise **? extends** quand le paramètre **produit** des valeurs.
@@ -575,6 +604,7 @@ listSuper.add(10);
 
 ---
 
+<a id="1813-pièges-communs"></a>
 ## 18.13 Pièges Communs
 
 - Trier des listes avec wildcard: List<? extends Number> ne peut pas accepter d’insertions.
@@ -585,6 +615,7 @@ listSuper.add(10);
 
 ---
 
+<a id="1814-tableau-récapitulatif-des-wildcards"></a>
 ## 18.14 Tableau Récapitulatif des Wildcards
 
 | Syntaxe | Signification |
@@ -595,6 +626,7 @@ listSuper.add(10);
 
 ---
 
+<a id="1815-récapitulatif-des-concepts"></a>
 ## 18.15 Récapitulatif des Concepts
 
 ```text
@@ -608,6 +640,7 @@ Bridge Methods = maintiennent le polymorphisme
 
 ---
 
+<a id="1816-exemple-complet"></a>
 ## 18.16 Exemple Complet
 
 ```java

@@ -1,5 +1,6 @@
 # 9. Stringhe in Java
 
+<a id="indice"></a>
 ### Indice
 
 - [9. Stringhe in Java](#9-stringhe-in-java)
@@ -32,10 +33,13 @@
 
 ---
 
+<a id="91-stringhe-text-blocks"></a>
 ## 9.1 Stringhe & Text Blocks
 
+<a id="911-stringhe"></a>
 ### 9.1.1 Stringhe
 
+<a id="9111-inizializzare-le-stringhe"></a>
 ### 9.1.1.1 Inizializzare le stringhe
 
 In Java, una **String** è un oggetto della classe `java.lang.String`, usato per rappresentare una sequenza di caratteri.
@@ -54,6 +58,7 @@ String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
     - I letterali stringa sono memorizzati nello `String pool`, un’area speciale di memoria usata per evitare di creare oggetti stringa duplicati.
     - L’uso della keyword `new` crea sempre un nuovo oggetto al di fuori del pool.
 
+<a id="9112-lo-string-pool"></a>
 ### 9.1.1.2 Lo String Pool
 
 Poiché gli oggetti `String` sono immutabili e ampiamente usati, potrebbero facilmente occupare una grande quantità di memoria in un programma Java.
@@ -62,6 +67,7 @@ Per ridurre la duplicazione, Java riutilizza tutte le stringhe dichiarate come l
 
 Per una spiegazione più approfondita e esempi, controlla il paragrafo: **"6.4.3 String Pool and Equality"** nel capitolo: [Istanziazione dei tipi](../module-01/instantiating-types.md).
 
+<a id="9113-caratteri-speciali-e-sequenze-di-escape"></a>
 ### 9.1.1.3 Caratteri speciali e sequenze di escape
 
 Le stringhe possono contenere caratteri di escape, che permettono di includere simboli speciali o caratteri di controllo (caratteri con un significato speciale in Java).  
@@ -81,6 +87,7 @@ Una sequenza di escape inizia con un backslash `\`.
 | `\b` | backspace | `"AB\bC"` | `AC` (il `B` viene rimosso visivamente) |
 | `\uXXXX` | unità di codice Unicode | `"\u00A9"` | `©` |
 
+<a id="9114-regole-per-la-concatenazione-di-stringhe"></a>
 ### 9.1.1.4 Regole per la concatenazione di stringhe
 
 Come introdotto nel capitolo su [Operatori Java](../module-01/java-operators.md), il simbolo `+` normalmente rappresenta l’**addizione aritmetica** quando viene usato con operandi numerici.
@@ -89,6 +96,7 @@ Tuttavia, quando applicato alle **String**, lo stesso operatore esegue la **conc
 
 Poiché l’operatore `+` può apparire in espressioni in cui sono presenti sia numeri sia stringhe, Java applica un insieme specifico di regole per determinare se `+` significa **addizione numerica** o **concatenazione di stringhe**.
 
+<a id="9115-regole-di-concatenazione"></a>
 ### 9.1.1.5 Regole di concatenazione
 
 - Se entrambi gli operandi sono numerici, `+` esegue l’**addizione numerica**.
@@ -156,6 +164,7 @@ System.out.println("AB" + null);
 // ABnull
 ```
 
+<a id="912-text-blocks-da-java-15"></a>
 ### 9.1.2 Text Blocks (da Java 15)
 
 Un text block è un letterale stringa multi-linea introdotto per semplificare la scrittura di stringhe grandi (come HTML, JSON o codice) senza la necessità di molte sequenze di escape.
@@ -179,6 +188,7 @@ String html = """
     - Le doppie virgolette all’interno del blocco di solito non richiedono escape.
     - Il compilatore interpreta il contenuto tra le triple virgolette di apertura e chiusura come il valore della stringa.
 
+<a id="9121-formattazione-whitespace-essenziale-vs-incidentale"></a>
 ### 9.1.2.1 Formattazione: whitespace essenziale vs incidentale
 
 - **Whitespace essenziale**: spazi e newline che fanno parte del contenuto della stringa.
@@ -227,6 +237,7 @@ String textNoTrail_2 = """
         Line 3""";
 ```
 
+<a id="9122-conteggio-righe-righe-vuote-e-line-break"></a>
 ### 9.1.2.2 Conteggio righe, righe vuote e line break
 
 - Ogni line break visibile dentro il blocco diventa `\n`.
@@ -254,6 +265,7 @@ Output:
 7:
 ```
 
+<a id="9123-text-blocks-e-caratteri-di-escape"></a>
 ### 9.1.2.3 Text Blocks e caratteri di escape
 
 Le sequenze di escape funzionano ancora dentro i text block quando necessario (per esempio, per backslash o caratteri di controllo espliciti).
@@ -276,6 +288,7 @@ String card = """
     """.formatted("Alice", 30);
 ```
 
+<a id="9124-errori-comuni-con-correzioni"></a>
 ### 9.1.2.4 Errori comuni (con correzioni)
 
 ```java
@@ -317,8 +330,10 @@ String correct = """
 
 ---
 
+<a id="92-metodi-principali-delle-stringhe"></a>
 ## 9.2 Metodi principali delle stringhe
 
+<a id="921-indicizzazione-delle-stringhe"></a>
 ### 9.2.1 Indicizzazione delle stringhe
 
 Le stringhe in Java usano l’**indicizzazione a base zero**, il che significa:
@@ -337,6 +352,7 @@ String s = "Java";
 char c = s.charAt(2); // 'v'
 ```
 
+<a id="922-metodo-length"></a>
 ### 9.2.2 Metodo `length()`
 
 `length()` restituisce il numero di caratteri nella stringa.
@@ -348,6 +364,7 @@ System.out.println(s.length());  // 5
 
 L’ultimo indice valido è sempre `length() - 1`.
 
+<a id="923-regole-dei-limiti-indice-iniziale-vs-indice-finale"></a>
 ### 9.2.3 Regole dei limiti: indice iniziale vs indice finale
 
 Molti metodi di `String` usano due indici:
@@ -371,6 +388,7 @@ s.substring(1, 4); // "bcd" (indexes 1,2,3)
 
 Questa regola si applica alla maggior parte dei metodi basati su substring.
 
+<a id="924-metodi-che-usano-solo-lindice-iniziale-inclusivo"></a>
 ### 9.2.4 Metodi che usano solo l’indice iniziale (inclusivo)
 
 | Metodo | Descrizione | Parametri | Regola indice | Esempio |
@@ -381,6 +399,7 @@ Questa regola si applica alla maggior parte dei metodi basati su substring.
 | lastIndexOf(String) | Ultima occorrenza | — | — | "banana".lastIndexOf("a") → 5 |
 | lastIndexOf(String, fromIndex) | Cerca all’indietro dall’indice | fromIndex | fromIndex inclusivo | "banana".lastIndexOf("a", 3) → 3 |
 
+<a id="925-metodi-con-inizio-inclusivo-fine-esclusivo"></a>
 ### 9.2.5 Metodi con inizio inclusivo / fine esclusivo
 
 Questi metodi seguono lo stesso comportamento di slicing: `start` incluso, `end` escluso.
@@ -392,6 +411,7 @@ Questi metodi seguono lo stesso comportamento di slicing: `start` incluso, `end`
 | getBytes(int srcBegin, int srcEnd, byte[] dst, int dstBegin) | Copia caratteri in un array di byte | start inclusivo, end esclusivo | Copia i caratteri in [srcBegin, srcEnd) |
 | copyValueOf(char[] data, int offset, int count) | Crea una nuova stringa | offset inclusivo; offset+count esclusivo | Stessa regola di substring |
 
+<a id="926-metodi-che-operano-sullintera-stringa"></a>
 ### 9.2.6 Metodi che operano sull’intera stringa
 
 | Metodo | Descrizione | Esempio |
@@ -405,6 +425,7 @@ Questi metodi seguono lo stesso comportamento di slicing: `start` incluso, `end`
 | isBlank() | Vero se vuota o solo whitespace | "  ".isBlank() → true |
 | isEmpty() | Vero se length == 0 | "".isEmpty() → true |
 
+<a id="927-accesso-ai-caratteri"></a>
 ### 9.2.7 Accesso ai caratteri
 
 | Metodo | Descrizione | Esempio |
@@ -412,6 +433,7 @@ Questi metodi seguono lo stesso comportamento di slicing: `start` incluso, `end`
 | charAt(int index) | Restituisce il carattere all’indice | "Java".charAt(2) → 'v' |
 | codePointAt(int index) | Restituisce il code point Unicode | Utile per emoji o caratteri oltre BMP |
 
+<a id="928-ricerca"></a>
 ### 9.2.8 Ricerca
 
 | Metodo | Descrizione | Esempio |
@@ -421,6 +443,7 @@ Questi metodi seguono lo stesso comportamento di slicing: `start` incluso, `end`
 | startsWith(String, offset) | Prefisso all’indice | "abc".startsWith("b", 1) → true |
 | endsWith(String) | Suffisso | "abcdef".endsWith("def") → true |
 
+<a id="929-metodi-di-sostituzione"></a>
 ### 9.2.9 Metodi di sostituzione
 
 | Metodo | Descrizione | Esempio |
@@ -430,6 +453,7 @@ Questi metodi seguono lo stesso comportamento di slicing: `start` incluso, `end`
 | replaceAll(String regex, String replacement) | Sostituzione regex globale | "a1a2".replaceAll("\\d","") → "aa" |
 | replaceFirst(String regex, String replacement) | Solo prima corrispondenza regex | "a1a2".replaceFirst("\\d","") → "aa2" |
 
+<a id="9210-suddivisione-e-unione"></a>
 ### 9.2.10 Suddivisione e unione
 
 | Metodo | Descrizione | Esempio |
@@ -437,6 +461,7 @@ Questi metodi seguono lo stesso comportamento di slicing: `start` incluso, `end`
 | split(String regex) | Suddivide per regex | "a,b,c".split(",") → ["a","b","c"] |
 | split(String regex, int limit) | Suddivide con limite | limit < 0 mantiene tutte le stringhe vuote finali |
 
+<a id="9211-metodi-che-restituiscono-array"></a>
 ### 9.2.11 Metodi che restituiscono array
 
 | Metodo | Descrizione | Esempio |
@@ -444,6 +469,7 @@ Questi metodi seguono lo stesso comportamento di slicing: `start` incluso, `end`
 | toCharArray() | Restituisce char[] | "abc".toCharArray() |
 | getBytes() | Restituisce byte[] usando encoding di piattaforma/default | "á".getBytes() |
 
+<a id="9212-indentazione"></a>
 ### 9.2.12 Indentazione
 
 | Metodo | Descrizione | Esempio |
@@ -505,6 +531,7 @@ c
 length: 5
 ```
 
+<a id="9213-esempi-aggiuntivi"></a>
 ### 9.2.13 Esempi aggiuntivi
 
 - Esempio 1 — Estrarre `[start, end)`

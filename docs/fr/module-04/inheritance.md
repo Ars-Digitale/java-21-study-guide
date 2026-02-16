@@ -1,5 +1,6 @@
 # 16. Héritage en Java
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [16. Héritage en Java](#16-héritage-en-java)
@@ -36,6 +37,7 @@ L'`Inheritance` (Héritage) est l’un des piliers fondamentaux de l'Object-Orie
 
 Elle permet à une classe `fille` ( child ), la **subclass**, d’acquérir l’état et le comportement d’une autre classe `génitrice` ( parent ), la **superclass**, en créant des relations hiérarchiques qui promeuvent la réutilisation du code, la spécialisation et le polymorphisme.
 
+<a id="161-définition-générale-de-lhéritage"></a>
 ## 16.1 Définition Générale de l’Héritage
 
 L’héritage permet à une classe d’en étendre une autre, en obtenant automatiquement ses `attributs` et ses `méthodes` accessibles.
@@ -47,6 +49,7 @@ La classe qui étend peut ajouter de nouvelles fonctionnalités ou redéfinir (f
 
 ---
 
+<a id="162-héritage-simple-et-javalangobject"></a>
 ## 16.2 Héritage Simple et java.lang.Object
 
 Java supporte la **single inheritance**, ce qui signifie que chaque classe peut étendre **une seule** superclasse directe.
@@ -65,6 +68,7 @@ System.out.println(new Dog() instanceof Object); // true
 
 ---
 
+<a id="163-héritage-transitif"></a>
 ## 16.3 Héritage Transitif
 
 L’`Inheritance` est **transitif**.
@@ -79,6 +83,7 @@ class C extends B { } // C inherits from both A and B
 
 ---
 
+<a id="164-ce-qui-est-hérité-bref-promemoria"></a>
 ## 16.4 Ce Qui Est Hérité, Bref Promemoria
 
 Une subclass hérite de tous les membres **accessibles** de la classe génitrice.
@@ -95,6 +100,7 @@ Cependant, spécifiquement, cela dépend des `access modifiers`.
 
 ---
 
+<a id="165-modificateurs-de-classe-qui-influencent-lhéritage"></a>
 ## 16.5 Modificateurs de Classe qui influencent l’Héritage
 
 Certains modificateurs au niveau de la classe déterminent si une classe peut être étendue.
@@ -112,8 +118,10 @@ Certains modificateurs au niveau de la classe déterminent si une classe peut ê
 
 ---
 
+<a id="166-références-this-et-super"></a>
 ## 16.6 Références `this` et `super`
 
+<a id="1661-la-référence-this"></a>
 ### 16.6.1 La Référence `this`
 
 La référence `this` se réfère à l’instance courante de l’objet et permet de lever l’ambiguïté d’accès aux membres courants et hérités.
@@ -147,6 +155,7 @@ public class Person {
 !!! warning
     `this` NE peut PAS être utilisé à l’intérieur de méthodes statiques parce que, dans ce contexte, aucune instance n’existe.
 
+<a id="1662-la-référence-super"></a>
 ### 16.6.2 La Référence `super`
 
 La référence `super` donne accès aux membres de la classe génitrice (parent) directe.
@@ -175,6 +184,7 @@ class Child extends Parent {
 
 ---
 
+<a id="167-déclarer-des-constructeurs-dans-une-chaîne-héréditaire"></a>
 ## 16.7 Déclarer des Constructeurs dans une chaîne héréditaire
 
 Un `constructeur` initialise un objet nouvellement créé.
@@ -193,6 +203,7 @@ Une classe parent continue d’avoir son propre constructeur par défaut à moin
 
 ---
 
+<a id="168-constructeur-no-arg-par-défaut"></a>
 ## 16.8 Constructeur `no-arg` par Défaut
 
 Si une classe ne déclare aucun constructeur, Java insère automatiquement un **default no-argument constructor**.
@@ -210,6 +221,7 @@ class Child extends Parent {
 
 ---
 
+<a id="169-utiliser-this-et-constructor-overloading"></a>
 ## 16.9 Utiliser `this()` et Constructor Overloading
 
 **this()** invoque un autre constructeur dans la même classe.
@@ -238,6 +250,7 @@ class Car {
 
 ---
 
+<a id="1610-appeler-le-constructeur-du-parent-en-utilisant-super"></a>
 ## 16.10 Appeler le Constructeur du Parent en utilisant `super()`
 
 Chaque constructeur doit appeler un constructeur de la superclasse, explicitement ou implicitement.
@@ -259,6 +272,7 @@ class Child extends Parent {
 
 ---
 
+<a id="1611-conseils-et-pièges-sur-le-constructeur-par-défaut"></a>
 ## 16.11 Conseils et Pièges sur le Constructeur par Défaut
 
 - **Si la classe parent n’a pas de no-arg constructor, la classe fille DOIT invoquer le spécifique `super(args)` explicitement.**
@@ -278,6 +292,7 @@ class Child extends Parent {
 
 ---
 
+<a id="1612-super-se-réfère-toujours-au-parent-le-plus-direct"></a>
 ## 16.12 `super()` se Réfère Toujours au Parent le plus direct
 
 Même dans de longues chaînes héréditaires, `super()` invoque toujours (et seulement) le constructeur de la classe génitrice **immédiate**.
@@ -307,8 +322,10 @@ C
 
 ---
 
+<a id="1613-hériter-des-membres"></a>
 ## 16.13 Hériter des Membres
 
+<a id="16131-method-overriding"></a>
 ### 16.13.1 Method Overriding
 
 Le `method overriding` est un concept fondamental de l’héritage: il permet à une classe fille de fournir une **nouvelle implémentation** pour une méthode déjà définie dans une de ses classes parent.
@@ -317,6 +334,7 @@ Le `method overriding` est un concept fondamental de l’héritage: il permet à
 
 Ce comportement est appelé **dynamic dispatch** et c’est ce qui rend possible le polymorphisme en Java.
 
+<a id="161311-définition-et-rôle-dans-lhéritage"></a>
 #### 16.13.1.1 Définition et Rôle dans l’Héritage
 
 Une méthode dans une subclass fait **override** d’une méthode d’une de ses superclass si:
@@ -350,6 +368,7 @@ public class TestOverride {
 }
 ```
 
+<a id="161312-utiliser-super-pour-appeler-limplémentation-du-parent"></a>
 #### 16.13.1.2 Utiliser super pour appeler l’Implémentation du Parent
 
 Quand une subclass fait override d’une méthode, elle peut quand même accéder à l’implémentation "originelle" de la superclass, via la référence `super`.
@@ -396,6 +415,7 @@ class Derived extends Base {
 }
 ```
 
+<a id="161313-règles-de-overriding-instance-methods"></a>
 #### 16.13.1.3 Règles de Overriding (Instance Methods)
 
 - **Même signature (signature)**: même nom de méthode, mêmes types et ordre des paramètres.
@@ -421,6 +441,7 @@ class Child extends Parent {
 }
 ```
 
+<a id="161314-masquer-static-methods-method-hiding"></a>
 #### 16.13.1.4 Masquer Static Methods (Method Hiding)
 
 Les méthodes statiques ne participent pas à l'`overriding`; elles sont au contraire, éventuellement, masquées (**hidden**).
@@ -459,8 +480,10 @@ public class TestStatic {
     - méthodes statiques **final** ne peuvent pas être `hidden` (masquées); méthodes d’instance déclarées **final** ne peuvent pas être `overriden`.
     - Si on essaye de les redéfinir dans une subclass, le code ne compilera pas.
 
+<a id="16132-abstract-classes"></a>
 ### 16.13.2 Abstract Classes
 
+<a id="161321-définition-et-but"></a>
 #### 16.13.2.1 Définition et But
 
 Une **abstract class** est une classe qui ne peut pas être instanciée directement et est destinée à être étendue.
@@ -472,6 +495,7 @@ Elle peut contenir:
 
 Les abstract classes sont utilisées quand on veut définir un comportement commun (et un contrat) de **base**, mais laisser certains détails à implémenter aux subclasses concrètes.
 
+<a id="161322-règles-pour-les-abstract-classes"></a>
 #### 16.13.2.2 Règles pour les Abstract Classes
 
 - Une classe avec au moins une méthode abstraite **doit** être déclarée `abstract`.
@@ -512,8 +536,10 @@ class Circle extends Shape {
     - Bien qu’une `abstract class` ne puisse pas être instanciée, ses constructeurs sont quand même appelés quand on crée des instances de classes filles concrètes.
     - Le flux des instanciations, dans la `chaîne héréditaire`, part toujours du sommet de la hiérarchie et se déplace vers le bas.
 
+<a id="16133-créer-des-objets-immutables"></a>
 ### 16.13.3 Créer des Objets Immutables
 
+<a id="161331-quest-ce-quun-objet-immutable"></a>
 #### 16.13.3.1 Qu’est-ce qu’un Objet `Immutable`
 
 Un objet est **immutable** si, après qu’il a été créé, son état **ne peut pas changer**.
@@ -522,6 +548,7 @@ Tous les attributs qui représentent son état, restent constants pour l'ensembl
 
 Les `immutable objects` sont simples à comprendre, intrinsèquement `thread safe` (si conçus correctement), et largement utilisés dans la Java Standard Library (par exemple `String`, wrapper classes comme `Integer`, et beaucoup de classes dans `java.time`).
 
+<a id="161332-lignes-directrices-pour-concevoir-des-classes-immutable"></a>
 #### 16.13.3.2 Lignes Directrices pour Concevoir des Classes Immutable
 
 - Déclarer une classe **final** afin qu’elle ne puisse pas être étendue (ou bien rendre tous les constructeurs privés et fournir des factory methods protégés).

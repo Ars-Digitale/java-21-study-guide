@@ -1,5 +1,6 @@
 # 3. Règles de nommage Java
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [3. Règles de nommage Java](#3-règles-de-nommage-java)
@@ -19,8 +20,10 @@ Java définit des règles précises pour les **identifiants**, c’est-à-dire l
 
 Tant que vous respectez les règles de nommage décrites ci-dessous, vous êtes libre de choisir des noms significatifs pour les éléments de votre programme.
 
+<a id="31-règles-pour-les-identifiants"></a>
 ## 3.1 Règles pour les identifiants
 
+<a id="311-mots-réservés"></a>
 ### 3.1.1 Mots réservés
 
 Les `identifiers` **ne peuvent pas** être identiques aux **mots-clés** Java ni aux **littéraux réservés**.
@@ -36,6 +39,7 @@ boolean true = false; // invalid: 'true' is a literal
 int year = 2024;   	  // valid
 ```
 
+<a id="3111-mots-clés-java-réservés"></a>
 #### 3.1.1.1 Mots-clés Java réservés
 
 | a -> c | c -> f | f -> n | n -> s | s -> w |
@@ -54,12 +58,14 @@ int year = 2024;   	  // valid
 !!! note
     `goto` et `const` sont réservés mais non utilisés.
 
+<a id="3112-littéraux-réservés"></a>
 #### 3.1.1.2 Littéraux réservés
 
 - `true`  
 - `false`  
 - `null`  
 
+<a id="312-sensibilité-à-la-casse"></a>
 ### 3.1.2 Sensibilité à la casse
 
 Les identifiants en Java sont **sensibles à la casse** (case sensitive).  
@@ -79,6 +85,7 @@ int CLASS = 6; // legal but, please, don't do it!!
     À cause de la sensibilité à la casse, il est possible d’utiliser des variantes de mots-clés qui diffèrent uniquement par la casse.  
     Même si c’est légal, ce type de nommage est fortement déconseillé, car il nuit à la lisibilité et est considéré comme une très mauvaise pratique.
 
+<a id="313-début-des-identifiants"></a>
 ### 3.1.3 Début des identifiants
 
 Les identifiants en Java doivent commencer par une lettre, un symbole monétaire (`$`, `€`, `£`, `₹`...) ou le symbole `_`.
@@ -94,6 +101,7 @@ String €uro = "currency"; // legal (rarely seen in practice)
 !!! note
     Les symboles de devise sont autorisés, mais ils ne sont pas recommandés dans du code réel.
 
+<a id="314-chiffres-dans-les-identifiants"></a>
 ### 3.1.4 Chiffres dans les identifiants
 
 Les identifiants Java peuvent contenir des chiffres, mais **ne peuvent pas commencer** par un chiffre.
@@ -106,6 +114,7 @@ int 3myVarC; // invalid: identifier cannot start with a digit
 int var2024 = 10; // valid
 ```
 
+<a id="315-jeton-seul"></a>
 ### 3.1.5 Jeton `_` seul
 
 - Un underscore (`_`) seul n’est pas autorisé comme identifiant.
@@ -119,6 +128,7 @@ int _;  // invalid since Java 9
 !!! warning
     `_` est autorisé à l’intérieur des littéraux numériques (voir section suivante), mais pas comme identifiant isolé.
 
+<a id="316-littéraux-numériques-et-caractère-underscore"></a>
 ### 3.1.6 Littéraux numériques et caractère underscore
 
 Vous pouvez utiliser un ou plusieurs caractères `_` (underscore) dans les littéraux numériques afin de les rendre plus lisibles.

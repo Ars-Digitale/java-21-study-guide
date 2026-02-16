@@ -1,5 +1,6 @@
 # 20. Programmation Fonctionnelle en Java
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [20. Programmation Fonctionnelle en Java](#20-programmation-fonctionnelle-en-java)
@@ -34,6 +35,7 @@ La `programmation fonctionnelle` est un paradigme qui se concentre sur ce qui do
 
 Ces fonctionnalités permettent d’écrire du code plus expressif, concis et réutilisable, en particulier lorsqu’on travaille avec des collections, des API de concurrence et des systèmes event-driven.
 
+<a id="201-interfaces-fonctionnelles"></a>
 ## 20.1 Interfaces Fonctionnelles
 
 En Java, une **interface fonctionnelle** est une interface qui contient **exactement une** méthode abstraite.
@@ -43,6 +45,7 @@ Les interfaces fonctionnelles permettent les **Lambda Expressions** et les **Met
 !!! note
     Java considère automatiquement comme interface fonctionnelle toute interface ayant une seule méthode abstraite. L’annotation `@FunctionalInterface` est optionnelle mais recommandée.
 
+<a id="2011-règles-pour-les-interfaces-fonctionnelles"></a>
 ### 20.1.1 Règles pour les Interfaces Fonctionnelles
 
 - **Exactement une méthode abstraite** (SAM = Single Abstract Method).
@@ -61,6 +64,7 @@ interface Adder {
 }
 ```
 
+<a id="2012-interfaces-fonctionnelles-courantes-javautilfunction"></a>
 ### 20.1.2 Interfaces Fonctionnelles Courantes (java.util.function)
 
 Ci-dessous, un résumé des interfaces fonctionnelles les plus importantes.
@@ -91,6 +95,7 @@ UnaryOperator<Integer> square = x -> x * x;
 Predicate<Integer> positive = x -> x > 0;
 ```
 
+<a id="2013-méthodes-de-commodité-sur-les-interfaces-fonctionnelles"></a>
 ### 20.1.3 Méthodes de Commodité sur les Interfaces Fonctionnelles
 
 De nombreuses interfaces fonctionnelles proposent des méthodes utilitaires permettant l’enchaînement et la composition.
@@ -122,6 +127,7 @@ Predicate<String> startsWithA = s -> s.startsWith("A");
 boolean ok = longString.and(startsWithA).test("Amazing");  // true
 ```
 
+<a id="2014-interfaces-fonctionnelles-primitives"></a>
 ### 20.1.4 Interfaces Fonctionnelles Primitives
 
 Java fournit des versions spécialisées des interfaces fonctionnelles pour les types primitifs afin d’éviter le coût du boxing/unboxing.
@@ -182,6 +188,7 @@ IntPredicate even = x -> x % 2 == 0;
 IntUnaryOperator doubleIt = x -> x * 2;
 ```
 
+<a id="2015-résumé"></a>
 ### 20.1.5 Résumé
 
 - Les interfaces fonctionnelles contiennent exactement une méthode abstraite (SAM).
@@ -191,6 +198,7 @@ IntUnaryOperator doubleIt = x -> x * 2;
 
 ---
 
+<a id="202-expressions-lambda"></a>
 ## 20.2 Expressions Lambda
 
 Une expression lambda est une manière compacte d’écrire une fonction.
@@ -201,6 +209,7 @@ Une lambda est essentiellement un petit bloc de code qui prend des paramètres e
 
 Elles représentent le comportement comme une donnée et constituent un élément clé du modèle de programmation fonctionnelle en Java.
 
+<a id="2021-syntaxe-des-expressions-lambda"></a>
 ### 20.2.1 Syntaxe des Expressions Lambda
 
 La syntaxe générale est :
@@ -209,6 +218,7 @@ La syntaxe générale est :
 ou  
 `(parameters) -> { statements }`
 
+<a id="2022-exemples-de-syntaxe-lambda"></a>
 ### 20.2.2 Exemples de Syntaxe Lambda
 
 **Zéro paramètre**
@@ -234,6 +244,7 @@ Function<Integer, String> f = (x) -> {
 };
 ```
 
+<a id="2023-règles-pour-les-expressions-lambda"></a>
 ### 20.2.3 Règles pour les Expressions Lambda
 
 - Les types des paramètres peuvent être omis (inférence de type).
@@ -244,6 +255,7 @@ Function<Integer, String> f = (x) -> {
 - Si le corps utilise `{ }` (un bloc), `return` doit apparaître si une valeur est renvoyée.
 - Les expressions lambda ne peuvent être assignées qu’à des interfaces fonctionnelles (types SAM).
 
+<a id="2024-inférence-de-type"></a>
 ### 20.2.4 Inférence de Type
 
 Le compilateur déduit le type de la lambda à partir du contexte de l’interface fonctionnelle cible.
@@ -258,6 +270,7 @@ Si le compilateur ne peut pas déduire le type, il faut le préciser expliciteme
 BiFunction<Integer, Integer, Integer> f = (Integer a, Integer b) -> a * b;
 ```
 
+<a id="2025-restrictions-dans-les-corps-des-lambda"></a>
 ### 20.2.5 Restrictions dans les Corps des Lambda
 
 **Les lambdas ne peuvent capturer que des variables locales `final` ou effectively final (non réassignées).**
@@ -277,6 +290,7 @@ var list = new ArrayList<>();
 Runnable r2 = () -> list.add("OK");  // autorisé
 ```
 
+<a id="2026-règles-de-type-de-retour"></a>
 ### 20.2.6 Règles de Type de Retour
 
 Si le corps est une expression : l’expression est la valeur de retour.
@@ -293,6 +307,7 @@ Function<Integer, Integer> g = x -> {
 };
 ```
 
+<a id="2027-lambdas-vs-classes-anonymes"></a>
 ### 20.2.7 Lambdas vs Classes Anonymes
 
 - Les lambdas ne créent PAS une nouvelle portée : elles partagent la portée englobante.
@@ -308,6 +323,7 @@ class Test {
 
 Dans une classe anonyme, `this` fait référence à l’instance de la classe anonyme.
 
+<a id="2028-erreurs-courantes-pièges-de-certification"></a>
 ### 20.2.8 Erreurs Courantes (Pièges de Certification)
 
 **Types de retour incohérents**
@@ -336,6 +352,7 @@ m(x -> x + 1);  // ❌ ambigu
 
 ---
 
+<a id="203-références-de-méthodes"></a>
 ## 20.3 Références de Méthodes
 
 Les références de méthodes (method references) fournissent une syntaxe abrégée pour utiliser une méthode existante comme implémentation d’une interface fonctionnelle.
@@ -349,6 +366,7 @@ Il existe quatre catégories de références de méthodes en Java :
 - 3. Référence à une méthode d’instance d’un objet arbitraire d’un type donné (`ClassName::instanceMethod`)
 - 4. Référence à un constructeur (`ClassName::new`)
 
+<a id="2031-référence-à-une-méthode-statique"></a>
 ### 20.3.1 Référence à une Méthode Statique
 
 Une référence à méthode statique remplace une lambda qui appelle une méthode statique.
@@ -364,6 +382,7 @@ Function<Integer, Integer> f2 = Utils::square;  // method reference
 
 `f1` et `f2` se comportent de manière identique.
 
+<a id="2032-référence-à-une-méthode-dinstance-dun-objet-particulier"></a>
 ### 20.3.2 Référence à une Méthode d’Instance d’un Objet Particulier
 
 Utilisée lorsque vous avez déjà une instance d’objet et que vous voulez référencer l’une de ses méthodes.
@@ -379,6 +398,7 @@ System.out.println(op2.apply("World"));
 
 La référence `prefix::concat` lie `concat` à **cet objet spécifique**.
 
+<a id="2033-référence-à-une-méthode-dinstance-dun-objet-arbitraire-dun-type-donné"></a>
 ### 20.3.3 Référence à une Méthode d’Instance d’un Objet Arbitraire d’un Type Donné
 
 C’est la forme la plus “piégeuse”.
@@ -395,6 +415,7 @@ System.out.println(p2.test("abc", "abc"));  // true
 !!! note
     Cette forme applique la méthode au *premier argument* de la lambda.
 
+<a id="2034-référence-à-un-constructeur"></a>
 ### 20.3.4 Référence à un Constructeur
 
 Les références de constructeurs remplacent des lambdas qui appellent `new`.
@@ -407,6 +428,7 @@ Function<Integer, ArrayList<String>> sup3 = ArrayList::new;
 // appelle le constructeur ArrayList(int capacity)
 ```
 
+<a id="2035-tableau-récapitulatif-des-types-de-method-reference"></a>
 ### 20.3.5 Tableau Récapitulatif des Types de Method Reference
 
 Le tableau ci-dessous résume toutes les catégories de références de méthodes.
@@ -418,6 +440,7 @@ Le tableau ci-dessous résume toutes les catégories de références de méthode
 | Instance method of arbitrary object | Class::method           | (obj, x) -> obj.method(x) |
 | Constructor                         | Class::new              | () -> new Class() |
 
+<a id="2036-pièges-fréquents"></a>
 ### 20.3.6 Pièges Fréquents
 
 - Une référence de méthode doit correspondre *exactement* à la signature de l’interface fonctionnelle.

@@ -1,5 +1,6 @@
 # 15. Class Loading, Initialization, and Object Construction
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [15. Class Loading, Initialization, and Object Construction](#15-class-loading-initialization-and-object-construction)
@@ -26,6 +27,7 @@ This chapter provides a unified, clear explanation of:
 - How constructors run in an inheritance chain
 - How different memory areas (Heap, Stack, Method Area) participate
 
+<a id="151-java-memory-areas-relevant-to-class-and-object-initialization"></a>
 ## 15.1 Java Memory Areas Relevant to Class and Object Initialization
 
 Before understanding initialization order, it is useful to recall the three main memory areas involved:
@@ -41,12 +43,14 @@ Before understanding initialization order, it is useful to recall the three main
 
 ---
 
+<a id="152-class-loading-with-inheritance"></a>
 ## 15.2 Class Loading (with Inheritance)
 
 When a Java program starts, the JVM loads classes *on demand*.
   
 When a class is referenced for the first time (e.g., by calling `new` or accessing a static member), **its entire inheritance chain must be loaded in memory first**.
 
+<a id="1521-class-loading-order"></a>
 ### 15.2.1 Class Loading Order
 
 Given a class hierarchy:
@@ -73,6 +77,7 @@ Then class loading proceeds in this strict order:
 - Load class B and repeat the same logic
 - Load class C and repeat the same logic
 
+<a id="1522-what-happens-during-class-loading"></a>
 ### 15.2.2 What Happens During Class Loading
 
 - **Step 1: Static variables are allocated** (default values first).
@@ -84,10 +89,12 @@ Then class loading proceeds in this strict order:
 
 ---
 
+<a id="153-object-creation-with-inheritance"></a>
 ## 15.3 Object Creation (with Inheritance)
 
 When the `new` keyword is used, **instance creation follows a strict and predictable sequence** involving all parent classes.
 
+<a id="1531-full-instance-creation-order"></a>
 ### 15.3.1 Full Instance Creation Order
 
 - **1. Memory is allocated on the Heap for the new object** (fields get default values).
@@ -98,6 +105,7 @@ When the `new` keyword is used, **instance creation follows a strict and predict
 
 ---
 
+<a id="154-a-complete-example-static-instance-initialization-across-inheritance"></a>
 ## 15.4 A Complete Example: Static + Instance Initialization Across Inheritance
 
 Consider the following three-level hierarchy:
@@ -191,6 +199,7 @@ C constructor
 
 ---
 
+<a id="155-visualization-diagram"></a>
 ## 15.5 Visualization Diagram
 
 ```text
@@ -224,6 +233,7 @@ C constructor
 
 ---
 
+<a id="156-key-rules"></a>
 ## 15.6 Key Rules
 
 - Static initialization happens **once** per class.
@@ -235,6 +245,7 @@ C constructor
 
 ---
 
+<a id="157-summary-table"></a>
 ## 15.7 Summary Table
 
 

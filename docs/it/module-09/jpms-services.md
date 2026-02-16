@@ -1,5 +1,6 @@
 # 39. Servizi in JPMS (Il Modello ServiceLoader)
 
+<a id="indice"></a>
 ### Indice
 
 - [39 Servizi in JPMS Il Modello ServiceLoader](#39-servizi-in-jpms-il-modello-serviceloader)
@@ -22,6 +23,7 @@ senza codificare rigidamente dipendenze tra `provider` e `consumer`.
 
 Questo meccanismo è basato sulla `ServiceLoader API` esistente, ma i moduli lo rendono affidabile, esplicito e sicuro.
 
+<a id="391-il-problema-che-i-servizi-risolvono"></a>
 ## 39.1 Il Problema che i Servizi Risolvono
 
 Talvolta un modulo necessita di utilizzare una capacità, ma non dovrebbe dipendere da una implementazione specifica.
@@ -36,6 +38,7 @@ Senza i servizi, il consumer dovrebbe dipendere direttamente da una implementazi
 
 Questo crea accoppiamento stretto e riduce la flessibilità.
 
+<a id="3911-ruoli-nel-modello-dei-servizi"></a>
 ### 39.1.1 Ruoli nel Modello dei Servizi
 
 Il `modello dei servizi JPMS` coinvolge quattro ruoli distinti.
@@ -47,6 +50,7 @@ Il `modello dei servizi JPMS` coinvolge quattro ruoli distinti.
 | `Consumer del servizio` | Utilizza il servizio |
 | `Service loader` | Scopre le implementazioni a runtime |
 
+<a id="3912-modulo-interfaccia-del-servizio"></a>
 ### 39.1.2 Modulo Interfaccia del Servizio
 
 L’`interfaccia del servizio` definisce l’API da cui i `consumer` dipendono.
@@ -70,6 +74,7 @@ module com.example.service {
 !!! note
     Il modulo dell’interfaccia del servizio non dovrebbe contenere implementazioni.
 
+<a id="3913-modulo-provider-del-servizio"></a>
 ### 39.1.3 Modulo Provider del Servizio
 
 Un `modulo provider` implementa l’interfaccia del servizio e dichiara di fornire il servizio.
@@ -98,6 +103,7 @@ Punti chiave:
 - La classe di implementazione non necessita di essere esportata
 - La direttiva `provides with` registra l’implementazione
 
+<a id="3914-modulo-consumer-del-servizio"></a>
 ### 39.1.4 Modulo Consumer del Servizio
 
 Il `modulo consumer` dichiara di utilizzare un servizio, ma non nomina alcuna implementazione.
@@ -115,6 +121,7 @@ module com.example.consumer {
     Un modulo che dichiara `uses` ma non ha provider corrispondenti nel module path compila normalmente,
     ma `ServiceLoader` restituisce un risultato vuoto a runtime.
 
+<a id="3915-caricamento-dei-servizi-a-runtime"></a>
 ### 39.1.5 Caricamento dei Servizi a Runtime
 
 La `ServiceLoader API` esegue la scoperta del servizio.
@@ -134,6 +141,7 @@ for (GreetingService service : loader) {
 
 La scoperta “accidentale” basata su classpath è prevenuta.
 
+<a id="3916-regole-di-risoluzione-dei-servizi"></a>
 ### 39.1.6 Regole di Risoluzione dei Servizi
 
 Affinché un servizio sia individuabile da `ServiceLoader`, devono essere soddisfatte diverse condizioni:
@@ -145,6 +153,7 @@ Affinché un servizio sia individuabile da `ServiceLoader`, devono essere soddis
 | Il consumer (o il Service Locator) deve dichiarare `uses` | Altrimenti ServiceLoader fallisce |
 | Il provider deve dichiarare `provides` | La scoperta implicita è vietata |
 
+<a id="3917-livello-service-locator"></a>
 ### 39.1.7 Livello Service Locator
 
 È possibile introdurre un livello aggiuntivo denominato `Service Locator`.
@@ -199,6 +208,7 @@ module com.example.consumer {
 
 Il consumer non dichiara `uses` perché non invoca direttamente `ServiceLoader`.
 
+<a id="3918-schema-sequenziale-di-invocazione"></a>
 ### 39.1.8 Schema Sequenziale di Invocazione
 
 Sequenza di esecuzione:
@@ -232,6 +242,7 @@ Provider Implementation
 Consumer
 ```
 
+<a id="3919-tabella-riassuntiva-dei-componenti"></a>
 ### 39.1.9 Tabella Riassuntiva dei Componenti
 
 | Componente | Ruolo | exports | requires | uses | provides |

@@ -1,5 +1,6 @@
 # 23. Shared Collection Operations & Equality
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [23. Shared Collection Operations & Equality](#23-shared-collection-operations--equality)
@@ -22,6 +23,7 @@ Map shares several conceptual behaviors (iteration, equality) but does not inher
 
 Mastering these operations is essential, as they explain how collections behave when adding, searching, removing, comparing, iterating, and sorting elements.
 
+<a id="231-core-collection-methods-available-to-most-collections"></a>
 ## 23.1 Core Collection Methods (Available to Most Collections)
 
 The following methods come from the `Collection<E>` interface and are inherited by **all** major collections except `Map` (which has its own family of operations).
@@ -29,6 +31,7 @@ The following methods come from the `Collection<E>` interface and are inherited 
 !!! note
     `Map` does not implement `Collection`, but its `keySet()`, `values()`, and `entrySet()` views **do**, and therefore expose these shared operations.
 
+<a id="2311-mutating-operations"></a>
 ### 23.1.1 Mutating Operations
 
 - `boolean add(E e)` — Adds an element (allowed to add duplicates in lists).
@@ -38,6 +41,7 @@ The following methods come from the `Collection<E>` interface and are inherited 
 - `boolean removeAll(Collection<?> c)` — Removes all elements contained in the given collection.
 - `boolean retainAll(Collection<?> c)` — Keeps only matching elements.
 
+<a id="2312-query-operations"></a>
 ### 23.1.2 Query Operations
 
 - `int size()` — Number of elements.
@@ -48,6 +52,7 @@ The following methods come from the `Collection<E>` interface and are inherited 
 
 ---
 
+<a id="232-equality"></a>
 ## 23.2 Equality
 
 A custom implementation of the method `equals()` allows us to compare the type and content of two collections.
@@ -88,6 +93,7 @@ secondSet.equals(thirdSet): true
 
 ---
 
+<a id="233-fail-fast-behavior"></a>
 ## 23.3 Fail-Fast Behavior
 
 Most collection iterators (except concurrent collections) are `fail-fast`: modifying a collection structurally while iterating triggers a `ConcurrentModificationException`.
@@ -106,6 +112,7 @@ for (Integer i : list) {
 
 ---
 
+<a id="234-bulk-operations"></a>
 ## 23.4 Bulk Operations
 
 - `removeIf(Predicate<? super E> filter)` — Removes all matching items.
@@ -115,6 +122,7 @@ for (Integer i : list) {
 
 ---
 
+<a id="235-common-return-types-and-exceptions"></a>
 ## 23.5 Common Return Types and Exceptions
 
 - `add(E)` returns **boolean** — always `true` for `ArrayList`, may be `false` for `Set` if no change occurs.
@@ -125,6 +133,7 @@ for (Integer i : list) {
 
 ---
 
+<a id="236-summary-table-shared-operations"></a>
 ## 23.6 Summary Table — Shared Operations
 
 

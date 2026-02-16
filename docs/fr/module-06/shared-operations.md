@@ -1,5 +1,6 @@
 # 23. Opérations Partagées des Collections & Égalité
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [23. Opérations Partagées des Collections & Égalité](#23-opérations-partagées-des-collections--égalité)
@@ -22,6 +23,7 @@ Map partage plusieurs comportements conceptuels (itération, égalité) mais n�
 
 Maîtriser ces opérations est essentiel, car elles expliquent comment les collections se comportent lors de l’ajout, de la recherche, de la suppression, de la comparaison, de l’itération et du tri des éléments.
 
+<a id="231-méthodes-fondamentales-des-collections-disponibles-pour-la-majorité-des-collections"></a>
 ## 23.1 Méthodes Fondamentales des Collections (Disponibles pour la Majorité des Collections)
 
 Les méthodes suivantes proviennent de l’interface `Collection<E>` et sont héritées par **toutes** les principales collections à l’exception de `Map` (qui possède sa propre famille d’opérations).
@@ -29,6 +31,7 @@ Les méthodes suivantes proviennent de l’interface `Collection<E>` et sont hé
 !!! note
     `Map` n’implémente pas `Collection`, mais ses vues `keySet()`, `values()` et `entrySet()` **l’implémentent**, et exposent donc ces opérations partagées.
 
+<a id="2311-opérations-de-mutation"></a>
 ### 23.1.1 Opérations de Mutation
 
 - `boolean add(E e)` — Ajoute un élément (les listes autorisent les doublons).
@@ -38,6 +41,7 @@ Les méthodes suivantes proviennent de l’interface `Collection<E>` et sont hé
 - `boolean removeAll(Collection<?> c)` — Supprime tous les éléments contenus dans la collection fournie.
 - `boolean retainAll(Collection<?> c)` — Conserve uniquement les éléments correspondants.
 
+<a id="2312-opérations-de-requête"></a>
 ### 23.1.2 Opérations de Requête
 
 - `int size()` — Nombre d’éléments.
@@ -48,6 +52,7 @@ Les méthodes suivantes proviennent de l’interface `Collection<E>` et sont hé
 
 ---
 
+<a id="232-égalité"></a>
 ## 23.2 Égalité
 
 Une implémentation personnalisée de la méthode `equals()` permet de comparer le type et le contenu de deux collections.
@@ -88,6 +93,7 @@ secondSet.equals(thirdSet): true
 
 ---
 
+<a id="233-comportement-fail-fast"></a>
 ## 23.3 Comportement Fail-Fast
 
 La plupart des itérateurs de collections (à l’exception des collections concurrentes) sont `fail-fast` : modifier structurellement une collection pendant l’itération déclenche une `ConcurrentModificationException`.
@@ -106,6 +112,7 @@ for (Integer i : list) {
 
 ---
 
+<a id="234-opérations-bulk"></a>
 ## 23.4 Opérations Bulk
 
 - `removeIf(Predicate<? super E> filter)` — Supprime tous les éléments correspondants.
@@ -115,6 +122,7 @@ for (Integer i : list) {
 
 ---
 
+<a id="235-types-de-retour-et-exceptions-courantes"></a>
 ## 23.5 Types de Retour et Exceptions Courantes
 
 - `add(E)` retourne **boolean** — toujours `true` pour `ArrayList`, peut être `false` pour les `Set` si aucune modification n’a lieu.
@@ -125,6 +133,7 @@ for (Integer i : list) {
 
 ---
 
+<a id="236-tableau-de-synthèse-opérations-partagées"></a>
 ## 23.6 Tableau de Synthèse — Opérations Partagées
 
 | Opération                     | S’applique à                     | Notes                                   |

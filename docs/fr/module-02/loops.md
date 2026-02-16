@@ -1,5 +1,6 @@
 # 8. Constructions de boucle en Java
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [8. Constructions de boucle en Java](#8-looping-constructs-in-java)
@@ -23,6 +24,7 @@ Java fournit plusieurs **constructions de boucle** qui permettent l’exécution
 
 Les boucles sont essentielles pour l’itération, le parcours de structures de données, les calculs répétitifs et l’implémentation d’algorithmes.
 
+<a id="81-la-boucle-while"></a>
 ## 8.1 La boucle `while`
 
 La boucle `while` évalue sa **condition booléenne avant chaque itération**.  
@@ -57,6 +59,7 @@ Sortie :
 
 ---
 
+<a id="82-la-boucle-do-while"></a>
 ## 8.2 La boucle `do-while`
 
 La boucle `do-while` évalue sa condition **après** l’exécution du corps, garantissant que le corps s’exécute au moins une fois.
@@ -87,6 +90,7 @@ Sortie :
 
 ---
 
+<a id="83-la-boucle-for"></a>
 ## 8.3 La boucle `for`
 
 La boucle `for` traditionnelle convient le mieux aux boucles avec une variable compteur.
@@ -131,6 +135,7 @@ for (long i = 0, c = 3; x < 3 && i < 12; x++, i++) {
 
 ---
 
+<a id="84-la-boucle-for-each-améliorée"></a>
 ## 8.4 La boucle `for-each` améliorée
 
 Le `for` amélioré simplifie l’itération sur les tableaux et les collections.
@@ -163,6 +168,7 @@ C
 
 ---
 
+<a id="85-boucles-imbriquées"></a>
 ## 8.5 Boucles imbriquées
 
 Les boucles peuvent être imbriquées ; chacune conserve ses propres variables et conditions.
@@ -187,6 +193,7 @@ Sortie :
 
 ---
 
+<a id="86-boucles-infinies"></a>
 ## 8.6 Boucles infinies
 
 Une boucle est infinie lorsque sa condition est toujours évaluée à `true` ou est omise.
@@ -204,6 +211,7 @@ for (;;) { ... }
 
 ---
 
+<a id="87-break-et-continue"></a>
 ## 8.7 `break` et `continue`
 
 <ins>**break**</ins>
@@ -229,6 +237,7 @@ for (int i = 0; i < 5; i++) {
 
 ---
 
+<a id="88-boucles-étiquetées"></a>
 ## 8.8 Boucles étiquetées
 
 Une étiquette (identifiant + deux-points) peut être appliquée à une boucle pour permettre à break/continue d’affecter les boucles externes.
@@ -255,6 +264,7 @@ for (int i = 1; i <= 3; i++) {
 
 ---
 
+<a id="89-portée-des-variables-de-boucle"></a>
 ## 8.9 Portée des variables de boucle
 
 - Les variables déclarées dans l’en-tête de la boucle sont limitées à la portée de cette boucle.
@@ -269,10 +279,12 @@ for (int i = 0; i < 3; i++) {
 
 ---
 
+<a id="810-code-inatteignable-après-break-continue-et-return"></a>
 ## 8.10 Code inatteignable après `break`, `continue` et `return`
 
 Toute instruction placée **après** `break`, `continue` ou `return` dans le même bloc est considérée comme inatteignable et ne compile pas.
 
+<a id="8101-code-inatteignable-après-break"></a>
 ### 8.10.1 Code inatteignable après `break`
 
 ```java
@@ -282,6 +294,7 @@ for (int i = 0; i < 3; i++) {
 }
 ```
 
+<a id="8102-code-inatteignable-après-continue"></a>
 ### 8.10.2 Code inatteignable après `continue`
 
 ```java
@@ -294,6 +307,7 @@ for (int i = 0; i < 3; i++) {
 !!! note
     `continue` saute à l’itération suivante, donc le code qui suit n’est jamais exécuté.
 
+<a id="8103-code-inatteignable-après-return"></a>
 ### 8.10.3 Code inatteignable après `return`
 
 ```java

@@ -1,5 +1,6 @@
 # 25. La API List
 
+<a id="indice"></a>
 ### Indice
 
 - [25. La API List](#25-la-api-list)
@@ -51,6 +52,7 @@ List
 !!! note
     Vector è legacy e sincronizzato — evitarlo a meno che non sia esplicitamente richiesto.
 
+<a id="251-caratteristiche-delle-list"></a>
 ## 25.1 Caratteristiche delle List
 
 - Ordinate — gli elementi preservano l’ordine di inserimento.
@@ -60,8 +62,10 @@ List
 
 ---
 
+<a id="252-creare-list-costruttori"></a>
 ## 25.2 Creare List (Costruttori)
 
+<a id="2521-costruttori-di-arraylist"></a>
 ### 25.2.1 Costruttori di ArrayList
 
 ```java
@@ -73,6 +77,7 @@ List<String> a3 = new ArrayList<>(List.of("A", "B"));
 !!! note
     La capacità iniziale non è una dimensione. Decide solo quanti elementi l’array interno può contenere prima di ridimensionarsi.
 
+<a id="2522-costruttori-di-linkedlist"></a>
 ### 25.2.2 Costruttori di LinkedList
 
 ```java
@@ -85,8 +90,10 @@ List<String> l2 = new LinkedList<>(List.of("A", "B"));
 
 ---
 
+<a id="253-metodi-factory"></a>
 ## 25.3 Metodi Factory
 
+<a id="2531-listof-immutabile"></a>
 ### 25.3.1 `List.of()` (immutabile)
 
 ```java
@@ -101,6 +108,7 @@ list1.set(0, "Z"); // ❌ UnsupportedOperationException
     - sono immutabili
     - lanciano `UOE` su modifiche strutturali
 
+<a id="2532-listcopyof-copia-immutabile"></a>
 ### 25.3.2 `List.copyOf()` (copia immutabile)
 
 ```java
@@ -110,6 +118,7 @@ src.add("Hello");
 List<String> copy = List.copyOf(src); // snapshot immutabile
 ```
 
+<a id="2533-arraysaslist-lista-a-dimensione-fissa"></a>
 ### 25.3.3 Arrays.asList() (lista a dimensione fissa)
 
 ```java
@@ -125,8 +134,10 @@ list.add("X"); // ❌ UOE — la dimensione è fissa
 
 ---
 
+<a id="254-operazioni-fondamentali-di-list"></a>
 ## 25.4 Operazioni Fondamentali di List
 
+<a id="2541-aggiungere-elementi"></a>
 ### 25.4.1 Aggiungere Elementi
 
 ```java
@@ -136,6 +147,7 @@ list.addAll(otherList);
 list.addAll(2, otherList);
 ```
 
+<a id="2542-accedere-agli-elementi"></a>
 ### 25.4.2 Accedere agli Elementi
 
 ```java
@@ -167,6 +179,7 @@ Exception in thread "main" java.lang.IndexOutOfBoundsException: Index 0 out of b
 !!! warning
     Chiamare get/set con un indice non valido lancia IndexOutOfBoundsException
 
+<a id="2543-rimuovere-elementi"></a>
 ### 25.4.3 Rimuovere Elementi
 
 ```java
@@ -176,6 +189,7 @@ list.removeIf(s -> s.startsWith("X"));
 list.clear();
 ```
 
+<a id="2544-comportamenti-e-caratteristiche-importanti"></a>
 ### 25.4.4 Comportamenti e Caratteristiche Importanti
 
 |		Operazione		|		Comportamento			|		Eccezione(i)			|
@@ -189,12 +203,15 @@ list.clear();
 
 ---
 
+<a id="255-contains-equals-e-hashcode"></a>
 ## 25.5 `contains()`, `equals()` e `hashCode()`
 
+<a id="2551-contains"></a>
 ### 25.5.1 `contains()`
 
 Il metodo `contains()` usa `.equals()` sugli elementi.
 
+<a id="2552-uguaglianza-delle-list"></a>
 ### 25.5.2 Uguaglianza delle List
 
 `List.equals()` esegue un confronto elemento per elemento, in ordine.
@@ -210,14 +227,17 @@ System.out.println(a.equals(b)); // true
     - L’ordine conta.
     - Il tipo di lista NON conta.
 
+<a id="2553-hashcode"></a>
 ### 25.5.3 `hashCode()`
 
 Calcolato in base al contenuto.
 
 ---
 
+<a id="256-iterare-una-list"></a>
 ## 25.6 Iterare una List
 
+<a id="2561-ciclo-for-classico"></a>
 ### 25.6.1 Ciclo For Classico
 
 ```java
@@ -226,6 +246,7 @@ for (int i = 0; i < list.size(); i++) {
 }
 ```
 
+<a id="2562-ciclo-for-migliorato"></a>
 ### 25.6.2 Ciclo For Migliorato
 
 ```java
@@ -234,6 +255,7 @@ for (String s : list) {
 }
 ```
 
+<a id="2563-iterator-listiterator"></a>
 ### 25.6.3 Iterator & ListIterator
 
 ```java
@@ -254,17 +276,20 @@ while (lit.hasNext()) {
 
 ---
 
+<a id="257-il-metodo-sublist"></a>
 ## 25.7 Il Metodo `subList()`
 
 `subList()` crea una vista di una porzione della lista, non una copia.
 Modificare una delle due può modificare l’altra.
 
+<a id="2571-sintassi"></a>
 ### 25.7.1 Sintassi
 
 ```java
 List<E> subList(int fromIndex, int toIndex);
 ```
 
+<a id="2572-regole"></a>
 ### 25.7.2 Regole
 
 |			Regola						|				Spiegazione				|
@@ -274,6 +299,7 @@ List<E> subList(int fromIndex, int toIndex);
 |	La vista è supportata dalla lista originale	|	modificare una modifica l’altra  	|
 |	Modifica strutturale del padre invalida la subList	|	→ ConcurrentModificationException	|
 
+<a id="2573-esempi"></a>
 ### 25.7.3 Esempi
 
 ```java
@@ -286,6 +312,7 @@ view.set(0, "X");
 // view = ["X", "C"]
 ```
 
+<a id="2574-modificare-la-lista-padre-invalida-la-vista"></a>
 ### 25.7.4 Modificare la lista padre invalida la vista
 
 ```java
@@ -297,6 +324,7 @@ list.add("E"); // modifica strutturale della lista padre
 view.get(0); // ❌ ConcurrentModificationException
 ```
 
+<a id="2575-modificare-la-sublist-modifica-il-padre"></a>
 ### 25.7.5 Modificare la subList modifica il padre
 
 ```java
@@ -304,6 +332,7 @@ view.remove(1);
 // rimuove "C" sia dalla view che dalla lista padre
 ```
 
+<a id="2576-svuotare-la-sublist-svuota-parte-della-lista-padre"></a>
 ### 25.7.6 Svuotare la subList svuota parte della lista padre
 
 ```java
@@ -311,6 +340,7 @@ view.clear();
 // rimuove gli indici 1 e 2 dalla lista padre
 ```
 
+<a id="2577-trappole-comuni"></a>
 ### 25.7.7 Trappole Comuni
 
 - Supporre che subList sia indipendente: è una vista, non una copia
@@ -320,6 +350,7 @@ view.clear();
 
 ---
 
+<a id="258-tabella-riassuntiva-delle-operazioni-importanti"></a>
 ## 25.8 Tabella Riassuntiva delle Operazioni Importanti
 
 

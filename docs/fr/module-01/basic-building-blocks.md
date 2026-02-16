@@ -1,5 +1,6 @@
 # 2. Blocs de base du langage Java
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [2. Blocs de base du langage Java](#2-blocs-de-base-du-langage-java)
@@ -32,6 +33,7 @@ Ce chapitre présente les éléments structurels essentiels d’un programme Jav
 
 Ce sont les concepts minimaux nécessaires pour écrire, compiler, organiser et exécuter du code Java avec le JDK — sans aucun IDE.
 
+<a id="21-définition-de-classe"></a>
 ## 2.1 Définition de classe
 
 Une `class` Java est le bloc fondamental d’un programme Java.
@@ -110,6 +112,7 @@ public class Person {
 
 ---
 
+<a id="22-commentaires"></a>
 ## 2.2 Commentaires
 
 Les commentaires ne sont pas du code exécutable : ils **expliquent** le code mais sont ignorés par le compilateur.
@@ -174,6 +177,7 @@ provoquera une erreur de compilation, car les deux premiers symboles font partie
 
 ---
 
+<a id="23-modificateurs-daccès"></a>
 ## 2.3 Modificateurs d’accès
 
 En Java, un **modificateur d’accès** (access modifier) est un mot-clé qui spécifie la visibilité (ou accessibilité) d’une **classe**, d’une **méthode** ou d’un **champ**. Il détermine quelles autres classes peuvent utiliser ou voir cet élément.
@@ -194,11 +198,13 @@ En Java, un **modificateur d’accès** (access modifier) est un mot-clé qui sp
 
 ---
 
+<a id="24-packages"></a>
 ## 2.4 Packages
 
 Les **packages Java** sont des regroupements logiques de classes, d’interfaces et de sous-packages.  
 Ils aident à organiser de grands codebases, à éviter les conflits de noms et à contrôler l’accès entre différentes parties d’une application.
 
+<a id="241-organisation-et-objectif"></a>
 ### 2.4.1 Organisation et objectif
 
 - La dénomination des packages suit les mêmes règles que les noms de variables. Voir : *Java Naming Rules*.  
@@ -206,6 +212,7 @@ Ils aident à organiser de grands codebases, à éviter les conflits de noms et 
 - Ils permettent de regrouper des classes liées entre elles (par exemple toutes les utilitaires dans `java.util`, toutes les classes réseau dans `java.net`).  
 - En utilisant les packages, vous pouvez éviter les **conflits de noms** : par exemple, vous pouvez avoir deux classes nommées `Date`, l’une `java.util.Date` et l’autre `java.sql.Date`.
 
+<a id="242-correspondance-avec-le-système-de-fichiers-et-déclaration-dun-package"></a>
 ### 2.4.2 Correspondance avec le système de fichiers et déclaration d’un package
 
 - Les packages correspondent directement à la **hiérarchie de répertoires** sur le système de fichiers.
@@ -226,6 +233,7 @@ public class MyApp{
 !!! important
     Cette déclaration signifie que la classe doit être située dans le répertoire : **com/example/myapp/utils/MyApp.java**
 
+<a id="243-appartenir-au-même-package"></a>
 ### 2.4.3 Appartenir au même package
 
 Deux classes appartiennent au même package si et seulement si :
@@ -265,6 +273,7 @@ public class Runner {
 }
 ```
 
+<a id="244-importer-depuis-un-package"></a>
 ### 2.4.4 Importer depuis un package
 
 Pour utiliser des classes provenant d’un autre package, vous devez les importer :
@@ -291,6 +300,7 @@ java.util.List myList = new java.util.ArrayList<>();
     Si vous importez explicitement un nom de classe, il est prioritaire sur tout import avec wildcard ;
     si vous voulez utiliser deux classes ayant le même nom (par exemple `Date` de `java.util` et de `java.sql`), il est préférable d’utiliser un import avec nom entièrement qualifié.
 
+<a id="245-imports-statiques"></a>
 ### 2.4.5 Imports statiques
 
 En plus d’importer des classes depuis un package, Java permet un autre type d’import : l’**import statique**.  
@@ -343,6 +353,7 @@ ils mettent **tous les membres statiques** de la classe dans la portée courante
     Vous pouvez **toujours** appeler un membre statique avec le nom de la classe :
     `Math.sqrt(16)` fonctionne toujours — même si le membre a été importé statiquement.
 
+<a id="2451-règles-de-précédence"></a>
 #### 2.4.5.1 Règles de précédence
 
 Si la classe courante déclare déjà une méthode ou une variable portant le même nom qu’un membre importé statiquement :
@@ -398,6 +409,7 @@ double a = sqrt(16);        // import statique
 double b = Math.sqrt(25);   // fully qualified — toujours autorisé
 ```
 
+<a id="246-packages-standard-vs-packages-définis-par-lutilisateur"></a>
 ### 2.4.6 Packages standard vs packages définis par l’utilisateur
 
 - **Packages standard** : fournis avec le JDK (par ex. `java.lang`, `java.util`, `java.io`).  
@@ -405,11 +417,13 @@ double b = Math.sqrt(25);   // fully qualified — toujours autorisé
 
 ---
 
+<a id="25-la-méthode-main"></a>
 ## 2.5 La méthode `main`
 
 En Java, la méthode `main` sert de **point d’entrée** à une application autonome.  
 Sa déclaration correcte est cruciale pour que la JVM puisse la reconnaître.
 
+<a id="251-signature-de-la-méthode-main"></a>
 ### 2.5.1 Signature de la méthode main
 
 Observons la signature de la méthode `main` dans deux des classes les plus simples possibles :
@@ -463,6 +477,7 @@ public class MainSecondExample {
 
 ---
 
+<a id="26-compiler-et-exécuter-le-code"></a>
 ## 2.6 Compiler et exécuter le code
 
 Cette section présente des commandes `javac` et `java` **correctes et fonctionnelles** pour des situations courantes en Java 21 : fichiers uniques, plusieurs fichiers, packages, répertoires de sortie séparés, utilisation du classpath/module-path.
@@ -482,6 +497,7 @@ java  -version   # should print: java version "21.0.7" ... (the output could be 
     `java com.example.app.Main` ✔  
     `java src/com/example/app/Main` ❌
 
+<a id="261-compiler-un-fichier-package-par-défaut-répertoire-unique"></a>
 ### 2.6.1 Compiler un fichier, package par défaut (répertoire unique)
 
 **Fichiers**
@@ -518,6 +534,7 @@ java Hello
 !!! important
     Vous n’avez pas à préciser l’extension ".class" lors de l’exécution du programme.
 
+<a id="262-plusieurs-fichiers-package-par-défaut-répertoire-unique"></a>
 ### 2.6.2 Plusieurs fichiers, package par défaut (répertoire unique)
 
 **Fichiers**
@@ -565,6 +582,7 @@ java B
     - `-classpath <classpath>`  
     - `--class-path <classpath>`
 
+<a id="263-code-dans-des-packages-organisation-standard-src-out"></a>
 ### 2.6.3 Code dans des packages (organisation standard src → out)
 
 **Fichiers**
@@ -600,6 +618,7 @@ public class Main {
 javac src/com/example/app/Main.java
 ```
 
+<a id="264-compiler-vers-un-autre-répertoire-d"></a>
 ### 2.6.4 Compiler vers un autre répertoire (`-d`)
 
 L’option `-d out` place les fichiers `.class` compilés dans le répertoire `out/`, en créant des sous-dossiers qui reflètent les noms de packages :
@@ -618,6 +637,7 @@ java -cp out com.example.app.Main
 java -cp out com.example.app.Main
 ```
 
+<a id="265-plusieurs-fichiers-sur-plusieurs-packages-compiler-tout-larbre-des-sources"></a>
 ### 2.6.5 Plusieurs fichiers sur plusieurs packages (compiler tout l’arbre des sources)
 
 **Fichiers**
@@ -646,6 +666,7 @@ javac -d out -sourcepath src   src/com/example/app/Main.java
 !!! important
     `-sourcepath <sourcepath>` indique à `javac` où chercher d’autres fichiers `.java` dont dépendent les sources.
 
+<a id="266-exécution-dun-fichier-source-unique-lancement-rapide-sans-javac"></a>
 ### 2.6.6 Exécution d’un fichier source unique (lancement rapide sans `javac`)
 
 Java 21 (depuis Java 11) permet d’exécuter de petits programmes directement à partir du code source :
@@ -663,6 +684,7 @@ java Main.java Helper.java
 
 > Si vous utilisez des **packages**, il est préférable de compiler dans `out/` et d’exécuter avec `-cp`.
 
+<a id="267-passer-des-paramètres-à-un-programme-java"></a>
 ### 2.6.7 Passer des paramètres à un programme Java
 
 Vous pouvez transmettre des données à votre programme Java via les paramètres du point d’entrée `main`.

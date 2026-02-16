@@ -1,5 +1,6 @@
 # 9. Strings in Java
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [9. Strings in Java](#9-strings-in-java)
@@ -32,10 +33,13 @@
 
 ---
 
+<a id="91-strings-text-blocks"></a>
 ## 9.1 Strings & Text Blocks
 
+<a id="911-strings"></a>
 ### 9.1.1 Strings
 
+<a id="9111-initializing-strings"></a>
 #### 9.1.1.1 Initializing Strings
 
 In Java, a **String** is an object of the `java.lang.String` class, used to represent a sequence of characters.
@@ -54,6 +58,7 @@ String s3 = s1.toUpperCase();           // creates a new String ("HELLO")
     - String literals are stored in the `String pool`, a special memory area used to avoid creating duplicate string objects.
     - Using the `new` keyword always creates a new object outside the pool.
 
+<a id="9112-the-string-pool"></a>
 #### 9.1.1.2 The String Pool
 
 Because `String` objects are immutable and widely used, they could easily occupy a large amount of memory in a Java program.
@@ -62,6 +67,7 @@ To reduce duplication, Java reuses all strings that are declared as literals (se
 
 Please check the Paragraph: "**6.4.3 String Pool and Equality**" in Chapter: [6. Instantiating Types](../module-01/instantiating-types.md) for a deeper explanation and examples.
 
+<a id="9113-special-characters-and-escape-sequences"></a>
 #### 9.1.1.3 Special Characters and Escape Sequences
 
 Strings can contain escape characters, which allow you to include special symbols or control characters (characters with a special meaning in Java).  
@@ -134,6 +140,7 @@ An escape sequence starts with a backslash `\`.
   </tbody>
 </table>
 
+<a id="9114-rules-for-string-concatenation"></a>
 #### 9.1.1.4 Rules for String Concatenation
 
 As introduced in the Chapter on [5. Java Operators](../module-01/java-operators.md), the symbol `+` normally represents **arithmetic addition** when used with numeric operands.
@@ -142,6 +149,7 @@ However, when applied to **Strings**, the same operator performs **string concat
 
 Since the operator `+` may appear in expressions where both numbers and strings are present, Java applies a specific set of rules to determine whether `+` means *numeric addition* or *string concatenation*.
 
+<a id="9115-concatenation-rules"></a>
 #### 9.1.1.5 Concatenation Rules
 
 - If both operands are numeric, `+` performs **numeric addition**.
@@ -209,6 +217,7 @@ System.out.println("AB" + null);
 // ABnull
 ```
 
+<a id="912-text-blocks-since-java-15"></a>
 ### 9.1.2 Text Blocks (since Java 15)
 
 A text block is a multi-line string literal introduced to simplify writing large strings (such as HTML, JSON, or code) without the need for many escape sequences.
@@ -232,6 +241,7 @@ String html = """
     - Double quotes inside the block usually don’t need escaping.
     - The compiler interprets the content between the opening and closing triple quotes as the string’s value.
 
+<a id="9121-formatting-essential-vs-incidental-whitespace"></a>
 #### 9.1.2.1 Formatting: Essential vs Incidental Whitespace
 
 - **Essential whitespace**: spaces and newlines that are part of the intended string content.
@@ -280,6 +290,7 @@ String textNoTrail_2 = """
         Line 3""";
 ```
 
+<a id="9122-line-count-blank-lines-and-line-breaks"></a>
 #### 9.1.2.2 Line Count, Blank Lines, and Line Breaks
 
 - Every visible line break inside the block becomes `\n`.
@@ -307,6 +318,7 @@ Output:
 7:
 ```
 
+<a id="9123-text-blocks-escape-characters"></a>
 #### 9.1.2.3 Text Blocks & Escape Characters
 
 Escape sequences still work inside text blocks when needed (for example, for backslashes or explicit control characters).
@@ -329,6 +341,7 @@ String card = """
     """.formatted("Alice", 30);
 ```
 
+<a id="9124-common-errors-with-fixes"></a>
 #### 9.1.2.4 Common Errors (with fixes)
 
 ```java
@@ -370,9 +383,11 @@ String correct = """
 
 ---
 
+<a id="92-core-string-methods"></a>
 ## 9.2 Core String Methods
 
 
+<a id="921-string-indexing"></a>
 #### 9.2.1 String Indexing
 
 Strings in Java use **zero-based indexing**, meaning:
@@ -391,6 +406,7 @@ String s = "Java";
 char c = s.charAt(2); // 'v'
 ```
 
+<a id="922-length-method"></a>
 ### 9.2.2 `length()` Method
 
 `length()` returns the number of characters in the string.
@@ -402,6 +418,7 @@ System.out.println(s.length());  // 5
 
 The last valid index is always `length() - 1`.
 
+<a id="923-boundary-rules-start-index-vs-end-index"></a>
 ### 9.2.3 Boundary Rules: Start Index vs End Index
 
 Many String methods use two indices:
@@ -425,6 +442,7 @@ s.substring(1, 4); // "bcd" (indexes 1,2,3)
 
 This rule applies to most substring-based methods.
 
+<a id="924-methods-using-only-start-index-inclusive"></a>
 ### 9.2.4 Methods Using Only Start Index (Inclusive)
 
 | Method | Description | Parameters | Index Rule | Example |
@@ -435,6 +453,7 @@ This rule applies to most substring-based methods.
 | lastIndexOf(String) | Last occurrence | — | — | "banana".lastIndexOf("a") → 5 |
 | lastIndexOf(String, fromIndex) | Search backward from index | fromIndex | fromIndex inclusive | "banana".lastIndexOf("a", 3) → 3 |
 
+<a id="925-methods-with-start-inclusive-end-exclusive"></a>
 ### 9.2.5 Methods with Start Inclusive / End Exclusive
 
 These methods follow the same slicing behavior: `start` included, `end` excluded.
@@ -446,6 +465,7 @@ These methods follow the same slicing behavior: `start` included, `end` excluded
 | getBytes(int srcBegin, int srcEnd, byte[] dst, int dstBegin) | Copies chars to byte array | start inclusive, end exclusive | Copies chars in [srcBegin, srcEnd) |
 | copyValueOf(char[] data, int offset, int count) | Creates a new string | offset inclusive; offset+count exclusive | Same rule as substring |
 
+<a id="926-methods-that-operate-on-entire-string"></a>
 ### 9.2.6 Methods That Operate on Entire String
 
 | Method | Description | Example |
@@ -459,6 +479,7 @@ These methods follow the same slicing behavior: `start` included, `end` excluded
 | isBlank() | True if empty or whitespace only | "  ".isBlank() → true |
 | isEmpty() | True if length == 0 | "".isEmpty() → true |
 
+<a id="927-character-access"></a>
 ### 9.2.7 Character Access
 
 | Method | Description | Example |
@@ -466,6 +487,7 @@ These methods follow the same slicing behavior: `start` included, `end` excluded
 | charAt(int index) | Returns char at index | "Java".charAt(2) → 'v' |
 | codePointAt(int index) | Returns Unicode code point | Useful for emojis or characters beyond BMP |
 
+<a id="928-searching"></a>
 ### 9.2.8 Searching
 
 | Method | Description | Example |
@@ -475,6 +497,7 @@ These methods follow the same slicing behavior: `start` included, `end` excluded
 | startsWith(String, offset) | Prefix at index | "abc".startsWith("b", 1) → true |
 | endsWith(String) | Suffix | "abcdef".endsWith("def") → true |
 
+<a id="929-replacement-methods"></a>
 ### 9.2.9 Replacement Methods
 
 | Method | Description | Example |
@@ -484,6 +507,7 @@ These methods follow the same slicing behavior: `start` included, `end` excluded
 | replaceAll(String regex, String replacement) | Regex replace all | "a1a2".replaceAll("\\d","") → "aa" |
 | replaceFirst(String regex, String replacement) | First regex match only | "a1a2".replaceFirst("\\d","") → "aa2" |
 
+<a id="9210-splitting-and-joining"></a>
 ### 9.2.10 Splitting and Joining
 
 | Method | Description | Example |
@@ -491,6 +515,7 @@ These methods follow the same slicing behavior: `start` included, `end` excluded
 | split(String regex) | Split by regex | "a,b,c".split(",") → ["a","b","c"] |
 | split(String regex, int limit) | Split with limit | limit < 0 keeps all trailing empty strings |
 
+<a id="9211-methods-returning-arrays"></a>
 ### 9.2.11 Methods Returning Arrays
 
 | Method | Description | Example |
@@ -498,6 +523,7 @@ These methods follow the same slicing behavior: `start` included, `end` excluded
 | toCharArray() | Returns char[] | "abc".toCharArray() |
 | getBytes() | Returns byte[] using platform/default encoding | "á".getBytes() |
 
+<a id="9212-indentation"></a>
 ### 9.2.12 Indentation
 
 | Method | Description | Example |
@@ -559,6 +585,7 @@ c
 length: 5
 ```
 
+<a id="9213-additional-examples"></a>
 ### 9.2.13 Additional Examples
 
 - Example 1 — Extract `[start, end)`

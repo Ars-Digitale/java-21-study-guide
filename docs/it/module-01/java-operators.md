@@ -1,5 +1,6 @@
 # 5. Operatori Java
 
+<a id="indice"></a>
 ### Indice
 
 - [5. Operatori Java](#5-operatori-java)
@@ -34,6 +35,7 @@
 
 ---
 
+<a id="51-definizione"></a>
 ## 5.1 Definizione
 
 In Java, gli **operatori** sono simboli speciali che eseguono operazioni su variabili e valori.  
@@ -50,6 +52,7 @@ Qui, `+` e `*` sono operatori, e `a`, `b` e `c` sono operandi.
 
 ---
 
+<a id="52-tipi-di-operatori"></a>
 ## 5.2 Tipi di operatori
 
 Java definisce tre tipi di operatori, raggruppati in base al numero di operandi che utilizzano:
@@ -62,6 +65,7 @@ Java definisce tre tipi di operatori, raggruppati in base al numero di operandi 
 
 ---
 
+<a id="53-categorie-di-operatori"></a>
 ## 5.3 Categorie di operatori
 
 Gli operatori possono anche essere raggruppati, in base al loro scopo, in categorie:
@@ -78,6 +82,7 @@ Gli operatori possono anche essere raggruppati, in base al loro scopo, in catego
 
 ---
 
+<a id="54-precedenza-degli-operatori-e-ordine-di-valutazione"></a>
 ## 5.4 Precedenza degli operatori e ordine di valutazione
 
 La **precedenza degli operatori** determina come gli operatori sono raggruppati in un’espressione — cioè, quali operazioni vengono eseguite per prime.
@@ -102,6 +107,7 @@ int result = (10 + 5) * 2;  // Le parentesi vengono valutate per prime → resul
 
 ---
 
+<a id="55-tabella-riassuntiva-degli-operatori-java"></a>
 ## 5.5 Tabella riassuntiva degli operatori Java
 
 | Precedenza (Alta → Bassa) | Tipo | Operatori | Esempio | Ordine di valutazione | Applicabile a |
@@ -124,6 +130,7 @@ int result = (10 + 5) * 2;  // Le parentesi vengono valutate per prime → resul
 | 16 | Assignment | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | `x += 5` | Destra → Sinistra | Tutti i tipi assegnabili |
 | 17 | Arrow operator | `->` | `(x, y) -> x + y` | Destra → Sinistra | Espressioni lambda, switch rules |
 
+<a id="551-note-aggiuntive"></a>
 ### 5.5.1 Note aggiuntive
 
 - La **concatenazione di stringhe (`+`)** ha una precedenza più bassa rispetto all’`+` aritmetico sui numeri.
@@ -131,11 +138,13 @@ int result = (10 + 5) * 2;  // Le parentesi vengono valutate per prime → resul
 
 ---
 
+<a id="56-operatori-unari"></a>
 ## 5.6 Operatori unari
 
 Gli operatori unari operano su **un solo operando** per produrre un nuovo valore.  
 Sono usati per operazioni come incremento/decremento, negazione di un valore, inversione di un booleano o complemento bit a bit.
 
+<a id="561-categorie-di-operatori-unari"></a>
 ### 5.6.1 Categorie di operatori unari
 
 | Operatore | Nome | Descrizione | Esempio | Risultato |
@@ -148,6 +157,7 @@ Sono usati per operazioni come incremento/decremento, negazione di un valore, in
 | `~` | Bitwise complement | Inverte ogni bit di un intero. | `~5` | `-6` |
 | `(type)` | Cast | Converte il valore in un altro tipo. | `(int) 3.9` | `3` |
 
+<a id="562-esempi"></a>
 ### 5.6.2 Esempi
 
 ```java
@@ -170,11 +180,13 @@ System.out.println(~a);     // -6 → binario: 1111 1010 (complemento a due)
 
 ---
 
+<a id="57-operatori-binari"></a>
 ## 5.7 Operatori binari
 
 Gli operatori binari richiedono **due operandi**.  
 Eseguono operazioni aritmetiche, relazionali, logiche, bit a bit e di assegnazione.
 
+<a id="571-categorie-di-operatori-binari"></a>
 ### 5.7.1 Categorie di operatori binari
 
 | Categoria | Operatori | Esempio | Descrizione |
@@ -233,6 +245,7 @@ System.out.println(a << 1); // 10 (1010)
 System.out.println(a >> 1); // 2  (0010)
 ```
 
+<a id="572-operatori-di-divisione-e-resto-modulus"></a>
 ### 5.7.2 Operatori di divisione e resto (modulus)
 
 L’operatore di resto (*modulus*) restituisce il resto della divisione tra due numeri.  
@@ -258,6 +271,7 @@ System.out.println(2 % 4);      // GIVES 2
 System.out.println(-8 % 9);     // GIVES -8
 ```
 
+<a id="573-il-valore-di-ritorno-delloperatore-di-assegnazione"></a>
 ### 5.7.3 Il valore di ritorno dell’operatore di assegnazione
 
 In Java, l’**operatore di assegnazione (`=`)** non si limita a memorizzare un valore in una variabile —  
@@ -300,6 +314,7 @@ if (flag == true) {
 !!! warning
     Se vedi `if (x = qualcosa)`, fermati: è una **assegnazione**, non un confronto.
 
+<a id="574-operatori-di-assegnazione-composta"></a>
 ### 5.7.4 Operatori di assegnazione composta
 
 Gli **operatori di assegnazione composta** in Java combinano un’operazione aritmetica o bit a bit con l’assegnazione in un unico passaggio.  
@@ -341,6 +356,7 @@ b += 1;         // ✅ funziona: cast implicito di nuovo verso byte
     Gli operatori di assegnazione composta **eseguono un cast implicito** verso il tipo della variabile a sinistra.
     Per questo motivo `b += 1` compila anche se `b = b + 1` non compila.
 
+<a id="575-operatori-di-uguaglianza-e"></a>
 ### 5.7.5 Operatori di uguaglianza (`==` e `!=`)
 
 Gli **operatori di uguaglianza** in Java `==` (uguale a) e `!=` (diverso da) vengono usati per confrontare due operandi.  
@@ -351,6 +367,7 @@ Tuttavia, il loro comportamento differisce **a seconda che siano applicati a tip
     - `==` confronta i **riferimenti** per gli oggetti  
     - `.equals()` confronta il **contenuto dell’oggetto** (se implementato)
 
+<a id="5751-uguaglianza-con-tipi-primitivi"></a>
 #### 5.7.5.1 Uguaglianza con tipi primitivi
 
 Quando si confrontano **valori primitivi**, `==` e `!=` confrontano i **valori effettivamente memorizzati**.
@@ -374,6 +391,7 @@ double d = 0.1 + 0.2;
 System.out.println(d == 0.3); // false → problema di arrotondamento dei floating point
 ```
 
+<a id="5752-uguaglianza-con-tipi-reference-oggetti"></a>
 #### 5.7.5.2 Uguaglianza con tipi reference (oggetti)
 
 Per gli oggetti, `==` e `!=` confrontano i riferimenti, non il contenuto dell’oggetto.  
@@ -421,6 +439,7 @@ int j = 100;
 System.out.println(i == j);   // true → unboxing prima del confronto
 ```
 
+<a id="576-loperatore-instanceof"></a>
 ### 5.7.6 L’operatore `instanceof`
 
 `instanceof` è un **operatore relazionale** che verifica se un valore reference è un’**istanza di** un certo **tipo reference** a runtime.  
@@ -443,6 +462,7 @@ System.out.println(n instanceof Object);  // false
 !!! warning
     `instanceof` restituisce sempre `false` quando l’operando a sinistra è `null`.
 
+<a id="5761-controllo-in-fase-di-compilazione-vs-fase-di-esecuzione"></a>
 #### 5.7.6.1 Controllo in fase di compilazione vs fase di esecuzione
 
 - In fase di compilazione, il compilatore rifiuta tipi *inconvertibili* (che non possono essere in relazione a runtime).
@@ -459,6 +479,7 @@ System.out.println(num instanceof Integer); // true a runtime
 System.out.println(num instanceof Double);  // false a runtime
 ```
 
+<a id="5762-pattern-matching-per-instanceof"></a>
 #### 5.7.6.2 Pattern matching per instanceof
 
 Java supporta i *type pattern* con `instanceof`, che eseguono sia il test sia il binding della variabile quando il test ha successo.  
@@ -482,6 +503,7 @@ Proprietà fondamentali:
 - Le variabili di pattern sono implicitamente `final` (non possono essere riassegnate).
 - Il nome non deve entrare in conflitto con una variabile esistente nello stesso scope.
 
+<a id="5763-flow-scoping-e-logica-short-circuit"></a>
 #### 5.7.6.3 Flow scoping e logica short-circuit
 
 Le variabili di pattern diventano disponibili in base all’analisi di flusso:
@@ -541,6 +563,7 @@ if (num instanceof Object s) {}  // ✅ Ok
 if (num instanceof Number s) {}  // ✅ Ok
 ```
 
+<a id="5764-array-e-tipi-reificabili"></a>
 #### 5.7.6.4 Array e tipi reificabili
 
 `instanceof` funziona con gli array (che sono reificabili) e con forme generiche *erased* o con wildcard.  
@@ -558,6 +581,7 @@ System.out.println(list instanceof java.util.List<?>); // ✅ true
 
 ---
 
+<a id="58-operatore-ternario"></a>
 ## 5.8 Operatore ternario
 
 L’**operatore ternario** (`? :`) è l’unico operatore in Java che prende **tre operandi**.  
@@ -571,12 +595,14 @@ Funziona come una forma compatta di un’istruzione `if-else`.
     String s = true ? "ok" : 5; // ❌ errore di compilazione: tipi incompatibili
     ```
 
+<a id="581-sintassi"></a>
 ### 5.8.1 Sintassi
 
 ```java
 condition ? expressionIfTrue : expressionIfFalse;
 ```
 
+<a id="582-esempio"></a>
 ### 5.8.2 Esempio
 
 ```java
@@ -585,6 +611,7 @@ String access = (age >= 18) ? "Allowed" : "Denied";
 System.out.println(access); // "Allowed"
 ```
 
+<a id="583-esempio-di-ternario-annidato"></a>
 ### 5.8.3 Esempio di ternario annidato
 
 ```java
@@ -595,6 +622,7 @@ String grade = (score >= 90) ? "A" :
 System.out.println(grade); // "B"
 ```
 
+<a id="584-note"></a>
 ### 5.8.4 Note
 
 !!! warning

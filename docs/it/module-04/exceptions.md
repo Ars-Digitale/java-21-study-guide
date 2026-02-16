@@ -1,5 +1,6 @@
 # 19. Eccezioni e Gestione degli Errori
 
+<a id="indice"></a>
 ### Indice
 
 - [19. Eccezioni e Gestione degli Errori](#19-eccezioni-e-gestione-degli-errori)
@@ -30,6 +31,7 @@ Le `Exceptions` sono il meccanismo strutturato di Java per gestire condizioni an
 
 Permettono ai programmi di separare il flusso di esecuzione normale dalla logica di gestione degli errori, migliorando robustezza, leggibilità e correttezza.
 
+<a id="191-gerarchia-e-tipi-di-eccezioni"></a>
 ## 19.1 Gerarchia e tipi di eccezioni
 
 Tutte le eccezioni derivano da `Throwable`.
@@ -44,12 +46,14 @@ java.lang.Object
         └── java.lang.RuntimeException
 ```
 
+<a id="1911-throwable"></a>
 ### 19.1.1 Throwable
 
 - Classe base per tutti gli errori e le eccezioni  
 - Supporta messaggio, causa e stack trace  
 - Solo `Throwable` (e le sue sottoclassi) può essere lanciato o catturato  
 
+<a id="1912-error-unchecked"></a>
 ### 19.1.2 Error (unchecked)
 
 - Rappresenta gravi problemi della JVM o del sistema  
@@ -59,6 +63,7 @@ java.lang.Object
 > **NOTA**  
 > Gli Error indicano condizioni dalle quali l’applicazione generalmente non è attesa a riprendersi.
 
+<a id="1913-eccezioni-checked-exception"></a>
 ### 19.1.3 Eccezioni Checked (`Exception`)
 
 - Sottoclassi di `Exception` **escludendo** `RuntimeException`  
@@ -66,6 +71,7 @@ java.lang.Object
 - Devono essere **catturate** oppure **dichiarate**  
 - Esempi: `IOException`, `SQLException`  
 
+<a id="1914-eccezioni-unchecked-runtimeexception"></a>
 ### 19.1.4 Eccezioni Unchecked (`RuntimeException`)
 
 - Sottoclassi di `RuntimeException`  
@@ -75,8 +81,10 @@ java.lang.Object
 
 ---
 
+<a id="192-dichiarare-e-lanciare-eccezioni"></a>
 ## 19.2 Dichiarare e lanciare eccezioni
 
+<a id="1921-dichiarare-eccezioni-con-throws"></a>
 ### 19.2.1 Dichiarare eccezioni con throws
 
 Un metodo dichiara eccezioni **checked** usando la clausola `throws`. Questa fa parte del contratto API del metodo.
@@ -90,6 +98,7 @@ void readFile(Path p) throws IOException {
 > **NOTA**  
 > Solo le **eccezioni checked** devono essere dichiarate. Le eccezioni unchecked possono essere dichiarate, ma di solito vengono omesse.
 
+<a id="1922-lanciare-eccezioni"></a>
 ### 19.2.2 Lanciare eccezioni
 
 Le eccezioni vengono create con `new` e lanciate esplicitamente usando `throw`.
@@ -105,6 +114,7 @@ if (value < 0) {
 
 ---
 
+<a id="193-override-dei-metodi-e-regole-sulle-eccezioni"></a>
 ## 19.3 Override dei metodi e regole sulle eccezioni
 
 Quando si fa override di un metodo, le regole sulle eccezioni sono applicate in modo rigoroso.
@@ -129,8 +139,10 @@ class Child extends Parent {
 
 ---
 
+<a id="194-gestione-delle-eccezioni-try-catch-finally"></a>
 ## 19.4 Gestione delle eccezioni: try, catch, finally
 
+<a id="1941-sintassi-base-try-catch"></a>
 ### 19.4.1 Sintassi base try-catch
 
 ```java
@@ -144,6 +156,7 @@ try {
 - Un blocco `try` deve essere seguito da almeno un `catch` oppure da un `finally`  
 - I catch vengono controllati dall’alto verso il basso  
 
+<a id="1942-blocchi-catch-multipli"></a>
 ### 19.4.2 Blocchi catch multipli
 
 Blocchi catch multipli permettono gestioni diverse per tipi di eccezione differenti.
@@ -162,6 +175,7 @@ try {
 > Le eccezioni più specifiche devono venire prima di quelle più generali, altrimenti la compilazione fallisce.  
 > Se si mette un catch per una superclasse (es. `IOException`) prima di uno per una sottoclasse (es. `FileNotFoundException`), il catch della sottoclasse diventa irraggiungibile.
 
+<a id="1943-multi-catch-java-7"></a>
 ### 19.4.3 Multi-catch (Java 7+)
 
 ```java
@@ -175,6 +189,7 @@ try {
 - I tipi di eccezione devono essere non correlati (nessuna relazione parent/child)  
 - La variabile catturata è implicitamente `final`  
 
+<a id="1944-blocco-finally"></a>
 ### 19.4.4 Blocco finally
 
 Il blocco `finally` viene eseguito indipendentemente dal fatto che venga lanciata un’eccezione, tranne in casi estremi di terminazione della JVM.
@@ -195,12 +210,14 @@ try {
 
 ---
 
+<a id="195-gestione-automatica-delle-risorse-try-with-resources"></a>
 ## 19.5 Gestione automatica delle risorse (try-with-resources)
 
 Il `try-with-resources` fornisce la chiusura automatica delle risorse che implementano `AutoCloseable`.
 
 Elimina la necessità di cleanup esplicito con `finally` nella maggior parte dei casi.
 
+<a id="1951-sintassi-base"></a>
 ### 19.5.1 Sintassi base
 
 ```java
@@ -212,6 +229,7 @@ try (BufferedReader br = Files.newBufferedReader(path)) {
 - Le risorse vengono chiuse automaticamente  
 - La chiusura avviene anche se viene lanciata un’eccezione  
 
+<a id="1952-dichiarare-risorse-multiple"></a>
 ### 19.5.2 Dichiarare risorse multiple
 
 ```java
@@ -223,6 +241,7 @@ try (InputStream in = Files.newInputStream(p);
 
 - Le risorse vengono chiuse in **ordine inverso** rispetto alla dichiarazione  
 
+<a id="1953-scope-delle-risorse"></a>
 ### 19.5.3 Scope delle risorse
 
 - Le risorse sono visibili solo all’interno del blocco `try`  
@@ -242,6 +261,7 @@ try (firstWriter; var secondWriter = Files.newBufferedWriter(filePath)) {
 
 ---
 
+<a id="196-eccezioni-soppresse"></a>
 ## 19.6 Eccezioni soppresse
 
 Quando sia il blocco `try` sia il metodo `close()` della risorsa lanciano eccezioni, Java conserva l’eccezione principale e **sopprime** le altre.
@@ -267,6 +287,7 @@ catch (Exception e) {
 
 ---
 
+<a id="197-riepilogo-sulle-eccezioni"></a>
 ## 19.7 Riepilogo sulle eccezioni
 
 - Le eccezioni checked devono essere catturate o dichiarate  

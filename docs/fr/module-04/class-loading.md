@@ -1,5 +1,6 @@
 # 15. Chargement des Classes, Initialisation et Construction des Objets
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [15. Chargement des Classes, Initialisation et Construction des Objets](#15-chargement-des-classes-initialisation-et-construction-des-objets)
@@ -26,6 +27,7 @@ Ce chapitre fournit une explication unifiée et claire de :
 - Comment les constructeurs s’exécutent dans une chaîne d’héritage  
 - Comment différentes zones mémoire (Heap, Stack, Method Area) participent  
 
+<a id="151-zones-mémoire-java-pertinentes-pour-linitialisation-des-classes-et-des-objets"></a>
 ## 15.1 Zones Mémoire Java Pertinentes pour l’Initialisation des Classes et des Objets
 
 Avant de comprendre l’ordre d’initialisation, il est utile de rappeler les trois principales zones mémoire impliquées :
@@ -39,12 +41,14 @@ Avant de comprendre l’ordre d’initialisation, il est utile de rappeler les t
 
 ---
 
+<a id="152-chargement-des-classes-avec-héritage"></a>
 ## 15.2 Chargement des Classes (avec Héritage)
 
 Quand un programme Java démarre, la JVM charge les classes *à la demande*.
 
 Quand une classe est référencée pour la première fois (par exemple via `new` ou en accédant à un membre statique), **toute sa chaîne d’héritage doit d’abord être chargée**.
 
+<a id="1521-ordre-de-chargement-des-classes"></a>
 ### 15.2.1 Ordre de Chargement des Classes
 
 Étant donnée une hiérarchie de classes :
@@ -71,6 +75,7 @@ Alors le chargement des classes se déroule dans cet ordre strict :
 - Charger la classe B et répéter la même logique  
 - Charger la classe C et répéter la même logique  
 
+<a id="1522-que-se-passe-t-il-pendant-le-chargement-dune-classe"></a>
 ### 15.2.2 Que se Passe-t-il Pendant le Chargement d’une Classe
 
 - **Étape 1 : Les variables statiques sont allouées** (d’abord avec les valeurs par défaut).  
@@ -82,10 +87,12 @@ Alors le chargement des classes se déroule dans cet ordre strict :
 
 ---
 
+<a id="153-création-dobjets-avec-héritage"></a>
 ## 15.3 Création d’Objets (avec Héritage)
 
 Quand le mot-clé `new` est utilisé, **la création d’instance suit une séquence stricte et prévisible** impliquant toutes les classes parentes.
 
+<a id="1531-ordre-complet-de-création-des-instances"></a>
 ### 15.3.1 Ordre Complet de Création des Instances
 
 - **1. La mémoire est allouée dans le Heap pour le nouvel objet** (les champs reçoivent des valeurs par défaut).  
@@ -96,6 +103,7 @@ Quand le mot-clé `new` est utilisé, **la création d’instance suit une séqu
 
 ---
 
+<a id="154-exemple-complet-initialisation-statique-dinstance-à-travers-lhéritage"></a>
 ## 15.4 Exemple Complet : Initialisation Statique + d’Instance à Travers l’Héritage
 
 Considérons la hiérarchie suivante à trois niveaux :
@@ -189,6 +197,7 @@ C constructor
 
 ---
 
+<a id="155-diagramme-de-visualisation"></a>
 ## 15.5 Diagramme de Visualisation
 
 ```text
@@ -222,6 +231,7 @@ C constructor
 
 ---
 
+<a id="156-règles-clés"></a>
 ## 15.6 Règles Clés
 
 - L’initialisation statique se produit **une seule fois** par classe.  
@@ -233,6 +243,7 @@ C constructor
 
 ---
 
+<a id="157-tableau-récapitulatif"></a>
 ## 15.7 Tableau Récapitulatif
 
 | STATIQUE (Niveau Classe) | INSTANCE (Niveau Objet) |

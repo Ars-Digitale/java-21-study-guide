@@ -1,5 +1,6 @@
 # 34. Stream I/O in Java
 
+<a id="indice"></a>
 ### Indice
 
 - [34. Stream I/O in Java](#34-stream-io-in-java)
@@ -51,6 +52,7 @@ Questo capitolo fornisce una spiegazione dettagliata degli `stream I/O in Java`.
 
 Copre gli stream classici **java.io**, li mette a confronto con **java.nio / java.nio.file**, e spiega principi di progettazione, API, casi limite e distinzioni rilevanti.
 
+<a id="341-che-cosè-uno-stream-io-in-java"></a>
 ## 34.1 Che cos’è uno Stream I/O in Java?
 
 Uno `stream I/O` rappresenta un flusso di dati tra un programma Java e una sorgente o destinazione esterna.
@@ -69,22 +71,26 @@ In Java, gli stream sono organizzati attorno a due dimensioni principali:
 
 ---
 
+<a id="342-stream-di-byte-vs-stream-di-caratteri"></a>
 ## 34.2 Stream di Byte vs Stream di Caratteri
 
 Java distingue gli stream in base all’unità di dato che elaborano.
 
+<a id="3421-stream-di-byte"></a>
 ### 34.2.1 Stream di Byte
 
 - Lavorano con byte grezzi a 8 bit
 - Usati per dati binari (immagini, audio, PDF, ZIP)
 - Classi base: `InputStream` e `OutputStream`
 
+<a id="3422-stream-di-caratteri"></a>
 ### 34.2.2 Stream di Caratteri
 
 - Lavorano con caratteri Unicode a 16 bit
 - Gestiscono automaticamente l’encoding dei caratteri
 - Classi base: `Reader` e `Writer`
 
+<a id="3423-tabella-di-riepilogo"></a>
 ### 34.2.3 Tabella di riepilogo
 
 |	Aspetto	|	Stream di Byte	|	Stream di Caratteri	|
@@ -97,10 +103,12 @@ Java distingue gli stream in base all’unità di dato che elaborano.
 
 ---
 
+<a id="343-stream-di-basso-livello-vs-stream-di-alto-livello"></a>
 ## 34.3 Stream di Basso Livello vs Stream di Alto Livello
 
 Gli stream in `java.io` seguono un pattern decorator. Gli stream vengono impilati per aggiungere funzionalità.
 
+<a id="3431-stream-di-basso-livello-node-streams"></a>
 ### 34.3.1 Stream di Basso Livello (Node Streams)
 
 Gli stream di basso livello si collegano direttamente a una sorgente o a una destinazione di dati.
@@ -108,6 +116,7 @@ Gli stream di basso livello si collegano direttamente a una sorgente o a una des
 - Sanno come leggere/scrivere byte o caratteri
 - NON forniscono buffering, formattazione o gestione di oggetti
 
+<a id="3432-stream-comuni-di-basso-livello"></a>
 ### 34.3.2 Stream comuni di Basso Livello
 
 |	Classe Stream	|	Scopo	|
@@ -131,6 +140,7 @@ try (InputStream in = new FileInputStream("data.bin")) {
 !!! note
     Gli stream di basso livello sono raramente usati da soli nelle applicazioni reali a causa di prestazioni scarse e funzionalità limitate.
 
+<a id="3433-stream-di-alto-livello-filter-processing-streams"></a>
 ### 34.3.3 Stream di Alto Livello (Filter / Processing Streams)
 
 Gli stream di alto livello avvolgono altri stream per aggiungere funzionalità.
@@ -140,6 +150,7 @@ Gli stream di alto livello avvolgono altri stream per aggiungere funzionalità.
 - Serializzazione di oggetti
 - Lettura/scrittura di primitivi
 
+<a id="3434-stream-comuni-di-alto-livello"></a>
 ### 34.3.4 Stream comuni di Alto Livello
 
 |	Classe Stream	|	Aggiunge funzionalità	|
@@ -165,12 +176,14 @@ try (BufferedReader reader =
 }
 ```
 
+<a id="3435-regole-di-chaining-degli-stream-e-errori-comuni"></a>
 ### 34.3.5 Regole di chaining degli stream e errori comuni
 
 L’esempio precedente illustra lo stream chaining, un concetto centrale in `java.io` basato sul pattern decorator.
 
 Ogni stream avvolge un altro stream, aggiungendo funzionalità preservando una gerarchia di tipi rigorosa.
 
+<a id="34351-regola-fondamentale-di-chaining"></a>
 #### 34.3.5.1 Regola fondamentale di chaining
 
 Uno stream può avvolgere solo un altro stream di un livello di astrazione compatibile.
@@ -182,10 +195,12 @@ Uno stream può avvolgere solo un altro stream di un livello di astrazione compa
 !!! note
     Non puoi mescolare arbitrariamente `InputStream` con `Reader` o `OutputStream` con `Writer`.
 
+<a id="34352-incompatibilità-tra-stream-di-byte-e-stream-di-caratteri"></a>
 #### 34.3.5.2 Incompatibilità tra stream di byte e stream di caratteri
 
 Un errore molto comune è tentare di avvolgere uno stream di byte direttamente con una classe basata su caratteri (o viceversa).
 
+<a id="34353-chaining-non-valido-errore-di-compilazione"></a>
 #### 34.3.5.3 Chaining non valido (errore di compilazione)
 
 ```java
@@ -196,6 +211,7 @@ BufferedReader reader =
 !!! note
     Questo fallisce perché `BufferedReader` si aspetta un `Reader`, non un `InputStream`.
 
+<a id="34354-bridging-da-stream-di-byte-a-stream-di-caratteri"></a>
 #### 34.3.5.4 Bridging da stream di byte a stream di caratteri
 
 Per convertire tra stream basati su byte e stream basati su caratteri, Java fornisce classi ponte che eseguono decodifica/codifica esplicita del charset.
@@ -203,6 +219,7 @@ Per convertire tra stream basati su byte e stream basati su caratteri, Java forn
 - `InputStreamReader` converte byte → caratteri
 - `OutputStreamWriter` converte caratteri → byte
 
+<a id="34355-pattern-corretto-di-conversione"></a>
 #### 34.3.5.5 Pattern corretto di conversione
 
 ```java
@@ -214,6 +231,7 @@ BufferedReader reader =
 !!! note
     Il ponte gestisce la decodifica dei caratteri usando un charset (predefinito o esplicito).
 
+<a id="34356-regole-di-ordinamento-nelle-catene-di-stream"></a>
 #### 34.3.5.6 Regole di ordinamento nelle catene di stream
 
 L’ordine di wrapping non è arbitrario.
@@ -222,12 +240,14 @@ L’ordine di wrapping non è arbitrario.
 - I bridge (se necessari) vengono dopo
 - Gli stream bufferizzati o di elaborazione vengono per ultimi
 
+<a id="34357-ordine-logico-corretto"></a>
 #### 34.3.5.7 Ordine logico corretto
 
 ```text
 FileInputStream → InputStreamReader → BufferedReader
 ```
 
+<a id="34358-regola-di-gestione-delle-risorse"></a>
 #### 34.3.5.8 Regola di gestione delle risorse
 
 Chiudere lo stream più esterno chiude automaticamente tutti gli stream avvolti.
@@ -235,6 +255,7 @@ Chiudere lo stream più esterno chiude automaticamente tutti gli stream avvolti.
 !!! note
     Per questo try-with-resources dovrebbe riferirsi solo allo stream di livello più alto.
 
+<a id="34359-trappole-comuni"></a>
 #### 34.3.5.9 Trappole comuni
 
 - Tentare di bufferizzare uno stream del tipo sbagliato
@@ -245,16 +266,19 @@ Chiudere lo stream più esterno chiude automaticamente tutti gli stream avvolti.
 
 ---
 
+<a id="344-classi-base-principali-di-javaio-e-metodi-chiave"></a>
 ## 34.4 Classi base principali di `java.io` e metodi chiave
 
 Il package `java.io` è costruito attorno a un piccolo insieme di **classi base astratte**.
 Comprendere queste classi e i loro contratti è essenziale, perché tutte le classi I/O concrete si basano su di esse.
 
+<a id="3441-inputstream"></a>
 ### 34.4.1 InputStream
 
 Classe base astratta per input orientato ai byte.
 Tutti gli input stream leggono byte grezzi (valori a 8 bit) da una sorgente come un file, un socket di rete o un buffer di memoria.
 
+<a id="34411-metodi-chiave"></a>
 #### 34.4.1.1 Metodi chiave
 
 | Metodo | Descrizione |
@@ -274,6 +298,7 @@ Il metodo `read()` a singolo byte è principalmente un primitivo di basso livell
 
 In pratica, leggere un byte alla volta è inefficiente e dovrebbe quasi sempre essere evitato a favore di letture bufferizzate.
 
+<a id="34412-esempio-tipico-di-utilizzo"></a>
 #### 34.4.1.2 Esempio tipico di utilizzo
 
 ```java
@@ -286,12 +311,14 @@ try (InputStream in = new FileInputStream("data.bin")) {
 }
 ```
 
+<a id="3442-outputstream"></a>
 ### 34.4.2 OutputStream
 
 Classe base astratta per output orientato ai byte.
 
 Rappresenta una destinazione dove possono essere scritti byte grezzi.
 
+<a id="34421-metodi-chiave"></a>
 #### 34.4.2.1 Metodi chiave
 
 | Metodo | Descrizione |
@@ -307,6 +334,7 @@ Rappresenta una destinazione dove possono essere scritti byte grezzi.
     
     Non eseguire flush o close su un OutputStream può causare perdita di dati.
 
+<a id="34422-esempio-tipico-di-utilizzo"></a>
 #### 34.4.2.2 Esempio tipico di utilizzo
 
 ```java
@@ -316,6 +344,7 @@ try (OutputStream out = new FileOutputStream("out.bin")) {
 }
 ```
 
+<a id="3443-reader-e-writer"></a>
 ### 34.4.3 Reader e Writer
 
 `Reader` e `Writer` sono le controparti `orientate ai caratteri` di InputStream e OutputStream.
@@ -331,6 +360,7 @@ Reader e Writer implicano sempre un `charset`, esplicitamente o implicitamente.
 
 Questo li rende l’astrazione corretta per l’elaborazione di testo.
 
+<a id="34431-gestione-del-charset"></a>
 #### 34.4.3.1 Gestione del charset
 
 ```java
@@ -347,6 +377,7 @@ Reader reader = new InputStreamReader(
 
 ---
 
+<a id="345-stream-bufferizzati-e-prestazioni"></a>
 ## 34.5 Stream bufferizzati e prestazioni
 
 Gli `stream bufferizzati` avvolgono un altro stream e aggiungono un buffer in memoria.
@@ -359,6 +390,7 @@ Invece di interagire con il sistema operativo a ogni read o write, i dati vengon
 !!! note
     Gli `stream bufferizzati` sono `decorator`: non sostituiscono lo stream sottostante, lo migliorano aggiungendo comportamento di buffering.
 
+<a id="3451-perché-il-buffering-conta"></a>
 ### 34.5.1 Perché il buffering conta
 
 | Aspetto | Non bufferizzato | Bufferizzato |
@@ -371,6 +403,7 @@ Le system call sono operazioni costose.
 
 Il buffering le minimizza raggruppando più letture o scritture logiche in meno operazioni I/O fisiche.
 
+<a id="3452-come-funziona-la-lettura-non-bufferizzata"></a>
 ### 34.5.2 Come funziona la lettura non bufferizzata
 
 In uno stream non bufferizzato, ogni chiamata a read() può risultare in una system call nativa.
@@ -389,6 +422,7 @@ try (InputStream in = new FileInputStream("data.bin")) {
 !!! note
     Leggere byte-per-byte senza buffering è quasi sempre un anti-pattern di prestazioni.
 
+<a id="3453-come-funziona-bufferedinputstream"></a>
 ### 34.5.3 Come funziona BufferedInputStream
 
 `BufferedInputStream` internamente legge un grande blocco di byte in un buffer.
@@ -408,6 +442,7 @@ try (InputStream in =
 !!! note
     Il programma chiama ancora `read()` ripetutamente, ma il sistema operativo viene invocato solo quando il buffer interno deve essere riempito di nuovo.
 
+<a id="3454-esempio-di-output-bufferizzato"></a>
 ### 34.5.4 Esempio di output bufferizzato
 
 L’output bufferizzato accumula dati in memoria e li scrive in blocchi più grandi.
@@ -429,6 +464,7 @@ try (OutputStream out =
     
     Chiamare `flush()` esplicitamente è utile quando i dati devono essere visibili immediatamente.
 
+<a id="3455-bufferedreader-vs-reader"></a>
 ### 34.5.5 BufferedReader vs Reader
 
 `BufferedReader` aggiunge una `**lettura basata su linee**` efficiente sopra un Reader.
@@ -449,6 +485,7 @@ try (BufferedReader reader =
 !!! note
     Il metodo `readLine()` è disponibile solo su `BufferedReader` (non su `Reader`), perché si basa sul buffering per rilevare efficientemente i confini di riga.
 
+<a id="3456-esempio-di-bufferedwriter"></a>
 ### 34.5.6 Esempio di BufferedWriter
 
 ```java
@@ -472,10 +509,12 @@ try (BufferedWriter writer =
 
 ---
 
+<a id="346-javaio-vs-javanio-e-javaniofile"></a>
 ## 34.6 java.io vs java.nio (e java.nio.file)
 
 Le applicazioni Java moderne favoriscono sempre più le API NIO e NIO.2, ma java.io rimane fondamentale e ampiamente usato.
 
+<a id="3461-differenze-concettuali"></a>
 ### 34.6.1 Differenze concettuali
 
 | Aspetto | java.io | java.nio / nio.2 |
@@ -491,6 +530,7 @@ Le applicazioni Java moderne favoriscono sempre più le API NIO e NIO.2, ma java
     
     Molte classi NIO internamente si basano su stream o coesistono con essi.
 
+<a id="3462-javanio-io-file-moderno"></a>
 ### 34.6.2 java.nio (I/O file moderno)
 
 Il package `java.nio.file` (NIO.2) fornisce una file API di alto livello, espressiva e più sicura.
@@ -516,6 +556,7 @@ try (BufferedReader reader = new BufferedReader(new FileReader("file.txt"))) {
 
 ---
 
+<a id="347-quando-usare-quale-api"></a>
 ## 34.7 Quando usare quale API
 
 | Scenario | API raccomandata |
@@ -528,6 +569,7 @@ try (BufferedReader reader = new BufferedReader(new FileReader("file.txt"))) {
 
 ---
 
+<a id="348-trappole-comuni-e-suggerimenti"></a>
 ## 34.8 Trappole comuni e suggerimenti
 
 - End-of-file è indicato da -1, non da un’eccezione

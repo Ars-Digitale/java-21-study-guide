@@ -1,5 +1,6 @@
 # 7. Flux de contrôle
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [7. Flux de contrôle](#7-flux-de-contrôle)
@@ -35,6 +36,7 @@ Java fournit trois grandes catégories de constructions de contrôle du flux :
 !!! tip
     Comprendre le flux de contrôle est essentiel pour voir comment les données circulent dans votre programme et comment chaque décision logique est évaluée étape par étape.
 
+<a id="71-linstruction-if"></a>
 ## 7.1 L’instruction `if`
 
 L’instruction `if` est une structure conditionnelle de contrôle du flux qui exécute un bloc de code uniquement si une expression booléenne spécifiée est évaluée à `true`. Elle permet au programme de prendre des décisions à l’exécution.
@@ -80,6 +82,7 @@ if (grade >= 90) {
 
 ---
 
+<a id="72-linstruction-switch-lexpression"></a>
 ## 7.2 L’instruction `switch` & l’expression
 
 La construction `switch` est une structure de contrôle du flux qui sélectionne une branche parmi plusieurs alternatives en fonction de la valeur d’une expression (le **selector**).
@@ -101,6 +104,7 @@ Java 21 prend en charge :
 
 Les deux formes de `switch` partagent les mêmes règles concernant le selector (la **variable cible** du switch) et les valeurs case acceptables.
 
+<a id="721-la-variable-cible-du-switch-peut-être"></a>
 ### 7.2.1 La `variable cible` du switch peut être
 
 | Control Variable type |
@@ -122,6 +126,7 @@ Les deux formes de `switch` partagent les mêmes règles concernant le selector 
     - `float`
     - `double`
 
+<a id="722-valeurs-case-acceptables"></a>
 ### 7.2.2 Valeurs `case` acceptables
 
 Pour un switch non pattern, chaque étiquette `case` doit être une constante à la compilation compatible avec le type du selector.
@@ -137,6 +142,7 @@ Une variable constante à la compilation :
 - Doit être déclarée avec `final` et initialisée dans la même instruction.
 - Son initialiseur doit lui-même être une expression constante (généralement en utilisant des littéraux et d’autres constantes à la compilation).
 
+<a id="723-compatibilité-de-type-entre-selector-et-case"></a>
 ### 7.2.3 Compatibilité de type entre selector et case
 
 Le type du selector et chaque étiquette `case` doivent être compatibles :
@@ -145,6 +151,7 @@ Le type du selector et chaque étiquette `case` doivent être compatibles :
 - Pour un selector `enum`, les étiquettes case doivent être des constantes de cet `enum`.
 - Pour un selector `String`, les étiquettes case doivent être des constantes de chaîne.
 
+<a id="724-pattern-matching-dans-switch"></a>
 ### 7.2.4 Pattern Matching dans Switch
 
 Le switch en Java 21 prend en charge le pattern matching, y compris :
@@ -173,6 +180,7 @@ String describe(Object o) {
 - Les variables de pattern sont dans la portée uniquement à l’intérieur de leur arm (ou des chemins où le pattern est connu comme correspondant).
 - L’ordre est important en raison de la **dominance** : les patterns plus spécifiques doivent précéder les plus généraux.
 
+<a id="7241-noms-de-variables-et-portée-entre-les-branches"></a>
 ### 7.2.4.1 Noms de variables et portée entre les branches
 
 Avec le pattern matching, la variable de pattern n’existe que dans la portée de l’arm dans lequel elle est définie. Cela signifie que vous pouvez réutiliser le même nom de variable dans différents branches case.
@@ -190,6 +198,7 @@ switch (o) {
 !!! note
     Ce dernier exemple ne retourne pas de valeur, il s’agit donc d’un **switch instruction** et non d’une expression switch.
 
+<a id="7242-ordonnancement-dominance-et-exhaustivité-dans-les-switch-à-patterns"></a>
 ### 7.2.4.2 Ordonnancement, dominance et exhaustivité dans les switch à patterns
 
 Lorsqu’on utilise le pattern matching, l’ordre des branches est crucial en raison de la **dominance** et du potentiel **code inatteignable**.
@@ -262,8 +271,10 @@ switch (number) {
 
 ---
 
+<a id="73-deux-formes-de-switch-switch-statement-vs-switch-expression"></a>
 ## 7.3 Deux formes de `switch` : `switch` Statement vs `switch` Expression
 
+<a id="731-linstruction-switch"></a>
 ### 7.3.1 L’instruction switch
 
 Une **instruction switch** est utilisée comme construction de contrôle du flux.
@@ -293,6 +304,7 @@ Lorsqu’il est présent, `break` termine le switch après l’exécution de son
 - Une clause `default` est optionnelle et peut apparaître n’importe où dans l’instruction switch. Elle s’exécute s’il n’y a pas de correspondance pour les cases précédents.
 - Une instruction switch ne produit pas de valeur comme une expression ; vous ne pouvez pas assigner directement une instruction switch à une variable.
 
+<a id="7311-comportement-de-fall-through"></a>
 ### 7.3.1.1 Comportement de fall-through
 
 Avec des case de style deux-points, l’exécution saute à l’étiquette case correspondante.
@@ -325,6 +337,7 @@ Sortie :
 !!! note
     Si, dans l’exemple précédent, nous supprimons le `break` sur le `case 3`, le message de la branche `default` sera également affiché.
 
+<a id="732-lexpression-switch"></a>
 ### 7.3.2 L’expression switch
 
 Une **expression switch** produit toujours une valeur unique comme résultat.
@@ -347,6 +360,7 @@ int len = switch (s) { // switch expression
 - Une expression switch doit être **exhaustive** : toutes les valeurs possibles du selector doivent être couvertes (via des case explicites et/ou `default`).
 - Le type du résultat doit être cohérent entre toutes les branches. Par exemple, si un arm produit un `int`, les autres arms doivent produire des valeurs compatibles avec `int`.
 
+<a id="7321-yield-dans-les-blocs-dexpression-switch"></a>
 ### 7.3.2.1 `yield` dans les blocs d’expression switch
 
 Lorsqu’un arm d’une expression switch utilise un bloc au lieu d’une expression unique, vous devez utiliser `yield` pour fournir le résultat de cet arm.
@@ -366,6 +380,7 @@ int len = switch (s) {
     `yield` est utilisé uniquement dans les expressions switch.
     `break value;` n’est pas autorisé comme moyen de retourner une valeur depuis une expression switch.
 
+<a id="7322-exhaustivité-pour-les-expressions-switch"></a>
 ### 7.3.2.2 Exhaustivité pour les expressions switch
 
 Puisqu’une expression switch doit retourner une valeur, elle doit également être **exhaustive** ; en d’autres termes, elle doit gérer toutes les valeurs possibles du selector.
@@ -388,6 +403,7 @@ int val = switch (s) {
 
 ---
 
+<a id="74-gestion-de-null"></a>
 ## 7.4 Gestion de null
 
 **Switch classique (sans patterns)**

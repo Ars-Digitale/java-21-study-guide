@@ -1,5 +1,6 @@
 # 28. Map API
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [28. Map API](#28-map-api)
@@ -21,6 +22,7 @@ The `Map` interface represents a collection of **key–value pairs**, where each
 Unlike other collection types, `Map` does **not** extend `Collection` and therefore has its own hierarchy and rules.
 
 
+<a id="281-core-map-characteristics"></a>
 ## 28.1 Core Map Characteristics
 
 - Each key is unique; **duplicate keys overwrite the previous value**
@@ -33,6 +35,7 @@ Unlike other collection types, `Map` does **not** extend `Collection` and theref
 
 ---
 
+<a id="282-main-map-implementations"></a>
 ## 28.2 Main Map Implementations
 
 | Implementation | Ordering | Null Keys | Null Values | Thread-Safe | Notes |
@@ -48,6 +51,7 @@ Unlike other collection types, `Map` does **not** extend `Collection` and theref
 
 ---
 
+<a id="283-creating-maps"></a>
 ## 28.3 Creating Maps
 
 `Maps` can be created using constructors or factory methods.
@@ -69,6 +73,7 @@ Map<String, Integer> map5 = Map.ofEntries(
 
 ---
 
+<a id="284-basic-map-operations"></a>
 ## 28.4 Basic Map Operations
 
 | Method | Description | Return
@@ -97,6 +102,7 @@ String v = map.get("B"); // Banana
 
 ---
 
+<a id="285-iterating-over-a-map"></a>
 ## 28.5 Iterating Over a Map
 
 Maps are iterated via views:
@@ -124,6 +130,7 @@ for (Map.Entry<String, String> e : map.entrySet()) {
 
 ---
 
+<a id="286-determining-equality-in-maps"></a>
 ## 28.6 Determining Equality in Maps
 
 Map equality is defined as follows:
@@ -144,6 +151,7 @@ System.out.println(m1.equals(m2)); // true
 
 ---
 
+<a id="287-special-behavior-of-treemap"></a>
 ## 28.7 Special Behavior of TreeMap
 
 TreeMap maintains entries in sorted order based on keys.
@@ -163,6 +171,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 
 ---
 
+<a id="288-null-handling"></a>
 ## 28.8 Null Handling
 
 | Implementation | Null Key | Null Value |
@@ -180,6 +189,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 
 ---
 
+<a id="289-common-pitfalls"></a>
 ## 28.9 Common Pitfalls
 
 - Assuming Map is a Collection
@@ -190,6 +200,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 
 ---
 
+<a id="2810-summary"></a>
 ## 28.10 Summary
 
 - Maps store unique keys mapped to values

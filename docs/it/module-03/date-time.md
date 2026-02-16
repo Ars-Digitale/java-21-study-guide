@@ -1,5 +1,6 @@
 # 12. Data e ora in Java
 
+<a id="indice"></a>
 ### Indice
 
 - [12. Data e ora in Java](#12-data-e-ora-in-java)
@@ -33,6 +34,7 @@
 
 ---
 
+<a id="121-data-e-ora"></a>
 ## 12.1 Data e ora
 
 Java fornisce un’API moderna, coerente e immutabile per data/ora nel package `java.time.*`.
@@ -81,6 +83,7 @@ System.out.println(ZonedDateTime.now());
 
 Entrambi rappresentano lo stesso istante nel tempo, semplicemente espresso in fusi orari diversi.
 
+<a id="1211-creare-date-e-ore-specifiche"></a>
 ### 12.1.1 Creare date e ore specifiche
 
 Puoi costruire oggetti di data/ora precisi usando i metodi factory `of()`.
@@ -130,11 +133,13 @@ var localDateTime2 = LocalDateTime.of(localDate1, localTime1);
 var zoned = ZonedDateTime.of(2025, 7, 31, 13, 55, 22, 0, ZoneId.of("Europe/Paris"));
 ```
 
+<a id="1212-aritmetica-su-data-e-ora-metodi-plus-e-minus"></a>
 ### 12.1.2 Aritmetica su data e ora: metodi `plus` e `minus`
 
 Tutte le classi nel package `java.time` (come `LocalDate`, `LocalTime`, `LocalDateTime`, `ZonedDateTime`, ecc.) sono **immutabili**.
 Ciò significa che metodi come `plusXxx()` e `minusXxx()` non modificano mai l’oggetto originale — restituiscono invece una nuova istanza con il valore regolato.
 
+<a id="1213-pattern-comuni"></a>
 ### 12.1.3 Pattern comuni
 
 La maggior parte delle classi di data/ora supporta tre tipi di metodi aritmetici:
@@ -154,6 +159,7 @@ La maggior parte delle classi di data/ora supporta tre tipi di metodi aritmetici
 
 Questi consentono un’aritmetica su data/ora flessibile e leggibile.
 
+<a id="1214-aritmetica-su-localdate"></a>
 ### 12.1.4 Aritmetica su `LocalDate`
 
 `LocalDate` rappresenta solo una data (niente ora, niente zona).
@@ -193,6 +199,7 @@ Period p = Period.of(1, 2, 3);  // 1 year, 2 months, 3 days
 LocalDate d6 = date.plus(p);
 ```
 
+<a id="1215-aritmetica-su-localtime"></a>
 ### 12.1.5 Aritmetica su `LocalTime`
 
 `LocalTime` rappresenta solo un orario (niente data, niente zona).
@@ -235,6 +242,7 @@ LocalTime t5 = time.plus(d);                // 15:00
     Quando l’aritmetica sull’ora supera la mezzanotte, con `LocalTime` la data viene ignorata.
     Per esempio, 23:30 + 2 ore = 01:30 (senza alcuna data coinvolta).
 
+<a id="1216-aritmetica-su-localdatetime"></a>
 ### 12.1.6 Aritmetica su `LocalDateTime`
 
 `LocalDateTime` combina data + ora, ma ancora senza fuso orario.
@@ -275,6 +283,7 @@ LocalDateTime l5 = ldt.plus(p);    // 2025-03-20T13:30
 LocalDateTime l6 = ldt.plus(d);    // 2025-03-10T18:30
 ```
 
+<a id="1217-aritmetica-su-zoneddatetime"></a>
 ### 12.1.7 Aritmetica su `ZonedDateTime`
 
 `ZonedDateTime` rappresenta data + ora + fuso orario + offset.
@@ -318,6 +327,7 @@ A seconda delle regole dell’ora legale per quella data:
 !!! important
     Per `ZonedDateTime`, l’aritmetica è definita in termini di timeline locale e regole del fuso orario, il che può causare spostamenti di ore durante le transizioni DST.
 
+<a id="1218-tabella-riassuntiva"></a>
 ### 12.1.8 Tabella riassuntiva
 
 | Classe | Metodi shortcut plus/minus | Metodi generici |
@@ -329,6 +339,7 @@ A seconda delle regole dell’ora legale per quella data:
 
 ---
 
+<a id="122-metodi-withxxx"></a>
 ## 12.2 Metodi `withXxx(...)`
 
 I metodi `with...` restituiscono una copia dell’oggetto con un campo modificato.
@@ -358,6 +369,7 @@ Non mutano mai l’istanza originale.
 
 ---
 
+<a id="123-conversione-e-metodi-at-collegare-data-ora-e-zona"></a>
 ## 12.3 Conversione e metodi `at...` (collegare data, ora e zona)
 
 Questi metodi sono usati per combinare o convertire tra `LocalDate`, `LocalTime`, `LocalDateTime` e `ZonedDateTime`.
@@ -380,6 +392,7 @@ Questi metodi sono usati per combinare o convertire tra `LocalDate`, `LocalTime`
 
 ---
 
+<a id="124-period-duration-e-instant"></a>
 ## 12.4 Period, Duration e Instant
 
 Il package `java.time` fornisce tre classi temporali essenziali che rappresentano quantità di tempo o punti sulla timeline:
@@ -390,6 +403,7 @@ Il package `java.time` fornisce tre classi temporali essenziali che rappresentan
 
 ---
 
+<a id="125-period-quantità-umane-di-data"></a>
 ## 12.5 `Period` — quantità “umane” di data
 
 `Period` rappresenta una quantità di tempo basata su data, come “3 anni, 2 mesi e 5 giorni”.
@@ -431,6 +445,7 @@ LocalDate result = base.plus(p2);          // 2026-03-13
 
 ---
 
+<a id="126-duration-quantità-macchina-di-tempo"></a>
 ## 12.6 `Duration` — quantità “macchina” di tempo
 
 `Duration` rappresenta una quantità di tempo basata su secondi e nanosecondi.
@@ -480,6 +495,7 @@ ZonedDateTime z3 = z1.plus(d2);              // Duration-based
 
 ---
 
+<a id="127-instant-punto-sulla-timeline-utc"></a>
 ## 12.7 `Instant` — punto sulla timeline UTC
 
 `Instant` rappresenta un singolo momento nel tempo relativo a UTC, con precisione al nanosecondo.
@@ -528,6 +544,7 @@ Duration between = Duration.between(start, end); // PT2H30M
 
 ---
 
+<a id="128-tabella-riassuntiva-period-vs-duration-vs-instant"></a>
 ## 12.8 Tabella riassuntiva (Period vs Duration vs Instant)
 
 | Concetto | Rappresenta | Utile per | Funziona con | Note |
@@ -545,6 +562,7 @@ Duration between = Duration.between(start, end); // PT2H30M
 
 ---
 
+<a id="129-temporalunit-e-temporalamount"></a>
 ## 12.9 TemporalUnit e TemporalAmount
 
 L’API `java.time` si basa su due interfacce chiave che definiscono come date, orari e durate vengono manipolati:
@@ -554,11 +572,13 @@ L’API `java.time` si basa su due interfacce chiave che definiscono come date, 
 
 Entrambe sono essenziali per capire come funzionano i metodi `plus`, `minus` e `with`.
 
+<a id="1291-temporalunit"></a>
 ### 12.9.1 `TemporalUnit`
 
 `TemporalUnit` rappresenta una singola unità di misura di data/ora.
 L’implementazione principale usata in Java è:
 
+<a id="1292-enum-chronounit"></a>
 ### 12.9.2 enum `ChronoUnit`
 
 Questo enum fornisce le unità standard usate nella cronologia ISO-8601:
@@ -596,6 +616,7 @@ LocalDate d = LocalDate.now().plus(5, ChronoUnit.HOURS);
 LocalTime t = LocalTime.now().plus(1, ChronoUnit.DAYS);
 ```
 
+<a id="1293-temporalamount"></a>
 ### 12.9.3 `TemporalAmount`
 
 `TemporalAmount` rappresenta una quantità di tempo multi-unità (per esempio, “2 anni, 3 mesi”, o “90 minuti”).
@@ -606,6 +627,7 @@ LocalTime t = LocalTime.now().plus(1, ChronoUnit.DAYS);
 
 Entrambi possono essere passati agli oggetti di data/ora per regolarli usando `plus()` e `minus()`.
 
+<a id="1294-period-come-temporalamount"></a>
 ### 12.9.4 `Period` come `TemporalAmount`
 
 `Period` rappresenta una quantità “umana”: anni, mesi, giorni.
@@ -624,6 +646,7 @@ Note
 - `Period` non può essere usato con `LocalTime` (nessun componente data).
 - `Period.ofWeeks(n)` viene convertito internamente in giorni (n × 7).
 
+<a id="1295-duration-come-temporalamount"></a>
 ### 12.9.5 `Duration` come `TemporalAmount`
 
 `Duration` rappresenta tempo “macchina”: secondi + nanosecondi.
@@ -643,6 +666,7 @@ Note
 - `Duration` non può essere applicata a `LocalDate` → lancerà `UnsupportedTemporalTypeException`.
 - `Duration` interagisce con zone e transizioni DST quando applicata a `ZonedDateTime`.
 
+<a id="1296-usare-temporalamount-vs-temporalunit"></a>
 ### 12.9.6 Usare `TemporalAmount` vs `TemporalUnit`
 
 Usare un `TemporalUnit`:
@@ -670,6 +694,7 @@ Entrambi producono lo stesso risultato quando supportati.
 | Utile per | Incrementi semplici | Incrementi complessi |
 | Comune con | Tutte le classi data/ora | Limitato dal tipo |
 
+<a id="1297-metodi-between"></a>
 ### 12.9.7 Metodi `between(...)`
 
 Molte classi forniscono un metodo `between` da `ChronoUnit`, `Duration` o `Period`.
@@ -709,6 +734,7 @@ long days = ChronoUnit.DAYS.between(
     while Period.between returns a Period,  
     and Duration.between returns a Duration.
 
+<a id="1298-problemi-comuni"></a>
 ### 12.9.8 Problemi comuni
 
 - Applicare il `TemporalAmount` sbagliato:
@@ -723,6 +749,7 @@ long days = ChronoUnit.DAYS.between(
 - `Instant.plus(Period)` → runtime `UnsupportedTemporalTypeException`; usa `Duration` se possibile.
 - `Instant` non puo esser creata direttamente da `LocalDateTime`; devi applicare prima una time zone: `ldt.atZone(zone).toInstant()`.
 
+<a id="1299-riepilogo"></a>
 ### 12.9.9 Riepilogo
 
 | Feature | TemporalUnit | TemporalAmount | ChronoUnit | Period | Duration |

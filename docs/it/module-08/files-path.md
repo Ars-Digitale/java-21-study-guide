@@ -1,5 +1,6 @@
 # 32. Fondamenti di File e Path
 
+<a id="indice"></a>
 ### Indice
 
 - [32. Fondamenti di File e Path](#32-fondamenti-di-file-e-path)
@@ -40,6 +41,7 @@
 
 Questa sezione si concentra su `Path`, `File`, `Files` e classi correlate, spiegando perché esistono, quali problemi risolvono e quali sono le differenze tra le API legacy `java.io` e `NIO v.2` (nuove API di I/O), con particolare attenzione alla semantica del filesystem, alla risoluzione dei path e ai falsi miti comuni.
 
+<a id="321-modello-concettuale-filesystem-file-directory-link-e-target-di-io"></a>
 ## 32.1 Modello Concettuale: Filesystem, File, Directory, Link e Target-di-I/O
 
 Prima di comprendere le API di Java I/O, è essenziale capire con cosa esse interagiscono.
@@ -50,6 +52,7 @@ Questa sezione definisce questi concetti indipendentemente da Java, poi spiega c
 
 ---
 
+<a id="322-filesystem-lastrazione-globale"></a>
 ## 32.2 Filesystem – L’Astrazione Globale
 
 Un `filesystem` è un meccanismo strutturato fornito da un sistema operativo per organizzare, memorizzare, recuperare e gestire dati su dispositivi di storage persistente.
@@ -76,6 +79,7 @@ In Java NIO, un filesystem è rappresentato dall’astrazione `FileSystem`, tipi
 
 ---
 
+<a id="323-path-localizzare-una-entry-in-un-filesystem"></a>
 ## 32.3 Path – Localizzare una Entry in un Filesystem
 
 Un `path` è un localizzatore logico, non una risorsa.
@@ -100,6 +104,7 @@ Un `path` risolve il problema dell’`addressing`:
 
 ---
 
+<a id="324-file-contenitori-persistenti-di-dati"></a>
 ## 32.4 File – Contenitori Persistenti di Dati
 
 Un `file` è una entry del filesystem il cui ruolo primario è memorizzare dati.
@@ -130,6 +135,7 @@ Dal punto di vista del filesystem, un file ha:
 
 ---
 
+<a id="325-directory-contenitori-strutturali"></a>
 ## 32.5 Directory – Contenitori Strutturali
 
 Una `directory (o folder)` è una entry del filesystem il cui scopo è organizzare altre entry.
@@ -152,12 +158,14 @@ Le `directory` risolvono il problema della scalabilità e dell’organizzazione:
 
 ---
 
+<a id="326-link-meccanismi-di-indirezione"></a>
 ## 32.6 Link – Meccanismi di Indirezione
 
 Un `link` è una entry del filesystem che riferisce un’altra entry.
 
 I link risolvono il problema dell’indirezione e del riuso.
 
+<a id="3261-hard-link"></a>
 ### 32.6.1 Hard Link
 
 Un `hard link` è un nome aggiuntivo per gli stessi dati sottostanti.
@@ -165,6 +173,7 @@ Un `hard link` è un nome aggiuntivo per gli stessi dati sottostanti.
 - Più path puntano agli stessi dati del file
 - La cancellazione avviene solo quando tutti i link vengono rimossi
 
+<a id="3262-link-simbolici-soft"></a>
 ### 32.6.2 Link Simbolici (Soft)
 
 Un `link simbolico` è un file speciale che contiene un path verso un’altra entry:
@@ -184,6 +193,7 @@ Un `link simbolico` è un file speciale che contiene un path verso un’altra en
 
 ---
 
+<a id="327-altri-tipi-di-entry-del-filesystem"></a>
 ## 32.7 Altri Tipi di Entry del Filesystem
 
 Alcune entry del filesystem non sono contenitori di dati ma endpoint di interazione.
@@ -199,6 +209,7 @@ Alcune entry del filesystem non sono contenitori di dati ma endpoint di interazi
 
 ---
 
+<a id="328-come-java-io-interagisce-con-questi-concetti"></a>
 ## 32.8 Come Java IO Interagisce con Questi Concetti
 
 Le API Java I/O operano a diversi livelli di astrazione:
@@ -221,6 +232,7 @@ Le API Java I/O operano a diversi livelli di astrazione:
 
 ---
 
+<a id="329-trappole-concettuali-fondamentali"></a>
 ## 32.9 Trappole Concettuali Fondamentali
 
 - Confondere i path con i file
@@ -233,6 +245,7 @@ Le API Java I/O operano a diversi livelli di astrazione:
 
 ---
 
+<a id="3210-perché-esistono-path-e-files-contesto-io"></a>
 ## 32.10 Perché Esistono Path e Files (Contesto-IO)
 
 Il classico `java.io` mescolava tre compiti diversi in un API poco specifica:
@@ -252,6 +265,7 @@ Il design di NIO.2 (Java 7+) separa deliberatamente queste responsabilità:
 
 ---
 
+<a id="3211-file-è-api-legacy-sia-un-path-sia-una-api-di-operazioni-su-file"></a>
 ## 32.11 File È (API legacy) sia un path sia una api-di-operazioni-su-file?
 
 Sì — nella vecchia API di I/O, `java.io.File` gioca in modo confuso due ruoli allo stesso tempo, e questo design è esattamente una delle ragioni per cui è stato introdotto `java.nio.file`.
@@ -265,6 +279,7 @@ Sì — nella vecchia API di I/O, `java.io.File` gioca in modo confuso due ruoli
 !!! note
     Questo mix di responsabilità è considerato un difetto di design.
 
+<a id="32111-cosa-è-davvero-file"></a>
 ### 32.11.1 Cosa È Davvero File
 
 Concettualmente, `File` è più vicino a ciò che oggi chiamiamo `Path`, ma con metodi operativi aggiunti.
@@ -281,6 +296,7 @@ Concettualmente, `File` è più vicino a ciò che oggi chiamiamo `Path`, ma con 
 !!! note
     Un oggetto `File` può esistere anche se il file non esiste.
 
+<a id="32112-responsabilità-tipo-path"></a>
 ### 32.11.2 Responsabilità tipo-Path
 
 `File` si comporta come un’astrazione di path perché:
@@ -297,6 +313,7 @@ File abs = f.getAbsoluteFile(); // path assoluto
 File canon = f.getCanonicalFile(); // normalizzato + risolto
 ```
 
+<a id="32113-responsabilità-di-operazioni-sul-filesystem"></a>
 ### 32.11.3 Responsabilità di Operazioni sul Filesystem
 
 Allo stesso tempo, `File` espone metodi che toccano il filesystem:
@@ -311,6 +328,7 @@ Allo stesso tempo, `File` espone metodi che toccano il filesystem:
 !!! note
     La maggior parte di questi metodi restituisce `boolean` invece di lanciare `IOException`, il che nasconde le cause degli eventuali problemi.
 
+<a id="32114-cosa-non-è-file"></a>
 ### 32.11.4 Cosa NON È File
 
 - Non è un file descriptor aperto
@@ -320,6 +338,7 @@ Allo stesso tempo, `File` espone metodi che toccano il filesystem:
 
 Si devono comunque usare stream o reader/writer per accedere ai contenuti.
 
+<a id="32115-il-vecchio-doppio-ruolo"></a>
 ### 32.11.5 Il vecchio doppio ruolo
 
 Il doppio ruolo di `File` ha causato diversi problemi:
@@ -329,6 +348,7 @@ Il doppio ruolo di `File` ha causato diversi problemi:
 - Supporto debole per link e filesystem multipli
 - Comportamento dipendente dalla piattaforma
 
+<a id="32116-come-nio-ha-risolto-questo"></a>
 ### 32.11.6 Come NIO ha Risolto Questo
 
 NIO.2 separa esplicitamente le responsabilità:
@@ -342,6 +362,7 @@ NIO.2 separa esplicitamente le responsabilità:
 !!! note
     Questa separazione è uno dei miglioramenti concettuali più importanti in Java I/O.
 
+<a id="32117-riepilogo"></a>
 ### 32.11.7 Riepilogo
 
 - `File` rappresenta un path E svolge operazioni sul filesystem
@@ -351,6 +372,7 @@ NIO.2 separa esplicitamente le responsabilità:
 
 ---
 
+<a id="3212-path-è-una-descrizione-non-una-risorsa"></a>
 ## 32.12 Path È una Descrizione, Non una Risorsa
 
 Un `Path` è un’astrazione pura che rappresenta una sequenza di elementi nominati in un filesystem.
@@ -373,10 +395,12 @@ Questo è fondamentalmente diverso da stream o channel.
 
 ---
 
+<a id="3213-path-assoluti-vs-relativi"></a>
 ## 32.13 Path Assoluti vs Relativi
 
 Comprendere la risoluzione dei path è essenziale.
 
+<a id="32131-path-assoluti"></a>
 ### 32.13.1 Path Assoluti
 
 Un path assoluto identifica interamente una posizione dalla root del filesystem.
@@ -406,6 +430,7 @@ is equivalent to:
 // in this example the symbols were redundant and unnecessary
 ```
 
+<a id="32132-path-relativi"></a>
 ### 32.13.2 Path Relativi
 
 Un path relativo viene risolto rispetto alla directory di lavoro corrente della JVM.
@@ -424,10 +449,12 @@ dirB/dirC/content.txt
 
 ---
 
+<a id="3214-consapevolezza-del-filesystem-e-separatori"></a>
 ## 32.14 Consapevolezza del Filesystem e Separatori
 
 NIO introduce l’astrazione del filesystem, che era in gran parte assente in java.io.
 
+<a id="32141-filesystem"></a>
 ### 32.14.1 FileSystem
 
 Un `FileSystem` rappresenta una specifica implementazione concreta di filesystem.
@@ -438,6 +465,7 @@ Un `FileSystem` rappresenta una specifica implementazione concreta di filesystem
 !!! note
     I path sono sempre associati a esattamente UN FileSystem.
 
+<a id="32142-separatori-di-path"></a>
 ### 32.14.2 Separatori di Path
 
 I separatori differiscono tra piattaforme, ma `Path` li astrae.
@@ -453,10 +481,12 @@ I separatori differiscono tra piattaforme, ma `Path` li astrae.
 
 ---
 
+<a id="3215-cosa-fa-davvero-files-e-cosa-non-fa"></a>
 ## 32.15 Cosa Fa Davvero Files e Cosa Non Fa
 
 La classe `Files` esegue vere operazioni di I/O.
 
+<a id="32151-files-fa"></a>
 ### 32.15.1 Files FA
 
 - Apre file indirettamente (tramite stream / channel restituiti dai suoi metodi)
@@ -464,6 +494,7 @@ La classe `Files` esegue vere operazioni di I/O.
 - Lancia eccezioni checked in caso di fallimento
 - Rispetta i permessi del filesystem
 
+<a id="32152-files-non-fa"></a>
 ### 32.15.2 Files NON FA
 
 - Mantenere risorse aperte dopo il ritorno del metodo (eccetto gli stream)
@@ -476,6 +507,7 @@ La classe `Files` esegue vere operazioni di I/O.
 
 ---
 
+<a id="3216-filosofia-di-gestione-degli-errori-old-vs-nio"></a>
 ## 32.16 Filosofia di Gestione degli Errori: Old vs NIO
 
 Una grande differenza concettuale risiede nel reporting degli errori.
@@ -489,6 +521,7 @@ Una grande differenza concettuale risiede nel reporting degli errori.
 
 ---
 
+<a id="3217-falsi-miti-comuni"></a>
 ## 32.17 Falsi Miti Comuni
 
 - “Path rappresenta un file” → falso

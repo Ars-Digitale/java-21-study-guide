@@ -1,5 +1,6 @@
 # 20. Functional Programming in Java
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [20. Functional Programming in Java](#20-functional-programming-in-java)
@@ -34,6 +35,7 @@ Starting from Java 8, the language added several features that enable functional
 
 These features allow developers to write more expressive, concise, and reusable code, especially when working with collections, concurrency APIs, and event-driven systems.
 
+<a id="201-functional-interfaces"></a>
 ## 20.1 Functional Interfaces
 
 In Java, a **functional interface** is an interface that contains **exactly one** abstract method.
@@ -44,6 +46,7 @@ Functional interfaces enable **Lambda Expressions** and **Method References**, f
     Java automatically treats any interface with a single abstract method as a functional interface. The `@FunctionalInterface` annotation is optional but recommended.
 
 
+<a id="2011-rules-for-functional-interfaces"></a>
 ### 20.1.1 Rules for Functional Interfaces
 
 - **Exactly one abstract method** (SAM = Single Abstract Method).
@@ -62,6 +65,7 @@ interface Adder {
 }
 ```
 
+<a id="2012-common-functional-interfaces-javautilfunction"></a>
 ### 20.1.2 Common Functional Interfaces (java.util.function)
 
 Below is a summary of the most important functional interfaces.
@@ -94,6 +98,7 @@ UnaryOperator<Integer> square = x -> x * x;
 Predicate<Integer> positive = x -> x > 0;
 ```
 
+<a id="2013-convenience-methods-on-functional-interfaces"></a>
 ### 20.1.3 Convenience Methods on Functional Interfaces
 
 Many functional interfaces come with helper methods that allow chaining and composition.
@@ -127,6 +132,7 @@ Predicate<String> startsWithA = s -> s.startsWith("A");
 boolean ok = longString.and(startsWithA).test("Amazing");  // true
 ```
 
+<a id="2014-primitive-functional-interfaces"></a>
 ### 20.1.4 Primitive Functional Interfaces
 
 Java provides specialized versions of functional interfaces for primitives to avoid boxing/unboxing overhead.
@@ -190,6 +196,7 @@ IntUnaryOperator doubleIt = x -> x * 2;
 ```
 
 
+<a id="2015-summary"></a>
 ### 20.1.5 Summary
 
 - Functional interfaces contain exactly one abstract method (SAM).
@@ -199,6 +206,7 @@ IntUnaryOperator doubleIt = x -> x * 2;
 
 ---
 
+<a id="202-lambda-expressions"></a>
 ## 20.2 Lambda Expressions
 
 A lambda expression is a compact way of writing a function.
@@ -209,6 +217,7 @@ A lambda is essentially a short block of code that takes parameters and returns 
 
 They represent behavior as data and are a key element of Java’s functional programming model.
 
+<a id="2021-syntax-of-lambda-expressions"></a>
 ### 20.2.1 Syntax of Lambda Expressions
 
 The general syntax is:
@@ -217,6 +226,7 @@ The general syntax is:
 or
 `(parameters) -> { statements }`
 
+<a id="2022-examples-of-lambda-syntax"></a>
 ### 20.2.2 Examples of Lambda Syntax
 
 **Zero parameters**
@@ -242,6 +252,7 @@ Function<Integer, String> f = (x) -> {
 };
 ```
 
+<a id="2023-rules-for-lambda-expressions"></a>
 ### 20.2.3 Rules for Lambda Expressions
 
 - Parameter types may be omitted (type inference).
@@ -252,6 +263,7 @@ Function<Integer, String> f = (x) -> {
 - If the body uses `{ }` (a block), `return` must appear if a value is returned.
 - Lambda expressions can only be assigned to functional interfaces (SAM types).
 
+<a id="2024-type-inference"></a>
 ### 20.2.4 Type Inference
 
 The compiler infers the lambda's type from the target functional interface context.
@@ -266,6 +278,7 @@ If the compiler cannot infer the type, you must specify it explicitly.
 BiFunction<Integer, Integer, Integer> f = (Integer a, Integer b) -> a * b;
 ```
 
+<a id="2025-restrictions-in-lambda-bodies"></a>
 ### 20.2.5 Restrictions in Lambda Bodies
 
 **Lambdas can only capture local variables that are final or effectively final (not reassigned).**
@@ -286,6 +299,7 @@ var list = new ArrayList<>();
 Runnable r2 = () -> list.add("OK");  // allowed
 ```
 
+<a id="2026-return-type-rules"></a>
 ### 20.2.6 Return Type Rules
 
 If the body is an expression: the expression is the return value.
@@ -302,6 +316,7 @@ Function<Integer, Integer> g = x -> {
 };
 ```
 
+<a id="2027-lambdas-vs-anonymous-classes"></a>
 ### 20.2.7 Lambdas vs Anonymous Classes
 
 - Lambdas do NOT create a new scope — they share the enclosing scope.
@@ -317,6 +332,7 @@ class Test {
 
 In anonymous classes, `this` refers to the anonymous class instance.
 
+<a id="2028-common-lambda-errors-certification-traps"></a>
 ### 20.2.8 Common Lambda Errors (Certification Traps)
 
 **Inconsistent return types**
@@ -345,6 +361,7 @@ m(x -> x + 1);  // ❌ ambiguous
 
 ---
 
+<a id="203-method-references"></a>
 ## 20.3 Method References
 
 Method references provide a shorthand syntax for using an existing method as a functional interface implementation. 
@@ -359,6 +376,7 @@ There are four categories of method references in Java:
 - 4. Reference to a constructor (`ClassName::new`)
 
 
+<a id="2031-reference-to-a-static-method"></a>
 ### 20.3.1 Reference to a Static Method
 
 A static method reference replaces a lambda that calls a static method.
@@ -375,6 +393,7 @@ Function<Integer, Integer> f2 = Utils::square;  // method reference
 Both `f1` and `f2` behave identically.
 
 
+<a id="2032-reference-to-an-instance-method-of-a-particular-object"></a>
 ### 20.3.2 Reference to an Instance Method of a Particular Object
 
 Used when you already have an object instance, and want to refer to one of its methods.
@@ -391,6 +410,7 @@ System.out.println(op2.apply("World"));
 The reference `prefix::concat` binds `concat` to **that specific object**.
 
 
+<a id="2033-reference-to-an-instance-method-of-an-arbitrary-object-of-a-given-type"></a>
 ### 20.3.3 Reference to an Instance Method of an Arbitrary Object of a Given Type
 
 This is the trickiest form.
@@ -408,6 +428,7 @@ System.out.println(p2.test("abc", "abc"));  // true
     This form applies the method to the *first argument* of the lambda.
 
 
+<a id="2034-reference-to-a-constructor"></a>
 ### 20.3.4 Reference to a Constructor
 
 Constructor references replace lambdas that call `new`.
@@ -420,6 +441,7 @@ Function<Integer, ArrayList<String>> sup3 = ArrayList::new;
 // calls the constructor ArrayList(int capacity)
 ```
 
+<a id="2035-summary-table-of-method-reference-types"></a>
 ### 20.3.5 Summary Table of Method Reference Types
 
 The table below summarizes all method reference categories.
@@ -433,6 +455,7 @@ The table below summarizes all method reference categories.
 |Constructor                         | Class::new              | () -> new Class() |
 
 
+<a id="2036-common-pitfalls"></a>
 ### 20.3.6 Common Pitfalls
 
 - A method reference must match *exactly* the functional interface signature.

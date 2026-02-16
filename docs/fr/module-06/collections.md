@@ -1,5 +1,6 @@
 # 22. Introduction au Framework des Collections
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [22. Introduction au Framework des Collections](#22-introduction-au-framework-des-collections)
@@ -23,6 +24,7 @@ Il fournit une architecture unifiée pour gérer les collections, permettant aux
 
 Ce chapitre introduit les concepts fondamentaux nécessaires avant d’étudier List, Set, Queue, Map et les Sequenced Collections, explorés en détail dans les chapitres suivants.
 
+<a id="221-quest-ce-que-le-framework-des-collections"></a>
 ## 22.1 Qu’est-ce que le Framework des Collections ?
 
 Le Framework des Collections fournit :
@@ -36,6 +38,7 @@ Toutes les principales structures de collection partagent une conception cohére
 
 ---
 
+<a id="222-les-interfaces-principales"></a>
 ## 22.2 Les Interfaces Principales
 
 Au cœur du Java Collections Framework se trouve un petit ensemble **d’interfaces racines** qui définissent des comportements génériques de gestion des données.
@@ -46,6 +49,7 @@ Au cœur du Java Collections Framework se trouve un petit ensemble **d’interfa
 - **Map** : une structure qui associe des clés à des valeurs, où les clés dupliquées ne sont pas autorisées ; chaque clé peut être associée à au plus une valeur.
 
 
+<a id="2221-principales-interfaces-de-collection"></a>
 ### 22.2.1 Principales interfaces de Collection
 
 Ci-dessous se trouve la hiérarchie conceptuelle.
@@ -87,6 +91,7 @@ java.util
 
 L’interface **Map** n’étend pas Collection, car une map stocke des paires clé/valeur plutôt que des valeurs uniques.
 
+<a id="2222-hiérarchie-de-map"></a>
 ### 22.2.2 Hiérarchie de Map
 
 ```text
@@ -105,6 +110,7 @@ java.util
 
 ---
 
+<a id="223-collections-sequenced-java-21"></a>
 ## 22.3 Collections Sequenced (Java 21+)
 
 Java 21 introduit la nouvelle interface `SequencedCollection`, qui formalise l’idée qu’une collection maintient un **ordre de parcours défini**.
@@ -117,6 +123,7 @@ Cela simplifie considérablement la spécification des comportements d’ordonna
 
 ---
 
+<a id="224-pourquoi-le-framework-des-collections-existe"></a>
 ## 22.4 Pourquoi le Framework des Collections existe
 
 - Éviter de réinventer les structures de données
@@ -130,6 +137,7 @@ Le Collections Framework a unifié tout cela dans une API cohérente.
 
 ---
 
+<a id="225-les-deux-côtés-du-framework-collections-vs-maps"></a>
 ## 22.5 Les deux côtés du Framework : Collections vs Maps
 
 « Map étend-elle Collection ? »
@@ -141,6 +149,7 @@ Une Map stocke des **paires**, tandis qu’une Collection stocke des **élément
 
 ---
 
+<a id="226-types-génériques-dans-le-framework-des-collections"></a>
 ## 22.6 Types génériques dans le Framework des Collections
 
 Les collections sont presque toujours utilisées avec des generics. L’utilisation de raw types est déconseillée.
@@ -153,6 +162,7 @@ Map<Integer, String> map = new HashMap<>();
 !!! note
     Les generics dans les collections fonctionnent via le `type erasure` : se référer au paragraphe "**18.4 Type Erasure**" dans le chapitre : [Generics in Java](../module-04/generics.md).
 
+<a id="227-mutabilité-vs-immutabilité"></a>
 ## 22.7 Mutabilité vs Immutabilité
 
 De nombreuses méthodes de la Collections API renvoient des collections **unmodifiable** :
@@ -196,6 +206,7 @@ fromAsList.set(0, "k");  // la mise à jour sera également reflétée dans le t
     Vous ne pouvez pas ajouter/supprimer des éléments, mais vous pouvez remplacer ceux existants.
 
 
+<a id="228-attentes-de-performance-big-o"></a>
 ## 22.8 Attentes de Performance Big-O
 
 Comprendre la complexité des types de collection est essentiel. Voici quelques exemples courants :
@@ -215,6 +226,7 @@ Comprendre la complexité des types de collection est essentiel. Voici quelques 
     Ces valeurs sont des moyennes ; le pire cas peut être différent (en particulier pour les structures basées sur le hachage).
 
 
+<a id="229-résumé"></a>
 ## 22.9 Résumé
 
 - Le Collection Framework est construit sur un petit ensemble d’interfaces principales.

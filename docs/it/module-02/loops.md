@@ -1,5 +1,6 @@
 # 8. Costrutti di iterazione in Java
 
+<a id="indice"></a>
 ### Indice
 
 - [8. Costrutti di iterazione in Java](#8-looping-constructs-in-java)
@@ -23,6 +24,7 @@ Java fornisce diversi **costrutti di iterazione** che consentono l’esecuzione 
 
 I cicli sono essenziali per l’iterazione, l’attraversamento di strutture dati, calcoli ripetuti e l’implementazione di algoritmi.
 
+<a id="81-il-ciclo-while"></a>
 ## 8.1 Il ciclo `while`
 
 Il ciclo `while` valuta la propria **condizione booleana prima di ogni iterazione**.
@@ -58,6 +60,7 @@ Output:
 
 ---
 
+<a id="82-il-ciclo-do-while"></a>
 ## 8.2 Il ciclo `do-while`
 
 Il ciclo `do-while` valuta la propria condizione **dopo** aver eseguito il corpo, assicurando che **il corpo venga eseguito almeno una volta**.
@@ -88,6 +91,7 @@ Output:
 
 ---
 
+<a id="83-il-ciclo-for"></a>
 ## 8.3 Il ciclo `for`
 
 Il ciclo `for` tradizionale è più adatto per cicli con una variabile contatore.
@@ -133,6 +137,7 @@ for (long i = 0, c = 3; x < 3 && i < 12; x++, i++) {
 
 ---
 
+<a id="84-il-ciclo-for-each-avanzato"></a>
 ## 8.4 Il ciclo `for-each` avanzato
 
 Il `for` avanzato semplifica l’iterazione su `array` e `collezioni`.
@@ -165,6 +170,7 @@ C
 
 ---
 
+<a id="85-cicli-annidati"></a>
 ## 8.5 Cicli annidati
 
 I cicli possono essere annidati; ciascuno mantiene le proprie variabili e condizioni.
@@ -189,6 +195,7 @@ Output:
 
 ---
 
+<a id="86-cicli-infiniti"></a>
 ## 8.6 Cicli infiniti
 
 Un ciclo è infinito quando la sua condizione viene sempre valutata come `true` o è omessa.
@@ -206,6 +213,7 @@ for (;;) { ... }
 
 ---
 
+<a id="87-break-e-continue"></a>
 ## 8.7 `break` e `continue`
 
 <ins>**break**</ins>
@@ -231,6 +239,7 @@ for (int i = 0; i < 5; i++) {
 
 ---
 
+<a id="88-cicli-etichettati"></a>
 ## 8.8 Cicli etichettati
 
 Un’`etichetta` (identificatore + due punti) può essere applicata a un ciclo per consentire a break/continue di influire sui cicli esterni.
@@ -257,6 +266,7 @@ for (int i = 1; i <= 3; i++) {
 
 ---
 
+<a id="89-ambito-delle-variabili-di-ciclo"></a>
 ## 8.9 Ambito delle variabili di ciclo
 
 - Le variabili dichiarate nell’intestazione del ciclo hanno ambito limitato a quel ciclo.
@@ -271,10 +281,12 @@ for (int i = 0; i < 3; i++) {
 
 ---
 
+<a id="810-codice-irraggiungibile-dopo-break-continue-e-return"></a>
 ## 8.10 Codice irraggiungibile dopo `break`, `continue` e `return`
 
 Qualsiasi istruzione posizionata **dopo** `break`, `continue` o `return` nello stesso blocco è considerata irraggiungibile e non compila.
 
+<a id="8101-codice-irraggiungibile-dopo-break"></a>
 ### 8.10.1 Codice irraggiungibile dopo `break`
 
 ```java
@@ -284,6 +296,7 @@ for (int i = 0; i < 3; i++) {
 }
 ```
 
+<a id="8102-codice-irraggiungibile-dopo-continue"></a>
 ### 8.10.2 Codice irraggiungibile dopo `continue`
 
 ```java
@@ -296,6 +309,7 @@ for (int i = 0; i < 3; i++) {
 !!! note
     `continue` salta alla successiva iterazione, quindi il codice successivo non viene mai eseguito.
 
+<a id="8103-codice-irraggiungibile-dopo-return"></a>
 ### 8.10.3 Codice irraggiungibile dopo `return`
 
 ```java

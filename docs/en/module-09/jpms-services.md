@@ -1,5 +1,6 @@
 # 39. Services in JPMS (The ServiceLoader Model)
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [39 Services in JPMS The ServiceLoader Model](#39-services-in-jpms-the-serviceloader-model)
@@ -22,6 +23,7 @@ without hardcoding dependencies between `providers` and `consumers`.
 
 This mechanism is based on the existing `ServiceLoader API`, but modules make it reliable, explicit, and safe.
 
+<a id="391-the-problem-services-solve"></a>
 ## 39.1 The Problem Services Solve
 
 Sometimes a module needs to use a capability, but should not depend on a specific implementation.
@@ -36,6 +38,7 @@ Without services, the consumer would need to depend directly on a concrete imple
 
 This creates tight coupling and reduces flexibility.
 
+<a id="3911-roles-in-the-service-model"></a>
 ### 39.1.1 Roles in the Service Model
 
 The `JPMS service model` involves four distinct roles.
@@ -47,6 +50,7 @@ The `JPMS service model` involves four distinct roles.
 | `Service consumer` | Uses the service |
 | `Service loader` | Discovers implementations at runtime |
 
+<a id="3912-service-interface-module"></a>
 ### 39.1.2 Service Interface Module
 
 The `service interface` defines the API that `consumers` depend on.
@@ -70,6 +74,7 @@ module com.example.service {
 !!! note
     The service interface module should contain no implementations.
 
+<a id="3913-service-provider-module"></a>
 ### 39.1.3 Service Provider Module
 
 A `provider module` implements the service interface and declares that it provides the service.
@@ -98,6 +103,7 @@ Key points:
 - The implementation class does not need to be exported
 - The `provides` directive registers the implementation
 
+<a id="3914-service-consumer-module"></a>
 ### 39.1.4 Service Consumer Module
 
 The `consumer module` declares that it uses a service, but does not name any implementation.
@@ -115,6 +121,7 @@ module com.example.consumer {
     A module that declares `uses` but has no matching provider on the module path compiles normally,
     but `ServiceLoader` returns an empty result at runtime.
 
+<a id="3915-loading-services-at-runtime"></a>
 ### 39.1.5 Loading Services at Runtime
 
 The `ServiceLoader API` performs service discovery.
@@ -134,6 +141,7 @@ for (GreetingService service : loader) {
 
 Classpath-based “accidental” discovery is prevented.
 
+<a id="3916-service-resolution-rules"></a>
 ### 39.1.6 Service Resolution Rules
 
 For a service to be discoverable by `ServiceLoader`, several conditions must be satisfied:
@@ -145,6 +153,7 @@ For a service to be discoverable by `ServiceLoader`, several conditions must be 
 | Consumer must declare `uses` | Otherwise ServiceLoader fails |
 | Provider must declare `provides` | Implicit discovery is forbidden |
 
+<a id="3917-service-locator-layer"></a>
 ### 39.1.7 Service Locator Layer
 
 It is possible to introduce an additional layer called `Service Locator`.
@@ -199,6 +208,7 @@ module com.example.consumer {
 
 The consumer does not declare `uses` because it does not directly invoke `ServiceLoader`.
 
+<a id="3918-sequential-invocation-diagram"></a>
 ### 39.1.8 Sequential Invocation Diagram
 
 Execution sequence:
@@ -232,6 +242,7 @@ Provider Implementation
 Consumer
 ```
 
+<a id="3919-component-summary-table"></a>
 ### 39.1.9 Component Summary Table
 
 | Component | Role | exports | requires | uses | provides |

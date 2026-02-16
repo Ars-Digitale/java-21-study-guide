@@ -1,5 +1,6 @@
 # 38. Compiler, Empaqueter et Exécuter des Modules
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [38. Compiler, Empaqueter et Exécuter des Modules](#38-compiler-empaqueter-et-exécuter-des-modules)
@@ -41,6 +42,7 @@ Une fois qu’un `module` est défini avec un fichier `module-info.java`, il doi
 
 Cette section explique comment la `toolchain Java` change lorsque des modules sont impliqués.
 
+<a id="381-le-module-path-vs-le-classpath"></a>
 ## 38.1 Le Module Path vs le Classpath
 
 `JPMS` introduit un nouveau concept : le **module path**.
@@ -62,6 +64,7 @@ Il existe aux côtés du **classpath** traditionnel, mais les deux se comportent
 
 ---
 
+<a id="382-options-de-ligne-de-commande-relatives-aux-modules"></a>
 ## 38.2 Options de Ligne de Commande Relatives aux Modules
 
 Lorsqu’on travaille avec le Java Module System, `java` et `javac` fournissent des options spécifiques pour compiler et exécuter des applications modulaires. 
@@ -69,6 +72,7 @@ Lorsqu’on travaille avec le Java Module System, `java` et `javac` fournissent 
 Certaines options sont communes, tandis que d’autres sont spécifiques à un outil.
 
 
+<a id="3821-options-disponibles-dans-java-et-javac"></a>
 ### 38.2.1 Options Disponibles dans `java` et `javac`
 
 Ces options peuvent être utilisées aussi bien lors de la compilation que lors de l’exécution :
@@ -80,6 +84,7 @@ Ces options peuvent être utilisées aussi bien lors de la compilation que lors 
   Spécifie les chemins dans lesquels `java` ou `javac` rechercheront les définitions de modules.
 
 
+<a id="3822-options-applicables-uniquement-à-javac"></a>
 ### 38.2.2 Options Applicables Uniquement à `javac`
 
 Ces options s’appliquent uniquement à la phase de compilation :
@@ -93,6 +98,7 @@ Ces options s’appliquent uniquement à la phase de compilation :
 
 
 
+<a id="3823-options-applicables-uniquement-à-java"></a>
 ### 38.2.3 Options Applicables Uniquement à `java`
 
 Ces options s’appliquent uniquement à la phase d’exécution :
@@ -110,6 +116,7 @@ Ces options s’appliquent uniquement à la phase d’exécution :
 
 
 
+<a id="3824-distinctions-importantes"></a>
 ### 38.2.4 Distinctions Importantes
 
 L’option `-d` a des significations différentes selon l’outil :
@@ -129,6 +136,7 @@ Dans cet exemple, `-Dconfig.file=app.properties` définit une propriété systè
 
 ---
 
+<a id="383-compiler-un-module-unique"></a>
 ## 38.3 Compiler un Module Unique
 
 Pour compiler un module, vous devez spécifier le chemin des sources du module et le répertoire de destination.
@@ -152,6 +160,7 @@ javac --module-source-path src \
 
 ---
 
+<a id="384-compiler-des-modules-multiples-interdépendants"></a>
 ## 38.4 Compiler des Modules Multiples Interdépendants
 
 Lorsque des modules dépendent les uns des autres, leurs dépendances doivent être résolubles à la compilation.
@@ -171,6 +180,7 @@ Ici :
 
 ---
 
+<a id="385-empaqueter-un-module-dans-un-jar-modulaire"></a>
 ## 38.5 Empaqueter un Module dans un JAR Modulaire
 
 Après la compilation, les modules sont généralement empaquetés sous forme de fichiers JAR.
@@ -192,6 +202,7 @@ jar --create \
 
 ---
 
+<a id="386-exécuter-une-application-modulaire"></a>
 ## 38.6 Exécuter une Application Modulaire
 
 Pour exécuter une application modulaire, vous utilisez le `module path` et spécifiez le `nom du module`.
@@ -212,12 +223,14 @@ java -p mods -m com.example.hello/com.example.hello.Main
 
 ---
 
+<a id="387-explication-des-directives-de-module"></a>
 ## 38.7 Explication des Directives de Module
 
 Le fichier `module-info.java` contient des directives qui décrivent les dépendances, la visibilité et les services.
 
 Chaque directive a une signification précise.
 
+<a id="3871-requires"></a>
 ### 38.7.1 `requires`
 
 La directive `requires` déclare une dépendance vers un autre module.
@@ -234,6 +247,7 @@ Effets de requires :
 - La dépendance doit être présente à la compilation et à l’exécution
 - Les packages exportés du module requis deviennent accessibles
 
+<a id="3872-requires-transitive"></a>
 ### 38.7.2 `requires transitive`
 
 `requires transitive` expose une dépendance aux modules en aval.
@@ -256,6 +270,7 @@ Signification :
     
     Lisible ≠ exporté : une dépendance transitive n’exporte pas automatiquement vos packages.
 
+<a id="3873-exports"></a>
 ### 38.7.3 `exports`
 
 `exports` rend un package accessible aux autres modules.
@@ -270,6 +285,7 @@ module com.example.lib {
 
 Les packages non exportés restent fortement encapsulés.
 
+<a id="3874-exports-to-exports-qualifiés"></a>
 ### 38.7.4 `exports ... to` (Exports Qualifiés)
 
 Un export qualifié restreint l’accès à des modules spécifiques.
@@ -282,6 +298,7 @@ module com.example.lib {
 
 Seuls les modules listés peuvent accéder au package exporté.
 
+<a id="3875-opens"></a>
 ### 38.7.5 `opens`
 
 `opens` permet un accès réflexif profond à un package.
@@ -298,6 +315,7 @@ module com.example.app {
     opens NE rend PAS un package accessible à la compilation.
     Il affecte uniquement la réflexion à l’exécution.
 
+<a id="3876-opens-to-opens-qualifiés"></a>
 ### 38.7.6 `opens ... to` (Opens Qualifiés)
 
 Vous pouvez restreindre l’accès réflexif à des modules spécifiques.
@@ -311,6 +329,7 @@ module com.example.app {
 !!! note
     `opens` affecte la réflexion ; `exports` affecte la compilation et la visibilité des types.
 
+<a id="3877-table-des-directives-principales"></a>
 ### 38.7.7 Table des Directives Principales
 
 | Directive | But |
@@ -322,6 +341,7 @@ module com.example.app {
 | `opens` | Autoriser la réflexion à l’exécution |
 | `opens ... to` | Restreindre l’accès réflexif |
 
+<a id="3878-exports-vs-opens-accès-à-la-compilation-vs-à-lexécution"></a>
 ### 38.7.8 Exports vs Opens — Accès à la Compilation vs à lExécution
 
 | Visibilité | Compilation ? | Réflexion à l’exécution ? |
@@ -336,6 +356,7 @@ module com.example.app {
 	
 ---
 
+<a id="388-modules-nommés-automatiques-et-unnamed"></a>
 ## 38.8 Modules Nommés, Automatiques et Unnamed
 
 `JPMS` supporte différents types de modules afin de permettre une migration progressive depuis le classpath.
@@ -344,6 +365,7 @@ JPMS doit interopérer avec du code legacy.
 
 Pour supporter l’adoption progressive, la JVM reconnaît trois catégories différentes de modules.
 
+<a id="3881-modules-nommés"></a>
 ### 38.8.1 Modules Nommés
 
 Un `module nommé` possède un `module-info.class` et une identité stable.
@@ -352,6 +374,7 @@ Un `module nommé` possède un `module-info.class` et une identité stable.
 - Dépendances explicites
 - Support complet JPMS
 
+<a id="3882-modules-automatiques"></a>
 ### 38.8.2 Modules Automatiques
 
 Un JAR sans `module-info` placé sur le `module path` devient un `module automatique`.
@@ -366,6 +389,7 @@ Son nom est dérivé du nom du fichier JAR.
     Les modules automatiques existent pour faciliter la migration.
     Ils ne conviennent pas comme conception à long terme.
 
+<a id="3883-module-unnamed"></a>
 ### 38.8.3 Module Unnamed
 
 Le code sur le classpath appartient au `module unnamed`.
@@ -377,6 +401,7 @@ Le code sur le classpath appartient au `module unnamed`.
 !!! note
     Le `module unnamed` préserve le comportement legacy du classpath.
 
+<a id="3884-résumé-comparatif"></a>
 ### 38.8.4 Résumé Comparatif
 
 | Type de module | module-info présent ? | Encapsulation | Lit |
@@ -387,8 +412,10 @@ Le code sur le classpath appartient au `module unnamed`.
 
 ---
 
+<a id="389-inspection-des-modules-et-des-dépendances"></a>
 ## 38.9 Inspection des Modules et des Dépendances
 
+<a id="3891-décrire-les-modules-avec-java"></a>
 ### 38.9.1 Décrire les Modules avec java
 
 ```bash
@@ -397,12 +424,14 @@ java --describe-module java.sql
 
 Cela affiche `exports`, `requires` et `services` d’un module.
 
+<a id="3892-décrire-les-jar-modulaires"></a>
 ### 38.9.2 Décrire les JAR Modulaires
 
 ```bash
 jar --describe-module --file mylib.jar
 ```
 
+<a id="3893-analyser-les-dépendances-avec-jdeps"></a>
 ### 38.9.3 Analyser les Dépendances avec `jdeps`
 
 `jdeps` analyse statiquement les dépendances de classes et de modules.
@@ -423,6 +452,7 @@ jdeps --jdk-internals myapp.jar
 
 ---
 
+<a id="3810-créer-des-images-runtime-personnalisées-avec-jlink"></a>
 ## 38.10 Créer des Images Runtime Personnalisées avec `jlink`
 
 `jlink` construit un runtime Java minimal contenant uniquement les modules requis par une application.
@@ -441,6 +471,7 @@ Avantages :
 
 ---
 
+<a id="3811-créer-des-applications-autonomes-avec-jpackage"></a>
 ## 38.11 Créer des Applications Autonomes avec `jpackage`
 
 `jpackage` construit des installateurs spécifiques à la plateforme ou des images applicatives.
@@ -459,6 +490,7 @@ jpackage
 
 ---
 
+<a id="3812-résumé-final-jpms-en-pratique"></a>
 ## 38.12 Résumé Final JPMS en Pratique
 
 - `JPMS` introduit une `encapsulation forte` et des dépendances fiables

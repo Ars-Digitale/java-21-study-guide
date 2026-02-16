@@ -1,5 +1,6 @@
 # 17. Au-delà des Classes
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [17. Au-delà des Classes](#17-au-delà-des-classes)
@@ -56,6 +57,7 @@
 
 Ce chapitre présente plusieurs mécanismes avancés de type (*type*) au-delà du design de la Classe en Java : **interfaces**, **enum**, **classes sealed / non-sealed**, **records** et **classes imbriquées**.
 
+<a id="171-interfaces"></a>
 ## 17.1 Interfaces
 
 Une **interface** en Java est un type de référence qui définit un contrat de méthodes qu’une classe accepte d’implémenter.
@@ -68,6 +70,7 @@ Une `interface` peut à son tour étendre plusieurs interfaces en utilisant le m
 
 Les interfaces permettent l’abstraction, un couplage faible et l’héritage multiple de type.
 
+<a id="1711-ce-que-les-interfaces-peuvent-contenir"></a>
 ### 17.1.1 Ce que les Interfaces Peuvent Contenir
 
 - **Méthodes abstraites** (implicitement `public` et `abstract`)
@@ -94,6 +97,7 @@ interface Calculator {
     Puisque les méthodes abstraites des interfaces sont implicitement `public`, **vous ne pouvez pas** réduire le niveau d’accès sur une méthode d’implémentation.
 
 
+<a id="1712-implémenter-une-interface"></a>
 ### 17.1.2 Implémenter une Interface
 
 ```java
@@ -105,6 +109,7 @@ class BasicCalc implements Calculator {
 !!! note
     **Chaque** méthode abstraite doit être implémentée, sauf si la classe est elle-même abstraite.
 
+<a id="1713-héritage-multiple"></a>
 ### 17.1.3 Héritage Multiple
 
 Une classe peut implémenter plusieurs interfaces.
@@ -119,6 +124,7 @@ class C implements A, B {
 }
 ```
 
+<a id="1714-héritage-des-interfaces-et-conflits"></a>
 ### 17.1.4 Héritage des Interfaces et Conflits
 
 Si deux interfaces fournissent des méthodes `default` avec la même signature, la classe qui implémente doit redéfinir (override) la méthode.
@@ -147,6 +153,7 @@ class Z implements X, Y {
 }
 ```
 
+<a id="1715-méthodes-default"></a>
 ### 17.1.5 Méthodes `default`
 
 Une méthode `default` (déclarée avec le mot-clé `default`) est une méthode qui définit une implémentation et peut être redéfinie par une classe qui implémente l’interface.
@@ -157,12 +164,14 @@ Une méthode `default` (déclarée avec le mot-clé `default`) est une méthode 
 - Une classe qui implémente peut naturellement s’appuyer sur l’implémentation fournie de la méthode `default` sans la redéfinir ;
 - La méthode `default` peut être invoquée sur une instance de la classe qui implémente et NON comme méthode `static` de l’interface contenante ;
 
+<a id="1716-méthodes-static"></a>
 ### 17.1.6 Méthodes `static`
 
 - Une interface peut fournir des `static methods` (via le mot-clé `static`) qui sont implicitement `public` ;
 - Les méthodes static doivent inclure un corps de méthode et sont accessibles via le nom de l’interface ;
 - Les méthodes static ne peuvent pas être `abstract` ou `final` ;
 
+<a id="1717-méthodes-private-dans-les-interfaces"></a>
 ### 17.1.7 Méthodes `private` dans les interfaces
 
 Parmi toutes les méthodes concrètes qu’une interface peut implémenter, nous avons aussi :
@@ -172,6 +181,7 @@ Parmi toutes les méthodes concrètes qu’une interface peut implémenter, nous
 
 ---
 
+<a id="172-types-sealed-non-sealed-et-final"></a>
 ## 17.2 Types sealed, non-sealed et final
 
 Les classes et interfaces `sealed` (Java 17+) restreignent quelles autres classes (ou interfaces) peuvent les étendre ou les implémenter.
@@ -186,6 +196,7 @@ final class Circle extends Shape { }
 non-sealed class Rectangle extends Shape { }
 ```
 
+<a id="1721-règles"></a>
 ### 17.2.1 Règles
 
 - Un type sealed doit déclarer tous les sous-types autorisés.
@@ -194,6 +205,7 @@ non-sealed class Rectangle extends Shape { }
 
 ---
 
+<a id="173-enum"></a>
 ## 17.3 Enum
 
 Les **enum** définissent un ensemble fixe de valeurs constantes.
@@ -202,12 +214,14 @@ Les `enum` peuvent déclarer des `attributs`, des `constructeurs` et des `métho
 
 La liste des valeurs de l’enum doit se terminer par un point-virgule `(;)` dans le cas des `Enum Complexes`, mais ce n’est pas obligatoire pour les `Enum Simples`.
 
+<a id="1731-définition-dune-enum-simple"></a>
 ### 17.3.1 Définition d’une Enum `Simple`
 
 ```java
 enum Day { MON, TUE, WED, THU, FRI, SAT, SUN } // point-virgule omis
 ```
 
+<a id="1732-enum-complexes-avec-état-et-comportement"></a>
 ### 17.3.2 Enum `Complexes` avec État et Comportement
 
 ```java
@@ -226,12 +240,14 @@ public static void main(String[] args) {
 }
 ```
 
+<a id="1733-méthodes-des-enum"></a>
 ### 17.3.3 Méthodes des Enum
 
 - `values()` – renvoie un tableau de toutes les valeurs constantes utilisables, par exemple, dans une boucle `for-each`
 - `valueOf(String)` – renvoie la constante par son nom
 - `ordinal()` – index (int) de la constante
 
+<a id="1734-règles"></a>
 ### 17.3.4 Règles
 
 - Les constructeurs d’enum sont implicitement `private` ;
@@ -240,6 +256,7 @@ public static void main(String[] args) {
 
 ---
 
+<a id="174-records-java-16"></a>
 ## 17.4 Records (Java 16+)
 
 Un **record** est une classe spéciale conçue pour modéliser des données immuables : ils sont en effet implicitement **final**.
@@ -266,6 +283,7 @@ System.out.println(element.y);
 Si vous avez besoin de validation ou de transformation supplémentaire des champs fournis, vous pouvez définir un `constructeur long` ou un `constructeur compact`.
 
 
+<a id="1741-résumé-des-règles-de-base-pour-les-records"></a>
 ### 17.4.1 Résumé des Règles de Base pour les Records
 
 Un record peut être déclaré à trois emplacements :
@@ -308,6 +326,7 @@ Le corps d’un record NE doit PAS contenir :
 - Des méthodes `native`
 
 
+<a id="1742-constructeur-long"></a>
 ### 17.4.2 Constructeur Long
 
 ```java
@@ -337,6 +356,7 @@ public record Point(int x, int y) {
     - Le compilateur n’insérera pas de constructeur si vous en fournissez manuellement un avec la même liste de paramètres dans l’ordre défini ;
     - Dans ce cas, vous devez définir explicitement chaque champ manuellement ;
 
+<a id="1743-constructeur-compact"></a>
 ### 17.4.3 Constructeur Compact
 
 Vous pouvez définir un `constructeur compact` qui initialise implicitement tous les champs, tout en vous permettant d’effectuer des validations et des transformations sur des champs spécifiques.
@@ -359,6 +379,7 @@ public record Person(String name, int age) {
 !!! warning
     - Si vous essayez de modifier un attribut de Record dans un Constructeur Compact, votre code ne compilera pas
 
+<a id="1744-pattern-matching-pour-les-records"></a>
 ### 17.4.4 Pattern Matching pour les Records
 
 Quand vous utilisez le pattern matching avec `instanceof` ou avec `switch`, un record pattern doit spécifier :
@@ -376,12 +397,14 @@ if (obj instanceof Point(int a, int b)) {
 }
 ```
 
+<a id="1745-nested-record-patterns-et-matching-des-records-avec-var-et-generics"></a>
 ### 17.4.5 Nested Record Patterns et Matching des Records avec `var` et Generics
 
 Les nested record patterns permettent de déstructurer des records qui contiennent d’autres records ou des types complexes, en extrayant récursivement des valeurs directement dans le pattern.
 
 Ils combinent la puissance de la déconstruction des `record` avec le pattern matching, vous donnant une manière concise et expressive de naviguer dans des structures de données hiérarchiques.
 
+<a id="17451-nested-record-pattern-de-base"></a>
 #### 17.4.5.1 Nested Record Pattern de Base
 
 Si un record contient un autre record, vous pouvez déstructurer les deux en une seule fois :
@@ -403,6 +426,7 @@ Dans l’exemple ci-dessus, le pattern `Person` inclut un pattern `Address` imbr
 
 Les deux sont appariés structurellement.
 
+<a id="17452-nested-record-patterns-avec-var"></a>
 #### 17.4.5.2 Nested Record Patterns avec `var`
 
 Au lieu de spécifier des types exacts pour chaque champ, vous pouvez utiliser `var` dans le pattern pour laisser le compilateur inférer le type.
@@ -419,6 +443,7 @@ Au lieu de spécifier des types exacts pour chaque champ, vous pouvez utiliser `
     - Vous avez toujours besoin du type du record englobant (Person, Address) ;
     - seuls les types des champs peuvent être remplacés par `var`.
 
+<a id="17453-nested-record-patterns-et-generics"></a>
 #### 17.4.5.3 Nested Record Patterns et Generics
 
 Les record patterns fonctionnent aussi avec des records génériques.
@@ -440,6 +465,7 @@ Dans cet exemple :
 - Le pattern exige exactement `Box<String>`, pas `Box<Integer>`.
 - Dans le pattern, `var v` capture la valeur générique unboxed.
 
+<a id="17454-erreurs-courantes-avec-les-nested-record-patterns"></a>
 #### 17.4.5.4 Erreurs Courantes avec les Nested Record Patterns
 
 Structure de record non correspondante
@@ -477,6 +503,7 @@ case var(Person(var n, var a)) -> ...
 
 ---
 
+<a id="175-classes-imbriquées-en-java"></a>
 ## 17.5 Classes Imbriquées en Java
 
 Java supporte plusieurs types de **classes imbriquées** — des classes déclarées à l’intérieur d’une autre classe.
@@ -501,6 +528,7 @@ Java définit quatre types de classes imbriquées :
 	- Une classe `static nested` ne peut pas accéder aux membres d’instance sans une référence explicite à un objet externe.
 	
 
+<a id="1751-static-nested-classes"></a>
 ### 17.5.1 Static Nested Classes
 
 Une **static nested class** se comporte comme une classe top-level dont le namespace est à l’intérieur de sa classe englobante.  
@@ -508,6 +536,7 @@ Elle ne **peut pas** accéder aux membres d’instance de la classe externe mais
 Elle ne conserve pas de référence vers une instance de la classe englobante.
 Une classe imbriquée `static` peut contenir des variables membres non statiques.
 
+<a id="17511-syntaxe-et-règles-daccès"></a>
 #### 17.5.1.1 Syntaxe et Règles d’Accès
 
 - Déclarée via `static class` à l’intérieur d’une autre classe.
@@ -534,6 +563,7 @@ class Test {
 }
 ```
 
+<a id="17512-erreurs-courantes"></a>
 #### 17.5.1.2 Erreurs Courantes
 
 - Les static nested classes **ne peuvent pas accéder aux variables d’instance** :
@@ -549,10 +579,12 @@ class Outer {
 }
 ```
 
+<a id="1752-inner-classes-non-static-nested-classes"></a>
 ### 17.5.2 Inner Classes (Non-Static Nested Classes)
 
 Une **inner class** est associée à une instance de la classe externe et peut accéder à **tous les membres** de la classe externe, y compris ceux **private**.
 
+<a id="17521-syntaxe-et-règles-daccès"></a>
 #### 17.5.2.1 Syntaxe et Règles d’Accès
 
 - Déclarée sans `static`.
@@ -585,6 +617,7 @@ class Test {
 }
 ```
 
+<a id="17522-erreurs-courantes"></a>
 #### 17.5.2.2 Erreurs Courantes
 
 - Les inner classes **ne peuvent pas déclarer de membres statiques** sauf les **static final constants**.
@@ -601,12 +634,14 @@ class Outer {
 !!! warning
     - Instancier une inner class SANS instance externe est illégal.
 
+<a id="1753-classes-locales"></a>
 ### 17.5.3 Classes Locales
 
 Une **classe locale** est une classe imbriquée définie à l’intérieur d’un bloc — le plus souvent une méthode.
 
 Elle n’a pas de modificateur d’accès et n’est visible qu’à l’intérieur du bloc où elle est déclarée.
 
+<a id="17531-caractéristiques"></a>
 #### 17.5.3.1 Caractéristiques
 
 - Déclarée à l’intérieur d’une méthode, d’un constructeur ou d’un initializer.
@@ -630,6 +665,7 @@ class Outer {
 }
 ```
 
+<a id="17532-erreurs-courantes"></a>
 #### 17.5.3.2 Erreurs Courantes
 
 - `base` doit être effectively final ; le modifier casse la compilation.
@@ -642,10 +678,12 @@ void compute() {
 }
 ```
 
+<a id="1754-classes-anonymes"></a>
 ### 17.5.4 Classes Anonymes
 
 Une **classe anonyme** est une classe one-off créée inline, généralement pour implémenter une interface ou redéfinir une méthode sans nommer une nouvelle classe.
 
+<a id="17541-syntaxe-et-utilisation"></a>
 #### 17.5.4.1 Syntaxe et Utilisation
 
 - Créée via `new` + type + body.
@@ -661,6 +699,7 @@ Runnable r = new Runnable() {
 };
 ```
 
+<a id="17542-classe-anonyme-qui-étend-une-classe"></a>
 #### 17.5.4.2 Classe Anonyme qui Étend une Classe
 
 ```java
@@ -673,6 +712,7 @@ b.onClick(new ClickHandler() {
 });
 ```
 
+<a id="1755-comparaison-des-types-de-classes-imbriquées"></a>
 ### 17.5.5 Comparaison des Types de Classes Imbriquées
 
 Un tableau rapide qui résume tous les types de classes imbriquées.
@@ -687,10 +727,12 @@ Un tableau rapide qui résume tous les types de classes imbriquées.
 
 ---
 
+<a id="176-imbrication-des-interfaces-en-java"></a>
 ## 17.6 Imbrication des Interfaces en Java
 
 En Java, une interface peut être déclarée à différents emplacements et suit des règles spécifiques concernant l’imbrication et les membres autorisés.
 
+<a id="1761-où-une-interface-peut-être-déclarée"></a>
 ### 17.6.1 Où une Interface peut être Déclarée
 
 Une interface peut être :
@@ -704,10 +746,12 @@ En Java, il n’est **pas permis de déclarer une interface locale** (c’est-à
 Les interfaces peuvent être uniquement `top-level` ou `member`.
 
 
+<a id="1762-interfaces-imbriquées"></a>
 ### 17.6.2 Interfaces Imbriquées
 
 Une interface imbriquée peut être déclarée dans :
 
+<a id="17621-interface-imbriquée-dans-une-classe"></a>
 #### 17.6.2.1 Interface Imbriquée dans une Classe
 
 - Elle est implicitement `static`
@@ -734,6 +778,7 @@ class Outer {
 }
 ```
 
+<a id="17622-interface-imbriquée-dans-une-autre-interface"></a>
 #### 17.6.2.2 Interface Imbriquée dans une autre Interface
 
 - Elle est implicitement `public` et `static`
@@ -748,6 +793,7 @@ interface A {
 ```
 
 
+<a id="1763-règles-daccès"></a>
 ### 17.6.3 Règles dAccès
 
 Une `interface imbriquée` :
@@ -757,6 +803,7 @@ Une `interface imbriquée` :
 - **Peut accéder uniquement aux membres `static` de la classe englobante**
 
 
+<a id="1764-types-imbriqués-dans-les-interfaces"></a>
 ### 17.6.4 Types Imbriqués dans les Interfaces
 
 Une interface peut contenir :
@@ -767,6 +814,7 @@ Une interface peut contenir :
 - D’autres interfaces imbriquées (implicitement `public static`)
 
 
+<a id="1765-résumé-essentiel"></a>
 ### 17.6.5 Résumé Essentiel
 
 - Les interfaces imbriquées sont toujours `static`

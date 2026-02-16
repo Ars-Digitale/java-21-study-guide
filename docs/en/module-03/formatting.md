@@ -1,5 +1,6 @@
 # 13. Formatting and Localizing in Java
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [13. Formatting and Localizing in Java](#13-formatting-and-localizing-in-java)
@@ -48,8 +49,10 @@
 
 This chapter delivers a deep and practical treatment of formatting in Java 21.
 
+<a id="131-string-formatting"></a>
 ## 13.1 String Formatting
 
+<a id="1311-stringformat-and-formatted"></a>
 ### 13.1.1 String.format and formatted
 
 `String.format()` creates formatted strings using printf-style placeholders.
@@ -83,6 +86,7 @@ String price = String.format(Locale.GERMANY, "%.2f", 1234.5);
 // Output (German locale): 1234,50
 ```
 
+<a id="13111-floating-point-flags"></a>
 #### 13.1.1.1 Floating-point Flags
 
 `%f` is used to format floating-point numbers (`float`, `double`, `BigDecimal`) using decimal notation.
@@ -99,6 +103,7 @@ System.out.printf("%f", 12.345);
 - Uses rounding (not truncation).
 - Is locale-sensitive for the decimal separator.
 
+<a id="13112-precision-n"></a>
 #### 13.1.1.2 Precision (.n)
 
 Precision defines the number of digits printed **after** the decimal point.
@@ -115,6 +120,7 @@ System.out.printf("%.2f", 12.345);
 - Rounding is applied.
 - Precision is applied before width padding.
 
+<a id="13113-width-m"></a>
 #### 13.1.1.3 Width (m)
 
 Width defines the minimum total number of characters in the output.
@@ -131,6 +137,7 @@ System.out.printf("%8.2f", 12.34);
 - If the value is longer, width is ignored (it never truncates).
 - Padding is applied on the left by default.
 
+<a id="13114-zero-padding-0-flag"></a>
 #### 13.1.1.4 Zero Padding `0` Flag
 
 The `0` flag replaces space padding with zeros.
@@ -147,6 +154,7 @@ System.out.printf("%08.2f", 12.34);
 - Zeros are inserted after the sign.
 - Ignored if left-justified (`-` flag).
 
+<a id="13115-left-justification-flag"></a>
 #### 13.1.1.5 Left Justification `-` Flag
 
 The `-` flag left-aligns the value within the width.
@@ -162,6 +170,7 @@ System.out.printf("%-8.2f", 12.34);
 - Padding is moved to the right.
 - Overrides zero padding.
 
+<a id="13116-explicit-sign-flag"></a>
 #### 13.1.1.6 Explicit Sign `+` Flag
 
 The `+` flag forces display of the sign for positive numbers.
@@ -177,6 +186,7 @@ System.out.printf("%+8.2f", 12.34);
 - Negative numbers already show `-`.
 - Overrides the space flag (which prints a leading space for positive values).
 
+<a id="13117-parentheses-for-negatives-flag"></a>
 #### 13.1.1.7 Parentheses for Negatives `(` Flag
 
 The `(` flag formats negative numbers using parentheses.
@@ -192,6 +202,7 @@ System.out.printf("%(8.2f", -12.34);
 - Only affects negative values.
 - Rarely used in practice.
 
+<a id="13118-combining-flags"></a>
 #### 13.1.1.8 Combining Flags
 
 ```java
@@ -209,6 +220,7 @@ Evaluation order (semplificato):
 - Width is enforced.
 - Padding (spaces or zeros) is applied.
 
+<a id="13119-locale-effects"></a>
 #### 13.1.1.9 Locale Effects
 
 ```java
@@ -221,6 +233,7 @@ System.out.printf(Locale.FRANCE, "%,.2f", 12345.67);
 
 Decimal and grouping separators depend on the active `Locale`.
 
+<a id="131110-common-pitfalls"></a>
 #### 13.1.1.10 Common Pitfalls
 
 - `%f` defaults to 6 decimal places if no precision is specified.
@@ -229,6 +242,7 @@ Decimal and grouping separators depend on the active `Locale`.
 - `+` overrides the space flag.
 - Grouping and separators are Locale-dependent.
 
+<a id="1312-custom-text-values-and-escaping"></a>
 ### 13.1.2 Custom Text Values and Escaping
 
 Certain characters have special meaning in format strings and must be escaped.
@@ -253,8 +267,10 @@ Status: OK
 
 ---
 
+<a id="132-number-formatting"></a>
 ## 13.2 Number Formatting
 
+<a id="1321-numberformat"></a>
 ### 13.2.1 NumberFormat
 
 `NumberFormat` is an abstract class used to format and parse numbers in a locale-aware manner.
@@ -269,6 +285,7 @@ System.out.println(nf.format(1234567.89));
     - Formatting depends on the provided `Locale`.
     - `NumberFormat` (and `DecimalFormat`) are not thread-safe.
 
+<a id="1322-localizing-numbers"></a>
 ### 13.2.2 Localizing Numbers
 
 Number localization affects decimal separators, grouping separators, and currency symbols.
@@ -281,6 +298,7 @@ System.out.println(nfUS.format(1234.56)); // 1,234.56
 System.out.println(nfIT.format(1234.56)); // 1.234,56
 ```
 
+<a id="1323-decimalformat-and-numberformat"></a>
 ### 13.2.3 DecimalFormat and NumberFormat
 
 `DecimalFormat` is a concrete subclass of `NumberFormat` that provides fine-grained control over numeric formatting using patterns.
@@ -303,6 +321,7 @@ DecimalFormat df = new DecimalFormat("#,##0.00");
     - `DecimalFormat` is **not** thread-safe.
     - Formatting is locale-sensitive via `DecimalFormatSymbols`.
 
+<a id="1324-decimalformat-pattern-structure"></a>
 ### 13.2.4 DecimalFormat Pattern Structure
 
 A pattern may contain a positive and an optional negative subpattern, separated by `;`.
@@ -316,6 +335,7 @@ A pattern may contain a positive and an optional negative subpattern, separated 
     - Second part → negative numbers.
     - If the negative part is omitted, negative numbers use a leading `-` automatically.
 
+<a id="1325-the-0-symbol-mandatory-digit"></a>
 ### 13.2.5 The `0` Symbol (Mandatory Digit)
 
 The `0` symbol forces a digit to appear, padding with zeros if necessary.
@@ -333,6 +353,7 @@ System.out.println(df.format(12.3));
 - Pads with zeros if the number has fewer digits.
 - Useful for fixed-width or aligned output.
 
+<a id="1326-the-symbol-optional-digit"></a>
 ### 13.2.6 The `#` Symbol (Optional Digit)
 
 The `` symbol displays a digit only if it exists.
@@ -350,6 +371,7 @@ System.out.println(df.format(12.3));
 - Suppresses unnecessary trailing zeros.
 - Good for “human-friendly” formatting.
 
+<a id="1327-combining-0-and"></a>
 ### 13.2.7 Combining `0` and `#`
 
 Patterns often combine both symbols for flexibility.
@@ -382,6 +404,7 @@ Pattern explanation:
 - Digits are grouped by thousands using the grouping separator.
 - Fractional digits are optional (up to two).
 
+<a id="1328-decimal-and-grouping-separators"></a>
 ### 13.2.8 Decimal and Grouping Separators
 
 In patterns:
@@ -391,6 +414,7 @@ In patterns:
 
 The actual symbols used at runtime depend on the `Locale` (for example, comma vs dot).
 
+<a id="1329-decimalformatsymbols-locale-specific-formatting-symbols"></a>
 ### 13.2.9 DecimalFormatSymbols Locale-Specific Formatting Symbols
 
 ```java
@@ -411,6 +435,7 @@ System.out.println(df.format(1234.5));
 - Controls minus sign and currency symbol.
 - Controls NaN and Infinity strings.
 
+<a id="13210-special-decimalformat-patterns"></a>
 ### 13.2.10 Special DecimalFormat Patterns
 
 ```text
@@ -419,6 +444,7 @@ System.out.println(df.format(1234.5));
 ¤#,##0.00 currency (¤ is the currency sign)
 ```
 
+<a id="13211-common-rules-and-pitfalls"></a>
 ### 13.2.11 Common Rules and Pitfalls
 
 - `DecimalFormat` is a `NumberFormat` subclass.
@@ -430,6 +456,7 @@ System.out.println(df.format(1234.5));
 
 ---
 
+<a id="133-parsing-numbers"></a>
 ## 13.3 Parsing Numbers
 
 Parsing converts localized text into numeric values.  
@@ -443,6 +470,7 @@ Number n = nf.parse("12 345,67abc"); // parses 12345.67
 - Parsing stops at the first invalid character.
 - Trailing text is ignored unless explicitly checked.
 
+<a id="1331-parsing-with-decimalformat"></a>
 ### 13.3.1 Parsing with DecimalFormat
 
 `DecimalFormat` can also parse numbers. Parsing is lenient by default.
@@ -461,6 +489,7 @@ To enforce strict parsing:
 df.setParseStrict(true);
 ```
 
+<a id="1332-compactnumberformat"></a>
 ### 13.3.2 CompactNumberFormat
 
 Compact formatting shortens large numbers for human readability.
@@ -490,8 +519,10 @@ System.out.println(cnf2.format(315_000_000));   // 315 million
 
 ---
 
+<a id="134-date-and-time-formatting"></a>
 ## 13.4 Date and Time Formatting
 
+<a id="1341-datetimeformatter"></a>
 ### 13.4.1 DateTimeFormatter
 
 Java 21 relies on `java.time` and `DateTimeFormatter` for modern date/time formatting.
@@ -508,6 +539,7 @@ System.out.println(LocalDateTime.now().format(f));
 - Thread-safe.
 - Locale-aware.
 
+<a id="1342-standard-datetime-symbols"></a>
 ### 13.4.2 Standard Date/Time Symbols
 
 ```text
@@ -523,6 +555,7 @@ a   AM/PM marker
 z   time zone
 ```
 
+<a id="1343-datetimeformat-vs-formatterformat"></a>
 ### 13.4.3 datetime.format vs formatter.format
 
 Both methods are functionally identical:
@@ -535,6 +568,7 @@ formatter.format(date);
 - `date.format(formatter)` → preferred for readability (data first, then formatting).
 - `formatter.format(date)` → sometimes convenient in functional or reusable formatter code.
 
+<a id="1344-localizing-dates"></a>
 ### 13.4.4 Localizing Dates
 
 Localized styles adapt date output to cultural norms.
@@ -565,8 +599,10 @@ mercoledì 17 dicembre 2025
 
 ---
 
+<a id="135-internationalization-i18n-and-localization-l10n"></a>
 ## 13.5 Internationalization (i18n) and Localization (l10n)
 
+<a id="1351-locales"></a>
 ### 13.5.1 Locales
 
 A `Locale` defines language, country, and optional variant.
@@ -585,6 +621,7 @@ Locale formats:
 - `en` (it, fr, etc.): lowercase language code.
 - `en_US` (fr_CA, it_IT, etc.): lowercase language code + underscore + uppercase country code.
 
+<a id="1352-locale-categories"></a>
 ### 13.5.2 Locale Categories
 
 Locale categories separate formatting from UI language.
@@ -598,6 +635,7 @@ There are two categories:
 | FORMAT | Numbers, dates, currency, other formatting |
 | DISPLAY | Human-readable text (UI, names, messages) |
 
+<a id="1353-real-world-example"></a>
 #### 13.5.3 Real-world Example
 
 A French user living in Germany might want:
@@ -625,6 +663,7 @@ Sample effects:
 
 ---
 
+<a id="136-properties-and-resource-bundles"></a>
 ## 13.6 Properties and Resource Bundles
 
 Resource bundles externalize text and allow localization without code changes.
@@ -636,6 +675,7 @@ ResourceBundle rb =
 String msg = rb.getString("welcome");
 ```
 
+<a id="1361-resource-bundle-resolution-rules"></a>
 ### 13.6.1 Resource Bundle Resolution Rules
 
 Java searches bundles in a strict fallback order. For example, with base name `messages` and locale `de_DE`:
@@ -652,6 +692,7 @@ If none is found → `MissingResourceException`.
 
 ---
 
+<a id="137-common-rules-and-pitfalls"></a>
 ## 13.7 Common Rules and Pitfalls
 
 - `DateTimeFormatter` is immutable and thread-safe.

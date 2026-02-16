@@ -1,5 +1,6 @@
 # 39. Services dans JPMS (Le Modèle ServiceLoader)
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [39 Services dans JPMS Le Modèle ServiceLoader](#39-services-dans-jpms-le-modèle-serviceloader)
@@ -22,6 +23,7 @@ sans coder en dur des dépendances entre `fournisseurs` et `consommateurs`.
 
 Ce mécanisme est basé sur l’`API ServiceLoader` existante, mais les modules le rendent fiable, explicite et sûr.
 
+<a id="391-le-problème-que-les-services-résolvent"></a>
 ## 39.1 Le Problème que les Services Résolvent
 
 Parfois un module doit utiliser une capacité, mais ne devrait pas dépendre dune implémentation spécifique.
@@ -36,6 +38,7 @@ Sans services, le consommateur devrait dépendre directement dune implémentatio
 
 Cela crée un couplage fort et réduit la flexibilité.
 
+<a id="3911-rôles-dans-le-modèle-de-service"></a>
 ### 39.1.1 Rôles dans le Modèle de Service
 
 Le `modèle de service JPMS` implique quatre rôles distincts.
@@ -47,6 +50,7 @@ Le `modèle de service JPMS` implique quatre rôles distincts.
 | `Consommateur de service` | Utilise le service |
 | `Service loader` | Découvre les implémentations à l’exécution |
 
+<a id="3912-module-interface-de-service"></a>
 ### 39.1.2 Module Interface de Service
 
 L’`interface de service` définit l’API dont les `consommateurs` dépendent.
@@ -70,6 +74,7 @@ module com.example.service {
 !!! note
     Le module d’interface de service ne devrait contenir aucune implémentation.
 
+<a id="3913-module-fournisseur-de-service"></a>
 ### 39.1.3 Module Fournisseur de Service
 
 Un `module fournisseur` implémente l’interface de service et déclare quil fournit le service.
@@ -98,6 +103,7 @@ Points clés :
 - La classe d’implémentation n’a pas besoin d’être exportée
 - La directive `provides` enregistre l’implémentation
 
+<a id="3914-module-consommateur-de-service"></a>
 ### 39.1.4 Module Consommateur de Service
 
 Le `module consommateur` déclare quil utilise un service, mais ne nomme aucune implémentation.
@@ -115,6 +121,7 @@ module com.example.consumer {
     Un module qui déclare `uses` mais ne possède aucun fournisseur correspondant sur le module path compile normalement,
     mais `ServiceLoader` retourne un résultat vide à l’exécution.
 
+<a id="3915-chargement-des-services-à-lexécution"></a>
 ### 39.1.5 Chargement des Services à lExécution
 
 L’`API ServiceLoader` effectue la découverte de service.
@@ -134,6 +141,7 @@ for (GreetingService service : loader) {
 
 La découverte “accidentelle” basée sur le classpath est empêchée.
 
+<a id="3916-règles-de-résolution-des-services"></a>
 ### 39.1.6 Règles de Résolution des Services
 
 Pour qu’un service soit découvrable par `ServiceLoader`, plusieurs conditions doivent être satisfaites :
@@ -145,6 +153,7 @@ Pour qu’un service soit découvrable par `ServiceLoader`, plusieurs conditions
 | Le consommateur doit déclarer `uses` | Sinon ServiceLoader échoue |
 | Le fournisseur doit déclarer `provides` | La découverte implicite est interdite |
 
+<a id="3917-couche-service-locator"></a>
 ### 39.1.7 Couche Service Locator
 
 Il est possible dintroduire une couche supplémentaire appelée `Service Locator`.
@@ -199,6 +208,7 @@ module com.example.consumer {
 
 Le consommateur ne déclare pas `uses` parce quil ninvoque pas directement `ServiceLoader`.
 
+<a id="3918-schéma-séquentiel-dinvocation"></a>
 ### 39.1.8 Schéma Séquentiel dInvocation
 
 Séquence dexécution :
@@ -232,6 +242,7 @@ Implémentation Fournisseur
 Consommateur
 ```
 
+<a id="3919-tableau-récapitulatif-des-composants"></a>
 ### 39.1.9 Tableau Récapitulatif des Composants
 
 | Composant | Rôle | exports | requires | uses | provides |

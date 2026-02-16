@@ -1,5 +1,6 @@
 # 2. Mattoni di base del linguaggio Java
 
+<a id="indice"></a>
 ### Indice
 
 - [2. Mattoni di base del linguaggio Java](#2-mattoni-di-base-del-linguaggio-java)
@@ -32,6 +33,7 @@ Questo capitolo introduce gli elementi strutturali essenziali di un programma Ja
 
 Questi sono i concetti minimi necessari per scrivere, compilare, organizzare ed eseguire codice Java nel JDK — senza nessun IDE.
 
+<a id="21-definizione-di-classe"></a>
 ## 2.1 Definizione di classe
 
 Una `class` Java è il mattone fondamentale di un programma Java. 
@@ -110,6 +112,7 @@ public class Person {
 
 ---
 
+<a id="22-commenti"></a>
 ## 2.2 Commenti
 
 I commenti non sono codice eseguibile: **spiegano** il codice ma vengono ignorati dal compilatore.
@@ -174,6 +177,7 @@ produrrà un errore di compilazione perché, mentre i primi due simboli fanno pa
 
 ---
 
+<a id="23-modificatori-di-accesso"></a>
 ## 2.3 Modificatori di accesso
 
 In Java, un **access modifier** è una keyword che specifica la visibilità (o accessibilità) di una **class**, **method** o **field**. 
@@ -195,11 +199,13 @@ Questo modificatore determina quali altre classi possono usare o vedere quel par
 
 ---
 
+<a id="24-package"></a>
 ## 2.4 Package
 
 I **package Java** sono raggruppamenti logici di classi, interfacce e sotto-package.  
 Aiutano a organizzare codebase grandi, evitare conflitti di nomi e fornire accesso controllato tra parti diverse di un’applicazione.
 
+<a id="241-organizzazione-e-scopo"></a>
 ### 2.4.1 Organizzazione e scopo
 
 - I nomi dei package seguono le stesse regole dei nomi di variabile. Vedi [Regole di naming Java](naming-rules.md).
@@ -207,6 +213,7 @@ Aiutano a organizzare codebase grandi, evitare conflitti di nomi e fornire acces
 - Permettono di raggruppare classi correlate (ad esempio tutte le utility in `java.util`, tutte le classi di rete in `java.net`).  
 - Usando i package puoi evitare **conflitti di nomi**; ad esempio, puoi avere due classi chiamate `Date`, ma una è `java.util.Date` e l’altra è `java.sql.Date`.
 
+<a id="242-mappatura-con-il-file-system-e-dichiarazione-di-un-package"></a>
 ### 2.4.2 Mappatura con il file system e dichiarazione di un package
 
 - I package corrispondono direttamente alla **gerarchia di directory** sul file system.
@@ -227,6 +234,7 @@ public class MyApp{
 !!! important
     Questa dichiarazione ci dice che la classe appartiene al package `com.example.myapp.utils` e che il suo file deve trovarsi nel path fisico: **com/example/myapp/utils/MyApp.java**
 
+<a id="243-appartenere-allo-stesso-package"></a>
 ### 2.4.3 Appartenere allo stesso package
 
 Due classi appartengono allo stesso package se e solo se:
@@ -266,6 +274,7 @@ public class Runner {
 }
 ```
 
+<a id="244-importare-da-un-package"></a>
 ### 2.4.4 Importare da un package
 
 Per usare classi da un altro package, si deve importarle:
@@ -293,6 +302,7 @@ java.util.List myList = new java.util.ArrayList<>();
     
     Se vuoi usare due classi con lo stesso nome (ad esempio `Date` da `java.util` e da `java.sql`), è piu prudente usare una import con nome completamente qualificato.
 
+<a id="245-import-statici"></a>
 ### 2.4.5 Import statici
 
 Oltre a importare classi da un package, Java permette un altro tipo di import: lo **static import**.
@@ -346,6 +356,7 @@ portano in scope **tutti i membri statici** della classe.
     Puoi **sempre** chiamare un membro statico usando il nome della classe:
     `Math.sqrt(16)` funziona sempre — anche se è stato importato staticamente.
 
+<a id="2451-regole-di-precedenza"></a>
 #### 2.4.5.1 Regole di precedenza
 
 Se la classe corrente dichiara già un metodo o una variabile con lo stesso nome di quella importata staticamente:
@@ -402,6 +413,7 @@ double a = sqrt(16);        // importato
 double b = Math.sqrt(25);   // fully qualified — sempre permesso
 ```
 
+<a id="246-package-standard-vs-package-definiti-dallutente"></a>
 ### 2.4.6 Package standard vs package definiti dall’utente
 
 - **Package standard**: forniti con il JDK (ad esempio `java.lang`, `java.util`, `java.io`).
@@ -409,12 +421,14 @@ double b = Math.sqrt(25);   // fully qualified — sempre permesso
 
 ---
 
+<a id="25-il-metodo-main"></a>
 ## 2.5 Il metodo `main`
 
 In Java, il metodo `main` funge da **punto di ingresso** di un’applicazione standalone. 
  
 La sua dichiarazione corretta è fondamentale perché la JVM possa riconoscerlo.
 
+<a id="251-firma-del-metodo-main"></a>
 ### 2.5.1 Firma del metodo main
 
 Analizziamo la firma del metodo `main` all’interno di due delle classi tra le più semplici possibili:
@@ -468,6 +482,7 @@ public class MainSecondExample {
 
 ---
 
+<a id="26-compilare-ed-eseguire-il-codice"></a>
 ## 2.6 Compilare ed eseguire il codice
 
 Questa sezione mostra l'uso dei comandi `javac` e `java` per i casi più comuni in Java 21: file singoli, più file, package, directory di output separate, uso di classpath/module-path.
@@ -487,6 +502,7 @@ java  -version   # output atteso: java version "21.0.7" ... (l'output potrebbe v
     `java com.example.app.Main` ✔  
     `java src/com/example/app/Main` ❌
 
+<a id="261-compilare-un-file-package-di-default-singola-directory"></a>
 ### 2.6.1 Compilare un file, package di default (singola directory)
 
 **File**
@@ -523,6 +539,7 @@ java Hello
 !!! important
     Non devi specificare l’estensione ".class" quando esegui il programma.
 
+<a id="262-più-file-package-di-default-singola-directory"></a>
 ### 2.6.2 Più file, package di default (singola directory)
 
 **File**
@@ -570,6 +587,7 @@ java B
     - `-classpath <classpath>`  
     - `--class-path <classpath>`
 
+<a id="263-codice-dentro-package-layout-standard-src-out"></a>
 ### 2.6.3 Codice dentro package (layout standard src → out)
 
 **File**
@@ -605,6 +623,7 @@ public class Main {
 javac src/com/example/app/Main.java
 ```
 
+<a id="264-compilare-verso-unaltra-directory-d"></a>
 ### 2.6.4 Compilare verso un’altra directory (`-d`)
 
 L’opzione `-d out` colloca i file `.class` compilati nella directory `out/`, creando sottocartelle che rispecchiano i nomi dei package:
@@ -623,6 +642,7 @@ java -cp out com.example.app.Main
 java -cp out com.example.app.Main
 ```
 
+<a id="265-più-file-su-più-package-compilare-lintero-albero-sorgente"></a>
 ### 2.6.5 Più file su più package (compilare l’intero albero sorgente)
 
 **File**
@@ -651,6 +671,7 @@ javac -d out -sourcepath src   src/com/example/app/Main.java
 !!! important
     `-sourcepath <sourcepath>` dice a `javac` dove cercare altri file `.java` da cui i sorgenti dipendono.
 
+<a id="266-esecuzione-di-un-singolo-sorgente-run-veloce-senza-javac"></a>
 ### 2.6.6 Esecuzione di un singolo sorgente (run veloce senza `javac`)
 
 Java 21 (a partire da Java 11) permette di eseguire piccoli programmi direttamente dal sorgente:
@@ -668,6 +689,7 @@ java Main.java Helper.java
 
 > Se usi i **package**, è preferibile compilare in `out/` ed eseguire con `-cp`.
 
+<a id="267-passare-parametri-a-un-programma-java"></a>
 ### 2.6.7 Passare parametri a un programma Java
 
 Puoi inviare dati al tuo programma Java attraverso i parametri del punto di ingresso `main`.

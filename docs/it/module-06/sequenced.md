@@ -1,5 +1,6 @@
 # 29. Collezioni Sequenziate & Map Sequenziate
 
+<a id="indice"></a>
 ### Indice
 
 - [29. Collezioni Sequenziate & Map Sequenziate](#29-collezioni-sequenziate--map-sequenziate)
@@ -23,6 +24,7 @@ Java 21 introduce le `Collezioni Sequenziate` e le `Map Sequenziate` per unifica
 
 Questa aggiunta risolve incoerenze di lunga data tra liste, set, queue, deque e map, fornendo un’API comune per lavorare con il primo e l’ultimo elemento, oltre che con viste invertite.
 
+<a id="291-motivazione-e-contesto"></a>
 ## 29.1 Motivazione e Contesto
 
 Prima di Java 21, le collezioni ordinate (come List, LinkedHashSet, Deque o LinkedHashMap) esponevano operazioni basate sull’ordine tramite metodi diversi o, in alcuni casi, non le esponevano affatto.
@@ -33,12 +35,14 @@ Le interfacce sequenziate introducono un contratto coerente per tutte le collezi
 
 ---
 
+<a id="292-interfaccia-sequencedcollection"></a>
 ## 29.2 Interfaccia SequencedCollection
 
 `SequencedCollection<E>` è una nuova interfaccia che estende `Collection<E>` e rappresenta collezioni con un ordine di incontro ben definito.
 
 È implementata da `List`, `Deque` e `LinkedHashSet` (`TreeSet` è ordinato ma non implementa direttamente SequencedCollection).
 
+<a id="2921-metodi-principali-di-sequencedcollection"></a>
 ### 29.2.1 Metodi Principali di SequencedCollection
 
 L’interfaccia definisce metodi per accedere e manipolare gli elementi a entrambe le estremità della collezione.
@@ -53,6 +57,7 @@ L’interfaccia definisce metodi per accedere e manipolare gli elementi a entram
 | `E removeLast()` | Rimuove e restituisce l’ultimo elemento |
 | `SequencedCollection<E> reversed()` | Restituisce una vista invertita |
 
+<a id="2922-implementazioni-di-sequencedcollection"></a>
 ### 29.2.2 Implementazioni di SequencedCollection
 
 I seguenti tipi standard implementano SequencedCollection:
@@ -63,6 +68,7 @@ I seguenti tipi standard implementano SequencedCollection:
 | **Deque** | Coda a doppia estremità |
 | **LinkedHashSet** | Mantiene l’ordine di inserimento |
 
+<a id="2923-viste-invertite"></a>
 ### 29.2.3 Viste Invertite
 
 La chiamata a `reversed()` non crea una copia.
@@ -84,12 +90,14 @@ System.out.println(list); // [1, 2]
 
 ---
 
+<a id="293-interfaccia-sequencedmap"></a>
 ## 29.3 Interfaccia SequencedMap
 
 `SequencedMap<K,V>` estende `Map<K,V>` e rappresenta map con un ordine di incontro delle entry ben definito.
 
 Standardizza operazioni che in precedenza esistevano solo in implementazioni specifiche come `LinkedHashMap`.
 
+<a id="2931-metodi-principali-di-sequencedmap"></a>
 ### 29.3.1 Metodi Principali di SequencedMap
 
 | Metodo | Descrizione |
@@ -100,6 +108,7 @@ Standardizza operazioni che in precedenza esistevano solo in implementazioni spe
 | `Entry<K,V> pollLastEntry()` | Rimuove e restituisce l’ultima entry, oppure null se vuota |
 | `SequencedMap<K,V> reversed()` | Vista invertita della map |
 
+<a id="2932-implementazioni-di-sequencedmap"></a>
 ### 29.3.2 Implementazioni di SequencedMap
 
 Attualmente, la principale implementazione standard è:
@@ -113,6 +122,7 @@ Attualmente, la principale implementazione standard è:
     
     In tal caso, “prima” e “ultima” riflettono l’ordine di accesso più recente.
 
+<a id="2933-map-invertite"></a>
 ### 29.3.3 Map Invertite
 
 Come per le collezioni, `reversed()` su una map sequenziata restituisce una vista, non una copia.
@@ -132,6 +142,7 @@ System.out.println(map); // {A=1, B=2}
 
 ---
 
+<a id="294-relazione-con-le-api-esistenti"></a>
 ## 29.4 Relazione con le API Esistenti
 
 Le interfacce sequenziate non sostituiscono i tipi di collezione esistenti.
@@ -140,6 +151,7 @@ Si collocano sopra di essi nella gerarchia e unificano i comportamenti comuni.
 
 Tutte le collezioni ordinate esistenti beneficiano automaticamente di queste API senza rompere la retrocompatibilità.
 
+<a id="2941-quali-tipi-built-in-sono-sequenziati"></a>
 ### 29.4.1 Quali Tipi Built-in Sono Sequenziati?
 
 La tabella seguente riassume se i tipi standard di collezione sono ordinati
@@ -161,6 +173,7 @@ e se implementano le nuove interfacce Sequenced.
 
 ---
 
+<a id="295-trappole-comuni"></a>
 ## 29.5 Trappole Comuni
 
 - Le interfacce sequenziate definiscono viste, non copie
@@ -172,6 +185,7 @@ e se implementano le nuove interfacce Sequenced.
 
 ---
 
+<a id="296-riepilogo"></a>
 ## 29.6 Riepilogo
 
 - Le interfacce sequenziate formalizzano l’ordine di incontro

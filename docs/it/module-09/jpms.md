@@ -1,5 +1,6 @@
 # 37. Java Platform Module System (JPMS)
 
+<a id="indice"></a>
 ### Indice
 
 - [37. Java Platform Module System (JPMS)](#37-java-platform-module-system-jpms)
@@ -33,6 +34,7 @@ JPMS influenza come il codice viene:
 
 Comprendere JPMS è essenziale per il Java moderno, specialmente per grandi applicazioni, librerie, immagini di runtime e strumenti di deployment.
 
+<a id="371-perché-i-moduli-sono-stati-introdotti"></a>
 ## 37.1 Perché i moduli sono stati introdotti
 
 Prima di Java 9, le applicazioni Java erano costruite usando solo:
@@ -42,6 +44,7 @@ Prima di Java 9, le applicazioni Java erano costruite usando solo:
 
 Questo modello aveva limitazioni serie man mano che le applicazioni crescevano.
 
+<a id="3711-problemi-con-il-classpath"></a>
 ### 37.1.1 Problemi con il classpath
 
 Il classpath è una lista piatta di JAR in cui:
@@ -58,6 +61,7 @@ Questo ha portato a problemi ben noti come:
 - uso accidentale di API interne
 - errori di runtime che non venivano rilevati in fase di compilazione
 
+<a id="3712-esempio-di-un-problema-di-classpath"></a>
 ### 37.1.2 Esempio di un problema di classpath
 
 Supponiamo che due librerie dipendano da versioni diverse dello stesso JAR di terze parti.
@@ -71,6 +75,7 @@ Quale viene scelta dipende solamente dall’ordine del classpath, non dalla appr
 
 ---
 
+<a id="372-che-cosè-un-modulo"></a>
 ## 37.2 Che cos’è un modulo?
 
 Un `modulo` è un’unità di codice nominata e auto-descrittiva.
@@ -89,6 +94,7 @@ Dichiara esplicitamente:
 
 Un modulo è più forte di un package e più strutturato di un JAR.
 
+<a id="3721-proprietà-fondamentali-dei-moduli"></a>
 ### 37.2.1 Proprietà fondamentali dei moduli
 
 | Proprietà | Descrizione |
@@ -98,6 +104,7 @@ Un modulo è più forte di un package e più strutturato di un JAR.
 | Configurazione affidabile | Dipendenze mancanti causano errori precoci |
 | Identità nominata | Ogni modulo ha un nome unico |
 
+<a id="3722-modulo-vs-package-vs-jar"></a>
 ### 37.2.2 Modulo vs package vs JAR
 
 | Concetto | Scopo | Incapsulamento |
@@ -108,6 +115,7 @@ Un modulo è più forte di un package e più strutturato di un JAR.
 
 ---
 
+<a id="373-il-descrittore-module-infojava"></a>
 ## 37.3 Il descrittore `module-info.java`
 
 Ogni `modulo nominato` è definito da un file descrittore del modulo chiamato:
@@ -118,6 +126,7 @@ module-info.java
 
 Questo file descrive il modulo al compilatore e al runtime.
 
+<a id="3731-descrittore-di-modulo-minimo"></a>
 ### 37.3.1 Descrittore di modulo minimo
 
 Un descrittore di modulo minimo dichiara solo il nome del modulo. Il nome del file deve essere esattamente `module-info.java`, e deve trovarsi nella root dell’albero dei sorgenti del modulo.
@@ -133,6 +142,7 @@ module com.example.hello {
 
 ---
 
+<a id="374-struttura-delle-directory-di-un-modulo"></a>
 ## 37.4 Struttura delle directory di un modulo
 
 Un progetto modulare segue un layout standard di directory.
@@ -160,10 +170,12 @@ Punti chiave:
 
 ---
 
+<a id="375-un-primo-programma-modulare"></a>
 ## 37.5 Un primo programma modulare
 
 Creiamo un’applicazione modulare minima.
 
+<a id="3751-classe-principale"></a>
 ### 37.5.1 Classe principale
 
 ```java
@@ -176,6 +188,7 @@ public class Main {
 }
 ```
 
+<a id="3752-descrittore-del-modulo"></a>
 ### 37.5.2 Descrittore del modulo
 
 ```java
@@ -190,6 +203,7 @@ Senza di essa, il package è incapsulato e inaccessibile.
 
 ---
 
+<a id="376-spiegazione-dellincapsulamento-forte"></a>
 ## 37.6 Spiegazione dell’incapsulamento forte
 
 In `JPMS`, i package NON sono accessibili di default.
@@ -213,6 +227,7 @@ Nei moduli, `public` significa “public verso altri moduli *solo se* il package
 
 ---
 
+<a id="377-sintesi-delle-idee-chiave"></a>
 ## 37.7 Sintesi delle idee chiave
 
 - `JPMS` introduce i moduli come unità forti di incapsulamento

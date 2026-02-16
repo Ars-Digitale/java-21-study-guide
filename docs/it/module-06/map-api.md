@@ -1,5 +1,6 @@
 # 28. Map API
 
+<a id="indice"></a>
 ### Indice
 
 - [28. Map API](#28-map-api)
@@ -20,6 +21,7 @@ L’interfaccia `Map` rappresenta una collezione di **coppie chiave–valore**, 
 
 A differenza degli altri tipi di collezione, `Map` **non** estende `Collection` e quindi possiede una propria gerarchia e regole specifiche.
 
+<a id="281-caratteristiche-fondamentali-di-map"></a>
 ## 28.1 Caratteristiche Fondamentali di Map
 
 - Ogni chiave è unica; **chiavi duplicate sovrascrivono il valore precedente**
@@ -32,6 +34,7 @@ A differenza degli altri tipi di collezione, `Map` **non** estende `Collection` 
 
 ---
 
+<a id="282-principali-implementazioni-di-map"></a>
 ## 28.2 Principali Implementazioni di Map
 
 | Implementazione | Ordinamento | Chiavi Null | Valori Null | Thread-Safe | Note |
@@ -47,6 +50,7 @@ A differenza degli altri tipi di collezione, `Map` **non** estende `Collection` 
 
 ---
 
+<a id="283-creare-map"></a>
 ## 28.3 Creare Map
 
 Le `Map` possono essere create usando costruttori o metodi factory.
@@ -68,6 +72,7 @@ Map<String, Integer> map5 = Map.ofEntries(
 
 ---
 
+<a id="284-operazioni-di-base-sulle-map"></a>
 ## 28.4 Operazioni di Base sulle Map
 
 | Metodo | Descrizione | Valore di Ritorno |
@@ -96,6 +101,7 @@ String v = map.get("B"); // Banana
 
 ---
 
+<a id="285-iterare-su-una-map"></a>
 ## 28.5 Iterare su una Map
 
 Le Map vengono iterate tramite le viste:
@@ -123,6 +129,7 @@ for (Map.Entry<String, String> e : map.entrySet()) {
 
 ---
 
+<a id="286-determinare-luguaglianza-nelle-map"></a>
 ## 28.6 Determinare l’Uguaglianza nelle Map
 
 L’uguaglianza tra map è definita come segue:
@@ -143,6 +150,7 @@ System.out.println(m1.equals(m2)); // true
 
 ---
 
+<a id="287-comportamento-speciale-di-treemap"></a>
 ## 28.7 Comportamento Speciale di TreeMap
 
 TreeMap mantiene le entry in ordinate in base alle chiavi.
@@ -162,6 +170,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 
 ---
 
+<a id="288-gestione-dei-null"></a>
 ## 28.8 Gestione dei Null
 
 | Implementazione | Chiave Null | Valore Null |
@@ -179,6 +188,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 
 ---
 
+<a id="289-trappole-comuni"></a>
 ## 28.9 Trappole Comuni
 
 - Supporre che Map sia una Collection
@@ -189,6 +199,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 
 ---
 
+<a id="2810-riepilogo"></a>
 ## 28.10 Riepilogo
 
 - Le Map memorizzano chiavi uniche associate a valori

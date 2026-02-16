@@ -1,5 +1,6 @@
 # 10. Arrays in Java
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [10. Arrays in Java](#10-arrays-in-java)
@@ -32,12 +33,14 @@
 
 ---
 
+<a id="101-what-an-array-is"></a>
 ## 10.1 What an Array Is
 
 Arrays in Java are **fixed-size**, **indexed**, **ordered** collections of elements of the same type.
   
 They are **objects**, even when the elements are primitives.
 
+<a id="1011-declaring-arrays"></a>
 ### 10.1.1 Declaring Arrays
 
 You can declare an array in two ways:
@@ -67,6 +70,7 @@ int arr1[], arr2;
 
 **Declaring does NOT create the array** — it only creates a variable capable of referencing one.
 
+<a id="1012-creating-arrays-instantiation"></a>
 ### 10.1.2 Creating Arrays (Instantiation)
 
 An array is created using `new` followed by the element type and the array length:
@@ -95,6 +99,7 @@ double[] values = new double[size];
 // int[] arr = new int[2.5];  // Compile error: size must be int
 ```
 
+<a id="1013-default-values-in-arrays"></a>
 ### 10.1.3 Default Values in Arrays
 
 Arrays (because they are objects) always receive **default initialization**:
@@ -116,6 +121,7 @@ String[] s = new String[3];
 System.out.println(s[0]);    // null
 ```
 
+<a id="1014-accessing-elements"></a>
 ### 10.1.4 Accessing Elements
 
 Elements are accessed using zero-based indexing:
@@ -135,14 +141,17 @@ System.out.println(a[1]); // 20
 // System.out.println(x[2]); // ❌ index 2 out of bounds
 ```
 
+<a id="1015-array-initialization-shorthands"></a>
 ### 10.1.5 Array Initialization Shorthands
 
+<a id="10151-anonymous-array-creation"></a>
 #### 10.1.5.1 Anonymous Array Creation
 
 ```java
 int[] a = new int[] {1,2,3};
 ```
 
+<a id="10152-short-syntax-only-at-declaration"></a>
 #### 10.1.5.2 Short Syntax (Only at Declaration)
 
 ```java
@@ -158,6 +167,7 @@ int[] b = {1,2,3};
 
 ---
 
+<a id="102-multidimensional-arrays-arrays-of-arrays"></a>
 ## 10.2 Multidimensional Arrays (Arrays of Arrays)
 
 Java implements multi-dimensional arrays as **arrays of arrays**.
@@ -169,12 +179,14 @@ int[][] matrix;
 String[][][] cube;
 ```
 
+<a id="1021-creating-a-rectangular-array"></a>
 ### 10.2.1 Creating a Rectangular Array
 
 ```java
 int[][] rect = new int[3][4]; // 3 rows, 4 columns each
 ```
 
+<a id="1022-creating-a-jagged-irregular-array"></a>
 ### 10.2.2 Creating a Jagged (Irregular) Array
 
 You can create rows with different lengths:
@@ -188,6 +200,7 @@ jagged[2] = new int[1];
 
 ---
 
+<a id="103-array-length-vs-string-length"></a>
 ## 10.3 Array Length vs String Length
 
 - Arrays use `.length` (public final field).
@@ -204,8 +217,10 @@ int yOk = s.length();
 
 ---
 
+<a id="104-array-reference-assignments"></a>
 ## 10.4 Array Reference Assignments
 
+<a id="1041-assigning-compatible-references"></a>
 ### 10.4.1 Assigning Compatible References
 
 ```java
@@ -220,6 +235,7 @@ b[0] = 99;
 System.out.println(a[0]); // 99
 ```
 
+<a id="1042-incompatible-assignments-compile-time-errors"></a>
 ### 10.4.2 Incompatible Assignments (Compile-Time Errors)
 
 ```java
@@ -234,6 +250,7 @@ String[] s = new String[3];
 Object[] o = s;      // OK: arrays are covariant
 ```
 
+<a id="1043-covariance-runtime-danger-arraystoreexception"></a>
 ### 10.4.3 Covariance Runtime Danger: ArrayStoreException
 
 ```java
@@ -243,6 +260,7 @@ Object[] objs = new String[3];
 
 ---
 
+<a id="105-comparing-arrays"></a>
 ## 10.5 Comparing Arrays
 
 `==` compares references (identity):
@@ -268,14 +286,17 @@ Arrays.deepEquals(o1, o2);   // deep comparison for nested arrays
 
 ---
 
+<a id="106-arrays-utility-methods"></a>
 ## 10.6 `Arrays` Utility Methods
 
+<a id="1061-arraystostring"></a>
 ### 10.6.1 `Arrays.toString()`
 
 ```java
 System.out.println(Arrays.toString(new int[]{1,2,3})); // [1, 2, 3]
 ```
 
+<a id="1062-arraysdeeptostring-for-nested-arrays"></a>
 ### 10.6.2 `Arrays.deepToString()` (for nested arrays)
 
 ```java
@@ -283,6 +304,7 @@ System.out.println(Arrays.deepToString(new int[][] {{1,2},{3,4}}));
 // [[1, 2], [3, 4]]
 ```
 
+<a id="1063-arrayssort"></a>
 ### 10.6.3 `Arrays.sort()`
 
 ```java
@@ -303,6 +325,7 @@ Arrays.sort(arr);
 System.out.println(Arrays.toString(arr));  // [10, 99, AB, Ba, ac, bA]
 ```
 
+<a id="1064-arraysbinarysearch"></a>
 ### 10.6.4 `Arrays.binarySearch()`
 
 Requirements: the array must be sorted using the same ordering; otherwise the result is unpredictable.
@@ -319,6 +342,7 @@ int pos = Arrays.binarySearch(a, 4); // returns -3
 // Insertion point is index 2 → -(2) - 1 = -3
 ```
 
+<a id="1065-arrayscompare"></a>
 ### 10.6.5 `Arrays.compare()`
 
 The class `Arrays` offers an overloaded `equals()` that checks if two arrays contain the same elements (and have the same length):
@@ -361,6 +385,7 @@ System.out.println(Arrays.compare(arr9, arr10));    // -1 (null considered small
 
 ---
 
+<a id="107-enhanced-for-loop-with-arrays"></a>
 ## 10.7 Enhanced for-loop with Arrays
 
 ```java
@@ -381,6 +406,7 @@ Common error:
 
 ---
 
+<a id="108-common-pitfalls"></a>
 ## 10.8 Common Pitfalls
 
 - **Accessing out of bounds** → throws `ArrayIndexOutOfBoundsException`.
@@ -406,6 +432,7 @@ Common error:
 
 ---
 
+<a id="109-summary"></a>
 ## 10.9 Summary
 
 Arrays in Java are:

@@ -1,5 +1,6 @@
 # 1. Blocs Syntaxiques Fondamentaux
 
+<a id="table-des-matières"></a>
 ### Table des matières
 - [1. Blocs Syntaxiques Fondamentaux](#1-blocs-syntaxiques-fondamentaux)
 	- [1.1 Valeur](#11-valeur)
@@ -34,6 +35,7 @@ La séquence est présentée dans un **ordre croissant de complexité**, avec de
 
 ---
 
+<a id="11-valeur"></a>
 ### 1.1 **Valeur**
 
 - **Définition :** Entité abstraite représentant une information (nombre, caractère, booléen, chaîne, etc.).
@@ -52,6 +54,7 @@ true      // une valeur boolean
 
 ---
 
+<a id="12-littéral"></a>
 ### 1.2 **Littéral**
 
 - **Définition :** Un **littéral** est la notation concrète dans le code source qui désigne directement une valeur fixe.
@@ -70,6 +73,7 @@ String msg = "Hello";     // "Hello" est un littéral String
 
 ---
 
+<a id="13-identifiant"></a>
 ### 1.3 **Identifiant**
 
 - **Définition :** Nom symbolique qui associe une valeur (ou une structure) à une étiquette lisible.
@@ -94,6 +98,7 @@ class MyService { }       // MyService est un identifiant de classe
 
 ---
 
+<a id="14-variable"></a>
 ### 1.4 **Variable**
 
 - **Définition :** « Case mémoire » étiquetée par un identifiant, qui peut contenir et changer de valeur.
@@ -110,6 +115,7 @@ counter++;             // autre mise à jour (post-incrément)
 
 ---
 
+<a id="15-type"></a>
 ### 1.5 **Type**
 
 - **Définition :** Un type est un ensemble de valeurs et un ensemble d’opérations autorisées sur ces valeurs.
@@ -135,6 +141,7 @@ String name = "Alice";  // type référence (classe String)
 
 ---
 
+<a id="16-opérateur"></a>
 ### 1.6 **Opérateur**
 
 - **Définition :** **Symbole ou mot-clé** qui effectue un calcul ou une action sur un ou plusieurs opérandes.
@@ -158,6 +165,7 @@ int sign = (a >= 0) ? 1 : -1; // ?: ternaire
 
 ---
 
+<a id="17-expression"></a>
 ### 1.7 **Expression**
 
 - **Définition :** Combinaison de valeurs, littéraux, variables, opérateurs et fonctions produisant une nouvelle valeur.
@@ -176,6 +184,7 @@ msg = msg + "world";         // msg + "world" est une autre expression
 
 ---
 
+<a id="18-instruction"></a>
 ### 1.8 **Instruction**
 
 - **Définition :** Unité d’exécution qui modifie l’état ou contrôle le flot d’exécution.
@@ -195,6 +204,7 @@ if (x > 0) {              // instruction if
 
 ---
 
+<a id="19-bloc-de-code"></a>
 ### 1.9 **Bloc de code**
 
 - **Définition :** Ensemble d’instructions délimitées formant une unité exécutable.
@@ -217,6 +227,7 @@ int x = 10;
 
 ---
 
+<a id="110-fonction-méthode"></a>
 ### 1.10 **Fonction / Méthode**
 
 - **Définition :** Séquence d’instructions encapsulée, identifiée par un nom, pouvant recevoir des entrées (paramètres) et renvoyer une sortie (valeur).
@@ -238,6 +249,7 @@ int result = square(5); // result = 25
 
 ---
 
+<a id="111-classe-objet"></a>
 ### 1.11 **Classe / Objet**
 
 - **Définition :**
@@ -264,6 +276,7 @@ p.move(1, 2);            // appel de méthode sur l’objet
 
 ---
 
+<a id="112-module-package"></a>
 ### 1.12 **Module / Package**
 
 - **Définition :** Regroupement logique de classes, fonctions et ressources partageant un objectif commun.
@@ -284,6 +297,7 @@ public class Main {
 
 ---
 
+<a id="113-programme"></a>
 ### 1.13 **Programme**
 
 - **Définition :** Ensemble cohérent de modules, classes et fonctions qui, lorsqu’il est exécuté sur une machine, réalise un comportement global.
@@ -302,6 +316,7 @@ public class HelloWorld {
 
 ---
 
+<a id="114-système"></a>
 ### 1.14 **Système**
 
 - **Définition :** Ensemble de programmes coopérant qui interagissent avec des ressources externes (utilisateur, réseau, périphériques).
@@ -319,6 +334,7 @@ Ensemble, ils forment un **système**.
 
 ---
 
+<a id="115-résumé-sous-forme-déchelle-croissante"></a>
 ### 1.15 📌 Résumé sous forme d’échelle croissante
 
 `Valeur → Littéral → Identifiant → Variable → Type → Opérateur → Expression → Instruction → Bloc de code → Fonction/Méthode → Classe/Objet → Module/Package → Programme → Système`
@@ -327,6 +343,7 @@ Cette échelle montre comment de petites unités conceptuelles sont combinées e
 
 ---
 
+<a id="116-diagramme-hiérarchique-ascii"></a>
 ### 1.16 📊 Diagramme hiérarchique (ASCII)
 
 **Description :** Ce diagramme ASCII montre la relation hiérarchique entre les blocs de construction, du plus complexe (Système) au plus simple (Valeur et sa forme concrète, le Littéral).
@@ -350,6 +367,7 @@ Système
 
 ---
 
+<a id="117-diagramme-hiérarchique-mermaid"></a>
 ### 1.17 📊 Diagramme hiérarchique (Mermaid)
 
 **Description :** Le diagramme Mermaid rend la même hiérarchie sous forme d’arbre descendant. Il met en évidence qu’un Littéral est la forme syntaxique d’une Valeur.

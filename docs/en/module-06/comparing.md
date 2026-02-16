@@ -1,5 +1,6 @@
 # 24. Comparable, Comparator & Sorting in Java
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [24. Comparable, Comparator & Sorting in Java](#24-comparable-comparator--sorting-in-java)
@@ -74,12 +75,14 @@ Output:
 !!! note
     Natural ordering is only defined for types that implement Comparable.
 
+<a id="241-comparable-natural-ordering"></a>
 ## 24.1 Comparable — Natural Ordering
 
 The interface `Comparable<T>` defines the natural order of a type.
 
 A class implements it when it wants to define its default sorting rule.
 
+<a id="2411-comparable-method-contract"></a>
 ### 24.1.1 Comparable Method Contract
 
 ```java
@@ -102,6 +105,7 @@ Rules and expectations:
     compareTo may throw ClassCastException if given a non-comparable type — but this usually appears only with raw types.
 
 
+<a id="2412-example-class-implementing-comparable"></a>
 ### 24.1.2 Example: Class Implementing Comparable
 
 ```java
@@ -130,6 +134,7 @@ list.stream().sorted().forEach(p -> System.out.println(p.getAge()));
 
 The list sorts by age, because that is the natural numbering order.
 
+<a id="2413-common-comparable-pitfalls"></a>
 ### 24.1.3 Common Comparable Pitfalls
 
 - Compare all relevant fields → inconsistent results if not
@@ -139,11 +144,13 @@ The list sorts by age, because that is the natural numbering order.
 
 ---
 
+<a id="242-comparator-custom-ordering"></a>
 ## 24.2 Comparator — Custom Ordering
 
 The interface `Comparator<T>` allows defining multiple sorting strategies
 without modifying the class itself.
 
+<a id="2421-comparator-core-methods"></a>
 ### 24.2.1 Comparator Core Methods
 
 ```java
@@ -152,6 +159,7 @@ int compare(T a, T b);
 
 Additional helper methods:
 
+<a id="24211-comparator-helper-static-methods"></a>
 #### 24.2.1.1 Comparator Helper **Static** Methods
 
 |Method	| Static / Instance | Return Type |	Parameters	| Description |
@@ -167,6 +175,7 @@ Additional helper methods:
 |`Comparator.nullsLast(comparator)`	| static	| Comparator<T>	| Comparator<T>	| Wraps comparator so nulls compare after non-nulls.|
 
 
+<a id="24212-instance-methods-on-comparator"></a>
 #### 24.2.1.2 **Instance** Methods on Comparator
 
 |Method	| Static / Instance |	Return Type	| Parameters | Description |
@@ -179,6 +188,7 @@ Additional helper methods:
 |`thenComparingDouble(keyExtractor)`	| instance	| Comparator<T>	| ToDoubleFunction<T>	| Secondary numeric comparison.|
 |`reversed()`	| instance	| Comparator<T>	| none	| Returns a reversed comparator for the same comparison logic.|
 
+<a id="2422-comparator-example"></a>
 ### 24.2.2 Comparator Example
 
 ```java
@@ -193,6 +203,7 @@ var sorted = people.stream().sorted(byName.thenComparing(byAgeDesc)).toList();
 
 ---
 
+<a id="243-comparable-vs-comparator"></a>
 ## 24.3 Comparable vs Comparator 
 
 
@@ -209,8 +220,10 @@ var sorted = people.stream().sorted(byName.thenComparing(byAgeDesc)).toList();
 
 ---	
 
+<a id="244-sorting-arrays-and-collections"></a>
 ## 24.4 Sorting Arrays and Collections
 
+<a id="2441-arrays-sort"></a>
 ### 24.4.1 Arrays sort()
 
 ```java
@@ -222,6 +235,7 @@ Arrays.sort(arr); // Person must implement Comparable
 Arrays.sort(arr, byName); // using Comparator
 ```
 
+<a id="2442-collections-sort"></a>
 ### 24.4.2 Collections sort()
 
 ```java
@@ -234,6 +248,7 @@ Collections.sort(list, byName); // comparator
 
 ---
 
+<a id="245-multi-level-sorting-thencomparing"></a>
 ## 24.5 Multi-Level Sorting (thenComparing)
 
 ```java
@@ -245,6 +260,7 @@ var cmp = Comparator
 
 ---
 
+<a id="246-comparing-primitives-efficiently"></a>
 ## 24.6 Comparing Primitives Efficiently
 
 ```java
@@ -258,6 +274,7 @@ Comparator.comparingDouble(...)
 
 ---
 
+<a id="247-common-traps"></a>
 ## 24.7 Common Traps
 
 - Sorting a list of Objects without Comparable → runtime ClassCastException
@@ -271,6 +288,7 @@ Comparator.comparingDouble(...)
 
 ---
 
+<a id="248-full-example"></a>
 ## 24.8 Full Example
 
 ```java
@@ -298,6 +316,7 @@ books.stream().sorted(cmp)
 
 ---
 
+<a id="249-summary"></a>
 ## 24.9 Summary
 
 - Use `Comparable` for natural ordering (1 default order).

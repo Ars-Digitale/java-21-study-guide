@@ -1,5 +1,6 @@
 # 19. Exceptions and Error Handling
 
+<a id="table-of-contents"></a>
 ### Table of Contents
 
 - [19. Exceptions and Error Handling](#19-exceptions-and-error-handling)
@@ -31,6 +32,7 @@
 
 They allow programs to separate normal execution flow from error-handling logic, improving robustness, readability, and correctness. 
 
+<a id="191-exception-hierarchy-and-types"></a>
 ## 19.1 Exception hierarchy and types
 
 All exceptions derive from `Throwable`. 
@@ -45,12 +47,14 @@ java.lang.Object
         └── java.lang.RuntimeException
 ```
 
+<a id="1911-throwable"></a>
 ### 19.1.1 Throwable
 
 - Base class for all errors and exceptions
 - Supports message, cause, and stack trace
 - Only `Throwable` (and subclasses) can be thrown or caught
 
+<a id="1912-error-unchecked"></a>
 ### 19.1.2 Error (unchecked)
 
 - Represents serious JVM or system problems
@@ -60,6 +64,7 @@ java.lang.Object
 !!! note
     Errors indicate conditions from which the application is generally not expected to recover.
 
+<a id="1913-checked-exceptions-exception"></a>
 ### 19.1.3 Checked Exceptions (`Exception`)
 
 - Subclasses of `Exception` **excluding** `RuntimeException`
@@ -67,6 +72,7 @@ java.lang.Object
 - Must be either **caught** or **declared**
 - Examples: `IOException`, `SQLException`
 
+<a id="1914-unchecked-exceptions-runtimeexception"></a>
 ### 19.1.4 Unchecked Exceptions (`RuntimeException`)
 
 - Subclasses of `RuntimeException`
@@ -76,8 +82,10 @@ java.lang.Object
 
 ---
 
+<a id="192-declaring-and-throwing-exceptions"></a>
 ## 19.2 Declaring and throwing exceptions
 
+<a id="1921-declaring-exceptions-with-throws"></a>
 ### 19.2.1 Declaring exceptions with throws
 
 A method declares checked exceptions using the `throws` clause. This is part of the method’s API contract.
@@ -90,6 +98,7 @@ void readFile(Path p) throws IOException {
 !!! note
     Only **checked exceptions** must be declared. Unchecked exceptions may be declared, but are usually omitted.
 
+<a id="1922-throwing-exceptions"></a>
 ### 19.2.2 Throwing exceptions
 
 Exceptions are created with `new` and thrown explicitly using `throw`.
@@ -105,6 +114,7 @@ if (value < 0) {
 
 ---
 
+<a id="193-overriding-methods-and-exception-rules"></a>
 ## 19.3 Overriding methods and exception rules
 
 When overriding a method, exception rules are strictly enforced.
@@ -129,8 +139,10 @@ class Child extends Parent {
 
 ---
 
+<a id="194-handling-exceptions-try-catch-finally"></a>
 ## 19.4 Handling exceptions: try, catch, finally
 
+<a id="1941-basic-try-catch-syntax"></a>
 ### 19.4.1 Basic try-catch syntax
 
 ```java
@@ -144,6 +156,7 @@ try {
 - A `try` block must be followed by at least one `catch` or a `finally`
 - Catches are checked top-down
 
+<a id="1942-multiple-catch-blocks"></a>
 ### 19.4.2 Multiple catch blocks
 
 Multiple catch blocks allow different handling for different exception types.
@@ -162,6 +175,7 @@ try {
     If you place a catch for a superclass (e.g. `IOException`) before a catch for a subclass (e.g. `FileNotFoundException`), the subclass catch becomes unreachable.
 
 
+<a id="1943-multi-catch-java-7"></a>
 ### 19.4.3 Multi-catch (Java 7+)
 
 ```java
@@ -175,6 +189,7 @@ try {
 - Exception types must be unrelated (no parent/child)
 - The caught variable is implicitly `final`
 
+<a id="1944-finally-block"></a>
 ### 19.4.4 finally block
 
 The `finally` block executes regardless of whether an exception is thrown, except in extreme JVM termination cases.
@@ -195,12 +210,14 @@ try {
 
 ---
 
+<a id="195-automatic-resource-management-try-with-resources"></a>
 ## 19.5 Automatic Resource Management (try-with-resources)
 
 Try-with-resources provides automatic closing of resources that implement `AutoCloseable`. 
 
 It eliminates the need for explicit `finally` cleanup in most cases.
 
+<a id="1951-basic-syntax"></a>
 ### 19.5.1 Basic syntax
 
 ```java
@@ -212,6 +229,7 @@ try (BufferedReader br = Files.newBufferedReader(path)) {
 - Resources are closed automatically
 - Closure happens even if an exception is thrown
 
+<a id="1952-declaring-multiple-resources"></a>
 ### 19.5.2 Declaring multiple resources
 
 ```java
@@ -223,6 +241,7 @@ try (InputStream in = Files.newInputStream(p);
 
 - Resources are closed in **reverse order** of declaration
 
+<a id="1953-scope-of-resources"></a>
 ### 19.5.3 Scope of resources
 
 - Resources are in scope only inside the `try` block
@@ -242,6 +261,7 @@ try (firstWriter; var secondWriter = Files.newBufferedWriter(filePath)) {
 
 ---
 
+<a id="196-suppressed-exceptions"></a>
 ## 19.6 Suppressed exceptions
 
 When both the `try` block and the resource’s `close()` method throw exceptions, Java preserves the primary exception and **suppresses** the others.
@@ -267,6 +287,7 @@ catch (Exception e) {
 
 ---
 
+<a id="197-exceptions-summary"></a>
 ## 19.7 Exceptions summary
 
 - Checked exceptions must be caught or declared

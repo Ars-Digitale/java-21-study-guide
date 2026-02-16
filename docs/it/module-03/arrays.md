@@ -1,5 +1,6 @@
 # 10. Array in Java
 
+<a id="indice"></a>
 ### Indice
 
 - [10. Array in Java](#10-array-in-java)
@@ -33,12 +34,14 @@
 
 ---
 
+<a id="101-che-cosè-un-array"></a>
 ## 10.1 Che cos’è un array
 
 Gli array in Java sono collezioni **a dimensione fissa**, **indicizzate**, **ordinate** di elementi dello stesso tipo.
   
 Sono **oggetti**, anche quando gli elementi contenuti sono primitivi.
 
+<a id="1011-dichiarare-gli-array"></a>
 ### 10.1.1 Dichiarare gli array
 
 Puoi dichiarare un array in due modi:
@@ -68,6 +71,7 @@ int arr1[], arr2;
 
 **Dichiarare NON crea l’array** — crea solo una variabile in grado di referenziarne uno.
 
+<a id="1012-creare-array-istanza"></a>
 ### 10.1.2 Creare array (istanza)
 
 Un array viene creato usando `new` seguito dal tipo dell’elemento e dalla lunghezza dell’array:
@@ -96,6 +100,7 @@ double[] values = new double[size];
 // int[] arr = new int[2.5];  // Compile error: size must be int
 ```
 
+<a id="1013-valori-predefiniti-negli-array"></a>
 ### 10.1.3 Valori predefiniti negli array
 
 Gli array (poiché sono oggetti) ricevono sempre una **inizializzazione predefinita**:
@@ -117,6 +122,7 @@ String[] s = new String[3];
 System.out.println(s[0]);    // null
 ```
 
+<a id="1014-accedere-agli-elementi"></a>
 ### 10.1.4 Accedere agli elementi
 
 Gli elementi si accedono usando l’indicizzazione a base zero:
@@ -136,14 +142,17 @@ System.out.println(a[1]); // 20
 // System.out.println(x[2]); // ❌ indice 2 out of bounds
 ```
 
+<a id="1015-scorciatoie-di-inizializzazione-degli-array"></a>
 ### 10.1.5 Scorciatoie di inizializzazione degli array
 
+<a id="10151-creazione-di-array-anonimi"></a>
 ### 10.1.5.1 Creazione di array anonimi
 
 ```java
 int[] a = new int[] {1,2,3};
 ```
 
+<a id="10152-sintassi-breve-solo-in-dichiarazione"></a>
 ### 10.1.5.2 Sintassi breve (solo in dichiarazione)
 
 ```java
@@ -159,6 +168,7 @@ int[] b = {1,2,3};
 
 ---
 
+<a id="102-array-multidimensionali-array-di-array"></a>
 ## 10.2 Array multidimensionali (array di array)
 
 Java implementa gli array multi-dimensionali come **array di array**.
@@ -170,12 +180,14 @@ int[][] matrix;
 String[][][] cube;
 ```
 
+<a id="1021-creare-un-array-rettangolare"></a>
 ### 10.2.1 Creare un array rettangolare
 
 ```java
 int[][] rect = new int[3][4]; // 3 righe, 4 colonne
 ```
 
+<a id="1022-creare-un-array-frastagliato-irregolare"></a>
 ### 10.2.2 Creare un array frastagliato (irregolare)
 
 Puoi creare righe con lunghezze diverse:
@@ -189,6 +201,7 @@ jagged[2] = new int[1];
 
 ---
 
+<a id="103-lunghezza-degli-array-vs-lunghezza-delle-stringhe"></a>
 ## 10.3 Lunghezza degli array vs lunghezza delle stringhe
 
 - Gli array usano `.length` (campo `public final`).
@@ -205,8 +218,10 @@ int yOk = s.length();
 
 ---
 
+<a id="104-assegnazioni-di-riferimenti-a-array"></a>
 ## 10.4 Assegnazioni di riferimenti a array
 
+<a id="1041-assegnare-riferimenti-compatibili"></a>
 ### 10.4.1 Assegnare riferimenti compatibili
 
 ```java
@@ -221,6 +236,7 @@ b[0] = 99;
 System.out.println(a[0]); // 99
 ```
 
+<a id="1042-assegnazioni-incompatibili-errori-a-compile-time"></a>
 ### 10.4.2 Assegnazioni incompatibili (errori a compile-time)
 
 ```java
@@ -235,6 +251,7 @@ String[] s = new String[3];
 Object[] o = s;      // OK: arrays are covariant
 ```
 
+<a id="1043-rischio-runtime-della-covarianza-arraystoreexception"></a>
 ### 10.4.3 Rischio runtime della covarianza: `ArrayStoreException`
 
 ```java
@@ -244,6 +261,7 @@ Object[] objs = new String[3];
 
 ---
 
+<a id="105-confrontare-gli-array"></a>
 ## 10.5 Confrontare gli array
 
 `==` confronta i riferimenti (identità):
@@ -269,14 +287,17 @@ Arrays.deepEquals(o1, o2);   // deep comparison per arrays annidati
 
 ---
 
+<a id="106-metodi-di-utilità-di-arrays"></a>
 ## 10.6 Metodi di utilità di `Arrays`
 
+<a id="1061-arraystostring"></a>
 ### 10.6.1 `Arrays.toString()`
 
 ```java
 System.out.println(Arrays.toString(new int[]{1,2,3})); // [1, 2, 3]
 ```
 
+<a id="1062-arraysdeeptostring-per-array-annidati"></a>
 ### 10.6.2 `Arrays.deepToString()` (per array annidati)
 
 ```java
@@ -284,6 +305,7 @@ System.out.println(Arrays.deepToString(new int[][] {{1,2},{3,4}}));
 // [[1, 2], [3, 4]]
 ```
 
+<a id="1063-arrayssort"></a>
 ### 10.6.3 `Arrays.sort()`
 
 ```java
@@ -304,6 +326,7 @@ Arrays.sort(arr);
 System.out.println(Arrays.toString(arr));  // [10, 99, AB, Ba, ac, bA]
 ```
 
+<a id="1064-arraysbinarysearch"></a>
 ### 10.6.4 `Arrays.binarySearch()`
 
 Requisiti: l’array deve essere ordinato; altrimenti il risultato è imprevedibile.
@@ -320,6 +343,7 @@ int pos = Arrays.binarySearch(a, 4); // returns -3
 // Il punto d'inserimento sarebbe all'indice 2 → -(2) - 1 = -3
 ```
 
+<a id="1065-arrayscompare"></a>
 ### 10.6.5 `Arrays.compare()`
 
 La classe `Arrays` offre un `equals()` sovraccarico che verifica se due array contengono gli stessi elementi (e hanno la stessa lunghezza):
@@ -362,6 +386,7 @@ System.out.println(Arrays.compare(arr9, arr10));    // -1 (null considered small
 
 ---
 
+<a id="107-enhanced-for-loop-con-array"></a>
 ## 10.7 Enhanced for-loop con array
 
 ```java
@@ -382,6 +407,7 @@ Errore comune:
 
 ---
 
+<a id="108-errori-comuni"></a>
 ## 10.8 Errori comuni
 
 - **Accesso fuori dai limiti** → lancia `ArrayIndexOutOfBoundsException`.
@@ -407,6 +433,7 @@ Errore comune:
 
 ---
 
+<a id="109-riepilogo"></a>
 ## 10.9 Riepilogo
 
 Gli array in Java sono:

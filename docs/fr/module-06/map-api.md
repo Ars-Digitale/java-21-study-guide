@@ -1,5 +1,6 @@
 # 28. Map API
 
+<a id="table-des-matières"></a>
 ### Table des matières
 
 - [28. Map API](#28-map-api)
@@ -20,6 +21,7 @@ L’interface `Map` représente une collection de **paires clé–valeur**, où 
 
 Contrairement aux autres types de collections, `Map` **n’étend pas** `Collection` et possède donc sa propre hiérarchie et ses propres règles.
 
+<a id="281-caractéristiques-fondamentales-de-map"></a>
 ## 28.1 Caractéristiques Fondamentales de Map
 
 - Chaque clé est unique ; **les clés dupliquées écrasent la valeur précédente**
@@ -32,6 +34,7 @@ Contrairement aux autres types de collections, `Map` **n’étend pas** `Collect
 
 ---
 
+<a id="282-principales-implémentations-de-map"></a>
 ## 28.2 Principales Implémentations de Map
 
 | Implémentation | Ordonnancement | Clés Null | Valeurs Null | Thread-Safe | Notes |
@@ -47,6 +50,7 @@ Contrairement aux autres types de collections, `Map` **n’étend pas** `Collect
 
 ---
 
+<a id="283-créer-des-map"></a>
 ## 28.3 Créer des Map
 
 Les `Map` peuvent être créées à l’aide de constructeurs ou de méthodes factory.
@@ -68,6 +72,7 @@ Map<String, Integer> map5 = Map.ofEntries(
 
 ---
 
+<a id="284-opérations-de-base-sur-les-map"></a>
 ## 28.4 Opérations de Base sur les Map
 
 | Méthode | Description | Valeur de Retour |
@@ -96,6 +101,7 @@ String v = map.get("B"); // Banana
 
 ---
 
+<a id="285-itérer-sur-une-map"></a>
 ## 28.5 Itérer sur une Map
 
 Les Map sont parcourues via des vues :
@@ -123,6 +129,7 @@ for (Map.Entry<String, String> e : map.entrySet()) {
 
 ---
 
+<a id="286-déterminer-légalité-dans-les-map"></a>
 ## 28.6 Déterminer l’Égalité dans les Map
 
 L’égalité des map est définie comme suit :
@@ -143,6 +150,7 @@ System.out.println(m1.equals(m2)); // true
 
 ---
 
+<a id="287-comportement-spécial-de-treemap"></a>
 ## 28.7 Comportement Spécial de TreeMap
 
 TreeMap maintient les entrées triées selon les clés.
@@ -162,6 +170,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 
 ---
 
+<a id="288-gestion-des-null"></a>
 ## 28.8 Gestion des Null
 
 | Implémentation | Clé Null | Valeur Null |
@@ -179,6 +188,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 
 ---
 
+<a id="289-pièges-courants"></a>
 ## 28.9 Pièges Courants
 
 - Supposer que Map est une Collection
@@ -189,6 +199,7 @@ System.out.println(tm); // {1=A, 2=B, 3=C}
 
 ---
 
+<a id="2810-résumé"></a>
 ## 28.10 Résumé
 
 - Les Map stockent des clés uniques associées à des valeurs

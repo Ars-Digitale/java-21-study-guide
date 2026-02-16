@@ -1,5 +1,6 @@
 # 17. Oltre le Classi
 
+<a id="indice"></a>
 ### Indice
 
 - [17. Oltre le Classi](#17-oltre-le-classi)
@@ -55,6 +56,7 @@
 
 Questo capitolo presenta diversi meccanismi avanzati di tipo (type) oltre il design della Classe in Java: **interfacce**, **enum**, **classi sealed / non-sealed**, **record** e **classi annidate**.
 
+<a id="171-interfacce"></a>
 ## 17.1 Interfacce
 
 Un’**interfaccia** in Java è un tipo di riferimento che definisce un contratto di metodi che una classe accetta di implementare.
@@ -67,6 +69,7 @@ Un `interface` può a sua volta estendere più interfacce usando la keyword `ext
 
 Le interfacce abilitano astrazione, accoppiamento lasco e ereditarietà multipla di tipo.
 
+<a id="1711-cosa-possono-contenere-le-interfacce"></a>
 ### 17.1.1 Cosa Possono Contenere le Interfacce
 
 - **Metodi astratti** (implicitamente `public` e `abstract`)
@@ -92,6 +95,7 @@ interface Calculator {
 !!! warning
     Poiché i metodi astratti delle interfacce sono implicitamente `public`, **non puoi** ridurre il livello di accesso su un metodo di implementazione.
 
+<a id="1712-implementare-uninterfaccia"></a>
 ### 17.1.2 Implementare un’Interfaccia
 
 ```java
@@ -103,6 +107,7 @@ class BasicCalc implements Calculator {
 !!! note
     **Ogni** metodo astratto deve essere implementato a meno che la classe non sia astratta essa stessa.
 
+<a id="1713-ereditarietà-multipla"></a>
 ### 17.1.3 Ereditarietà Multipla
 
 Una classe può implementare più interfacce.
@@ -117,6 +122,7 @@ class C implements A, B {
 }
 ```
 
+<a id="1714-ereditarietà-delle-interfacce-e-conflitti"></a>
 ### 17.1.4 Ereditarietà delle Interfacce e Conflitti
 
 Se due interfacce forniscono metodi `default` con la stessa signature, la classe che implementa deve fare override del metodo.
@@ -145,6 +151,7 @@ class Z implements X, Y {
 }
 ```
 
+<a id="1715-metodi-default"></a>
 ### 17.1.5 Metodi `default`
 
 Un metodo `default` (dichiarato con la keyword `default`) è un metodo che definisce un’implementazione e può essere sovrascritto da una classe che implementa l’interfaccia.
@@ -155,12 +162,14 @@ Un metodo `default` (dichiarato con la keyword `default`) è un metodo che defin
 - Una classe che implementa può naturalmente basarsi sull’implementazione fornita del metodo `default` senza sovrascriverlo;
 - Il metodo `default` può essere invocato su un’istanza della classe che implementa e NON come metodo `static` dell’interfaccia contenitore;
 
+<a id="1716-metodi-static"></a>
 ### 17.1.6 Metodi `static`
 
 - Un’interfaccia può fornire `static methods` (tramite la keyword `static`) che sono implicitamente `public`;
 - I metodi static devono includere un corpo del metodo e sono accessibili usando il nome dell’interfaccia;
 - I metodi static non possono essere `abstract` o `final`;
 
+<a id="1717-metodi-private-nelle-interfacce"></a>
 ### 17.1.7 Metodi `private` nelle interfacce
 
 Tra tutti i metodi concreti che un’interfaccia può implementare, abbiamo anche:
@@ -171,6 +180,7 @@ Tra tutti i metodi concreti che un’interfaccia può implementare, abbiamo anch
 ---
 
 
+<a id="172-tipi-sealed-non-sealed-e-final"></a>
 ## 17.2 Tipi sealed, non-sealed e final
 
 Le classi e le interfacce `sealed` (Java 17+) restringono quali altre classi (o interfacce) possono estenderle o implementarle.
@@ -185,6 +195,7 @@ final class Circle extends Shape { }
 non-sealed class Rectangle extends Shape { }
 ```
 
+<a id="1721-regole"></a>
 ### 17.2.1 Regole
 
 - Un tipo sealed deve dichiarare tutti i sottotipi permessi.
@@ -194,6 +205,7 @@ non-sealed class Rectangle extends Shape { }
 ---
 
 
+<a id="173-enum"></a>
 ## 17.3 Enum
 
 Le **enum** definiscono un insieme fisso di valori costanti.
@@ -202,6 +214,7 @@ Le `enum` possono dichiarare `attributi`, `costruttori` e `metodi` come le class
 
 La lista dei valori dell’enum deve terminare con un punto e virgola `(;)` nel caso di `Enum Complesse`, ma questo non è obbligatorio per `Enum Semplici`.
 
+<a id="1731-definizione-di-enum-semplice"></a>
 ### 17.3.1 Definizione di Enum `Semplice`
 
 ```java
@@ -209,6 +222,7 @@ enum Day { MON, TUE, WED, THU, FRI, SAT, SUN } // punto e virgola omesso
 ```
 
 
+<a id="1732-enum-complesse-con-stato-e-comportamento"></a>
 ### 17.3.2 Enum `Complesse` con Stato e Comportamento
 
 ```java
@@ -227,12 +241,14 @@ public static void main(String[] args) {
 }
 ```
 
+<a id="1733-metodi-delle-enum"></a>
 ### 17.3.3 Metodi delle Enum
 
 - `values()` – restituisce un array di tutti i valori costanti che possono essere usati, per esempio, in un ciclo `for-each`
 - `valueOf(String)` – restituisce la costante per nome
 - `ordinal()` – indice (int) della costante
 
+<a id="1734-regole"></a>
 ### 17.3.4 Regole
 
 - I costruttori delle enum sono implicitamente `private`;
@@ -242,6 +258,7 @@ public static void main(String[] args) {
 ---
 
 
+<a id="174-record-java-16"></a>
 ## 17.4 Record (Java 16+)
 
 Un **record** è una classe speciale progettata per modellare dati immutabili: sono infatti implicitamente **final**.
@@ -268,6 +285,7 @@ System.out.println(element.y);
 Se ti serve validazione o trasformazione aggiuntiva dei campi forniti, puoi definire un `costruttore lungo` o un `costruttore compatto`.
 
 
+<a id="1741-riepilogo-delle-regole-di-base-per-i-record"></a>
 ### 17.4.1 Riepilogo delle Regole di Base per i Record
 
 Un record può essere dichiarato in tre posizioni:
@@ -310,6 +328,7 @@ Il corpo di un record NON deve contenere:
 - Metodi `native`
 
 
+<a id="1742-costruttore-lungo"></a>
 ### 17.4.2 Costruttore Lungo
 
 ```java
@@ -339,6 +358,7 @@ public record Point(int x, int y) {
     - Il compilatore non inserirà un costruttore se ne fornisci manualmente uno con la stessa lista di parametri nell’ordine definito;
     - In questo caso, devi impostare esplicitamente ogni campo manualmente;
 
+<a id="1743-costruttore-compatto"></a>
 ### 17.4.3 Costruttore Compatto
 
 Puoi definire un `costruttore compatto` che imposta implicitamente tutti i campi, permettendoti di eseguire validazioni e trasformazioni su campi specifici.
@@ -361,6 +381,7 @@ public record Person(String name, int age) {
 !!! warning
     - Se provi a modificare un attributo di Record dentro un Costruttore Compatto, il tuo codice non compilerà
 
+<a id="1744-pattern-matching-per-i-record"></a>
 ### 17.4.4 Pattern Matching per i Record
 
 Quando usi pattern matching con `instanceof` o con `switch`, un record pattern deve specificare:
@@ -378,12 +399,14 @@ if (obj instanceof Point(int a, int b)) {
 }
 ```
 
+<a id="1745-nested-record-patterns-e-matching-dei-record-con-var-e-generics"></a>
 ### 17.4.5 Nested Record Patterns e Matching dei Record con `var` e Generics
 
 I nested record patterns permettono di destrutturare record che contengono altri record o tipi complessi, estraendo valori ricorsivamente direttamente nel pattern stesso.
 
 Combinano la potenza della destrutturazione dei `record` con il pattern matching, dandoti un modo conciso ed espressivo per navigare strutture dati gerarchiche.
 
+<a id="17451-nested-record-pattern-di-base"></a>
 #### 17.4.5.1 Nested Record Pattern di Base
 
 Se un record contiene un altro record, puoi destrutturare entrambi in una volta:
@@ -405,6 +428,7 @@ Nell’esempio sopra, il pattern `Person` include un pattern `Address` annidato.
 
 Entrambi sono matchati strutturalmente.
 
+<a id="17452-nested-record-patterns-con-var"></a>
 #### 17.4.5.2 Nested Record Patterns con `var`
 
 Invece di specificare tipi esatti per ogni campo, puoi usare `var` dentro il pattern per lasciare al compilatore l’inferenza del tipo.
@@ -421,6 +445,7 @@ Invece di specificare tipi esatti per ogni campo, puoi usare `var` dentro il pat
     - Ti serve ancora il tipo del record contenitore (Person, Address);
     - solo i tipi dei campi possono essere sostituiti con `var`.
 
+<a id="17453-nested-record-patterns-e-generics"></a>
 #### 17.4.5.3 Nested Record Patterns e Generics
 
 I record patterns funzionano anche con record generici.
@@ -442,6 +467,7 @@ In questo esempio:
 - Il pattern richiede esattamente `Box<String>`, non `Box<Integer>`.
 - Dentro il pattern, `var v` cattura il valore generico unboxed.
 
+<a id="17454-errori-comuni-con-i-nested-record-patterns"></a>
 #### 17.4.5.4 Errori Comuni con i Nested Record Patterns
 
 Struttura record non corrispondente
@@ -479,6 +505,7 @@ case var(Person(var n, var a)) -> ...
 
 ---
 
+<a id="175-classi-annidate-in-java"></a>
 ## 17.5 Classi Annidate in Java
 
 Java supporta diversi tipi di **classi annidate** — classi dichiarate dentro un’altra classe.
@@ -503,6 +530,7 @@ Java definisce quattro tipi di classi annidate:
 	- Una classe `static nested` non può accedere ai membri di istanza senza un riferimento esplicito a un oggetto esterno.
 	
 
+<a id="1751-static-nested-classes"></a>
 ### 17.5.1 Static Nested Classes
 
 Una **static nested class** si comporta come una classe top-level con namespace dentro la sua classe contenitore.  
@@ -510,6 +538,7 @@ Non **può** accedere ai membri d’istanza della classe esterna ma **può** acc
 Non mantiene un riferimento a un’istanza della classe contenitore.
 Una classe annidata `static` può contenere variabili membro non statiche.
 
+<a id="17511-sintassi-e-regole-di-accesso"></a>
 #### 17.5.1.1 Sintassi e Regole di Accesso
 
 - Dichiarata usando `static class` dentro un’altra classe.
@@ -536,6 +565,7 @@ class Test {
 }
 ```
 
+<a id="17512-errori-comuni"></a>
 #### 17.5.1.2 Errori Comuni
 
 - Le static nested classes **non possono accedere alle variabili d’istanza**:
@@ -551,10 +581,12 @@ class Outer {
 }
 ```
 
+<a id="1752-inner-classes-non-static-nested-classes"></a>
 ### 17.5.2 Inner Classes (Non-Static Nested Classes)
 
 Una **inner class** è associata a un’istanza della classe esterna e può accedere a **tutti i membri** della classe esterna, inclusi quelli **private**.
 
+<a id="17521-sintassi-e-regole-di-accesso"></a>
 #### 17.5.2.1 Sintassi e Regole di Accesso
 
 - Dichiarata senza `static`.
@@ -587,6 +619,7 @@ class Test {
 }
 ```
 
+<a id="17522-errori-comuni"></a>
 #### 17.5.2.2 Errori Comuni
 
 - Le inner classes **non possono dichiarare membri statici** eccetto **static final constants**.
@@ -603,12 +636,14 @@ class Outer {
 !!! warning
     - Istanziare una inner class SENZA un’istanza esterna è illegale.
 
+<a id="1753-classi-locali"></a>
 ### 17.5.3 Classi Locali
 
 Una **classe locale** è una classe annidata definita dentro un blocco — più comunemente un metodo.
   
 Non ha modificatori di accesso ed è visibile solo dentro il blocco in cui è dichiarata.
 
+<a id="17531-caratteristiche"></a>
 #### 17.5.3.1 Caratteristiche
 
 - Dichiarata dentro un metodo, costruttore o initializer.
@@ -632,6 +667,7 @@ class Outer {
 }
 ```
 
+<a id="17532-errori-comuni"></a>
 #### 17.5.3.2 Errori Comuni
 
 - `base` deve essere effectively final; cambiarla rompe la compilazione.
@@ -644,10 +680,12 @@ void compute() {
 }
 ```
 
+<a id="1754-classi-anonime"></a>
 ### 17.5.4 Classi Anonime
 
 Una **classe anonima** è una classe one-off creata inline, di solito per implementare un’interfaccia o fare override di un metodo senza nominare una nuova classe.
 
+<a id="17541-sintassi-e-utilizzo"></a>
 #### 17.5.4.1 Sintassi e Utilizzo
 
 - Creata usando `new` + tipo + body.
@@ -663,6 +701,7 @@ Runnable r = new Runnable() {
 };
 ```
 
+<a id="17542-classe-anonima-che-estende-una-classe"></a>
 #### 17.5.4.2 Classe Anonima che Estende una Classe
 
 ```java
@@ -675,6 +714,7 @@ b.onClick(new ClickHandler() {
 });
 ```
 
+<a id="1755-confronto-dei-tipi-di-classi-annidate"></a>
 ### 17.5.5 Confronto dei Tipi di Classi Annidate
 
 Una tabella rapida che riassume tutti i tipi di classi annidate.
@@ -689,10 +729,12 @@ Una tabella rapida che riassume tutti i tipi di classi annidate.
 
 ---
 
+<a id="176-nesting-delle-interfacce-in-java"></a>
 ## 17.6 Nesting delle Interfacce in Java
 
 In Java, un’interfaccia può essere dichiarata in diverse posizioni e seguire regole specifiche riguardo al nesting e ai membri consentiti.
 
+<a id="1761-dove-può-essere-dichiarata-uninterfaccia"></a>
 ### 17.6.1 Dove può essere dichiarata un’interfaccia
 
 Un’interfaccia può essere:
@@ -706,10 +748,12 @@ In Java **non è permesso dichiarare un’interfaccia locale** (cioè dentro un 
 Le interfacce possono essere solo `top-level` o `member`.
 
 
+<a id="1762-interfacce-annidate-nested-interfaces"></a>
 ### 17.6.2 Interfacce annidate (Nested Interfaces)
 
 Una Nested Interface può essere dichiarata dentro:
 
+<a id="17621-interfaccia-annidata-in-una-classe"></a>
 #### 17.6.2.1 Interfaccia annidata in una Classe
 
 - È implicitamente `static`
@@ -736,6 +780,7 @@ class Outer {
 }
 ```
 
+<a id="17622-interfaccia-annidata-in-una-unaltra-interfaccia"></a>
 #### 17.6.2.2 Interfaccia annidata in una un’altra Interfaccia
 
 - È implicitamente `public` e `static`
@@ -749,6 +794,7 @@ interface A {
 }
 ```
 
+<a id="1763-regole-di-accesso"></a>
 ### 17.6.3 Regole di Accesso
 
 Una `nested interface`:
@@ -758,6 +804,7 @@ Una `nested interface`:
 - **Può accedere solo ai membri `static` della classe esterna**
 
 
+<a id="1764-nested-types-nelle-interfacce"></a>
 ### 17.6.4 Nested Types nelle Interfacce
 
 Un’interfaccia può contenere:
@@ -768,6 +815,7 @@ Un’interfaccia può contenere:
 - Altre interfacce annidate (implicitamente `public static`)
 
 
+<a id="1765-riassunto-essenziale"></a>
 ### 17.6.5 Riassunto Essenziale 
 
 - Le interfacce nested sono sempre `static`
