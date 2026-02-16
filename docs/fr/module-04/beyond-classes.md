@@ -19,14 +19,15 @@
     - [17.3.3 Méthodes des Enum](#1733-méthodes-des-enum)
     - [17.3.4 Règles](#1734-règles)
   - [17.4 Records (Java 16+)](#174-records-java-16)
-    - [17.4.1 Constructeur Long](#1741-constructeur-long)
-    - [17.4.2 Constructeur Compact](#1742-constructeur-compact)
-    - [17.4.3 Pattern Matching pour les Records](#1743-pattern-matching-pour-les-records)
-    - [17.4.4 Nested Record Patterns et Matching des Records avec var et Generics](#1744-nested-record-patterns-et-matching-des-records-avec-var-et-generics)
-      - [17.4.4.1 Nested Record Pattern de Base](#17441-nested-record-pattern-de-base)
-      - [17.4.4.2 Nested Record Patterns avec var](#17442-nested-record-patterns-avec-var)
-      - [17.4.4.3 Nested Record Patterns et Generics](#17443-nested-record-patterns-et-generics)
-      - [17.4.4.4 Erreurs Courantes avec les Nested Record Patterns](#17444-erreurs-courantes-avec-les-nested-record-patterns)
+    - [17.4.1 Résumé des Règles de Base pour les Records](#1741-résumé-des-règles-de-base-pour-les-records)
+    - [17.4.2 Constructeur Long](#1742-constructeur-long)
+    - [17.4.3 Constructeur Compact](#1743-constructeur-compact)
+    - [17.4.4 Pattern Matching pour les Records](#1744-pattern-matching-pour-les-records)
+    - [17.4.5 Nested Record Patterns et Matching des Records avec var et Generics](#1745-nested-record-patterns-et-matching-des-records-avec-var-et-generics)
+      - [17.4.5.1 Nested Record Pattern de Base](#17451-nested-record-pattern-de-base)
+      - [17.4.5.2 Nested Record Patterns avec var](#17452-nested-record-patterns-avec-var)
+      - [17.4.5.3 Nested Record Patterns et Generics](#17453-nested-record-patterns-et-generics)
+      - [17.4.5.4 Erreurs Courantes avec les Nested Record Patterns](#17454-erreurs-courantes-avec-les-nested-record-patterns)
   - [17.5 Classes Imbriquées en Java](#175-classes-imbriquées-en-java)
     - [17.5.1 Static Nested Classes](#1751-static-nested-classes)
       - [17.5.1.1 Syntaxe et Règles d’Accès](#17511-syntaxe-et-règles-daccès)
@@ -254,7 +255,50 @@ System.out.println(element.y);
 
 Si vous avez besoin de validation ou de transformation supplémentaire des champs fournis, vous pouvez définir un `constructeur long` ou un `constructeur compact`.
 
-### 17.4.1 Constructeur Long
+
+### 17.4.1 Résumé des Règles de Base pour les Records
+
+Un record peut être déclaré à trois emplacements :
+
+- Comme **record top-level** (directement dans un package)
+- Comme **record member** (à l’intérieur d’une classe ou d’une interface)
+- Comme **record local** (à l’intérieur d’une méthode)
+
+Toutes les classes record `member` et `local` sont implicitement `static`.
+
+- Un record member peut déclarer `static` de manière redondante.
+- Un record local ne doit pas déclarer `static` explicitement.
+
+Chaque classe record est implicitement `final`.
+
+- Déclarer `final` explicitement est autorisé mais redondant.
+- Un record ne peut pas être déclaré `abstract`, `sealed` ou `non-sealed`.
+
+La superclasse directe de chaque record est `java.lang.Record`.
+
+- Un record ne peut pas déclarer de clause `extends`.
+- Un record ne peut étendre aucune autre classe.
+
+La sérialisation des records diffère de celle des classes sérialisables ordinaires.
+
+- Lors de la désérialisation, le constructeur canonique est invoqué.
+
+Le corps d’un record peut contenir :
+
+- Des constructeurs
+- Des méthodes
+- Des champs statiques
+- Des blocs d’initialisation statiques
+
+Le corps d’un record NE doit PAS contenir :
+
+- Des déclarations de champs d’instance
+- Des blocs d’initialisation d’instance
+- Des méthodes `abstract`
+- Des méthodes `native`
+
+
+### 17.4.2 Constructeur Long
 
 ```java
 public record Person(String name, int age) {
@@ -283,7 +327,7 @@ public record Point(int x, int y) {
     - Le compilateur n’insérera pas de constructeur si vous en fournissez manuellement un avec la même liste de paramètres dans l’ordre défini ;
     - Dans ce cas, vous devez définir explicitement chaque champ manuellement ;
 
-### 17.4.2 Constructeur Compact
+### 17.4.3 Constructeur Compact
 
 Vous pouvez définir un `constructeur compact` qui initialise implicitement tous les champs, tout en vous permettant d’effectuer des validations et des transformations sur des champs spécifiques.
 
@@ -305,7 +349,7 @@ public record Person(String name, int age) {
 !!! warning
     - Si vous essayez de modifier un attribut de Record dans un Constructeur Compact, votre code ne compilera pas
 
-### 17.4.3 Pattern Matching pour les Records
+### 17.4.4 Pattern Matching pour les Records
 
 Quand vous utilisez le pattern matching avec `instanceof` ou avec `switch`, un record pattern doit spécifier :
 
@@ -322,13 +366,13 @@ if (obj instanceof Point(int a, int b)) {
 }
 ```
 
-### 17.4.4 Nested Record Patterns et Matching des Records avec `var` et Generics
+### 17.4.5 Nested Record Patterns et Matching des Records avec `var` et Generics
 
 Les nested record patterns permettent de déstructurer des records qui contiennent d’autres records ou des types complexes, en extrayant récursivement des valeurs directement dans le pattern.
 
 Ils combinent la puissance de la déconstruction des `record` avec le pattern matching, vous donnant une manière concise et expressive de naviguer dans des structures de données hiérarchiques.
 
-#### 17.4.4.1 Nested Record Pattern de Base
+#### 17.4.5.1 Nested Record Pattern de Base
 
 Si un record contient un autre record, vous pouvez déstructurer les deux en une seule fois :
 
@@ -349,7 +393,7 @@ Dans l’exemple ci-dessus, le pattern `Person` inclut un pattern `Address` imbr
 
 Les deux sont appariés structurellement.
 
-#### 17.4.4.2 Nested Record Patterns avec `var`
+#### 17.4.5.2 Nested Record Patterns avec `var`
 
 Au lieu de spécifier des types exacts pour chaque champ, vous pouvez utiliser `var` dans le pattern pour laisser le compilateur inférer le type.
 
@@ -365,7 +409,7 @@ Au lieu de spécifier des types exacts pour chaque champ, vous pouvez utiliser `
     - Vous avez toujours besoin du type du record englobant (Person, Address) ;
     - seuls les types des champs peuvent être remplacés par `var`.
 
-#### 17.4.4.3 Nested Record Patterns et Generics
+#### 17.4.5.3 Nested Record Patterns et Generics
 
 Les record patterns fonctionnent aussi avec des records génériques.
 
@@ -386,7 +430,7 @@ Dans cet exemple :
 - Le pattern exige exactement `Box<String>`, pas `Box<Integer>`.
 - Dans le pattern, `var v` capture la valeur générique unboxed.
 
-#### 17.4.4.4 Erreurs Courantes avec les Nested Record Patterns
+#### 17.4.5.4 Erreurs Courantes avec les Nested Record Patterns
 
 Structure de record non correspondante
 
