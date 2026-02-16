@@ -42,6 +42,14 @@
       - [17.5.4.1 Sintassi e Utilizzo](#17541-sintassi-e-utilizzo)
       - [17.5.4.2 Classe Anonima che Estende una Classe](#17542-classe-anonima-che-estende-una-classe)
     - [17.5.5 Confronto dei Tipi di Classi Annidate](#1755-confronto-dei-tipi-di-classi-annidate)
+  - [17.6 Nesting delle Interfacce in Java](#176-nesting-delle-interfacce-in-java)
+    - [17.6.1 Dove può essere dichiarata un’interfaccia](#1761-dove-puo-essere-dichiarata-uninterfaccia)
+    - [17.6.2 Interfacce annidate (Nested Interfaces)](#1762-interfacce-annidate-nested-interfaces)
+      - [17.6.2.1 Interfaccia annidata in una Classe](#17621-interfaccia-annidata-in-una-classe)
+      - [17.6.2.2 Interfaccia annidata in una un’altra Interfaccia](#17622-interfaccia-annidata-in-una-unaltra-interfaccia)
+    - [17.6.3 Regole di Accesso](#1763-regole-di-accesso)
+    - [17.6.4 Nested Types nelle Interfacce](#1764-nested-types-nelle-interfacce)
+    - [17.6.5 Riassunto Essenziale](#1765-riassunto-essenziale)
 
 ---
 
@@ -500,6 +508,7 @@ Java definisce quattro tipi di classi annidate:
 Una **static nested class** si comporta come una classe top-level con namespace dentro la sua classe contenitore.  
 Non **può** accedere ai membri d’istanza della classe esterna ma **può** accedere ai membri statici.  
 Non mantiene un riferimento a un’istanza della classe contenitore.
+Una classe annidata `static` può contenere variabili membro non statiche.
 
 #### 17.5.1.1 Sintassi e Regole di Accesso
 
@@ -676,3 +685,93 @@ Una tabella rapida che riassume tutti i tipi di classi annidate.
 | Inner Class | Sì | Sì | No (eccetto costanti) | Comportamento legato all’oggetto |
 | Local Class | Sì | Sì | No | Classi temporanee con scope |
 | Anonymous Class | Sì | Sì | No | Personalizzazione inline |
+
+
+---
+
+## 17.6 Nesting delle Interfacce in Java
+
+In Java, un’interfaccia può essere dichiarata in diverse posizioni e seguire regole specifiche riguardo al nesting e ai membri consentiti.
+
+### 17.6.1 Dove può essere dichiarata un’interfaccia
+
+Un’interfaccia può essere:
+
+- **Top-level** (direttamente in un package)
+- **Nested member interface** (dichiarata all’interno di una classe o di un’altra interfaccia)
+- **Local interface** ❌ (non consentita)
+- **Anonymous interface** ❌ (non esiste come dichiarazione, solo implementazioni anonime)
+
+In Java **non è permesso dichiarare un’interfaccia locale** (cioè dentro un metodo o blocco).  
+Le interfacce possono essere solo `top-level` o `member`.
+
+
+### 17.6.2 Interfacce annidate (Nested Interfaces)
+
+Una Nested Interface può essere dichiarata dentro:
+
+#### 17.6.2.1 Interfaccia annidata in una Classe
+
+- È implicitamente `static`
+- Non può essere dichiarata `non-static`
+- Può essere dichiarata `public`, `protected`, `private` o`package-private`
+
+- Esempio:
+
+```java
+class Outer {
+    interface InnerInterface {
+        void test();
+    }
+}
+```
+
+La parola chiave `static` è implicita:
+
+```java
+class Outer {
+    static interface InnerInterface {   // consentito ma ridondante
+        void test();
+    }
+}
+```
+
+#### 17.6.2.2 Interfaccia annidata in una un’altra Interfaccia
+
+- È implicitamente `public` e `static`
+- Non può essere `private` o `protected`
+
+```java
+interface A {
+    interface B {
+        void test();
+    }
+}
+```
+
+### 17.6.3 Regole di Accesso
+
+Una `nested interface`:
+
+- Non ha riferimento implicito a un’istanza della classe esterna
+- Non può accedere direttamente ai membri di istanza della classe esterna
+- **Può accedere solo ai membri `static` della classe esterna**
+
+
+### 17.6.4 Nested Types nelle Interfacce
+
+Un’interfaccia può contenere:
+
+- Classi annidate (implicitamente `public static`)
+- Record annidati (implicitamente `public static`)
+- Enum annidati (implicitamente `public static`)
+- Altre interfacce annidate (implicitamente `public static`)
+
+
+### 17.6.5 Riassunto Essenziale 
+
+- Le interfacce nested sono sempre `static`
+- Non esistono interfacce locali
+- I campi sono sempre `public static final`
+- I metodi sono implicitamente `public abstract` (salvo default/static/private)
+- Possono contenere altri tipi nested

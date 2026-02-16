@@ -41,8 +41,16 @@
     - [17.5.4 Anonymous Classes](#1754-anonymous-classes)
       - [17.5.4.1 Syntax and Usage](#17541-syntax-and-usage)
       - [17.5.4.2 Anonymous Class Extending a Class](#17542-anonymous-class-extending-a-class)
-    - [17.5.5 Comparison of Nested Class Types](#1755-comparison-of-nested-class-types)
-
+    - [17.5.5 Comparison of Nested Class Types](#1755-comparison-of-nested-class-types)	
+  - [17.6 Nesting of Interfaces in Java](#176-nesting-of-interfaces-in-java)
+    - [17.6.1 Where an Interface Can Be Declared](#1761-where-an-interface-can-be-declared)
+    - [17.6.2 Nested Interfaces](#1762-nested-interfaces)
+      - [17.6.2.1 Interface Nested Inside a Class](#17621-interface-nested-inside-a-class)
+      - [17.6.2.2 Interface Nested Inside Another Interface](#17622-interface-nested-inside-another-interface)
+    - [17.6.3 Access Rules](#1763-access-rules)
+    - [17.6.4 Nested Types Inside Interfaces](#1764-nested-types-inside-interfaces)
+    - [17.6.5 Essential Summary](#1765-essential-summary)
+	
 
 ---
 
@@ -503,6 +511,7 @@ Java defines four kinds of nested classes:
 A **static nested class** behaves like a top-level class that is namespaced inside its enclosing class.  
 It **cannot** access instance members of the outer class but **can** access static members.  
 It does **not** hold a reference to an instance of the enclosing class.
+A static nested class can contain non-static member variables.
 
 #### 17.5.1.1 Syntax and Access Rules
 
@@ -685,4 +694,93 @@ A quick table summarizing all kinds of nested classes.
 |Anonymous Class     | Yes                 | Yes                                | No                        | Inline customization |
 
 
+---
 
+## 17.6 Nesting of Interfaces in Java
+
+In Java, an interface can be declared in different locations and follows specific rules regarding nesting and permitted members.
+
+### 17.6.1 Where an Interface Can Be Declared
+
+An interface can be:
+
+- **Top-level** (directly inside a package)
+- **Nested member interface** (declared inside a class or another interface)
+- **Local interface** ❌ (not allowed)
+- **Anonymous interface** ❌ (does not exist as a declaration, only anonymous implementations exist)
+
+In Java, it is **not permitted to declare a local interface** (that is, inside a method or block).  
+Interfaces can only be `top-level` or `member`.
+
+---
+
+### 17.6.2 Nested Interfaces
+
+A Nested Interface can be declared inside:
+
+#### 17.6.2.1 Interface Nested Inside a Class
+
+- It is implicitly `static`
+- It cannot be declared `non-static`
+- It may be declared `public`, `protected`, `private`, or `package-private`
+
+- Example:
+
+```java
+class Outer {
+    interface InnerInterface {
+        void test();
+    }
+}
+```
+
+The `static` keyword is implicit:
+
+```java
+class Outer {
+    static interface InnerInterface {   // allowed but redundant
+        void test();
+    }
+}
+```
+
+#### 17.6.2.2 Interface Nested Inside Another Interface
+
+- It is implicitly `public` and `static`
+- It cannot be `private` or `protected`
+
+```java
+interface A {
+    interface B {
+        void test();
+    }
+}
+```
+
+
+### 17.6.3 Access Rules
+
+A `nested interface`:
+
+- Does not have an implicit reference to an instance of the enclosing class
+- Cannot directly access instance members of the enclosing class
+- **Can access only `static` members of the enclosing class**
+
+
+### 17.6.4 Nested Types Inside Interfaces
+
+An interface may contain:
+
+- Nested classes (implicitly `public static`)
+- Nested records (implicitly `public static`)
+- Nested enums (implicitly `public static`)
+- Other nested interfaces (implicitly `public static`)
+
+
+### 17.6.5 Essential Summary
+
+- Nested interfaces are always `static`
+- Local interfaces do not exist
+- Fields are always `public static final`
+- Methods are implicitly `public abstract` (except default/static/private)
+- They may contain other nested types

@@ -42,6 +42,14 @@
       - [17.5.4.1 Syntaxe et Utilisation](#17541-syntaxe-et-utilisation)
       - [17.5.4.2 Classe Anonyme qui Étend une Classe](#17542-classe-anonyme-qui-étend-une-classe)
     - [17.5.5 Comparaison des Types de Classes Imbriquées](#1755-comparaison-des-types-de-classes-imbriquées)
+  - [17.6 Imbrication des Interfaces en Java](#176-imbrication-des-interfaces-en-java)
+    - [17.6.1 Où une Interface peut être Déclarée](#1761-où-une-interface-peut-être-déclarée)
+    - [17.6.2 Interfaces Imbriquées](#1762-interfaces-imbriquées)
+      - [17.6.2.1 Interface Imbriquée dans une Classe](#17621-interface-imbriquée-dans-une-classe)
+      - [17.6.2.2 Interface Imbriquée dans une autre Interface](#17622-interface-imbriquée-dans-une-autre-interface)
+    - [17.6.3 Règles d'Accès](#1763-règles-daccès)
+    - [17.6.4 Types Imbriqués dans les Interfaces](#1764-types-imbriqués-dans-les-interfaces)
+    - [17.6.5 Résumé Essentiel](#1765-résumé-essentiel)
 
 ---
 
@@ -496,6 +504,7 @@ Java définit quatre types de classes imbriquées :
 Une **static nested class** se comporte comme une classe top-level dont le namespace est à l’intérieur de sa classe englobante.  
 Elle ne **peut pas** accéder aux membres d’instance de la classe externe mais **peut** accéder aux membres statiques.  
 Elle ne conserve pas de référence vers une instance de la classe englobante.
+Une classe imbriquée `static` peut contenir des variables membres non statiques.
 
 #### 17.5.1.1 Syntaxe et Règles d’Accès
 
@@ -672,3 +681,94 @@ Un tableau rapide qui résume tous les types de classes imbriquées.
 | Inner Class | Oui | Oui | Non (sauf constantes) | Comportement lié à l’objet |
 | Local Class | Oui | Oui | Non | Classes temporaires avec scope |
 | Anonymous Class | Oui | Oui | Non | Personnalisation inline |
+
+
+---
+
+## 17.6 Imbrication des Interfaces en Java
+
+En Java, une interface peut être déclarée à différents emplacements et suit des règles spécifiques concernant l’imbrication et les membres autorisés.
+
+### 17.6.1 Où une Interface peut être Déclarée
+
+Une interface peut être :
+
+- **Top-level** (directement dans un package)
+- **Interface membre imbriquée** (déclarée à l’intérieur d’une classe ou d’une autre interface)
+- **Interface locale** ❌ (non autorisée)
+- **Interface anonyme** ❌ (n’existe pas comme déclaration, seulement des implémentations anonymes)
+
+En Java, il n’est **pas permis de déclarer une interface locale** (c’est-à-dire à l’intérieur d’une méthode ou d’un bloc).  
+Les interfaces peuvent être uniquement `top-level` ou `member`.
+
+
+### 17.6.2 Interfaces Imbriquées
+
+Une interface imbriquée peut être déclarée dans :
+
+#### 17.6.2.1 Interface Imbriquée dans une Classe
+
+- Elle est implicitement `static`
+- Elle ne peut pas être déclarée `non-static`
+- Elle peut être déclarée `public`, `protected`, `private` ou `package-private`
+
+- Exemple :
+
+```java
+class Outer {
+    interface InnerInterface {
+        void test();
+    }
+}
+```
+
+Le mot-clé `static` est implicite :
+
+```java
+class Outer {
+    static interface InnerInterface {   // autorisé mais redondant
+        void test();
+    }
+}
+```
+
+#### 17.6.2.2 Interface Imbriquée dans une autre Interface
+
+- Elle est implicitement `public` et `static`
+- Elle ne peut pas être `private` ou `protected`
+
+```java
+interface A {
+    interface B {
+        void test();
+    }
+}
+```
+
+
+### 17.6.3 Règles dAccès
+
+Une `interface imbriquée` :
+
+- N’a pas de référence implicite à une instance de la classe englobante
+- Ne peut pas accéder directement aux membres d’instance de la classe englobante
+- **Peut accéder uniquement aux membres `static` de la classe englobante**
+
+
+### 17.6.4 Types Imbriqués dans les Interfaces
+
+Une interface peut contenir :
+
+- Des classes imbriquées (implicitement `public static`)
+- Des records imbriqués (implicitement `public static`)
+- Des enums imbriqués (implicitement `public static`)
+- D’autres interfaces imbriquées (implicitement `public static`)
+
+
+### 17.6.5 Résumé Essentiel
+
+- Les interfaces imbriquées sont toujours `static`
+- Les interfaces locales n’existent pas
+- Les champs sont toujours `public static final`
+- Les méthodes sont implicitement `public abstract` (sauf default/static/private)
+- Elles peuvent contenir d’autres types imbriqués
