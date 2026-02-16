@@ -5,7 +5,7 @@
 - [17. Au-delà des Classes](#17-au-delà-des-classes)
   - [17.1 Interfaces](#171-interfaces)
     - [17.1.1 Ce que les Interfaces Peuvent Contenir](#1711-ce-que-les-interfaces-peuvent-contenir)
-    - [17.1.2 Implémenter une Interface](#1712-implémenter-une-interface)
+    - [17.1.2 Implémenter une Interface](#1712-implementer-une-interface)
     - [17.1.3 Héritage Multiple](#1713-héritage-multiple)
     - [17.1.4 Héritage des Interfaces et Conflits](#1714-héritage-des-interfaces-et-conflits)
     - [17.1.5 Méthodes default](#1715-méthodes-default)
@@ -92,6 +92,7 @@ interface Calculator {
 !!! warning
     Puisque les méthodes abstraites des interfaces sont implicitement `public`, **vous ne pouvez pas** réduire le niveau d’accès sur une méthode d’implémentation.
 
+<a id="1712-implementer-une-interface"></a>
 ### 17.1.2 Implémenter une Interface
 
 ```java

@@ -42,3 +42,4 @@ decode_md.sh
 test.txt
 rename_lang.sh
 generate_indexes.sh
+site/
