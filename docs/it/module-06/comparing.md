@@ -3,25 +3,26 @@
 <a id="indice"></a>
 ### Indice
 
-- [24. Comparable, Comparator & Ordinamento in Java](#24-comparable-comparator--ordinamento-in-java)
-  - [24.1 Comparable — Ordinamento Naturale](#241-comparable--ordinamento-naturale)
-    - [24.1.1 Contratto del Metodo di Comparable](#2411-contratto-del-metodo-di-comparable)
-    - [24.1.2 Classe di Esempio che Implementa Comparable](#2412-esempio-classe-che-implementa-comparable)
-    - [24.1.3 Errori Comuni di Comparable](#2413-errori-comuni-di-comparable)
-  - [24.2 Comparator — Ordinamento Personalizzato](#242-comparator--ordinamento-personalizzato)
-    - [24.2.1 Metodi Principali di Comparator](#2421-metodi-principali-di-comparator)
-      - [24.2.1.1 Metodi di Supporto **Statici** di Comparator](#24211-metodi-di-supporto-statici-di-comparator)
-      - [24.2.1.2 Metodi di **Istanza** su Comparator](#24212-metodi-di-istanza-su-comparator)
-    - [24.2.2 Esempio di Comparator](#2422-esempio-di-comparator)
-  - [24.3 Comparable vs Comparator](#243-comparable-vs-comparator)
-  - [24.4 Ordinamento di Array e Collezioni](#244-ordinamento-di-array-e-collezioni)
-    - [24.4.1 Arrays sort](#2441-arrays-sort)
-    - [24.4.2 Collections sort](#2442-collections-sort)
-  - [24.5 Ordinamento Multi-Livello thenComparing](#245-ordinamento-multi-livello-thencomparing)
-  - [24.6 Confrontare Primitivi in Modo Efficiente](#246-confrontare-primitivi-in-modo-efficiente)
-  - [24.7 Trappole Comuni](#247-trappole-comuni)
-  - [24.8 Esempio Completo](#248-esempio-completo)
-  - [24.9 Riepilogo](#249-riepilogo)
+
+- [24.1 Comparable — Ordinamento Naturale](#241-comparable--ordinamento-naturale)
+	- [24.1.1 Contratto del Metodo di Comparable](#2411-contratto-del-metodo-di-comparable)
+	- [24.1.2 Classe di Esempio che Implementa Comparable](#2412-esempio-classe-che-implementa-comparable)
+	- [24.1.3 Errori Comuni di Comparable](#2413-errori-comuni-di-comparable)
+- [24.2 Comparator — Ordinamento Personalizzato](#242-comparator--ordinamento-personalizzato)
+	- [24.2.1 Metodi Principali di Comparator](#2421-metodi-principali-di-comparator)
+		- [24.2.1.1 Metodi di Supporto **Statici** di Comparator](#24211-metodi-di-supporto-statici-di-comparator)
+		- [24.2.1.2 Metodi di **Istanza** su Comparator](#24212-metodi-di-istanza-su-comparator)
+	- [24.2.2 Esempio di Comparator](#2422-esempio-di-comparator)
+- [24.3 Comparable vs Comparator](#243-comparable-vs-comparator)
+- [24.4 Ordinamento di Array e Collezioni](#244-ordinamento-di-array-e-collezioni)
+	- [24.4.1 Arrays sort](#2441-arrays-sort)
+	- [24.4.2 Collections sort](#2442-collections-sort)
+- [24.5 Ordinamento Multi-Livello thenComparing](#245-ordinamento-multi-livello-thencomparing)
+- [24.6 Confrontare Primitivi in Modo Efficiente](#246-confrontare-primitivi-in-modo-efficiente)
+- [24.7 Trappole Comuni](#247-trappole-comuni)
+- [24.8 Esempio Completo](#248-esempio-completo)
+- [24.9 Riepilogo](#249-riepilogo)
+
 
 ---
 

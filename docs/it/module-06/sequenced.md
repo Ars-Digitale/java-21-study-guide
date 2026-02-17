@@ -3,20 +3,21 @@
 <a id="indice"></a>
 ### Indice
 
-- [29. Collezioni Sequenziate & Map Sequenziate](#29-collezioni-sequenziate--map-sequenziate)
-  - [29.1 Motivazione e Contesto](#291-motivazione-e-contesto)
-  - [29.2 Interfaccia SequencedCollection](#292-interfaccia-sequencedcollection)
-    - [29.2.1 Metodi Principali di SequencedCollection](#2921-metodi-principali-di-sequencedcollection)
-    - [29.2.2 Implementazioni di SequencedCollection](#2922-implementazioni-di-sequencedcollection)
-    - [29.2.3 Viste Invertite](#2923-viste-invertite)
-  - [29.3 Interfaccia SequencedMap](#293-interfaccia-sequencedmap)
-    - [29.3.1 Metodi Principali di SequencedMap](#2931-metodi-principali-di-sequencedmap)
-    - [29.3.2 Implementazioni di SequencedMap](#2932-implementazioni-di-sequencedmap)
-    - [29.3.3 Map Invertite](#2933-map-invertite)
-  - [29.4 Relazione con le API Esistenti](#294-relazione-con-le-api-esistenti)
-    - [29.4.1 Quali Tipi Built-in Sono Sequenziati](#2941-quali-tipi-built-in-sono-sequenziati)
-  - [29.5 Trappole Comuni](#295-trappole-comuni)
-  - [29.6 Riepilogo](#296-riepilogo)
+
+- [29.1 Motivazione e Contesto](#291-motivazione-e-contesto)
+- [29.2 Interfaccia SequencedCollection](#292-interfaccia-sequencedcollection)
+	- [29.2.1 Metodi Principali di SequencedCollection](#2921-metodi-principali-di-sequencedcollection)
+	- [29.2.2 Implementazioni di SequencedCollection](#2922-implementazioni-di-sequencedcollection)
+	- [29.2.3 Viste Invertite](#2923-viste-invertite)
+- [29.3 Interfaccia SequencedMap](#293-interfaccia-sequencedmap)
+	- [29.3.1 Metodi Principali di SequencedMap](#2931-metodi-principali-di-sequencedmap)
+	- [29.3.2 Implementazioni di SequencedMap](#2932-implementazioni-di-sequencedmap)
+	- [29.3.3 Map Invertite](#2933-map-invertite)
+- [29.4 Relazione con le API Esistenti](#294-relazione-con-le-api-esistenti)
+	- [29.4.1 Quali Tipi Built-in Sono Sequenziati](#2941-quali-tipi-built-in-sono-sequenziati)
+- [29.5 Trappole Comuni](#295-trappole-comuni)
+- [29.6 Riepilogo](#296-riepilogo)
+
 
 ---
 

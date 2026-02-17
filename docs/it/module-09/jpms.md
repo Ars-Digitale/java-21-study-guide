@@ -3,21 +3,22 @@
 <a id="indice"></a>
 ### Indice
 
-- [37. Java Platform Module System (JPMS)](#37-java-platform-module-system-jpms)
-  - [37.1 Perché i moduli sono stati introdotti](#371-perché-i-moduli-sono-stati-introdotti)
-    - [37.1.1 Problemi con il classpath](#3711-problemi-con-il-classpath)
-    - [37.1.2 Esempio di un problema di classpath](#3712-esempio-di-un-problema-di-classpath)
-  - [37.2 Che cos’è un modulo](#372-che-cosè-un-modulo)
-    - [37.2.1 Proprietà fondamentali dei moduli](#3721-proprietà-fondamentali-dei-moduli)
-    - [37.2.2 Modulo vs package vs JAR](#3722-modulo-vs-package-vs-jar)
-  - [37.3 Il descrittore module-infojava](#373-il-descrittore-module-infojava)
-    - [37.3.1 Descrittore di modulo minimo](#3731-descrittore-di-modulo-minimo)
-  - [37.4 Struttura delle directory di un modulo](#374-struttura-delle-directory-di-un-modulo)
-  - [37.5 Un primo programma modulare](#375-un-primo-programma-modulare)
-    - [37.5.1 Classe principale](#3751-classe-principale)
-    - [37.5.2 Descrittore del modulo](#3752-descrittore-del-modulo)
-  - [37.6 Spiegazione dell’incapsulamento forte](#376-spiegazione-dellincapsulamento-forte)
-  - [37.7 Sintesi delle idee chiave](#377-sintesi-delle-idee-chiave)
+
+- [37.1 Perché i moduli sono stati introdotti](#371-perché-i-moduli-sono-stati-introdotti)
+	- [37.1.1 Problemi con il classpath](#3711-problemi-con-il-classpath)
+	- [37.1.2 Esempio di un problema di classpath](#3712-esempio-di-un-problema-di-classpath)
+- [37.2 Che cos’è un modulo](#372-che-cosè-un-modulo)
+	- [37.2.1 Proprietà fondamentali dei moduli](#3721-proprietà-fondamentali-dei-moduli)
+	- [37.2.2 Modulo vs package vs JAR](#3722-modulo-vs-package-vs-jar)
+- [37.3 Il descrittore module-infojava](#373-il-descrittore-module-infojava)
+	- [37.3.1 Descrittore di modulo minimo](#3731-descrittore-di-modulo-minimo)
+- [37.4 Struttura delle directory di un modulo](#374-struttura-delle-directory-di-un-modulo)
+- [37.5 Un primo programma modulare](#375-un-primo-programma-modulare)
+	- [37.5.1 Classe principale](#3751-classe-principale)
+	- [37.5.2 Descrittore del modulo](#3752-descrittore-del-modulo)
+- [37.6 Spiegazione dell’incapsulamento forte](#376-spiegazione-dellincapsulamento-forte)
+- [37.7 Sintesi delle idee chiave](#377-sintesi-delle-idee-chiave)
+
 
 ---
 

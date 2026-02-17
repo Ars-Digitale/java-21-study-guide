@@ -3,17 +3,18 @@
 <a id="indice"></a>
 ### Indice
 
-- [28. Map API](#28-map-api)
-  - [28.1 Caratteristiche Fondamentali di Map](#281-caratteristiche-fondamentali-di-map)
-  - [28.2 Principali Implementazioni di Map](#282-principali-implementazioni-di-map)
-  - [28.3 Creare Map](#283-creare-map)
-  - [28.4 Operazioni di Base sulle Map](#284-operazioni-di-base-sulle-map)
-  - [28.5 Iterare su una Map](#285-iterare-su-una-map)
-  - [28.6 Determinare l’Uguaglianza nelle Map](#286-determinare-luguaglianza-nelle-map)
-  - [28.7 Comportamento Speciale di TreeMap](#287-comportamento-speciale-di-treemap)
-  - [28.8 Gestione dei Null](#288-gestione-dei-null)
-  - [28.9 Trappole Comuni](#289-trappole-comuni)
-  - [28.10 Riepilogo](#2810-riepilogo)
+
+- [28.1 Caratteristiche Fondamentali di Map](#281-caratteristiche-fondamentali-di-map)
+- [28.2 Principali Implementazioni di Map](#282-principali-implementazioni-di-map)
+- [28.3 Creare Map](#283-creare-map)
+- [28.4 Operazioni di Base sulle Map](#284-operazioni-di-base-sulle-map)
+- [28.5 Iterare su una Map](#285-iterare-su-una-map)
+- [28.6 Determinare l’Uguaglianza nelle Map](#286-determinare-luguaglianza-nelle-map)
+- [28.7 Comportamento Speciale di TreeMap](#287-comportamento-speciale-di-treemap)
+- [28.8 Gestione dei Null](#288-gestione-dei-null)
+- [28.9 Trappole Comuni](#289-trappole-comuni)
+- [28.10 Riepilogo](#2810-riepilogo)
+
 
 ---
 

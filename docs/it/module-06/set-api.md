@@ -3,26 +3,27 @@
 <a id="indice"></a>
 ### Indice
 
-- [26. Set API ](#26-set-api)
-  - [26.1 Gerarchia dei Set Java-Collections-Framework](#261-gerarchia-dei-set-java-collections-framework)
-  - [26.2 Caratteristiche di Ogni Implementazione di Set](#262-caratteristiche-di-ogni-implementazione-di-set)
-    - [26.2.1 HashSet](#2621-hashset)
-    - [26.2.2 LinkedHashSet](#2622-linkedhashset)
-    - [26.2.3 TreeSet](#2623-treeset)
-  - [26.3 Regole di Uguaglianza nei Set](#263-regole-di-uguaglianza-nei-set)
-    - [26.3.1 HashSet--LinkedHashSet](#2631-hashset--linkedhashset)
-    - [26.3.2 TreeSet](#2632-treeset)
-  - [26.4 Creare Istanze di Set](#264-creare-istanze-di-set)
-    - [26.4.1 Usando i Costruttori](#2641-usando-i-costruttori)
-    - [26.4.2 Costruttori di Copia](#2642-costruttori-di-copia)
-    - [26.4.3 Metodi Factory](#2643-metodi-factory)
-  - [26.5 Operazioni Principali sui Set](#265-operazioni-principali-sui-set)
-    - [26.5.1 Aggiungere Elementi](#2651-aggiungere-elementi)
-    - [26.5.2 Verificare l’Appartenenza](#2652-verificare-lappartenenza)
-    - [26.5.3 Rimuovere Elementi](#2653-rimuovere-elementi)
-    - [26.5.4 Operazioni Bulk](#2654-operazioni-bulk)
-  - [26.6 Trappole Comuni](#266-trappole-comuni)
-  - [26.7 Tabella Riassuntiva](#267-tabella-riassuntiva)
+
+- [26.1 Gerarchia dei Set Java-Collections-Framework](#261-gerarchia-dei-set-java-collections-framework)
+- [26.2 Caratteristiche di Ogni Implementazione di Set](#262-caratteristiche-di-ogni-implementazione-di-set)
+	- [26.2.1 HashSet](#2621-hashset)
+	- [26.2.2 LinkedHashSet](#2622-linkedhashset)
+	- [26.2.3 TreeSet](#2623-treeset)
+- [26.3 Regole di Uguaglianza nei Set](#263-regole-di-uguaglianza-nei-set)
+	- [26.3.1 HashSet--LinkedHashSet](#2631-hashset--linkedhashset)
+	- [26.3.2 TreeSet](#2632-treeset)
+- [26.4 Creare Istanze di Set](#264-creare-istanze-di-set)
+	- [26.4.1 Usando i Costruttori](#2641-usando-i-costruttori)
+	- [26.4.2 Costruttori di Copia](#2642-costruttori-di-copia)
+	- [26.4.3 Metodi Factory](#2643-metodi-factory)
+- [26.5 Operazioni Principali sui Set](#265-operazioni-principali-sui-set)
+	- [26.5.1 Aggiungere Elementi](#2651-aggiungere-elementi)
+	- [26.5.2 Verificare l’Appartenenza](#2652-verificare-lappartenenza)
+	- [26.5.3 Rimuovere Elementi](#2653-rimuovere-elementi)
+	- [26.5.4 Operazioni Bulk](#2654-operazioni-bulk)
+- [26.6 Trappole Comuni](#266-trappole-comuni)
+- [26.7 Tabella Riassuntiva](#267-tabella-riassuntiva)
+
 
 ---
 

@@ -3,27 +3,28 @@
 <a id="indice"></a>
 ### Indice
 
-- [19. Eccezioni e Gestione degli Errori](#19-eccezioni-e-gestione-degli-errori)
-  - [19.1 Gerarchia e tipi di eccezioni](#191-gerarchia-e-tipi-di-eccezioni)
-    - [19.1.1 Throwable](#1911-throwable)
+
+ - [19.1 Gerarchia e tipi di eccezioni](#191-gerarchia-e-tipi-di-eccezioni)
+	- [19.1.1 Throwable](#1911-throwable)
 	- [19.1.2 Error (unchecked)](#1912-error-unchecked)
 	- [19.1.3 Eccezioni Checked (`Exception`)](#1913-eccezioni-checked-exception)
 	- [19.1.4 Eccezioni Unchecked (`RuntimeException`)](#1914-eccezioni-unchecked-runtimeexception)
-  - [19.2 Dichiarare e lanciare eccezioni](#192-dichiarare-e-lanciare-eccezioni)
-    - [19.2.1 Dichiarare eccezioni con throws](#1921-dichiarare-eccezioni-con-throws)
-    - [19.2.2 Lanciare eccezioni](#1922-lanciare-eccezioni)
-  - [19.3 Override dei metodi e regole sulle eccezioni](#193-override-dei-metodi-e-regole-sulle-eccezioni)
-  - [19.4 Gestione delle eccezioni: try, catch, finally](#194-gestione-delle-eccezioni-try-catch-finally)
-    - [19.4.1 Sintassi base try-catch](#1941-sintassi-base-try-catch)
-    - [19.4.2 Blocchi catch multipli](#1942-blocchi-catch-multipli)
-    - [19.4.3 Multi-catch Java 7](#1943-multi-catch-java-7)
-    - [19.4.4 Blocco finally](#1944-blocco-finally)
-  - [19.5 Gestione automatica delle risorse try-with-resources](#195-gestione-automatica-delle-risorse-try-with-resources)
-    - [19.5.1 Sintassi base](#1951-sintassi-base)
-    - [19.5.2 Dichiarare risorse multiple](#1952-dichiarare-risorse-multiple)
-    - [19.5.3 Scope delle risorse](#1953-scope-delle-risorse)
-  - [19.6 Eccezioni soppresse](#196-eccezioni-soppresse)
-  - [19.7 Riepilogo sulle eccezioni](#197-riepilogo-sulle-eccezioni)
+ - [19.2 Dichiarare e lanciare eccezioni](#192-dichiarare-e-lanciare-eccezioni)
+	- [19.2.1 Dichiarare eccezioni con throws](#1921-dichiarare-eccezioni-con-throws)
+	- [19.2.2 Lanciare eccezioni](#1922-lanciare-eccezioni)
+- [19.3 Override dei metodi e regole sulle eccezioni](#193-override-dei-metodi-e-regole-sulle-eccezioni)
+- [19.4 Gestione delle eccezioni: try, catch, finally](#194-gestione-delle-eccezioni-try-catch-finally)
+	- [19.4.1 Sintassi base try-catch](#1941-sintassi-base-try-catch)
+	- [19.4.2 Blocchi catch multipli](#1942-blocchi-catch-multipli)
+	- [19.4.3 Multi-catch Java 7](#1943-multi-catch-java-7)
+	- [19.4.4 Blocco finally](#1944-blocco-finally)
+- [19.5 Gestione automatica delle risorse try-with-resources](#195-gestione-automatica-delle-risorse-try-with-resources)
+	- [19.5.1 Sintassi base](#1951-sintassi-base)
+	- [19.5.2 Dichiarare risorse multiple](#1952-dichiarare-risorse-multiple)
+	- [19.5.3 Scope delle risorse](#1953-scope-delle-risorse)
+- [19.6 Eccezioni soppresse](#196-eccezioni-soppresse)
+- [19.7 Riepilogo sulle eccezioni](#197-riepilogo-sulle-eccezioni)
+
 
 ---
 

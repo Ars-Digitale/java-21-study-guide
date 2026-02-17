@@ -3,17 +3,18 @@
 <a id="indice"></a>
 ### Indice
 
-- [15. Caricamento delle Classi, Inizializzazione e Costruzione degli Oggetti](#15-caricamento-delle-classi-inizializzazione-e-costruzione-degli-oggetti)
-  - [15.1 Aree di Memoria Java Rilevanti per l’Inizializzazione di Classi e Oggetti](#151-aree-di-memoria-java-rilevanti-per-linizializzazione-di-classi-e-oggetti)
-  - [15.2 Caricamento delle Classi con Ereditarietà](#152-caricamento-delle-classi-con-ereditarietà)
-    - [15.2.1 Ordine di Caricamento delle Classi](#1521-ordine-di-caricamento-delle-classi)
-    - [15.2.2 Cosa Succede Durante il Caricamento di una Classe](#1522-cosa-succede-durante-il-caricamento-di-una-classe)
-  - [15.3 Creazione degli Oggetti con Ereditarietà](#153-creazione-degli-oggetti-con-ereditarietà)
-    - [15.3.1 Ordine Completo di Creazione delle Istanze](#1531-ordine-completo-di-creazione-delle-istanze)
-  - [15.4 Esempio Completo: Inizializzazione Statica + di Istanza nell’Ereditarietà](#154-esempio-completo-inizializzazione-statica--di-istanza-nellereditarietà)
-  - [15.5 Diagramma di Visualizzazione](#155-diagramma-di-visualizzazione)
-  - [15.6 Regole Chiave](#156-regole-chiave)
-  - [15.7 Tabella Riassuntiva](#157-tabella-riassuntiva)
+
+- [15.1 Aree di Memoria Java Rilevanti per l’Inizializzazione di Classi e Oggetti](#151-aree-di-memoria-java-rilevanti-per-linizializzazione-di-classi-e-oggetti)
+- [15.2 Caricamento delle Classi con Ereditarietà](#152-caricamento-delle-classi-con-ereditarietà)
+	- [15.2.1 Ordine di Caricamento delle Classi](#1521-ordine-di-caricamento-delle-classi)
+	- [15.2.2 Cosa Succede Durante il Caricamento di una Classe](#1522-cosa-succede-durante-il-caricamento-di-una-classe)
+- [15.3 Creazione degli Oggetti con Ereditarietà](#153-creazione-degli-oggetti-con-ereditarietà)
+	- [15.3.1 Ordine Completo di Creazione delle Istanze](#1531-ordine-completo-di-creazione-delle-istanze)
+- [15.4 Esempio Completo: Inizializzazione Statica + di Istanza nell’Ereditarietà](#154-esempio-completo-inizializzazione-statica--di-istanza-nellereditarietà)
+- [15.5 Diagramma di Visualizzazione](#155-diagramma-di-visualizzazione)
+- [15.6 Regole Chiave](#156-regole-chiave)
+- [15.7 Tabella Riassuntiva](#157-tabella-riassuntiva)
+
 
 ---
 

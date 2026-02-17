@@ -3,27 +3,30 @@
 <a id="indice"></a>
 ### Indice
 
-- [30. Thread Java – Fondamenti e Modello di Esecuzione](#30-thread-java--fondamenti-e-modello-di-esecuzione)
-  - [30.1 Thread, Processi e il Sistema Operativo](#301-thread-processi-e-il-sistema-operativo)
-  - [30.2 Modello di Memoria Stack e Heap](#302-modello-di-memoria-stack-e-heap)
-  - [30.3 Contesto e Context Switching](#303-contesto-e-context-switching)
-  - [30.4 Concorrenza vs Parallelismo](#304-concorrenza-vs-parallelismo)
-  - [30.5 Thread in Java Modello Concettuale](#305-thread-in-java-modello-concettuale)
-  - [30.6 Categorie di Thread in Java 21](#306-categorie-di-thread-in-java-21)
-  - [30.7 Creare Thread in Java](#307-creare-thread-in-java)
-  - [30.8 Ciclo di Vita ed Esecuzione di un Thread](#308-ciclo-di-vita-ed-esecuzione-di-un-thread)
-  - [30.9 Avviare vs Eseguire un Thread Sincrono-o-Asincrono](#309-avviare-vs-eseguire-un-thread-sincrono-o-asincrono)
-  - [30.10 Priorità dei Thread e Scheduling](#3010-priorità-dei-thread-e-scheduling)
-  - [30.11 Differimento e Yield dei Thread](#3011-differimento-e-yield-dei-thread)
-  - [30.12 Interruzione dei Thread e Cancellazione Cooperativa](#3012-interruzione-dei-thread-e-cancellazione-cooperativa)
-    - [30.12.1 Cosa Significa Interrompere un Thread](#30121-cosa-significa-interrompere-un-thread)
-    - [30.12.2 Interrompere Operazioni Bloccanti](#30122-interrompere-operazioni-bloccanti)
-    - [30.12.3 Controllare lo Stato di Interruzione](#30123-controllare-lo-stato-di-interruzione)
-    - [30.12.4 Esempio Interrompere un Thread in Sleep](#30124-esempio-interrompere-un-thread-in-sleep)
-    - [30.12.5 Osservazioni Chiave](#30125-osservazioni-chiave)
-  - [30.13 Thread e il Thread Principale](#3013-thread-e-il-thread-principale)
-  - [30.14 Concorrenza dei Thread e Stato Condiviso](#3014-concorrenza-dei-thread-e-stato-condiviso)
-  - [30.15 Sommario](#3015-sommario)
+
+- [30.1 Thread, Processi e il Sistema Operativo](#301-thread-processi-e-il-sistema-operativo)
+- [30.2 Modello di Memoria Stack e Heap](#302-modello-di-memoria-stack-e-heap)
+- [30.3 Contesto e Context Switching](#303-contesto-e-context-switching)
+- [30.4 Concorrenza vs Parallelismo](#304-concorrenza-vs-parallelismo)
+- [30.5 Thread in Java Modello Concettuale](#305-thread-in-java-modello-concettuale)
+- [30.6 Categorie di Thread in Java 21](#306-categorie-di-thread-in-java-21)
+- [30.7 Creare Thread in Java](#307-creare-thread-in-java)
+- [30.8 Ciclo di Vita ed Esecuzione di un Thread](#308-ciclo-di-vita-ed-esecuzione-di-un-thread)
+- [30.9 Avviare vs Eseguire un Thread Sincrono-o-Asincrono](#309-avviare-vs-eseguire-un-thread-sincrono-o-asincrono)
+- [30.10 Priorità dei Thread e Scheduling](#3010-priorità-dei-thread-e-scheduling)
+- [30.11 Differimento e Yield dei Thread](#3011-differimento-e-yield-dei-thread)
+- [30.12 Interruzione dei Thread e Cancellazione Cooperativa](#3012-interruzione-dei-thread-e-cancellazione-cooperativa)
+	- [30.12.1 Cosa Significa Interrompere un Thread](#30121-cosa-significa-interrompere-un-thread)
+	- [30.12.2 Interrompere Operazioni Bloccanti](#30122-interrompere-operazioni-bloccanti)
+	- [30.12.3 Controllare lo Stato di Interruzione](#30123-controllare-lo-stato-di-interruzione)
+	- [30.12.4 Esempio Interrompere un Thread in Sleep](#30124-esempio-interrompere-un-thread-in-sleep)
+	- [30.12.5 Osservazioni Chiave](#30125-osservazioni-chiave)
+- [30.13 Thread e il Thread Principale](#3013-thread-e-il-thread-principale)
+- [30.14 Concorrenza dei Thread e Stato Condiviso](#3014-concorrenza-dei-thread-e-stato-condiviso)
+- [30.15 Sommario](#3015-sommario)
+
+
+---
 
 Questo capitolo introduce i **thread** a partire dai principi di base e spiega come sono modellati e utilizzati in Java 21.
 

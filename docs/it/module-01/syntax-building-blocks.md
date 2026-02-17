@@ -2,24 +2,26 @@
 
 <a id="indice"></a>
 ### Indice
-- [1. Mattoni Sintattici di Base](#1-mattoni-sintattici-di-base)
-	- [1.1 Valore](#11-valore)
-	- [1.2 Letterale](#12-letterale)
-	- [1.3 Identificatore](#13-identificatore)
-	- [1.4 Variabile](#14-variabile)
-	- [1.5 Tipo](#15-tipo)
-	- [1.6 Operatore](#16-operatore)
-	- [1.7 Espressione](#17-espressione)
-	- [1.8 Istruzione](#18-istruzione)
-	- [1.9 Blocco di Codice](#19-blocco-di-codice)
-	- [1.10 Funzione / Metodo](#110-funzione--metodo)
-	- [1.11 Classe / Oggetto](#111-classe--oggetto)
-	- [1.12 Modulo / Package](#112-modulo--package)
-	- [1.13 Programma](#113-programma)
-	- [1.14 Sistema](#114-sistema)
-	- [1.15 Riepilogo come scala crescente](#115--riepilogo-come-scala-crescente)
-	- [1.16 Diagramma gerarchico ASCII](#116--diagramma-gerarchico-ascii)
-	- [1.17 Diagramma gerarchico Mermaid](#117--diagramma-gerarchico-mermaid)
+
+
+- [1.1 Valore](#11-valore)
+- [1.2 Letterale](#12-letterale)
+- [1.3 Identificatore](#13-identificatore)
+- [1.4 Variabile](#14-variabile)
+- [1.5 Tipo](#15-tipo)
+- [1.6 Operatore](#16-operatore)
+- [1.7 Espressione](#17-espressione)
+- [1.8 Istruzione](#18-istruzione)
+- [1.9 Blocco di Codice](#19-blocco-di-codice)
+- [1.10 Funzione / Metodo](#110-funzione--metodo)
+- [1.11 Classe / Oggetto](#111-classe--oggetto)
+- [1.12 Modulo / Package](#112-modulo--package)
+- [1.13 Programma](#113-programma)
+- [1.14 Sistema](#114-sistema)
+- [1.15 Riepilogo come scala crescente](#115--riepilogo-come-scala-crescente)
+- [1.16 Diagramma gerarchico ASCII](#116--diagramma-gerarchico-ascii)
+- [1.17 Diagramma gerarchico Mermaid](#117--diagramma-gerarchico-mermaid)
+
 
 ---
 

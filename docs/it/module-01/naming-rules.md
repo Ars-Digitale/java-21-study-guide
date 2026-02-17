@@ -3,16 +3,17 @@
 <a id="indice"></a>
 ### Indice
 
-- [3. Regole di naming Java](#3-regole-di-naming-java)
-  - [3.1 Regole per gli identificatori](#31-regole-per-gli-identificatori)
-    - [3.1.1 Parole riservate](#311-parole-riservate)
-      - [3.1.1.1 Keyword Java riservate](#3111-keyword-java-riservate)
-      - [3.1.1.2 Letterali riservati](#3112-letterali-riservati)
-    - [3.1.2 Sensibilità alle maiuscole/minuscole](#312-sensibilità-alle-maiuscoleminuscole)
-    - [3.1.3 Inizio degli identificatori](#313-inizio-degli-identificatori)
-    - [3.1.4 Numeri negli identificatori](#314-numeri-negli-identificatori)
-    - [3.1.5 Singolo token _](#315-singolo-token-_)
-    - [3.1.6 Letterali numerici e carattere underscore](#316-letterali-numerici-e-carattere-underscore)
+
+- [3.1 Regole per gli identificatori](#31-regole-per-gli-identificatori)
+	- [3.1.1 Parole riservate](#311-parole-riservate)
+		- [3.1.1.1 Keyword Java riservate](#3111-keyword-java-riservate)
+		- [3.1.1.2 Letterali riservati](#3112-letterali-riservati)
+	- [3.1.2 Sensibilità alle maiuscole/minuscole](#312-sensibilità-alle-maiuscoleminuscole)
+	- [3.1.3 Inizio degli identificatori](#313-inizio-degli-identificatori)
+	- [3.1.4 Numeri negli identificatori](#314-numeri-negli-identificatori)
+	- [3.1.5 Singolo token _](#315-singolo-token-_)
+	- [3.1.6 Letterali numerici e carattere underscore](#316-letterali-numerici-e-carattere-underscore)
+
 
 ---
 

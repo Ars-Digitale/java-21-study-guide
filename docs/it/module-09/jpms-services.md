@@ -3,17 +3,17 @@
 <a id="indice"></a>
 ### Indice
 
-- [39 Servizi in JPMS Il Modello ServiceLoader](#39-servizi-in-jpms-il-modello-serviceloader)
-  - [39.1 Il Problema che i Servizi Risolvono](#391-il-problema-che-i-servizi-risolvono)
-    - [39.1.1 Ruoli nel Modello dei Servizi](#3911-ruoli-nel-modello-dei-servizi)
-    - [39.1.2 Modulo Interfaccia del Servizio](#3912-modulo-interfaccia-del-servizio)
-    - [39.1.3 Modulo Provider del Servizio](#3913-modulo-provider-del-servizio)
-    - [39.1.4 Modulo Consumer del Servizio](#3914-modulo-consumer-del-servizio)
-    - [39.1.5 Caricamento dei Servizi a Runtime](#3915-caricamento-dei-servizi-a-runtime)
-    - [39.1.6 Regole di Risoluzione dei Servizi](#3916-regole-di-risoluzione-dei-servizi)
-    - [39.1.7 Livello Service Locator](#3917-livello-service-locator)
-    - [39.1.8 Schema Sequenziale di Invocazione](#3918-schema-sequenziale-di-invocazione)
-    - [39.1.9 Tabella Riassuntiva dei Componenti](#3919-tabella-riassuntiva-dei-componenti)
+
+- [39.1 Il Problema che i Servizi Risolvono](#391-il-problema-che-i-servizi-risolvono)
+	- [39.1.1 Ruoli nel Modello dei Servizi](#3911-ruoli-nel-modello-dei-servizi)
+	- [39.1.2 Modulo Interfaccia del Servizio](#3912-modulo-interfaccia-del-servizio)
+	- [39.1.3 Modulo Provider del Servizio](#3913-modulo-provider-del-servizio)
+	- [39.1.4 Modulo Consumer del Servizio](#3914-modulo-consumer-del-servizio)
+	- [39.1.5 Caricamento dei Servizi a Runtime](#3915-caricamento-dei-servizi-a-runtime)
+	- [39.1.6 Regole di Risoluzione dei Servizi](#3916-regole-di-risoluzione-dei-servizi)
+	- [39.1.7 Livello Service Locator](#3917-livello-service-locator)
+	- [39.1.8 Schema Sequenziale di Invocazione](#3918-schema-sequenziale-di-invocazione)
+	- [39.1.9 Tabella Riassuntiva dei Componenti](#3919-tabella-riassuntiva-dei-componenti)
 
 
 ---

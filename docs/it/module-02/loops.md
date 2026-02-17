@@ -3,20 +3,21 @@
 <a id="indice"></a>
 ### Indice
 
-- [8. Costrutti di iterazione in Java](#8-looping-constructs-in-java)
-	- [8.1 Il ciclo while](#81-il-ciclo-while)
-	- [8.2 Il ciclo do-while](#82-il-ciclo-do-while)
-	- [8.3 Il ciclo for](#83-il-ciclo-for)
-	- [8.4 Il ciclo for-each avanzato](#84-il-ciclo-for-each-avanzato)
-	- [8.5 Cicli annidati](#85-cicli-annidati)
-	- [8.6 Cicli infiniti](#86-cicli-infiniti)
-	- [8.7 break e continue](#87-break-e-continue)
-	- [8.8 Cicli etichettati](#88-cicli-etichettati)
-	- [8.9 Ambito delle variabili di ciclo](#89-ambito-delle-variabili-di-ciclo)
-	- [8.10 Codice irraggiungibile dopo break continue e return](#810-codice-irraggiungibile-dopo-break-continue-e-return)
-		- [8.10.1 Codice irraggiungibile dopo break](#8101-codice-irraggiungibile-dopo-break)
-		- [8.10.2 Codice irraggiungibile dopo continue](#8102-codice-irraggiungibile-dopo-continue)
-		- [8.10.3 Codice irraggiungibile dopo return](#8103-codice-irraggiungibile-dopo-return)
+
+- [8.1 Il ciclo while](#81-il-ciclo-while)
+- [8.2 Il ciclo do-while](#82-il-ciclo-do-while)
+- [8.3 Il ciclo for](#83-il-ciclo-for)
+- [8.4 Il ciclo for-each avanzato](#84-il-ciclo-for-each-avanzato)
+- [8.5 Cicli annidati](#85-cicli-annidati)
+- [8.6 Cicli infiniti](#86-cicli-infiniti)
+- [8.7 break e continue](#87-break-e-continue)
+- [8.8 Cicli etichettati](#88-cicli-etichettati)
+- [8.9 Ambito delle variabili di ciclo](#89-ambito-delle-variabili-di-ciclo)
+- [8.10 Codice irraggiungibile dopo break continue e return](#810-codice-irraggiungibile-dopo-break-continue-e-return)
+	- [8.10.1 Codice irraggiungibile dopo break](#8101-codice-irraggiungibile-dopo-break)
+	- [8.10.2 Codice irraggiungibile dopo continue](#8102-codice-irraggiungibile-dopo-continue)
+	- [8.10.3 Codice irraggiungibile dopo return](#8103-codice-irraggiungibile-dopo-return)
+
 
 ---
 

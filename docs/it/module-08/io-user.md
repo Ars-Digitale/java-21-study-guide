@@ -3,26 +3,27 @@
 <a id="indice"></a>
 ### Indice
 
-- [36. Interagire con l'Utente Stream I/O Standard](#36-interagire-con-lutente-stream-io-standard)
-  - [36.1 Gli Stream I/O Standard](#361-gli-stream-io-standard)
-  - [36.2 PrintStream Cosè e Perché Esiste](#362-printstream-cosè-e-perché-esiste)
-    - [36.2.1 Caratteristiche Chiave di PrintStream](#3621-caratteristiche-chiave-di-printstream)
-    - [36.2.2 Uso Base di PrintStream](#3622-uso-base-di-printstream)
-    - [36.2.3 Formattare l'Output con PrintStream](#3623-formattare-loutput-con-printstream)
-  - [36.3 Leggere Input come Stream I/O](#363-leggere-input-come-stream-io)
-    - [36.3.1 Lettura a Basso Livello da Systemin](#3631-lettura-a-basso-livello-da-systemin)
-    - [36.3.2 Uso di InputStreamReader e BufferedReader](#3632-uso-di-inputstreamreader-e-bufferedreader)
-  - [36.4 La Classe Scanner Comoda ma Sottile](#364-la-classe-scanner-comoda-ma-sottile)
-    - [36.4.1 Problemi Comuni di Scanner](#3641-problemi-comuni-di-scanner)
-  - [36.5 Chiusura degli Stream di Sistema](#365-chiusura-degli-stream-di-sistema)
-  - [36.6 Acquisire Input con Console](#366-acquisire-input-con-console)
-    - [36.6.1 Leggere Input da Console](#3661-leggere-input-da-console)
-    - [36.6.2 Leggere Password in Modo Sicuro](#3662-leggere-password-in-modo-sicuro)
-  - [36.7 Formattare l'Output della Console](#367-formattare-loutput-della-console)
-  - [36.8 Confronto tra Console Scanner e BufferedReader](#368-confronto-tra-console-scanner-e-bufferedreader)
-  - [36.9 Redirezione e Stream Standard](#369-redirezione-e-stream-standard)
-  - [36.10 Trappole Comuni e Best Practice](#3610-trappole-comuni-e-best-practice)
-  - [36.11 Sintesi Finale](#3611-sintesi-finale)
+
+- [36.1 Gli Stream I/O Standard](#361-gli-stream-io-standard)
+- [36.2 PrintStream Cosè e Perché Esiste](#362-printstream-cosè-e-perché-esiste)
+	- [36.2.1 Caratteristiche Chiave di PrintStream](#3621-caratteristiche-chiave-di-printstream)
+	- [36.2.2 Uso Base di PrintStream](#3622-uso-base-di-printstream)
+	- [36.2.3 Formattare l'Output con PrintStream](#3623-formattare-loutput-con-printstream)
+- [36.3 Leggere Input come Stream I/O](#363-leggere-input-come-stream-io)
+	- [36.3.1 Lettura a Basso Livello da Systemin](#3631-lettura-a-basso-livello-da-systemin)
+	- [36.3.2 Uso di InputStreamReader e BufferedReader](#3632-uso-di-inputstreamreader-e-bufferedreader)
+- [36.4 La Classe Scanner Comoda ma Sottile](#364-la-classe-scanner-comoda-ma-sottile)
+	- [36.4.1 Problemi Comuni di Scanner](#3641-problemi-comuni-di-scanner)
+- [36.5 Chiusura degli Stream di Sistema](#365-chiusura-degli-stream-di-sistema)
+- [36.6 Acquisire Input con Console](#366-acquisire-input-con-console)
+	- [36.6.1 Leggere Input da Console](#3661-leggere-input-da-console)
+	- [36.6.2 Leggere Password in Modo Sicuro](#3662-leggere-password-in-modo-sicuro)
+- [36.7 Formattare l'Output della Console](#367-formattare-loutput-della-console)
+- [36.8 Confronto tra Console Scanner e BufferedReader](#368-confronto-tra-console-scanner-e-bufferedreader)
+- [36.9 Redirezione e Stream Standard](#369-redirezione-e-stream-standard)
+- [36.10 Trappole Comuni e Best Practice](#3610-trappole-comuni-e-best-practice)
+- [36.11 Sintesi Finale](#3611-sintesi-finale)
+
 
 ---
 

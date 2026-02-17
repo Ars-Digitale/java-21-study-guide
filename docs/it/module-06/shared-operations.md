@@ -3,15 +3,16 @@
 <a id="indice"></a>
 ### Indice
 
-- [23. Operazioni Condivise delle Collezioni & Uguaglianza](#23-operazioni-condivise-delle-collezioni--uguaglianza)
-  - [23.1 Metodi Fondamentali delle Collezioni Disponibili per la Maggior Parte delle Collezioni](#231-metodi-fondamentali-delle-collezioni-disponibili-per-la-maggior-parte-delle-collezioni)
-    - [23.1.1 Operazioni di Mutazione](#2311-operazioni-di-mutazione)
-    - [23.1.2 Operazioni di Query](#2312-operazioni-di-query)
-  - [23.2 Uguaglianza](#232-uguaglianza)
-  - [23.3 Comportamento Fail-Fast](#233-comportamento-fail-fast)
-  - [23.4 Operazioni Bulk](#234-operazioni-bulk)
-  - [23.5 Tipi di Ritorno ed Eccezioni Comuni](#235-tipi-di-ritorno-ed-eccezioni-comuni)
-  - [23.6 Tabella di Riepilogo — Operazioni Condivise](#236-tabella-di-riepilogo--operazioni-condivise)
+
+- [23.1 Metodi Fondamentali delle Collezioni Disponibili per la Maggior Parte delle Collezioni](#231-metodi-fondamentali-delle-collezioni-disponibili-per-la-maggior-parte-delle-collezioni)
+	- [23.1.1 Operazioni di Mutazione](#2311-operazioni-di-mutazione)
+	- [23.1.2 Operazioni di Query](#2312-operazioni-di-query)
+- [23.2 Uguaglianza](#232-uguaglianza)
+- [23.3 Comportamento Fail-Fast](#233-comportamento-fail-fast)
+- [23.4 Operazioni Bulk](#234-operazioni-bulk)
+- [23.5 Tipi di Ritorno ed Eccezioni Comuni](#235-tipi-di-ritorno-ed-eccezioni-comuni)
+- [23.6 Tabella di Riepilogo — Operazioni Condivise](#236-tabella-di-riepilogo--operazioni-condivise)
+
 
 ---
 

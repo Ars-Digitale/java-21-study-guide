@@ -3,21 +3,22 @@
 <a id="indice"></a>
 ### Indice
 
-- [27. API Queue & Deque](#27-api-queue--deque)
-  - [27.1 Queue — Panoramica](#271-queue--panoramica)
-    - [27.1.1 Metodi Principali di Queue](#2711-metodi-principali-di-queue)
-    - [27.1.2 Implementazioni di Queue](#2712-implementazioni-di-queue)
-  - [27.2 Deque — Panoramica](#272-deque--panoramica)
-    - [27.2.1 Metodi Principali di Deque](#2721-metodi-principali-di-deque)
-    - [27.2.2 Implementazioni di Deque](#2722-implementazioni-di-deque)
-  - [27.3 Usare una Queue](#273-usare-una-queue)
-  - [27.4 Usare una Deque come Queue e come Stack](#274-usare-una-deque-come-queue-e-come-stack)
-    - [27.4.1 Esempio FIFO (Comportamento Queue)](#2741-esempio-fifo-comportamento-queue)
-    - [27.4.2 Esempio LIFO (Comportamento Stack)](#2742-esempio-lifo-comportamento-stack)
-  - [27.5 PriorityQueue — Queue Speciale](#275-priorityqueue--queue-speciale)
-  - [27.6 Blocking Queue (Basi)](#276-blocking-queue-basi)
-  - [27.7 Trappole Comuni](#277-trappole-comuni)
-  - [27.8 Tabella Riassuntiva](#278-tabella-riassuntiva)
+
+- [27.1 Queue — Panoramica](#271-queue--panoramica)
+	- [27.1.1 Metodi Principali di Queue](#2711-metodi-principali-di-queue)
+	- [27.1.2 Implementazioni di Queue](#2712-implementazioni-di-queue)
+- [27.2 Deque — Panoramica](#272-deque--panoramica)
+	- [27.2.1 Metodi Principali di Deque](#2721-metodi-principali-di-deque)
+	- [27.2.2 Implementazioni di Deque](#2722-implementazioni-di-deque)
+- [27.3 Usare una Queue](#273-usare-una-queue)
+- [27.4 Usare una Deque come Queue e come Stack](#274-usare-una-deque-come-queue-e-come-stack)
+	- [27.4.1 Esempio FIFO (Comportamento Queue)](#2741-esempio-fifo-comportamento-queue)
+	- [27.4.2 Esempio LIFO (Comportamento Stack)](#2742-esempio-lifo-comportamento-stack)
+- [27.5 PriorityQueue — Queue Speciale](#275-priorityqueue--queue-speciale)
+- [27.6 Blocking Queue (Basi)](#276-blocking-queue-basi)
+- [27.7 Trappole Comuni](#277-trappole-comuni)
+- [27.8 Tabella Riassuntiva](#278-tabella-riassuntiva)
+
 
 ---
 
