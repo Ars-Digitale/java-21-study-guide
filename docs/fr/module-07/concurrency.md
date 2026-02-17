@@ -3,32 +3,35 @@
 <a id="indice"></a>
 ### Indice
 
-- [31. Java Concurrency APIs](#31-java-concurrency-apis)
-  - [31.1 Objectifs et Portée de la Concurrency API](#311-objectifs-et-portée-de-la-concurrency-api)
-  - [31.2 Problèmes Fondamentaux du Threading](#312-problèmes-fondamentaux-du-threading)
-    - [31.2.1 Race Conditions](#3121-race-conditions)
-    - [31.2.2 Deadlock](#3122-deadlock)
-    - [31.2.3 Starvation](#3123-starvation)
-    - [31.2.4 Livelock](#3124-livelock)
-  - [31.3 Des Thread aux Task](#313-des-thread-aux-task)
-  - [31.4 Executor Framework](#314-executor-framework)
-    - [31.4.1 Submitting Task et Futures](#3141-submitting-task-et-futures)
-    - [31.4.2 Callable vs Runnable](#3142-callable-vs-runnable)
-  - [31.5 Thread Pools et Scheduling](#315-thread-pools-et-scheduling)
-  - [31.6 Lifecycle et Terminaison de l'Executor](#316-lifecycle-et-terminaison-de-lexecutor)
-  - [31.7 Stratégies de Thread Safety](#317-stratégies-de-thread-safety)
-    - [31.7.1 Synchronisation](#3171-synchronisation)
-    - [31.7.2 Variables atomiques](#3172-variables-atomiques)
-      - [31.7.2.1 Atomic classes](#31721-atomic-classes)
-      - [31.7.2.2 Méthodes Atomiques](#31722-méthodes-atomiques)
-    - [31.7.3 Lock Framework](#3173-lock-framework)
-      - [31.7.3.1 Lock implementations](#31731-lock-implementations)
-      - [31.7.3.2 Common Lock methods](#31732-common-lock-methods)
-    - [31.7.4 Coordination Utilities](#3174-coordination-utilities)
-  - [31.8 Concurrent Collections](#318-concurrent-collections)
-  - [31.9 Parallel Streams](#319-parallel-streams)
-  - [31.10 Relation avec Virtual Threads](#3110-relation-avec-virtual-threads)
-  - [31.11 Summary](#3111-summary)
+
+- [31.1 Objectifs et Portée de la Concurrency API](#311-objectifs-et-portée-de-la-concurrency-api)
+- [31.2 Problèmes Fondamentaux du Threading](#312-problèmes-fondamentaux-du-threading)
+	- [31.2.1 Race Conditions](#3121-race-conditions)
+	- [31.2.2 Deadlock](#3122-deadlock)
+	- [31.2.3 Starvation](#3123-starvation)
+	- [31.2.4 Livelock](#3124-livelock)
+- [31.3 Des Thread aux Task](#313-des-thread-aux-task)
+- [31.4 Executor Framework](#314-executor-framework)
+	- [31.4.1 Submitting Task et Futures](#3141-submitting-task-et-futures)
+	- [31.4.2 Callable vs Runnable](#3142-callable-vs-runnable)
+- [31.5 Thread Pools et Scheduling](#315-thread-pools-et-scheduling)
+- [31.6 Lifecycle et Terminaison de l'Executor](#316-lifecycle-et-terminaison-de-lexecutor)
+- [31.7 Stratégies de Thread Safety](#317-stratégies-de-thread-safety)
+	- [31.7.1 Synchronisation](#3171-synchronisation)
+	- [31.7.2 Variables atomiques](#3172-variables-atomiques)
+		- [31.7.2.1 Atomic classes](#31721-atomic-classes)
+		- [31.7.2.2 Méthodes Atomiques](#31722-méthodes-atomiques)
+	- [31.7.3 Lock Framework](#3173-lock-framework)
+		- [31.7.3.1 Lock implementations](#31731-lock-implementations)
+		- [31.7.3.2 Common Lock methods](#31732-common-lock-methods)
+	- [31.7.4 Coordination Utilities](#3174-coordination-utilities)
+- [31.8 Concurrent Collections](#318-concurrent-collections)
+- [31.9 Parallel Streams](#319-parallel-streams)
+- [31.10 Relation avec Virtual Threads](#3110-relation-avec-virtual-threads)
+- [31.11 Sommaire](#3111-sommaire)
+
+
+---
 
 Ce chapitre introduit la **Java Concurrency API**, qui fournit des abstractions de haut niveau pour gérer la concurrence de manière sûre, efficace et scalable.
 
@@ -591,8 +594,8 @@ Cela permet au code blocking de scaler efficacement sans redessiner les API.
 
 ---
 
-<a id="3111-summary"></a>
-## 31.11 Summary
+<a id="3111-sommaire"></a>
+## 31.11 Sommaire
 
 - La `Java Concurrency API` fournit une alternative robuste, scalable et plus sûre à la gestion manuelle des thread.
 - Abstraire l’exécution, coordonner les task et offrir des utilities thread-safe permet aux développeurs de construire des systèmes concurrents à la fois performants et maintenables.

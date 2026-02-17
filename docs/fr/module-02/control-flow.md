@@ -3,21 +3,21 @@
 <a id="table-des-matières"></a>
 ### Table des matières
 
-- [7. Flux de contrôle](#7-flux-de-contrôle)
-	- [7.1 L’instruction if](#71-linstruction-if)
-	- [7.2 L’instruction & l’expression switch](#72-linstruction-switch--lexpression)
-		- [7.2.1 La variable cible du switch peut être](#721-la-variable-cible-du-switch-peut-être)
-		- [7.2.2 Valeurs case acceptables](#722-valeurs-case-acceptables)
-		- [7.2.3 Compatibilité de type entre selector et case](#723-compatibilité-de-type-entre-selector-et-case)
-		- [7.2.4 Pattern matching dans switch](#724-pattern-matching-dans-switch)
-			- [7.2.4.1 Noms de variables et portée entre les branches](#7241-noms-de-variables-et-portée-entre-les-branches)
-			- [7.2.4.2 Ordonnancement, dominance et exhaustivité dans les switch à patterns](#7242-ordonnancement-dominance-et-exhaustivité-dans-les-switch-à-patterns)
-	- [7.3 Deux formes de switch : switch Statement vs switch Expression](#73-deux-formes-de-switch--switch-statement-vs-switch-expression)
-		- [7.3.1 L’instruction switch](#731-linstruction-switch)
-			- [7.3.1.1 Comportement de fall-through](#7311-comportement-de-fall-through)
-		- [7.3.2 L’expression switch](#732-lexpression-switch)
-			- [7.3.2.1 yield dans les blocs d’expression switch](#7321-yield-dans-les-blocs-dexpression-switch)
-			- [7.3.2.2 Exhaustivité pour les expressions switch](#7322-exhaustivité-pour-les-expressions-switch)
+
+- [7.1 L’instruction if](#71-linstruction-if)
+- [7.2 L’instruction & l’expression switch](#72-linstruction-switch--lexpression)
+	- [7.2.1 La variable cible du switch peut être](#721-la-variable-cible-du-switch-peut-être)
+	- [7.2.2 Valeurs case acceptables](#722-valeurs-case-acceptables)
+	- [7.2.3 Compatibilité de type entre selector et case](#723-compatibilité-de-type-entre-selector-et-case)
+	- [7.2.4 Pattern matching dans switch](#724-pattern-matching-dans-switch)
+		- [7.2.4.1 Noms de variables et portée entre les branches](#7241-noms-de-variables-et-portée-entre-les-branches)
+		- [7.2.4.2 Ordonnancement, dominance et exhaustivité dans les switch à patterns](#7242-ordonnancement-dominance-et-exhaustivité-dans-les-switch-à-patterns)
+- [7.3 Deux formes de switch : switch Statement vs switch Expression](#73-deux-formes-de-switch--switch-statement-vs-switch-expression)
+	- [7.3.1 L’instruction switch](#731-linstruction-switch)
+		- [7.3.1.1 Comportement de fall-through](#7311-comportement-de-fall-through)
+	- [7.3.2 L’expression switch](#732-lexpression-switch)
+		- [7.3.2.1 yield dans les blocs d’expression switch](#7321-yield-dans-les-blocs-dexpression-switch)
+		- [7.3.2.2 Exhaustivité pour les expressions switch](#7322-exhaustivité-pour-les-expressions-switch)
 - [7.4 Gestion de null](#74-gestion-de-null)
 
 

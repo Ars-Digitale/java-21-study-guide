@@ -3,17 +3,18 @@
 <a id="table-des-matières"></a>
 ### Table des matières
 
-- [28. Map API](#28-map-api)
-  - [28.1 Caractéristiques Fondamentales de Map](#281-caractéristiques-fondamentales-de-map)
-  - [28.2 Principales Implémentations de Map](#282-principales-implémentations-de-map)
-  - [28.3 Créer des Map](#283-créer-des-map)
-  - [28.4 Opérations de Base sur les Map](#284-opérations-de-base-sur-les-map)
-  - [28.5 Itérer sur une Map](#285-itérer-sur-une-map)
-  - [28.6 Déterminer l’Égalité dans les Map](#286-déterminer-légalité-dans-les-map)
-  - [28.7 Comportement Spécial de TreeMap](#287-comportement-spécial-de-treemap)
-  - [28.8 Gestion des Null](#288-gestion-des-null)
-  - [28.9 Pièges Courants](#289-pièges-courants)
-  - [28.10 Résumé](#2810-résumé)
+
+- [28.1 Caractéristiques Fondamentales de Map](#281-caractéristiques-fondamentales-de-map)
+- [28.2 Principales Implémentations de Map](#282-principales-implémentations-de-map)
+- [28.3 Créer des Map](#283-créer-des-map)
+- [28.4 Opérations de Base sur les Map](#284-opérations-de-base-sur-les-map)
+- [28.5 Itérer sur une Map](#285-itérer-sur-une-map)
+- [28.6 Déterminer l’Égalité dans les Map](#286-déterminer-légalité-dans-les-map)
+- [28.7 Comportement Spécial de TreeMap](#287-comportement-spécial-de-treemap)
+- [28.8 Gestion des Null](#288-gestion-des-null)
+- [28.9 Pièges Courants](#289-pièges-courants)
+- [28.10 Résumé](#2810-résumé)
+
 
 ---
 

@@ -3,15 +3,16 @@
 <a id="table-des-matières"></a>
 ### Table des matières
 
-- [23. Opérations Partagées des Collections & Égalité](#23-opérations-partagées-des-collections--égalité)
-  - [23.1 Méthodes Fondamentales des Collections Disponibles pour la Majorité des Collections](#231-méthodes-fondamentales-des-collections-disponibles-pour-la-majorité-des-collections)
-    - [23.1.1 Opérations de Mutation](#2311-opérations-de-mutation)
-    - [23.1.2 Opérations de Requête](#2312-opérations-de-requête)
-  - [23.2 Égalité](#232-égalité)
-  - [23.3 Comportement Fail-Fast](#233-comportement-fail-fast)
-  - [23.4 Opérations Bulk](#234-opérations-bulk)
-  - [23.5 Types de Retour et Exceptions Courantes](#235-types-de-retour-et-exceptions-courantes)
-  - [23.6 Tableau de Synthèse — Opérations Partagées](#236-tableau-de-synthèse--opérations-partagées)
+
+- [23.1 Méthodes Fondamentales des Collections Disponibles pour la Majorité des Collections](#231-méthodes-fondamentales-des-collections-disponibles-pour-la-majorité-des-collections)
+	- [23.1.1 Opérations de Mutation](#2311-opérations-de-mutation)
+	- [23.1.2 Opérations de Requête](#2312-opérations-de-requête)
+- [23.2 Égalité](#232-égalité)
+- [23.3 Comportement Fail-Fast](#233-comportement-fail-fast)
+- [23.4 Opérations Bulk](#234-opérations-bulk)
+- [23.5 Types de Retour et Exceptions Courantes](#235-types-de-retour-et-exceptions-courantes)
+- [23.6 Tableau de Synthèse — Opérations Partagées](#236-tableau-de-synthèse--opérations-partagées)
+
 
 ---
 

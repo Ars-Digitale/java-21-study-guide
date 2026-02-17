@@ -3,26 +3,27 @@
 <a id="table-des-matières"></a>
 ### Table des matières
 
-- [26. Set API ](#26-set-api)
-  - [26.1 Hiérarchie des Set Java-Collections-Framework](#261-hiérarchie-des-set-java-collections-framework)
-  - [26.2 Caractéristiques de Chaque Implémentation de Set](#262-caractéristiques-de-chaque-implémentation-de-set)
-    - [26.2.1 HashSet](#2621-hashset)
-    - [26.2.2 LinkedHashSet](#2622-linkedhashset)
-    - [26.2.3 TreeSet](#2623-treeset)
-  - [26.3 Règles d’Égalité dans les Set](#263-règles-dégalité-dans-les-set)
-    - [26.3.1 HashSet--LinkedHashSet](#2631-hashset--linkedhashset)
-    - [26.3.2 TreeSet](#2632-treeset)
-  - [26.4 Créer des Instances de Set](#264-créer-des-instances-de-set)
-    - [26.4.1 En Utilisant les Constructeurs](#2641-en-utilisant-les-constructeurs)
-    - [26.4.2 Constructeurs de Copie](#2642-constructeurs-de-copie)
-    - [26.4.3 Méthodes Factory](#2643-méthodes-factory)
-  - [26.5 Opérations Principales sur les Set](#265-opérations-principales-sur-les-set)
-    - [26.5.1 Ajouter des Éléments](#2651-ajouter-des-éléments)
-    - [26.5.2 Vérifier l’Appartenance](#2652-vérifier-lappartenance)
-    - [26.5.3 Supprimer des Éléments](#2653-supprimer-des-éléments)
-    - [26.5.4 Opérations Bulk](#2654-opérations-bulk)
-  - [26.6 Pièges Courants](#266-pièges-courants)
-  - [26.7 Tableau Récapitulatif](#267-tableau-récapitulatif)
+
+- [26.1 Hiérarchie des Set Java-Collections-Framework](#261-hiérarchie-des-set-java-collections-framework)
+- [26.2 Caractéristiques de Chaque Implémentation de Set](#262-caractéristiques-de-chaque-implémentation-de-set)
+	- [26.2.1 HashSet](#2621-hashset)
+	- [26.2.2 LinkedHashSet](#2622-linkedhashset)
+	- [26.2.3 TreeSet](#2623-treeset)
+- [26.3 Règles d’Égalité dans les Set](#263-règles-dégalité-dans-les-set)
+	- [26.3.1 HashSet--LinkedHashSet](#2631-hashset--linkedhashset)
+	- [26.3.2 TreeSet](#2632-treeset)
+- [26.4 Créer des Instances de Set](#264-créer-des-instances-de-set)
+	- [26.4.1 En Utilisant les Constructeurs](#2641-en-utilisant-les-constructeurs)
+	- [26.4.2 Constructeurs de Copie](#2642-constructeurs-de-copie)
+	- [26.4.3 Méthodes Factory](#2643-méthodes-factory)
+- [26.5 Opérations Principales sur les Set](#265-opérations-principales-sur-les-set)
+	- [26.5.1 Ajouter des Éléments](#2651-ajouter-des-éléments)
+	- [26.5.2 Vérifier l’Appartenance](#2652-vérifier-lappartenance)
+	- [26.5.3 Supprimer des Éléments](#2653-supprimer-des-éléments)
+	- [26.5.4 Opérations Bulk](#2654-opérations-bulk)
+- [26.6 Pièges Courants](#266-pièges-courants)
+- [26.7 Tableau Récapitulatif](#267-tableau-récapitulatif)
+
 
 ---
 

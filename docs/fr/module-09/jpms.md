@@ -3,21 +3,22 @@
 <a id="table-des-matières"></a>
 ### Table des matières
 
-- [37. Java Platform Module System (JPMS)](#37-java-platform-module-system-jpms)
-  - [37.1 Pourquoi les modules ont été introduits](#371-pourquoi-les-modules-ont-été-introduits)
-    - [37.1.1 Problèmes avec le classpath](#3711-problèmes-avec-le-classpath)
-    - [37.1.2 Exemple d’un problème de classpath](#3712-exemple-dun-problème-de-classpath)
-  - [37.2 Qu’est-ce qu’un module](#372-quest-ce-quun-module-)
-    - [37.2.1 Propriétés fondamentales des modules](#3721-propriétés-fondamentales-des-modules)
-    - [37.2.2 Module vs package vs JAR](#3722-module-vs-package-vs-jar)
-  - [37.3 Le descripteur module-infojava](#373-le-descripteur-module-infojava)
-    - [37.3.1 Descripteur de module minimal](#3731-descripteur-de-module-minimal)
-  - [37.4 Structure des répertoires d’un module](#374-structure-des-répertoires-dun-module)
-  - [37.5 Un premier programme modulaire](#375-un-premier-programme-modulaire)
-    - [37.5.1 Classe principale](#3751-classe-principale)
-    - [37.5.2 Descripteur du module](#3752-descripteur-du-module)
-  - [37.6 Explication de l’encapsulation forte](#376-explication-de-lencapsulation-forte)
-  - [37.7 Synthèse des idées clés](#377-synthèse-des-idées-clés)
+
+- [37.1 Pourquoi les modules ont été introduits](#371-pourquoi-les-modules-ont-été-introduits)
+	- [37.1.1 Problèmes avec le classpath](#3711-problèmes-avec-le-classpath)
+	- [37.1.2 Exemple d’un problème de classpath](#3712-exemple-dun-problème-de-classpath)
+- [37.2 Qu’est-ce qu’un module](#372-quest-ce-quun-module-)
+	- [37.2.1 Propriétés fondamentales des modules](#3721-propriétés-fondamentales-des-modules)
+	- [37.2.2 Module vs package vs JAR](#3722-module-vs-package-vs-jar)
+- [37.3 Le descripteur module-infojava](#373-le-descripteur-module-infojava)
+	- [37.3.1 Descripteur de module minimal](#3731-descripteur-de-module-minimal)
+- [37.4 Structure des répertoires d’un module](#374-structure-des-répertoires-dun-module)
+- [37.5 Un premier programme modulaire](#375-un-premier-programme-modulaire)
+	- [37.5.1 Classe principale](#3751-classe-principale)
+	- [37.5.2 Descripteur du module](#3752-descripteur-du-module)
+- [37.6 Explication de l’encapsulation forte](#376-explication-de-lencapsulation-forte)
+- [37.7 Synthèse des idées clés](#377-synthèse-des-idées-clés)
+
 
 ---
 

@@ -3,17 +3,18 @@
 <a id="table-des-matières"></a>
 ### Table des matières
 
-- [15. Chargement des Classes, Initialisation et Construction des Objets](#15-chargement-des-classes-initialisation-et-construction-des-objets)
-  - [15.1 Zones Mémoire Java Pertinentes pour l’Initialisation des Classes et des Objets](#151-zones-mémoire-java-pertinentes-pour-linitialisation-des-classes-et-des-objets)
-  - [15.2 Chargement des Classes avec Héritage](#152-chargement-des-classes-avec-héritage)
-    - [15.2.1 Ordre de Chargement des Classes](#1521-ordre-de-chargement-des-classes)
-    - [15.2.2 Que se Passe-t-il Pendant le Chargement d’une Classe](#1522-que-se-passe-t-il-pendant-le-chargement-dune-classe)
-  - [15.3 Création d’Objets avec Héritage](#153-création-dobjets-avec-héritage)
-    - [15.3.1 Ordre Complet de Création des Instances](#1531-ordre-complet-de-création-des-instances)
-  - [15.4 Exemple Complet : Initialisation Statique + d’Instance à Travers l’Héritage](#154-exemple-complet--initialisation-statique--dinstance-à-travers-lhéritage)
-  - [15.5 Diagramme de Visualisation](#155-diagramme-de-visualisation)
-  - [15.6 Règles Clés](#156-règles-clés)
-  - [15.7 Tableau Récapitulatif](#157-tableau-récapitulatif)
+
+- [15.1 Zones Mémoire Java Pertinentes pour l’Initialisation des Classes et des Objets](#151-zones-mémoire-java-pertinentes-pour-linitialisation-des-classes-et-des-objets)
+- [15.2 Chargement des Classes avec Héritage](#152-chargement-des-classes-avec-héritage)
+	- [15.2.1 Ordre de Chargement des Classes](#1521-ordre-de-chargement-des-classes)
+	- [15.2.2 Que se Passe-t-il Pendant le Chargement d’une Classe](#1522-que-se-passe-t-il-pendant-le-chargement-dune-classe)
+- [15.3 Création d’Objets avec Héritage](#153-création-dobjets-avec-héritage)
+	- [15.3.1 Ordre Complet de Création des Instances](#1531-ordre-complet-de-création-des-instances)
+- [15.4 Exemple Complet : Initialisation Statique + d’Instance à Travers l’Héritage](#154-exemple-complet--initialisation-statique--dinstance-à-travers-lhéritage)
+- [15.5 Diagramme de Visualisation](#155-diagramme-de-visualisation)
+- [15.6 Règles Clés](#156-règles-clés)
+- [15.7 Tableau Récapitulatif](#157-tableau-récapitulatif)
+
 
 ---
 

@@ -3,20 +3,21 @@
 <a id="table-des-matières"></a>
 ### Table des matières
 
-- [8. Constructions de boucle en Java](#8-looping-constructs-in-java)
-	- [8.1 La boucle while](#81-la-boucle-while)
-	- [8.2 La boucle do-while](#82-la-boucle-do-while)
-	- [8.3 La boucle for](#83-la-boucle-for)
-	- [8.4 La boucle for-each améliorée](#84-la-boucle-for-each-améliorée)
-	- [8.5 Boucles imbriquées](#85-boucles-imbriquées)
-	- [8.6 Boucles infinies](#86-boucles-infinies)
-	- [8.7 break et continue](#87-break-et-continue)
-	- [8.8 Boucles étiquetées](#88-boucles-étiquetées)
-	- [8.9 Portée des variables de boucle](#89-portée-des-variables-de-boucle)
-	- [8.10 Code inatteignable après break continue et return](#810-code-inatteignable-après-break-continue-et-return)
-		- [8.10.1 Code inatteignable après break](#8101-code-inatteignable-après-break)
-		- [8.10.2 Code inatteignable après continue](#8102-code-inatteignable-après-continue)
-		- [8.10.3 Code inatteignable après return](#8103-code-inatteignable-après-return)
+
+- [8.1 La boucle while](#81-la-boucle-while)
+- [8.2 La boucle do-while](#82-la-boucle-do-while)
+- [8.3 La boucle for](#83-la-boucle-for)
+- [8.4 La boucle for-each améliorée](#84-la-boucle-for-each-améliorée)
+- [8.5 Boucles imbriquées](#85-boucles-imbriquées)
+- [8.6 Boucles infinies](#86-boucles-infinies)
+- [8.7 break et continue](#87-break-et-continue)
+- [8.8 Boucles étiquetées](#88-boucles-étiquetées)
+- [8.9 Portée des variables de boucle](#89-portée-des-variables-de-boucle)
+- [8.10 Code inatteignable après break continue et return](#810-code-inatteignable-après-break-continue-et-return)
+	- [8.10.1 Code inatteignable après break](#8101-code-inatteignable-après-break)
+	- [8.10.2 Code inatteignable après continue](#8102-code-inatteignable-après-continue)
+	- [8.10.3 Code inatteignable après return](#8103-code-inatteignable-après-return)
+
 
 ---
 

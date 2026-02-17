@@ -2,24 +2,26 @@
 
 <a id="table-des-matières"></a>
 ### Table des matières
-- [1. Blocs Syntaxiques Fondamentaux](#1-blocs-syntaxiques-fondamentaux)
-	- [1.1 Valeur](#11-valeur)
-	- [1.2 Littéral](#12-littéral)
-	- [1.3 Identifiant](#13-identifiant)
-	- [1.4 Variable](#14-variable)
-	- [1.5 Type](#15-type)
-	- [1.6 Opérateur](#16-opérateur)
-	- [1.7 Expression](#17-expression)
-	- [1.8 Instruction](#18-instruction)
-	- [1.9 Bloc de code](#19-bloc-de-code)
-	- [1.10 Fonction / Méthode](#110-fonction--méthode)
-	- [1.11 Classe / Objet](#111-classe--objet)
-	- [1.12 Module / Package](#112-module--package)
-	- [1.13 Programme](#113-programme)
-	- [1.14 Système](#114-système)
-	- [1.15 Résumé sous forme d’échelle croissante](#115--résumé-sous-forme-déchelle-croissante)
-	- [1.16 Diagramme hiérarchique ASCII](#116--diagramme-hiérarchique-ascii)
-	- [1.17 Diagramme hiérarchique Mermaid](#117--diagramme-hiérarchique-mermaid)
+
+
+- [1.1 Valeur](#11-valeur)
+- [1.2 Littéral](#12-littéral)
+- [1.3 Identifiant](#13-identifiant)
+- [1.4 Variable](#14-variable)
+- [1.5 Type](#15-type)
+- [1.6 Opérateur](#16-opérateur)
+- [1.7 Expression](#17-expression)
+- [1.8 Instruction](#18-instruction)
+- [1.9 Bloc de code](#19-bloc-de-code)
+- [1.10 Fonction / Méthode](#110-fonction--méthode)
+- [1.11 Classe / Objet](#111-classe--objet)
+- [1.12 Module / Package](#112-module--package)
+- [1.13 Programme](#113-programme)
+- [1.14 Système](#114-système)
+- [1.15 Résumé sous forme d’échelle croissante](#115--résumé-sous-forme-déchelle-croissante)
+- [1.16 Diagramme hiérarchique ASCII](#116--diagramme-hiérarchique-ascii)
+- [1.17 Diagramme hiérarchique Mermaid](#117--diagramme-hiérarchique-mermaid)
+
 
 ---
 

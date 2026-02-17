@@ -3,17 +3,17 @@
 <a id="table-des-matières"></a>
 ### Table des matières
 
-- [39 Services dans JPMS Le Modèle ServiceLoader](#39-services-dans-jpms-le-modèle-serviceloader)
-  - [39.1 Le Problème que les Services Résolvent](#391-le-problème-que-les-services-résolvent)
-    - [39.1.1 Rôles dans le Modèle de Service](#3911-rôles-dans-le-modèle-de-service)
-    - [39.1.2 Module Interface de Service](#3912-module-interface-de-service)
-    - [39.1.3 Module Fournisseur de Service](#3913-module-fournisseur-de-service)
-    - [39.1.4 Module Consommateur de Service](#3914-module-consommateur-de-service)
-    - [39.1.5 Chargement des Services à lExécution](#3915-chargement-des-services-a-lxécution)
-    - [39.1.6 Règles de Résolution des Services](#3916-règles-de-résolution-des-services)
-    - [39.1.7 Couche Service Locator](#3917-couche-service-locator)
-    - [39.1.8 Schéma Séquentiel dInvocation](#3918-schéma-séquentiel-dinvocation)
-    - [39.1.9 Tableau Récapitulatif des Composants](#3919-tableau-récapitulatif-des-composants)
+
+- [39.1 Le Problème que les Services Résolvent](#391-le-problème-que-les-services-résolvent)
+	- [39.1.1 Rôles dans le Modèle de Service](#3911-rôles-dans-le-modèle-de-service)
+	- [39.1.2 Module Interface de Service](#3912-module-interface-de-service)
+	- [39.1.3 Module Fournisseur de Service](#3913-module-fournisseur-de-service)
+	- [39.1.4 Module Consommateur de Service](#3914-module-consommateur-de-service)
+	- [39.1.5 Chargement des Services à lExécution](#3915-chargement-des-services-a-lxécution)
+	- [39.1.6 Règles de Résolution des Services](#3916-règles-de-résolution-des-services)
+	- [39.1.7 Couche Service Locator](#3917-couche-service-locator)
+	- [39.1.8 Schéma Séquentiel dInvocation](#3918-schéma-séquentiel-dinvocation)
+	- [39.1.9 Tableau Récapitulatif des Composants](#3919-tableau-récapitulatif-des-composants)
 
 
 ---

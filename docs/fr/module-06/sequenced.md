@@ -3,20 +3,21 @@
 <a id="table-des-matières"></a>
 ### Table des matières
 
-- [29. Collections Séquencées & Map Séquencées](#29-collections-séquencées--map-séquencées)
-  - [29.1 Motivation et Contexte](#291-motivation-et-contexte)
-  - [29.2 Interface SequencedCollection](#292-interface-sequencedcollection)
-    - [29.2.1 Méthodes Principales de SequencedCollection](#2921-méthodes-principales-de-sequencedcollection)
-    - [29.2.2 Implémentations de SequencedCollection](#2922-implémentations-de-sequencedcollection)
-    - [29.2.3 Vues Inversées](#2923-vues-inversées)
-  - [29.3 Interface SequencedMap](#293-interface-sequencedmap)
-    - [29.3.1 Méthodes Principales de SequencedMap](#2931-méthodes-principales-de-sequencedmap)
-    - [29.3.2 Implémentations de SequencedMap](#2932-implémentations-de-sequencedmap)
-    - [29.3.3 Map Inversées](#2933-map-inversées)
-  - [29.4 Relation avec les API Existantes](#294-relation-avec-les-api-existantes)
-    - [29.4.1 Quels Types Built-in Sont Séquencés](#2941-quels-types-built-in-sont-séquencés)
-  - [29.5 Pièges Courants](#295-pièges-courants)
-  - [29.6 Résumé](#296-résumé)
+
+- [29.1 Motivation et Contexte](#291-motivation-et-contexte)
+- [29.2 Interface SequencedCollection](#292-interface-sequencedcollection)
+	- [29.2.1 Méthodes Principales de SequencedCollection](#2921-méthodes-principales-de-sequencedcollection)
+	- [29.2.2 Implémentations de SequencedCollection](#2922-implémentations-de-sequencedcollection)
+	- [29.2.3 Vues Inversées](#2923-vues-inversées)
+- [29.3 Interface SequencedMap](#293-interface-sequencedmap)
+	- [29.3.1 Méthodes Principales de SequencedMap](#2931-méthodes-principales-de-sequencedmap)
+	- [29.3.2 Implémentations de SequencedMap](#2932-implémentations-de-sequencedmap)
+	- [29.3.3 Map Inversées](#2933-map-inversées)
+- [29.4 Relation avec les API Existantes](#294-relation-avec-les-api-existantes)
+	- [29.4.1 Quels Types Built-in Sont Séquencés](#2941-quels-types-built-in-sont-séquencés)
+- [29.5 Pièges Courants](#295-pièges-courants)
+- [29.6 Résumé](#296-résumé)
+
 
 ---
 

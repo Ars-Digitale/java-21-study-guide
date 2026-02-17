@@ -3,16 +3,17 @@
 <a id="table-des-matières"></a>
 ### Table des matières
 
-- [3. Règles de nommage Java](#3-règles-de-nommage-java)
-  - [3.1 Règles pour les identifiants](#31-règles-pour-les-identifiants)
-    - [3.1.1 Mots réservés](#311-mots-réservés)
-      - [3.1.1.1 Mots-clés Java réservés](#3111-mots-clés-java-réservés)
-      - [3.1.1.2 Littéraux réservés](#3112-littéraux-réservés)
-    - [3.1.2 Sensibilité à la casse](#312-sensibilité-à-la-casse)
-    - [3.1.3 Début des identifiants](#313-début-des-identifiants)
-    - [3.1.4 Chiffres dans les identifiants](#314-chiffres-dans-les-identifiants)
-    - [3.1.5 Jeton `_` seul](#315-jeton-_-seul)
-    - [3.1.6 Littéraux numériques et caractère underscore](#316-littéraux-numériques-et-caractère-underscore)
+
+- [3.1 Règles pour les identifiants](#31-règles-pour-les-identifiants)
+	- [3.1.1 Mots réservés](#311-mots-réservés)
+		- [3.1.1.1 Mots-clés Java réservés](#3111-mots-clés-java-réservés)
+		- [3.1.1.2 Littéraux réservés](#3112-littéraux-réservés)
+	- [3.1.2 Sensibilité à la casse](#312-sensibilité-à-la-casse)
+	- [3.1.3 Début des identifiants](#313-début-des-identifiants)
+	- [3.1.4 Chiffres dans les identifiants](#314-chiffres-dans-les-identifiants)
+	- [3.1.5 Jeton `_` seul](#315-jeton-_-seul)
+	- [3.1.6 Littéraux numériques et caractère underscore](#316-littéraux-numériques-et-caractère-underscore)
+
 
 ---
 

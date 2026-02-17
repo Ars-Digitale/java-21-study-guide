@@ -3,27 +3,30 @@
 <a id="table-des-matières"></a>
 ### Table des matières
 
-- [19. Exceptions et Gestion des Erreurs](#19-exceptions-et-gestion-des-erreurs)
-	- [19.1 Hiérarchie et types dexceptions](#191-hiérarchie-et-types-dexceptions)
-		- [19.1.1 Throwable](#1911-throwable)
-		- [19.1.2 Error (unchecked)](#1912-error-unchecked)
-		- [19.1.3 Exceptions Checked (`Exception`)](#1913-exceptions-checked-exception)
-		- [19.1.4 Exceptions Unchecked (`RuntimeException`)](#1914-exceptions-unchecked-runtimeexception)
-	- [19.2 Déclarer et lancer des exceptions](#192-déclarer-et-lancer-des-exceptions)
-		- [19.2.1 Déclarer des exceptions avec throws](#1921-déclarer-des-exceptions-avec-throws)
-		- [19.2.2 Lancer des exceptions](#1922-lancer-des-exceptions)
-	- [19.3 Redéfinition de méthodes et règles sur les exceptions](#193-redéfinition-de-méthodes-et-règles-sur-les-exceptions)
-	- [19.4 Gestion des exceptions: try, catch, finally](#194-gestion-des-exceptions-try-catch-finally)
-		- [19.4.1 Syntaxe de base try-catch](#1941-syntaxe-de-base-try-catch)
-		- [19.4.2 Plusieurs blocs catch](#1942-plusieurs-blocs-catch)
-		- [19.4.3 Multi-catch Java-7](#1943-multi-catch-java-7)
-		- [19.4.4 Bloc finally](#1944-bloc-finally)
-	- [19.5 Gestion automatique des ressources try-with-resources](#195-gestion-automatique-des-ressources-try-with-resources)
-		- [19.5.1 Syntaxe de base](#1951-syntaxe-de-base)
-		- [19.5.2 Déclarer plusieurs ressources](#1952-déclarer-plusieurs-ressources)
-		- [19.5.3 Portée des ressources](#1953-portée-des-ressources)
-	- [19.6 Exceptions supprimées](#196-exceptions-supprimées)
-	- [19.7 Résumé des exceptions](#197-résumé-des-exceptions)
+
+- [19.1 Hiérarchie et types dexceptions](#191-hiérarchie-et-types-dexceptions)
+	- [19.1.1 Throwable](#1911-throwable)
+	- [19.1.2 Error (unchecked)](#1912-error-unchecked)
+	- [19.1.3 Exceptions Checked (`Exception`)](#1913-exceptions-checked-exception)
+	- [19.1.4 Exceptions Unchecked (`RuntimeException`)](#1914-exceptions-unchecked-runtimeexception)
+- [19.2 Déclarer et lancer des exceptions](#192-déclarer-et-lancer-des-exceptions)
+	- [19.2.1 Déclarer des exceptions avec throws](#1921-déclarer-des-exceptions-avec-throws)
+	- [19.2.2 Lancer des exceptions](#1922-lancer-des-exceptions)
+- [19.3 Redéfinition de méthodes et règles sur les exceptions](#193-redéfinition-de-méthodes-et-règles-sur-les-exceptions)
+- [19.4 Gestion des exceptions: try, catch, finally](#194-gestion-des-exceptions-try-catch-finally)
+	- [19.4.1 Syntaxe de base try-catch](#1941-syntaxe-de-base-try-catch)
+	- [19.4.2 Plusieurs blocs catch](#1942-plusieurs-blocs-catch)
+	- [19.4.3 Multi-catch Java-7](#1943-multi-catch-java-7)
+	- [19.4.4 Bloc finally](#1944-bloc-finally)
+- [19.5 Gestion automatique des ressources try-with-resources](#195-gestion-automatique-des-ressources-try-with-resources)
+	- [19.5.1 Syntaxe de base](#1951-syntaxe-de-base)
+	- [19.5.2 Déclarer plusieurs ressources](#1952-déclarer-plusieurs-ressources)
+	- [19.5.3 Portée des ressources](#1953-portée-des-ressources)
+- [19.6 Exceptions supprimées](#196-exceptions-supprimées)
+- [19.7 Résumé des exceptions](#197-résumé-des-exceptions)
+
+
+---
 
 Les `Exceptions` constituent le mécanisme structuré de Java pour gérer les conditions anormales à runtime.
 Elles permettent de séparer le flux normal dexécution de la logique de gestion des erreurs, améliorant la robustesse, la lisibilité et la correction du programme.

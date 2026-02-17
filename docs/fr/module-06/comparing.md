@@ -3,25 +3,26 @@
 <a id="table-des-matières"></a>
 ### Table des matières
 
-- [24. Comparable, Comparator & Tri en Java](#24-comparable-comparator--tri-en-java)
-  - [24.1 Comparable — Ordre Naturel](#241-comparable--ordre-naturel)
-    - [24.1.1 Contrat de la Méthode Comparable](#2411-contrat-de-la-méthode-comparable)
-    - [24.1.2 Classe d’Exemple Implémentant Comparable](#2412-exemple--classe-implémentant-comparable)
-    - [24.1.3 Erreurs Courantes de Comparable](#2413-erreurs-courantes-de-comparable)
-  - [24.2 Comparator — Ordre Personnalisé](#242-comparator--ordre-personnalisé)
-    - [24.2.1 Méthodes Principales de Comparator](#2421-méthodes-principales-de-comparator)
-      - [24.2.1.1 Méthodes de Support **Statiques** de Comparator](#24211-méthodes-de-support-statiques-de-comparator)
-      - [24.2.1.2 Méthodes d’**Instance** sur Comparator](#24212-méthodes-dinstance-sur-comparator)
-    - [24.2.2 Exemple de Comparator](#2422-exemple-de-comparator)
-  - [24.3 Comparable vs Comparator](#243-comparable-vs-comparator)
-  - [24.4 Tri des Tableaux et des Collections](#244-tri-des-tableaux-et-des-collections)
-    - [24.4.1 Arrays sort](#2441-arrays-sort)
-    - [24.4.2 Collections sort](#2442-collections-sort)
-  - [24.5 Tri Multi-Niveaux thenComparing](#245-tri-multi-niveaux-thencomparing)
-  - [24.6 Comparer les Primitifs Efficacement](#246-comparer-les-primitifs-efficacement)
-  - [24.7 Pièges Courants](#247-pièges-courants)
-  - [24.8 Exemple Complet](#248-exemple-complet)
-  - [24.9 Résumé](#249-résumé)
+
+- [24.1 Comparable — Ordre Naturel](#241-comparable--ordre-naturel)
+	- [24.1.1 Contrat de la Méthode Comparable](#2411-contrat-de-la-méthode-comparable)
+	- [24.1.2 Classe d’Exemple Implémentant Comparable](#2412-exemple--classe-implémentant-comparable)
+	- [24.1.3 Erreurs Courantes de Comparable](#2413-erreurs-courantes-de-comparable)
+- [24.2 Comparator — Ordre Personnalisé](#242-comparator--ordre-personnalisé)
+	- [24.2.1 Méthodes Principales de Comparator](#2421-méthodes-principales-de-comparator)
+		- [24.2.1.1 Méthodes de Support **Statiques** de Comparator](#24211-méthodes-de-support-statiques-de-comparator)
+		- [24.2.1.2 Méthodes d’**Instance** sur Comparator](#24212-méthodes-dinstance-sur-comparator)
+	- [24.2.2 Exemple de Comparator](#2422-exemple-de-comparator)
+- [24.3 Comparable vs Comparator](#243-comparable-vs-comparator)
+- [24.4 Tri des Tableaux et des Collections](#244-tri-des-tableaux-et-des-collections)
+	- [24.4.1 Arrays sort](#2441-arrays-sort)
+	- [24.4.2 Collections sort](#2442-collections-sort)
+- [24.5 Tri Multi-Niveaux thenComparing](#245-tri-multi-niveaux-thencomparing)
+- [24.6 Comparer les Primitifs Efficacement](#246-comparer-les-primitifs-efficacement)
+- [24.7 Pièges Courants](#247-pièges-courants)
+- [24.8 Exemple Complet](#248-exemple-complet)
+- [24.9 Résumé](#249-résumé)
+
 
 ---
 

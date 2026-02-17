@@ -3,26 +3,27 @@
 <a id="table-des-matières"></a>
 ### Table des matières
 
-- [36. Interagir avec l'Utilisateur Flux E/S Standard](#36-interagir-avec-lutilisateur-flux-es-standard)
-  - [36.1 Les Flux E/S Standard](#361-les-flux-es-standard)
-  - [36.2 PrintStream Quest-ce et Pourquoi il Existe](#362-printstream-quest-ce-et-pourquoi-il-existe)
-    - [36.2.1 Caractéristiques Clés de PrintStream](#3621-caractéristiques-clés-de-printstream)
-    - [36.2.2 Utilisation de Base de PrintStream](#3622-utilisation-de-base-de-printstream)
-    - [36.2.3 Formater l'Output avec PrintStream](#3623-formater-loutput-avec-printstream)
-  - [36.3 Lire l'Input comme Flux E/S](#363-lire-linput-comme-flux-es)
-    - [36.3.1 Lecture de Bas Niveau depuis Systemin](#3631-lecture-de-bas-niveau-depuis-systemin)
-    - [36.3.2 Utilisation de InputStreamReader et BufferedReader](#3632-utilisation-de-inputstreamreader-et-bufferedreader)
-  - [36.4 La Classe Scanner Pratique mais Subtile](#364-la-classe-scanner-pratique-mais-subtile)
-    - [36.4.1 Problèmes Communs de Scanner](#3641-problèmes-communs-de-scanner)
-  - [36.5 Fermeture des Flux Système](#365-fermeture-des-flux-système)
-  - [36.6 Acquérir l'Input avec Console](#366-acquérir-linput-avec-console)
-    - [36.6.1 Lire l'Input depuis Console](#3661-lire-linput-depuis-console)
-    - [36.6.2 Lire des Mots de Passe de Manière Sécurisée](#3662-lire-des-mots-de-passe-de-manière-sécurisée)
-  - [36.7 Formater l'Output de la Console](#367-formater-loutput-de-la-console)
-  - [36.8 Comparaison entre Console Scanner et BufferedReader](#368-comparaison-entre-console-scanner-et-bufferedreader)
-  - [36.9 Redirection et Flux Standard](#369-redirection-et-flux-standard)
-  - [36.10 Pièges Communs et Bonnes Pratiques](#3610-pièges-communs-et-bonnes-pratiques)
-  - [36.11 Synthèse Finale](#3611-synthèse-finale)
+
+- [36.1 Les Flux E/S Standard](#361-les-flux-es-standard)
+- [36.2 PrintStream Quest-ce et Pourquoi il Existe](#362-printstream-quest-ce-et-pourquoi-il-existe)
+	- [36.2.1 Caractéristiques Clés de PrintStream](#3621-caractéristiques-clés-de-printstream)
+	- [36.2.2 Utilisation de Base de PrintStream](#3622-utilisation-de-base-de-printstream)
+	- [36.2.3 Formater l'Output avec PrintStream](#3623-formater-loutput-avec-printstream)
+- [36.3 Lire l'Input comme Flux E/S](#363-lire-linput-comme-flux-es)
+	- [36.3.1 Lecture de Bas Niveau depuis Systemin](#3631-lecture-de-bas-niveau-depuis-systemin)
+	- [36.3.2 Utilisation de InputStreamReader et BufferedReader](#3632-utilisation-de-inputstreamreader-et-bufferedreader)
+- [36.4 La Classe Scanner Pratique mais Subtile](#364-la-classe-scanner-pratique-mais-subtile)
+	- [36.4.1 Problèmes Communs de Scanner](#3641-problèmes-communs-de-scanner)
+- [36.5 Fermeture des Flux Système](#365-fermeture-des-flux-système)
+- [36.6 Acquérir l'Input avec Console](#366-acquérir-linput-avec-console)
+	- [36.6.1 Lire l'Input depuis Console](#3661-lire-linput-depuis-console)
+	- [36.6.2 Lire des Mots de Passe de Manière Sécurisée](#3662-lire-des-mots-de-passe-de-manière-sécurisée)
+- [36.7 Formater l'Output de la Console](#367-formater-loutput-de-la-console)
+- [36.8 Comparaison entre Console Scanner et BufferedReader](#368-comparaison-entre-console-scanner-et-bufferedreader)
+- [36.9 Redirection et Flux Standard](#369-redirection-et-flux-standard)
+- [36.10 Pièges Communs et Bonnes Pratiques](#3610-pièges-communs-et-bonnes-pratiques)
+- [36.11 Synthèse Finale](#3611-synthèse-finale)
+
 
 ---
 
