@@ -3,25 +3,26 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [24. Comparable, Comparator & Sorting in Java](#24-comparable-comparator--sorting-in-java)
-  - [24.1 Comparable — Natural Ordering](#241-comparable--natural-ordering)
-    - [24.1.1 Comparable Method Contract](#2411-comparable-method-contract)
-    - [24.1.2 Example Class Implementing Comparable](#2412-example-class-implementing-comparable)
-    - [24.1.3 Common Comparable Pitfalls](#2413-common-comparable-pitfalls)
-  - [24.2 Comparator — Custom Ordering](#242-comparator--custom-ordering)
-    - [24.2.1 Comparator Core Methods](#2421-comparator-core-methods)
-      - [24.2.1.1 Comparator Helper Static Methods](#24211-comparator-helper-static-methods)
-      - [24.2.1.2 Instance Methods on Comparator](#24212-instance-methods-on-comparator)
-    - [24.2.2 Comparator Example](#2422-comparator-example)
-  - [24.3 Comparable vs Comparator](#243-comparable-vs-comparator)
-  - [24.4 Sorting Arrays and Collections](#244-sorting-arrays-and-collections)
-    - [24.4.1 Arrays sort](#2441-arrays-sort)
-    - [24.4.2 Collections sort](#2442-collections-sort)
-  - [24.5 Multi-Level Sorting thenComparing](#245-multi-level-sorting-thencomparing)
-  - [24.6 Comparing Primitives Efficiently](#246-comparing-primitives-efficiently)
-  - [24.7 Common Traps](#247-common-traps)
-  - [24.8 Full Example](#248-full-example)
-  - [24.9 Summary](#249-summary)
+
+- [24.1 Comparable — Natural Ordering](#241-comparable--natural-ordering)
+	- [24.1.1 Comparable Method Contract](#2411-comparable-method-contract)
+	- [24.1.2 Example Class Implementing Comparable](#2412-example-class-implementing-comparable)
+	- [24.1.3 Common Comparable Pitfalls](#2413-common-comparable-pitfalls)
+- [24.2 Comparator — Custom Ordering](#242-comparator--custom-ordering)
+	- [24.2.1 Comparator Core Methods](#2421-comparator-core-methods)
+		- [24.2.1.1 Comparator Helper Static Methods](#24211-comparator-helper-static-methods)
+		- [24.2.1.2 Instance Methods on Comparator](#24212-instance-methods-on-comparator)
+	- [24.2.2 Comparator Example](#2422-comparator-example)
+- [24.3 Comparable vs Comparator](#243-comparable-vs-comparator)
+- [24.4 Sorting Arrays and Collections](#244-sorting-arrays-and-collections)
+	- [24.4.1 Arrays sort](#2441-arrays-sort)
+	- [24.4.2 Collections sort](#2442-collections-sort)
+- [24.5 Multi-Level Sorting thenComparing](#245-multi-level-sorting-thencomparing)
+- [24.6 Comparing Primitives Efficiently](#246-comparing-primitives-efficiently)
+- [24.7 Common Traps](#247-common-traps)
+- [24.8 Full Example](#248-full-example)
+- [24.9 Summary](#249-summary)
+
 
 ---
 

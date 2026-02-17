@@ -3,17 +3,18 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [28. Map API](#28-map-api)
-  - [28.1 Core Map Characteristics](#281-core-map-characteristics)
-  - [28.2 Main Map Implementations](#282-main-map-implementations)
-  - [28.3 Creating Maps](#283-creating-maps)
-  - [28.4 Basic Map Operations](#284-basic-map-operations)
-  - [28.5 Iterating Over a Map](#285-iterating-over-a-map)
-  - [28.6 Determining Equality in Maps](#286-determining-equality-in-maps)
-  - [28.7 Special Behavior of TreeMap](#287-special-behavior-of-treemap)
-  - [28.8 Null Handling](#288-null-handling)
-  - [28.9 Common Pitfalls](#289-common-pitfalls)
-  - [28.10 Summary](#2810-summary)
+
+- [28.1 Core Map Characteristics](#281-core-map-characteristics)
+- [28.2 Main Map Implementations](#282-main-map-implementations)
+- [28.3 Creating Maps](#283-creating-maps)
+- [28.4 Basic Map Operations](#284-basic-map-operations)
+- [28.5 Iterating Over a Map](#285-iterating-over-a-map)
+- [28.6 Determining Equality in Maps](#286-determining-equality-in-maps)
+- [28.7 Special Behavior of TreeMap](#287-special-behavior-of-treemap)
+- [28.8 Null Handling](#288-null-handling)
+- [28.9 Common Pitfalls](#289-common-pitfalls)
+- [28.10 Summary](#2810-summary)
+
 
 ---
 

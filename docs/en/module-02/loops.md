@@ -3,20 +3,20 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [8. Looping Constructs in Java](#8-looping-constructs-in-java)
-  - [8.1 The while Loop](#81-the-while-loop)
-  - [8.2 The do-while Loop](#82-the-do-while-loop)
-  - [8.3 The for Loop](#83-the-for-loop)
-  - [8.4 The Enhanced for-each Loop](#84-the-enhanced-for-each-loop)
-  - [8.5 Nested Loops](#85-nested-loops)
-  - [8.6 Infinite Loops](#86-infinite-loops)
-  - [8.7 break and continue](#87-break-and-continue)
-  - [8.8 Labeled Loops](#88-labeled-loops)
-  - [8.9 Loop Variable Scope](#89-loop-variable-scope)
-  - [8.10 Unreachable Code After break continue and return](#810-unreachable-code-after-break-continue-and-return)
-    - [8.10.1 Unreachable Code After break](#8101-unreachable-code-after-break)
-    - [8.10.2 Unreachable Code After continue](#8102-unreachable-code-after-continue)
-    - [8.10.3 Unreachable Code After return](#8103-unreachable-code-after-return)
+
+- [8.1 The while Loop](#81-the-while-loop)
+- [8.2 The do-while Loop](#82-the-do-while-loop)
+- [8.3 The for Loop](#83-the-for-loop)
+- [8.4 The Enhanced for-each Loop](#84-the-enhanced-for-each-loop)
+- [8.5 Nested Loops](#85-nested-loops)
+- [8.6 Infinite Loops](#86-infinite-loops)
+- [8.7 break and continue](#87-break-and-continue)
+- [8.8 Labeled Loops](#88-labeled-loops)
+- [8.9 Loop Variable Scope](#89-loop-variable-scope)
+- [8.10 Unreachable Code After break continue and return](#810-unreachable-code-after-break-continue-and-return)
+	- [8.10.1 Unreachable Code After break](#8101-unreachable-code-after-break)
+	- [8.10.2 Unreachable Code After continue](#8102-unreachable-code-after-continue)
+	- [8.10.3 Unreachable Code After return](#8103-unreachable-code-after-return)
 
 ---
 

@@ -3,22 +3,23 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [11. Math in Java](#11-math-in-java)
-  - [11.1 Math APIs](#111-math-apis)
-    - [11.1.1 Maximum and Minimum Between Two Values](#1111-maximum-and-minimum-between-two-values)
-    - [11.1.2 Math.round](#1112-mathround)
-    - [11.1.3 Math.ceil Ceiling](#1113-mathceil-ceiling)
-    - [11.1.4 Math.floor Floor](#1114-mathfloor-floor)
-    - [11.1.5 Math.pow](#1115-mathpow)
-    - [11.1.6 Math.random](#1116-mathrandom)
-    - [11.1.7 Math.abs](#1117-mathabs)
-    - [11.1.8 Math.sqrt](#1118-mathsqrt)
-    - [11.1.9 Summary Table](#1119-summary-table)
-  - [11.2 BigInteger and BigDecimal](#112-biginteger-and-bigdecimal)
-    - [11.2.1 Why double and float Are Not Enough](#1121-why-double-and-float-are-not-enough)
-    - [11.2.2 BigInteger — Arbitrary-Precision Integers](#1122-biginteger--arbitrary-precision-integers)
-    - [11.2.3 Creating BigInteger](#1123-creating-biginteger)
-    - [11.2.4 Operations No Operators](#1124-operations-no-operators)
+
+- [11.1 Math APIs](#111-math-apis)
+	- [11.1.1 Maximum and Minimum Between Two Values](#1111-maximum-and-minimum-between-two-values)
+	- [11.1.2 Math.round](#1112-mathround)
+	- [11.1.3 Math.ceil Ceiling](#1113-mathceil-ceiling)
+	- [11.1.4 Math.floor Floor](#1114-mathfloor-floor)
+	- [11.1.5 Math.pow](#1115-mathpow)
+	- [11.1.6 Math.random](#1116-mathrandom)
+	- [11.1.7 Math.abs](#1117-mathabs)
+	- [11.1.8 Math.sqrt](#1118-mathsqrt)
+	- [11.1.9 Summary Table](#1119-summary-table)
+- [11.2 BigInteger and BigDecimal](#112-biginteger-and-bigdecimal)
+	- [11.2.1 Why double and float Are Not Enough](#1121-why-double-and-float-are-not-enough)
+	- [11.2.2 BigInteger — Arbitrary-Precision Integers](#1122-biginteger--arbitrary-precision-integers)
+	- [11.2.3 Creating BigInteger](#1123-creating-biginteger)
+	- [11.2.4 Operations No Operators](#1124-operations-no-operators)
+
 
 ---
 

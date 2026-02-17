@@ -3,17 +3,17 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [39 Services in JPMS The ServiceLoader Model](#39-services-in-jpms-the-serviceloader-model)
-  - [39.1 The Problem Services Solve](#391-the-problem-services-solve)
-    - [39.1.1 Roles in the Service Model](#3911-roles-in-the-service-model)
-    - [39.1.2 Service Interface Module](#3912-service-interface-module)
-    - [39.1.3 Service Provider Module](#3913-service-provider-module)
-    - [39.1.4 Service Consumer Module](#3914-service-consumer-module)
-    - [39.1.5 Loading Services at Runtime](#3915-loading-services-at-runtime)
-    - [39.1.6 Service Resolution Rules](#3916-service-resolution-rules)
-    - [39.1.7 Service Locator Layer](#3917-service-locator-layer)
-    - [39.1.8 Sequential Invocation Diagram](#3918-sequential-invocation-diagram)
-    - [39.1.9 Component Summary Table](#3919-component-summary-table)
+
+- [39.1 The Problem Services Solve](#391-the-problem-services-solve)
+	- [39.1.1 Roles in the Service Model](#3911-roles-in-the-service-model)
+	- [39.1.2 Service Interface Module](#3912-service-interface-module)
+	- [39.1.3 Service Provider Module](#3913-service-provider-module)
+	- [39.1.4 Service Consumer Module](#3914-service-consumer-module)
+	- [39.1.5 Loading Services at Runtime](#3915-loading-services-at-runtime)
+	- [39.1.6 Service Resolution Rules](#3916-service-resolution-rules)
+	- [39.1.7 Service Locator Layer](#3917-service-locator-layer)
+	- [39.1.8 Sequential Invocation Diagram](#3918-sequential-invocation-diagram)
+	- [39.1.9 Component Summary Table](#3919-component-summary-table)
 
 
 ---

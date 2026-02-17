@@ -3,20 +3,21 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [29. Sequenced Collections & Sequenced Maps](#29-sequenced-collections--sequenced-maps)
-  - [29.1 Motivation and Background](#291-motivation-and-background)
-  - [29.2 SequencedCollection Interface](#292-sequencedcollection-interface)
-    - [29.2.1 Core Methods of SequencedCollection](#2921-core-methods-of-sequencedcollection)
-    - [29.2.2 Implementations of SequencedCollection](#2922-implementations-of-sequencedcollection)
-    - [29.2.3 Reversed Views](#2923-reversed-views)
-  - [29.3 SequencedMap Interface](#293-sequencedmap-interface)
-    - [29.3.1 Core Methods of SequencedMap](#2931-core-methods-of-sequencedmap)
-    - [29.3.2 Implementations of SequencedMap](#2932-implementations-of-sequencedmap)
-    - [29.3.3 Reversed Maps](#2933-reversed-maps)
-  - [29.4 Relationship with Existing APIs](#294-relationship-with-existing-apis)
-    - [29.4.1 Which Built-in Types Are Sequenced](#2941-which-built-in-types-are-sequenced)
-  - [29.5 Common Pitfalls](#295-common-pitfalls)
-  - [29.6 Summary](#296-summary)
+
+- [29.1 Motivation and Background](#291-motivation-and-background)
+- [29.2 SequencedCollection Interface](#292-sequencedcollection-interface)
+	- [29.2.1 Core Methods of SequencedCollection](#2921-core-methods-of-sequencedcollection)
+	- [29.2.2 Implementations of SequencedCollection](#2922-implementations-of-sequencedcollection)
+	- [29.2.3 Reversed Views](#2923-reversed-views)
+- [29.3 SequencedMap Interface](#293-sequencedmap-interface)
+	- [29.3.1 Core Methods of SequencedMap](#2931-core-methods-of-sequencedmap)
+	- [29.3.2 Implementations of SequencedMap](#2932-implementations-of-sequencedmap)
+	- [29.3.3 Reversed Maps](#2933-reversed-maps)
+- [29.4 Relationship with Existing APIs](#294-relationship-with-existing-apis)
+	- [29.4.1 Which Built-in Types Are Sequenced](#2941-which-built-in-types-are-sequenced)
+- [29.5 Common Pitfalls](#295-common-pitfalls)
+- [29.6 Summary](#296-summary)
+
 
 ---
 

@@ -3,15 +3,16 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [23. Shared Collection Operations & Equality](#23-shared-collection-operations--equality)
-  - [23.1 Core Collection Methods Available to Most Collections](#231-core-collection-methods-available-to-most-collections)
-    - [23.1.1 Mutating Operations](#2311-mutating-operations)
-    - [23.1.2 Query Operations](#2312-query-operations)
-  - [23.2 Equality](#232-equality)
-  - [23.3 Fail-Fast Behavior](#233-fail-fast-behavior)
-  - [23.4 Bulk Operations](#234-bulk-operations)
-  - [23.5 Common Return Types and Exceptions](#235-common-return-types-and-exceptions)
-  - [23.6 Summary Table — Shared Operations](#236-summary-table--shared-operations)
+
+- [23.1 Core Collection Methods Available to Most Collections](#231-core-collection-methods-available-to-most-collections)
+	- [23.1.1 Mutating Operations](#2311-mutating-operations)
+	- [23.1.2 Query Operations](#2312-query-operations)
+- [23.2 Equality](#232-equality)
+- [23.3 Fail-Fast Behavior](#233-fail-fast-behavior)
+- [23.4 Bulk Operations](#234-bulk-operations)
+- [23.5 Common Return Types and Exceptions](#235-common-return-types-and-exceptions)
+- [23.6 Summary Table — Shared Operations](#236-summary-table--shared-operations)
+
 
 ---
 

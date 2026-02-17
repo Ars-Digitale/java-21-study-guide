@@ -3,21 +3,22 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [27. Queue & Deque API](#27-queue--deque-api)
-  - [27.1 Queue — Overview](#271-queue--overview)
-    - [27.1.1 Queue Core Methods](#2711-queue-core-methods)
-    - [27.1.2 Queue Implementations](#2712-queue-implementations)
-  - [27.2 Deque — Overview](#272-deque--overview)
-    - [27.2.1 Deque Core Methods](#2721-deque-core-methods)
-    - [27.2.2 Deque Implementations](#2722-deque-implementations)
-  - [27.3 Using a Queue](#273-using-a-queue)
-  - [27.4 Using a Deque as-Queue and as-Stack](#274-using-a-deque-as-queue-and-as-stack)
-    - [27.4.1 FIFO Example Queue-Behavior](#2741-fifo-example-queue-behavior)
-    - [27.4.2 LIFO Example Stack-Behavior](#2742-lifo-example-stack-behavior)
-  - [27.5 PriorityQueue — Special Queue](#275-priorityqueue--special-queue)
-  - [27.6 Blocking Queues Basics](#276-blocking-queues-basics)
-  - [27.7 Common Pitfalls](#277-common-pitfalls)
-  - [27.8 Summary Table](#278-summary-table)
+
+- [27.1 Queue — Overview](#271-queue--overview)
+	- [27.1.1 Queue Core Methods](#2711-queue-core-methods)
+	- [27.1.2 Queue Implementations](#2712-queue-implementations)
+- [27.2 Deque — Overview](#272-deque--overview)
+	- [27.2.1 Deque Core Methods](#2721-deque-core-methods)
+	- [27.2.2 Deque Implementations](#2722-deque-implementations)
+- [27.3 Using a Queue](#273-using-a-queue)
+- [27.4 Using a Deque as-Queue and as-Stack](#274-using-a-deque-as-queue-and-as-stack)
+	- [27.4.1 FIFO Example Queue-Behavior](#2741-fifo-example-queue-behavior)
+	- [27.4.2 LIFO Example Stack-Behavior](#2742-lifo-example-stack-behavior)
+- [27.5 PriorityQueue — Special Queue](#275-priorityqueue--special-queue)
+- [27.6 Blocking Queues Basics](#276-blocking-queues-basics)
+- [27.7 Common Pitfalls](#277-common-pitfalls)
+- [27.8 Summary Table](#278-summary-table)
+
 
 ---
 

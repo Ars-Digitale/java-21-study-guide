@@ -3,22 +3,22 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [7. Control Flow](#7-control-flow)
-  - [7.1 The if Statement](#71-the-if-statement)
-  - [7.2 The switch Statement & Expression](#72-the-switch-statement--expression)
-    - [7.2.1 The switch target variable can be](#721-the-switch-target-variable-can-be)
-    - [7.2.2 Acceptable Case Values](#722-acceptable-case-values)
-    - [7.2.3 Type Compatibility Between Selector and Case](#723-type-compatibility-between-selector-and-case)
-    - [7.2.4 Pattern Matching in Switch](#724-pattern-matching-in-switch)
-      - [7.2.4.1 Variable Names and Scope Across Branches](#7241-variable-names-and-scope-across-branches)
-      - [7.2.4.2 Ordering Dominance and Exhaustiveness in Pattern Switches](#7242-ordering-dominance-and-exhaustiveness-in-pattern-switches)
-  - [7.3 Two Forms of switch Statement vs switch Expression](#73-two-forms-of-switch-switch-statement-vs-switch-expression)
-    - [7.3.1 The Switch Statement](#731-the-switch-statement)
-      - [7.3.1.1 Fall-Through Behavior](#7311-fall-through-behavior)
-    - [7.3.2 The Switch Expression](#732-the-switch-expression)
-      - [7.3.2.1 yield in Switch Expression Blocks](#7321-yield-in-switch-expression-blocks)
-      - [7.3.2.2 Exhaustiveness for Switch Expressions](#7322-exhaustiveness-for-switch-expressions)
-  - [7.4 Null Handling](#74-null-handling)
+
+- [7.1 The if Statement](#71-the-if-statement)
+- [7.2 The switch Statement & Expression](#72-the-switch-statement--expression)
+	- [7.2.1 The switch target variable can be](#721-the-switch-target-variable-can-be)
+	- [7.2.2 Acceptable Case Values](#722-acceptable-case-values)
+	- [7.2.3 Type Compatibility Between Selector and Case](#723-type-compatibility-between-selector-and-case)
+	- [7.2.4 Pattern Matching in Switch](#724-pattern-matching-in-switch)
+		- [7.2.4.1 Variable Names and Scope Across Branches](#7241-variable-names-and-scope-across-branches)
+		- [7.2.4.2 Ordering Dominance and Exhaustiveness in Pattern Switches](#7242-ordering-dominance-and-exhaustiveness-in-pattern-switches)
+- [7.3 Two Forms of switch Statement vs switch Expression](#73-two-forms-of-switch-switch-statement-vs-switch-expression)
+	- [7.3.1 The Switch Statement](#731-the-switch-statement)
+		- [7.3.1.1 Fall-Through Behavior](#7311-fall-through-behavior)
+	- [7.3.2 The Switch Expression](#732-the-switch-expression)
+		- [7.3.2.1 yield in Switch Expression Blocks](#7321-yield-in-switch-expression-blocks)
+		- [7.3.2.2 Exhaustiveness for Switch Expressions](#7322-exhaustiveness-for-switch-expressions)
+- [7.4 Null Handling](#74-null-handling)
 
 
 ---

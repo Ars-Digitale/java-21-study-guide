@@ -3,21 +3,22 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [37. Java Platform Module System (JPMS)](#37-java-platform-module-system-jpms)
-  - [37.1 Why Modules Were Introduced](#371-why-modules-were-introduced)
-    - [37.1.1 Problems with the Classpath](#3711-problems-with-the-classpath)
-    - [37.1.2 Example of a Classpath Problem](#3712-example-of-a-classpath-problem)
-  - [37.2 What Is a Module](#372-what-is-a-module)
-    - [37.2.1 Core Properties of Modules](#3721-core-properties-of-modules)
-    - [37.2.2 Module vs Package vs JAR](#3722-module-vs-package-vs-jar)
-  - [37.3 The module-infojava Descriptor](#373-the-module-infojava-descriptor)
-    - [37.3.1 Minimal Module Descriptor](#3731-minimal-module-descriptor)
-  - [37.4 Module Directory Structure](#374-module-directory-structure)
-  - [37.5 A First Modular Program](#375-a-first-modular-program)
-    - [37.5.1 Main Class](#3751-main-class)
-    - [37.5.2 Module Descriptor](#3752-module-descriptor)
-  - [37.6 Strong Encapsulation Explained](#376-strong-encapsulation-explained)
-  - [37.7 Summary of Key Ideas](#377-summary-of-key-ideas)
+
+- [37.1 Why Modules Were Introduced](#371-why-modules-were-introduced)
+	- [37.1.1 Problems with the Classpath](#3711-problems-with-the-classpath)
+	- [37.1.2 Example of a Classpath Problem](#3712-example-of-a-classpath-problem)
+- [37.2 What Is a Module](#372-what-is-a-module)
+	- [37.2.1 Core Properties of Modules](#3721-core-properties-of-modules)
+	- [37.2.2 Module vs Package vs JAR](#3722-module-vs-package-vs-jar)
+- [37.3 The module-infojava Descriptor](#373-the-module-infojava-descriptor)
+	- [37.3.1 Minimal Module Descriptor](#3731-minimal-module-descriptor)
+- [37.4 Module Directory Structure](#374-module-directory-structure)
+- [37.5 A First Modular Program](#375-a-first-modular-program)
+	- [37.5.1 Main Class](#3751-main-class)
+	- [37.5.2 Module Descriptor](#3752-module-descriptor)
+- [37.6 Strong Encapsulation Explained](#376-strong-encapsulation-explained)
+- [37.7 Summary of Key Ideas](#377-summary-of-key-ideas)
+
 
 ---
 

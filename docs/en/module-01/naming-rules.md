@@ -3,16 +3,15 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [3. Java Naming Rules](#3-java-naming-rules)
-  - [3.1 Rules for Identifiers](#31-rules-for-identifiers)
-    - [3.1.1 Reserved Words](#311-reserved-words)
-      - [3.1.1.1 Java Reserved Keywords](#3111-java-reserved-keywords)
-      - [3.1.1.2 Reserved Literals](#3112-reserved-literals)
-    - [3.1.2 Case Sensitivity](#312-case-sensitivity)
-    - [3.1.3 Beginning of Identifiers](#313-beginning-of-identifiers)
-    - [3.1.4 Numbers in Identifiers](#314-numbers-in-identifiers)
-    - [3.1.5 Single _ Token](#315-single-_-token)
-    - [3.1.6 Numeric Literals & Underscore Character](#316-numeric-literals--underscore-character)
+- [3.1 Rules for Identifiers](#31-rules-for-identifiers)
+	- [3.1.1 Reserved Words](#311-reserved-words)
+		- [3.1.1.1 Java Reserved Keywords](#3111-java-reserved-keywords)
+		- [3.1.1.2 Reserved Literals](#3112-reserved-literals)
+	- [3.1.2 Case Sensitivity](#312-case-sensitivity)
+	- [3.1.3 Beginning of Identifiers](#313-beginning-of-identifiers)
+	- [3.1.4 Numbers in Identifiers](#314-numbers-in-identifiers)
+	- [3.1.5 Single _ Token](#315-single-_-token)
+	- [3.1.6 Numeric Literals & Underscore Character](#316-numeric-literals--underscore-character)
 
 ---
 

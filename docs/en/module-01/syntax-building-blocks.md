@@ -2,24 +2,25 @@
 
 <a id="table-of-contents"></a>
 ### Table of Contents
-- [1. Syntax Building Blocks](#1-syntax-building-blocks)
-	- [1.1 Value](#11-value)
-	- [1.2 Literal](#12-literal)
-	- [1.3 Identifier](#13-identifier)
-	- [1.4 Variable](#14-variable)
-	- [1.5 Type](#15-type)
-	- [1.6 Operator](#16-operator)
-	- [1.7 Expression](#17-expression)
-	- [1.8 Statement](#18-statement)
-	- [1.9 Code Block](#19-code-block)
-	- [1.10 Function / Method](#110--function--method)
-	- [1.11 Class / Object](#111-class--object)
-	- [1.12 Module / Package](#112-module--package)
-	- [1.13 Program](#113-program)
-	- [1.14 System](#114-system)
-	- [1.15 Summary as a Growing Scale](#115--summary-as-a-growing-scale)
-	- [1.16 Hierarchy Diagram ASCII](#116--hierarchy-diagram-ascii)
-	- [1.17 Hierarchy Diagram Mermaid](#117--hierarchy-diagram-mermaid)
+
+
+- [1.1 Value](#11-value)
+- [1.2 Literal](#12-literal)
+- [1.3 Identifier](#13-identifier)
+- [1.4 Variable](#14-variable)
+- [1.5 Type](#15-type)
+- [1.6 Operator](#16-operator)
+- [1.7 Expression](#17-expression)
+- [1.8 Statement](#18-statement)
+- [1.9 Code Block](#19-code-block)
+- [1.10 Function / Method](#110--function--method)
+- [1.11 Class / Object](#111-class--object)
+- [1.12 Module / Package](#112-module--package)
+- [1.13 Program](#113-program)
+- [1.14 System](#114-system)
+- [1.15 Summary as a Growing Scale](#115--summary-as-a-growing-scale)
+- [1.16 Hierarchy Diagram ASCII](#116--hierarchy-diagram-ascii)
+- [1.17 Hierarchy Diagram Mermaid](#117--hierarchy-diagram-mermaid)
 
 ---
 

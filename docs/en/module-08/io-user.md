@@ -3,26 +3,27 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [36. Interacting with the User Standard I/O Streams](#36-interacting-with-the-user-standard-io-streams)
-  - [36.1 The Standard I/O Streams](#361-the-standard-io-streams)
-  - [36.2 PrintStream What It Is and Why It Exists](#362-printstream-what-it-is-and-why-it-exists)
-    - [36.2.1 Key Characteristics of PrintStream](#3621-key-characteristics-of-printstream)
-    - [36.2.2 Basic Usage of PrintStream](#3622-basic-usage-of-printstream)
-    - [36.2.3 Formatting Output with PrintStream](#3623-formatting-output-with-printstream)
-  - [36.3 Reading Input as an IO Stream](#363-reading-input-as-an-io-stream)
-    - [36.3.1 Low-Level Reading from Systemin](#3631-low-level-reading-from-systemin)
-    - [36.3.2 Using InputStreamReader and BufferedReader](#3632-using-inputstreamreader-and-bufferedreader)
-  - [36.4 The Scanner Class Convenient but Subtle](#364-the-scanner-class-convenient-but-subtle)
-    - [36.4.1 Common Scanner Pitfalls](#3641-common-scanner-pitfalls)
-  - [36.5 Closing System Streams](#365-closing-system-streams)
-  - [36.6 Acquiring Input with Console](#366-acquiring-input-with-console)
-    - [36.6.1 Reading Input from Console](#3661-reading-input-from-console)
-    - [36.6.2 Reading Passwords Securely](#3662-reading-passwords-securely)
-  - [36.7 Formatting Console Output](#367-formatting-console-output)
-  - [36.8 Comparing Console Scanner and BufferedReader](#368-comparing-console-scanner-and-bufferedreader)
-  - [36.9 Redirection and Standard Streams](#369-redirection-and-standard-streams)
-  - [36.10 Common Traps and Best Practices](#3610-common-traps-and-best-practices)
-  - [36.11 Final Summary](#3611-final-summary)
+
+- [36.1 The Standard I/O Streams](#361-the-standard-io-streams)
+- [36.2 PrintStream What It Is and Why It Exists](#362-printstream-what-it-is-and-why-it-exists)
+	- [36.2.1 Key Characteristics of PrintStream](#3621-key-characteristics-of-printstream)
+	- [36.2.2 Basic Usage of PrintStream](#3622-basic-usage-of-printstream)
+	- [36.2.3 Formatting Output with PrintStream](#3623-formatting-output-with-printstream)
+- [36.3 Reading Input as an IO Stream](#363-reading-input-as-an-io-stream)
+	- [36.3.1 Low-Level Reading from Systemin](#3631-low-level-reading-from-systemin)
+	- [36.3.2 Using InputStreamReader and BufferedReader](#3632-using-inputstreamreader-and-bufferedreader)
+- [36.4 The Scanner Class Convenient but Subtle](#364-the-scanner-class-convenient-but-subtle)
+	- [36.4.1 Common Scanner Pitfalls](#3641-common-scanner-pitfalls)
+- [36.5 Closing System Streams](#365-closing-system-streams)
+- [36.6 Acquiring Input with Console](#366-acquiring-input-with-console)
+	- [36.6.1 Reading Input from Console](#3661-reading-input-from-console)
+	- [36.6.2 Reading Passwords Securely](#3662-reading-passwords-securely)
+- [36.7 Formatting Console Output](#367-formatting-console-output)
+- [36.8 Comparing Console Scanner and BufferedReader](#368-comparing-console-scanner-and-bufferedreader)
+- [36.9 Redirection and Standard Streams](#369-redirection-and-standard-streams)
+- [36.10 Common Traps and Best Practices](#3610-common-traps-and-best-practices)
+- [36.11 Final Summary](#3611-final-summary)
+
 
 ---
 

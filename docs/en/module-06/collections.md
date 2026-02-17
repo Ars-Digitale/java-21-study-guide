@@ -3,18 +3,19 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [22. Introduction to the Collections Framework](#22-introduction-to-the-collections-framework)
-  - [22.1 What Is the Collections Framework](#221-what-is-the-collections-framework)
-  - [22.2 The Core Interfaces](#222-the-core-interfaces)
-    - [22.2.1 Main Collection Interfaces](#2221-main-collection-interfaces)
-    - [22.2.2 Map Hierarchy](#2222-map-hierarchy)
-  - [22.3 Sequenced Collections Java-21](#223-sequenced-collections-java-21)
-  - [22.4 Why the Collections Framework Exists](#224-why-the-collections-framework-exists)
-  - [22.5 The Two Sides of the Framework Collections-vs-Maps](#225-the-two-sides-of-the-framework-collections-vs-maps)
-  - [22.6 Generic Types in the Collections Framework](#226-generic-types-in-the-collections-framework)
-  - [22.7 Mutability vs Immutability](#227-mutability-vs-immutability)
-  - [22.8 Big-O Performance Expectations](#228-big-o-performance-expectations)
-  - [22.9 Summary](#229-summary)
+
+- [22.1 What Is the Collections Framework](#221-what-is-the-collections-framework)
+- [22.2 The Core Interfaces](#222-the-core-interfaces)
+	- [22.2.1 Main Collection Interfaces](#2221-main-collection-interfaces)
+	- [22.2.2 Map Hierarchy](#2222-map-hierarchy)
+- [22.3 Sequenced Collections Java-21](#223-sequenced-collections-java-21)
+- [22.4 Why the Collections Framework Exists](#224-why-the-collections-framework-exists)
+- [22.5 The Two Sides of the Framework Collections-vs-Maps](#225-the-two-sides-of-the-framework-collections-vs-maps)
+- [22.6 Generic Types in the Collections Framework](#226-generic-types-in-the-collections-framework)
+- [22.7 Mutability vs Immutability](#227-mutability-vs-immutability)
+- [22.8 Big-O Performance Expectations](#228-big-o-performance-expectations)
+- [22.9 Summary](#229-summary)
+
 
 ---
 

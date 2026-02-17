@@ -3,17 +3,18 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [15. Class Loading, Initialization, and Object Construction](#15-class-loading-initialization-and-object-construction)
-  - [15.1 Java Memory Areas Relevant to Class and Object Initialization](#151-java-memory-areas-relevant-to-class-and-object-initialization)
-  - [15.2 Class Loading with Inheritance](#152-class-loading-with-inheritance)
-    - [15.2.1 Class Loading Order](#1521-class-loading-order)
-    - [15.2.2 What Happens During Class Loading](#1522-what-happens-during-class-loading)
-  - [15.3 Object Creation with Inheritance](#153-object-creation-with-inheritance)
-    - [15.3.1 Full Instance Creation Order](#1531-full-instance-creation-order)
-  - [15.4 A Complete Example Static + Instance Initialization Across Inheritance](#154-a-complete-example-static--instance-initialization-across-inheritance)
-  - [15.5 Visualization Diagram](#155-visualization-diagram)
-  - [15.6 Key Rules](#156-key-rules)
-  - [15.7 Summary Table](#157-summary-table)
+
+- [15.1 Java Memory Areas Relevant to Class and Object Initialization](#151-java-memory-areas-relevant-to-class-and-object-initialization)
+- [15.2 Class Loading with Inheritance](#152-class-loading-with-inheritance)
+	- [15.2.1 Class Loading Order](#1521-class-loading-order)
+	- [15.2.2 What Happens During Class Loading](#1522-what-happens-during-class-loading)
+- [15.3 Object Creation with Inheritance](#153-object-creation-with-inheritance)
+	- [15.3.1 Full Instance Creation Order](#1531-full-instance-creation-order)
+- [15.4 A Complete Example Static + Instance Initialization Across Inheritance](#154-a-complete-example-static--instance-initialization-across-inheritance)
+- [15.5 Visualization Diagram](#155-visualization-diagram)
+- [15.6 Key Rules](#156-key-rules)
+- [15.7 Summary Table](#157-summary-table)
+
 
 ---
 

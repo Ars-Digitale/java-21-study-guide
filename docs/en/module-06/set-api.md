@@ -3,26 +3,27 @@
 <a id="table-of-contents"></a>
 ### Table of Contents
 
-- [26. Set API](#26-set-api)
-  - [26.1 Set Hierarchy Java-Collections-Framework](#261-set-hierarchy-java-collections-framework)
-  - [26.2 Characteristics of Each Set Implementation](#262-characteristics-of-each-set-implementation)
-    - [26.2.1 HashSet](#2621-hashset)
-    - [26.2.2 LinkedHashSet](#2622-linkedhashset)
-    - [26.2.3 TreeSet](#2623-treeset)
-  - [26.3 Equality Rules in Sets](#263-equality-rules-in-sets)
-    - [26.3.1 HashSet--LinkedHashSet](#2631-hashset--linkedhashset)
-    - [26.3.2 TreeSet](#2632-treeset)
-  - [26.4 Creating Set Instances](#264-creating-set-instances)
-    - [26.4.1 Using Constructors](#2641-using-constructors)
-    - [26.4.2 Copy Constructors](#2642-copy-constructors)
-    - [26.4.3 Factory Methods](#2643-factory-methods)
-  - [26.5 Main Operations on Sets](#265-main-operations-on-sets)
-    - [26.5.1 Adding Elements](#2651-adding-elements)
-    - [26.5.2 Checking Membership](#2652-checking-membership)
-    - [26.5.3 Removing Elements](#2653-removing-elements)
-    - [26.5.4 Bulk Operations](#2654-bulk-operations)
-  - [26.6 Common Pitfalls](#266-common-pitfalls)
-  - [26.7 Summary Table](#267-summary-table)
+
+- [26.1 Set Hierarchy Java-Collections-Framework](#261-set-hierarchy-java-collections-framework)
+- [26.2 Characteristics of Each Set Implementation](#262-characteristics-of-each-set-implementation)
+	- [26.2.1 HashSet](#2621-hashset)
+	- [26.2.2 LinkedHashSet](#2622-linkedhashset)
+	- [26.2.3 TreeSet](#2623-treeset)
+- [26.3 Equality Rules in Sets](#263-equality-rules-in-sets)
+	- [26.3.1 HashSet--LinkedHashSet](#2631-hashset--linkedhashset)
+	- [26.3.2 TreeSet](#2632-treeset)
+- [26.4 Creating Set Instances](#264-creating-set-instances)
+	- [26.4.1 Using Constructors](#2641-using-constructors)
+	- [26.4.2 Copy Constructors](#2642-copy-constructors)
+	- [26.4.3 Factory Methods](#2643-factory-methods)
+- [26.5 Main Operations on Sets](#265-main-operations-on-sets)
+	- [26.5.1 Adding Elements](#2651-adding-elements)
+	- [26.5.2 Checking Membership](#2652-checking-membership)
+	- [26.5.3 Removing Elements](#2653-removing-elements)
+	- [26.5.4 Bulk Operations](#2654-bulk-operations)
+- [26.6 Common Pitfalls](#266-common-pitfalls)
+- [26.7 Summary Table](#267-summary-table)
+
 
 ---
 
