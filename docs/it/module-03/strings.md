@@ -33,7 +33,7 @@
 
 ---
 
-<a id="91-stringhe-text-blocks"></a>
+<a id="91-stringhe--text-blocks"></a>
 ## 9.1 Stringhe & Text Blocks
 
 <a id="911-stringhe"></a>
@@ -399,7 +399,7 @@ Questa regola si applica alla maggior parte dei metodi basati su substring.
 | lastIndexOf(String) | Ultima occorrenza | — | — | "banana".lastIndexOf("a") → 5 |
 | lastIndexOf(String, fromIndex) | Cerca all’indietro dall’indice | fromIndex | fromIndex inclusivo | "banana".lastIndexOf("a", 3) → 3 |
 
-<a id="925-metodi-con-inizio-inclusivo-fine-esclusivo"></a>
+<a id="925-metodi-con-inizio-inclusivo--fine-esclusivo"></a>
 ### 9.2.5 Metodi con inizio inclusivo / fine esclusivo
 
 Questi metodi seguono lo stesso comportamento di slicing: `start` incluso, `end` escluso.

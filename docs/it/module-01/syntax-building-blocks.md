@@ -227,7 +227,7 @@ int x = 10;
 
 ---
 
-<a id="110-funzione-metodo"></a>
+<a id="110-funzione--metodo"></a>
 ### 1.10 **Funzione / Metodo**
 
 - **Definizione:** Sequenza di istruzioni incapsulata, identificata da un nome, che può ricevere input (parametri) e restituire un output (valore).
@@ -249,7 +249,7 @@ int result = square(5); // result = 25
 
 ---
 
-<a id="111-classe-oggetto"></a>
+<a id="111-classe--oggetto"></a>
 ### 1.11 **Classe / Oggetto**
 
 - **Definizione:**
@@ -276,7 +276,7 @@ p.move(1, 2);            // chiamata di metodo sull’oggetto
 
 ---
 
-<a id="112-modulo-package"></a>
+<a id="112-modulo--package"></a>
 ### 1.12 **Modulo / Package**
 
 - **Definizione:** Raggruppamento logico di classi, funzioni e risorse con uno scopo comune.
@@ -334,7 +334,7 @@ Insieme formano un **sistema**.
 
 ---
 
-<a id="115-riepilogo-come-scala-crescente"></a>
+<a id="115--riepilogo-come-scala-crescente"></a>
 ### 1.15 📌 Riepilogo come scala crescente
 
 `Valore → Letterale → Identificatore → Variabile → Tipo → Operatore → Espressione → Istruzione → Blocco di Codice → Funzione/Metodo → Classe/Oggetto → Modulo/Package → Programma → Sistema`
@@ -343,7 +343,7 @@ Questa scala mostra come unità concettuali piccole vengano combinate in struttu
 
 ---
 
-<a id="116-diagramma-gerarchico-ascii"></a>
+<a id="116--diagramma-gerarchico-ascii"></a>
 ### 1.16 📊 Diagramma gerarchico (ASCII)
 
 **Descrizione:** Questo diagramma ASCII mostra la relazione gerarchica tra i mattoni, dal più complesso (Sistema) al più semplice (Valore e la sua forma concreta, il Letterale).
@@ -367,7 +367,7 @@ Sistema
 
 ---
 
-<a id="117-diagramma-gerarchico-mermaid"></a>
+<a id="117--diagramma-gerarchico-mermaid"></a>
 ### 1.17 📊 Diagramma gerarchico (Mermaid)
 
 **Descrizione:** Il diagramma Mermaid rende la stessa gerarchia in un albero dall’alto verso il basso. Evidenzia che il Letterale è la forma sintattica di un Valore.

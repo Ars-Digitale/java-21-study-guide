@@ -133,7 +133,7 @@ for (Integer i : list) {
 
 ---
 
-<a id="236-tabella-di-riepilogo-operazioni-condivise"></a>
+<a id="236-tabella-di-riepilogo--operazioni-condivise"></a>
 ## 23.6 Tabella di Riepilogo — Operazioni Condivise
 
 | Operazione                    | Si applica a                | Note                          |

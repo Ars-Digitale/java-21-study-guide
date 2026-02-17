@@ -155,7 +155,7 @@ System.out.printf("%08.2f", 12.34);
 - Gli zeri sono inseriti dopo il segno.
 - Ignorato se è presente la giustificazione a sinistra (flag `-`).
 
-<a id="13115-giustificazione-a-sinistra-flag"></a>
+<a id="13115-giustificazione-a-sinistra-flag--"></a>
 ### 13.1.1.5 Giustificazione a sinistra Flag `-`
 
 Il flag `-` allinea il valore a sinistra all’interno della larghezza.
@@ -171,7 +171,7 @@ System.out.printf("%-8.2f", 12.34);
 - Il riempimento viene spostato a destra.
 - Sovrascrive il riempimento con zero.
 
-<a id="13116-segno-esplicito-flag"></a>
+<a id="13116-segno-esplicito-flag-"></a>
 ### 13.1.1.6 Segno esplicito Flag `+`
 
 Il flag `+` forza la visualizzazione del segno per i numeri positivi.
@@ -187,7 +187,7 @@ System.out.printf("%+8.2f", 12.34);
 - I numeri negativi mostrano già `-`.
 - Sovrascrive il flag spazio (che stampa uno spazio iniziale per i valori positivi).
 
-<a id="13117-parentesi-per-i-negativi-flag"></a>
+<a id="13117-parentesi-per-i-negativi-flag-"></a>
 ### 13.1.1.7 Parentesi per i negativi Flag `(`
 
 Il flag `(` formatta i numeri negativi usando le parentesi.
@@ -353,7 +353,7 @@ System.out.println(df.format(12.3));
 - Riempie con zeri se il numero ha meno cifre.
 - Utile per output a larghezza fissa o allineato.
 
-<a id="1326-il-simbolo-cifra-opzionale"></a>
+<a id="1326-il-simbolo--cifra-opzionale"></a>
 ### 13.2.6 Il simbolo `#` (cifra opzionale)
 
 Il simbolo `#` visualizza una cifra solo se esiste.
@@ -371,7 +371,7 @@ System.out.println(df.format(12.3));
 - Sopprime gli zeri finali non necessari.
 - Adatto a una formattazione “user-friendly”.
 
-<a id="1327-combinare-0-e"></a>
+<a id="1327-combinare-0-e-"></a>
 ### 13.2.7 Combinare `0` e `#`
 
 I pattern combinano spesso entrambi i simboli per maggiore flessibilità.

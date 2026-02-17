@@ -26,7 +26,7 @@ Le interfacce `Queue` e `Deque` di Java modellano collezioni ordinate progettate
 Una **Queue** modella tipicamente una struttura **FIFO** (First-In, First-Out).  
 Una **Deque** (`double-ended queue`) consente inserimento e rimozione da entrambe le estremità, permettendo comportamenti **FIFO** e **LIFO** in una singola API.
 
-<a id="271-queue-panoramica"></a>
+<a id="271-queue--panoramica"></a>
 ## 27.1 Queue — Panoramica
 
 L’interfaccia `Queue` estende `Collection` ed è comunemente utilizzata nella programmazione asincrona, nella distribuzione del carico, negli algoritmi e nel buffering.
@@ -60,7 +60,7 @@ Classi comuni che implementano `Queue`:
 
 ---
 
-<a id="272-deque-panoramica"></a>
+<a id="272-deque--panoramica"></a>
 ## 27.2 Deque — Panoramica
 
 `Deque` (double-ended queue) supporta inserimento, rimozione e ispezione sia dalla testa sia dalla coda.
@@ -146,7 +146,7 @@ System.out.println(stack.pop()); // A
 
 ---
 
-<a id="275-priorityqueue-queue-speciale"></a>
+<a id="275-priorityqueue--queue-speciale"></a>
 ## 27.5 PriorityQueue — Queue Speciale
 
 `PriorityQueue` ordina gli elementi per **ordine naturale** o tramite un `Comparator` fornito.

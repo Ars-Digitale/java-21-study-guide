@@ -120,7 +120,7 @@ System.out.println(tree); // [1, 5, 10]
 
 Le regole differiscono in base all’implementazione.
 
-<a id="2631-hashset-linkedhashset"></a>
+<a id="2631-hashset--linkedhashset"></a>
 ### 26.3.1 HashSet & LinkedHashSet
 
 L’`unicità` è determinata da due metodi:  

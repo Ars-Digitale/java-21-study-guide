@@ -52,7 +52,7 @@ Questa sezione definisce questi concetti indipendentemente da Java, poi spiega c
 
 ---
 
-<a id="322-filesystem-lastrazione-globale"></a>
+<a id="322-filesystem--lastrazione-globale"></a>
 ## 32.2 Filesystem – L’Astrazione Globale
 
 Un `filesystem` è un meccanismo strutturato fornito da un sistema operativo per organizzare, memorizzare, recuperare e gestire dati su dispositivi di storage persistente.
@@ -79,7 +79,7 @@ In Java NIO, un filesystem è rappresentato dall’astrazione `FileSystem`, tipi
 
 ---
 
-<a id="323-path-localizzare-una-entry-in-un-filesystem"></a>
+<a id="323-path--localizzare-una-entry-in-un-filesystem"></a>
 ## 32.3 Path – Localizzare una Entry in un Filesystem
 
 Un `path` è un localizzatore logico, non una risorsa.
@@ -104,7 +104,7 @@ Un `path` risolve il problema dell’`addressing`:
 
 ---
 
-<a id="324-file-contenitori-persistenti-di-dati"></a>
+<a id="324-file--contenitori-persistenti-di-dati"></a>
 ## 32.4 File – Contenitori Persistenti di Dati
 
 Un `file` è una entry del filesystem il cui ruolo primario è memorizzare dati.
@@ -135,7 +135,7 @@ Dal punto di vista del filesystem, un file ha:
 
 ---
 
-<a id="325-directory-contenitori-strutturali"></a>
+<a id="325-directory--contenitori-strutturali"></a>
 ## 32.5 Directory – Contenitori Strutturali
 
 Una `directory (o folder)` è una entry del filesystem il cui scopo è organizzare altre entry.
@@ -158,7 +158,7 @@ Le `directory` risolvono il problema della scalabilità e dell’organizzazione:
 
 ---
 
-<a id="326-link-meccanismi-di-indirezione"></a>
+<a id="326-link--meccanismi-di-indirezione"></a>
 ## 32.6 Link – Meccanismi di Indirezione
 
 Un `link` è una entry del filesystem che riferisce un’altra entry.

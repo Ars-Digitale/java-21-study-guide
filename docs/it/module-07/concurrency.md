@@ -593,7 +593,7 @@ Questo permette al codice blocking di scalare efficientemente senza ridisegnare 
 
 ---
 
-<a id="3111-summary"></a>
+<a id="3111-sommario"></a>
 ## 31.11 Summary
 
 - La `Java Concurrency API` fornisce un’alternativa robusta, scalabile e più sicura alla gestione manuale dei thread.

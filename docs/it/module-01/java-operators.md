@@ -356,7 +356,7 @@ b += 1;         // ✅ funziona: cast implicito di nuovo verso byte
     Gli operatori di assegnazione composta **eseguono un cast implicito** verso il tipo della variabile a sinistra.
     Per questo motivo `b += 1` compila anche se `b = b + 1` non compila.
 
-<a id="575-operatori-di-uguaglianza-e"></a>
+<a id="575-operatori-di-uguaglianza--e-"></a>
 ### 5.7.5 Operatori di uguaglianza (`==` e `!=`)
 
 Gli **operatori di uguaglianza** in Java `==` (uguale a) e `!=` (diverso da) vengono usati per confrontare due operandi.  

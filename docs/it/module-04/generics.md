@@ -270,7 +270,7 @@ class Demo {
 !!! note
     Il compilatore può inserire cast aggiuntivi o metodi bridge in scenari di ereditarietà più complessi, ma l’erasure usa sempre solo il primo bound (A in questo caso).
 
-<a id="1847-overloading-di-un-metodo-generico-perché-alcuni-overload-sono-impossibili"></a>
+<a id="1847-overloading-di-un-metodo-generico--perché-alcuni-overload-sono-impossibili"></a>
 ### 18.4.7 Overloading di un Metodo Generico — Perché Alcuni Overload Sono Impossibili
 
 Quando Java compila codice generico, applica la type erasure:
@@ -342,7 +342,7 @@ void testInput(ArrayList inputParam)
 
 Nessuna collisione → overloading legale.
 
-<a id="1849-restituire-tipi-generici-regole-e-restrizioni"></a>
+<a id="1849-restituire-tipi-generici--regole-e-restrizioni"></a>
 ### 18.4.9 Restituire Tipi Generici — Regole e Restrizioni
 
 Quando si restituisce un valore da un metodo, Java segue una regola rigida:
@@ -447,10 +447,10 @@ La classe deve comparire per prima.
 class C<T extends Number & Comparable<T>> { }
 ```
 
-<a id="1853-wildcard-extends-super"></a>
+<a id="1853-wildcard---extends--super"></a>
 ### 18.5.3 Wildcard: `?`, `? extends`, `? super`
 
-<a id="18531-wildcard-non-limitata"></a>
+<a id="18531-wildcard-non-limitata-"></a>
 #### 18.5.3.1 Wildcard Non Limitata `?`
 
 Da utilizzare quando si vuole accettare una lista di tipo sconosciuto:
@@ -459,7 +459,7 @@ Da utilizzare quando si vuole accettare una lista di tipo sconosciuto:
 void printAll(List<?> list) { ... }
 ```
 
-<a id="18532-wildcard-con-upper-bound-extends"></a>
+<a id="18532-wildcard-con-upper-bound--extends"></a>
 #### 18.5.3.2 Wildcard con Upper Bound `? extends`
 
 ```java
@@ -471,7 +471,7 @@ Number n = nums.get(0);   // OK
 
 > Non puoi aggiungere elementi (eccetto null) a `? extends` perché non conosci il sottotipo esatto.
 
-<a id="18533-wildcard-con-lower-bound-super"></a>
+<a id="18533-wildcard-con-lower-bound--super"></a>
 #### 18.5.3.3 Wildcard con Lower Bound `? super`
 
 `<? super Integer>` significa **il tipo deve essere Integer o una superclasse di Integer**.

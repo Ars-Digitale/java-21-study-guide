@@ -285,7 +285,7 @@ module com.example.lib {
 
 I package non esportati rimangono fortemente incapsulati.
 
-<a id="3874-exports-to-export-qualificati"></a>
+<a id="3874-exports--to-export-qualificati"></a>
 ### 38.7.4 `exports ... to` (Export Qualificati)
 
 Un export qualificato limita l’accesso a moduli specifici.
@@ -315,7 +315,7 @@ module com.example.app {
     opens NON rende un package accessibile a compile-time.
     Influenza solo la reflection a runtime.
 
-<a id="3876-opens-to-opens-qualificati"></a>
+<a id="3876-opens--to-opens-qualificati"></a>
 ### 38.7.6 `opens ... to` (Opens Qualificati)
 
 Puoi limitare l’accesso riflessivo a moduli specifici.
@@ -341,7 +341,7 @@ module com.example.app {
 | `opens` | Consentire reflection a runtime |
 | `opens ... to` | Limitare l’accesso riflessivo |
 
-<a id="3878-exports-vs-opens-accesso-a-compile-time-vs-runtime"></a>
+<a id="3878-exports-vs-opens--accesso-a-compile-time-vs-runtime"></a>
 ### 38.7.8 Exports vs Opens — Accesso a Compile-Time vs Runtime
 
 | Visibilità | Compile-time? | Reflection a runtime? |

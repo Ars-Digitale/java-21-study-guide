@@ -124,7 +124,7 @@ System.out.println(rp.toAbsolutePath());
 !!! note
     I path relativi sono una fonte comune di bug “funziona sulla mia macchina” perché `user.dir` dipende da come/dove la JVM è stata lanciata.
 
-<a id="3314-unire-costruire-path"></a>
+<a id="3314-unire--costruire-path"></a>
 ### 33.1.4 Unire / Costruire Path
 
 - Il `File` legacy usa i costruttori (parent + child).
@@ -370,7 +370,7 @@ Rimuove elementi di nome **ridondanti** come `.` e `..`.
 !!! note
     `normalize()` è puramente sintattico, non controlla l’esistenza, e può produrre path invalidi se usato male.
 
-<a id="3318-tabella-di-confronto-rapida-creazione-conversione"></a>
+<a id="3318-tabella-di-confronto-rapida-creazione--conversione"></a>
 ### 33.1.8 Tabella di Confronto Rapida (Creazione + Conversione)
 
 | Esigenza | Legacy (File) | NIO (Path) | Preferito oggi |
@@ -524,7 +524,7 @@ FileOutputStream out = new FileOutputStream("dst.bin")) {
 !!! note
     Ricorda `read(byte[])` restituisce il numero di byte letti; devi scrivere solo quel conteggio, non l’intero buffer.
 
-<a id="3324-spostare-rinominare-e-sostituire"></a>
+<a id="3324-spostare--rinominare-e-sostituire"></a>
 ### 33.2.4 Spostare / Rinominare e Sostituire
 
 In entrambe le API, rinomina/sposta è “a livello metadata” quando possibile, ma può comportarsi come copy+delete tra filesystem. NIO lo rende esplicito tramite opzioni.
@@ -664,7 +664,7 @@ System.out.println(deleted);
 !!! note
     Certification tip: `Files.delete` lancia `NoSuchFileException` se mancante, mentre `deleteIfExists` restituisce `false`.
 
-<a id="3327-copiare-cancellare-ricorsivamente-alberi-di-directory-pattern-nio"></a>
+<a id="3327-copiare--cancellare-ricorsivamente-alberi-di-directory-pattern-nio"></a>
 ### 33.2.7 Copiare / Cancellare Ricorsivamente Alberi di Directory (Pattern NIO)
 
 NIO non fornisce un singolo metodo “copyTree/deleteTree”, ma l’approccio standard usa `Files.walk` o `Files.walkFileTree`.

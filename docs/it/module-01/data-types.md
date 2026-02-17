@@ -138,7 +138,7 @@ Queste regole garantiscono calcoli coerenti e riducono il rischio di perdita di 
 <a id="461-regole-di-promozione-numerica-in-java"></a>
 ### 4.6.1 Regole di promozione numerica in Java
 
-<a id="4611-regola-1-tipi-misti-il-tipo-più-piccolo-viene-promosso-a-quello-più-grande"></a>
+<a id="4611-regola-1--tipi-misti--il-tipo-più-piccolo-viene-promosso-a-quello-più-grande"></a>
 #### 4.6.1.1 Regola 1 – Tipi misti → il tipo più piccolo viene promosso a quello più grande
 
 Se due operandi appartengono a **tipi numerici diversi**, Java promuove automaticamente il tipo **più piccolo** al tipo **più grande** prima di eseguire l’operazione.
@@ -150,7 +150,7 @@ Se due operandi appartengono a **tipi numerici diversi**, Java promuove automati
 **Ordine di promozione valido (dal più piccolo al più grande):**  
 `byte → short → int → long → float → double`
 
-<a id="4612-regola-2-intero-floating-point-lintero-viene-promosso-a-floating-point"></a>
+<a id="4612-regola-2--integrale--floating-point--lintegrale-viene-promosso-a-floating-point"></a>
 #### 4.6.1.2 Regola 2 – Intero + floating-point → l’intero viene promosso a floating-point
 
 Se un operando è di tipo **intero** (`byte`, `short`, `char`, `int`, `long`) e l’altro è di tipo **floating-point** (`float`, `double`),  
@@ -161,7 +161,7 @@ il valore intero viene **promosso** al tipo **floating-point** prima dell’oper
 | `float f = 2.5F; int n = 3;`<br>`float result = f * n;` | `n` (int) viene promosso a `float`. Il risultato è un `float` (`7.5`). |
 | `double d = 10.0; long l = 3;`<br>`double result = d / l;` | `l` (long) è promosso a `double`. Il risultato è un `double` (`3.333...`). |
 
-<a id="4613-regola-3-byte-short-e-char-vengono-promossi-a-int-durante-laritmetica"></a>
+<a id="4613-regola-3--byte-short-e-char-vengono-promossi-a-int-durante-laritmetica"></a>
 #### 4.6.1.3 Regola 3 – `byte`, `short` e `char` vengono promossi a `int` durante l’aritmetica
 
 Quando effettui operazioni aritmetiche **con variabili** (non costanti letterali) di tipo `byte`, `short` o `char`,  
@@ -185,7 +185,7 @@ byte c = 20;
 byte d = b + c;     // ❌ Errore: b + c è valutato a runtime → int
 ```
 
-<a id="4614-regola-4-il-tipo-del-risultato-coincide-con-il-tipo-promosso"></a>
+<a id="4614-regola-4--il-tipo-del-risultato-coincide-con-il-tipo-promosso"></a>
 #### 4.6.1.4 Regola 4 – Il tipo del risultato coincide con il tipo promosso
 
 Dopo l’applicazione delle promozioni, quando entrambi gli operandi sono dello stesso tipo,  

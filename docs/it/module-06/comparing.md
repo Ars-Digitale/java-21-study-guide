@@ -75,7 +75,7 @@ Output:
 !!! note
     L’ordinamento naturale è definito solo per i tipi che implementano `Comparable`.
 
-<a id="241-comparable-ordinamento-naturale"></a>
+<a id="241-comparable--ordinamento-naturale"></a>
 ## 24.1 Comparable — Ordinamento Naturale
 
 L’interfaccia `Comparable<T>` definisce l’ordine naturale di un tipo.
@@ -144,7 +144,7 @@ La lista viene ordinata per età, perché quello è l’ordine numerico naturale
 
 ---
 
-<a id="242-comparator-ordinamento-personalizzato"></a>
+<a id="242-comparator--ordinamento-personalizzato"></a>
 ## 24.2 Comparator — Ordinamento Personalizzato
 
 L’interfaccia `Comparator<T>` consente di definire più strategie di ordinamento

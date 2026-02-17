@@ -56,7 +56,7 @@
 
 ---
 
-<a id="351-legacy-javaio-design-comportamento-e-sottigliezze"></a>
+<a id="351-legacy-javaio--design-comportamento-e-sottigliezze"></a>
 ## 35.1 Legacy java.io — Design, comportamento e sottigliezze
 
 L’API legacy `java.io` è l’astrazione I/O originale introdotta in Java 1.0.
@@ -237,7 +237,7 @@ Non rappresenta una risorsa aperta.
 
 ---
 
-<a id="352-javanio-buffer-channel-e-io-non-bloccante"></a>
+<a id="352-javanio--buffer-channel-e-io-non-bloccante"></a>
 ## 35.2 `java.nio` — Buffer, Channel e I/O non bloccante
 
 L’API `java.nio` (New I/O) è stata introdotta per risolvere i limiti di `java.io`.
@@ -283,7 +283,7 @@ ByteBuffer buffer = ByteBuffer.allocate(1024);
 | `position` | Indice corrente di lettura/scrittura |
 | `limit` | Limite dei dati leggibili o scrivibili |
 
-<a id="3523-ciclo-di-vita-del-buffer-write-flip-read"></a>
+<a id="3523-ciclo-di-vita-del-buffer-write--flip--read"></a>
 ### 35.2.3 Ciclo di vita del buffer: Write → Flip → Read
 
 I `buffer` hanno un ciclo d’uso rigoroso.
@@ -424,7 +424,7 @@ Per operazioni semplici su file, spesso basta `java.nio.file.Files`.
 
 ---
 
-<a id="353-javaniofile-nio2-operazioni-su-file-e-directory-legacy-vs-modern"></a>
+<a id="353-javaniofile-nio2--operazioni-su-file-e-directory-legacy-vs-modern"></a>
 ## 35.3 `java.nio.file` (NIO.2) — Operazioni su file e directory (Legacy vs Modern)
 
 Questa sezione si concentra sulle operazioni pratiche su file e directory.
@@ -960,7 +960,7 @@ Le API legacy restano soprattutto per compatibilità o quando richieste da libre
 
 ---
 
-<a id="354-serializzazione-object-stream-compatibilità-e-trappole"></a>
+<a id="354-serializzazione--object-stream-compatibilità-e-trappole"></a>
 ## 35.4 Serializzazione — Object stream, compatibilità e trappole
 
 La serializzazione è il processo di convertire un grafo di oggetti in uno stream di byte per memorizzarlo o trasmetterlo, e ricostruirlo successivamente.

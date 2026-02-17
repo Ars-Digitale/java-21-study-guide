@@ -403,7 +403,7 @@ Il package `java.time` fornisce tre classi temporali essenziali che rappresentan
 
 ---
 
-<a id="125-period-quantità-umane-di-data"></a>
+<a id="125-period--quantità-umane-di-data"></a>
 ## 12.5 `Period` — quantità “umane” di data
 
 `Period` rappresenta una quantità di tempo basata su data, come “3 anni, 2 mesi e 5 giorni”.
@@ -445,7 +445,7 @@ LocalDate result = base.plus(p2);          // 2026-03-13
 
 ---
 
-<a id="126-duration-quantità-macchina-di-tempo"></a>
+<a id="126-duration--quantità-macchina-di-tempo"></a>
 ## 12.6 `Duration` — quantità “macchina” di tempo
 
 `Duration` rappresenta una quantità di tempo basata su secondi e nanosecondi.
@@ -495,7 +495,7 @@ ZonedDateTime z3 = z1.plus(d2);              // Duration-based
 
 ---
 
-<a id="127-instant-punto-sulla-timeline-utc"></a>
+<a id="127-instant--punto-sulla-timeline-utc"></a>
 ## 12.7 `Instant` — punto sulla timeline UTC
 
 `Instant` rappresenta un singolo momento nel tempo relativo a UTC, con precisione al nanosecondo.

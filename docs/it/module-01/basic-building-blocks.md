@@ -587,7 +587,7 @@ java B
     - `-classpath <classpath>`  
     - `--class-path <classpath>`
 
-<a id="263-codice-dentro-package-layout-standard-src-out"></a>
+<a id="263-codice-dentro-package-layout-standard-src--out"></a>
 ### 2.6.3 Codice dentro package (layout standard src → out)
 
 **File**
@@ -623,7 +623,7 @@ public class Main {
 javac src/com/example/app/Main.java
 ```
 
-<a id="264-compilare-verso-unaltra-directory-d"></a>
+<a id="264-compilare-verso-unaltra-directory--d"></a>
 ### 2.6.4 Compilare verso un’altra directory (`-d`)
 
 L’opzione `-d out` colloca i file `.class` compilati nella directory `out/`, creando sottocartelle che rispecchiano i nomi dei package:

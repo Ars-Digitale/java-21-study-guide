@@ -255,7 +255,7 @@ for (String s : list) {
 }
 ```
 
-<a id="2563-iterator-listiterator"></a>
+<a id="2563-iterator--listiterator"></a>
 ### 25.6.3 Iterator & ListIterator
 
 ```java

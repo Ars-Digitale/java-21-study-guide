@@ -105,7 +105,7 @@ Quando viene usata la parola chiave `new`, **la creazione dell’istanza segue u
 
 ---
 
-<a id="154-esempio-completo-inizializzazione-statica-di-istanza-nellereditarietà"></a>
+<a id="154-esempio-completo-inizializzazione-statica--di-istanza-nellereditarietà"></a>
 ## 15.4 Esempio Completo: Inizializzazione Statica + di Istanza nell’Ereditarietà
 
 Consideriamo la seguente gerarchia a tre livelli:

@@ -205,7 +205,7 @@ Per attività come i calcoli finanziari, questo è inaccettabile.
   
 `BigDecimal` risolve il problema rappresentando i numeri usando un modello decimale con una scala configurabile (numero di cifre dopo il separatore decimale).
 
-<a id="1122-biginteger-interi-a-precisione-arbitraria"></a>
+<a id="1122-biginteger--interi-a-precisione-arbitraria"></a>
 ### 11.2.2 BigInteger — Interi a precisione arbitraria
 
 `BigInteger` rappresenta valori interi di dimensione praticamente qualsiasi, limitata solo dalla memoria disponibile.

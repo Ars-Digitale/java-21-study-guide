@@ -84,7 +84,7 @@ if (grade >= 90) {
 
 ---
 
-<a id="72-listruzione-switch-la-switch-expression"></a>
+<a id="72-listruzione-switch--la-switch-expression"></a>
 ## 7.2 L’istruzione `switch` & la `switch Expression`
 
 Il costrutto `switch` è una struttura di controllo del flusso che seleziona un ramo tra più alternative in base al valore di un’espressione (il **selector**).

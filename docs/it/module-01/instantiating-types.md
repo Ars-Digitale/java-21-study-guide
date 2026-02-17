@@ -761,7 +761,7 @@ System.out.println(c1 == c2);   // true
 
 Con gli oggetti (tipi reference), il significato di `==` cambia.
 
-<a id="6421-confronto-di-identità"></a>
+<a id="6421--confronto-di-identità"></a>
 #### 6.4.2.1 `==` (Confronto di identità)  
 `==` verifica se **due riferimenti puntano allo stesso oggetto in memoria**.
 

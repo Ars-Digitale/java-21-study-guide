@@ -60,7 +60,7 @@ Una `dichiarazione di metodo` è composta da componenti **obbligatori** e **opzi
 <a id="1411-componenti-obbligatori-di-un-metodo"></a>
 ### 14.1.1 Componenti obbligatori di un metodo
 
-<a id="14111-modificatori-di-accesso"></a>
+<a id="14111--modificatori-di-accesso"></a>
 ### 14.1.1.1  Modificatori di accesso
 
 I `Modificatori di accesso` controllano la *visibilità*, non il comportamento.
@@ -270,7 +270,7 @@ call(5); // stampa: int (corrispondenza esatta per int)
 ```
 
 
-<a id="14312-se-non-esiste-una-corrispondenza-esatta-java-sceglie-il-tipo-compatibile-più-specifico"></a>
+<a id="14312--se-non-esiste-una-corrispondenza-esatta-java-sceglie-il-tipo-compatibile-più-specifico"></a>
 ### 14.3.1.2 — Se non esiste una corrispondenza esatta, Java sceglie il tipo compatibile *più specifico*
 
 Java preferisce:
@@ -291,7 +291,7 @@ test(5);  // letterale int: può essere allargato a long o float
 ```
 
 
-<a id="14313-lallargamento-dei-primitivi-batte-il-boxing"></a>
+<a id="14313--lallargamento-dei-primitivi-batte-il-boxing"></a>
 ### 14.3.1.3 — L’allargamento dei primitivi batte il boxing
 
 Se un argomento primitivo può essere sia allargato sia autoboxato, Java sceglie l’allargamento.
@@ -306,7 +306,7 @@ m(b);               // byte → int (widening) vince
 ```
 
 
-<a id="14314-il-boxing-batte-i-varargs"></a>
+<a id="14314--il-boxing-batte-i-varargs"></a>
 ### 14.3.1.4 — Il boxing batte i varargs
 
 ```java
@@ -318,7 +318,7 @@ show(5);                // int → Integer (boxing) preferito
 ```
 
 
-<a id="14315-per-i-riferimenti-java-sceglie-il-tipo-di-riferimento-più-specifico"></a>
+<a id="14315--per-i-riferimenti-java-sceglie-il-tipo-di-riferimento-più-specifico"></a>
 ### 14.3.1.5 — Per i riferimenti, Java sceglie il tipo di riferimento più specifico
 
 ```java
@@ -332,7 +332,7 @@ ref("abc");             // "abc" è una String → più specifica di Object
 Più specifico significa *più in basso nella gerarchia di ereditarietà*.
 
 
-<a id="14316-quando-non-esiste-un-più-specifico-non-ambiguo-la-chiamata-genera-un-errore-di-compilazione"></a>
+<a id="14316--quando-non-esiste-un-più-specifico-non-ambiguo-la-chiamata-è-un-errore-di-compilazione"></a>
 ### 14.3.1.6 — Quando non esiste un “più specifico” non ambiguo, la chiamata genera un errore di compilazione
 
 Esempio con classi sorelle:
@@ -356,7 +356,7 @@ run(null);  // ❌ Errore a compile-time: chiamata di metodo ambigua
 ```
 
 
-<a id="14317-overload-misti-primitivi-wrapper"></a>
+<a id="14317--overload-misti-primitivi--wrapper"></a>
 ### 14.3.1.7 — Overload misti primitivi + wrapper
 
 Java valuta `widening`, `boxing` e `varargs` in questo ordine:
@@ -377,7 +377,7 @@ mix(s);   // short → int → long  (widening)
 ```
 
 
-<a id="14318-quando-i-primitivi-si-mescolano-con-i-tipi-reference"></a>
+<a id="14318--quando-i-primitivi-si-mescolano-con-i-tipi-di-riferimento"></a>
 ### 14.3.1.8 — Quando i primitivi si mescolano con i tipi reference
 
 ```java
@@ -393,7 +393,7 @@ fun(i);                 // riferimento accettato → Object
 ```
 
 
-<a id="14319-quando-vince-object"></a>
+<a id="14319--quando-vince-object"></a>
 ### 14.3.1.9 — Quando vince Object
 
 ```java

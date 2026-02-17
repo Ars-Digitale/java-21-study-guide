@@ -140,7 +140,7 @@ try (InputStream in = new FileInputStream("data.bin")) {
 !!! note
     Gli stream di basso livello sono raramente usati da soli nelle applicazioni reali a causa di prestazioni scarse e funzionalità limitate.
 
-<a id="3433-stream-di-alto-livello-filter-processing-streams"></a>
+<a id="3433-stream-di-alto-livello-filter--processing-streams"></a>
 ### 34.3.3 Stream di Alto Livello (Filter / Processing Streams)
 
 Gli stream di alto livello avvolgono altri stream per aggiungere funzionalità.
