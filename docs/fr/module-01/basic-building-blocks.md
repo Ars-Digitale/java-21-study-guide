@@ -582,7 +582,7 @@ java B
     - `-classpath <classpath>`  
     - `--class-path <classpath>`
 
-<a id="#263-code-dans-des-packages-organisation-standard-src--out"></a>
+<a id="263-code-dans-des-packages-organisation-standard-src--out"></a>
 ### 2.6.3 Code dans des packages (organisation standard src → out)
 
 **Fichiers**

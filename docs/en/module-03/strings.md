@@ -33,7 +33,7 @@
 
 ---
 
-<a id="#91-strings--text-blocks"></a>
+<a id="91-strings--text-blocks"></a>
 ## 9.1 Strings & Text Blocks
 
 <a id="911-strings"></a>
