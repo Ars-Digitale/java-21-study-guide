@@ -133,10 +133,10 @@ Lorsqu’on applique des opérateurs arithmétiques ou de comparaison à des **t
 
 Ces règles garantissent des calculs cohérents et évitent la perte de données lors du mélange de types numériques différents.
 
-<a id="461-règles-de-promotion-numérique-en-java"></a>
+<a id="461--règles-de-promotion-numérique-en-java"></a>
 ### 4.6.1 🔹 Règles de promotion numérique en Java
 
-<a id="4611-règle-1-types-numériques-mixtes-le-plus-petit-type-est-promu-vers-le-plus-grand"></a>
+<a id="4611-règle-1--types-numériques-mixtes--le-plus-petit-type-est-promu-vers-le-plus-grand"></a>
 #### 4.6.1.1 Règle 1 – Types numériques mixtes → le plus petit type est promu vers le plus grand
 
 Si deux opérandes appartiennent à des **types numériques différents**, Java promeut automatiquement le type le **plus petit** vers le type le **plus grand** avant d’effectuer l’opération.
@@ -148,7 +148,7 @@ Si deux opérandes appartiennent à des **types numériques différents**, Java 
 **Ordre de promotion valide (du plus petit au plus grand)** :  
 `byte → short → int → long → float → double`
 
-<a id="4612-règle-2-entier-flottant-lentier-est-promu-vers-le-flottant"></a>
+<a id="4612-règle-2--entier--flottant--lentier-est-promu-vers-le-flottant"></a>
 #### 4.6.1.2 Règle 2 – Entier + flottant → l’entier est promu vers le flottant
 
 Si un opérande est de type **entier** (`byte`, `short`, `char`, `int`, `long`) et l’autre de type **flottant** (`float`, `double`),  
@@ -159,7 +159,7 @@ la **valeur entière est promue** vers le type flottant avant l’opération.
 | `float f = 2.5F; int n = 3; float result = f * n;` | `n` (int) est promu en `float`. Le résultat est un `float` (`7.5`). |
 | `double d = 10.0; long l = 3; double result = d / l;` | `l` (long) est promu en `double`. Le résultat est un `double` (`3.333...`). |
 
-<a id="4613-règle-3-byte-short-et-char-sont-promus-en-int-lors-des-opérations-arithmétiques"></a>
+<a id="4613-règle-3--byte-short-et-char-sont-promus-en-int-lors-des-opérations-arithmétiques"></a>
 #### 4.6.1.3 Règle 3 – `byte`, `short` et `char` sont promus en `int` lors des opérations arithmétiques
 
 Lorsqu’on effectue une opération arithmétique sur des **variables** (et non des constantes littérales) de type `byte`, `short` ou `char`,  
@@ -182,7 +182,7 @@ byte c = 20;
 byte d = b + c;     // ❌ Erreur : b + c est évalué à l’exécution → int
 ```
 
-<a id="4614-règle-4-le-type-du-résultat-correspond-au-type-promu-des-opérandes"></a>
+<a id="4614-règle-4--le-type-du-résultat-correspond-au-type-promu-des-opérandes"></a>
 #### 4.6.1.4 Règle 4 – Le type du résultat correspond au type promu des opérandes
 
 Une fois les promotions appliquées, et lorsque les deux opérandes sont du même type,  
@@ -205,7 +205,7 @@ int result2 = 10 / 4;     // ❌ 2 (fraction ignorée)
 
 ---
 
-<a id="462-récapitulatif-du-comportement-de-promotion-numérique"></a>
+<a id="462--récapitulatif-du-comportement-de-promotion-numérique"></a>
 ### 4.6.2 ✅ Récapitulatif du comportement de promotion numérique
 
 | Situation | Résultat de promotion | Exemple |
@@ -215,7 +215,7 @@ int result2 = 10 / 4;     // ❌ 2 (fraction ignorée)
 | Arithmétique sur byte, short, char | Promu en int | byte + byte → int |
 | Résultat après promotion | Le type du résultat correspond au type promu | float + long → float |
 
-<a id="4621-points-clés"></a>
+<a id="4621--points-clés"></a>
 #### 4.6.2.1 🧠 Points clés
 
 - Toujours tenir compte de la **promotion de type** lorsqu’on mélange des types dans une expression arithmétique.  

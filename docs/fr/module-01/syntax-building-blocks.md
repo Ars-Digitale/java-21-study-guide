@@ -227,7 +227,7 @@ int x = 10;
 
 ---
 
-<a id="110-fonction-méthode"></a>
+<a id="110-fonction--méthode"></a>
 ### 1.10 **Fonction / Méthode**
 
 - **Définition :** Séquence d’instructions encapsulée, identifiée par un nom, pouvant recevoir des entrées (paramètres) et renvoyer une sortie (valeur).
@@ -249,7 +249,7 @@ int result = square(5); // result = 25
 
 ---
 
-<a id="111-classe-objet"></a>
+<a id="111-classe--objet"></a>
 ### 1.11 **Classe / Objet**
 
 - **Définition :**
@@ -276,7 +276,7 @@ p.move(1, 2);            // appel de méthode sur l’objet
 
 ---
 
-<a id="112-module-package"></a>
+<a id="112-module--package"></a>
 ### 1.12 **Module / Package**
 
 - **Définition :** Regroupement logique de classes, fonctions et ressources partageant un objectif commun.
@@ -334,7 +334,7 @@ Ensemble, ils forment un **système**.
 
 ---
 
-<a id="115-résumé-sous-forme-déchelle-croissante"></a>
+<a id="115--résumé-sous-forme-déchelle-croissante"></a>
 ### 1.15 📌 Résumé sous forme d’échelle croissante
 
 `Valeur → Littéral → Identifiant → Variable → Type → Opérateur → Expression → Instruction → Bloc de code → Fonction/Méthode → Classe/Objet → Module/Package → Programme → Système`
@@ -343,7 +343,7 @@ Cette échelle montre comment de petites unités conceptuelles sont combinées e
 
 ---
 
-<a id="116-diagramme-hiérarchique-ascii"></a>
+<a id="116--diagramme-hiérarchique-ascii"></a>
 ### 1.16 📊 Diagramme hiérarchique (ASCII)
 
 **Description :** Ce diagramme ASCII montre la relation hiérarchique entre les blocs de construction, du plus complexe (Système) au plus simple (Valeur et sa forme concrète, le Littéral).
@@ -367,7 +367,7 @@ Système
 
 ---
 
-<a id="117-diagramme-hiérarchique-mermaid"></a>
+<a id="117--diagramme-hiérarchique-mermaid"></a>
 ### 1.17 📊 Diagramme hiérarchique (Mermaid)
 
 **Description :** Le diagramme Mermaid rend la même hiérarchie sous forme d’arbre descendant. Il met en évidence qu’un Littéral est la forme syntaxique d’une Valeur.

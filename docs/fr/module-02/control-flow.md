@@ -82,7 +82,7 @@ if (grade >= 90) {
 
 ---
 
-<a id="72-linstruction-switch-lexpression"></a>
+<a id="72-linstruction-switch--lexpression"></a>
 ## 7.2 L’instruction `switch` & l’expression
 
 La construction `switch` est une structure de contrôle du flux qui sélectionne une branche parmi plusieurs alternatives en fonction de la valeur d’une expression (le **selector**).
@@ -271,7 +271,7 @@ switch (number) {
 
 ---
 
-<a id="73-deux-formes-de-switch-switch-statement-vs-switch-expression"></a>
+<a id="73-deux-formes-de-switch--switch-statement-vs-switch-expression"></a>
 ## 7.3 Deux formes de `switch` : `switch` Statement vs `switch` Expression
 
 <a id="731-linstruction-switch"></a>

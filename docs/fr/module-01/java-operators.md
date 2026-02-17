@@ -355,7 +355,7 @@ b += 1;         // ✅ fonctionne : cast implicite vers byte
     Les affectations composées effectuent un **cast implicite** vers le type de la variable à gauche.
     C’est pourquoi `b += 1` compile alors que `b = b + 1` ne compile pas.
 
-<a id="575-opérateurs-dégalité-et"></a>
+<a id="575-opérateurs-dégalité--et-"></a>
 ### 5.7.5 Opérateurs d’égalité (`==` et `!=`)
 
 Les **opérateurs d’égalité** en Java `==` (égal à) et `!=` (différent de) servent à comparer deux opérandes.  
@@ -502,7 +502,7 @@ Propriétés clés :
 - Les variables de pattern sont implicitement final (ne peuvent pas être réassignées).
 - Le nom ne doit pas entrer en conflit avec une variable existante dans le même scope.
 
-<a id="5763-flow-scoping-logique-short-circuit"></a>
+<a id="5763-flow-scoping--logique-short-circuit"></a>
 #### 5.7.6.3 Flow scoping & logique short-circuit
 
 Les variables de pattern deviennent disponibles selon l’analyse de flux :

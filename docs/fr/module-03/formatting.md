@@ -156,7 +156,7 @@ System.out.printf("%08.2f", 12.34);
 - Les zéros sont insérés après le signe.
 - Ignoré si la justification à gauche est présente (indicateur `-`).
 
-<a id="13115-justification-à-gauche-indicateur"></a>
+<a id="13115-justification-à-gauche-indicateur--"></a>
 ### 13.1.1.5 Justification à gauche Indicateur `-`
 
 L’indicateur `-` aligne la valeur à gauche à l’intérieur de la largeur.
@@ -172,7 +172,7 @@ System.out.printf("%-8.2f", 12.34);
 - Le remplissage est déplacé vers la droite.
 - Écrase le remplissage par zéro.
 
-<a id="13116-signe-explicite-indicateur"></a>
+<a id="13116-signe-explicite-indicateur-"></a>
 ### 13.1.1.6 Signe explicite Indicateur `+`
 
 L’indicateur `+` force l’affichage du signe pour les nombres positifs.
@@ -188,7 +188,7 @@ System.out.printf("%+8.2f", 12.34);
 - Les nombres négatifs affichent déjà `-`.
 - Écrase l’indicateur espace (qui affiche un espace en tête pour les valeurs positives).
 
-<a id="13117-parenthèses-pour-les-négatifs-indicateur"></a>
+<a id="13117-parenthèses-pour-les-négatifs-indicateur-"></a>
 ### 13.1.1.7 Parenthèses pour les négatifs Indicateur `(`
 
 L’indicateur `(` formate les nombres négatifs en utilisant des parenthèses.
@@ -353,7 +353,7 @@ System.out.println(df.format(12.3));
 - Complète avec des zéros si le nombre contient moins de chiffres.
 - Utile pour des sorties à largeur fixe ou alignées.
 
-<a id="1326-le-symbole-chiffre-optionnel"></a>
+<a id="1326-le-symbole--chiffre-optionnel"></a>
 ### 13.2.6 Le symbole `#` (chiffre optionnel)
 
 Le symbole `#` affiche un chiffre uniquement s’il existe.
@@ -371,7 +371,7 @@ System.out.println(df.format(12.3));
 - Supprime les zéros finaux inutiles.
 - Adapté à un formatage « convivial ».
 
-<a id="1327-combiner-0-et"></a>
+<a id="1327-combiner-0-et-"></a>
 ### 13.2.7 Combiner `0` et `#`
 
 Les patterns combinent souvent les deux symboles pour plus de flexibilité.
@@ -414,7 +414,7 @@ Dans les patterns :
 
 Les symboles effectivement utilisés à l’exécution dépendent du `Locale` (par exemple, virgule vs point).
 
-<a id="1329-decimalformatsymbols-symboles-de-format-spécifiques-au-locale"></a>
+<a id="1329-decimalformatsymbols--symboles-de-format-spécifiques-au-locale"></a>
 ### 13.2.9 DecimalFormatSymbols : symboles de format spécifiques au Locale
 
 ```java

@@ -134,7 +134,7 @@ var localDateTime2 = LocalDateTime.of(localDate1, localTime1);
 var zoned = ZonedDateTime.of(2025, 7, 31, 13, 55, 22, 0, ZoneId.of("Europe/Paris"));
 ```
 
-<a id="1212-arithmétique-dateheure-méthodes-plus-et-minus"></a>
+<a id="1212-arithmétique-dateheure--méthodes-plus-et-minus"></a>
 ### 12.1.2 Arithmétique date/heure : méthodes `plus` et `minus`
 
 Toutes les classes du package `java.time` (comme `LocalDate`, `LocalTime`, `LocalDateTime`, `ZonedDateTime`, etc.) sont **immutables**.
@@ -406,7 +406,7 @@ Le package `java.time` fournit trois classes temporelles essentielles qui repré
 
 ---
 
-<a id="125-period-durées-humaines-basées-sur-la-date"></a>
+<a id="125-period--durées-humaines-basées-sur-la-date"></a>
 ## 12.5 `Period` — Durées humaines basées sur la date
 
 `Period` représente une durée basée sur la date, telle que “3 ans, 2 mois et 5 jours”.  
@@ -449,7 +449,7 @@ LocalDate result = base.plus(p2);          // 2026-03-13
 
 ---
 
-<a id="126-duration-durées-machine-basées-sur-le-temps"></a>
+<a id="126-duration--durées-machine-basées-sur-le-temps"></a>
 ## 12.6 `Duration` — Durées machine basées sur le temps
 
 `Duration` représente une durée basée sur le temps en secondes et nanosecondes.
@@ -500,7 +500,7 @@ ZonedDateTime z3 = z1.plus(d2);              // Duration-based
 
 ---
 
-<a id="127-instant-point-sur-la-chronologie-utc"></a>
+<a id="127-instant--point-sur-la-chronologie-utc"></a>
 ## 12.7 `Instant` — Point sur la chronologie UTC
 
 `Instant` représente un seul moment dans le temps par rapport à UTC, avec une précision à la nanoseconde.

@@ -582,7 +582,7 @@ java B
     - `-classpath <classpath>`  
     - `--class-path <classpath>`
 
-<a id="263-code-dans-des-packages-organisation-standard-src-out"></a>
+<a id="#263-code-dans-des-packages-organisation-standard-src--out"></a>
 ### 2.6.3 Code dans des packages (organisation standard src → out)
 
 **Fichiers**
@@ -618,7 +618,7 @@ public class Main {
 javac src/com/example/app/Main.java
 ```
 
-<a id="264-compiler-vers-un-autre-répertoire-d"></a>
+<a id="264-compiler-vers-un-autre-répertoire--d"></a>
 ### 2.6.4 Compiler vers un autre répertoire (`-d`)
 
 L’option `-d out` place les fichiers `.class` compilés dans le répertoire `out/`, en créant des sous-dossiers qui reflètent les noms de packages :

@@ -251,7 +251,7 @@ String[] s = new String[3];
 Object[] o = s;      // OK: arrays are covariant
 ```
 
-<a id="1043-danger-dexécution-de-la-covariance-arraystoreexception"></a>
+<a id="1043-danger-dexécution-de-la-covariance--arraystoreexception"></a>
 ### 10.4.3 Danger d’exécution de la covariance : `ArrayStoreException`
 
 ```java
