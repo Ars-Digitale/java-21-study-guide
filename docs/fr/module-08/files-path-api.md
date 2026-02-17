@@ -39,7 +39,7 @@
 
 Cette section se concentre sur la création de localisateurs de système de fichiers en utilisant l’API legacy `java.io.File` et l’API moderne `java.nio.file.Path` : comment convertir entre eux et comprendre les surcharges, les valeurs par défaut et les pièges courants.
 
-<a id="331-file-legacy-et-path-nio-création-et-conversion"></a>
+<a id="331-file-legacy-et-path-nio--création-et-conversion"></a>
 ## 33.1 `File` legacy et `Path` NIO : création et conversion
 
 <a id="3311-créer-un-file-legacy"></a>
@@ -100,7 +100,7 @@ Path p4 = Path.of(URI.create("file:///tmp/data.txt"));
     - `Path.of(...)` et `Paths.get(...)` sont équivalents pour le système de fichiers par défaut.
     - Préférez `Path.of` dans le code moderne.
 
-<a id="3313-absolu-vs-relatif-ce-que-signifie-relatif"></a>
+<a id="3313-absolu-vs-relatif--ce-que-signifie-relatif"></a>
 ### 33.1.3 Absolu vs relatif : ce que signifie “relatif”
 
 `File` et `Path` peuvent être créés comme chemins relatifs.
@@ -124,7 +124,7 @@ System.out.println(rp.toAbsolutePath());
 !!! note
     Les chemins relatifs sont une source courante de bugs “works on my machine” parce que `user.dir` dépend de la manière/où la JVM a été lancée.
 
-<a id="3314-joindre-construire-des-paths"></a>
+<a id="3314-joindre--construire-des-paths"></a>
 ### 33.1.4 Joindre / construire des paths
 
 - Le `File` legacy utilise des constructeurs (parent + enfant).
@@ -370,7 +370,7 @@ Supprime des éléments de nom **redondants** comme `.` et `..`.
 !!! note
     `normalize()` est purement syntaxique, ne vérifie pas l’existence, et peut produire des paths invalides s’il est mal utilisé.
 
-<a id="3318-tableau-de-comparaison-rapide-création-conversion"></a>
+<a id="3318-tableau-de-comparaison-rapide-création--conversion"></a>
 ### 33.1.8 Tableau de comparaison rapide (création + conversion)
 
 | Besoin | Legacy (File) | NIO (Path) | Préféré aujourd’hui |
@@ -383,14 +383,14 @@ Supprime des éléments de nom **redondants** comme `.` et `..`.
 
 ---
 
-<a id="332-gérer-les-fichiers-et-répertoires-créer-copier-déplacer-remplacer-comparer-supprimer-legacy-vs-nio"></a>
+<a id="332-gérer-les-fichiers-et-répertoires--créer-copier-déplacer-remplacer-comparer-supprimer-legacy-vs-nio"></a>
 ## 33.2 Gérer les fichiers et répertoires : créer, copier, déplacer, remplacer, comparer, supprimer (Legacy vs NIO)
 
 Cette section couvre les opérations que vous effectuez sur des entrées du système de fichiers (fichiers/répertoires) : créer, copier, déplacer/renommer, remplacer, comparer et supprimer.
 
 Elle contraste `java.io.File` legacy (et des helpers legacy associés) avec `java.nio.file` moderne (NIO.2).
 
-<a id="3321-modèle-mental-pathlocator-vs-opérations"></a>
+<a id="3321-modèle-mental--pathlocator-vs-opérations"></a>
 ### 33.2.1 Modèle mental : “Path/Locator” vs “Opérations”
 
 Les deux APIs utilisent des objets qui représentent un path, mais les opérations diffèrent :
@@ -524,7 +524,7 @@ FileOutputStream out = new FileOutputStream("dst.bin")) {
 !!! note
     Rappelez-vous `read(byte[])` retourne le nombre de bytes lus ; vous devez écrire seulement ce compte, pas le buffer entier.
 
-<a id="3324-déplacer-renommer-et-remplacer"></a>
+<a id="3324-déplacer--renommer-et-remplacer"></a>
 ### 33.2.4 Déplacer / renommer et remplacer
 
 Dans les deux APIs, rename/move est “au niveau metadata” quand possible, mais peut se comporter comme copy+delete entre systèmes de fichiers. NIO rend cela explicite via des options.
@@ -664,7 +664,7 @@ System.out.println(deleted);
 !!! note
     Certification tip: `Files.delete` lance `NoSuchFileException` si manquant, tandis que `deleteIfExists` retourne `false`.
 
-<a id="3327-copier-supprimer-récursivement-des-arbres-de-répertoires-pattern-nio"></a>
+<a id="3327-copier--supprimer-récursivement-des-arbres-de-répertoires-pattern-nio"></a>
 ### 33.2.7 Copier / supprimer récursivement des arbres de répertoires (pattern NIO)
 
 NIO ne fournit pas une seule méthode “copyTree/deleteTree”, mais l’approche standard utilise `Files.walk` ou `Files.walkFileTree`.

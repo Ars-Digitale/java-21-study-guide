@@ -205,7 +205,7 @@ Pour des tâches comme les calculs financiers, cela est inacceptable.
   
 `BigDecimal` résout ce problème en représentant les nombres à l’aide d’un modèle décimal avec une échelle configurable (nombre de chiffres après la virgule).
 
-<a id="1122-biginteger-entiers-à-précision-arbitraire"></a>
+<a id="1122-biginteger--entiers-à-précision-arbitraire"></a>
 ### 11.2.2 BigInteger — Entiers à précision arbitraire
 
 `BigInteger` représente des valeurs entières de taille pratiquement quelconque, limitée uniquement par la mémoire disponible.
@@ -254,7 +254,7 @@ BigInteger c = new BigInteger("FF", 16);               // 255 in base 16
 BigInteger r = new BigInteger(128, new Random());      // random 128-bit number
 ```
 
-<a id="1124-opérations-pas-dopérateurs"></a>
+<a id="1124-opérations-pas-dopérateurs-"></a>
 ### 11.2.4 Opérations (pas d’opérateurs !)
 
 Vous ne pouvez pas utiliser les opérateurs arithmétiques standards (`+`, `-`, `*`, `/`, `%`) avec `BigInteger` ou `BigDecimal`.

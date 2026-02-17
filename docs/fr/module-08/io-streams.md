@@ -52,7 +52,7 @@ Ce chapitre fournit une explication détaillée des `flux I/O Java`.
 
 Il couvre les flux classiques **java.io**, les compare à **java.nio / java.nio.file**, et explique les principes de conception, les API, les cas limites et les distinctions pertinentes.
 
-<a id="341-quest-ce-quun-flux-io-en-java"></a>
+<a id="341-quest-ce-quun-flux-io-en-java-"></a>
 ## 34.1 Qu’est-ce qu’un flux I/O en Java ?
 
 Un `flux I/O` représente un flux de données entre un programme Java et une source ou une destination externe.
@@ -140,7 +140,7 @@ try (InputStream in = new FileInputStream("data.bin")) {
 !!! note
     Les flux de bas niveau sont rarement utilisés seuls dans des applications réelles en raison de performances médiocres et de fonctionnalités limitées.
 
-<a id="3433-flux-de-haut-niveau-filter-processing-streams"></a>
+<a id="3433-flux-de-haut-niveau-filter--processing-streams"></a>
 ### 34.3.3 Flux de haut niveau (Filter / Processing Streams)
 
 Les flux de haut niveau enveloppent d’autres flux pour ajouter des fonctionnalités.

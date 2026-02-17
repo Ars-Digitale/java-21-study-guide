@@ -167,7 +167,7 @@ Décomposition :
 
 ---
 
-<a id="142-java-est-un-langage-pass-by-value"></a>
+<a id="142-java-est-un-langage--pass-by-value-"></a>
 ## 14.2 Java est un langage « Pass-by-Value »
 
 Java utilise **uniquement le pass-by-value**, sans exception.
@@ -262,7 +262,7 @@ call(5); // affiche : int (correspondance exacte pour int)
 ```
 
 
-<a id="14312-sil-nexiste-pas-de-correspondance-exacte-java-choisit-le-type-compatible-le-plus-spécifique"></a>
+<a id="14312--sil-nexiste-pas-de-correspondance-exacte-java-choisit-le-type-compatible-le-plus-spécifique"></a>
 ### 14.3.1.2 — S’il n’existe pas de correspondance exacte, Java choisit le type compatible *le plus spécifique*
 
 Java préfère :
@@ -283,7 +283,7 @@ test(5);  // littéral int : peut être élargi en long ou float
 ```
 
 
-<a id="14313-lélargissement-des-primitifs-bat-le-boxing"></a>
+<a id="14313--lélargissement-des-primitifs-bat-le-boxing"></a>
 ### 14.3.1.3 — L’élargissement des primitifs bat le boxing
 
 Si un argument primitif peut être soit élargi soit autoboxé, Java choisit l’élargissement.
@@ -298,7 +298,7 @@ m(b);               // byte → int (élargissement) l’emporte
 ```
 
 
-<a id="14314-le-boxing-bat-les-varargs"></a>
+<a id="14314--le-boxing-bat-les-varargs"></a>
 ### 14.3.1.4 — Le boxing bat les varargs
 
 ```java
@@ -310,7 +310,7 @@ show(5);                // int → Integer (boxing) préféré
 ```
 
 
-<a id="14315-pour-les-références-java-choisit-le-type-de-référence-le-plus-spécifique"></a>
+<a id="14315--pour-les-références-java-choisit-le-type-de-référence-le-plus-spécifique"></a>
 ### 14.3.1.5 — Pour les références, Java choisit le type de référence le plus spécifique
 
 ```java
@@ -324,7 +324,7 @@ ref("abc");             // "abc" est une String → plus spécifique que Object
 Plus spécifique signifie *plus bas dans la hiérarchie d’héritage*.
 
 
-<a id="14316-lorsquil-ny-a-pas-de-plus-spécifique-non-ambigu-lappel-est-une-erreur-de-compilation"></a>
+<a id="14316--lorsquil-ny-a-pas-de--plus-spécifique--non-ambigu-lappel-est-une-erreur-de-compilation"></a>
 ### 14.3.1.6 — Lorsqu’il n’y a pas de « plus spécifique » non ambigu, l’appel est une erreur de compilation
 
 Exemple avec des classes sœurs :
@@ -348,7 +348,7 @@ run(null);  // ❌ Erreur à la compilation : appel de méthode ambigu
 ```
 
 
-<a id="14317-surcharges-mixtes-primitifs-wrappers"></a>
+<a id="14317--surcharges-mixtes-primitifs--wrappers"></a>
 ### 14.3.1.7 — Surcharges mixtes primitifs + wrappers
 
 Java évalue l’élargissement, le boxing et les varargs dans cet ordre :
@@ -369,7 +369,7 @@ mix(s);   // short → int → long  (élargissement)
 ```
 
 
-<a id="14318-quand-les-primitifs-se-mélangent-avec-les-types-de-référence"></a>
+<a id="14318--quand-les-primitifs-se-mélangent-avec-les-types-de-référence"></a>
 ### 14.3.1.8 — Quand les primitifs se mélangent avec les types de référence
 
 ```java
@@ -385,7 +385,7 @@ fun(i);                 // référence acceptée → Object
 ```
 
 
-<a id="14319-quand-object-gagne"></a>
+<a id="14319--quand-object-gagne"></a>
 ### 14.3.1.9 — Quand Object gagne
 
 ```java

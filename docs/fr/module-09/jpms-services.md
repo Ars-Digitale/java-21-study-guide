@@ -121,7 +121,7 @@ module com.example.consumer {
     Un module qui déclare `uses` mais ne possède aucun fournisseur correspondant sur le module path compile normalement,
     mais `ServiceLoader` retourne un résultat vide à l’exécution.
 
-<a id="3915-chargement-des-services-à-lexécution"></a>
+<a id="3915-chargement-des-services-a-lxécution"></a>
 ### 39.1.5 Chargement des Services à lExécution
 
 L’`API ServiceLoader` effectue la découverte de service.

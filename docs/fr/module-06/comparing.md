@@ -75,7 +75,7 @@ Sortie :
 !!! note
     L’ordre naturel est défini uniquement pour les types qui implémentent `Comparable`.
 
-<a id="241-comparable-ordre-naturel"></a>
+<a id="241-comparable--ordre-naturel"></a>
 ## 24.1 Comparable — Ordre Naturel
 
 L’interface `Comparable<T>` définit l’ordre naturel d’un type.
@@ -105,7 +105,7 @@ Règles et valeur de retour :
     compareTo peut lever une ClassCastException s’il reçoit un type non comparable — mais cela se produit généralement uniquement avec des types raw.
 
 
-<a id="2412-exemple-classe-implémentant-comparable"></a>
+<a id="2412-exemple--classe-implémentant-comparable"></a>
 ### 24.1.2 Exemple : Classe Implémentant Comparable
 
 ```java
@@ -144,7 +144,7 @@ La liste est triée par âge, car il s’agit de l’ordre numérique naturel.
 
 ---
 
-<a id="242-comparator-ordre-personnalisé"></a>
+<a id="242-comparator--ordre-personnalisé"></a>
 ## 24.2 Comparator — Ordre Personnalisé
 
 L’interface `Comparator<T>` permet de définir plusieurs stratégies de tri

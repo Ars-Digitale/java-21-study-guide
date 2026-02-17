@@ -133,7 +133,7 @@ for (Integer i : list) {
 
 ---
 
-<a id="236-tableau-de-synthèse-opérations-partagées"></a>
+<a id="236-tableau-de-synthèse--opérations-partagées"></a>
 ## 23.6 Tableau de Synthèse — Opérations Partagées
 
 | Opération                     | S’applique à                     | Notes                                   |

@@ -75,7 +75,7 @@ La version choisie dépend uniquement de l’ordre du classpath, et non de l’a
 
 ---
 
-<a id="372-quest-ce-quun-module"></a>
+<a id="372-quest-ce-quun-module-"></a>
 ## 37.2 Qu’est-ce qu’un module ?
 
 Un `module` est une unité de code nommée et auto-descriptive.

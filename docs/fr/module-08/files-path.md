@@ -41,7 +41,7 @@
 
 Cette section se concentre sur `Path`, `File`, `Files` et les classes associées, en expliquant pourquoi elles existent, quels problèmes elles résolvent et quelles sont les différences entre les API legacy `java.io` et `NIO v.2` (nouvelles API d’E/S), avec une attention particulière à la sémantique du système de fichiers, à la résolution des chemins et aux idées fausses courantes.
 
-<a id="321-modèle-conceptuel-système-de-fichiers-fichiers-répertoires-liens-et-cibles-des"></a>
+<a id="321-modèle-conceptuel--système-de-fichiers-fichiers-répertoires-liens-et-cibles-des"></a>
 ## 32.1 Modèle conceptuel : système de fichiers, fichiers, répertoires, liens et cibles-d’E/S
 
 Avant de comprendre les API d’E/S Java, il est essentiel de comprendre avec quoi elles interagissent.
@@ -52,7 +52,7 @@ Cette section définit ces concepts indépendamment de Java, puis explique comme
 
 ---
 
-<a id="322-système-de-fichiers-labstraction-globale"></a>
+<a id="322-système-de-fichiers--labstraction-globale"></a>
 ## 32.2 Système de fichiers – L’abstraction globale
 
 Un `système de fichiers` est un mécanisme structuré fourni par un système d’exploitation pour organiser, stocker, récupérer et gérer des données sur des dispositifs de stockage persistant.
@@ -79,7 +79,7 @@ En Java NIO, un système de fichiers est représenté par l’abstraction `FileS
 
 ---
 
-<a id="323-chemin-localiser-une-entrée-dans-un-système-de-fichiers"></a>
+<a id="323-chemin--localiser-une-entrée-dans-un-système-de-fichiers"></a>
 ## 32.3 Chemin – Localiser une entrée dans un système de fichiers
 
 Un `chemin` est un localisateur logique, pas une ressource.
@@ -104,7 +104,7 @@ Un `chemin` résout le problème de l’`addressing` :
 
 ---
 
-<a id="324-fichiers-conteneurs-persistants-de-données"></a>
+<a id="324-fichiers--conteneurs-persistants-de-données"></a>
 ## 32.4 Fichiers – Conteneurs persistants de données
 
 Un `fichier` est une entrée du système de fichiers dont le rôle principal est de stocker des données.
@@ -135,7 +135,7 @@ Du point de vue du système de fichiers, un fichier a :
 
 ---
 
-<a id="325-répertoires-conteneurs-structurels"></a>
+<a id="325-répertoires--conteneurs-structurels"></a>
 ## 32.5 Répertoires – Conteneurs structurels
 
 Un `répertoire (ou dossier)` est une entrée du système de fichiers dont le but est d’organiser d’autres entrées.
@@ -158,7 +158,7 @@ Les `répertoires` résolvent le problème de l’évolutivité et de l’organi
 
 ---
 
-<a id="326-liens-mécanismes-dindirection"></a>
+<a id="326-liens--mécanismes-dindirection"></a>
 ## 32.6 Liens – Mécanismes d’indirection
 
 Un `lien` est une entrée du système de fichiers qui référence une autre entrée.
@@ -507,7 +507,7 @@ La classe `Files` effectue de vraies opérations d’E/S.
 
 ---
 
-<a id="3216-philosophie-de-gestion-des-erreurs-old-vs-nio"></a>
+<a id="3216-philosophie-de-gestion-des-erreurs--old-vs-nio"></a>
 ## 32.16 Philosophie de gestion des erreurs : Old-vs-NIO
 
 Une grande différence conceptuelle réside dans le reporting des erreurs.

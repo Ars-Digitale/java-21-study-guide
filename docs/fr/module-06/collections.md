@@ -24,7 +24,7 @@ Il fournit une architecture unifiée pour gérer les collections, permettant aux
 
 Ce chapitre introduit les concepts fondamentaux nécessaires avant d’étudier List, Set, Queue, Map et les Sequenced Collections, explorés en détail dans les chapitres suivants.
 
-<a id="221-quest-ce-que-le-framework-des-collections"></a>
+<a id="221-quest-ce-que-le-framework-des-collections-"></a>
 ## 22.1 Qu’est-ce que le Framework des Collections ?
 
 Le Framework des Collections fournit :
@@ -137,7 +137,7 @@ Le Collections Framework a unifié tout cela dans une API cohérente.
 
 ---
 
-<a id="225-les-deux-côtés-du-framework-collections-vs-maps"></a>
+<a id="225-les-deux-côtés-du-framework--collections-vs-maps"></a>
 ## 22.5 Les deux côtés du Framework : Collections vs Maps
 
 « Map étend-elle Collection ? »

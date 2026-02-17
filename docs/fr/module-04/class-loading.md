@@ -103,7 +103,7 @@ Quand le mot-clé `new` est utilisé, **la création d’instance suit une séqu
 
 ---
 
-<a id="154-exemple-complet-initialisation-statique-dinstance-à-travers-lhéritage"></a>
+<a id="154-exemple-complet--initialisation-statique--dinstance-à-travers-lhéritage"></a>
 ## 15.4 Exemple Complet : Initialisation Statique + d’Instance à Travers l’Héritage
 
 Considérons la hiérarchie suivante à trois niveaux :

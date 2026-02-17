@@ -416,7 +416,7 @@ Règles pour des streams parallèles sûrs :
 <a id="218-opérations-de-réduction"></a>
 ## 21.8 Opérations de réduction
 
-<a id="2181-reduce-combiner-un-stream-en-un-seul-objet"></a>
+<a id="2181-reduce--combiner-un-stream-en-un-seul-objet"></a>
 ### 21.8.1 `reduce()` : combiner un stream en un seul objet
 
 Il existe trois signatures de méthode pour cette opération :

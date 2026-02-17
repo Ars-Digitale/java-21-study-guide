@@ -270,7 +270,7 @@ class Demo {
 !!! note
     Le compilateur peut insérer des casts supplémentaires ou des méthodes bridge dans des scénarios d’héritage plus complexes, mais l’erasure utilise toujours seulement le premier bound (A dans ce cas).
 
-<a id="1847-surcharge-dune-méthode-générique-pourquoi-certaines-surcharges-sont-impossibles"></a>
+<a id="1847-surcharge-dune-méthode-générique--pourquoi-certaines-surcharges-sont-impossibles"></a>
 ### 18.4.7 Surcharge d’une Méthode Générique — Pourquoi Certaines Surcharges Sont Impossibles
 
 Quand Java compile du code générique, il applique la type erasure:
@@ -342,7 +342,7 @@ void testInput(ArrayList inputParam)
 
 Aucune collision → surcharge légale.
 
-<a id="1849-retourner-des-types-génériques-règles-et-restrictions"></a>
+<a id="1849-retourner-des-types-génériques--règles-et-restrictions"></a>
 ### 18.4.9 Retourner des Types Génériques — Règles et Restrictions
 
 Quand on retourne une valeur depuis une méthode, Java suit une règle rigide:
@@ -447,10 +447,10 @@ La classe doit apparaître en premier.
 class C<T extends Number & Comparable<T>> { }
 ```
 
-<a id="1853-wildcard-extends-super"></a>
+<a id="1853-wildcard---extends--super"></a>
 ### 18.5.3 Wildcard: `?`, `? extends`, `? super`
 
-<a id="18531-wildcard-non-limitée"></a>
+<a id="18531-wildcard-non-limitée-"></a>
 #### 18.5.3.1 Wildcard Non Limitée `?`
 
 À utiliser quand on veut accepter une liste de type inconnu:
@@ -459,7 +459,7 @@ class C<T extends Number & Comparable<T>> { }
 void printAll(List<?> list) { ... }
 ```
 
-<a id="18532-wildcard-avec-upper-bound-extends"></a>
+<a id="18532-wildcard-avec-upper-bound--extends"></a>
 #### 18.5.3.2 Wildcard avec Upper Bound `? extends`
 
 ```java
@@ -471,7 +471,7 @@ Number n = nums.get(0);   // OK
 
 > Tu ne peux pas ajouter des éléments (sauf null) à `? extends` parce que tu ne connais pas le sous-type exact.
 
-<a id="18533-wildcard-avec-lower-bound-super"></a>
+<a id="18533-wildcard-avec-lower-bound--super"></a>
 #### 18.5.3.3 Wildcard avec Lower Bound `? super`
 
 `<? super Integer>` signifie **le type doit être Integer ou une superclasse de Integer**.

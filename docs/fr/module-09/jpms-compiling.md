@@ -285,7 +285,7 @@ module com.example.lib {
 
 Les packages non exportés restent fortement encapsulés.
 
-<a id="3874-exports-to-exports-qualifiés"></a>
+<a id="3874-exports--to-exports-qualifiés"></a>
 ### 38.7.4 `exports ... to` (Exports Qualifiés)
 
 Un export qualifié restreint l’accès à des modules spécifiques.
@@ -315,7 +315,7 @@ module com.example.app {
     opens NE rend PAS un package accessible à la compilation.
     Il affecte uniquement la réflexion à l’exécution.
 
-<a id="3876-opens-to-opens-qualifiés"></a>
+<a id="3876-opens--to-opens-qualifiés"></a>
 ### 38.7.6 `opens ... to` (Opens Qualifiés)
 
 Vous pouvez restreindre l’accès réflexif à des modules spécifiques.
@@ -341,7 +341,7 @@ module com.example.app {
 | `opens` | Autoriser la réflexion à l’exécution |
 | `opens ... to` | Restreindre l’accès réflexif |
 
-<a id="3878-exports-vs-opens-accès-à-la-compilation-vs-à-lexécution"></a>
+<a id="3878-exports-vs-opens--accès-à-la-compilation-vs-à-lexécution"></a>
 ### 38.7.8 Exports vs Opens — Accès à la Compilation vs à lExécution
 
 | Visibilité | Compilation ? | Réflexion à l’exécution ? |

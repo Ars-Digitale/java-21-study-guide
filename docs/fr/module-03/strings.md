@@ -34,7 +34,7 @@
 
 ---
 
-<a id="91-chaînes-text-blocks"></a>
+<a id="91-chaînes--text-blocks"></a>
 ## 9.1 Chaînes & Text Blocks
 
 <a id="911-chaînes"></a>
@@ -189,7 +189,7 @@ String html = """
     - Les guillemets doubles à l’intérieur du bloc n’ont généralement pas besoin d’être échappés.
     - Le compilateur interprète le contenu entre les triples guillemets d’ouverture et de fermeture comme la valeur de la chaîne.
 
-<a id="9121-mise-en-forme-espaces-essentiels-vs-incidentels"></a>
+<a id="9121-mise-en-forme--espaces-essentiels-vs-incidentels"></a>
 ### 9.1.2.1 Mise en forme : espaces essentiels vs incidentels
 
 - **Espaces essentiels** : espaces et newlines qui font partie du contenu de chaîne voulu.
@@ -365,7 +365,7 @@ System.out.println(s.length());  // 5
 
 Le dernier index valide est toujours `length() - 1`.
 
-<a id="923-règles-de-bornes-index-de-début-vs-index-de-fin"></a>
+<a id="923-règles-de-bornes--index-de-début-vs-index-de-fin"></a>
 ### 9.2.3 Règles de bornes : index de début vs index de fin
 
 De nombreuses méthodes de `String` utilisent deux indices :
@@ -400,7 +400,7 @@ Cette règle s’applique à la plupart des méthodes basées sur substring.
 | lastIndexOf(String) | Dernière occurrence | — | — | "banana".lastIndexOf("a") → 5 |
 | lastIndexOf(String, fromIndex) | Recherche à rebours depuis l’index | fromIndex | fromIndex inclusif | "banana".lastIndexOf("a", 3) → 3 |
 
-<a id="925-méthodes-avec-début-inclusif-fin-exclusive"></a>
+<a id="925-méthodes-avec-début-inclusif--fin-exclusive"></a>
 ### 9.2.5 Méthodes avec début inclusif / fin exclusive
 
 Ces méthodes suivent le même comportement de découpage : `start` inclus, `end` exclus.
