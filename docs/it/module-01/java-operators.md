@@ -26,11 +26,14 @@
 		- [5.7.6.2 Pattern matching per instanceof](#5762-pattern-matching-per-instanceof)
 		- [5.7.6.3 Flow scoping e logica short-circuit](#5763-flow-scoping-e-logica-short-circuit)
 		- [5.7.6.4 Array e tipi reificabili](#5764-array-e-tipi-reificabili)
-- [5.8 Operatore ternario](#58-operatore-ternario)
-	- [5.8.1 Sintassi](#581-sintassi)
-	- [5.8.2 Esempio](#582-esempio)
-	- [5.8.3 Esempio di ternario annidato](#583-esempio-di-ternario-annidato)
-	- [5.8.4 Note](#584-note)
+- [5.8 Operatore Ternario](#58-operatore-ternario)
+	- [5.8.1 Regole di Tipo per l’Operatore Ternario](#581-regole-di-tipo-per-loperatore-ternario)
+		- [5.8.1.1 Operandi Numerici](#5811-operandi-numerici)
+		- [5.8.1.2 Tipi di Riferimento](#5812-tipi-di-riferimento)
+	- [5.8.2 Sintassi](#582-sintassi)
+	- [5.8.3 Esempio](#583-esempio)
+	- [5.8.4 Esempio di Ternario Annidato](#584-esempio-di-ternario-annidato)
+	- [5.8.5 Note](#585-note)
 
 
 ---
@@ -584,47 +587,82 @@ System.out.println(list instanceof java.util.List<?>); // ✅ true
 <a id="58-operatore-ternario"></a>
 ## 5.8 Operatore ternario
 
-L’**operatore ternario** (`? :`) è l’unico operatore in Java che prende **tre operandi**.  
-Funziona come una forma compatta di un’istruzione `if-else`.
+L’**operatore ternario** (`? :`) è l’unico operatore in Java che accetta **tre operandi**.  
+Rappresenta una forma compatta dell’istruzione `if-else`.
+
+
+<a id="581-regole-di-tipo-per-loperatore-ternario"></a>
+### 5.8.1 Regole di Tipo per l’Operatore Ternario
+
+Il tipo di un’espressione condizionale (ternaria) è determinato dai tipi del secondo e del terzo operando.
+
+
+<a id="5811-operandi-numerici"></a>
+#### 5.8.1.1 Operandi Numerici
+
+- Se un operando è di tipo `byte` e l’altro è di tipo `short`, il tipo risultante è `short`.
+- Se un operando è di tipo `T` (`byte`, `short` o `char`) e l’altro è un’espressione costante di tipo `int` il cui valore è rappresentabile in `T`, allora il tipo risultante è `T`.
+- In tutti gli altri casi numerici si applica la **binary numeric promotion** ai due operandi.  
+  Il tipo dell’espressione condizionale diventa il tipo promosso.
+
+> La binary numeric promotion include **unboxing conversion** e **value set conversion**.
+
+
+<a id="5812-tipi-di-riferimento"></a>
+#### 5.8.1.2 Tipi di Riferimento
+
+- Se un operando è `null` e l’altro è un tipo di riferimento, il tipo risultante è quel tipo di riferimento.
+- Se i due operandi sono tipi di riferimento diversi, uno deve essere assegnabile all’altro (compatibilità per assegnazione).  
+  Il tipo risultante è il tipo più generale, cioè quello a cui l’altro può essere assegnato.
+- Se nessuno dei due tipi è compatibile per assegnazione con l’altro, si verifica un **errore a compile-time**.
+
+
+In sintesi, l’operatore ternario determina il proprio tipo applicando:
+
+- Regole speciali di narrowing per piccoli tipi integrali  
+- Binary numeric promotion per i valori numerici  
+- Regole di compatibilità per assegnazione per i tipi di riferimento  
+
 
 !!! tip
-    L’operatore ternario **deve** produrre un valore di un tipo *compatibile*.
-    Se i due rami producono tipi non correlati, la compilazione fallisce.
+    L’operatore ternario **deve** produrre un valore di tipo compatibile.
+    Se i due rami restituiscono tipi non correlati, la compilazione fallisce.
     
     ```java
     String s = true ? "ok" : 5; // ❌ errore di compilazione: tipi incompatibili
     ```
 
-<a id="581-sintassi"></a>
-### 5.8.1 Sintassi
+<a id="582-sintassi"></a>
+### 5.8.2 Sintassi
 
 ```java
 condition ? expressionIfTrue : expressionIfFalse;
 ```
 
-<a id="582-esempio"></a>
-### 5.8.2 Esempio
+<a id="583-esempio"></a>
+### 5.8.3 Esempio
 
 ```java
 int age = 20;
-String access = (age >= 18) ? "Allowed" : "Denied";
-System.out.println(access); // "Allowed"
+String access = (age >= 18) ? "Consentito" : "Negato";
+System.out.println(access);  // "Consentito"
 ```
 
-<a id="583-esempio-di-ternario-annidato"></a>
-### 5.8.3 Esempio di ternario annidato
+<a id="584-esempio-di-ternario-annidato"></a>
+### 5.8.4 Esempio di Ternario Annidato
 
 ```java
 int score = 85;
 String grade = (score >= 90) ? "A" :
-(score >= 75) ? "B" :
-(score >= 60) ? "C" : "F";
-System.out.println(grade); // "B"
+               (score >= 75) ? "B" :
+               (score >= 60) ? "C" : "F";
+System.out.println(grade);  // "B"
 ```
 
-<a id="584-note"></a>
-### 5.8.4 Note
+
+<a id="585-note"></a>
+### 5.8.5 Note
 
 !!! warning
-    - Espressioni ternarie annidate possono ridurre la leggibilità. Usa le parentesi per maggiore chiarezza.
-    - L’operatore ternario restituisce un valore, a differenza di if-else, che è un’istruzione.
+    - Le espressioni ternarie annidate possono ridurre la leggibilità. Usare le parentesi per maggiore chiarezza.
+    - L’operatore ternario restituisce un **valore**, a differenza di `if-else`, che è un’istruzione.

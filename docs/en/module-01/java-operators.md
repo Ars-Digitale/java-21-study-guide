@@ -26,10 +26,13 @@
 		- [5.7.6.3 Flow Scoping & Short-Circuit Logic](#5763-flow-scoping--short-circuit-logic)
 		- [5.7.6.4 Arrays and Reifiable Types](#5764-arrays-and-reifiable-types)
 - [5.8 Ternary Operator](#58-ternary-operator)
-	- [5.8.1 Syntax](#581-syntax)
-	- [5.8.2 Example](#582-example)
-	- [5.8.3 Nested Ternary Example](#583-nested-ternary-example)
-	- [5.8.4 Notes](#584-notes)
+	- [5.8.1 Type Rules for the Ternary Operator](#581-type-rules-for-the-ternary-operator)
+		- [5.8.1.1 Numeric Operands](#5811-numeric-operands)
+		- [5.8.1.2 Reference Types](#5812-reference-types)
+	- [5.8.2 Syntax](#582-syntax)
+	- [5.8.3 Example](#583-example)
+	- [5.8.4 Nested Ternary Example](#584-nested-ternary-example)
+	- [5.8.5 Notes](#585-notes)
 
 
 ---
@@ -596,8 +599,43 @@ System.out.println(list instanceof java.util.List<?>); // ✅ true
 <a id="58-ternary-operator"></a>
 ## 5.8 Ternary Operator
 
+
 The **ternary operator** (`? :`) is the only operator in Java that takes **three operands**.  
 It acts as a concise form of an `if-else` statement.
+
+
+<a id="581-type-rules-for-the-ternary-operator"></a>
+### 5.8.1 Type Rules for the Ternary Operator
+
+The type of a conditional (ternary) expression is determined by the types of its second and third operands.
+
+
+<a id="5811-numeric-operands"></a>
+#### 5.8.1.1 Numeric Operands
+
+- If one operand is `byte` and the other is `short`, the result type is `short`.
+- If one operand is of type `T` (`byte`, `short`, or `char`) and the other operand is an `int` constant expression whose value fits within type `T`, then the result type is `T`.
+- In all other numeric cases, **binary numeric promotion** is applied to the second and third operands.  
+  The type of the conditional expression becomes the promoted type.
+
+> Binary numeric promotion includes **unboxing conversion** and **value set conversion**.
+
+
+<a id="5812-reference-types"></a>
+#### 5.8.1.2 Reference Types
+
+- If one operand is `null` and the other is a reference type, the result type is that reference type.
+- If the operands are different reference types, one type must be assignment-compatible with the other.  
+  The resulting type is the more general type (the one to which the other can be assigned).
+- If neither type can be assigned to the other, the expression causes a **compile-time error**.
+
+
+In short, the ternary operator determines its type by applying:
+
+- Special narrowing rules for small integral types  
+- Binary numeric promotion for numeric values  
+- Assignment compatibility rules for reference types  
+
 
 !!! tip
     The ternary operator **must** produce a value of a *compatible type*.
@@ -608,14 +646,16 @@ It acts as a concise form of an `if-else` statement.
     ```
 
 
-<a id="581-syntax"></a>
-### 5.8.1 Syntax
+<a id="582-syntax"></a>
+### 5.8.2 Syntax
+
 ```java
 condition ? expressionIfTrue : expressionIfFalse;
 ```
 
-<a id="582-example"></a>
-### 5.8.2 Example
+
+<a id="583-example"></a>
+### 5.8.3 Example
 
 ```java
 int age = 20;
@@ -623,8 +663,9 @@ String access = (age >= 18) ? "Allowed" : "Denied";
 System.out.println(access);  // "Allowed"
 ```
 
-<a id="583-nested-ternary-example"></a>
-### 5.8.3 Nested Ternary Example
+
+<a id="584-nested-ternary-example"></a>
+### 5.8.4 Nested Ternary Example
 
 ```java
 int score = 85;
@@ -634,9 +675,10 @@ String grade = (score >= 90) ? "A" :
 System.out.println(grade);  // "B"
 ```
 
-<a id="584-notes"></a>
-### 5.8.4 Notes
+
+<a id="585-notes"></a>
+### 5.8.5 Notes
 
 !!! warning
     - Nested ternary expressions can reduce readability. Use parentheses for clarity.
-    - The ternary operator returns a **value**, unlike `if-else`, which is a statement.
+    - The ternary operator returns a **value**, unlike `if-else`,

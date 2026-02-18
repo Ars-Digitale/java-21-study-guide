@@ -26,12 +26,14 @@
 		- [5.7.6.2 Pattern matching pour instanceof](#5762-pattern-matching-pour-instanceof)
 		- [5.7.6.3 Flow scoping & logique short-circuit](#5763-flow-scoping--logique-short-circuit)
 		- [5.7.6.4 Tableaux et types réifiables](#5764-tableaux-et-types-réifiables)
-- [5.8 Opérateur ternaire](#58-opérateur-ternaire)
-	- [5.8.1 Syntaxe](#581-syntaxe)
-	- [5.8.2 Exemple](#582-exemple)
-	- [5.8.3 Exemple de ternaire imbriqué](#583-exemple-de-ternaire-imbriqué)
-	- [5.8.4 Notes](#584-notes)
-
+- [5.8 Opérateur Ternaire](#58-opérateur-ternaire)
+	- [5.8.1 Règles de Typage de l’Opérateur Ternaire](#581-regles-de-typage-de-loperateur-ternaire)
+		- [5.8.1.1 Opérandes Numériques](#5811-operandes-numeriques)
+		- [5.8.1.2 Types de Référence](#5812-types-de-reference)
+	- [5.8.2 Syntaxe](#582-syntaxe)
+	- [5.8.3 Exemple](#583-exemple)
+	- [5.8.4 Exemple de Ternaire Imbriqué](#584-exemple-de-ternaire-imbriqué)
+	- [5.8.5 Remarques](#585-remarques)
 
 ---
 
@@ -584,47 +586,90 @@ System.out.println(list instanceof java.util.List<?>); // ✅ true
 ## 5.8 Opérateur ternaire
 
 L’**opérateur ternaire** (`? :`) est le seul opérateur en Java qui prend **trois opérandes**.  
-Il agit comme une forme concise d’une instruction `if-else`.
+Il constitue une forme concise de l’instruction `if-else`.
+
+
+<a id="581-regles-de-typage-de-loperateur-ternaire"></a>
+### 5.8.1 Règles de Typage de l’Opérateur Ternaire
+
+Le type d’une expression conditionnelle (ternaire) est déterminé par les types du deuxième et du troisième opérande.
+
+
+<a id="5811-operandes-numeriques"></a>
+#### 5.8.1.1 Opérandes Numériques
+
+- Si un opérande est de type `byte` et l’autre de type `short`, le type résultant est `short`.
+- Si un opérande est de type `T` (`byte`, `short` ou `char`) et l’autre est une expression constante de type `int` dont la valeur est représentable dans `T`, alors le type résultant est `T`.
+- Dans tous les autres cas numériques, la **binary numeric promotion** est appliquée aux deux opérandes.  
+  Le type de l’expression conditionnelle devient le type promu.
+
+> La binary numeric promotion inclut la **conversion d’unboxing** et la **value set conversion**.
+
+
+
+<a id="5812-types-de-reference"></a>
+#### 5.8.1.2 Types de Référence
+
+- Si un opérande est `null` et l’autre est un type de référence, le type résultant est ce type de référence.
+- Si les deux opérandes sont de types de référence différents, l’un doit être assignable à l’autre (compatibilité d’assignation).  
+  Le type résultant est le type le plus général, c’est-à-dire celui auquel l’autre peut être assigné.
+- Si aucun des deux types n’est compatible par assignation avec l’autre, une **erreur à la compilation** se produit.
+
+
+
+En résumé, l’opérateur ternaire détermine son type en appliquant :
+
+- Des règles spécifiques de narrowing pour les petits types entiers  
+- La binary numeric promotion pour les valeurs numériques  
+- Les règles de compatibilité d’assignation pour les types de référence  
+
+
 
 !!! tip
-    L’opérateur ternaire **doit** produire une valeur d’un type *compatible*.
-    Si les deux branches produisent des types sans relation, la compilation échoue.
+    L’opérateur ternaire **doit** produire une valeur d’un type compatible.
+    Si les deux branches retournent des types non liés, la compilation échoue.
     
     ```java
     String s = true ? "ok" : 5; // ❌ erreur de compilation : types incompatibles
     ```
-    
 
-<a id="581-syntaxe"></a>
-### 5.8.1 Syntaxe
+
+
+<a id="582-syntaxe"></a>
+### 5.8.2 Syntaxe
 
 ```java
 condition ? expressionIfTrue : expressionIfFalse;
 ```
 
-<a id="582-exemple"></a>
-### 5.8.2 Exemple
+
+
+<a id="583-exemple"></a>
+### 5.8.3 Exemple
 
 ```java
 int age = 20;
-String access = (age >= 18) ? "Allowed" : "Denied";
-System.out.println(access); // "Allowed"
+String access = (age >= 18) ? "Autorisé" : "Refusé";
+System.out.println(access);  // "Autorisé"
 ```
 
-<a id="583-exemple-de-ternaire-imbriqué"></a>
-### 5.8.3 Exemple de ternaire imbriqué
+
+
+<a id="584-exemple-de-ternaire-imbriqué"></a>
+### 5.8.4 Exemple de Ternaire Imbriqué
 
 ```java
 int score = 85;
 String grade = (score >= 90) ? "A" :
-(score >= 75) ? "B" :
-(score >= 60) ? "C" : "F";
-System.out.println(grade); // "B"
+               (score >= 75) ? "B" :
+               (score >= 60) ? "C" : "F";
+System.out.println(grade);  // "B"
 ```
 
-<a id="584-notes"></a>
-### 5.8.4 Notes
+
+<a id="585-remarques"></a>
+### 5.8.5 Remarques
 
 !!! warning
-    - Les expressions ternaires imbriquées peuvent réduire la lisibilité. Utilise des parenthèses pour plus de clarté.
-    - L’opérateur ternaire renvoie une valeur, contrairement à if-else, qui est une instruction.
+    - Les expressions ternaires imbriquées peuvent réduire la lisibilité. Utilisez des parenthèses pour plus de clarté.
+    - L’opérateur ternaire retourne une **valeur**, contrairement à `if-else`, qui est une instruction.
