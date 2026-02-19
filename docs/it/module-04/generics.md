@@ -515,7 +515,7 @@ public class Demo {
 
 **Perché funziona**
 
-Anche se ArrayList<String> diventa ArrayList, e List<Object> diventa List, queste sono classi diverse (ArrayList vs List), quindi le signature restano distinte:
+Anche se `ArrayList<String>` diventa `ArrayList`, e `List<Object>` diventa `List`, queste sono classi diverse (ArrayList vs List), quindi le signature restano distinte:
 
 ```java
 void testInput(List inputParam)

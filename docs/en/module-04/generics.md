@@ -500,9 +500,9 @@ public class Demo {
 }
 ```
 
-<ins>**Why this works**</ins>
+**Why this works**
 
-Even though ArrayList<String> erases to ArrayList, and List<Object> erases to List, these are different classes (ArrayList vs. List), so the signatures remain distinct:
+Even though `ArrayList<String>` erases to `ArrayList`, and `List<Object>` erases to `List`, these are different classes (ArrayList vs. List), so the signatures remain distinct:
 
 ```java
 void testInput(List inputParam)
