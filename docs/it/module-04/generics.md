@@ -14,10 +14,20 @@
 	- [18.4.4 Bound Multipli: Il Primo Bound Determina l’Erasure](#1844-bound-multipli-il-primo-bound-determina-lerasure)
 	- [18.4.5 Perché Solo il Primo Bound Diventa il Tipo a Runtime](#1845-perché-solo-il-primo-bound-diventa-il-tipo-a-runtime)
 	- [18.4.6 Un Esempio Più Complesso](#1846-un-esempio-più-complesso)
-	- [18.4.7 Overloading di un Metodo Generico — Perché Alcuni Overload Sono Impossibili](#1847-overloading-di-un-metodo-generico--perché-alcuni-overload-sono-impossibili)
-	- [18.4.8 Overloading di un Metodo Generico Ereditato da una Classe Parent](#1848-overloading-di-un-metodo-generico-ereditato-da-una-classe-parent)
-	- [18.4.9 Restituire Tipi Generici — Regole e Restrizioni](#1849-restituire-tipi-generici--regole-e-restrizioni)
-	- [18.4.10 Riepilogo delle Regole di Erasure](#18410-riepilogo-delle-regole-di-erasure)
+	- [18.4.7 Override e Generics](#1847-override-e-generics)
+		- [18.4.7.1 Come il compilatore valida un override](#18471-come-il-compilatore-valida-un-override)
+		- [18.4.7.2 Parametri generici e override](#18472-parametri-generici-e-override)
+		- [18.4.7.3 Override valido — Eliminazione della specificità generica](#18473-override-valido-eliminazione-della-specificità-generica)
+		- [18.4.7.4 Override non valido — Aggiunta di specificità generica](#18474-override-non-valido-aggiunta-di-specificità-generica)
+		- [18.4.7.5 Override valido — Parametrizzazione identica](#18475-override-valido-parametrizzazione-identica)
+		- [18.4.7.6 Override non valido — Modifica dell’argomento generico](#18476-override-non-valido-modifica-dellargomento-generico)
+		- [18.4.7.7 Perché esiste questa regola](#18477-perché-esiste-questa-regola)
+		- [18.4.7.8 Modello mentale](#18478-modello-mentale)
+		- [18.4.7.9 Regole riassuntive](#18479-regole-riassuntive)
+	- [18.4.8 Overloading di un Metodo Generico — Perché Alcuni Overload Sono Impossibili](#1848-overloading-di-un-metodo-generico--perché-alcuni-overload-sono-impossibili)
+	- [18.4.9 Overloading di un Metodo Generico Ereditato da una Classe Parent](#1849-overloading-di-un-metodo-generico-ereditato-da-una-classe-parent)
+	- [18.4.10 Restituire Tipi Generici — Regole e Restrizioni](#18410-restituire-tipi-generici--regole-e-restrizioni)
+	- [18.4.11 Riepilogo delle Regole di Erasure](#18411-riepilogo-delle-regole-di-erasure)
 - [18.5 Bound sui Parametri di Tipo](#185-bound-sui-parametri-di-tipo)
 	- [18.5.1 Upper Bounds: extends](#1851-upper-bounds-extends)
 	- [18.5.2 Bound Multipli](#1852-bound-multipli)
@@ -270,9 +280,180 @@ class Demo {
 
 !!! note
     Il compilatore può inserire cast aggiuntivi o metodi bridge in scenari di ereditarietà più complessi, ma l’erasure usa sempre solo il primo bound (A in questo caso).
+	
+	
+<a id="1847-override-e-generics"></a>
+### 18.4.7 Override e Generics
 
-<a id="1847-overloading-di-un-metodo-generico--perché-alcuni-overload-sono-impossibili"></a>
-### 18.4.7 Overloading di un Metodo Generico — Perché Alcuni Overload Sono Impossibili
+Quando i generics interagiscono con l’ereditarietà, è fondamentale comprendere chiaramente due regole:
+
+!!! important
+    **L’override viene verificato dopo la type erasure.**  
+    **La compatibilità dei tipi viene verificata prima della type erasure.**
+
+Questi due passaggi spiegano perché alcuni metodi effettuano correttamente l’override mentre altri producono errori di compilazione.
+
+
+
+<a id="18471-come-il-compilatore-valida-un-override"></a>
+#### 18.4.7.1 Come il compilatore valida un override
+
+Quando una sottoclasse dichiara un metodo che *potrebbe* effettuare l’override di un metodo della superclasse, il compilatore esegue due controlli:
+
+1. **Prima della erasure**  
+   Il metodo deve essere compatibile a livello di tipo con quello della classe padre:
+   - Stesso nome del metodo
+   - Stessi tipi dei parametri (inclusi gli argomenti generici)
+   - Tipo di ritorno compatibile (covarianza ammessa)
+
+2. **Dopo la erasure**  
+   Le firme erase devono coincidere esattamente.
+
+Entrambe le condizioni devono essere soddisfatte.
+
+
+
+<a id="18472-parametri-generici-e-override"></a>
+#### 18.4.7.2 Parametri generici e override
+
+Gli argomenti di tipo generico fanno parte della firma del metodo **a compile-time**, ma scompaiono dopo la erasure.
+
+Per questo motivo:
+
+- È consentito **eliminare l’informazione generica nel metodo che effettua override**
+- Non è consentito **aggiungere nuova specificità generica**
+- Se entrambi i metodi dichiarano tipi parametrizzati, devono coincidere esattamente
+
+
+
+<a id="18473-override-valido-eliminazione-della-specificità-generica"></a>
+#### 18.4.7.3 Override valido — Eliminazione della specificità generica
+
+```java
+class Parent {
+    void process(Set<Integer> data) {}
+}
+
+class Child extends Parent {
+    @Override
+    void process(Set data) {}   // ✔ consentito (raw type)
+}
+```
+
+Spiegazione:
+
+- Prima della erasure: `Set` è assignment-compatible con `Set<Integer>`
+- Dopo la erasure: entrambi diventano `Set`
+
+✔ Override valido.
+
+
+
+<a id="18474-override-non-valido-aggiunta-di-specificità-generica"></a>
+#### 18.4.7.4 Override non valido — Aggiunta di specificità generica
+
+```java
+class Parent {
+    void process(Set data) {}
+}
+
+class Child extends Parent {
+    void process(Set<Integer> data) {}   // ❌ errore di compilazione
+}
+```
+
+Spiegazione:
+
+- Prima della erasure: `Set<Integer>` NON è assignment-compatible con `Set`
+- Il compilatore lo rifiuta prima ancora di considerare la erasure
+
+
+
+<a id="18475-override-valido-parametrizzazione-identica"></a>
+#### 18.4.7.5 Override valido — Parametrizzazione identica
+
+```java
+class Parent {
+    void process(Set<Integer> data) {}
+}
+
+class Child extends Parent {
+    @Override
+    void process(Set<Integer> data) {}   // ✔ corrispondenza esatta
+}
+```
+
+Entrambi i controlli sono soddisfatti:
+- Compatibilità prima della erasure
+- Firma identica dopo la erasure
+
+
+
+<a id="18476-override-non-valido-modifica-dellargomento-generico"></a>
+#### 18.4.7.6 Override non valido — Modifica dell’argomento generico
+
+```java
+class Parent {
+    void process(Set<Integer> data) {}
+}
+
+class Child extends Parent {
+    void process(Set<String> data) {}   // ❌ errore di compilazione
+}
+```
+
+Spiegazione:
+
+- Prima della erasure: `Set<String>` non è compatibile con `Set<Integer>`
+- Dopo la erasure: entrambi diventerebbero `Set`
+- Collisione + incompatibilità → errore di compilazione
+
+
+
+<a id="18477-perché-esiste-questa-regola"></a>
+#### 18.4.7.7 Perché esiste questa regola
+
+Java deve garantire:
+
+- **Type safety a compile-time**
+- **Polimorfismo a runtime dopo la erasure**
+
+Poiché i generics scompaiono a runtime, la JVM vede solo le firme erase.
+Il compilatore deve quindi garantire compatibilità prima della erasure e coerenza dopo la erasure.
+
+
+
+<a id="18478-modello-mentale"></a>
+#### 18.4.7.8 Modello mentale
+
+Considera l’override con generics come un controllo in due fasi:
+
+```text
+Fase 1 → I tipi a livello di sorgente sono compatibili?
+Fase 2 → Le firme erase coincidono?
+```
+
+Se una delle due fasi fallisce → errore di compilazione.
+
+
+
+<a id="18479-regole-riassuntive"></a>
+#### 18.4.7.9 Regole riassuntive
+
+- L’override è validato **dopo la erasure**
+- La compatibilità è validata **prima della erasure**
+- È possibile eliminare informazione generica nella sottoclasse
+- Non è possibile aggiungere nuova specificità generica
+- Se entrambi i metodi sono parametrizzati, gli argomenti devono coincidere esattamente
+- Dopo la erasure, le firme devono essere identiche
+
+
+
+Questo spiega perché alcuni metodi che *sembrano* semplici overload vengono rifiutati:
+dopo la erasure entrano in collisione e, se non costituiscono un override valido, il compilatore li blocca.
+
+<a id="1848-overloading-di-un-metodo-generico--perché-alcuni-overload-sono-impossibili"></a>
+### 18.4.8 Overloading di un Metodo Generico — Perché Alcuni Overload Sono Impossibili
 
 Quando Java compila codice generico, applica la type erasure:
 i parametri di tipo come T vengono rimossi, e il compilatore li sostituisce con il loro tipo erasure (di solito Object o il primo bound).
@@ -305,8 +486,8 @@ void testInput(List inputParam)
 
 Java non permette due metodi con signature identiche nella stessa classe, quindi l’overload viene rifiutato a compile time.
 
-<a id="1848-overloading-di-un-metodo-generico-ereditato-da-una-classe-parent"></a>
-### 18.4.8 Overloading di un Metodo Generico Ereditato da una Classe Parent
+<a id="1849-overloading-di-un-metodo-generico-ereditato-da-una-classe-parent"></a>
+### 18.4.9 Overloading di un Metodo Generico Ereditato da una Classe Parent
 
 La stessa regola si applica quando una subclass tenta di introdurre un metodo che, dopo erasure, ha la stessa signature di uno nella superclass.
 
@@ -343,8 +524,8 @@ void testInput(ArrayList inputParam)
 
 Nessuna collisione → overloading legale.
 
-<a id="1849-restituire-tipi-generici--regole-e-restrizioni"></a>
-### 18.4.9 Restituire Tipi Generici — Regole e Restrizioni
+<a id="18410-restituire-tipi-generici--regole-e-restrizioni"></a>
+### 18.4.10 Restituire Tipi Generici — Regole e Restrizioni
 
 Quando si restituisce un valore da un metodo, Java segue una regola rigida:
 
@@ -411,8 +592,8 @@ class Demo {
 
 **Java non usa il tipo di ritorno per distinguere metodi in overload**.
 
-<a id="18410-riepilogo-delle-regole-di-erasure"></a>
-### 18.4.10 Riepilogo delle Regole di Erasure
+<a id="18411-riepilogo-delle-regole-di-erasure"></a>
+### 18.4.11 Riepilogo delle Regole di Erasure
 
 - `T senza bound` → erasure a Object.
 - `T extends X` → erasure a X.

@@ -14,10 +14,20 @@
 	- [18.4.4 Bounds Multiples: Le Premier Bound Détermine l’Erasure](#1844-bounds-multiples-le-premier-bound-détermine-lerasure)
 	- [18.4.5 Pourquoi Seulement le Premier Bound Devient le Type à Runtime](#1845-pourquoi-seulement-le-premier-bound-devient-le-type-à-runtime)
 	- [18.4.6 Un Exemple Plus Complexe](#1846-un-exemple-plus-complexe)
-	- [18.4.7 Surcharge d’une Méthode Générique — Pourquoi Certaines Surcharges Sont Impossibles](#1847-surcharge-dune-méthode-générique--pourquoi-certaines-surcharges-sont-impossibles)
-	- [18.4.8 Surcharge d’une Méthode Générique Héritée d’une Classe Parent](#1848-surcharge-dune-méthode-générique-héritée-dune-classe-parent)
-	- [18.4.9 Retourner des Types Génériques — Règles et Restrictions](#1849-retourner-des-types-génériques--règles-et-restrictions)
-	- [18.4.10 Récapitulatif des Règles d’Erasure](#18410-récapitulatif-des-règles-derasure)
+	- [18.4.7 Redéfinition (Overriding) et Génériques](#1847-redéfinition-et-génériques)
+		- [18.4.7.1 Comment le compilateur valide une redéfinition](#18471-comment-le-compilateur-valide-une-redéfinition)
+		- [18.4.7.2 Paramètres génériques et redéfinition](#18472-paramètres-génériques-et-redéfinition)
+		- [18.4.7.3 Redéfinition valide — Suppression de la spécificité générique](#18473-redéfinition-valide-suppression-de-spécificité-générique)
+		- [18.4.7.4 Redéfinition invalide — Ajout de spécificité générique](#18474-redéfinition-invalide-ajout-de-spécificité-générique)
+		- [18.4.7.5 Redéfinition valide — Paramétrage identique](#18475-redéfinition-valide-paramétrage-identique)
+		- [18.4.7.6 Redéfinition invalide — Changement d’argument générique](#18476-redéfinition-invalide-changement-dargument-générique)
+		- [18.4.7.7 Pourquoi cette règle existe](#18477-pourquoi-cette-règle-existe)
+		- [18.4.7.8 Modèle mental](#18478-modèle-mental)
+		- [18.4.7.9 Règles récapitulatives](#18479-règles-résumé)
+	- [18.4.8 Surcharge d’une Méthode Générique — Pourquoi Certaines Surcharges Sont Impossibles](#1848-surcharge-dune-méthode-générique--pourquoi-certaines-surcharges-sont-impossibles)
+	- [18.4.9 Surcharge d’une Méthode Générique Héritée d’une Classe Parent](#1849-surcharge-dune-méthode-générique-héritée-dune-classe-parent)
+	- [18.4.10 Retourner des Types Génériques — Règles et Restrictions](#18410-retourner-des-types-génériques--règles-et-restrictions)
+	- [18.4.11 Récapitulatif des Règles d’Erasure](#18411-récapitulatif-des-règles-derasure)
 - [18.5 Bounds sur les Paramètres de Type](#185-bounds-sur-les-paramètres-de-type)
 	- [18.5.1 Upper Bounds: extends](#1851-upper-bounds-extends)
 	- [18.5.2 Bounds Multiples](#1852-bounds-multiples)
@@ -271,8 +281,174 @@ class Demo {
 !!! note
     Le compilateur peut insérer des casts supplémentaires ou des méthodes bridge dans des scénarios d’héritage plus complexes, mais l’erasure utilise toujours seulement le premier bound (A dans ce cas).
 
-<a id="1847-surcharge-dune-méthode-générique--pourquoi-certaines-surcharges-sont-impossibles"></a>
-### 18.4.7 Surcharge d’une Méthode Générique — Pourquoi Certaines Surcharges Sont Impossibles
+
+<a id="1847-redéfinition-et-génériques"></a>
+### 18.4.7 Redéfinition (Overriding) et Génériques
+
+Lorsque les génériques interagissent avec l’héritage, deux règles fondamentales doivent être clairement comprises :
+
+!!! important
+    **La redéfinition est vérifiée après l’effacement des types (type erasure).**  
+    **La compatibilité des types est vérifiée avant l’effacement.**
+
+Ces deux étapes expliquent pourquoi certaines méthodes redéfinissent correctement, tandis que d’autres provoquent des erreurs de compilation.
+
+
+<a id="18471-comment-le-compilateur-valide-une-redéfinition"></a>
+#### 18.4.7.1 Comment le compilateur valide une redéfinition
+
+Lorsqu’une sous-classe déclare une méthode qui *pourrait* redéfinir une méthode de la superclasse, le compilateur effectue deux vérifications :
+
+1. **Avant l’effacement**  
+   La méthode doit être compatible avec celle de la classe parente :
+   - Même nom
+   - Même types de paramètres (y compris les arguments génériques)
+   - Type de retour compatible (covariance autorisée)
+
+2. **Après l’effacement**  
+   Les signatures effacées doivent correspondre exactement.
+
+Les deux conditions doivent être satisfaites.
+
+
+<a id="18472-paramètres-génériques-et-redéfinition"></a>
+#### 18.4.7.2 Paramètres génériques et redéfinition
+
+Les arguments de type générique font partie de la signature de la méthode **à la compilation**, mais disparaissent après l’effacement.
+
+Par conséquent :
+
+- Il est permis **d’effacer l’information générique dans la méthode redéfinie**
+- Il est interdit **d’ajouter une nouvelle spécificité générique**
+- Si les deux méthodes utilisent des types paramétrés, ils doivent correspondre exactement
+
+
+<a id="18473-redéfinition-valide-suppression-de-spécificité-générique"></a>
+#### 18.4.7.3 Redéfinition valide — Suppression de la spécificité générique
+
+```java
+class Parent {
+    void process(Set<Integer> data) {}
+}
+
+class Child extends Parent {
+    @Override
+    void process(Set data) {}   // ✔ autorisé (type brut)
+}
+```
+
+Explication :
+
+- Avant l’effacement : `Set` est compatible par affectation avec `Set<Integer>`
+- Après l’effacement : les deux deviennent `Set`
+
+✔ Redéfinition valide.
+
+
+<a id="18474-redéfinition-invalide-ajout-de-spécificité-générique"></a>
+#### 18.4.7.4 Redéfinition invalide — Ajout de spécificité générique
+
+```java
+class Parent {
+    void process(Set data) {}
+}
+
+class Child extends Parent {
+    void process(Set<Integer> data) {}   // ❌ erreur de compilation
+}
+```
+
+Explication :
+
+- Avant l’effacement : `Set<Integer>` n’est PAS compatible par affectation avec `Set`
+- Le compilateur rejette la méthode avant même d’appliquer l’effacement
+
+
+
+<a id="18475-redéfinition-valide-paramétrage-identique"></a>
+#### 18.4.7.5 Redéfinition valide — Paramétrage identique
+
+```java
+class Parent {
+    void process(Set<Integer> data) {}
+}
+
+class Child extends Parent {
+    @Override
+    void process(Set<Integer> data) {}   // ✔ correspondance exacte
+}
+```
+
+Les deux vérifications réussissent :
+- Compatible avant l’effacement
+- Identique après l’effacement
+
+
+
+<a id="18476-redéfinition-invalide-changement-dargument-générique"></a>
+#### 18.4.7.6 Redéfinition invalide — Changement d’argument générique
+
+```java
+class Parent {
+    void process(Set<Integer> data) {}
+}
+
+class Child extends Parent {
+    void process(Set<String> data) {}   // ❌ erreur de compilation
+}
+```
+
+Explication :
+
+- Avant l’effacement : `Set<String>` n’est pas compatible avec `Set<Integer>`
+- Après l’effacement : les deux deviennent `Set`
+- Collision + incompatibilité → erreur de compilation
+
+
+<a id="18477-pourquoi-cette-règle-existe"></a>
+#### 18.4.7.7 Pourquoi cette règle existe
+
+Java doit garantir :
+
+- **La sûreté des types à la compilation**
+- **Le polymorphisme à l’exécution après effacement**
+
+Comme les génériques disparaissent à l’exécution, la JVM ne voit que les signatures effacées.  
+Le compilateur doit donc assurer la compatibilité avant l’effacement et la cohérence après l’effacement.
+
+
+
+<a id="18478-modèle-mental"></a>
+#### 18.4.7.8 Modèle mental
+
+Considérez la redéfinition avec génériques comme une vérification en deux phases :
+
+```text
+Phase 1 → Les types au niveau source sont-ils compatibles ?
+Phase 2 → Les signatures effacées correspondent-elles ?
+```
+
+Si l’une des phases échoue → erreur de compilation.
+
+
+
+<a id="18479-règles-résumé"></a>
+#### 18.4.7.9 Règles récapitulatives
+
+- La redéfinition est validée **après l’effacement**
+- La compatibilité est validée **avant l’effacement**
+- Il est possible d’effacer l’information générique dans la sous-classe
+- Il est interdit d’introduire une nouvelle spécificité générique
+- Si les deux méthodes sont paramétrées, les arguments doivent correspondre exactement
+- Après l’effacement, les signatures doivent être identiques
+
+Cela explique pourquoi certaines méthodes qui *semblent* être des surcharges sont rejetées :  
+après l’effacement, elles entrent en collision, et si elles ne constituent pas une redéfinition valide, le compilateur les bloque.
+
+
+
+<a id="1848-surcharge-dune-méthode-générique--pourquoi-certaines-surcharges-sont-impossibles"></a>
+### 18.4.8 Surcharge d’une Méthode Générique — Pourquoi Certaines Surcharges Sont Impossibles
 
 Quand Java compile du code générique, il applique la type erasure:
 les paramètres de type comme T sont supprimés, et le compilateur les remplace par leur type erasure (habituellement Object ou le premier bound).
@@ -305,8 +481,8 @@ void testInput(List inputParam)
 
 Java ne permet pas deux méthodes avec des signatures identiques dans la même classe, donc la surcharge est rejetée à compile time.
 
-<a id="1848-surcharge-dune-méthode-générique-héritée-dune-classe-parent"></a>
-### 18.4.8 Surcharge d’une Méthode Générique Héritée d’une Classe Parent
+<a id="1849-surcharge-dune-méthode-générique-héritée-dune-classe-parent"></a>
+### 18.4.9 Surcharge d’une Méthode Générique Héritée d’une Classe Parent
 
 La même règle s’applique quand une subclass tente d’introduire une méthode qui, après erasure, a la même signature qu’une dans la superclass.
 
@@ -343,8 +519,8 @@ void testInput(ArrayList inputParam)
 
 Aucune collision → surcharge légale.
 
-<a id="1849-retourner-des-types-génériques--règles-et-restrictions"></a>
-### 18.4.9 Retourner des Types Génériques — Règles et Restrictions
+<a id="18410-retourner-des-types-génériques--règles-et-restrictions"></a>
+### 18.4.10 Retourner des Types Génériques — Règles et Restrictions
 
 Quand on retourne une valeur depuis une méthode, Java suit une règle rigide:
 
@@ -411,8 +587,8 @@ class Demo {
 
 **Java n’utilise pas le type de retour pour distinguer les méthodes en surcharge**.
 
-<a id="18410-récapitulatif-des-règles-derasure"></a>
-### 18.4.10 Récapitulatif des Règles d’Erasure
+<a id="18411-récapitulatif-des-règles-derasure"></a>
+### 18.4.11 Récapitulatif des Règles d’Erasure
 
 - `T sans bound` → erasure à Object.
 - `T extends X` → erasure à X.

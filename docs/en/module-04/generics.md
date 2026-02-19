@@ -14,10 +14,20 @@
 	- [18.4.4 Multiple Bounds The First Bound Determines Erasure](#1844-multiple-bounds-the-first-bound-determines-erasure)
 	- [18.4.5 Why Only the First Bound Becomes the Runtime Type](#1845-why-only-the-first-bound-becomes-the-runtime-type)
 	- [18.4.6 A More Complex Example](#1846-a-more-complex-example)
-	- [18.4.7 Overloading a Generic Method Why Some Overloads Are Impossible](#1847-overloading-a-generic-method--why-some-overloads-are-impossible)
-	- [18.4.8 Overloading a Generic Method Inherited from a Parent Class](#1848-overloading-a-generic-method-inherited-from-a-parent-class)
-	- [18.4.9 Returning Generic Types Rules and Restrictions](#1849-returning-generic-types--rules-and-restrictions)
-	- [18.4.10 Summary of Erasure Rules](#18410-summary-of-erasure-rules)
+	- [18.4.7 Overriding and Generics](#1847-overriding-and-generics)
+		- [18.4.7.1 How the Compiler Validates an Override](#18471-how-the-compiler-validates-an-override)
+		- [18.4.7.2 Generic Parameters and Overriding](#18472-generic-parameters-and-overriding)
+		- [18.4.7.3 Valid Override - Erasing Generic Specificity](#18473-valid-override-erasing-generic-specificity)
+		- [18.4.7.4 Invalid Override - Adding Generic Specificity](#18474-invalid-override-adding-generic-specificity)
+		- [18.4.7.5 Valid Override - Matching Parameterization](#18475-valid-override-matching-parameterization)
+		- [18.4.7.6 Invalid Override - Changing Generic Argument](#18476-invalid-override-changing-generic-argument)
+		- [18.4.7.7 Why This Rule Exists](#18477-why-this-rule-exists)
+		- [18.4.7.8 Mental Model](#18478-mental-model)
+		- [18.4.7.9 Summary Rules](#18479-summary-rules)
+	- [18.4.8 Overloading a Generic Method Why Some Overloads Are Impossible](#1848-overloading-a-generic-method--why-some-overloads-are-impossible)
+	- [18.4.9 Overloading a Generic Method Inherited from a Parent Class](#1849-overloading-a-generic-method-inherited-from-a-parent-class)
+	- [18.4.10 Returning Generic Types Rules and Restrictions](#18410-returning-generic-types--rules-and-restrictions)
+	- [18.4.11 Summary of Erasure Rules](#18411-summary-of-erasure-rules)
 - [18.5 Bounds on Type Parameters](#185-bounds-on-type-parameters)
 	- [18.5.1 Upper Bounds extends](#1851-upper-bounds-extends)
 	- [18.5.2 Multiple Bounds](#1852-multiple-bounds)
@@ -268,8 +278,169 @@ class Demo {
     The compiler may insert additional casts or bridge methods in more complex inheritance scenarios, but erasure always uses only the first bound (A in this case).
 
 
-<a id="1847-overloading-a-generic-method--why-some-overloads-are-impossible"></a>
-### 18.4.7 Overloading a Generic Method — Why Some Overloads Are Impossible
+<a id="1847-overriding-and-generics"></a>
+### 18.4.7 Overriding and Generics
+
+When generics interact with inheritance, two fundamental rules must be clearly understood:
+
+!!! important
+    **Override is checked after type erasure.**  
+    **Type compatibility is checked before type erasure.**
+
+These two steps explain why some methods override correctly while others produce compile-time errors.
+
+<a id="18471-how-the-compiler-validates-an-override"></a>
+#### 18.4.7.1 How the Compiler Validates an Override
+
+When a subclass declares a method that *might* override a superclass method, the compiler performs two checks:
+
+1. **Before erasure**  
+   The method must be type-compatible with the parent method.
+   - Same method name
+   - Same parameter types (including generic arguments)
+   - Compatible return type (covariant allowed)
+
+2. **After erasure**  
+   The erased signatures must match exactly.
+
+Both conditions must be satisfied.
+
+<a id="18472-generic-parameters-and-overriding"></a>
+#### 18.4.7.2 Generic Parameters and Overriding
+
+Generic type arguments are part of the method signature *at compile time*, but disappear after erasure.
+
+Because of this:
+
+- You are allowed to **erase generic information in the overriding method**
+- You are NOT allowed to **introduce new generic specificity**
+- If both methods declare parameterized types, they must match exactly
+
+
+<a id="18473-valid-override-erasing-generic-specificity"></a>
+#### 18.4.7.3 Valid Override - Erasing Generic Specificity
+
+```java
+class Parent {
+    void process(Set<Integer> data) {}
+}
+
+class Child extends Parent {
+    @Override
+    void process(Set data) {}   // ✔ allowed (raw type)
+}
+```
+
+Explanation:
+
+- Before erasure: `Set` is assignment-compatible with `Set<Integer>`
+- After erasure: both become `Set`
+
+✔ Valid override.
+
+
+<a id="18474-invalid-override-adding-generic-specificity"></a>
+#### 18.4.7.4 Invalid Override - Adding Generic Specificity
+
+```java
+class Parent {
+    void process(Set data) {}
+}
+
+class Child extends Parent {
+    void process(Set<Integer> data) {}   // ❌ compile error
+}
+```
+
+Explanation:
+
+- Before erasure: `Set<Integer>` is NOT assignment-compatible with `Set`
+- The compiler rejects it before even considering erasure
+
+
+<a id="18475-valid-override-matching-parameterization"></a>
+#### 18.4.7.5 Valid Override - Matching Parameterization
+
+```java
+class Parent {
+    void process(Set<Integer> data) {}
+}
+
+class Child extends Parent {
+    @Override
+    void process(Set<Integer> data) {}   // ✔ exact match
+}
+```
+
+Both checks pass:
+- Compatible before erasure
+- Identical after erasure
+
+
+<a id="18476-invalid-override-changing-generic-argument"></a>
+#### 18.4.7.6 Invalid Override - Changing Generic Argument
+
+```java
+class Parent {
+    void process(Set<Integer> data) {}
+}
+
+class Child extends Parent {
+    void process(Set<String> data) {}   // ❌ compile error
+}
+```
+
+Explanation:
+
+- Before erasure: `Set<String>` is not compatible with `Set<Integer>`
+- After erasure: both would become `Set`
+- Collision + incompatibility → compile error
+
+
+<a id="18477-why-this-rule-exists"></a>
+#### 18.4.7.7 Why This Rule Exists
+
+Java must guarantee:
+
+- **Compile-time type safety**
+- **Runtime polymorphism after erasure**
+
+Since generics disappear at runtime, the JVM sees only erased signatures.
+The compiler must therefore ensure compatibility before erasure, and consistency after erasure.
+
+
+<a id="18478-mental-model"></a>
+#### 18.4.7.8 Mental Model
+
+Think of overriding with generics as a two-phase check:
+
+```text
+Phase 1 → Are the source-level types compatible?
+Phase 2 → Do the erased signatures match?
+```
+
+If either phase fails → compilation error.
+
+
+<a id="18479-summary-rules"></a>
+#### 18.4.7.9 Summary Rules
+
+- Override is validated **after erasure**
+- Compatibility is validated **before erasure**
+- You may erase generic information in the subclass
+- You may NOT introduce new generic specificity
+- If both methods are parameterized, arguments must match exactly
+- After erasure, signatures must be identical
+
+
+
+This explains why some methods that *look* like overloads are rejected:
+after erasure they collide, and if they are not valid overrides, the compiler blocks them.
+
+
+
+<a id="1848-overloading-a-generic-method--why-some-overloads-are-impossible"></a>
+### 18.4.8 Overloading a Generic Method — Why Some Overloads Are Impossible
 
 When Java compiles generic code, it applies type erasure:
 type parameters such as T are removed, and the compiler substitutes them with their erased type (usually Object or the first bound).
@@ -302,8 +473,8 @@ void testInput(List inputParam)
 
 Java does not allow two methods with identical signatures in the same class, so the overload is rejected at compile time.
 
-<a id="1848-overloading-a-generic-method-inherited-from-a-parent-class"></a>
-### 18.4.8 Overloading a Generic Method Inherited from a Parent Class
+<a id="1849-overloading-a-generic-method-inherited-from-a-parent-class"></a>
+### 18.4.9 Overloading a Generic Method Inherited from a Parent Class
 
 The same rule applies when a subclass tries to introduce a method that erases to the same signature as one in its superclass.
 
@@ -340,8 +511,8 @@ void testInput(ArrayList inputParam)
 
 No collision → legal overloading.
 
-<a id="1849-returning-generic-types--rules-and-restrictions"></a>
-### 18.4.9 Returning Generic Types — Rules and Restrictions
+<a id="18410-returning-generic-types--rules-and-restrictions"></a>
+### 18.4.10 Returning Generic Types — Rules and Restrictions
 
 When returning a value from a method, Java follows a strict rule:
 
@@ -407,8 +578,8 @@ class Demo {
 
 **Java does not use the return type when distinguishing overloaded methods**.
 
-<a id="18410-summary-of-erasure-rules"></a>
-### 18.4.10 Summary of Erasure Rules
+<a id="18411-summary-of-erasure-rules"></a>
+### 18.4.11 Summary of Erasure Rules
 
 - `Unbounded T` → erased to Object.
 - `T extends X` → erased to X.
