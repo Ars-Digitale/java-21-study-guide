@@ -29,7 +29,7 @@
 ---
 
 Les `Exceptions` constituent le mécanisme structuré de Java pour gérer les conditions anormales à runtime.
-Elles permettent de séparer le flux normal dexécution de la logique de gestion des erreurs, améliorant la robustesse, la lisibilité et la correction du programme.
+Elles permettent de séparer le flux normal d'exécution de la logique de gestion des erreurs, améliorant la robustesse, la lisibilité et l'exactitude du programme.
 
 <a id="191-hiérarchie-et-types-dexceptions"></a>
 ## 19.1 Hiérarchie et types dexceptions
@@ -58,12 +58,12 @@ java.lang.Object
 - Exemples: `OutOfMemoryError`, `StackOverflowError`
 
 !!! note
-    Les erreurs indiquent des conditions dont lapplication ne peut généralement pas se remettre.
+    Les erreurs indiquent des conditions dont l'application ne peut généralement pas se remettre.
 
 <a id="1913-exceptions-checked-exception"></a>
 ### 19.1.3 Exceptions Checked (`Exception`)
 - Sous-classes de `Exception` **à lexclusion** de `RuntimeException`
-- Représentent des conditions que lapplication peut vouloir gérer
+- Représentent des conditions que l'application peut vouloir gérer
 - Doivent être soit **capturées** soit **déclarées**
 - Exemples: `IOException`, `SQLException`
 
@@ -88,7 +88,7 @@ void readFile(Path p) throws IOException {
 ```
 
 !!! note
-    Seules les **exceptions checked** doivent être déclarées. Les exceptions unchecked peuvent lêtre, mais sont généralement omises.
+    Seules les **exceptions checked** doivent être déclarées. Les exceptions unchecked peuvent l'être, mais sont généralement omises.
 
 <a id="1922-lancer-des-exceptions"></a>
 ### 19.2.2 Lancer des exceptions
@@ -107,8 +107,8 @@ if (value < 0) {
 ## 19.3 Redéfinition de méthodes et règles sur les exceptions
 
 Lors de la redéfinition dune méthode, les règles sur les exceptions sont strictement appliquées.
-- Une méthode redéfinie peut lancer **moins** dexceptions checked ou des exceptions plus **spécifiques**
-- Elle peut lancer nimporte quelles exceptions unchecked
+- Une méthode redéfinie peut lancer **moins** d'exceptions checked ou des exceptions plus **spécifiques**
+- Elle peut lancer n'importe quelles exceptions unchecked
 - Elle ne peut lancer **aucune nouvelle** exception checked plus large
 
 ```java
@@ -139,7 +139,7 @@ try {
 }
 ```
 
-- Un bloc `try` doit être suivi dau moins un `catch` ou dun `finally`
+- Un bloc `try` doit être suivi d'au moins un `catch` ou d'un `finally`
 - Les `catch` sont évalués de haut en bas
 
 <a id="1942-plusieurs-blocs-catch"></a>
@@ -157,7 +157,7 @@ try {
 
 !!! note
     Les exceptions plus spécifiques doivent précéder les plus générales, sinon la compilation échoue.
-    Si un `catch` pour une superclasse précède celui dune sous-classe, ce dernier devient inatteignable.
+    Si un `catch` pour une superclasse précède celui d'une sous-classe, ce dernier devient inatteignable.
 
 <a id="1943-multi-catch-java-7"></a>
 ### 19.4.3 Multi-catch Java-7
@@ -170,12 +170,12 @@ try {
 }
 ```
 
-- Les types dexception doivent être non liés (pas parent/enfant)
+- Les types d'exception doivent être non liés (pas parent/enfant)
 - La variable capturée est implicitement `final`
 
 <a id="1944-bloc-finally"></a>
 ### 19.4.4 Bloc finally
-Le bloc `finally` sexécute quil y ait exception ou non, sauf en cas darrêt extrême de la JVM.
+Le bloc `finally` s'exécute qu'il y ait exception ou non, sauf en cas d'arrêt extrême de la JVM.
 
 ```java
 try {
@@ -186,7 +186,7 @@ try {
 ```
 
 - Utilisé pour la logique de nettoyage
-- Sexécute même si `return` est utilisé dans try ou catch
+- S'exécute même si `return` est utilisé dans try ou catch
 
 !!! note
     Un bloc `finally` peut écraser une valeur de retour ou avaler une exception. Cela est déconseillé car cela complique le flux de contrôle.
@@ -194,8 +194,8 @@ try {
 <a id="195-gestion-automatique-des-ressources-try-with-resources"></a>
 ## 19.5 Gestion automatique des ressources try-with-resources
 
-Le try-with-resources permet la fermeture automatique des ressources implémentant `AutoCloseable`.
-Il élimine le besoin dun bloc `finally` explicite dans la plupart des cas.
+Le `try-with-resources` permet la fermeture automatique des ressources implémentant `AutoCloseable`.
+Il élimine le besoin d'un bloc `finally` explicite dans la plupart des cas.
 
 <a id="1951-syntaxe-de-base"></a>
 ### 19.5.1 Syntaxe de base
@@ -207,7 +207,16 @@ try (BufferedReader br = Files.newBufferedReader(path)) {
 ```
 
 - Les ressources sont fermées automatiquement
-- La fermeture a lieu même en cas dexception
+- La fermeture a lieu même en cas d'exception
+- Les ressources sont fermées avant l’exécution de tout bloc `catch` ou `finally`.
+
+```java
+try (Resource a = new Resource()) {
+    a.read();
+} finally {
+    a.close();  // ❌ Compile-time error: a est hors de portée ici
+}
+```
 
 <a id="1952-déclarer-plusieurs-ressources"></a>
 ### 19.5.2 Déclarer plusieurs ressources
@@ -238,10 +247,20 @@ try (firstWriter; var secondWriter = Files.newBufferedWriter(filePath)) {
 !!! note
     Tenter de réaffecter une variable ressource provoque une erreur de compilation.
 
+
+```java
+Resource a = new Resource();
+try(a){ // since Java 9
+  ...
+}finally{
+   a.close(); // ce code compile, mais la ressource référencée par la référence `a` a déjà été fermée.
+}
+```
+
 <a id="196-exceptions-supprimées"></a>
 ## 19.6 Exceptions supprimées
 
-Lorsque le bloc `try` et la méthode `close()` dune ressource lancent tous deux une exception, Java conserve lexception principale et **supprime** les autres.
+Lorsque le bloc `try` et la méthode `close()` d'une ressource lancent tous deux une exception, Java conserve l'exception principale et **supprime** les autres.
 
 ```java
 try (BadResource r = new BadResource()) {

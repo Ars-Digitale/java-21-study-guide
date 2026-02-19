@@ -228,6 +228,15 @@ try (BufferedReader br = Files.newBufferedReader(path)) {
 
 - Resources are closed automatically
 - Closure happens even if an exception is thrown
+- Resources are closed before any catch or finally block executes.
+
+```java
+try (Resource a = new Resource()) {
+    a.read();
+} finally {
+    a.close();  // ❌ Compile-time error: a is out of scope here
+}
+```
 
 <a id="1952-declaring-multiple-resources"></a>
 ### 19.5.2 Declaring multiple resources
@@ -258,6 +267,16 @@ try (firstWriter; var secondWriter = Files.newBufferedWriter(filePath)) {
 
 !!! note
     Attempting to reassign a resource variable causes a compilation error.
+	
+
+```java
+Resource a = new Resource();
+try(a){ // since Java 9
+  ...
+}finally{
+   a.close(); // this code will compile but the resource referred to by the reference 'a', has been closed.
+}
+```
 
 ---
 

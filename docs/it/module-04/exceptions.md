@@ -37,7 +37,7 @@ Permettono ai programmi di separare il flusso di esecuzione normale dalla logica
 
 Tutte le eccezioni derivano da `Throwable`.
 
-La gerarchia definisce quali condizioni sono recuperabili, quali devono essere dichiarate e quali rappresentano fallimenti fatali del sistema.
+La gerarchia definisce quali condizioni sono recuperabili, quali devono essere dichiarate e quali rappresentano errori fatali del sistema.
 
 ```text
 java.lang.Object
@@ -228,7 +228,16 @@ try (BufferedReader br = Files.newBufferedReader(path)) {
 ```
 
 - Le risorse vengono chiuse automaticamente  
-- La chiusura avviene anche se viene lanciata un’eccezione  
+- La chiusura avviene anche se viene lanciata un’eccezione
+- Le risorse vengono chiuse prima dell'esecuzione dei blocchi `catch` o del `finally`
+
+```java
+try (Resource a = new Resource()) {
+    a.read();
+} finally {
+    a.close();  // ❌ Compile-time error: a è out of scope qui
+}
+```   
 
 <a id="1952-dichiarare-risorse-multiple"></a>
 ### 19.5.2 Dichiarare risorse multiple
@@ -259,6 +268,15 @@ try (firstWriter; var secondWriter = Files.newBufferedWriter(filePath)) {
 
 > **NOTA**  
 > Tentare di riassegnare una variabile risorsa causa un errore di compilazione.
+
+```java
+Resource a = new Resource();
+try(a){ // since Java 9
+  ...
+}finally{
+   a.close(); // questo codice compila ma la risorsa puntata dal reference 'a', è stata chiusa.
+}
+```
 
 ---
 
