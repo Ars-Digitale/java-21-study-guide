@@ -784,8 +784,8 @@ listSuper.add(10);
 <a id="1813-pièges-communs"></a>
 ## 18.13 Pièges Communs
 
-- Trier des listes avec wildcard: List<? extends Number> ne peut pas accepter d’insertions.
-- Mal comprendre que List<Object> N’EST PAS un supertype de List<String>.
+- Trier des listes avec wildcard: `List<? extends Number>` ne peut pas accepter d’insertions.
+- Mal comprendre que `List<Object>` N’EST PAS un supertype de List<String>.
 - Oublier que les tableaux génériques sont illégaux.
 - Penser que les types génériques sont préservés à runtime (ils sont effacés).
 - Essayer de surcharger des méthodes en utilisant seulement des paramètres de type différents.

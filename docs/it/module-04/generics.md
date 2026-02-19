@@ -789,8 +789,8 @@ listSuper.add(10);
 <a id="1813-errori-comuni"></a>
 ## 18.13 Errori Comuni
 
-- Ordinare liste con wildcard: List<? extends Number> non può accettare inserimenti.
-- Fraintendere che List<Object> NON è un supertype di List<String>.
+- Ordinare liste con wildcard: `List<? extends Number>` non può accettare inserimenti.
+- Fraintendere che `List<Object>` NON è un supertype di `List<String>`.
 - Dimenticare che gli array generici sono illegali.
 - Pensare che i tipi generici siano preservati a runtime (vengono cancellati).
 - Provare a fare overload di metodi usando solo parametri di tipo diversi.

@@ -778,8 +778,8 @@ listSuper.add(10);
 <a id="1813-common-pitfalls"></a>
 ## 18.13 Common Pitfalls
 
-- Sorting lists with wildcards: List<? extends Number> cannot accept insertions.
-- Misunderstanding that List<Object> is NOT a supertype of List<String>.
+- Sorting lists with wildcards: `List<? extends Number>` cannot accept insertions.
+- Misunderstanding that `List<Object>` is NOT a supertype of `List<String>`.
 - Forgetting generic arrays are illegal.
 - Thinking generic types are preserved at runtime (they are erased).
 - Trying to overload methods using only different type parameters.
