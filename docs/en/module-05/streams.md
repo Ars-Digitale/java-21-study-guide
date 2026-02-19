@@ -207,9 +207,9 @@ Streams are designed for data processing, not data storage.
 
 Every stream pipeline consists of three distinct phases:
 
-- 1️⃣  **Source**
-- 2️⃣  Zero or more **Intermediate Operations**
-- 3️⃣. Exactly one **Terminal Operation**
+- 1️ **Source**
+- 2️ Zero or more **Intermediate Operations**
+- 3️ Exactly one **Terminal Operation**
 
 
 <a id="2131-stream-sources"></a>
@@ -300,6 +300,7 @@ Terminal operations:
 | `min` / `max` | **`Optional<T>`** | does not terminate |  
 |  `count` | **long** | does not terminate |
 
+---
 
 <a id="214-lazy-evaluation-and-short-circuiting"></a>
 ## 21.4 Lazy Evaluation and Short-Circuiting
@@ -732,6 +733,7 @@ The “From” column tells you which methods are available and the resulting ta
 !!! important
     - There is no **`unboxed()`** operation.
     - To go from wrappers to primitives you must start from `Stream<T>` and use `mapToInt` / `mapToLong` / `mapToDouble`.
+
 
 <a id="21105-terminal-operations-and-their-result-types"></a>
 ### 21.10.5 Terminal operations and their result types

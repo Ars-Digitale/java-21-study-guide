@@ -206,9 +206,9 @@ Les streams sont conçus pour le traitement des données, et non pour leur stock
 
 Chaque pipeline de stream se compose de trois phases distinctes :
 
-- 1️⃣ **Source**
-- 2️⃣ Zéro ou plusieurs **Opérations intermédiaires**
-- 3️⃣ Exactement une **Opération terminale**
+- 1️ **Source**
+- 2️ Zéro ou plusieurs **Opérations intermédiaires**
+- 3️ Exactement une **Opération terminale**
 
 <a id="2131-sources-de-stream"></a>
 ### 21.3.1 Sources de Stream
@@ -269,6 +269,7 @@ MARIO
 !!! note
     Les opérations intermédiaires décrivent uniquement le calcul. Aucun élément n’est encore traité.
 
+
 <a id="2133-opérations-terminales"></a>
 ### 21.3.3 Opérations terminales
 
@@ -277,6 +278,7 @@ Opérations terminales :
 - Déclenchent l’exécution
 - Consomment le stream
 - Produisent un résultat ou un effet de bord
+
 
 <a id="21331-tableau-des-opérations-terminales"></a>
 #### 21.3.3.1 Tableau des opérations terminales
@@ -707,6 +709,7 @@ La colonne « From » indique quelles méthodes sont disponibles et le type de s
 !!! important
     - Il n’existe pas d’opération **`unboxed()`**.
     - Pour passer des wrappers aux primitifs, vous devez partir de `Stream<T>` et utiliser `mapToInt` / `mapToLong` / `mapToDouble`.
+
 
 <a id="21105-opérations-terminales-et-leurs-types-de-résultat"></a>
 ### 21.10.5 Opérations terminales et leurs types de résultat

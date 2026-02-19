@@ -208,9 +208,9 @@ Gli stream sono progettati per l’elaborazione dei dati, non per l’archiviazi
 
 Ogni pipeline di stream consiste di tre fasi distinte:
 
-- 1️⃣  **Sorgente**
-- 2️⃣  Zero o più **Operazioni Intermedie**
-- 3️⃣. Esattamente una **Operazione Terminale**
+- 1️ **Sorgente**
+- 2️ Zero o più **Operazioni Intermedie**
+- 3️ Esattamente una **Operazione Terminale**
 
 
 <a id="2131-sorgenti-di-stream"></a>
@@ -302,6 +302,7 @@ Operazioni terminali:
 | `min` / `max` | **`Optional<T>`** | non termina |  
 |  `count` | **long** | non termina |
 
+---
 
 <a id="214-valutazione-pigra-e-short-circuiting"></a>
 ## 21.4 Valutazione Pigra e Short-Circuiting
