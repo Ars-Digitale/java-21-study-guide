@@ -424,9 +424,9 @@ Règles pour des streams parallèles sûrs :
 
 Il existe trois signatures de méthode pour cette opération :
 
-- public Optional<T> **reduce**(BinaryOperator<T> accumulator);
-- public T **reduce**(T identity, BinaryOperator<T> accumulator);
-- public <U> U **reduce**(U identity, BiFunction<U, ? super T, U> accumulator, BinaryOperator<U> combiner);
+- public `Optional<T>` **reduce**(`BinaryOperator<T> accumulator`);
+- public `T` **reduce**(`T identity`, `BinaryOperator<T> accumulator`);
+- public `<U> U` **reduce**(`U identity`, `BiFunction<U, ? super T, U> accumulator`, `BinaryOperator<U> combiner`);
 
 ```java
 int sum = Stream.of(1, 2, 3)
@@ -534,11 +534,11 @@ C’est l’outil standard de l’API Stream pour la « réduction mutable » : 
 
 La forme générale est :
 
-- public <R> R **collect**(Supplier<R> supplier, BiConsumer<R, ? super T> accumulator, BiConsumer<R, R> combiner);
+- `public <R> R **collect**(Supplier<R> supplier, BiConsumer<R, ? super T> accumulator, BiConsumer<R, R> combiner)`;
 
 Une version couramment utilisée est :
 
-- public <R, A> R **collect**(Collector<? super T, A, R> collector);
+- `public <R, A> R **collect**(Collector<? super T, A, R> collector)`;
 
 où `Collectors.*` fournit des collectors préconstruits (grouping, mapping, joining, counting, etc.).
 
@@ -684,27 +684,27 @@ La colonne « From » indique quelles méthodes sont disponibles et le type de s
 
 | From (source) | To (target) | Primary method(s) |
 |---------------|-------------|-------------------|
-| Stream<T> | Stream<R> | map(Function<? super T, ? extends R>) |
-| Stream<T> | Stream<R> (flatten) | flatMap(Function<? super T, ? extends Stream<? extends R>>) |
+| `Stream<T>` | `Stream<R>` | `map(Function<? super T, ? extends R>)` |
+| `Stream<T>` | `Stream<R> (flatten)` | `flatMap(Function<? super T, ? extends Stream<? extends R>>)` |
 ||||
-| Stream<T> | IntStream | mapToInt(ToIntFunction<? super T>) |
-| Stream<T> | LongStream | mapToLong(ToLongFunction<? super T>) |
-| Stream<T> | DoubleStream | mapToDouble(ToDoubleFunction<? super T>) |
-| Stream<T> | IntStream (flatten) | flatMapToInt(Function<? super T, ? extends IntStream>) |
-| Stream<T> | LongStream (flatten) | flatMapToLong(Function<? super T, ? extends LongStream>) |
-| Stream<T> | DoubleStream (flatten) | flatMapToDouble(Function<? super T, ? extends DoubleStream>) |
+| `Stream<T>` | `IntStream` | `mapToInt(ToIntFunction<? super T>)` |
+| `Stream<T>` | `LongStream` | `mapToLong(ToLongFunction<? super T>)` |
+| `Stream<T>` | `DoubleStream` | `mapToDouble(ToDoubleFunction<? super T>)` |
+| `Stream<T>` | `IntStream (flatten)` | `flatMapToInt(Function<? super T, ? extends IntStream>)` |
+| `Stream<T>` | `LongStream (flatten)` | `flatMapToLong(Function<? super T, ? extends LongStream>)` |
+| `Stream<T>` | `DoubleStream (flatten)` | `flatMapToDouble(Function<? super T, ? extends DoubleStream>)` |
 ||||
-| IntStream | Stream<Integer> | boxed() |
-| LongStream | Stream<Long> | boxed() |
-| DoubleStream | Stream<Double> | boxed() |
+| `IntStream` | `Stream<Integer>` | `boxed()` |
+| `LongStream` | `Stream<Long>` | `boxed()` |
+| `DoubleStream` | `Stream<Double>` | `boxed()` |
 ||||
-| IntStream | Stream<U> | mapToObj(IntFunction<? extends U>) |
-| LongStream | Stream<U> | mapToObj(LongFunction<? extends U>) |
-| DoubleStream | Stream<U> | mapToObj(DoubleFunction<? extends U>) |
+| `IntStream` | `Stream<U>` | `mapToObj(IntFunction<? extends U>)` |
+| `LongStream` | `Stream<U>` | `mapToObj(LongFunction<? extends U>)` |
+| `DoubleStream` | `Stream<U>` | `mapToObj(DoubleFunction<? extends U>)` |
 ||||
-| IntStream | LongStream | asLongStream() |
-| IntStream | DoubleStream | asDoubleStream() |
-| LongStream | DoubleStream | asDoubleStream() |
+| `IntStream` | `LongStream` | `asLongStream()` |
+| `IntStream` | `DoubleStream` | `asDoubleStream()` |
+| `LongStream` | `DoubleStream` | `asDoubleStream()` |
 
 !!! important
     - Il n’existe pas d’opération **`unboxed()`**.

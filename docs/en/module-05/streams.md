@@ -443,9 +443,9 @@ Rules for safe parallel streams:
 
 There are three method signatures for this operation:
 
-- public Optional<T> **reduce**(BinaryOperator<T> accumulator);
-- public T **reduce**(T identity, BinaryOperator<T> accumulator);
-- public <U> U **reduce**(U identity, BiFunction<U, ? super T, U> accumulator, BinaryOperator<U> combiner)
+- public `Optional<T>` **reduce**(`BinaryOperator<T> accumulator`);
+- public `T` **reduce**(`T identity`, `BinaryOperator<T> accumulator`);
+- public `<U> U` **reduce**(`U identity`, `BiFunction<U, ? super T, U> accumulator`, `BinaryOperator<U> combiner`)
 
 
 ```java
@@ -555,19 +555,19 @@ and then optionally merge partial containers when running in parallel.
 
 The general form is:
 
-- public <R> R **collect**(Supplier<R> supplier, BiConsumer<R, ? super T> accumulator, BiConsumer<R, R> combiner);
+- `public <R> R **collect**(Supplier<R> supplier, BiConsumer<R, ? super T> accumulator, BiConsumer<R, R> combiner)`;
 
 And a common version used is:
 
-- public <R, A> R **collect**(Collector<? super T, A, R> collector)
+- `public <R, A> R **collect**(Collector<? super T, A, R> collector)`
 
 where Collectors.* provides prebuilt collectors (grouping, mapping, joining, counting, etc.).
 
 **Meaning**:
 
-- **supplier**: creates a new empty result container (e.g. new ArrayList<>())
-- **accumulator**: adds one element into that container (e.g. list::add)
-- **combiner**: merges two containers (e.g. list1.addAll(list2))
+- **supplier**: creates a new empty result container (e.g. new `ArrayList<>()`)
+- **accumulator**: adds one element into that container (e.g. `list::add`)
+- **combiner**: merges two containers (e.g. `list1.addAll(list2)`)
 
 <a id="2183-why-collect-is-different-from-reduce"></a>
 ### 21.8.3 Why `collect()` is different from `reduce()`
@@ -611,7 +611,7 @@ Map<Integer, List<String>> byLength =
 
 What happens conceptually:
 
-- The collector creates an empty Map<Integer, List<String>>
+- The collector creates an empty `Map<Integer, List<String>>`
 - For each name:
 	- compute the key (String::length)
 	- put it in the correct bucket list
@@ -706,29 +706,29 @@ This table summarizes the main conversions among object streams and primitive st
 The “From” column tells you which methods are available and the resulting target stream type.
 
 
-| From (source)	| To (target) |	Primary method(s) |
+| From (source) | To (target) | Primary method(s) |
 |---------------|-------------|-------------------|
-| Stream<T> | Stream<R> | map(Function<? super T, ? extends R>) |
-| Stream<T> | Stream<R> (flatten) | flatMap(Function<? super T, ? extends Stream<? extends R>>) |
+| `Stream<T>` | `Stream<R>` | `map(Function<? super T, ? extends R>)` |
+| `Stream<T>` | `Stream<R> (flatten)` | `flatMap(Function<? super T, ? extends Stream<? extends R>>)` |
 ||||
-| Stream<T> | IntStream | mapToInt(ToIntFunction<? super T>) |
-| Stream<T> | LongStream | mapToLong(ToLongFunction<? super T>) |
-| Stream<T> | DoubleStream | mapToDouble(ToDoubleFunction<? super T>) |
-| Stream<T> | IntStream (flatten) | flatMapToInt(Function<? super T, ? extends IntStream>) |
-| Stream<T> | LongStream (flatten) | flatMapToLong(Function<? super T, ? extends LongStream>) |
-| Stream<T> | DoubleStream (flatten) | flatMapToDouble(Function<? super T, ? extends DoubleStream>) |
+| `Stream<T>` | `IntStream` | `mapToInt(ToIntFunction<? super T>)` |
+| `Stream<T>` | `LongStream` | `mapToLong(ToLongFunction<? super T>)` |
+| `Stream<T>` | `DoubleStream` | `mapToDouble(ToDoubleFunction<? super T>)` |
+| `Stream<T>` | `IntStream (flatten)` | `flatMapToInt(Function<? super T, ? extends IntStream>)` |
+| `Stream<T>` | `LongStream (flatten)` | `flatMapToLong(Function<? super T, ? extends LongStream>)` |
+| `Stream<T>` | `DoubleStream (flatten)` | `flatMapToDouble(Function<? super T, ? extends DoubleStream>)` |
 ||||
-| IntStream | Stream<Integer> | boxed() |
-| LongStream | Stream<Long> | boxed() |
-| DoubleStream | Stream<Double> | boxed() |
+| `IntStream` | `Stream<Integer>` | `boxed()` |
+| `LongStream` | `Stream<Long>` | `boxed()` |
+| `DoubleStream` | `Stream<Double>` | `boxed()` |
 ||||
-| IntStream | Stream<U> | mapToObj(IntFunction<? extends U>) |
-| LongStream | Stream<U> | mapToObj(LongFunction<? extends U>) |
-| DoubleStream | Stream<U> | mapToObj(DoubleFunction<? extends U>) |
+| `IntStream` | `Stream<U>` | `mapToObj(IntFunction<? extends U>)` |
+| `LongStream` | `Stream<U>` | `mapToObj(LongFunction<? extends U>)` |
+| `DoubleStream` | `Stream<U>` | `mapToObj(DoubleFunction<? extends U>)` |
 ||||
-| IntStream | LongStream | asLongStream() |
-| IntStream | DoubleStream | asDoubleStream() |
-| LongStream | DoubleStream | asDoubleStream() |
+| `IntStream` | `LongStream` | `asLongStream()` |
+| `IntStream` | `DoubleStream` | `asDoubleStream()` |
+| `LongStream` | `DoubleStream` | `asDoubleStream()` |
 		
 !!! important
     - There is no **`unboxed()`** operation.

@@ -445,9 +445,9 @@ Regole per stream paralleli sicuri:
 
 Ci sono tre firme di metodo per questa operazione:
 
-- public Optional<T> **reduce**(BinaryOperator<T> accumulator);
-- public T **reduce**(T identity, BinaryOperator<T> accumulator);
-- public <U> U **reduce**(U identity, BiFunction<U, ? super T, U> accumulator, BinaryOperator<U> combiner)
+- public `Optional<T>` **reduce**(`BinaryOperator<T> accumulator`);
+- public `T` **reduce**(`T identity`, `BinaryOperator<T> accumulator`);
+- public `<U> U` **reduce**(`U identity`, `BiFunction<U, ? super T, U> accumulator`, `BinaryOperator<U> combiner`)
 
 
 ```java
@@ -557,19 +557,19 @@ e poi, opzionalmente, si uniscono i contenitori parziali quando si esegue in par
 
 La forma generale è:
 
-- public <R> R **collect**(Supplier<R> supplier, BiConsumer<R, ? super T> accumulator, BiConsumer<R, R> combiner);
+- `public <R> R **collect**(Supplier<R> supplier, BiConsumer<R, ? super T> accumulator, BiConsumer<R, R> combiner)`;
 
 E una versione comune usata è:
 
-- public <R, A> R **collect**(Collector<? super T, A, R> collector)
+- `public <R, A> R **collect**(Collector<? super T, A, R> collector)`
 
 dove Collectors.* fornisce collector pre-costruiti (grouping, mapping, joining, counting, ecc.).
 
 **Significato**:
 
-- **supplier**: crea un nuovo contenitore risultato vuoto (es. new ArrayList<>())
-- **accumulator**: aggiunge un elemento in quel contenitore (es. list::add)
-- **combiner**: unisce due contenitori (es. list1.addAll(list2))
+- **supplier**: crea un nuovo contenitore risultato vuoto (es. `new ArrayList<>()`)
+- **accumulator**: aggiunge un elemento in quel contenitore (es. `list::add`)
+- **combiner**: unisce due contenitori (es. `list1.addAll(list2)`)
 
 <a id="2183-perché-collect-è-diverso-da-reduce"></a>
 ### 21.8.3 Perché `collect()` è diverso da `reduce()`
@@ -613,7 +613,7 @@ Map<Integer, List<String>> byLength =
 
 Cosa succede concettualmente:
 
-- Il collector crea una Map<Integer, List<String>> vuota
+- Il collector crea una `Map<Integer, List<String>>` vuota
 - Per ogni name:
 	- calcola la chiave (String::length)
 	- lo mette nella lista bucket corretta
@@ -708,29 +708,30 @@ Questa tabella riassume le principali conversioni tra stream di oggetti e stream
 La colonna “From” ti dice quali metodi sono disponibili e il tipo di stream target risultante.
 
 
-| From (source)	| To (target) |	Primary method(s) |
+| From (source) | To (target) | Primary method(s) |
 |---------------|-------------|-------------------|
-| Stream<T> | Stream<R> | map(Function<? super T, ? extends R>) |
-| Stream<T> | Stream<R> (flatten) | flatMap(Function<? super T, ? extends Stream<? extends R>>) |
+| `Stream<T>` | `Stream<R>` | `map(Function<? super T, ? extends R>)` |
+| `Stream<T>` | `Stream<R> (flatten)` | `flatMap(Function<? super T, ? extends Stream<? extends R>>)` |
 ||||
-| Stream<T> | IntStream | mapToInt(ToIntFunction<? super T>) |
-| Stream<T> | LongStream | mapToLong(ToLongFunction<? super T>) |
-| Stream<T> | DoubleStream | mapToDouble(ToDoubleFunction<? super T>) |
-| Stream<T> | IntStream (flatten) | flatMapToInt(Function<? super T, ? extends IntStream>) |
-| Stream<T> | LongStream (flatten) | flatMapToLong(Function<? super T, ? extends LongStream>) |
-| Stream<T> | DoubleStream (flatten) | flatMapToDouble(Function<? super T, ? extends DoubleStream>) |
+| `Stream<T>` | `IntStream` | `mapToInt(ToIntFunction<? super T>)` |
+| `Stream<T>` | `LongStream` | `mapToLong(ToLongFunction<? super T>)` |
+| `Stream<T>` | `DoubleStream` | `mapToDouble(ToDoubleFunction<? super T>)` |
+| `Stream<T>` | `IntStream (flatten)` | `flatMapToInt(Function<? super T, ? extends IntStream>)` |
+| `Stream<T>` | `LongStream (flatten)` | `flatMapToLong(Function<? super T, ? extends LongStream>)` |
+| `Stream<T>` | `DoubleStream (flatten)` | `flatMapToDouble(Function<? super T, ? extends DoubleStream>)` |
 ||||
-| IntStream | Stream<Integer> | boxed() |
-| LongStream | Stream<Long> | boxed() |
-| DoubleStream | Stream<Double> | boxed() |
+| `IntStream` | `Stream<Integer>` | `boxed()` |
+| `LongStream` | `Stream<Long>` | `boxed()` |
+| `DoubleStream` | `Stream<Double>` | `boxed()` |
 ||||
-| IntStream | Stream<U> | mapToObj(IntFunction<? extends U>) |
-| LongStream | Stream<U> | mapToObj(LongFunction<? extends U>) |
-| DoubleStream | Stream<U> | mapToObj(DoubleFunction<? extends U>) |
+| `IntStream` | `Stream<U>` | `mapToObj(IntFunction<? extends U>)` |
+| `LongStream` | `Stream<U>` | `mapToObj(LongFunction<? extends U>)` |
+| `DoubleStream` | `Stream<U>` | `mapToObj(DoubleFunction<? extends U>)` |
 ||||
-| IntStream | LongStream | asLongStream() |
-| IntStream | DoubleStream | asDoubleStream() |
-| LongStream | DoubleStream | asDoubleStream() |
+| `IntStream` | `LongStream` | `asLongStream()` |
+| `IntStream` | `DoubleStream` | `asDoubleStream()` |
+| `LongStream` | `DoubleStream` | `asDoubleStream()` |
+
 		
 !!! important
     - Non esiste un’operazione **`unboxed()`**.
