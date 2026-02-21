@@ -39,6 +39,7 @@
  
 It allows a class (the *subclass*) to acquire the state and behavior of another class (the *superclass*), creating hierarchical relationships that promote code reuse, specialization, and polymorphism.
 
+
 <a id="161-general-definition-of-inheritance"></a>
 ## 16.1 General Definition of Inheritance
 
@@ -50,6 +51,7 @@ The extending class may add new features or override existing behaviors, creatin
     Inheritance expresses an *“is-a”* relationship: a Dog **is a** Animal.
 
 ---
+
 
 <a id="162-single-inheritance-and-javalangobject"></a>
 ## 16.2 Single Inheritance and java.lang.Object
@@ -70,6 +72,7 @@ System.out.println(new Dog() instanceof Object); // true
 
 ---
 
+
 <a id="163-transitive-inheritance"></a>
 ## 16.3 Transitive Inheritance
 
@@ -84,6 +87,7 @@ class C extends B { } // C inherits from both A and B
 ```
 
 ---
+
 
 <a id="164-what-gets-inherited-short-reminder"></a>
 ## 16.4 What Gets Inherited? (Short Reminder)
@@ -101,6 +105,7 @@ However, this depends on `access modifiers`.
     ( Please refer to Paragraph "**Access Modifiers**" in Chapter: [2. Basic Language Java Building Blocks](../module-01/basic-building-blocks.md) )
 
 ---
+
 
 <a id="165-class-modifiers-affecting-inheritance"></a>
 ## 16.5 Class Modifiers Affecting Inheritance
@@ -122,8 +127,10 @@ Some class-level modifiers affect whether a class may be extended.
 
 ---
 
+
 <a id="166-this-and-super-references"></a>
 ## 16.6 `this` and `super` References
+
 
 <a id="1661-the-this-reference"></a>
 ### 16.6.1 The `this` Reference
@@ -160,6 +167,7 @@ public class Person {
 !!! warning
     `this` cannot be used inside static methods because, in that context, no instance exists.
 
+
 <a id="1662-the-super-reference"></a>
 ### 16.6.2 The `super` Reference
 
@@ -189,6 +197,7 @@ class Child extends Parent {
 
 ---
 
+
 <a id="167-declaring-constructors-in-an-inheritance-chain"></a>
 ## 16.7 Declaring Constructors in an Inheritance Chain
 
@@ -208,6 +217,7 @@ A parent class still gets its own default constructor unless it also defines one
 
 ---
 
+
 <a id="168-default-no-arg-constructor"></a>
 ## 16.8 Default `no-arg` Constructor
 
@@ -225,6 +235,7 @@ class Child extends Parent {
 ```
 
 ---
+
 
 <a id="169-using-this-and-constructor-overloading"></a>
 ## 16.9 Using `this()` and Constructor Overloading
@@ -256,6 +267,7 @@ class Car {
 
 ---
 
+
 <a id="1610-calling-the-parent-constructor-using-super"></a>
 ## 16.10 Calling the Parent Constructor Using `super()`
 
@@ -279,6 +291,7 @@ class Child extends Parent {
 
 ---
 
+
 <a id="1611-default-constructor--tips-and-traps"></a>
 ## 16.11 Default Constructor — Tips and Traps
 
@@ -298,6 +311,7 @@ class Child extends Parent {
 ```
 
 ---
+
 
 <a id="1612-super-always-refers-to-the-most-direct-parent"></a>
 ## 16.12 `super()` Always Refers to the **Most Direct Parent**
@@ -329,8 +343,108 @@ C
 
 ---
 
+
 <a id="1613-inheriting-members"></a>
 ## 16.13 Inheriting Members
+
+
+In Java, **field access and static method calls** are resolved at compile time,  
+while **instance method calls** are resolved at runtime.
+
+The key distinction is:
+
+- The `variable` or `static method` that is used depends on the **declared type of the reference**.
+- The `instance method` that is executed depends on the **actual runtime type of the object**.
+
+
+- Example: `Field Access` (Not Polymorphic)
+
+Fields are resolved based on the **declared type of the reference**, not the actual object.
+
+```java
+class Parent {
+    String name = "Parent";
+}
+
+class Child extends Parent {
+    String name = "Child";
+}
+
+Parent p = new Child();
+System.out.println(p.name);   // Output: Parent
+```
+
+Explanation:
+
+- The reference `p` is declared as type `Parent`.
+- Field access is determined at compile time.
+- Therefore, `Parent.name` is used, even though the object is a `Child`.
+
+Fields are **not polymorphic**.
+
+
+
+- Example: `Static Methods` (Not Polymorphic)
+
+Static methods are also resolved using the **declared type of the reference**.
+
+```java
+class Parent {
+    static void print() {
+        System.out.println("Parent static");
+    }
+}
+
+class Child extends Parent {
+    static void print() {
+        System.out.println("Child static");
+    }
+}
+
+Parent p = new Child();
+p.print();   // Output: Parent static
+```
+
+Explanation:
+
+- Static methods are bound at compile time.
+- The method chosen depends on the reference type (`Parent`), not the object type.
+
+This is called **method hiding**, not overriding.
+
+
+
+- Example: `Instance Methods` (Polymorphic)
+
+Instance methods are resolved at runtime based on the **actual object type**.
+
+```java
+class Parent {
+    void print() {
+        System.out.println("Parent instance");
+    }
+}
+
+class Child extends Parent {
+    @Override
+    void print() {
+        System.out.println("Child instance");
+    }
+}
+
+Parent p = new Child();
+p.print();   // Output: Child instance
+```
+
+Explanation:
+
+- The reference type is `Parent`.
+- The actual object is `Child`.
+- Java uses dynamic dispatch.
+- Therefore, `Child.print()` is executed.
+
+Instance methods are **polymorphic**.
+
 
 <a id="16131-method-overriding"></a>
 ### 16.13.1 Method Overriding
@@ -340,6 +454,7 @@ Method overriding is a core concept of inheritance: it allows a subclass to prov
 At runtime, the version of the method that is executed depends on the **actual object type**, not on the reference type.
  
 This is called **dynamic dispatch** and it is what enables polymorphism in Java.
+
 
 <a id="161311-definition-and-role-in-inheritance"></a>
 #### 16.13.1.1 Definition and Role in Inheritance
@@ -375,6 +490,7 @@ public class TestOverride {
 	}
 }
 ```
+
 
 <a id="161312-using-super-to-call-the-parent-implementation"></a>
 #### 16.13.1.2 Using `super` to Call the Parent Implementation
@@ -424,6 +540,7 @@ class Derived extends Base {
 }
 ```
 
+
 <a id="161313-overriding-rules-instance-methods"></a>
 #### 16.13.1.3 Overriding Rules (Instance Methods)
 
@@ -449,6 +566,7 @@ class Child extends Parent {
 	}
 }
 ```
+
 
 <a id="161314-hiding-static-methods-method-hiding"></a>
 #### 16.13.1.4 Hiding Static Methods (Method Hiding)
@@ -490,6 +608,7 @@ public class TestStatic {
     - If you try to redefine them in a subclass, the code will not compile.
 
 
+
 <a id="16132-abstract-classes"></a>
 ### 16.13.2 Abstract Classes
 
@@ -505,6 +624,7 @@ It may contain:
 - fields, constructors, static members, and even static initializers.
 
 Abstract classes are used when you want to define a common **base behavior** and contract, but leave some details to be implemented by concrete subclasses.
+
 
 <a id="161322-rules-for-abstract-classes"></a>
 #### 16.13.2.2 Rules for Abstract Classes
@@ -548,8 +668,10 @@ class Circle extends Shape {
     - Although an abstract class cannot be instantiated, its constructors are still called when creating instances of concrete subclasses.
     - The chain always starts from the top of the hierarchy and moves down.
 
+
 <a id="16133-creating-immutable-objects"></a>
 ### 16.13.3 Creating Immutable Objects
+
 
 <a id="161331-what-is-an-immutable-object"></a>
 #### 16.13.3.1 What Is an Immutable Object?
@@ -559,6 +681,7 @@ An object is **immutable** if, after it has been created, its state **cannot cha
 All fields that represent the state remain constant for the lifetime of that object. 
 
 Immutable objects are simpler to reason about, inherently thread safe (if properly designed), and widely used in the Java Standard Library (for example, `String`, wrapper classes like `Integer`, and many classes in `java.time`).
+
 
 <a id="161332-guidelines-for-designing-immutable-classes"></a>
 #### 16.13.3.2 Guidelines for Designing Immutable Classes

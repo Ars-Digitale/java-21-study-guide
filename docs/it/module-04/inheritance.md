@@ -38,6 +38,7 @@ L'`Inheritance` (Ereditarietà) è uno dei pilastri fondamentali dell'Object-Ori
 
 Essa permette a una classe `figlia` ( child ), la **subclass**, di acquisire lo stato e il comportamento di un’altra classe `genitrice` ( parent ), la **superclass**, creando relazioni gerarchiche che promuovono riuso del codice, specializzazione e polimorfismo.
 
+
 <a id="161-definizione-generale-di-ereditarietà"></a>
 ## 16.1 Definizione Generale di Ereditarietà
 
@@ -49,6 +50,7 @@ La classe che estende può aggiungere nuove funzionalità o ridefinire (fare `ov
     L’Ereditarietà esprime una relazione *“is-a”* (è-un): un Cane **is a** (è-un) Animale.
 
 ---
+
 
 <a id="162-ereditarietà-singola-e-javalangobject"></a>
 ## 16.2 Ereditarietà Singola e java.lang.Object
@@ -69,6 +71,7 @@ System.out.println(new Dog() instanceof Object); // true
 
 ---
 
+
 <a id="163-ereditarietà-transitiva"></a>
 ## 16.3 Ereditarietà Transitiva
 
@@ -83,6 +86,7 @@ class C extends B { } // C inherits from both A and B
 ```
 
 ---
+
 
 <a id="164-cosa-viene-ereditato-breve-promemoria"></a>
 ## 16.4 Cosa Viene Ereditato, Breve Promemoria
@@ -101,6 +105,7 @@ Tuttavia, nello specifico, questo dipende dagli `access modifiers`.
 
 ---
 
+
 <a id="165-modificatori-di-classe-che-influenzano-lereditarietà"></a>
 ## 16.5 Modificatori di Classe che influenzano l’Ereditarietà
 
@@ -118,6 +123,7 @@ Alcuni modificatori a livello di classe determinano se una classe possa essere e
     Una classe `static` in Java può esistere solo come **static nested class**.
 
 ---
+
 
 <a id="166-riferimenti-this-e-super"></a>
 ## 16.6 Riferimenti `this` e `super`
@@ -187,6 +193,7 @@ class Child extends Parent {
 
 ---
 
+
 <a id="167-dichiarare-costruttori-in-una-catena-ereditaria"></a>
 ## 16.7 Dichiarare Costruttori in una catena ereditaria
 
@@ -206,6 +213,7 @@ Una classe parent continua ad avere il proprio costruttore di default a meno che
 
 ---
 
+
 <a id="168-costruttore-no-arg-di-default"></a>
 ## 16.8 Costruttore `no-arg` di Default
 
@@ -223,6 +231,7 @@ class Child extends Parent {
 ```
 
 ---
+
 
 <a id="169-usare-this-e-constructor-overloading"></a>
 ## 16.9 Usare `this()` e Constructor Overloading
@@ -253,6 +262,7 @@ class Car {
 
 ---
 
+
 <a id="1610-chiamare-il-costruttore-del-parent-usando-super"></a>
 ## 16.10 Chiamare il Costruttore del Parent usando `super()`
 
@@ -275,6 +285,7 @@ class Child extends Parent {
 
 ---
 
+
 <a id="1611-suggerimenti-e-trappole-sul-costruttore-di-default"></a>
 ## 16.11 Suggerimenti e Trappole sul Costruttore di Default
 
@@ -294,6 +305,7 @@ class Child extends Parent {
 ```
 
 ---
+
 
 <a id="1612-super-si-riferisce-sempre-al-parent-più-diretto"></a>
 ## 16.12 `super()` si Riferisce Sempre al Parent più diretto
@@ -325,8 +337,105 @@ C
 
 ---
 
+
 <a id="1613-ereditare-membri"></a>
 ## 16.13 Ereditare Membri
+
+In Java, l’**accesso ai campi** e le **chiamate a metodi statici** vengono risolti a compile-time,  
+mentre le **chiamate ai metodi di istanza** vengono risolte a runtime.
+
+La distinzione fondamentale è:
+
+- La `variabile` o il `metodo statico` utilizzato dipende dal **tipo dichiarato del riferimento**.
+- Il `metodo di istanza` eseguito dipende dal **tipo reale dell’oggetto a runtime**.
+
+
+- Esempio: `Accesso ai Campi` (Non Polimorfico)
+
+I campi vengono risolti in base al **tipo dichiarato del riferimento**, non al tipo reale dell’oggetto.
+
+```java
+class Parent {
+    String name = "Parent";
+}
+
+class Child extends Parent {
+    String name = "Child";
+}
+
+Parent p = new Child();
+System.out.println(p.name);   // Output: Parent
+```
+
+Spiegazione:
+
+- Il riferimento `p` è dichiarato di tipo `Parent`.
+- L’accesso ai campi è determinato a compile-time.
+- Pertanto viene utilizzato `Parent.name`, anche se l’oggetto è di tipo `Child`.
+
+I campi **non sono polimorfici**.
+
+
+- Esempio: `Metodi Statici` (Non Polimorfici)
+
+Anche i metodi statici vengono risolti utilizzando il **tipo dichiarato del riferimento**.
+
+```java
+class Parent {
+    static void print() {
+        System.out.println("Parent static");
+    }
+}
+
+class Child extends Parent {
+    static void print() {
+        System.out.println("Child static");
+    }
+}
+
+Parent p = new Child();
+p.print();   // Output: Parent static
+```
+
+Spiegazione:
+
+- I metodi statici sono collegati (binding) a compile-time.
+- Il metodo scelto dipende dal tipo del riferimento (`Parent`), non dal tipo reale dell’oggetto.
+
+Questo meccanismo è chiamato **method hiding**, non overriding.
+
+
+- Esempio: `Metodi di Istanza` (Polimorfici)
+
+I metodi di istanza vengono risolti a runtime in base al **tipo reale dell’oggetto**.
+
+```java
+class Parent {
+    void print() {
+        System.out.println("Parent instance");
+    }
+}
+
+class Child extends Parent {
+    @Override
+    void print() {
+        System.out.println("Child instance");
+    }
+}
+
+Parent p = new Child();
+p.print();   // Output: Child instance
+```
+
+Spiegazione:
+
+- Il tipo del riferimento è `Parent`.
+- L’oggetto reale è di tipo `Child`.
+- Java utilizza il dynamic dispatch.
+- Pertanto viene eseguito `Child.print()`.
+
+I metodi di istanza sono **polimorfici**.
+
 
 <a id="16131-method-overriding"></a>
 ### 16.13.1 Method Overriding
@@ -336,6 +445,7 @@ Il `method overriding` è un concetto fondamentale dell'ereditarietà: permette 
 A runtime, la versione del metodo eseguita dipende dal **tipo reale dell’oggetto**, non dal particolare `reference type`.
 
 Questo comportamento è chiamato **dynamic dispatch** ed è ciò che rende possibile il polimorfismo in Java.
+
 
 <a id="161311-definizione-e-ruolo-nellereditarietà"></a>
 #### 16.13.1.1 Definizione e Ruolo nell’Ereditarietà
@@ -370,6 +480,7 @@ public class TestOverride {
 	}
 }
 ```
+
 
 <a id="161312-usare-super-per-chiamare-limplementazione-del-parent"></a>
 #### 16.13.1.2 Usare super per chiamare l’Implementazione del Parent
@@ -418,6 +529,7 @@ class Derived extends Base {
 }
 ```
 
+
 <a id="161313-regole-di-overriding-instance-methods"></a>
 #### 16.13.1.3 Regole di Overriding (Instance Methods)
 
@@ -443,6 +555,7 @@ class Child extends Parent {
 	}
 }
 ```
+
 
 <a id="161314-nascondere-static-methods-method-hiding"></a>
 #### 16.13.1.4 Nascondere Static Methods (Method Hiding)
@@ -483,6 +596,7 @@ public class TestStatic {
     - metodi statici **final** non possono essere `hidden` (nascosti); metodi d'istanza dichiarati **final** non possono essere `overriden`.
     - Se si prova a ridefinirli in una subclass, il codice non compilerà.
 
+
 <a id="16132-abstract-classes"></a>
 ### 16.13.2 Abstract Classes
 
@@ -497,6 +611,7 @@ Può contenere:
 - attributi, costruttori, membri statici, e anche static initializers.
 
 Le abstract classes sono usate quando si vuole definire un comportamento comune (e un contratto) di **base**, ma lasciare alcuni dettagli da implementare alle subclasses concrete.
+
 
 <a id="161322-regole-per-le-abstract-classes"></a>
 #### 16.13.2.2 Regole per le Abstract Classes
@@ -539,8 +654,10 @@ class Circle extends Shape {
     - Sebbene una `abstract class` non possa essere istanziata, i suoi costruttori vengono comunque chiamati quando si creano istanze di classi figlie concrete.
     - Il flusso delle istanziazioni, nella `catena ereditaria`, parte sempre dal top della gerarchia e si muove verso il basso.
 
+
 <a id="16133-creare-oggetti-immutabili"></a>
 ### 16.13.3 Creare Oggetti Immutabili
+
 
 <a id="161331-cosè-un-oggetto-immutable"></a>
 #### 16.13.3.1 Cos’è un Oggetto `Immutable`
@@ -550,6 +667,7 @@ Un oggetto è **immutable** se, dopo che è stato creato, il suo stato **non pu�
 Tutti gli attributi che ne rappresentano lo stato, rimangono costanti per l'intero ciclo di vita di quell’oggetto.
 
 Gli `immutable objects` sono semplici da comprendere, intrinsecamente `thread safe` (se progettati correttamente), e ampiamente usati nella Java Standard Library (ad esempio `String`, wrapper classes come `Integer`, e molte classi in `java.time`).
+
 
 <a id="161332-linee-guida-per-progettare-classi-immutable"></a>
 #### 16.13.3.2 Linee Guida per Progettare Classi Immutable
