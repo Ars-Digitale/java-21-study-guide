@@ -15,6 +15,8 @@
 - [5.7 Binary Operators](#57-binary-operators)
 	- [5.7.1 Categories of Binary Operators](#571-categories-of-binary-operators)
 	- [5.7.2 Division and Modulus Operators](#572-division-and-modulus-operators)
+		- [5.7.2.1 Division Operator](#5721-division-operator)
+		- [5.7.2.2 Modulus Operator](#5722-modulus-operator)
 	- [5.7.3 The Return Value of an Assignment Operator](#573-the-return-value-of-an-assignment-operator)
 	- [5.7.4 Compound Assignment Operators](#574-compound-assignment-operators)
 	- [5.7.5 Equality Operators == and !=](#575-equality-operators--and-)
@@ -254,6 +256,37 @@ System.out.println(a >> 1); // 2  (0010)
 
 <a id="572-division-and-modulus-operators"></a>
 ### 5.7.2 Division and Modulus Operators
+
+<a id="5721-division-operator"></a>
+#### 5.7.2.1 Division Operator
+
+Dividing an `integer` by zero (for example, 10 / 0) causes the JVM to throw a `java.lang.ArithmeticException: / by zero`.
+
+However, floating-point division behaves differently. 
+
+When a `float` or `double` value is divided by 0 or 0.0, no exception is thrown. Instead, the result is:
+
+- Float.POSITIVE_INFINITY or Float.NEGATIVE_INFINITY
+- Double.POSITIVE_INFINITY or Double.NEGATIVE_INFINITY
+
+The sign depends on the operands involved in the operation.
+
+To determine whether a floating-point value represents infinity, the `Float` and `Double` classes provide utility methods:
+
+Static methods:
+
+- Float.isInfinite(float value)
+- Double.isInfinite(double value)
+
+Instance methods:
+
+- Float.isInfinite()
+- Double.isInfinite()
+
+These methods return true if the value corresponds to either positive or negative infinity.
+
+<a id="5722-modulus-operator"></a>
+#### 5.7.2.2 Modulus Operator
 
 The modulus operator is the remainder when two numbers are divided.
 If two numbers divide evenly, the reminder is 0: for example **10 % 5** is 0.

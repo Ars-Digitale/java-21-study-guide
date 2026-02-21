@@ -16,6 +16,8 @@
 - [5.7 Opérateurs binaires](#57-opérateurs-binaires)
 	- [5.7.1 Catégories d’opérateurs binaires](#571-catégories-dopérateurs-binaires)
 	- [5.7.2 Opérateurs de division et de modulo (reste)](#572-opérateurs-de-division-et-de-modulo-reste)
+		- [5.7.2.1 Opérateur de division](#5721-opérateur-de-division)
+		- [5.7.2.2 Opérateur Modulo](#5722-opérateur-modulo)
 	- [5.7.3 La valeur de retour de l’opérateur d’affectation](#573-la-valeur-de-retour-de-lopérateur-daffectation)
 	- [5.7.4 Opérateurs d’affectation composée](#574-opérateurs-daffectation-composée)
 	- [5.7.5 Opérateurs d’égalité == et !=](#575-opérateurs-dégalité--et-)
@@ -248,6 +250,37 @@ System.out.println(a >> 1); // 2  (0010)
 
 <a id="572-opérateurs-de-division-et-de-modulo-reste"></a>
 ### 5.7.2 Opérateurs de division et de modulo (reste)
+
+<a id="5721-opérateur-de-division"></a>
+#### 5.7.2.1 Opérateur de Division
+
+Diviser un `entier` par zéro (par exemple, 10 / 0) provoque le lancement par la JVM d’une `java.lang.ArithmeticException: / by zero`.
+
+Cependant, la division en virgule flottante se comporte différemment.
+
+Lorsqu’une valeur `float` ou `double` est divisée par 0 ou 0.0, aucune exception n’est levée. À la place, le résultat est :
+
+- Float.POSITIVE_INFINITY ou Float.NEGATIVE_INFINITY
+- Double.POSITIVE_INFINITY ou Double.NEGATIVE_INFINITY
+
+Le signe dépend des opérandes impliqués dans l’opération.
+
+Pour déterminer si une valeur en virgule flottante représente l’infini, les classes `Float` et `Double` fournissent des méthodes utilitaires :
+
+Méthodes statiques :
+
+- Float.isInfinite(float value)
+- Double.isInfinite(double value)
+
+Méthodes d’instance :
+
+- Float.isInfinite()
+- Double.isInfinite()
+
+Ces méthodes retournent `true` si la valeur correspond à l’infini positif ou à l’infini négatif.
+
+<a id="5722-opérateur-modulo"></a>
+#### 5.7.2.2 Opérateur Modulo
 
 L’opérateur modulo donne le reste lorsque deux nombres sont divisés.  
 Si deux nombres se divisent exactement, le reste est 0 : par exemple **10 % 5** vaut 0.  

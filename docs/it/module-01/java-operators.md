@@ -16,6 +16,8 @@
 - [5.7 Operatori binari](#57-operatori-binari)
 	- [5.7.1 Categorie di operatori binari](#571-categorie-di-operatori-binari)
 	- [5.7.2 Operatori di divisione e resto (modulus)](#572-operatori-di-divisione-e-resto-modulus)
+		- [5.7.2.1 Operatore di divisione](#5721-operatore-di-divisione)
+		- [5.7.2.2 Operatore Modulo](#5722-operatore-modulo)
 	- [5.7.3 Il valore di ritorno dell’operatore di assegnazione](#573-il-valore-di-ritorno-delloperatore-di-assegnazione)
 	- [5.7.4 Operatori di assegnazione composta](#574-operatori-di-assegnazione-composta)
 	- [5.7.5 Operatori di uguaglianza == e !=](#575-operatori-di-uguaglianza--e-)
@@ -250,6 +252,37 @@ System.out.println(a >> 1); // 2  (0010)
 
 <a id="572-operatori-di-divisione-e-resto-modulus"></a>
 ### 5.7.2 Operatori di divisione e resto (modulus)
+
+<a id="5721-operatore-di-divisione"></a>
+#### 5.7.2.1 Operatore di Divisione
+
+Dividere un `intero` per zero (ad esempio, 10 / 0) provoca il lancio da parte della JVM di una `java.lang.ArithmeticException: / by zero`.
+
+Tuttavia, la divisione in virgola mobile si comporta in modo diverso.
+
+Quando un valore `float` o `double` viene diviso per 0 o 0.0, non viene lanciata alcuna eccezione. Invece, il risultato è:
+
+- Float.POSITIVE_INFINITY oppure Float.NEGATIVE_INFINITY
+- Double.POSITIVE_INFINITY oppure Double.NEGATIVE_INFINITY
+
+Il segno dipende dagli operandi coinvolti nell’operazione.
+
+Per determinare se un valore in virgola mobile rappresenta l’infinito, le classi `Float` e `Double` forniscono metodi di utilità:
+
+Metodi statici:
+
+- Float.isInfinite(float value)
+- Double.isInfinite(double value)
+
+Metodi di istanza:
+
+- Float.isInfinite()
+- Double.isInfinite()
+
+Questi metodi restituiscono `true` se il valore corrisponde a infinito positivo o infinito negativo.
+
+<a id="5722-operatore-modulo"></a>
+#### 5.7.2.2 Operatore Modulo
 
 L’operatore di resto (*modulus*) restituisce il resto della divisione tra due numeri.  
 Se due numeri si dividono esattamente, il resto è 0: per esempio **10 % 5** è 0.  
