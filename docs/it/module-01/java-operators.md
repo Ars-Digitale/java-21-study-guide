@@ -262,8 +262,8 @@ Tuttavia, la divisione in virgola mobile si comporta in modo diverso.
 
 Quando un valore `float` o `double` viene diviso per 0 o 0.0, non viene lanciata alcuna eccezione. Invece, il risultato è:
 
-- Float.POSITIVE_INFINITY oppure Float.NEGATIVE_INFINITY
-- Double.POSITIVE_INFINITY oppure Double.NEGATIVE_INFINITY
+- **Float.POSITIVE_INFINITY** oppure **Float.NEGATIVE_INFINITY**
+- **Double.POSITIVE_INFINITY** oppure **Double.NEGATIVE_INFINITY**
 
 Il segno dipende dagli operandi coinvolti nell’operazione.
 
@@ -271,13 +271,13 @@ Per determinare se un valore in virgola mobile rappresenta l’infinito, le clas
 
 Metodi statici:
 
-- Float.isInfinite(float value)
-- Double.isInfinite(double value)
+- **Float.isInfinite(float value)**
+- **Double.isInfinite(double value)**
 
 Metodi di istanza:
 
-- Float.isInfinite()
-- Double.isInfinite()
+- **Float.isInfinite()**
+- **Double.isInfinite()**
 
 Questi metodi restituiscono `true` se il valore corrisponde a infinito positivo o infinito negativo.
 

@@ -266,8 +266,8 @@ However, floating-point division behaves differently.
 
 When a `float` or `double` value is divided by 0 or 0.0, no exception is thrown. Instead, the result is:
 
-- Float.POSITIVE_INFINITY or Float.NEGATIVE_INFINITY
-- Double.POSITIVE_INFINITY or Double.NEGATIVE_INFINITY
+- **Float.POSITIVE_INFINITY** or **Float.NEGATIVE_INFINITY**
+- **Double.POSITIVE_INFINITY** or **Double.NEGATIVE_INFINITY**
 
 The sign depends on the operands involved in the operation.
 
@@ -275,13 +275,13 @@ To determine whether a floating-point value represents infinity, the `Float` and
 
 Static methods:
 
-- Float.isInfinite(float value)
-- Double.isInfinite(double value)
+- **Float.isInfinite(float value)**
+- **Double.isInfinite(double value)**
 
 Instance methods:
 
-- Float.isInfinite()
-- Double.isInfinite()
+- **Float.isInfinite()**
+- **Double.isInfinite()**
 
 These methods return true if the value corresponds to either positive or negative infinity.
 

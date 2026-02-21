@@ -260,8 +260,8 @@ Cependant, la division en virgule flottante se comporte différemment.
 
 Lorsqu’une valeur `float` ou `double` est divisée par 0 ou 0.0, aucune exception n’est levée. À la place, le résultat est :
 
-- Float.POSITIVE_INFINITY ou Float.NEGATIVE_INFINITY
-- Double.POSITIVE_INFINITY ou Double.NEGATIVE_INFINITY
+- **Float.POSITIVE_INFINITY** ou **Float.NEGATIVE_INFINITY**
+- **Double.POSITIVE_INFINITY** ou **Double.NEGATIVE_INFINITY**
 
 Le signe dépend des opérandes impliqués dans l’opération.
 
@@ -269,13 +269,13 @@ Pour déterminer si une valeur en virgule flottante représente l’infini, les 
 
 Méthodes statiques :
 
-- Float.isInfinite(float value)
-- Double.isInfinite(double value)
+- **Float.isInfinite(float value)**
+- **Double.isInfinite(double value)**
 
 Méthodes d’instance :
 
-- Float.isInfinite()
-- Double.isInfinite()
+- **Float.isInfinite()**
+- **Double.isInfinite()**
 
 Ces méthodes retournent `true` si la valeur correspond à l’infini positif ou à l’infini négatif.
 
