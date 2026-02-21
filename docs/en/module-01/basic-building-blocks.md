@@ -35,7 +35,7 @@
 This chapter introduces the essential structural elements of a Java program:
 `classes`, `methods`, `comments`, `access modifiers`, `packages`, the `main` method, and the basic command-line tools (`javac` and `java`).
 
-These are the minimum concepts needed to write, compile, organize, and run Java code in the JDK — without any IDE.
+These are the minimum essential components required to write, compile, organize, and execute Java code using the JDK (Java Development Kit) — without the use of any IDE (Integrated Development Environment).
  
 <a id="21-class-definition"></a>
 ## 2.1 Class definition
@@ -43,13 +43,14 @@ These are the minimum concepts needed to write, compile, organize, and run Java 
 
 A Java `class` is the fundamental building block of a Java program.
 
-A class represents a **type** in Java: it defines structure (`fields`) and behavior (`methods`).
+A `class` represents a **user-defined data type**, composed of a set of internal data (`fields`) and the operations that can act upon them (`methods`).
 
 A `class` is a **blueprint**, while `objects` are **concrete instances** created at runtime.
 
 A Java class is composed of two main elements, known as its **members**:
-- **Fields** (or variables) — they represent the data that define the state of this newly created type.
-- **Methods** (or functions) — they represent the operations that can be performed on this data.
+
+- **Fields** (or variables): they represent the data that define the state of this newly created type.
+- **Methods** (or functions): they represent the operations that can be performed on this data.
 
 Some members can be declared with the keyword **static**.
 

@@ -32,20 +32,21 @@
 Questo capitolo introduce gli elementi strutturali essenziali di un programma Java:
 `class`, `method`, `comment`, `access modifier`, `package`, il metodo `main` e i comandi di base da riga di comando (`javac` e `java`).
 
-Questi sono i concetti minimi necessari per scrivere, compilare, organizzare ed eseguire codice Java nel JDK — senza nessun IDE.
+Questi sono gli elementi minimi indispensabili per scrivere, compilare, organizzare ed eseguire codice Java utilizzando il JDK (Java Development Kit) — senza ricorrere ad alcun IDE (Integrated Development Environment).
 
 <a id="21-definizione-di-classe"></a>
 ## 2.1 Definizione di classe
 
 Una `class` Java è il mattone fondamentale di un programma Java. 
  
-Una classe rappresenta un **tipo** in Java: definisce un insieme di dati (`fields`) e un comportamento (`methods`).
+Una `classe` rappresenta un **tipo di dato** definito dall’utente, costituito da un insieme di dati interni (`fields`) e dalle operazioni che possono agire su di essi (`methods`).
 
 Una `class` è un **blueprint** (modello), mentre gli `object` sono **istanze concrete** create a runtime sulla base di questo modello.
 
 Una classe Java è composta da due elementi principali, detti **membri** della classe:
-- **Field** (o variabili) — rappresentano i dati che definiscono lo stato del nuovo tipo.
-- **Method** (o funzioni) — rappresentano le operazioni che possono essere eseguite su questi dati.
+
+- **Field** (o variabili): rappresentano i dati che definiscono lo stato del nuovo tipo.
+- **Method** (o funzioni): rappresentano le operazioni che possono essere eseguite su questi dati.
 
 Alcuni membri possono essere dichiarati con la keyword **static**.
 
@@ -54,8 +55,8 @@ Un membro static appartiene alla classe stessa, non agli oggetti creati da essa.
 Ciò significa che:
 
 - esiste una sola copia condivisa tra tutte le istanze
-- può essere utilizzato senza creare un oggetto della classe
-- è caricato in memoria quando la classe viene caricata dalla JVM
+- il membro può essere utilizzato senza dover creare un oggetto della classe
+- esso è caricato in memoria quando la classe viene caricata dalla JVM
 
 I membri non statici (detti **di istanza**) appartengono invece ai singoli oggetti e ogni istanza ne possiede la propria copia.
 

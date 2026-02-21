@@ -32,20 +32,21 @@
 Ce chapitre présente les éléments structurels essentiels d’un programme Java :  
 `classes`, `méthodes`, `commentaires`, `modificateurs d’accès`, `packages`, la méthode `main` et les outils de base en ligne de commande (`javac` et `java`).
 
-Ce sont les concepts minimaux nécessaires pour écrire, compiler, organiser et exécuter du code Java avec le JDK — sans aucun IDE.
+Ce sont les éléments minimaux nécessaires pour écrire, compiler, organiser et exécuter du code Java à l’aide du JDK (Java Development Kit) — sans utiliser aucun IDE (Integrated Development Environment).
 
 <a id="21-définition-de-classe"></a>
 ## 2.1 Définition de classe
 
 Une `class` Java est le bloc fondamental d’un programme Java.
   
-Une classe représente un **type** en Java : elle définit une structure (`fields`) et un comportement (`methods`).
+Une `classe` représente un **type de donnée défini par l’utilisateur**, constitué d’un ensemble de données internes (`fields`) et des opérations pouvant agir sur celles-ci (`methods`).
 
 Une `class` est un **plan** (blueprint), tandis que les `objects` sont des **instances concrètes** créées à l’exécution.
 
-Une classe Java est composée de deux éléments principaux, appelés ses **membres** :
-- **Fields** (ou variables) — représentent les données qui définissent l’état de ce nouveau type.
-- **Methods** (ou fonctions) — représentent les opérations qui peuvent être effectuées sur ces données.
+Une classe Java est composée de deux éléments principaux, appelés ses **membres**:
+
+- **Fields** (ou variables): représentent les données qui définissent l’état de ce nouveau type.
+- **Methods** (ou fonctions): représentent les opérations qui peuvent être effectuées sur ces données.
 
 Certains membres peuvent être déclarés avec le mot-clé **static**.
 
