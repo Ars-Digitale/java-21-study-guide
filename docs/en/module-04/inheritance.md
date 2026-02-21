@@ -357,7 +357,7 @@ The key distinction is:
 - The `instance method` that is executed depends on the **actual runtime type of the object**.
 
 
-- Example: `Field Access` (Not Polymorphic)
+**Example**: `Field Access` (Not Polymorphic)
 
 Fields are resolved based on the **declared type of the reference**, not the actual object.
 
@@ -384,7 +384,7 @@ Fields are **not polymorphic**.
 
 
 
-- Example: `Static Methods` (Not Polymorphic)
+**Example**: `Static Methods` (Not Polymorphic)
 
 Static methods are also resolved using the **declared type of the reference**.
 
@@ -414,7 +414,7 @@ This is called **method hiding**, not overriding.
 
 
 
-- Example: `Instance Methods` (Polymorphic)
+**Example**: `Instance Methods` (Polymorphic)
 
 Instance methods are resolved at runtime based on the **actual object type**.
 

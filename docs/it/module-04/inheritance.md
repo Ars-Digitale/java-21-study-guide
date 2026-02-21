@@ -350,7 +350,7 @@ La distinzione fondamentale è:
 - Il `metodo di istanza` eseguito dipende dal **tipo reale dell’oggetto a runtime**.
 
 
-- Esempio: `Accesso ai Campi` (Non Polimorfico)
+**Esempio**: `Accesso ai Campi` (Non Polimorfico)
 
 I campi vengono risolti in base al **tipo dichiarato del riferimento**, non al tipo reale dell’oggetto.
 
@@ -376,7 +376,7 @@ Spiegazione:
 I campi **non sono polimorfici**.
 
 
-- Esempio: `Metodi Statici` (Non Polimorfici)
+**Esempio**: `Metodi Statici` (Non Polimorfici)
 
 Anche i metodi statici vengono risolti utilizzando il **tipo dichiarato del riferimento**.
 
@@ -405,7 +405,7 @@ Spiegazione:
 Questo meccanismo è chiamato **method hiding**, non overriding.
 
 
-- Esempio: `Metodi di Istanza` (Polimorfici)
+**Esempio**: `Metodi di Istanza` (Polimorfici)
 
 I metodi di istanza vengono risolti a runtime in base al **tipo reale dell’oggetto**.
 

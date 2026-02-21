@@ -349,7 +349,7 @@ La distinction essentielle est la suivante :
 - La `méthode d’instance` exécutée dépend du **type réel de l’objet à l’exécution**.
 
 
-- Exemple : `Accès aux Champs` (Non Polymorphique)
+**Exemple** : `Accès aux Champs` (Non Polymorphique)
 
 Les champs sont résolus en fonction du **type déclaré de la référence**, et non du type réel de l’objet.
 
@@ -375,7 +375,7 @@ Explication :
 Les champs **ne sont pas polymorphiques**.
 
 
-- Exemple : `Méthodes Statiques` (Non Polymorphiques)
+**Exemple** : `Méthodes Statiques` (Non Polymorphiques)
 
 Les méthodes statiques sont également résolues en utilisant le **type déclaré de la référence**.
 
@@ -404,7 +404,7 @@ Explication :
 Ce mécanisme s’appelle le **method hiding**, et non l’override.
 
 
-- Exemple : `Méthodes d’Instance` (Polymorphiques)
+**Exemple** : `Méthodes d’Instance` (Polymorphiques)
 
 Les méthodes d’instance sont résolues à l’exécution en fonction du **type réel de l’objet**.
 
