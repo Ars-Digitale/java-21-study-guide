@@ -423,6 +423,7 @@ A differenza delle normali variabili di istanza e di classe, le variabili **`fin
 Una variabile `final` **deve essere assegnata esplicitamente esattamente una sola volta**, altrimenti il codice non compila.
 
 Questo vale sia per:
+
 - **variabili final di istanza**
 - **variabili di classe static final**
 

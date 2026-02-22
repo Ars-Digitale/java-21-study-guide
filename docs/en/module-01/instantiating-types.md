@@ -419,6 +419,7 @@ Unlike regular instance and class variables, **`final` variables are *not* defau
 A `final` variable **must be explicitly assigned exactly once**, otherwise the code does not compile.
 
 This applies to both:
+
 - **final instance variables**
 - **static final class variables**
 

@@ -419,6 +419,7 @@ Contrairement aux variables d’instance et de classe ordinaires, les variables 
 Une variable `final` **doit être affectée explicitement exactement une fois**, sinon le code ne compile pas.
 
 Cela s’applique aux :
+
 - **variables final d’instance**
 - **variables de classe static final**
 
