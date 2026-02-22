@@ -516,6 +516,7 @@ Example e = new Example(); // ❌ compile-time error
 <ins>**Perché le variabili `final` non vengono inizializzate di default?**</ins>
 
 Perché:
+
 - Il loro valore deve essere **noto e immutabile**, e
 - Java deve garantire che il valore sia impostato **prima dell’uso**,
 - L’inizializzazione di default creerebbe una situazione in cui `0`, `null`, o `false` potrebbero diventare involontariamente il valore permanente.
@@ -612,13 +613,16 @@ Ogni primitivo ha una corrispondente classe wrapper nel package `java.lang`:
 
 <a id="631-scopo-dei-tipi-wrapper"></a>
 ### 6.3.1 Scopo dei tipi wrapper
+
 - Consentono di usare i primitivi in contesti che richiedono oggetti (es. collezioni, generics).  
 - Forniscono metodi di utilità per parsing, conversione e manipolazione dei valori.  
 - Supportano costanti come `Integer.MAX_VALUE` o `Double.MIN_VALUE`.  
 
 <a id="632-autoboxing-e-unboxing"></a>
 ### 6.3.2 Autoboxing e unboxing
+
 Da Java 5, il compilatore converte automaticamente tra primitivi e wrapper:
+
 - **Autoboxing**: primitivo → wrapper  
 - **Unboxing**: wrapper → primitivo  
 
@@ -684,6 +688,7 @@ Integer.valueOf("G", 16);	// NumberFormatException
 
 !!! note
     I metodi **parseXxx()** restituiscono un primitivo mentre **valueOf()** restituisce un oggetto wrapper.
+
 
 <a id="634-metodi-di-supporto"></a>
 ### 6.3.4 Metodi di supporto
@@ -751,8 +756,10 @@ char c2 = 65;                   // stesso code point Unicode
 System.out.println(c1 == c2);   // true
 ```
 
+
 <a id="6411-punti-chiave"></a>
 #### 6.4.1.1 Punti chiave
+
 - `==` esegue un **confronto di valori** per i primitivi.
 - I tipi primitivi **non** hanno un metodo `.equals()`.
 - Tipi primitivi misti seguono le **regole di promozione** numerica  
@@ -764,8 +771,10 @@ System.out.println(c1 == c2);   // true
 
 Con gli oggetti (tipi reference), il significato di `==` cambia.
 
+
 <a id="6421--confronto-di-identità"></a>
-#### 6.4.2.1 `==` (Confronto di identità)  
+#### 6.4.2.1 `==` (Confronto di identità)
+  
 `==` verifica se **due riferimenti puntano allo stesso oggetto in memoria**.
 
 ```java
@@ -780,7 +789,8 @@ Anche se i contenuti sono identici, `==` è false a meno che entrambe le variabi
 
 
 <a id="6422-equals-confronto-logico"></a>
-#### 6.4.2.2 `.equals()` (Confronto logico)  
+#### 6.4.2.2 `.equals()` (Confronto logico)
+  
 Molte classi ridefiniscono `.equals()` per confrontare i **valori**, non gli indirizzi di memoria.
 
 ```java
@@ -789,6 +799,7 @@ System.out.println(s1.equals(s2)); // true → stesso contenuto
 
 <a id="6423-punti-chiave"></a>
 #### 6.4.2.3 Punti chiave
+
 - `.equals()` è definito in `Object`.
 - Se una classe *non* ridefinisce `.equals()`, si comporta come `==`.
 - Classi come `String`, `Integer`, `List`, ecc. ridefiniscono `.equals()`  

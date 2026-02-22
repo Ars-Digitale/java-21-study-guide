@@ -511,6 +511,7 @@ Example e = new Example(); // ❌ compile-time error
 <ins>**Pourquoi les variables `final` ne sont-elles pas initialisées par défaut ?**</ins>
 
 Parce que :
+
 - Leur valeur doit être **connue et immuable**, et
 - Java doit garantir que la valeur est définie **avant utilisation**,
 - Une initialisation par défaut créerait une situation où `0`, `null` ou `false` pourraient devenir involontairement la valeur permanente.
@@ -604,15 +605,20 @@ Chaque primitif a une classe wrapper correspondante dans le package `java.lang` 
 
 Les objets wrapper sont immuables — une fois créés, leur valeur ne peut pas changer.
 
+
 <a id="631-objectif-des-types-wrapper"></a>
 ### 6.3.1 Objectif des types wrapper
+
 - Permettre d’utiliser des primitifs dans des contextes qui exigent des objets (par ex. collections, generics).  
 - Fournir des méthodes utilitaires pour parser, convertir et manipuler des valeurs.  
 - Supporter des constantes comme `Integer.MAX_VALUE` ou `Double.MIN_VALUE`.  
 
+
 <a id="632-autoboxing-et-unboxing"></a>
 ### 6.3.2 Autoboxing et unboxing
+
 Depuis Java 5, le compilateur convertit automatiquement entre primitifs et wrappers :
+
 - **Autoboxing** : primitif → wrapper  
 - **Unboxing** : wrapper → primitif  
 
@@ -639,6 +645,7 @@ Double[] arr2 = {11, 22};     // WARNING: Does not compile!!
 !!! warning
     - **AUTOBOXING** et **cast implicite** ne sont pas autorisés dans la même instruction : tu ne peux pas faire les deux en même temps. (voir l’exemple ci-dessus)
     - Cette règle s’applique aussi aux appels de méthode.
+
 
 <a id="633-parsing-et-conversion"></a>
 ### 6.3.3 Parsing et conversion
@@ -679,6 +686,7 @@ Integer.valueOf("G", 16);	// NumberFormatException
 !!! note
     Les méthodes **parseXxx()** renvoient un primitif tandis que **valueOf()** renvoie un objet wrapper.
 
+
 <a id="634-méthodes-utilitaires"></a>
 ### 6.3.4 Méthodes utilitaires
 
@@ -717,6 +725,7 @@ int z = val; // ❌ NullPointerException at runtime
 
 ---
 
+
 <a id="64-égalité-en-java"></a>
 ## 6.4 Égalité en Java
 
@@ -747,6 +756,7 @@ System.out.println(c1 == c2);   // true
 
 <a id="6411-points-clés"></a>
 #### 6.4.1.1 Points clés
+
 - `==` effectue une **comparaison de valeur** pour les primitifs.
 - Les types primitifs n’ont **pas** de méthode `.equals()`.
 - Les types primitifs mixtes suivent les **règles de promotion** numérique  
@@ -758,8 +768,10 @@ System.out.println(c1 == c2);   // true
 
 Avec les objets (types référence), la signification de `==` change.
 
+
 <a id="6421-comparaison-didentité"></a>
-#### 6.4.2.1 `==` (Comparaison d’identité)  
+#### 6.4.2.1 `==` (Comparaison d’identité)
+  
 `==` vérifie si **deux références pointent vers le même objet en mémoire**.
 
 ```java
@@ -774,7 +786,8 @@ Même si les contenus sont identiques, `==` est false sauf si les deux variables
 
 
 <a id="6422-equals-comparaison-logique"></a>
-#### 6.4.2.2 `.equals()` (Comparaison logique)  
+#### 6.4.2.2 `.equals()` (Comparaison logique)
+  
 De nombreuses classes redéfinissent `.equals()` pour comparer les **valeurs**, pas les adresses mémoire.
 
 ```java
@@ -783,6 +796,7 @@ System.out.println(s1.equals(s2)); // true → même contenu
 
 <a id="6423-points-clés"></a>
 #### 6.4.2.3 Points clés
+
 - `.equals()` est définie dans `Object`.
 - Si une classe ne redéfinit *pas* `.equals()`, elle se comporte comme `==`.
 - Des classes comme `String`, `Integer`, `List`, etc. redéfinissent `.equals()`  

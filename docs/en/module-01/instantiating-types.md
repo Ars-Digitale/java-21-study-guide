@@ -511,6 +511,7 @@ Example e = new Example(); // ❌ compile-time error
 <ins>**Why `final` Variables Are Not Default-Initialized?**</ins>
 
 Because:
+
 - Their value must be **known and immutable**, and
 - Java must guarantee that the value is set **before use**,
 - Default initialization would create a situation where `0`, `null`, or `false` might unintentionally become the permanent value.
@@ -606,13 +607,16 @@ Wrapper objects are immutable — once created, their value cannot change.
 
 <a id="631-purpose-of-wrapper-types"></a>
 ### 6.3.1 Purpose of Wrapper Types
+
 - Allow primitives to be used in contexts that require objects (e.g., collections, generics).  
 - Provide utility methods for parsing, converting, and working with values.  
 - Support constants such as `Integer.MAX_VALUE` or `Double.MIN_VALUE`.  
 
 <a id="632-autoboxing-and-unboxing"></a>
 ### 6.3.2 Autoboxing and Unboxing
+
 Since Java 5, the compiler automatically converts between primitives and their wrappers:
+
 - **Autoboxing**: primitive → wrapper  
 - **Unboxing**: wrapper → primitive  
 
@@ -679,6 +683,7 @@ Integer.valueOf("G", 16);	// NumberFormatException
 
 !!! note
     methods **parseXxx()** return a primitive while **valueOf()** returns a wrapper object.
+
 
 <a id="634--helper-methods"></a>
 ### 6.3.4  Helper methods
@@ -748,6 +753,7 @@ System.out.println(c1 == c2);   // true
 
 <a id="6411-key-points"></a>
 #### 6.4.1.1 Key points
+
 - `==` performs **value comparison** for primitives.
 - Primitive types have **no `.equals()`** method.
 - Mixed primitive types follow numeric **promotion rules**  
@@ -761,6 +767,7 @@ With objects (reference types), the meaning of `==` changes.
 
 <a id="6421-identity-comparison"></a>
 #### 6.4.2.1 `==`(Identity Comparison)  
+
 `==` checks whether **two references point to the same object in memory**.
 
 ```java
@@ -775,7 +782,8 @@ Even if contents are identical, `==` is false unless both variables refer to
 
 
 <a id="6422-equals-logical-comparison"></a>
-#### 6.4.2.2 `.equals()` (Logical Comparison)  
+#### 6.4.2.2 `.equals()` (Logical Comparison)
+  
 Many classes override `.equals()` to compare **values**, not memory addresses.
 
 ```java
@@ -784,6 +792,7 @@ System.out.println(s1.equals(s2)); // true → same content
 
 <a id="6423-key-points"></a>
 #### 6.4.2.3 Key points
+
 - `.equals()` is defined in `Object`.
 - If a class does *not* override `.equals()`, it behaves like `==`.
 - Classes like `String`, `Integer`, `List`, etc. override `.equals()`  
