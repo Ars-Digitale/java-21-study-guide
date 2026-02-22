@@ -1,0 +1,7410 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ars-digitale.github.io/java-21-study-guide/en/module-04/generics/">
+      
+      
+        <link rel="prev" href="../beyond-classes/">
+      
+      
+        <link rel="next" href="../exceptions/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Generics in Java - Java 21 Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#18-generics-in-java" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Java 21 Study Guide" class="md-header__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Java 21 Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Generics in Java
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Java 21 Study Guide" class="md-nav__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Java 21 Study Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisite material
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Java Language Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Java Language Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syntax building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic language building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java naming rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java data types and casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantiating types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Control Flow
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Control Flow
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control flow statements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — Core Standard APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — Core Standard APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strings in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dates and time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatting and localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methods, attributes, and variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading, initialization, and object construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inheritance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beyond classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#181-generic-type-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 Generic Type Basics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#182-why-generics-exist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 Why Generics Exist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#183-generic-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.3 Generic Methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#184-type-erasure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4 Type Erasure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18.4 Type Erasure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1841-how-type-erasure-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.1 How Type Erasure Works
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1842-erasure-of-unbounded-type-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.2 Erasure of Unbounded Type Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1843-erasure-of-bounded-type-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.3 Erasure of Bounded Type Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1844-multiple-bounds-the-first-bound-determines-erasure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.4 Multiple Bounds: The First Bound Determines Erasure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1845-why-only-the-first-bound-becomes-the-runtime-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.5 Why Only the First Bound Becomes the Runtime Type?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1846-a-more-complex-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.6 A More Complex Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1847-overriding-and-generics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7 Overriding and Generics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18.4.7 Overriding and Generics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#18471-how-the-compiler-validates-an-override" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.1 How the Compiler Validates an Override
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18472-generic-parameters-and-overriding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.2 Generic Parameters and Overriding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18473-valid-override-erasing-generic-specificity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.3 Valid Override - Erasing Generic Specificity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18474-invalid-override-adding-generic-specificity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.4 Invalid Override - Adding Generic Specificity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18475-valid-override-matching-parameterization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.5 Valid Override - Matching Parameterization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18476-invalid-override-changing-generic-argument" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.6 Invalid Override - Changing Generic Argument
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18477-why-this-rule-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.7 Why This Rule Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18478-mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.8 Mental Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18479-summary-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.9 Summary Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1848-overloading-a-generic-method-why-some-overloads-are-impossible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.8 Overloading a Generic Method — Why Some Overloads Are Impossible
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1849-overloading-a-generic-method-inherited-from-a-parent-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.9 Overloading a Generic Method Inherited from a Parent Class
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18410-returning-generic-types-rules-and-restrictions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.10 Returning Generic Types — Rules and Restrictions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18411-summary-of-erasure-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.11 Summary of Erasure Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#185-bounds-on-type-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5 Bounds on Type Parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18.5 Bounds on Type Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1851-upper-bounds-extends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5.1 Upper Bounds: extends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1852-multiple-bounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5.2 Multiple Bounds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1853-wildcards-extends-super" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5.3 Wildcards: ?, ? extends, ? super
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18.5.3 Wildcards: ?, ? extends, ? super">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#18531-unbounded-wildcard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5.3.1 Unbounded Wildcard ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18532-upper-bounded-wildcard-extends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5.3.2 Upper-Bounded Wildcard ? extends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18533-lower-bounded-wildcard-super" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5.3.3 Lower-Bounded Wildcard ? super
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#186-generics-and-inheritance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.6 Generics and Inheritance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#187-type-inference-diamond-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.7 Type Inference (Diamond Operator)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#188-raw-types-legacy-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.8 Raw Types (Legacy Compatibility)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#189-generic-arrays-not-allowed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.9 Generic Arrays (Not Allowed)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1810-bounded-type-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.10 Bounded Type Inference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1811-wildcards-vs-type-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.11 Wildcards vs. Type Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1812-pecs-rule-producer-extends-consumer-super" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.12 PECS Rule (Producer Extends, Consumer Super)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1813-common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.13 Common Pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1814-summary-table-of-wildcards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.14 Summary Table of Wildcards
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1815-summary-of-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.15 Summary of Concepts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1816-complete-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.16 Complete Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions and error handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Functional Programming
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Functional Programming
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functional programming in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to the collections framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared collection operations and equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting and comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    List APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue and deque APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrency and Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrency and Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thread fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concurrency APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — Java I/O and NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — Java I/O and NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java I/O streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O streams APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interacting with the user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JPMS fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiling, packaging, and running modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Italiano
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Italiano
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materiale propedeutico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi di sintassi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elementi base del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regole di naming Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tipi di dati e casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operatori Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istanziare i tipi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istruzioni di controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cicli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stringhe in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilità Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data e ora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formattazione e localizzazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metodi, attributi e variabili
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading e costruzione oggetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ereditarietà
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oltre le classi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eccezioni e gestione errori
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmazione funzionale in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operazioni condivise ed equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting e comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti thread
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API di concorrenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 08 — I/O e NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 08 — I/O e NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (fondamenti)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interazione con l’utente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilare e avviare moduli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Français
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Français
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matériel de support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Bases du Langage Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Bases du Langage Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocs de syntaxe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Éléments de base du langage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Règles de nommage Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types de données et casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérateurs Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instanciation des types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Contrôle de flux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Contrôle de flux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions de contrôle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boucles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chaînes (String) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tableaux (Arrays) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilitaires Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date et heure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatage et localisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Fondamentaux OO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Fondamentaux OO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Méthodes, attributs et variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chargement de classes et construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Héritage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Au-delà des classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions et gestion des erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmation fonctionnelle en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Streams Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Framework des Collections
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Framework des Collections
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction au framework des collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérations partagées et égalité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tri et comparaison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrence et Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrence et Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux des threads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de concurrence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — I/O et NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — I/O et NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (fondamentaux)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interaction avec l’utilisateur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiler et exécuter des modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services en JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ars-digitale.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ars Digitale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#181-generic-type-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 Generic Type Basics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#182-why-generics-exist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 Why Generics Exist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#183-generic-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.3 Generic Methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#184-type-erasure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4 Type Erasure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18.4 Type Erasure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1841-how-type-erasure-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.1 How Type Erasure Works
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1842-erasure-of-unbounded-type-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.2 Erasure of Unbounded Type Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1843-erasure-of-bounded-type-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.3 Erasure of Bounded Type Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1844-multiple-bounds-the-first-bound-determines-erasure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.4 Multiple Bounds: The First Bound Determines Erasure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1845-why-only-the-first-bound-becomes-the-runtime-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.5 Why Only the First Bound Becomes the Runtime Type?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1846-a-more-complex-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.6 A More Complex Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1847-overriding-and-generics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7 Overriding and Generics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18.4.7 Overriding and Generics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#18471-how-the-compiler-validates-an-override" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.1 How the Compiler Validates an Override
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18472-generic-parameters-and-overriding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.2 Generic Parameters and Overriding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18473-valid-override-erasing-generic-specificity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.3 Valid Override - Erasing Generic Specificity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18474-invalid-override-adding-generic-specificity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.4 Invalid Override - Adding Generic Specificity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18475-valid-override-matching-parameterization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.5 Valid Override - Matching Parameterization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18476-invalid-override-changing-generic-argument" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.6 Invalid Override - Changing Generic Argument
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18477-why-this-rule-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.7 Why This Rule Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18478-mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.8 Mental Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18479-summary-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.7.9 Summary Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1848-overloading-a-generic-method-why-some-overloads-are-impossible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.8 Overloading a Generic Method — Why Some Overloads Are Impossible
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1849-overloading-a-generic-method-inherited-from-a-parent-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.9 Overloading a Generic Method Inherited from a Parent Class
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18410-returning-generic-types-rules-and-restrictions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.10 Returning Generic Types — Rules and Restrictions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18411-summary-of-erasure-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4.11 Summary of Erasure Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#185-bounds-on-type-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5 Bounds on Type Parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18.5 Bounds on Type Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1851-upper-bounds-extends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5.1 Upper Bounds: extends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1852-multiple-bounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5.2 Multiple Bounds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1853-wildcards-extends-super" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5.3 Wildcards: ?, ? extends, ? super
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18.5.3 Wildcards: ?, ? extends, ? super">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#18531-unbounded-wildcard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5.3.1 Unbounded Wildcard ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18532-upper-bounded-wildcard-extends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5.3.2 Upper-Bounded Wildcard ? extends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18533-lower-bounded-wildcard-super" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5.3.3 Lower-Bounded Wildcard ? super
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#186-generics-and-inheritance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.6 Generics and Inheritance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#187-type-inference-diamond-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.7 Type Inference (Diamond Operator)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#188-raw-types-legacy-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.8 Raw Types (Legacy Compatibility)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#189-generic-arrays-not-allowed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.9 Generic Arrays (Not Allowed)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1810-bounded-type-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.10 Bounded Type Inference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1811-wildcards-vs-type-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.11 Wildcards vs. Type Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1812-pecs-rule-producer-extends-consumer-super" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.12 PECS Rule (Producer Extends, Consumer Super)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1813-common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.13 Common Pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1814-summary-table-of-wildcards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.14 Summary Table of Wildcards
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1815-summary-of-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.15 Summary of Concepts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1816-complete-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.16 Complete Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="18-generics-in-java">18. Generics in Java</h1>
+<p><a id="table-of-contents"></a></p>
+<h3 id="table-of-contents">Table of Contents</h3>
+<ul>
+<li><a href="#181-generic-type-basics">18.1 Generic Type Basics</a></li>
+<li><a href="#182-why-generics-exist">18.2 Why Generics Exist</a></li>
+<li><a href="#183-generic-methods">18.3 Generic Methods</a></li>
+<li><a href="#184-type-erasure">18.4 Type Erasure</a><ul>
+<li><a href="#1841-how-type-erasure-works">18.4.1 How Type Erasure Works</a></li>
+<li><a href="#1842-erasure-of-unbounded-type-parameters">18.4.2 Erasure of Unbounded Type Parameters</a></li>
+<li><a href="#1843-erasure-of-bounded-type-parameters">18.4.3 Erasure of Bounded Type Parameters</a></li>
+<li><a href="#1844-multiple-bounds-the-first-bound-determines-erasure">18.4.4 Multiple Bounds The First Bound Determines Erasure</a></li>
+<li><a href="#1845-why-only-the-first-bound-becomes-the-runtime-type">18.4.5 Why Only the First Bound Becomes the Runtime Type</a></li>
+<li><a href="#1846-a-more-complex-example">18.4.6 A More Complex Example</a></li>
+<li><a href="#1847-overriding-and-generics">18.4.7 Overriding and Generics</a><ul>
+<li><a href="#18471-how-the-compiler-validates-an-override">18.4.7.1 How the Compiler Validates an Override</a></li>
+<li><a href="#18472-generic-parameters-and-overriding">18.4.7.2 Generic Parameters and Overriding</a></li>
+<li><a href="#18473-valid-override-erasing-generic-specificity">18.4.7.3 Valid Override - Erasing Generic Specificity</a></li>
+<li><a href="#18474-invalid-override-adding-generic-specificity">18.4.7.4 Invalid Override - Adding Generic Specificity</a></li>
+<li><a href="#18475-valid-override-matching-parameterization">18.4.7.5 Valid Override - Matching Parameterization</a></li>
+<li><a href="#18476-invalid-override-changing-generic-argument">18.4.7.6 Invalid Override - Changing Generic Argument</a></li>
+<li><a href="#18477-why-this-rule-exists">18.4.7.7 Why This Rule Exists</a></li>
+<li><a href="#18478-mental-model">18.4.7.8 Mental Model</a></li>
+<li><a href="#18479-summary-rules">18.4.7.9 Summary Rules</a></li>
+</ul>
+</li>
+<li><a href="#1848-overloading-a-generic-method--why-some-overloads-are-impossible">18.4.8 Overloading a Generic Method Why Some Overloads Are Impossible</a></li>
+<li><a href="#1849-overloading-a-generic-method-inherited-from-a-parent-class">18.4.9 Overloading a Generic Method Inherited from a Parent Class</a></li>
+<li><a href="#18410-returning-generic-types--rules-and-restrictions">18.4.10 Returning Generic Types Rules and Restrictions</a></li>
+<li><a href="#18411-summary-of-erasure-rules">18.4.11 Summary of Erasure Rules</a></li>
+</ul>
+</li>
+<li><a href="#185-bounds-on-type-parameters">18.5 Bounds on Type Parameters</a><ul>
+<li><a href="#1851-upper-bounds-extends">18.5.1 Upper Bounds extends</a></li>
+<li><a href="#1852-multiple-bounds">18.5.2 Multiple Bounds</a></li>
+<li><a href="#1853-wildcards---extends--super">18.5.3 Wildcards: ?, ? extends, ? super</a><ul>
+<li><a href="#18531-unbounded-wildcard-">18.5.3.1 Unbounded Wildcard</a></li>
+<li><a href="#18532-upper-bounded-wildcard--extends">18.5.3.2 Upper-Bounded Wildcard extends</a></li>
+<li><a href="#18533-lower-bounded-wildcard--super">18.5.3.3 Lower-Bounded Wildcard super</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#186-generics-and-inheritance">18.6 Generics and Inheritance</a></li>
+<li><a href="#187-type-inference-diamond-operator">18.7 Type Inference Diamond Operator</a></li>
+<li><a href="#188-raw-types-legacy-compatibility">18.8 Raw Types Legacy Compatibility</a></li>
+<li><a href="#189-generic-arrays-not-allowed">18.9 Generic Arrays Not Allowed</a></li>
+<li><a href="#1810-bounded-type-inference">18.10 Bounded Type Inference</a></li>
+<li><a href="#1811-wildcards-vs-type-parameters">18.11 Wildcards vs Type Parameters</a></li>
+<li><a href="#1812-pecs-rule-producer-extends-consumer-super">18.12 PECS Rule Producer Extends Consumer Super</a></li>
+<li><a href="#1813-common-pitfalls">18.13 Common Pitfalls</a></li>
+<li><a href="#1814-summary-table-of-wildcards">18.14 Summary Table of Wildcards</a></li>
+<li><a href="#1815-summary-of-concepts">18.15 Summary of Concepts</a></li>
+<li><a href="#1816-complete-example">18.16 Complete Example</a></li>
+</ul>
+<hr />
+<p>Java <code>Generics</code> allow you to create classes, interfaces, and methods that work with user-specified types, ensuring that only objects of the correct type are used.</p>
+<p>All type checks are performed by the compiler at compile time.</p>
+<p>During compilation, the compiler verifies type correctness and then removes the generic type information, replacing it with concrete types (a process known as <strong>type erasure</strong>) or with Object when necessary.</p>
+<p>The resulting bytecode does not contain generics: it only contains concrete types and, when needed, casts automatically inserted by the compiler.</p>
+<p>In this way, type errors are caught before execution, making the code safer, more readable, and more reusable.</p>
+<p>Generics apply to:<br />
+- <code>Classes</code>
+- <code>Interfaces</code>
+- <code>Methods</code> (generic methods)
+- <code>Constructors</code>  </p>
+<p><a id="181-generic-type-basics"></a></p>
+<h2 id="181-generic-type-basics">18.1 Generic Type Basics</h2>
+<p>A generic class or interface introduces one or more <strong>type parameters</strong>, enclosed in angle brackets.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Box</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="nf">get</span><span class="p">()</span><span class="w">       </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">Box</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Box</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">b</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">);</span>
+<span class="n">String</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="na">get</span><span class="p">();</span><span class="w"> </span><span class="c1">// no cast needed</span>
+</code></pre></div>
+<p>Multiple type parameters are allowed:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Pair</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">K</span><span class="w"> </span><span class="n">key</span><span class="p">;</span>
+<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<p><a id="182-why-generics-exist"></a></p>
+<h2 id="182-why-generics-exist">18.2 Why Generics Exist</h2>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="p">();</span><span class="w">          </span><span class="c1">// pre-generics</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;hi&quot;</span><span class="p">);</span>
+<span class="n">Integer</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">    </span><span class="c1">// ClassCastException at runtime</span>
+</code></pre></div>
+<p>With generics:</p>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;hi&quot;</span><span class="p">);</span>
+<span class="n">String</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">               </span><span class="c1">// type-safe, no cast</span>
+</code></pre></div>
+<hr />
+<p><a id="183-generic-methods"></a></p>
+<h2 id="183-generic-methods">18.3 Generic Methods</h2>
+<p>A <strong>generic method</strong> introduces its own type parameter(s), independent of the class.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Util</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">pick</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Util</span><span class="p">.</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="n">pick</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// explicit</span>
+<span class="n">String</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Util</span><span class="p">.</span><span class="na">pick</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="p">);</span><span class="w">         </span><span class="c1">// inference works</span>
+</code></pre></div>
+<hr />
+<p><a id="184-type-erasure"></a></p>
+<h2 id="184-type-erasure">18.4 Type Erasure</h2>
+<p><code>Type erasure</code> is the process by which the Java compiler removes all generic type information before generating bytecode. </p>
+<p>This ensures backward compatibility with pre-Java-5 JVMs.</p>
+<p>At compile time, generics are fully checked: type bounds, variance, method overloading with generics, etc. However, at runtime, all generic information disappears.</p>
+<p><a id="1841-how-type-erasure-works"></a></p>
+<h3 id="1841-how-type-erasure-works">18.4.1 How Type Erasure Works</h3>
+<ul>
+<li>Replace all type variables (like <code>T</code>) with their erasure.</li>
+<li>Insert casts where needed.</li>
+<li>Remove all generic type arguments (e.g., <code>List&lt;String&gt;</code> → <code>List</code>).</li>
+</ul>
+<p><a id="1842-erasure-of-unbounded-type-parameters"></a></p>
+<h3 id="1842-erasure-of-unbounded-type-parameters">18.4.2 Erasure of Unbounded Type Parameters</h3>
+<p>If a type variable has no bound:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Box</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="nf">get</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The erasure of <code>T</code> is <code>Object</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Box</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Object</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Object</span><span class="w"> </span><span class="nf">get</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="1843-erasure-of-bounded-type-parameters"></a></p>
+<h3 id="1843-erasure-of-bounded-type-parameters">18.4.3 Erasure of Bounded Type Parameters</h3>
+<p>If the type parameter has bounds:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">TaskRunner</span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Runnable</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">task</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">task</span><span class="p">.</span><span class="na">run</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Then the erasure of <code>T</code> is the first bound: <code>Runnable</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">TaskRunner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">Runnable</span><span class="w"> </span><span class="n">task</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">task</span><span class="p">.</span><span class="na">run</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="1844-multiple-bounds-the-first-bound-determines-erasure"></a></p>
+<h3 id="1844-multiple-bounds-the-first-bound-determines-erasure">18.4.4 Multiple Bounds: The First Bound Determines Erasure</h3>
+<p>Java allows multiple bounds:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Serializable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Cloneable</span><span class="o">&gt;</span>
+</code></pre></div>
+<p>The critical rule:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The erasure of <code>T</code> is always the <strong>first bound</strong>, which must be a class or interface.</p>
+</div>
+<p>Because <code>Runnable</code> is the first bound, the compiler erases <code>T</code> to <code>Runnable</code>.</p>
+<p>-Example with Multiple Bounds (Fully Expanded)</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Serializable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Cloneable</span><span class="o">&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">runAll</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">t</span><span class="p">.</span><span class="na">run</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Erased Version</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">runAll</span><span class="p">(</span><span class="n">List</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Runnable</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Runnable</span><span class="p">)</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span><span class="w">   </span><span class="c1">// cast set by the compiler</span>
+<span class="w">        </span><span class="n">t</span><span class="p">.</span><span class="na">run</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>What happens to the other bounds (Serializable, Cloneable)?</p>
+<ul>
+<li>They are enforced only at compile time.</li>
+<li>They do NOT appear in bytecode.</li>
+<li>No additional interfaces are attached to the erased type.</li>
+</ul>
+<p><a id="1845-why-only-the-first-bound-becomes-the-runtime-type"></a></p>
+<h3 id="1845-why-only-the-first-bound-becomes-the-runtime-type">18.4.5 Why Only the First Bound Becomes the Runtime Type?</h3>
+<p>Because the JVM must operate using a single, concrete reference type for each variable or parameter.</p>
+<p>Runtime bytecode instructions like <code>invokevirtual</code> require a single class or interface, not a composite type such as “Runnable &amp; Serializable &amp; Cloneable”.</p>
+<p>Thus:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Java selects the <strong>first bound</strong> as the runtime type, and uses the remaining bounds for <strong>compile-time validation only</strong>.</p>
+</div>
+<p><a id="1846-a-more-complex-example"></a></p>
+<h3 id="1846-a-more-complex-example">18.4.6 A More Complex Example</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">a</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">interface</span> <span class="nc">B</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">b</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">C</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">a</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">b</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Demo</span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">B</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">value</span><span class="p">.</span><span class="na">a</span><span class="p">();</span>
+<span class="w">        </span><span class="n">value</span><span class="p">.</span><span class="na">b</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Erased Version</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Demo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">value</span><span class="p">.</span><span class="na">a</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// value.b();   // ❌ not available after erasure: type is A, not B</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The compiler may insert additional casts or bridge methods in more complex inheritance scenarios, but erasure always uses only the first bound (A in this case).</p>
+</div>
+<p><a id="1847-overriding-and-generics"></a></p>
+<h3 id="1847-overriding-and-generics">18.4.7 Overriding and Generics</h3>
+<p>When generics interact with inheritance, two fundamental rules must be clearly understood:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Override is checked after type erasure.</strong><br />
+<strong>Type compatibility is checked before type erasure.</strong></p>
+</div>
+<p>These two steps explain why some methods override correctly while others produce compile-time errors.</p>
+<p><a id="18471-how-the-compiler-validates-an-override"></a></p>
+<h4 id="18471-how-the-compiler-validates-an-override">18.4.7.1 How the Compiler Validates an Override</h4>
+<p>When a subclass declares a method that <em>might</em> override a superclass method, the compiler performs two checks:</p>
+<ol>
+<li><strong>Before erasure</strong><br />
+   The method must be type-compatible with the parent method.</li>
+<li>Same method name</li>
+<li>Same parameter types (including generic arguments)</li>
+<li>
+<p>Compatible return type (covariant allowed)</p>
+</li>
+<li>
+<p><strong>After erasure</strong><br />
+   The erased signatures must match exactly.</p>
+</li>
+</ol>
+<p>Both conditions must be satisfied.</p>
+<p><a id="18472-generic-parameters-and-overriding"></a></p>
+<h4 id="18472-generic-parameters-and-overriding">18.4.7.2 Generic Parameters and Overriding</h4>
+<p>Generic type arguments are part of the method signature <em>at compile time</em>, but disappear after erasure.</p>
+<p>Because of this:</p>
+<ul>
+<li>You are allowed to <strong>erase generic information in the overriding method</strong></li>
+<li>You are NOT allowed to <strong>introduce new generic specificity</strong></li>
+<li>If both methods declare parameterized types, they must match exactly</li>
+</ul>
+<p><a id="18473-valid-override-erasing-generic-specificity"></a></p>
+<h4 id="18473-valid-override-erasing-generic-specificity">18.4.7.3 Valid Override - Erasing Generic Specificity</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Parent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Child</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Parent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">Set</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">   </span><span class="c1">// ✔ allowed (raw type)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Explanation:</p>
+<ul>
+<li>Before erasure: <code>Set</code> is assignment-compatible with <code>Set&lt;Integer&gt;</code></li>
+<li>After erasure: both become <code>Set</code></li>
+</ul>
+<p>✔ Valid override.</p>
+<p><a id="18474-invalid-override-adding-generic-specificity"></a></p>
+<h4 id="18474-invalid-override-adding-generic-specificity">18.4.7.4 Invalid Override - Adding Generic Specificity</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Parent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">Set</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Child</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Parent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">   </span><span class="c1">// ❌ compile error</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Explanation:</p>
+<ul>
+<li>Before erasure: <code>Set&lt;Integer&gt;</code> is NOT assignment-compatible with <code>Set</code></li>
+<li>The compiler rejects it before even considering erasure</li>
+</ul>
+<p><a id="18475-valid-override-matching-parameterization"></a></p>
+<h4 id="18475-valid-override-matching-parameterization">18.4.7.5 Valid Override - Matching Parameterization</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Parent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Child</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Parent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">   </span><span class="c1">// ✔ exact match</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Both checks pass:
+- Compatible before erasure
+- Identical after erasure</p>
+<p><a id="18476-invalid-override-changing-generic-argument"></a></p>
+<h4 id="18476-invalid-override-changing-generic-argument">18.4.7.6 Invalid Override - Changing Generic Argument</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Parent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Child</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Parent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">   </span><span class="c1">// ❌ compile error</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Explanation:</p>
+<ul>
+<li>Before erasure: <code>Set&lt;String&gt;</code> is not compatible with <code>Set&lt;Integer&gt;</code></li>
+<li>After erasure: both would become <code>Set</code></li>
+<li>Collision + incompatibility → compile error</li>
+</ul>
+<p><a id="18477-why-this-rule-exists"></a></p>
+<h4 id="18477-why-this-rule-exists">18.4.7.7 Why This Rule Exists</h4>
+<p>Java must guarantee:</p>
+<ul>
+<li><strong>Compile-time type safety</strong></li>
+<li><strong>Runtime polymorphism after erasure</strong></li>
+</ul>
+<p>Since generics disappear at runtime, the JVM sees only erased signatures.
+The compiler must therefore ensure compatibility before erasure, and consistency after erasure.</p>
+<p><a id="18478-mental-model"></a></p>
+<h4 id="18478-mental-model">18.4.7.8 Mental Model</h4>
+<p>Think of overriding with generics as a two-phase check:</p>
+<div class="highlight"><pre><span></span><code>Phase 1 → Are the source-level types compatible?
+Phase 2 → Do the erased signatures match?
+</code></pre></div>
+<p>If either phase fails → compilation error.</p>
+<p><a id="18479-summary-rules"></a></p>
+<h4 id="18479-summary-rules">18.4.7.9 Summary Rules</h4>
+<ul>
+<li>Override is validated <strong>after erasure</strong></li>
+<li>Compatibility is validated <strong>before erasure</strong></li>
+<li>You may erase generic information in the subclass</li>
+<li>You may NOT introduce new generic specificity</li>
+<li>If both methods are parameterized, arguments must match exactly</li>
+<li>After erasure, signatures must be identical</li>
+</ul>
+<p>This explains why some methods that <em>look</em> like overloads are rejected:
+after erasure they collide, and if they are not valid overrides, the compiler blocks them.</p>
+<p><a id="1848-overloading-a-generic-method--why-some-overloads-are-impossible"></a></p>
+<h3 id="1848-overloading-a-generic-method-why-some-overloads-are-impossible">18.4.8 Overloading a Generic Method — Why Some Overloads Are Impossible</h3>
+<p>When Java compiles generic code, it applies type erasure:
+type parameters such as T are removed, and the compiler substitutes them with their erased type (usually Object or the first bound).</p>
+<p>Because of this, two methods that look different at the source level may become identical after erasure.</p>
+<p>If the erased signatures are the same, Java cannot distinguish between them, therefore the code does not compile.</p>
+<ul>
+<li>Example: Two Methods That Collapse to the Same Signature</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Demo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testInput</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputParam</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="c1">// public void testInput(List&lt;String&gt; inputParam) {}   // ❌ Compile error: after erasure, both become testInput(List)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Explanation</p>
+<div class="highlight"><pre><span></span><code>List&lt;Object&gt;<span class="w"> </span>and<span class="w"> </span>List&lt;String&gt;<span class="w"> </span>are<span class="w"> </span>both<span class="w"> </span>erased<span class="w"> </span>to<span class="w"> </span>List.
+</code></pre></div>
+<p>At runtime both methods would appear as:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">testInput</span><span class="p">(</span><span class="n">List</span><span class="w"> </span><span class="n">inputParam</span><span class="p">)</span>
+</code></pre></div>
+<p>Java does not allow two methods with identical signatures in the same class, so the overload is rejected at compile time.</p>
+<p><a id="1849-overloading-a-generic-method-inherited-from-a-parent-class"></a></p>
+<h3 id="1849-overloading-a-generic-method-inherited-from-a-parent-class">18.4.9 Overloading a Generic Method Inherited from a Parent Class</h3>
+<p>The same rule applies when a subclass tries to introduce a method that erases to the same signature as one in its superclass.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SubDemo</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Demo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testInput</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputParam</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// ❌ Compile error: erases to testInput(List), same as parent</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Again, the compiler rejects the overload because the erased signatures collide.</p>
+<p><ins><strong>When Overloading Does Work</strong></ins></p>
+<p><strong>Erasure only removes type parameters, not the actual class used in the method parameter</strong>.</p>
+<p>Therefore, if two method parameters differ in their raw (non-generic) type, the overload is legal, even if one is a generic parameterized type.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Demo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testInput</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputParam</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testInput</span><span class="p">(</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputParam</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">  </span><span class="c1">// ✔ Compiles</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Why this works</strong></p>
+<p>Even though <code>ArrayList&lt;String&gt;</code> erases to <code>ArrayList</code>, and <code>List&lt;Object&gt;</code> erases to <code>List</code>, these are different classes (ArrayList vs. List), so the signatures remain distinct:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">testInput</span><span class="p">(</span><span class="n">List</span><span class="w"> </span><span class="n">inputParam</span><span class="p">)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">testInput</span><span class="p">(</span><span class="n">ArrayList</span><span class="w"> </span><span class="n">inputParam</span><span class="p">)</span>
+</code></pre></div>
+<p>No collision → legal overloading.</p>
+<p><a id="18410-returning-generic-types--rules-and-restrictions"></a></p>
+<h3 id="18410-returning-generic-types-rules-and-restrictions">18.4.10 Returning Generic Types — Rules and Restrictions</h3>
+<p>When returning a value from a method, Java follows a strict rule:</p>
+<p>The return type of an overriding method must be a subtype of the parent's return type, and any generic arguments must remain type-compatible (even though they are erased at runtime).</p>
+<p>This often confuses developers, because generics on return types cause similar erasure-based conflicts as parameter types.</p>
+<p>Key Points:
+- Return type covariance applies only to the raw type, not the generic arguments.
+- Generic arguments must remain compatible after erasure (they must match).
+- Two methods cannot differ only by generic parameter on the return type.</p>
+<ul>
+<li>Example: Illegal Return Type Change Due to Generic Mismatch</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">B</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// List&lt;Integer&gt; is not a covariant return type of List&lt;String&gt;</span>
+<span class="w">    </span><span class="c1">// ❌ Compile error</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Explanation:</p>
+<p>Even though generics are erased, Java still enforces source-level type safety:</p>
+<p><code>List&lt;Integer&gt;</code> is not a subtype of <code>List&lt;String&gt;</code>.</p>
+<p>Both erase to <code>List</code>, but Java rejects overriding that breaks type compatibility.</p>
+<ul>
+<li>Example: Legal Covariant Return Type</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">B</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// ✔ List is a subtype of Collection</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This is allowed because:
+- The raw types are covariant (List extends Collection).
+- The generic arguments match (String vs. String).</p>
+<ul>
+<li>Example: Illegal Overload on Return Type Alone</li>
+</ul>
+<p>Two methods differing only by the generic argument in the return type cannot coexist:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Demo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// List&lt;Integer&gt; getList() { return null; }  </span>
+<span class="w">    </span><span class="c1">// ❌ Compile error: return type alone does not distinguish methods</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Java does not use the return type when distinguishing overloaded methods</strong>.</p>
+<p><a id="18411-summary-of-erasure-rules"></a></p>
+<h3 id="18411-summary-of-erasure-rules">18.4.11 Summary of Erasure Rules</h3>
+<ul>
+<li><code>Unbounded T</code> → erased to Object.</li>
+<li><code>T extends X</code> → erased to X.</li>
+<li><code>T extends X &amp; Y &amp; Z</code> → erased to X.</li>
+<li>All generic parameters are erased in method signatures.</li>
+<li>Casts are inserted to preserve compile-time typing.</li>
+<li>Bridge methods may be generated to preserve polymorphism.</li>
+</ul>
+<hr />
+<p><a id="185-bounds-on-type-parameters"></a></p>
+<h2 id="185-bounds-on-type-parameters">18.5 Bounds on Type Parameters</h2>
+<p><a id="1851-upper-bounds-extends"></a></p>
+<h3 id="1851-upper-bounds-extends">18.5.1 Upper Bounds: extends</h3>
+<p><code>&lt;T extends Number&gt;</code> means <strong>T must be Number or a subclass</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Stats</span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Stats</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="1852-multiple-bounds"></a></p>
+<h3 id="1852-multiple-bounds">18.5.2 Multiple Bounds</h3>
+<p>Syntax: <code>T extends Class &amp; Interface1 &amp; Interface2 ...</code>  </p>
+<p>The class must come first.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">C</span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Comparable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><a id="1853-wildcards---extends--super"></a></p>
+<h3 id="1853-wildcards-extends-super">18.5.3 Wildcards: <code>?</code>, <code>? extends</code>, <code>? super</code></h3>
+<p><a id="18531-unbounded-wildcard-"></a></p>
+<h4 id="18531-unbounded-wildcard">18.5.3.1 Unbounded Wildcard <code>?</code></h4>
+<p>Use when you want to accept a list of unknown type:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">printAll</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><a id="18532-upper-bounded-wildcard--extends"></a></p>
+<h4 id="18532-upper-bounded-wildcard-extends">18.5.3.2 Upper-Bounded Wildcard <code>? extends</code></h4>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="n">Number</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">   </span><span class="c1">// OK</span>
+<span class="c1">// nums.add(5);           // ❌ cannot add: type safety</span>
+</code></pre></div>
+<blockquote>
+<p><strong>You cannot add elements (except null) to ? extends</strong> because you don’t know the exact subtype.</p>
+</blockquote>
+<p><a id="18533-lower-bounded-wildcard--super"></a></p>
+<h4 id="18533-lower-bounded-wildcard-super">18.5.3.3 Lower-Bounded Wildcard <code>? super</code></h4>
+<p><code>&lt;? super Integer&gt;</code> means <strong>the type must be Integer or a superclass of Integer</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w">    </span><span class="c1">// OK</span>
+<span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// returns Object (lowest common supertype)</span>
+</code></pre></div>
+<blockquote>
+<p><strong>IMPORTANT</strong></p>
+<ul>
+<li>
+<p><code>Super</code> accepts <strong>insertion</strong></p>
+</li>
+<li>
+<p><code>extends</code> accepts <strong>extraction</strong>.</p>
+</li>
+</ul>
+</blockquote>
+<hr />
+<p><a id="186-generics-and-inheritance"></a></p>
+<h2 id="186-generics-and-inheritance">18.6 Generics and Inheritance</h2>
+<blockquote>
+<p><strong>Generics do NOT participate in inheritance</strong>. </p>
+<p>A <code>List&lt;String&gt;</code> is not a subtype of <code>List&lt;Object&gt;</code>; parameterized types are invariant.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ls</span><span class="p">;</span><span class="w">      </span><span class="c1">// ❌ compile error</span>
+</code></pre></div>
+<p>Instead:</p>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ls</span><span class="p">;</span><span class="w">   </span><span class="c1">// works</span>
+</code></pre></div>
+<hr />
+<p><a id="187-type-inference-diamond-operator"></a></p>
+<h2 id="187-type-inference-diamond-operator">18.7 Type Inference (Diamond Operator)</h2>
+<div class="highlight"><pre><span></span><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</code></pre></div>
+<p>The compiler infers generic arguments from the assignment.</p>
+<hr />
+<p><a id="188-raw-types-legacy-compatibility"></a></p>
+<h2 id="188-raw-types-legacy-compatibility">18.8 Raw Types (Legacy Compatibility)</h2>
+<p>A <strong>raw type</strong> disables generics, re-introducing unsafe behavior.</p>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="w"> </span><span class="n">raw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="p">();</span>
+<span class="n">raw</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;x&quot;</span><span class="p">);</span>
+<span class="n">raw</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w">   </span><span class="c1">// allowed, but unsafe</span>
+</code></pre></div>
+<blockquote>
+<p>Raw types should be avoided.</p>
+</blockquote>
+<hr />
+<p><a id="189-generic-arrays-not-allowed"></a></p>
+<h2 id="189-generic-arrays-not-allowed">18.9 Generic Arrays (Not Allowed)</h2>
+<p>You cannot create arrays of parameterized types:</p>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;[]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;[</span><span class="mi">10</span><span class="o">]</span><span class="p">;</span><span class="w">   </span><span class="c1">// ❌ compile error</span>
+</code></pre></div>
+<p>Because arrays enforce runtime type safety while generics rely on compile-time checks only.</p>
+<hr />
+<p><a id="1810-bounded-type-inference"></a></p>
+<h2 id="1810-bounded-type-inference">18.10 Bounded Type Inference</h2>
+<div class="highlight"><pre><span></span><code><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">identity</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">identity</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w">   </span><span class="c1">// OK</span>
+<span class="c1">// String s = identity(&quot;x&quot;); // ❌ not a Number</span>
+</code></pre></div>
+<hr />
+<p><a id="1811-wildcards-vs-type-parameters"></a></p>
+<h2 id="1811-wildcards-vs-type-parameters">18.11 Wildcards vs. Type Parameters</h2>
+<p>Use <strong>wildcards</strong> when you need flexibility in parameters.<br />
+Use <strong>type parameters</strong> when the method must return or maintain type information.</p>
+<p>Example — wildcard too weak:</p>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="nf">copy</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">list</span><span class="p">;</span><span class="w">  </span><span class="c1">// loses type information</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Better:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">copy</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">list</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<p><a id="1812-pecs-rule-producer-extends-consumer-super"></a></p>
+<h2 id="1812-pecs-rule-producer-extends-consumer-super">18.12 PECS Rule (Producer Extends, Consumer Super)</h2>
+<p>Use <strong>? extends</strong> when the parameter <strong>produces</strong> values.<br />
+Use <strong>? super</strong> when the parameter <strong>consumes</strong> values.</p>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="n">listExtends</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">listSuper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="c1">// ? extends → safe read</span>
+<span class="n">Number</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listExtends</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// ? super → safe write</span>
+<span class="n">listSuper</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</code></pre></div>
+<hr />
+<p><a id="1813-common-pitfalls"></a></p>
+<h2 id="1813-common-pitfalls">18.13 Common Pitfalls</h2>
+<ul>
+<li>Sorting lists with wildcards: <code>List&lt;? extends Number&gt;</code> cannot accept insertions.</li>
+<li>Misunderstanding that <code>List&lt;Object&gt;</code> is NOT a supertype of <code>List&lt;String&gt;</code>.</li>
+<li>Forgetting generic arrays are illegal.</li>
+<li>Thinking generic types are preserved at runtime (they are erased).</li>
+<li>Trying to overload methods using only different type parameters.</li>
+</ul>
+<hr />
+<p><a id="1814-summary-table-of-wildcards"></a></p>
+<h2 id="1814-summary-table-of-wildcards">18.14 Summary Table of Wildcards</h2>
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>?</code></td>
+<td>unknown type (read-only except Object methods)</td>
+</tr>
+<tr>
+<td><code>? extends T</code></td>
+<td>read T safely, cannot add (except null)</td>
+</tr>
+<tr>
+<td><code>? super T</code></td>
+<td>can add T, retrieving gives Object</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a id="1815-summary-of-concepts"></a></p>
+<h2 id="1815-summary-of-concepts">18.15 Summary of Concepts</h2>
+<div class="highlight"><pre><span></span><code>Generics = compile-time type safety
+Bounds = restrict legal types
+Wildcards = flexibility in parameters
+Type Inference = compiler deduces types
+Type Erasure = generics disappear at runtime
+Bridge Methods = maintain polymorphism
+</code></pre></div>
+<hr />
+<p><a id="1816-complete-example"></a></p>
+<h2 id="1816-complete-example">18.16 Complete Example</h2>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Repository</span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">store</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">value</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="nf">first</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// generic method with wildcard</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Number</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="na">doubleValue</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">total</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.ars-digitale.com/" target="_blank" rel="noopener" title="Ars Digitale" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

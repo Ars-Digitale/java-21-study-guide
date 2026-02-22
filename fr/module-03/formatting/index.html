@@ -1,0 +1,7340 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ars-digitale.github.io/java-21-study-guide/fr/module-03/formatting/">
+      
+      
+        <link rel="prev" href="../date-time/">
+      
+      
+        <link rel="next" href="../../module-04/methods-attributes/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Formatage et localisation - Java 21 Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#13-mise-en-forme-et-localisation-en-java" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Java 21 Study Guide" class="md-header__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Java 21 Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Formatage et localisation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Java 21 Study Guide" class="md-nav__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Java 21 Study Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisite material
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Java Language Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Java Language Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syntax building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic language building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java naming rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java data types and casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantiating types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Control Flow
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Control Flow
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control flow statements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — Core Standard APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — Core Standard APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strings in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dates and time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatting and localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methods, attributes, and variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading, initialization, and object construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inheritance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beyond classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions and error handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Functional Programming
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Functional Programming
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functional programming in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to the collections framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared collection operations and equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting and comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    List APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue and deque APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrency and Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrency and Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thread fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concurrency APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — Java I/O and NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — Java I/O and NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java I/O streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O streams APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interacting with the user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JPMS fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiling, packaging, and running modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Italiano
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Italiano
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materiale propedeutico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi di sintassi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elementi base del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regole di naming Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tipi di dati e casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operatori Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istanziare i tipi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istruzioni di controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cicli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stringhe in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilità Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data e ora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formattazione e localizzazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metodi, attributi e variabili
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading e costruzione oggetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ereditarietà
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oltre le classi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eccezioni e gestione errori
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmazione funzionale in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operazioni condivise ed equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting e comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti thread
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API di concorrenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 08 — I/O e NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 08 — I/O e NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (fondamenti)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interazione con l’utente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilare e avviare moduli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Français
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Français
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matériel de support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Bases du Langage Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Bases du Langage Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocs de syntaxe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Éléments de base du langage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Règles de nommage Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types de données et casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérateurs Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instanciation des types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Contrôle de flux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Contrôle de flux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions de contrôle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boucles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chaînes (String) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tableaux (Arrays) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilitaires Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date et heure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatage et localisation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatage et localisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-des-matieres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table des matières
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#131-mise-en-forme-des-chaines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Mise en forme des chaînes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.1 Mise en forme des chaînes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1311-stringformat-et-formatted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1 String.format et formatted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13111-indicateurs-pour-nombres-a-virgule-flottante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.1 Indicateurs pour nombres à virgule flottante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13112-precision-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.2 Précision (.n)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13113-largeur-m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.3 Largeur (m)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13114-indicateur-de-remplissage-par-zero-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.4 Indicateur de remplissage par zéro 0
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13115-justification-a-gauche-indicateur-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.5 Justification à gauche Indicateur -
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13116-signe-explicite-indicateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.6 Signe explicite Indicateur +
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13117-parentheses-pour-les-negatifs-indicateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.7 Parenthèses pour les négatifs Indicateur (
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13118-combinaison-des-indicateurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.8 Combinaison des indicateurs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13119-effets-du-locale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.9 Effets du Locale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#131110-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.10 Erreurs courantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1312-valeurs-de-texte-personnalisees-et-echappement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.2 Valeurs de texte personnalisées et échappement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132-mise-en-forme-des-nombres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Mise en forme des nombres
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.2 Mise en forme des nombres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1321-numberformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.1 NumberFormat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1322-localisation-des-nombres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.2 Localisation des nombres
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1323-decimalformat-et-numberformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.3 DecimalFormat et NumberFormat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1324-structure-du-pattern-decimalformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.4 Structure du pattern DecimalFormat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1325-le-symbole-0-chiffre-obligatoire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.5 Le symbole 0 (chiffre obligatoire)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1326-le-symbole-chiffre-optionnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.6 Le symbole # (chiffre optionnel)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1327-combiner-0-et" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.7 Combiner 0 et #
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1328-separateurs-decimaux-et-de-groupement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.8 Séparateurs décimaux et de groupement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1329-decimalformatsymbols-symboles-de-format-specifiques-au-locale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.9 DecimalFormatSymbols : symboles de format spécifiques au Locale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13210-patterns-speciaux-de-decimalformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.10 Patterns spéciaux de DecimalFormat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13211-regles-et-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.11 Règles et erreurs courantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#133-analyse-parsing-des-nombres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Analyse (parsing) des nombres
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.3 Analyse (parsing) des nombres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1331-parsing-avec-decimalformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.1 Parsing avec DecimalFormat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1332-compactnumberformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.2 CompactNumberFormat
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#134-mise-en-forme-des-dates-et-heures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 Mise en forme des dates et heures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.4 Mise en forme des dates et heures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1341-datetimeformatter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.1 DateTimeFormatter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1342-symboles-standard-de-date-et-dheure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.2 Symboles standard de date et d’heure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1343-datetimeformat-vs-formatterformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.3 datetime.format vs formatter.format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1344-localisation-des-dates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.4 Localisation des dates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#135-internationalisation-i18n-et-localisation-l10n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5 Internationalisation (i18n) et localisation (l10n)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.5 Internationalisation (i18n) et localisation (l10n)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1351-locales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.1 Locales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1352-categories-de-locale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.2 Catégories de Locale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1353-exemple-reel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.3 Exemple réel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#136-properties-et-resource-bundles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.6 Properties et Resource Bundles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.6 Properties et Resource Bundles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1361-regles-de-resolution-des-resource-bundles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.6.1 Règles de résolution des Resource Bundles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#137-regles-et-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.7 Règles et erreurs courantes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Fondamentaux OO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Fondamentaux OO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Méthodes, attributs et variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chargement de classes et construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Héritage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Au-delà des classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions et gestion des erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmation fonctionnelle en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Streams Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Framework des Collections
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Framework des Collections
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction au framework des collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérations partagées et égalité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tri et comparaison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrence et Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrence et Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux des threads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de concurrence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — I/O et NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — I/O et NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (fondamentaux)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interaction avec l’utilisateur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiler et exécuter des modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services en JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ars-digitale.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ars Digitale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-des-matieres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table des matières
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#131-mise-en-forme-des-chaines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Mise en forme des chaînes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.1 Mise en forme des chaînes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1311-stringformat-et-formatted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1 String.format et formatted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13111-indicateurs-pour-nombres-a-virgule-flottante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.1 Indicateurs pour nombres à virgule flottante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13112-precision-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.2 Précision (.n)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13113-largeur-m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.3 Largeur (m)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13114-indicateur-de-remplissage-par-zero-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.4 Indicateur de remplissage par zéro 0
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13115-justification-a-gauche-indicateur-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.5 Justification à gauche Indicateur -
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13116-signe-explicite-indicateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.6 Signe explicite Indicateur +
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13117-parentheses-pour-les-negatifs-indicateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.7 Parenthèses pour les négatifs Indicateur (
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13118-combinaison-des-indicateurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.8 Combinaison des indicateurs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13119-effets-du-locale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.9 Effets du Locale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#131110-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.1.10 Erreurs courantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1312-valeurs-de-texte-personnalisees-et-echappement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1.2 Valeurs de texte personnalisées et échappement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132-mise-en-forme-des-nombres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Mise en forme des nombres
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.2 Mise en forme des nombres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1321-numberformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.1 NumberFormat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1322-localisation-des-nombres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.2 Localisation des nombres
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1323-decimalformat-et-numberformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.3 DecimalFormat et NumberFormat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1324-structure-du-pattern-decimalformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.4 Structure du pattern DecimalFormat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1325-le-symbole-0-chiffre-obligatoire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.5 Le symbole 0 (chiffre obligatoire)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1326-le-symbole-chiffre-optionnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.6 Le symbole # (chiffre optionnel)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1327-combiner-0-et" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.7 Combiner 0 et #
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1328-separateurs-decimaux-et-de-groupement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.8 Séparateurs décimaux et de groupement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1329-decimalformatsymbols-symboles-de-format-specifiques-au-locale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.9 DecimalFormatSymbols : symboles de format spécifiques au Locale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13210-patterns-speciaux-de-decimalformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.10 Patterns spéciaux de DecimalFormat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13211-regles-et-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2.11 Règles et erreurs courantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#133-analyse-parsing-des-nombres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Analyse (parsing) des nombres
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.3 Analyse (parsing) des nombres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1331-parsing-avec-decimalformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.1 Parsing avec DecimalFormat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1332-compactnumberformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.2 CompactNumberFormat
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#134-mise-en-forme-des-dates-et-heures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 Mise en forme des dates et heures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.4 Mise en forme des dates et heures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1341-datetimeformatter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.1 DateTimeFormatter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1342-symboles-standard-de-date-et-dheure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.2 Symboles standard de date et d’heure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1343-datetimeformat-vs-formatterformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.3 datetime.format vs formatter.format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1344-localisation-des-dates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.4 Localisation des dates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#135-internationalisation-i18n-et-localisation-l10n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5 Internationalisation (i18n) et localisation (l10n)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.5 Internationalisation (i18n) et localisation (l10n)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1351-locales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.1 Locales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1352-categories-de-locale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.2 Catégories de Locale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1353-exemple-reel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.3 Exemple réel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#136-properties-et-resource-bundles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.6 Properties et Resource Bundles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.6 Properties et Resource Bundles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1361-regles-de-resolution-des-resource-bundles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.6.1 Règles de résolution des Resource Bundles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#137-regles-et-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.7 Règles et erreurs courantes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="13-mise-en-forme-et-localisation-en-java">13. Mise en forme et localisation en Java</h1>
+<p><a id="table-des-matières"></a></p>
+<h2 id="table-des-matieres">Table des matières</h2>
+<ul>
+<li><a href="#131-mise-en-forme-des-chaînes">13.1 Mise en forme des chaînes</a><ul>
+<li><a href="#1311-stringformat-et-formatted">13.1.1 String.format et formatted</a><ul>
+<li><a href="#13111-indicateurs-pour-nombres-à-virgule-flottante">13.1.1.1 Indicateurs pour nombres à virgule flottante</a></li>
+<li><a href="#13112-précision-n">13.1.1.2 Précision n</a></li>
+<li><a href="#13113-largeur-m">13.1.1.3 Largeur m</a></li>
+<li><a href="#13114-indicateur-de-remplissage-par-zéro-0">13.1.1.4 Indicateur de remplissage par zéro 0</a></li>
+<li><a href="#13115-justification-à-gauche-indicateur--">13.1.1.5 Justification à gauche Indicateur -</a></li>
+<li><a href="#13116-signe-explicite-indicateur-">13.1.1.6 Signe explicite Indicateur +</a></li>
+<li><a href="#13117-parenthèses-pour-les-négatifs-indicateur-">13.1.1.7 Parenthèses pour les négatifs Indicateur (</a></li>
+<li><a href="#13118-combinaison-des-indicateurs">13.1.1.8 Combinaison des indicateurs</a></li>
+<li><a href="#13119-effets-du-locale">13.1.1.9 Effets du Locale</a></li>
+<li><a href="#131110-erreurs-courantes">13.1.1.10 Erreurs courantes</a></li>
+</ul>
+</li>
+<li><a href="#1312-valeurs-de-texte-personnalisées-et-échappement">13.1.2 Valeurs de texte personnalisées et échappement</a></li>
+</ul>
+</li>
+<li><a href="#132-mise-en-forme-des-nombres">13.2 Mise en forme des nombres</a><ul>
+<li><a href="#1321-numberformat">13.2.1 NumberFormat</a></li>
+<li><a href="#1322-localisation-des-nombres">13.2.2 Localisation des nombres</a></li>
+<li><a href="#1323-decimalformat-et-numberformat">13.2.3 DecimalFormat et NumberFormat</a></li>
+<li><a href="#1324-structure-du-pattern-decimalformat">13.2.4 Structure du pattern DecimalFormat</a></li>
+<li><a href="#1325-le-symbole-0-chiffre-obligatoire">13.2.5 Le symbole 0 (chiffre obligatoire)</a></li>
+<li><a href="#1326-le-symbole--chiffre-optionnel">13.2.6 Le symbole # (chiffre optionnel)</a></li>
+<li><a href="#1327-combiner-0-et-">13.2.7 Combiner 0 et #</a></li>
+<li><a href="#1328-séparateurs-décimaux-et-de-groupement">13.2.8 Séparateurs décimaux et de groupement</a></li>
+<li><a href="#1329-decimalformatsymbols--symboles-de-format-spécifiques-au-locale">13.2.9 DecimalFormatSymbols : symboles de format spécifiques au Locale</a></li>
+<li><a href="#13210-patterns-spéciaux-de-decimalformat">13.2.10 Patterns spéciaux de DecimalFormat</a></li>
+<li><a href="#13211-règles-et-erreurs-courantes">13.2.11 Règles et erreurs courantes</a></li>
+</ul>
+</li>
+<li><a href="#133-analyse-parsing-des-nombres">13.3 Analyse (parsing) des nombres</a><ul>
+<li><a href="#1331-parsing-avec-decimalformat">13.3.1 Parsing avec DecimalFormat</a></li>
+<li><a href="#1332-compactnumberformat">13.3.2 CompactNumberFormat</a></li>
+</ul>
+</li>
+<li><a href="#134-mise-en-forme-des-dates-et-heures">13.4 Mise en forme des dates et heures</a><ul>
+<li><a href="#1341-datetimeformatter">13.4.1 DateTimeFormatter</a></li>
+<li><a href="#1342-symboles-standard-de-date-et-dheure">13.4.2 Symboles standard de date et d’heure</a></li>
+<li><a href="#1343-datetimeformat-vs-formatterformat">13.4.3 datetime.format vs formatter.format</a></li>
+<li><a href="#1344-localisation-des-dates">13.4.4 Localisation des dates</a></li>
+</ul>
+</li>
+<li><a href="#135-internationalisation-i18n-et-localisation-l10n">13.5 Internationalisation (i18n) et localisation (l10n)</a><ul>
+<li><a href="#1351-locales">13.5.1 Locales</a></li>
+<li><a href="#1352-catégories-de-locale">13.5.2 Catégories de Locale</a></li>
+<li><a href="#1353-exemple-réel">13.5.3 Exemple réel</a></li>
+</ul>
+</li>
+<li><a href="#136-properties-et-resource-bundles">13.6 Properties et Resource Bundles</a><ul>
+<li><a href="#1361-règles-de-résolution-des-resource-bundles">13.6.1 Règles de résolution des Resource Bundles</a></li>
+</ul>
+</li>
+<li><a href="#137-règles-et-erreurs-courantes">13.7 Règles et erreurs courantes</a></li>
+</ul>
+<hr />
+<p>Ce chapitre fournit un traitement approfondi et pratique de la mise en forme en Java 21.</p>
+<p><a id="131-mise-en-forme-des-chaînes"></a></p>
+<h2 id="131-mise-en-forme-des-chaines">13.1 Mise en forme des chaînes</h2>
+<p><a id="1311-stringformat-et-formatted"></a></p>
+<h3 id="1311-stringformat-et-formatted">13.1.1 String.format et formatted</h3>
+<p><code>String.format()</code> crée des chaînes formatées en utilisant des substituts de type printf.</p>
+<p>Il est sensible au locale et retourne une nouvelle <code>String</code> immuable.</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;The User: %s | Score: %d&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+
+<span class="c1">// Or</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;The User: %s | Score: %d&quot;</span><span class="p">.</span><span class="na">formatted</span><span class="p">(</span><span class="s">&quot;Bob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">));</span>
+</code></pre></div>
+<p>Sortie :</p>
+<div class="highlight"><pre><span></span><code>The<span class="w"> </span>User:<span class="w"> </span>Bob<span class="w"> </span><span class="p">|</span><span class="w"> </span>Score:<span class="w"> </span><span class="m">42</span>
+</code></pre></div>
+<p><strong>Caractéristiques clés :</strong></p>
+<ul>
+<li>Utilise des spécificateurs de format tels que <code>%s</code> (tout type, généralement des chaînes), <code>%d</code> (valeurs entières), <code>%f</code> (valeurs à virgule flottante).</li>
+<li>Ne modifie pas les chaînes existantes.</li>
+<li>Lance <code>IllegalFormatException</code> si les arguments ne correspondent pas au format.</li>
+<li>Est sensible au locale lorsqu’un <code>Locale</code> est fourni.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">GERMANY</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%.2f&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1234.5</span><span class="p">);</span>
+<span class="c1">// Sortie (locale allemand) : 1234,50</span>
+</code></pre></div>
+<p><a id="13111-indicateurs-pour-nombres-à-virgule-flottante"></a></p>
+<h3 id="13111-indicateurs-pour-nombres-a-virgule-flottante">13.1.1.1 Indicateurs pour nombres à virgule flottante</h3>
+<p><code>%f</code> est utilisé pour formater les nombres à virgule flottante (<code>float</code>, <code>double</code>, <code>BigDecimal</code>) en notation décimale.</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%f&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">12.345</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="m">12</span>.345000
+</code></pre></div>
+<ul>
+<li><strong>Affiche toujours 6 chiffres après le séparateur décimal</strong> par défaut.</li>
+<li>Utilise l’arrondi (et non la troncature).</li>
+<li>Est sensible au locale pour le séparateur décimal.</li>
+</ul>
+<p><a id="13112-précision-n"></a></p>
+<h3 id="13112-precision-n">13.1.1.2 Précision (.n)</h3>
+<p>La précision définit le nombre de chiffres affichés <strong>après</strong> le séparateur décimal.</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%.2f&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">12.345</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="m">12</span>.35
+</code></pre></div>
+<ul>
+<li><code>%.0f</code> n’affiche aucun chiffre décimal.</li>
+<li>L’arrondi est appliqué.</li>
+<li>La précision est appliquée avant le remplissage de la largeur.</li>
+</ul>
+<p><a id="13113-largeur-m"></a></p>
+<h3 id="13113-largeur-m">13.1.1.3 Largeur (m)</h3>
+<p>La largeur définit le nombre total minimal de caractères dans la sortie.</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%8.2f&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">12.34</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="w">   </span><span class="m">12</span>.34
+</code></pre></div>
+<ul>
+<li><strong>Remplit avec des espaces</strong> par défaut.</li>
+<li>Si la valeur est plus longue, la largeur est ignorée (elle ne tronque jamais).</li>
+<li>Le remplissage est appliqué à gauche par défaut.</li>
+</ul>
+<p><a id="13114-indicateur-de-remplissage-par-zéro-0"></a></p>
+<h3 id="13114-indicateur-de-remplissage-par-zero-0">13.1.1.4 Indicateur de remplissage par zéro <code>0</code></h3>
+<p>L’indicateur <code>0</code> remplace le remplissage par des espaces par des zéros.</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%08.2f&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">12.34</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="m">00012</span>.34
+</code></pre></div>
+<ul>
+<li>Nécessite une largeur.</li>
+<li>Les zéros sont insérés après le signe.</li>
+<li>Ignoré si la justification à gauche est présente (indicateur <code>-</code>).</li>
+</ul>
+<p><a id="13115-justification-à-gauche-indicateur--"></a></p>
+<h3 id="13115-justification-a-gauche-indicateur-">13.1.1.5 Justification à gauche Indicateur <code>-</code></h3>
+<p>L’indicateur <code>-</code> aligne la valeur à gauche à l’intérieur de la largeur.</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%-8.2f&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">12.34</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="m">12</span>.34<span class="w">   </span>
+</code></pre></div>
+<ul>
+<li>Le remplissage est déplacé vers la droite.</li>
+<li>Écrase le remplissage par zéro.</li>
+</ul>
+<p><a id="13116-signe-explicite-indicateur-"></a></p>
+<h3 id="13116-signe-explicite-indicateur">13.1.1.6 Signe explicite Indicateur <code>+</code></h3>
+<p>L’indicateur <code>+</code> force l’affichage du signe pour les nombres positifs.</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%+8.2f&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">12.34</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="w">   </span>+12.34
+</code></pre></div>
+<ul>
+<li>Les nombres négatifs affichent déjà <code>-</code>.</li>
+<li>Écrase l’indicateur espace (qui affiche un espace en tête pour les valeurs positives).</li>
+</ul>
+<p><a id="13117-parenthèses-pour-les-négatifs-indicateur-"></a></p>
+<h3 id="13117-parentheses-pour-les-negatifs-indicateur">13.1.1.7 Parenthèses pour les négatifs Indicateur <code>(</code></h3>
+<p>L’indicateur <code>(</code> formate les nombres négatifs en utilisant des parenthèses.</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%(8.2f&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">12.34</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="o">(</span><span class="m">12</span>.34<span class="o">)</span>
+</code></pre></div>
+<ul>
+<li>N’affecte que les valeurs négatives.</li>
+<li>Rarement utilisé en pratique.</li>
+</ul>
+<p><a id="13118-combinaison-des-indicateurs"></a></p>
+<h3 id="13118-combinaison-des-indicateurs">13.1.1.8 Combinaison des indicateurs</h3>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%+010.2f&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">12.34</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>+000012.34
+</code></pre></div>
+<p>Ordre d’évaluation (simplifié) :</p>
+<ul>
+<li>La précision est appliquée.</li>
+<li>Le signe est traité.</li>
+<li>La largeur est appliquée.</li>
+<li>Le remplissage (espaces ou zéros) est appliqué.</li>
+</ul>
+<p><a id="13119-effets-du-locale"></a></p>
+<h3 id="13119-effets-du-locale">13.1.1.9 Effets du Locale</h3>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">FRANCE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%,.2f&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">12345.67</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="m">12</span><span class="w"> </span><span class="m">345</span>,67
+</code></pre></div>
+<p>Les séparateurs décimaux et de groupement dépendent du <code>Locale</code> actif.</p>
+<p><a id="131110-erreurs-courantes"></a></p>
+<h3 id="131110-erreurs-courantes">13.1.1.10 Erreurs courantes</h3>
+<ul>
+<li><code>%f</code> utilise 6 décimales par défaut si aucune précision n’est spécifiée.</li>
+<li>La largeur ne tronque jamais la sortie ; elle ne fait qu’ajouter du remplissage si nécessaire.</li>
+<li>L’indicateur <code>0</code> est ignoré lorsque <code>-</code> est présent.</li>
+<li><code>+</code> écrase l’indicateur espace.</li>
+<li>Le groupement et les séparateurs dépendent du Locale.</li>
+</ul>
+<p><a id="1312-valeurs-de-texte-personnalisées-et-échappement"></a></p>
+<h3 id="1312-valeurs-de-texte-personnalisees-et-echappement">13.1.2 Valeurs de texte personnalisées et échappement</h3>
+<p>Certains caractères ont une signification particulière dans les chaînes de format et doivent être échappés.</p>
+<ul>
+<li><code>%%</code> → signe pourcentage littéral.</li>
+<li><code>\n</code>, <code>\t</code> → échappements Java standards.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;Completion: %d%%%nStatus: OK&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+</code></pre></div>
+<p>Sortie :</p>
+<div class="highlight"><pre><span></span><code>Completion:<span class="w"> </span><span class="m">100</span>%
+Status:<span class="w"> </span>OK
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Un seul % sans spécificateur valide provoque une IllegalFormatException à l’exécution.</p>
+</div>
+<p><a id="132-mise-en-forme-des-nombres"></a></p>
+<h2 id="132-mise-en-forme-des-nombres">13.2 Mise en forme des nombres</h2>
+<p><a id="1321-numberformat"></a></p>
+<h3 id="1321-numberformat">13.2.1 NumberFormat</h3>
+<p><code>NumberFormat</code> est une classe abstraite utilisée pour formater et analyser les nombres de manière sensible au locale.</p>
+<div class="highlight"><pre><span></span><code><span class="n">NumberFormat</span><span class="w"> </span><span class="n">nf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NumberFormat</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">FRANCE</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">nf</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="mf">1234567.89</span><span class="p">));</span>
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul>
+<li>Les méthodes factory déterminent le style de formatage (général, entier, monnaie, pourcentage, compact, ...).</li>
+<li>Le formatage dépend du <code>Locale</code> fourni.</li>
+<li><code>NumberFormat</code> (et <code>DecimalFormat</code>) ne sont pas thread-safe.</li>
+</ul>
+</div>
+<p><a id="1322-localisation-des-nombres"></a></p>
+<h3 id="1322-localisation-des-nombres">13.2.2 Localisation des nombres</h3>
+<p>La localisation des nombres affecte les séparateurs décimaux, les séparateurs de groupement et les symboles monétaires.</p>
+<div class="highlight"><pre><span></span><code><span class="n">NumberFormat</span><span class="w"> </span><span class="n">nfUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NumberFormat</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">US</span><span class="p">);</span>
+<span class="n">NumberFormat</span><span class="w"> </span><span class="n">nfIT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NumberFormat</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">ITALY</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">nfUS</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="mf">1234.56</span><span class="p">));</span><span class="w"> </span><span class="c1">// 1,234.56</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">nfIT</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="mf">1234.56</span><span class="p">));</span><span class="w"> </span><span class="c1">// 1.234,56</span>
+</code></pre></div>
+<p><a id="1323-decimalformat-et-numberformat"></a></p>
+<h3 id="1323-decimalformat-et-numberformat">13.2.3 DecimalFormat et NumberFormat</h3>
+<p><code>DecimalFormat</code> est une sous-classe concrète de <code>NumberFormat</code> qui offre un contrôle fin de la mise en forme numérique à l’aide de patterns.</p>
+<p><code>NumberFormat</code> définit un formatage sensible au locale via des méthodes factory, tandis que <code>DecimalFormat</code> permet un contrôle explicite basé sur des patterns.</p>
+<div class="highlight"><pre><span></span><code><span class="n">NumberFormat</span><span class="w"> </span><span class="n">nf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NumberFormat</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">US</span><span class="p">);</span>
+<span class="n">DecimalFormat</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">DecimalFormat</span><span class="p">)</span><span class="w"> </span><span class="n">nf</span><span class="p">;</span>
+</code></pre></div>
+<p>Ou directement :</p>
+<div class="highlight"><pre><span></span><code><span class="n">DecimalFormat</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DecimalFormat</span><span class="p">(</span><span class="s">&quot;#,##0.00&quot;</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><code>DecimalFormat</code> est mutable (on peut modifier le pattern, les symboles, etc.).</li>
+<li><code>DecimalFormat</code> n’est pas thread-safe.</li>
+<li>Le formatage est sensible au locale via <code>DecimalFormatSymbols</code>.</li>
+</ul>
+</div>
+<p><a id="1324-structure-du-pattern-decimalformat"></a></p>
+<h3 id="1324-structure-du-pattern-decimalformat">13.2.4 Structure du pattern DecimalFormat</h3>
+<p>Un pattern peut contenir une sous-structure positive et une sous-structure négative optionnelle, séparées par <code>;</code>.</p>
+<div class="highlight"><pre><span></span><code>#,##0.00;(#,##0.00)
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>Première partie → nombres positifs.</li>
+<li>Seconde partie → nombres négatifs.</li>
+<li>Si la partie négative est omise, les nombres négatifs utilisent automatiquement un <code>-</code> en tête.</li>
+</ul>
+</div>
+<p><a id="1325-le-symbole-0-chiffre-obligatoire"></a></p>
+<h3 id="1325-le-symbole-0-chiffre-obligatoire">13.2.5 Le symbole <code>0</code> (chiffre obligatoire)</h3>
+<p>Le symbole <code>0</code> force l’affichage d’un chiffre, en complétant avec des zéros si nécessaire.</p>
+<div class="highlight"><pre><span></span><code><span class="n">DecimalFormat</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DecimalFormat</span><span class="p">(</span><span class="s">&quot;0000.00&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="mf">12.3</span><span class="p">));</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="m">0012</span>.30
+</code></pre></div>
+<ul>
+<li>Contrôle le nombre minimal de chiffres.</li>
+<li>Complète avec des zéros si le nombre contient moins de chiffres.</li>
+<li>Utile pour des sorties à largeur fixe ou alignées.</li>
+</ul>
+<p><a id="1326-le-symbole--chiffre-optionnel"></a></p>
+<h3 id="1326-le-symbole-chiffre-optionnel">13.2.6 Le symbole <code>#</code> (chiffre optionnel)</h3>
+<p>Le symbole <code>#</code> affiche un chiffre uniquement s’il existe.</p>
+<div class="highlight"><pre><span></span><code><span class="n">DecimalFormat</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DecimalFormat</span><span class="p">(</span><span class="s">&quot;####.##&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="mf">12.3</span><span class="p">));</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="m">12</span>.3
+</code></pre></div>
+<ul>
+<li>Supprime les zéros initiaux.</li>
+<li>Supprime les zéros finaux inutiles.</li>
+<li>Adapté à un formatage « convivial ».</li>
+</ul>
+<p><a id="1327-combiner-0-et-"></a></p>
+<h3 id="1327-combiner-0-et">13.2.7 Combiner <code>0</code> et <code>#</code></h3>
+<p>Les patterns combinent souvent les deux symboles pour plus de flexibilité.</p>
+<div class="highlight"><pre><span></span><code><span class="n">DecimalFormat</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DecimalFormat</span><span class="p">(</span><span class="s">&quot;#,##0.##&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="mi">12</span><span class="p">));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="mf">12.5</span><span class="p">));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="mf">12345.678</span><span class="p">));</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="m">12</span>
+<span class="m">12</span>.5
+<span class="m">12</span>,345.68
+</code></pre></div>
+<p>Explication du pattern :</p>
+<div class="highlight"><pre><span></span><code>#,##0 . ##
+ ^  ^    ^
+ |  |    |
+ |  |    └─ chiffres fractionnaires optionnels (#)
+ |  └───── chiffre entier obligatoire (0)
+ └──────── pattern de groupement (,)
+</code></pre></div>
+<ul>
+<li>Au moins un chiffre entier est garanti (le <code>0</code>).</li>
+<li>Les chiffres sont regroupés par milliers à l’aide du séparateur de groupement.</li>
+<li>Les chiffres fractionnaires sont optionnels (jusqu’à deux).</li>
+</ul>
+<p><a id="1328-séparateurs-décimaux-et-de-groupement"></a></p>
+<h3 id="1328-separateurs-decimaux-et-de-groupement">13.2.8 Séparateurs décimaux et de groupement</h3>
+<p>Dans les patterns :</p>
+<ul>
+<li><code>.</code> → séparateur décimal.</li>
+<li><code>,</code> → séparateur de groupement.</li>
+</ul>
+<p>Les symboles effectivement utilisés à l’exécution dépendent du <code>Locale</code> (par exemple, virgule vs point).</p>
+<p><a id="1329-decimalformatsymbols--symboles-de-format-spécifiques-au-locale"></a></p>
+<h3 id="1329-decimalformatsymbols-symboles-de-format-specifiques-au-locale">13.2.9 DecimalFormatSymbols : symboles de format spécifiques au Locale</h3>
+<div class="highlight"><pre><span></span><code><span class="n">DecimalFormatSymbols</span><span class="w"> </span><span class="n">symbols</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">DecimalFormatSymbols</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">FRANCE</span><span class="p">);</span>
+
+<span class="n">DecimalFormat</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">DecimalFormat</span><span class="p">(</span><span class="s">&quot;#,##0.00&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">symbols</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="mf">1234.5</span><span class="p">));</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="m">1</span><span class="w"> </span><span class="m">234</span>,50
+</code></pre></div>
+<ul>
+<li>Contrôle les séparateurs décimaux et de groupement.</li>
+<li>Contrôle le signe moins et le symbole monétaire.</li>
+<li>Contrôle les chaînes NaN et Infinity.</li>
+</ul>
+<p><a id="13210-patterns-spéciaux-de-decimalformat"></a></p>
+<h3 id="13210-patterns-speciaux-de-decimalformat">13.2.10 Patterns spéciaux de DecimalFormat</h3>
+<div class="highlight"><pre><span></span><code>0.###E0   notation scientifique
+###%      pourcentage
+¤#,##0.00 monnaie (¤ est le symbole monétaire)
+</code></pre></div>
+<p><a id="13211-règles-et-erreurs-courantes"></a></p>
+<h3 id="13211-regles-et-erreurs-courantes">13.2.11 Règles et erreurs courantes</h3>
+<ul>
+<li><code>DecimalFormat</code> est une sous-classe de <code>NumberFormat</code>.</li>
+<li><code>0</code> force les chiffres, <code>#</code> non.</li>
+<li>Les patterns contrôlent le formatage, pas le mode d’arrondi (utiliser <code>setRoundingMode()</code>).</li>
+<li>Le groupement fonctionne uniquement si le séparateur (généralement <code>,</code>) est présent dans le pattern.</li>
+<li>Le parsing peut réussir partiellement sans erreur si des caractères finaux suivent un nombre valide.</li>
+<li><code>DecimalFormat</code> est mutable et non thread-safe.</li>
+</ul>
+<p><a id="133-analyse-parsing-des-nombres"></a></p>
+<h2 id="133-analyse-parsing-des-nombres">13.3 Analyse (parsing) des nombres</h2>
+<p>L’analyse convertit un texte localisé en valeurs numériques. Par défaut, l’analyse est permissive.</p>
+<div class="highlight"><pre><span></span><code><span class="n">NumberFormat</span><span class="w"> </span><span class="n">nf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NumberFormat</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">FRANCE</span><span class="p">);</span>
+<span class="n">Number</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nf</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&quot;12 345,67abc&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// analyse 12345.67</span>
+</code></pre></div>
+<ul>
+<li>L’analyse s’arrête au premier caractère invalide.</li>
+<li>Le texte final est ignoré sauf vérification explicite.</li>
+</ul>
+<p><a id="1331-parsing-avec-decimalformat"></a></p>
+<h3 id="1331-parsing-avec-decimalformat">13.3.1 Parsing avec DecimalFormat</h3>
+<p><code>DecimalFormat</code> peut également analyser des nombres. L’analyse est permissive par défaut.</p>
+<div class="highlight"><pre><span></span><code><span class="n">DecimalFormat</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DecimalFormat</span><span class="p">(</span><span class="s">&quot;#,##0.##&quot;</span><span class="p">);</span>
+<span class="n">Number</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&quot;1,234.56abc&quot;</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li>L’analyse s’arrête au premier caractère invalide.</li>
+<li>Le texte final est ignoré s’il est présent.</li>
+</ul>
+<p>Pour imposer une analyse stricte :</p>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">.</span><span class="na">setParseStrict</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div>
+<p><a id="1332-compactnumberformat"></a></p>
+<h3 id="1332-compactnumberformat">13.3.2 CompactNumberFormat</h3>
+<p>La mise en forme compacte abrège les grands nombres pour une meilleure lisibilité humaine.</p>
+<ul>
+<li>Prend en charge les styles SHORT et LONG.</li>
+<li>Utilise des abréviations dépendantes du locale (par exemple K, M, « million »).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">NumberFormat</span><span class="w"> </span><span class="n">cnf</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">NumberFormat</span><span class="p">.</span><span class="na">getCompactNumberInstance</span><span class="p">(</span>
+<span class="w">                </span><span class="n">Locale</span><span class="p">.</span><span class="na">US</span><span class="p">,</span><span class="w"> </span><span class="n">NumberFormat</span><span class="p">.</span><span class="na">Style</span><span class="p">.</span><span class="na">SHORT</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">cnf</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="mi">1_200</span><span class="p">));</span><span class="w">        </span><span class="c1">// 1.2K</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">cnf</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="mi">5_000_000</span><span class="p">));</span><span class="w">    </span><span class="c1">// 5M</span>
+
+<span class="n">NumberFormat</span><span class="w"> </span><span class="n">cnf1</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">NumberFormat</span><span class="p">.</span><span class="na">getCompactNumberInstance</span><span class="p">(</span>
+<span class="w">                </span><span class="n">Locale</span><span class="p">.</span><span class="na">US</span><span class="p">,</span><span class="w"> </span><span class="n">NumberFormat</span><span class="p">.</span><span class="na">Style</span><span class="p">.</span><span class="na">SHORT</span><span class="p">);</span>
+
+<span class="n">NumberFormat</span><span class="w"> </span><span class="n">cnf2</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">NumberFormat</span><span class="p">.</span><span class="na">getCompactNumberInstance</span><span class="p">(</span>
+<span class="w">                </span><span class="n">Locale</span><span class="p">.</span><span class="na">US</span><span class="p">,</span><span class="w"> </span><span class="n">NumberFormat</span><span class="p">.</span><span class="na">Style</span><span class="p">.</span><span class="na">LONG</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">cnf1</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="mi">315_000_000</span><span class="p">));</span><span class="w">   </span><span class="c1">// 315M</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">cnf2</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="mi">315_000_000</span><span class="p">));</span><span class="w">   </span><span class="c1">// 315 million</span>
+</code></pre></div>
+<p><a id="134-mise-en-forme-des-dates-et-heures"></a></p>
+<h2 id="134-mise-en-forme-des-dates-et-heures">13.4 Mise en forme des dates et heures</h2>
+<p><a id="1341-datetimeformatter"></a></p>
+<h3 id="1341-datetimeformatter">13.4.1 DateTimeFormatter</h3>
+<p>Java 21 repose sur <code>java.time</code> et <code>DateTimeFormatter</code> pour la mise en forme moderne des dates et heures.</p>
+<div class="highlight"><pre><span></span><code><span class="n">DateTimeFormatter</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">DateTimeFormatter</span><span class="p">.</span><span class="na">ofPattern</span><span class="p">(</span><span class="s">&quot;yyyy-MM-dd HH:mm&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">format</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
+</code></pre></div>
+<p><strong>Propriétés principales :</strong></p>
+<ul>
+<li>Immuable.</li>
+<li>Thread-safe.</li>
+<li>Sensible au locale.</li>
+</ul>
+<p><a id="1342-symboles-standard-de-date-et-dheure"></a></p>
+<h3 id="1342-symboles-standard-de-date-et-dheure">13.4.2 Symboles standard de date et d’heure</h3>
+<div class="highlight"><pre><span></span><code>y   année
+M   numéro du mois (ou nom avec plus de lettres)
+d   jour du mois
+E   nom du jour
+H   heure (0–23)
+h   heure (1–12)
+m   minute
+s   seconde
+a   indicateur AM/PM
+z   fuseau horaire
+</code></pre></div>
+<p><a id="1343-datetimeformat-vs-formatterformat"></a></p>
+<h3 id="1343-datetimeformat-vs-formatterformat">13.4.3 datetime.format vs formatter.format</h3>
+<p>Les deux méthodes sont fonctionnellement identiques :</p>
+<div class="highlight"><pre><span></span><code><span class="n">date</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">formatter</span><span class="p">);</span>
+<span class="n">formatter</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">date</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>date.format(formatter)</code> → préféré pour la lisibilité (données d’abord, puis formatage).</li>
+<li><code>formatter.format(date)</code> → parfois pratique dans un code fonctionnel ou avec des formatters réutilisables.</li>
+</ul>
+<p><a id="1344-localisation-des-dates"></a></p>
+<h3 id="1344-localisation-des-dates">13.4.4 Localisation des dates</h3>
+<p>Les styles localisés adaptent l’affichage des dates aux normes culturelles.</p>
+<div class="highlight"><pre><span></span><code><span class="n">DateTimeFormatter</span><span class="w"> </span><span class="n">fullIt</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">DateTimeFormatter</span>
+<span class="w">                </span><span class="p">.</span><span class="na">ofLocalizedDate</span><span class="p">(</span><span class="n">FormatStyle</span><span class="p">.</span><span class="na">FULL</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">withLocale</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">ITALY</span><span class="p">);</span>
+
+<span class="n">DateTimeFormatter</span><span class="w"> </span><span class="n">shortIt</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">DateTimeFormatter</span>
+<span class="w">                </span><span class="p">.</span><span class="na">ofLocalizedDate</span><span class="p">(</span><span class="n">FormatStyle</span><span class="p">.</span><span class="na">SHORT</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">withLocale</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">ITALY</span><span class="p">);</span>
+
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">today</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">today</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">fullIt</span><span class="p">));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">today</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">shortIt</span><span class="p">));</span>
+</code></pre></div>
+<p>Sortie possible :</p>
+<div class="highlight"><pre><span></span><code>mercoledì<span class="w"> </span><span class="m">17</span><span class="w"> </span>dicembre<span class="w"> </span><span class="m">2025</span>
+<span class="m">17</span>/12/25
+</code></pre></div>
+<p><a id="135-internationalisation-i18n-et-localisation-l10n"></a></p>
+<h2 id="135-internationalisation-i18n-et-localisation-l10n">13.5 Internationalisation (i18n) et localisation (l10n)</h2>
+<p><a id="1351-locales"></a></p>
+<h3 id="1351-locales">13.5.1 Locales</h3>
+<p>Un <code>Locale</code> définit la langue, le pays et une variante optionnelle.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Locale</span><span class="w"> </span><span class="n">l1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Locale</span><span class="p">.</span><span class="na">US</span><span class="p">;</span>
+<span class="n">Locale</span><span class="w"> </span><span class="n">l2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Locale</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;fr&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;FR&quot;</span><span class="p">);</span>
+<span class="n">Locale</span><span class="w"> </span><span class="n">l3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Locale</span><span class="p">.</span><span class="na">Builder</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">setLanguage</span><span class="p">(</span><span class="s">&quot;en&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">setRegion</span><span class="p">(</span><span class="s">&quot;US&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+</code></pre></div>
+<p>Formats de Locale :</p>
+<ul>
+<li><code>en</code> (it, fr, etc.) : code langue en minuscules.</li>
+<li><code>en_US</code> (fr_CA, it_IT, etc.) : code langue en minuscules + underscore + code pays en majuscules.</li>
+</ul>
+<p><a id="1352-catégories-de-locale"></a></p>
+<h3 id="1352-categories-de-locale">13.5.2 Catégories de Locale</h3>
+<p>Les catégories de Locale séparent la mise en forme de la langue de l’interface utilisateur.</p>
+<p><code>Locale.Category</code> permet à Java d’utiliser différents Locale par défaut selon les usages.</p>
+<p>Il existe deux catégories :</p>
+<table>
+<thead>
+<tr>
+<th>Catégorie</th>
+<th>Utilisée pour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FORMAT</td>
+<td>Nombres, dates, monnaie, autre formatage</td>
+</tr>
+<tr>
+<td>DISPLAY</td>
+<td>Texte lisible (UI, noms, messages)</td>
+</tr>
+</tbody>
+</table>
+<p><a id="1353-exemple-réel"></a></p>
+<h3 id="1353-exemple-reel">13.5.3 Exemple réel</h3>
+<p>Un utilisateur français vivant en Allemagne peut souhaiter :</p>
+<ul>
+<li>Nombres et dates → format allemand.</li>
+<li>Langue de l’interface → français.</li>
+</ul>
+<p>Avant Java 7, cela n’était pas possible.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Locale</span><span class="p">.</span><span class="na">setDefault</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">Category</span><span class="p">.</span><span class="na">FORMAT</span><span class="p">,</span><span class="w"> </span><span class="n">Locale</span><span class="p">.</span><span class="na">GERMANY</span><span class="p">);</span>
+<span class="n">Locale</span><span class="p">.</span><span class="na">setDefault</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">Category</span><span class="p">.</span><span class="na">DISPLAY</span><span class="p">,</span><span class="w"> </span><span class="n">Locale</span><span class="p">.</span><span class="na">FRANCE</span><span class="p">);</span>
+</code></pre></div>
+<p>Exemples d’effets :</p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Résultat (exemple)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nombres</td>
+<td>1.234,56</td>
+</tr>
+<tr>
+<td>Dates</td>
+<td>31.12.2025</td>
+</tr>
+<tr>
+<td>Monnaie</td>
+<td>€</td>
+</tr>
+<tr>
+<td>Texte UI</td>
+<td>Français</td>
+</tr>
+<tr>
+<td>Noms des mois</td>
+<td>décembre</td>
+</tr>
+<tr>
+<td>Noms des pays</td>
+<td>Allemagne</td>
+</tr>
+</tbody>
+</table>
+<p><a id="136-properties-et-resource-bundles"></a></p>
+<h2 id="136-properties-et-resource-bundles">13.6 Properties et Resource Bundles</h2>
+<p>Les resource bundles externalisent le texte et permettent la localisation sans modifier le code.</p>
+<div class="highlight"><pre><span></span><code><span class="n">ResourceBundle</span><span class="w"> </span><span class="n">rb</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">ResourceBundle</span><span class="p">.</span><span class="na">getBundle</span><span class="p">(</span><span class="s">&quot;messages&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Locale</span><span class="p">.</span><span class="na">GERMAN</span><span class="p">);</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rb</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;welcome&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p><a id="1361-règles-de-résolution-des-resource-bundles"></a></p>
+<h3 id="1361-regles-de-resolution-des-resource-bundles">13.6.1 Règles de résolution des Resource Bundles</h3>
+<p>Java recherche les bundles selon un ordre de repli strict. Par exemple, avec le nom de base <code>messages</code> et le locale <code>de_DE</code> :</p>
+<ul>
+<li>messages_de_DE.properties</li>
+<li>messages_de.properties</li>
+<li>messages.properties</li>
+</ul>
+<p>Si aucun n’est trouvé → <code>MissingResourceException</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les fichiers <code>.properties</code> traditionnels sont spécifiés en ISO-8859-1 ;
+les caractères non ASCII doivent être encodés via des échappements Unicode (par exemple <code>\u00E9</code> pour é), sauf si des mécanismes de chargement alternatifs sont utilisés.</p>
+</div>
+<p><a id="137-règles-et-erreurs-courantes"></a></p>
+<h2 id="137-regles-et-erreurs-courantes">13.7 Règles et erreurs courantes</h2>
+<ul>
+<li><code>DateTimeFormatter</code> est immuable et thread-safe.</li>
+<li><code>NumberFormat</code> / <code>DecimalFormat</code> sont mutables et non thread-safe.</li>
+<li>Modifier le <code>Locale</code> affecte la manière dont les valeurs sont formatées et analysées, et non les valeurs numériques ou temporelles sous-jacentes.</li>
+<li>L’analyse avec <code>NumberFormat</code> ou <code>DecimalFormat</code> peut réussir partiellement sans exception si du texte supplémentaire suit un nombre valide.</li>
+<li><code>java.time</code> remplace la plupart des usages des anciennes API <code>java.util.Date</code> / <code>Calendar</code> dans le code moderne et à l’examen.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.ars-digitale.com/" target="_blank" rel="noopener" title="Ars Digitale" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

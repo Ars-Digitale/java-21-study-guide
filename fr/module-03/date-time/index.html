@@ -1,0 +1,7631 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ars-digitale.github.io/java-21-study-guide/fr/module-03/date-time/">
+      
+      
+        <link rel="prev" href="../math/">
+      
+      
+        <link rel="next" href="../formatting/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Date et heure - Java 21 Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#12-date-et-heure-en-java" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Java 21 Study Guide" class="md-header__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Java 21 Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Date et heure
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Java 21 Study Guide" class="md-nav__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Java 21 Study Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisite material
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Java Language Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Java Language Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syntax building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic language building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java naming rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java data types and casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantiating types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Control Flow
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Control Flow
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control flow statements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — Core Standard APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — Core Standard APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strings in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dates and time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatting and localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methods, attributes, and variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading, initialization, and object construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inheritance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beyond classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions and error handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Functional Programming
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Functional Programming
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functional programming in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to the collections framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared collection operations and equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting and comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    List APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue and deque APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrency and Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrency and Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thread fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concurrency APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — Java I/O and NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — Java I/O and NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java I/O streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O streams APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interacting with the user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JPMS fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiling, packaging, and running modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Italiano
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Italiano
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materiale propedeutico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi di sintassi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elementi base del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regole di naming Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tipi di dati e casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operatori Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istanziare i tipi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istruzioni di controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cicli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stringhe in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilità Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data e ora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formattazione e localizzazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metodi, attributi e variabili
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading e costruzione oggetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ereditarietà
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oltre le classi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eccezioni e gestione errori
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmazione funzionale in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operazioni condivise ed equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting e comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti thread
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API di concorrenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 08 — I/O e NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 08 — I/O e NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (fondamenti)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interazione con l’utente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilare e avviare moduli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Français
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Français
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matériel de support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Bases du Langage Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Bases du Langage Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocs de syntaxe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Éléments de base du langage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Règles de nommage Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types de données et casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérateurs Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instanciation des types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Contrôle de flux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Contrôle de flux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions de contrôle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boucles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chaînes (String) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tableaux (Arrays) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilitaires Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date et heure
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date et heure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-des-matieres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table des matières
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#121-date-et-heure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Date et heure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.1 Date et heure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1211-creer-des-dates-et-heures-specifiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.1 Créer des dates et heures spécifiques
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1212-arithmetique-dateheure-methodes-plus-et-minus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.2 Arithmétique date/heure : méthodes plus et minus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1213-modeles-courants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.3 Modèles courants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1214-arithmetique-localdate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.4 Arithmétique LocalDate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1215-arithmetique-localtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.5 Arithmétique LocalTime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1216-arithmetique-localdatetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.6 Arithmétique LocalDateTime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1217-arithmetique-zoneddatetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.7 Arithmétique ZonedDateTime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1218-tableau-recapitulatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.8 Tableau récapitulatif
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-methodes-withxxx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Méthodes withXxx(...)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123-conversion-et-methodes-at-lier-date-heure-et-zone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Conversion et méthodes at... (lier date, heure et zone)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124-period-duration-et-instant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 Period, Duration et Instant
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125-period-durees-humaines-basees-sur-la-date" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5 Period — Durées humaines basées sur la date
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126-duration-durees-machine-basees-sur-le-temps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6 Duration — Durées machine basées sur le temps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#127-instant-point-sur-la-chronologie-utc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.7 Instant — Point sur la chronologie UTC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#128-tableau-recapitulatif-period-vs-duration-vs-instant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.8 Tableau récapitulatif (Period vs Duration vs Instant)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#129-temporalunit-et-temporalamount" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9 TemporalUnit et TemporalAmount
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.9 TemporalUnit et TemporalAmount">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1291-temporalunit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.1 TemporalUnit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1292-enum-chronounit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.2 Enum ChronoUnit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1293-temporalamount" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.3 TemporalAmount
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1294-period-en-tant-que-temporalamount" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.4 Period en tant que TemporalAmount
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1295-duration-en-tant-que-temporalamount" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.5 Duration en tant que TemporalAmount
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1296-utiliser-temporalamount-vs-temporalunit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.6 Utiliser TemporalAmount vs TemporalUnit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1297-methodes-between" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.7 Méthodes between(...)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1298-pieges-courants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.8 Pièges courants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1299-resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.9 Résumé
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatage et localisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Fondamentaux OO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Fondamentaux OO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Méthodes, attributs et variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chargement de classes et construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Héritage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Au-delà des classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions et gestion des erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmation fonctionnelle en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Streams Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Framework des Collections
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Framework des Collections
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction au framework des collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérations partagées et égalité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tri et comparaison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrence et Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrence et Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux des threads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de concurrence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — I/O et NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — I/O et NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (fondamentaux)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interaction avec l’utilisateur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiler et exécuter des modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services en JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ars-digitale.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ars Digitale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-des-matieres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table des matières
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#121-date-et-heure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Date et heure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.1 Date et heure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1211-creer-des-dates-et-heures-specifiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.1 Créer des dates et heures spécifiques
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1212-arithmetique-dateheure-methodes-plus-et-minus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.2 Arithmétique date/heure : méthodes plus et minus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1213-modeles-courants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.3 Modèles courants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1214-arithmetique-localdate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.4 Arithmétique LocalDate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1215-arithmetique-localtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.5 Arithmétique LocalTime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1216-arithmetique-localdatetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.6 Arithmétique LocalDateTime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1217-arithmetique-zoneddatetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.7 Arithmétique ZonedDateTime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1218-tableau-recapitulatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1.8 Tableau récapitulatif
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-methodes-withxxx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Méthodes withXxx(...)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123-conversion-et-methodes-at-lier-date-heure-et-zone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Conversion et méthodes at... (lier date, heure et zone)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124-period-duration-et-instant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 Period, Duration et Instant
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125-period-durees-humaines-basees-sur-la-date" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5 Period — Durées humaines basées sur la date
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126-duration-durees-machine-basees-sur-le-temps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6 Duration — Durées machine basées sur le temps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#127-instant-point-sur-la-chronologie-utc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.7 Instant — Point sur la chronologie UTC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#128-tableau-recapitulatif-period-vs-duration-vs-instant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.8 Tableau récapitulatif (Period vs Duration vs Instant)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#129-temporalunit-et-temporalamount" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9 TemporalUnit et TemporalAmount
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.9 TemporalUnit et TemporalAmount">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1291-temporalunit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.1 TemporalUnit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1292-enum-chronounit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.2 Enum ChronoUnit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1293-temporalamount" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.3 TemporalAmount
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1294-period-en-tant-que-temporalamount" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.4 Period en tant que TemporalAmount
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1295-duration-en-tant-que-temporalamount" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.5 Duration en tant que TemporalAmount
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1296-utiliser-temporalamount-vs-temporalunit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.6 Utiliser TemporalAmount vs TemporalUnit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1297-methodes-between" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.7 Méthodes between(...)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1298-pieges-courants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.8 Pièges courants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1299-resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.9.9 Résumé
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="12-date-et-heure-en-java">12. Date et heure en Java</h1>
+<p><a id="table-des-matières"></a></p>
+<h3 id="table-des-matieres">Table des matières</h3>
+<ul>
+<li><a href="#121-date-et-heure">12.1 Date et heure</a><ul>
+<li><a href="#1211-créer-des-dates-et-heures-spécifiques">12.1.1 Créer des dates et heures spécifiques</a></li>
+<li><a href="#1212-arithmétique-dateheure--méthodes-plus-et-minus">12.1.2 Arithmétique date/heure : méthodes plus et minus</a></li>
+<li><a href="#1213-modèles-courants">12.1.3 Modèles courants</a></li>
+<li><a href="#1214-arithmétique-localdate">12.1.4 Arithmétique LocalDate</a></li>
+<li><a href="#1215-arithmétique-localtime">12.1.5 Arithmétique LocalTime</a></li>
+<li><a href="#1216-arithmétique-localdatetime">12.1.6 Arithmétique LocalDateTime</a></li>
+<li><a href="#1217-arithmétique-zoneddatetime">12.1.7 Arithmétique ZonedDateTime</a></li>
+<li><a href="#1218-tableau-récapitulatif">12.1.8 Tableau récapitulatif</a></li>
+</ul>
+</li>
+<li><a href="#122-méthodes-withxxx">12.2 Méthodes withXxx</a></li>
+<li><a href="#123-conversion-et-méthodes-at-lier-date-heure-et-zone">12.3 Conversion et méthodes at (lier date, heure et zone)</a></li>
+<li><a href="#124-period-duration-et-instant">12.4 Period, Duration et Instant</a></li>
+<li><a href="#125-period--durées-humaines-basées-sur-la-date">12.5 Period — Durées humaines basées sur la date</a></li>
+<li><a href="#126-duration--durées-machine-basées-sur-le-temps">12.6 Duration — Durées machine basées sur le temps</a></li>
+<li><a href="#127-instant--point-sur-la-chronologie-utc">12.7 Instant — Point sur la chronologie UTC</a></li>
+<li><a href="#128-tableau-récapitulatif-period-vs-duration-vs-instant">12.8 Tableau récapitulatif : Period vs Duration vs Instant</a></li>
+<li><a href="#129-temporalunit-et-temporalamount">12.9 TemporalUnit et TemporalAmount</a><ul>
+<li><a href="#1291-temporalunit">12.9.1 TemporalUnit</a></li>
+<li><a href="#1292-enum-chronounit">12.9.2 Enum ChronoUnit</a></li>
+<li><a href="#1293-temporalamount">12.9.3 TemporalAmount</a></li>
+<li><a href="#1294-period-en-tant-que-temporalamount">12.9.4 Period en tant que TemporalAmount</a></li>
+<li><a href="#1295-duration-en-tant-que-temporalamount">12.9.5 Duration en tant que TemporalAmount</a></li>
+<li><a href="#1296-utiliser-temporalamount-vs-temporalunit">12.9.6 Utiliser TemporalAmount vs TemporalUnit</a></li>
+<li><a href="#1297-méthodes-between">12.9.7 Méthodes between</a></li>
+<li><a href="#1298-pièges-courants">12.9.8 Pièges courants</a></li>
+<li><a href="#1299-résumé">12.9.9 Résumé</a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<p><a id="121-date-et-heure"></a></p>
+<h2 id="121-date-et-heure">12.1 Date et heure</h2>
+<p>Java fournit une API moderne, cohérente et immuable de date/heure dans le package <code>java.time.*</code>.</p>
+<p>Cette API remplace les anciennes classes <code>java.util.Date</code> et <code>java.util.Calendar</code>.</p>
+<p>Selon le niveau de détail requis, Java propose quatre classes principales :</p>
+<ul>
+<li><code>LocalDate</code> → représente une date uniquement (année–mois–jour)</li>
+<li><code>LocalTime</code> → représente une heure uniquement (heure–minute–seconde–nanoseconde)</li>
+<li><code>LocalDateTime</code> → combine date + heure, mais sans fuseau horaire</li>
+<li><code>ZonedDateTime</code> → date + heure + décalage + fuseau horaire</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>Un <strong>fuseau horaire</strong> définit des règles comme les changements d’heure d’été (par exemple, <code>Europe/Paris</code>).</li>
+<li>Un <strong>décalage de zone</strong> (zone offset) est un décalage fixe par rapport à UTC/GMT (par exemple, <code>+01:00</code>, <code>-07:00</code>).  </li>
+<li>Pour comparer deux instants provenant de fuseaux horaires différents, convertissez-les en UTC (GMT) en appliquant le décalage.</li>
+</ul>
+</div>
+<p><strong>Obtenir la date/heure actuelle</strong></p>
+<p>Vous pouvez récupérer les valeurs système actuelles en utilisant les méthodes statiques <code>now()</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">());</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">LocalTime</span><span class="p">.</span><span class="na">now</span><span class="p">());</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">());</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">ZonedDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">());</span>
+</code></pre></div>
+<ul>
+<li>Exemple de sortie (votre système peut différer) :</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="m">2025</span>-12-01
+<span class="m">19</span>:11:53.213856300
+<span class="m">2025</span>-12-01T19:11:53.213856300
+<span class="m">2025</span>-12-01T19:11:53.214856900+01:00<span class="o">[</span>Europe/Paris<span class="o">]</span>
+</code></pre></div>
+<ul>
+<li>Exemple : conversion de <code>ZonedDateTime</code> vers GMT (UTC)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// Conceptual examples (not real code, just illustrating offsets):</span>
+<span class="c1">// 2024-07-01T12:00+09:00[Asia/Tokyo]        ---&gt; 12:00 minus 9 hours ---&gt; 03:00 UTC</span>
+<span class="c1">// 2024-07-01T20:00-07:00[America/Los_Angeles] ---&gt; 20:00 plus 7 hours ---&gt; 03:00 UTC</span>
+</code></pre></div>
+<p>Les deux représentent le même instant dans le temps, simplement exprimé dans des fuseaux horaires différents.</p>
+<p><a id="1211-créer-des-dates-et-heures-spécifiques"></a></p>
+<h3 id="1211-creer-des-dates-et-heures-specifiques">12.1.1 Créer des dates et heures spécifiques</h3>
+<p>Vous pouvez construire des objets date/heure précis en utilisant les méthodes de fabrique <code>of()</code>.  </p>
+<p>Toutes les classes incluent plusieurs versions surchargées de <code>of()</code> (seules les plus courantes sont listées ici).</p>
+<p>**LocalDate — formes surchargées de <code>of()</code>
+- <code>of(int year, int month, int dayOfMonth)</code>
+- <code>of(int year, Month month, int dayOfMonth)</code></p>
+<p>**LocalTime — formes surchargées de <code>of()</code>
+- <code>of(int hour, int minute)</code>
+- <code>of(int hour, int minute, int second)</code>
+- <code>of(int hour, int minute, int second, int nanoOfSecond)</code></p>
+<p>**LocalDateTime — formes surchargées de <code>of()</code>
+- <code>of(int year, int month, int day, int hour, int minute)</code>
+- <code>of(int year, int month, int day, int hour, int minute, int second)</code>
+- <code>of(int year, int month, int day, int hour, int minute, int second, int nano)</code>
+- <code>of(LocalDate date, LocalTime time)</code></p>
+<p>**ZonedDateTime — formes surchargées de <code>of()</code>
+- <code>of(LocalDate date, LocalTime time, ZoneId zone)</code>
+- <code>of(int y, int m, int d, int h, int min, int s, int nano, ZoneId zone)</code></p>
+<ul>
+<li>Exemples</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// Creating specific dates</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="n">localDate1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">localDate2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">JULY</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">);</span>
+
+<span class="c1">// Creating specific times</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="n">localTime1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">localTime1</span><span class="p">);</span><span class="w">                     </span><span class="c1">// 13:21</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">LocalTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">52</span><span class="p">));</span><span class="w">       </span><span class="c1">// 13:21:52</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">LocalTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">));</span><span class="w">  </span><span class="c1">// 13:21:52.000000200</span>
+
+<span class="c1">// Creating LocalDateTime</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="n">localDateTime1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">localDateTime2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">localDate1</span><span class="p">,</span><span class="w"> </span><span class="n">localTime1</span><span class="p">);</span>
+
+<span class="c1">// Creating a ZonedDateTime</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="n">zoned</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZonedDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Europe/Paris&quot;</span><span class="p">));</span>
+</code></pre></div>
+<p><a id="1212-arithmétique-dateheure--méthodes-plus-et-minus"></a></p>
+<h3 id="1212-arithmetique-dateheure-methodes-plus-et-minus">12.1.2 Arithmétique date/heure : méthodes <code>plus</code> et <code>minus</code></h3>
+<p>Toutes les classes du package <code>java.time</code> (comme <code>LocalDate</code>, <code>LocalTime</code>, <code>LocalDateTime</code>, <code>ZonedDateTime</code>, etc.) sont <strong>immutables</strong>.</p>
+<p>Cela signifie que des méthodes comme <code>plusXxx()</code> et <code>minusXxx()</code> ne modifient jamais l’objet original — elles renvoient à la place une nouvelle instance avec la valeur ajustée.</p>
+<p><a id="1213-modèles-courants"></a></p>
+<h3 id="1213-modeles-courants">12.1.3 Modèles courants</h3>
+<p>La plupart des classes date/heure prennent en charge trois types de méthodes arithmétiques :</p>
+<ul>
+<li><strong>Raccourcis spécifiques au type</strong>  </li>
+<li><code>plusDays(long daysToAdd)</code>  </li>
+<li><code>plusHours(long hoursToAdd)</code>  </li>
+<li>
+<p>etc.</p>
+</li>
+<li>
+<p><strong>Méthodes génériques basées sur une quantité</strong>  </p>
+</li>
+<li><code>plus(TemporalAmount amount)</code> → par exemple <code>Period</code>, <code>Duration</code>  </li>
+<li>
+<p><code>minus(TemporalAmount amount)</code>  </p>
+</li>
+<li>
+<p><strong>Méthodes génériques basées sur une unité</strong>  </p>
+</li>
+<li><code>plus(long amountToAdd, TemporalUnit unit)</code>  </li>
+<li><code>minus(long amountToSubtract, TemporalUnit unit)</code>  </li>
+</ul>
+<p>Elles permettent une arithmétique de date/heure flexible et lisible.</p>
+<p><a id="1214-arithmétique-localdate"></a></p>
+<h3 id="1214-arithmetique-localdate">12.1.4 Arithmétique <code>LocalDate</code></h3>
+<p><code>LocalDate</code> représente une date uniquement (pas d’heure, pas de zone).</p>
+<p><strong>Principales méthodes <code>plus</code> / <code>minus</code> (surcharges)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Méthode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plusDays(long days)</code></td>
+<td>Ajouter des jours</td>
+</tr>
+<tr>
+<td><code>plusWeeks(long weeks)</code></td>
+<td>Ajouter des semaines</td>
+</tr>
+<tr>
+<td><code>plusMonths(long months)</code></td>
+<td>Ajouter des mois</td>
+</tr>
+<tr>
+<td><code>plusYears(long years)</code></td>
+<td>Ajouter des années</td>
+</tr>
+<tr>
+<td><code>minusDays(long days)</code></td>
+<td>Soustraire des jours</td>
+</tr>
+<tr>
+<td><code>minusWeeks(long weeks)</code></td>
+<td>Soustraire des semaines</td>
+</tr>
+<tr>
+<td><code>minusMonths(long months)</code></td>
+<td>Soustraire des mois</td>
+</tr>
+<tr>
+<td><code>minusYears(long years)</code></td>
+<td>Soustraire des années</td>
+</tr>
+<tr>
+<td><code>plus(TemporalAmount amount)</code></td>
+<td>Ajouter une Period</td>
+</tr>
+<tr>
+<td><code>minus(TemporalAmount amount)</code></td>
+<td>Soustraire une Period</td>
+</tr>
+<tr>
+<td><code>plus(long amountToAdd, TemporalUnit unit)</code></td>
+<td>Ajouter en utilisant ChronoUnit (par ex. DAYS, MONTHS)</td>
+</tr>
+<tr>
+<td><code>minus(long amountToSubtract, TemporalUnit unit)</code></td>
+<td>Soustraire en utilisant ChronoUnit</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Exemples :</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">LocalDate</span><span class="w"> </span><span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">d1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">plusDays</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w">            </span><span class="c1">// 2025-03-15</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">d2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">minusWeeks</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w">          </span><span class="c1">// 2025-02-24</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">d3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">plusMonths</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">          </span><span class="c1">// 2025-04-10</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">d4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">plusYears</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w">           </span><span class="c1">// 2027-03-10</span>
+
+<span class="c1">// Using ChronoUnit</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">d5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">DAYS</span><span class="p">);</span><span class="w">   </span><span class="c1">// 2025-03-20</span>
+
+<span class="c1">// Using Period</span>
+<span class="n">Period</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Period</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">  </span><span class="c1">// 1 year, 2 months, 3 days</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">d6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</code></pre></div>
+<p><a id="1215-arithmétique-localtime"></a></p>
+<h3 id="1215-arithmetique-localtime">12.1.5 Arithmétique <code>LocalTime</code></h3>
+<p><code>LocalTime</code> représente une heure uniquement (pas de date, pas de zone).</p>
+<p><strong>Principales méthodes <code>plus</code> / <code>minus</code> (surcharges)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Méthode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plusNanos(long nanos)</code></td>
+<td>Ajouter des nanosecondes</td>
+</tr>
+<tr>
+<td><code>plusSeconds(long seconds)</code></td>
+<td>Ajouter des secondes</td>
+</tr>
+<tr>
+<td><code>plusMinutes(long minutes)</code></td>
+<td>Ajouter des minutes</td>
+</tr>
+<tr>
+<td><code>plusHours(long hours)</code></td>
+<td>Ajouter des heures</td>
+</tr>
+<tr>
+<td><code>minusNanos(long nanos)</code></td>
+<td>Soustraire des nanosecondes</td>
+</tr>
+<tr>
+<td><code>minusSeconds(long seconds)</code></td>
+<td>Soustraire des secondes</td>
+</tr>
+<tr>
+<td><code>minusMinutes(long minutes)</code></td>
+<td>Soustraire des minutes</td>
+</tr>
+<tr>
+<td><code>minusHours(long hours)</code></td>
+<td>Soustraire des heures</td>
+</tr>
+<tr>
+<td><code>plus(TemporalAmount amount)</code></td>
+<td>Ajouter une Duration</td>
+</tr>
+<tr>
+<td><code>minus(TemporalAmount amount)</code></td>
+<td>Soustraire une Duration</td>
+</tr>
+<tr>
+<td><code>plus(long amountToAdd, TemporalUnit unit)</code></td>
+<td>Ajouter en utilisant ChronoUnit</td>
+</tr>
+<tr>
+<td><code>minus(long amountToSubtract, TemporalUnit unit)</code></td>
+<td>Soustraire en utilisant ChronoUnit</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Exemples</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">LocalTime</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span><span class="w">       </span><span class="c1">// 13:30</span>
+
+<span class="n">LocalTime</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">.</span><span class="na">plusHours</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w">            </span><span class="c1">// 15:30</span>
+<span class="n">LocalTime</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">.</span><span class="na">minusMinutes</span><span class="p">(</span><span class="mi">45</span><span class="p">);</span><span class="w">        </span><span class="c1">// 12:45</span>
+<span class="n">LocalTime</span><span class="w"> </span><span class="n">t3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">.</span><span class="na">plusSeconds</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span><span class="w">         </span><span class="c1">// 13:31:30</span>
+
+<span class="c1">// Using ChronoUnit</span>
+<span class="n">LocalTime</span><span class="w"> </span><span class="n">t4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">HOURS</span><span class="p">);</span><span class="w">    </span><span class="c1">// 16:30</span>
+
+<span class="c1">// Using Duration</span>
+<span class="n">Duration</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMinutes</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span>
+<span class="n">LocalTime</span><span class="w"> </span><span class="n">t5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="n">d</span><span class="p">);</span><span class="w">                </span><span class="c1">// 15:00</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Quand l’arithmétique des heures franchit minuit, la date est ignorée avec <code>LocalTime</code>.
+Par exemple, 23:30 + 2 heures = 01:30 (sans date impliquée).</p>
+</div>
+<p><a id="1216-arithmétique-localdatetime"></a></p>
+<h3 id="1216-arithmetique-localdatetime">12.1.6 Arithmétique <code>LocalDateTime</code></h3>
+<p><code>LocalDateTime</code> combine date + heure, mais toujours sans fuseau horaire.  </p>
+<p>Il prend en charge à la fois les méthodes de raccourci liées à la date et celles liées à l’heure.</p>
+<p><strong>Principales méthodes <code>plus</code> / <code>minus</code> (surcharges)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Méthode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plusYears(long years)</code> / <code>minusYears(long years)</code></td>
+<td>Ajuster les années</td>
+</tr>
+<tr>
+<td><code>plusMonths(long months)</code> / <code>minusMonths(long months)</code></td>
+<td>Ajuster les mois</td>
+</tr>
+<tr>
+<td><code>plusWeeks(long weeks)</code> / <code>minusWeeks(long weeks)</code></td>
+<td>Ajuster les semaines</td>
+</tr>
+<tr>
+<td><code>plusDays(long days)</code> / <code>minusDays(long days)</code></td>
+<td>Ajuster les jours</td>
+</tr>
+<tr>
+<td><code>plusHours(long hours)</code> / <code>minusHours(long hours)</code></td>
+<td>Ajuster les heures</td>
+</tr>
+<tr>
+<td><code>plusMinutes(long minutes)</code> / <code>minusMinutes(long minutes)</code></td>
+<td>Ajuster les minutes</td>
+</tr>
+<tr>
+<td><code>plusSeconds(long seconds)</code> / <code>minusSeconds(long seconds)</code></td>
+<td>Ajuster les secondes</td>
+</tr>
+<tr>
+<td><code>plusNanos(long nanos)</code> / <code>minusNanos(long nanos)</code></td>
+<td>Ajuster les nanosecondes</td>
+</tr>
+<tr>
+<td><code>plus(TemporalAmount amount)</code> / <code>minus(TemporalAmount amount)</code></td>
+<td>Ajouter/soustraire Period ou Duration</td>
+</tr>
+<tr>
+<td><code>plus(long amountToAdd, TemporalUnit unit)</code> / <code>minus(long amountToSubtract, TemporalUnit unit)</code></td>
+<td>En utilisant ChronoUnit</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Exemples</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">LocalDateTime</span><span class="w"> </span><span class="n">ldt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2025-03-10T13:30</span>
+
+<span class="n">LocalDateTime</span><span class="w"> </span><span class="n">l1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ldt</span><span class="p">.</span><span class="na">plusDays</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">          </span><span class="c1">// 2025-03-11T13:30</span>
+<span class="n">LocalDateTime</span><span class="w"> </span><span class="n">l2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ldt</span><span class="p">.</span><span class="na">minusHours</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w">        </span><span class="c1">// 2025-03-10T10:30</span>
+<span class="n">LocalDateTime</span><span class="w"> </span><span class="n">l3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ldt</span><span class="p">.</span><span class="na">plusMinutes</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span><span class="w">      </span><span class="c1">// 2025-03-10T15:00</span>
+
+<span class="c1">// Using ChronoUnit</span>
+<span class="n">LocalDateTime</span><span class="w"> </span><span class="n">l4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ldt</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">WEEKS</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2025-03-24T13:30</span>
+
+<span class="c1">// Using Period and Duration</span>
+<span class="n">Period</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Period</span><span class="p">.</span><span class="na">ofDays</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">Duration</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofHours</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+<span class="n">LocalDateTime</span><span class="w"> </span><span class="n">l5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ldt</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="w">    </span><span class="c1">// 2025-03-20T13:30</span>
+<span class="n">LocalDateTime</span><span class="w"> </span><span class="n">l6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ldt</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="n">d</span><span class="p">);</span><span class="w">    </span><span class="c1">// 2025-03-10T18:30</span>
+</code></pre></div>
+<p><a id="1217-arithmétique-zoneddatetime"></a></p>
+<h3 id="1217-arithmetique-zoneddatetime">12.1.7 Arithmétique <code>ZonedDateTime</code></h3>
+<p><code>ZonedDateTime</code> représente date + heure + fuseau horaire + décalage.</p>
+<p>Il prend en charge les mêmes méthodes <code>plus</code>/<code>minus</code> que <code>LocalDateTime</code>, mais avec une attention supplémentaire aux fuseaux horaires et à l’heure d’été (DST).</p>
+<p><strong>Principales méthodes <code>plus</code> / <code>minus</code> (surcharges)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Méthode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plusYears(long years)</code> / <code>minusYears(long years)</code></td>
+<td>Ajuster les années</td>
+</tr>
+<tr>
+<td><code>plusMonths(long months)</code> / <code>minusMonths(long months)</code></td>
+<td>Ajuster les mois</td>
+</tr>
+<tr>
+<td><code>plusWeeks(long weeks)</code> / <code>minusWeeks(long weeks)</code></td>
+<td>Ajuster les semaines</td>
+</tr>
+<tr>
+<td><code>plusDays(long days)</code> / <code>minusDays(long days)</code></td>
+<td>Ajuster les jours</td>
+</tr>
+<tr>
+<td><code>plusHours(long hours)</code> / <code>minusHours(long hours)</code></td>
+<td>Ajuster les heures</td>
+</tr>
+<tr>
+<td><code>plusMinutes(long minutes)</code> / <code>minusMinutes(long minutes)</code></td>
+<td>Ajuster les minutes</td>
+</tr>
+<tr>
+<td><code>plusSeconds(long seconds)</code> / <code>minusSeconds(long seconds)</code></td>
+<td>Ajuster les secondes</td>
+</tr>
+<tr>
+<td><code>plusNanos(long nanos)</code> / <code>minusNanos(long nanos)</code></td>
+<td>Ajuster les nanosecondes</td>
+</tr>
+<tr>
+<td><code>plus(TemporalAmount amount)</code> / <code>minus(TemporalAmount amount)</code></td>
+<td>Period / Duration</td>
+</tr>
+<tr>
+<td><code>plus(long amountToAdd, TemporalUnit unit)</code> / <code>minus(long amountToSubtract, TemporalUnit unit)</code></td>
+<td>En utilisant ChronoUnit</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Exemples (avec fuseaux horaires et DST) :</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">ZonedDateTime</span><span class="w"> </span><span class="n">zdt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZonedDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">    </span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Europe/Paris&quot;</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// Add 2 hours across a possible DST change</span>
+<span class="n">ZonedDateTime</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zdt</span><span class="p">.</span><span class="na">plusHours</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">zdt</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">z1</span><span class="p">);</span>
+</code></pre></div>
+<p>Selon les règles d’heure d’été pour cette date :</p>
+<ul>
+<li>L’heure locale peut passer de 02:00 à 03:00 ou similaire.</li>
+<li><code>ZonedDateTime</code> ajuste le décalage et l’heure locale selon les règles de zone, mais représente toujours le bon instant sur la timeline.</li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Pour <code>ZonedDateTime</code>, l’arithmétique est définie en fonction de la timeline locale et des règles de fuseau horaire, ce qui peut provoquer des décalages d’heures pendant les transitions DST.</p>
+</div>
+<p><a id="1218-tableau-récapitulatif"></a></p>
+<h3 id="1218-tableau-recapitulatif">12.1.8 Tableau récapitulatif</h3>
+<table>
+<thead>
+<tr>
+<th>Classe</th>
+<th>Méthodes plus/minus de raccourci</th>
+<th>Méthodes génériques</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LocalDate</td>
+<td>plusDays, plusWeeks, plusMonths, plusYears (et minus)</td>
+<td>plus/minus(TemporalAmount), plus/minus(long, TemporalUnit)</td>
+</tr>
+<tr>
+<td>LocalTime</td>
+<td>plusNanos, plusSeconds, plusMinutes, plusHours (et minus)</td>
+<td>plus/minus(TemporalAmount), plus/minus(long, TemporalUnit)</td>
+</tr>
+<tr>
+<td>LocalDateTime</td>
+<td>Tous les raccourcis de LocalDate + LocalTime</td>
+<td>plus/minus(TemporalAmount), plus/minus(long, TemporalUnit)</td>
+</tr>
+<tr>
+<td>ZonedDateTime</td>
+<td>Identiques à LocalDateTime, mais sensibles à la zone</td>
+<td>plus/minus(TemporalAmount), plus/minus(long, TemporalUnit)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a id="122-méthodes-withxxx"></a></p>
+<h2 id="122-methodes-withxxx">12.2 Méthodes <code>withXxx(...)</code></h2>
+<p>Les méthodes <code>with...</code> renvoient une copie de l’objet avec un champ modifié.<br />
+Elles ne mutent jamais l’instance originale.</p>
+<table>
+<thead>
+<tr>
+<th>Classe</th>
+<th>Méthodes with... courantes (non exhaustif)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LocalDate</code></td>
+<td>withYear(int year)</td>
+<td>Même date, mais avec une année différente</td>
+</tr>
+<tr>
+<td>LocalDate</td>
+<td>LocalDate.withMonth(int month)</td>
+<td>Même date, mois différent (1–12)</td>
+</tr>
+<tr>
+<td>LocalDate</td>
+<td>LocalDate.withDayOfMonth(int dayOfMonth)</td>
+<td>Même date, jour du mois différent</td>
+</tr>
+<tr>
+<td>LocalDate</td>
+<td>LocalDate.with(TemporalField field, long newValue)</td>
+<td>Ajustement générique basé sur un champ</td>
+</tr>
+<tr>
+<td>LocalDate</td>
+<td>LocalDate.with(TemporalAdjuster adjuster)</td>
+<td>Utilise un adjuster (par ex. firstDayOfMonth())</td>
+</tr>
+<tr>
+<td><code>LocalTime</code></td>
+<td>withHour(int hour)</td>
+<td>Même heure, heure différente</td>
+</tr>
+<tr>
+<td>LocalTime</td>
+<td>LocalTime.withMinute(int minute)</td>
+<td>Même heure, minute différente</td>
+</tr>
+<tr>
+<td>LocalTime</td>
+<td>LocalTime.withSecond(int second)</td>
+<td>Même heure, seconde différente</td>
+</tr>
+<tr>
+<td>LocalTime</td>
+<td>LocalTime.withNano(int nanoOfSecond)</td>
+<td>Même heure, nanoseconde différente</td>
+</tr>
+<tr>
+<td>LocalTime</td>
+<td>LocalTime.with(TemporalField field, long newValue)</td>
+<td>Ajustement générique basé sur un champ</td>
+</tr>
+<tr>
+<td>LocalTime</td>
+<td>LocalTime.with(TemporalAdjuster adjuster)</td>
+<td>Ajuster via un temporal adjuster</td>
+</tr>
+<tr>
+<td><code>LocalDateTime</code></td>
+<td>withYear(int year), withMonth(int month), withDayOfMonth(int day)</td>
+<td>Changer uniquement la partie date</td>
+</tr>
+<tr>
+<td>LocalDateTime</td>
+<td>withHour(int hour), withMinute(int minute), withSecond(int second)</td>
+<td>Changer uniquement la partie heure</td>
+</tr>
+<tr>
+<td>LocalDateTime</td>
+<td>withNano(int nanoOfSecond)</td>
+<td>Changer la nanoseconde</td>
+</tr>
+<tr>
+<td>LocalDateTime</td>
+<td>with(TemporalField field, long newValue)</td>
+<td>Ajustement générique basé sur un champ</td>
+</tr>
+<tr>
+<td>LocalDateTime</td>
+<td>with(TemporalAdjuster adjuster)</td>
+<td>Ajuster via un temporal adjuster</td>
+</tr>
+<tr>
+<td><code>ZonedDateTime</code></td>
+<td>tous les withXxx(...) de LocalDateTime</td>
+<td>Changer les composants locaux date/heure</td>
+</tr>
+<tr>
+<td>ZonedDateTime</td>
+<td>withZoneSameInstant(ZoneId zone)</td>
+<td>Même instant, zone différente (change l’heure locale)</td>
+</tr>
+<tr>
+<td>ZonedDateTime</td>
+<td>withZoneSameLocal(ZoneId zone)</td>
+<td>Même date/heure locale, zone différente (change l’instant)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a id="123-conversion-et-méthodes-at-lier-date-heure-et-zone"></a></p>
+<h2 id="123-conversion-et-methodes-at-lier-date-heure-et-zone">12.3 Conversion et méthodes <code>at...</code> (lier date, heure et zone)</h2>
+<p>Ces méthodes sont utilisées pour combiner ou convertir entre <code>LocalDate</code>, <code>LocalTime</code>, <code>LocalDateTime</code> et <code>ZonedDateTime</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Depuis</th>
+<th>Méthode</th>
+<th>Résultat</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LocalDate</code></td>
+<td>atTime(LocalTime time)</td>
+<td>LocalDateTime</td>
+<td>Combine cette date avec une heure donnée</td>
+</tr>
+<tr>
+<td>LocalDate</td>
+<td>atTime(int hour, int minute)</td>
+<td>LocalDateTime</td>
+<td>Surcharges de convenance avec des composantes horaires numériques</td>
+</tr>
+<tr>
+<td>LocalDate</td>
+<td>atTime(int hour, int minute, int second)</td>
+<td>LocalDateTime</td>
+<td>—</td>
+</tr>
+<tr>
+<td>LocalDate</td>
+<td>atTime(int hour, int minute, int second, int nano)</td>
+<td>LocalDateTime</td>
+<td>—</td>
+</tr>
+<tr>
+<td>LocalDate</td>
+<td>atStartOfDay()</td>
+<td>LocalDateTime</td>
+<td>Cette date à l’heure 00:00</td>
+</tr>
+<tr>
+<td>LocalDate</td>
+<td>atStartOfDay(ZoneId zone)</td>
+<td>ZonedDateTime</td>
+<td>Cette date au début de la journée dans une zone spécifique</td>
+</tr>
+<tr>
+<td><code>LocalTime</code></td>
+<td>atDate(LocalDate date)</td>
+<td>LocalDateTime</td>
+<td>Combine cette heure avec une date donnée</td>
+</tr>
+<tr>
+<td><code>LocalDateTime</code></td>
+<td>atZone(ZoneId zone)</td>
+<td>ZonedDateTime</td>
+<td>Ajoute un fuseau horaire à une date-heure locale</td>
+</tr>
+<tr>
+<td>LocalDateTime</td>
+<td>toLocalDate()</td>
+<td>LocalDate</td>
+<td>Extrait la composante date</td>
+</tr>
+<tr>
+<td>LocalDateTime</td>
+<td>toLocalTime()</td>
+<td>LocalTime</td>
+<td>Extrait la composante heure</td>
+</tr>
+<tr>
+<td><code>ZonedDateTime</code></td>
+<td>toLocalDate()</td>
+<td>LocalDate</td>
+<td>Supprime zone/décalage, conserve la date locale</td>
+</tr>
+<tr>
+<td>ZonedDateTime</td>
+<td>toLocalTime()</td>
+<td>LocalTime</td>
+<td>Supprime zone/décalage, conserve l’heure locale</td>
+</tr>
+<tr>
+<td>ZonedDateTime</td>
+<td>toLocalDateTime()</td>
+<td>LocalDateTime</td>
+<td>Supprime zone/décalage, conserve la date-heure locale</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a id="124-period-duration-et-instant"></a></p>
+<h2 id="124-period-duration-et-instant">12.4 Period, Duration et Instant</h2>
+<p>Le package <code>java.time</code> fournit trois classes temporelles essentielles qui représentent des durées ou des points sur la timeline :</p>
+<ul>
+<li><strong>Period</strong> → durées humaines basées sur la date (années, mois, jours)</li>
+<li><strong>Duration</strong> → durées machine basées sur le temps (secondes, nanosecondes)</li>
+<li><strong>Instant</strong> → un point sur la timeline UTC</li>
+</ul>
+<hr />
+<p><a id="125-period--durées-humaines-basées-sur-la-date"></a></p>
+<h2 id="125-period-durees-humaines-basees-sur-la-date">12.5 <code>Period</code> — Durées humaines basées sur la date</h2>
+<p><code>Period</code> représente une durée basée sur la date, telle que “3 ans, 2 mois et 5 jours”.  </p>
+<p>Il est utilisé avec <code>LocalDate</code> et <code>LocalDateTime</code> (car ils contiennent des parties date).</p>
+<p><strong>Méthodes de création</strong></p>
+<table>
+<thead>
+<tr>
+<th>Méthode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Period.ofYears(int years)</td>
+<td>Uniquement des années</td>
+</tr>
+<tr>
+<td>Period.ofMonths(int months)</td>
+<td>Uniquement des mois</td>
+</tr>
+<tr>
+<td>Period.ofWeeks(int weeks)</td>
+<td>Convertit les semaines en jours</td>
+</tr>
+<tr>
+<td>Period.ofDays(int days)</td>
+<td>Uniquement des jours</td>
+</tr>
+<tr>
+<td>Period.of(int years, int months, int days)</td>
+<td>Période complète</td>
+</tr>
+<tr>
+<td>Period.parse(CharSequence text)</td>
+<td>Format ISO-8601 : "P1Y2M3D", "P7D", "P1W", ...</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Propriétés clés</strong></p>
+<ul>
+<li>Ne prend pas en charge les heures, minutes, secondes, nanosecondes.</li>
+<li>Peut être négatif.</li>
+<li>
+<p>Immuable.</p>
+</li>
+<li>
+<p>Exemples</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Period</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Period</span><span class="p">.</span><span class="na">ofYears</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">             </span><span class="c1">// P1Y</span>
+<span class="n">Period</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Period</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">            </span><span class="c1">// P1Y2M3D</span>
+<span class="n">Period</span><span class="w"> </span><span class="n">p3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Period</span><span class="p">.</span><span class="na">ofWeeks</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w">             </span><span class="c1">// P14D (converted to days)</span>
+
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="n">p2</span><span class="p">);</span><span class="w">          </span><span class="c1">// 2026-03-13</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>Period.parse("P1W")</code> est autorisé et représente une période de 7 jours (équivalente à "P7D").</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>Period</code> est basé sur le calendrier : ajouter une période de mois/années respecte la longueur des mois et les années bissextiles.</p>
+</div>
+<hr />
+<p><a id="126-duration--durées-machine-basées-sur-le-temps"></a></p>
+<h2 id="126-duration-durees-machine-basees-sur-le-temps">12.6 <code>Duration</code> — Durées machine basées sur le temps</h2>
+<p><code>Duration</code> représente une durée basée sur le temps en secondes et nanosecondes.</p>
+<p>Il est utilisé avec <code>LocalTime</code>, <code>LocalDateTime</code>, <code>ZonedDateTime</code> et <code>Instant</code>.</p>
+<p><strong>Méthodes de création</strong></p>
+<table>
+<thead>
+<tr>
+<th>Méthode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Duration.ofDays(long days)</td>
+<td>Convertit les jours en secondes</td>
+</tr>
+<tr>
+<td>Duration.ofHours(long hours)</td>
+<td>Convertit les heures en secondes</td>
+</tr>
+<tr>
+<td>Duration.ofMinutes(long minutes)</td>
+<td>Convertit les minutes en secondes</td>
+</tr>
+<tr>
+<td>Duration.ofSeconds(long seconds)</td>
+<td>Représentation de base en secondes</td>
+</tr>
+<tr>
+<td>Duration.ofSeconds(long seconds, long nanoAdjustment)</td>
+<td>Secondes plus nanos supplémentaires</td>
+</tr>
+<tr>
+<td>Duration.ofMillis(long millis)</td>
+<td>Convertit les millisecondes en nanos</td>
+</tr>
+<tr>
+<td>Duration.ofNanos(long nanos)</td>
+<td>Uniquement des nanosecondes</td>
+</tr>
+<tr>
+<td>Duration.between(Temporal start, Temporal end)</td>
+<td>Calculer la durée entre deux instants</td>
+</tr>
+<tr>
+<td>Duration.parse(CharSequence text)</td>
+<td>ISO : "PT20H", "PT15M", "PT10S"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Caractéristiques clés</strong></p>
+<ul>
+<li>Prend en charge des heures jusqu’aux nanosecondes, mais pas les années/mois/semaines directement.</li>
+<li>Idéal pour des calculs temporels au niveau machine.</li>
+<li>
+<p>Immuable.</p>
+</li>
+<li>
+<p>Exemples</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Duration</span><span class="w"> </span><span class="n">d1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofHours</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w">           </span><span class="c1">// PT5H</span>
+<span class="n">Duration</span><span class="w"> </span><span class="n">d2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMinutes</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span><span class="w">        </span><span class="c1">// PT1H30M</span>
+
+<span class="n">LocalTime</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="n">LocalTime</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="n">d2</span><span class="p">);</span><span class="w">                   </span><span class="c1">// 11:30</span>
+
+<span class="n">ZonedDateTime</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZonedDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">    </span><span class="mi">2024</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Europe/Paris&quot;</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="n">ZonedDateTime</span><span class="w"> </span><span class="n">z2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z1</span><span class="p">.</span><span class="na">plusHours</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w">          </span><span class="c1">// DST-aware</span>
+<span class="n">ZonedDateTime</span><span class="w"> </span><span class="n">z3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z1</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="n">d2</span><span class="p">);</span><span class="w">              </span><span class="c1">// Duration-based</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>Duration.ofDays(1)</code> représente exactement 24 heures de temps machine.
+Dans une zone avec DST, 24 heures peuvent ne pas correspondre à “la même heure locale demain”.</p>
+</div>
+<hr />
+<p><a id="127-instant--point-sur-la-chronologie-utc"></a></p>
+<h2 id="127-instant-point-sur-la-chronologie-utc">12.7 <code>Instant</code> — Point sur la chronologie UTC</h2>
+<p><code>Instant</code> représente un seul moment dans le temps par rapport à UTC, avec une précision à la nanoseconde.</p>
+<p>Il contient :</p>
+<ul>
+<li>Des secondes depuis l’époque (1970-01-01T00:00Z).</li>
+<li>Un ajustement de nanosecondes.</li>
+</ul>
+<p><strong>Méthodes de création</strong></p>
+<table>
+<thead>
+<tr>
+<th>Méthode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Instant.now()</td>
+<td>Moment actuel en UTC</td>
+</tr>
+<tr>
+<td>Instant.ofEpochSecond(long seconds)</td>
+<td>À partir des secondes depuis l’époque</td>
+</tr>
+<tr>
+<td>Instant.ofEpochSecond(long seconds, long nanos)</td>
+<td>À partir des secondes plus nanos</td>
+</tr>
+<tr>
+<td>Instant.ofEpochMilli(long millis)</td>
+<td>À partir des millisecondes depuis l’époque</td>
+</tr>
+<tr>
+<td>Instant.parse(CharSequence text)</td>
+<td>ISO : "2024-01-01T10:15:30Z"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conversions</strong></p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Méthode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Instant → heure zonée</td>
+<td>instant.atZone(zoneId)</td>
+</tr>
+<tr>
+<td>ZonedDateTime → Instant</td>
+<td>zdt.toInstant()</td>
+</tr>
+<tr>
+<td>LocalDateTime → Instant</td>
+<td>Non autorisé directement (nécessite une zone)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Exemple</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Instant</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">();</span>
+
+<span class="n">ZonedDateTime</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="na">atZone</span><span class="p">(</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Europe/Paris&quot;</span><span class="p">));</span>
+<span class="n">Instant</span><span class="w"> </span><span class="n">back</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z</span><span class="p">.</span><span class="na">toInstant</span><span class="p">();</span><span class="w">  </span><span class="c1">// same moment</span>
+
+<span class="c1">// Duration between instants</span>
+<span class="n">Instant</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Instant</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&quot;2024-01-01T10:00:00Z&quot;</span><span class="p">);</span>
+<span class="n">Instant</span><span class="w"> </span><span class="n">end</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">Instant</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&quot;2024-01-01T12:30:00Z&quot;</span><span class="p">);</span>
+
+<span class="n">Duration</span><span class="w"> </span><span class="n">between</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">between</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span><span class="w"> </span><span class="c1">// PT2H30M</span>
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><code>Instant</code> est toujours en UTC, sans information de fuseau horaire attachée.
+Il ne peut pas être combiné avec une <code>Period</code> ; utilisez <code>Duration</code> à la place.</p>
+</div>
+<hr />
+<p><a id="128-tableau-récapitulatif-period-vs-duration-vs-instant"></a></p>
+<h2 id="128-tableau-recapitulatif-period-vs-duration-vs-instant">12.8 Tableau récapitulatif (Period vs Duration vs Instant)</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Représente</th>
+<th>Bon pour</th>
+<th>Fonctionne avec</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Period</td>
+<td>Années, mois, jours</td>
+<td>Arithmétique calendaire</td>
+<td>LocalDate, LocalDateTime</td>
+<td>Unités humaines</td>
+</tr>
+<tr>
+<td>Duration</td>
+<td>Heures à nanosecondes</td>
+<td>Calculs temporels précis</td>
+<td>LocalTime, LocalDateTime, ZonedDateTime, Instant</td>
+<td>Unités machine</td>
+</tr>
+<tr>
+<td>Instant</td>
+<td>Point exact sur la timeline UTC</td>
+<td>Représentation d’horodatage</td>
+<td>Convertible vers/depuis ZonedDateTime</td>
+<td>Ne peut pas être combiné avec Period</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pièges courants</strong></p>
+<ul>
+<li><code>Period.of(1, 0, 0)</code> n’est pas la même chose que <code>Duration.ofDays(365)</code> (années bissextiles !).</li>
+<li><code>Duration.ofDays(1)</code> peut ne pas être égal à une “journée calendaire” complète dans une zone DST.</li>
+<li><code>LocalDateTime</code> ne peut pas être converti en <code>Instant</code> sans fuseau horaire.</li>
+<li><code>Period.parse("P1W")</code> est valide et donne une période de 7 jours.</li>
+</ul>
+<hr />
+<p><a id="129-temporalunit-et-temporalamount"></a></p>
+<h2 id="129-temporalunit-et-temporalamount">12.9 TemporalUnit et TemporalAmount</h2>
+<p>L’API <code>java.time</code> repose sur deux interfaces clés qui définissent comment les dates, les heures et les durées sont manipulées :</p>
+<ul>
+<li><code>TemporalUnit</code> → représente une unité de temps (par exemple, DAYS, HOURS, MINUTES).</li>
+<li><code>TemporalAmount</code> → représente une quantité de temps (par exemple, <code>Period</code>, <code>Duration</code>).</li>
+</ul>
+<p>Les deux sont essentiels pour comprendre comment fonctionnent les méthodes <code>plus</code>, <code>minus</code> et <code>with</code>.</p>
+<p><a id="1291-temporalunit"></a></p>
+<h3 id="1291-temporalunit">12.9.1 <code>TemporalUnit</code></h3>
+<p><code>TemporalUnit</code> représente une seule unité de mesure date/heure.<br />
+L’implémentation principale utilisée en Java est :</p>
+<p><a id="1292-enum-chronounit"></a></p>
+<h3 id="1292-enum-chronounit">12.9.2 Enum <code>ChronoUnit</code></h3>
+<p>Cet enum fournit les unités standard utilisées dans la chronologie ISO-8601 :</p>
+<table>
+<thead>
+<tr>
+<th>Catégorie</th>
+<th>Unités</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unités de date</td>
+<td>DAYS, WEEKS, MONTHS, YEARS, DECADES, CENTURIES, MILLENNIA, ERAS</td>
+</tr>
+<tr>
+<td>Unités de temps</td>
+<td>NANOS, MICROS, MILLIS, SECONDS, MINUTES, HOURS, HALF_DAYS</td>
+</tr>
+<tr>
+<td>Spécial</td>
+<td>FOREVER</td>
+</tr>
+</tbody>
+</table>
+<p>Un <code>TemporalUnit</code> peut être utilisé directement avec les méthodes <code>plus()</code> et <code>minus()</code>.</p>
+<ul>
+<li>Exemples avec <code>ChronoUnit</code> :</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">LocalDate</span><span class="w"> </span><span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">d1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">DAYS</span><span class="p">);</span><span class="w">     </span><span class="c1">// 2025-03-20</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">d2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">minus</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">MONTHS</span><span class="p">);</span><span class="w">   </span><span class="c1">// 2025-01-10</span>
+
+<span class="n">LocalTime</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="n">LocalTime</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">MINUTES</span><span class="p">);</span><span class="w">  </span><span class="c1">// 11:30</span>
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Vous ne pouvez pas utiliser des unités basées sur le temps avec <code>LocalDate</code>, ni des unités basées sur la date avec <code>LocalTime</code>.</p>
+</div>
+<ul>
+<li>Exemples :</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ UnsupportedTemporalTypeException</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">plus</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">HOURS</span><span class="p">);</span>
+
+<span class="c1">// ❌ UnsupportedTemporalTypeException</span>
+<span class="n">LocalTime</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalTime</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">plus</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">DAYS</span><span class="p">);</span>
+</code></pre></div>
+<p><a id="1293-temporalamount"></a></p>
+<h3 id="1293-temporalamount">12.9.3 <code>TemporalAmount</code></h3>
+<p><code>TemporalAmount</code> représente une quantité de temps à unités multiples (par exemple, “2 ans, 3 mois”, ou “90 minutes”).<br />
+Elle est implémentée par :</p>
+<ul>
+<li><code>Period</code> → années, mois, jours (basé sur la date)</li>
+<li><code>Duration</code> → secondes, nanosecondes (basé sur le temps)</li>
+</ul>
+<p>Les deux peuvent être passés aux objets date/heure pour les ajuster via <code>plus()</code> et <code>minus()</code>.</p>
+<p><a id="1294-period-en-tant-que-temporalamount"></a></p>
+<h3 id="1294-period-en-tant-que-temporalamount">12.9.4 <code>Period</code> en tant que <code>TemporalAmount</code></h3>
+<p><code>Period</code> représente une quantité humaine : années, mois, jours.</p>
+<ul>
+<li>Exemples :</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Period</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Period</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">  </span><span class="c1">// 1 year, 2 months, 3 days</span>
+
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2026-05-13</span>
+</code></pre></div>
+<p>Notes</p>
+<ul>
+<li><code>Period</code> ne peut pas être utilisé avec <code>LocalTime</code> (pas de composante date).</li>
+<li><code>Period.ofWeeks(n)</code> est converti en interne en jours (n × 7).</li>
+</ul>
+<p><a id="1295-duration-en-tant-que-temporalamount"></a></p>
+<h3 id="1295-duration-en-tant-que-temporalamount">12.9.5 <code>Duration</code> en tant que <code>TemporalAmount</code></h3>
+<p><code>Duration</code> représente un temps machine : secondes + nanosecondes.</p>
+<ul>
+<li>Exemples :</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Duration</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofHours</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="na">plusMinutes</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span><span class="w"> </span><span class="c1">// PT5H30M</span>
+
+<span class="n">LocalDateTime</span><span class="w"> </span><span class="n">ldt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="n">LocalDateTime</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ldt</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="n">d</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2025-03-10T15:30</span>
+</code></pre></div>
+<p>Notes</p>
+<ul>
+<li><code>Duration</code> peut être utilisée avec des classes qui ont des composantes de temps (<code>LocalTime</code>, <code>LocalDateTime</code>, <code>ZonedDateTime</code>, <code>Instant</code>).</li>
+<li><code>Duration</code> ne peut pas être appliquée à <code>LocalDate</code> → cela lance <code>UnsupportedTemporalTypeException</code>.</li>
+<li><code>Duration</code> interagit avec les zones et les transitions DST lorsqu’elle est appliquée à <code>ZonedDateTime</code>.</li>
+</ul>
+<p><a id="1296-utiliser-temporalamount-vs-temporalunit"></a></p>
+<h3 id="1296-utiliser-temporalamount-vs-temporalunit">12.9.6 Utiliser <code>TemporalAmount</code> vs <code>TemporalUnit</code></h3>
+<p>Utiliser un <code>TemporalUnit</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="n">LocalDate</span><span class="w"> </span><span class="n">d1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">plus</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">DAYS</span><span class="p">);</span>
+</code></pre></div>
+<p>Utiliser un <code>TemporalAmount</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="n">Period</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Period</span><span class="p">.</span><span class="na">ofDays</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">d2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">plus</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</code></pre></div>
+<p>Les deux produisent le même résultat lorsque c’est pris en charge.</p>
+<p><strong>Différences</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>TemporalUnit</th>
+<th>TemporalAmount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Représente</td>
+<td>Une seule unité (par ex. DAYS)</td>
+<td>Une quantité structurée (par ex. 2Y, 5M, 3D)</td>
+</tr>
+<tr>
+<td>Exemples</td>
+<td>ChronoUnit.DAYS</td>
+<td>Period.of(2,5,3)</td>
+</tr>
+<tr>
+<td>Prend en charge plusieurs champs</td>
+<td>Non</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td>Bon pour</td>
+<td>Incréments simples</td>
+<td>Incréments complexes</td>
+</tr>
+<tr>
+<td>Fréquent avec</td>
+<td>Toutes les classes date/heure</td>
+<td>Restreint selon le type</td>
+</tr>
+</tbody>
+</table>
+<p><a id="1297-méthodes-between"></a></p>
+<h3 id="1297-methodes-between">12.9.7 Méthodes <code>between(...)</code></h3>
+<p>De nombreuses classes fournissent une méthode <code>between</code> via <code>ChronoUnit</code>, <code>Duration</code> ou <code>Period</code>.</p>
+<p><strong>Utiliser <code>Duration.between</code> (pour les classes basées sur le temps)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">Duration</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">between</span><span class="p">(</span>
+<span class="w">    </span><span class="n">LocalTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">    </span><span class="n">LocalTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="c1">// PT3H30M</span>
+</code></pre></div>
+<p><strong>Utiliser <code>Period.between</code> (uniquement pour les dates)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">Period</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Period</span><span class="p">.</span><span class="na">between</span><span class="p">(</span>
+<span class="w">    </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">    </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="c1">// P2M9D</span>
+</code></pre></div>
+<p><strong>Utiliser <code>ChronoUnit</code> <code>between</code></strong></p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">days</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">DAYS</span><span class="p">.</span><span class="na">between</span><span class="p">(</span>
+<span class="w">    </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
+<span class="w">    </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="c1">// 9</span>
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><code>ChronoUnit.between(...)</code> renvoie toujours un <code>long</code>,
+tandis que <code>Period.between</code> renvoie une <code>Period</code>,<br />
+et <code>Duration.between</code> renvoie une <code>Duration</code>.</p>
+</div>
+<p><a id="1298-pièges-courants"></a></p>
+<h3 id="1298-pieges-courants">12.9.8 Pièges courants</h3>
+<ul>
+<li>Appliquer le mauvais <code>TemporalAmount</code> :</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// LocalTime.plus(Period.ofDays(1))   // ❌ compile-time error</span>
+<span class="c1">// LocalDate.plus(Duration.ofHours(1)) // ❌ runtime error: UnsupportedTemporalTypeException</span>
+</code></pre></div>
+<ul>
+<li>Changements DST avec <code>Duration</code> : ajouter 24 heures n’est pas toujours “demain” dans une zone avec DST.</li>
+<li><code>Period.ofWeeks(1)</code> fait exactement 7 jours ; les effets DST apparaissent lorsqu’il est appliqué à des types sensibles à la zone.</li>
+<li><code>Instant.plus(Period)</code> → <code>UnsupportedTemporalTypeException</code> à l’exécution ; utilisez <code>Duration</code> à la place.</li>
+<li><code>Instant</code> ne peut pas être créé directement depuis un <code>LocalDateTime</code> ; vous devez d’abord appliquer une zone : <code>ldt.atZone(zone).toInstant()</code>.</li>
+</ul>
+<p><a id="1299-résumé"></a></p>
+<h3 id="1299-resume">12.9.9 Résumé</h3>
+<table>
+<thead>
+<tr>
+<th>Fonctionnalité</th>
+<th>TemporalUnit</th>
+<th>TemporalAmount</th>
+<th>ChronoUnit</th>
+<th>Period</th>
+<th>Duration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Représente</td>
+<td>Une unité</td>
+<td>Une quantité</td>
+<td>enum d’unités</td>
+<td>Y/M/J</td>
+<td>S + nanos</td>
+</tr>
+<tr>
+<td>Multi-champ</td>
+<td>Non</td>
+<td>Oui</td>
+<td>Non</td>
+<td>Oui</td>
+<td>Non</td>
+</tr>
+<tr>
+<td>Fonctionne avec</td>
+<td>plus/minus</td>
+<td>plus/minus</td>
+<td>date/heure</td>
+<td>LocalDate/LocalDateTime</td>
+<td>Temps/zone</td>
+</tr>
+<tr>
+<td>Basé sur l’humain</td>
+<td>Non</td>
+<td>Oui</td>
+<td>Non</td>
+<td>Oui</td>
+<td>Non</td>
+</tr>
+<tr>
+<td>Basé sur la machine</td>
+<td>Oui</td>
+<td>Oui</td>
+<td>Oui</td>
+<td>Non</td>
+<td>Oui</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.ars-digitale.com/" target="_blank" rel="noopener" title="Ars Digitale" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

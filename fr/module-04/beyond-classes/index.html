@@ -1,0 +1,7726 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ars-digitale.github.io/java-21-study-guide/fr/module-04/beyond-classes/">
+      
+      
+        <link rel="prev" href="../inheritance/">
+      
+      
+        <link rel="next" href="../generics/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Au-delà des classes - Java 21 Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#17-au-dela-des-classes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Java 21 Study Guide" class="md-header__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Java 21 Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Au-delà des classes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Java 21 Study Guide" class="md-nav__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Java 21 Study Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisite material
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Java Language Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Java Language Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syntax building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic language building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java naming rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java data types and casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantiating types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Control Flow
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Control Flow
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control flow statements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — Core Standard APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — Core Standard APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strings in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dates and time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatting and localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methods, attributes, and variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading, initialization, and object construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inheritance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beyond classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions and error handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Functional Programming
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Functional Programming
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functional programming in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to the collections framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared collection operations and equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting and comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    List APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue and deque APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrency and Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrency and Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thread fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concurrency APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — Java I/O and NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — Java I/O and NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java I/O streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O streams APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interacting with the user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JPMS fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiling, packaging, and running modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Italiano
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Italiano
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materiale propedeutico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi di sintassi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elementi base del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regole di naming Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tipi di dati e casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operatori Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istanziare i tipi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istruzioni di controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cicli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stringhe in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilità Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data e ora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formattazione e localizzazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metodi, attributi e variabili
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading e costruzione oggetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ereditarietà
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oltre le classi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eccezioni e gestione errori
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmazione funzionale in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operazioni condivise ed equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting e comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti thread
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API di concorrenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 08 — I/O e NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 08 — I/O e NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (fondamenti)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interazione con l’utente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilare e avviare moduli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Français
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Français
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matériel de support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Bases du Langage Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Bases du Langage Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocs de syntaxe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Éléments de base du langage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Règles de nommage Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types de données et casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérateurs Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instanciation des types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Contrôle de flux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Contrôle de flux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions de contrôle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boucles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chaînes (String) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tableaux (Arrays) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilitaires Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date et heure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatage et localisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Fondamentaux OO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Fondamentaux OO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Méthodes, attributs et variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chargement de classes et construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Héritage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Au-delà des classes
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Au-delà des classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-des-matieres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table des matières
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#171-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Interfaces
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.1 Interfaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1711-ce-que-les-interfaces-peuvent-contenir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.1 Ce que les Interfaces Peuvent Contenir
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1712-implementer-une-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.2 Implémenter une Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1713-heritage-multiple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.3 Héritage Multiple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1714-heritage-des-interfaces-et-conflits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.4 Héritage des Interfaces et Conflits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1715-methodes-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.5 Méthodes default
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1716-methodes-static" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.6 Méthodes static
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1717-methodes-private-dans-les-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.7 Méthodes private dans les interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#172-types-sealed-non-sealed-et-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Types sealed, non-sealed et final
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.2 Types sealed, non-sealed et final">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1721-regles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2.1 Règles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#173-enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Enum
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.3 Enum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1731-definition-dune-enum-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3.1 Définition d’une Enum Simple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1732-enum-complexes-avec-etat-et-comportement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3.2 Enum Complexes avec État et Comportement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1733-methodes-des-enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3.3 Méthodes des Enum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1734-regles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3.4 Règles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#174-records-java-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4 Records (Java 16+)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.4 Records (Java 16+)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1741-resume-des-regles-de-base-pour-les-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.1 Résumé des Règles de Base pour les Records
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1742-constructeur-long" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.2 Constructeur Long
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1743-constructeur-compact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.3 Constructeur Compact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1744-pattern-matching-pour-les-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.4 Pattern Matching pour les Records
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1745-nested-record-patterns-et-matching-des-records-avec-var-et-generics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.5 Nested Record Patterns et Matching des Records avec var et Generics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.4.5 Nested Record Patterns et Matching des Records avec var et Generics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#17451-nested-record-pattern-de-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.5.1 Nested Record Pattern de Base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17452-nested-record-patterns-avec-var" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.5.2 Nested Record Patterns avec var
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17453-nested-record-patterns-et-generics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.5.3 Nested Record Patterns et Generics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17454-erreurs-courantes-avec-les-nested-record-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.5.4 Erreurs Courantes avec les Nested Record Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#175-classes-imbriquees-en-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5 Classes Imbriquées en Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.5 Classes Imbriquées en Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1751-static-nested-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.1 Static Nested Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.5.1 Static Nested Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#17511-syntaxe-et-regles-dacces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.1.1 Syntaxe et Règles d’Accès
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17512-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.1.2 Erreurs Courantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1752-inner-classes-non-static-nested-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.2 Inner Classes (Non-Static Nested Classes)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.5.2 Inner Classes (Non-Static Nested Classes)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#17521-syntaxe-et-regles-dacces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.2.1 Syntaxe et Règles d’Accès
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17522-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.2.2 Erreurs Courantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1753-classes-locales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.3 Classes Locales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.5.3 Classes Locales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#17531-caracteristiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.3.1 Caractéristiques
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17532-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.3.2 Erreurs Courantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1754-classes-anonymes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.4 Classes Anonymes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.5.4 Classes Anonymes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#17541-syntaxe-et-utilisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.4.1 Syntaxe et Utilisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17542-classe-anonyme-qui-etend-une-classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.4.2 Classe Anonyme qui Étend une Classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1755-comparaison-des-types-de-classes-imbriquees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.5 Comparaison des Types de Classes Imbriquées
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#176-imbrication-des-interfaces-en-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6 Imbrication des Interfaces en Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.6 Imbrication des Interfaces en Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1761-ou-une-interface-peut-etre-declaree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.1 Où une Interface peut être Déclarée
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1762-interfaces-imbriquees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.2 Interfaces Imbriquées
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.6.2 Interfaces Imbriquées">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#17621-interface-imbriquee-dans-une-classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.2.1 Interface Imbriquée dans une Classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17622-interface-imbriquee-dans-une-autre-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.2.2 Interface Imbriquée dans une autre Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1763-regles-dacces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.3 Règles dAccès
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1764-types-imbriques-dans-les-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.4 Types Imbriqués dans les Interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1765-resume-essentiel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.5 Résumé Essentiel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions et gestion des erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmation fonctionnelle en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Streams Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Framework des Collections
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Framework des Collections
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction au framework des collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérations partagées et égalité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tri et comparaison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrence et Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrence et Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux des threads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de concurrence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — I/O et NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — I/O et NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (fondamentaux)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interaction avec l’utilisateur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiler et exécuter des modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services en JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ars-digitale.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ars Digitale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-des-matieres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table des matières
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#171-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Interfaces
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.1 Interfaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1711-ce-que-les-interfaces-peuvent-contenir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.1 Ce que les Interfaces Peuvent Contenir
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1712-implementer-une-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.2 Implémenter une Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1713-heritage-multiple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.3 Héritage Multiple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1714-heritage-des-interfaces-et-conflits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.4 Héritage des Interfaces et Conflits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1715-methodes-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.5 Méthodes default
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1716-methodes-static" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.6 Méthodes static
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1717-methodes-private-dans-les-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1.7 Méthodes private dans les interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#172-types-sealed-non-sealed-et-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Types sealed, non-sealed et final
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.2 Types sealed, non-sealed et final">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1721-regles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2.1 Règles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#173-enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Enum
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.3 Enum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1731-definition-dune-enum-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3.1 Définition d’une Enum Simple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1732-enum-complexes-avec-etat-et-comportement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3.2 Enum Complexes avec État et Comportement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1733-methodes-des-enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3.3 Méthodes des Enum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1734-regles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3.4 Règles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#174-records-java-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4 Records (Java 16+)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.4 Records (Java 16+)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1741-resume-des-regles-de-base-pour-les-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.1 Résumé des Règles de Base pour les Records
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1742-constructeur-long" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.2 Constructeur Long
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1743-constructeur-compact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.3 Constructeur Compact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1744-pattern-matching-pour-les-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.4 Pattern Matching pour les Records
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1745-nested-record-patterns-et-matching-des-records-avec-var-et-generics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.5 Nested Record Patterns et Matching des Records avec var et Generics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.4.5 Nested Record Patterns et Matching des Records avec var et Generics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#17451-nested-record-pattern-de-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.5.1 Nested Record Pattern de Base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17452-nested-record-patterns-avec-var" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.5.2 Nested Record Patterns avec var
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17453-nested-record-patterns-et-generics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.5.3 Nested Record Patterns et Generics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17454-erreurs-courantes-avec-les-nested-record-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4.5.4 Erreurs Courantes avec les Nested Record Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#175-classes-imbriquees-en-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5 Classes Imbriquées en Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.5 Classes Imbriquées en Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1751-static-nested-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.1 Static Nested Classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.5.1 Static Nested Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#17511-syntaxe-et-regles-dacces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.1.1 Syntaxe et Règles d’Accès
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17512-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.1.2 Erreurs Courantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1752-inner-classes-non-static-nested-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.2 Inner Classes (Non-Static Nested Classes)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.5.2 Inner Classes (Non-Static Nested Classes)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#17521-syntaxe-et-regles-dacces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.2.1 Syntaxe et Règles d’Accès
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17522-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.2.2 Erreurs Courantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1753-classes-locales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.3 Classes Locales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.5.3 Classes Locales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#17531-caracteristiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.3.1 Caractéristiques
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17532-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.3.2 Erreurs Courantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1754-classes-anonymes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.4 Classes Anonymes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.5.4 Classes Anonymes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#17541-syntaxe-et-utilisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.4.1 Syntaxe et Utilisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17542-classe-anonyme-qui-etend-une-classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.4.2 Classe Anonyme qui Étend une Classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1755-comparaison-des-types-de-classes-imbriquees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5.5 Comparaison des Types de Classes Imbriquées
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#176-imbrication-des-interfaces-en-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6 Imbrication des Interfaces en Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.6 Imbrication des Interfaces en Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1761-ou-une-interface-peut-etre-declaree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.1 Où une Interface peut être Déclarée
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1762-interfaces-imbriquees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.2 Interfaces Imbriquées
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17.6.2 Interfaces Imbriquées">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#17621-interface-imbriquee-dans-une-classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.2.1 Interface Imbriquée dans une Classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17622-interface-imbriquee-dans-une-autre-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.2.2 Interface Imbriquée dans une autre Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1763-regles-dacces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.3 Règles dAccès
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1764-types-imbriques-dans-les-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.4 Types Imbriqués dans les Interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1765-resume-essentiel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.6.5 Résumé Essentiel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="17-au-dela-des-classes">17. Au-delà des Classes</h1>
+<p><a id="table-des-matières"></a></p>
+<h3 id="table-des-matieres">Table des matières</h3>
+<ul>
+<li><a href="#171-interfaces">17.1 Interfaces</a><ul>
+<li><a href="#1711-ce-que-les-interfaces-peuvent-contenir">17.1.1 Ce que les Interfaces Peuvent Contenir</a></li>
+<li><a href="#1712-implémenter-une-interface">17.1.2 Implémenter une Interface</a></li>
+<li><a href="#1713-héritage-multiple">17.1.3 Héritage Multiple</a></li>
+<li><a href="#1714-héritage-des-interfaces-et-conflits">17.1.4 Héritage des Interfaces et Conflits</a></li>
+<li><a href="#1715-méthodes-default">17.1.5 Méthodes default</a></li>
+<li><a href="#1716-méthodes-static">17.1.6 Méthodes static</a></li>
+<li><a href="#1717-méthodes-private-dans-les-interfaces">17.1.7 Méthodes private dans les interfaces</a></li>
+</ul>
+</li>
+<li><a href="#172-types-sealed-non-sealed-et-final">17.2 Types sealed, non-sealed et final</a><ul>
+<li><a href="#1721-règles">17.2.1 Règles</a></li>
+</ul>
+</li>
+<li><a href="#173-enum">17.3 Enum</a><ul>
+<li><a href="#1731-définition-dune-enum-simple">17.3.1 Définition d’une Enum Simple</a></li>
+<li><a href="#1732-enum-complexes-avec-état-et-comportement">17.3.2 Enum Complexes avec État et Comportement</a></li>
+<li><a href="#1733-méthodes-des-enum">17.3.3 Méthodes des Enum</a></li>
+<li><a href="#1734-règles">17.3.4 Règles</a></li>
+</ul>
+</li>
+<li><a href="#174-records-java-16">17.4 Records (Java 16+)</a><ul>
+<li><a href="#1741-résumé-des-règles-de-base-pour-les-records">17.4.1 Résumé des Règles de Base pour les Records</a></li>
+<li><a href="#1742-constructeur-long">17.4.2 Constructeur Long</a></li>
+<li><a href="#1743-constructeur-compact">17.4.3 Constructeur Compact</a></li>
+<li><a href="#1744-pattern-matching-pour-les-records">17.4.4 Pattern Matching pour les Records</a></li>
+<li><a href="#1745-nested-record-patterns-et-matching-des-records-avec-var-et-generics">17.4.5 Nested Record Patterns et Matching des Records avec var et Generics</a><ul>
+<li><a href="#17451-nested-record-pattern-de-base">17.4.5.1 Nested Record Pattern de Base</a></li>
+<li><a href="#17452-nested-record-patterns-avec-var">17.4.5.2 Nested Record Patterns avec var</a></li>
+<li><a href="#17453-nested-record-patterns-et-generics">17.4.5.3 Nested Record Patterns et Generics</a></li>
+<li><a href="#17454-erreurs-courantes-avec-les-nested-record-patterns">17.4.5.4 Erreurs Courantes avec les Nested Record Patterns</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#175-classes-imbriquées-en-java">17.5 Classes Imbriquées en Java</a><ul>
+<li><a href="#1751-static-nested-classes">17.5.1 Static Nested Classes</a><ul>
+<li><a href="#17511-syntaxe-et-règles-daccès">17.5.1.1 Syntaxe et Règles d’Accès</a></li>
+<li><a href="#17512-erreurs-courantes">17.5.1.2 Erreurs Courantes</a></li>
+</ul>
+</li>
+<li><a href="#1752-inner-classes-non-static-nested-classes">17.5.2 Inner Classes (Non-Static Nested Classes)</a><ul>
+<li><a href="#17521-syntaxe-et-règles-daccès">17.5.2.1 Syntaxe et Règles d’Accès</a></li>
+<li><a href="#17522-erreurs-courantes">17.5.2.2 Erreurs Courantes</a></li>
+</ul>
+</li>
+<li><a href="#1753-classes-locales">17.5.3 Classes Locales</a><ul>
+<li><a href="#17531-caractéristiques">17.5.3.1 Caractéristiques</a></li>
+<li><a href="#17532-erreurs-courantes">17.5.3.2 Erreurs Courantes</a></li>
+</ul>
+</li>
+<li><a href="#1754-classes-anonymes">17.5.4 Classes Anonymes</a><ul>
+<li><a href="#17541-syntaxe-et-utilisation">17.5.4.1 Syntaxe et Utilisation</a></li>
+<li><a href="#17542-classe-anonyme-qui-étend-une-classe">17.5.4.2 Classe Anonyme qui Étend une Classe</a></li>
+</ul>
+</li>
+<li><a href="#1755-comparaison-des-types-de-classes-imbriquées">17.5.5 Comparaison des Types de Classes Imbriquées</a></li>
+</ul>
+</li>
+<li><a href="#176-imbrication-des-interfaces-en-java">17.6 Imbrication des Interfaces en Java</a><ul>
+<li><a href="#1761-où-une-interface-peut-être-déclarée">17.6.1 Où une Interface peut être Déclarée</a></li>
+<li><a href="#1762-interfaces-imbriquées">17.6.2 Interfaces Imbriquées</a><ul>
+<li><a href="#17621-interface-imbriquée-dans-une-classe">17.6.2.1 Interface Imbriquée dans une Classe</a></li>
+<li><a href="#17622-interface-imbriquée-dans-une-autre-interface">17.6.2.2 Interface Imbriquée dans une autre Interface</a></li>
+</ul>
+</li>
+<li><a href="#1763-règles-daccès">17.6.3 Règles d'Accès</a></li>
+<li><a href="#1764-types-imbriqués-dans-les-interfaces">17.6.4 Types Imbriqués dans les Interfaces</a></li>
+<li><a href="#1765-résumé-essentiel">17.6.5 Résumé Essentiel</a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>Ce chapitre présente plusieurs mécanismes avancés de type (<em>type</em>) au-delà du design de la Classe en Java : <strong>interfaces</strong>, <strong>enum</strong>, <strong>classes sealed / non-sealed</strong>, <strong>records</strong> et <strong>classes imbriquées</strong>.</p>
+<p><a id="171-interfaces"></a></p>
+<h2 id="171-interfaces">17.1 Interfaces</h2>
+<p>Une <strong>interface</strong> en Java est un type de référence qui définit un contrat de méthodes qu’une classe accepte d’implémenter.</p>
+<p>Une <code>interface</code> est implicitement <code>abstract</code> et ne peut pas être marquée <code>final</code> : comme pour les classes top-level, une interface peut déclarer une visibilité <code>public</code> ou <code>default</code> (package-private).</p>
+<p>Une classe Java peut implémenter un nombre quelconque d’interfaces via le mot-clé <code>implements</code>.</p>
+<p>Une <code>interface</code> peut à son tour étendre plusieurs interfaces en utilisant le mot-clé <code>extends</code>.</p>
+<p>Les interfaces permettent l’abstraction, un couplage faible et l’héritage multiple de type.</p>
+<p><a id="1711-ce-que-les-interfaces-peuvent-contenir"></a></p>
+<h3 id="1711-ce-que-les-interfaces-peuvent-contenir">17.1.1 Ce que les Interfaces Peuvent Contenir</h3>
+<ul>
+<li><strong>Méthodes abstraites</strong> (implicitement <code>public</code> et <code>abstract</code>)</li>
+<li><strong>Méthodes concrètes</strong><ul>
+<li><strong>Méthodes default</strong> (contiennent du code et sont implicitement <code>public</code>)</li>
+<li><strong>Méthodes static</strong> (déclarées <code>static</code>, contiennent du code et sont implicitement <code>public</code>)</li>
+<li><strong>Méthodes private</strong> (Java 9+) pour la réutilisation interne</li>
+</ul>
+</li>
+<li><strong>Constantes</strong> → implicitement <code>public static final</code> et initialisées à la déclaration</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span> <span class="nc">Calculator</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">                 </span><span class="c1">// abstract</span>
+
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">mult</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">       </span><span class="c1">// default method</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">pi</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mf">3.14</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">    </span><span class="c1">// static method</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Puisque les méthodes abstraites des interfaces sont implicitement <code>public</code>, <strong>vous ne pouvez pas</strong> réduire le niveau d’accès sur une méthode d’implémentation.</p>
+</div>
+<p><a id="1712-implémenter-une-interface"></a></p>
+<h3 id="1712-implementer-une-interface">17.1.2 Implémenter une Interface</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">BasicCalc</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Calculator</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Chaque</strong> méthode abstraite doit être implémentée, sauf si la classe est elle-même abstraite.</p>
+</div>
+<p><a id="1713-héritage-multiple"></a></p>
+<h3 id="1713-heritage-multiple">17.1.3 Héritage Multiple</h3>
+<p>Une classe peut implémenter plusieurs interfaces.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">a</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">interface</span> <span class="nc">B</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">b</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">C</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">a</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">b</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="1714-héritage-des-interfaces-et-conflits"></a></p>
+<h3 id="1714-heritage-des-interfaces-et-conflits">17.1.4 Héritage des Interfaces et Conflits</h3>
+<p>Si deux interfaces fournissent des méthodes <code>default</code> avec la même signature, la classe qui implémente doit redéfinir (override) la méthode.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span> <span class="nc">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">interface</span> <span class="nc">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Z</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// mandatory</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Si vous voulez tout de même accéder à une implémentation particulière de la méthode <code>default</code> héritée, vous pouvez utiliser la syntaxe suivante :</p>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span> <span class="nc">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">interface</span> <span class="nc">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Z</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">useARun</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Y</span><span class="p">.</span><span class="na">super</span><span class="p">.</span><span class="na">run</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="1715-méthodes-default"></a></p>
+<h3 id="1715-methodes-default">17.1.5 Méthodes <code>default</code></h3>
+<p>Une méthode <code>default</code> (déclarée avec le mot-clé <code>default</code>) est une méthode qui définit une implémentation et peut être redéfinie par une classe qui implémente l’interface.</p>
+<ul>
+<li>Une méthode default contient du code et est implicitement <code>public</code> ;</li>
+<li>Une méthode default ne peut pas être <code>abstract</code>, <code>static</code> ou <code>final</code> ;</li>
+<li>Comme vu juste au-dessus, si deux interfaces fournissent des méthodes default avec la même signature, la classe qui implémente doit redéfinir la méthode ;</li>
+<li>Une classe qui implémente peut naturellement s’appuyer sur l’implémentation fournie de la méthode <code>default</code> sans la redéfinir ;</li>
+<li>La méthode <code>default</code> peut être invoquée sur une instance de la classe qui implémente et NON comme méthode <code>static</code> de l’interface contenante ;</li>
+</ul>
+<p><a id="1716-méthodes-static"></a></p>
+<h3 id="1716-methodes-static">17.1.6 Méthodes <code>static</code></h3>
+<ul>
+<li>Une interface peut fournir des <code>static methods</code> (via le mot-clé <code>static</code>) qui sont implicitement <code>public</code> ;</li>
+<li>Les méthodes static doivent inclure un corps de méthode et sont accessibles via le nom de l’interface ;</li>
+<li>Les méthodes static ne peuvent pas être <code>abstract</code> ou <code>final</code> ;</li>
+</ul>
+<p><a id="1717-méthodes-private-dans-les-interfaces"></a></p>
+<h3 id="1717-methodes-private-dans-les-interfaces">17.1.7 Méthodes <code>private</code> dans les interfaces</h3>
+<p>Parmi toutes les méthodes concrètes qu’une interface peut implémenter, nous avons aussi :</p>
+<ul>
+<li><strong>Méthodes <code>private</code></strong> : visibles uniquement à l’intérieur de l’interface déclarante et qui ne peuvent être invoquées que depuis un contexte <code>non-static</code> (méthodes <code>default</code> ou autres <code>non-static private methods</code>).</li>
+<li><strong>Méthodes <code>private static</code></strong> : visibles uniquement à l’intérieur de l’interface déclarante et qui peuvent être invoquées par n’importe quelle méthode de l’interface englobante.</li>
+</ul>
+<hr />
+<p><a id="172-types-sealed-non-sealed-et-final"></a></p>
+<h2 id="172-types-sealed-non-sealed-et-final">17.2 Types sealed, non-sealed et final</h2>
+<p>Les classes et interfaces <code>sealed</code> (Java 17+) restreignent quelles autres classes (ou interfaces) peuvent les étendre ou les implémenter.</p>
+<p>Un <code>sealed type</code> est déclaré en plaçant le modificateur <code>sealed</code> juste avant le mot-clé class (ou interface), et en ajoutant, après le nom du Type, le mot-clé <code>permits</code> suivi de la liste des types qui peuvent l’étendre (ou l’implémenter).</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Shape</span><span class="w"> </span><span class="n">permits</span><span class="w"> </span><span class="n">Circle</span><span class="p">,</span><span class="w"> </span><span class="n">Rectangle</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Circle</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Shape</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="n">non</span><span class="o">-</span><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Rectangle</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Shape</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><a id="1721-règles"></a></p>
+<h3 id="1721-regles">17.2.1 Règles</h3>
+<ul>
+<li>Un type sealed doit déclarer tous les sous-types autorisés.</li>
+<li>Un sous-type autorisé doit être <strong>final</strong>, <strong>sealed</strong> ou <strong>non-sealed</strong> ; puisque les interfaces ne peuvent pas être final, elles ne peuvent être marquées que <code>sealed</code> ou <code>non-sealed</code> lorsqu’elles étendent une interface sealed.</li>
+<li>Les types sealed doivent être déclarés dans le même package (ou module nommé) que leurs sous-types directs.</li>
+</ul>
+<hr />
+<p><a id="173-enum"></a></p>
+<h2 id="173-enum">17.3 Enum</h2>
+<p>Les <strong>enum</strong> définissent un ensemble fixe de valeurs constantes.</p>
+<p>Les <code>enum</code> peuvent déclarer des <code>attributs</code>, des <code>constructeurs</code> et des <code>méthodes</code> comme des classes ordinaires mais <strong>ne peuvent pas être étendues</strong>.</p>
+<p>La liste des valeurs de l’enum doit se terminer par un point-virgule <code>(;)</code> dans le cas des <code>Enum Complexes</code>, mais ce n’est pas obligatoire pour les <code>Enum Simples</code>.</p>
+<p><a id="1731-définition-dune-enum-simple"></a></p>
+<h3 id="1731-definition-dune-enum-simple">17.3.1 Définition d’une Enum <code>Simple</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">enum</span><span class="w"> </span><span class="n">Day</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">MON</span><span class="p">,</span><span class="w"> </span><span class="n">TUE</span><span class="p">,</span><span class="w"> </span><span class="n">WED</span><span class="p">,</span><span class="w"> </span><span class="n">THU</span><span class="p">,</span><span class="w"> </span><span class="n">FRI</span><span class="p">,</span><span class="w"> </span><span class="n">SAT</span><span class="p">,</span><span class="w"> </span><span class="n">SUN</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// point-virgule omis</span>
+</code></pre></div>
+<p><a id="1732-enum-complexes-avec-état-et-comportement"></a></p>
+<h3 id="1732-enum-complexes-avec-etat-et-comportement">17.3.2 Enum <code>Complexes</code> avec État et Comportement</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">enum</span><span class="w"> </span><span class="n">Level</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">LOW</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">MEDIUM</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="n">HIGH</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// point-virgule obligatoire</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">    </span><span class="n">Level</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">code</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getCode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">code</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Level</span><span class="p">.</span><span class="na">MEDIUM</span><span class="p">.</span><span class="na">getCode</span><span class="p">();</span><span class="w">     </span><span class="c1">// invoking a method</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="1733-méthodes-des-enum"></a></p>
+<h3 id="1733-methodes-des-enum">17.3.3 Méthodes des Enum</h3>
+<ul>
+<li><code>values()</code> – renvoie un tableau de toutes les valeurs constantes utilisables, par exemple, dans une boucle <code>for-each</code></li>
+<li><code>valueOf(String)</code> – renvoie la constante par son nom</li>
+<li><code>ordinal()</code> – index (int) de la constante</li>
+</ul>
+<p><a id="1734-règles"></a></p>
+<h3 id="1734-regles">17.3.4 Règles</h3>
+<ul>
+<li>Les constructeurs d’enum sont implicitement <code>private</code> ;</li>
+<li>Les enum peuvent contenir des méthodes <code>static</code> et <code>instance</code> ;</li>
+<li>Les enum peuvent implémenter des <code>interfaces</code> ;</li>
+</ul>
+<hr />
+<p><a id="174-records-java-16"></a></p>
+<h2 id="174-records-java-16">17.4 Records (Java 16+)</h2>
+<p>Un <strong>record</strong> est une classe spéciale conçue pour modéliser des données immuables : ils sont en effet implicitement <strong>final</strong>.</p>
+<p>Vous ne pouvez pas étendre un record, mais il est permis d’implémenter une interface normale ou sealed.</p>
+<p>Il fournit automatiquement :</p>
+<ul>
+<li><strong>champs private final</strong> pour chaque composant</li>
+<li><strong>constructeur</strong> avec des paramètres dans le même ordre que la déclaration du record ;</li>
+<li><strong>getters</strong> (portant le nom des attributs)</li>
+<li><strong><code>equals()</code>, <code>hashCode()</code>, <code>toString()</code></strong> : il est également permis de redéfinir (override) ces méthodes</li>
+<li>Les <strong>Records</strong> peuvent inclure <code>nested classes</code>, <code>interfaces</code>, <code>records</code>, <code>enums</code> et <code>annotations</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Point</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Point</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">element</span><span class="p">.</span><span class="na">x</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">element</span><span class="p">.</span><span class="na">y</span><span class="p">);</span>
+</code></pre></div>
+<p>Si vous avez besoin de validation ou de transformation supplémentaire des champs fournis, vous pouvez définir un <code>constructeur long</code> ou un <code>constructeur compact</code>.</p>
+<p><a id="1741-résumé-des-règles-de-base-pour-les-records"></a></p>
+<h3 id="1741-resume-des-regles-de-base-pour-les-records">17.4.1 Résumé des Règles de Base pour les Records</h3>
+<p>Un record peut être déclaré à trois emplacements :</p>
+<ul>
+<li>Comme <strong>record top-level</strong> (directement dans un package)</li>
+<li>Comme <strong>record member</strong> (à l’intérieur d’une classe ou d’une interface)</li>
+<li>Comme <strong>record local</strong> (à l’intérieur d’une méthode)</li>
+</ul>
+<p>Toutes les classes record <code>member</code> et <code>local</code> sont implicitement <code>static</code>.</p>
+<ul>
+<li>Un record member peut déclarer <code>static</code> de manière redondante.</li>
+<li>Un record local ne doit pas déclarer <code>static</code> explicitement.</li>
+</ul>
+<p>Chaque classe record est implicitement <code>final</code>.</p>
+<ul>
+<li>Déclarer <code>final</code> explicitement est autorisé mais redondant.</li>
+<li>Un record ne peut pas être déclaré <code>abstract</code>, <code>sealed</code> ou <code>non-sealed</code>.</li>
+</ul>
+<p>La superclasse directe de chaque record est <code>java.lang.Record</code>.</p>
+<ul>
+<li>Un record ne peut pas déclarer de clause <code>extends</code>.</li>
+<li>Un record ne peut étendre aucune autre classe.</li>
+</ul>
+<p>La sérialisation des records diffère de celle des classes sérialisables ordinaires.</p>
+<ul>
+<li>Lors de la désérialisation, le constructeur canonique est invoqué.</li>
+</ul>
+<p>Le corps d’un record peut contenir :</p>
+<ul>
+<li>Des constructeurs</li>
+<li>Des méthodes</li>
+<li>Des champs statiques</li>
+<li>Des blocs d’initialisation statiques</li>
+</ul>
+<p>Le corps d’un record NE doit PAS contenir :</p>
+<ul>
+<li>Des déclarations de champs d’instance</li>
+<li>Des blocs d’initialisation d’instance</li>
+<li>Des méthodes <code>abstract</code></li>
+<li>Des méthodes <code>native</code></li>
+</ul>
+<p><a id="1742-constructeur-long"></a></p>
+<h3 id="1742-constructeur-long">17.4.2 Constructeur Long</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">){</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Vous pouvez aussi définir des constructeurs en surcharge (overload), à condition qu’ils délèguent finalement au constructeur canonique via <code>this(...)</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Point</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Overloaded constructor (NOT canonical)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Point</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span><span class="w"> </span><span class="c1">// doit invoquer, comme première instruction, un autre constructeur surchargé et, en dernière instance, le constructeur canonique.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>Le compilateur n’insérera pas de constructeur si vous en fournissez manuellement un avec la même liste de paramètres dans l’ordre défini ;</li>
+<li>Dans ce cas, vous devez définir explicitement chaque champ manuellement ;</li>
+</ul>
+</div>
+<p><a id="1743-constructeur-compact"></a></p>
+<h3 id="1743-constructeur-compact">17.4.3 Constructeur Compact</h3>
+<p>Vous pouvez définir un <code>constructeur compact</code> qui initialise implicitement tous les champs, tout en vous permettant d’effectuer des validations et des transformations sur des champs spécifiques.</p>
+<p>Java exécutera le constructeur complet, initialisant tous les champs, après que le constructeur compact a terminé.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span><span class="w"> </span><span class="c1">// This transformation is still (at this level of initialization) on the input parameter.</span>
+
+<span class="w">        </span><span class="c1">// this.name = name; // ❌ Does not compile.</span>
+<span class="w">    </span><span class="p">}</span><span class="w">   </span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>Si vous essayez de modifier un attribut de Record dans un Constructeur Compact, votre code ne compilera pas</li>
+</ul>
+</div>
+<p><a id="1744-pattern-matching-pour-les-records"></a></p>
+<h3 id="1744-pattern-matching-pour-les-records">17.4.4 Pattern Matching pour les Records</h3>
+<p>Quand vous utilisez le pattern matching avec <code>instanceof</code> ou avec <code>switch</code>, un record pattern doit spécifier :</p>
+<ul>
+<li>Le type du record ;</li>
+<li>Un pattern pour chaque champ du record (correspondant au bon nombre de composants, et avec des types compatibles) ;</li>
+</ul>
+<p>Exemple record :</p>
+<div class="highlight"><pre><span></span><code><span class="n">Object</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">obj</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="nf">Point</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">   </span><span class="c1">// 8</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="1745-nested-record-patterns-et-matching-des-records-avec-var-et-generics"></a></p>
+<h3 id="1745-nested-record-patterns-et-matching-des-records-avec-var-et-generics">17.4.5 Nested Record Patterns et Matching des Records avec <code>var</code> et Generics</h3>
+<p>Les nested record patterns permettent de déstructurer des records qui contiennent d’autres records ou des types complexes, en extrayant récursivement des valeurs directement dans le pattern.</p>
+<p>Ils combinent la puissance de la déconstruction des <code>record</code> avec le pattern matching, vous donnant une manière concise et expressive de naviguer dans des structures de données hiérarchiques.</p>
+<p><a id="17451-nested-record-pattern-de-base"></a></p>
+<h4 id="17451-nested-record-pattern-de-base">17.4.5.1 Nested Record Pattern de Base</h4>
+<p>Si un record contient un autre record, vous pouvez déstructurer les deux en une seule fois :</p>
+<div class="highlight"><pre><span></span><code><span class="kd">record</span> <span class="nc">Address</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">country</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="kd">record</span> <span class="nc">Person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">address</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">printInfo</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">co</span><span class="p">))</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; lives in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">co</span><span class="p">);</span>
+<span class="w">        </span><span class="k">default</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Unknown&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Dans l’exemple ci-dessus, le pattern <code>Person</code> inclut un pattern <code>Address</code> imbriqué.</p>
+<p>Les deux sont appariés structurellement.</p>
+<p><a id="17452-nested-record-patterns-avec-var"></a></p>
+<h4 id="17452-nested-record-patterns-avec-var">17.4.5.2 Nested Record Patterns avec <code>var</code></h4>
+<p>Au lieu de spécifier des types exacts pour chaque champ, vous pouvez utiliser <code>var</code> dans le pattern pour laisser le compilateur inférer le type.</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">country</span><span class="p">))</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; — &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">city</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">country</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p><code>var</code> dans les patterns fonctionne comme <code>var</code> dans les variables locales : cela signifie "inférer le type".</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>Vous avez toujours besoin du type du record englobant (Person, Address) ;</li>
+<li>seuls les types des champs peuvent être remplacés par <code>var</code>.</li>
+</ul>
+</div>
+<p><a id="17453-nested-record-patterns-et-generics"></a></p>
+<h4 id="17453-nested-record-patterns-et-generics">17.4.5.3 Nested Record Patterns et Generics</h4>
+<p>Les record patterns fonctionnent aussi avec des records génériques.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">record</span> <span class="nc">Box</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="kd">record</span> <span class="nc">Wrapper</span><span class="p">(</span><span class="n">Box</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">box</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">Wrapper</span><span class="p">(</span><span class="n">Box</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">v</span><span class="p">))</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Boxed string: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v</span><span class="p">);</span>
+<span class="w">        </span><span class="k">default</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Something else&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Dans cet exemple :</p>
+<ul>
+<li>Le pattern exige exactement <code>Box&lt;String&gt;</code>, pas <code>Box&lt;Integer&gt;</code>.</li>
+<li>Dans le pattern, <code>var v</code> capture la valeur générique unboxed.</li>
+</ul>
+<p><a id="17454-erreurs-courantes-avec-les-nested-record-patterns"></a></p>
+<h4 id="17454-erreurs-courantes-avec-les-nested-record-patterns">17.4.5.4 Erreurs Courantes avec les Nested Record Patterns</h4>
+<p>Structure de record non correspondante</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ ERROR: pattern does not match record structure</span>
+<span class="k">case</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">city</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">...</span>
+</code></pre></div>
+<p><code>Person</code> a 2 champs, mais l’un d’eux est un record. Vous devez déstructurer correctement.</p>
+<p>Nombre incorrect de composants</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ ERROR: Address has 2 components, not 1</span>
+<span class="k">case</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">onlyCity</span><span class="p">))</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">...</span>
+</code></pre></div>
+<p>Incompatibilité générique</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ ERROR: expecting Box&lt;String&gt; but found Box&lt;Integer&gt;</span>
+<span class="k">case</span><span class="w"> </span><span class="n">Wrapper</span><span class="p">(</span><span class="n">Box</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">v</span><span class="p">))</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">...</span>
+</code></pre></div>
+<p>Placement illégal de <code>var</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ var cannot replace the record type itself</span>
+<span class="k">case</span><span class="w"> </span><span class="n">var</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">...</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><code>var</code> ne peut pas remplacer l’ensemble du pattern, seulement les composants individuels.</li>
+</ul>
+</div>
+<hr />
+<p><a id="175-classes-imbriquées-en-java"></a></p>
+<h2 id="175-classes-imbriquees-en-java">17.5 Classes Imbriquées en Java</h2>
+<p>Java supporte plusieurs types de <strong>classes imbriquées</strong> — des classes déclarées à l’intérieur d’une autre classe.</p>
+<p>Ce sont des outils fondamentaux pour l’encapsulation, l’organisation du code, les patterns d’event-handling et la représentation de hiérarchies logiques.</p>
+<p>Une classe imbriquée appartient toujours à une <strong>classe englobante</strong> et a des règles particulières d’accessibilité et d’instanciation selon sa catégorie.</p>
+<p>Java définit quatre types de classes imbriquées :</p>
+<ul>
+<li><strong>Static Nested Classes</strong> – déclarées avec <code>static</code> à l’intérieur d’une autre classe.</li>
+<li><strong>Inner Classes</strong> (non-static <strong>nested</strong> classes).</li>
+<li><strong>Local Classes</strong> – déclarées dans un bloc (méthode, constructeur ou initializer).</li>
+<li><strong>Anonymous Classes</strong> – classes sans nom créées inline, généralement pour redéfinir une méthode ou implémenter une interface.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li><code>static</code> s’applique uniquement aux classes <strong>membres imbriquées</strong></li>
+<li>Les classes <code>Top-level</code> → ne peuvent pas être static</li>
+<li>Les classes <code>Local</code> (déclarées dans les méthodes) → ne peuvent pas être static</li>
+<li>Les classes <code>Anonymous</code> → ne peuvent pas être static</li>
+<li>Une classe <code>static nested</code> ne peut pas accéder aux membres d’instance sans une référence explicite à un objet externe.</li>
+</ul>
+</div>
+<p><a id="1751-static-nested-classes"></a></p>
+<h3 id="1751-static-nested-classes">17.5.1 Static Nested Classes</h3>
+<p>Une <strong>static nested class</strong> se comporte comme une classe top-level dont le namespace est à l’intérieur de sa classe englobante.<br />
+Elle ne <strong>peut pas</strong> accéder aux membres d’instance de la classe externe mais <strong>peut</strong> accéder aux membres statiques.<br />
+Elle ne conserve pas de référence vers une instance de la classe englobante.
+Une classe imbriquée <code>static</code> peut contenir des variables membres non statiques.</p>
+<p><a id="17511-syntaxe-et-règles-daccès"></a></p>
+<h4 id="17511-syntaxe-et-regles-dacces">17.5.1.1 Syntaxe et Règles d’Accès</h4>
+<ul>
+<li>Déclarée via <code>static class</code> à l’intérieur d’une autre classe.</li>
+<li>Peut accéder uniquement aux membres <strong>static</strong> de la classe externe.</li>
+<li>N’a pas de référence implicite vers l’instance englobante.</li>
+<li>Peut être instanciée sans instance externe.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Outer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Nested</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Version: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">version</span><span class="p">);</span><span class="w"> </span><span class="c1">// OK: accessing static member</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Outer</span><span class="p">.</span><span class="na">Nested</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Outer</span><span class="p">.</span><span class="na">Nested</span><span class="p">();</span><span class="w"> </span><span class="c1">// No Outer instance required</span>
+<span class="w">        </span><span class="n">n</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="17512-erreurs-courantes"></a></p>
+<h4 id="17512-erreurs-courantes">17.5.1.2 Erreurs Courantes</h4>
+<ul>
+<li>Les static nested classes <strong>ne peuvent pas accéder aux variables d’instance</strong> :</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Outer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Nested</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// System.out.println(x); // ❌ Compile error</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="1752-inner-classes-non-static-nested-classes"></a></p>
+<h3 id="1752-inner-classes-non-static-nested-classes">17.5.2 Inner Classes (Non-Static Nested Classes)</h3>
+<p>Une <strong>inner class</strong> est associée à une instance de la classe externe et peut accéder à <strong>tous les membres</strong> de la classe externe, y compris ceux <strong>private</strong>.</p>
+<p><a id="17521-syntaxe-et-règles-daccès"></a></p>
+<h4 id="17521-syntaxe-et-regles-dacces">17.5.2.1 Syntaxe et Règles d’Accès</h4>
+<ul>
+<li>Déclarée sans <code>static</code>.</li>
+<li>Possède une référence implicite vers l’instance englobante.</li>
+<li>Peut accéder aux membres statiques et aux membres d’instance de la classe externe.</li>
+<li>Comme elle n’est pas statique, elle doit être créée via une instance de la classe englobante.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Outer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">class</span> <span class="nc">Inner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Value = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">value</span><span class="p">);</span><span class="w"> </span><span class="c1">// OK: accessing private</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">make</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Inner</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Inner</span><span class="p">();</span><span class="w"> </span><span class="c1">// OK inside the outer class</span>
+<span class="w">        </span><span class="n">i</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Outer</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Outer</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Outer</span><span class="p">.</span><span class="na">Inner</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="na">new</span><span class="w"> </span><span class="nf">Inner</span><span class="p">();</span><span class="w"> </span><span class="c1">// MUST be created from an instance</span>
+<span class="w">        </span><span class="n">i</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="17522-erreurs-courantes"></a></p>
+<h4 id="17522-erreurs-courantes">17.5.2.2 Erreurs Courantes</h4>
+<ul>
+<li>Les inner classes <strong>ne peuvent pas déclarer de membres statiques</strong> sauf les <strong>static final constants</strong>.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Outer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">class</span> <span class="nc">Inner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// static int x = 10;     // ❌ Compile error</span>
+<span class="w">        </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">OK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="c1">// ✔ Allowed (constant)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>Instancier une inner class SANS instance externe est illégal.</li>
+</ul>
+</div>
+<p><a id="1753-classes-locales"></a></p>
+<h3 id="1753-classes-locales">17.5.3 Classes Locales</h3>
+<p>Une <strong>classe locale</strong> est une classe imbriquée définie à l’intérieur d’un bloc — le plus souvent une méthode.</p>
+<p>Elle n’a pas de modificateur d’accès et n’est visible qu’à l’intérieur du bloc où elle est déclarée.</p>
+<p><a id="17531-caractéristiques"></a></p>
+<h4 id="17531-caracteristiques">17.5.3.1 Caractéristiques</h4>
+<ul>
+<li>Déclarée à l’intérieur d’une méthode, d’un constructeur ou d’un initializer.</li>
+<li>Peut accéder aux membres de la classe externe.</li>
+<li>Peut accéder aux variables locales si elles sont <strong>effectively final</strong>.</li>
+<li>Ne peut pas déclarer de membres statiques (sauf static final constants).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Outer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">compute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="c1">// must be effectively final</span>
+
+<span class="w">        </span><span class="kd">class</span> <span class="nc">Local</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="nf">show</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">base</span><span class="p">);</span><span class="w"> </span><span class="c1">// OK</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Local</span><span class="p">().</span><span class="na">show</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="17532-erreurs-courantes"></a></p>
+<h4 id="17532-erreurs-courantes">17.5.3.2 Erreurs Courantes</h4>
+<ul>
+<li><code>base</code> doit être effectively final ; le modifier casse la compilation.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">compute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">base</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="c1">// ❌ Now base is NOT effectively final</span>
+<span class="w">    </span><span class="kd">class</span> <span class="nc">Local</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="1754-classes-anonymes"></a></p>
+<h3 id="1754-classes-anonymes">17.5.4 Classes Anonymes</h3>
+<p>Une <strong>classe anonyme</strong> est une classe one-off créée inline, généralement pour implémenter une interface ou redéfinir une méthode sans nommer une nouvelle classe.</p>
+<p><a id="17541-syntaxe-et-utilisation"></a></p>
+<h4 id="17541-syntaxe-et-utilisation">17.5.4.1 Syntaxe et Utilisation</h4>
+<ul>
+<li>Créée via <code>new</code> + type + body.</li>
+<li>Ne peut pas avoir de constructeurs (pas de nom).</li>
+<li>Souvent utilisée pour event handling, callbacks, comparators.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Runnable</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Runnable</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Anonymous running&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+<p><a id="17542-classe-anonyme-qui-étend-une-classe"></a></p>
+<h4 id="17542-classe-anonyme-qui-etend-une-classe">17.5.4.2 Classe Anonyme qui Étend une Classe</h4>
+<div class="highlight"><pre><span></span><code><span class="n">Button</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&quot;Click&quot;</span><span class="p">);</span>
+<span class="n">b</span><span class="p">.</span><span class="na">onClick</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ClickHandler</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Handled!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p><a id="1755-comparaison-des-types-de-classes-imbriquées"></a></p>
+<h3 id="1755-comparaison-des-types-de-classes-imbriquees">17.5.5 Comparaison des Types de Classes Imbriquées</h3>
+<p>Un tableau rapide qui résume tous les types de classes imbriquées.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>A une Instance Externe ?</th>
+<th>Peut Accéder aux Membres d’Instance Externe ?</th>
+<th>Peut Avoir des Membres Statiques ?</th>
+<th>Usage Typique</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Static Nested</td>
+<td>Non</td>
+<td>Non</td>
+<td>Oui</td>
+<td>Namespacing, helpers</td>
+</tr>
+<tr>
+<td>Inner Class</td>
+<td>Oui</td>
+<td>Oui</td>
+<td>Non (sauf constantes)</td>
+<td>Comportement lié à l’objet</td>
+</tr>
+<tr>
+<td>Local Class</td>
+<td>Oui</td>
+<td>Oui</td>
+<td>Non</td>
+<td>Classes temporaires avec scope</td>
+</tr>
+<tr>
+<td>Anonymous Class</td>
+<td>Oui</td>
+<td>Oui</td>
+<td>Non</td>
+<td>Personnalisation inline</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a id="176-imbrication-des-interfaces-en-java"></a></p>
+<h2 id="176-imbrication-des-interfaces-en-java">17.6 Imbrication des Interfaces en Java</h2>
+<p>En Java, une interface peut être déclarée à différents emplacements et suit des règles spécifiques concernant l’imbrication et les membres autorisés.</p>
+<p><a id="1761-où-une-interface-peut-être-déclarée"></a></p>
+<h3 id="1761-ou-une-interface-peut-etre-declaree">17.6.1 Où une Interface peut être Déclarée</h3>
+<p>Une interface peut être :</p>
+<ul>
+<li><strong>Top-level</strong> (directement dans un package)</li>
+<li><strong>Interface membre imbriquée</strong> (déclarée à l’intérieur d’une classe ou d’une autre interface)</li>
+<li><strong>Interface locale</strong> ❌ (non autorisée)</li>
+<li><strong>Interface anonyme</strong> ❌ (n’existe pas comme déclaration, seulement des implémentations anonymes)</li>
+</ul>
+<p>En Java, il n’est <strong>pas permis de déclarer une interface locale</strong> (c’est-à-dire à l’intérieur d’une méthode ou d’un bloc).<br />
+Les interfaces peuvent être uniquement <code>top-level</code> ou <code>member</code>.</p>
+<p><a id="1762-interfaces-imbriquées"></a></p>
+<h3 id="1762-interfaces-imbriquees">17.6.2 Interfaces Imbriquées</h3>
+<p>Une interface imbriquée peut être déclarée dans :</p>
+<p><a id="17621-interface-imbriquée-dans-une-classe"></a></p>
+<h4 id="17621-interface-imbriquee-dans-une-classe">17.6.2.1 Interface Imbriquée dans une Classe</h4>
+<ul>
+<li>Elle est implicitement <code>static</code></li>
+<li>Elle ne peut pas être déclarée <code>non-static</code></li>
+<li>
+<p>Elle peut être déclarée <code>public</code>, <code>protected</code>, <code>private</code> ou <code>package-private</code></p>
+</li>
+<li>
+<p>Exemple :</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Outer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">interface</span> <span class="nc">InnerInterface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Le mot-clé <code>static</code> est implicite :</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Outer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">InnerInterface</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// autorisé mais redondant</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="17622-interface-imbriquée-dans-une-autre-interface"></a></p>
+<h4 id="17622-interface-imbriquee-dans-une-autre-interface">17.6.2.2 Interface Imbriquée dans une autre Interface</h4>
+<ul>
+<li>Elle est implicitement <code>public</code> et <code>static</code></li>
+<li>Elle ne peut pas être <code>private</code> ou <code>protected</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">interface</span> <span class="nc">B</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="1763-règles-daccès"></a></p>
+<h3 id="1763-regles-dacces">17.6.3 Règles dAccès</h3>
+<p>Une <code>interface imbriquée</code> :</p>
+<ul>
+<li>N’a pas de référence implicite à une instance de la classe englobante</li>
+<li>Ne peut pas accéder directement aux membres d’instance de la classe englobante</li>
+<li><strong>Peut accéder uniquement aux membres <code>static</code> de la classe englobante</strong></li>
+</ul>
+<p><a id="1764-types-imbriqués-dans-les-interfaces"></a></p>
+<h3 id="1764-types-imbriques-dans-les-interfaces">17.6.4 Types Imbriqués dans les Interfaces</h3>
+<p>Une interface peut contenir :</p>
+<ul>
+<li>Des classes imbriquées (implicitement <code>public static</code>)</li>
+<li>Des records imbriqués (implicitement <code>public static</code>)</li>
+<li>Des enums imbriqués (implicitement <code>public static</code>)</li>
+<li>D’autres interfaces imbriquées (implicitement <code>public static</code>)</li>
+</ul>
+<p><a id="1765-résumé-essentiel"></a></p>
+<h3 id="1765-resume-essentiel">17.6.5 Résumé Essentiel</h3>
+<ul>
+<li>Les interfaces imbriquées sont toujours <code>static</code></li>
+<li>Les interfaces locales n’existent pas</li>
+<li>Les champs sont toujours <code>public static final</code></li>
+<li>Les méthodes sont implicitement <code>public abstract</code> (sauf default/static/private)</li>
+<li>Elles peuvent contenir d’autres types imbriqués</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.ars-digitale.com/" target="_blank" rel="noopener" title="Ars Digitale" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

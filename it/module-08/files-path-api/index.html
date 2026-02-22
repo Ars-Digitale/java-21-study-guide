@@ -1,0 +1,7445 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ars-digitale.github.io/java-21-study-guide/it/module-08/files-path-api/">
+      
+      
+        <link rel="prev" href="../files-path/">
+      
+      
+        <link rel="next" href="../io-streams/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Files e paths (API) - Java 21 Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#33-api-di-files-e-path" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Java 21 Study Guide" class="md-header__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Java 21 Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Files e paths (API)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Java 21 Study Guide" class="md-nav__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Java 21 Study Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisite material
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Java Language Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Java Language Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syntax building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic language building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java naming rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java data types and casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantiating types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Control Flow
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Control Flow
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control flow statements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — Core Standard APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — Core Standard APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strings in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dates and time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatting and localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methods, attributes, and variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading, initialization, and object construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inheritance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beyond classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions and error handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Functional Programming
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Functional Programming
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functional programming in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to the collections framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared collection operations and equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting and comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    List APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue and deque APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrency and Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrency and Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thread fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concurrency APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — Java I/O and NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — Java I/O and NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java I/O streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O streams APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interacting with the user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JPMS fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiling, packaging, and running modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Italiano
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Italiano
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materiale propedeutico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi di sintassi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elementi base del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regole di naming Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tipi di dati e casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operatori Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istanziare i tipi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istruzioni di controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cicli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stringhe in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilità Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data e ora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formattazione e localizzazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metodi, attributi e variabili
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading e costruzione oggetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ereditarietà
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oltre le classi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eccezioni e gestione errori
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmazione funzionale in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operazioni condivise ed equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting e comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti thread
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API di concorrenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 08 — I/O e NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 08 — I/O e NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (fondamenti)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (API)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#331-file-legacy-e-path-nio-creazione-e-conversione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1 File legacy e Path NIO: Creazione e Conversione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.1 File legacy e Path NIO: Creazione e Conversione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3311-creare-un-file-legacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.1 Creare un File (Legacy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3312-creare-un-path-nio-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.2 Creare un Path (NIO v.2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3313-assoluto-vs-relativo-cosa-significa-relativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.3 Assoluto vs Relativo: Cosa Significa “Relativo”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3314-unire-costruire-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.4 Unire / Costruire Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.1.4 Unire / Costruire Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33141-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.4.1 resolve()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33142-relativize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.4.2 relativize()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3315-convertire-tra-file-e-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.5 Convertire tra File e Path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3316-conversione-uri-quando-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.6 Conversione URI (Quando Serve)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3317-canonico-vs-assoluto-vs-normalizzato-differenze-fondamentali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.7 Canonico vs Assoluto vs Normalizzato (Differenze Fondamentali)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.1.7 Canonico vs Assoluto vs Normalizzato (Differenze Fondamentali)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33171-normalize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.7.1 normalize()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3318-tabella-di-confronto-rapida-creazione-conversione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.8 Tabella di Confronto Rapida (Creazione + Conversione)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#332-gestire-file-e-directory-creare-copiare-spostare-sostituire-confrontare-cancellare-legacy-vs-nio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2 Gestire File e Directory: Creare, Copiare, Spostare, Sostituire, Confrontare, Cancellare (Legacy vs NIO)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.2 Gestire File e Directory: Creare, Copiare, Spostare, Sostituire, Confrontare, Cancellare (Legacy vs NIO)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3321-modello-mentale-pathlocator-vs-operazioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.1 Modello Mentale: “Path/Locator” vs “Operazioni”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3322-creare-file-e-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.2 Creare File e Directory
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.2.2 Creare File e Directory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33221-creare-un-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.2.1 Creare un File
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33222-creare-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.2.2 Creare Directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3323-copiare-file-e-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.3 Copiare File e Directory
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.2.3 Copiare File e Directory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33231-copiare-un-file-nio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.3.1 Copiare un File (NIO)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33232-copia-manuale-legacy-basata-su-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.3.2 Copia Manuale (Legacy, Basata su Stream)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3324-spostare-rinominare-e-sostituire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.4 Spostare / Rinominare e Sostituire
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.2.4 Spostare / Rinominare e Sostituire">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33241-rinomina-legacy-trappola-comune" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.4.1 Rinomina Legacy (Trappola Comune)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33242-nio-move-preferito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.4.2 NIO Move (Preferito)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3325-confrontare-path-e-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.5 Confrontare Path e File
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.2.5 Confrontare Path e File">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33251-uguaglianza-vs-stesso-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.5.1 Uguaglianza vs Stesso File
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3326-cancellare-file-e-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.6 Cancellare File e Directory
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.2.6 Cancellare File e Directory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33261-delete-legacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.6.1 Delete Legacy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33262-nio-delete-e-delete-if-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.6.2 NIO Delete e Delete-If-Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3327-copiare-cancellare-ricorsivamente-alberi-di-directory-pattern-nio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.7 Copiare / Cancellare Ricorsivamente Alberi di Directory (Pattern NIO)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3328-checklist-di-riepilogo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.8 Checklist di Riepilogo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interazione con l’utente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilare e avviare moduli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Français
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Français
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matériel de support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Bases du Langage Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Bases du Langage Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocs de syntaxe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Éléments de base du langage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Règles de nommage Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types de données et casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérateurs Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instanciation des types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Contrôle de flux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Contrôle de flux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions de contrôle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boucles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chaînes (String) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tableaux (Arrays) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilitaires Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date et heure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatage et localisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Fondamentaux OO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Fondamentaux OO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Méthodes, attributs et variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chargement de classes et construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Héritage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Au-delà des classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions et gestion des erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmation fonctionnelle en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Streams Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Framework des Collections
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Framework des Collections
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction au framework des collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérations partagées et égalité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tri et comparaison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrence et Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrence et Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux des threads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de concurrence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — I/O et NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — I/O et NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (fondamentaux)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interaction avec l’utilisateur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiler et exécuter des modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services en JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ars-digitale.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ars Digitale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#331-file-legacy-e-path-nio-creazione-e-conversione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1 File legacy e Path NIO: Creazione e Conversione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.1 File legacy e Path NIO: Creazione e Conversione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3311-creare-un-file-legacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.1 Creare un File (Legacy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3312-creare-un-path-nio-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.2 Creare un Path (NIO v.2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3313-assoluto-vs-relativo-cosa-significa-relativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.3 Assoluto vs Relativo: Cosa Significa “Relativo”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3314-unire-costruire-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.4 Unire / Costruire Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.1.4 Unire / Costruire Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33141-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.4.1 resolve()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33142-relativize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.4.2 relativize()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3315-convertire-tra-file-e-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.5 Convertire tra File e Path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3316-conversione-uri-quando-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.6 Conversione URI (Quando Serve)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3317-canonico-vs-assoluto-vs-normalizzato-differenze-fondamentali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.7 Canonico vs Assoluto vs Normalizzato (Differenze Fondamentali)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.1.7 Canonico vs Assoluto vs Normalizzato (Differenze Fondamentali)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33171-normalize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.7.1 normalize()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3318-tabella-di-confronto-rapida-creazione-conversione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1.8 Tabella di Confronto Rapida (Creazione + Conversione)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#332-gestire-file-e-directory-creare-copiare-spostare-sostituire-confrontare-cancellare-legacy-vs-nio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2 Gestire File e Directory: Creare, Copiare, Spostare, Sostituire, Confrontare, Cancellare (Legacy vs NIO)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.2 Gestire File e Directory: Creare, Copiare, Spostare, Sostituire, Confrontare, Cancellare (Legacy vs NIO)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3321-modello-mentale-pathlocator-vs-operazioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.1 Modello Mentale: “Path/Locator” vs “Operazioni”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3322-creare-file-e-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.2 Creare File e Directory
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.2.2 Creare File e Directory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33221-creare-un-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.2.1 Creare un File
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33222-creare-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.2.2 Creare Directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3323-copiare-file-e-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.3 Copiare File e Directory
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.2.3 Copiare File e Directory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33231-copiare-un-file-nio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.3.1 Copiare un File (NIO)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33232-copia-manuale-legacy-basata-su-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.3.2 Copia Manuale (Legacy, Basata su Stream)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3324-spostare-rinominare-e-sostituire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.4 Spostare / Rinominare e Sostituire
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.2.4 Spostare / Rinominare e Sostituire">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33241-rinomina-legacy-trappola-comune" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.4.1 Rinomina Legacy (Trappola Comune)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33242-nio-move-preferito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.4.2 NIO Move (Preferito)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3325-confrontare-path-e-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.5 Confrontare Path e File
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.2.5 Confrontare Path e File">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33251-uguaglianza-vs-stesso-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.5.1 Uguaglianza vs Stesso File
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3326-cancellare-file-e-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.6 Cancellare File e Directory
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33.2.6 Cancellare File e Directory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33261-delete-legacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.6.1 Delete Legacy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33262-nio-delete-e-delete-if-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.6.2 NIO Delete e Delete-If-Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3327-copiare-cancellare-ricorsivamente-alberi-di-directory-pattern-nio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.7 Copiare / Cancellare Ricorsivamente Alberi di Directory (Pattern NIO)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3328-checklist-di-riepilogo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2.8 Checklist di Riepilogo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="33-api-di-files-e-path">33. API di Files e Path</h1>
+<p><a id="indice"></a></p>
+<h3 id="indice">Indice</h3>
+<ul>
+<li><a href="#331-file-legacy-e-path-nio-creazione-e-conversione">33.1 Creazione-e-Conversione di File legacy e Path NIO</a><ul>
+<li><a href="#3311-creare-un-file-legacy">33.1.1 Creare un File Legacy</a></li>
+<li><a href="#3312-creare-un-path-nio-v2">33.1.2 Creare un Path NIO-v2</a></li>
+<li><a href="#3313-assoluto-vs-relativo-cosa-significa-relativo">33.1.3 Assoluto vs Relativo Cosa Significa Relativo</a></li>
+<li><a href="#3314-unire--costruire-path">33.1.4 Unire--Costruire-Path</a><ul>
+<li><a href="#33141-resolve">33.1.4.1 resolve</a></li>
+<li><a href="#33142-relativize">33.1.4.2 relativize</a></li>
+</ul>
+</li>
+<li><a href="#3315-convertire-tra-file-e-path">33.1.5 Convertire tra File e Path</a></li>
+<li><a href="#3316-conversione-uri-quando-serve">33.1.6 Conversione URI Quando-Serve</a></li>
+<li><a href="#3317-canonico-vs-assoluto-vs-normalizzato-differenze-fondamentali">33.1.7 Canonico vs Assoluto vs Normalizzato Differenze-Fondamentali</a><ul>
+<li><a href="#33171-normalize">33.1.7.1 normalize</a></li>
+</ul>
+</li>
+<li><a href="#3318-tabella-di-confronto-rapida-creazione--conversione">33.1.8 Tabella di Confronto Rapida Creazione--Conversione</a></li>
+</ul>
+</li>
+<li><a href="#332-gestire-file-e-directory-creare-copiare-spostare-sostituire-confrontare-cancellare-legacy-vs-nio">33.2 Gestire File e Directory: Creare-Copiare-Spostare-Sostituire-Confrontare-Cancellare</a><ul>
+<li><a href="#3321-modello-mentale-pathlocator-vs-operazioni">33.2.1 Modello Mentale Path-Locator-vs-Operazioni</a></li>
+<li><a href="#3322-creare-file-e-directory">33.2.2 Creare File e Directory</a><ul>
+<li><a href="#33221-creare-un-file">33.2.2.1 Creare un File</a></li>
+<li><a href="#33222-creare-directory">33.2.2.2 Creare Directory</a></li>
+</ul>
+</li>
+<li><a href="#3323-copiare-file-e-directory">33.2.3 Copiare File e Directory</a><ul>
+<li><a href="#33231-copiare-un-file-nio">33.2.3.1 Copiare un File NIO</a></li>
+<li><a href="#33232-copia-manuale-legacy-basata-su-stream">33.2.3.2 Copia Manuale Legacy-Basata-su-Stream</a></li>
+</ul>
+</li>
+<li><a href="#3324-spostare--rinominare-e-sostituire">33.2.4 Spostare--Rinominare-e-Sostituire</a><ul>
+<li><a href="#33241-rinomina-legacy-trappola-comune">33.2.4.1 Rinomina Legacy Trappola-Comune</a></li>
+<li><a href="#33242-nio-move-preferito">33.2.4.2 NIO Move Preferito</a></li>
+</ul>
+</li>
+<li><a href="#3325-confrontare-path-e-file">33.2.5 Confrontare Path e File</a><ul>
+<li><a href="#33251-uguaglianza-vs-stesso-file">33.2.5.1 Uguaglianza-vs-Stesso-File</a></li>
+</ul>
+</li>
+<li><a href="#3326-cancellare-file-e-directory">33.2.6 Cancellare File e Directory</a><ul>
+<li><a href="#33261-delete-legacy">33.2.6.1 Delete Legacy</a></li>
+<li><a href="#33262-nio-delete-e-delete-if-exists">33.2.6.2 NIO Delete e Delete-If-Exists</a></li>
+</ul>
+</li>
+<li><a href="#3327-copiare--cancellare-ricorsivamente-alberi-di-directory-pattern-nio">33.2.7 Copiare--Cancellare-Ricorsivamente-Alberi-di-Directory Pattern-NIO</a></li>
+<li><a href="#3328-checklist-di-riepilogo">33.2.8 Checklist di Riepilogo</a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>Questa sezione si concentra su come creare localizzatori su filesystem usando la API legacy <code>java.io.File</code> e la moderna API <code>java.nio.file.Path</code>: come convertire tra di loro e comprendere overload, default e trappole comuni.</p>
+<p><a id="331-file-legacy-e-path-nio-creazione-e-conversione"></a></p>
+<h2 id="331-file-legacy-e-path-nio-creazione-e-conversione">33.1 <code>File</code> legacy e <code>Path</code> NIO: Creazione e Conversione</h2>
+<p><a id="3311-creare-un-file-legacy"></a></p>
+<h3 id="3311-creare-un-file-legacy">33.1.1 Creare un <code>File</code> (Legacy)</h3>
+<p>Una istanza <code>File</code> rappresenta un pathname del filesystem (assoluto o relativo).</p>
+<p>Crearne una non accede al filesystem e non lancia <code>IOException</code>.</p>
+<p>Costruttori core (più comuni):</p>
+<ul>
+<li><code>new File(String pathname)</code> </li>
+<li><code>new File(String parent, String child)</code> </li>
+<li><code>new File(File parent, String child)</code> </li>
+<li><code>new File(URI uri)</code> (tipicamente <code>file:...</code>)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+
+<span class="n">File</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;data.txt&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// relativo</span>
+<span class="n">File</span><span class="w"> </span><span class="n">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;/tmp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;data.txt&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// parent + child</span>
+<span class="n">File</span><span class="w"> </span><span class="n">f3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;/tmp&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;data.txt&quot;</span><span class="p">);</span>
+
+<span class="n">File</span><span class="w"> </span><span class="n">f4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;file:///tmp/data.txt&quot;</span><span class="p">));</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><code>new File(...)</code> non apre mai il file.</li>
+<li>Esistenza/permessi vengono controllati solo quando invocati metodi come <code>exists()</code>, <code>length()</code>, o quando si apre uno stream/channel.</li>
+</ul>
+</div>
+<p><a id="3312-creare-un-path-nio-v2"></a></p>
+<h3 id="3312-creare-un-path-nio-v2">33.1.2 Creare un <code>Path</code> (NIO v.2)</h3>
+<p>Un <code>Path</code> è solo un locator.</p>
+<p>Come <code>File</code>, creare un <code>Path</code> non accede al filesystem.</p>
+<p>Factory core:</p>
+<ul>
+<li><code>Path.of(String first, String... more)</code> (Java 11+)</li>
+<li><code>Paths.get(String first, String... more)</code> (stile più vecchio; ancora valido)</li>
+<li><code>Path.of(URI uri)</code> (es. <code>file:///...</code>)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Paths</span><span class="p">;</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;data.txt&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// relativo</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/tmp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;data.txt&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// parent + child</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">p3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Paths</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;data.txt&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// stile factory legacy</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">p4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;file:///tmp/data.txt&quot;</span><span class="p">));</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><code>Path.of(...)</code> e <code>Paths.get(...)</code> sono equivalenti per il filesystem di default.</li>
+<li>Preferisci <code>Path.of</code> nel codice moderno.</li>
+</ul>
+</div>
+<p><a id="3313-assoluto-vs-relativo-cosa-significa-relativo"></a></p>
+<h3 id="3313-assoluto-vs-relativo-cosa-significa-relativo">33.1.3 Assoluto vs Relativo: Cosa Significa “Relativo”</h3>
+<p>Sia <code>File</code> sia <code>Path</code> possono essere creati come path relativi.</p>
+<p>I path relativi vengono risolti rispetto alla working directory del processo (tipicamente <code>System.getProperty("user.dir")</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+
+<span class="n">File</span><span class="w"> </span><span class="n">rf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;data.txt&quot;</span><span class="p">);</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">rp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;data.txt&quot;</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">rf</span><span class="p">.</span><span class="na">isAbsolute</span><span class="p">());</span><span class="w"> </span><span class="c1">// false</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">rp</span><span class="p">.</span><span class="na">isAbsolute</span><span class="p">());</span><span class="w"> </span><span class="c1">// false</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">rf</span><span class="p">.</span><span class="na">getAbsolutePath</span><span class="p">());</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">rp</span><span class="p">.</span><span class="na">toAbsolutePath</span><span class="p">());</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I path relativi sono una fonte comune di bug “funziona sulla mia macchina” perché <code>user.dir</code> dipende da come/dove la JVM è stata lanciata.</p>
+</div>
+<p><a id="3314-unire--costruire-path"></a></p>
+<h3 id="3314-unire-costruire-path">33.1.4 Unire / Costruire Path</h3>
+<ul>
+<li>Il <code>File</code> legacy usa i costruttori (parent + child).</li>
+<li>NIO usa <code>resolve</code> e metodi correlati.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Legacy (File)</th>
+<th>NIO (Path)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unire parent + child</td>
+<td><code>new File(parent, child)</code></td>
+<td><code>parent.resolve(child)</code></td>
+</tr>
+<tr>
+<td>Unire molti segmenti</td>
+<td>Costruttori ripetuti</td>
+<td><code>Path.of(a, b, c)</code> o <code>resolve()</code> concatenati</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+
+<span class="n">File</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;/tmp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a.txt&quot;</span><span class="p">);</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/tmp&quot;</span><span class="p">);</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="s">&quot;a.txt&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// /tmp/a.txt</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="s">&quot;dir&quot;</span><span class="p">).</span><span class="na">resolve</span><span class="p">(</span><span class="s">&quot;a.txt&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// /tmp/dir/a.txt</span>
+</code></pre></div>
+<p><a id="33141-resolve"></a></p>
+<h4 id="33141-resolve">33.1.4.1 <code>resolve()</code></h4>
+<p>Combina path in modo filesystem-aware.</p>
+<ul>
+<li>I path relativi vengono appesi</li>
+<li>Un argomento assoluto sostituisce il base path</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>Path.resolve(...)</code> ha una regola: se l’argomento è assoluto, restituisce l’argomento e scarta la base (non puoi combinare due path assoluti usando <code>resolve</code>).</p>
+</div>
+<p><a id="33142-relativize"></a></p>
+<h4 id="33142-relativize">33.1.4.2 <code>relativize()</code></h4>
+<p><code>Path.relativize</code> calcola un <strong>path relativo</strong> da un path a un altro. Il path risultante, quando <code>resolved</code> rispetto al path sorgente, produce il path target.</p>
+<p>In altre parole:</p>
+<ul>
+<li>Risponde alla domanda: “Come vado dal path A al path B?”</li>
+<li>Il risultato è sempre un path <strong>relativo</strong></li>
+<li>Non avviene alcun accesso al filesystem</li>
+</ul>
+<p><strong>Regole Fondamentali</strong></p>
+<p><code>relativize</code> ha precondizioni strette. Violandole si lancia una eccezione.</p>
+<table>
+<thead>
+<tr>
+<th>Regola</th>
+<th>Spiegazione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Entrambi i path devono essere assoluti</td>
+<td>o entrambi relativi</td>
+</tr>
+<tr>
+<td>Entrambi i path devono appartenere allo stesso filesystem</td>
+<td>stesso provider</td>
+</tr>
+<tr>
+<td>I componenti di root devono combaciare</td>
+<td>stessa root (su Windows, stesso drive)</td>
+</tr>
+<tr>
+<td>Il risultato non è mai assoluto</td>
+<td>sempre relativo</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Se un path è assoluto e l’altro relativo, viene lanciata <code>IllegalArgumentException</code>.</p>
+</div>
+<p><strong>Esempio Relativo Semplice</strong>:</p>
+<p>Entrambi i path sono relativi, quindi la relativizzazione è consentita.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;docs/manual&quot;</span><span class="p">);</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;docs/images/logo.png&quot;</span><span class="p">);</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">relative</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="na">relativize</span><span class="p">(</span><span class="n">p2</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">relative</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>../images/logo.png
+</code></pre></div>
+<p>Interpretazione: da <code>docs/manual</code>, sali di un livello, poi entra in <code>images/logo.png</code>.</p>
+<p><strong>Esempio di Path Assoluti</strong>:</p>
+<p>I path assoluti funzionano esattamente allo stesso modo.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/home/user/projects&quot;</span><span class="p">);</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/home/user/docs/readme.txt&quot;</span><span class="p">);</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">relative</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">.</span><span class="na">relativize</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">relative</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>../docs/readme.txt
+</code></pre></div>
+<p><strong>Usare <code>resolve</code> per Verificare il Risultato</strong></p>
+<p>Una proprietà chiave di <code>relativize</code> è questa identità:</p>
+<div class="highlight"><pre><span></span><code>base.resolve(base.relativize(target)).equals(target)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/a/b/c&quot;</span><span class="p">);</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/a/d/e&quot;</span><span class="p">);</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">.</span><span class="na">relativize</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">r</span><span class="p">);</span><span class="w"> </span><span class="c1">// ../../d/e</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">base</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">r</span><span class="p">));</span><span class="w"> </span><span class="c1">// /a/d/e</span>
+</code></pre></div>
+<p><strong>Esempio</strong>: Mescolare Path Assoluti e Relativi (CASO ERRORE)</p>
+<p>Questo è uno degli errori più comuni.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">abs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/a/b&quot;</span><span class="p">);</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;c/d&quot;</span><span class="p">);</span>
+
+<span class="n">abs</span><span class="p">.</span><span class="na">relativize</span><span class="p">(</span><span class="n">rel</span><span class="p">);</span><span class="w"> </span><span class="c1">// lancia eccezione</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Exception<span class="w"> </span><span class="k">in</span><span class="w"> </span>thread<span class="w"> </span><span class="s2">&quot;main&quot;</span><span class="w"> </span>java.lang.IllegalArgumentException
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>relativize</code> NON tenta di convertire automaticamente i path in assoluti.</p>
+</div>
+<p><strong>Esempio</strong>: Root Diverse (Trappola Specifica Windows)</p>
+<p>Su Windows, path con lettere di drive diverse non possono essere relativizzati.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;C:\\data\\a&quot;</span><span class="p">);</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;D:\\data\\b&quot;</span><span class="p">);</span>
+
+<span class="n">p1</span><span class="p">.</span><span class="na">relativize</span><span class="p">(</span><span class="n">p2</span><span class="p">);</span><span class="w"> </span><span class="c1">// IllegalArgumentException</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Su sistemi Unix-like, la root è sempre <code>/</code>, quindi questo problema non si verifica.</p>
+</div>
+<p><a id="3315-convertire-tra-file-e-path"></a></p>
+<h3 id="3315-convertire-tra-file-e-path">33.1.5 Convertire tra <code>File</code> e <code>Path</code></h3>
+<p>La conversione è diretta e lossless per normali path del filesystem locale.</p>
+<table>
+<thead>
+<tr>
+<th>Conversione</th>
+<th>Come</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>File → Path</td>
+<td><code>file.toPath()</code></td>
+</tr>
+<tr>
+<td>Path → File</td>
+<td><code>path.toFile()</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+
+<span class="n">File</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;data.txt&quot;</span><span class="p">);</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">toPath</span><span class="p">();</span>
+
+<span class="n">File</span><span class="w"> </span><span class="n">back</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">toFile</span><span class="p">();</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La conversione non valida l’esistenza. Converte solo rappresentazioni.</p>
+</div>
+<p><a id="3316-conversione-uri-quando-serve"></a></p>
+<h3 id="3316-conversione-uri-quando-serve">33.1.6 Conversione URI (Quando Serve)</h3>
+<p>Gli <code>URI</code> sono utili quando i path devono essere rappresentati in forma standard e assoluta (es. interoperare con risorse in rete o configurazione).</p>
+<p>Entrambe le API supportano la conversione URI.</p>
+<table>
+<thead>
+<tr>
+<th>Direzione</th>
+<th>Legacy (File)</th>
+<th>NIO (Path)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Da URI</td>
+<td><code>new File(uri)</code></td>
+<td><code>Path.of(uri)</code></td>
+</tr>
+<tr>
+<td>A URI</td>
+<td><code>file.toURI()</code></td>
+<td><code>path.toUri()</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+
+<span class="n">File</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;/tmp/data.txt&quot;</span><span class="p">);</span>
+<span class="n">URI</span><span class="w"> </span><span class="n">u1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">toURI</span><span class="p">();</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/tmp/data.txt&quot;</span><span class="p">);</span>
+<span class="n">URI</span><span class="w"> </span><span class="n">u2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">toUri</span><span class="p">();</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">pFromUri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">u2</span><span class="p">);</span>
+<span class="n">File</span><span class="w"> </span><span class="n">fFromUri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">u1</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>new File(URI)</code> richiede un URI <code>file:</code> e lancia <code>IllegalArgumentException</code> se l’URI non è gerarchico o non è un file URI.</p>
+</div>
+<p><a id="3317-canonico-vs-assoluto-vs-normalizzato-differenze-fondamentali"></a></p>
+<h3 id="3317-canonico-vs-assoluto-vs-normalizzato-differenze-fondamentali">33.1.7 Canonico vs Assoluto vs Normalizzato (Differenze Fondamentali)</h3>
+<p>Questi termini vengono spesso confusi. Non sono la stessa cosa.</p>
+<table>
+<thead>
+<tr>
+<th>Concetto</th>
+<th>Legacy (File)</th>
+<th>NIO (Path)</th>
+<th>Tocca filesystem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Assoluto</td>
+<td><code>getAbsoluteFile()</code></td>
+<td><code>toAbsolutePath()</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Normalizzato</td>
+<td>(nessun normalize puro, usa canonical)*</td>
+<td><code>normalize()</code></td>
+<td><code>normalize()</code>: No</td>
+</tr>
+<tr>
+<td>Canonico / Reale</td>
+<td><code>getCanonicalFile()</code></td>
+<td><code>toRealPath()</code></td>
+<td>Sì</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>File.getCanonicalFile()</code> e <code>Path.toRealPath()</code> possono risolvere symlink e richiedere che il path esista, quindi possono lanciare <code>IOException</code>.</p>
+<p>File non fornisce un metodo per una normalizzazione puramente sintattica: storicamente molti sviluppatori usavano getCanonicalFile(), ma questo accede al filesystem e può fallire.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+
+<span class="n">File</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;a/../data.txt&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="na">getAbsolutePath</span><span class="p">());</span><span class="w"> </span><span class="c1">// assoluto, può ancora contenere &quot;..&quot;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="na">getCanonicalPath</span><span class="p">());</span><span class="w"> </span><span class="c1">// risolve &quot;..&quot;, può toccare filesystem</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Canonical failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a/../data.txt&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">toAbsolutePath</span><span class="p">());</span><span class="w"> </span><span class="c1">// assoluto, può ancora contenere &quot;..&quot;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">normalize</span><span class="p">());</span><span class="w"> </span><span class="c1">// puramente sintattico</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">toRealPath</span><span class="p">());</span><span class="w"> </span><span class="c1">// risolve symlink, richiede esistenza</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;RealPath failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="33171-normalize"></a></p>
+<h4 id="33171-normalize">33.1.7.1 <code>normalize()</code></h4>
+<p>Rimuove elementi di nome <strong>ridondanti</strong> come <code>.</code> e <code>..</code>.</p>
+<ul>
+<li>Puramente sintattico</li>
+<li>Non controlla se il path esiste</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>normalize()</code> è puramente sintattico, non controlla l’esistenza, e può produrre path invalidi se usato male.</p>
+</div>
+<p><a id="3318-tabella-di-confronto-rapida-creazione--conversione"></a></p>
+<h3 id="3318-tabella-di-confronto-rapida-creazione-conversione">33.1.8 Tabella di Confronto Rapida (Creazione + Conversione)</h3>
+<table>
+<thead>
+<tr>
+<th>Esigenza</th>
+<th>Legacy (File)</th>
+<th>NIO (Path)</th>
+<th>Preferito oggi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Creare da stringa</td>
+<td><code>new File("x")</code></td>
+<td><code>Path.of("x")</code></td>
+<td>Path</td>
+</tr>
+<tr>
+<td>Parent + child</td>
+<td><code>new File(p, c)</code></td>
+<td><code>Path.of(p, c)</code> o <code>resolve()</code></td>
+<td>Path</td>
+</tr>
+<tr>
+<td>Convertire tra API</td>
+<td><code>toPath()</code></td>
+<td><code>toFile()</code></td>
+<td>Path-centric</td>
+</tr>
+<tr>
+<td>Normalizzare</td>
+<td><code>getCanonicalFile()</code> (basato su filesystem)</td>
+<td><code>normalize()</code> (solo sintattico)</td>
+<td>Path</td>
+</tr>
+<tr>
+<td>Risolvere symlink</td>
+<td>Canonical</td>
+<td><code>toRealPath()</code></td>
+<td>Path</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a id="332-gestire-file-e-directory-creare-copiare-spostare-sostituire-confrontare-cancellare-legacy-vs-nio"></a></p>
+<h2 id="332-gestire-file-e-directory-creare-copiare-spostare-sostituire-confrontare-cancellare-legacy-vs-nio">33.2 Gestire File e Directory: Creare, Copiare, Spostare, Sostituire, Confrontare, Cancellare (Legacy vs NIO)</h2>
+<p>Questa sezione copre le operazioni che esegui sulle entry del filesystem (file/directory): creazione, copia, spostamento/rinominazione, sostituzione, confronto e cancellazione.</p>
+<p>Confronta il legacy <code>java.io.File</code> (e helper legacy correlati) con il moderno <code>java.nio.file</code> (NIO.2).</p>
+<p><a id="3321-modello-mentale-pathlocator-vs-operazioni"></a></p>
+<h3 id="3321-modello-mentale-pathlocator-vs-operazioni">33.2.1 Modello Mentale: “Path/Locator” vs “Operazioni”</h3>
+<p>Entrambe le API usano oggetti che rappresentano un path, ma le operazioni differiscono:</p>
+<ul>
+<li>Legacy: <code>File</code> è sia un wrapper di path sia una API di operazioni (responsabilità mescolata)</li>
+<li>NIO: <code>Path</code> è il path; <code>Files</code> esegue le operazioni (separazione delle responsabilità)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Responsabilità</th>
+<th>Legacy</th>
+<th>NIO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rappresentazione Path</td>
+<td><code>File</code></td>
+<td><code>Path</code></td>
+</tr>
+<tr>
+<td>Operazioni su filesystem</td>
+<td><code>File</code></td>
+<td><code>Files</code></td>
+</tr>
+<tr>
+<td>Reporting degli errori</td>
+<td>Debole (boolean)</td>
+<td>Forte (eccezioni)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I metodi legacy spesso restituiscono <code>boolean</code> (fallimento silenzioso), mentre NIO lancia <code>IOException</code> con causa.</p>
+</div>
+<p><a id="3322-creare-file-e-directory"></a></p>
+<h3 id="3322-creare-file-e-directory">33.2.2 Creare File e Directory</h3>
+<p>La creazione è dove la vecchia API è più scomoda e la API NIO è più espressiva.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Approccio legacy</th>
+<th>Approccio NIO</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Creare file vuoto</td>
+<td>apri+chiudi stream</td>
+<td><code>Files.createFile</code></td>
+<td>NIO fallisce se esiste</td>
+</tr>
+<tr>
+<td>Creare una directory</td>
+<td><code>mkdir</code></td>
+<td><code>Files.createDirectory</code></td>
+<td>Il parent deve esistere</td>
+</tr>
+<tr>
+<td>Creare directory ricorsivamente</td>
+<td><code>mkdirs</code></td>
+<td><code>Files.createDirectories</code></td>
+<td>Crea i parent</td>
+</tr>
+</tbody>
+</table>
+<p><a id="33221-creare-un-file"></a></p>
+<h4 id="33221-creare-un-file">33.2.2.1 Creare un File</h4>
+<p>Il legacy non ha un metodo “crea file vuoto”, quindi tipicamente crei un file aprendo uno stream di output (side effect).</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.FileOutputStream</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="n">File</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;created-legacy.txt&quot;</span><span class="p">);</span>
+<span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">FileOutputStream</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="n">f</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// il file è creato (o troncato) come side effect</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>NIO fornisce un metodo esplicito di creazione.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Files</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;created-nio.txt&quot;</span><span class="p">);</span>
+<span class="n">Files</span><span class="p">.</span><span class="na">createFile</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>Files.createFile</code> lancia <code>FileAlreadyExistsException</code> se la entry esiste.</p>
+</div>
+<p><a id="33222-creare-directory"></a></p>
+<h4 id="33222-creare-directory">33.2.2.2 Creare Directory</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span>
+
+<span class="n">File</span><span class="w"> </span><span class="n">dir1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;a/b&quot;</span><span class="p">);</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">ok1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dir1</span><span class="p">.</span><span class="na">mkdir</span><span class="p">();</span><span class="w"> </span><span class="c1">// fallisce se il parent &quot;a&quot; non esiste</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">ok2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dir1</span><span class="p">.</span><span class="na">mkdirs</span><span class="p">();</span><span class="w"> </span><span class="c1">// crea i parent</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Files</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a/b&quot;</span><span class="p">);</span>
+<span class="n">Files</span><span class="p">.</span><span class="na">createDirectory</span><span class="p">(</span><span class="n">d</span><span class="p">);</span><span class="w"> </span><span class="c1">// il parent deve esistere</span>
+<span class="n">Files</span><span class="p">.</span><span class="na">createDirectories</span><span class="p">(</span><span class="n">d</span><span class="p">);</span><span class="w"> </span><span class="c1">// crea i parent, ok se già esiste</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I legacy <code>mkdir()/mkdirs()</code> restituiscono <code>false</code> in caso di fallimento senza dire perché. NIO lancia <code>IOException</code>.</p>
+</div>
+<p><a id="3323-copiare-file-e-directory"></a></p>
+<h3 id="3323-copiare-file-e-directory">33.2.3 Copiare File e Directory</h3>
+<p>La copia legacy è di solito una copia manuale via stream (o librerie esterne). NIO ha una singola operazione esplicita.</p>
+<table>
+<thead>
+<tr>
+<th>Capacità</th>
+<th>Legacy</th>
+<th>NIO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Copiare contenuti file</td>
+<td>Stream manuali</td>
+<td><code>Files.copy</code></td>
+</tr>
+<tr>
+<td>Copiare in target esistente</td>
+<td>Manuale</td>
+<td>Opzione <code>REPLACE_EXISTING</code></td>
+</tr>
+<tr>
+<td>Copiare albero directory</td>
+<td>Ricorsione manuale</td>
+<td>Ricorsione manuale (ma strumenti migliori: <code>Files.walk</code> + <code>Files.copy</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><a id="33231-copiare-un-file-nio"></a></p>
+<h4 id="33231-copiare-un-file-nio">33.2.3.1 Copiare un File (NIO)</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Files</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.StandardCopyOption</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;src.txt&quot;</span><span class="p">);</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">dst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;dst.txt&quot;</span><span class="p">);</span>
+
+<span class="n">Files</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="n">dst</span><span class="p">);</span><span class="w"> </span><span class="c1">// fallisce se dst esiste</span>
+<span class="n">Files</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="n">StandardCopyOption</span><span class="p">.</span><span class="na">REPLACE_EXISTING</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>Files.copy</code> lancia <code>FileAlreadyExistsException</code> se il target esiste e non hai usato <code>REPLACE_EXISTING</code>.</p>
+</div>
+<p><a id="33232-copia-manuale-legacy-basata-su-stream"></a></p>
+<h4 id="33232-copia-manuale-legacy-basata-su-stream">33.2.3.2 Copia Manuale (Legacy, Basata su Stream)</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.FileInputStream</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.FileOutputStream</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">FileInputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="s">&quot;src.bin&quot;</span><span class="p">);</span>
+<span class="n">FileOutputStream</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="s">&quot;dst.bin&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">8192</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buf</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ricorda <code>read(byte[])</code> restituisce il numero di byte letti; devi scrivere solo quel conteggio, non l’intero buffer.</p>
+</div>
+<p><a id="3324-spostare--rinominare-e-sostituire"></a></p>
+<h3 id="3324-spostare-rinominare-e-sostituire">33.2.4 Spostare / Rinominare e Sostituire</h3>
+<p>In entrambe le API, rinomina/sposta è “a livello metadata” quando possibile, ma può comportarsi come copy+delete tra filesystem. NIO lo rende esplicito tramite opzioni.</p>
+<table>
+<thead>
+<tr>
+<th>Operazione</th>
+<th>Legacy</th>
+<th>NIO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rinominare/spostare</td>
+<td><code>File.renameTo</code></td>
+<td><code>Files.move</code></td>
+</tr>
+<tr>
+<td>Sostituire esistente</td>
+<td>Inaffidabile</td>
+<td><code>REPLACE_EXISTING</code></td>
+</tr>
+<tr>
+<td>Spostamento atomico</td>
+<td>Non supportato</td>
+<td><code>ATOMIC_MOVE</code> (se supportato)</td>
+</tr>
+</tbody>
+</table>
+<p><a id="33241-rinomina-legacy-trappola-comune"></a></p>
+<h4 id="33241-rinomina-legacy-trappola-comune">33.2.4.1 Rinomina Legacy (Trappola Comune)</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span>
+
+<span class="n">File</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;old.txt&quot;</span><span class="p">);</span>
+<span class="n">File</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;new.txt&quot;</span><span class="p">);</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">from</span><span class="p">.</span><span class="na">renameTo</span><span class="p">(</span><span class="n">to</span><span class="p">);</span><span class="w"> </span><span class="c1">// può fallire silenziosamente</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">ok</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><code>renameTo</code> è notoriamente platform-dependent e restituisce solo <code>boolean</code>.</li>
+<li>Può fallire perché il target esiste, il file è aperto, permessi, o spostamento cross-filesystem.</li>
+</ul>
+</div>
+<p><a id="33242-nio-move-preferito"></a></p>
+<h4 id="33242-nio-move-preferito">33.2.4.2 NIO Move (Preferito)</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Files</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.StandardCopyOption</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;old.txt&quot;</span><span class="p">);</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;new.txt&quot;</span><span class="p">);</span>
+
+<span class="n">Files</span><span class="p">.</span><span class="na">move</span><span class="p">(</span><span class="n">from</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="p">);</span><span class="w"> </span><span class="c1">// fallisce se il target esiste</span>
+<span class="n">Files</span><span class="p">.</span><span class="na">move</span><span class="p">(</span><span class="n">from</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="p">,</span><span class="w"> </span><span class="n">StandardCopyOption</span><span class="p">.</span><span class="na">REPLACE_EXISTING</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>Files.move</code> lancia <code>FileAlreadyExistsException</code> quando il target esiste e <code>REPLACE_EXISTING</code> non è specificato.</p>
+</div>
+<p><a id="3325-confrontare-path-e-file"></a></p>
+<h3 id="3325-confrontare-path-e-file">33.2.5 Confrontare Path e File</h3>
+<p>Confrontare locator può significare: uguaglianza string/path, uguaglianza normalizzata/canonica, o “stesso file su disco”.</p>
+<p>Le API differiscono significativamente qui.</p>
+<table>
+<thead>
+<tr>
+<th>Obiettivo confronto</th>
+<th>Legacy</th>
+<th>NIO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stesso testo di path</td>
+<td><code>File.equals</code></td>
+<td><code>Path.equals</code></td>
+</tr>
+<tr>
+<td>Normalizzare path</td>
+<td><code>getCanonicalFile</code></td>
+<td><code>normalize</code></td>
+</tr>
+<tr>
+<td>Stesso file/risorsa su disco</td>
+<td>debole (euristica canonica)</td>
+<td><code>Files.isSameFile</code></td>
+</tr>
+</tbody>
+</table>
+<p><a id="33251-uguaglianza-vs-stesso-file"></a></p>
+<h4 id="33251-uguaglianza-vs-stesso-file">33.2.5.1 Uguaglianza vs Stesso File</h4>
+<p>Due stringhe di path diverse possono riferirsi allo stesso file.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Files</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a/../data.txt&quot;</span><span class="p">);</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;data.txt&quot;</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">p2</span><span class="p">));</span><span class="w"> </span><span class="c1">// false (testo path diverso)</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p1</span><span class="p">.</span><span class="na">normalize</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">p2</span><span class="p">.</span><span class="na">normalize</span><span class="p">()));</span><span class="w"> </span><span class="c1">// può ancora essere false se relativo</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Files</span><span class="p">.</span><span class="na">isSameFile</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="n">p2</span><span class="p">));</span><span class="w"> </span><span class="c1">// può essere true, può lanciare se non accessibile</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;isSameFile failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>Files.isSameFile</code> può accedere al filesystem e può lanciare <code>IOException</code> (problemi di permessi, file mancanti, ecc.).</p>
+</div>
+<p><a id="3326-cancellare-file-e-directory"></a></p>
+<h3 id="3326-cancellare-file-e-directory">33.2.6 Cancellare File e Directory</h3>
+<p>La cancellazione è semplice in concetto ma ha casi limite importanti: directory non vuote, target mancanti e differenze nel reporting degli errori.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Legacy</th>
+<th>NIO</th>
+<th>Comportamento se mancante</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cancellare file/dir</td>
+<td><code>File.delete</code></td>
+<td><code>Files.delete</code></td>
+<td>Legacy false, NIO eccezione</td>
+</tr>
+<tr>
+<td>Cancellare se esiste</td>
+<td>Nessun diretto (check+delete)</td>
+<td><code>Files.deleteIfExists</code></td>
+<td>restituisce boolean</td>
+</tr>
+<tr>
+<td>Cancellare dir non vuota</td>
+<td>Ricorsione manuale</td>
+<td>Ricorsione manuale (walk)</td>
+<td>Entrambe richiedono ricorsione</td>
+</tr>
+</tbody>
+</table>
+<p><a id="33261-delete-legacy"></a></p>
+<h4 id="33261-delete-legacy">33.2.6.1 Delete Legacy</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span>
+
+<span class="n">File</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;x.txt&quot;</span><span class="p">);</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">delete</span><span class="p">();</span><span class="w"> </span><span class="c1">// false se non cancellato</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">ok</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Legacy <code>delete()</code> fallisce (restituisce false) per una directory non vuota e spesso non fornisce motivo.</p>
+</div>
+<p><a id="33262-nio-delete-e-delete-if-exists"></a></p>
+<h4 id="33262-nio-delete-e-delete-if-exists">33.2.6.2 NIO Delete e Delete-If-Exists</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Files</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.NoSuchFileException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.DirectoryNotEmptyException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;x.txt&quot;</span><span class="p">);</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Files</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">NoSuchFileException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Missing: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getFile</span><span class="p">());</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">DirectoryNotEmptyException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Directory not empty: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getFile</span><span class="p">());</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Delete failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">deleted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Files</span><span class="p">.</span><span class="na">deleteIfExists</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">deleted</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Certification tip: <code>Files.delete</code> lancia <code>NoSuchFileException</code> se mancante, mentre <code>deleteIfExists</code> restituisce <code>false</code>.</p>
+</div>
+<p><a id="3327-copiare--cancellare-ricorsivamente-alberi-di-directory-pattern-nio"></a></p>
+<h3 id="3327-copiare-cancellare-ricorsivamente-alberi-di-directory-pattern-nio">33.2.7 Copiare / Cancellare Ricorsivamente Alberi di Directory (Pattern NIO)</h3>
+<p>NIO non fornisce un singolo metodo “copyTree/deleteTree”, ma l’approccio standard usa <code>Files.walk</code> o <code>Files.walkFileTree</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.attribute.BasicFileAttributes</span><span class="p">;</span>
+
+<span class="n">Path</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;dirToDelete&quot;</span><span class="p">);</span>
+
+<span class="n">Files</span><span class="p">.</span><span class="na">walkFileTree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SimpleFileVisitor</span><span class="o">&lt;</span><span class="n">Path</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">FileVisitResult</span><span class="w"> </span><span class="nf">visitFile</span><span class="p">(</span><span class="n">Path</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">BasicFileAttributes</span><span class="w"> </span><span class="n">attrs</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Files</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">FileVisitResult</span><span class="p">.</span><span class="na">CONTINUE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">FileVisitResult</span><span class="w"> </span><span class="nf">postVisitDirectory</span><span class="p">(</span><span class="n">Path</span><span class="w"> </span><span class="n">dir</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="n">exc</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">exc</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">exc</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Files</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">dir</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">FileVisitResult</span><span class="p">.</span><span class="na">CONTINUE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cancellare un albero di directory richiede cancellare prima i file, poi le directory (post-order). Questa è una domanda di ragionamento comune.</p>
+</div>
+<p><a id="3328-checklist-di-riepilogo"></a></p>
+<h3 id="3328-checklist-di-riepilogo">33.2.8 Checklist di Riepilogo</h3>
+<ul>
+<li>Preferisci <code>Files.createFile/createDirectory/createDirectories</code> rispetto a workaround legacy</li>
+<li><code>File.renameTo</code> è inaffidabile; preferisci <code>Files.move</code> con opzioni</li>
+<li><code>Files.copy/move</code> lanciano <code>FileAlreadyExistsException</code> a meno che non venga usato <code>REPLACE_EXISTING</code></li>
+<li><code>Files.delete</code> lancia; <code>Files.deleteIfExists</code> restituisce boolean</li>
+<li><code>Files.isSameFile</code> può lanciare <code>IOException</code> e può toccare il filesystem</li>
+<li>La cancellazione di directory non vuote richiede ricorsione (entrambe le API)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.ars-digitale.com/" target="_blank" rel="noopener" title="Ars Digitale" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

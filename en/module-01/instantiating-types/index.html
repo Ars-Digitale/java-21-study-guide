@@ -1,0 +1,7520 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ars-digitale.github.io/java-21-study-guide/en/module-01/instantiating-types/">
+      
+      
+        <link rel="prev" href="../java-operators/">
+      
+      
+        <link rel="next" href="../../module-02/control-flow/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Instantiating types - Java 21 Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-instantiating-types" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Java 21 Study Guide" class="md-header__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Java 21 Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Instantiating types
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Java 21 Study Guide" class="md-nav__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Java 21 Study Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisite material
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Java Language Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Java Language Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syntax building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic language building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java naming rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java data types and casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantiating types
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantiating types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Introduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#611-handling-primitive-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.1 Handling Primitive Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1.1 Handling Primitive Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6111-declaring-a-primitive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.1.1 Declaring a Primitive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6112-assigning-a-primitive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.1.2 Assigning a Primitive
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#612-handling-reference-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.2 Handling Reference Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1.2 Handling Reference Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6121-creating-and-assigning-a-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.2.1 Creating and Assigning a Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6122-constructors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.2.2 Constructors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6123-instance-initializer-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.2.3 Instance Initializer Blocks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-default-variable-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Default Variable Initialization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Default Variable Initialization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#621-instance-and-class-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.1 Instance and Class variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#622-final-instance-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.2 Final Instance Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#623-local-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.3 Local variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2.3 Local variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6231-inferring-types-with-var" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.3.1 Inferring Types with var
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-wrapper-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Wrapper Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 Wrapper Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#631-purpose-of-wrapper-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.1 Purpose of Wrapper Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#632-autoboxing-and-unboxing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.2 Autoboxing and Unboxing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#633-parsing-and-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.3 Parsing and Conversion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#634-helper-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.4 Helper methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#635-null-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.5 Null Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-equality-in-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Equality in Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4 Equality in Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#641-equality-with-primitive-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.1 Equality with Primitive Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4.1 Equality with Primitive Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6411-key-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.1.1 Key points
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#642-equality-with-reference-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.2 Equality with Reference Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4.2 Equality with Reference Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6421-identity-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.2.1 ==(Identity Comparison)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6422-equals-logical-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.2.2 .equals() (Logical Comparison)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6423-key-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.2.3 Key points
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#643-string-pool-and-equality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.3 String Pool and Equality
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4.3 String Pool and Equality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6431-the-intern-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.3.1 The intern method
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#644-equality-with-wrapper-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.4 Equality with Wrapper Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#645-equality-and-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.5 Equality and null
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#646-summary-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.6 Summary Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Control Flow
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Control Flow
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control flow statements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — Core Standard APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — Core Standard APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strings in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dates and time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatting and localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methods, attributes, and variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading, initialization, and object construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inheritance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beyond classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions and error handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Functional Programming
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Functional Programming
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functional programming in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to the collections framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared collection operations and equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting and comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    List APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue and deque APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrency and Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrency and Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thread fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concurrency APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — Java I/O and NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — Java I/O and NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java I/O streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O streams APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interacting with the user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JPMS fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiling, packaging, and running modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Italiano
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Italiano
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materiale propedeutico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi di sintassi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elementi base del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regole di naming Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tipi di dati e casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operatori Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istanziare i tipi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istruzioni di controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cicli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stringhe in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilità Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data e ora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formattazione e localizzazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metodi, attributi e variabili
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading e costruzione oggetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ereditarietà
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oltre le classi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eccezioni e gestione errori
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmazione funzionale in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operazioni condivise ed equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting e comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti thread
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API di concorrenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 08 — I/O e NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 08 — I/O e NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (fondamenti)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interazione con l’utente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilare e avviare moduli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Français
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Français
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matériel de support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Bases du Langage Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Bases du Langage Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocs de syntaxe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Éléments de base du langage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Règles de nommage Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types de données et casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérateurs Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instanciation des types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Contrôle de flux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Contrôle de flux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions de contrôle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boucles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chaînes (String) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tableaux (Arrays) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilitaires Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date et heure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatage et localisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Fondamentaux OO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Fondamentaux OO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Méthodes, attributs et variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chargement de classes et construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Héritage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Au-delà des classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions et gestion des erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmation fonctionnelle en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Streams Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Framework des Collections
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Framework des Collections
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction au framework des collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérations partagées et égalité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tri et comparaison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrence et Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrence et Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux des threads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de concurrence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — I/O et NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — I/O et NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (fondamentaux)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interaction avec l’utilisateur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiler et exécuter des modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services en JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ars-digitale.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ars Digitale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Introduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#611-handling-primitive-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.1 Handling Primitive Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1.1 Handling Primitive Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6111-declaring-a-primitive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.1.1 Declaring a Primitive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6112-assigning-a-primitive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.1.2 Assigning a Primitive
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#612-handling-reference-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.2 Handling Reference Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1.2 Handling Reference Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6121-creating-and-assigning-a-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.2.1 Creating and Assigning a Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6122-constructors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.2.2 Constructors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6123-instance-initializer-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.2.3 Instance Initializer Blocks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-default-variable-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Default Variable Initialization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Default Variable Initialization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#621-instance-and-class-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.1 Instance and Class variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#622-final-instance-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.2 Final Instance Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#623-local-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.3 Local variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2.3 Local variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6231-inferring-types-with-var" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.3.1 Inferring Types with var
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-wrapper-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Wrapper Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 Wrapper Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#631-purpose-of-wrapper-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.1 Purpose of Wrapper Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#632-autoboxing-and-unboxing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.2 Autoboxing and Unboxing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#633-parsing-and-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.3 Parsing and Conversion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#634-helper-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.4 Helper methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#635-null-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.5 Null Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-equality-in-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Equality in Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4 Equality in Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#641-equality-with-primitive-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.1 Equality with Primitive Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4.1 Equality with Primitive Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6411-key-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.1.1 Key points
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#642-equality-with-reference-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.2 Equality with Reference Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4.2 Equality with Reference Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6421-identity-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.2.1 ==(Identity Comparison)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6422-equals-logical-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.2.2 .equals() (Logical Comparison)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6423-key-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.2.3 Key points
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#643-string-pool-and-equality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.3 String Pool and Equality
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4.3 String Pool and Equality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6431-the-intern-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.3.1 The intern method
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#644-equality-with-wrapper-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.4 Equality with Wrapper Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#645-equality-and-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.5 Equality and null
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#646-summary-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.6 Summary Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="6-instantiating-types">6. Instantiating Types</h1>
+<p><a id="table-of-contents"></a></p>
+<h3 id="table-of-contents">Table of Contents</h3>
+<ul>
+<li><a href="#61-introduction">6.1 Introduction</a><ul>
+<li><a href="#611-handling-primitive-types">6.1.1 Handling Primitive Types</a><ul>
+<li><a href="#6111-declaring-a-primitive">6.1.1.1 Declaring a Primitive</a></li>
+<li><a href="#6112-assigning-a-primitive">6.1.1.2 Assigning a Primitive</a></li>
+</ul>
+</li>
+<li><a href="#612-handling-reference-types">6.1.2 Handling Reference Types</a></li>
+<li><a href="#6121-creating-and-assigning-a-reference">6.1.2.1 Creating and Assigning a Reference</a></li>
+<li><a href="#6122-constructors">6.1.2.2 Constructors</a></li>
+<li><a href="#6123-instance-initializer-blocks">6.1.2.3 Instance Initializer Blocks</a></li>
+</ul>
+</li>
+<li><a href="#62-default-variable-initialization">6.2 Default Variable Initialization</a><ul>
+<li><a href="#621-instance-and-class-variables">6.2.1 Instance and Class Variables</a></li>
+<li><a href="#622-final-instance-variables">6.2.2 Final Instance Variables</a></li>
+<li><a href="#623-local-variables">6.2.3 Local Variables</a><ul>
+<li><a href="#6231-inferring-types-with-var">6.2.3.1 Inferring Types with var</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#63-wrapper-types">6.3 Wrapper Types</a><ul>
+<li><a href="#631-purpose-of-wrapper-types">6.3.1 Purpose of Wrapper Types</a></li>
+<li><a href="#632-autoboxing-and-unboxing">6.3.2 Autoboxing and Unboxing</a></li>
+<li><a href="#633--parsing-and-conversion">6.3.3 Parsing and Conversion</a></li>
+<li><a href="#634--helper-methods">6.3.4 Helper Methods</a></li>
+<li><a href="#635--null-values">6.3.5 Null Values</a></li>
+</ul>
+</li>
+<li><a href="#64-equality-in-java">6.4 Equality in Java</a><ul>
+<li><a href="#641-equality-with-primitive-types">6.4.1 Equality with Primitive Types</a><ul>
+<li><a href="#6411-key-points">6.4.1.1 Key Points</a></li>
+</ul>
+</li>
+<li><a href="#642-equality-with-reference-types">6.4.2 Equality with Reference Types</a><ul>
+<li><a href="#6421-identity-comparison">6.4.2.1 Identity Comparison</a></li>
+<li><a href="#6422-equals-logical-comparison">6.4.2.2 equals Logical Comparison</a></li>
+<li><a href="#6423-key-points">6.4.2.3 Key Points</a></li>
+</ul>
+</li>
+<li><a href="#643-string-pool-and-equality">6.4.3 String Pool and Equality</a><ul>
+<li><a href="#6431-the-intern-method">6.4.3.1 The intern Method</a></li>
+</ul>
+</li>
+<li><a href="#644-equality-with-wrapper-types">6.4.4 Equality with Wrapper Types</a></li>
+<li><a href="#645-equality-and-null">6.4.5 Equality and null</a></li>
+<li><a href="#646-summary-table">6.4.6 Summary Table</a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<p><a id="61-introduction"></a></p>
+<h2 id="61-introduction">6.1 Introduction</h2>
+<p>In Java, a <strong>type</strong> can be either a <strong>primitive type</strong> (such as <code>int</code>, <code>double</code>, <code>boolean</code>, etc.) or a <strong>reference type</strong> (classes, interfaces, arrays, enums, records, etc.). See: <a href="../data-types/">Java Data Types and Casting</a></p>
+<p>The way instances are created depends on the category of the type:</p>
+<ul>
+<li><strong>Primitive types</strong><br />
+  Instances of primitive types are created simply by declaring a variable.<br />
+  The JVM automatically allocates memory to hold the value, and no explicit keyword is needed. </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">         </span><span class="c1">// creates a primitive int with value 30</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">  </span><span class="c1">// creates a primitive boolean with value true</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.14159</span><span class="p">;</span><span class="w">  </span><span class="c1">// creates a primitive double with value 3.14159</span>
+</code></pre></div>
+<ul>
+<li><strong>Reference types (objects)</strong><br />
+    Instances of class types are created using the new keyword (except for a few special cases such as string literals, records with canonical constructors, or factory methods).
+    The new keyword allocates memory on the heap and invokes a constructor of the class.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;Alice&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// creates a new String object explicitly</span>
+<span class="n">Person</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span><span class="w">           </span><span class="c1">// creates a new Person object using its constructor</span>
+</code></pre></div>
+<p>It is also common to rely on literals or factory methods for object creation.</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello World&quot;</span><span class="p">;</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="p">);</span><span class="w">              </span><span class="c1">// factory method immutabile</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">   </span><span class="c1">// factory method immutabile</span>
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">opt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;value&quot;</span><span class="p">);</span><span class="w">             </span><span class="c1">// factory method</span>
+
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">);</span>
+<span class="n">Integer</span><span class="w"> </span><span class="n">boxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>String literals <strong>do not require <code>new</code></strong> and are stored in the <strong>String pool</strong>.
+Using <code>new String("x")</code> always creates a new object on the heap.</p>
+</div>
+<p><a id="611-handling-primitive-types"></a></p>
+<h3 id="611-handling-primitive-types">6.1.1 Handling Primitive Types</h3>
+<p><a id="6111-declaring-a-primitive"></a></p>
+<h4 id="6111-declaring-a-primitive">6.1.1.1 Declaring a Primitive</h4>
+<p><strong>Declaring</strong> a primitive type (as with reference types) means reserving space in memory for a variable of a given type, without necessarily giving it a value.  </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Unlike primitives, whose size depends on their specific type (e.g., <code>int</code> vs <code>long</code>), reference types always occupy the same fixed size in memory — what varies is the size of the object they point to.</p>
+</div>
+<ul>
+<li>Syntax examples for declaration only:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">;</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">active</span><span class="p">;</span>
+
+<span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w">          </span><span class="c1">// Multiple declarations in one statement: Java allows declaring multiple variables of the same type</span>
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <code>modifiers</code> and the <code>type</code> declared at the beginning of a variable declaration apply to all variables declared in the same statement.</p>
+<p><strong>Exception</strong>: when declaring arrays using brackets after the variable name, the brackets are part of the individual variable declarator, not the base type.</p>
+</div>
+<ul>
+<li>Examples</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+
+<span class="c1">// is equivalent to :</span>
+
+<span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+
+
+<span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w">   </span><span class="c1">// both are arrays of int</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="o">[]</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">;</span><span class="w">   </span><span class="c1">// only c is an array, d is a regular int</span>
+</code></pre></div>
+<p><a id="6112-assigning-a-primitive"></a></p>
+<h4 id="6112-assigning-a-primitive">6.1.1.2 Assigning a Primitive</h4>
+<p><strong>Assigning</strong> a primitive type (as with reference types) means storing a value into a declared variable of that given type.<br />
+For primitives, the variable holds the value itself, while for reference types the variable holds the memory address (a reference) of the object being pointed to.</p>
+<ul>
+<li>Syntax examples:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Declaring an int type: a variable called &quot;number&quot;</span>
+
+<span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">                </span><span class="c1">// Assigning the value 10 to this variable</span>
+
+<span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span><span class="w">          </span><span class="c1">// Declaring and Assigning in a single statement: declaration and assignment can be combined </span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="n">a2</span><span class="p">;</span><span class="w">                   </span><span class="c1">// Multiple declarations  </span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">    </span><span class="c1">// Multiple declarations &amp; assignements</span>
+
+<span class="kt">char</span><span class="w"> </span><span class="n">b1</span><span class="p">,</span><span class="w"> </span><span class="n">b2</span><span class="p">,</span><span class="w"> </span><span class="n">b3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="p">;</span><span class="w">      </span><span class="c1">// Mixed declarations (2 declarations + 1 assignment)</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">d1</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">d2</span><span class="p">;</span><span class="w">         </span><span class="c1">// ERROR - NOT LEGAL</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">v1</span><span class="p">;</span><span class="w"> </span><span class="n">v2</span><span class="p">;</span><span class="w">                     </span><span class="c1">// ERROR - NOT LEGAL</span>
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>When you write a number directly in the code (a numeric literal), Java assumes by default that it is of type <strong>int</strong>.
+If the value does not fit into an <code>int</code>, the code will not compile unless you explicitly mark it with the correct suffix.</p>
+</div>
+<ul>
+<li>Syntax example for a numeric literal:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">exNumLit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5729685479</span><span class="p">;</span><span class="w"> </span><span class="c1">// ❌ Does not compile.</span>
+<span class="w">                          </span><span class="c1">// Even though the value would fit in a long,</span>
+<span class="w">                          </span><span class="c1">// a plain numeric literal is assumed to be an int,</span>
+<span class="w">                          </span><span class="c1">// and this number is too large for int.</span>
+
+<span class="n">Changing</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">declaration</span><span class="w"> </span><span class="n">adding</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">correct</span><span class="w"> </span><span class="nf">suffix</span><span class="w"> </span><span class="p">(</span><span class="n">L</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">solve</span><span class="p">:</span>
+
+<span class="kt">long</span><span class="w"> </span><span class="n">exNumLit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5729685479L</span><span class="p">;</span>
+
+<span class="n">or</span>
+
+<span class="kt">long</span><span class="w"> </span><span class="n">exNumLit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5729685479l</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>Declaring</strong> a <code>reference</code> type means reserving space in memory for a variable that will contain a reference (pointer) to an object of the specified type.</p>
+<p>At this stage, no object is created yet — the variable only has the potential to point to one.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Unlike primitives, whose size depends on their specific type (e.g., <code>int</code> vs <code>long</code>), reference variables always occupy the same fixed size in memory (enough to store a reference).
+What varies is the size of the object they point to, which is allocated separately on the heap.</p>
+</div>
+<ul>
+<li>Syntax examples for declaration only:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="n">Person</span><span class="w"> </span><span class="n">person</span><span class="p">;</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="p">;</span>
+
+<span class="n">Person</span><span class="w"> </span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="n">p2</span><span class="p">,</span><span class="w"> </span><span class="n">p3</span><span class="p">;</span><span class="w">   </span><span class="c1">// Multiple declarations in one statement</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;abc&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;def&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ghi&quot;</span><span class="p">;</span><span class="w">     </span><span class="c1">// Multiple declarations &amp; assignements</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">b1</span><span class="p">,</span><span class="w"> </span><span class="n">b2</span><span class="p">,</span><span class="w"> </span><span class="n">b3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;abc&quot;</span><span class="w">                   </span><span class="c1">// Mixed declarations (b1, b2) with one assignement (b3)</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">d1</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">d2</span><span class="p">;</span><span class="w">                   </span><span class="c1">// ERROR - NOT LEGAL</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">v1</span><span class="p">;</span><span class="w"> </span><span class="n">v2</span><span class="p">;</span><span class="w">                          </span><span class="c1">// ERROR - NOT LEGAL</span>
+</code></pre></div>
+<p><a id="612-handling-reference-types"></a></p>
+<h3 id="612-handling-reference-types">6.1.2 Handling Reference Types</h3>
+<p><a id="6121-creating-and-assigning-a-reference"></a></p>
+<h4 id="6121-creating-and-assigning-a-reference">6.1.2.1 Creating and Assigning a Reference</h4>
+<p><strong>Assigning</strong> a <code>reference</code> type means storing into the variable the memory address of an object.</p>
+<p>This is normally done after the creation of the object with the <strong>new</strong> keyword and a Constructor, or by using a literal or a factory method.</p>
+<p>A reference can also be assigned to another object of the same or compatible type.</p>
+<p>Reference types can also be assigned <strong>null</strong>, which means that they do not refer to an object.</p>
+<ul>
+<li>Syntax examples:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Person</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span><span class="w"> </span><span class="c1">// Example with &#39;new&#39; and a constructor &#39;Person()&#39;:</span>
+<span class="w">                            </span><span class="c1">// &#39;new Person()&#39; creates a new Person object on the heap</span>
+<span class="w">                            </span><span class="c1">// and returns its reference, which is stored in the variable &#39;person&#39;.</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">;</span><span class="w">   </span><span class="c1">// Example with literal (for String).</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">   </span><span class="c1">// Example with a factory method.</span>
+</code></pre></div>
+<p><a id="6122-constructors"></a></p>
+<h4 id="6122-constructors">6.1.2.2 Constructors</h4>
+<p>In the example, <strong><code>Person()</code></strong> is a constructor — a special kind of method used to initialize new objects.</p>
+<p>Whenever you call <code>new Person()</code>, the constructor runs and sets up the newly created instance.</p>
+<p><strong>Constructors have three main characteristics:</strong></p>
+<ul>
+<li>The constructor name <strong>must match the class name</strong> exactly (case-sensitive).  </li>
+<li>Constructors <strong>do not declare a return type</strong> (not even <code>void</code>).  </li>
+<li>If you do not define any constructor in your class, the compiler will automatically provide a <strong>default no-argument constructor</strong> that does nothing.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you see a method that has the same name as the class <strong>but also declares a return type</strong>, it is <strong>not</strong> a constructor.
+It is simply a regular method (though starting method names with a capital letter is against Java naming conventions).</p>
+</div>
+<p>The <strong>purpose of a constructor</strong> is to initialize the state of a newly created object — typically by assigning values to its fields, either with default values or using parameters passed to the constructor.</p>
+<ul>
+<li>Example 1: Default constructor (no parameters)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Default constructor</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Unknown&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">Person</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span><span class="w"> </span><span class="c1">// name = &quot;Unknown&quot;, age = 0</span>
+</code></pre></div>
+<ul>
+<li>Example 2: Constructor with parameters</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Constructor with parameters</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">newName</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">newAge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newName</span><span class="p">;</span>
+<span class="w">        </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newAge</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">Person</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span><span class="w"> </span><span class="c1">// name = &quot;Alice&quot;, age = 30</span>
+</code></pre></div>
+<ul>
+<li>Example 3: Multiple constructors (constructor overloading)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Default constructor</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">(</span><span class="s">&quot;Unknown&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// calls the other constructor</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Constructor with parameters</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">newName</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">newAge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newName</span><span class="p">;</span>
+<span class="w">        </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newAge</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">Person</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span><span class="w">            </span><span class="c1">// name = &quot;Unknown&quot;, age = 0</span>
+<span class="n">Person</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Bob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">);</span><span class="w">   </span><span class="c1">// name = &quot;Bob&quot;, age = 25</span>
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul>
+<li>Constructors are not inherited: if a superclass defines constructors, they are not automatically available in the subclass — you must declare them explicitly.</li>
+<li>If you declare any constructor in a class, the compiler does not generate the default no-argument constructor: if you still need a no-argument constructor, you must declare it manually.</li>
+</ul>
+</div>
+<p><a id="6123-instance-initializer-blocks"></a></p>
+<h4 id="6123-instance-initializer-blocks">6.1.2.3 Instance Initializer Blocks</h4>
+<p>In addition to constructors, Java provides a mechanism called <strong>initializer blocks</strong> to help initialize objects.<br />
+These are blocks of code inside a class, enclosed in <code>{ }</code>, that run <strong>every time an instance is created</strong>, just before the constructor body is executed.</p>
+<p><strong>Characteristics</strong></p>
+<ul>
+<li>Also called <strong>instance initializer blocks</strong>.  </li>
+<li>Executed, along with fields initializers, in the order in which they appear in the class definition but always before Constructors.    </li>
+<li>Useful when multiple constructors need to share common initialization code.</li>
+</ul>
+<p>Example: Using an Instance Initializer Block</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Instance initializer block</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Instance initializer block executed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">18</span><span class="p">;</span><span class="w"> </span><span class="c1">// default age for every Person</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Default constructor</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Unknown&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Constructor with parameters</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">newName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newName</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">Person</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span><span class="w">          </span><span class="c1">// prints &quot;Instance initializer block executed&quot;</span>
+<span class="n">Person</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Alice&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// prints &quot;Instance initializer block executed&quot;</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this example, the initializer block runs before either constructor body.
+Both p1 and p2 will start with age = 18, regardless of which constructor is used.</p>
+</div>
+<p><strong>Multiple Initializer Blocks</strong>: if a class contains multiple initializer blocks, they are executed in the order they appear in the source file:</p>
+<ul>
+<li>Example: </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;First block&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Second block&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">Example</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Example</span><span class="p">();</span>
+<span class="c1">// Output:</span>
+<span class="c1">// First block</span>
+<span class="c1">// Second block</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Instance initializer blocks are less common in practice, because similar logic can often be placed directly in constructors.
+It is important to know that:
+- They always run before the constructor body.
+- They are executed in the order of declaration in the class.
+- They can be combined with constructors to avoid code duplication.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Order of initialization when creating an object</strong>
+1. Static fields
+2. Static initializer blocks
+3. Instance fields
+4. Instance initializer blocks
+5. Constructor body</p>
+</div>
+<hr />
+<p><a id="62-default-variable-initialization"></a></p>
+<h2 id="62-default-variable-initialization">6.2 Default Variable Initialization</h2>
+<p><a id="621-instance-and-class-variables"></a></p>
+<h3 id="621-instance-and-class-variables">6.2.1 Instance and Class variables</h3>
+<ul>
+<li>An <strong>instance variable (a field)</strong> is a value defined within an instance of an object;</li>
+<li>A <strong>class variable</strong> (defined with the keyword <strong>static</strong>) is defined at class level and it is shared among all the objects (instances of the class)</li>
+</ul>
+<p>Instance and class variables are given a default value, by the compiler, if not initialized.</p>
+<ul>
+<li>Table of default values for instance &amp; class variables;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Object</td>
+<td>null</td>
+</tr>
+<tr>
+<td>Numeric</td>
+<td>0</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>char</td>
+<td>'\u0000' (NUL)</td>
+</tr>
+</tbody>
+</table>
+<p><a id="622-final-instance-variables"></a></p>
+<h3 id="622-final-instance-variables">6.2.2 Final Instance Variables</h3>
+<p>Unlike regular instance and class variables, <strong><code>final</code> variables are <em>not</em> default-initialized by the compiler</strong>.<br />
+A <code>final</code> variable <strong>must be explicitly assigned exactly once</strong>, otherwise the code does not compile.</p>
+<p>This applies to both:</p>
+<ul>
+<li><strong>final instance variables</strong></li>
+<li><strong>static final class variables</strong></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We can assign a <code>null</code> value to a <code>final</code> instance or class instance variables as long they are explicitely set.</p>
+</div>
+<p>Java enforces this rule because a <code>final</code> variable represents a value that must be <em>known and fixed</em> before use.</p>
+<p><ins><strong><code>Final Instance Variables</code></strong></ins></p>
+<p>A <strong>final instance variable</strong> must be assigned <strong>exactly once</strong>, and the assignment must occur in <em>one</em> of the following:</p>
+<ol>
+<li><strong>At the point of declaration</strong></li>
+<li><strong>In an instance initializer block</strong></li>
+<li><strong>Inside every constructor</strong></li>
+</ol>
+<p>If the class has <em>multiple constructors</em>, the variable must be assigned in <strong>all</strong> of them.</p>
+<ul>
+<li>Example:
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w">   </span><span class="c1">// must be assigned before constructor ends</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Constructor 1</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w">        </span><span class="c1">// ok</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Constructor 2</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">         </span><span class="c1">// also required here</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Unknown&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Trying to compile without assigning <code>id</code> inside <strong>every</strong> constructor produces a compile-time error:
+variable id might not have been initialized</p>
+</div>
+<p><ins><strong><code>static final</code> Class Variables (Constants)</strong></ins></p>
+<p>A <strong>static final variable</strong> belongs to the class rather than to any instance.<br />
+It must also be assigned exactly once, but assignment can occur in one of the following places:</p>
+<ol>
+<li><strong>At the point of declaration</strong></li>
+<li>
+<p><strong>Inside a static initializer block</strong></p>
+</li>
+<li>
+<p>Example:
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TIMEOUT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span><span class="p">;</span><span class="w">    </span><span class="c1">// assigned at declaration</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">VERSION</span><span class="p">;</span><span class="w">        </span><span class="c1">// assigned in static initializer</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">VERSION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.0.0&quot;</span><span class="p">;</span><span class="w">              </span><span class="c1">// ok</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+</ol>
+<p>Attempting to assign a <code>static final</code> in a constructor is illegal.</p>
+<p><ins><strong>Key Rules for <code>final</code> Fields</strong></ins></p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Allowed?</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Assign at declaration</td>
+<td>✔</td>
+<td>Most common pattern</td>
+</tr>
+<tr>
+<td>Assign in constructor</td>
+<td>✔</td>
+<td>All constructors must assign it</td>
+</tr>
+<tr>
+<td>Assign in instance initializer</td>
+<td>✔</td>
+<td>Before constructor body runs</td>
+</tr>
+<tr>
+<td>Assign in static initializer (<code>static final</code> only)</td>
+<td>✔</td>
+<td>For class-level constants</td>
+</tr>
+<tr>
+<td>Assign multiple times</td>
+<td>❌</td>
+<td>Compilation error</td>
+</tr>
+<tr>
+<td>Default initialization</td>
+<td>❌</td>
+<td>Must be explicitly assigned</td>
+</tr>
+</tbody>
+</table>
+<p>Example of an <strong>illegal</strong> situation:
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">        </span><span class="c1">// not initialized</span>
+<span class="p">}</span>
+
+<span class="n">Example</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Example</span><span class="p">();</span><span class="w"> </span><span class="c1">// ❌ compile-time error</span>
+</code></pre></div></p>
+<p><ins><strong>Why <code>final</code> Variables Are Not Default-Initialized?</strong></ins></p>
+<p>Because:</p>
+<ul>
+<li>Their value must be <strong>known and immutable</strong>, and</li>
+<li>Java must guarantee that the value is set <strong>before use</strong>,</li>
+<li>Default initialization would create a situation where <code>0</code>, <code>null</code>, or <code>false</code> might unintentionally become the permanent value.</li>
+</ul>
+<p>Thus, Java forces developers to explicitly initialize <code>final</code> fields.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>final</code> means <strong>assigned once</strong>, not <strong>immutable object</strong>.</p>
+<p>A final reference can still point to a mutable object.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;ok&quot;</span><span class="p">);</span><span class="w">      </span><span class="c1">// allowed</span>
+<span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// ❌ cannot reassign reference</span>
+</code></pre></div>
+<p><a id="623-local-variables"></a></p>
+<h3 id="623-local-variables">6.2.3 Local variables</h3>
+<p><strong>Local variables</strong> are variables defined within a constructor, method or inizializer block;</p>
+<p>Local variables do not have default values and they must be initialized before they can be used. If you try to use a not initialized local variable the compiler will report an ERROR.</p>
+<ul>
+<li>Example </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">localMethod</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">firstVar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">secondVar</span><span class="p">;</span>
+<span class="w">    </span><span class="n">secondVar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">35</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">firstSum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">firstVar</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">secondVar</span><span class="p">;</span><span class="w">    </span><span class="c1">// OK variables are both initialized before use</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">thirdVar</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">secondSum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">firstSum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">thirdVar</span><span class="p">;</span><span class="w">    </span><span class="c1">// ERROR: variable thirdVar has not been initialized before use; if you do not try to use thirdVar the compiler will not complain</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="6231-inferring-types-with-var"></a></p>
+<h4 id="6231-inferring-types-with-var">6.2.3.1 Inferring Types with var</h4>
+<p>Under certain conditions you can use the keyword <strong>var</strong> in place of the appropriate type when declaring <strong>local</strong> variables;</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li><strong>var</strong> IS NOT a reserved word in java;</li>
+<li><strong>var</strong> can be used only for local variables: it CAN'T be used for <strong>constructor parameters</strong>, <strong>instance variables</strong> or <strong>method parameters</strong>;</li>
+<li>The compiler infere the type by looking ONLY at the code <strong>on the line of the declaration</strong>; once the right type has been inferred you can't reassign to another type.</li>
+</ul>
+</div>
+<ul>
+<li>example</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">localMethod</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">inferredInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">   </span><span class="c1">// The compiler infer int by the context;</span>
+<span class="w">    </span><span class="n">inferredInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span><span class="w">       </span><span class="c1">// OK</span>
+
+<span class="w">    </span><span class="n">inferredInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;abcd&quot;</span><span class="p">;</span><span class="w">   </span><span class="c1">// ERROR: the compiler has already inferred the type of the variable as int</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">notInferred</span><span class="p">;</span>
+<span class="w">    </span><span class="n">notInferred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">       </span><span class="c1">// ERROR: in order to infer the type, the compiler looks ONLY at the line with declaration</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15</span><span class="p">;</span><span class="w"> </span><span class="c1">// ERROR: var cannot be used to define two variables on the same statement;</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">           </span><span class="c1">// ERROR: var cannot be initialized with null but it can be reassigned to null provided that the underlying type is a reference type.</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Local variables <strong>never</strong> get default values.
+Instance &amp; static fields <strong>always</strong> do.</p>
+</div>
+<hr />
+<p><a id="63-wrapper-types"></a></p>
+<h2 id="63-wrapper-types">6.3 Wrapper Types</h2>
+<p>In Java, <strong>wrapper types</strong> are object representations of the eight primitive types.<br />
+Each primitive has a corresponding wrapper class in the <code>java.lang</code> package:</p>
+<table>
+<thead>
+<tr>
+<th>Primitive</th>
+<th>Wrapper Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>byte</code></td>
+<td><code>Byte</code></td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td><code>Short</code></td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td><code>Integer</code></td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td><code>Long</code></td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td><code>Float</code></td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td><code>Double</code></td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td><code>Character</code></td>
+</tr>
+<tr>
+<td><code>boolean</code></td>
+<td><code>Boolean</code></td>
+</tr>
+</tbody>
+</table>
+<p>Wrapper objects are immutable — once created, their value cannot change.</p>
+<p><a id="631-purpose-of-wrapper-types"></a></p>
+<h3 id="631-purpose-of-wrapper-types">6.3.1 Purpose of Wrapper Types</h3>
+<ul>
+<li>Allow primitives to be used in contexts that require objects (e.g., collections, generics).  </li>
+<li>Provide utility methods for parsing, converting, and working with values.  </li>
+<li>Support constants such as <code>Integer.MAX_VALUE</code> or <code>Double.MIN_VALUE</code>.  </li>
+</ul>
+<p><a id="632-autoboxing-and-unboxing"></a></p>
+<h3 id="632-autoboxing-and-unboxing">6.3.2 Autoboxing and Unboxing</h3>
+<p>Since Java 5, the compiler automatically converts between primitives and their wrappers:</p>
+<ul>
+<li><strong>Autoboxing</strong>: primitive → wrapper  </li>
+<li><strong>Unboxing</strong>: wrapper → primitive  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Integer</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">       </span><span class="c1">// autoboxing: int → Integer</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">            </span><span class="c1">// unboxing: Integer → int</span>
+
+<span class="n">Integer</span><span class="w"> </span><span class="n">int1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">long1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">int1</span><span class="p">;</span><span class="w">  </span><span class="c1">// Unboxing --&gt; implicit cast OK</span>
+
+<span class="n">Long</span><span class="w"> </span><span class="n">long2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">;</span><span class="w">   </span><span class="c1">// ❌ Does not compile. </span>
+<span class="w">                   </span><span class="c1">// 11 is an int literal → requires autoboxing + widening → illegal</span>
+
+<span class="n">Character</span><span class="w"> </span><span class="n">char1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="kt">char</span><span class="w"> </span><span class="n">char2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">char1</span><span class="p">;</span><span class="w">  </span><span class="c1">// WARNING: NullPointerException</span>
+
+<span class="n">Integer</span><span class="w">  </span><span class="n">arr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">11.5</span><span class="p">,</span><span class="w"> </span><span class="mf">13.6</span><span class="p">}</span><span class="w">  </span><span class="c1">// WARNING: Does not compile!!</span>
+<span class="n">Double</span><span class="o">[]</span><span class="w"> </span><span class="n">arr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">};</span><span class="w">     </span><span class="c1">// WARNING: Does not compile!!</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Java <strong>never</strong> performs autoboxing + widening/narrowing in one step.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li><strong>AUTOBOXING</strong> and <strong>Implicit cast</strong> are not allowed in the same statement: you can't do both at the same time. (see example above)</li>
+<li>This rule apply also in method calls.</li>
+</ul>
+</div>
+<p><a id="633--parsing-and-conversion"></a></p>
+<h3 id="633-parsing-and-conversion">6.3.3  Parsing and Conversion</h3>
+<p>Wrappers provide static methods to convert strings or other types into primitives:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">);</span><span class="w">    </span><span class="c1">// returns primitive int</span>
+<span class="n">Integer</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;456&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// returns Integer object</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Double</span><span class="p">.</span><span class="na">parseDouble</span><span class="p">(</span><span class="s">&quot;3.14&quot;</span><span class="p">);</span>
+
+<span class="c1">// On the numeric wrapper class valueOf() throws a NumberFormatException on invalid input.</span>
+<span class="c1">// Example:</span>
+
+<span class="n">Integer</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;two&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// NumberFormatException</span>
+
+<span class="c1">// On Boolean, the method returns Boolean.TRUE for any value that matches &quot;true&quot; ignoring case, otherwise Boolean.false</span>
+<span class="c1">// Example:</span>
+
+<span class="n">Boolean</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;true&quot;</span><span class="p">);</span><span class="w">    </span><span class="c1">// true</span>
+<span class="n">Boolean</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;TrUe&quot;</span><span class="p">);</span><span class="w">    </span><span class="c1">// true</span>
+<span class="n">Boolean</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;TRUE&quot;</span><span class="p">);</span><span class="w">    </span><span class="c1">// true</span>
+<span class="n">Boolean</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;false&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// false</span>
+<span class="n">Boolean</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;FALSE&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// false</span>
+<span class="n">Boolean</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;xyz&quot;</span><span class="p">);</span><span class="w">     </span><span class="c1">// false</span>
+<span class="n">Boolean</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w">      </span><span class="c1">// false</span>
+
+<span class="c1">// The numeric integral classes Byte, Short, Integer and Long include an overloaded **valueOf(String str, int base)** method which takes a base value</span>
+<span class="c1">// Example with base 16 (hexadecimal) which includes character 0 -&gt; 9 and A -&gt; F (ignore case)</span>
+
+<span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;6&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span><span class="w">   </span><span class="c1">// 6</span>
+<span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span><span class="w">   </span><span class="c1">// 10</span>
+<span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span><span class="w">   </span><span class="c1">// 10</span>
+<span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;F&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span><span class="w">   </span><span class="c1">// 15</span>
+<span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;G&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span><span class="w">   </span><span class="c1">// NumberFormatException</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>methods <strong>parseXxx()</strong> return a primitive while <strong>valueOf()</strong> returns a wrapper object.</p>
+</div>
+<p><a id="634--helper-methods"></a></p>
+<h3 id="634-helper-methods">6.3.4  Helper methods</h3>
+<p>All the numeric wrapper classes extend the Number class and, for that, they inherit some helper methods such as: byteValue(), shortValue(), intValue(), longValue(), floatValue(), doubleValue().</p>
+<p>The Boolean and Character wrapper classes include: booleanValue() and charValue().</p>
+<ul>
+<li>Example:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="c1">// In trying to convert those helper methods can result in a loss of precision.</span>
+
+<span class="w">        </span><span class="n">Double</span><span class="w"> </span><span class="n">baseDouble</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Double</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;300.56&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">wrapDouble</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseDouble</span><span class="p">.</span><span class="na">doubleValue</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;baseDouble.doubleValue(): &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">wrapDouble</span><span class="p">);</span><span class="w">  </span><span class="c1">// 300.56</span>
+
+<span class="w">        </span><span class="kt">byte</span><span class="w"> </span><span class="n">wrapByte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseDouble</span><span class="p">.</span><span class="na">byteValue</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;baseDouble.byteValue(): &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">wrapByte</span><span class="p">);</span><span class="w">      </span><span class="c1">// 44  -&gt; There is no 300 in byte</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">wrapInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseDouble</span><span class="p">.</span><span class="na">intValue</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;baseDouble.intValue(): &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">wrapInt</span><span class="p">);</span><span class="w">        </span><span class="c1">// 300 -&gt; The value is truncated</span>
+</code></pre></div>
+<p><a id="635--null-values"></a></p>
+<h3 id="635-null-values">6.3.5  Null Values</h3>
+<p>Unlike primitives, wrapper types can hold <strong>null</strong>. 
+Attempting to unbox null causes a NullPointerException:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Integer</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="p">;</span><span class="w"> </span><span class="c1">// ❌ NullPointerException at runtime</span>
+</code></pre></div>
+<hr />
+<p><a id="64-equality-in-java"></a></p>
+<h2 id="64-equality-in-java">6.4 Equality in Java</h2>
+<p>Java provides two different mechanisms for checking equality:</p>
+<ul>
+<li><code>==</code> (equality operator)</li>
+<li><code>.equals()</code> (method defined in <code>Object</code> and overridden in many classes)</li>
+</ul>
+<p>Understanding the difference is essential.</p>
+<p><a id="641-equality-with-primitive-types"></a></p>
+<h3 id="641-equality-with-primitive-types">6.4.1 Equality with Primitive Types</h3>
+<p>For <strong>primitive values</strong> (<code>int</code>, <code>double</code>, <code>char</code>, <code>boolean</code>, etc.),<br />
+the operator <code>==</code> compares their actual <strong>numeric or boolean value</strong>.</p>
+<p>Example:
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">     </span><span class="c1">// true</span>
+
+<span class="kt">char</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span>
+<span class="kt">char</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">65</span><span class="p">;</span><span class="w">                   </span><span class="c1">// same Unicode code point</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">c2</span><span class="p">);</span><span class="w">   </span><span class="c1">// true</span>
+</code></pre></div></p>
+<p><a id="6411-key-points"></a></p>
+<h4 id="6411-key-points">6.4.1.1 Key points</h4>
+<ul>
+<li><code>==</code> performs <strong>value comparison</strong> for primitives.</li>
+<li>Primitive types have <strong>no <code>.equals()</code></strong> method.</li>
+<li>Mixed primitive types follow numeric <strong>promotion rules</strong><br />
+  (e.g., <code>int == long</code> → <code>int</code> promoted to <code>long</code>).</li>
+</ul>
+<p><a id="642-equality-with-reference-types"></a></p>
+<h3 id="642-equality-with-reference-types">6.4.2 Equality with Reference Types</h3>
+<p>With objects (reference types), the meaning of <code>==</code> changes.</p>
+<p><a id="6421-identity-comparison"></a></p>
+<h4 id="6421-identity-comparison">6.4.2.1 <code>==</code>(Identity Comparison)</h4>
+<p><code>==</code> checks whether <strong>two references point to the same object in memory</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;Hi&quot;</span><span class="p">);</span>
+<span class="n">String</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;Hi&quot;</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">s2</span><span class="p">);</span><span class="w">      </span><span class="c1">// false → different objects</span>
+</code></pre></div>
+<p>Even if contents are identical, <code>==</code> is false unless both variables refer to<br />
+<strong>the exact same object</strong>.</p>
+<p><a id="6422-equals-logical-comparison"></a></p>
+<h4 id="6422-equals-logical-comparison">6.4.2.2 <code>.equals()</code> (Logical Comparison)</h4>
+<p>Many classes override <code>.equals()</code> to compare <strong>values</strong>, not memory addresses.</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">s2</span><span class="p">));</span><span class="w"> </span><span class="c1">// true → same content</span>
+</code></pre></div>
+<p><a id="6423-key-points"></a></p>
+<h4 id="6423-key-points">6.4.2.3 Key points</h4>
+<ul>
+<li><code>.equals()</code> is defined in <code>Object</code>.</li>
+<li>If a class does <em>not</em> override <code>.equals()</code>, it behaves like <code>==</code>.</li>
+<li>Classes like <code>String</code>, <code>Integer</code>, <code>List</code>, etc. override <code>.equals()</code><br />
+  to provide meaningful value comparison.</li>
+</ul>
+<p><a id="643-string-pool-and-equality"></a></p>
+<h3 id="643-string-pool-and-equality">6.4.3 String Pool and Equality</h3>
+<p>String literals are stored in the <strong>String pool</strong>, so identical literals<br />
+refer to the <strong>same object</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Java&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Java&quot;</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">       </span><span class="c1">// true → same pooled literal</span>
+</code></pre></div>
+<p>But using <code>new</code> creates a different object:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;Java&quot;</span><span class="p">);</span>
+<span class="n">String</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Java&quot;</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w">       </span><span class="c1">// false → x is not pooled</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">y</span><span class="p">));</span><span class="w">  </span><span class="c1">// true</span>
+</code></pre></div>
+<p>Common Pitfalls</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Java string literal&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot; Java string literal&quot;</span><span class="p">.</span><span class="na">trim</span><span class="p">();</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w">       </span><span class="c1">// false → x and y are not the same at compile time</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Java string literal&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Java &quot;</span><span class="p">;</span>
+<span class="n">b</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;string literal&quot;</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// false</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Any String created at <strong>runtime</strong> does <em>not</em> go into the pool automatically.
+Use <code>intern()</code> if you want pooling.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>"Hello" == "Hel" + "lo"</code> → true (compile-time constant)</p>
+<p><code>"Hello" == getHello()</code> → false (runtime concatenation)</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hel&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;lo&quot;</span><span class="p">;</span><span class="w">   </span><span class="c1">// compile-time → same literal</span>
+<span class="n">String</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hel&quot;</span><span class="p">;</span>
+<span class="n">z</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;lo&quot;</span><span class="p">;</span><span class="w">                 </span><span class="c1">// runtime → new String</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">z</span><span class="p">);</span><span class="w"> </span><span class="c1">// false</span>
+</code></pre></div>
+<p><a id="6431-the-intern-method"></a></p>
+<h4 id="6431-the-intern-method">6.4.3.1 The intern method</h4>
+<p>You can also tell Java to use a String from the String Pool (in case it already exist) through the <code>intern()</code> method:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Java&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;Java&quot;</span><span class="p">).</span><span class="na">intern</span><span class="p">();</span>
+
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w">       </span><span class="c1">// true</span>
+</code></pre></div>
+<p><a id="644-equality-with-wrapper-types"></a></p>
+<h3 id="644-equality-with-wrapper-types">6.4.4 Equality with Wrapper Types</h3>
+<p>Wrapper classes (<code>Integer</code>, <code>Double</code>, etc.) behave like objects:</p>
+<ul>
+<li><code>==</code> → compares references  </li>
+<li><code>.equals()</code> → compares values  </li>
+</ul>
+<p>However, some wrappers are <strong>cached</strong> (Integer from −128 to 127):</p>
+<div class="highlight"><pre><span></span><code><span class="n">Integer</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="n">Integer</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">        </span><span class="c1">// true → cached</span>
+
+<span class="n">Integer</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+<span class="n">Integer</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">d</span><span class="p">);</span><span class="w">        </span><span class="c1">// false → not cached</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">d</span><span class="p">));</span><span class="w">   </span><span class="c1">// true → same numeric value</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be very careful with wrapper caching</p>
+</div>
+<p><a id="645-equality-and-null"></a></p>
+<h3 id="645-equality-and-null">6.4.5 Equality and <code>null</code></h3>
+<ul>
+<li><code>== null</code> is always safe.</li>
+<li>Calling <code>.equals()</code> on a <code>null</code> reference throws a <strong>NullPointerException</strong>.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w">   </span><span class="c1">// true</span>
+<span class="c1">// s.equals(&quot;Hi&quot;);               // ❌ NullPointerException</span>
+</code></pre></div>
+<p><a id="646-summary-table"></a></p>
+<h3 id="646-summary-table">6.4.6 Summary Table</h3>
+<table>
+<thead>
+<tr>
+<th>Comparison</th>
+<th>Primitives</th>
+<th>Objects / Wrappers</th>
+<th>Strings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>==</code></td>
+<td>compares <strong>value</strong></td>
+<td>compares <strong>reference</strong></td>
+<td>identity (affected by String pool)</td>
+</tr>
+<tr>
+<td><code>.equals()</code></td>
+<td>N/A</td>
+<td>compares <strong>content</strong> if overridden</td>
+<td><strong>content</strong> comparison</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.ars-digitale.com/" target="_blank" rel="noopener" title="Ars Digitale" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

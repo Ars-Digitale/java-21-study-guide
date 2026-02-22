@@ -1,0 +1,7513 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ars-digitale.github.io/java-21-study-guide/fr/module-08/io-streams/">
+      
+      
+        <link rel="prev" href="../files-path-api/">
+      
+      
+        <link rel="next" href="../io-streams-api/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Flux I/O - Java 21 Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#34-streams-io-java" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Java 21 Study Guide" class="md-header__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Java 21 Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Flux I/O
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Java 21 Study Guide" class="md-nav__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Java 21 Study Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisite material
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Java Language Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Java Language Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syntax building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic language building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java naming rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java data types and casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantiating types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Control Flow
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Control Flow
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control flow statements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — Core Standard APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — Core Standard APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strings in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dates and time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatting and localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methods, attributes, and variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading, initialization, and object construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inheritance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beyond classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions and error handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Functional Programming
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Functional Programming
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functional programming in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to the collections framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared collection operations and equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting and comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    List APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue and deque APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrency and Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrency and Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thread fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concurrency APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — Java I/O and NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — Java I/O and NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java I/O streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O streams APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interacting with the user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JPMS fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiling, packaging, and running modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Italiano
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Italiano
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materiale propedeutico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi di sintassi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elementi base del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regole di naming Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tipi di dati e casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operatori Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istanziare i tipi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istruzioni di controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cicli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stringhe in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilità Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data e ora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formattazione e localizzazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metodi, attributi e variabili
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading e costruzione oggetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ereditarietà
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oltre le classi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eccezioni e gestione errori
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmazione funzionale in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operazioni condivise ed equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting e comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti thread
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API di concorrenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 08 — I/O e NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 08 — I/O e NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (fondamenti)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interazione con l’utente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilare e avviare moduli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Français
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Français
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matériel de support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Bases du Langage Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Bases du Langage Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocs de syntaxe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Éléments de base du langage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Règles de nommage Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types de données et casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérateurs Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instanciation des types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Contrôle de flux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Contrôle de flux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions de contrôle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boucles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chaînes (String) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tableaux (Arrays) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilitaires Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date et heure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatage et localisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Fondamentaux OO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Fondamentaux OO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Méthodes, attributs et variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chargement de classes et construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Héritage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Au-delà des classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions et gestion des erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmation fonctionnelle en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Streams Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Framework des Collections
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Framework des Collections
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction au framework des collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérations partagées et égalité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tri et comparaison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrence et Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrence et Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux des threads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de concurrence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — I/O et NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — I/O et NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (fondamentaux)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-des-matieres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table des matières
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#341-quest-ce-quun-flux-io-en-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.1 Qu’est-ce qu’un flux I/O en Java ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#342-flux-doctets-vs-flux-de-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.2 Flux d’octets vs flux de caractères
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.2 Flux d’octets vs flux de caractères">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3421-flux-doctets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.2.1 Flux d’octets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3422-flux-de-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.2.2 Flux de caractères
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3423-tableau-recapitulatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.2.3 Tableau récapitulatif
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#343-flux-de-bas-niveau-vs-flux-de-haut-niveau" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3 Flux de bas niveau vs flux de haut niveau
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.3 Flux de bas niveau vs flux de haut niveau">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3431-flux-de-bas-niveau-node-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.1 Flux de bas niveau (Node Streams)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3432-flux-de-bas-niveau-courants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.2 Flux de bas niveau courants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3433-flux-de-haut-niveau-filter-processing-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.3 Flux de haut niveau (Filter / Processing Streams)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3434-flux-de-haut-niveau-courants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.4 Flux de haut niveau courants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3435-regles-de-chainage-des-flux-et-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5 Règles de chaînage des flux et erreurs courantes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.3.5 Règles de chaînage des flux et erreurs courantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#34351-regle-fondamentale-de-chainage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.1 Règle fondamentale de chaînage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34352-incompatibilite-flux-doctets-vs-flux-de-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.2 Incompatibilité flux d’octets vs flux de caractères
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34353-chainage-invalide-erreur-de-compilation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.3 Chaînage invalide (erreur de compilation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34354-pont-entre-flux-doctets-et-flux-de-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.4 Pont entre flux d’octets et flux de caractères
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34355-patron-correct-de-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.5 Patron correct de conversion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34356-regles-dordre-dans-les-chaines-de-flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.6 Règles d’ordre dans les chaînes de flux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34357-ordre-logique-correct" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.7 Ordre logique correct
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34358-regle-de-gestion-des-ressources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.8 Règle de gestion des ressources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34359-pieges-courants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.9 Pièges courants
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#344-classes-de-base-principales-de-javaio-et-methodes-cles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4 Classes de base principales de java.io et méthodes clés
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.4 Classes de base principales de java.io et méthodes clés">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3441-inputstream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.1 InputStream
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.4.1 InputStream">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#34411-methodes-cles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.1.1 Méthodes clés
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34412-exemple-dutilisation-typique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.1.2 Exemple d’utilisation typique
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3442-outputstream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.2 OutputStream
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.4.2 OutputStream">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#34421-methodes-cles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.2.1 Méthodes clés
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34422-exemple-dutilisation-typique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.2.2 Exemple d’utilisation typique
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3443-reader-et-writer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.3 Reader et Writer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.4.3 Reader et Writer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#34431-gestion-du-charset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.3.1 Gestion du charset
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#345-flux-tamponnes-et-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5 Flux tamponnés et performance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.5 Flux tamponnés et performance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3451-pourquoi-la-mise-en-tampon-compte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5.1 Pourquoi la mise en tampon compte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3452-comment-fonctionne-la-lecture-non-tamponnee" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5.2 Comment fonctionne la lecture non tamponnée
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3453-comment-fonctionne-bufferedinputstream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5.3 Comment fonctionne BufferedInputStream
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3454-exemple-de-sortie-tamponnee" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5.4 Exemple de sortie tamponnée
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3455-bufferedreader-vs-reader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5.5 BufferedReader vs Reader
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3456-exemple-de-bufferedwriter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5.6 Exemple de BufferedWriter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#346-javaio-vs-javanio-et-javaniofile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.6 java.io vs java.nio (et java.nio.file)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.6 java.io vs java.nio (et java.nio.file)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3461-differences-conceptuelles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.6.1 Différences conceptuelles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3462-javanio-io-de-fichier-moderne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.6.2 java.nio (I/O de fichier moderne)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#347-quand-utiliser-quelle-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.7 Quand utiliser quelle API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#348-pieges-courants-et-conseils" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.8 Pièges courants et conseils
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interaction avec l’utilisateur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiler et exécuter des modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services en JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ars-digitale.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ars Digitale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-des-matieres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table des matières
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#341-quest-ce-quun-flux-io-en-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.1 Qu’est-ce qu’un flux I/O en Java ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#342-flux-doctets-vs-flux-de-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.2 Flux d’octets vs flux de caractères
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.2 Flux d’octets vs flux de caractères">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3421-flux-doctets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.2.1 Flux d’octets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3422-flux-de-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.2.2 Flux de caractères
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3423-tableau-recapitulatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.2.3 Tableau récapitulatif
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#343-flux-de-bas-niveau-vs-flux-de-haut-niveau" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3 Flux de bas niveau vs flux de haut niveau
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.3 Flux de bas niveau vs flux de haut niveau">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3431-flux-de-bas-niveau-node-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.1 Flux de bas niveau (Node Streams)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3432-flux-de-bas-niveau-courants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.2 Flux de bas niveau courants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3433-flux-de-haut-niveau-filter-processing-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.3 Flux de haut niveau (Filter / Processing Streams)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3434-flux-de-haut-niveau-courants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.4 Flux de haut niveau courants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3435-regles-de-chainage-des-flux-et-erreurs-courantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5 Règles de chaînage des flux et erreurs courantes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.3.5 Règles de chaînage des flux et erreurs courantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#34351-regle-fondamentale-de-chainage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.1 Règle fondamentale de chaînage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34352-incompatibilite-flux-doctets-vs-flux-de-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.2 Incompatibilité flux d’octets vs flux de caractères
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34353-chainage-invalide-erreur-de-compilation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.3 Chaînage invalide (erreur de compilation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34354-pont-entre-flux-doctets-et-flux-de-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.4 Pont entre flux d’octets et flux de caractères
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34355-patron-correct-de-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.5 Patron correct de conversion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34356-regles-dordre-dans-les-chaines-de-flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.6 Règles d’ordre dans les chaînes de flux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34357-ordre-logique-correct" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.7 Ordre logique correct
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34358-regle-de-gestion-des-ressources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.8 Règle de gestion des ressources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34359-pieges-courants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3.5.9 Pièges courants
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#344-classes-de-base-principales-de-javaio-et-methodes-cles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4 Classes de base principales de java.io et méthodes clés
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.4 Classes de base principales de java.io et méthodes clés">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3441-inputstream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.1 InputStream
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.4.1 InputStream">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#34411-methodes-cles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.1.1 Méthodes clés
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34412-exemple-dutilisation-typique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.1.2 Exemple d’utilisation typique
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3442-outputstream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.2 OutputStream
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.4.2 OutputStream">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#34421-methodes-cles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.2.1 Méthodes clés
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34422-exemple-dutilisation-typique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.2.2 Exemple d’utilisation typique
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3443-reader-et-writer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.3 Reader et Writer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.4.3 Reader et Writer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#34431-gestion-du-charset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4.3.1 Gestion du charset
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#345-flux-tamponnes-et-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5 Flux tamponnés et performance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.5 Flux tamponnés et performance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3451-pourquoi-la-mise-en-tampon-compte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5.1 Pourquoi la mise en tampon compte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3452-comment-fonctionne-la-lecture-non-tamponnee" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5.2 Comment fonctionne la lecture non tamponnée
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3453-comment-fonctionne-bufferedinputstream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5.3 Comment fonctionne BufferedInputStream
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3454-exemple-de-sortie-tamponnee" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5.4 Exemple de sortie tamponnée
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3455-bufferedreader-vs-reader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5.5 BufferedReader vs Reader
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3456-exemple-de-bufferedwriter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5.6 Exemple de BufferedWriter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#346-javaio-vs-javanio-et-javaniofile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.6 java.io vs java.nio (et java.nio.file)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34.6 java.io vs java.nio (et java.nio.file)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3461-differences-conceptuelles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.6.1 Différences conceptuelles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3462-javanio-io-de-fichier-moderne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.6.2 java.nio (I/O de fichier moderne)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#347-quand-utiliser-quelle-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.7 Quand utiliser quelle API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#348-pieges-courants-et-conseils" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.8 Pièges courants et conseils
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="34-streams-io-java">34. Streams I/O Java</h1>
+<p><a id="table-des-matières"></a></p>
+<h3 id="table-des-matieres">Table des matières</h3>
+<ul>
+<li><a href="#341-quest-ce-quun-flux-io-en-java-">34.1 Qu’est-ce qu’un flux I/O en Java</a></li>
+<li><a href="#342-flux-doctets-vs-flux-de-caractères">34.2 Flux d’octets vs flux de caractères</a><ul>
+<li><a href="#3421-flux-doctets">34.2.1 Flux d’octets</a></li>
+<li><a href="#3422-flux-de-caractères">34.2.2 Flux de caractères</a></li>
+<li><a href="#3423-tableau-récapitulatif">34.2.3 Tableau récapitulatif</a></li>
+</ul>
+</li>
+<li><a href="#343-flux-de-bas-niveau-vs-flux-de-haut-niveau">34.3 Flux de bas niveau vs flux de haut niveau</a><ul>
+<li><a href="#3431-flux-de-bas-niveau-node-streams">34.3.1 Flux de bas niveau Node-Streams</a></li>
+<li><a href="#3432-flux-de-bas-niveau-courants">34.3.2 Flux de bas niveau courants</a></li>
+<li><a href="#3433-flux-de-haut-niveau-filter--processing-streams">34.3.3 Flux de haut niveau Filter--Processing-Streams</a></li>
+<li><a href="#3434-flux-de-haut-niveau-courants">34.3.4 Flux de haut niveau courants</a></li>
+<li><a href="#3435-règles-de-chaînage-des-flux-et-erreurs-courantes">34.3.5 Règles de chaînage des flux et erreurs courantes</a><ul>
+<li><a href="#34351-règle-fondamentale-de-chaînage">34.3.5.1 Règle fondamentale de chaînage</a></li>
+<li><a href="#34352-incompatibilité-flux-doctets-vs-flux-de-caractères">34.3.5.2 Incompatibilité flux d’octets vs flux de caractères</a></li>
+<li><a href="#34353-chaînage-invalide-erreur-de-compilation">34.3.5.3 Chaînage invalide erreur-de-compilation</a></li>
+<li><a href="#34354-pont-entre-flux-doctets-et-flux-de-caractères">34.3.5.4 Pont entre flux d’octets et flux de caractères</a></li>
+<li><a href="#34355-patron-correct-de-conversion">34.3.5.5 Patron correct de conversion</a></li>
+<li><a href="#34356-règles-dordre-dans-les-chaînes-de-flux">34.3.5.6 Règles d’ordre dans les chaînes de flux</a></li>
+<li><a href="#34357-ordre-logique-correct">34.3.5.7 Ordre logique correct</a></li>
+<li><a href="#34358-règle-de-gestion-des-ressources">34.3.5.8 Règle de gestion des ressources</a></li>
+<li><a href="#34359-pièges-courants">34.3.5.9 Pièges courants</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#344-classes-de-base-principales-de-javaio-et-méthodes-clés">34.4 Classes de base principales de javaio et méthodes clés</a><ul>
+<li><a href="#3441-inputstream">34.4.1 InputStream</a><ul>
+<li><a href="#34411-méthodes-clés">34.4.1.1 Méthodes clés</a></li>
+<li><a href="#34412-exemple-dutilisation-typique">34.4.1.2 Exemple d’utilisation typique</a></li>
+</ul>
+</li>
+<li><a href="#3442-outputstream">34.4.2 OutputStream</a><ul>
+<li><a href="#34421-méthodes-clés">34.4.2.1 Méthodes clés</a></li>
+<li><a href="#34422-exemple-dutilisation-typique">34.4.2.2 Exemple d’utilisation typique</a></li>
+</ul>
+</li>
+<li><a href="#3443-reader-et-writer">34.4.3 Reader et Writer</a><ul>
+<li><a href="#34431-gestion-du-charset">34.4.3.1 Gestion du charset</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#345-flux-tamponnés-et-performance">34.5 Flux tamponnés et performance</a><ul>
+<li><a href="#3451-pourquoi-la-mise-en-tampon-compte">34.5.1 Pourquoi la mise en tampon compte</a></li>
+<li><a href="#3452-comment-fonctionne-la-lecture-non-tamponnée">34.5.2 Comment fonctionne la lecture non tamponnée</a></li>
+<li><a href="#3453-comment-fonctionne-bufferedinputstream">34.5.3 Comment fonctionne BufferedInputStream</a></li>
+<li><a href="#3454-exemple-de-sortie-tamponnée">34.5.4 Exemple de sortie tamponnée</a></li>
+<li><a href="#3455-bufferedreader-vs-reader">34.5.5 BufferedReader vs Reader</a></li>
+<li><a href="#3456-exemple-de-bufferedwriter">34.5.6 Exemple de BufferedWriter</a></li>
+</ul>
+</li>
+<li><a href="#346-javaio-vs-javanio-et-javaniofile">34.6 java io vs java nio et java nio file</a><ul>
+<li><a href="#3461-différences-conceptuelles">34.6.1 Différences conceptuelles</a></li>
+<li><a href="#3462-javanio-io-de-fichier-moderne">34.6.2 java-nio I/O de fichier moderne</a></li>
+</ul>
+</li>
+<li><a href="#347-quand-utiliser-quelle-api">34.7 Quand utiliser quelle API</a></li>
+<li><a href="#348-pièges-courants-et-conseils">34.8 Pièges courants et conseils</a></li>
+</ul>
+<hr />
+<p>Ce chapitre fournit une explication détaillée des <code>flux I/O Java</code>.</p>
+<p>Il couvre les flux classiques <strong>java.io</strong>, les compare à <strong>java.nio / java.nio.file</strong>, et explique les principes de conception, les API, les cas limites et les distinctions pertinentes.</p>
+<p><a id="341-quest-ce-quun-flux-io-en-java-"></a></p>
+<h2 id="341-quest-ce-quun-flux-io-en-java">34.1 Qu’est-ce qu’un flux I/O en Java ?</h2>
+<p>Un <code>flux I/O</code> représente un flux de données entre un programme Java et une source ou une destination externe.</p>
+<p>Les données circulent de manière séquentielle, comme de l’eau dans un tuyau.</p>
+<ul>
+<li>Un flux n’est pas une structure de données ; il ne stocke pas les données de manière permanente</li>
+<li>Les flux sont unidirectionnels (entrée OU sortie)</li>
+<li>Les flux abstraient la source sous-jacente (fichier, réseau, mémoire, périphérique)</li>
+<li>Les flux fonctionnent de manière bloquante, synchrone (I/O classique)</li>
+</ul>
+<p>En Java, les flux sont organisés autour de deux dimensions majeures :</p>
+<ul>
+<li><code>Direction</code> : Entrée vs Sortie</li>
+<li><code>Type de données</code> : Octets vs Caractères</li>
+</ul>
+<hr />
+<p><a id="342-flux-doctets-vs-flux-de-caractères"></a></p>
+<h2 id="342-flux-doctets-vs-flux-de-caracteres">34.2 Flux d’octets vs flux de caractères</h2>
+<p>Java distingue les flux selon l’unité de données qu’ils traitent.</p>
+<p><a id="3421-flux-doctets"></a></p>
+<h3 id="3421-flux-doctets">34.2.1 Flux d’octets</h3>
+<ul>
+<li>Fonctionnent avec des octets bruts 8 bits</li>
+<li>Utilisés pour les données binaires (images, audio, PDF, ZIP)</li>
+<li>Classes de base : <code>InputStream</code> et <code>OutputStream</code></li>
+</ul>
+<p><a id="3422-flux-de-caractères"></a></p>
+<h3 id="3422-flux-de-caracteres">34.2.2 Flux de caractères</h3>
+<ul>
+<li>Fonctionnent avec des caractères Unicode 16 bits</li>
+<li>Gèrent automatiquement l’encodage des caractères</li>
+<li>Classes de base : <code>Reader</code> et <code>Writer</code></li>
+</ul>
+<p><a id="3423-tableau-récapitulatif"></a></p>
+<h3 id="3423-tableau-recapitulatif">34.2.3 Tableau récapitulatif</h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Flux d’octets</th>
+<th>Flux de caractères</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Unité de données</code></td>
+<td>byte (8 bits)</td>
+<td>char (16 bits)</td>
+</tr>
+<tr>
+<td><code>Gestion de l’encodage</code></td>
+<td>Aucune</td>
+<td>Oui (conscient du charset)</td>
+</tr>
+<tr>
+<td><code>Classes de base</code></td>
+<td>InputStream / OutputStream</td>
+<td>Reader / Writer</td>
+</tr>
+<tr>
+<td><code>Usage typique</code></td>
+<td>Fichiers binaires</td>
+<td>Fichiers texte</td>
+</tr>
+<tr>
+<td><code>Focus</code></td>
+<td>I/O bas niveau</td>
+<td>Traitement de texte</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a id="343-flux-de-bas-niveau-vs-flux-de-haut-niveau"></a></p>
+<h2 id="343-flux-de-bas-niveau-vs-flux-de-haut-niveau">34.3 Flux de bas niveau vs flux de haut niveau</h2>
+<p>Les flux dans <code>java.io</code> suivent un pattern decorator. Les flux sont empilés pour ajouter des fonctionnalités.</p>
+<p><a id="3431-flux-de-bas-niveau-node-streams"></a></p>
+<h3 id="3431-flux-de-bas-niveau-node-streams">34.3.1 Flux de bas niveau (Node Streams)</h3>
+<p>Les flux de bas niveau se connectent directement à une source ou un puits de données.</p>
+<ul>
+<li>Ils savent lire/écrire des octets ou des caractères</li>
+<li>Ils ne fournissent PAS de mise en tampon, de formatage ou de gestion d’objets</li>
+</ul>
+<p><a id="3432-flux-de-bas-niveau-courants"></a></p>
+<h3 id="3432-flux-de-bas-niveau-courants">34.3.2 Flux de bas niveau courants</h3>
+<table>
+<thead>
+<tr>
+<th>Classe de flux</th>
+<th>Objectif</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FileInputStream</code></td>
+<td>Lire des octets depuis un fichier</td>
+</tr>
+<tr>
+<td><code>FileOutputStream</code></td>
+<td>Écrire des octets dans un fichier</td>
+</tr>
+<tr>
+<td><code>FileReader</code></td>
+<td>Lire des caractères depuis un fichier</td>
+</tr>
+<tr>
+<td><code>FileWriter</code></td>
+<td>Écrire des caractères dans un fichier</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Exemple : flux d’octets de bas niveau</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">InputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="s">&quot;data.bin&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">read</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les flux de bas niveau sont rarement utilisés seuls dans des applications réelles en raison de performances médiocres et de fonctionnalités limitées.</p>
+</div>
+<p><a id="3433-flux-de-haut-niveau-filter--processing-streams"></a></p>
+<h3 id="3433-flux-de-haut-niveau-filter-processing-streams">34.3.3 Flux de haut niveau (Filter / Processing Streams)</h3>
+<p>Les flux de haut niveau enveloppent d’autres flux pour ajouter des fonctionnalités.</p>
+<ul>
+<li>Mise en tampon</li>
+<li>Conversion de type de données</li>
+<li>Sérialisation d’objets</li>
+<li>Lecture/écriture de primitifs</li>
+</ul>
+<p><a id="3434-flux-de-haut-niveau-courants"></a></p>
+<h3 id="3434-flux-de-haut-niveau-courants">34.3.4 Flux de haut niveau courants</h3>
+<table>
+<thead>
+<tr>
+<th>Classe de flux</th>
+<th>Ajoute des fonctionnalités</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BufferedInputStream</code></td>
+<td>Mise en tampon</td>
+</tr>
+<tr>
+<td><code>BufferedReader</code></td>
+<td>Lecture par lignes</td>
+</tr>
+<tr>
+<td><code>DataInputStream</code></td>
+<td>Types primitifs</td>
+</tr>
+<tr>
+<td><code>ObjectInputStream</code></td>
+<td>Sérialisation d’objets</td>
+</tr>
+<tr>
+<td><code>PrintWriter</code></td>
+<td>Sortie texte formatée</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Exemple : chaînage de flux</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedReader</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">InputStreamReader</span><span class="p">(</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="s">&quot;text.txt&quot;</span><span class="p">))))</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">line</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">readLine</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="3435-règles-de-chaînage-des-flux-et-erreurs-courantes"></a></p>
+<h3 id="3435-regles-de-chainage-des-flux-et-erreurs-courantes">34.3.5 Règles de chaînage des flux et erreurs courantes</h3>
+<p>L’exemple précédent illustre le chaînage des flux, un concept central de <code>java.io</code> basé sur le pattern decorator.</p>
+<p>Chaque flux enveloppe un autre flux, ajoutant des fonctionnalités tout en préservant une hiérarchie de types stricte.</p>
+<p><a id="34351-règle-fondamentale-de-chaînage"></a></p>
+<h4 id="34351-regle-fondamentale-de-chainage">34.3.5.1 Règle fondamentale de chaînage</h4>
+<p>Un flux ne peut envelopper qu’un autre flux d’un niveau d’abstraction compatible.</p>
+<ul>
+<li>Les flux d’octets ne peuvent envelopper que des flux d’octets</li>
+<li>Les flux de caractères ne peuvent envelopper que des flux de caractères</li>
+<li>Les flux de haut niveau nécessitent un flux de bas niveau sous-jacent</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Vous ne pouvez pas mélanger arbitrairement <code>InputStream</code> avec <code>Reader</code> ou <code>OutputStream</code> avec <code>Writer</code>.</p>
+</div>
+<p><a id="34352-incompatibilité-flux-doctets-vs-flux-de-caractères"></a></p>
+<h4 id="34352-incompatibilite-flux-doctets-vs-flux-de-caracteres">34.3.5.2 Incompatibilité flux d’octets vs flux de caractères</h4>
+<p>Une erreur très courante consiste à tenter d’envelopper un flux d’octets directement avec une classe basée sur les caractères (ou inversement).</p>
+<p><a id="34353-chaînage-invalide-erreur-de-compilation"></a></p>
+<h4 id="34353-chainage-invalide-erreur-de-compilation">34.3.5.3 Chaînage invalide (erreur de compilation)</h4>
+<div class="highlight"><pre><span></span><code><span class="n">BufferedReader</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedReader</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="s">&quot;text.txt&quot;</span><span class="p">));</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cela échoue parce que <code>BufferedReader</code> attend un <code>Reader</code>, pas un <code>InputStream</code>.</p>
+</div>
+<p><a id="34354-pont-entre-flux-doctets-et-flux-de-caractères"></a></p>
+<h4 id="34354-pont-entre-flux-doctets-et-flux-de-caracteres">34.3.5.4 Pont entre flux d’octets et flux de caractères</h4>
+<p>Pour convertir entre les flux basés sur les octets et ceux basés sur les caractères, Java fournit des classes passerelles qui effectuent un décodage/encodage explicite du charset.</p>
+<ul>
+<li><code>InputStreamReader</code> convertit octets → caractères</li>
+<li><code>OutputStreamWriter</code> convertit caractères → octets</li>
+</ul>
+<p><a id="34355-patron-correct-de-conversion"></a></p>
+<h4 id="34355-patron-correct-de-conversion">34.3.5.5 Patron correct de conversion</h4>
+<div class="highlight"><pre><span></span><code><span class="n">BufferedReader</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedReader</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">InputStreamReader</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="s">&quot;text.txt&quot;</span><span class="p">)));</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La passerelle gère le décodage des caractères en utilisant un charset (par défaut ou explicite).</p>
+</div>
+<p><a id="34356-règles-dordre-dans-les-chaînes-de-flux"></a></p>
+<h4 id="34356-regles-dordre-dans-les-chaines-de-flux">34.3.5.6 Règles d’ordre dans les chaînes de flux</h4>
+<p>L’ordre d’enveloppement n’est pas arbitraire.</p>
+<ul>
+<li>Le flux de bas niveau doit être le plus interne</li>
+<li>Les passerelles (si nécessaires) viennent ensuite</li>
+<li>Les flux tamponnés ou de traitement viennent en dernier</li>
+</ul>
+<p><a id="34357-ordre-logique-correct"></a></p>
+<h4 id="34357-ordre-logique-correct">34.3.5.7 Ordre logique correct</h4>
+<div class="highlight"><pre><span></span><code>FileInputStream → InputStreamReader → BufferedReader
+</code></pre></div>
+<p><a id="34358-règle-de-gestion-des-ressources"></a></p>
+<h4 id="34358-regle-de-gestion-des-ressources">34.3.5.8 Règle de gestion des ressources</h4>
+<p>Fermer le flux le plus externe ferme automatiquement tous les flux enveloppés.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>C’est pourquoi try-with-resources devrait référencer uniquement le flux de plus haut niveau.</p>
+</div>
+<p><a id="34359-pièges-courants"></a></p>
+<h4 id="34359-pieges-courants">34.3.5.9 Pièges courants</h4>
+<ul>
+<li>Essayer de tamponner un flux du mauvais type</li>
+<li>Oublier la passerelle entre flux d’octets et flux de caractères</li>
+<li>Supposer que <code>Reader</code> fonctionne avec des données binaires</li>
+<li>Utiliser le charset par défaut involontairement</li>
+<li>Fermer manuellement les flux internes (risque de double-close) : <code>close()</code> sur l’enveloppe externe suffit et est recommandé</li>
+</ul>
+<hr />
+<p><a id="344-classes-de-base-principales-de-javaio-et-méthodes-clés"></a></p>
+<h2 id="344-classes-de-base-principales-de-javaio-et-methodes-cles">34.4 Classes de base principales de <code>java.io</code> et méthodes clés</h2>
+<p>Le package <code>java.io</code> est construit autour d’un petit ensemble de <strong>classes de base abstraites</strong>.
+Comprendre ces classes et leurs contrats est essentiel, car toutes les classes I/O concrètes s’appuient sur elles.</p>
+<p><a id="3441-inputstream"></a></p>
+<h3 id="3441-inputstream">34.4.1 InputStream</h3>
+<p>Classe de base abstraite pour l’entrée orientée octets.
+Tous les flux d’entrée lisent des octets bruts (valeurs 8 bits) depuis une source telle qu’un fichier, un socket réseau, ou un buffer mémoire.</p>
+<p><a id="34411-méthodes-clés"></a></p>
+<h4 id="34411-methodes-cles">34.4.1.1 Méthodes clés</h4>
+<table>
+<thead>
+<tr>
+<th>Méthode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int <code>read()</code></td>
+<td>Lit un octet (0–255) ; retourne -1 à la fin du flux</td>
+</tr>
+<tr>
+<td>int <code>read(byte[])</code></td>
+<td>Lit des octets dans un buffer ; retourne le nombre d’octets lus ou -1</td>
+</tr>
+<tr>
+<td>int <code>read(byte[], int, int)</code></td>
+<td>Lit jusqu’à length octets dans une tranche de buffer</td>
+</tr>
+<tr>
+<td>int <code>available()</code></td>
+<td>Octets lisibles sans bloquer (indice, pas garantie)</td>
+</tr>
+<tr>
+<td>void <code>close()</code></td>
+<td>Libère la ressource sous-jacente</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les méthodes <code>read()</code> sont bloquantes par défaut.</p>
+<p>Elles suspendent le thread appelant jusqu’à ce que des données soient disponibles, que la fin de flux soit atteinte, ou qu’une erreur I/O se produise.</p>
+</div>
+<p>La méthode <code>read()</code> à octet unique est principalement un primitif de bas niveau.</p>
+<p>En pratique, lire un octet à la fois est inefficace et devrait presque toujours être évité au profit de lectures tamponnées.</p>
+<p><a id="34412-exemple-dutilisation-typique"></a></p>
+<h4 id="34412-exemple-dutilisation-typique">34.4.1.2 Exemple d’utilisation typique</h4>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">InputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="s">&quot;data.bin&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// traiter buffer[0..count-1]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="3442-outputstream"></a></p>
+<h3 id="3442-outputstream">34.4.2 OutputStream</h3>
+<p>Classe de base abstraite pour la sortie orientée octets.</p>
+<p>Elle représente une destination où des octets bruts peuvent être écrits.</p>
+<p><a id="34421-méthodes-clés"></a></p>
+<h4 id="34421-methodes-cles">34.4.2.1 Méthodes clés</h4>
+<table>
+<thead>
+<tr>
+<th>Méthode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void <code>write(int b)</code></td>
+<td>Écrit les 8 bits de poids faible de l’entier</td>
+</tr>
+<tr>
+<td>void <code>write(byte[])</code></td>
+<td>Écrit un tableau d’octets entier</td>
+</tr>
+<tr>
+<td>void <code>write(byte[], int, int)</code></td>
+<td>Écrit une tranche d’un tableau d’octets</td>
+</tr>
+<tr>
+<td>void <code>flush()</code></td>
+<td>Force l’écriture des données tamponnées</td>
+</tr>
+<tr>
+<td>void <code>close()</code></td>
+<td>Effectue flush et libère la ressource</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Appeler <code>close()</code> appelle implicitement <code>flush()</code>.</p>
+<p>Ne pas faire flush ou close sur un OutputStream peut entraîner une perte de données.</p>
+</div>
+<p><a id="34422-exemple-dutilisation-typique"></a></p>
+<h4 id="34422-exemple-dutilisation-typique">34.4.2.2 Exemple d’utilisation typique</h4>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">OutputStream</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="s">&quot;out.bin&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">out</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">});</span>
+<span class="w">    </span><span class="n">out</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a id="3443-reader-et-writer"></a></p>
+<h3 id="3443-reader-et-writer">34.4.3 Reader et Writer</h3>
+<p><code>Reader</code> et <code>Writer</code> sont les équivalents <code>orientés caractères</code> de InputStream et OutputStream.</p>
+<p>Ils fonctionnent sur des caractères Unicode 16 bits au lieu d’octets bruts.</p>
+<table>
+<thead>
+<tr>
+<th>Classe</th>
+<th>Direction</th>
+<th>Basée sur caractères</th>
+<th>Consciente de l’encodage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Reader</code></td>
+<td>Entrée</td>
+<td>Oui</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td><code>Writer</code></td>
+<td>Sortie</td>
+<td>Oui</td>
+<td>Oui</td>
+</tr>
+</tbody>
+</table>
+<p>Readers et Writers impliquent toujours un <code>charset</code>, explicitement ou implicitement.</p>
+<p>Cela en fait l’abstraction correcte pour le traitement de texte.</p>
+<p><a id="34431-gestion-du-charset"></a></p>
+<h4 id="34431-gestion-du-charset">34.4.3.1 Gestion du charset</h4>
+<div class="highlight"><pre><span></span><code><span class="n">Reader</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InputStreamReader</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="s">&quot;file.txt&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span>
+<span class="p">);</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>InputStreamReader</code> et <code>OutputStreamWriter</code> sont des classes passerelles.</p>
+<p>Ils convertissent entre <code>flux d’octets</code> et <code>flux de caractères</code> en utilisant un <code>charset</code>.</p>
+</div>
+<hr />
+<p><a id="345-flux-tamponnés-et-performance"></a></p>
+<h2 id="345-flux-tamponnes-et-performance">34.5 Flux tamponnés et performance</h2>
+<p>Les <code>flux tamponnés</code> enveloppent un autre flux et ajoutent un buffer en mémoire.</p>
+<p>Au lieu d’interagir avec le système d’exploitation à chaque read ou write, les données sont accumulées en mémoire et transférées en plus gros blocs.</p>
+<ul>
+<li><code>BufferedInputStream</code> / <code>BufferedOutputStream</code> pour les flux d’octets</li>
+<li><code>BufferedReader</code> / <code>BufferedWriter</code> pour les flux de caractères</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les <code>flux tamponnés</code> sont des <code>decorators</code> : ils ne remplacent pas le flux sous-jacent, ils l’améliorent en ajoutant un comportement de mise en tampon.</p>
+</div>
+<p><a id="3451-pourquoi-la-mise-en-tampon-compte"></a></p>
+<h3 id="3451-pourquoi-la-mise-en-tampon-compte">34.5.1 Pourquoi la mise en tampon compte</h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Non tamponné</th>
+<th>Tamponné</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Appels système</code></td>
+<td>Fréquents</td>
+<td>Réduits</td>
+</tr>
+<tr>
+<td><code>Performance</code></td>
+<td>Médiocre</td>
+<td>Élevée</td>
+</tr>
+<tr>
+<td><code>Utilisation mémoire</code></td>
+<td>Minimale</td>
+<td>Légèrement plus élevée</td>
+</tr>
+</tbody>
+</table>
+<p>Les appels système sont des opérations coûteuses.</p>
+<p>La mise en tampon les minimise en regroupant plusieurs lectures ou écritures logiques en moins d’opérations I/O physiques.</p>
+<p><a id="3452-comment-fonctionne-la-lecture-non-tamponnée"></a></p>
+<h3 id="3452-comment-fonctionne-la-lecture-non-tamponnee">34.5.2 Comment fonctionne la lecture non tamponnée</h3>
+<p>Dans un flux non tamponné, chaque appel à read() peut entraîner un appel système natif.</p>
+<p>C’est particulièrement inefficace lorsqu’on lit de grandes quantités de données.</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">InputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="s">&quot;data.bin&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">read</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// chaque read() peut déclencher un appel système</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Lire octet par octet sans mise en tampon est presque toujours un anti-pattern de performance.</p>
+</div>
+<p><a id="3453-comment-fonctionne-bufferedinputstream"></a></p>
+<h3 id="3453-comment-fonctionne-bufferedinputstream">34.5.3 Comment fonctionne BufferedInputStream</h3>
+<p><code>BufferedInputStream</code> lit en interne un grand bloc d’octets dans un buffer.</p>
+<p>Les appels <code>read()</code> suivants sont servis directement depuis la mémoire jusqu’à ce que le buffer soit vide.</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">InputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedInputStream</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="s">&quot;data.bin&quot;</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">read</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// la plupart des lectures sont servies depuis la mémoire, pas depuis l’OS</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Le programme appelle toujours <code>read()</code> de manière répétée, mais le système d’exploitation n’est accédé que lorsque le buffer interne doit être rempli à nouveau.</p>
+</div>
+<p><a id="3454-exemple-de-sortie-tamponnée"></a></p>
+<h3 id="3454-exemple-de-sortie-tamponnee">34.5.4 Exemple de sortie tamponnée</h3>
+<p>La sortie tamponnée accumule les données en mémoire et les écrit en plus gros blocs.</p>
+<p>L’opération <code>flush()</code> force l’écriture immédiate du buffer.</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">OutputStream</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedOutputStream</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="s">&quot;out.bin&quot;</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1_000</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">out</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span><span class="w"> </span><span class="c1">// force les données tamponnées sur disque</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>close()</code> appelle automatiquement flush().</p>
+<p>Appeler <code>flush()</code> explicitement est utile lorsque les données doivent être visibles immédiatement.</p>
+</div>
+<p><a id="3455-bufferedreader-vs-reader"></a></p>
+<h3 id="3455-bufferedreader-vs-reader">34.5.5 BufferedReader vs Reader</h3>
+<p><code>BufferedReader</code> ajoute une <code>**lecture par lignes**</code> efficace au-dessus d’un Reader.</p>
+<p>Sans mise en tampon, chaque caractère lu peut impliquer un appel système.</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedReader</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileReader</span><span class="p">(</span><span class="s">&quot;file.txt&quot;</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">line</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">readLine</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La méthode <code>readLine()</code> n’est disponible que sur <code>BufferedReader</code> (pas sur <code>Reader</code>), car elle s’appuie sur la mise en tampon pour détecter efficacement les limites de ligne.</p>
+</div>
+<p><a id="3456-exemple-de-bufferedwriter"></a></p>
+<h3 id="3456-exemple-de-bufferedwriter">34.5.6 Exemple de BufferedWriter</h3>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">BufferedWriter</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedWriter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileWriter</span><span class="p">(</span><span class="s">&quot;file.txt&quot;</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="n">writer</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">writer</span><span class="p">.</span><span class="na">newLine</span><span class="p">();</span>
+<span class="w">        </span><span class="n">writer</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="s">&quot;World&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>BufferedWriter</code> minimise l’accès disque et fournit des méthodes pratiques telles que newLine().</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Enveloppez toujours les flux de fichiers avec une mise en tampon sauf s’il y a une forte raison de ne pas le faire</p>
+<p>Préférez BufferedReader / BufferedWriter pour le texte</p>
+<p>Préférez BufferedInputStream / BufferedOutputStream pour les données binaires</p>
+</div>
+<hr />
+<p><a id="346-javaio-vs-javanio-et-javaniofile"></a></p>
+<h2 id="346-javaio-vs-javanio-et-javaniofile">34.6 java.io vs java.nio (et java.nio.file)</h2>
+<p>Les applications Java modernes favorisent de plus en plus les API NIO et NIO.2, mais java.io reste fondamental et largement utilisé.</p>
+<p><a id="3461-différences-conceptuelles"></a></p>
+<h3 id="3461-differences-conceptuelles">34.6.1 Différences conceptuelles</h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>java.io</th>
+<th>java.nio / nio.2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Modèle de programmation</code></td>
+<td>Basé sur les flux</td>
+<td>Basé sur buffers / channels</td>
+</tr>
+<tr>
+<td><code>I/O bloquantes</code></td>
+<td>bloquantes par défaut</td>
+<td>Capable de non-bloquant</td>
+</tr>
+<tr>
+<td><code>API fichiers</code></td>
+<td>File</td>
+<td>Path + Files</td>
+</tr>
+<tr>
+<td><code>Scalabilité</code></td>
+<td>Limitée</td>
+<td>Élevée</td>
+</tr>
+<tr>
+<td><code>Introduit</code></td>
+<td>Java 1.0</td>
+<td>Java 4 / Java 7</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>java.nio</code> ne remplace pas <code>java.io</code>.</p>
+<p>De nombreuses classes NIO s’appuient en interne sur des flux ou coexistent avec eux.</p>
+</div>
+<p><a id="3462-javanio-io-de-fichier-moderne"></a></p>
+<h3 id="3462-javanio-io-de-fichier-moderne">34.6.2 java.nio (I/O de fichier moderne)</h3>
+<p>Le package <code>java.nio.file</code> (NIO.2) fournit une API fichiers de haut niveau, expressive et plus sûre.
+C’est l’approche préférée pour les opérations sur fichiers en Java 11+.</p>
+<p>Exemple : lire un fichier (NIO)</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;file.txt&quot;</span><span class="p">);</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Files</span><span class="p">.</span><span class="na">readAllLines</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+</code></pre></div>
+<p>Code java.io équivalent</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedReader</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileReader</span><span class="p">(</span><span class="s">&quot;file.txt&quot;</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">line</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">readLine</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<p><a id="347-quand-utiliser-quelle-api"></a></p>
+<h2 id="347-quand-utiliser-quelle-api">34.7 Quand utiliser quelle API</h2>
+<table>
+<thead>
+<tr>
+<th>Scénario</th>
+<th>API recommandée</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Lecture/écriture simple de fichier</code></td>
+<td>java.nio.file.Files</td>
+</tr>
+<tr>
+<td><code>Streaming binaire</code></td>
+<td>InputStream / OutputStream</td>
+</tr>
+<tr>
+<td><code>Traitement de texte en caractères</code></td>
+<td>Reader / Writer</td>
+</tr>
+<tr>
+<td><code>Serveurs haute performance</code></td>
+<td>java.nio.channels</td>
+</tr>
+<tr>
+<td><code>API legacy</code></td>
+<td>java.io</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a id="348-pièges-courants-et-conseils"></a></p>
+<h2 id="348-pieges-courants-et-conseils">34.8 Pièges courants et conseils</h2>
+<ul>
+<li>La fin de fichier est indiquée par -1, pas par une exception</li>
+<li>Fermer un flux wrapper ferme automatiquement le flux enveloppé</li>
+<li><code>BufferedReader.readLine()</code> supprime les séparateurs de ligne</li>
+<li><code>InputStreamReader</code> implique toujours un charset</li>
+<li>Les méthodes utilitaires Files lancent des IOException checked</li>
+<li><code>available()</code> ne doit pas être utilisé pour détecter EOF</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La plupart des bugs I/O proviennent d’hypothèses incorrectes sur le blocking, la mise en tampon ou l’encodage des caractères.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.ars-digitale.com/" target="_blank" rel="noopener" title="Ars Digitale" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

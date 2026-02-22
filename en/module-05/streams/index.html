@@ -1,0 +1,7897 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ars-digitale.github.io/java-21-study-guide/en/module-05/streams/">
+      
+      
+        <link rel="prev" href="../functional/">
+      
+      
+        <link rel="next" href="../../module-06/collections/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Java streams - Java 21 Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#21-java-optionals-and-streams" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Java 21 Study Guide" class="md-header__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Java 21 Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Java streams
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Java 21 Study Guide" class="md-nav__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Java 21 Study Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisite material
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Java Language Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Java Language Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syntax building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic language building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java naming rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java data types and casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantiating types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Control Flow
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Control Flow
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control flow statements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — Core Standard APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — Core Standard APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strings in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dates and time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatting and localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methods, attributes, and variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading, initialization, and object construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inheritance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beyond classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions and error handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Functional Programming
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Functional Programming
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functional programming in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java streams
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#211-optionals-optional-optionalint-optionallong-optionaldouble" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1 Optionals (Optional, OptionalInt, OptionalLong, OptionalDouble)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.1 Optionals (Optional, OptionalInt, OptionalLong, OptionalDouble)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2111-creating-optionals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1.1 Creating Optionals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2112-reading-values-safely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1.2 Reading values safely
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2113-transforming-optionals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1.3 Transforming Optionals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2114-optionals-and-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1.4 Optionals and Streams
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2115-primitive-optionals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1.5 Primitive Optionals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2116-common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1.6 Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212-what-is-a-stream-and-what-it-is-not" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.2 What Is a Stream (And What It Is Not)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#213-stream-pipeline-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3 Stream Pipeline Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.3 Stream Pipeline Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2131-stream-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3.1 Stream Sources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2132-intermediate-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3.2 Intermediate Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.3.2 Intermediate Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21321-table-of-common-intermediate-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3.2.1 Table of Common intermediate operations:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2133-terminal-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3.3 Terminal Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.3.3 Terminal Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21331-table-of-terminal-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3.3.1 Table of terminal operations:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#214-lazy-evaluation-and-short-circuiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.4 Lazy Evaluation and Short-Circuiting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#215-stateless-vs-stateful-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.5 Stateless vs Stateful Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.5 Stateless vs Stateful Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2151-stateless-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.5.1 Stateless Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2152-stateful-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.5.2 Stateful Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#216-stream-ordering-and-determinism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.6 Stream Ordering and Determinism
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#217-parallel-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.7 Parallel Streams
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#218-reduction-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.8 Reduction Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.8 Reduction Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2181-reduce-combining-a-stream-into-a-single-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.8.1 reduce(): combining a stream into a single object
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.8.1 reduce(): combining a stream into a single object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21811-correct-mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.8.1.1 Correct mental model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2182-collect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.8.2 collect()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2183-why-collect-is-different-from-reduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.8.3 Why collect() is different from reduce()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#219-common-streams-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.9 Common Streams Pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2110-primitive-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10 Primitive Streams
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.10 Primitive Streams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21101-why-primitive-streams-matter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10.1 Why primitive streams matter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21102-common-creation-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10.2 Common creation methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21103-primitive-specialized-mapping-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10.3 Primitive-specialized mapping methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21104-mapping-table-among-streamt-and-primitive-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10.4 Mapping table among Stream&lt;T&gt; and primitive streams
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21105-terminal-operations-and-their-result-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10.5 Terminal operations and their result types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21106-common-pitfalls-and-gotchas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10.6 Common pitfalls and gotchas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2111-collectors-collect-collector-and-the-collectors-factory-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11 Collectors (collect(), Collector, and the Collectors Factory Methods)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.11 Collectors (collect(), Collector, and the Collectors Factory Methods)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21111-collect-vs-collector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.1 collect() vs Collector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21112-core-collectors-quick-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.2 Core collectors (quick reference)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21113-grouping-collectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.3 Grouping collectors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21114-partitioningby" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.4 partitioningBy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21115-tomap-and-merge-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.5 toMap and merge rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21116-collectingandthen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.6 collectingAndThen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21117-how-collectors-relate-to-parallel-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.7 How collectors relate to parallel streams
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to the collections framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared collection operations and equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting and comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    List APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue and deque APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrency and Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrency and Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thread fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concurrency APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — Java I/O and NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — Java I/O and NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java I/O streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O streams APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interacting with the user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JPMS fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiling, packaging, and running modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Italiano
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Italiano
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materiale propedeutico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi di sintassi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elementi base del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regole di naming Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tipi di dati e casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operatori Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istanziare i tipi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istruzioni di controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cicli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stringhe in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilità Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data e ora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formattazione e localizzazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metodi, attributi e variabili
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading e costruzione oggetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ereditarietà
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oltre le classi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eccezioni e gestione errori
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmazione funzionale in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operazioni condivise ed equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting e comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti thread
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API di concorrenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 08 — I/O e NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 08 — I/O e NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (fondamenti)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interazione con l’utente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilare e avviare moduli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Français
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Français
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matériel de support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Bases du Langage Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Bases du Langage Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocs de syntaxe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Éléments de base du langage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Règles de nommage Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types de données et casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérateurs Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instanciation des types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Contrôle de flux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Contrôle de flux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions de contrôle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boucles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chaînes (String) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tableaux (Arrays) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilitaires Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date et heure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatage et localisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Fondamentaux OO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Fondamentaux OO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Méthodes, attributs et variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chargement de classes et construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Héritage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Au-delà des classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions et gestion des erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmation fonctionnelle en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Streams Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Framework des Collections
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Framework des Collections
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction au framework des collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérations partagées et égalité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tri et comparaison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrence et Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrence et Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux des threads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de concurrence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — I/O et NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — I/O et NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (fondamentaux)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interaction avec l’utilisateur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiler et exécuter des modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../fr/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services en JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ars-digitale.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ars Digitale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#211-optionals-optional-optionalint-optionallong-optionaldouble" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1 Optionals (Optional, OptionalInt, OptionalLong, OptionalDouble)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.1 Optionals (Optional, OptionalInt, OptionalLong, OptionalDouble)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2111-creating-optionals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1.1 Creating Optionals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2112-reading-values-safely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1.2 Reading values safely
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2113-transforming-optionals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1.3 Transforming Optionals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2114-optionals-and-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1.4 Optionals and Streams
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2115-primitive-optionals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1.5 Primitive Optionals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2116-common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1.6 Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212-what-is-a-stream-and-what-it-is-not" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.2 What Is a Stream (And What It Is Not)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#213-stream-pipeline-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3 Stream Pipeline Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.3 Stream Pipeline Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2131-stream-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3.1 Stream Sources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2132-intermediate-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3.2 Intermediate Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.3.2 Intermediate Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21321-table-of-common-intermediate-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3.2.1 Table of Common intermediate operations:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2133-terminal-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3.3 Terminal Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.3.3 Terminal Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21331-table-of-terminal-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3.3.1 Table of terminal operations:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#214-lazy-evaluation-and-short-circuiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.4 Lazy Evaluation and Short-Circuiting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#215-stateless-vs-stateful-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.5 Stateless vs Stateful Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.5 Stateless vs Stateful Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2151-stateless-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.5.1 Stateless Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2152-stateful-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.5.2 Stateful Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#216-stream-ordering-and-determinism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.6 Stream Ordering and Determinism
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#217-parallel-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.7 Parallel Streams
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#218-reduction-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.8 Reduction Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.8 Reduction Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2181-reduce-combining-a-stream-into-a-single-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.8.1 reduce(): combining a stream into a single object
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.8.1 reduce(): combining a stream into a single object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21811-correct-mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.8.1.1 Correct mental model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2182-collect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.8.2 collect()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2183-why-collect-is-different-from-reduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.8.3 Why collect() is different from reduce()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#219-common-streams-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.9 Common Streams Pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2110-primitive-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10 Primitive Streams
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.10 Primitive Streams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21101-why-primitive-streams-matter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10.1 Why primitive streams matter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21102-common-creation-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10.2 Common creation methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21103-primitive-specialized-mapping-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10.3 Primitive-specialized mapping methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21104-mapping-table-among-streamt-and-primitive-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10.4 Mapping table among Stream&lt;T&gt; and primitive streams
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21105-terminal-operations-and-their-result-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10.5 Terminal operations and their result types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21106-common-pitfalls-and-gotchas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.10.6 Common pitfalls and gotchas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2111-collectors-collect-collector-and-the-collectors-factory-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11 Collectors (collect(), Collector, and the Collectors Factory Methods)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.11 Collectors (collect(), Collector, and the Collectors Factory Methods)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21111-collect-vs-collector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.1 collect() vs Collector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21112-core-collectors-quick-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.2 Core collectors (quick reference)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21113-grouping-collectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.3 Grouping collectors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21114-partitioningby" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.4 partitioningBy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21115-tomap-and-merge-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.5 toMap and merge rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21116-collectingandthen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.6 collectingAndThen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21117-how-collectors-relate-to-parallel-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.11.7 How collectors relate to parallel streams
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="21-java-optionals-and-streams">21. Java Optionals and Streams</h1>
+<p><a id="table-of-contents"></a></p>
+<h3 id="table-of-contents">Table of Contents</h3>
+<ul>
+<li><a href="#211-optionals-optional-optionalint-optionallong-optionaldouble">21.1 Optionals Optional OptionalInt OptionalLong OptionalDouble</a><ul>
+<li><a href="#2111-creating-optionals">21.1.1 Creating Optionals</a></li>
+<li><a href="#2112-reading-values-safely">21.1.2 Reading values safely</a></li>
+<li><a href="#2113-transforming-optionals">21.1.3 Transforming Optionals</a></li>
+<li><a href="#2114-optionals-and-streams">21.1.4 Optionals and Streams</a></li>
+<li><a href="#2115-primitive-optionals">21.1.5 Primitive Optionals</a></li>
+<li><a href="#2116-common-pitfalls">21.1.6 Common pitfalls</a></li>
+</ul>
+</li>
+<li><a href="#212-what-is-a-stream-and-what-it-is-not">21.2 What Is a Stream And What It Is Not</a></li>
+<li><a href="#213-stream-pipeline-architecture">21.3 Stream Pipeline Architecture</a><ul>
+<li><a href="#2131-stream-sources">21.3.1 Stream Sources</a></li>
+<li><a href="#2132-intermediate-operations">21.3.2 Intermediate Operations</a><ul>
+<li><a href="#21321-table-of-common-intermediate-operations">21.3.2.1 Table of Common intermediate operations</a></li>
+</ul>
+</li>
+<li><a href="#2133-terminal-operations">21.3.3 Terminal Operations</a><ul>
+<li><a href="#21331-table-of-terminal-operations">21.3.3.1 Table of terminal operations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#214-lazy-evaluation-and-short-circuiting">21.4 Lazy Evaluation and Short-Circuiting</a></li>
+<li><a href="#215-stateless-vs-stateful-operations">21.5 Stateless vs Stateful Operations</a><ul>
+<li><a href="#2151-stateless-operations">21.5.1 Stateless Operations</a></li>
+<li><a href="#2152-stateful-operations">21.5.2 Stateful Operations</a></li>
+</ul>
+</li>
+<li><a href="#216-stream-ordering-and-determinism">21.6 Stream Ordering and Determinism</a></li>
+<li><a href="#217-parallel-streams">21.7 Parallel Streams</a></li>
+<li><a href="#218-reduction-operations">21.8 Reduction Operations</a><ul>
+<li><a href="#2181-reduce-combining-a-stream-into-a-single-object">21.8.1 reduce combining a stream into a single object</a><ul>
+<li><a href="#21811-correct-mental-model">21.8.1.1 Correct mental model</a></li>
+</ul>
+</li>
+<li><a href="#2182-collect">21.8.2 collect</a></li>
+<li><a href="#2183-why-collect-is-different-from-reduce">21.8.3 Why collect is different from reduce</a></li>
+</ul>
+</li>
+<li><a href="#219-common-streams-pitfalls">21.9 Common Streams Pitfalls</a></li>
+<li><a href="#2110-primitive-streams">21.10 Primitive Streams</a><ul>
+<li><a href="#21101-why-primitive-streams-matter">21.10.1 Why primitive streams matter</a></li>
+<li><a href="#21102-common-creation-methods">21.10.2 Common creation methods</a></li>
+<li><a href="#21103-primitive-specialized-mapping-methods">21.10.3 Primitive-specialized mapping methods</a></li>
+<li><a href="#21104-mapping-table-among-streamt-and-primitive-streams">21.10.4 Mapping table among StreamT and primitive streams</a></li>
+<li><a href="#21105-terminal-operations-and-their-result-types">21.10.5 Terminal operations and their result types</a></li>
+<li><a href="#21106-common-pitfalls-and-gotchas">21.10.6 Common pitfalls and gotchas</a></li>
+</ul>
+</li>
+<li><a href="#2111-collectors-collect-collector-and-the-collectors-factory-methods">21.11 Collectors collect Collector and the Collectors Factory Methods</a><ul>
+<li><a href="#21111-collect-vs-collector">21.11.1 collect vs Collector</a></li>
+<li><a href="#21112-core-collectors-quick-reference">21.11.2 Core collectors quick-reference</a></li>
+<li><a href="#21113-grouping-collectors">21.11.3 Grouping collectors</a></li>
+<li><a href="#21114-partitioningby">21.11.4 partitioningBy</a></li>
+<li><a href="#21115-tomap-and-merge-rules">21.11.5 toMap and merge rules</a></li>
+<li><a href="#21116-collectingandthen">21.11.6 collectingAndThen</a></li>
+<li><a href="#21117-how-collectors-relate-to-parallel-streams">21.11.7 How collectors relate to parallel streams</a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<p><a id="211-optionals-optional-optionalint-optionallong-optionaldouble"></a></p>
+<h2 id="211-optionals-optional-optionalint-optionallong-optionaldouble">21.1 Optionals (Optional, OptionalInt, OptionalLong, OptionalDouble)</h2>
+<p><code>Optional&lt;T&gt;</code> is a container object that may or may not hold a non-null value. </p>
+<p>It is designed to make “absence of a value” explicit and to reduce <code>NullPointerException</code> risk by forcing callers to handle the empty case.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><code>Optional</code> is intended primarily for <strong>return types</strong>.</li>
+<li>It is generally discouraged for fields, method parameters, and serialization boundaries (unless a specific API contract requires it).</li>
+</ul>
+</div>
+<p><a id="2111-creating-optionals"></a></p>
+<h3 id="2111-creating-optionals">21.1.1 Creating Optionals</h3>
+<p>There are three core factory methods. </p>
+<ul>
+<li><code>Optional.of(value)</code> → value must be non-null; otherwise <code>NullPointerException</code> is thrown</li>
+<li><code>Optional.ofNullable(value)</code> → returns empty if value is null</li>
+<li><code>Optional.empty()</code> → an explicitly empty Optional</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;x&quot;</span><span class="p">);</span>
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w"> </span><span class="c1">// Optional.empty</span>
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">();</span>
+</code></pre></div>
+<p><a id="2112-reading-values-safely"></a></p>
+<h3 id="2112-reading-values-safely">21.1.2 Reading values safely</h3>
+<p>Optionals provide multiple ways to access the wrapped value.</p>
+<ul>
+<li><code>isPresent()</code> / <code>isEmpty()</code> → test presence</li>
+<li><code>get()</code> → returns the value or throws <code>NoSuchElementException</code> if empty (discouraged)</li>
+<li><code>orElse(defaultValue)</code> → returns value or default (default evaluated immediately)</li>
+<li><code>orElseGet(supplier)</code> → returns value or supplier result (supplier evaluated lazily)</li>
+<li><code>orElseThrow()</code> → returns value or throws <code>NoSuchElementException</code></li>
+<li><code>orElseThrow(exceptionSupplier)</code> → returns value or throws custom exception</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">opt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;java&quot;</span><span class="p">);</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="p">.</span><span class="na">orElse</span><span class="p">(</span><span class="s">&quot;default&quot;</span><span class="p">);</span>
+<span class="n">String</span><span class="w"> </span><span class="n">v2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="p">.</span><span class="na">orElseGet</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;computed&quot;</span><span class="p">);</span>
+<span class="n">String</span><span class="w"> </span><span class="n">v3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="p">.</span><span class="na">orElseThrow</span><span class="p">();</span><span class="w"> </span><span class="c1">// ok because opt is present</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>A common trap: <code>orElse(...)</code> evaluates its argument even if the Optional is present.</li>
+<li>Use <code>orElseGet(...)</code> when the default is expensive to compute.</li>
+</ul>
+</div>
+<p><a id="2113-transforming-optionals"></a></p>
+<h3 id="2113-transforming-optionals">21.1.3 Transforming Optionals</h3>
+<p>Optionals support functional transformations similar to streams, but with “0 or 1 element” semantics.</p>
+<ul>
+<li><code>map(fn)</code> → transforms the value if present</li>
+<li><code>flatMap(fn)</code> → transforms to an Optional without nesting</li>
+<li><code>filter(predicate)</code> → keeps value only if predicate is true</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Alice&quot;</span><span class="p">);</span>
+
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">name</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="n">length</span><span class="p">);</span><span class="w"> </span><span class="c1">// Optional[5]</span>
+
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">name</span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="na">startsWith</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// Optional[Alice]</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">len</span><span class="p">.</span><span class="na">orElse</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">filtered</span><span class="p">.</span><span class="na">orElseGet</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;11&quot;</span><span class="p">));</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>5
+Alice
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><code>map</code> wraps the result in an Optional.</li>
+<li>If your mapping function already returns an Optional, use <code>flatMap</code> to avoid <code>Optional&lt;Optional&lt;T&gt;&gt;</code> nesting.</li>
+</ul>
+</div>
+<p><a id="2114-optionals-and-streams"></a></p>
+<h3 id="2114-optionals-and-streams">21.1.4 Optionals and Streams</h3>
+<p>A very common pipeline pattern is to map to an Optional and then remove empties. </p>
+<p>Since Java 9, <code>Optional</code> provides <code>stream()</code> to convert “present → one element” and “empty → zero elements”.</p>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ccc&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">words</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">w</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">w</span><span class="p">.</span><span class="na">length</span><span class="p">())</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="n">empty</span><span class="p">()).</span><span class="na">flatMap</span><span class="p">(</span><span class="n">Optional</span><span class="p">::</span><span class="n">stream</span><span class="p">)</span><span class="w"> </span><span class="c1">// rimuove gli elementi vuoti</span>
+<span class="w">                </span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">::</span><span class="n">println</span><span class="p">);</span><span class="w"> </span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>2
+3
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before Java 9, this pattern required <code>filter(Optional::isPresent)</code> plus <code>map(Optional::get)</code>.</p>
+</div>
+<p><a id="2115-primitive-optionals"></a></p>
+<h3 id="2115-primitive-optionals">21.1.5 Primitive Optionals</h3>
+<p>Primitive streams use primitive optionals to avoid boxing: <code>OptionalInt</code>, <code>OptionalLong</code>, <code>OptionalDouble</code>. </p>
+<p>They mirror the main Optional API with primitive getters such as <code>getAsInt()</code>.</p>
+<ul>
+<li><code>OptionalInt.getAsInt()</code> / <code>OptionalLong.getAsLong()</code> / <code>OptionalDouble.getAsDouble()</code></li>
+<li><code>orElse(...)</code> / <code>orElseGet(...)</code> / <code>orElseThrow(...)</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">OptionalInt</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IntStream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">).</span><span class="na">min</span><span class="p">();</span><span class="w"> </span><span class="c1">// OptionalInt[1]</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="na">orElse</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// 1</span>
+</code></pre></div>
+<p><a id="2116-common-pitfalls"></a></p>
+<h3 id="2116-common-pitfalls">21.1.6 Common pitfalls</h3>
+<ul>
+<li>Do not call <code>get()</code> without checking presence; prefer <code>orElseThrow</code> or transformations</li>
+<li>Avoid returning <code>null</code> instead of <code>Optional.empty()</code>; an Optional reference itself should not be null</li>
+<li>Remember: <code>average()</code> on primitive streams always returns <code>OptionalDouble</code> (even for <code>IntStream</code> and <code>LongStream</code>)</li>
+<li>Use <code>orElseGet</code> when computing the default is expensive</li>
+</ul>
+<hr />
+<p><a id="212-what-is-a-stream-and-what-it-is-not"></a></p>
+<h2 id="212-what-is-a-stream-and-what-it-is-not">21.2 What Is a Stream (And What It Is Not)</h2>
+<p>A <code>Java Stream</code> represents a sequence of elements supporting functional-style operations. </p>
+<p>Streams are designed for data processing, not data storage.</p>
+<p><strong>Key characteristics</strong>:</p>
+<ul>
+<li>A stream does not store data</li>
+<li>A stream is lazy — nothing happens until a terminal operation is invoked</li>
+<li>A stream can be consumed only once</li>
+<li>Streams encourage side-effect-free operations</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Streams are conceptually similar to database queries: they describe what to compute, not how to iterate.</p>
+</div>
+<hr />
+<p><a id="213-stream-pipeline-architecture"></a></p>
+<h2 id="213-stream-pipeline-architecture">21.3 Stream Pipeline Architecture</h2>
+<p>Every stream pipeline consists of three distinct phases:</p>
+<ul>
+<li>1️ <strong>Source</strong></li>
+<li>2️ Zero or more <strong>Intermediate Operations</strong></li>
+<li>3️ Exactly one <strong>Terminal Operation</strong></li>
+</ul>
+<p><a id="2131-stream-sources"></a></p>
+<h3 id="2131-stream-sources">21.3.1 Stream Sources</h3>
+<p>Common stream sources include:</p>
+<ul>
+<li>Collections: <code>collection.stream()</code></li>
+<li>Arrays: <code>Arrays.stream(array)</code></li>
+<li>I/O channels and files</li>
+<li>Infinite streams: <code>Stream.iterate</code>, <code>Stream.generate</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Carla&quot;</span><span class="p">);</span>
+<span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">names</span><span class="p">.</span><span class="na">stream</span><span class="p">();</span><span class="w">  </span>
+</code></pre></div>
+<p><a id="2132-intermediate-operations"></a></p>
+<h3 id="2132-intermediate-operations">21.3.2 Intermediate Operations</h3>
+<p>Intermediate operations:</p>
+<ul>
+<li>Return a new stream</li>
+<li>Are lazy</li>
+<li>Do not trigger execution</li>
+</ul>
+<p><a id="21321-table-of-common-intermediate-operations"></a></p>
+<h4 id="21321-table-of-common-intermediate-operations">21.3.2.1 Table of Common intermediate operations:</h4>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Common input Params</th>
+<th>Return value</th>
+<th>Desctiption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>filter</code></td>
+<td>Predicate</td>
+<td><code>Stream&lt;T&gt;</code></td>
+<td>filter the stream according to a predicate match</td>
+</tr>
+<tr>
+<td><code>map</code></td>
+<td>Function</td>
+<td><code>Stream&lt;R&gt;</code></td>
+<td>transform a stream through a one to one mapping input/output</td>
+</tr>
+<tr>
+<td><code>flatMap</code></td>
+<td>Function</td>
+<td><code>Stream&lt;R&gt;</code></td>
+<td>flatten nested streams into a single stream</td>
+</tr>
+<tr>
+<td><code>sorted</code></td>
+<td>(none) or Comparator</td>
+<td><code>Stream&lt;T&gt;</code></td>
+<td>sort by natural order or by the provided Comparator</td>
+</tr>
+<tr>
+<td><code>distinct</code></td>
+<td>(none)</td>
+<td><code>Stream&lt;T&gt;</code></td>
+<td>remove duplicate elements</td>
+</tr>
+<tr>
+<td><code>limit</code> / <code>skip</code></td>
+<td>long</td>
+<td><code>Stream&lt;T&gt;</code></td>
+<td>limit size or skip elements</td>
+</tr>
+<tr>
+<td><code>peek</code></td>
+<td>Consumer</td>
+<td><code>Stream&lt;T&gt;</code></td>
+<td>run side-effect action for each element (debugging)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Example:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Carla&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mario&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">names</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">filter</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">).</span><span class="na">map</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="n">toUpperCase</span><span class="p">).</span><span class="na">forEach</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">::</span><span class="n">println</span><span class="p">);</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>CARLA
+MARIO
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Intermediate operations only describe the computation. No element is processed yet.</p>
+</div>
+<p><a id="2133-terminal-operations"></a></p>
+<h3 id="2133-terminal-operations">21.3.3 Terminal Operations</h3>
+<p>Terminal operations:</p>
+<ul>
+<li>Trigger execution</li>
+<li>Consume the stream</li>
+<li>Produce a result or side effect</li>
+</ul>
+<p><a id="21331-table-of-terminal-operations"></a></p>
+<h4 id="21331-table-of-terminal-operations">21.3.3.1 Table of terminal operations:</h4>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Return value</th>
+<th>behaviour for infinite streams</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>forEach</code></td>
+<td><strong>void</strong></td>
+<td>does not terminate</td>
+</tr>
+<tr>
+<td><code>collect</code></td>
+<td>varies</td>
+<td>does not terminate</td>
+</tr>
+<tr>
+<td><code>reduce</code></td>
+<td>varies</td>
+<td>does not terminate</td>
+</tr>
+<tr>
+<td><code>findFirst</code> / <code>findAny</code></td>
+<td><strong><code>Optional&lt;T&gt;</code></strong></td>
+<td>terminates</td>
+</tr>
+<tr>
+<td><code>anyMatch</code> / <code>allMatch</code> / <code>noneMatch</code></td>
+<td><strong>boolean</strong></td>
+<td>may terminate early (short-circuit)</td>
+</tr>
+<tr>
+<td><code>min</code> / <code>max</code></td>
+<td><strong><code>Optional&lt;T&gt;</code></strong></td>
+<td>does not terminate</td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td><strong>long</strong></td>
+<td>does not terminate</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a id="214-lazy-evaluation-and-short-circuiting"></a></p>
+<h2 id="214-lazy-evaluation-and-short-circuiting">21.4 Lazy Evaluation and Short-Circuiting</h2>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">newNames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="n">newNames</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Bob&quot;</span><span class="p">);</span>
+<span class="n">newNames</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Dan&quot;</span><span class="p">);</span>
+
+<span class="c1">// Streams are lazily evaluated: this does not traverse the data yet,</span>
+<span class="c1">// it only creates a pipeline description bound to the source.</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newNames</span><span class="p">.</span><span class="na">stream</span><span class="p">();</span>
+
+<span class="n">newNames</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Erin&quot;</span><span class="p">);</span>
+
+<span class="c1">// Terminal operation triggers evaluation. The stream sees the updated source,</span>
+<span class="c1">// so the count includes &quot;Erin&quot;.</span>
+<span class="n">stream</span><span class="p">.</span><span class="na">count</span><span class="p">();</span><span class="w"> </span><span class="c1">// 3</span>
+</code></pre></div>
+<p><strong>Important note :</strong><br />
+A stream is bound to its <em>source</em> (<code>newNames</code>), and the pipeline is not executed until a terminal operation is invoked.<br />
+For this reason, if you <strong>modify the collection before the terminal operation</strong>, the terminal operation “sees” the new elements (here, <code>Erin</code>).<br />
+In general, however, <strong>modifying the source while a stream pipeline is in use is bad practice</strong> and can lead to non-deterministic behavior (or <code>ConcurrentModificationException</code> with some sources/operations). 
+The practical rule is: <em>build the source, then create and execute the stream without mutating it</em>.</p>
+<p>Streams process elements <strong>one at a time</strong>, flowing “vertically” through the pipeline rather than stage-by-stage.</p>
+<p>Below we modify the example to use a <strong>short-circuiting</strong> terminal operation: <code>findFirst()</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ccc&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;filter &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;map &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="p">.</span><span class="na">findFirst</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="na">ifPresent</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">::</span><span class="n">println</span><span class="p">);</span>
+</code></pre></div>
+<p>Execution order:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only the minimum number of elements required by the terminal operation are processed.</p>
+</div>
+<div class="highlight"><pre><span></span><code>filter a
+filter bb
+map bb
+BB
+</code></pre></div>
+<p><code>findFirst()</code> is satisfied as soon as it finds the <strong>first</strong> element that successfully passes through the pipeline (here <code>"bb"</code>), therefore:
+- <code>"ccc"</code> is never processed (neither <code>filter</code> nor <code>map</code>);
+- lazy evaluation avoids unnecessary work compared to a terminal operation that consumes all elements (such as <code>forEach</code> or <code>count</code>).</p>
+<hr />
+<p><a id="215-stateless-vs-stateful-operations"></a></p>
+<h2 id="215-stateless-vs-stateful-operations">21.5 Stateless vs Stateful Operations</h2>
+<p><a id="2151-stateless-operations"></a></p>
+<h3 id="2151-stateless-operations">21.5.1 Stateless Operations</h3>
+<p>Operations like <code>map</code> and <code>filter</code> process each element independently.</p>
+<p><a id="2152-stateful-operations"></a></p>
+<h3 id="2152-stateful-operations">21.5.2 Stateful Operations</h3>
+<p>Operations like <code>distinct</code>, <code>sorted</code>, and <code>limit</code> require maintaining internal state.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Stateful operations can severely impact parallel stream performance.</p>
+</div>
+<hr />
+<p><a id="216-stream-ordering-and-determinism"></a></p>
+<h2 id="216-stream-ordering-and-determinism">21.6 Stream Ordering and Determinism</h2>
+<p>Streams may be:</p>
+<ul>
+<li>Ordered (e.g., <code>List.stream()</code>)</li>
+<li>Unordered (e.g., <code>HashSet.stream()</code>)</li>
+</ul>
+<p>Some operations respect encounter order:</p>
+<ul>
+<li><code>forEachOrdered</code></li>
+<li><code>findFirst</code></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In parallel streams, <code>forEach</code> does not guarantee order.</p>
+</div>
+<hr />
+<p><a id="217-parallel-streams"></a></p>
+<h2 id="217-parallel-streams">21.7 Parallel Streams</h2>
+<p>Parallel streams divide work across threads using the ForkJoinPool.commonPool().</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span>
+<span class="n">IntStream</span><span class="p">.</span><span class="na">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1_000_000</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">parallel</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">sum</span><span class="p">();</span>
+</code></pre></div>
+<p>Rules for safe parallel streams:</p>
+<ul>
+<li>No side effects</li>
+<li>No mutable shared state</li>
+<li>Associative operations only</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Parallel streams can be slower for small workloads.</p>
+</div>
+<hr />
+<p><a id="218-reduction-operations"></a></p>
+<h2 id="218-reduction-operations">21.8 Reduction Operations</h2>
+<p><a id="2181-reduce-combining-a-stream-into-a-single-object"></a></p>
+<h3 id="2181-reduce-combining-a-stream-into-a-single-object">21.8.1 <code>reduce()</code>: combining a stream into a single object</h3>
+<p>There are three method signatures for this operation:</p>
+<ul>
+<li>public <code>Optional&lt;T&gt;</code> <strong>reduce</strong>(<code>BinaryOperator&lt;T&gt; accumulator</code>);</li>
+<li>public <code>T</code> <strong>reduce</strong>(<code>T identity</code>, <code>BinaryOperator&lt;T&gt; accumulator</code>);</li>
+<li>public <code>&lt;U&gt; U</code> <strong>reduce</strong>(<code>U identity</code>, <code>BiFunction&lt;U, ? super T, U&gt; accumulator</code>, <code>BinaryOperator&lt;U&gt; combiner</code>)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="p">::</span><span class="n">sum</span><span class="p">);</span>
+</code></pre></div>
+<p>Reduction requires:</p>
+<ul>
+<li><strong>Identity</strong>: Initial value for each partial reduction; must be a neutral element; Example: 0 for sum, 1 for multiplication, empty collection for collecting;</li>
+<li><strong>Accumulator</strong>: Incorporates one stream element into a partial result;</li>
+<li>(Optional) <strong>Combiner</strong>: Merges two partial results; Used only when the stream is parallel; Ignored for sequential streams</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The accumulator must be associative and stateless.</p>
+</div>
+<p><a id="21811-correct-mental-model"></a></p>
+<h4 id="21811-correct-mental-model">21.8.1.1 Correct mental model</h4>
+<ul>
+<li>Accumulator: result + element</li>
+<li>Combiner: result + result</li>
+</ul>
+<p><strong>Example 1</strong>: Correct use (sum of lengths)</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalLength</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ccc&quot;</span><span class="p">)</span>
+<span class="w">          </span><span class="p">.</span><span class="na">parallel</span><span class="p">()</span>
+<span class="w">          </span><span class="p">.</span><span class="na">reduce</span><span class="p">(</span>
+<span class="w">              </span><span class="mi">0</span><span class="p">,</span><span class="w">                       </span><span class="c1">// identity</span>
+<span class="w">              </span><span class="p">(</span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">(),</span><span class="w"> </span><span class="c1">// accumulator</span>
+<span class="w">              </span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="c1">// combiner</span>
+<span class="w">          </span><span class="p">);</span>
+</code></pre></div>
+<p>What happens in parallel</p>
+<p>Suppose the stream is split:</p>
+<ul>
+<li>Thread 1: "a", "bb" → 0 + 1 + 2 = 3</li>
+<li>Thread 2: "ccc" → 0 + 3 = 3</li>
+</ul>
+<p>Then the combiner merges the partial results:</p>
+<div class="highlight"><pre><span></span><code><span class="m">3</span><span class="w"> </span>+<span class="w"> </span><span class="nv">3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span>
+</code></pre></div>
+<p><strong>Example 2</strong>: Combiner ignored in sequential streams</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ccc&quot;</span><span class="p">)</span>
+<span class="w">          </span><span class="p">.</span><span class="na">reduce</span><span class="p">(</span>
+<span class="w">              </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">              </span><span class="p">(</span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">(),</span>
+<span class="w">              </span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="s">&quot;Never called&quot;</span><span class="p">);</span>
+<span class="w">              </span><span class="p">}</span>
+<span class="w">          </span><span class="p">);</span>
+</code></pre></div>
+<p><strong>Example 3</strong>: Incorrect combiner</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="w">          </span><span class="p">.</span><span class="na">parallel</span><span class="p">()</span>
+<span class="w">          </span><span class="p">.</span><span class="na">reduce</span><span class="p">(</span>
+<span class="w">              </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">              </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w">   </span><span class="c1">// accumulator</span>
+<span class="w">              </span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">y</span><span class="w">    </span><span class="c1">// combiner</span>
+<span class="w">          </span><span class="p">);</span>
+</code></pre></div>
+<p><ins>Why this is wrong</ins></p>
+<p><strong>Subtraction is not associative</strong>.</p>
+<p>Possible execution:</p>
+<ul>
+<li>Thread 1: 0 - 1 - 2 = -3</li>
+<li>Thread 2: 0 - 3 - 4 = -7</li>
+</ul>
+<p>Combiner:</p>
+<div class="highlight"><pre><span></span><code>-3<span class="w"> </span>-<span class="w"> </span><span class="o">(</span>-7<span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span>
+</code></pre></div>
+<p>Sequential result would be:</p>
+<div class="highlight"><pre><span></span><code><span class="o">(((</span><span class="m">0</span><span class="w"> </span>-<span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span>-<span class="w"> </span><span class="m">2</span><span class="o">)</span><span class="w"> </span>-<span class="w"> </span><span class="m">3</span><span class="o">)</span><span class="w"> </span>-<span class="w"> </span><span class="nv">4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>-10
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>❌ Parallel and sequential results differ → illegal reduction</p>
+</div>
+<p><a id="2182-collect"></a></p>
+<h3 id="2182-collect">21.8.2 <code>collect()</code></h3>
+<p><code>collect</code> is a mutable reduction optimized for grouping and aggregation. </p>
+<p>It is the Stream API’s standard tool for “mutable reduction”: you accumulate elements into a mutable container (like a List, Set, Map, StringBuilder, custom result object), 
+and then optionally merge partial containers when running in parallel.</p>
+<p>The general form is:</p>
+<ul>
+<li><code>public &lt;R&gt; R **collect**(Supplier&lt;R&gt; supplier, BiConsumer&lt;R, ? super T&gt; accumulator, BiConsumer&lt;R, R&gt; combiner)</code>;</li>
+</ul>
+<p>And a common version used is:</p>
+<ul>
+<li><code>public &lt;R, A&gt; R **collect**(Collector&lt;? super T, A, R&gt; collector)</code></li>
+</ul>
+<p>where Collectors.* provides prebuilt collectors (grouping, mapping, joining, counting, etc.).</p>
+<p><strong>Meaning</strong>:</p>
+<ul>
+<li><strong>supplier</strong>: creates a new empty result container (e.g. new <code>ArrayList&lt;&gt;()</code>)</li>
+<li><strong>accumulator</strong>: adds one element into that container (e.g. <code>list::add</code>)</li>
+<li><strong>combiner</strong>: merges two containers (e.g. <code>list1.addAll(list2)</code>)</li>
+</ul>
+<p><a id="2183-why-collect-is-different-from-reduce"></a></p>
+<h3 id="2183-why-collect-is-different-from-reduce">21.8.3 Why <code>collect()</code> is different from <code>reduce()</code></h3>
+<ul>
+<li><strong>Intent</strong>: mutation vs immutability<ul>
+<li><code>reduce()</code> is designed for immutable-style reduction: combine values into a new value (e.g. sum, min, max).</li>
+<li><code>collect()</code> is designed for mutable containers: build up a List, Map, StringBuilder, etc.</li>
+</ul>
+</li>
+<li><strong>Correctness</strong> in parallel<ul>
+<li><code>reduce()</code> requires the operation to be:<ul>
+<li>associative</li>
+<li>stateless</li>
+<li>compatible with identity/combiner rules</li>
+</ul>
+</li>
+<li><code>collect()</code> is built to support parallelism safely by:<ul>
+<li>creating one container per thread (supplier)</li>
+<li>accumulating locally (accumulator)</li>
+<li>merging at the end (combiner)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance</strong></p>
+<ul>
+<li><code>collect()</code> can be optimized because the stream runtime knows you are building containers:<ul>
+<li>it can avoid unnecessary copying</li>
+<li>it can pre-size or use specialized implementations (depending on collector)</li>
+<li>it’s the idiomatic and expected approach</li>
+<li>using reduce() to build a collection often creates extra objects or forces unsafe mutation.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Example: “collect into a List” the right way</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">longNames</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">names</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">         </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
+</code></pre></div>
+<ul>
+<li>Example: groupingBy with explanation</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">byLength</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">names</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">         </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="n">length</span><span class="p">));</span>
+</code></pre></div>
+<p>What happens conceptually:</p>
+<ul>
+<li>The collector creates an empty <code>Map&lt;Integer, List&lt;String&gt;&gt;</code></li>
+<li>For each name:<ul>
+<li>compute the key (String::length)</li>
+<li>put it in the correct bucket list</li>
+</ul>
+</li>
+<li>In parallel:<ul>
+<li>each thread builds its own partial maps</li>
+<li>the combiner merges maps by merging lists per key</li>
+</ul>
+</li>
+</ul>
+<hr />
+<p><a id="219-common-streams-pitfalls"></a></p>
+<h2 id="219-common-streams-pitfalls">21.9 Common Streams Pitfalls</h2>
+<ul>
+<li>Reusing a consumed stream → <code>IllegalStateException</code></li>
+<li>Modifying external variables inside lambdas</li>
+<li>Assuming execution order in parallel streams</li>
+<li>Using <code>peek</code> for logic instead of debugging</li>
+</ul>
+<hr />
+<p><a id="2110-primitive-streams"></a></p>
+<h2 id="2110-primitive-streams">21.10 Primitive Streams</h2>
+<p>Java provides three specialized stream types to avoid boxing overhead and to enable numeric-focused operations:</p>
+<ul>
+<li><code>IntStream</code> for <code>int</code></li>
+<li><code>LongStream</code> for <code>long</code></li>
+<li><code>DoubleStream</code> for <code>double</code></li>
+</ul>
+<p>Primitive streams are still streams (lazy pipelines, intermediate + terminal operations, single-use), but they are <strong>not generic</strong> and they use primitive-specialized functional interfaces (e.g., <code>IntPredicate</code>, <code>LongUnaryOperator</code>, <code>DoubleConsumer</code>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use primitive streams when the data is naturally numeric or when performance matters: they avoid boxing/unboxing overhead and provide additional numeric terminal operations.</p>
+</div>
+<p><a id="21101-why-primitive-streams-matter"></a></p>
+<h3 id="21101-why-primitive-streams-matter">21.10.1 Why primitive streams matter</h3>
+<ul>
+<li>Performance: avoid allocating wrapper objects and repeated boxing/unboxing in large pipelines</li>
+<li>Convenience: built-in numeric reductions such as <code>sum()</code>, <code>average()</code>, <code>summaryStatistics()</code></li>
+<li>Common traps: understanding when results are primitives vs <code>OptionalInt</code>/<code>OptionalLong</code>/<code>OptionalDouble</code></li>
+</ul>
+<p><a id="21102-common-creation-methods"></a></p>
+<h3 id="21102-common-creation-methods">21.10.2 Common creation methods</h3>
+<p>The following are the most frequently used ways to create primitive streams. Many certification questions start by identifying the stream type created by a factory method.</p>
+<table>
+<thead>
+<tr>
+<th>Sources</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IntStream.of(int...)</td>
+</tr>
+<tr>
+<td>IntStream.range(int startInclusive, int endExclusive)</td>
+</tr>
+<tr>
+<td>IntStream.rangeClosed(int startInclusive, int endInclusive)</td>
+</tr>
+<tr>
+<td>IntStream.iterate(int seed, IntUnaryOperator f) // infinite unless limited</td>
+</tr>
+<tr>
+<td>IntStream.iterate(int seed, IntPredicate hasNext, IntUnaryOperator f)</td>
+</tr>
+<tr>
+<td>IntStream.generate(IntSupplier s) // infinite unless limited</td>
+</tr>
+<tr>
+<td>LongStream.of(long...)</td>
+</tr>
+<tr>
+<td>LongStream.range(long startInclusive, long endExclusive)</td>
+</tr>
+<tr>
+<td>LongStream.rangeClosed(long startInclusive, long endInclusive)</td>
+</tr>
+<tr>
+<td>LongStream.iterate(long seed, LongUnaryOperator f)</td>
+</tr>
+<tr>
+<td>LongStream.iterate(long seed, LongPredicate hasNext, LongUnaryOperator f)</td>
+</tr>
+<tr>
+<td>LongStream.generate(LongSupplier s)</td>
+</tr>
+<tr>
+<td>DoubleStream.of(double...)</td>
+</tr>
+<tr>
+<td>DoubleStream.iterate(double seed, DoubleUnaryOperator f)</td>
+</tr>
+<tr>
+<td>DoubleStream.iterate(double seed, DoublePredicate hasNext, DoubleUnaryOperator f)</td>
+</tr>
+<tr>
+<td>DoubleStream.generate(DoubleSupplier s)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul>
+<li>Only <code>IntStream</code> and <code>LongStream</code> provide <code>range()</code> and <code>rangeClosed()</code>.</li>
+<li>There is no <code>DoubleStream.range</code> because counting with doubles has rounding issues.</li>
+</ul>
+</div>
+<p><a id="21103-primitive-specialized-mapping-methods"></a></p>
+<h3 id="21103-primitive-specialized-mapping-methods">21.10.3 Primitive-specialized mapping methods</h3>
+<p>Primitive streams provide <strong>primitive-only</strong> mapping operations that avoid boxing:</p>
+<ul>
+<li><code>IntStream.map(IntUnaryOperator)</code> → <code>IntStream</code></li>
+<li><code>IntStream.mapToLong(IntToLongFunction)</code> → <code>LongStream</code></li>
+<li>
+<p><code>IntStream.mapToDouble(IntToDoubleFunction)</code> → <code>DoubleStream</code></p>
+</li>
+<li>
+<p><code>LongStream.map(LongUnaryOperator)</code> → <code>LongStream</code></p>
+</li>
+<li><code>LongStream.mapToInt(LongToIntFunction)</code> → <code>IntStream</code></li>
+<li>
+<p><code>LongStream.mapToDouble(LongToDoubleFunction)</code> → <code>DoubleStream</code></p>
+</li>
+<li>
+<p><code>DoubleStream.map(DoubleUnaryOperator)</code> → <code>DoubleStream</code></p>
+</li>
+<li><code>DoubleStream.mapToInt(DoubleToIntFunction)</code> → <code>IntStream</code></li>
+<li><code>DoubleStream.mapToLong(DoubleToLongFunction)</code> → <code>LongStream</code></li>
+</ul>
+<p><a id="21104-mapping-table-among-streamt-and-primitive-streams"></a></p>
+<h3 id="21104-mapping-table-among-streamt-and-primitive-streams">21.10.4 Mapping table among <code>Stream&lt;T&gt;</code> and primitive streams</h3>
+<p>This table summarizes the main conversions among object streams and primitive streams. </p>
+<p>The “From” column tells you which methods are available and the resulting target stream type.</p>
+<table>
+<thead>
+<tr>
+<th>From (source)</th>
+<th>To (target)</th>
+<th>Primary method(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Stream&lt;T&gt;</code></td>
+<td><code>Stream&lt;R&gt;</code></td>
+<td><code>map(Function&lt;? super T, ? extends R&gt;)</code></td>
+</tr>
+<tr>
+<td><code>Stream&lt;T&gt;</code></td>
+<td><code>Stream&lt;R&gt; (flatten)</code></td>
+<td><code>flatMap(Function&lt;? super T, ? extends Stream&lt;? extends R&gt;&gt;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Stream&lt;T&gt;</code></td>
+<td><code>IntStream</code></td>
+<td><code>mapToInt(ToIntFunction&lt;? super T&gt;)</code></td>
+</tr>
+<tr>
+<td><code>Stream&lt;T&gt;</code></td>
+<td><code>LongStream</code></td>
+<td><code>mapToLong(ToLongFunction&lt;? super T&gt;)</code></td>
+</tr>
+<tr>
+<td><code>Stream&lt;T&gt;</code></td>
+<td><code>DoubleStream</code></td>
+<td><code>mapToDouble(ToDoubleFunction&lt;? super T&gt;)</code></td>
+</tr>
+<tr>
+<td><code>Stream&lt;T&gt;</code></td>
+<td><code>IntStream (flatten)</code></td>
+<td><code>flatMapToInt(Function&lt;? super T, ? extends IntStream&gt;)</code></td>
+</tr>
+<tr>
+<td><code>Stream&lt;T&gt;</code></td>
+<td><code>LongStream (flatten)</code></td>
+<td><code>flatMapToLong(Function&lt;? super T, ? extends LongStream&gt;)</code></td>
+</tr>
+<tr>
+<td><code>Stream&lt;T&gt;</code></td>
+<td><code>DoubleStream (flatten)</code></td>
+<td><code>flatMapToDouble(Function&lt;? super T, ? extends DoubleStream&gt;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>IntStream</code></td>
+<td><code>Stream&lt;Integer&gt;</code></td>
+<td><code>boxed()</code></td>
+</tr>
+<tr>
+<td><code>LongStream</code></td>
+<td><code>Stream&lt;Long&gt;</code></td>
+<td><code>boxed()</code></td>
+</tr>
+<tr>
+<td><code>DoubleStream</code></td>
+<td><code>Stream&lt;Double&gt;</code></td>
+<td><code>boxed()</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>IntStream</code></td>
+<td><code>Stream&lt;U&gt;</code></td>
+<td><code>mapToObj(IntFunction&lt;? extends U&gt;)</code></td>
+</tr>
+<tr>
+<td><code>LongStream</code></td>
+<td><code>Stream&lt;U&gt;</code></td>
+<td><code>mapToObj(LongFunction&lt;? extends U&gt;)</code></td>
+</tr>
+<tr>
+<td><code>DoubleStream</code></td>
+<td><code>Stream&lt;U&gt;</code></td>
+<td><code>mapToObj(DoubleFunction&lt;? extends U&gt;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>IntStream</code></td>
+<td><code>LongStream</code></td>
+<td><code>asLongStream()</code></td>
+</tr>
+<tr>
+<td><code>IntStream</code></td>
+<td><code>DoubleStream</code></td>
+<td><code>asDoubleStream()</code></td>
+</tr>
+<tr>
+<td><code>LongStream</code></td>
+<td><code>DoubleStream</code></td>
+<td><code>asDoubleStream()</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul>
+<li>There is no <strong><code>unboxed()</code></strong> operation.</li>
+<li>To go from wrappers to primitives you must start from <code>Stream&lt;T&gt;</code> and use <code>mapToInt</code> / <code>mapToLong</code> / <code>mapToDouble</code>.</li>
+</ul>
+</div>
+<p><a id="21105-terminal-operations-and-their-result-types"></a></p>
+<h3 id="21105-terminal-operations-and-their-result-types">21.10.5 Terminal operations and their result types</h3>
+<p>Primitive streams have several terminal operations that are either unique or have primitive-specific return types.</p>
+<table>
+<thead>
+<tr>
+<th>Terminal operation</th>
+<th>IntStream returns</th>
+<th>LongStream returns</th>
+<th>DoubleStream returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>count()</code></td>
+<td>long</td>
+<td>long</td>
+<td>long</td>
+</tr>
+<tr>
+<td><code>sum()</code></td>
+<td>int</td>
+<td>long</td>
+<td>double</td>
+</tr>
+<tr>
+<td><code>min()</code> / max()</td>
+<td>OptionalInt</td>
+<td>OptionalLong</td>
+<td>OptionalDouble</td>
+</tr>
+<tr>
+<td><code>average()</code></td>
+<td>OptionalDouble</td>
+<td>OptionalDouble</td>
+<td>OptionalDouble</td>
+</tr>
+<tr>
+<td><code>findFirst()</code> / findAny()</td>
+<td>OptionalInt</td>
+<td>OptionalLong</td>
+<td>OptionalDouble</td>
+</tr>
+<tr>
+<td><code>reduce(op)</code></td>
+<td>OptionalInt</td>
+<td>OptionalLong</td>
+<td>OptionalDouble</td>
+</tr>
+<tr>
+<td><code>reduce(identity, op)</code></td>
+<td>int</td>
+<td>long</td>
+<td>double</td>
+</tr>
+<tr>
+<td><code>summaryStatistics()</code></td>
+<td>IntSummaryStatistics</td>
+<td>LongSummaryStatistics</td>
+<td>DoubleSummaryStatistics</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>Even for <code>IntStream</code> and <code>LongStream</code>, <strong><code>average()</code></strong> returns <code>OptionalDouble</code> (not <code>OptionalInt</code> or <code>OptionalLong</code>).</li>
+</ul>
+</div>
+<ul>
+<li>Example 1: <code>Stream&lt;String&gt;</code> → <code>IntStream</code> → primitive terminal operations.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ccc&quot;</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">totalLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">words</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="n">length</span><span class="p">)</span><span class="w"> </span><span class="c1">// IntStream</span>
+<span class="w">        </span><span class="p">.</span><span class="na">sum</span><span class="p">();</span><span class="w"> </span><span class="c1">// int</span>
+
+<span class="c1">// totalLength = 1 + 2 + 3 = 6</span>
+</code></pre></div>
+<ul>
+<li>Example 2: <code>IntStream</code> → boxed <code>Stream&lt;Integer&gt;</code> (boxing introduced).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Stream</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">boxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IntStream</span><span class="p">.</span><span class="na">rangeClosed</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// 1,2,3</span>
+<span class="w">    </span><span class="p">.</span><span class="na">boxed</span><span class="p">();</span><span class="w"> </span><span class="c1">// Stream&lt;Integer&gt;</span>
+</code></pre></div>
+<ul>
+<li>Example 3: primitive stream → object stream via <code>mapToObj</code>.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IntStream</span><span class="p">.</span><span class="na">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="c1">// 1,2,3</span>
+<span class="w">    </span><span class="p">.</span><span class="na">mapToObj</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;N=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="c1">// Stream&lt;String&gt;</span>
+</code></pre></div>
+<p><a id="21106-common-pitfalls-and-gotchas"></a></p>
+<h3 id="21106-common-pitfalls-and-gotchas">21.10.6 Common pitfalls and gotchas</h3>
+<ul>
+<li>Do not confuse <code>Stream&lt;Integer&gt;</code> with <code>IntStream</code>: their mapping methods and functional interfaces differ</li>
+<li><code>IntStream.sum()</code> returns <code>int</code> but <code>IntStream.count()</code> returns <code>long</code></li>
+<li><code>average()</code> always returns <code>OptionalDouble</code> for all primitive stream types</li>
+<li>Using <code>boxed()</code> reintroduces boxing; only do it if the downstream API requires objects (e.g., collecting to <code>List&lt;Integer&gt;</code>)</li>
+<li>Be careful with narrowing conversions: <code>LongStream.mapToInt</code> and <code>DoubleStream.mapToInt</code> may truncate values</li>
+</ul>
+<hr />
+<p><a id="2111-collectors-collect-collector-and-the-collectors-factory-methods"></a></p>
+<h2 id="2111-collectors-collect-collector-and-the-collectors-factory-methods">21.11 Collectors (collect(), Collector, and the Collectors Factory Methods)</h2>
+<p>A <code>Collector</code> describes how to accumulate stream elements into a final result. </p>
+<p>The <code>collect(...)</code> terminal operation executes this recipe. </p>
+<p>The <code>Collectors</code> utility class provides ready-made collectors for common aggregation tasks.</p>
+<p><a id="21111-collect-vs-collector"></a></p>
+<h3 id="21111-collect-vs-collector">21.11.1 collect() vs Collector</h3>
+<p>There are two main ways to collect:</p>
+<ul>
+<li><code>collect(Collector)</code> → the common form using <code>Collectors.*</code></li>
+<li><code>collect(supplier, accumulator, combiner)</code> → explicit mutable reduction (lower-level)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span>
+<span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
+
+<span class="n">StringBuilder</span><span class="w"> </span><span class="n">sb</span><span class="w"> </span><span class="o">=</span>
+<span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">StringBuilder</span><span class="p">::</span><span class="k">new</span><span class="p">,</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">::</span><span class="n">append</span><span class="p">,</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">::</span><span class="n">append</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use <code>collect(supplier, accumulator, combiner)</code> when you need a custom mutable container and do not want to implement a full <code>Collector</code>.</p>
+</div>
+<p><a id="21112-core-collectors-quick-reference"></a></p>
+<h3 id="21112-core-collectors-quick-reference">21.11.2 Core collectors (quick reference)</h3>
+<p>These are the most frequently used collectors and the ones most likely to appear in exam questions.</p>
+<ul>
+<li><code>toList()</code> → <code>List&lt;T&gt;</code> (no guarantees about mutability/implementation)</li>
+<li><code>toSet()</code> → <code>Set&lt;T&gt;</code></li>
+<li><code>toCollection(supplier)</code> → specific collection type (e.g., <code>TreeSet</code>)</li>
+<li><code>joining(delim, prefix, suffix)</code> → <code>String</code> from <code>CharSequence</code> elements</li>
+<li><code>counting()</code> → <code>Long</code> count</li>
+<li><code>summingInt</code> / <code>summingLong</code> / <code>summingDouble</code> → numeric sums</li>
+<li><code>averagingInt</code> / <code>averagingLong</code> / <code>averagingDouble</code> → numeric averages</li>
+<li><code>minBy(comparator)</code> / <code>maxBy(comparator)</code> → <code>Optional&lt;T&gt;</code></li>
+<li><code>mapping(mapper, downstream)</code> → transform then collect with downstream</li>
+<li><code>filtering(predicate, downstream)</code> → filter inside collector (Java 9+)</li>
+</ul>
+<p><a id="21113-grouping-collectors"></a></p>
+<h3 id="21113-grouping-collectors">21.11.3 Grouping collectors</h3>
+<p><code>groupingBy</code> classifies elements into buckets keyed by a classifier function. </p>
+<p>It produces a <code>Map&lt;K, V&gt;</code> where <code>V</code> depends on the downstream collector.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">byLen</span><span class="w"> </span><span class="o">=</span>
+<span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ccc&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dd&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="n">length</span><span class="p">));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;byLen: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">byLen</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>byLen:<span class="w"> </span><span class="o">{</span><span class="nv">1</span><span class="o">=[</span>a<span class="o">]</span>,<span class="w"> </span><span class="nv">2</span><span class="o">=[</span>bb,<span class="w"> </span>dd<span class="o">]</span>,<span class="w"> </span><span class="nv">3</span><span class="o">=[</span>ccc<span class="o">]}</span>
+</code></pre></div>
+<p>With a downstream collector you control what each bucket contains:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">countByLen</span><span class="w"> </span><span class="o">=</span>
+<span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ccc&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dd&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="n">length</span><span class="p">,</span><span class="w"> </span><span class="n">Collectors</span><span class="p">.</span><span class="na">counting</span><span class="p">()));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;countByLen: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">countByLen</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">setByLen</span><span class="w"> </span><span class="o">=</span>
+<span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ccc&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dd&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="n">length</span><span class="p">,</span><span class="w"> </span><span class="n">Collectors</span><span class="p">.</span><span class="na">toSet</span><span class="p">()));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;setByLen: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">setByLen</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>countByLen:<span class="w"> </span><span class="o">{</span><span class="nv">1</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">2</span><span class="o">=</span><span class="m">2</span>,<span class="w"> </span><span class="nv">3</span><span class="o">=</span><span class="m">1</span><span class="o">}</span>
+setByLen:<span class="w"> </span><span class="o">{</span><span class="nv">1</span><span class="o">=[</span>a<span class="o">]</span>,<span class="w"> </span><span class="nv">2</span><span class="o">=[</span>bb,<span class="w"> </span>dd<span class="o">]</span>,<span class="w"> </span><span class="nv">3</span><span class="o">=[</span>ccc<span class="o">]}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Pay attention to the resulting map value type. Example: <code>groupingBy(..., counting())</code> yields <code>Map&lt;K, Long&gt;</code> (not <code>int</code>).</p>
+</div>
+<p><a id="21114-partitioningby"></a></p>
+<h3 id="21114-partitioningby">21.11.4 partitioningBy</h3>
+<p><code>partitioningBy</code> splits the stream into exactly two groups using a boolean predicate. It always returns a map with keys <code>true</code> and <code>false</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">parts</span><span class="w"> </span><span class="o">=</span>
+<span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ccc&quot;</span><span class="p">)</span>
+<span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">partitioningBy</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;parts: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">parts</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>parts:<span class="w"> </span><span class="o">{</span><span class="nv">false</span><span class="o">=[</span>a<span class="o">]</span>,<span class="w"> </span><span class="nv">true</span><span class="o">=[</span>bb,<span class="w"> </span>ccc<span class="o">]}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>partitioningBy</code> always creates two buckets, while <code>groupingBy</code> can create many. Both support downstream collectors.</p>
+</div>
+<p><a id="21115-tomap-and-merge-rules"></a></p>
+<h3 id="21115-tomap-and-merge-rules">21.11.5 toMap and merge rules</h3>
+<p><code>toMap</code> throws an exception on duplicate keys unless you provide a merge function.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m1</span><span class="w"> </span><span class="o">=</span>
+<span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;aa&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bb&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toMap</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="n">length</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">));</span><span class="w"> </span><span class="c1">// ❌ Exception in thread &quot;main&quot; java.lang.IllegalStateException: Duplicate key 2 (attempted merging values aa and bb)</span>
+
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m2</span><span class="w"> </span><span class="o">=</span>
+<span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;aa&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cc&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toMap</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="n">length</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">oldV</span><span class="p">,</span><span class="w"> </span><span class="n">newV</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">oldV</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">newV</span><span class="p">));</span><span class="w"> </span><span class="c1">// key=2 merges values</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>m2:<span class="w"> </span><span class="o">{</span><span class="nv">2</span><span class="o">=</span>aa,bb,cc<span class="o">}</span>
+</code></pre></div>
+<p><a id="21116-collectingandthen"></a></p>
+<h3 id="21116-collectingandthen">21.11.6 collectingAndThen</h3>
+<p><code>collectingAndThen(downstream, finisher)</code> lets you apply a final transformation after collecting (e.g., make the list unmodifiable).</p>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">unmodifiable</span><span class="w"> </span><span class="o">=</span>
+<span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">collectingAndThen</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">(),</span><span class="w"> </span><span class="n">List</span><span class="p">::</span><span class="n">copyOf</span><span class="p">));</span>
+</code></pre></div>
+<p><a id="21117-how-collectors-relate-to-parallel-streams"></a></p>
+<h3 id="21117-how-collectors-relate-to-parallel-streams">21.11.7 How collectors relate to parallel streams</h3>
+<p>Collectors are designed to work with parallel streams by using supplier/accumulator/combiner internally. In parallel, each worker builds a partial result container and then merges containers.</p>
+<ul>
+<li>The accumulator mutates a per-thread container (no shared mutable state)</li>
+<li>The combiner merges containers (required for parallel execution)</li>
+<li>Some collectors are “concurrent” or have characteristics that affect performance and ordering</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>prefer <code>collect(Collectors.toList())</code> over using <code>reduce</code> to build collections. <code>reduce</code> is for immutable-style reductions; <code>collect</code> is for mutable containers.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.ars-digitale.com/" target="_blank" rel="noopener" title="Ars Digitale" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

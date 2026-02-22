@@ -1,0 +1,7480 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ars-digitale.github.io/java-21-study-guide/fr/module-01/java-operators/">
+      
+      
+        <link rel="prev" href="../data-types/">
+      
+      
+        <link rel="next" href="../instantiating-types/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Opérateurs Java - Java 21 Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5-operateurs-java" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Java 21 Study Guide" class="md-header__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Java 21 Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Opérateurs Java
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Java 21 Study Guide" class="md-nav__button md-logo" aria-label="Java 21 Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Java 21 Study Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Ars-Digitale/java-21-study-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ars-Digitale/java-21-study-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prerequisite material
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Java Language Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Java Language Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syntax building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic language building blocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java naming rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java data types and casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantiating types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Control Flow
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Control Flow
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control flow statements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — Core Standard APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — Core Standard APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strings in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dates and time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatting and localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Object-Oriented Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methods, attributes, and variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading, initialization, and object construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inheritance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beyond classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions and error handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Functional Programming
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Functional Programming
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functional programming in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to the collections framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared collection operations and equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting and comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    List APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Queue and deque APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrency and Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrency and Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thread fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concurrency APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — Java I/O and NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — Java I/O and NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files and paths APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java I/O streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O streams APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interacting with the user
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — Java Platform Module System (JPMS)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JPMS fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiling, packaging, and running modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../en/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Italiano
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Italiano
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materiale propedeutico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 01 — Fondamenti del Linguaggio Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi di sintassi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elementi base del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regole di naming Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tipi di dati e casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/java-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operatori Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-01/instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istanziare i tipi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 02 — Controllo di Flusso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Istruzioni di controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cicli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stringhe in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilità Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data e ora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formattazione e localizzazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 04 — Fondamenti OOP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metodi, attributi e variabili
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class loading e costruzione oggetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ereditarietà
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oltre le classi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eccezioni e gestione errori
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 05 — Programmazione Funzionale
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmazione funzionale in Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 06 — Collections Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 06 — Collections Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operazioni condivise ed equality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorting e comparing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 07 — Concorrenza e Thread
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti thread
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API di concorrenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 08 — I/O e NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 08 — I/O e NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (fondamenti)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files e paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stream I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interazione con l’utente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modulo 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modulo 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilare e avviare moduli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../it/module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services in JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Français
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Français
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 00 — Prerequisites & Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 00 — Prerequisites & Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/prerequisites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matériel de support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-00/eclipse-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eclipse shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 01 — Bases du Langage Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 01 — Bases du Langage Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syntax-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocs de syntaxe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-building-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Éléments de base du langage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../naming-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Règles de nommage Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types de données et casting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérateurs Java
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérateurs Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-des-matieres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table des matières
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Définition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-types-doperateurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Types d’opérateurs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-categories-doperateurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Catégories d’opérateurs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-priorite-des-operateurs-et-ordre-devaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Priorité des opérateurs et ordre d’évaluation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-tableau-recapitulatif-des-operateurs-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Tableau récapitulatif des opérateurs Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.5 Tableau récapitulatif des opérateurs Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#551-notes-complementaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5.1 Notes complémentaires
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56-operateurs-unaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 Opérateurs unaires
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.6 Opérateurs unaires">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#561-categories-doperateurs-unaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6.1 Catégories d’opérateurs unaires
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#562-exemples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6.2 Exemples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#57-operateurs-binaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7 Opérateurs binaires
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.7 Opérateurs binaires">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#571-categories-doperateurs-binaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.1 Catégories d’opérateurs binaires
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#572-operateurs-de-division-et-de-modulo-reste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.2 Opérateurs de division et de modulo (reste)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.7.2 Opérateurs de division et de modulo (reste)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5721-operateur-de-division" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.2.1 Opérateur de Division
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5722-operateur-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.2.2 Opérateur Modulo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#573-la-valeur-de-retour-de-loperateur-daffectation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.3 La valeur de retour de l’opérateur d’affectation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#574-operateurs-daffectation-composee" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.4 Opérateurs d’affectation composée
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#575-operateurs-degalite-et" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.5 Opérateurs d’égalité (== et !=)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.7.5 Opérateurs d’égalité (== et !=)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5751-egalite-avec-les-types-primitifs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.5.1 Égalité avec les types primitifs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5752-egalite-avec-les-types-reference-objets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.5.2 Égalité avec les types référence (objets)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#576-loperateur-instanceof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.6 L’opérateur instanceof
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.7.6 L’opérateur instanceof">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5761-verification-a-la-compilation-vs-a-lexecution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.6.1 Vérification à la compilation vs à l’exécution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5762-pattern-matching-pour-instanceof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.6.2 Pattern matching pour instanceof
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5763-flow-scoping-logique-short-circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.6.3 Flow scoping &amp; logique short-circuit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5764-tableaux-et-types-reifiables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.6.4 Tableaux et types réifiables
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#58-operateur-ternaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8 Opérateur ternaire
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.8 Opérateur ternaire">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#581-regles-de-typage-de-loperateur-ternaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.1 Règles de Typage de l’Opérateur Ternaire
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.8.1 Règles de Typage de l’Opérateur Ternaire">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5811-operandes-numeriques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.1.1 Opérandes Numériques
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5812-types-de-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.1.2 Types de Référence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#582-syntaxe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.2 Syntaxe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#583-exemple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.3 Exemple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#584-exemple-de-ternaire-imbrique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.4 Exemple de Ternaire Imbriqué
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#585-remarques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.5 Remarques
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../instantiating-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instanciation des types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 02 — Contrôle de flux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 02 — Contrôle de flux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instructions de contrôle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-02/loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boucles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 03 — API Standard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 03 — API Standard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chaînes (String) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tableaux (Arrays) en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilitaires Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/date-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date et heure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-03/formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatage et localisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 04 — Fondamentaux OO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 04 — Fondamentaux OO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/methods-attributes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Méthodes, attributs et variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/class-loading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chargement de classes et construction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/inheritance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Héritage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/beyond-classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Au-delà des classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-04/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions et gestion des erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 05 — Programmation fonctionnelle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programmation fonctionnelle en Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-05/streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Streams Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 06 — Framework des Collections
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 06 — Framework des Collections
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction au framework des collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/shared-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérations partagées et égalité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/comparing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tri et comparaison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/list-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/set-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/queue-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Queue/Deque
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/map-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-06/sequenced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequenced collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 07 — Concurrence et Threads
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 07 — Concurrence et Threads
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux des threads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-07/concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de concurrence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 08 — I/O et NIO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 08 — I/O et NIO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (fondamentaux)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/files-path-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files et paths (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-streams-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flux I/O (API)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-08/io-user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interaction avec l’utilisateur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module 09 — JPMS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module 09 — JPMS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamentaux JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-compiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiler et exécuter des modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module-09/jpms-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services en JPMS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.ars-digitale.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ars Digitale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-des-matieres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table des matières
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Définition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-types-doperateurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Types d’opérateurs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-categories-doperateurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Catégories d’opérateurs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-priorite-des-operateurs-et-ordre-devaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Priorité des opérateurs et ordre d’évaluation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-tableau-recapitulatif-des-operateurs-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Tableau récapitulatif des opérateurs Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.5 Tableau récapitulatif des opérateurs Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#551-notes-complementaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5.1 Notes complémentaires
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56-operateurs-unaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 Opérateurs unaires
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.6 Opérateurs unaires">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#561-categories-doperateurs-unaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6.1 Catégories d’opérateurs unaires
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#562-exemples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6.2 Exemples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#57-operateurs-binaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7 Opérateurs binaires
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.7 Opérateurs binaires">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#571-categories-doperateurs-binaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.1 Catégories d’opérateurs binaires
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#572-operateurs-de-division-et-de-modulo-reste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.2 Opérateurs de division et de modulo (reste)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.7.2 Opérateurs de division et de modulo (reste)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5721-operateur-de-division" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.2.1 Opérateur de Division
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5722-operateur-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.2.2 Opérateur Modulo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#573-la-valeur-de-retour-de-loperateur-daffectation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.3 La valeur de retour de l’opérateur d’affectation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#574-operateurs-daffectation-composee" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.4 Opérateurs d’affectation composée
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#575-operateurs-degalite-et" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.5 Opérateurs d’égalité (== et !=)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.7.5 Opérateurs d’égalité (== et !=)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5751-egalite-avec-les-types-primitifs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.5.1 Égalité avec les types primitifs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5752-egalite-avec-les-types-reference-objets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.5.2 Égalité avec les types référence (objets)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#576-loperateur-instanceof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.6 L’opérateur instanceof
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.7.6 L’opérateur instanceof">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5761-verification-a-la-compilation-vs-a-lexecution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.6.1 Vérification à la compilation vs à l’exécution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5762-pattern-matching-pour-instanceof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.6.2 Pattern matching pour instanceof
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5763-flow-scoping-logique-short-circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.6.3 Flow scoping &amp; logique short-circuit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5764-tableaux-et-types-reifiables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7.6.4 Tableaux et types réifiables
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#58-operateur-ternaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8 Opérateur ternaire
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.8 Opérateur ternaire">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#581-regles-de-typage-de-loperateur-ternaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.1 Règles de Typage de l’Opérateur Ternaire
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.8.1 Règles de Typage de l’Opérateur Ternaire">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5811-operandes-numeriques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.1.1 Opérandes Numériques
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5812-types-de-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.1.2 Types de Référence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#582-syntaxe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.2 Syntaxe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#583-exemple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.3 Exemple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#584-exemple-de-ternaire-imbrique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.4 Exemple de Ternaire Imbriqué
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#585-remarques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8.5 Remarques
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="5-operateurs-java">5. Opérateurs Java</h1>
+<p><a id="table-des-matières"></a></p>
+<h3 id="table-des-matieres">Table des matières</h3>
+<ul>
+<li><a href="#51-définition">5.1 Définition</a></li>
+<li><a href="#52-types-dopérateurs">5.2 Types d’opérateurs</a></li>
+<li><a href="#53-catégories-dopérateurs">5.3 Catégories d’opérateurs</a></li>
+<li><a href="#54-priorité-des-opérateurs-et-ordre-dévaluation">5.4 Priorité des opérateurs et ordre d’évaluation</a></li>
+<li><a href="#55-tableau-récapitulatif-des-opérateurs-java">5.5 Tableau récapitulatif des opérateurs Java</a><ul>
+<li><a href="#551-notes-complémentaires">5.5.1 Notes complémentaires</a></li>
+</ul>
+</li>
+<li><a href="#56-opérateurs-unaires">5.6 Opérateurs unaires</a><ul>
+<li><a href="#561-catégories-dopérateurs-unaires">5.6.1 Catégories d’opérateurs unaires</a></li>
+<li><a href="#562-exemples">5.6.2 Exemples</a></li>
+</ul>
+</li>
+<li><a href="#57-opérateurs-binaires">5.7 Opérateurs binaires</a><ul>
+<li><a href="#571-catégories-dopérateurs-binaires">5.7.1 Catégories d’opérateurs binaires</a></li>
+<li><a href="#572-opérateurs-de-division-et-de-modulo-reste">5.7.2 Opérateurs de division et de modulo (reste)</a><ul>
+<li><a href="#5721-opérateur-de-division">5.7.2.1 Opérateur de division</a></li>
+<li><a href="#5722-opérateur-modulo">5.7.2.2 Opérateur Modulo</a></li>
+</ul>
+</li>
+<li><a href="#573-la-valeur-de-retour-de-lopérateur-daffectation">5.7.3 La valeur de retour de l’opérateur d’affectation</a></li>
+<li><a href="#574-opérateurs-daffectation-composée">5.7.4 Opérateurs d’affectation composée</a></li>
+<li><a href="#575-opérateurs-dégalité--et-">5.7.5 Opérateurs d’égalité == et !=</a><ul>
+<li><a href="#5751-égalité-avec-les-types-primitifs">5.7.5.1 Égalité avec les types primitifs</a></li>
+<li><a href="#5752-égalité-avec-les-types-référence-objets">5.7.5.2 Égalité avec les types référence (objets)</a></li>
+</ul>
+</li>
+<li><a href="#576-lopérateur-instanceof">5.7.6 L’opérateur instanceof</a><ul>
+<li><a href="#5761-vérification-à-la-compilation-vs-à-lexécution">5.7.6.1 Vérification à la compilation vs à l’exécution</a></li>
+<li><a href="#5762-pattern-matching-pour-instanceof">5.7.6.2 Pattern matching pour instanceof</a></li>
+<li><a href="#5763-flow-scoping--logique-short-circuit">5.7.6.3 Flow scoping &amp; logique short-circuit</a></li>
+<li><a href="#5764-tableaux-et-types-réifiables">5.7.6.4 Tableaux et types réifiables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#58-opérateur-ternaire">5.8 Opérateur Ternaire</a><ul>
+<li><a href="#581-regles-de-typage-de-loperateur-ternaire">5.8.1 Règles de Typage de l’Opérateur Ternaire</a><ul>
+<li><a href="#5811-operandes-numeriques">5.8.1.1 Opérandes Numériques</a></li>
+<li><a href="#5812-types-de-reference">5.8.1.2 Types de Référence</a></li>
+</ul>
+</li>
+<li><a href="#582-syntaxe">5.8.2 Syntaxe</a></li>
+<li><a href="#583-exemple">5.8.3 Exemple</a></li>
+<li><a href="#584-exemple-de-ternaire-imbriqué">5.8.4 Exemple de Ternaire Imbriqué</a></li>
+<li><a href="#585-remarques">5.8.5 Remarques</a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<p><a id="51-définition"></a></p>
+<h2 id="51-definition">5.1 Définition</h2>
+<p>En Java, les <strong>opérateurs</strong> sont des symboles spéciaux qui effectuent des opérations sur des variables et des valeurs.<br />
+Ce sont les briques de base des expressions et ils permettent aux développeurs de manipuler des données, de comparer des valeurs, d’effectuer des opérations arithmétiques et de contrôler le flux logique.</p>
+<p>Une <strong>expression</strong> est une combinaison d’opérateurs et d’opérandes qui produit un résultat.</p>
+<p>Par exemple :
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+</code></pre></div></p>
+<p>Ici, <code>+</code> et <code>*</code> sont des opérateurs, et <code>a</code>, <code>b</code> et <code>c</code> sont des opérandes.</p>
+<hr />
+<p><a id="52-types-dopérateurs"></a></p>
+<h2 id="52-types-doperateurs">5.2 Types d’opérateurs</h2>
+<p>Java définit trois types d’opérateurs, regroupés selon le nombre d’opérandes qu’ils utilisent :</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Exemples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unary</td>
+<td>Opère sur un seul opérande</td>
+<td><code>+x</code>, <code>-x</code>, <code>++x</code>, <code>--x</code>, <code>!flag</code>, <code>~num</code></td>
+</tr>
+<tr>
+<td>Binary</td>
+<td>Opère sur deux opérandes</td>
+<td><code>a + b</code>, <code>a - b</code>, <code>x * y</code>, <code>x / y</code>, <code>x % y</code></td>
+</tr>
+<tr>
+<td>Ternary</td>
+<td>Opère sur trois opérandes (un seul en Java)</td>
+<td><code>condition ? valueIfTrue : valueIfFalse</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a id="53-catégories-dopérateurs"></a></p>
+<h2 id="53-categories-doperateurs">5.3 Catégories d’opérateurs</h2>
+<p>Les opérateurs peuvent également être regroupés, selon leur objectif, en catégories :</p>
+<table>
+<thead>
+<tr>
+<th>Catégorie</th>
+<th>Description</th>
+<th>Exemples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Assignment</td>
+<td>Assigne des valeurs aux variables</td>
+<td><code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code></td>
+</tr>
+<tr>
+<td>Relational</td>
+<td>Compare des valeurs</td>
+<td><code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></td>
+</tr>
+<tr>
+<td>Logical</td>
+<td>Combine ou inverse des expressions booléennes</td>
+<td><code>&#124;</code>, <code>&amp;</code>, <code>^</code></td>
+</tr>
+<tr>
+<td>Conditional</td>
+<td>Combine ou inverse des expressions booléennes</td>
+<td><code>&#124;&#124;</code>, <code>&amp;&amp;</code></td>
+</tr>
+<tr>
+<td>Bitwise</td>
+<td>Manipule des bits</td>
+<td><code>&amp;</code>, <code>&#124;</code>, <code>^</code>, <code>~</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&gt;&gt;&gt;</code></td>
+</tr>
+<tr>
+<td>Instanceof</td>
+<td>Teste le type d’un objet</td>
+<td><code>obj instanceof ClassName</code></td>
+</tr>
+<tr>
+<td>Lambda</td>
+<td>Utilisé dans les expressions lambda</td>
+<td><code>(x, y) -&gt; x + y</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a id="54-priorité-des-opérateurs-et-ordre-dévaluation"></a></p>
+<h2 id="54-priorite-des-operateurs-et-ordre-devaluation">5.4 Priorité des opérateurs et ordre d’évaluation</h2>
+<p>La <strong>priorité des opérateurs</strong> détermine comment les opérateurs sont regroupés dans une expression — c’est-à-dire quelles opérations sont effectuées en premier.<br />
+L’<strong>associativité</strong> (ou <strong>ordre d’évaluation</strong>) détermine si l’expression est évaluée de <strong>gauche à droite</strong> ou de <strong>droite à gauche</strong> lorsque des opérateurs ont la même priorité.</p>
+<p>Exemple :</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">  </span><span class="c1">// La multiplication est effectuée avant l’addition → result = 20</span>
+</code></pre></div>
+<p>Les parenthèses <code>()</code> peuvent être utilisées pour <strong>surclasser la priorité</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">  </span><span class="c1">// Les parenthèses sont évaluées en premier → result = 30</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>La <strong>priorité</strong> des opérateurs concerne le <em>regroupement</em>, pas l’ordre concret d’évaluation.</li>
+<li>Utilise les parenthèses pour la priorité et la clarté dans les expressions complexes.</li>
+</ul>
+</div>
+<hr />
+<p><a id="55-tableau-récapitulatif-des-opérateurs-java"></a></p>
+<h2 id="55-tableau-recapitulatif-des-operateurs-java">5.5 Tableau récapitulatif des opérateurs Java</h2>
+<table>
+<thead>
+<tr>
+<th>Priorité (Haute → Basse)</th>
+<th>Type</th>
+<th>Opérateurs</th>
+<th>Exemple</th>
+<th>Ordre d’évaluation</th>
+<th>Applicable à</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Postfix Unary</td>
+<td><code>expr++</code>, <code>expr--</code></td>
+<td><code>x++</code></td>
+<td>Gauche → Droite</td>
+<td>Types numériques</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Prefix Unary</td>
+<td><code>++expr</code>, <code>--expr</code></td>
+<td><code>--x</code></td>
+<td>Gauche → Droite</td>
+<td>Numériques</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Other Unary</td>
+<td><code>(type)</code>, <code>+</code>, <code>-</code>, <code>~</code>, <code>!</code></td>
+<td><code>-x</code>, <code>!flag</code></td>
+<td>Droite → Gauche</td>
+<td>Numériques, boolean</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Cast Unary</td>
+<td><code>(Type) reference</code></td>
+<td><code>(short) 22</code></td>
+<td>Droite → Gauche</td>
+<td>reference, primitifs</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Multiplication/division/modulus</td>
+<td><code>*</code>, <code>/</code>, <code>%</code></td>
+<td><code>a * b</code></td>
+<td>Gauche → Droite</td>
+<td>Types numériques</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Additive</td>
+<td><code>+</code>, <code>-</code></td>
+<td><code>a + b</code></td>
+<td>Gauche → Droite</td>
+<td>Numériques, String (concaténation)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Shift</td>
+<td><code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&gt;&gt;&gt;</code></td>
+<td><code>a &lt;&lt; 2</code></td>
+<td>Gauche → Droite</td>
+<td>Types intégraux</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Relational</td>
+<td><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>instanceof</code></td>
+<td><code>a &lt; b</code>, <code>obj instanceof Person</code></td>
+<td>Gauche → Droite</td>
+<td>Numériques, reference</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Equality</td>
+<td><code>==</code>, <code>!=</code></td>
+<td><code>a == b</code></td>
+<td>Gauche → Droite</td>
+<td>Tous les types (sauf boolean pour <code>&lt;</code>, <code>&gt;</code>)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Logical AND</td>
+<td><code>&amp;</code></td>
+<td><code>a &amp; b</code></td>
+<td>Gauche → Droite</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Logical exclusive OR</td>
+<td><code>^</code></td>
+<td><code>a ^ b</code></td>
+<td>Gauche → Droite</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Logical inclusive OR</td>
+<td><code>&#124;</code></td>
+<td><code>a</code><code>&#124;</code><code>b</code></td>
+<td>Gauche → Droite</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Conditional AND</td>
+<td><code>&amp;&amp;</code></td>
+<td><code>a</code><code>&amp;&amp;</code><code>b</code></td>
+<td>Gauche → Droite</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Conditional OR</td>
+<td><code>&#124;&#124;</code></td>
+<td><code>a</code><code>&#124;&#124;</code><code>b</code></td>
+<td>Gauche → Droite</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Ternary (Conditional)</td>
+<td><code>? :</code></td>
+<td><code>a &gt; b ? x : y</code></td>
+<td>Droite → Gauche</td>
+<td>Tous les types</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Assignment</td>
+<td><code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code></td>
+<td><code>x += 5</code></td>
+<td>Droite → Gauche</td>
+<td>Tous les types assignables</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Arrow operator</td>
+<td><code>-&gt;</code></td>
+<td><code>(x, y) -&gt; x + y</code></td>
+<td>Droite → Gauche</td>
+<td>Expressions lambda, switch rules</td>
+</tr>
+</tbody>
+</table>
+<p><a id="551-notes-complémentaires"></a></p>
+<h3 id="551-notes-complementaires">5.5.1 Notes complémentaires</h3>
+<ul>
+<li>La <strong>concaténation de chaînes (<code>+</code>)</strong> a une priorité plus faible que le <code>+</code> arithmétique sur les nombres.</li>
+<li>Utilise les parenthèses <code>()</code> pour la priorité et la lisibilité — elles ne changent pas la sémantique mais rendent l’intention explicite.</li>
+</ul>
+<hr />
+<p><a id="56-opérateurs-unaires"></a></p>
+<h2 id="56-operateurs-unaires">5.6 Opérateurs unaires</h2>
+<p>Les opérateurs unaires opèrent sur <strong>un seul opérande</strong> pour produire une nouvelle valeur.<br />
+Ils sont utilisés pour des opérations comme l’incrémentation/décrémentation, la négation d’une valeur, l’inversion d’un booléen ou le complément bit à bit.</p>
+<p><a id="561-catégories-dopérateurs-unaires"></a></p>
+<h3 id="561-categories-doperateurs-unaires">5.6.1 Catégories d’opérateurs unaires</h3>
+<table>
+<thead>
+<tr>
+<th>Opérateur</th>
+<th>Nom</th>
+<th>Description</th>
+<th>Exemple</th>
+<th>Résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+</code></td>
+<td>Unary plus</td>
+<td>Indique une valeur positive (souvent redondant).</td>
+<td><code>+x</code></td>
+<td>Identique à <code>x</code></td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>Unary minus</td>
+<td>Indique qu’un nombre littéral est négatif ou nie une expression.</td>
+<td><code>-5</code></td>
+<td><code>-5</code></td>
+</tr>
+<tr>
+<td><code>++</code></td>
+<td>Increment</td>
+<td>Augmente une variable de 1. Peut être préfixe ou postfixe.</td>
+<td><code>++x</code>, <code>x++</code></td>
+<td><code>x+1</code></td>
+</tr>
+<tr>
+<td><code>--</code></td>
+<td>Decrement</td>
+<td>Diminue une variable de 1. Peut être préfixe ou postfixe.</td>
+<td><code>--x</code>, <code>x--</code></td>
+<td><code>x-1</code></td>
+</tr>
+<tr>
+<td><code>!</code></td>
+<td>Logical complement</td>
+<td>Inverse une valeur booléenne.</td>
+<td><code>!true</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>Bitwise complement</td>
+<td>Inverse chaque bit d’un entier.</td>
+<td><code>~5</code></td>
+<td><code>-6</code></td>
+</tr>
+<tr>
+<td><code>(type)</code></td>
+<td>Cast</td>
+<td>Convertit la valeur vers un autre type.</td>
+<td><code>(int) 3.9</code></td>
+<td><code>3</code></td>
+</tr>
+</tbody>
+</table>
+<p><a id="562-exemples"></a></p>
+<h3 id="562-exemples">5.6.2 Exemples</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="o">++</span><span class="n">x</span><span class="p">);</span><span class="w">  </span><span class="c1">// 6  (préfixe : incrémente x à 6, puis renvoie 6)</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="o">++</span><span class="p">);</span><span class="w">  </span><span class="c1">// 6  (postfixe : renvoie 6, puis incrémente x à 7)</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w">    </span><span class="c1">// 7</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="o">!</span><span class="n">flag</span><span class="p">);</span><span class="w">  </span><span class="c1">// true</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">                  </span><span class="c1">// binaire : 0000 0101</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="o">~</span><span class="n">a</span><span class="p">);</span><span class="w">     </span><span class="c1">// -6 → binaire : 1111 1010 (complément à deux)</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>Préfixe (<code>++x</code> / <code>--x</code>) : met à jour la valeur d’abord, puis renvoie la nouvelle valeur.</li>
+<li>Postfixe (<code>x++</code> / <code>x--</code>) : renvoie d’abord la valeur courante, puis la met à jour.</li>
+<li>L’opérateur <code>!</code> s’applique aux valeurs boolean ; <code>~</code> s’applique aux types numériques intégraux.</li>
+</ul>
+</div>
+<hr />
+<p><a id="57-opérateurs-binaires"></a></p>
+<h2 id="57-operateurs-binaires">5.7 Opérateurs binaires</h2>
+<p>Les opérateurs binaires nécessitent <strong>deux opérandes</strong>.<br />
+Ils effectuent des opérations arithmétiques, relationnelles, logiques, bit à bit et d’affectation.</p>
+<p><a id="571-catégories-dopérateurs-binaires"></a></p>
+<h3 id="571-categories-doperateurs-binaires">5.7.1 Catégories d’opérateurs binaires</h3>
+<table>
+<thead>
+<tr>
+<th>Catégorie</th>
+<th>Opérateurs</th>
+<th>Exemple</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arithmetic</td>
+<td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code></td>
+<td><code>a + b</code></td>
+<td>Opérations mathématiques de base.</td>
+</tr>
+<tr>
+<td>Relational</td>
+<td><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code></td>
+<td><code>a &lt; b</code></td>
+<td>Compare des valeurs.</td>
+</tr>
+<tr>
+<td>Logical (boolean)</td>
+<td><code>&amp;</code>, <code>&#124;</code>, <code>^</code></td>
+<td><code>a</code><code>&amp;</code><code>b</code></td>
+<td>Voir note ci-dessous.</td>
+</tr>
+<tr>
+<td>Conditional</td>
+<td><code>&amp;&amp;</code>, <code>&#124;&#124;</code></td>
+<td><code>a</code><code>&amp;&amp;</code><code>b</code></td>
+<td>Voir note ci-dessous.</td>
+</tr>
+<tr>
+<td>Bitwise (integral)</td>
+<td><code>&amp;</code>, <code>&#124;</code>, <code>^</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&gt;&gt;&gt;</code></td>
+<td><code>a &lt;&lt; 2</code></td>
+<td>Opère sur les bits.</td>
+</tr>
+<tr>
+<td>Assignment</td>
+<td><code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code></td>
+<td><code>x += 3</code></td>
+<td>Modifie puis affecte.</td>
+</tr>
+<tr>
+<td>String Concatenation</td>
+<td><code>+</code></td>
+<td><code>"Hello " + name</code></td>
+<td>Concatène des chaînes.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul>
+<li>Les opérateurs <strong>logiques</strong> (<code>&amp;</code>, <code>|</code>, <code>^</code>) <em>évaluent toujours les deux côtés</em>.</li>
+<li>Les opérateurs <strong>conditionnels</strong> (<code>&amp;&amp;</code>, <code>||</code>) sont <strong>short-circuit</strong> :</li>
+<li><code>a &amp;&amp; b</code> → <code>b</code> est évalué uniquement si <code>a</code> est true</li>
+<li><code>a || b</code> → <code>b</code> est évalué uniquement si <code>a</code> est false</li>
+</ul>
+</div>
+<p>Exemples :</p>
+<p><strong>Exemple arithmétique :</strong>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// 14</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// 6</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// 40</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// 2</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// 2</span>
+</code></pre></div></p>
+<p><strong>Exemple relationnel :</strong>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">   </span><span class="c1">// true</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// false</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// false</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// true</span>
+</code></pre></div></p>
+<p><strong>Exemple logique :</strong>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w">  </span><span class="c1">// false</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w">  </span><span class="c1">// true</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="o">!</span><span class="n">x</span><span class="p">);</span><span class="w">      </span><span class="c1">// false</span>
+</code></pre></div></p>
+<p><strong>Exemple bit à bit :</strong>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">   </span><span class="c1">// 0101</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">   </span><span class="c1">// 0011</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// 1  (0001)</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// 7  (0111)</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// 6  (0110)</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// 10 (1010)</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2  (0010)</span>
+</code></pre></div></p>
+<p><a id="572-opérateurs-de-division-et-de-modulo-reste"></a></p>
+<h3 id="572-operateurs-de-division-et-de-modulo-reste">5.7.2 Opérateurs de division et de modulo (reste)</h3>
+<p><a id="5721-opérateur-de-division"></a></p>
+<h4 id="5721-operateur-de-division">5.7.2.1 Opérateur de Division</h4>
+<p>Diviser un <code>entier</code> par zéro (par exemple, 10 / 0) provoque le lancement par la JVM d’une <code>java.lang.ArithmeticException: / by zero</code>.</p>
+<p>Cependant, la division en virgule flottante se comporte différemment.</p>
+<p>Lorsqu’une valeur <code>float</code> ou <code>double</code> est divisée par 0 ou 0.0, aucune exception n’est levée. À la place, le résultat est :</p>
+<ul>
+<li><strong>Float.POSITIVE_INFINITY</strong> ou <strong>Float.NEGATIVE_INFINITY</strong></li>
+<li><strong>Double.POSITIVE_INFINITY</strong> ou <strong>Double.NEGATIVE_INFINITY</strong></li>
+</ul>
+<p>Le signe dépend des opérandes impliqués dans l’opération.</p>
+<p>Pour déterminer si une valeur en virgule flottante représente l’infini, les classes <code>Float</code> et <code>Double</code> fournissent des méthodes utilitaires :</p>
+<p>Méthodes statiques :</p>
+<ul>
+<li><strong>Float.isInfinite(float value)</strong></li>
+<li><strong>Double.isInfinite(double value)</strong></li>
+</ul>
+<p>Méthodes d’instance :</p>
+<ul>
+<li><strong>Float.isInfinite()</strong></li>
+<li><strong>Double.isInfinite()</strong></li>
+</ul>
+<p>Ces méthodes retournent <code>true</code> si la valeur correspond à l’infini positif ou à l’infini négatif.</p>
+<p><a id="5722-opérateur-modulo"></a></p>
+<h4 id="5722-operateur-modulo">5.7.2.2 Opérateur Modulo</h4>
+<p>L’opérateur modulo donne le reste lorsque deux nombres sont divisés.<br />
+Si deux nombres se divisent exactement, le reste est 0 : par exemple <strong>10 % 5</strong> vaut 0.<br />
+En revanche, <strong>13 % 4</strong> donne un reste de 1.</p>
+<p>On peut utiliser le modulo avec des nombres négatifs selon les règles suivantes :</p>
+<ul>
+<li>si le <strong>diviseur</strong> est négatif (ex. : 7 % -5), le signe est ignoré et le résultat est <strong>2</strong> ;</li>
+<li>si le <strong>dividende</strong> est négatif (ex. : -7 % 5), le signe est conservé et le résultat est <strong>-2</strong> ;</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span><span class="w">      </span><span class="c1">// GIVES 3</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="mi">10</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span><span class="w">     </span><span class="c1">// GIVES 0</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="mi">10</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">     </span><span class="c1">// GIVES 1    </span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">    </span><span class="c1">// GIVES -1    </span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="mi">10</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span><span class="p">);</span><span class="w">    </span><span class="c1">// GIVES 1   </span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span><span class="p">);</span><span class="w">   </span><span class="c1">// GIVES -1 </span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">9</span><span class="p">);</span><span class="w">      </span><span class="c1">// GIVES 8</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w">      </span><span class="c1">// GIVES 3    </span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w">      </span><span class="c1">// GIVES 2</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">9</span><span class="p">);</span><span class="w">     </span><span class="c1">// GIVES -8</span>
+</code></pre></div>
+<p><a id="573-la-valeur-de-retour-de-lopérateur-daffectation"></a></p>
+<h3 id="573-la-valeur-de-retour-de-loperateur-daffectation">5.7.3 La valeur de retour de l’opérateur d’affectation</h3>
+<p>En Java, l’<strong>opérateur d’affectation (<code>=</code>)</strong> ne fait pas que stocker une valeur dans une variable —<br />
+il <strong>renvoie aussi la valeur affectée</strong> comme résultat de l’expression entière.</p>
+<p>Cela signifie que l’affectation peut être <strong>utilisée comme partie d’une autre expression</strong>,<br />
+par exemple dans une condition <code>if</code>, dans la condition d’une boucle, ou même dans une autre affectation.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w">   </span><span class="c1">// l’affectation (x = 10) renvoie 10</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="w">  </span><span class="c1">// 10</span>
+
+<span class="c1">// x = 10 affecte 10 à x.</span>
+<span class="c1">// L’expression (x = 10) s’évalue à 10.</span>
+<span class="c1">// Cette valeur est ensuite affectée à y.</span>
+<span class="c1">// Donc x et y finissent avec la même valeur (10).</span>
+</code></pre></div>
+<p>Comme l’affectation renvoie une valeur, elle peut aussi apparaître dans un <strong>if</strong>.<br />
+Cependant, cela conduit souvent à des erreurs logiques si c’est fait involontairement.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;This will always execute!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Ici la condition (flag = true) affecte true à flag, puis s’évalue à true,</span>
+<span class="c1">// donc le bloc if s’exécute toujours.</span>
+
+<span class="c1">// Usage correct (comparaison au lieu d’affectation) :</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">flag</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Condition checked, not assigned&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Si tu vois <code>if (x = quelque chose)</code>, stop : c’est une <strong>affectation</strong>, pas une comparaison.</p>
+</div>
+<p><a id="574-opérateurs-daffectation-composée"></a></p>
+<h3 id="574-operateurs-daffectation-composee">5.7.4 Opérateurs d’affectation composée</h3>
+<p>Les <strong>opérateurs d’affectation composée</strong> en Java combinent une opération arithmétique ou bit à bit avec une affectation en une seule étape.<br />
+Au lieu d’écrire <code>x = x + 5</code>, tu peux utiliser la forme abrégée <code>x += 5</code>.<br />
+Ils effectuent automatiquement un <strong>cast implicite</strong> vers le type de la variable à gauche lorsque c’est nécessaire.</p>
+<p>Les opérateurs composés courants incluent :<br />
+<code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>&amp;=</code>, <code>|=</code>, <code>^=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>, et <code>&gt;&gt;&gt;=</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+
+<span class="c1">// Affectations composées arithmétiques</span>
+<span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">   </span><span class="c1">// équivalent à x = x + 5 → x = 15</span>
+<span class="n">x</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">   </span><span class="c1">// équivalent à x = x - 3 → x = 12</span>
+<span class="n">x</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">   </span><span class="c1">// équivalent à x = x * 2 → x = 24</span>
+<span class="n">x</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">   </span><span class="c1">// équivalent à x = x / 4 → x = 6</span>
+<span class="n">x</span><span class="w"> </span><span class="o">%=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">   </span><span class="c1">// équivalent à x = x % 5 → x = 1</span>
+
+<span class="c1">// Affectations composées bit à bit</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w">   </span><span class="c1">// 0110 (binaire)</span>
+<span class="n">y</span><span class="w"> </span><span class="o">&amp;=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">      </span><span class="c1">// y = y &amp; 3 → 0110 &amp; 0011 = 0010 → y = 2</span>
+<span class="n">y</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">      </span><span class="c1">// y = y | 4 → 0010 | 0100 = 0110 → y = 6</span>
+<span class="n">y</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">      </span><span class="c1">// y = y ^ 5 → 0110 ^ 0101 = 0011 → y = 3</span>
+
+<span class="c1">// Affectations composées avec décalage</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w">   </span><span class="c1">// 0000 1000</span>
+<span class="n">z</span><span class="w"> </span><span class="o">&lt;&lt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">     </span><span class="c1">// z = z &lt;&lt; 2 → 0010 0000 → z = 32</span>
+<span class="n">z</span><span class="w"> </span><span class="o">&gt;&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">     </span><span class="c1">// z = z &gt;&gt; 1 → 0001 0000 → z = 16</span>
+<span class="n">z</span><span class="w"> </span><span class="o">&gt;&gt;&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">    </span><span class="c1">// z = z &gt;&gt;&gt; 2 → 0000 0100 → z = 4</span>
+
+<span class="c1">// Exemple de cast de type</span>
+<span class="kt">byte</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="c1">// b = b + 1;   // ❌ erreur de compilation : le résultat int ne peut pas être affecté à byte</span>
+<span class="n">b</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">         </span><span class="c1">// ✅ fonctionne : cast implicite vers byte</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les affectations composées effectuent un <strong>cast implicite</strong> vers le type de la variable à gauche.
+C’est pourquoi <code>b += 1</code> compile alors que <code>b = b + 1</code> ne compile pas.</p>
+</div>
+<p><a id="575-opérateurs-dégalité--et-"></a></p>
+<h3 id="575-operateurs-degalite-et">5.7.5 Opérateurs d’égalité (<code>==</code> et <code>!=</code>)</h3>
+<p>Les <strong>opérateurs d’égalité</strong> en Java <code>==</code> (égal à) et <code>!=</code> (différent de) servent à comparer deux opérandes.<br />
+Cependant, leur comportement diffère <strong>selon qu’ils s’appliquent à des types primitifs ou à des types référence (objets)</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><code>==</code> compare les <strong>valeurs</strong> pour les primitifs</li>
+<li><code>==</code> compare les <strong>références</strong> pour les objets  </li>
+<li><code>.equals()</code> compare le <strong>contenu</strong> d’un objet (si implémenté)</li>
+</ul>
+</div>
+<p><a id="5751-égalité-avec-les-types-primitifs"></a></p>
+<h4 id="5751-egalite-avec-les-types-primitifs">5.7.5.1 Égalité avec les types primitifs</h4>
+<p>Lorsqu’on compare des <strong>valeurs primitives</strong>, <code>==</code> et <code>!=</code> comparent les <strong>valeurs stockées</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// true  → mêmes valeurs</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// false → valeurs égales</span>
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul>
+<li>Si les opérandes sont de types numériques différents, Java les promeut automatiquement vers un type commun avant la comparaison.</li>
+<li>Cependant, comparer float et double peut produire des résultats inattendus à cause des erreurs de précision (voir ci-dessous).</li>
+</ul>
+</div>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w">  </span><span class="c1">// true → x promu en double (10.0)</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">d</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0.3</span><span class="p">);</span><span class="w"> </span><span class="c1">// false → problème d’arrondi floating-point</span>
+</code></pre></div>
+<p><a id="5752-égalité-avec-les-types-référence-objets"></a></p>
+<h4 id="5752-egalite-avec-les-types-reference-objets">5.7.5.2 Égalité avec les types référence (objets)</h4>
+<p>Pour les objets, <code>==</code> et <code>!=</code> comparent les références, pas le contenu.<br />
+Ils renvoient true uniquement si les deux références pointent vers <strong>le même objet</strong> en mémoire.</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;Java&quot;</span><span class="p">);</span>
+<span class="n">String</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;Java&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">s2</span><span class="p">);</span><span class="w">      </span><span class="c1">// false → objets différents en mémoire</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s1</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">s2</span><span class="p">);</span><span class="w">      </span><span class="c1">// true  → pas la même référence</span>
+</code></pre></div>
+<p>Même si deux objets ont un contenu identique, <code>==</code> compare leurs <strong>adresses</strong>, pas leurs valeurs.<br />
+Pour comparer le <strong>contenu</strong> des objets, utilise <strong><code>.equals()</code></strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">s2</span><span class="p">));</span><span class="w"> </span><span class="c1">// true → même contenu de chaîne</span>
+</code></pre></div>
+<p><strong>Cas particulier : null et littéraux String</strong></p>
+<ul>
+<li>Toute référence peut être comparée à <code>null</code> avec <code>==</code> ou <code>!=</code>.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w">  </span><span class="c1">// true</span>
+</code></pre></div>
+<ul>
+<li>Les littéraux String sont <em>internés</em> par la JVM :<br />
+des littéraux identiques peuvent donc pointer vers la même référence en mémoire :</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Java&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Java&quot;</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">       </span><span class="c1">// true → même littéral interné</span>
+</code></pre></div>
+<ul>
+<li>Égalité avec types mixtes :<br />
+avec <code>==</code> entre catégories différentes (ex. primitif vs objet),<br />
+le compilateur tente l’unboxing si l’un des deux est une <strong>classe wrapper</strong>.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Integer</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">j</span><span class="p">);</span><span class="w">   </span><span class="c1">// true → unboxing avant comparaison</span>
+</code></pre></div>
+<p><a id="576-lopérateur-instanceof"></a></p>
+<h3 id="576-loperateur-instanceof">5.7.6 L’opérateur <code>instanceof</code></h3>
+<p><code>instanceof</code> est un <strong>opérateur relationnel</strong> qui teste si une référence est une <strong>instance</strong> d’un certain <strong>type référence</strong> à l’exécution.<br />
+Il renvoie un <code>boolean</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Java&quot;</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">o</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">String</span><span class="p">);</span><span class="w">   </span><span class="c1">// true</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">b2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">o</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Number</span><span class="p">);</span><span class="w">   </span><span class="c1">// false</span>
+</code></pre></div>
+<p>Comportement avec <strong>null</strong> :<br />
+si l’expression est null, <strong>expr instanceof Type</strong> est toujours <strong>false</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Object</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Object</span><span class="p">);</span><span class="w">  </span><span class="c1">// false</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>instanceof</code> renvoie toujours <code>false</code> lorsque l’opérande gauche est <code>null</code>.</p>
+</div>
+<p><a id="5761-vérification-à-la-compilation-vs-à-lexécution"></a></p>
+<h4 id="5761-verification-a-la-compilation-vs-a-lexecution">5.7.6.1 Vérification à la compilation vs à l’exécution</h4>
+<ul>
+<li>À la compilation, le compilateur rejette les types inconvertibles (qui ne peuvent pas être liés à l’exécution).</li>
+<li>À l’exécution, si la vérification compile-time a passé, la JVM évalue le type réel de l’objet.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// ❌ Erreur de compilation : types inconvertibles (String est sans rapport avec Integer)</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">bad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;abc&quot;</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Integer</span><span class="p">);</span>
+
+<span class="c1">// ✅ Compile, mais le résultat à l’exécution dépend de l’objet réel :</span>
+
+<span class="n">Number</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Integer</span><span class="p">);</span><span class="w"> </span><span class="c1">// true à l’exécution</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Double</span><span class="p">);</span><span class="w">  </span><span class="c1">// false à l’exécution</span>
+</code></pre></div>
+<p><a id="5762-pattern-matching-pour-instanceof"></a></p>
+<h4 id="5762-pattern-matching-pour-instanceof">5.7.6.2 Pattern matching pour instanceof</h4>
+<p>Java supporte les <em>type patterns</em> avec <code>instanceof</code>, qui testent et lient une variable si le test réussit.<br />
+Ajouter une variable après le type indique au compilateur d’interpréter cela comme du <em>Pattern Matching</em>.</p>
+<p>Syntaxe (forme pattern) :</p>
+<div class="highlight"><pre><span></span><code><span class="n">Object</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">obj</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Ajouter la variable str après le type indique au compilateur de faire du Pattern Matching</span>
+
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">());</span><span class="w"> </span><span class="c1">// l’identifiant est en scope ici, de type String (sûr).</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Propriétés clés :</p>
+<ul>
+<li>Si le test réussit, la variable de pattern (ex. <code>str</code>) est définitivement assignée et visible dans la branche true.</li>
+<li>Les variables de pattern sont implicitement final (ne peuvent pas être réassignées).</li>
+<li>Le nom ne doit pas entrer en conflit avec une variable existante dans le même scope.</li>
+</ul>
+<p><a id="5763-flow-scoping--logique-short-circuit"></a></p>
+<h4 id="5763-flow-scoping-logique-short-circuit">5.7.6.3 Flow scoping &amp; logique short-circuit</h4>
+<p>Les variables de pattern deviennent disponibles selon l’analyse de flux :</p>
+<div class="highlight"><pre><span></span><code><span class="n">Object</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;data&quot;</span><span class="p">;</span>
+
+<span class="c1">// Test négatif, variable disponible dans la branche else</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">obj</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// s n’est pas en scope ici</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">());</span><span class="w"> </span><span class="c1">// s est en scope ici</span>
+<span class="p">}</span>
+
+<span class="c1">// Avec &amp;&amp;, la variable de pattern peut être utilisée à droite si la gauche l’a établie</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">obj</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">));</span><span class="w"> </span><span class="c1">// s en scope</span>
+<span class="p">}</span>
+
+<span class="c1">// Avec ||, la variable de pattern n’est PAS sûre à droite (le short-circuit peut empêcher de l’établir)</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">obj</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// ❌ s n’est pas en scope ici</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// Les parenthèses peuvent aider à regrouper la logique</span>
+<span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">obj</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// ✅ s en scope après le test groupé</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Le pattern matching avec <code>null</code> s’évalue, comme toujours pour <code>instanceof</code>, à <code>false</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="c1">// instanceof classique</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">str</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;NOT EXECUTED&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// instanceof vaut false</span>
+<span class="p">}</span>
+
+<span class="c1">// Pattern matching</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">str</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;NOT EXECUTED&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// instanceof vaut toujours false</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Types supportés :</strong></p>
+<p>Le type de la variable de pattern doit être un sous-type, un super-type, ou le même type que la variable référence.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Number</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Short</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">  </span><span class="c1">// ❌ Erreur de compilation</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Short</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">   </span><span class="c1">// ✅ Ok</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">  </span><span class="c1">// ✅ Ok</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">  </span><span class="c1">// ✅ Ok</span>
+</code></pre></div>
+<p><a id="5764-tableaux-et-types-réifiables"></a></p>
+<h4 id="5764-tableaux-et-types-reifiables">5.7.6.4 Tableaux et types réifiables</h4>
+<p><code>instanceof</code> fonctionne avec les tableaux (réifiables) et avec des formes génériques effacées ou avec wildcard.<br />
+Les <strong>types réifiables</strong> sont ceux dont la représentation à l’exécution conserve pleinement leur type (par exemple : raw types, tableaux, classes non génériques, wildcard <code>?</code>).<br />
+À cause de l’effacement de type (<em>type erasure</em>), <code>List&lt;String&gt;</code> ne peut pas être testée directement à l’exécution.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Object</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">arr</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
+
+<span class="n">Object</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+<span class="c1">// System.out.println(list instanceof List&lt;Integer&gt;); // ❌ Erreur de compilation : type paramétré non réifiable</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">List</span><span class="o">&lt;?&gt;</span><span class="p">);</span><span class="w"> </span><span class="c1">// ✅ true</span>
+</code></pre></div>
+<hr />
+<p><a id="58-opérateur-ternaire"></a></p>
+<h2 id="58-operateur-ternaire">5.8 Opérateur ternaire</h2>
+<p>L’<strong>opérateur ternaire</strong> (<code>? :</code>) est le seul opérateur en Java qui prend <strong>trois opérandes</strong>.<br />
+Il constitue une forme concise de l’instruction <code>if-else</code>.</p>
+<p><a id="581-regles-de-typage-de-loperateur-ternaire"></a></p>
+<h3 id="581-regles-de-typage-de-loperateur-ternaire">5.8.1 Règles de Typage de l’Opérateur Ternaire</h3>
+<p>Le type d’une expression conditionnelle (ternaire) est déterminé par les types du deuxième et du troisième opérande.</p>
+<p><a id="5811-operandes-numeriques"></a></p>
+<h4 id="5811-operandes-numeriques">5.8.1.1 Opérandes Numériques</h4>
+<ul>
+<li>Si un opérande est de type <code>byte</code> et l’autre de type <code>short</code>, le type résultant est <code>short</code>.</li>
+<li>Si un opérande est de type <code>T</code> (<code>byte</code>, <code>short</code> ou <code>char</code>) et l’autre est une expression constante de type <code>int</code> dont la valeur est représentable dans <code>T</code>, alors le type résultant est <code>T</code>.</li>
+<li>Dans tous les autres cas numériques, la <strong>binary numeric promotion</strong> est appliquée aux deux opérandes.<br />
+  Le type de l’expression conditionnelle devient le type promu.</li>
+</ul>
+<blockquote>
+<p>La binary numeric promotion inclut la <strong>conversion d’unboxing</strong> et la <strong>value set conversion</strong>.</p>
+</blockquote>
+<p><a id="5812-types-de-reference"></a></p>
+<h4 id="5812-types-de-reference">5.8.1.2 Types de Référence</h4>
+<ul>
+<li>Si un opérande est <code>null</code> et l’autre est un type de référence, le type résultant est ce type de référence.</li>
+<li>Si les deux opérandes sont de types de référence différents, l’un doit être assignable à l’autre (compatibilité d’assignation).<br />
+  Le type résultant est le type le plus général, c’est-à-dire celui auquel l’autre peut être assigné.</li>
+<li>Si aucun des deux types n’est compatible par assignation avec l’autre, une <strong>erreur à la compilation</strong> se produit.</li>
+</ul>
+<p>En résumé, l’opérateur ternaire détermine son type en appliquant :</p>
+<ul>
+<li>Des règles spécifiques de narrowing pour les petits types entiers  </li>
+<li>La binary numeric promotion pour les valeurs numériques  </li>
+<li>Les règles de compatibilité d’assignation pour les types de référence  </li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>L’opérateur ternaire <strong>doit</strong> produire une valeur d’un type compatible.
+Si les deux branches retournent des types non liés, la compilation échoue.</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;ok&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="c1">// ❌ erreur de compilation : types incompatibles</span>
+</code></pre></div>
+</div>
+<p><a id="582-syntaxe"></a></p>
+<h3 id="582-syntaxe">5.8.2 Syntaxe</h3>
+<div class="highlight"><pre><span></span><code><span class="n">condition</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">expressionIfTrue</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">expressionIfFalse</span><span class="p">;</span>
+</code></pre></div>
+<p><a id="583-exemple"></a></p>
+<h3 id="583-exemple">5.8.3 Exemple</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">age</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;Autorisé&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Refusé&quot;</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">access</span><span class="p">);</span><span class="w">  </span><span class="c1">// &quot;Autorisé&quot;</span>
+</code></pre></div>
+<p><a id="584-exemple-de-ternaire-imbriqué"></a></p>
+<h3 id="584-exemple-de-ternaire-imbrique">5.8.4 Exemple de Ternaire Imbriqué</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">85</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">grade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">90</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;A&quot;</span><span class="w"> </span><span class="p">:</span>
+<span class="w">               </span><span class="p">(</span><span class="n">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">75</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="w"> </span><span class="p">:</span>
+<span class="w">               </span><span class="p">(</span><span class="n">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;F&quot;</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">grade</span><span class="p">);</span><span class="w">  </span><span class="c1">// &quot;B&quot;</span>
+</code></pre></div>
+<p><a id="585-remarques"></a></p>
+<h3 id="585-remarques">5.8.5 Remarques</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>Les expressions ternaires imbriquées peuvent réduire la lisibilité. Utilisez des parenthèses pour plus de clarté.</li>
+<li>L’opérateur ternaire retourne une <strong>valeur</strong>, contrairement à <code>if-else</code>, qui est une instruction.</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.ars-digitale.com/" target="_blank" rel="noopener" title="Ars Digitale" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
