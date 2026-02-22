@@ -92,10 +92,12 @@ Il costrutto `switch` è una struttura di controllo del flusso che seleziona un 
 Rispetto a lunghe catene di `if-else-if`, uno `switch`:
 
 - È spesso **più facile da leggere** quando si testano molti valori discreti (costanti, enum, stringhe).
-- Può essere **più sicuro e più conciso** quando usato come **espressione switch** perché:
+- Può essere **più sicuro e più conciso** quando usato come **espressione switch** 
 
-1) Produce un valore.
-2) Il compilatore può imporre **esaustività** e **coerenza di tipo**.
+perché:
+
+- Produce un valore.
+- Il compilatore può imporre **esaustività** e **coerenza di tipo**.
 
 Java 21 supporta:
 
@@ -104,6 +106,7 @@ Java 21 supporta:
 - **Pattern matching** dentro `switch`, inclusi type pattern e guard.
 
 Entrambe le forme di `switch` condividono le stesse regole riguardanti il selector (la **variabile target** dello switch) e i valori `case` accettabili.
+
 
 <a id="721-la-variable-target-dello-switch-può-essere"></a>
 ### 7.2.1 La `variable target` dello switch può essere
@@ -127,6 +130,7 @@ Entrambe le forme di `switch` condividono le stesse regole riguardanti il select
     - `float`
     - `double`
 
+
 <a id="722-valori-case-accettabili"></a>
 ### 7.2.2 Valori `case` accettabili
 
@@ -143,6 +147,7 @@ Una costante a compile-time:
 - Deve essere dichiarata con `final` e inizializzata nella stessa istruzione.
 - Il suo inizializzatore deve a sua volta essere un’espressione costante (tipicamente usando letterali e altre costanti a compile-time).
 
+
 <a id="723-compatibilità-di-tipo-tra-selector-e-case"></a>
 ### 7.2.3 Compatibilità di tipo tra `selector` e `case`
 
@@ -151,6 +156,7 @@ Il tipo del `selector` e ogni etichetta `case` devono essere compatibili:
 - Le costanti numeriche dei case devono essere entro l’intervallo del tipo del selector.
 - Per un selector `enum`, le etichette `case` devono essere costanti di quell’`enum`.
 - Per un selector `String`, le etichette `case` devono essere costanti stringa.
+
 
 <a id="724-pattern-matching-nello-switch"></a>
 ### 7.2.4 Pattern Matching nello Switch
@@ -181,6 +187,7 @@ String describe(Object o) {
 - Le pattern variable sono in scope solo all’interno del proprio `ramo` (o dei percorsi in cui è noto che il pattern corrisponde).
 - L’ordine è importante a causa della **dominanza**: **i pattern più specifici devono precedere quelli più generali**.
 
+
 <a id="7241-nomi-delle-variabili-e-scope-tra-i-rami"></a>
 ### 7.2.4.1 Nomi delle variabili e scope tra i rami
 
@@ -200,6 +207,7 @@ switch (o) {
 
 !!! note
     Quest’ultimo esempio non restituisce un valore, quindi è in realtà una **istruzione switch**, non una switch Expression.
+
 
 <a id="7242-ordinamento-dominanza-ed-esaustività-negli-switch-con-pattern"></a>
 ### 7.2.4.2 Ordinamento, dominanza ed esaustività negli switch con pattern
@@ -277,6 +285,7 @@ switch (number) {
 <a id="73-due-forme-di-switch-switch-statement-vs-switch-expression"></a>
 ## 7.3 Due forme di `switch`: `switch` Statement vs `switch` Expression
 
+
 <a id="731-listruzione-switch"></a>
 ### 7.3.1 L’istruzione Switch
 
@@ -306,6 +315,7 @@ Infine, un’espressione o un blocco (racchiuso in `{}`) definisce il codice da 
 Quando presente, `break` termina lo switch dopo l’esecuzione del suo case; senza di esso, l’esecuzione continua, in ordine, nei rami successivi.
 - Una clausola `default` è opzionale e può apparire ovunque nell’istruzione switch. Viene eseguita se non c’è corrispondenza per i case precedenti.
 - Un’istruzione switch non produce un valore come nell'Expression; non puoi assegnare un’istruzione switch direttamente a una variabile.
+
 
 <a id="7311-comportamento-di-fall-through"></a>
 ### 7.3.1.1 Comportamento di Fall-Through
@@ -340,6 +350,7 @@ Output:
 !!! note
     Se nell’esempio precedente rimuoviamo il `break` sul `case 3`, verrà stampato anche il messaggio del ramo `default`.
 
+
 <a id="732-lespressione-switch"></a>
 ### 7.3.2 L’espressione Switch
 
@@ -363,6 +374,7 @@ int len = switch (s) { // switch expression
 - Un’espressione switch deve essere **esaustiva**: tutti i possibili valori del selector devono essere coperti (tramite case espliciti e/o `default`).
 - Il tipo del risultato deve essere coerente tra tutti i rami. Per esempio, se un ramo produce un `int`, gli altri rami devono produrre valori compatibili con `int`.
 
+
 <a id="7321-yield-nei-blocchi-di-espressione-switch"></a>
 ### 7.3.2.1 `yield` nei blocchi di espressione switch
 
@@ -382,6 +394,7 @@ int len = switch (s) {
 !!! note
     `yield` è usato solo nelle Expressions switch.
     `break value;` non è consentito come modo per restituire un valore da un’espressione switch.
+
 
 <a id="7322-esaustività-per-le-espressioni-switch"></a>
 ### 7.3.2.2 Esaustività per le espressioni switch

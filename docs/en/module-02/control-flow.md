@@ -91,11 +91,12 @@ The `switch` construct is a control-flow structure that selects one branch among
 Compared to long chains of `if-else-if`, a `switch`:
 
 - Is often **easier to read** when testing many discrete values (constants, enums, strings).
-- Can be **safer and more concise** when used as a **switch expression** because:
+- Can be **safer and more concise** when used as a **switch expression** 
 
-It **produces a value**.
+because:
 
-The compiler can enforce **exhaustiveness** and **type consistency**.
+- It **produces a value**.
+- The compiler can enforce **exhaustiveness** and **type consistency**.
 
 
 Java 21 supports:
@@ -306,6 +307,7 @@ When present, `break` terminates the switch after executing its case; without it
 - A `default` clause is optional and can appear anywhere in the switch statement. It runs if there is no match for previous cases.
 - A switch statement does not yield a value as an expression; you cannot assign a switch statement directly to a variable.
 
+
 <a id="7311-fall-through-behavior"></a>
 #### 7.3.1.1 Fall-Through Behavior
 
@@ -338,6 +340,7 @@ Output:
 
 !!! note
     If in the previous example we remove the `break` on `case 3`, the message from the `default` branch will also be printed.
+
 
 <a id="732-the-switch-expression"></a>
 ### 7.3.2 The Switch Expression

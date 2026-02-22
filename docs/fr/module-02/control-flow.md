@@ -90,11 +90,12 @@ La construction `switch` est une structure de contrôle du flux qui sélectionne
 Comparé aux longues chaînes de `if-else-if`, un `switch` :
 
 - Est souvent **plus facile à lire** lorsqu’on teste de nombreuses valeurs discrètes (constantes, enums, chaînes).
-- Peut être **plus sûr et plus concis** lorsqu’il est utilisé comme **expression switch** parce que :
+- Peut être **plus sûr et plus concis** lorsqu’il est utilisé comme **expression switch** 
 
-Il produit une valeur.
+parce que :
 
-Le compilateur peut imposer l’**exhaustivité** et la **cohérence de type**.
+- Il produit une valeur.
+- Le compilateur peut imposer l’**exhaustivité** et la **cohérence de type**.
 
 Java 21 prend en charge :
 
@@ -126,6 +127,7 @@ Les deux formes de `switch` partagent les mêmes règles concernant le selector 
     - `float`
     - `double`
 
+
 <a id="722-valeurs-case-acceptables"></a>
 ### 7.2.2 Valeurs `case` acceptables
 
@@ -142,6 +144,7 @@ Une variable constante à la compilation :
 - Doit être déclarée avec `final` et initialisée dans la même instruction.
 - Son initialiseur doit lui-même être une expression constante (généralement en utilisant des littéraux et d’autres constantes à la compilation).
 
+
 <a id="723-compatibilité-de-type-entre-selector-et-case"></a>
 ### 7.2.3 Compatibilité de type entre selector et case
 
@@ -150,6 +153,7 @@ Le type du selector et chaque étiquette `case` doivent être compatibles :
 - Les constantes numériques des case doivent être dans l’intervalle du type du selector.
 - Pour un selector `enum`, les étiquettes case doivent être des constantes de cet `enum`.
 - Pour un selector `String`, les étiquettes case doivent être des constantes de chaîne.
+
 
 <a id="724-pattern-matching-dans-switch"></a>
 ### 7.2.4 Pattern Matching dans Switch
@@ -180,6 +184,7 @@ String describe(Object o) {
 - Les variables de pattern sont dans la portée uniquement à l’intérieur de leur arm (ou des chemins où le pattern est connu comme correspondant).
 - L’ordre est important en raison de la **dominance** : les patterns plus spécifiques doivent précéder les plus généraux.
 
+
 <a id="7241-noms-de-variables-et-portée-entre-les-branches"></a>
 ### 7.2.4.1 Noms de variables et portée entre les branches
 
@@ -197,6 +202,7 @@ switch (o) {
 
 !!! note
     Ce dernier exemple ne retourne pas de valeur, il s’agit donc d’un **switch instruction** et non d’une expression switch.
+
 
 <a id="7242-ordonnancement-dominance-et-exhaustivité-dans-les-switch-à-patterns"></a>
 ### 7.2.4.2 Ordonnancement, dominance et exhaustivité dans les switch à patterns
@@ -304,6 +310,7 @@ Lorsqu’il est présent, `break` termine le switch après l’exécution de son
 - Une clause `default` est optionnelle et peut apparaître n’importe où dans l’instruction switch. Elle s’exécute s’il n’y a pas de correspondance pour les cases précédents.
 - Une instruction switch ne produit pas de valeur comme une expression ; vous ne pouvez pas assigner directement une instruction switch à une variable.
 
+
 <a id="7311-comportement-de-fall-through"></a>
 ### 7.3.1.1 Comportement de fall-through
 
@@ -337,6 +344,7 @@ Sortie :
 !!! note
     Si, dans l’exemple précédent, nous supprimons le `break` sur le `case 3`, le message de la branche `default` sera également affiché.
 
+
 <a id="732-lexpression-switch"></a>
 ### 7.3.2 L’expression switch
 
@@ -360,6 +368,7 @@ int len = switch (s) { // switch expression
 - Une expression switch doit être **exhaustive** : toutes les valeurs possibles du selector doivent être couvertes (via des case explicites et/ou `default`).
 - Le type du résultat doit être cohérent entre toutes les branches. Par exemple, si un arm produit un `int`, les autres arms doivent produire des valeurs compatibles avec `int`.
 
+
 <a id="7321-yield-dans-les-blocs-dexpression-switch"></a>
 ### 7.3.2.1 `yield` dans les blocs d’expression switch
 
@@ -379,6 +388,7 @@ int len = switch (s) {
 !!! note
     `yield` est utilisé uniquement dans les expressions switch.
     `break value;` n’est pas autorisé comme moyen de retourner une valeur depuis une expression switch.
+
 
 <a id="7322-exhaustivité-pour-les-expressions-switch"></a>
 ### 7.3.2.2 Exhaustivité pour les expressions switch
