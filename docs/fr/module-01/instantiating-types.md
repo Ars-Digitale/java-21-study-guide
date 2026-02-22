@@ -163,11 +163,11 @@ int v1; v2; 					 // ERROR - NOT LEGAL
 
 ```java
 long exNumLit = 5729685479; // ❌ Does not compile.
-						  // Even though the value would fit in a long,
-						  // a plain numeric literal is assumed to be an int,
-						  // and this number is too large for int.
+                          // Même si la valeur pourrait tenir dans un long,
+                          // un littéral numérique simple est considéré comme un int,
+                          // et ce nombre est trop grand pour un int.
 
-Changing the declaration adding the correct suffix (L or l) will solve:
+// Changing the declaration adding the correct suffix (L or l) will solve:
 
 long exNumLit = 5729685479L;
 
@@ -316,6 +316,7 @@ En plus des constructeurs, Java fournit un mécanisme appelé **initializer bloc
 Ce sont des blocs de code à l’intérieur d’une classe, entourés par `{ }`, qui s’exécutent **à chaque création d’instance**, juste avant l’exécution du corps du constructeur.
 
 **Caractéristiques**
+
 - Aussi appelés **instance initializer blocks**.  
 - Exécutés, avec les initialisations de champs, dans l’ordre où ils apparaissent dans la définition de la classe, mais toujours avant les constructeurs.    
 - Utiles lorsque plusieurs constructeurs doivent partager un code d’initialisation commun.

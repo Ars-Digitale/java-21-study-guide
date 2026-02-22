@@ -317,6 +317,7 @@ In addition to constructors, Java provides a mechanism called **initializer bloc
 These are blocks of code inside a class, enclosed in `{ }`, that run **every time an instance is created**, just before the constructor body is executed.
 
 **Characteristics**
+
 - Also called **instance initializer blocks**.  
 - Executed, along with fields initializers, in the order in which they appear in the class definition but always before Constructors.    
 - Useful when multiple constructors need to share common initialization code.
