@@ -375,7 +375,8 @@ Explication :
 - L’accès aux champs est déterminé à la compilation.
 - Par conséquent, `Parent.name` est utilisé, même si l’objet est un `Child`.
 
-Les champs **ne sont pas polymorphiques**.
+!!! important
+	- Les champs **ne sont pas polymorphiques**.
 
 
 **Exemple** : `Méthodes Statiques` (Non Polymorphiques)
@@ -436,7 +437,8 @@ Explication :
 - Java utilise le dynamic dispatch.
 - Par conséquent, `Child.print()` est exécuté.
 
-Les méthodes d’instance sont **polymorphiques**.
+!!! important
+	- Les méthodes d’instance sont **polymorphiques**.
 
 
 <a id="16131-method-overriding"></a>

@@ -382,7 +382,8 @@ Explanation:
 - Field access is determined at compile time.
 - Therefore, `Parent.name` is used, even though the object is a `Child`.
 
-Fields are **not polymorphic**.
+!!! important
+	- Fields are **not polymorphic**.
 
 
 
@@ -445,7 +446,8 @@ Explanation:
 - Java uses dynamic dispatch.
 - Therefore, `Child.print()` is executed.
 
-Instance methods are **polymorphic**.
+!!! important
+	- Instance methods are **polymorphic**.
 
 
 <a id="16131-method-overriding"></a>

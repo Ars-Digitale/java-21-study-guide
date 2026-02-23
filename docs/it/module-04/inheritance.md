@@ -376,7 +376,8 @@ Spiegazione:
 - L’accesso ai campi è determinato a compile-time.
 - Pertanto viene utilizzato `Parent.name`, anche se l’oggetto è di tipo `Child`.
 
-I campi **non sono polimorfici**.
+!!! important
+	- I campi **non sono polimorfici**.
 
 
 **Esempio**: `Metodi Statici` (Non Polimorfici)
@@ -437,7 +438,8 @@ Spiegazione:
 - Java utilizza il dynamic dispatch.
 - Pertanto viene eseguito `Child.print()`.
 
-I metodi di istanza sono **polimorfici**.
+!!! important
+	- I metodi di istanza sono **polimorfici**.
 
 
 <a id="16131-method-overriding"></a>
