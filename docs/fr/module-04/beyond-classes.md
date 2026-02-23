@@ -56,7 +56,7 @@
 ---
 
 
-Ce chapitre présente plusieurs mécanismes avancés de type (*type*) au-delà du design de la Classe en Java : **interfaces**, **enum**, **classes sealed / non-sealed**, **records** et **classes imbriquées**.
+Ce chapitre présente plusieurs mécanismes de type (type) avancés, au-delà de celui, déjà étudié, de la classe : **interfaces**, **enum**, **classes sealed / non-sealed**, **records** et **classes imbriquées**.
 
 <a id="171-interfaces"></a>
 ## 17.1 Interfaces

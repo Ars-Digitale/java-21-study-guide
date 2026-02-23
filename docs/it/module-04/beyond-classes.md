@@ -55,14 +55,14 @@
 
 ---
 
-Questo capitolo presenta diversi meccanismi avanzati di tipo (type) oltre il design della Classe in Java: **interfacce**, **enum**, **classi sealed / non-sealed**, **record** e **classi annidate**.
+Questo capitolo presenta diversi meccanismi avanzati di tipo (type) oltre quello, già visto, della Classe: **interfacce**, **enum**, **classi sealed / non-sealed**, **record** e **classi annidate**.
 
 <a id="171-interfacce"></a>
 ## 17.1 Interfacce
 
 Un’**interfaccia** in Java è un tipo di riferimento che definisce un contratto di metodi che una classe accetta di implementare.
 
-Un `interface` è implicitamente `abstract` e non può essere marcato come `final`: come per le classi top-level, un’interfaccia può dichiarare visibilità come `public` o `default` (package-private).
+Una `interface` è implicitamente `abstract` e non può essere marcata come `final`: come per le classi top-level, un’interfaccia può dichiarare visibilità come `public` o `default` (package-private).
 
 Una classe Java può implementare un numero qualsiasi di interfacce tramite la keyword `implements`.
 
