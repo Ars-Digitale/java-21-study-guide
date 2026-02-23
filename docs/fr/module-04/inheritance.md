@@ -405,7 +405,8 @@ Explication :
 - Les méthodes statiques sont liées (binding) à la compilation.
 - La méthode choisie dépend du type de la référence (`Parent`), et non du type réel de l’objet.
 
-Ce mécanisme s’appelle le **method hiding**, et non l’override.
+!!! important
+	- Ce mécanisme s’appelle le **method hiding**, et non l’override.
 
 
 **Exemple** : `Méthodes d’Instance` (Polymorphiques)

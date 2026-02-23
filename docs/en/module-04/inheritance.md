@@ -413,7 +413,8 @@ Explanation:
 - Static methods are bound at compile time.
 - The method chosen depends on the reference type (`Parent`), not the object type.
 
-This is called **method hiding**, not overriding.
+!!! important
+	- This is called **method hiding**, not overriding.
 
 
 

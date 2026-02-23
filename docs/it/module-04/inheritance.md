@@ -406,7 +406,8 @@ Spiegazione:
 - I metodi statici sono collegati (binding) a compile-time.
 - Il metodo scelto dipende dal tipo del riferimento (`Parent`), non dal tipo reale dell’oggetto.
 
-Questo meccanismo è chiamato **method hiding**, non overriding.
+!!! important
+	- Questo meccanismo è chiamato **method hiding**, non overriding.
 
 
 **Esempio**: `Metodi di Istanza` (Polimorfici)
