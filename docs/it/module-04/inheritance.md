@@ -457,6 +457,7 @@ Questo comportamento è chiamato **dynamic dispatch** ed è ciò che rende possi
 #### 16.13.1.1 Definizione e Ruolo nell’Ereditarietà
 
 Un metodo in una subclass fa **override** di un metodo di una sua superclass se:
+
 - il metodo della superclass è `metodo d'istanza` (non statico);
 - il metodo della subclass ha lo **stesso nome**, la **stessa lista di parametri** e un **return type che è dello stesso tipo** o di un **sottotipo** del return type nel metodo ereditato;
 - entrambi i metodi sono accessibili (non privati) e il metodo della subclass non è meno visibile di quello della superclass.
