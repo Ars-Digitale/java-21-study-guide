@@ -90,21 +90,25 @@ Puoi costruire oggetti di data/ora precisi usando i metodi factory `of()`.
 Tutte le classi includono più versioni sovraccaricate di `of()` (qui sono elencate solo le più comuni).
 
 **LocalDate — forme sovraccaricate di `of()`**
+
 - `of(int year, int month, int dayOfMonth)`
 - `of(int year, Month month, int dayOfMonth)`
 
 **LocalTime — forme sovraccaricate di `of()`**
+
 - `of(int hour, int minute)`
 - `of(int hour, int minute, int second)`
 - `of(int hour, int minute, int second, int nanoOfSecond)`
 
 **LocalDateTime — forme sovraccaricate di `of()`**
+
 - `of(int year, int month, int day, int hour, int minute)`
 - `of(int year, int month, int day, int hour, int minute, int second)`
 - `of(int year, int month, int day, int hour, int minute, int second, int nano)`
 - `of(LocalDate date, LocalTime time)`
 
 **ZonedDateTime — forme sovraccaricate di `of()`
+
 - `of(LocalDate date, LocalTime time, ZoneId zone)`
 - `of(int y, int m, int d, int h, int min, int s, int nano, ZoneId zone)`
 
@@ -145,15 +149,18 @@ Ciò significa che metodi come `plusXxx()` e `minusXxx()` non modificano mai l�
 La maggior parte delle classi di data/ora supporta tre tipi di metodi aritmetici:
 
 - **Scorciatoie specifiche per tipo**
+
 - `plusDays(long daysToAdd)`
 - `plusHours(long hoursToAdd)`
 - ecc.
 
 - **Metodi generici basati su “amount”**
+
 - `plus(TemporalAmount amount)` → ad esempio `Period`, `Duration`
 - `minus(TemporalAmount amount)`
 
 - **Metodi generici basati su “unit”**
+
 - `plus(long amountToAdd, TemporalUnit unit)`
 - `minus(long amountToSubtract, TemporalUnit unit)`
 

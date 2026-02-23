@@ -91,21 +91,25 @@ Vous pouvez construire des objets date/heure précis en utilisant les méthodes 
 Toutes les classes incluent plusieurs versions surchargées de `of()` (seules les plus courantes sont listées ici).
 
 **LocalDate — formes surchargées de `of()`
+
 - `of(int year, int month, int dayOfMonth)`
 - `of(int year, Month month, int dayOfMonth)`
 
 **LocalTime — formes surchargées de `of()`
+
 - `of(int hour, int minute)`
 - `of(int hour, int minute, int second)`
 - `of(int hour, int minute, int second, int nanoOfSecond)`
 
 **LocalDateTime — formes surchargées de `of()`
+
 - `of(int year, int month, int day, int hour, int minute)`
 - `of(int year, int month, int day, int hour, int minute, int second)`
 - `of(int year, int month, int day, int hour, int minute, int second, int nano)`
 - `of(LocalDate date, LocalTime time)`
 
 **ZonedDateTime — formes surchargées de `of()`
+
 - `of(LocalDate date, LocalTime time, ZoneId zone)`
 - `of(int y, int m, int d, int h, int min, int s, int nano, ZoneId zone)`
 
@@ -146,16 +150,19 @@ Cela signifie que des méthodes comme `plusXxx()` et `minusXxx()` ne modifient j
 
 La plupart des classes date/heure prennent en charge trois types de méthodes arithmétiques :
 
-- **Raccourcis spécifiques au type**  
+- **Raccourcis spécifiques au type**
+  
 - `plusDays(long daysToAdd)`  
 - `plusHours(long hoursToAdd)`  
 - etc.
 
-- **Méthodes génériques basées sur une quantité**  
+- **Méthodes génériques basées sur une quantité**
+  
 - `plus(TemporalAmount amount)` → par exemple `Period`, `Duration`  
 - `minus(TemporalAmount amount)`  
 
-- **Méthodes génériques basées sur une unité**  
+- **Méthodes génériques basées sur une unité**
+  
 - `plus(long amountToAdd, TemporalUnit unit)`  
 - `minus(long amountToSubtract, TemporalUnit unit)`  
 

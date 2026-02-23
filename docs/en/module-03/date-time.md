@@ -90,21 +90,25 @@ You can build precise date/time objects using the `of()` factory methods.
 All classes include multiple overloaded versions of `of()` (only the most common are listed here).
 
 **LocalDate — overloaded `of()` forms**
+
 - `of(int year, int month, int dayOfMonth)`
 - `of(int year, Month month, int dayOfMonth)`
 
 **LocalTime — overloaded `of()` forms**
+
 - `of(int hour, int minute)`
 - `of(int hour, int minute, int second)`
 - `of(int hour, int minute, int second, int nanoOfSecond)`
 
 **LocalDateTime — overloaded `of()` forms**
+
 - `of(int year, int month, int day, int hour, int minute)`
 - `of(int year, int month, int day, int hour, int minute, int second)`
 - `of(int year, int month, int day, int hour, int minute, int second, int nano)`
 - `of(LocalDate date, LocalTime time)`
 
 **ZonedDateTime — overloaded `of()` forms**
+
 - `of(LocalDate date, LocalTime time, ZoneId zone)`
 - `of(int y, int m, int d, int h, int min, int s, int nano, ZoneId zone)`
 
@@ -146,16 +150,19 @@ This means that methods like `plusXxx()` and `minusXxx()` never modify the origi
 
 Most date/time classes support three kinds of arithmetic methods:
 
-- **Type-specific shortcuts**  
+- **Type-specific shortcuts**
+  
 - `plusDays(long daysToAdd)`  
 - `plusHours(long hoursToAdd)`  
 - etc.
 
-- **Generic amount-based methods**  
+- **Generic amount-based methods**
+  
 - `plus(TemporalAmount amount)` → for example `Period`, `Duration`  
 - `minus(TemporalAmount amount)`
 
-- **Generic unit-based methods**  
+- **Generic unit-based methods**
+  
 - `plus(long amountToAdd, TemporalUnit unit)`  
 - `minus(long amountToSubtract, TemporalUnit unit)`
 
