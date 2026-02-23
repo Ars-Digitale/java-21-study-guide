@@ -182,7 +182,7 @@ Tra tutti i metodi concreti che un’interfaccia può implementare, abbiamo anch
 
 
 <a id="172-tipi-sealed-non-sealed-e-final"></a>
-## 17.2 Tipi sealed, non-sealed e final
+## 17.2 `Tipi sealed`, `non-sealed` e `final`
 
 Le classi e le interfacce `sealed` (Java 17+) restringono quali altre classi (o interfacce) possono estenderle o implementarle.
 
@@ -201,7 +201,7 @@ non-sealed class Rectangle extends Shape { }
 
 - Un tipo sealed deve dichiarare tutti i sottotipi permessi.
 - Un sottotipo permesso deve essere **final**, **sealed** o **non-sealed**; poiché le interfacce non possono essere final, possono essere marcate solo `sealed` o `non-sealed` quando estendono un’interfaccia sealed.
-- I tipi sealed devono essere dichiarati nello stesso package (o modulo nominato) dei loro sottotipi diretti.
+- **I tipi sealed devono essere dichiarati nello stesso package (o modulo nominato) dei loro sottotipi diretti**.
 
 ---
 

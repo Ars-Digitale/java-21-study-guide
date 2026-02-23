@@ -183,7 +183,7 @@ Parmi toutes les méthodes concrètes qu’une interface peut implémenter, nous
 ---
 
 <a id="172-types-sealed-non-sealed-et-final"></a>
-## 17.2 Types sealed, non-sealed et final
+## 17.2 `Types sealed`, `non-sealed` et `final`
 
 Les classes et interfaces `sealed` (Java 17+) restreignent quelles autres classes (ou interfaces) peuvent les étendre ou les implémenter.
 
@@ -202,7 +202,7 @@ non-sealed class Rectangle extends Shape { }
 
 - Un type sealed doit déclarer tous les sous-types autorisés.
 - Un sous-type autorisé doit être **final**, **sealed** ou **non-sealed** ; puisque les interfaces ne peuvent pas être final, elles ne peuvent être marquées que `sealed` ou `non-sealed` lorsqu’elles étendent une interface sealed.
-- Les types sealed doivent être déclarés dans le même package (ou module nommé) que leurs sous-types directs.
+- **Les types sealed doivent être déclarés dans le même package (ou module nommé) que leurs sous-types directs**.
 
 ---
 
