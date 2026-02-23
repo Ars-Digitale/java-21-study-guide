@@ -252,9 +252,10 @@ public static void main(String[] args) {
 <a id="1734-regole"></a>
 ### 17.3.4 Regole
 
-- I costruttori delle enum sono implicitamente `private`;
+- **I costruttori delle enum sono implicitamente `private`**;
 - Le enum possono contenere metodi `static` e `instance`;
 - Le enum possono implementare `interfaces`;
+- Le enum non possono essere estese.
 
 ---
 
@@ -264,15 +265,15 @@ public static void main(String[] args) {
 
 Un **record** è una classe speciale progettata per modellare dati immutabili: sono infatti implicitamente **final**.
 
-Non puoi estendere un record, ma è permesso implementare un’interfaccia regolare o sealed.
+Non puoi estendere un record, ma è permesso implementare un’interfaccia `regolare` o `sealed`.
 
 Fornisce automaticamente:
 
-- **campi private final** per ogni componente
+- **campi private final** per ogni componente;
 - **costruttore** con parametri nello stesso ordine della dichiarazione del record;
-- **getters** (con nome degli attributi)
-- **`equals()`, `hashCode()`, `toString()`**: è inoltre permesso fare override di questi metodi
-- I **Record** possono includere `nested classes`, `interfaces`, `records`, `enums` e `annotations`
+- **getters** (con nome degli attributi);
+- **`equals()`, `hashCode()`, `toString()`**: è inoltre permesso fare override di questi metodi;
+- I **Record** possono includere `nested classes`, `interfaces`, `records`, `enums` e `annotations`.
 
 ```java
 public record Point(int x, int y) { }

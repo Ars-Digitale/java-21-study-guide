@@ -252,9 +252,10 @@ public static void main(String[] args) {
 <a id="1734-rules"></a>
 ### 17.3.4 Rules
 
-- Enum constructors are implicitly `private`;
+- **Enum constructors are implicitly `private`**;
 - Enums can contain `static` and `instance` methods;
 - Enums can implement `interfaces`;
+- Enums cannot be extended.
 
 ---
 
@@ -263,15 +264,15 @@ public static void main(String[] args) {
 
 A **record** is a special class designed to model immutable data: they are, in fact, implicitly **final**. 
 
-You can't extend a record, but it is allowed to implement a regular or sealed interface.
+You can't extend a record, but it is allowed to implement a `regular` or `sealed interface`.
 
 It automatically provides:
 
-- **private final fields** for each component
+- **private final fields** for each component;
 - **constructor** with parameters in the same order as in the record declaration;
-- **getters** (named like fields)
-- **`equals()`, `hashCode()`, `toString()`**: you are also permitted to override those methods
-- **Records** can include `nested classes`, `interfaces`, `records`, `enums` and `annotations`
+- **getters** (named like fields);
+- **`equals()`, `hashCode()`, `toString()`**: you are also permitted to override those methods;
+- **Records** can include `nested classes`, `interfaces`, `records`, `enums` and `annotations`.
 
 ```java
 public record Point(int x, int y) { }
