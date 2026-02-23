@@ -134,6 +134,7 @@ Certains modificateurs au niveau de la classe déterminent si une classe peut ê
 La référence `this` se réfère à l’instance courante de l’objet et permet de lever l’ambiguïté d’accès aux membres courants et hérités.
 
 Java utilise une règle de **granular scope**:
+
 - Si une variable de méthode/locale a le même nom qu’un `instance field`, celle locale “masque” l'attribut d’instance.
 - Il est nécessaire d’utiliser `this.fieldName` pour accéder donc à l’attribut d’instance.
 
@@ -169,6 +170,7 @@ public class Person {
 La référence `super` donne accès aux membres de la classe génitrice (parent) directe.
 
 Utile quand:
+
 - Le parent (genitore) et le child (figlio) définissent un attribut/méthode avec le même nom; voir section: [Hériter des Membres](#1613-hériter-des-membres)
 - Parent et child définissent un attribut avec le même nom → `variable hiding` (deux copies)
 - Parent et child définissent une méthode avec la même signature → `method overriding`
@@ -238,6 +240,7 @@ class Child extends Parent {
 **this()** invoque un autre constructeur dans la même classe.
 
 Règles:
+
 - Doit être la **première** instruction dans le constructeur
 - Ne peut pas être combiné avec `super()`
 - Une seule invocation à `this()` est autorisée dans un constructeur
@@ -450,6 +453,7 @@ Ce comportement est appelé **dynamic dispatch** et c’est ce qui rend possible
 #### 16.13.1.1 Définition et Rôle dans l’Héritage
 
 Une méthode dans une subclass fait **override** d’une méthode d’une de ses superclass si:
+
 - la méthode de la superclass est `méthode d’instance` (non statique);
 - la méthode de la subclass a le **même nom**, la **même liste de paramètres** et un **return type qui est du même type** ou d’un **sous-type** du return type dans la méthode héritée;
 - les deux méthodes sont accessibles (non privées) et la méthode de la subclass n’est pas moins visible que celle de la superclass.
@@ -505,6 +509,7 @@ class Student extends Person {
 ```
 
 Si la classe parent et la classe child déclarent toutes deux un membre (attribut ou méthode) avec le même nom, le child peut accéder aux deux:
+
 - la version en overriding (default)
 - la version du parent via `super`
 
@@ -605,6 +610,7 @@ public class TestStatic {
 Une **abstract class** est une classe qui ne peut pas être instanciée directement et est destinée à être étendue.
 
 Elle peut contenir:
+
 - méthodes abstract (déclarées sans body);
 - méthodes concrètes (avec implémentation);
 - attributs, constructeurs, membres statiques, et aussi static initializers.
@@ -710,6 +716,7 @@ public final class Person {
 ```
 
 Dans cet exemple:
+
 - `Person` est **final**: elle ne peut pas être étendue et son comportement ne peut pas être altéré via `inheritance`.
 - Tous les attributs sont `private` et `final`, définis une seule fois dans le constructeur.
 - La liste des `hobbies` est copiée défensivement dans la phase de construction et wrappée comme `unmodifiable` (non modifiable) dans la `méthode getter`, afin qu’aucun code externe ne puisse modifier l’état interne.

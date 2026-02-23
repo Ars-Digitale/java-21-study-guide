@@ -94,7 +94,7 @@ class C extends B { } // C inherits from both A and B
 
 A subclass inherits all **accessible** members of the superclass.
   
-However, this depends on `access modifiers`.
+However, this depends on `access modifiers`:
 
 - **public** → always inherited
 - **protected** → inherited if accessible through package or subclass rules
@@ -137,7 +137,8 @@ Some class-level modifiers affect whether a class may be extended.
 
 The `this` reference refers to the current object instance and helps in disambiguing access to current and inherited members. 
  
-Java uses a **granular scope** rule:  
+Java uses a **granular scope** rule:
+  
 - If a method/local variable has the same name as an instance field, the local one “shadows” the field.  
 - `this.fieldName` is required to access the instance attribute.
 
@@ -173,7 +174,8 @@ public class Person {
 
 The `super` reference gives access to members of the direct parent class.  
 
-Useful when:  
+Useful when:
+  
 - The parent and child define a field/method with the same name:  See below: [Inheriting Members](#1613-inheriting-members) 
 - Parent and child define a field with the same name → variable hiding (two copies)
 - Parent and child define a method with the same signature → method overriding

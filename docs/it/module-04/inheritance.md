@@ -134,6 +134,7 @@ Alcuni modificatori a livello di classe determinano se una classe possa essere e
 Il riferimento `this` si riferisce all’istanza corrente dell’oggetto e permette di disambiguare l’accesso ai membri correnti ed ereditati.
 
 Java utilizza una regola di **granular scope**:
+
 - Se una variabile di metodo/locale ha lo stesso nome di un `instance field`, quella locale “oscura” l'attributo di istanza.
 - È necessario usare `this.fieldName` per accedere quindi all’attributo di istanza.
 
@@ -170,6 +171,7 @@ public class Person {
 Il riferimento `super` dà accesso ai membri della classe genitrice (parent) diretta.
 
 Utile quando:
+
 - Il parent (genitore) e il child (figlio) definiscono un attributo/metodo con lo stesso nome; vedi sezione: [Ereditare Membri](#1613-ereditare-membri)
 - Parent e child definiscono un attributo con lo stesso nome → `variable hiding` (due copie)
 - Parent e child definiscono un metodo con la stessa signature → `method overriding`
@@ -239,6 +241,7 @@ class Child extends Parent {
 **this()** invoca un altro costruttore nella stessa classe.
 
 Regole:
+
 - Deve essere la **prima** istruzione nel costruttore
 - Non può essere combinato con `super()`
 - È consentita una sola chiamata a `this()` in un costruttore
@@ -506,6 +509,7 @@ class Student extends Person {
 ```
 
 Se sia la classe parent sia la classe child dichiarano un membro (attributo o metodo) con lo stesso nome, il child può accedere a entrambi:
+
 - la versione in overriding (default)
 - la versione del parent tramite `super`
 
@@ -606,6 +610,7 @@ public class TestStatic {
 Una **abstract class** è una classe che non può essere istanziata direttamente ed è destinata a essere estesa.
 
 Può contenere:
+
 - metodi abstract (dichiarati senza body);
 - metodi concreti (con implementazione);
 - attributi, costruttori, membri statici, e anche static initializers.
@@ -711,6 +716,7 @@ public final class Person {
 ```
 
 In questo esempio:
+
 - `Person` è **final**: non può essere estesa e il suo comportamento non può essere alterato tramite `inheritance`.
 - Tutti gli attributi sono `private` e `final`, definiti una sola volta nel costruttore.
 - La lista degli `hobbies` viene copiata difensivamente nella fase di costruzione e wrappata come `unmodifiable` (non modificabile) nel `metodo getter`, cosicché alcun codice esterno ne possa modificare lo stato interno.
