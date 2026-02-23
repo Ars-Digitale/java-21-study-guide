@@ -65,6 +65,7 @@ System.out.println(Math.min(10, -20));      // -20
 values with fractional part 0.5 and above are rounded up; below 0.5 are rounded down (toward the nearest integer).
 
 **Overloads**
+
 - `long round(double value)`
 - `int round(float value)`
 
@@ -86,6 +87,7 @@ Math.round(-3.5f);  // -3  (float version returns int)
 `ceil()` returns the smallest `double` value that is greater than or equal to the argument.
 
 **Overloads**
+
 - `double ceil(double value)`
 
 - Examples:
@@ -101,6 +103,7 @@ Math.ceil(-3.1);  // -3.0
 `floor()` returns the largest `double` value that is less than or equal to the argument.
 
 **Overloads**
+
 - `double floor(double value)`
 
 - Examples:
@@ -116,6 +119,7 @@ Math.floor(-3.1);  // -4.0
 `pow()` raises a value to a power.
 
 **Overloads**
+
 - `double pow(double base, double exponent)`
 
 - Examples:
@@ -132,6 +136,7 @@ Math.pow(10, -1);    // 0.1
 `random()` returns a `double` in the range `[0.0, 1.0)` (0.0 inclusive, 1.0 exclusive).
 
 **Overloads**
+
 - `double random()`
 
 - Examples:
@@ -149,6 +154,7 @@ int x = (int)(Math.random() * 10);
 `abs()` returns the absolute value (distance from zero).
 
 **Overloads**
+
 - `int abs(int value)`
 - `long abs(long value)`
 - `float abs(float value)`

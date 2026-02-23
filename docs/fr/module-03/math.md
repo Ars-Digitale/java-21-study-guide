@@ -65,6 +65,7 @@ System.out.println(Math.min(10, -20));      // -20
 les valeurs dont la partie fractionnaire est 0.5 et au-dessus sont arrondies vers le haut ; en dessous de 0.5 elles sont arrondies vers le bas (vers l’entier le plus proche).
 
 **Surcharges**
+
 - `long round(double value)`
 - `int round(float value)`
 
@@ -86,6 +87,7 @@ Math.round(-3.5f);  // -3  (float version returns int)
 `ceil()` renvoie la plus petite valeur `double` qui est supérieure ou égale à l’argument.
 
 **Surcharge**
+
 - `double ceil(double value)`
 
 - Exemples :
@@ -101,6 +103,7 @@ Math.ceil(-3.1);  // -3.0
 `floor()` renvoie la plus grande valeur `double` qui est inférieure ou égale à l’argument.
 
 **Surcharge**
+
 - `double floor(double value)`
 
 - Exemples :
@@ -116,6 +119,7 @@ Math.floor(-3.1);  // -4.0
 `pow()` élève une valeur à une puissance.
 
 **Surcharge**
+
 - `double pow(double base, double exponent)`
 
 - Exemples :
@@ -132,6 +136,7 @@ Math.pow(10, -1);    // 0.1
 `random()` renvoie un `double` dans l’intervalle `[0.0, 1.0)` (0.0 inclus, 1.0 exclus).
 
 **Surcharge**
+
 - `double random()`
 
 - Exemples :
@@ -149,6 +154,7 @@ int x = (int)(Math.random() * 10);
 `abs()` renvoie la valeur absolue (distance à zéro).
 
 **Surcharges**
+
 - `int abs(int value)`
 - `long abs(long value)`
 - `float abs(float value)`

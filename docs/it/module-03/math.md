@@ -65,6 +65,7 @@ System.out.println(Math.min(10, -20));      // -20
 i valori con parte frazionaria 0.5 e superiore vengono arrotondati verso l’alto; sotto 0.5 vengono arrotondati verso il basso (verso l’intero più vicino).
 
 **Overload**
+
 - `long round(double value)`
 - `int round(float value)`
 
@@ -86,6 +87,7 @@ Math.round(-3.5f);  // -3  (float version returns int)
 `ceil()` restituisce il più piccolo valore `double` che è maggiore o uguale all’argomento.
 
 **Overload**
+
 - `double ceil(double value)`
 
 - Esempi:
@@ -101,6 +103,7 @@ Math.ceil(-3.1);  // -3.0
 `floor()` restituisce il più grande valore `double` che è minore o uguale all’argomento.
 
 **Overload**
+
 - `double floor(double value)`
 
 - Esempi:
@@ -116,6 +119,7 @@ Math.floor(-3.1);  // -4.0
 `pow()` eleva un valore a una potenza.
 
 **Overload**
+
 - `double pow(double base, double exponent)`
 
 - Esempi:
@@ -132,6 +136,7 @@ Math.pow(10, -1);    // 0.1
 `random()` restituisce un `double` randomico nell’intervallo `[0.0, 1.0)` (0.0 incluso, 1.0 escluso).
 
 **Overload**
+
 - `double random()`
 
 - Esempi:
@@ -149,6 +154,7 @@ int x = (int)(Math.random() * 10);
 `abs()` restituisce il valore assoluto (distanza da zero).
 
 **Overload**
+
 - `int abs(int value)`
 - `long abs(long value)`
 - `float abs(float value)`
