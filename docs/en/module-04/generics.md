@@ -521,6 +521,7 @@ The return type of an overriding method must be a subtype of the parent's return
 This often confuses developers, because generics on return types cause similar erasure-based conflicts as parameter types.
 
 Key Points:
+
 - Return type covariance applies only to the raw type, not the generic arguments.
 - Generic arguments must remain compatible after erasure (they must match).
 - Two methods cannot differ only by generic parameter on the return type.
@@ -560,6 +561,7 @@ class B extends A {
 ```
 
 This is allowed because:
+
 - The raw types are covariant (List extends Collection).
 - The generic arguments match (String vs. String).
 

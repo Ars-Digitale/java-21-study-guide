@@ -549,6 +549,7 @@ A static nested class can contain non-static member variables.
 - Can access only **static** members of the outer class.
 - Does not have an implicit reference to the enclosing instance.
 - Can be instantiated without an outer instance.
+- Can contain non-static member variables.
 
 ```java
 class Outer {

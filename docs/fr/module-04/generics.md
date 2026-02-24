@@ -529,6 +529,7 @@ Le type de retour d’une méthode en overriding doit être un sous-type du type
 Cela confond souvent les programmeurs, parce que les generics sur les types de retour causent des conflits similaires à ceux des paramètres.
 
 Points Clés:
+
 - La **covariance du type de retour s’applique seulement au type raw**, pas aux arguments génériques.
 - Les arguments génériques doivent rester compatibles après l’erasure (ils doivent coïncider).
 - **Deux méthodes ne peuvent pas différer seulement par le paramètre générique dans le type de retour**.
@@ -570,6 +571,7 @@ class B extends A {
 ```
 
 Ceci est permis parce que:
+
 - Les types raw sont covariants (List étend Collection).
 - Les arguments génériques coïncident (String vs String).
 

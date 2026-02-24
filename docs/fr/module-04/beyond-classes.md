@@ -545,6 +545,7 @@ Une classe imbriquée `static` peut contenir des variables membres non statiques
 - Peut accéder uniquement aux membres **static** de la classe externe.
 - N’a pas de référence implicite vers l’instance englobante.
 - Peut être instanciée sans instance externe.
+- Peut contenir des variables membres non statiques.
 
 ```java
 class Outer {

@@ -547,6 +547,7 @@ Una classe annidata `static` può contenere variabili membro non statiche.
 - Può accedere solo ai membri **static** della classe esterna.
 - Non ha un riferimento implicito all’istanza contenitore.
 - Può essere istanziata senza un’istanza esterna.
+- Può contenere variabili membro non statiche
 
 ```java
 class Outer {

@@ -534,6 +534,7 @@ Il tipo di ritorno di un metodo in overriding deve essere un sottotipo del tipo 
 Questo spesso confonde i programmatori, perché i generics nei tipi di ritorno causano conflitti simili a quelli dei parametri.
 
 Punti Chiave:
+
 - La **covarianza del tipo di ritorno si applica solo al tipo raw**, non agli argomenti generici.
 - Gli argomenti generici devono restare compatibili dopo l’erasure (devono coincidere).
 - **Due metodi non possono differire solo per il parametro generico nel tipo di ritorno**.
@@ -575,6 +576,7 @@ class B extends A {
 ```
 
 Questo è permesso perché:
+
 - I tipi raw sono covarianti (List estende Collection).
 - Gli argomenti generici coincidono (String vs String).
 
