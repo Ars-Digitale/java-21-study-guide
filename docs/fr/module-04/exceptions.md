@@ -47,12 +47,14 @@ java.lang.Object
 
 <a id="1911-throwable"></a>
 ### 19.1.1 Throwable
+
 - Classe de base pour toutes les erreurs et exceptions
 - Fournit message, cause et stack trace
 - Seuls `Throwable` et ses sous-classes peuvent être lancés ou capturés
 
 <a id="1912-error-unchecked"></a>
 ### 19.1.2 Error (unchecked)
+
 - Représente des problèmes graves de la JVM ou du système
 - Non destiné à être capturé ou géré
 - Exemples: `OutOfMemoryError`, `StackOverflowError`
@@ -62,6 +64,7 @@ java.lang.Object
 
 <a id="1913-exceptions-checked-exception"></a>
 ### 19.1.3 Exceptions Checked (`Exception`)
+
 - Sous-classes de `Exception` **à lexclusion** de `RuntimeException`
 - Représentent des conditions que l'application peut vouloir gérer
 - Doivent être soit **capturées** soit **déclarées**
@@ -69,6 +72,7 @@ java.lang.Object
 
 <a id="1914-exceptions-unchecked-runtimeexception"></a>
 ### 19.1.4 Exceptions Unchecked (`RuntimeException`)
+
 - Sous-classes de `RuntimeException`
 - Ne doivent pas obligatoirement être déclarées ou capturées
 - Représentent généralement des erreurs de programmation
@@ -79,6 +83,7 @@ java.lang.Object
 
 <a id="1921-déclarer-des-exceptions-avec-throws"></a>
 ### 19.2.1 Déclarer des exceptions avec throws
+
 Une méthode déclare les exceptions checked avec la clause `throws`. Cela fait partie du contrat API de la méthode.
 
 ```java
@@ -92,6 +97,7 @@ void readFile(Path p) throws IOException {
 
 <a id="1922-lancer-des-exceptions"></a>
 ### 19.2.2 Lancer des exceptions
+
 Les exceptions sont créées avec `new` et lancées explicitement avec `throw`.
 
 ```java
@@ -106,7 +112,8 @@ if (value < 0) {
 <a id="193-redéfinition-de-méthodes-et-règles-sur-les-exceptions"></a>
 ## 19.3 Redéfinition de méthodes et règles sur les exceptions
 
-Lors de la redéfinition dune méthode, les règles sur les exceptions sont strictement appliquées.
+Lors de la redéfinition dune méthode, les règles sur les exceptions sont strictement appliquées :
+
 - Une méthode redéfinie peut lancer **moins** d'exceptions checked ou des exceptions plus **spécifiques**
 - Elle peut lancer n'importe quelles exceptions unchecked
 - Elle ne peut lancer **aucune nouvelle** exception checked plus large
@@ -175,6 +182,7 @@ try {
 
 <a id="1944-bloc-finally"></a>
 ### 19.4.4 Bloc finally
+
 Le bloc `finally` s'exécute qu'il y ait exception ou non, sauf en cas d'arrêt extrême de la JVM.
 
 ```java
@@ -232,6 +240,7 @@ try (InputStream in = Files.newInputStream(p);
 
 <a id="1953-portée-des-ressources"></a>
 ### 19.5.3 Portée des ressources
+
 - Les ressources sont visibles uniquement dans le bloc `try`
 - Elles sont implicitement `final`
 - Depuis Java 9, on peut déclarer les ressources avant le try-with-resources si elles sont `final` ou effectivement finales
@@ -283,6 +292,7 @@ catch (Exception e) {
 
 <a id="197-résumé-des-exceptions"></a>
 ## 19.7 Résumé des exceptions
+
 - Les exceptions checked doivent être capturées ou déclarées
 - Les méthodes redéfinies ne peuvent pas élargir les exceptions checked
 - Utiliser multi-catch pour une logique de gestion commune

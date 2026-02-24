@@ -61,8 +61,8 @@ java.lang.Object
 - Non è pensato per essere catturato o gestito  
 - Esempi: `OutOfMemoryError`, `StackOverflowError`  
 
-> **NOTA**  
-> Gli Error indicano condizioni dalle quali l’applicazione generalmente non è attesa a riprendersi.
+!!! note  
+	- Gli Error indicano condizioni dalle quali l’applicazione generalmente non è attesa a riprendersi.
 
 <a id="1913-eccezioni-checked-exception"></a>
 ### 19.1.3 Eccezioni Checked (`Exception`)
@@ -96,8 +96,8 @@ void readFile(Path p) throws IOException {
 }
 ```
 
-> **NOTA**  
-> Solo le **eccezioni checked** devono essere dichiarate. Le eccezioni unchecked possono essere dichiarate, ma di solito vengono omesse.
+!!! note   
+	- Solo le **eccezioni checked** devono essere dichiarate. Le eccezioni unchecked possono essere dichiarate, ma di solito vengono omesse.
 
 <a id="1922-lanciare-eccezioni"></a>
 ### 19.2.2 Lanciare eccezioni
@@ -135,8 +135,8 @@ class Child extends Parent {
 }
 ```
 
-> **NOTA**  
-> Cambiare solo le eccezioni **unchecked** non rompe mai il contratto di override.
+!!! note  
+	- Cambiare solo le eccezioni **unchecked** non rompe mai il contratto di override.
 
 ---
 
@@ -172,9 +172,9 @@ try {
 }
 ```
 
-> **NOTA**  
-> Le eccezioni più specifiche devono venire prima di quelle più generali, altrimenti la compilazione fallisce.  
-> Se si mette un catch per una superclasse (es. `IOException`) prima di uno per una sottoclasse (es. `FileNotFoundException`), il catch della sottoclasse diventa irraggiungibile.
+!!! note   
+	- Le eccezioni più specifiche devono venire prima di quelle più generali, altrimenti la compilazione fallisce.  
+	- Se si mette un catch per una superclasse (es. `IOException`) prima di uno per una sottoclasse (es. `FileNotFoundException`), il catch della sottoclasse diventa irraggiungibile.
 
 <a id="1943-multi-catch-java-7"></a>
 ### 19.4.3 Multi-catch (Java 7+)
@@ -206,8 +206,8 @@ try {
 - Usato per logica di cleanup  
 - Viene eseguito anche se si usa `return` nel blocco try e/o catch  
 
-> **NOTA**  
-> Un blocco `finally` può sovrascrivere un valore di ritorno o “inghiottire” un’eccezione. Questo è generalmente sconsigliato perché rende il flusso di controllo più difficile da comprendere.
+!!! note  
+	- Un blocco `finally` può sovrascrivere un valore di ritorno o “inghiottire” un’eccezione. Questo è generalmente sconsigliato perché rende il flusso di controllo più difficile da comprendere.
 
 ---
 
@@ -266,8 +266,8 @@ try (firstWriter; var secondWriter = Files.newBufferedWriter(filePath)) {
 }
 ```
 
-> **NOTA**  
-> Tentare di riassegnare una variabile risorsa causa un errore di compilazione.
+!!! note   
+	- Tentare di riassegnare una variabile risorsa causa un errore di compilazione.
 
 ```java
 Resource a = new Resource();

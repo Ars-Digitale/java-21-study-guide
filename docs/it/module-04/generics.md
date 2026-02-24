@@ -238,6 +238,7 @@ Cosa succede agli altri bound (Serializable, Cloneable)?
 - NON compaiono nel bytecode.
 - Nessuna interfaccia aggiuntiva viene associata al tipo con erasure.
 
+
 <a id="1845-perché-solo-il-primo-bound-diventa-il-tipo-a-runtime"></a>
 ### 18.4.5 Perché Solo il Primo Bound Diventa il Tipo a Runtime?
 
@@ -672,11 +673,9 @@ list.add(10);    // OK
 Object o = list.get(0); // restituisce Object (supertype comune minimo)
 ```
 
-> **IMPORTANT**
->
-> `super` accetta **inserimento**
->
-> `extends` accetta **estrazione**.
+!!! important
+	- `super` accetta **inserimento**
+	- `extends` accetta **estrazione**.
 
 ---
 

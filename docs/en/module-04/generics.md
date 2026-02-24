@@ -297,17 +297,18 @@ When a subclass declares a method that *might* override a superclass method, the
 
 1. **Before erasure**
   
-   The method must be type-compatible with the parent method:
+	- The method must be type-compatible with the parent method:
    
-   - Same method name
-   - Same parameter types (including generic arguments)
-   - Compatible return type (covariant allowed)
+		- Same method name
+		- Same parameter types (including generic arguments)
+		- Compatible return type (covariant allowed)
 
 2. **After erasure**
   
-   The erased signatures must match exactly.
+	- The erased signatures must match exactly.
 
-Both conditions must be satisfied.
+		- Both conditions must be satisfied.
+		
 
 <a id="18472-generic-parameters-and-overriding"></a>
 #### 18.4.7.2 Generic Parameters and Overriding
@@ -657,11 +658,9 @@ Object o = list.get(0); // returns Object (lowest common supertype)
 ```
 
 
-> **IMPORTANT**
->
-> - `Super` accepts **insertion**
->
-> - `extends` accepts **extraction**.
+!!! important
+	- `Super` accepts **insertion**
+	- `extends` accepts **extraction**.
 
 ---
 

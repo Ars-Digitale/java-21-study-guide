@@ -302,17 +302,17 @@ Lorsqu’une sous-classe déclare une méthode qui *pourrait* redéfinir une mé
 
 1. **Avant l’effacement**
   
-   La méthode doit être compatible avec celle de la classe parente :
+	- La méthode doit être compatible avec celle de la classe parente :
    
-   - Même nom
-   - Même types de paramètres (y compris les arguments génériques)
-   - Type de retour compatible (covariance autorisée)
+		- Même nom
+		- Même types de paramètres (y compris les arguments génériques)
+		- Type de retour compatible (covariance autorisée)
 
 2. **Après l’effacement**  
 
-   Les signatures effacées doivent correspondre exactement.
+	- Les signatures effacées doivent correspondre exactement.
 
-Les deux conditions doivent être satisfaites.
+		- Les deux conditions doivent être satisfaites.
 
 
 <a id="18472-paramètres-génériques-et-redéfinition"></a>
@@ -666,11 +666,9 @@ list.add(10);    // OK
 Object o = list.get(0); // retourne Object (supertype commun minimal)
 ```
 
-> **IMPORTANT**
->
-> `super` accepte **l’insertion**
->
-> `extends` accepte **l’extraction**.
+!!! important
+	- `super` accepte **l’insertion**
+	- `extends` accepte **l’extraction**.
 
 ---
 
