@@ -18,7 +18,7 @@
 	- [20.2.5 Restrictions dans les Corps des Lambda](#2025-restrictions-dans-les-corps-des-lambda)
 	- [20.2.6 Règles de Type de Retour](#2026-règles-de-type-de-retour)
 	- [20.2.7 Lambdas vs Classes Anonymes](#2027-lambdas-vs-classes-anonymes)
-	- [20.2.8 Erreurs Courantes (Pièges de Certification)](#2028-erreurs-courantes-pièges-de-certification)
+	- [20.2.8 Erreurs Courantes](#2028-erreurs-courantes)
 - [20.3 Références de Méthodes](#203-références-de-méthodes)
 	- [20.3.1 Référence à une Méthode Statique](#2031-référence-à-une-méthode-statique)
 	- [20.3.2 Référence à une Méthode d’Instance d’un Objet Particulier](#2032-référence-à-une-méthode-dinstance-dun-objet-particulier)
@@ -103,8 +103,8 @@ De nombreuses interfaces fonctionnelles proposent des méthodes utilitaires perm
 
 | Interface      | Method     | Description |
 |---------------|------------|-------------|
-| Function      | andThen()  | applique celle-ci, puis une autre |
-| Function      | compose()  | applique une autre, puis celle-ci |
+| Function      | andThen()  | applique la fonction, puis l’autre spécifiée dans cette méthode additionnelle |
+| Function      | compose()  | applique la fonction spécifiée dans cette méthode additionnelle, puis la fonction |
 | Function      | identity() | renvoie une fonction x -> x |
 | Predicate     | and()      | ET logique |
 | Predicate     | or()       | OU logique |
@@ -324,8 +324,8 @@ class Test {
 
 Dans une classe anonyme, `this` fait référence à l’instance de la classe anonyme.
 
-<a id="2028-erreurs-courantes-pièges-de-certification"></a>
-### 20.2.8 Erreurs Courantes (Pièges de Certification)
+<a id="2028-erreurs-courantes"></a>
+### 20.2.8 Erreurs Courantes
 
 **Types de retour incohérents**
 ```java
@@ -362,10 +362,10 @@ Elles sont équivalentes aux expressions lambda, mais plus concises, plus lisibl
 
 Il existe quatre catégories de références de méthodes en Java :
 
-- 1. Référence à une méthode statique (`ClassName::staticMethod`)
-- 2. Référence à une méthode d’instance d’un objet particulier (`instance::method`)
-- 3. Référence à une méthode d’instance d’un objet arbitraire d’un type donné (`ClassName::instanceMethod`)
-- 4. Référence à un constructeur (`ClassName::new`)
+- Référence à une méthode statique (`ClassName::staticMethod`)
+- Référence à une méthode d’instance d’un objet particulier (`instance::method`)
+- Référence à une méthode d’instance d’un objet arbitraire d’un type donné (`ClassName::instanceMethod`)
+- Référence à un constructeur (`ClassName::new`)
 
 <a id="2031-référence-à-une-méthode-statique"></a>
 ### 20.3.1 Référence à une Méthode Statique

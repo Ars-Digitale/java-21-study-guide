@@ -18,7 +18,7 @@
 	- [20.2.5 Restrictions in Lambda Bodies](#2025-restrictions-in-lambda-bodies)
 	- [20.2.6 Return Type Rules](#2026-return-type-rules)
 	- [20.2.7 Lambdas vs Anonymous Classes](#2027-lambdas-vs-anonymous-classes)
-	- [20.2.8 Common Lambda Errors Certification Traps](#2028-common-lambda-errors-certification-traps)
+	- [20.2.8 Common Lambda Errors](#2028-common-lambda-errors)
 - [20.3 Method References](#203-method-references)
 	- [20.3.1 Reference to a Static Method](#2031-reference-to-a-static-method)
 	- [20.3.2 Reference to an Instance Method of a Particular Object](#2032-reference-to-an-instance-method-of-a-particular-object)
@@ -107,8 +107,8 @@ Many functional interfaces come with helper methods that allow chaining and comp
 
 |Interface        | Method         | Description |
 |-----------------|----------------|--------------------------- |
-|Function         | andThen()      | applies this, then another |
-|Function         | compose()      | applies another, then this |
+|Function         | andThen()      | applies the function, then the other one specified in this additional method |
+|Function         | compose()      | applies the other function specified in the additional method, then the function |
 |Function         | identity()     | returns a function x -> x |
 |Predicate        | and()          | logical AND |
 |Predicate        | or()           | logical OR |
@@ -333,8 +333,8 @@ class Test {
 
 In anonymous classes, `this` refers to the anonymous class instance.
 
-<a id="2028-common-lambda-errors-certification-traps"></a>
-### 20.2.8 Common Lambda Errors (Certification Traps)
+<a id="2028-common-lambda-errors"></a>
+### 20.2.8 Common Lambda Errors
 
 **Inconsistent return types**
 ```java
@@ -371,10 +371,10 @@ They are equivalent to lambda expressions, but more concise, readable, and often
 
 There are four categories of method references in Java:
 
-- 1. Reference to a static method (`ClassName::staticMethod`)
-- 2. Reference to an instance method of a particular object (`instance::method`)
-- 3. Reference to an instance method of an arbitrary object of a given type (`ClassName::instanceMethod`)
-- 4. Reference to a constructor (`ClassName::new`)
+- Reference to a static method (`ClassName::staticMethod`)
+- Reference to an instance method of a particular object (`instance::method`)
+- Reference to an instance method of an arbitrary object of a given type (`ClassName::instanceMethod`)
+- Reference to a constructor (`ClassName::new`)
 
 
 <a id="2031-reference-to-a-static-method"></a>

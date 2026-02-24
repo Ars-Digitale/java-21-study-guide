@@ -18,7 +18,7 @@
 	- [20.2.5 Restrizioni nei Corpi delle Lambda](#2025-restrizioni-nei-corpi-delle-lambda)
 	- [20.2.6 Regole sul Tipo di Ritorno](#2026-regole-sul-tipo-di-ritorno)
 	- [20.2.7 Lambda vs Classi Anonime](#2027-lambda-vs-classi-anonime)
-	- [20.2.8 Errori Comuni nelle Lambda Trappole da Certificazione](#2028-errori-comuni-nelle-lambda-trappole-da-certificazione)
+	- [20.2.8 Errori Comuni nelle Lambda](#2028-errori-comuni-nelle-lambda)
 - [20.3 Riferimenti a Metodi](#203-riferimenti-a-metodi)
 	- [20.3.1 Riferimento a un Metodo Statico](#2031-riferimento-a-un-metodo-statico)
 	- [20.3.2 Riferimento a un Metodo d’Istanza di un Oggetto Specifico](#2032-riferimento-a-un-metodo-distanza-di-un-oggetto-specifico)
@@ -103,8 +103,8 @@ Molte interfacce funzionali includono metodi di supporto che consentono chaining
 
 | Interface      | Method    | Description |
 |---------------|-----------|-------------|
-| Function      | andThen() | applica questa funzione, poi un’altra |
-| Function      | compose() | applica un’altra funzione, poi questa |
+| Function      | andThen() | applica la funzione, poi l’altra specificata in questo metodo addizionale |
+| Function      | compose() | applica la funzione specificata nel metodo addizionale, poi la funzione |
 | Function      | identity() | restituisce una funzione x -> x |
 | Predicate     | and()     | AND logico |
 | Predicate     | or()      | OR logico |
@@ -324,8 +324,8 @@ class Test {
 
 Nelle classi anonime, `this` si riferisce all’istanza della classe anonima.
 
-<a id="2028-errori-comuni-nelle-lambda-trappole-da-certificazione"></a>
-### 20.2.8 Errori Comuni nelle Lambda (Trappole da Certificazione)
+<a id="2028-errori-comuni-nelle-lambda"></a>
+### 20.2.8 Errori Comuni nelle Lambda
 
 **Tipi di ritorno incoerenti**
 ```java
@@ -362,10 +362,10 @@ Sono equivalenti alle lambda expressions, ma più concisi, leggibili e spesso pr
 
 Esistono quattro categorie di method references in Java:
 
-- 1. Riferimento a un metodo statico (`ClassName::staticMethod`)
-- 2. Riferimento a un metodo d’istanza di un oggetto specifico (`instance::method`)
-- 3. Riferimento a un metodo d’istanza di un oggetto arbitrario di un dato tipo (`ClassName::instanceMethod`)
-- 4. Riferimento a un costruttore (`ClassName::new`)
+- Riferimento a un metodo statico (`ClassName::staticMethod`)
+- Riferimento a un metodo d’istanza di un oggetto specifico (`instance::method`)
+- Riferimento a un metodo d’istanza di un oggetto arbitrario di un dato tipo (`ClassName::instanceMethod`)
+- Riferimento a un costruttore (`ClassName::new`)
 
 <a id="2031-riferimento-a-un-metodo-statico"></a>
 ### 20.3.1 Riferimento a un Metodo Statico
