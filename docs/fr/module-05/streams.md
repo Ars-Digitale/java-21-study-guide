@@ -315,11 +315,13 @@ newNames.add("Erin");
 stream.count(); // 3
 ```
 
-**Note importante :**  
-Un stream est lié à sa *source* (`newNames`), et le pipeline n’est pas exécuté tant qu’une opération terminale n’est pas invoquée.  
-Pour cette raison, si vous **modifiez la collection avant l’opération terminale**, l’opération terminale « voit » les nouveaux éléments (ici, `Erin`).  
-En général, toutefois, **modifier la source pendant qu’un pipeline de stream est en cours d’utilisation est une mauvaise pratique** et peut conduire à un comportement non déterministe (ou à une `ConcurrentModificationException` avec certaines sources/opérations).  
-La règle pratique est : *construire la source, puis créer et exécuter le stream sans la modifier*.
+
+!!! note
+	Un stream est lié à sa *source* (`newNames`), et le pipeline n’est pas exécuté tant qu’une opération terminale n’est pas invoquée.  
+	Pour cette raison, si vous **modifiez la collection avant l’opération terminale**, l’opération terminale « voit » les nouveaux éléments (ici, `Erin`).  
+	En général, toutefois, **modifier la source pendant qu’un pipeline de stream est en cours d’utilisation est une mauvaise pratique** et peut conduire à un comportement non déterministe (ou à une `ConcurrentModificationException` avec certaines sources/opérations).  
+	La règle pratique est : *construire la source, puis créer et exécuter le stream sans la modifier*.
+
 
 Les streams traitent les éléments **un par un**, en circulant « verticalement » à travers le pipeline plutôt que étape par étape.
 
@@ -352,6 +354,7 @@ BB
 ```
 
 `findFirst()` est satisfait dès qu’il trouve le **premier** élément qui traverse avec succès le pipeline (ici `"bb"`), donc :
+
 - `"ccc"` n’est jamais traité (ni `filter` ni `map`) ;
 - l’évaluation paresseuse évite un travail inutile par rapport à une opération terminale qui consomme tous les éléments (comme `forEach` ou `count`).
 

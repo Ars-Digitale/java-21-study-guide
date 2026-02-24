@@ -322,11 +322,11 @@ newNames.add("Erin");
 stream.count(); // 3
 ```
 
-**Important note :**  
-A stream is bound to its *source* (`newNames`), and the pipeline is not executed until a terminal operation is invoked.  
-For this reason, if you **modify the collection before the terminal operation**, the terminal operation “sees” the new elements (here, `Erin`).  
-In general, however, **modifying the source while a stream pipeline is in use is bad practice** and can lead to non-deterministic behavior (or `ConcurrentModificationException` with some sources/operations). 
-The practical rule is: *build the source, then create and execute the stream without mutating it*.
+!!! note  
+	A stream is bound to its *source* (`newNames`), and the pipeline is not executed until a terminal operation is invoked.  
+	For this reason, if you **modify the collection before the terminal operation**, the terminal operation “sees” the new elements (here, `Erin`).  
+	In general, however, **modifying the source while a stream pipeline is in use is bad practice** and can lead to non-deterministic behavior (or `ConcurrentModificationException` with some sources/operations). 
+	The practical rule is: *build the source, then create and execute the stream without mutating it*.
 
 
 
@@ -361,6 +361,7 @@ BB
 ```
 
 `findFirst()` is satisfied as soon as it finds the **first** element that successfully passes through the pipeline (here `"bb"`), therefore:
+
 - `"ccc"` is never processed (neither `filter` nor `map`);
 - lazy evaluation avoids unnecessary work compared to a terminal operation that consumes all elements (such as `forEach` or `count`).
 

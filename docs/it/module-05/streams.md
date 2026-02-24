@@ -324,11 +324,12 @@ newNames.add("Erin");
 stream.count(); // 3
 ```
 
-**Nota importante :**  
-Uno stream è legato alla sua *sorgente* (`newNames`), e la pipeline non viene eseguita finché non viene invocata un’operazione terminale.  
-Per questa ragione, se **modifichi la collezione prima dell’operazione terminale**, l’operazione terminale “vede” i nuovi elementi (qui, `Erin`).  
-In generale, tuttavia, **modificare la sorgente mentre una pipeline stream è in uso è una cattiva pratica** e può portare a comportamento non deterministico (o `ConcurrentModificationException` con alcune sorgenti/operazioni). 
-La regola pratica è: *costruisci la sorgente, poi crea ed esegui lo stream senza mutarla*.
+
+!!! note
+	Uno stream è legato alla sua *sorgente* (`newNames`), e la pipeline non viene eseguita finché non viene invocata un’operazione terminale.  
+	Per questa ragione, se **modifichi la collezione prima dell’operazione terminale**, l’operazione terminale “vede” i nuovi elementi (qui, `Erin`).  
+	In generale, tuttavia, **modificare la sorgente mentre una pipeline stream è in uso è una cattiva pratica** e può portare a comportamento non deterministico (o `ConcurrentModificationException` con alcune sorgenti/operazioni). 
+	La regola pratica è: *costruisci la sorgente, poi crea ed esegui lo stream senza mutarla*.
 
 
 
@@ -363,6 +364,7 @@ BB
 ```
 
 `findFirst()` è soddisfatto non appena trova il **primo** elemento che passa con successo attraverso la pipeline (qui `"bb"`), quindi:
+
 - `"ccc"` non viene mai processato (né `filter` né `map`);
 - la valutazione pigra evita lavoro non necessario rispetto a un’operazione terminale che consuma tutti gli elementi (come `forEach` o `count`).
 
