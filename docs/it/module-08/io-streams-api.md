@@ -96,6 +96,7 @@ InputStream in =
 ```
 
 In questo esempio:
+
 - `FileInputStream` esegue l’accesso reale al file
 - `BufferedInputStream` aggiunge un buffer in memoria
 
@@ -112,6 +113,7 @@ Tutti gli stream legacy `java.io` sono **bloccanti**.
 Ciò significa che un thread che esegue I/O può essere sospeso dal sistema operativo.
 
 Per esempio, quando chiami `read()`:
+
 - se i dati sono disponibili, vengono restituiti subito
 - se non ci sono dati, il thread attende
 - se si raggiunge la fine dello stream, viene restituito -1
@@ -167,6 +169,7 @@ Tuttavia, i tempi del GC sono imprevedibili.
 Non indica la quantità totale di dati rimanenti.
 
 Casi d’uso tipici:
+
 - evitare blocchi in UI o parsing di protocolli
 - dimensionare buffer temporanei
 
@@ -199,6 +202,7 @@ in.reset();
 | `BufferedInputStream` | Sì |
 | `ByteArrayInputStream` | Sì |
 
+
 <a id="3518-reader-writer-e-codifica-dei-caratteri"></a>
 ### 35.1.8 Reader, Writer e codifica dei caratteri
 
@@ -213,9 +217,8 @@ new FileReader("file.txt"); // encoding di default della piattaforma
 ```
 
 !!! note
-    Affidarsi al charset di default porta a bug di non portabilità.
-    
-    Specifica sempre un charset esplicitamente.
+    - Affidarsi al charset di default porta a bug di non portabilità.
+    - Specifica sempre un charset esplicitamente.
 
 <a id="3519-file-vs-filedescriptor"></a>
 ### 35.1.9 File vs FileDescriptor
@@ -246,9 +249,11 @@ L’API `java.nio` (New I/O) è stata introdotta per risolvere i limiti di `java
 Offre un modello I/O di più basso livello e più esplicito, che mappa bene sui sistemi operativi moderni.
 
 Alla base, `java.nio` ruota attorno a tre concetti:
+
 - `Buffer` — contenitori di memoria espliciti
 - `Channel` — connessioni dati bidirezionali
 - `Selector` — multiplexing dell’I/O non bloccante
+
 
 <a id="3521-dagli-stream-ai-buffer-un-cambio-concettuale"></a>
 ### 35.2.1 Dagli stream ai buffer: un cambio concettuale
@@ -264,6 +269,7 @@ Al contrario, `NIO` rende esplicita la memoria tramite i buffer.
 | Controllo    | Semplice, poco granulare    | Più granulare e configurabile             |
 
 Con NIO, l’applicazione controlla quando i dati vengono letti in memoria e come vengono consumati.
+
 
 <a id="3522-buffer-scopo-e-struttura"></a>
 ### 35.2.2 Buffer: scopo e struttura
@@ -284,6 +290,7 @@ ByteBuffer buffer = ByteBuffer.allocate(1024);
 | `position` | Indice corrente di lettura/scrittura |
 | `limit` | Limite dei dati leggibili o scrivibili |
 
+
 <a id="3523-ciclo-di-vita-del-buffer-write--flip--read"></a>
 ### 35.2.3 Ciclo di vita del buffer: Write → Flip → Read
 
@@ -292,6 +299,7 @@ I `buffer` hanno un ciclo d’uso rigoroso.
 Capirlo male è una fonte comune di bug.
 
 Sequenza tipica:
+
 - scrivi i dati nel buffer
 - `flip()` per passare in modalità lettura
 - leggi i dati dal buffer
@@ -315,6 +323,7 @@ buffer.clear(); // pronto a scrivere di nuovo
 !!! note
     `flip()` non cancella i dati: regola position e limit.
 
+
 <a id="3524-clear-vs-compact"></a>
 ### 35.2.4 `clear()` vs `compact()`
 
@@ -326,6 +335,7 @@ Dopo la lettura, un buffer può essere riutilizzato in due modi.
 | `compact()` | Preserva i dati non letti |
 
 `compact()` è utile nei protocolli streaming dove nel buffer possono restare messaggi parziali.
+
 
 <a id="3525-heap-buffers-vs-direct-buffers"></a>
 ### 35.2.5 Heap buffers vs Direct buffers
@@ -379,6 +389,7 @@ channel.configureBlocking(false);
 ```
 
 In modalità **non bloccante**:
+
 - `read()` può ritornare subito con 0 byte
 - `write()` può scrivere solo una parte dei dati
 
@@ -413,10 +424,12 @@ Sono la base dei server scalabili.
 | `SelectionKey`  | Rappresenta registrazione e stato del channel |
 | `Interest set`  | Operazioni osservate (read, write, ecc.) |
 
+
 <a id="35210-quando-usare-javanio"></a>
 ### 35.2.10 Quando usare `java.nio`
 
 `NIO` è adatto quando:
+
 - serve alta concorrenza
 - ti serve controllo fine sulla memoria
 - stai implementando protocolli o server
@@ -433,6 +446,7 @@ Questa sezione si concentra sulle operazioni pratiche su file e directory.
 Confrontiamo gli approcci legacy (java.io.File + stream java.io) con quelli moderni NIO.2 (Path + Files).
 
 L’obiettivo non è solo conoscere i nomi dei metodi, ma capire:
+
 - cosa fa davvero ogni metodo
 - cosa ritorna e come segnala gli errori
 - quali trappole esistono (race condition, link, permessi, portabilità)
@@ -464,6 +478,7 @@ boolean canExec = f.canExecute();
 Questi metodi ritornano boolean e non spiegano perché un’operazione è fallita.
 
 Per esempio, exists() può ritornare false quando:
+
 - il file non esiste davvero
 - il file esiste ma l’accesso è negato
 - un link simbolico è rotto
@@ -506,11 +521,13 @@ Files.exists(p, LinkOption.NOFOLLOW_LINKS);
 ```
 
 La classe File legacy non distingue in modo affidabile:
+
 - file mancante
 - link simbolico rotto
 - link verso target inaccessibile
 
 NIO.2 permette check link-aware e ispezione esplicita dei link.
+
 
 <a id="353122-pattern-duso-corretto-critico"></a>
 ##### 35.3.1.2.2 Pattern d’uso corretto (critico)
@@ -535,6 +552,7 @@ try {
 
 !!! note
     Il vero vantaggio di NIO.2 è la diagnostica tramite eccezioni durante le azioni, non check di esistenza più “accurati”.
+
 
 <a id="353123-tabella-riassuntiva"></a>
 ##### 35.3.1.2.3 Tabella riassuntiva
@@ -594,6 +612,7 @@ Files.createDirectories(dirDeep);
 | Creare directory | `mkdir()`              | `createDirectory()`           | NIO lancia eccezioni dettagliate |
 | Creare parent    | `mkdirs()`             | `createDirectories()`         | Atomicità non garantita per directory profonde |
 
+
 <a id="3533-eliminazione-di-file-e-directory"></a>
 ### 35.3.3 Eliminazione di file e directory
 
@@ -610,6 +629,7 @@ boolean deleted = f.delete();
 ```
 
 Se fallisce (permessi, file mancante, directory non vuota), `delete()` spesso ritorna false senza dettagli.
+
 
 <a id="35332-api-moderna-files"></a>
 #### 35.3.3.2 API moderna (Files)
@@ -675,11 +695,13 @@ Files.copy(
     
     Usa `REPLACE_EXISTING` quando l’overwrite è intenzionale.
 
+
 | Obiettivo         | Approccio legacy        | Moderno (Files)                          | Dettaglio chiave |
 |------------------|--------------------------|------------------------------------------|------------------|
 | Copiare file     | Loop stream manuale      | `Files.copy(Path, Path, …)`              | Opzioni: `REPLACE_EXISTING`, `COPY_ATTRIBUTES` |
 | Copiare stream   | InputStream/OutputStream | `Files.copy(InputStream, Path, …)`       | Utile per upload/download e piping |
 | Copiare directory| Ricorsione manuale       | `walkFileTree + Files.copy`              | Nessun one-liner per copy completa di albero |
+
 
 <a id="3535-spostamento-e-rinomina"></a>
 ### 35.3.5 Spostamento e rinomina
@@ -719,11 +741,13 @@ Files.move(
     ATOMIC_MOVE è garantito solo se lo spostamento avviene nello stesso filesystem.
     Altrimenti viene lanciata un’eccezione.
 
+
 | Obiettivo        | Legacy (File)  | Moderno (Files)             | Dettaglio chiave |
 |-----------------|-----------------|-----------------------------|------------------|
 | Rinomina / move | `renameTo()`    | `move()`                    | Exceptions + opzioni esplicite |
 | Move atomico    | Non supportato  | `move(…, ATOMIC_MOVE)`      | Garantito solo stesso filesystem |
 | Replace existing| Non esplicito   | `REPLACE_EXISTING`          | Intenzione di overwrite esplicita |
+
 
 <a id="3536-lettura-e-scrittura-di-testo-e-byte-miglioramenti-di-files"></a>
 ### 35.3.6 Lettura e scrittura di testo e byte (miglioramenti di Files)
@@ -748,6 +772,7 @@ try (BufferedWriter w = new BufferedWriter(new FileWriter("file.txt"))) {
 ```
 
 Queste classi legacy usano spesso il charset di default se non si utilizza un bridge esplicito.
+
 
 <a id="35362-letturascrittura-testo-moderna"></a>
 #### 35.3.6.2 Lettura/scrittura testo moderna
@@ -775,6 +800,7 @@ Files.write(Path.of("out.bin"), data);
     
     Usa `Files.lines()` (lazy) o, per file grandi, preferisci API streaming come newBufferedReader/newInputStream.
 
+
 | Task            | Metodo legacy                    | Metodo NIO.2 Files                    | Dettaglio chiave |
 |-----------------|----------------------------------|----------------------------------------|------------------|
 | Leggere tutti i byte | Loop InputStream manuale     | `readAllBytes()`                       | Carica tutto in memoria |
@@ -783,6 +809,7 @@ Files.write(Path.of("out.bin"), data);
 | Scrivere byte   | OutputStream                      | `write(Path, byte[])`                  | Conciso |
 | Scrivere righe  | Loop BufferedWriter               | `write(Path, Iterable, …)`             | Charset specificabile |
 | Append testo    | FileWriter(true)                  | `write(…, APPEND)`                     | Opzioni esplicite |
+
 
 <a id="3537-newinputstreamnewoutputstream-e-newbufferedreadernewbufferedwriter"></a>
 ### 35.3.7 newInputStream/newOutputStream e newBufferedReader/newBufferedWriter
@@ -930,6 +957,7 @@ Files.setAttribute(Path.of("a.txt"), "basic:lastModifiedTime", FileTime.fromMill
     
     Attributi non supportati generano eccezioni.
 
+
 <a id="35311-link-simbolici-e-follow-dei-link"></a>
 ### 35.3.11 Link simbolici e follow dei link
 
@@ -948,10 +976,12 @@ Molti metodi seguono i link di default.
 
 Per evitarlo, passa `LinkOption.NOFOLLOW_LINKS` quando supportato.
 
+
 <a id="35312-sintesi-perché-files-è-un-miglioramento"></a>
 ### 35.3.12 Sintesi: perché Files è un miglioramento
 
 La classe utility `Files` migliora la programmazione filesystem perché:
+
 - riduce boilerplate (copy/move/read/write)
 - fornisce opzioni esplicite (overwrite, atomic move, follow links)
 - offre metadata più ricchi (attributes/views)
@@ -969,6 +999,7 @@ La serializzazione è il processo di convertire un grafo di oggetti in uno strea
 In Java, la serializzazione classica è implementata da `java.io.ObjectOutputStream` e `java.io.ObjectInputStream`.
 
 Questo argomento è importante perché combina:
+
 - stream I/O e grafi di oggetti
 - versioning e backward compatibility
 - considerazioni di sicurezza e pattern d’uso sicuri
@@ -978,15 +1009,18 @@ Questo argomento è importante perché combina:
 ### 35.4.1 Cosa fa la serializzazione (e cosa non fa)
 
 Quando un oggetto è serializzato, Java scrive informazioni sufficienti a ricostruirlo:
+
 - nome della classe
 - serialVersionUID
 - valori dei campi di istanza serializzabili
 - riferimenti tra oggetti (identità)
 
 La serializzazione non include automaticamente:
+
 - campi static (stato di classe)
 - campi transient (esclusi esplicitamente)
 - oggetti referenziati non serializzabili (a meno di gestione speciale)
+
 
 <a id="3542-le-due-principali-marker-interface"></a>
 ### 35.4.2 Le due principali marker interface
@@ -1002,6 +1036,7 @@ La serializzazione Java è abilitata implementando una di queste interfacce.
     `Serializable` non ha metodi: è una marker interface.
     
     `Externalizable` estende Serializable e aggiunge readExternal/writeExternal.
+
 
 <a id="3543-esempio-base-scrivere-e-leggere-un-oggetto"></a>
 ### 35.4.3 Esempio base: scrivere e leggere un oggetto
@@ -1047,6 +1082,7 @@ public class Demo {
     `readObject()` ritorna Object: serve cast.
     `readObject()` può lanciare ClassNotFoundException.
 
+
 <a id="3544-grafi-di-oggetti-riferimenti-e-identità"></a>
 ### 35.4.4 Grafi di oggetti, riferimenti e identità
 
@@ -1066,6 +1102,7 @@ Object[] restored = (Object[]) in.readObject();
 
 !!! note
     Questo previene ricorsione infinita in grafi ciclici.
+
 
 <a id="3545-serialversionuid-la-chiave-di-versioning"></a>
 ### 35.4.5 `serialVersionUID`: la chiave di versioning
@@ -1120,6 +1157,7 @@ class Session implements Serializable {
 !!! note
     Se un transient serve dopo la deserializzazione, va ricalcolato o ripristinato manualmente.
 
+
 <a id="3547-campi-non-serializzabili-e-notserializableexception"></a>
 ### 35.4.7 Campi non serializzabili e NotSerializableException
 
@@ -1135,9 +1173,11 @@ class Holder implements Serializable {
 ```
 
 Soluzioni tipiche:
+
 - marcare il campo transient
 - sostituirlo con una rappresentazione serializzabile
 - usare hook di serializzazione custom
+
 
 <a id="3548-costruttori-e-serializzazione"></a>
 ### 35.4.8 Costruttori e serializzazione
@@ -1145,6 +1185,7 @@ Soluzioni tipiche:
 Il comportamento dei costruttori in deserializzazione è fonte frequente di confusione.
 
 Java ripristina lo stato principalmente dal byte stream, non eseguendo i costruttori.
+
 
 <a id="35481-regola-i-costruttori-delle-classi-serializable-non-vengono-chiamati"></a>
 #### 35.4.8.1 Regola: i costruttori delle classi Serializable NON vengono chiamati
@@ -1156,6 +1197,7 @@ L’istanza viene creata senza chiamare quei costruttori e i campi vengono iniet
 !!! note
     Per questo i costruttori delle classi Serializable non devono contenere logica di inizializzazione essenziale: non verrebbe eseguita in deserializzazione.
 
+
 <a id="35482-regola-di-ereditarietà-viene-chiamata-la-prima-superclass-non-serializable"></a>
 #### 35.4.8.2 Regola di ereditarietà: viene chiamata la prima superclass non-Serializable
 
@@ -1164,8 +1206,10 @@ Se una classe Serializable ha una superclasse non Serializable, la deserializzaz
 Quindi Java chiama **il costruttore no-arg della prima superclasse non-Serializable**.
 
 Implicazioni:
+
 - la superclasse non Serializable deve avere un no-arg accessibile
 - le sottoclassi Serializable saltano i costruttori, le superclassi non Serializable no
+
 
 <a id="35483-tabella-quali-costruttori-vengono-eseguiti"></a>
 #### 35.4.8.3 Tabella: quali costruttori vengono eseguiti
@@ -1176,6 +1220,7 @@ Implicazioni:
 | Sottoclasse Serializable | No |
 | Prima superclasse non Serializable | Sì (no-arg) |
 | Classe Externalizable | Sì (richiesto public no-arg) |
+
 
 <a id="35484-esempio-quali-costruttori-vengono-chiamati"></a>
 #### 35.4.8.4 Esempio: quali costruttori vengono chiamati
@@ -1237,6 +1282,7 @@ A constructor
 ```
 
 Spiegazione:
+
 - C è Serializable → C() non viene chiamato
 - B è Serializable → B() non viene chiamato
 - A non è Serializable → A() viene chiamato (no-arg)
@@ -1245,12 +1291,14 @@ Spiegazione:
 !!! note
     Se la prima superclasse non-Serializable non ha un no-arg accessibile, la deserializzazione fallisce.
 
+
 <a id="3549-hook-di-serializzazione-custom-writeobject-e-readobject"></a>
 ### 35.4.9 Hook di serializzazione custom: `writeObject` e `readObject`
 
 Gli hook custom servono quando la serializzazione di default non basta (stato transient, campi derivati, cifratura, validazione, compatibilità).
 
 Sono avanzati ma importanti per una deserializzazione corretta.
+
 
 <a id="35491-perché-esiste-la-serializzazione-custom"></a>
 #### 35.4.9.1 Perché esiste la serializzazione custom
@@ -1260,11 +1308,13 @@ Di default, Java serializza automaticamente tutti i campi di istanza non static 
 È comodo, ma non copre esigenze frequenti.
 
 Motivi tipici:
+
 - un campo non va salvato direttamente (dati sensibili)
 - un campo è derivato/cache e va ricalcolato
 - serve validazione in lettura (rifiutare stato invalido)
 - serve logica di backward/forward compatibility
 - un oggetto referenziato non è Serializable e va gestito
+
 
 <a id="35492-cosa-sono-davvero-writeobject-e-readobject"></a>
 #### 35.4.9.2 Cosa sono davvero `writeObject` e `readObject`
@@ -1282,6 +1332,7 @@ Se non esistono (o la firma è sbagliata), viene usata la serializzazione di def
 !!! note
     Se la firma è errata (visibilità, parametri, return type, eccezioni), il framework non la riconosce e torna silenziosamente al default.
 
+
 <a id="35493-firme-richieste-esatte"></a>
 #### 35.4.9.3 Firme richieste (esatte)
 
@@ -1292,10 +1343,12 @@ private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundE
 ```
 
 Vincoli:
+
 - devono essere private
 - devono ritornare void
 - i tipi dei parametri devono combaciare esattamente
 - le eccezioni devono essere compatibili
+
 
 <a id="35494-cosa-succede-in-serializzazione-step-by-step"></a>
 #### 35.4.9.4 Cosa succede in serializzazione: step-by-step
@@ -1307,6 +1360,7 @@ out.writeObject(obj);
 ```
 
 Meccanismo:
+
 - verifica Serializable
 - cerca un private writeObject(ObjectOutputStream)
 - se assente → default serialization
@@ -1321,6 +1375,7 @@ out.defaultWriteObject();
 `defaultWriteObject()` significa: “serializza i campi serializzabili normali col meccanismo standard”.
 
 Poi puoi scrivere dati extra come vuoi.
+
 
 <a id="35495-pattern-tipico-e-regola-dellordine-writeread"></a>
 #### 35.4.9.5 Pattern tipico e regola dell’ordine write/read
@@ -1343,6 +1398,7 @@ private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundE
 
 !!! note
     Se scrivi valori extra (int/string/etc.), devi leggerli nella stessa sequenza, altrimenti la deserializzazione fallisce o corrompe lo stato.
+
 
 <a id="35410-esempio-duso-ripristinare-un-campo-derivato-transient"></a>
 ### 35.4.10 Esempio d’uso: ripristinare un campo derivato transient
@@ -1410,18 +1466,22 @@ class Point implements Externalizable {
     Con Externalizable controlli il formato.
     Se lo cambi, devi gestire tu la backward compatibility.
 
+
 <a id="35412-considerazioni-di-sicurezza-su-readobject"></a>
 ### 35.4.12 Considerazioni di sicurezza su `readObject()`
 
 La deserializzazione di dati non fidati è pericolosa perché può eseguire codice indirettamente tramite:
+
 - hook readObject
 - logica di inizializzazione
 - gadget chain in librerie
 
 Linee guida:
+
 - non deserializzare mai byte non fidati senza un motivo forte
 - preferire formati sicuri (JSON, protobuf) per input esterni
 - se obbligato, usare object filter e validazione rigorosa
+
 
 <a id="35413-trappole-comuni-e-consigli-pratici"></a>
 ### 35.4.13 Trappole comuni e consigli pratici
@@ -1434,15 +1494,18 @@ Linee guida:
 - Externalizable richiede public no-arg constructor
 - NotSerializableException quando un campo referenziato non è serializzabile
 
+
 <a id="35414-quando-usare-o-evitare-la-serializzazione-java"></a>
 ### 35.4.14 Quando usare (o evitare) la serializzazione Java
 
 Usa la serializzazione classica soprattutto per:
+
 - persistenza locale di breve durata con versioni controllate
 - caching in memoria quando entrambe le estremità sono fidate
 - sistemi legacy che già la usano
 
 Evitala per:
+
 - protocolli di rete pubblici
 - storage a lungo termine con schema evolutivo
 - input non fidati
