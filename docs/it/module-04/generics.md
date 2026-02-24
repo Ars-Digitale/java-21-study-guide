@@ -303,17 +303,17 @@ Quando una sottoclasse dichiara un metodo che *potrebbe* effettuare l’override
 
 1. **Prima della erasure**
   
-   Il metodo deve essere compatibile a livello di tipo con quello della classe padre:
+	- Il metodo deve essere compatibile a livello di tipo con quello della classe padre:
    
-   - Stesso nome del metodo
-   - Stessi tipi dei parametri (inclusi gli argomenti generici)
-   - Tipo di ritorno compatibile (covarianza ammessa)
+		- Stesso nome del metodo
+		- Stessi tipi dei parametri (inclusi gli argomenti generici)
+		- Tipo di ritorno compatibile (covarianza ammessa)
 
 2. **Dopo la erasure**
   
-   Le firme erase devono coincidere esattamente.
+	- Le firme erase devono coincidere esattamente.
 
-Entrambe le condizioni devono essere soddisfatte.
+		- Entrambe le condizioni devono essere soddisfatte.
 
 
 
