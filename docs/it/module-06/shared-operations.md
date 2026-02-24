@@ -30,7 +30,7 @@ Padroneggiare queste operazioni è essenziale, poiché spiegano come le collezio
 I seguenti metodi provengono dall’interfaccia `Collection<E>` e sono ereditati da **tutte** le principali collezioni eccetto `Map` (che ha una propria famiglia di operazioni).
 
 !!! note
-    `Map` non implementa `Collection`, ma le sue viste `keySet()`, `values()` ed `entrySet()` **sì**, e quindi espongono queste operazioni condivise.
+    `Map` non implementa `Collection`, ma le sue viste `keySet()`, `values()` ed `entrySet()` **lo fanno**, esponendo, quindi, queste operazioni condivise.
 
 <a id="2311-operazioni-di-mutazione"></a>
 ### 23.1.1 Operazioni di Mutazione

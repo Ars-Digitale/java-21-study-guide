@@ -46,7 +46,8 @@ Set<E>
            └── TreeSet<E>    (ordinato)
 ```
 
-Tutte le implementazioni di `Set` richiedono:  
+Tutte le implementazioni di `Set` richiedono:
+  
 - unicità degli elementi  
 - uguaglianza e hashing prevedibili (a seconda dell’implementazione)
 
@@ -92,11 +93,13 @@ System.out.println(set);  // [A, C, B]
 <a id="2623-treeset"></a>
 ### 26.2.3 TreeSet
 
-Un Set **ordinato** il cui ordine è determinato da:  
-1. Ordinamento naturale (`Comparable`)  
-2. Un `Comparator` fornito  
+Un Set **ordinato** il cui ordine è determinato da:
+  
+- Ordinamento naturale (`Comparable`)  
+- Un `Comparator` fornito  
 
-TreeSet:  
+TreeSet:
+  
 - Non consente elementi `null` (NullPointerException a runtime)  
 - Garantisce iterazione ordinata  
 - Supporta viste di intervallo: `headSet()`, `tailSet()`, `subSet()`  
@@ -124,14 +127,15 @@ Le regole differiscono in base all’implementazione.
 <a id="2631-hashset--linkedhashset"></a>
 ### 26.3.1 HashSet & LinkedHashSet
 
-L’`unicità` è determinata da due metodi:  
+L’`unicità` è determinata da due metodi: 
+ 
 - `hashCode()`  
 - `equals()`  
 
 Due oggetti sono considerati lo stesso elemento se:
   
-1. I loro hash code coincidono  
-2. Il loro metodo `equals()` restituisce `true`  
+- I loro hash code coincidono  
+- Il loro metodo `equals()` restituisce `true`  
 
 !!! warning
     Se si muta un oggetto dopo averlo aggiunto a un HashSet o LinkedHashSet, il suo hashCode può cambiare e il set può perdere il riferimento a quell’elemento.
