@@ -24,8 +24,8 @@
 
 Le interfacce `Queue` e `Deque` di Java modellano collezioni ordinate progettate per elaborare elementi in una sequenza specifica.
 
-Una **Queue** modella tipicamente una struttura **FIFO** (First-In, First-Out).  
-Una **Deque** (`double-ended queue`) consente inserimento e rimozione da entrambe le estremità, permettendo comportamenti **FIFO** e **LIFO** in una singola API.
+- Una **Queue** modella tipicamente una struttura **FIFO** (First-In, First-Out).  
+- Una **Deque** (`double-ended queue`) consente inserimento e rimozione da entrambe le estremità, permettendo comportamenti **FIFO** e **LIFO** in una singola API.
 
 <a id="271-queue--panoramica"></a>
 ## 27.1 Queue — Panoramica
@@ -66,7 +66,8 @@ Classi comuni che implementano `Queue`:
 
 `Deque` (double-ended queue) supporta inserimento, rimozione e ispezione sia dalla testa sia dalla coda.
 
-È più versatile di una Queue:  
+È più versatile di una Queue:
+  
 - FIFO (simile a una queue)  
 - LIFO (simile a uno stack)  
 - Algoritmi bidirezionali
@@ -183,10 +184,10 @@ Negli ambienti concorrenti, il package `java.util.concurrent` fornisce tipi di q
 - `DelayQueue` — elementi rilasciati dopo un ritardo.
 
 !!! note
-    BlockingQueue non consente mai `null`.
-    put(e) — blocca finché c’è spazio disponibile
-    take() — blocca finché un elemento è disponibile
-    BlockingQueue supporta anche operazioni temporizzate: offer(e, timeout), poll(timeout)
+    - BlockingQueue non consente mai `null`.
+    - put(e) — blocca finché c’è spazio disponibile
+    - take() — blocca finché un elemento è disponibile
+    - BlockingQueue supporta anche operazioni temporizzate: offer(e, timeout), poll(timeout)
 
 ---
 
