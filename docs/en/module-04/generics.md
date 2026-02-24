@@ -60,7 +60,8 @@ The resulting bytecode does not contain generics: it only contains concrete type
 
 In this way, type errors are caught before execution, making the code safer, more readable, and more reusable.
 
-Generics apply to:  
+Generics apply to:
+  
 - `Classes`
 - `Interfaces`
 - `Methods` (generic methods)
@@ -263,7 +264,7 @@ class Demo<T extends A & B> {
 }
 ```
 
-Erased Version
+Erased Version:
 
 ```java
 class Demo {
@@ -294,13 +295,16 @@ These two steps explain why some methods override correctly while others produce
 
 When a subclass declares a method that *might* override a superclass method, the compiler performs two checks:
 
-1. **Before erasure**  
-   The method must be type-compatible with the parent method.
+1. **Before erasure**
+  
+   The method must be type-compatible with the parent method:
+   
    - Same method name
    - Same parameter types (including generic arguments)
    - Compatible return type (covariant allowed)
 
-2. **After erasure**  
+2. **After erasure**
+  
    The erased signatures must match exactly.
 
 Both conditions must be satisfied.

@@ -61,6 +61,7 @@ Il bytecode risultante non contiene generics: contiene solo i tipi concreti e, s
 In questo modo, gli errori di tipo vengono intercettati prima dell’esecuzione, rendendo il codice più sicuro, leggibile e riutilizzabile.
 
 I Generics si applicano a:
+
 - `Classi`
 - `Interfacce`
 - `Metodi` (metodi generici)
@@ -220,7 +221,7 @@ void runAll(List<T> list) {
 }
 ```
 
-Versione con Erasure
+Versione con Erasure:
 
 ```java
 public static void runAll(List list) {
@@ -267,7 +268,7 @@ class Demo<T extends A & B> {
 }
 ```
 
-Versione con Erasure
+Versione con Erasure:
 
 ```java
 class Demo {
@@ -300,13 +301,16 @@ Questi due passaggi spiegano perché alcuni metodi effettuano correttamente l’
 
 Quando una sottoclasse dichiara un metodo che *potrebbe* effettuare l’override di un metodo della superclasse, il compilatore esegue due controlli:
 
-1. **Prima della erasure**  
+1. **Prima della erasure**
+  
    Il metodo deve essere compatibile a livello di tipo con quello della classe padre:
+   
    - Stesso nome del metodo
    - Stessi tipi dei parametri (inclusi gli argomenti generici)
    - Tipo di ritorno compatibile (covarianza ammessa)
 
-2. **Dopo la erasure**  
+2. **Dopo la erasure**
+  
    Le firme erase devono coincidere esattamente.
 
 Entrambe le condizioni devono essere soddisfatte.
@@ -384,6 +388,7 @@ class Child extends Parent {
 ```
 
 Entrambi i controlli sono soddisfatti:
+
 - Compatibilità prima della erasure
 - Firma identica dopo la erasure
 
@@ -580,7 +585,7 @@ Questo è permesso perché:
 - I tipi raw sono covarianti (List estende Collection).
 - Gli argomenti generici coincidono (String vs String).
 
-- 
+
 - Esempio: Overload Illegale Basato Solo sul Tipo di Ritorno
 
 ```java

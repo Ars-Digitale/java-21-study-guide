@@ -61,6 +61,7 @@ Le bytecode résultant ne contient pas de generics: il contient seulement les ty
 De cette manière, les erreurs de type sont interceptées avant l’exécution, rendant le code plus sûr, lisible et réutilisable.
 
 Les Generics s’appliquent à:
+
 - `Classes`
 - `Interfaces`
 - `Méthodes` (méthodes génériques)
@@ -220,7 +221,7 @@ void runAll(List<T> list) {
 }
 ```
 
-Version avec Erasure
+Version avec Erasure:
 
 ```java
 public static void runAll(List list) {
@@ -267,7 +268,7 @@ class Demo<T extends A & B> {
 }
 ```
 
-Version avec Erasure
+Version avec Erasure:
 
 ```java
 class Demo {
@@ -299,13 +300,16 @@ Ces deux étapes expliquent pourquoi certaines méthodes redéfinissent correcte
 
 Lorsqu’une sous-classe déclare une méthode qui *pourrait* redéfinir une méthode de la superclasse, le compilateur effectue deux vérifications :
 
-1. **Avant l’effacement**  
+1. **Avant l’effacement**
+  
    La méthode doit être compatible avec celle de la classe parente :
+   
    - Même nom
    - Même types de paramètres (y compris les arguments génériques)
    - Type de retour compatible (covariance autorisée)
 
 2. **Après l’effacement**  
+
    Les signatures effacées doivent correspondre exactement.
 
 Les deux conditions doivent être satisfaites.
@@ -575,7 +579,7 @@ Ceci est permis parce que:
 - Les types raw sont covariants (List étend Collection).
 - Les arguments génériques coïncident (String vs String).
 
--
+
 - Exemple: Surcharge Illégale Basée Seulement sur le Type de Retour
 
 ```java
