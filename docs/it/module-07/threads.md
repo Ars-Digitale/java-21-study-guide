@@ -115,7 +115,11 @@ Java 21 definisce diversi tipi di thread, che differiscono per ciclo di vita, sc
 - **Thread di Sistema**: Thread creati internamente dalla JVM per garbage collection, compilazione JIT e altri servizi runtime.
 
 !!! note
-    I `thread virtuali` sono thread utente leggeri; **non** sono daemon per default.
+    - I `virtual threads` sono thread utente leggeri ; non sono **daemon** per default ;
+    - Un VirtualThread (creato direttamente tramite `Thread.startVirtualThread()` oppure `Thread.ofVirtual().start(...)`) accetta un Runnable come task. Non accetta direttamente un Callable :
+      Se è necessario eseguire un Callable con virtual threads e ottenere un risultato, è necessario utilizzare un ExecutorService ;
+    - I virtual threads sono implementati dalla classe `java.lang.VirtualThread`. Questa classe estende `BaseVirtualThread`, che a sua volta estende Thread.
+      Pertanto, un virtual thread è tecnicamente una sottoclasse di Thread. Tuttavia, non è corretto descrivere un virtual thread come un istanza diretta della classe Thread, poiché è in realtà un istanza di una sottoclasse specializzata progettata specificamente per il comportamento dei virtual threads.
 
 ---
 

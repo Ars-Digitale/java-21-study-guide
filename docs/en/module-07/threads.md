@@ -114,7 +114,11 @@ Java 21 defines multiple kinds of threads, differing in lifecycle, scheduling, a
 
 
 !!! note
-    `Virtual threads` are lightweight user threads; they are **not** daemon by default.
+    - `Virtual threads` are lightweight user threads; they are **not** daemon by default;
+	- A VirtualThread (created directly via `Thread.startVirtualThread()` or `Thread.ofVirtual().start(...)`) accepts a Runnable as its task. It does not directly accept a Callable:
+	If you need to run a Callable with virtual threads and retrieve a result, you must use an ExecutorService;
+	- Virtual threads are implemented by the `java.lang.VirtualThread` class. This class extends `BaseVirtualThread`, which itself extends Thread. 
+	Therefore, a virtual thread is technically a subclass of Thread. However, it is not accurate to describe a virtual thread as a direct instance of the Thread class, since it is actually an instance of a specialized subclass designed specifically for virtual thread behavior.
 
 ---
 
