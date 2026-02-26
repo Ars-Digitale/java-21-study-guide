@@ -88,6 +88,13 @@ Then class loading proceeds in this strict order:
 !!! note
     After these steps, the class is fully prepared and may now be used (instantiated or referenced).
 
+
+!!! warning
+	Accessing a static field triggers the initialization only of the class or interface that directly declares that field. 
+	
+	This is true even if the field is accessed using the name of a subclass, a subinterface, or a class that implements the interface.
+
+
 ---
 
 <a id="153-object-creation-with-inheritance"></a>

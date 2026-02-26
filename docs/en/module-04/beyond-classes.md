@@ -200,7 +200,8 @@ non-sealed class Rectangle extends Shape { }
 
 - A sealed Type must declare all permitted subtypes.
 - A permitted subtype must be **final**, **sealed**, or **non-sealed**; because interfaces cannot be final, they can only be marked `sealed` or `non-sealed` when extending a sealed interface.
-- **Sealed types must be declared in the same package (or named module) as their direct sub-types**.
+- If a sealed class belongs to a `named` module, then all the classes listed in its permits clause must also belong to that `same module`.
+- If a sealed class belongs to an `unnamed module`, then all the classes listed in its permits clause must be declared in the `same package`.
 
 ---
 

@@ -59,9 +59,16 @@ Il existe aux côtés du **classpath** traditionnel, mais les deux se comportent
 | Ordre de résolution | Dépendant de l’ordre | Déterministe |
 
 !!! note
-    - Un JAR placé sur le `module path` devient un `module nommé (ou automatique)`.
-    - Un JAR placé sur le classpath est traité comme faisant partie du `module non nommé`.
-    - Les split packages sont autorisés sur le classpath mais interdits pour les modules nommés sur le module path.
+	- Un JAR placé sur le `module path` est traité comme un `module` :
+		- S il contient un `module-info.class`, il devient un `named module`.
+		- S il ne contient pas de descripteur de module, il devient un `automatic module`.
+	- Un JAR placé sur le classpath n est pas traité comme un module.
+		- À la place, il devient partie du unnamed module, avec toutes les autres entrées du classpath.
+	- Un JAR modulaire (c est-à-dire un JAR contenant module-info.class) peut toujours être utilisé comme un JAR régulier.
+		- S il est placé sur le classpath au lieu du module path, il est traité comme partie du unnamed module, permettant aux applications non modulaires de l utiliser sans adopter le module system.
+	- Split packages :
+		- Sont autorisés sur le classpath (plusieurs JAR peuvent contenir des classes dans le même package).
+		- Sont interdits pour les named modules ou automatic modules sur le module path.
 
 ---
 

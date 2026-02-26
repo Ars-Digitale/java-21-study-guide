@@ -88,6 +88,11 @@ Allora il caricamento delle classi procede in questo ordine rigoroso:
 !!! note
     Dopo questi passaggi, la classe è completamente pronta e può essere utilizzata (istanziata o referenziata).
 
+
+!!! warning
+	L’accesso a un campo statico provoca l’inizializzazione esclusivamente della classe o dell’interfaccia che lo dichiara direttamente. 
+	Questo vale anche se il campo viene referenziato tramite il nome di una sottoclasse, di una sottointerfaccia o di una classe che implementa l’interfaccia.
+
 ---
 
 <a id="153-creazione-degli-oggetti-con-ereditarietà"></a>
