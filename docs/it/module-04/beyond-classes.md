@@ -152,16 +152,59 @@ class Z implements X, Y {
 }
 ```
 
-<a id="1715-metodi-default"></a>
-### 17.1.5 Metodi `default`
+<a id="1715-default-methods"></a>
+### 17.1.5 `Default` methods
 
-Un metodo `default` (dichiarato con la keyword `default`) è un metodo che definisce un’implementazione e può essere sovrascritto da una classe che implementa l’interfaccia.
+Un metodo `default` (dichiarato con la parola chiave `default`) è un metodo che definisce un implementazione e può essere sovrascritto da una classe che implementa l interfaccia.
 
-- Un metodo default include codice ed è implicitamente `public`;
-- Un metodo default non può essere `abstract`, `static` o `final`;
-- Come visto appena sopra, se due interfacce forniscono metodi default con la stessa signature, la classe che implementa deve fare override del metodo;
-- Una classe che implementa può naturalmente basarsi sull’implementazione fornita del metodo `default` senza sovrascriverlo;
-- Il metodo `default` può essere invocato su un’istanza della classe che implementa e NON come metodo `static` dell’interfaccia contenitore;
+- Un metodo default contiene codice ed è implicitamente `public` ;
+- Un metodo default non può essere `abstract`, `static` o `final` ;
+- Come abbiamo visto appena sopra, se due interfacce forniscono metodi default con la stessa firma, la classe che implementa deve sovrascrivere il metodo ;
+- Una classe che implementa può naturalmente fare affidamento sull implementazione fornita dal metodo `default` senza sovrascriverlo ;
+- Il metodo `default` può essere invocato su un istanza della classe che implementa e NON come metodo `static` dell interfaccia che lo contiene ;
+- Una classe (o un interfaccia) può invocare esplicitamente un metodo default di un interfaccia che è direttamente menzionata nella sua clausola `implements` (o `extends`) utilizzando la sintassi `InterfaceName.super.methodName()` ; ciò è tipicamente utilizzato per risolvere ambiguità tra più metodi default ereditati ;
+- Questa sintassi può essere utilizzata solo se l interfaccia è esplicitamente menzionata nella clausola `implements` (o `extends`) ; non può essere utilizzata per invocare un metodo default proveniente da un interfaccia ereditata indirettamente ;
+- La sintassi `InterfaceName.super.methodName()` si applica esclusivamente ai metodi `default` e non può essere utilizzata per metodi astratti, metodi statici, metodi privati di interfaccia o campi.
+
+
+**Example**: Uso valido
+
+```java
+interface A {
+    default void hello() {
+        System.out.println("Hello from A");
+    }
+}
+
+class B implements A {
+
+    @Override
+    public void hello() {
+        A.super.hello();  // ✅ allowed
+        System.out.println("Hello from B");
+    }
+}
+```
+
+**Example**: Uso errato
+
+```java
+interface A {
+    default void hello() {
+        System.out.println("Hello from A");
+    }
+}
+
+interface B extends A {
+}
+
+class C implements B {
+
+    public void test() {
+        A.super.hello();  // ❌ compilation error
+    }
+}
+```
 
 <a id="1716-metodi-static"></a>
 ### 17.1.6 Metodi `static`

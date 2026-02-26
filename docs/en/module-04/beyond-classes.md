@@ -156,12 +156,55 @@ class Z implements X, Y {
 
 A `default` method (declared with the `default` keyword) is a method that defines an implementation and can be overridden by a class implementing the interface.
 
-
-- A default method include code and is implicitly `public`;
-- A default method cannot be `abstract`, `static` or `final`;
+- A default method includes code and is implicitly `public`;
+- A default method cannot be `abstract`, `static`, or `final`;
 - As we saw just above, if two interfaces provide default methods with the same signature, the implementing class must override the method;
-- An implementig class may of course rely on the provided implementation of the `default` method without overriding it;
+- An implementing class may of course rely on the provided implementation of the `default` method without overriding it;
 - The `default` method can be invoked on an instance of the implementing class and NOT as a `static` method of the containing interface;
+- A class (or an interface) can explicitly invoke a default method of an interface that is directly listed in its `implements` clause (or `extends` clause) by using the syntax `InterfaceName.super.methodName()`; this is typically used to disambiguate multiple inherited default methods;
+- This syntax can only be used if the interface is explicitly mentioned in the `implements` (or `extends`) clause; it cannot be used to invoke a default method from an indirectly inherited interface;
+- The `InterfaceName.super.methodName()` syntax applies only to `default` methods and cannot be used for abstract methods, static methods, private interface methods, or fields.
+
+
+**Example**: Valid Usage
+
+```java
+interface A {
+    default void hello() {
+        System.out.println("Hello from A");
+    }
+}
+
+class B implements A {
+
+    @Override
+    public void hello() {
+        A.super.hello();  // ✅ allowed
+        System.out.println("Hello from B");
+    }
+}
+```
+
+**Example**: Invalid Usage
+
+```java
+interface A {
+    default void hello() {
+        System.out.println("Hello from A");
+    }
+}
+
+interface B extends A {
+}
+
+class C implements B {
+
+    public void test() {
+        A.super.hello();  // ❌ compilation error
+    }
+}
+```
+
 
 <a id="1716-static-methods"></a>
 ### 17.1.6 `Static` methods
