@@ -91,6 +91,7 @@ Allora il caricamento delle classi procede in questo ordine rigoroso:
 
 !!! warning
 	L’accesso a un campo statico provoca l’inizializzazione esclusivamente della classe o dell’interfaccia che lo dichiara direttamente. 
+	
 	Questo vale anche se il campo viene referenziato tramite il nome di una sottoclasse, di una sottointerfaccia o di una classe che implementa l’interfaccia.
 
 ---

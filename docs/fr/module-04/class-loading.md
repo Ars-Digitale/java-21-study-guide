@@ -89,6 +89,7 @@ Alors le chargement des classes se déroule dans cet ordre strict :
 
 !!! warning
 	L’accès à un champ statique provoque l’initialisation uniquement de la classe ou de l’interface qui le déclare directement. 
+	
 	Cela reste vrai même si le champ est référencé en utilisant le nom d’une sous-classe, d’une sous-interface ou d’une classe qui implémente l’interface.
 
 ---
