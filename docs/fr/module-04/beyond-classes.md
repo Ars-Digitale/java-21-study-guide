@@ -209,7 +209,10 @@ class C implements B {
 }
 ```
 
-Une sous-interface est autorisée à redéclarer une méthode statique d'une superinterface comme méthode `default`.
+!!! note
+	- Une sous-interface est autorisée à redéclarer une méthode statique d'une superinterface comme méthode `default`.
+
+**Exemple** :
 
 ```java
 interface Parent {
@@ -220,6 +223,40 @@ interface Child extends Parent {
     default void p() { } // VALID, static method redeclared as default
 }
 ```
+
+!!! note
+	- Une interface est autorisée à redéclarer une méthode `default` héritée d une superinterface et à la transformer en méthode `abstract`.
+	
+	Lorsque cela se produit, l implémentation `default` provenant de la superinterface est effectivement supprimée dans la sous-interface. 
+	En conséquence, toute classe qui implémente la sous-interface N héritera PAS de l implémentation `default` originale et devra fournir sa propre implémentation.
+
+**Exemple** :
+
+```java
+interface Parent {
+    default void greet() {
+        System.out.println("Hello from Parent");
+    }
+}
+
+interface Child extends Parent {
+    void greet();   // redéclarée comme abstraite
+}
+
+class Demo implements Child {
+    public void greet() {   // obligatoire
+        System.out.println("Hello from Demo");
+    }
+}
+```
+
+Explication :
+
+- `Parent` fournit une implémentation par défaut de `greet()`.
+- `Child` redéclare `greet()` sans `default`, la rendant à nouveau abstraite.
+- `Demo` ne peut pas hériter de l implémentation par défaut de `Parent`.
+- Par conséquent, `Demo` doit implémenter explicitement `greet()`.
+
 
 <a id="1716-méthodes-static"></a>
 ### 17.1.6 Méthodes `static`

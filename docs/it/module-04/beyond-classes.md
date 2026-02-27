@@ -207,8 +207,10 @@ class C implements B {
 }
 ```
 
-
-Una sottointerfaccia può ridichiarare un metodo statico di una superinterfaccia come metodo `default` ;
+!!! note
+	- Una sottointerfaccia può ridichiarare un metodo statico di una superinterfaccia come metodo `default` ;
+	
+**Esempio**:
 
 ```java
 interface Parent {
@@ -220,6 +222,38 @@ interface Child extends Parent {
 }
 ```
 
+!!! note
+	- Un interfaccia è autorizzata a ridichiarare un metodo `default` ereditato da una superinterfaccia e a trasformarlo in un metodo `abstract`.
+	
+	Quando ciò accade, l implementazione `default` proveniente dalla superinterfaccia viene effettivamente rimossa nella sottointerfaccia. 
+	Di conseguenza, qualsiasi classe che implementa la sottointerfaccia NON erediterà l implementazione `default` originale e dovrà fornire una propria implementazione.
+
+**Esempio**:
+
+```java
+interface Parent {
+    default void greet() {
+        System.out.println("Hello from Parent");
+    }
+}
+
+interface Child extends Parent {
+    void greet();   // ridichiarato come abstract
+}
+
+class Demo implements Child {
+    public void greet() {   // obbligatorio
+        System.out.println("Hello from Demo");
+    }
+}
+```
+
+Spiegazione:
+
+- `Parent` fornisce un implementazione di default di `greet()`.
+- `Child` ridichiara `greet()` senza `default`, rendendolo nuovamente astratto.
+- `Demo` non può ereditare l implementazione di default di `Parent`.
+- Pertanto, `Demo` deve implementare esplicitamente `greet()`.
 
 <a id="1716-metodi-static"></a>
 ### 17.1.6 Metodi `static`

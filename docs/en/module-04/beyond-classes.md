@@ -206,7 +206,10 @@ class C implements B {
 }
 ```
 
-A subinterface is allowed to redeclare a static method from a superinterface as a `default` method.
+!!! note
+	- A subinterface is allowed to redeclare a static method from a superinterface as a `default` method.
+
+**Example**: 
 
 ```java
 interface Parent {
@@ -217,6 +220,39 @@ interface Child extends Parent {
     default void p() { } // VALID, static method redeclared as default
 }
 ```
+
+!!! note
+	- An interface is allowed to redeclare a `default` method inherited from a superinterface and turn it into an `abstract` method.
+	
+	When this happens, the `default` implementation from the superinterface is effectively removed in the subinterface. 
+	As a consequence, any class that implements the subinterface will NOT inherit the original `default` implementation and must provide its own implementation.
+
+**Example**:
+
+```java
+interface Parent {
+    default void greet() {
+        System.out.println("Hello from Parent");
+    }
+}
+
+interface Child extends Parent {
+    void greet();   // redeclared as abstract
+}
+
+class Demo implements Child {
+    public void greet() {   // mandatory
+        System.out.println("Hello from Demo");
+    }
+}
+```
+
+Explanation:
+
+- `Parent` provides a default implementation of `greet()`.
+- `Child` redeclares `greet()` without `default`, making it abstract again.
+- `Demo` cannot inherit the default implementation from `Parent`.
+- Therefore, `Demo` must implement `greet()` explicitly.
 
 
 <a id="1716-static-methods"></a>
