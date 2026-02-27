@@ -487,6 +487,28 @@ public class TestOverride {
 }
 ```
 
+On ne peut pas redéfinir une méthode d instance avec une méthode statique, ni redéfinir une méthode statique avec une méthode d instance. 
+
+Cependant, une sous-interface est autorisée à redéclarer une méthode statique d une superinterface comme méthode `default`.
+
+- Exemple :
+
+```java
+class Alpha {
+    static void a() { }
+    void b() { }
+    static void c() { }
+    void d() { }
+}
+
+class Beta extends Alpha {
+    void a() { }        // NE COMPILE PAS (impossible de redéfinir une méthode statique avec une méthode d instance)
+    static void b() { } // NE COMPILE PAS (impossible de redéfinir une méthode d instance avec une méthode statique)
+    static void c() { } // VALIDE, c() dans Alpha est masquée
+    void d() { }        // VALIDE, d() dans Alpha est redéfinie
+}
+```
+
 
 <a id="161312-utiliser-super-pour-appeler-limplémentation-du-parent"></a>
 #### 16.13.1.2 Utiliser super pour appeler l’Implémentation du Parent

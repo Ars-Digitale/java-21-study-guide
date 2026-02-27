@@ -161,6 +161,7 @@ Une méthode `default` (déclarée avec le mot-clé `default`) est une méthode 
 
 - Une méthode default contient du code et est implicitement `public` ;
 - Une méthode default ne peut pas être `abstract`, `static` ou `final` ;
+- Une sous-interface est autorisée à redéclarer une méthode statique d'une superinterface comme méthode `default`.
 - Comme nous l'avons vu juste au-dessus, si deux interfaces fournissent des méthodes default avec la même signature, la classe implémentante doit redéfinir la méthode ;
 - Une classe implémentante peut bien sûr s'appuyer sur l'implémentation fournie par la méthode `default` sans la redéfinir ;
 - La méthode `default` peut être invoquée sur une instance de la classe implémentante et NON comme une méthode `static` de l interface qui la contient ;
@@ -205,6 +206,18 @@ class C implements B {
     public void test() {
         A.super.hello();  // ❌ compilation error
     }
+}
+```
+
+Une sous-interface est autorisée à redéclarer une méthode statique d'une superinterface comme méthode `default`.
+
+```java
+interface Parent {
+    static void p() { }
+}
+
+interface Child extends Parent {
+    default void p() { } // VALID, static method redeclared as default
 }
 ```
 

@@ -158,6 +158,7 @@ A `default` method (declared with the `default` keyword) is a method that define
 
 - A default method includes code and is implicitly `public`;
 - A default method cannot be `abstract`, `static`, or `final`;
+- A subinterface is allowed to redeclare a static method from a superinterface as a `default` method.
 - As we saw just above, if two interfaces provide default methods with the same signature, the implementing class must override the method;
 - An implementing class may of course rely on the provided implementation of the `default` method without overriding it;
 - The `default` method can be invoked on an instance of the implementing class and NOT as a `static` method of the containing interface;
@@ -205,6 +206,18 @@ class C implements B {
 }
 ```
 
+A subinterface is allowed to redeclare a static method from a superinterface as a `default` method.
+
+```java
+interface Parent {
+    static void p() { }
+}
+
+interface Child extends Parent {
+    default void p() { } // VALID, static method redeclared as default
+}
+```
+
 
 <a id="1716-static-methods"></a>
 ### 17.1.6 `Static` methods
@@ -212,6 +225,7 @@ class C implements B {
 - An interface can provide `static methods` (through the keyword `static`) which are implicitly `public`;
 - Static methods must include a method body and are accessed using the interface name;
 - Static methods cannot be `abstract` or `final`;
+
 
 <a id="1717-private-interface-methods"></a>
 ### 17.1.7 `Private` interface methods

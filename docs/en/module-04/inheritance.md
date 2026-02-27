@@ -496,6 +496,28 @@ public class TestOverride {
 }
 ```
 
+You cannot override an instance method with a static method, nor override a static method with an instance method.  
+
+However, a subinterface is allowed to redeclare a static method from a superinterface as a `default` method.
+
+- Example:
+
+```java
+class Alpha {
+    static void a() { }
+    void b() { }
+    static void c() { }
+    void d() { }
+}
+
+class Beta extends Alpha {
+    void a() { }        // DOES NOT COMPILE (cannot override static with instance)
+    static void b() { } // DOES NOT COMPILE (cannot override instance with static)
+    static void c() { } // VALID, c() in Alpha is hidden
+    void d() { }        // VALID, d() in Alpha is overridden
+}
+```
+
 
 <a id="161312-using-super-to-call-the-parent-implementation"></a>
 #### 16.13.1.2 Using `super` to Call the Parent Implementation

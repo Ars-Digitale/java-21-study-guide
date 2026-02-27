@@ -488,6 +488,28 @@ public class TestOverride {
 }
 ```
 
+Non è possibile sovrascrivere un metodo di istanza con un metodo statico, né sovrascrivere un metodo statico con un metodo di istanza. 
+
+Tuttavia, una sottointerfaccia può ridichiarare un metodo statico di una superinterfaccia come metodo `default`.
+
+- Esempio :
+
+```java
+class Alpha {
+    static void a() { }
+    void b() { }
+    static void c() { }
+    void d() { }
+}
+
+class Beta extends Alpha {
+    void a() { }        // NON COMPILA (impossibile sovrascrivere un metodo statico con un metodo di istanza)
+    static void b() { } // NON COMPILA (impossibile sovrascrivere un metodo di istanza con un metodo statico)
+    static void c() { } // VALIDO, c() in Alpha è nascosto
+    void d() { }        // VALIDO, d() in Alpha è sovrascritto
+}
+```
+
 
 <a id="161312-usare-super-per-chiamare-limplementazione-del-parent"></a>
 #### 16.13.1.2 Usare super per chiamare l’Implementazione del Parent

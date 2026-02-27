@@ -159,6 +159,7 @@ Un metodo `default` (dichiarato con la parola chiave `default`) è un metodo che
 
 - Un metodo default contiene codice ed è implicitamente `public` ;
 - Un metodo default non può essere `abstract`, `static` o `final` ;
+- Una sottointerfaccia può ridichiarare un metodo statico di una superinterfaccia come metodo `default` ;
 - Come abbiamo visto appena sopra, se due interfacce forniscono metodi default con la stessa firma, la classe che implementa deve sovrascrivere il metodo ;
 - Una classe che implementa può naturalmente fare affidamento sull implementazione fornita dal metodo `default` senza sovrascriverlo ;
 - Il metodo `default` può essere invocato su un istanza della classe che implementa e NON come metodo `static` dell interfaccia che lo contiene ;
@@ -205,6 +206,20 @@ class C implements B {
     }
 }
 ```
+
+
+Una sottointerfaccia può ridichiarare un metodo statico di una superinterfaccia come metodo `default` ;
+
+```java
+interface Parent {
+    static void p() { }
+}
+
+interface Child extends Parent {
+    default void p() { } // VALID, static method redeclared as default
+}
+```
+
 
 <a id="1716-metodi-static"></a>
 ### 17.1.6 Metodi `static`
