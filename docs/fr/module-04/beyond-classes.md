@@ -161,6 +161,7 @@ Une méthode `default` (déclarée avec le mot-clé `default`) est une méthode 
 
 - Une méthode default contient du code et est implicitement `public` ;
 - Une méthode default ne peut pas être `abstract`, `static` ou `final` ;
+- Une interface peut redéclarer une méthode `default` et fournir une implémentation différente ;
 - Une sous-interface est autorisée à redéclarer une méthode statique d'une superinterface comme méthode `default`.
 - Comme nous l'avons vu juste au-dessus, si deux interfaces fournissent des méthodes default avec la même signature, la classe implémentante doit redéfinir la méthode ;
 - Une classe implémentante peut bien sûr s'appuyer sur l'implémentation fournie par la méthode `default` sans la redéfinir ;
