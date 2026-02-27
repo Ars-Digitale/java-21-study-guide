@@ -152,8 +152,8 @@ class Z implements X, Y {
 }
 ```
 
-<a id="1715-default-methods"></a>
-### 17.1.5 `Default` methods
+<a id="1715-metodi-default"></a>
+### 17.1.5 Metodi `Default`
 
 Un metodo `default` (dichiarato con la parola chiave `default`) è un metodo che definisce un implementazione e può essere sovrascritto da una classe che implementa l interfaccia.
 

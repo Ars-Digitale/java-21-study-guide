@@ -154,8 +154,8 @@ class Z implements X, Y {
 }
 ```
 
-<a id="1715-default-methods"></a>
-### 17.1.5 `Default` methods
+<a id="1715-méthodes-default"></a>
+### 17.1.5 Méthodes `Default`
 
 Une méthode `default` (déclarée avec le mot-clé `default`) est une méthode qui définit une implémentation et peut être redéfinie par une classe qui implémente l interface.
 
