@@ -183,6 +183,7 @@ $(find src -name "*.java")
 ```
 
 Qui:
+
 - `--module-source-path` individua gli alberi dei sorgenti dei moduli
 - `--module-path` fornisce moduli già compilati
 
@@ -252,6 +253,7 @@ module com.example.app {
 ```
 
 Effetti di requires:
+
 - La dipendenza deve essere presente a compile-time e a runtime
 - I package esportati del modulo richiesto diventano accessibili
 
@@ -270,6 +272,7 @@ module com.example.lib {
 ```
 
 Significato:
+
 - **Qualsiasi modulo che richiede com.example.lib legge automaticamente com.example.util**
 - **I chiamanti non devono dichiarare requires com.example.util esplicitamente**
 
@@ -337,6 +340,7 @@ module com.example.app {
 !!! note
     `opens` influenza la reflection; `exports` influenza la compilazione e la visibilità dei tipi.
 
+
 <a id="3877-tabella-delle-direttive-principali"></a>
 ### 38.7.7 Tabella delle Direttive Principali
 
@@ -383,6 +387,7 @@ Un `modulo named` possiede un `module-info.class` e una identità stabile.
 - Dipendenze esplicite
 - Supporto completo JPMS
 
+
 <a id="3882-moduli-automatici"></a>
 ### 38.8.2 Moduli Automatici
 
@@ -398,6 +403,7 @@ Il suo nome è derivato dal nome del file JAR.
     I moduli automatici esistono per facilitare la migrazione.
     Non sono adatti come design a lungo termine.
 
+
 <a id="3883-modulo-unnamed"></a>
 ### 38.8.3 Modulo Unnamed
 
@@ -409,6 +415,7 @@ Il codice nel classpath appartiene al `modulo unnamed`.
 
 !!! note
     Il `modulo unnamed` preserva il comportamento legacy del classpath.
+
 
 <a id="3884-riepilogo-comparativo"></a>
 ### 38.8.4 Riepilogo Comparativo
@@ -474,6 +481,7 @@ jlink
 ```
 
 Benefici:
+
 - runtime più piccolo
 - avvio più rapido
 - nessun modulo JDK inutilizzato
@@ -493,6 +501,7 @@ jpackage
 ```
 
 `jpackage` può produrre:
+
 - .exe / .msi (Windows)
 - .pkg / .dmg (macOS)
 - .deb / .rpm (Linux)

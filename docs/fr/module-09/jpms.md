@@ -204,7 +204,7 @@ module com.example.hello {
 }
 ```
 
-La `directive exports` rend le package accessible aux autres modules.
+La `directive exports` rend le `package` accessible aux autres modules.
 
 Sans elle, le package est encapsulé et inaccessible.
 

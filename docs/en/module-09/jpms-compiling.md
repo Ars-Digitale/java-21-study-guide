@@ -185,6 +185,7 @@ $(find src -name "*.java")
 ```
 
 Here:
+
 - `--module-source-path` locates module source trees
 - `--module-path` provides already-compiled modules
 
@@ -241,6 +242,7 @@ The `module-info.java` file contains directives that describe dependencies, visi
 
 Each directive has a precise meaning.
 
+
 <a id="3871-requires"></a>
 ### 38.7.1 `requires`
 
@@ -255,8 +257,10 @@ module com.example.app {
 ```
 
 Effects of requires:
+
 - Dependency must be present at compile and runtime
 - Exported packages of the required module become accessible
+
 
 <a id="3872-requires-transitive"></a>
 ### 38.7.2 `requires transitive`
@@ -273,6 +277,7 @@ module com.example.lib {
 ```
 
 Meaning:
+
 - **Any module requiring com.example.lib automatically reads com.example.util**
 - **Callers do not need to declare requires com.example.util explicitly**
 
@@ -326,6 +331,7 @@ module com.example.app {
 !!! note
     opens does NOT make a package accessible at compile time.
     It only affects runtime reflection.
+
 
 <a id="3876-opens--to-qualified-opens"></a>
 ### 38.7.6 `opens ... to` (Qualified Opens)
@@ -382,6 +388,7 @@ JPMS must interoperate with legacy code.
 
 To support gradual adoption, the JVM recognizes three different module categories.
 
+
 <a id="3881-named-modules"></a>
 ### 38.8.1 Named Modules
 
@@ -390,6 +397,7 @@ A `named module` has a `module-info.class` and a stable identity.
 - Strong encapsulation
 - Explicit dependencies
 - Full JPMS support
+
 
 <a id="3882-automatic-modules"></a>
 ### 38.8.2 Automatic Modules
@@ -417,6 +425,7 @@ Code on the classpath belongs to the `unnamed module`.
 
 !!! note
     The `unnamed module` preserves legacy classpath behavior.
+
 
 <a id="3884-comparison-summary"></a>
 ### 38.8.4 Comparison Summary
@@ -482,6 +491,7 @@ jlink
 ```
 
 Benefits:
+
 - smaller runtime
 - faster startup
 - no unused JDK modules
@@ -501,6 +511,7 @@ jpackage
 ```
 
 `jpackage` can produce:
+
 - .exe / .msi (Windows)
 - .pkg / .dmg (macOS)
 - .deb / .rpm (Linux)

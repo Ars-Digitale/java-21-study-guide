@@ -203,7 +203,7 @@ module com.example.hello {
 }
 ```
 
-The `exports directive` makes the package accessible to other modules.
+The `exports directive` makes the `package` accessible to other modules.
 
 Without it, the package is encapsulated and inaccessible.
 

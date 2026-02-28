@@ -183,6 +183,7 @@ $(find src -name "*.java")
 ```
 
 Ici :
+
 - `--module-source-path` localise les arbres de sources des modules
 - `--module-path` fournit des modules déjà compilés
 
@@ -238,6 +239,7 @@ Le fichier `module-info.java` contient des directives qui décrivent les dépend
 
 Chaque directive a une signification précise.
 
+
 <a id="3871-requires"></a>
 ### 38.7.1 `requires`
 
@@ -252,8 +254,10 @@ module com.example.app {
 ```
 
 Effets de requires :
+
 - La dépendance doit être présente à la compilation et à l’exécution
 - Les packages exportés du module requis deviennent accessibles
+
 
 <a id="3872-requires-transitive"></a>
 ### 38.7.2 `requires transitive`
@@ -270,6 +274,7 @@ module com.example.lib {
 ```
 
 Signification :
+
 - **Tout module qui requiert com.example.lib lit automatiquement com.example.util**
 - **Les appelants n’ont pas besoin de déclarer requires com.example.util explicitement**
 
@@ -292,6 +297,7 @@ module com.example.lib {
 ```
 
 Les packages non exportés restent fortement encapsulés.
+
 
 <a id="3874-exports--to-exports-qualifiés"></a>
 ### 38.7.4 `exports ... to` (Exports Qualifiés)
@@ -337,6 +343,7 @@ module com.example.app {
 !!! note
     `opens` affecte la réflexion ; `exports` affecte la compilation et la visibilité des types.
 
+
 <a id="3877-table-des-directives-principales"></a>
 ### 38.7.7 Table des Directives Principales
 
@@ -348,6 +355,7 @@ module com.example.app {
 | `exports ... to` | Exposer à des modules spécifiques |
 | `opens` | Autoriser la réflexion à l’exécution |
 | `opens ... to` | Restreindre l’accès réflexif |
+
 
 <a id="3878-exports-vs-opens--accès-à-la-compilation-vs-à-lexécution"></a>
 ### 38.7.8 Exports vs Opens — Accès à la Compilation vs à lExécution
@@ -373,6 +381,7 @@ JPMS doit interopérer avec du code legacy.
 
 Pour supporter l’adoption progressive, la JVM reconnaît trois catégories différentes de modules.
 
+
 <a id="3881-modules-nommés"></a>
 ### 38.8.1 Modules Nommés
 
@@ -381,6 +390,7 @@ Un `module nommé` possède un `module-info.class` et une identité stable.
 - Encapsulation forte
 - Dépendances explicites
 - Support complet JPMS
+
 
 <a id="3882-modules-automatiques"></a>
 ### 38.8.2 Modules Automatiques
@@ -408,6 +418,7 @@ Le code sur le classpath appartient au `module unnamed`.
 
 !!! note
     Le `module unnamed` préserve le comportement legacy du classpath.
+
 
 <a id="3884-résumé-comparatif"></a>
 ### 38.8.4 Résumé Comparatif
@@ -473,6 +484,7 @@ jlink
 ```
 
 Avantages :
+
 - runtime plus petit
 - démarrage plus rapide
 - aucun module JDK inutilisé
@@ -492,6 +504,7 @@ jpackage
 ```
 
 `jpackage` peut produire :
+
 - .exe / .msi (Windows)
 - .pkg / .dmg (macOS)
 - .deb / .rpm (Linux)
