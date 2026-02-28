@@ -27,6 +27,7 @@ The `Java Platform Module System` (**JPMS**) was introduced in Java 9.
 It is a language-level and runtime-level mechanism for structuring Java applications into strongly encapsulated units called `modules`.
 
 JPMS affects how code is:
+
 - organized
 - compiled
 - linked
@@ -39,6 +40,7 @@ Understanding JPMS is essential for modern Java, especially for large applicatio
 ## 37.1 Why Modules Were Introduced
 
 Before Java 9, Java applications were built using only:
+
 - `packages`
 - `JAR` files
 - the `classpath`
@@ -49,6 +51,7 @@ This model had serious limitations as applications grew.
 ### 37.1.1 Problems with the Classpath
 
 The classpath is a flat list of JARs where:
+
 - all public classes are accessible to everyone
 - there is no reliable dependency declaration
 - conflicting versions are common
@@ -57,6 +60,7 @@ The classpath is a flat list of JARs where:
 
 
 This led to well-known issues such as:
+
 - “JAR hell”
 - classpath ordering bugs
 - accidental use of internal APIs
@@ -89,6 +93,7 @@ Every named module has a unique name that identifies it to the compiler and modu
 
 
 It explicitly declares:
+
 - what it depends on
 - what it exposes to other modules
 - what it keeps hidden
@@ -160,6 +165,7 @@ src/
 ```
 
 Key points:
+
 - The **directory name matches the module name**
 - `module-info.java` is at the top of the module source root
 - packages follow standard Java naming rules
