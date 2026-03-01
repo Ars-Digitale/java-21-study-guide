@@ -90,6 +90,55 @@ Queste opzioni possono essere utilizzate sia durante la compilazione sia durante
 
 - **`--module-path`** o **`-p`**  
   Specifica i percorsi nei quali `java` o `javac` cercheranno le definizioni dei moduli.
+  
+  
+Il sistema dei moduli Java mette a disposizione tre opzioni speciali da linea di comando, utilizzabili sia con `javac` sia con `java`, che consentono di modificare temporaneamente le regole di accesso tra moduli senza alterare i file `module-info.java`. Queste opzioni hanno effetto solo per quella specifica esecuzione del comando e non modificano in modo permanente i descrittori dei moduli.
+
+Le tre opzioni sono:
+
+- `--add-reads`
+- `--add-exports`
+- `--add-opens`
+
+Sono generalmente utilizzate per test, retrocompatibilità, migrazione di applicazioni esistenti oppure quando si lavora con moduli di terze parti che non possono essere modificati.
+
+Supponiamo, ad esempio, che `moduleA` debba accedere ai tipi pubblici di `moduleB`, ma che:
+
+- `moduleA` non dichiari `requires moduleB;`
+- `moduleB` non esporti il package richiesto verso `moduleA`
+
+Invece di modificare i file `module-info.java`, è possibile concedere temporaneamente l’accesso necessario con:
+
+```bash
+javac --add-reads moduleA=moduleB \
+      --add-exports moduleB/com.modB.package1=moduleA \
+      ...
+
+java  --add-reads moduleA=moduleB \
+      --add-exports moduleB/com.modB.package1=moduleA \
+      ...
+```
+
+Significato delle opzioni:
+
+- `--add-reads moduleA=moduleB`  
+  Dichiara temporaneamente che `moduleA` legge `moduleB`.  
+  È equivalente ad aggiungere `requires moduleB;` nel descrittore di `moduleA`.  
+  In questo modo, `moduleA` può accedere ai package esportati di `moduleB`.
+
+- `--add-exports moduleB/com.modB.package1=moduleA`  
+  Esporta temporaneamente il package `com.modB.package1` dal modulo `moduleB` verso `moduleA`.  
+  È equivalente ad aggiungere:  
+  `exports com.modB.package1 to moduleA;`  
+  nel descrittore di `moduleB`.
+
+Distinzione importante:
+
+- `--add-reads` stabilisce la leggibilità a livello di modulo.
+- `--add-exports` concede l’accesso a specifici package.
+- `--add-opens` (non mostrato sopra) è simile a `--add-exports`, ma consente anche l’accesso tramite reflection profonda (deep reflection), spesso necessario per alcuni framework.
+
+Queste opzioni non modificano i metadati compilati del modulo; si limitano ad adattare il grafo dei moduli per quella specifica esecuzione di `javac` o `java`.
 
 
 <a id="3822-opzioni-applicabili-solo-a-javac"></a>

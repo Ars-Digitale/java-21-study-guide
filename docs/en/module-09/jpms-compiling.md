@@ -91,6 +91,56 @@ These options can be used during compilation as well as execution:
 
 - **`--module-path`** or **`-p`**  
   Specifies the paths where `java` or `javac` will look for module definitions.
+  
+
+The Java Module System provides three special command-line options, usable with both `javac` and `java`, that allow you to override module access rules at runtime or compilation time without modifying the `module-info.java` files. 
+These options affect only the current command execution and do not permanently change the module descriptors.
+
+The three options are:
+
+- `--add-reads`
+- `--add-exports`
+- `--add-opens`
+
+They are typically used for testing, backward compatibility, migration scenarios, or when working with third-party modules that cannot be modified.
+
+For example, suppose `moduleA` needs to access public types from `moduleB`, but:
+
+- `moduleA` does not declare `requires moduleB;`
+- `moduleB` does not export the required package to `moduleA`
+
+Instead of editing the `module-info.java` files, you can temporarily grant the necessary access using:
+
+```bash
+javac --add-reads moduleA=moduleB \
+      --add-exports moduleB/com.modB.package1=moduleA \
+      ...
+
+java  --add-reads moduleA=moduleB \
+      --add-exports moduleB/com.modB.package1=moduleA \
+      ...
+```
+
+Here is what each option means:
+
+- `--add-reads moduleA=moduleB`  
+  Temporarily declares that `moduleA` reads `moduleB`.  
+  This is equivalent to adding `requires moduleB;` inside `moduleA`’s descriptor.  
+  It allows `moduleA` to access the exported packages of `moduleB`.
+
+- `--add-exports moduleB/com.modB.package1=moduleA`  
+  Temporarily exports the package `com.modB.package1` from `moduleB` to `moduleA`.  
+  This is equivalent to adding:  
+  `exports com.modB.package1 to moduleA;`  
+  inside `moduleB`’s descriptor.
+
+Important distinction:
+
+- `--add-reads` establishes module-level readability.
+- `--add-exports` grants access to specific packages.
+- `--add-opens` (not shown above) is similar to `--add-exports` but additionally allows deep reflection access, typically required by frameworks.
+
+These options do not modify the compiled module metadata; they only adjust the module graph for that particular invocation of `javac` or `java`.
 
 
 <a id="3822-options-applicable-only-to-javac"></a>
