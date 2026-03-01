@@ -716,6 +716,29 @@ class Test {
 }
 ```
 
+À l’intérieur d’une classe interne `non-static`, on peut faire référence à l’objet englobant en utilisant `OuterClass.this`.  
+L’expression `InnerClass.this`, qui est équivalente à `this`, fait référence à l’objet `Inner` courant.
+
+- Exemple :
+
+```java
+class Outer {
+    int x = 10;
+
+    class Inner {
+        int x = 20;
+
+        void print() {
+            System.out.println(x);              // 20 (Inner.this.x)
+            System.out.println(this.x);         // 20
+            System.out.println(Outer.this.x);   // 10
+        }
+    }
+}
+```
+
+
+
 <a id="17522-erreurs-courantes"></a>
 #### 17.5.2.2 Erreurs Courantes
 
@@ -760,6 +783,27 @@ class Outer {
         }
 
         new Local().show();
+    }
+}
+```
+
+Une classe locale, tout comme une classe interne membre, possède une référence implicite vers l’instance englobante via `OuterClass.this`.  
+Elle dispose également de `LocalClass.this`, équivalent à `this`, qui est valide à l’intérieur du corps de la classe locale.
+
+- Exemple :
+
+```java
+class Outer {
+    int x = 10;
+
+    void method() {
+        class Local {
+            void print() {
+                System.out.println(Outer.this.x);  // ✔ valide
+
+                System.out.println(Local.this);   // ✔ valide
+            }
+        }
     }
 }
 ```

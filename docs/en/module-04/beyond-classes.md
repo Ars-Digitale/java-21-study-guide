@@ -720,6 +720,28 @@ class Test {
 }
 ```
 
+Inside the `non-static` inner class, you can refer to the enclosing object using `OuterClass.this` and
+`InnerClass.this`, which is equivalent to `this`, refers to the current Inner object:
+
+- Example:
+
+```java
+class Outer {
+    int x = 10;
+
+    class Inner {
+        int x = 20;
+
+        void print() {
+            System.out.println(x);              // 20 (Inner.this.x)
+            System.out.println(this.x);         // 20
+            System.out.println(Outer.this.x);   // 10
+        }
+    }
+}
+```
+
+
 <a id="17522-common-pitfalls"></a>
 #### 17.5.2.2 Common Pitfalls
 
@@ -768,6 +790,28 @@ class Outer {
     }
 }
 ```
+
+A local class, just like in a member inner class, has an implicit reference to the enclosing instance using `OuterClass.this` and also `LocalClass.this`, equivalent to `this`, is valid inside the local class body.
+
+
+- Example:
+
+```java
+class Outer {
+    int x = 10;
+
+    void method() {
+        class Local {
+            void print() {
+                System.out.println(Outer.this.x);  // ✔ valid
+				
+				System.out.println(Local.this);   // ✔ valid
+            }
+        }
+    }
+}
+```
+
 
 <a id="17532-common-pitfalls"></a>
 #### 17.5.3.2 Common Pitfalls
