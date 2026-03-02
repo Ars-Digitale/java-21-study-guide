@@ -28,13 +28,23 @@
 	- [38.8.2 Moduli Automatici](#3882-moduli-automatici)
 	- [38.8.3 Modulo Unnamed](#3883-modulo-unnamed)
 	- [38.8.4 Riepilogo Comparativo](#3884-riepilogo-comparativo)
-- [38.9 Ispezionare Moduli e Dipendenze](#389-ispezionare-moduli-e-dipendenze)
-	- [38.9.1 Descrivere Moduli con java](#3891-descrivere-moduli-con-java)
-	- [38.9.2 Descrivere JAR Modulari](#3892-descrivere-jar-modulari)
-	- [38.9.3 Analizzare le Dipendenze con jdeps](#3893-analizzare-le-dipendenze-con-jdeps)
-- [38.10 Creare Immagini Runtime Personalizzate con jlink](#3810-creare-immagini-runtime-personalizzate-con-jlink)
-- [38.11 Creare Applicazioni Self-Contained con jpackage](#3811-creare-applicazioni-self-contained-con-jpackage)
-- [38.12 Riepilogo Finale JPMS in Pratica](#3812-riepilogo-finale-jpms-in-pratica)
+- [38.9 Approccio Top-Down e Bottom-Up per modularizzare un’applicazione](#389-approccio-top-down-e-bottom-up-per-modularizzare-unapplicazione)
+	- [38.9.1 Approccio Top-Down](#3891-approccio-top-down)
+	  - [38.9.1.1 Regole fondamentali](#38911-regole-fondamentali)
+	  - [38.9.1.2 Implicazioni pratiche](#38912-implicazioni-pratiche)
+	  - [38.9.1.3 Riepilogo delle regole di accesso](#38913-riepilogo-delle-regole-di-accesso)
+	- [38.9.2 Approccio Bottom-Up](#3892-approccio-bottom-up)
+	  - [38.9.2.1 Strategia principale](#38921-strategia-principale)
+	  - [38.9.2.2 Vantaggi architetturali](#38922-vantaggi-architetturali)
+	- [38.9.3 Confronto concettuale](#3893-confronto-concettuale)
+	- [38.9.4 Considerazioni sulla migrazione](#3894-considerazioni-sulla-migrazione)
+- [38.10 Ispezionare Moduli e Dipendenze](#3810-ispezionare-moduli-e-dipendenze)
+	- [38.10.1 Descrivere Moduli con java](#38101-descrivere-moduli-con-java)
+	- [38.10.2 Descrivere JAR Modulari](#38102-descrivere-jar-modulari)
+	- [38.10.3 Analizzare le Dipendenze con jdeps](#38103-analizzare-le-dipendenze-con-jdeps)
+- [38.11 Creare Immagini Runtime Personalizzate con jlink](#3811-creare-immagini-runtime-personalizzate-con-jlink)
+- [38.12 Creare Applicazioni Self-Contained con jpackage](#3812-creare-applicazioni-self-contained-con-jpackage)
+- [38.13 Riepilogo Finale JPMS in Pratica](#3813-riepilogo-finale-jpms-in-pratica)
 
 
 ---
@@ -477,11 +487,173 @@ Il codice nel classpath appartiene al `modulo unnamed`.
 
 ---
 
-<a id="389-ispezionare-moduli-e-dipendenze"></a>
-## 38.9 Ispezionare Moduli e Dipendenze
+<a id="389-approccio-top-down-e-bottom-up-per-modularizzare-unapplicazione"></a>
+## 38.9 Approccio Top-Down e Bottom-Up per modularizzare un’applicazione
 
-<a id="3891-descrivere-moduli-con-java"></a>
-### 38.9.1 Descrivere Moduli con java
+Quando si migra un’applicazione esistente (non modulare) verso il Java Platform Module System (JPMS), è possibile adottare due strategie principali: **top-down** e **bottom-up**.  
+Entrambi gli approcci richiedono una chiara comprensione delle interazioni tra **moduli nominati**, **moduli automatici** e **modulo non nominato**.
+
+
+
+<a id="3891-approccio-top-down"></a>
+### 38.9.1 Approccio Top-Down
+
+In un `approccio top-down`, si inizia **modularizzando il modulo principale dell’applicazione**, per poi migrare progressivamente le sue dipendenze.
+
+
+
+<a id="38911-regole-fondamentali"></a>
+#### 38.9.1.1 Regole fondamentali
+
+1. **Un JAR posizionato sul module path diventa un modulo automatico.**  
+   - Il suo nome è determinato:
+     - Dall’eventuale voce `Automatic-Module-Name` presente nel manifest, oppure  
+     - Derivato dal nome del file JAR (i trattini vengono sostituiti con punti e la parte relativa alla versione viene ignorata).  
+       Esempio:  
+       `mysql-connector-java-8.0.11.jar` → `mysql.connector.java`
+   - Un `modulo automatico`:
+     - Esporta tutti i suoi package.
+     - Legge tutti gli altri moduli.
+
+2. **Un JAR posizionato sul classpath appartiene al modulo non nominato.**  
+   - Il `modulo non nominato`:
+     - Esporta tutti i suoi package.
+     - Può leggere tutti gli altri moduli.
+   - Tuttavia, non avendo un nome, nessun modulo può dichiarare una clausola `requires` nei suoi confronti.
+
+3. **I moduli esplicitamente nominati (con file `module-info.java`)**
+   - Possono dichiarare dipendenze tramite:
+     ```
+     requires some.module;
+     ```
+   - Possono dipendere da:
+     - Altri moduli nominati
+     - Moduli automatici
+   - Non possono dipendere dal modulo non nominato (poiché privo di nome).
+
+Conseguenza importante:
+
+> Un `modulo nominato` può leggere un `modulo automatico`, ma non può leggere il `modulo non nominato`.
+
+
+
+<a id="38912-implicazioni-pratiche"></a>
+#### 38.9.1.2 Implicazioni pratiche
+
+Supponiamo:
+
+- JAR dell’applicazione = `A`
+- `A` dipende direttamente da `B`
+- `B` dipende da `C`
+
+Se modularizzi `A` per primo:
+
+- `A` deve dichiarare `requires B;`
+- Di conseguenza, `B` deve trovarsi sul module path (come modulo nominato o automatico)
+- Se `B` diventa un modulo nominato:
+  - Anche `C` dovrà essere spostato sul module path (nominato o automatico)
+
+Quindi, in una migrazione top-down:
+
+- Si parte dal livello dell’applicazione.
+- Si modularizzano progressivamente le dipendenze verso l’esterno.
+- I moduli automatici sono spesso utilizzati temporaneamente durante la fase di transizione.
+
+
+
+<a id="38913-riepilogo-delle-regole-di-accesso"></a>
+#### 38.9.1.3 Riepilogo delle regole di accesso
+
+| Tipo di modulo         | Esporta | Può leggere |
+|------------------------|---------|-------------|
+| `Modulo nominato`      | Solo export dichiarati | Solo moduli richiesti |
+| `Modulo automatico`    | Tutti i package | Tutti i moduli |
+| `Modulo non nominato`  | Tutti i package | Tutti i moduli |
+
+!!! important
+	- I `moduli automatici e non nominati` sono **permissivi**.  
+	- I `moduli nominati` impongono regole esplicite di dipendenza ed export.
+
+
+
+<a id="3892-approccio-bottom-up"></a>
+### 38.9.2 Approccio Bottom-Up
+
+In un `approccio bottom-up`, si inizia modularizzando le `librerie di livello più basso`, per poi risalire progressivamente verso i moduli di livello superiore, `fino all’applicazione principale`.
+
+
+
+<a id="38921-strategia-principale"></a>
+#### 38.9.2.1 Strategia principale
+
+Si convertono inizialmente le librerie fondamentali in moduli nominati correttamente definiti, dotati di un descrittore esplicito `module-info.java`.
+
+Successivamente:
+
+- Si modularizzano i moduli che dipendono da esse.
+- Infine, anche l’applicazione principale diventa un modulo nominato.
+
+Questo approccio enfatizza:
+
+- Relazioni `requires` esplicite
+- `exports` controllati
+- Una forte incapsulazione fin dall’inizio
+
+
+
+<a id="38922-vantaggi-architetturali"></a>
+#### 38.9.2.2 Vantaggi architetturali
+
+Rispetto ai moduli automatici:
+
+- I moduli nominati esportano solo ciò che è dichiarato esplicitamente.
+- Non leggono implicitamente tutti gli altri moduli.
+- I confini di incapsulamento sono chiaramente definiti.
+
+La modularizzazione bottom-up porta generalmente a:
+
+- Un grafo delle dipendenze più pulito
+- Maggiore manutenibilità
+- Confini modulari più solidi
+
+
+
+<a id="3893-confronto-concettuale"></a>
+### 38.9.3 Confronto concettuale
+
+**Top-Down**
+
+- Si parte dall’applicazione principale.
+- Le dipendenze vengono modularizzate secondo necessità.
+- Si fa spesso affidamento temporaneo sui moduli automatici.
+- Migrazione iniziale più rapida.
+
+**Bottom-Up**
+
+- Si parte dalle librerie di base.
+- I descrittori di modulo vengono definiti in modo rigoroso fin dall’inizio.
+- La migrazione procede verso l’alto.
+- Produce un’architettura modulare più disciplinata e robusta.
+
+
+
+<a id="3894-considerazioni-sulla-migrazione"></a>
+### 38.9.4 Considerazioni sulla migrazione
+
+Nella pratica, molti progetti reali combinano entrambe le strategie:
+
+- Una migrazione top-down consente di attivare rapidamente l’esecuzione modulare.
+- Una fase successiva di raffinamento bottom-up sostituisce i moduli automatici con moduli nominati correttamente definiti.
+
+Questo approccio ibrido consente un’adozione incrementale del JPMS, rafforzando progressivamente l’incapsulamento e la chiarezza architetturale.
+
+---
+
+<a id="3810-ispezionare-moduli-e-dipendenze"></a>
+## 38.10 Ispezionare Moduli e Dipendenze
+
+<a id="38101-descrivere-moduli-con-java"></a>
+### 38.10.1 Descrivere Moduli con java
 
 ```bash
 java --describe-module java.sql
@@ -489,15 +661,15 @@ java --describe-module java.sql
 
 Questo mostra `exports`, `requires` e `services` di un modulo.
 
-<a id="3892-descrivere-jar-modulari"></a>
-### 38.9.2 Descrivere JAR Modulari
+<a id="38102-descrivere-jar-modulari"></a>
+### 38.10.2 Descrivere JAR Modulari
 
 ```bash
 jar --describe-module --file mylib.jar
 ```
 
-<a id="3893-analizzare-le-dipendenze-con-jdeps"></a>
-### 38.9.3 Analizzare le Dipendenze con `jdeps`
+<a id="38103-analizzare-le-dipendenze-con-jdeps"></a>
+### 38.10.3 Analizzare le Dipendenze con `jdeps`
 
 `jdeps` analizza staticamente le dipendenze di classi e moduli.
 
@@ -517,7 +689,7 @@ jdeps --jdk-internals myapp.jar
 
 ---
 
-<a id="3810-creare-immagini-runtime-personalizzate-con-jlink"></a>
+<a id="3811-creare-immagini-runtime-personalizzate-con-jlink"></a>
 ## 38.10 Creare Immagini Runtime Personalizzate con `jlink`
 
 `jlink` costruisce un runtime Java minimale contenente solo i moduli richiesti da una applicazione.
@@ -537,7 +709,7 @@ Benefici:
 
 ---
 
-<a id="3811-creare-applicazioni-self-contained-con-jpackage"></a>
+<a id="3812-creare-applicazioni-self-contained-con-jpackage"></a>
 ## 38.11 Creare Applicazioni Self-Contained con `jpackage`
 
 `jpackage` costruisce installer specifici per piattaforma o immagini applicative.
@@ -557,7 +729,7 @@ jpackage
 
 ---
 
-<a id="3812-riepilogo-finale-jpms-in-pratica"></a>
+<a id="3813-riepilogo-finale-jpms-in-pratica"></a>
 ## 38.12 Riepilogo Finale JPMS in Pratica
 
 - `JPMS` introduce `incapsulamento forte` e dipendenze affidabili

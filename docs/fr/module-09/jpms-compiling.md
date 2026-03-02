@@ -28,13 +28,23 @@
 	- [38.8.2 Modules Automatiques](#3882-modules-automatiques)
 	- [38.8.3 Module Unnamed](#3883-module-unnamed)
 	- [38.8.4 Résumé Comparatif](#3884-résumé-comparatif)
-- [38.9 Inspection des Modules et des Dépendances](#389-inspection-des-modules-et-des-dépendances)
-	- [38.9.1 Décrire les Modules avec java](#3891-décrire-les-modules-avec-java)
-	- [38.9.2 Décrire les JAR Modulaires](#3892-décrire-les-jar-modulaires)
-	- [38.9.3 Analyser les Dépendances avec jdeps](#3893-analyser-les-dépendances-avec-jdeps)
-- [38.10 Créer des Images Runtime Personnalisées avec jlink](#3810-créer-des-images-runtime-personnalisées-avec-jlink)
-- [38.11 Créer des Applications Autonomes avec jpackage](#3811-créer-des-applications-autonomes-avec-jpackage)
-- [38.12 Résumé Final JPMS en Pratique](#3812-résumé-final-jpms-en-pratique)
+- [38.9 Approche Top-Down et Bottom-Up pour modulariser une application](#389-approche-top-down-et-bottom-up-pour-modulariser-une-application)
+	- [38.9.1 Approche Top-Down](#3891-approche-top-down)
+	  - [38.9.1.1 Règles fondamentales](#38911-règles-fondamentales)
+	  - [38.9.1.2 Implications pratiques](#38912-implications-pratiques)
+	  - [38.9.1.3 Résumé des règles d’accès](#38913-résumé-des-règles-daccès)
+	- [38.9.2 Approche Bottom-Up](#3892-approche-bottom-up)
+	  - [38.9.2.1 Stratégie principale](#38921-stratégie-principale)
+	  - [38.9.2.2 Avantages architecturaux](#38922-avantages-architecturaux)
+	- [38.9.3 Comparaison conceptuelle](#3893-comparaison-conceptuelle)
+	- [38.9.4 Perspective de migration](#3894-perspective-de-migration)
+- [38.10 Inspection des Modules et des Dépendances](#3810-inspection-des-modules-et-des-dépendances)
+	- [38.10.1 Décrire les Modules avec java](#38101-décrire-les-modules-avec-java)
+	- [38.10.2 Décrire les JAR Modulaires](#38102-décrire-les-jar-modulaires)
+	- [38.10.3 Analyser les Dépendances avec jdeps](#38103-analyser-les-dépendances-avec-jdeps)
+- [38.11 Créer des Images Runtime Personnalisées avec jlink](#3811-créer-des-images-runtime-personnalisées-avec-jlink)
+- [38.12 Créer des Applications Autonomes avec jpackage](#3812-créer-des-applications-autonomes-avec-jpackage)
+- [38.13 Résumé Final JPMS en Pratique](#3813-résumé-final-jpms-en-pratique)
 
 
 ---
@@ -481,11 +491,171 @@ Le code sur le classpath appartient au `module unnamed`.
 
 ---
 
-<a id="389-inspection-des-modules-et-des-dépendances"></a>
-## 38.9 Inspection des Modules et des Dépendances
+<a id="389-approche-top-down-et-bottom-up-pour-modulariser-une-application"></a>
+## 38.9 Approche Top-Down et Bottom-Up pour modulariser une application
 
-<a id="3891-décrire-les-modules-avec-java"></a>
-### 38.9.1 Décrire les Modules avec java
+Lors de la migration d’une application existante (non modulaire) vers le Java Platform Module System (JPMS), deux stratégies principales peuvent être adoptées : **top-down** et **bottom-up**.  
+Ces deux approches nécessitent une compréhension claire des interactions entre les **modules nommés**, les **modules automatiques** et le **module non nommé**.
+
+
+
+<a id="3891-approche-top-down"></a>
+### 38.9.1 Approche Top-Down
+
+Dans une `approche top-down`, on commence par **modulariser le module principal de l’application**, puis on migre progressivement ses dépendances.
+
+
+<a id="38911-règles-fondamentales"></a>
+#### 38.9.1.1 Règles fondamentales
+
+1. **Un JAR placé sur le module path devient un module automatique.**  
+   - Son nom est déterminé soit :
+     - À partir de l’entrée `Automatic-Module-Name` dans le manifeste,  
+     - Soit dérivé du nom du fichier JAR (les tirets sont remplacés par des points et les numéros de version sont ignorés).  
+       Exemple :  
+       `mysql-connector-java-8.0.11.jar` → `mysql.connector.java`
+   - Un `module automatique` :
+     - Exporte tous ses packages.
+     - Lit tous les autres modules.
+
+2. **Un JAR placé sur le classpath appartient au module non nommé.**  
+   - Le `module non nommé` :
+     - Exporte tous ses packages.
+     - Peut lire tous les autres modules.
+   - Cependant, il n’a pas de nom ; aucun module ne peut donc déclarer `requires` à son égard.
+
+3. **Les modules nommés explicitement (avec un fichier `module-info.java`)**
+   - Peuvent déclarer des dépendances à l’aide de :
+     ```
+     requires some.module;
+     ```
+   - Peuvent dépendre :
+     - D’autres modules nommés
+     - De modules automatiques
+   - Ne peuvent pas dépendre du module non nommé (puisqu’il n’a pas de nom).
+
+Conséquence importante :
+
+> Un `module nommé` peut lire un `module automatique`, mais il ne peut pas lire le `module non nommé`.
+
+
+<a id="38912-implications-pratiques"></a>
+#### 38.9.1.2 Implications pratiques
+
+Supposons :
+
+- JAR de l’application = `A`
+- `A` dépend directement de `B`
+- `B` dépend de `C`
+
+Si vous modularisez `A` en premier :
+
+- `A` doit déclarer `requires B;`
+- Donc `B` doit être placé sur le module path (module nommé ou automatique)
+- Si `B` devient un module nommé :
+  - `C` doit également être placé sur le module path (nommé ou automatique)
+
+Ainsi, dans une migration top-down :
+
+- On commence par la couche application.
+- On modularise progressivement les dépendances vers l’extérieur.
+- Les modules automatiques sont souvent utilisés temporairement pendant la transition.
+
+
+<a id="38913-résumé-des-règles-daccès"></a>
+#### 38.9.1.3 Résumé des règles d’accès
+
+| Type de module        | Exporte | Peut lire |
+|-----------------------|---------|-----------|
+| `Module nommé`        | Exportations déclarées uniquement | Modules requis uniquement |
+| `Module automatique`  | Tous les packages | Tous les modules |
+| `Module non nommé`    | Tous les packages | Tous les modules |
+
+!!! important
+	- Les `modules automatiques et non nommés` sont **permissifs**.  
+	- Les `modules nommés` imposent des règles explicites de dépendance et d’export.
+
+
+
+<a id="3892-approche-bottom-up"></a>
+### 38.9.2 Approche Bottom-Up
+
+Dans une `approche bottom-up`, on commence par modulariser les `bibliothèques de plus bas niveau`, puis on progresse vers les modules de niveau supérieur, `jusqu’à l’application principale`.
+
+
+
+<a id="38921-stratégie-principale"></a>
+#### 38.9.2.1 Stratégie principale
+
+On convertit d’abord les bibliothèques fondamentales en modules nommés correctement définis avec un descripteur explicite `module-info.java`.
+
+Ensuite :
+
+- Les modules qui en dépendent sont modularisés.
+- Enfin, l’application principale devient elle aussi un module nommé.
+
+Cette approche met l’accent sur :
+
+- Des relations `requires` explicites
+- Des `exports` maîtrisés
+- Une encapsulation forte dès le départ
+
+
+
+<a id="38922-avantages-architecturaux"></a>
+#### 38.9.2.2 Avantages architecturaux
+
+Comparés aux modules automatiques :
+
+- Les modules nommés n’exportent que ce qui est explicitement déclaré.
+- Ils ne lisent pas implicitement tous les autres modules.
+- Les frontières d’encapsulation sont clairement définies.
+
+La modularisation bottom-up conduit généralement à :
+
+- Un graphe de dépendances plus propre
+- Une meilleure maintenabilité
+- Des frontières de modules plus solides
+
+
+
+<a id="3893-comparaison-conceptuelle"></a>
+### 38.9.3 Comparaison conceptuelle
+
+**Top-Down**
+
+- On commence par l’application principale.
+- Les dépendances sont modularisées selon les besoins.
+- On s’appuie souvent temporairement sur des modules automatiques.
+- Migration initiale plus rapide.
+
+**Bottom-Up**
+
+- On commence par les bibliothèques cœur.
+- Les descripteurs de modules sont définis strictement dès le départ.
+- La migration progresse vers le haut.
+- Architecture modulaire plus disciplinée et robuste.
+
+
+
+<a id="3894-perspective-de-migration"></a>
+### 38.9.4 Perspective de migration
+
+En pratique, les projets réels combinent souvent les deux stratégies :
+
+- Une migration top-down permet d’activer rapidement l’exécution modulaire.
+- Une phase de raffinement bottom-up remplace ensuite les modules automatiques par des modules nommés correctement définis.
+
+Cette approche hybride permet une adoption progressive du JPMS tout en renforçant progressivement l’encapsulation et la clarté architecturale.
+
+
+---
+
+<a id="3810-inspection-des-modules-et-des-dépendances"></a>
+## 38.10 Inspection des Modules et des Dépendances
+
+<a id="38101-décrire-les-modules-avec-java"></a>
+### 38.10.1 Décrire les Modules avec java
 
 ```bash
 java --describe-module java.sql
@@ -493,15 +663,15 @@ java --describe-module java.sql
 
 Cela affiche `exports`, `requires` et `services` d’un module.
 
-<a id="3892-décrire-les-jar-modulaires"></a>
-### 38.9.2 Décrire les JAR Modulaires
+<a id="38102-décrire-les-jar-modulaires"></a>
+### 38.10.2 Décrire les JAR Modulaires
 
 ```bash
 jar --describe-module --file mylib.jar
 ```
 
-<a id="3893-analyser-les-dépendances-avec-jdeps"></a>
-### 38.9.3 Analyser les Dépendances avec `jdeps`
+<a id="38103-analyser-les-dépendances-avec-jdeps"></a>
+### 38.10.3 Analyser les Dépendances avec `jdeps`
 
 `jdeps` analyse statiquement les dépendances de classes et de modules.
 
@@ -521,8 +691,8 @@ jdeps --jdk-internals myapp.jar
 
 ---
 
-<a id="3810-créer-des-images-runtime-personnalisées-avec-jlink"></a>
-## 38.10 Créer des Images Runtime Personnalisées avec `jlink`
+<a id="3811-créer-des-images-runtime-personnalisées-avec-jlink"></a>
+## 38.11 Créer des Images Runtime Personnalisées avec `jlink`
 
 `jlink` construit un runtime Java minimal contenant uniquement les modules requis par une application.
 
@@ -541,8 +711,8 @@ Avantages :
 
 ---
 
-<a id="3811-créer-des-applications-autonomes-avec-jpackage"></a>
-## 38.11 Créer des Applications Autonomes avec `jpackage`
+<a id="3812-créer-des-applications-autonomes-avec-jpackage"></a>
+## 38.12 Créer des Applications Autonomes avec `jpackage`
 
 `jpackage` construit des installateurs spécifiques à la plateforme ou des images applicatives.
 
@@ -561,8 +731,8 @@ jpackage
 
 ---
 
-<a id="3812-résumé-final-jpms-en-pratique"></a>
-## 38.12 Résumé Final JPMS en Pratique
+<a id="3813-résumé-final-jpms-en-pratique"></a>
+## 38.13 Résumé Final JPMS en Pratique
 
 - `JPMS` introduit une `encapsulation forte` et des dépendances fiables
 - Les `modules` remplacent les conventions fragiles du classpath
