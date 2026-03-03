@@ -23,7 +23,8 @@
 		- [18.4.7.6 Override non valido — Modifica dell’argomento generico](#18476-override-non-valido-modifica-dellargomento-generico)
 		- [18.4.7.7 Perché esiste questa regola](#18477-perché-esiste-questa-regola)
 		- [18.4.7.8 Modello mentale](#18478-modello-mentale)
-		- [18.4.7.9 Regole riassuntive](#18479-regole-riassuntive)
+		- [18.4.7.9 Ritorni covarianti e Generics](#18479-ritorni-covarianti-e-generics)
+		- [18.4.7.10 Regole riassuntive](#184710-regole-riassuntive)
 	- [18.4.8 Overloading di un Metodo Generico — Perché Alcuni Overload Sono Impossibili](#1848-overloading-di-un-metodo-generico--perché-alcuni-overload-sono-impossibili)
 	- [18.4.9 Overloading di un Metodo Generico Ereditato da una Classe Parent](#1849-overloading-di-un-metodo-generico-ereditato-da-una-classe-parent)
 	- [18.4.10 Restituire Tipi Generici — Regole e Restrizioni](#18410-restituire-tipi-generici--regole-e-restrizioni)
@@ -442,9 +443,88 @@ Fase 2 → Le firme erase coincidono?
 Se una delle due fasi fallisce → errore di compilazione.
 
 
+<a id="18479-ritorni-covarianti-e-generics"></a>
+#### 18.4.7.9 Ritorni Covarianti e Generics
 
-<a id="18479-regole-riassuntive"></a>
-#### 18.4.7.9 Regole riassuntive
+Un metodo che effettua l’override (cioè un metodo dichiarato in una sottoclasse) è autorizzato a restituire un **sottotipo** del tipo di ritorno dichiarato nel metodo sovrascritto (cioè nel metodo della superclasse).
+
+Questa è nota come **regola dei ritorni covarianti**.
+
+Il primo passo nella validazione di un override consiste quindi nel:
+
+- Verificare se il tipo di ritorno del metodo nella sottoclasse è un sottotipo del tipo di ritorno dichiarato nella superclasse.
+
+!!! important
+	- Se il metodo sovrascritto restituisce `List`, il metodo nella sottoclasse può restituire `ArrayList`.
+	- Non può **restituire** `Object`, poiché `Object` è un supertipo e non un sottotipo.
+
+Quando entrano in gioco i generics, la validazione del tipo di ritorno diventa più delicata.
+
+Occorre valutare le relazioni di sottotipizzazione utilizzando le regole della gerarchia dei tipi generici.
+
+Si assuma che `S` sia un sottotipo di `T`.
+
+Esistono due importanti gerarchie generiche da ricordare.
+
+- **Gerarchia 1** (wildcard con limite superiore):
+
+`A<S>` è un sottotipo di `A<? extends S>` che a sua volta è un sottotipo di `A<? extends T>`
+
+- Esempio:
+
+Poiché `Integer` è un sottotipo di `Number`:
+
+- `List<Integer> <<< List<? extends Integer>`
+- `List<? extends Integer> <<< List<? extends Number>`
+
+Pertanto, se un metodo sovrascritto restituisce:
+
+`List<? extends Integer>`
+
+il metodo che effettua l’override può restituire:
+
+- `List<Integer>`
+
+ma non può restituire:
+
+- `List<Number>`
+- `List<? extends Number>`
+
+- **Gerarchia 2** (wildcard con limite inferiore):
+
+`A<T>` è un sottotipo di `A<? super T>` che a sua volta è un sottotipo di `A<? super S>`
+
+- Esempio:
+
+- `List<Number> <<< List<? super Number>`
+- `List<? super Number> <<< List<? super Integer>`
+
+Pertanto, se un metodo sovrascritto restituisce:
+
+`List<? super Number>`
+
+il metodo che effettua l’override può restituire:
+
+- `List<Number>`
+
+ma non può restituire:
+
+- `List<Integer>`
+- `List<? super Integer>`
+
+Un punto fondamentale da ricordare:
+
+Anche se `Integer` è un sottotipo di `Number`,  
+`List<Integer>` **non** è un sottotipo di `List<Number>`.
+
+I tipi generici in Java sono invarianti, salvo l’uso di wildcard.
+
+Queste regole spiegano perché alcuni metodi che sembrano compatibili vengono rifiutati dal compilatore.  
+La specificità generica deve rispettare le gerarchie formali di sottotipizzazione prima che la validazione dell’override passi ai controlli basati sull’erasure (vedi 18.4.7.10).
+
+
+<a id="184710-regole-riassuntive"></a>
+#### 18.4.7.10 Regole riassuntive
 
 - L’override è validato **dopo la erasure**
 - La compatibilità è validata **prima della erasure**
@@ -452,7 +532,9 @@ Se una delle due fasi fallisce → errore di compilazione.
 - Non è possibile aggiungere nuova specificità generica
 - Se entrambi i metodi sono parametrizzati, gli argomenti devono coincidere esattamente
 - Dopo la erasure, le firme devono essere identiche
-
+- I tipi di ritorno covarianti richiedono che il tipo di ritorno del metodo che effettua l’override sia un vero sottotipo.
+- Con i generics, le relazioni di sottotipizzazione devono rispettare le regole della gerarchia dei wildcard.
+- Le relazioni logiche apparenti tra argomenti di tipo (ad esempio `Integer` e `Number`) non si traducono automaticamente in relazioni di sottotipizzazione tra tipi parametrizzati.
 
 
 Questo spiega perché alcuni metodi che *sembrano* semplici overload vengono rifiutati:

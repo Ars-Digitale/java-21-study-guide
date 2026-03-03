@@ -23,7 +23,8 @@
 		- [18.4.7.6 Redéfinition invalide — Changement d’argument générique](#18476-redéfinition-invalide-changement-dargument-générique)
 		- [18.4.7.7 Pourquoi cette règle existe](#18477-pourquoi-cette-règle-existe)
 		- [18.4.7.8 Modèle mental](#18478-modèle-mental)
-		- [18.4.7.9 Règles récapitulatives](#18479-règles-résumé)
+		- [18.4.7.9 Retours Covariants et Génériques](#18479-retours-covariants-et-génériques)
+		- [18.4.7.10 Règles récapitulatives](#184710-règles-résumé)
 	- [18.4.8 Surcharge d’une Méthode Générique — Pourquoi Certaines Surcharges Sont Impossibles](#1848-surcharge-dune-méthode-générique--pourquoi-certaines-surcharges-sont-impossibles)
 	- [18.4.9 Surcharge d’une Méthode Générique Héritée d’une Classe Parent](#1849-surcharge-dune-méthode-générique-héritée-dune-classe-parent)
 	- [18.4.10 Retourner des Types Génériques — Règles et Restrictions](#18410-retourner-des-types-génériques--règles-et-restrictions)
@@ -435,9 +436,88 @@ Phase 2 → Les signatures effacées correspondent-elles ?
 Si l’une des phases échoue → erreur de compilation.
 
 
+<a id="18479-retours-covariants-et-génériques"></a>
+#### 18.4.7.9 Retours covariants et génériques
 
-<a id="18479-règles-résumé"></a>
-#### 18.4.7.9 Règles récapitulatives
+Une méthode redéfinie (c’est-à-dire une méthode déclarée dans une sous-classe) est autorisée à retourner un **sous-type** du type de retour déclaré dans la méthode redéfinie (c’est-à-dire la méthode de la superclasse).
+
+Ceci est connu sous le nom de **règle des retours covariants**.
+
+La première étape lors de la validation d’une redéfinition consiste donc à :
+
+- Vérifier si le type de retour de la méthode redéfinissante est un sous-type du type de retour déclaré dans la superclasse.
+
+!!! important
+	- Si la méthode redéfinie retourne `List`, la méthode redéfinissante peut retourner `ArrayList`.
+	- Elle ne peut **pas** retourner `Object`, car `Object` est un supertype et non un sous-type.
+
+Lorsque les génériques sont impliqués, la validation du type de retour devient plus subtile.
+
+Il faut alors évaluer les relations de sous-typage en utilisant les règles de hiérarchie des types génériques.
+
+Supposons que `S` soit un sous-type de `T`.
+
+Il existe deux hiérarchies génériques importantes à retenir.
+
+- **Hiérarchie 1** (wildcards bornés supérieurs) :
+
+`A<S>` est un sous-type de `A<? extends S>` qui est lui-même un sous-type de `A<? extends T>`
+
+- Exemple :
+
+Puisque `Integer` est un sous-type de `Number` :
+
+- `List<Integer> <<< List<? extends Integer>`
+- `List<? extends Integer> <<< List<? extends Number>`
+
+Donc, si une méthode redéfinie retourne :
+
+`List<? extends Integer>`
+
+la méthode redéfinissante peut retourner :
+
+- `List<Integer>`
+
+mais ne peut **pas** retourner :
+
+- `List<Number>`
+- `List<? extends Number>`
+
+- **Hiérarchie 2** (wildcards bornés inférieurs) :
+
+`A<T>` est un sous-type de `A<? super T>` qui est lui-même un sous-type de `A<? super S>`
+
+- Exemple :
+
+- `List<Number> <<< List<? super Number>`
+- `List<? super Number> <<< List<? super Integer>`
+
+Donc, si une méthode redéfinie retourne :
+
+`List<? super Number>`
+
+la méthode redéfinissante peut retourner :
+
+- `List<Number>`
+
+mais ne peut **pas** retourner :
+
+- `List<Integer>`
+- `List<? super Integer>`
+
+Point crucial à retenir :
+
+Même si `Integer` est un sous-type de `Number`,  
+`List<Integer>` n’est **pas** un sous-type de `List<Number>`.
+
+Les types génériques en Java sont invariants, sauf en présence de wildcards.
+
+Ces règles expliquent pourquoi certaines méthodes qui semblent compatibles sont rejetées par le compilateur.  
+La spécificité générique doit respecter les hiérarchies formelles de sous-typage avant que la validation de redéfinition ne passe aux vérifications basées sur l’effacement (voir 18.4.7.10).
+
+
+<a id="184710-règles-résumé"></a>
+#### 18.4.7.10 Règles récapitulatives
 
 - La redéfinition est validée **après l’effacement**
 - La compatibilité est validée **avant l’effacement**
@@ -445,6 +525,9 @@ Si l’une des phases échoue → erreur de compilation.
 - Il est interdit d’introduire une nouvelle spécificité générique
 - Si les deux méthodes sont paramétrées, les arguments doivent correspondre exactement
 - Après l’effacement, les signatures doivent être identiques
+- Les types de retour covariants exigent que le type de retour de la méthode redéfinissante soit un véritable sous-type.
+- Avec les génériques, les relations de sous-typage doivent respecter les règles de hiérarchie des wildcards.
+- Les relations logiques apparentes entre arguments de type (par exemple `Integer` et `Number`) ne se traduisent pas automatiquement en relations de sous-typage entre types paramétrés.
 
 Cela explique pourquoi certaines méthodes qui *semblent* être des surcharges sont rejetées :  
 après l’effacement, elles entrent en collision, et si elles ne constituent pas une redéfinition valide, le compilateur les bloque.

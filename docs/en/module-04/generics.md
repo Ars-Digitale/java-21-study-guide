@@ -23,7 +23,8 @@
 		- [18.4.7.6 Invalid Override - Changing Generic Argument](#18476-invalid-override-changing-generic-argument)
 		- [18.4.7.7 Why This Rule Exists](#18477-why-this-rule-exists)
 		- [18.4.7.8 Mental Model](#18478-mental-model)
-		- [18.4.7.9 Summary Rules](#18479-summary-rules)
+		- [18.4.7.9 Covariant returns and Generics](#18479-covariant-returns-and-generics)
+		- [18.4.7.10 Summary Rules](#184710-summary-rules)
 	- [18.4.8 Overloading a Generic Method Why Some Overloads Are Impossible](#1848-overloading-a-generic-method--why-some-overloads-are-impossible)
 	- [18.4.9 Overloading a Generic Method Inherited from a Parent Class](#1849-overloading-a-generic-method-inherited-from-a-parent-class)
 	- [18.4.10 Returning Generic Types Rules and Restrictions](#18410-returning-generic-types--rules-and-restrictions)
@@ -427,8 +428,89 @@ Phase 2 → Do the erased signatures match?
 If either phase fails → compilation error.
 
 
-<a id="18479-summary-rules"></a>
-#### 18.4.7.9 Summary Rules
+<a id="18479-covariant-returns-and-generics"></a>
+#### 18.4.7.9 Covariant Returns and Generics
+
+An overriding method (i.e., a method declared in a subclass) is allowed to return a **subtype** of the return type declared in the overridden method (i.e., the superclass method).
+
+This is known as the **rule of covariant returns**.
+
+The first step when validating an override is therefore:
+
+- Check whether the return type of the overriding method is a subtype of the return type declared in the superclass.
+
+!!! important
+	- If the overridden method returns `List`, the overriding method may return `ArrayList`.
+	- It may **not** return `Object`, because `Object` is a supertype, not a subtype.
+
+When generics are involved, return type validation becomes more subtle.
+  
+You must evaluate subtype relationships using the generic type hierarchy rules.
+
+Assume that `S` is a subtype of `T`,
+
+There are two important generic hierarchies to remember.
+
+- **Hierarchy 1** (upper bounded wildcards):
+
+`A<S>` is a subtype of `A<? extends S>` which is a subtype of `A<? extends T>`
+
+- Example:
+
+Since `Integer` is a subtype of `Number`:
+
+- `List<Integer> <<< List<? extends Integer>`
+- `List<? extends Integer> <<< List<? extends Number>`
+
+Therefore, if an overridden method returns:
+
+`List<? extends Integer>`
+
+the overriding method may return:
+
+- `List<Integer>`
+
+but may **not** return:
+
+- `List<Number>`
+- `List<? extends Number>`
+
+- **Hierarchy 2** (lower bounded wildcards):
+
+`A<T>` is a subtype of `A<? super T>` which is a subtype of `A<? super S>`
+
+- Example:
+
+- `List<Number> <<< List<? super Number>`
+- `List<? super Number> <<< List<? super Integer>`
+
+Therefore, if an overridden method returns:
+
+`List<? super Number>`
+
+the overriding method may return:
+
+- `List<Number>`
+
+but may **not** return:
+
+- `List<Integer>`
+- `List<? super Integer>`
+
+A crucial point to remember:
+
+Even though `Integer` is a subtype of `Number`,  
+`List<Integer>` is **not** a subtype of `List<Number>`.
+
+Generic types in Java are invariant unless wildcards are involved.
+
+
+These rules explain why certain methods that appear compatible are rejected by the compiler.  
+Generic specificity must respect formal subtype hierarchies before override validation proceeds to erasure-based signature checks (see 18.4.7.10).
+
+
+<a id="184710-summary-rules"></a>
+#### 18.4.7.10 Summary Rules
 
 - Override is validated **after erasure**
 - Compatibility is validated **before erasure**
@@ -436,6 +518,9 @@ If either phase fails → compilation error.
 - You may NOT introduce new generic specificity
 - If both methods are parameterized, arguments must match exactly
 - After erasure, signatures must be identical
+- Covariant return types require the overriding return type to be a true subtype
+- With generics, subtype relationships must follow wildcard hierarchy rules
+- Apparent logical relationships between type arguments (e.g., `Integer` and `Number`) do not automatically translate into subtype relationships between parameterized types
 
 
 
