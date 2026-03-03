@@ -459,7 +459,7 @@ Supposons que `S` soit un sous-type de `T`.
 
 Il existe deux hiérarchies génériques importantes à retenir.
 
-- **Hiérarchie 1** (wildcards bornés supérieurs) :
+**Hiérarchie 1** (wildcards bornés supérieurs) :
 
 `A<S>` est un sous-type de `A<? extends S>` qui est lui-même un sous-type de `A<? extends T>`
 
@@ -483,7 +483,7 @@ mais ne peut **pas** retourner :
 - `List<Number>`
 - `List<? extends Number>`
 
-- **Hiérarchie 2** (wildcards bornés inférieurs) :
+**Hiérarchie 2** (wildcards bornés inférieurs) :
 
 `A<T>` est un sous-type de `A<? super T>` qui est lui-même un sous-type de `A<? super S>`
 

@@ -451,7 +451,7 @@ Assume that `S` is a subtype of `T`,
 
 There are two important generic hierarchies to remember.
 
-- **Hierarchy 1** (upper bounded wildcards):
+**Hierarchy 1** (upper bounded wildcards):
 
 `A<S>` is a subtype of `A<? extends S>` which is a subtype of `A<? extends T>`
 
@@ -475,7 +475,7 @@ but may **not** return:
 - `List<Number>`
 - `List<? extends Number>`
 
-- **Hierarchy 2** (lower bounded wildcards):
+**Hierarchy 2** (lower bounded wildcards):
 
 `A<T>` is a subtype of `A<? super T>` which is a subtype of `A<? super S>`
 

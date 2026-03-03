@@ -466,7 +466,7 @@ Si assuma che `S` sia un sottotipo di `T`.
 
 Esistono due importanti gerarchie generiche da ricordare.
 
-- **Gerarchia 1** (wildcard con limite superiore):
+**Gerarchia 1** (wildcard con limite superiore):
 
 `A<S>` è un sottotipo di `A<? extends S>` che a sua volta è un sottotipo di `A<? extends T>`
 
@@ -490,7 +490,7 @@ ma non può restituire:
 - `List<Number>`
 - `List<? extends Number>`
 
-- **Gerarchia 2** (wildcard con limite inferiore):
+**Gerarchia 2** (wildcard con limite inferiore):
 
 `A<T>` è un sottotipo di `A<? super T>` che a sua volta è un sottotipo di `A<? super S>`
 
