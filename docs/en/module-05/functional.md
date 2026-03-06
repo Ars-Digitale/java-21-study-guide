@@ -227,6 +227,12 @@ The general syntax is:
 or
 `(parameters) -> { statements }`
 
+
+!!! important
+	A lambda expression does not introduce a new variable scope.
+	As a result, variable names that already exist in the surrounding context cannot be redeclared as parameters in the lambda expression.
+
+
 <a id="2022-examples-of-lambda-syntax"></a>
 ### 20.2.2 Examples of Lambda Syntax
 

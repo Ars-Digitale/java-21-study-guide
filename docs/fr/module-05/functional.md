@@ -219,6 +219,12 @@ La syntaxe générale est :
 ou  
 `(parameters) -> { statements }`
 
+
+!!! important
+	Une expression lambda n’introduit pas un nouveau scope pour les variables.
+	Par conséquent, les noms de variables déjà présents dans le contexte environnant ne peuvent pas être redéclarés comme paramètres de l’expression lambda.
+
+
 <a id="2022-exemples-de-syntaxe-lambda"></a>
 ### 20.2.2 Exemples de Syntaxe Lambda
 

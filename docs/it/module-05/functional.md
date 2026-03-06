@@ -219,6 +219,12 @@ La sintassi generale è:
 oppure  
 `(parameters) -> { statements }`
 
+
+!!! important
+	Un’espressione lambda non introduce un nuovo scope per le variabili.
+	Di conseguenza, i nomi di variabili già esistenti nel contesto circostante non possono essere ridefiniti come parametri dell’espressione lambda.
+
+
 <a id="2022-esempi-di-sintassi-lambda"></a>
 ### 20.2.2 Esempi di Sintassi Lambda
 
