@@ -468,7 +468,7 @@ A method in a subclass **overrides** a method in its superclass if:
 
 - the superclass method is `instance` (non static).
 - the subclass method has the same name, the same parameter list and a return type which is the same type or a subtype of the return type in the inherited method.
-- when the return type of the overridden method (i.e. the method in the base/super class) is a primitive, the return type of the overriding method (i.e. the method in the sub class) must match the return type of the overridden method.
+- when the return type of the overridden method (i.e. the method in the base/super class) is a **primitive**, the return type of the overriding method (i.e. the method in the sub class) must match the return type of the overridden method.
 - both methods are accessible (not private) and the subclass method is NOT less visible than the superclass one.
 - The overriding method cannot declare new or broader checked exceptions. 
 

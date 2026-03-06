@@ -460,7 +460,7 @@ Un metodo in una subclass fa **override** di un metodo di una sua superclass se:
 
 - il metodo della superclass è `metodo d'istanza` (non statico).
 - il metodo della subclass ha lo **stesso nome**, la **stessa lista di parametri** e un **return type che è dello stesso tipo** o di un **sottotipo** del return type nel metodo ereditato.
-- Quando il tipo di ritorno del metodo sovrascritto (cioè il metodo nella classe base / superclasse) è un tipo primitivo, il tipo di ritorno del metodo che lo sovrascrive (cioè il metodo nella sottoclasse) deve corrispondere esattamente al tipo di ritorno del metodo sovrascritto.
+- Quando il tipo di ritorno del metodo sovrascritto (cioè il metodo nella classe base/superclasse) è un tipo **primitivo**, il tipo di ritorno del metodo che lo sovrascrive (cioè il metodo nella sottoclasse) deve corrispondere esattamente al tipo di ritorno del metodo sovrascritto.
 - entrambi i metodi sono accessibili (non privati) e il metodo della subclass non è meno visibile di quello della superclass.
 - Il metodo in overriding **non può dichiarare nuove o più ampie checked exceptions**.
 
