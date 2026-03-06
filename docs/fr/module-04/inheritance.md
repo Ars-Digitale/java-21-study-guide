@@ -457,8 +457,9 @@ Ce comportement est appelé **dynamic dispatch** et c’est ce qui rend possible
 
 Une méthode dans une subclass fait **override** d’une méthode d’une de ses superclass si:
 
-- la méthode de la superclass est `méthode d’instance` (non statique);
-- la méthode de la subclass a le **même nom**, la **même liste de paramètres** et un **return type qui est du même type** ou d’un **sous-type** du return type dans la méthode héritée;
+- la méthode de la superclass est `méthode d’instance` (non statique).
+- la méthode de la subclass a le **même nom**, la **même liste de paramètres** et un **return type qui est du même type** ou d’un **sous-type** du return type dans la méthode héritée.
+- Lorsque le type de retour de la méthode redéfinie (c’est-à-dire la méthode dans la classe de base / superclasse) est un type primitif, le type de retour de la méthode qui la redéfinit (c’est-à-dire la méthode dans la sous-classe) doit correspondre  exactement au type de retour de la méthode redéfinie.
 - les deux méthodes sont accessibles (non privées) et la méthode de la subclass n’est pas moins visible que celle de la superclass.
 - La méthode en overriding **ne peut pas déclarer de nouvelles ou plus larges checked exceptions**.
 

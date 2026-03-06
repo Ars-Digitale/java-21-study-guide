@@ -32,6 +32,12 @@ Thumbs.db
 /env/
 /local/
 /tools/
+/build/
+/dist/*.epub
+/assets/
+/covers/
+/dist/
+/scripts/
 
 # ---- If you keep 'bin' or a custom classes dir ----
 /bin/
