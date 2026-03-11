@@ -33,6 +33,10 @@
 	- [6.4.3 String Pool et égalité](#643-string-pool-et-égalité)
 		- [6.4.3.1 La méthode intern](#6431-la-méthode-intern)
 	- [6.4.4 Égalité avec les types wrapper](#644-égalité-avec-les-types-wrapper)
+		- [6.4.4.1 Mise en cache des Wrapper](#6441-mise-en-cache-des-wrapper)
+		- [6.4.4.2 Le mot-clé `new` contourne le cache](#6442-le-mot-clé-new-contourne-le-cache)
+		- [6.4.4.3 Comparaison des wrapper avec `==`](#6443-comparaison-des-wrapper-avec-==)
+		- [6.4.4.4 Des types Wrapper différents ne peuvent pas être comparés](#6444-des-types-wrapper-différents-ne-peuvent-pas-être-comparés)
 	- [6.4.5 Égalité et null](#645-égalité-et-null)
 	- [6.4.6 Tableau récapitulatif](#646-tableau-récapitulatif)
 
@@ -874,12 +878,14 @@ System.out.println(x == y);       // true
 <a id="644-égalité-avec-les-types-wrapper"></a>
 ### 6.4.4 Égalité avec les types wrapper
 
-Les classes wrapper (`Integer`, `Double`, etc.) se comportent comme des objets :
+Les classes wrapper (`Integer`, `Double`, `Boolean`, etc.) se comportent comme des objets normaux.
 
-- `==` → compare les références  
-- `.equals()` → compare les valeurs  
+Par conséquent :
 
-Cependant, certains wrappers sont **mis en cache** (Integer de −128 à 127) :
+- `==` → compare **les références des objets**
+- `.equals()` → compare **les valeurs numériques**
+
+**Exemple** :
 
 ```java
 Integer a = 100;
@@ -888,13 +894,118 @@ System.out.println(a == b);        // true → cached
 
 Integer c = 1000;
 Integer d = 1000;
-System.out.println(c == d);        // false → not cached
+System.out.println(c == d);        // false → objets différents
 
 System.out.println(c.equals(d));   // true → même valeur numérique
 ```
 
+Puisque, comme rappelé précédemment, toutes les classes wrapper sont **immutables**, leur valeur interne **ne peut pas être modifiée** une fois créées.
+
+Les opérations qui semblent modifier un wrapper créent en réalité **un nouvel objet**.
+
+**Exemple** :
+
+```java
+Integer i = 5;
+i++;
+```
+
+Cela est conceptuellement équivalent à :
+
+```java
+i = Integer.valueOf(i.intValue() + 1);
+```
+
+Donc un **nouvel objet `Integer`** est créé et assigné à `i`.
+
+<a id="6441-mise-en-cache-des-wrapper"></a>
+#### 6.4.4.1 Mise en cache des wrapper
+
+Pour réduire l’utilisation de la mémoire et la création d’objets, Java **réutilise certaines instances de wrapper**.
+
+Les valeurs suivantes sont mises en cache :
+
+- Toutes les valeurs `Boolean` (`true` et `false`)
+- Toutes les valeurs `Byte`
+- Toutes les valeurs `Character` de `\u0000` à `\u007f` (0–127)
+- Toutes les valeurs `Short` de **−128 à 127**
+- Toutes les valeurs `Integer` de **−128 à 127**
+
+À cause de ce mécanisme de mise en cache :
+
+```java
+Integer a = 100;
+Integer b = 100;
+
+System.out.println(a == b);   // true
+```
+
+Les deux variables font référence **au même objet mis en cache**.
+
+Cependant, les valeurs en dehors de l’intervalle du cache produisent **des objets distincts** :
+
+```java
+Integer c = 1000;
+Integer d = 1000;
+
+System.out.println(c == d);   // false
+System.out.println(c.equals(d)); // true
+```
+
+<a id="6442-le-mot-clé-new-contourne-le-cache"></a>
+#### 6.4.4.2 Le mot-clé `new` contourne le cache
+
+Lorsqu’un objet wrapper est créé en utilisant `new`, **une nouvelle instance est toujours créée**, même si une valeur mise en cache existe.
+
+**Exemple** :
+
+```java
+Integer i = 10;          // objet mis en cache
+Integer j = 10;          // même objet mis en cache
+Integer k = new Integer(10); // nouvel objet (non mis en cache)
+
+System.out.println(i == j); // true
+System.out.println(i == k); // false
+```
+
+Cependant, les constructeurs des wrapper ont été **dépréciés en Java 9** et marqués pour suppression.  
+Le code moderne devrait utiliser **l’autoboxing** ou des méthodes factory comme `Integer.valueOf()`.
+
+
+<a id="6443-comparaison-des-wrapper-avec-=="></a>
+#### 6.4.4.3 Comparaison des wrapper avec `==`
+
+Lorsque deux références wrapper sont comparées en utilisant `==`, le résultat dépend du fait qu’elles **référencent le même objet**, et non du fait que leurs valeurs soient égales.
+
+Par conséquent, les tests d’égalité entre wrapper devraient normalement utiliser :
+
+```java
+equals()
+```
+
+au lieu de `==`.
+
+
+<a id="6444-des-types-wrapper-différents-ne-peuvent-pas-être-comparés"></a>
+#### 6.4.4.4 Des types wrapper différents ne peuvent pas être comparés
+
+Les objets wrapper de **types différents** ne peuvent pas être comparés en utilisant `==`.
+
+Exemple :
+
+```java
+Byte b = 1;
+Integer i = 1;
+
+b == i;   // erreur de compilation
+```
+
+Les opérandes doivent être **des types compatibles**, sinon la comparaison n’est pas valide.
+
+
 !!! warning
-    Fais très attention au caching des wrappers.
+    Faire très attention lorsque l’on compare des objets wrapper avec `==`.  
+    À cause du caching des wrapper, les comparaisons peuvent parfois retourner `true` et parfois `false` selon la valeur.
 
 
 <a id="645-égalité-et-null"></a>

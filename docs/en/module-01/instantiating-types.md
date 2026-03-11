@@ -33,6 +33,10 @@
 	- [6.4.3 String Pool and Equality](#643-string-pool-and-equality)
 		- [6.4.3.1 The intern Method](#6431-the-intern-method)
 	- [6.4.4 Equality with Wrapper Types](#644-equality-with-wrapper-types)
+		- [6.4.4.1 Wrapper Caching](#6441-wrapper-caching)
+		- [6.4.4.2 The `new` keyword bypasses the cache](#6442-the-new-keyword-bypasses-the-cache)
+		- [6.4.4.3 Comparing wrapper objects with `==`](#6443-comparing-wrapper-objects-with-==)
+		- [6.4.4.4 Different Wrapper Types Cannot Be Compared](#6444-different-wrapper-types-cannot-be-compared)
 	- [6.4.5 Equality and null](#645-equality-and-null)
 	- [6.4.6 Summary Table](#646-summary-table)
 
@@ -871,12 +875,14 @@ System.out.println(x == y);       // true
 <a id="644-equality-with-wrapper-types"></a>
 ### 6.4.4 Equality with Wrapper Types
 
-Wrapper classes (`Integer`, `Double`, etc.) behave like objects:
+Wrapper classes (`Integer`, `Double`, `Boolean`, etc.) behave like normal objects.
 
-- `==` → compares references  
-- `.equals()` → compares values  
+Therefore:
 
-However, some wrappers are **cached** (Integer from −128 to 127):
+- `==` → compares **object references**
+- `.equals()` → compares **numeric values**
+
+**Example**:
 
 ```java
 Integer a = 100;
@@ -885,13 +891,118 @@ System.out.println(a == b);        // true → cached
 
 Integer c = 1000;
 Integer d = 1000;
-System.out.println(c == d);        // false → not cached
+System.out.println(c == d);        // false → different objects
 
 System.out.println(c.equals(d));   // true → same numeric value
 ```
 
+Since, as previously noted, all wrapper classes are **immutable**, their internal value **cannot be modified** once they are created.
+
+Operations that appear to modify a wrapper actually create **a new object**.
+
+**Example**:
+
+```java
+Integer i = 5;
+i++;
+```
+
+This is conceptually equivalent to:
+
+```java
+i = Integer.valueOf(i.intValue() + 1);
+```
+
+Therefore a **new `Integer` object** is created and assigned back to `i`.
+
+<a id="6441-wrapper-caching"></a>
+#### 6.4.4.1 Wrapper Caching
+
+To reduce memory usage and object creation, Java **reuses certain wrapper instances**.
+
+The following values are cached:
+
+- All `Boolean` values (`true` and `false`)
+- All `Byte` values
+- All `Character` values from `\u0000` to `\u007f` (0–127)
+- All `Short` values from **−128 to 127**
+- All `Integer` values from **−128 to 127**
+
+Because of this caching mechanism:
+
+```java
+Integer a = 100;
+Integer b = 100;
+
+System.out.println(a == b);   // true
+```
+
+Both variables refer to **the same cached object**.
+
+However, values outside the cache range produce **distinct objects**:
+
+```java
+Integer c = 1000;
+Integer d = 1000;
+
+System.out.println(c == d);   // false
+System.out.println(c.equals(d)); // true
+```
+
+<a id="6442-the-new-keyword-bypasses-the-cache"></a>
+#### 6.4.4.2 The `new` keyword bypasses the cache
+
+When a wrapper object is created using `new`, **a new instance is always created**, even if a cached value exists.
+
+**Example**:
+
+```java
+Integer i = 10;          // cached object
+Integer j = 10;          // same cached object
+Integer k = new Integer(10); // new object (not cached)
+
+System.out.println(i == j); // true
+System.out.println(i == k); // false
+```
+
+However, wrapper constructors were **deprecated in Java 9** and marked for removal.  
+Modern code should use **autoboxing** or factory methods such as `Integer.valueOf()`.
+
+
+<a id="6443-comparing-wrapper-objects-with-=="></a>
+#### 6.4.4.3 Comparing wrapper objects with `==`
+
+When two wrapper references are compared using `==`, the result depends on whether they **refer to the same object**, not on whether their values are equal.
+
+Therefore, equality tests between wrappers should normally use:
+
+```java
+equals()
+```
+
+instead of `==`.
+
+
+<a id="6444-different-wrapper-types-cannot-be-compared"></a>
+#### 6.4.4.4 Different Wrapper Types Cannot Be Compared
+
+Wrapper objects of **different types** cannot be compared using `==`.
+
+Example:
+
+```java
+Byte b = 1;
+Integer i = 1;
+
+b == i;   // compilation error
+```
+
+The operands must be **compatible types**, otherwise the comparison is not valid.
+
+
 !!! warning
-    Be very careful with wrapper caching
+    Be very careful when comparing wrapper objects with `==`.  
+    Due to wrapper caching, comparisons may sometimes return `true` and sometimes `false` depending on the value.
 
 
 <a id="645-equality-and-null"></a>
