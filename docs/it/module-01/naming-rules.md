@@ -11,7 +11,7 @@
 	- [3.1.2 Sensibilità alle maiuscole/minuscole](#312-sensibilità-alle-maiuscoleminuscole)
 	- [3.1.3 Inizio degli identificatori](#313-inizio-degli-identificatori)
 	- [3.1.4 Numeri negli identificatori](#314-numeri-negli-identificatori)
-	- [3.1.5 Singolo token _](#315-singolo-token-_)
+	- [3.1.5 Singolo token `underscore`](#315-singolo-token-underscore)
 	- [3.1.6 Letterali numerici e carattere underscore](#316-letterali-numerici-e-carattere-underscore)
 
 
@@ -115,8 +115,8 @@ int 3myVarC; // non valido: identifier non possono iniziare con una cifra
 int var2024 = 10; // valido
 ```
 
-<a id="315-singolo-token"></a>
-### 3.1.5 Singolo token `_`
+<a id="315-singolo-token-underscore"></a>
+### 3.1.5 Singolo token `underscore`
 
 - Un singolo underscore (`_`) non è consentito come identificatore.
 - A partire da Java 9, `_` è un token riservato per un possibile uso futuro del linguaggio.

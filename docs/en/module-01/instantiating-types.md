@@ -35,7 +35,7 @@
 	- [6.4.4 Equality with Wrapper Types](#644-equality-with-wrapper-types)
 		- [6.4.4.1 Wrapper Caching](#6441-wrapper-caching)
 		- [6.4.4.2 The `new` keyword bypasses the cache](#6442-the-new-keyword-bypasses-the-cache)
-		- [6.4.4.3 Comparing wrapper objects with `==`](#6443-comparing-wrapper-objects-with-==)
+		- [6.4.4.3 Comparing wrapper objects](#6443-comparing-wrapper-objects)
 		- [6.4.4.4 Different Wrapper Types Cannot Be Compared](#6444-different-wrapper-types-cannot-be-compared)
 	- [6.4.5 Equality and null](#645-equality-and-null)
 	- [6.4.6 Summary Table](#646-summary-table)
@@ -969,8 +969,8 @@ However, wrapper constructors were **deprecated in Java 9** and marked for remov
 Modern code should use **autoboxing** or factory methods such as `Integer.valueOf()`.
 
 
-<a id="6443-comparing-wrapper-objects-with-=="></a>
-#### 6.4.4.3 Comparing wrapper objects with `==`
+<a id="6443-comparing-wrapper-objects"></a>
+#### 6.4.4.3 Comparing wrapper objects
 
 When two wrapper references are compared using `==`, the result depends on whether they **refer to the same object**, not on whether their values are equal.
 

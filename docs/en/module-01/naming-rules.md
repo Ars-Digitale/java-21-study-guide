@@ -10,7 +10,7 @@
 	- [3.1.2 Case Sensitivity](#312-case-sensitivity)
 	- [3.1.3 Beginning of Identifiers](#313-beginning-of-identifiers)
 	- [3.1.4 Numbers in Identifiers](#314-numbers-in-identifiers)
-	- [3.1.5 Single _ Token](#315-single-_-token)
+	- [3.1.5 Single `underscore` Token](#315-single-underscore-token)
 	- [3.1.6 Numeric Literals & Underscore Character](#316-numeric-literals--underscore-character)
 
 ---
@@ -118,8 +118,8 @@ int var2024 = 10; // valid
 ```
 
 
-<a id="315-single-token"></a>
-### 3.1.5 Single `_` token
+<a id="315-single-underscore-token"></a>
+### 3.1.5 Single `underscore` token
 
 - A single underscore (`_`) is not allowed as an identifier.
 - Since Java 9, `_` is a reserved token for future language use.

@@ -11,7 +11,7 @@
 	- [3.1.2 Sensibilité à la casse](#312-sensibilité-à-la-casse)
 	- [3.1.3 Début des identifiants](#313-début-des-identifiants)
 	- [3.1.4 Chiffres dans les identifiants](#314-chiffres-dans-les-identifiants)
-	- [3.1.5 Jeton `_` seul](#315-jeton-_-seul)
+	- [3.1.5 Jeton `underscore` seul](#315-jeton-underscore-seul)
 	- [3.1.6 Littéraux numériques et caractère underscore](#316-littéraux-numériques-et-caractère-underscore)
 
 
@@ -115,8 +115,8 @@ int 3myVarC; // invalid: identifier cannot start with a digit
 int var2024 = 10; // valid
 ```
 
-<a id="315-jeton-seul"></a>
-### 3.1.5 Jeton `_` seul
+<a id="315-jeton-underscore-seul"></a>
+### 3.1.5 Jeton `underscore` seul
 
 - Un underscore (`_`) seul n’est pas autorisé comme identifiant.
 - Depuis Java 9, `_` est un jeton réservé pour un usage futur du langage.

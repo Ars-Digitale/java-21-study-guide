@@ -35,7 +35,7 @@
 	- [6.4.4 Égalité avec les types wrapper](#644-égalité-avec-les-types-wrapper)
 		- [6.4.4.1 Mise en cache des Wrapper](#6441-mise-en-cache-des-wrapper)
 		- [6.4.4.2 Le mot-clé `new` contourne le cache](#6442-le-mot-clé-new-contourne-le-cache)
-		- [6.4.4.3 Comparaison des wrapper avec `==`](#6443-comparaison-des-wrapper-avec-==)
+		- [6.4.4.3 Comparaison des wrapper](#6443-comparaison-des-wrapper)
 		- [6.4.4.4 Des types Wrapper différents ne peuvent pas être comparés](#6444-des-types-wrapper-différents-ne-peuvent-pas-être-comparés)
 	- [6.4.5 Égalité et null](#645-égalité-et-null)
 	- [6.4.6 Tableau récapitulatif](#646-tableau-récapitulatif)
@@ -972,8 +972,8 @@ Cependant, les constructeurs des wrapper ont été **dépréciés en Java 9** et
 Le code moderne devrait utiliser **l’autoboxing** ou des méthodes factory comme `Integer.valueOf()`.
 
 
-<a id="6443-comparaison-des-wrapper-avec-=="></a>
-#### 6.4.4.3 Comparaison des wrapper avec `==`
+<a id="6443-comparaison-des-wrapper"></a>
+#### 6.4.4.3 Comparaison des wrapper
 
 Lorsque deux références wrapper sont comparées en utilisant `==`, le résultat dépend du fait qu’elles **référencent le même objet**, et non du fait que leurs valeurs soient égales.
 
