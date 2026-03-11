@@ -11,6 +11,7 @@
 
 - [Matériel préalable](module-00/prerequisites.md)
 - [Eclipse shortcuts](module-00/eclipse-shortcuts.md)
+
 ---
 
 <a id="module-01-java-language-basics"></a>
@@ -22,6 +23,7 @@
 - [4. Types de données Java et cast](module-01/data-types.md)
 - [5. Opérateurs Java](module-01/java-operators.md)
 - [6. Instanciation des types](module-01/instantiating-types.md)
+
 ---
 
 <a id="module-02-control-flow"></a>
@@ -29,6 +31,7 @@
 
 - [7. Flux de contrôle](module-02/control-flow.md)
 - [8. Constructions de boucle en Java](module-02/loops.md)
+
 ---
 
 <a id="module-03-core-standard-apis"></a>
@@ -39,6 +42,7 @@
 - [11. Mathématiques en Java](module-03/math.md)
 - [12. Date et heure en Java](module-03/date-time.md)
 - [13. Mise en forme et localisation en Java](module-03/formatting.md)
+
 ---
 
 <a id="module-04-object-oriented-fundamentals"></a>
@@ -50,6 +54,7 @@
 - [17. Au-delà des Classes](module-04/beyond-classes.md)
 - [18. Generics en Java](module-04/generics.md)
 - [19. Exceptions et Gestion des Erreurs](module-04/exceptions.md)
+
 ---
 
 <a id="module-05-functional-programming"></a>
@@ -57,6 +62,7 @@
 
 - [20. Programmation Fonctionnelle en Java](module-05/functional.md)
 - [21. Java Optional et Streams](module-05/streams.md)
+
 ---
 
 <a id="module-06-collections-framework"></a>
@@ -70,6 +76,7 @@
 - [27. API Queue & Deque](module-06/queue-api.md)
 - [28. Map API](module-06/map-api.md)
 - [29. Collections Séquencées & Map Séquencées](module-06/sequenced.md)
+
 ---
 
 <a id="module-07-concurrency-and-threads"></a>
@@ -77,6 +84,7 @@
 
 - [30. Thread Java – Fondamentaux et Modèle d’Exécution](module-07/threads.md)
 - [31. Java Concurrency APIs](module-07/concurrency.md)
+
 ---
 
 <a id="module-08-java-io-and-nio"></a>
@@ -87,6 +95,7 @@
 - [34. Streams I/O Java](module-08/io-streams.md)
 - [35. API Java d’E/S (Legacy et NIO)](module-08/io-streams-api.md)
 - [36. Interagir avec l’Utilisateur (Flux E/S Standard)](module-08/io-user.md)
+
 ---
 
 <a id="module-09-java-platform-module-system-jpms"></a>

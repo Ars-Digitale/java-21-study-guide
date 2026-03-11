@@ -11,6 +11,7 @@
 
 - [Materiale propedeutico](module-00/prerequisites.md)
 - [Eclipse shortcuts](module-00/eclipse-shortcuts.md)
+
 ---
 
 <a id="module-01-java-language-basics"></a>
@@ -22,6 +23,7 @@
 - [4. Tipi di dato Java e casting](module-01/data-types.md)
 - [5. Operatori Java](module-01/java-operators.md)
 - [6. Istanziazione dei tipi](module-01/instantiating-types.md)
+
 ---
 
 <a id="module-02-control-flow"></a>
@@ -29,6 +31,7 @@
 
 - [7. Flusso di controllo](module-02/control-flow.md)
 - [8. Costrutti di iterazione in Java](module-02/loops.md)
+
 ---
 
 <a id="module-03-core-standard-apis"></a>
@@ -39,6 +42,7 @@
 - [11. Matematica in Java](module-03/math.md)
 - [12. Data e ora in Java](module-03/date-time.md)
 - [13. Formattazione e Localizzazione in Java](module-03/formatting.md)
+
 ---
 
 <a id="module-04-object-oriented-fundamentals"></a>
@@ -50,6 +54,7 @@
 - [17. Oltre le Classi](module-04/beyond-classes.md)
 - [18. Generics in Java](module-04/generics.md)
 - [19. Eccezioni e Gestione degli Errori](module-04/exceptions.md)
+
 ---
 
 <a id="module-05-functional-programming"></a>
@@ -57,6 +62,7 @@
 
 - [20. Programmazione Funzionale in Java](module-05/functional.md)
 - [21. Java Optional e Streams](module-05/streams.md)
+
 ---
 
 <a id="module-06-collections-framework"></a>
@@ -65,11 +71,12 @@
 - [22. Introduzione al Framework delle Collezioni](module-06/collections.md)
 - [23. Operazioni Condivise delle Collezioni & Uguaglianza](module-06/shared-operations.md)
 - [24. Comparable, Comparator & Ordinamento in Java](module-06/comparing.md)
-- [25. La API List](module-06/list-api.md)
+- [25. L’API List](module-06/list-api.md)
 - [26. Set API](module-06/set-api.md)
 - [27. API Queue & Deque](module-06/queue-api.md)
 - [28. Map API](module-06/map-api.md)
 - [29. Collezioni Sequenziate & Map Sequenziate](module-06/sequenced.md)
+
 ---
 
 <a id="module-07-concurrency-and-threads"></a>
@@ -77,6 +84,7 @@
 
 - [30. Thread Java – Fondamenti e Modello di Esecuzione](module-07/threads.md)
 - [31. Java Concurrency APIs](module-07/concurrency.md)
+
 ---
 
 <a id="module-08-java-io-and-nio"></a>
@@ -87,6 +95,7 @@
 - [34. Stream I/O in Java](module-08/io-streams.md)
 - [35. API di I/O Java (Legacy e NIO)](module-08/io-streams-api.md)
 - [36. Interagire con l’Utente (Stream I/O Standard)](module-08/io-user.md)
+
 ---
 
 <a id="module-09-java-platform-module-system-jpms"></a>

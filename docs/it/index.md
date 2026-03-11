@@ -69,7 +69,7 @@
 - [22. Introduzione al Framework delle Collezioni](module-06/collections.md)
 - [23. Operazioni Condivise delle Collezioni & Uguaglianza](module-06/shared-operations.md)
 - [24. Comparable, Comparator & Ordinamento in Java](module-06/comparing.md)
-- [25. La API List](module-06/list-api.md)
+- [25. L’API List](module-06/list-api.md)
 - [26. Set API](module-06/set-api.md)
 - [27. API Queue & Deque](module-06/queue-api.md)
 - [28. Map API](module-06/map-api.md)
