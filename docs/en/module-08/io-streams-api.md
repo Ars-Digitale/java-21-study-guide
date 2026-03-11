@@ -1236,9 +1236,9 @@ Java serialization restores object state primarily from the byte stream, not by 
 <a id="35481-rule-constructors-of-serializable-classes-are-not-called"></a>
 #### 35.4.8.1 Rule: Constructors of Serializable Classes Are Not Called
 
-During deserialization of a Serializable class, the constructors of that class are NOT executed.
+During deserialization of a Serializable class, the constructors, or any static or instance blocks of that class, are NOT executed.
 
-The instance is created without calling those constructors, and field values are injected from the stream.
+The instance is created without calling those constructors (or any static or instance blocks), and field values are injected from the stream.
 
 !!! note
     This is why constructors of Serializable classes must not contain essential initialization logic.

@@ -1220,9 +1220,9 @@ Java restaure l’état principalement depuis le flux d’octets, sans exécuter
 <a id="35481-règle-les-constructeurs-des-classes-serializable-ne-sont-pas-appelés"></a>
 #### 35.4.8.1 Règle: les constructeurs des classes Serializable NE sont pas appelés
 
-Pendant la désérialisation d’une classe Serializable, ses constructeurs NE sont pas exécutés.
+Pendant la désérialisation d’une classe Serializable, ses constructeurs, ou tout bloc statique ou bloc d’initialisation d’instance, NE sont pas exécutés.
 
-L’instance est créée sans appeler ces constructeurs et les champs sont injectés depuis le flux.
+L’instance est créée sans appeler ces constructeurs (ou tout bloc statique ou bloc d’initialisation d’instance), et les champs sont injectés depuis le flux.
 
 !!! note
     Pour cela les constructeurs des classes Serializable ne doivent pas contenir une logique d’initialisation essentielle: elle ne serait pas exécutée en désérialisation.

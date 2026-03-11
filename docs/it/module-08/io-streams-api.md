@@ -1190,9 +1190,9 @@ Java ripristina lo stato principalmente dal byte stream, non eseguendo i costrut
 <a id="35481-regola-i-costruttori-delle-classi-serializable-non-vengono-chiamati"></a>
 #### 35.4.8.1 Regola: i costruttori delle classi Serializable NON vengono chiamati
 
-Durante la deserializzazione di una classe Serializable, i suoi costruttori NON vengono eseguiti.
+Durante la deserializzazione di una classe Serializable, i suoi costruttori, o gli eventuali blocchi d'inizializzazione statici o d'istanza, NON vengono eseguiti.
 
-L’istanza viene creata senza chiamare quei costruttori e i campi vengono iniettati dallo stream.
+L’istanza viene creata senza chiamare quei costruttori (o i blocchi d'inizializzazione statici o d'istanza) e i campi vengono iniettati dallo stream.
 
 !!! note
     Per questo i costruttori delle classi Serializable non devono contenere logica di inizializzazione essenziale: non verrebbe eseguita in deserializzazione.
