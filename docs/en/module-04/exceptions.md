@@ -136,6 +136,15 @@ class Child extends Parent {
 
 !!! note
     Changing only the **unchecked** exceptions never breaks the override contract.
+	
+	
+!!! important
+	Remember: `constructors` follow a different rule.
+
+	A `Constructor` must declare all the checked exceptions declared in the base constructor (or the superclasses of those checked exceptions). It may also declare additional checked exceptions.
+	This behavior is the opposite of method overriding.
+	An overriding method cannot throw any checked exception other than those declared by the overridden method. It may only throw subclasses of those exceptions.
+
 
 ---
 

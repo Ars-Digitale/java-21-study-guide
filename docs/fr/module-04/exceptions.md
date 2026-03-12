@@ -132,6 +132,14 @@ class Child extends Parent {
 !!! note
     Modifier uniquement les exceptions unchecked ne viole jamais le contrat de redéfinition.
 
+	
+!!! important
+	Rappel : les `constructeurs` suivent une règle différente.
+
+	Un `Constructeur` doit déclarer toutes les exceptions checked déclarées dans le constructeur de base (ou les superclasses de ces exceptions checked). Il peut également déclarer des exceptions checked supplémentaires.
+	Ce comportement est l’opposé de celui de l’overriding de méthodes.
+	Une méthode qui override ne peut pas lancer d’exception checked autre que celles déclarées par la méthode overridée. Elle ne peut lancer que des sous-classes de ces exceptions.
+
 <a id="194-gestion-des-exceptions-try-catch-finally"></a>
 ## 19.4 Gestion des exceptions: try, catch, finally
 

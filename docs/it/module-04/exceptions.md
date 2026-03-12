@@ -137,6 +137,14 @@ class Child extends Parent {
 
 !!! note  
 	- Cambiare solo le eccezioni **unchecked** non rompe mai il contratto di override.
+	
+	
+!!! important
+	Ricorda: i `costruttori` seguono una regola diversa.
+
+	Un `Costruttore` deve dichiarare tutte le eccezioni checked dichiarate nel costruttore di base (o le superclassi di quelle eccezioni checked). Può anche dichiarare eccezioni checked aggiuntive.
+	Questo comportamento è l’opposto di quello dell’overriding dei metodi.
+	Un metodo che override non può lanciare alcuna eccezione checked diversa da quelle dichiarate dal metodo overridato. Può lanciare solo sottoclassi di tali eccezioni.
 
 ---
 
