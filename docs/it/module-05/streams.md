@@ -369,6 +369,17 @@ BB
 - la valutazione pigra evita lavoro non necessario rispetto a un’operazione terminale che consuma tutti gli elementi (come `forEach` o `count`).
 
 
+
+!!! important
+    `allMatch`, `noneMatch`, `anyMatch`, `findFirst` e `findAny` sono **operazioni terminali a corto circuito** (*short-circuiting terminal operations*).
+
+    Ciò significa che il predicato fornito **non viene necessariamente valutato per ogni elemento dello stream**.  
+    L’operazione può interrompersi non appena il risultato finale può essere determinato.
+
+    Per esempio, con `allMatch`, se il predicato restituisce `false` per il **primo elemento**, il risultato complessivo dell’operazione è già noto come `false`. Poiché `allMatch` richiede che tutti gli elementi soddisfino il predicato, trovare un singolo elemento che non lo soddisfa è sufficiente per determinare il risultato.
+
+    Di conseguenza, quando un tale elemento viene incontrato, **gli elementi rimanenti dello stream non devono essere testati**, e l’elaborazione dello stream termina immediatamente.
+
 ---
 
 <a id="215-operazioni-stateless-vs-stateful"></a>

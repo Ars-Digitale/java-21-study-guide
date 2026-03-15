@@ -358,6 +358,18 @@ BB
 - `"ccc"` n’est jamais traité (ni `filter` ni `map`) ;
 - l’évaluation paresseuse évite un travail inutile par rapport à une opération terminale qui consomme tous les éléments (comme `forEach` ou `count`).
 
+
+!!! important
+    `allMatch`, `noneMatch`, `anyMatch`, `findFirst` et `findAny` sont des **opérations terminales à court-circuit** (*short-circuiting terminal operations*).
+
+    Cela signifie que le prédicat fourni **n’est pas nécessairement évalué pour chaque élément du stream**.  
+    L’opération peut s’arrêter dès que le résultat final peut déjà être déterminé.
+
+    Par exemple, avec `allMatch`, si le prédicat retourne `false` pour le **premier élément**, le résultat global de l’opération est déjà connu comme étant `false`. Comme `allMatch` exige que tous les éléments satisfassent le prédicat, trouver un seul élément qui ne correspond pas suffit pour déterminer le résultat.
+
+    Par conséquent, dès qu’un tel élément est rencontré, **les éléments restants du stream n’ont plus besoin d’être testés**, et le traitement du stream s’arrête immédiatement.
+
+
 ---
 
 <a id="215-opérations-stateless-vs-stateful"></a>

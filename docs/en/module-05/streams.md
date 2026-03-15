@@ -366,6 +366,16 @@ BB
 - lazy evaluation avoids unnecessary work compared to a terminal operation that consumes all elements (such as `forEach` or `count`).
 
 
+!!! important
+    `allMatch`, `noneMatch`, `anyMatch`, `findFirst`, and `findAny` are **short-circuiting terminal operations**.
+
+    This means that the given predicate is **not necessarily evaluated for every element of the stream**.  
+    The operation may stop as soon as the final result can already be determined.
+
+    For example, with `allMatch`, if the predicate returns `false` for the **first element**, the overall result of the operation is already known to be `false`. Since `allMatch` requires every element to satisfy the predicate, finding a single element that does not match is sufficient to determine the result.
+
+    Therefore, once such an element is encountered, **the remaining elements of the stream do not need to be tested**, and the stream processing stops immediately.
+
 ---
 
 <a id="215-stateless-vs-stateful-operations"></a>
