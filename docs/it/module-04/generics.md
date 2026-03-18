@@ -291,7 +291,8 @@ class Demo {
 Quando i generics interagiscono con l’ereditarietà, è fondamentale comprendere chiaramente due regole:
 
 !!! important
-    **L’override viene verificato dopo la type erasure.**  
+    **L’override viene verificato dopo la type erasure.**
+	
     **La compatibilità dei tipi viene verificata prima della type erasure.**
 
 Questi due passaggi spiegano perché alcuni metodi effettuano correttamente l’override mentre altri producono errori di compilazione.
@@ -697,10 +698,44 @@ class Demo {
 <a id="185-bound-sui-parametri-di-tipo"></a>
 ## 18.5 Bound sui Parametri di Tipo
 
+Questa sezione introduce i **vincoli sui parametri di tipo e i wildcard** nei generics di Java.  
+I vincoli limitano l’insieme dei tipi che possono essere utilizzati con un parametro di tipo generico o con un wildcard.
+
+Sono utilizzati per imporre **vincoli di tipo** e per esprimere relazioni tra tipi nel codice generico.
+  
+I vincoli compaiono principalmente in due forme:
+
+- **Vincoli sui parametri di tipo** usando `extends`
+- **Vincoli sui wildcard** usando `?`, `? extends` e `? super`
+
+Questi meccanismi permettono alle API generiche di specificare quali tipi sono accettabili e quali operazioni sono sicure dal punto di vista del sistema di tipi.
+
+**Regole**
+
+- `T extends Tipo` → il parametro di tipo deve essere `Tipo` o una sottoclasse.
+- `T extends Classe & Interface1 & Interface2` → sono consentiti vincoli multipli.
+- Nei vincoli multipli, la classe deve apparire per prima.
+- `?` rappresenta un tipo sconosciuto.
+- `? extends Tipo` → accetta tipi che sono `Tipo` o sottoclassi.
+- `? super Tipo` → accetta tipi che sono `Tipo` o superclassi.
+- `? extends` consente **lettura (estrazione)** ma proibisce l’inserimento.
+- `? super` consente **scrittura (inserimento)** ma la lettura restituisce `Object`.
+
+**Tabella riassuntiva**
+
+| Sintassi | Significato | Compatibilità di assegnazione | Lettura | Scrittura |
+|------|------|------|------|------|
+| `<T extends Number>` | Il parametro di tipo deve essere `Number` o una sottoclasse | Vincolo nella dichiarazione generica | `T` | `T` |
+| `<T extends Classe & Interface>` | Vincoli multipli | Vincolo nella dichiarazione generica | `T` | `T` |
+| `List<?>` | Tipo di elemento sconosciuto | Qualsiasi `List<T>` | `Object` | ❌ |
+| `List<? extends Number>` | Sottotipo sconosciuto di `Number` | `List<Integer>`, `List<Double>`, ecc. | `Number` | ❌ |
+| `List<? super Integer>` | `Integer` o supertipo | `List<Integer>`, `List<Number>`, `List<Object>` | `Object` | `Integer` |
+
+
 <a id="1851-upper-bounds-extends"></a>
 ### 18.5.1 Upper Bounds: extends
 
-`<T extends Number>` significa **T deve essere Number o una sottoclasse**.
+`<T extends Number>` significa che **T deve essere Number o una sottoclasse**.
 
 ```java
 class Stats<T extends Number> {
@@ -712,8 +747,9 @@ class Stats<T extends Number> {
 <a id="1852-bound-multipli"></a>
 ### 18.5.2 Bound Multipli
 
-Sintassi: `T extends Class & Interface1 & Interface2 ...`
-La classe deve comparire per prima.
+Sintassi: `T extends Classe & Interface1 & Interface2 ...`  
+
+La classe deve apparire per prima.
 
 ```java
 class C<T extends Number & Comparable<T>> { }
@@ -725,7 +761,7 @@ class C<T extends Number & Comparable<T>> { }
 <a id="18531-wildcard-non-limitata-"></a>
 #### 18.5.3.1 Wildcard Non Limitata `?`
 
-Da utilizzare quando si vuole accettare una lista di tipo sconosciuto:
+Usare quando si vuole accettare una lista di tipo sconosciuto:
 
 ```java
 void printAll(List<?> list) { ... }
@@ -736,27 +772,25 @@ void printAll(List<?> list) { ... }
 
 ```java
 List<? extends Number> nums = List.of(1, 2, 3);
-
 Number n = nums.get(0);   // OK
-// nums.add(5);           // ❌ non si può aggiungere: type safety
+// nums.add(5);           // ❌ impossibile aggiungere: sicurezza di tipo
 ```
 
-> Non puoi aggiungere elementi (eccetto null) a `? extends` perché non conosci il sottotipo esatto.
+> **Non è possibile aggiungere elementi (eccetto null) a ? extends** perché non si conosce il sottotipo esatto.
 
 <a id="18533-wildcard-con-lower-bound--super"></a>
 #### 18.5.3.3 Wildcard con Lower Bound `? super`
 
-`<? super Integer>` significa **il tipo deve essere Integer o una superclasse di Integer**.
+`<? super Integer>` significa che **il tipo deve essere Integer o una sua superclasse**.
 
 ```java
 List<? super Integer> list = new ArrayList<Number>();
 list.add(10);    // OK
-
-Object o = list.get(0); // restituisce Object (supertype comune minimo)
+Object o = list.get(0); // restituisce Object (supertipo comune minimo)
 ```
 
 !!! important
-	- `super` accetta **inserimento**
+	- `Super` accetta **inserimento**
 	- `extends` accetta **estrazione**.
 
 ---

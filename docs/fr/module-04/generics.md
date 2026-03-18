@@ -290,7 +290,8 @@ class Demo {
 Lorsque les génériques interagissent avec l’héritage, deux règles fondamentales doivent être clairement comprises :
 
 !!! important
-    **La redéfinition est vérifiée après l’effacement des types (type erasure).**  
+    **La redéfinition est vérifiée après l’effacement des types (type erasure).**
+	
     **La compatibilité des types est vérifiée avant l’effacement.**
 
 Ces deux étapes expliquent pourquoi certaines méthodes redéfinissent correctement, tandis que d’autres provoquent des erreurs de compilation.
@@ -691,10 +692,44 @@ class Demo {
 <a id="185-bounds-sur-les-paramètres-de-type"></a>
 ## 18.5 Bounds sur les Paramètres de Type
 
+Cette section introduit les **bornes sur les paramètres de type et les jokers (wildcards)** dans les génériques Java.  
+Les bornes restreignent l’ensemble des types pouvant être utilisés avec un paramètre de type générique ou un joker.
+
+Elles sont utilisées pour imposer des **contraintes de type** et pour exprimer des relations entre types dans du code générique.
+  
+Les bornes apparaissent sous deux formes principales :
+
+- **Bornes sur les paramètres de type** utilisant `extends`
+- **Bornes sur les jokers** utilisant `?`, `? extends` et `? super`
+
+Ces mécanismes permettent aux API génériques de spécifier quels types sont acceptables et quelles opérations sont sûres du point de vue du typage.
+
+**Règles**
+
+- `T extends Type` → le paramètre de type doit être `Type` ou une sous-classe.
+- `T extends Classe & Interface1 & Interface2` → plusieurs bornes sont autorisées.
+- Dans des bornes multiples, la classe doit apparaître en premier.
+- `?` représente un type inconnu.
+- `? extends Type` → accepte des types qui sont `Type` ou des sous-classes.
+- `? super Type` → accepte des types qui sont `Type` ou des superclasses.
+- `? extends` permet la **lecture (extraction)** mais interdit l’insertion.
+- `? super` permet l’**écriture (insertion)** mais la lecture retourne `Object`.
+
+**Tableau récapitulatif**
+
+| Syntaxe | Signification | Compatibilité d’affectation | Lecture | Écriture |
+|------|------|------|------|------|
+| `<T extends Number>` | Le paramètre de type doit être `Number` ou une sous-classe | Borne de déclaration générique | `T` | `T` |
+| `<T extends Classe & Interface>` | Bornes multiples | Borne de déclaration générique | `T` | `T` |
+| `List<?>` | Type d’élément inconnu | Tout `List<T>` | `Object` | ❌ |
+| `List<? extends Number>` | Sous-type inconnu de `Number` | `List<Integer>`, `List<Double>`, etc. | `Number` | ❌ |
+| `List<? super Integer>` | `Integer` ou supertype | `List<Integer>`, `List<Number>`, `List<Object>` | `Object` | `Integer` |
+
+
 <a id="1851-upper-bounds-extends"></a>
 ### 18.5.1 Upper Bounds: extends
 
-`<T extends Number>` signifie **T doit être Number ou une sous-classe**.
+`<T extends Number>` signifie que **T doit être Number ou une sous-classe**.
 
 ```java
 class Stats<T extends Number> {
@@ -706,7 +741,8 @@ class Stats<T extends Number> {
 <a id="1852-bounds-multiples"></a>
 ### 18.5.2 Bounds Multiples
 
-Syntaxe: `T extends Class & Interface1 & Interface2 ...`
+Syntaxe : `T extends Classe & Interface1 & Interface2 ...`  
+
 La classe doit apparaître en premier.
 
 ```java
@@ -719,7 +755,7 @@ class C<T extends Number & Comparable<T>> { }
 <a id="18531-wildcard-non-limitée-"></a>
 #### 18.5.3.1 Wildcard Non Limitée `?`
 
-À utiliser quand on veut accepter une liste de type inconnu:
+À utiliser lorsque l’on veut accepter une liste de type inconnu :
 
 ```java
 void printAll(List<?> list) { ... }
@@ -730,27 +766,25 @@ void printAll(List<?> list) { ... }
 
 ```java
 List<? extends Number> nums = List.of(1, 2, 3);
-
 Number n = nums.get(0);   // OK
-// nums.add(5);           // ❌ on ne peut pas ajouter: type safety
+// nums.add(5);           // ❌ impossible d’ajouter : sécurité de type
 ```
 
-> Tu ne peux pas ajouter des éléments (sauf null) à `? extends` parce que tu ne connais pas le sous-type exact.
+> **Vous ne pouvez pas ajouter d’éléments (sauf null) à ? extends** car vous ne connaissez pas le sous-type exact.
 
 <a id="18533-wildcard-avec-lower-bound--super"></a>
 #### 18.5.3.3 Wildcard avec Lower Bound `? super`
 
-`<? super Integer>` signifie **le type doit être Integer ou une superclasse de Integer**.
+`<? super Integer>` signifie que **le type doit être Integer ou une superclasse de Integer**.
 
 ```java
 List<? super Integer> list = new ArrayList<Number>();
 list.add(10);    // OK
-
-Object o = list.get(0); // retourne Object (supertype commun minimal)
+Object o = list.get(0); // retourne Object (supertype commun le plus bas)
 ```
 
 !!! important
-	- `super` accepte **l’insertion**
+	- `Super` accepte **l’insertion**
 	- `extends` accepte **l’extraction**.
 
 ---

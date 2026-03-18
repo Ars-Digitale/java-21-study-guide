@@ -286,7 +286,8 @@ class Demo {
 When generics interact with inheritance, two fundamental rules must be clearly understood:
 
 !!! important
-    **Override is checked after type erasure.**  
+    **Override is checked after type erasure.** 
+	
     **Type compatibility is checked before type erasure.**
 
 These two steps explain why some methods override correctly while others produce compile-time errors.
@@ -685,6 +686,40 @@ class Demo {
 <a id="185-bounds-on-type-parameters"></a>
 ## 18.5 Bounds on Type Parameters
 
+This section introduces **bounds on type parameters and wildcards** in Java generics.  
+Bounds restrict the set of types that can be used with a generic type parameter or wildcard.
+
+They are used to enforce **type constraints** and to express relationships between types in generic code.
+  
+Bounds appear in two main forms:
+
+- **Type parameter bounds** using `extends`
+- **Wildcard bounds** using `?`, `? extends`, and `? super`
+
+These mechanisms allow generic APIs to specify what kinds of types are acceptable and what operations are type-safe.
+
+**Rules**
+
+- `T extends Type` → the type parameter must be `Type` or a subclass.
+- `T extends Class & Interface1 & Interface2` → multiple bounds are allowed.
+- In multiple bounds, the class must appear first.
+- `?` represents an unknown type.
+- `? extends Type` → accepts types that are `Type` or subclasses.
+- `? super Type` → accepts types that are `Type` or superclasses.
+- `? extends` allows **reading (extraction)** but forbids insertion.
+- `? super` allows **writing (insertion)** but reading returns `Object`.
+
+**Summary Table**
+
+| Syntax | Meaning | Assignment Compatibility | Read | Write |
+|------|------|------|------|------|
+| `<T extends Number>` | Type parameter must be `Number` or subclass | Generic declaration bound | `T` | `T` |
+| `<T extends Class & Interface>` | Multiple bounds | Generic declaration bound | `T` | `T` |
+| `List<?>` | Unknown element type | Any `List<T>` | `Object` | ❌ |
+| `List<? extends Number>` | Unknown subtype of `Number` | `List<Integer>`, `List<Double>`, etc. | `Number` | ❌ |
+| `List<? super Integer>` | `Integer` or supertype | `List<Integer>`, `List<Number>`, `List<Object>` | `Object` | `Integer` |
+
+
 <a id="1851-upper-bounds-extends"></a>
 ### 18.5.1 Upper Bounds: extends
 
@@ -742,11 +777,9 @@ list.add(10);    // OK
 Object o = list.get(0); // returns Object (lowest common supertype)
 ```
 
-
 !!! important
 	- `Super` accepts **insertion**
 	- `extends` accepts **extraction**.
-
 ---
 
 <a id="186-generics-and-inheritance"></a>
