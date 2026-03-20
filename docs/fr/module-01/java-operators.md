@@ -210,7 +210,7 @@ Ils effectuent des opérations arithmétiques, relationnelles, logiques, bit à 
 	  
 	  
 !!! important
-	**Cheat Sheet Pattern Bitwise e Booleani**
+	**Cheat Sheet Pattern Bitwise et Boolean**
 	
 		a ^ a = 0
 		

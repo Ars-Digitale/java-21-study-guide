@@ -214,7 +214,7 @@ They perform arithmetic, relational, logical, bitwise, and assignment operations
 
 
 !!! important
-	**Cheat Sheet Pattern Bitwise e Booleani**
+	**Cheat Sheet Pattern Bitwise and Boolean**
 	
 		a ^ a = 0
 		
