@@ -96,9 +96,8 @@ void readFile(Path p) throws IOException {
 }
 ```
 !!! note
-    Only **checked exceptions** must be declared. 
-	
-	Unchecked exceptions may be declared, but are usually omitted.
+	- Only **checked exceptions** must be declared. 
+	- Unchecked exceptions may be declared, but are usually omitted.
 
 <a id="1922-throwing-exceptions"></a>
 ### 19.2.2 Throwing exceptions

@@ -97,7 +97,8 @@ void readFile(Path p) throws IOException {
 ```
 
 !!! note   
-	- Solo le **eccezioni checked** devono essere dichiarate. Le eccezioni unchecked possono essere dichiarate, ma di solito vengono omesse.
+	- Solo le **eccezioni checked** devono essere dichiarate. 
+	- Le eccezioni unchecked possono essere dichiarate, ma di solito vengono omesse.
 
 <a id="1922-lanciare-eccezioni"></a>
 ### 19.2.2 Lanciare eccezioni
@@ -142,8 +143,10 @@ class Child extends Parent {
 !!! important
 	Ricorda: i `costruttori` seguono una regola diversa.
 
-	Un `Costruttore` deve dichiarare tutte le eccezioni checked dichiarate nel costruttore di base (o le superclassi di quelle eccezioni checked). Può anche dichiarare eccezioni checked aggiuntive.
-	Questo comportamento è l’opposto di quello dell’overriding dei metodi.
+	Un `Costruttore` deve dichiarare tutte le eccezioni checked dichiarate nel costruttore di base (o le superclassi di quelle eccezioni checked). 
+	
+	Può anche dichiarare eccezioni checked aggiuntive. Questo comportamento è l’opposto di quello dell’overriding dei metodi.
+	
 	Un metodo che override non può lanciare alcuna eccezione checked diversa da quelle dichiarate dal metodo overridato. Può lanciare solo sottoclassi di tali eccezioni.
 
 ---

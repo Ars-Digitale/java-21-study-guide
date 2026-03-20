@@ -93,7 +93,8 @@ void readFile(Path p) throws IOException {
 ```
 
 !!! note
-    Seules les **exceptions checked** doivent être déclarées. Les exceptions unchecked peuvent l'être, mais sont généralement omises.
+	- Seules les **exceptions checked** doivent être déclarées. 
+	- Les exceptions unchecked peuvent l'être, mais sont généralement omises.
 
 <a id="1922-lancer-des-exceptions"></a>
 ### 19.2.2 Lancer des exceptions
@@ -136,8 +137,10 @@ class Child extends Parent {
 !!! important
 	Rappel : les `constructeurs` suivent une règle différente.
 
-	Un `Constructeur` doit déclarer toutes les exceptions checked déclarées dans le constructeur de base (ou les superclasses de ces exceptions checked). Il peut également déclarer des exceptions checked supplémentaires.
-	Ce comportement est l’opposé de celui de l’overriding de méthodes.
+	Un `Constructeur` doit déclarer toutes les exceptions checked déclarées dans le constructeur de base (ou les superclasses de ces exceptions checked). 
+	
+	Il peut également déclarer des exceptions checked supplémentaires. Ce comportement est l’opposé de celui de l’overriding de méthodes.
+	
 	Une méthode qui override ne peut pas lancer d’exception checked autre que celles déclarées par la méthode overridée. Elle ne peut lancer que des sous-classes de ces exceptions.
 
 <a id="194-gestion-des-exceptions-try-catch-finally"></a>
