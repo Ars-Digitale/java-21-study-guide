@@ -250,6 +250,21 @@ System.out.println(a << 1); // 10 (1010)
 System.out.println(a >> 1); // 2  (0010)
 ```
 
+!!! important
+	**Cheat Sheet Pattern Bitwise e Booleani**
+	
+	a ^ a = 0
+	
+	a ^ 0 = a
+	
+	a ^ -1 = ~a
+	
+	a ^ ~a = -1
+
+	a & a = a
+	
+	a | 0 = a
+
 <a id="572-operatori-di-divisione-e-resto-modulus"></a>
 ### 5.7.2 Operatori di divisione e resto (modulus)
 
