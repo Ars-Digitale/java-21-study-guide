@@ -159,7 +159,7 @@ Sono usati per operazioni come incremento/decremento, negazione di un valore, in
 | `++` | Increment | Incrementa una variabile di 1. Può essere prefisso o postfisso. | `++x`, `x++` | `x+1` |
 | `--` | Decrement | Decrementa una variabile di 1. Può essere prefisso o postfisso. | `--x`, `x--` | `x-1` |
 | `!` | Logical complement | Inverte un valore booleano. | `!true` | `false` |
-| `~` | Bitwise complement | Inverte ogni bit di un intero. | `~5` | `-6` |
+| `~` | Bitwise complement | Inverte ogni bit di un intero. Quick rule: ~n = -(n + 1) | `~5` | `-6` |
 | `(type)` | Cast | Converte il valore in un altro tipo. | `(int) 3.9` | `3` |
 
 <a id="562-esempi"></a>

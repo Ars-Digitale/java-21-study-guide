@@ -160,7 +160,7 @@ They are used for operations like incrementing/decrementing, negating a value, i
 | `++` | Increment | Increases a variable by 1. Can be prefix or postfix. | `++x`, `x++` | `x+1` |
 | `--` | Decrement | Decreases a variable by 1. Can be prefix or postfix. | `--x`, `x--` | `x-1` |
 | `!` | Logical complement | Inverts a boolean value. | `!true` | `false` |
-| `~` | Bitwise complement | Inverts each bit of an integer. | `~5` | `-6` |
+| `~` | Bitwise complement | Inverts each bit of an integer. Quick rule: ~n = -(n + 1) | `~5` | `-6` |
 | `(type)` | Cast | Converts value to another type. | `(int) 3.9` | `3` |
 
 <a id="562-examples"></a>

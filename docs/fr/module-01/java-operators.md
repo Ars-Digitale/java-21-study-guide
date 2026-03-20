@@ -157,7 +157,7 @@ Ils sont utilisés pour des opérations comme l’incrémentation/décrémentati
 | `++` | Increment | Augmente une variable de 1. Peut être préfixe ou postfixe. | `++x`, `x++` | `x+1` |
 | `--` | Decrement | Diminue une variable de 1. Peut être préfixe ou postfixe. | `--x`, `x--` | `x-1` |
 | `!` | Logical complement | Inverse une valeur booléenne. | `!true` | `false` |
-| `~` | Bitwise complement | Inverse chaque bit d’un entier. | `~5` | `-6` |
+| `~` | Bitwise complement | Inverse chaque bit d’un entier. Quick rule: ~n = -(n + 1) | `~5` | `-6` |
 | `(type)` | Cast | Convertit la valeur vers un autre type. | `(int) 3.9` | `3` |
 
 <a id="562-exemples"></a>
