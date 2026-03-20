@@ -203,10 +203,26 @@ Ils effectuent des opérations arithmétiques, relationnelles, logiques, bit à 
 | String Concatenation | `+` | `"Hello " + name` | Concatène des chaînes. |
 
 !!! important
-    - Les opérateurs **logiques** (`&`, `|`, `^`) *évaluent toujours les deux côtés*.
-    - Les opérateurs **conditionnels** (`&&`, `||`) sont **short-circuit** :
-      - `a && b` → `b` est évalué uniquement si `a` est true
-      - `a || b` → `b` est évalué uniquement si `a` est false
+	- Les opérateurs **logiques** (`&`, `|`, `^`) *évaluent toujours les deux côtés*.
+	- Les opérateurs **conditionnels** (`&&`, `||`) sont **short-circuit** :
+		- `a && b` → `b` est évalué uniquement si `a` est true
+		- `a || b` → `b` est évalué uniquement si `a` est false
+	  
+	  
+!!! important
+	**Cheat Sheet Pattern Bitwise e Booleani**
+	
+		a ^ a = 0
+		
+		a ^ 0 = a
+		
+		a ^ -1 = ~a
+		
+		a ^ ~a = -1
+
+		a & a = a
+		
+		a | 0 = a
 
 Exemples :
 

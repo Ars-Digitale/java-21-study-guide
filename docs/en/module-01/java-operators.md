@@ -207,14 +207,29 @@ They perform arithmetic, relational, logical, bitwise, and assignment operations
 | **String Concatenation** | `+` | `"Hello " + name` | Joins strings together. |
 
 !!! important
-    **Logical operators** (`&`, `|`, `^`) *always evaluate both sides*.
-    
-    **Conditional operators** (`&&`, `||`) are **short-circuiting**:
-    - `a && b` → `b` evaluated only if `a` is true
-    - `a || b` → `b` evaluated only if `a` is false
+	- **Logical operators** (`&`, `|`, `^`) *always evaluate both sides*.
+	- **Conditional operators** (`&&`, `||`) are **short-circuiting**:
+		- `a && b` → `b` evaluated only if `a` is true
+		- `a || b` → `b` evaluated only if `a` is false
 
 
-- Examples:
+!!! important
+	**Cheat Sheet Pattern Bitwise e Booleani**
+	
+		a ^ a = 0
+		
+		a ^ 0 = a
+		
+		a ^ -1 = ~a
+		
+		a ^ ~a = -1
+
+		a & a = a
+		
+		a | 0 = a
+		
+
+**Examples**:
 
 Arithmetic Example:
 ```java
