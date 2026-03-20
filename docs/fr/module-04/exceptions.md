@@ -207,6 +207,23 @@ try {
 !!! note
     Un bloc `finally` peut écraser une valeur de retour ou avaler une exception. Cela est déconseillé car cela complique le flux de contrôle.
 
+!!! important
+    Lorsquun bloc `catch` et un bloc `finally` lancent tous deux une exception, lexception lancée dans le bloc `finally` est celle qui est propagée par la méthode.
+
+    Lexception lancée dans le bloc `catch` est perdue et **nest pas** ajoutée à la liste des exceptions supprimées.
+
+```java
+try {
+    throw new RuntimeException("try");
+} catch (RuntimeException e) {
+    throw new RuntimeException("catch");
+} finally {
+    throw new RuntimeException("finally");
+}
+```
+
+Dans ce cas, seule lexception `"finally"` est lancée.
+
 <a id="195-gestion-automatique-des-ressources-try-with-resources"></a>
 ## 19.5 Gestion automatique des ressources try-with-resources
 
@@ -298,6 +315,11 @@ catch (Exception e) {
 - L'exeption principale est lancée
 - Les exceptions secondaires sont accessibles via `getSuppressed()`
 
+!!! important
+    Les exceptions supprimées sont générées uniquement par le bloc `finally` **implicite** créé par le `try-with-resources`.
+
+    En revanche, les exceptions lancées dans un bloc `finally` **explicite** ne sont pas supprimées : elles remplacent toute exception précédente et deviennent la seule exception propagée.
+
 <a id="197-résumé-des-exceptions"></a>
 ## 19.7 Résumé des exceptions
 
@@ -307,4 +329,3 @@ catch (Exception e) {
 - Préférer try-with-resources au nettoyage via finally
 - Les ressources se ferment en ordre inverse
 - Les exceptions supprimées préservent le contexte complet de défaillance
-

@@ -217,6 +217,23 @@ try {
 !!! note  
 	- Un blocco `finally` può sovrascrivere un valore di ritorno o “inghiottire” un’eccezione. Questo è generalmente sconsigliato perché rende il flusso di controllo più difficile da comprendere.
 
+!!! important
+	- Quando sia un blocco `catch` sia un blocco `finally` lanciano un’eccezione, l’eccezione lanciata nel blocco `finally` è quella che viene propagata dal metodo.
+
+	- L’eccezione lanciata nel blocco `catch` viene persa e **non** viene aggiunta alla lista delle eccezioni soppresse.
+
+```java
+try {
+    throw new RuntimeException("try");
+} catch (RuntimeException e) {
+    throw new RuntimeException("catch");
+} finally {
+    throw new RuntimeException("finally");
+}
+```
+
+In questo caso, viene lanciata solo l’eccezione `"finally"`.
+
 ---
 
 <a id="195-gestione-automatica-delle-risorse-try-with-resources"></a>
@@ -311,6 +328,11 @@ catch (Exception e) {
 
 - L’eccezione principale viene lanciata  
 - Le eccezioni secondarie sono accessibili tramite `getSuppressed()`  
+
+!!! important
+	- Le eccezioni soppresse vengono generate solo dal blocco `finally` **implicito** creato dal `try-with-resources`.
+
+	- Al contrario, le eccezioni lanciate in un blocco `finally` **esplicito** non vengono soppresse: sostituiscono qualsiasi eccezione precedente e diventano l’unica eccezione propagata.
 
 ---
 

@@ -96,7 +96,9 @@ void readFile(Path p) throws IOException {
 }
 ```
 !!! note
-    Only **checked exceptions** must be declared. Unchecked exceptions may be declared, but are usually omitted.
+    Only **checked exceptions** must be declared. 
+	
+	Unchecked exceptions may be declared, but are usually omitted.
 
 <a id="1922-throwing-exceptions"></a>
 ### 19.2.2 Throwing exceptions
@@ -141,9 +143,11 @@ class Child extends Parent {
 !!! important
 	Remember: `constructors` follow a different rule.
 
-	A `Constructor` must declare all the checked exceptions declared in the base constructor (or the superclasses of those checked exceptions). It may also declare additional checked exceptions.
-	This behavior is the opposite of method overriding.
-	An overriding method cannot throw any checked exception other than those declared by the overridden method. It may only throw subclasses of those exceptions.
+	A `Constructor` must declare all the checked exceptions declared in the base constructor (or the superclasses of those checked exceptions). 
+	
+	It may also declare additional checked exceptions. This behavior is the opposite of method overriding.
+	
+	An `overriding method` cannot throw any checked exception other than those declared by the overridden method. It may only throw subclasses of those exceptions.
 
 
 ---
@@ -216,6 +220,23 @@ try {
 
 !!! note
     A `finally` block can override a return value or swallow an exception. This is generally discouraged because it makes the control flow harder to reason about.
+
+!!! important
+    When both a `catch` block and a `finally` block throw exceptions, the exception thrown in the `finally` block is the one that is propagated from the method.
+
+    The exception thrown in the `catch` block is lost and is **not** added to the suppressed exceptions list.
+
+```java
+try {
+    throw new RuntimeException("try");
+} catch (RuntimeException e) {
+    throw new RuntimeException("catch");
+} finally {
+    throw new RuntimeException("finally");
+}
+```
+
+In this case, only the `"finally"` exception is thrown.
 
 ---
 
@@ -313,6 +334,11 @@ catch (Exception e) {
 - Primary exception is thrown
 - Secondary exceptions are accessible via `getSuppressed()`
 
+!!! important
+    Suppressed exceptions are generated only by the **implicit** `finally` block created by `try-with-resources`.
+
+    In contrast, exceptions thrown in an **explicit** `finally` block are not suppressed: they replace any previous exception and become the only exception propagated.
+
 ---
 
 <a id="197-exceptions-summary"></a>
@@ -324,4 +350,3 @@ catch (Exception e) {
 - Prefer try-with-resources over finally cleanup
 - Resources close in reverse order
 - Suppressed exceptions preserve full failure context
-
