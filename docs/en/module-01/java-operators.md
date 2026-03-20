@@ -229,9 +229,8 @@ They perform arithmetic, relational, logical, bitwise, and assignment operations
 		a | 0 = a
 		
 
-**Examples**:
 
-Arithmetic Example:
+**Arithmetic Example:**
 ```java
 int a = 10, b = 4;
 System.out.println(a + b);  // 14
@@ -241,7 +240,7 @@ System.out.println(a / b);  // 2
 System.out.println(a % b);  // 2
 ```
 
-Relational Example:
+**Relational Example:**
 ```java
 int a = 5, b = 8;
 System.out.println(a < b);   // true
@@ -250,7 +249,7 @@ System.out.println(a == b);  // false
 System.out.println(a != b);  // true
 ```
 
-Logical Example:
+**Logical Example:**
 ```java
 boolean x = true, y = false;
 System.out.println(x && y);  // false
@@ -258,7 +257,7 @@ System.out.println(x || y);  // true
 System.out.println(!x);      // false
 ```
 
-Bitwise Example:
+**Bitwise Example:**
 ```java
 int a = 5;   // 0101
 int b = 3;   // 0011

@@ -226,7 +226,6 @@ Eseguono operazioni aritmetiche, relazionali, logiche, bit a bit e di assegnazio
 		
 		a | 0 = a
 
-Esempi:
 
 **Esempio aritmetico:**
 ```java

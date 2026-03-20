@@ -224,7 +224,6 @@ Ils effectuent des opérations arithmétiques, relationnelles, logiques, bit à 
 		
 		a | 0 = a
 
-Exemples :
 
 **Exemple arithmétique :**
 ```java
