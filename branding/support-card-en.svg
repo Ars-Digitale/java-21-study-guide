@@ -8,8 +8,8 @@
   <title id="title">Support Ars Digitale</title>
 
   <desc id="description">
-    Technical knowledge should remain freely accessible.
-    Documentation-first, created independently and shared freely.
+    Technical knowledge belongs to everyone.
+    Independent engineering. Open technical knowledge. Shared freely.
     Support the project.
   </desc>
 
@@ -65,7 +65,7 @@
     font-family="Arial, Helvetica, sans-serif"
     font-size="34"
     font-weight="700">
-    Technical knowledge should
+    Technical knowledge 
   </text>
 
   <text
@@ -75,7 +75,7 @@
     font-family="Arial, Helvetica, sans-serif"
     font-size="34"
     font-weight="700">
-    remain freely accessible.
+    belongs to everyone.
   </text>
 
   <!-- Project philosophy -->
@@ -85,7 +85,7 @@
     fill="#ffffff"
     font-family="Arial, Helvetica, sans-serif"
     font-size="18">
-    Documentation-first. Created independently. Shared freely.
+    Independent engineering. Open technical knowledge. Shared freely.
   </text>
 
   <!-- Support button -->
