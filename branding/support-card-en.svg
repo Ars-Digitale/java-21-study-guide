@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="900"
+     height="280"
+     viewBox="0 0 900 280">
+
+  <rect
+      x="8"
+      y="8"
+      width="884"
+      height="264"
+      rx="18"
+      fill="#184f87"
+      stroke="#efb321"
+      stroke-width="4"/>
+
+  <text
+      x="40"
+      y="60"
+      fill="#efb321"
+      font-family="Arial, Helvetica, sans-serif"
+      font-size="20"
+      font-weight="700"
+      letter-spacing="3">
+      ARS DIGITALE
+  </text>
+
+  <text
+      x="40"
+      y="118"
+      fill="#f0e1cb"
+      font-family="Arial, Helvetica, sans-serif"
+      font-size="38"
+      font-weight="700">
+      Technical knowledge
+  </text>
+
+  <text
+      x="40"
+      y="164"
+      fill="#f0e1cb"
+      font-family="Arial, Helvetica, sans-serif"
+      font-size="38"
+      font-weight="700">
+      should remain freely accessible.
+  </text>
+
+  <text
+      x="40"
+      y="235"
+      fill="#ffffff"
+      font-family="Arial, Helvetica, sans-serif"
+      font-size="26">
+      ❤ Support the project
+  </text>
+
+</svg>
