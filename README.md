@@ -28,6 +28,18 @@ The index provides the full curriculum with direct links to each module.
 
 ---
 
+### ❤️ Keep technical knowledge freely accessible
+
+<p align="center">
+  <a href="https://secure.ars-digitale.com/b/fZu00j1TjfBqd4yd7Q43S03">
+    <img
+      src="branding/support-card-en.svg"
+      alt="Support Ars Digitale">
+  </a>
+</p>
+
+---
+
 ## 📚 Repository structure
 
 - **`docs/en/`** – Core course material in English (Markdown)
