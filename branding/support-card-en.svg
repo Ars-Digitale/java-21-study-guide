@@ -1,34 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg"
      width="900"
-     height="300"
-     viewBox="0 0 900 300"
+     height="320"
+     viewBox="0 0 900 320"
      role="img"
      aria-labelledby="title description">
 
   <title id="title">Support Ars Digitale</title>
+
   <desc id="description">
-    Technical knowledge should remain freely accessible. Support the project.
+    Technical knowledge should remain freely accessible.
+    Documentation-first, created independently and shared freely.
+    Support the project.
   </desc>
 
+  <!-- Card -->
   <rect
     x="8"
     y="8"
     width="884"
-    height="284"
-    rx="20"
+    height="304"
+    rx="22"
     fill="#184f87"
     stroke="#efb321"
     stroke-width="4" />
 
+  <!-- Logo panel -->
   <rect
-    x="34"
-    y="34"
-    width="112"
-    height="112"
-    rx="16"
+    x="36"
+    y="38"
+    width="118"
+    height="118"
+    rx="18"
     fill="#f0e1cb" />
 
-  <g transform="translate(51 51) scale(.152)"
+  <!-- Ars Digitale beetle -->
+  <g transform="translate(54 56) scale(.16)"
      fill="#184f87"
      stroke="#184f87"
      stroke-width="5.632">
@@ -39,9 +45,10 @@
 
   </g>
 
+  <!-- Brand -->
   <text
-    x="176"
-    y="62"
+    x="184"
+    y="64"
     fill="#efb321"
     font-family="Arial, Helvetica, sans-serif"
     font-size="19"
@@ -50,8 +57,9 @@
     ARS DIGITALE
   </text>
 
+  <!-- Main statement -->
   <text
-    x="176"
+    x="184"
     y="112"
     fill="#f0e1cb"
     font-family="Arial, Helvetica, sans-serif"
@@ -61,7 +69,7 @@
   </text>
 
   <text
-    x="176"
+    x="184"
     y="153"
     fill="#f0e1cb"
     font-family="Arial, Helvetica, sans-serif"
@@ -70,32 +78,46 @@
     remain freely accessible.
   </text>
 
+  <!-- Project philosophy -->
   <text
-    x="176"
-    y="195"
+    x="184"
+    y="192"
     fill="#ffffff"
     font-family="Arial, Helvetica, sans-serif"
-    font-size="19">
-    Help maintain and expand free technical guides.
+    font-size="18">
+    Documentation-first. Created independently. Shared freely.
   </text>
 
+  <!-- Support button -->
   <rect
-    x="176"
+    x="184"
     y="220"
-    width="260"
-    height="48"
-    rx="10"
+    width="286"
+    height="58"
+    rx="12"
     fill="#da3433" />
 
   <text
-    x="306"
-    y="251"
+    x="327"
+    y="257"
     fill="#ffffff"
     font-family="Arial, Helvetica, sans-serif"
-    font-size="20"
+    font-size="21"
     font-weight="700"
     text-anchor="middle">
     ❤ Support the project
+  </text>
+
+  <!-- Signature -->
+  <text
+    x="844"
+    y="285"
+    fill="#f0e1cb"
+    opacity=".72"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="15"
+    text-anchor="end">
+    ars-digitale.com
   </text>
 
 </svg>
