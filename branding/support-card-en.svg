@@ -1,56 +1,101 @@
 <svg xmlns="http://www.w3.org/2000/svg"
      width="900"
-     height="280"
-     viewBox="0 0 900 280">
+     height="300"
+     viewBox="0 0 900 300"
+     role="img"
+     aria-labelledby="title description">
+
+  <title id="title">Support Ars Digitale</title>
+  <desc id="description">
+    Technical knowledge should remain freely accessible. Support the project.
+  </desc>
 
   <rect
-      x="8"
-      y="8"
-      width="884"
-      height="264"
-      rx="18"
-      fill="#184f87"
-      stroke="#efb321"
-      stroke-width="4"/>
+    x="8"
+    y="8"
+    width="884"
+    height="284"
+    rx="20"
+    fill="#184f87"
+    stroke="#efb321"
+    stroke-width="4" />
+
+  <rect
+    x="34"
+    y="34"
+    width="112"
+    height="112"
+    rx="16"
+    fill="#f0e1cb" />
+
+  <g transform="translate(51 51) scale(.152)"
+     fill="#184f87"
+     stroke="#184f87"
+     stroke-width="5.632">
+
+    <path d="m507.517 257.027-106.445-57.318v-20.506a8.53 8.53 0 0 0-8.533-8.533h-25.6v-8.533c0-6.562-.683-12.962-1.783-19.217l56.346-24.141a8.522 8.522 0 0 0 5.171-7.842V17.07h51.2c4.719 0 8.533-3.823 8.533-8.533S482.592.004 477.873.004H418.14a8.53 8.53 0 0 0-8.533 8.533v96.777l-48.751 20.898c-7.859-22.852-22.886-42.377-42.496-55.757 8.713-6.187 14.447-16.307 14.447-27.784 0-18.825-15.309-34.133-34.133-34.133-4.719 0-8.533 3.823-8.533 8.533s3.814 8.533 8.533 8.533c9.412 0 17.067 7.654 17.067 17.067 0 9.412-7.654 17.067-17.067 17.067-.017 0-.026.009-.043.009-13.133-5.487-27.529-8.542-42.624-8.542s-29.491 3.055-42.624 8.542c-.017 0-.026-.009-.043-.009-9.412 0-17.067-7.654-17.067-17.067 0-9.412 7.654-17.067 17.067-17.067 4.719 0 8.533-3.823 8.533-8.533s-3.814-8.533-8.533-8.533c-18.825 0-34.133 15.309-34.133 34.133 0 11.477 5.734 21.598 14.447 27.784-19.61 13.38-34.637 32.905-42.496 55.757l-48.751-20.898V8.537A8.53 8.53 0 0 0 93.874.004H34.138c-4.719 0-8.533 3.823-8.533 8.533s3.814 8.533 8.533 8.533h51.2v93.867a8.522 8.522 0 0 0 5.171 7.842l56.346 24.141c-1.101 6.255-1.784 12.655-1.784 19.217v8.533h-25.6a8.53 8.53 0 0 0-8.533 8.533v20.506L4.494 257.027c-4.147 2.227-5.709 7.407-3.473 11.554a8.537 8.537 0 0 0 7.526 4.489 8.415 8.415 0 0 0 4.036-1.024l108.766-58.564L256.022 288.9l135.202-75.11 108.203 58.257a8.418 8.418 0 0 0 4.036 1.024 8.532 8.532 0 0 0 7.526-4.489c2.236-4.148.675-9.327-3.472-11.555zM349.872 170.67H162.138v-8.533c0-51.755 42.112-93.867 93.867-93.867s93.867 42.112 93.867 93.867v8.533z"/>
+
+    <path d="m449.208 343.32-48.136-40.115v-75.366l-136.533 75.853v173.747c76.015-4.454 136.533-67.524 136.533-144.632v-7.381l32.205 26.837-39.97 87.945a8.545 8.545 0 0 0 .358 7.765l34.133 59.733a8.514 8.514 0 0 0 7.415 4.301 8.523 8.523 0 0 0 4.224-1.126 8.527 8.527 0 0 0 3.174-11.648l-31.966-55.936 40.858-89.899a8.517 8.517 0 0 0-2.295-10.078zM110.938 303.205 62.802 343.32a8.519 8.519 0 0 0-2.295 10.078l40.858 89.899-31.966 55.936a8.527 8.527 0 0 0 3.174 11.648 8.523 8.523 0 0 0 4.224 1.126 8.513 8.513 0 0 0 7.415-4.301l34.133-59.733a8.542 8.542 0 0 0 .358-7.765l-39.97-87.945 32.205-26.837v7.381c0 77.107 60.518 140.177 136.533 144.632V303.674l-136.533-76.459v75.99z"/>
+
+  </g>
 
   <text
-      x="40"
-      y="60"
-      fill="#efb321"
-      font-family="Arial, Helvetica, sans-serif"
-      font-size="20"
-      font-weight="700"
-      letter-spacing="3">
-      ARS DIGITALE
+    x="176"
+    y="62"
+    fill="#efb321"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="19"
+    font-weight="700"
+    letter-spacing="3">
+    ARS DIGITALE
   </text>
 
   <text
-      x="40"
-      y="118"
-      fill="#f0e1cb"
-      font-family="Arial, Helvetica, sans-serif"
-      font-size="38"
-      font-weight="700">
-      Technical knowledge
+    x="176"
+    y="112"
+    fill="#f0e1cb"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="34"
+    font-weight="700">
+    Technical knowledge should
   </text>
 
   <text
-      x="40"
-      y="164"
-      fill="#f0e1cb"
-      font-family="Arial, Helvetica, sans-serif"
-      font-size="38"
-      font-weight="700">
-      should remain freely accessible.
+    x="176"
+    y="153"
+    fill="#f0e1cb"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="34"
+    font-weight="700">
+    remain freely accessible.
   </text>
 
   <text
-      x="40"
-      y="235"
-      fill="#ffffff"
-      font-family="Arial, Helvetica, sans-serif"
-      font-size="26">
-      ❤ Support the project
+    x="176"
+    y="195"
+    fill="#ffffff"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="19">
+    Help maintain and expand free technical guides.
+  </text>
+
+  <rect
+    x="176"
+    y="220"
+    width="260"
+    height="48"
+    rx="10"
+    fill="#da3433" />
+
+  <text
+    x="306"
+    y="251"
+    fill="#ffffff"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="20"
+    font-weight="700"
+    text-anchor="middle">
+    ❤ Support the project
   </text>
 
 </svg>
